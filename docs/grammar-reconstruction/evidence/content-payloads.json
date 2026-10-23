@@ -1,0 +1,22 @@
+[
+  {
+    "file": "public/grammar/v5/index.json",
+    "bytes": 1020312,
+    "gzipBytes": 214048
+  },
+  {
+    "file": "public/grammar/v5/day-01.json",
+    "bytes": 52551,
+    "gzipBytes": 12807
+  },
+  {
+    "file": "public/grammar/v5/day-20.json",
+    "bytes": 59555,
+    "gzipBytes": 14489
+  },
+  {
+    "file": "public/grammar/v5/day-29.json",
+    "bytes": 70314,
+    "gzipBytes": 18317
+  }
+]

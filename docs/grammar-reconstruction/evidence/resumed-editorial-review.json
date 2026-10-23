@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-22",
+  "reviewer": "Codex editorial reconstruction review",
+  "scope": "Final outstanding Day 10/20/29/30 manuscripts and keys, prior flagged repairs, source-specific Day 24 conventions, all recall tags, cumulative assessments and positional explanations after prepublication option rearrangement; final question-system and split-infinitive coverage search and new original tasks",
+  "reviewMethod": "Read the actual authored JSON, compare form/function/meaning and the supplied constraints, check difficult rules against the sources retained in the source register, and inspect selected answers plus distractors. This is editorial review, not an independent external accreditation.",
+  "resolved": [
+    {
+      "location": "gv5-d29-q15",
+      "finding": "Duplicate context-free insist prompt and unsuitable source association",
+      "correction": "New contextual -ing gap; linked insist source and explanation of both on and that-clause patterns"
+    },
+    {
+      "location": "gv5-d29-q17",
+      "finding": "Explanation misidentified the positions of coordinated alternatives",
+      "correction": "Explanation names the actual sentence structures"
+    },
+    {
+      "location": "gv5-d30-q21",
+      "finding": "Survey support was not entailed by the stated context",
+      "correction": "Added the explicit nine/three results; limited claim remains limited to respondents"
+    },
+    {
+      "location": "gv5-d30-r07",
+      "finding": "Passive example unnecessarily changed tense",
+      "correction": "The comparison now uses past simple in both relevant versions"
+    },
+    {
+      "location": "gv5-d30-r08",
+      "finding": "Promise-with-recipient construction introduces an avoidable lexical-variation issue",
+      "correction": "Uses the directly sourced try versus persuade control contrast"
+    },
+    {
+      "location": "gv5-d30-r12",
+      "finding": "Alternative dropped the clock event despite the preservation constraint",
+      "correction": "Both model and alternative retain all participants/events and the noon relationship"
+    },
+    {
+      "location": "gv5-d30-c05",
+      "finding": "A manner repair should not imply a universal ban on depictive adjectives",
+      "correction": "Specified the intended manner and added a qualification in the rubric"
+    },
+    {
+      "location": "gv5-d29-m01",
+      "finding": "What-clause permits an additional fused-relative analysis",
+      "correction": "Uses an unambiguous whether-interrogative example"
+    },
+    {
+      "location": "gv5-d30-q17; gv5-diagnostic-q17; gv5-d05-q09; gv5-d22-q06; gv5-d18-q02",
+      "finding": "Option rearrangement made positional descriptions inaccurate or fragile",
+      "correction": "Identifies constructions by their actual wording; expanded validation gate"
+    },
+    {
+      "location": "Day 24 modules and related recall",
+      "finding": "General punctuation source alone was inadequate for specialist style exceptions",
+      "correction": "Added directly consulted Cambridge possessives, Oxford punctuation/abbreviations/words and MLA letter plurals"
+    },
+    {
+      "location": "Curriculum coverage identifiers",
+      "finding": "A coverage-group ID could share spelling with a correction-task ID",
+      "correction": "Namespaced all scheduled subtopic IDs as gv5-topic-* and validates global identifier uniqueness"
+    },
+    {
+      "location": "gv5-d30-writing01 précis and annotation",
+      "finding": "A claim that replies cannot represent all users could be read as proving their empirical unrepresentativeness.",
+      "correction": "The précis now states the warranted evidential limit: the replies do not establish all users’ views. The annotation describes the interview limits. The revised model remains within the 65–80-word requirement. The report and précis also preserve that trial staffing costs were not recorded separately, and distinguish unchanged past weekday hours from the recommendation about future hours."
+    },
+    {
+      "location": "Day 14 m02; phase 3; Day 29",
+      "finding": "Question tags and echo questions lacked substantive instruction and directly linked practice",
+      "correction": "Expanded four layers with auxiliary/polarity, negative subjects and singular they, imperative/special tags, intonation/register, echo and negative-question interpretation. Four short responses, two constrained corrections, fresh phase echo analysis and a verified four-option Day 29 key. Compared each model with the actual prompt; ordinary confirmation is explicitly specified so marked conversational alternatives are not universally rejected."
+    },
+    {
+      "location": "Day 20 m01",
+      "finding": "Split infinitives were missing from non-finite usage guidance",
+      "correction": "Consulted MLA and Cambridge article bodies; added original explanation, scope contrast, exception/glossary and open comparison with model/rubric accepting context-dependent readings."
+    }
+  ],
+  "retainedEvidenceLimitation": "Earlier independent research reviews completed in the prior environment are summarised in the session history, but their detailed temporary output files did not survive restart. This file does not fabricate those missing ledgers. The original full-course audit matrices, current manuscripts, key register, source metadata and new testing evidence are retained in the repository."
+}

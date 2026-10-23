@@ -1,0 +1,3834 @@
+{
+  "version": "grammar-v5-2026-10",
+  "editorialConvention": "British English with explicitly accepted established variation",
+  "days": [
+    {
+      "day": 1,
+      "id": "gv5-day-01",
+      "title": "Understanding English Grammar and Sentence Anatomy",
+      "taxonomy": [
+        "A",
+        "H"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d01-c01",
+          "title": "language and grammar",
+          "referenceId": "gv5-d01-c01",
+          "practice": "gv5-d01-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c02",
+          "title": "meaning and structure",
+          "referenceId": "gv5-d01-c02",
+          "practice": "gv5-d01-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c03",
+          "title": "morphemes, roots and stems",
+          "referenceId": "gv5-d01-c03",
+          "practice": "gv5-d01-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c04",
+          "title": "words, phrases, clauses and sentences",
+          "referenceId": "gv5-d01-c04",
+          "practice": "gv5-d01-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c05",
+          "title": "open and closed word classes",
+          "referenceId": "gv5-d01-c05",
+          "practice": "gv5-d01-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c06",
+          "title": "inflection and derivation",
+          "referenceId": "gv5-d01-c06",
+          "practice": "gv5-d01-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c07",
+          "title": "form and function",
+          "referenceId": "gv5-d01-c07",
+          "practice": "gv5-d01-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c08",
+          "title": "subjects, predicates, objects, complements and adjuncts",
+          "referenceId": "gv5-d01-c08",
+          "practice": "gv5-d01-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d01-c09",
+          "title": "simple SVO analysis",
+          "referenceId": "gv5-d01-c09",
+          "practice": "gv5-d01-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 2,
+      "id": "gv5-day-02",
+      "title": "Nouns and Noun Structures",
+      "taxonomy": [
+        "A",
+        "B"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d02-c01",
+          "title": "common, proper, concrete, abstract, collective, material and compound nouns",
+          "referenceId": "gv5-d02-c01",
+          "practice": "gv5-d02-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d02-c02",
+          "title": "regular, irregular and foreign plurals",
+          "referenceId": "gv5-d02-c02",
+          "practice": "gv5-d02-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d02-c03",
+          "title": "countability and contextual shifts",
+          "referenceId": "gv5-d02-c03",
+          "practice": "gv5-d02-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d02-c04",
+          "title": "singular-only and plural-only nouns",
+          "referenceId": "gv5-d02-c04",
+          "practice": "gv5-d02-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d02-c05",
+          "title": "collective agreement",
+          "referenceId": "gv5-d02-c05",
+          "practice": "gv5-d02-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d02-c06",
+          "title": "genitives and possession",
+          "referenceId": "gv5-d02-c06",
+          "practice": "gv5-d02-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d02-c07",
+          "title": "noun modifiers and nominal compounds",
+          "referenceId": "gv5-d02-c07",
+          "practice": "gv5-d02-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d02-c08",
+          "title": "nominalisation, apposition and noun-phrase structure",
+          "referenceId": "gv5-d02-c08",
+          "practice": "gv5-d02-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        1
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 3,
+      "id": "gv5-day-03",
+      "title": "Articles, Determiners and Quantification",
+      "taxonomy": [
+        "B",
+        "K"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d03-c01",
+          "title": "a, an, the and zero article",
+          "referenceId": "gv5-d03-c01",
+          "practice": "gv5-d03-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c02",
+          "title": "definiteness, specificity and generic reference",
+          "referenceId": "gv5-d03-c02",
+          "practice": "gv5-d03-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c03",
+          "title": "first and subsequent mention",
+          "referenceId": "gv5-d03-c03",
+          "practice": "gv5-d03-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c04",
+          "title": "institutional, geographical, proper and abstract nouns",
+          "referenceId": "gv5-d03-c04",
+          "practice": "gv5-d03-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c05",
+          "title": "demonstrative, possessive, distributive and interrogative determiners",
+          "referenceId": "gv5-d03-c05",
+          "practice": "gv5-d03-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c06",
+          "title": "numbers and quantifiers",
+          "referenceId": "gv5-d03-c06",
+          "practice": "gv5-d03-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c07",
+          "title": "some and any",
+          "referenceId": "gv5-d03-c07",
+          "practice": "gv5-d03-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c08",
+          "title": "few/a few, little/a little, fewer/less",
+          "referenceId": "gv5-d03-c08",
+          "practice": "gv5-d03-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d03-c09",
+          "title": "each/every, either/neither, both/all, enough and several",
+          "referenceId": "gv5-d03-c09",
+          "practice": "gv5-d03-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        1,
+        2
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 4,
+      "id": "gv5-day-04",
+      "title": "Pronouns, Reference and Agreement",
+      "taxonomy": [
+        "C",
+        "K",
+        "P"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d04-c01",
+          "title": "personal, possessive, reflexive and emphatic pronouns",
+          "referenceId": "gv5-d04-c01",
+          "practice": "gv5-d04-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c02",
+          "title": "reciprocal, relative, demonstrative, interrogative, indefinite and distributive pronouns",
+          "referenceId": "gv5-d04-c02",
+          "practice": "gv5-d04-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c03",
+          "title": "case and coordination",
+          "referenceId": "gv5-d04-c03",
+          "practice": "gv5-d04-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c04",
+          "title": "antecedents and agreement",
+          "referenceId": "gv5-d04-c04",
+          "practice": "gv5-d04-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c05",
+          "title": "anaphora, cataphora and deixis",
+          "referenceId": "gv5-d04-c05",
+          "practice": "gv5-d04-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c06",
+          "title": "dummy subjects and generic reference",
+          "referenceId": "gv5-d04-c06",
+          "practice": "gv5-d04-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c07",
+          "title": "singular they and inclusive language",
+          "referenceId": "gv5-d04-c07",
+          "practice": "gv5-d04-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c08",
+          "title": "ambiguity and reference across sentences",
+          "referenceId": "gv5-d04-c08",
+          "practice": "gv5-d04-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d04-c09",
+          "title": "pedagogical binding restrictions and regional/register variation",
+          "referenceId": "gv5-d04-c09",
+          "practice": "gv5-d04-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        2,
+        3
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 5,
+      "id": "gv5-day-05",
+      "title": "The English Verb System",
+      "taxonomy": [
+        "D",
+        "L"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d05-c01",
+          "title": "lexical, primary and modal auxiliaries",
+          "referenceId": "gv5-d05-c01",
+          "practice": "gv5-d05-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c02",
+          "title": "regular and irregular forms",
+          "referenceId": "gv5-d05-c02",
+          "practice": "gv5-d05-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c03",
+          "title": "finite and non-finite verbs",
+          "referenceId": "gv5-d05-c03",
+          "practice": "gv5-d05-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c04",
+          "title": "verb phrases and auxiliary order",
+          "referenceId": "gv5-d05-c04",
+          "practice": "gv5-d05-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c05",
+          "title": "transitive, intransitive, ditransitive, linking and complex-transitive patterns",
+          "referenceId": "gv5-d05-c05",
+          "practice": "gv5-d05-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c06",
+          "title": "valency, complements and objects",
+          "referenceId": "gv5-d05-c06",
+          "practice": "gv5-d05-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c07",
+          "title": "ergative alternations",
+          "referenceId": "gv5-d05-c07",
+          "practice": "gv5-d05-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c08",
+          "title": "stative and dynamic interpretation",
+          "referenceId": "gv5-d05-c08",
+          "practice": "gv5-d05-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d05-c09",
+          "title": "do-support, negation, questions, contractions and inversion",
+          "referenceId": "gv5-d05-c09",
+          "practice": "gv5-d05-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        3,
+        4
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 6,
+      "id": "gv5-day-06",
+      "title": "Present-Time Expressions and Aspect",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d06-c01",
+          "title": "simple present",
+          "referenceId": "gv5-d06-c01",
+          "practice": "gv5-d06-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c02",
+          "title": "present progressive",
+          "referenceId": "gv5-d06-c02",
+          "practice": "gv5-d06-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c03",
+          "title": "present perfect",
+          "referenceId": "gv5-d06-c03",
+          "practice": "gv5-d06-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c04",
+          "title": "present perfect progressive",
+          "referenceId": "gv5-d06-c04",
+          "practice": "gv5-d06-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c05",
+          "title": "affirmative, negative and interrogative forms",
+          "referenceId": "gv5-d06-c05",
+          "practice": "gv5-d06-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c06",
+          "title": "habits, states, temporary situations and ongoing events",
+          "referenceId": "gv5-d06-c06",
+          "practice": "gv5-d06-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c07",
+          "title": "completion, experience, duration and present relevance",
+          "referenceId": "gv5-d06-c07",
+          "practice": "gv5-d06-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c08",
+          "title": "tense versus time and aspect",
+          "referenceId": "gv5-d06-c08",
+          "practice": "gv5-d06-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d06-c09",
+          "title": "cumulative assessment Days 1–6",
+          "referenceId": "gv5-d06-c09",
+          "practice": "gv5-d06-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-1",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        4,
+        5
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 7,
+      "id": "gv5-day-07",
+      "title": "Past-Time Expressions and Narrative Grammar",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d07-c01",
+          "title": "past simple",
+          "referenceId": "gv5-d07-c01",
+          "practice": "gv5-d07-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c02",
+          "title": "past progressive",
+          "referenceId": "gv5-d07-c02",
+          "practice": "gv5-d07-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c03",
+          "title": "past perfect",
+          "referenceId": "gv5-d07-c03",
+          "practice": "gv5-d07-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c04",
+          "title": "past perfect progressive",
+          "referenceId": "gv5-d07-c04",
+          "practice": "gv5-d07-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c05",
+          "title": "narrative sequence and background",
+          "referenceId": "gv5-d07-c05",
+          "practice": "gv5-d07-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c06",
+          "title": "interruption and duration",
+          "referenceId": "gv5-d07-c06",
+          "practice": "gv5-d07-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c07",
+          "title": "used to and habitual would",
+          "referenceId": "gv5-d07-c07",
+          "practice": "gv5-d07-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c08",
+          "title": "past states and completed versus continuing events",
+          "referenceId": "gv5-d07-c08",
+          "practice": "gv5-d07-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d07-c09",
+          "title": "historical reporting and time reference",
+          "referenceId": "gv5-d07-c09",
+          "practice": "gv5-d07-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        5,
+        6
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 8,
+      "id": "gv5-day-08",
+      "title": "Perfect, Progressive and Complex Aspectual Relationships",
+      "taxonomy": [
+        "D",
+        "E",
+        "K"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d08-c01",
+          "title": "perfect versus progressive aspect",
+          "referenceId": "gv5-d08-c01",
+          "practice": "gv5-d08-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c02",
+          "title": "stative restrictions and dynamic readings",
+          "referenceId": "gv5-d08-c02",
+          "practice": "gv5-d08-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c03",
+          "title": "temporary states, repetition and duration",
+          "referenceId": "gv5-d08-c03",
+          "practice": "gv5-d08-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c04",
+          "title": "resultative meaning",
+          "referenceId": "gv5-d08-c04",
+          "practice": "gv5-d08-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c05",
+          "title": "already, yet and just",
+          "referenceId": "gv5-d08-c05",
+          "practice": "gv5-d08-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c06",
+          "title": "since and for",
+          "referenceId": "gv5-d08-c06",
+          "practice": "gv5-d08-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c07",
+          "title": "by and until",
+          "referenceId": "gv5-d08-c07",
+          "practice": "gv5-d08-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c08",
+          "title": "lately and recently",
+          "referenceId": "gv5-d08-c08",
+          "practice": "gv5-d08-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d08-c09",
+          "title": "aspectual combinations and context-dependent preferences",
+          "referenceId": "gv5-d08-c09",
+          "practice": "gv5-d08-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        6,
+        7
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 9,
+      "id": "gv5-day-09",
+      "title": "Future Reference and Sequence of Tenses",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d09-c01",
+          "title": "will and shall",
+          "referenceId": "gv5-d09-c01",
+          "practice": "gv5-d09-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d09-c02",
+          "title": "be going to",
+          "referenceId": "gv5-d09-c02",
+          "practice": "gv5-d09-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d09-c03",
+          "title": "present progressive arrangements and present simple schedules",
+          "referenceId": "gv5-d09-c03",
+          "practice": "gv5-d09-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d09-c04",
+          "title": "future progressive, perfect and perfect progressive",
+          "referenceId": "gv5-d09-c04",
+          "practice": "gv5-d09-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d09-c05",
+          "title": "prediction, intention, promise and plan",
+          "referenceId": "gv5-d09-c05",
+          "practice": "gv5-d09-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d09-c06",
+          "title": "future in the past",
+          "referenceId": "gv5-d09-c06",
+          "practice": "gv5-d09-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d09-c07",
+          "title": "future time clauses and exceptions for modal will",
+          "referenceId": "gv5-d09-c07",
+          "practice": "gv5-d09-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d09-c08",
+          "title": "sequence of tenses, optional backshift and temporal consistency",
+          "referenceId": "gv5-d09-c08",
+          "practice": "gv5-d09-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        7,
+        8
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 10,
+      "id": "gv5-day-10",
+      "title": "Subject–Verb Agreement",
+      "taxonomy": [
+        "B",
+        "D",
+        "P"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d10-c01",
+          "title": "person and number",
+          "referenceId": "gv5-d10-c01",
+          "practice": "gv5-d10-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c02",
+          "title": "intervening modifiers and coordinated subjects",
+          "referenceId": "gv5-d10-c02",
+          "practice": "gv5-d10-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c03",
+          "title": "collectives and regional variation",
+          "referenceId": "gv5-d10-c03",
+          "practice": "gv5-d10-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c04",
+          "title": "indefinite pronouns",
+          "referenceId": "gv5-d10-c04",
+          "practice": "gv5-d10-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c05",
+          "title": "relative-clause antecedents",
+          "referenceId": "gv5-d10-c05",
+          "practice": "gv5-d10-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c06",
+          "title": "inversion and existential there",
+          "referenceId": "gv5-d10-c06",
+          "practice": "gv5-d10-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c07",
+          "title": "fractions and percentages",
+          "referenceId": "gv5-d10-c07",
+          "practice": "gv5-d10-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c08",
+          "title": "measurements, mathematics and titles",
+          "referenceId": "gv5-d10-c08",
+          "practice": "gv5-d10-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c09",
+          "title": "plural-looking nouns",
+          "referenceId": "gv5-d10-c09",
+          "practice": "gv5-d10-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d10-c10",
+          "title": "proximity and notional agreement",
+          "referenceId": "gv5-d10-c10",
+          "practice": "gv5-d10-c10-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        8,
+        9
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 11,
+      "id": "gv5-day-11",
+      "title": "Adjectives, Adverbs, Degree and Comparison",
+      "taxonomy": [
+        "F",
+        "K"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d11-c01",
+          "title": "adjective classes, attributive and predicative positions",
+          "referenceId": "gv5-d11-c01",
+          "practice": "gv5-d11-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c02",
+          "title": "adjective order and participial adjectives",
+          "referenceId": "gv5-d11-c02",
+          "practice": "gv5-d11-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c03",
+          "title": "gradability, intensifiers and downtoners",
+          "referenceId": "gv5-d11-c03",
+          "practice": "gv5-d11-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c04",
+          "title": "comparative, superlative and irregular forms",
+          "referenceId": "gv5-d11-c04",
+          "practice": "gv5-d11-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c05",
+          "title": "comparison clauses and parallel comparison",
+          "referenceId": "gv5-d11-c05",
+          "practice": "gv5-d11-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c06",
+          "title": "adjective/adverb pairs",
+          "referenceId": "gv5-d11-c06",
+          "practice": "gv5-d11-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c07",
+          "title": "adverb types, phrases, placement and scope",
+          "referenceId": "gv5-d11-c07",
+          "practice": "gv5-d11-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c08",
+          "title": "focusing and sentence adverbials",
+          "referenceId": "gv5-d11-c08",
+          "practice": "gv5-d11-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d11-c09",
+          "title": "absolute and relative gradability",
+          "referenceId": "gv5-d11-c09",
+          "practice": "gv5-d11-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        9,
+        10
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 12,
+      "id": "gv5-day-12",
+      "title": "Prepositions, Particles and Verb Patterns",
+      "taxonomy": [
+        "G",
+        "L"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d12-c01",
+          "title": "time, place, direction and source",
+          "referenceId": "gv5-d12-c01",
+          "practice": "gv5-d12-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c02",
+          "title": "cause, purpose, means and relationship",
+          "referenceId": "gv5-d12-c02",
+          "practice": "gv5-d12-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c03",
+          "title": "complements and prepositional phrases",
+          "referenceId": "gv5-d12-c03",
+          "practice": "gv5-d12-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c04",
+          "title": "stranding and pied-piping",
+          "referenceId": "gv5-d12-c04",
+          "practice": "gv5-d12-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c05",
+          "title": "fixed combinations and meaning differences",
+          "referenceId": "gv5-d12-c05",
+          "practice": "gv5-d12-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c06",
+          "title": "phrasal, prepositional and phrasal-prepositional verbs",
+          "referenceId": "gv5-d12-c06",
+          "practice": "gv5-d12-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c07",
+          "title": "particle placement and separability",
+          "referenceId": "gv5-d12-c07",
+          "practice": "gv5-d12-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c08",
+          "title": "lexical dependencies",
+          "referenceId": "gv5-d12-c08",
+          "practice": "gv5-d12-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d12-c09",
+          "title": "cumulative assessment Days 7–12 and earlier retrieval",
+          "referenceId": "gv5-d12-c09",
+          "practice": "gv5-d12-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-2",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        10,
+        11
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 13,
+      "id": "gv5-day-13",
+      "title": "Phrases and Their Internal Structure",
+      "taxonomy": [
+        "H"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d13-c01",
+          "title": "noun, verb, adjective, adverb and prepositional phrases",
+          "referenceId": "gv5-d13-c01",
+          "practice": "gv5-d13-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d13-c02",
+          "title": "heads, determiners, modifiers and complements",
+          "referenceId": "gv5-d13-c02",
+          "practice": "gv5-d13-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d13-c03",
+          "title": "premodification and postmodification",
+          "referenceId": "gv5-d13-c03",
+          "practice": "gv5-d13-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d13-c04",
+          "title": "embedding and coordination",
+          "referenceId": "gv5-d13-c04",
+          "practice": "gv5-d13-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d13-c05",
+          "title": "hierarchical structure",
+          "referenceId": "gv5-d13-c05",
+          "practice": "gv5-d13-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d13-c06",
+          "title": "constituency diagnostics",
+          "referenceId": "gv5-d13-c06",
+          "practice": "gv5-d13-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d13-c07",
+          "title": "phrase parsing and limits of substitution tests",
+          "referenceId": "gv5-d13-c07",
+          "practice": "gv5-d13-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        11,
+        12
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 14,
+      "id": "gv5-day-14",
+      "title": "Clauses and Sentence Architecture",
+      "taxonomy": [
+        "H",
+        "I"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d14-c01",
+          "title": "independent and dependent clauses",
+          "referenceId": "gv5-d14-c01",
+          "practice": "gv5-d14-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d14-c02",
+          "title": "finite and non-finite clauses",
+          "referenceId": "gv5-d14-c02",
+          "practice": "gv5-d14-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d14-c03",
+          "title": "declarative, interrogative, imperative and exclamative forms",
+          "referenceId": "gv5-d14-c03",
+          "practice": "gv5-d14-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ],
+          "coverageDetails": [
+            "ordinary confirmation tags, auxiliaries and polarity",
+            "negative subjects and singular-they tags",
+            "imperative and let’s tags; I am/aren’t I",
+            "same-polarity tags, intonation and register",
+            "echo questions and negative yes-no questions"
+          ]
+        },
+        {
+          "id": "gv5-topic-d14-c04",
+          "title": "form versus communicative function",
+          "referenceId": "gv5-d14-c04",
+          "practice": "gv5-d14-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d14-c05",
+          "title": "simple, compound, complex and compound-complex sentences",
+          "referenceId": "gv5-d14-c05",
+          "practice": "gv5-d14-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d14-c06",
+          "title": "complements and subordination",
+          "referenceId": "gv5-d14-c06",
+          "practice": "gv5-d14-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d14-c07",
+          "title": "clause boundaries, fragments, comma splices and run-ons",
+          "referenceId": "gv5-d14-c07",
+          "practice": "gv5-d14-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d14-c08",
+          "title": "structured visual parsing",
+          "referenceId": "gv5-d14-c08",
+          "practice": "gv5-d14-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        12,
+        13
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 15,
+      "id": "gv5-day-15",
+      "title": "Relative, Nominal and Adverbial Clauses",
+      "taxonomy": [
+        "I"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d15-c01",
+          "title": "defining and supplementary relatives",
+          "referenceId": "gv5-d15-c01",
+          "practice": "gv5-d15-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c02",
+          "title": "relative pronouns and adverbs",
+          "referenceId": "gv5-d15-c02",
+          "practice": "gv5-d15-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c03",
+          "title": "contact clauses and reduced relatives",
+          "referenceId": "gv5-d15-c03",
+          "practice": "gv5-d15-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c04",
+          "title": "content and nominal clauses",
+          "referenceId": "gv5-d15-c04",
+          "practice": "gv5-d15-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c05",
+          "title": "that-clauses, wh-clauses and embedded questions",
+          "referenceId": "gv5-d15-c05",
+          "practice": "gv5-d15-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c06",
+          "title": "infinitival clauses",
+          "referenceId": "gv5-d15-c06",
+          "practice": "gv5-d15-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c07",
+          "title": "time, reason, result and purpose adjunct clauses",
+          "referenceId": "gv5-d15-c07",
+          "practice": "gv5-d15-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c08",
+          "title": "concession, condition, comparison and manner",
+          "referenceId": "gv5-d15-c08",
+          "practice": "gv5-d15-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d15-c09",
+          "title": "clause function and semantic relationships",
+          "referenceId": "gv5-d15-c09",
+          "practice": "gv5-d15-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        13,
+        14
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 16,
+      "id": "gv5-day-16",
+      "title": "Coordination, Conjunctions and Logical Relationships",
+      "taxonomy": [
+        "H",
+        "M"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d16-c01",
+          "title": "coordinating, subordinating and correlative conjunctions",
+          "referenceId": "gv5-d16-c01",
+          "practice": "gv5-d16-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d16-c02",
+          "title": "word, phrase and clause coordination",
+          "referenceId": "gv5-d16-c02",
+          "practice": "gv5-d16-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d16-c03",
+          "title": "both–and, either–or, neither–nor, not only–but also",
+          "referenceId": "gv5-d16-c03",
+          "practice": "gv5-d16-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d16-c04",
+          "title": "agreement and parallelism",
+          "referenceId": "gv5-d16-c04",
+          "practice": "gv5-d16-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d16-c05",
+          "title": "addition, contrast, concession and qualification",
+          "referenceId": "gv5-d16-c05",
+          "practice": "gv5-d16-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d16-c06",
+          "title": "cause, result, purpose, sequence and alternatives",
+          "referenceId": "gv5-d16-c06",
+          "practice": "gv5-d16-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d16-c07",
+          "title": "conjunctions versus prepositions, conjunctive adverbs and discourse markers",
+          "referenceId": "gv5-d16-c07",
+          "practice": "gv5-d16-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        14,
+        15
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 17,
+      "id": "gv5-day-17",
+      "title": "Modal Verbs and Modality",
+      "taxonomy": [
+        "D",
+        "K"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d17-c01",
+          "title": "ability, permission, possibility and probability",
+          "referenceId": "gv5-d17-c01",
+          "practice": "gv5-d17-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c02",
+          "title": "certainty, necessity, obligation and prohibition",
+          "referenceId": "gv5-d17-c02",
+          "practice": "gv5-d17-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c03",
+          "title": "advice, willingness, expectation and deduction",
+          "referenceId": "gv5-d17-c03",
+          "practice": "gv5-d17-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c04",
+          "title": "core, semi-modal and marginal modal forms",
+          "referenceId": "gv5-d17-c04",
+          "practice": "gv5-d17-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c05",
+          "title": "modal-perfect combinations",
+          "referenceId": "gv5-d17-c05",
+          "practice": "gv5-d17-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c06",
+          "title": "must/might/should have done",
+          "referenceId": "gv5-d17-c06",
+          "practice": "gv5-d17-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c07",
+          "title": "needn’t have versus didn’t need to",
+          "referenceId": "gv5-d17-c07",
+          "practice": "gv5-d17-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c08",
+          "title": "epistemic and deontic meaning",
+          "referenceId": "gv5-d17-c08",
+          "practice": "gv5-d17-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d17-c09",
+          "title": "hedging and degrees of commitment",
+          "referenceId": "gv5-d17-c09",
+          "practice": "gv5-d17-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        15,
+        16
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 18,
+      "id": "gv5-day-18",
+      "title": "Conditionals, Hypothesis and Mood",
+      "taxonomy": [
+        "I",
+        "J",
+        "K"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d18-c01",
+          "title": "zero, first, second, third and mixed conditional teaching patterns",
+          "referenceId": "gv5-d18-c01",
+          "practice": "gv5-d18-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c02",
+          "title": "real, predictive, hypothetical, counterfactual and implied conditions",
+          "referenceId": "gv5-d18-c02",
+          "practice": "gv5-d18-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c03",
+          "title": "open versus remote conditions",
+          "referenceId": "gv5-d18-c03",
+          "practice": "gv5-d18-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c04",
+          "title": "wish, regret and if only",
+          "referenceId": "gv5-d18-c04",
+          "practice": "gv5-d18-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c05",
+          "title": "as if/as though, would rather and it’s time",
+          "referenceId": "gv5-d18-c05",
+          "practice": "gv5-d18-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c06",
+          "title": "conditional inversion",
+          "referenceId": "gv5-d18-c06",
+          "practice": "gv5-d18-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c07",
+          "title": "indicative, imperative and subjunctive constructions",
+          "referenceId": "gv5-d18-c07",
+          "practice": "gv5-d18-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c08",
+          "title": "mandative and formulaic uses",
+          "referenceId": "gv5-d18-c08",
+          "practice": "gv5-d18-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d18-c09",
+          "title": "cumulative assessment Days 13–18",
+          "referenceId": "gv5-d18-c09",
+          "practice": "gv5-d18-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-3",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        16,
+        17
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 19,
+      "id": "gv5-day-19",
+      "title": "Active, Passive, Causative and Related Constructions",
+      "taxonomy": [
+        "D",
+        "J"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d19-c01",
+          "title": "be-passives across tense, aspect, modals and infinitives",
+          "referenceId": "gv5-d19-c01",
+          "practice": "gv5-d19-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d19-c02",
+          "title": "agentless and reporting passives",
+          "referenceId": "gv5-d19-c02",
+          "practice": "gv5-d19-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d19-c03",
+          "title": "get-passives and double-object passives",
+          "referenceId": "gv5-d19-c03",
+          "practice": "gv5-d19-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d19-c04",
+          "title": "prepositional passives and restrictions",
+          "referenceId": "gv5-d19-c04",
+          "practice": "gv5-d19-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d19-c05",
+          "title": "have/get causatives",
+          "referenceId": "gv5-d19-c05",
+          "practice": "gv5-d19-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d19-c06",
+          "title": "make/let/help complementation",
+          "referenceId": "gv5-d19-c06",
+          "practice": "gv5-d19-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d19-c07",
+          "title": "ergative alternations",
+          "referenceId": "gv5-d19-c07",
+          "practice": "gv5-d19-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d19-c08",
+          "title": "meaning-preserving transformations",
+          "referenceId": "gv5-d19-c08",
+          "practice": "gv5-d19-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        17,
+        18
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 20,
+      "id": "gv5-day-20",
+      "title": "Gerunds, Infinitives, Participles and Non-Finite Clauses",
+      "taxonomy": [
+        "D",
+        "H",
+        "J",
+        "L"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d20-c01",
+          "title": "gerund-participial -ing forms",
+          "referenceId": "gv5-d20-c01",
+          "practice": "gv5-d20-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c02",
+          "title": "to and bare infinitives",
+          "referenceId": "gv5-d20-c02",
+          "practice": "gv5-d20-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ],
+          "coverageDetails": [
+            "to-infinitives and bare infinitives",
+            "split infinitives, adverb scope and style-dependent preferences"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c03",
+          "title": "present and past participles",
+          "referenceId": "gv5-d20-c03",
+          "practice": "gv5-d20-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c04",
+          "title": "perfect and passive non-finite forms",
+          "referenceId": "gv5-d20-c04",
+          "practice": "gv5-d20-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c05",
+          "title": "verb complementation and meaning changes",
+          "referenceId": "gv5-d20-c05",
+          "practice": "gv5-d20-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c06",
+          "title": "purpose and participial clauses",
+          "referenceId": "gv5-d20-c06",
+          "practice": "gv5-d20-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c07",
+          "title": "dangling and misplaced participles",
+          "referenceId": "gv5-d20-c07",
+          "practice": "gv5-d20-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c08",
+          "title": "control and subject interpretation",
+          "referenceId": "gv5-d20-c08",
+          "practice": "gv5-d20-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d20-c09",
+          "title": "reduced clauses and raising",
+          "referenceId": "gv5-d20-c09",
+          "practice": "gv5-d20-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        18,
+        19
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 21,
+      "id": "gv5-day-21",
+      "title": "Direct and Indirect Speech",
+      "taxonomy": [
+        "D",
+        "I",
+        "N"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d21-c01",
+          "title": "direct quotation and indirect reporting",
+          "referenceId": "gv5-d21-c01",
+          "practice": "gv5-d21-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c02",
+          "title": "optional and required backshift",
+          "referenceId": "gv5-d21-c02",
+          "practice": "gv5-d21-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c03",
+          "title": "pronoun, time and place reference",
+          "referenceId": "gv5-d21-c03",
+          "practice": "gv5-d21-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c04",
+          "title": "reported statements and thoughts",
+          "referenceId": "gv5-d21-c04",
+          "practice": "gv5-d21-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c05",
+          "title": "questions and embedded interrogatives",
+          "referenceId": "gv5-d21-c05",
+          "practice": "gv5-d21-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c06",
+          "title": "commands, requests, suggestions and exclamations",
+          "referenceId": "gv5-d21-c06",
+          "practice": "gv5-d21-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c07",
+          "title": "reporting verb patterns",
+          "referenceId": "gv5-d21-c07",
+          "practice": "gv5-d21-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c08",
+          "title": "truth continuing at report time",
+          "referenceId": "gv5-d21-c08",
+          "practice": "gv5-d21-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d21-c09",
+          "title": "formal transformations",
+          "referenceId": "gv5-d21-c09",
+          "practice": "gv5-d21-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        19,
+        20
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 22,
+      "id": "gv5-day-22",
+      "title": "Modifiers, Parallelism and Grammatical Ambiguity",
+      "taxonomy": [
+        "H",
+        "K",
+        "Q"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d22-c01",
+          "title": "misplaced, dangling and squinting modifiers",
+          "referenceId": "gv5-d22-c01",
+          "practice": "gv5-d22-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d22-c02",
+          "title": "attachment and scope ambiguity",
+          "referenceId": "gv5-d22-c02",
+          "practice": "gv5-d22-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d22-c03",
+          "title": "word, phrase and clause parallelism",
+          "referenceId": "gv5-d22-c03",
+          "practice": "gv5-d22-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d22-c04",
+          "title": "comparisons and correlative constructions",
+          "referenceId": "gv5-d22-c04",
+          "practice": "gv5-d22-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d22-c05",
+          "title": "pronoun ambiguity",
+          "referenceId": "gv5-d22-c05",
+          "practice": "gv5-d22-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d22-c06",
+          "title": "faulty comparison and predication",
+          "referenceId": "gv5-d22-c06",
+          "practice": "gv5-d22-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d22-c07",
+          "title": "illogical relationships",
+          "referenceId": "gv5-d22-c07",
+          "practice": "gv5-d22-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d22-c08",
+          "title": "meaning-preserving revision",
+          "referenceId": "gv5-d22-c08",
+          "practice": "gv5-d22-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        20,
+        21
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 23,
+      "id": "gv5-day-23",
+      "title": "Advanced English Sentence Structures",
+      "taxonomy": [
+        "J",
+        "K",
+        "M"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d23-c01",
+          "title": "negative and concessive inversion",
+          "referenceId": "gv5-d23-c01",
+          "practice": "gv5-d23-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c02",
+          "title": "conditional inversion",
+          "referenceId": "gv5-d23-c02",
+          "practice": "gv5-d23-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c03",
+          "title": "fronting and topicalisation",
+          "referenceId": "gv5-d23-c03",
+          "practice": "gv5-d23-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c04",
+          "title": "clefts and pseudo-clefts",
+          "referenceId": "gv5-d23-c04",
+          "practice": "gv5-d23-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c05",
+          "title": "extraposition and existential clauses",
+          "referenceId": "gv5-d23-c05",
+          "practice": "gv5-d23-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c06",
+          "title": "emphatic do",
+          "referenceId": "gv5-d23-c06",
+          "practice": "gv5-d23-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c07",
+          "title": "substitution and ellipsis",
+          "referenceId": "gv5-d23-c07",
+          "practice": "gv5-d23-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c08",
+          "title": "information structure, focus, theme and rheme",
+          "referenceId": "gv5-d23-c08",
+          "practice": "gv5-d23-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c09",
+          "title": "end-weight and end-focus",
+          "referenceId": "gv5-d23-c09",
+          "practice": "gv5-d23-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d23-c10",
+          "title": "marked order and register",
+          "referenceId": "gv5-d23-c10",
+          "practice": "gv5-d23-c10-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        21,
+        22
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 24,
+      "id": "gv5-day-24",
+      "title": "Punctuation, Capitalisation and Orthographic Conventions",
+      "taxonomy": [
+        "O",
+        "P"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d24-c01",
+          "title": "full stops, commas and semicolons",
+          "referenceId": "gv5-d24-c01",
+          "practice": "gv5-d24-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c02",
+          "title": "colons and apostrophes",
+          "referenceId": "gv5-d24-c02",
+          "practice": "gv5-d24-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c03",
+          "title": "quotations, parentheses and square brackets",
+          "referenceId": "gv5-d24-c03",
+          "practice": "gv5-d24-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c04",
+          "title": "dashes, hyphens and ellipses",
+          "referenceId": "gv5-d24-c04",
+          "practice": "gv5-d24-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c05",
+          "title": "question and exclamation marks",
+          "referenceId": "gv5-d24-c05",
+          "practice": "gv5-d24-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c06",
+          "title": "complex clauses, lists and introductory units",
+          "referenceId": "gv5-d24-c06",
+          "practice": "gv5-d24-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c07",
+          "title": "capitalisation and spelling",
+          "referenceId": "gv5-d24-c07",
+          "practice": "gv5-d24-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c08",
+          "title": "contractions, possessives, numbers, abbreviations and initials",
+          "referenceId": "gv5-d24-c08",
+          "practice": "gv5-d24-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c09",
+          "title": "compound formatting and style variation",
+          "referenceId": "gv5-d24-c09",
+          "practice": "gv5-d24-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d24-c10",
+          "title": "cumulative assessment Days 19–24",
+          "referenceId": "gv5-d24-c10",
+          "practice": "gv5-d24-c10-practice",
+          "assessment": [
+            "daily",
+            "phase-4",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        22,
+        23
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 25,
+      "id": "gv5-day-25",
+      "title": "Usage, Collocations and Frequently Confused Constructions",
+      "taxonomy": [
+        "G",
+        "L",
+        "P",
+        "Q"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d25-c01",
+          "title": "confusing word pairs",
+          "referenceId": "gv5-d25-c01",
+          "practice": "gv5-d25-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d25-c02",
+          "title": "grammatical collocations and lexical restrictions",
+          "referenceId": "gv5-d25-c02",
+          "practice": "gv5-d25-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d25-c03",
+          "title": "verb patterns and preposition selection",
+          "referenceId": "gv5-d25-c03",
+          "practice": "gv5-d25-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d25-c04",
+          "title": "contextual countability and agreement",
+          "referenceId": "gv5-d25-c04",
+          "practice": "gv5-d25-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d25-c05",
+          "title": "formal register",
+          "referenceId": "gv5-d25-c05",
+          "practice": "gv5-d25-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d25-c06",
+          "title": "British and American differences",
+          "referenceId": "gv5-d25-c06",
+          "practice": "gv5-d25-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d25-c07",
+          "title": "recurring Urdu-influenced transfer patterns without generalising about learners",
+          "referenceId": "gv5-d25-c07",
+          "practice": "gv5-d25-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d25-c08",
+          "title": "wrong, unusual, acceptable and context-dependent usage",
+          "referenceId": "gv5-d25-c08",
+          "practice": "gv5-d25-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        23,
+        24
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 26,
+      "id": "gv5-day-26",
+      "title": "Grammar Beyond the Sentence",
+      "taxonomy": [
+        "M",
+        "N"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d26-c01",
+          "title": "cohesion and coherence",
+          "referenceId": "gv5-d26-c01",
+          "practice": "gv5-d26-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c02",
+          "title": "reference chains",
+          "referenceId": "gv5-d26-c02",
+          "practice": "gv5-d26-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c03",
+          "title": "substitution and ellipsis",
+          "referenceId": "gv5-d26-c03",
+          "practice": "gv5-d26-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c04",
+          "title": "temporal consistency",
+          "referenceId": "gv5-d26-c04",
+          "practice": "gv5-d26-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c05",
+          "title": "given/new information and topic continuity",
+          "referenceId": "gv5-d26-c05",
+          "practice": "gv5-d26-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c06",
+          "title": "paragraph progression and transitions",
+          "referenceId": "gv5-d26-c06",
+          "practice": "gv5-d26-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c07",
+          "title": "nominalisation and grammatical compression",
+          "referenceId": "gv5-d26-c07",
+          "practice": "gv5-d26-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c08",
+          "title": "hedging, cautious claims and modality",
+          "referenceId": "gv5-d26-c08",
+          "practice": "gv5-d26-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d26-c09",
+          "title": "syntactic variety, clarity and economy",
+          "referenceId": "gv5-d26-c09",
+          "practice": "gv5-d26-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        24,
+        25
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 27,
+      "id": "gv5-day-27",
+      "title": "Grammar in Précis, Paraphrasing and Formal Expression",
+      "taxonomy": [
+        "N",
+        "R"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d27-c01",
+          "title": "summarising and précis",
+          "referenceId": "gv5-d27-c01",
+          "practice": "gv5-d27-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d27-c02",
+          "title": "paraphrase and synthesis",
+          "referenceId": "gv5-d27-c02",
+          "practice": "gv5-d27-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d27-c03",
+          "title": "translation and formal answers",
+          "referenceId": "gv5-d27-c03",
+          "practice": "gv5-d27-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d27-c04",
+          "title": "preserving tense, scope, modality and logical relationships",
+          "referenceId": "gv5-d27-c04",
+          "practice": "gv5-d27-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d27-c05",
+          "title": "compression with qualifications",
+          "referenceId": "gv5-d27-c05",
+          "practice": "gv5-d27-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d27-c06",
+          "title": "restructuring and reported claims",
+          "referenceId": "gv5-d27-c06",
+          "practice": "gv5-d27-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d27-c07",
+          "title": "original passage reduction",
+          "referenceId": "gv5-d27-c07",
+          "practice": "gv5-d27-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d27-c08",
+          "title": "formal correspondence and academic answers",
+          "referenceId": "gv5-d27-c08",
+          "practice": "gv5-d27-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        25,
+        26
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 28,
+      "id": "gv5-day-28",
+      "title": "Advanced Error Analysis and Sentence Reconstruction",
+      "taxonomy": [
+        "Q",
+        "R"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d28-c01",
+          "title": "multi-layer error diagnosis",
+          "referenceId": "gv5-d28-c01",
+          "practice": "gv5-d28-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c02",
+          "title": "rule, exception and alternative analysis",
+          "referenceId": "gv5-d28-c02",
+          "practice": "gv5-d28-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c03",
+          "title": "advanced transformations",
+          "referenceId": "gv5-d28-c03",
+          "practice": "gv5-d28-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c04",
+          "title": "sentence combining and splitting",
+          "referenceId": "gv5-d28-c04",
+          "practice": "gv5-d28-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c05",
+          "title": "word-order reconstruction",
+          "referenceId": "gv5-d28-c05",
+          "practice": "gv5-d28-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c06",
+          "title": "suspicious but grammatical constructions",
+          "referenceId": "gv5-d28-c06",
+          "practice": "gv5-d28-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c07",
+          "title": "register-sensitive editing",
+          "referenceId": "gv5-d28-c07",
+          "practice": "gv5-d28-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c08",
+          "title": "paragraph correction",
+          "referenceId": "gv5-d28-c08",
+          "practice": "gv5-d28-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d28-c09",
+          "title": "grammatical reasoning with evidence",
+          "referenceId": "gv5-d28-c09",
+          "practice": "gv5-d28-c09-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        26,
+        27
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 29,
+      "id": "gv5-day-29",
+      "title": "Comprehensive Grammar Examination",
+      "taxonomy": [
+        "Q",
+        "R"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d29-c01",
+          "title": "recognition and classification",
+          "referenceId": "gv5-d29-c01",
+          "practice": "gv5-d29-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d29-c02",
+          "title": "error detection with no-error alternatives",
+          "referenceId": "gv5-d29-c02",
+          "practice": "gv5-d29-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d29-c03",
+          "title": "contextual single and multiple gaps",
+          "referenceId": "gv5-d29-c03",
+          "practice": "gv5-d29-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d29-c04",
+          "title": "transformations",
+          "referenceId": "gv5-d29-c04",
+          "practice": "gv5-d29-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d29-c05",
+          "title": "paragraph editing",
+          "referenceId": "gv5-d29-c05",
+          "practice": "gv5-d29-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d29-c06",
+          "title": "grammatical analysis",
+          "referenceId": "gv5-d29-c06",
+          "practice": "gv5-d29-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d29-c07",
+          "title": "controlled writing",
+          "referenceId": "gv5-d29-c07",
+          "practice": "gv5-d29-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d29-c08",
+          "title": "balanced difficulty and domain-level report",
+          "referenceId": "gv5-d29-c08",
+          "practice": "gv5-d29-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        27,
+        28
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    },
+    {
+      "day": 30,
+      "id": "gv5-day-30",
+      "title": "Final Mastery Assessment and Continuing Development",
+      "taxonomy": [
+        "Q",
+        "R"
+      ],
+      "subtopics": [
+        {
+          "id": "gv5-topic-d30-c01",
+          "title": "integrated capstone",
+          "referenceId": "gv5-d30-c01",
+          "practice": "gv5-d30-c01-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d30-c02",
+          "title": "comparable diagnostic skill domains",
+          "referenceId": "gv5-d30-c02",
+          "practice": "gv5-d30-c02-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d30-c03",
+          "title": "correction, construction, analysis and editing",
+          "referenceId": "gv5-d30-c03",
+          "practice": "gv5-d30-c03-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d30-c04",
+          "title": "independent writing with rubric",
+          "referenceId": "gv5-d30-c04",
+          "practice": "gv5-d30-c04-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d30-c05",
+          "title": "topic-level evidence profile",
+          "referenceId": "gv5-d30-c05",
+          "practice": "gv5-d30-c05-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d30-c06",
+          "title": "individual revision plan",
+          "referenceId": "gv5-d30-c06",
+          "practice": "gv5-d30-c06-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d30-c07",
+          "title": "permanent reference index",
+          "referenceId": "gv5-d30-c07",
+          "practice": "gv5-d30-c07-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        },
+        {
+          "id": "gv5-topic-d30-c08",
+          "title": "spaced review and continued practice",
+          "referenceId": "gv5-d30-c08",
+          "practice": "gv5-d30-c08-practice",
+          "assessment": [
+            "daily",
+            "phase-5",
+            "day-29",
+            "day-30"
+          ]
+        }
+      ],
+      "prerequisiteDays": [
+        28,
+        29
+      ],
+      "layers": [
+        "Foundation",
+        "Intermediate",
+        "Advanced",
+        "Expert Extension"
+      ]
+    }
+  ],
+  "permanentExtensions": [
+    {
+      "id": "gv5-ref-negation-scope",
+      "title": "Negation, polarity and quantifier scope",
+      "coverageIds": [
+        "gv5-ref-k01",
+        "gv5-ref-k02",
+        "gv5-ref-k03"
+      ],
+      "taxonomy": [
+        "D",
+        "K",
+        "P"
+      ],
+      "resource": "reference-meaning"
+    },
+    {
+      "id": "gv5-ref-presupposition",
+      "title": "Presupposition, entailment and contextual interpretation",
+      "coverageIds": [
+        "gv5-ref-k04",
+        "gv5-ref-k05",
+        "gv5-ref-k06"
+      ],
+      "taxonomy": [
+        "K",
+        "M",
+        "N"
+      ],
+      "resource": "reference-meaning"
+    },
+    {
+      "id": "gv5-ref-morph-processes",
+      "title": "Word formation beyond prefixes and suffixes",
+      "coverageIds": [
+        "gv5-ref-a01",
+        "gv5-ref-a02",
+        "gv5-ref-a03",
+        "gv5-ref-a04",
+        "gv5-ref-a05"
+      ],
+      "taxonomy": [
+        "A",
+        "L"
+      ],
+      "resource": "reference-word-formation"
+    },
+    {
+      "id": "gv5-ref-morph-productivity",
+      "title": "Roots, affix order and grammatical productivity",
+      "coverageIds": [
+        "gv5-ref-a06",
+        "gv5-ref-a07",
+        "gv5-ref-a08"
+      ],
+      "taxonomy": [
+        "A",
+        "K"
+      ],
+      "resource": "reference-word-formation"
+    }
+  ]
+}

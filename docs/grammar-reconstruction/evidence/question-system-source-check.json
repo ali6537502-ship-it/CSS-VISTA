@@ -1,0 +1,68 @@
+[
+  {
+    "id": "tags",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/question-tags",
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/question-tags",
+    "status": 200,
+    "sha256": "b344d482bec0aa34b6be38b283f265cbb5d2e712c6f4980dc002d367cbbbbd29"
+  },
+  {
+    "id": "infinitives",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/infinitives-with-and-without-to",
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/infinitives-with-and-without-to",
+    "status": 200,
+    "sha256": "6b6c91674adb1a860b6d9c26afed1674ca8349ff1041b4a6fd08a4f07e40906b"
+  },
+  {
+    "id": "echo",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-echo-and-checking-questions",
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/questions-echo-and-checking-questions",
+    "status": 200,
+    "sha256": "c084f91b89dc23bc89d445646b77bc023be1f8c85db2471ab279d22344051376"
+  },
+  {
+    "id": "bc-tags",
+    "url": "https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/question-tags",
+    "finalUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/question-tags",
+    "status": 200,
+    "title": "Question tags | LearnEnglish",
+    "sha256": "ae4c8f78c5bf2f7c0adcc2f624550dd9b9bbdda8feed662a3c418d5d3f1f68f0"
+  },
+  {
+    "id": "split-cambridge",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/split-infinitives",
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/",
+    "status": 200,
+    "title": "English Grammar Today on Cambridge Dictionary",
+    "sha256": "faf2711dc66f2ca334f6422897bbc033cd893c6411aa49e7cc2bdced0885f508"
+  },
+  {
+    "id": "split-mw",
+    "url": "https://www.merriam-webster.com/grammar/to-boldly-split-infinitives",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "split-mla",
+    "url": "https://style.mla.org/split-infinitives/",
+    "finalUrl": "https://style.mla.org/split-infinitives/",
+    "status": 200,
+    "title": "Is it OK to split an infinitive? | MLA Style Center",
+    "sha256": "8e61468ad92359bf2fb3dbba946bbe0d68d7ebd0bb4f23f089ee90a57111ac4a"
+  },
+  {
+    "id": "split-dict",
+    "url": "https://dictionary.cambridge.org/dictionary/english/split-infinitive",
+    "finalUrl": "https://dictionary.cambridge.org/dictionary/english/split-infinitive",
+    "status": 200,
+    "title": "SPLIT INFINITIVE | English meaning - Cambridge Dictionary",
+    "sha256": "aa69c84fffb577913ca761eff1b8017994117854b30eccf0b1c52402f7402999"
+  },
+  {
+    "id": "yesno",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-yes-no-questions-are-you-feeling-cold",
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/questions-yes-no-questions-are-you-feeling-cold",
+    "status": 200,
+    "title": "Questions: yes-no questions ( Are you feeling cold? ) - Cambridge Grammar",
+    "sha256": "98115614bdb7a016cc3bdb736b08003396ae1de06e9778d2f55442d7c26dd7d9"
+  }
+]

@@ -1,0 +1,39 @@
+gv5-d10-q01 [gv5-d10-m01] The condition of the outer walls ____ deteriorating. Use the ordinary singular head-noun agreement.
+0:is | 1:are | 2:have | 3:do
+KEY:0 Singular condition is the subject head; walls belongs to its modifying of-phrase.
+
+gv5-d10-q02 [gv5-d10-m01] Which statement correctly describes most ordinary lexical past-tense forms?
+0:They add -s for every plural subject. | 1:They do not normally distinguish singular from plural: she arrived / they arrived. | 2:They require a plural participle after every plural noun. | 3:They are all identical to present-tense forms.
+KEY:1 Most lexical past forms show no number contrast; be is an important exception.
+
+gv5-d10-q03 [gv5-d10-m02] For ordinary British English usage, which analysis is accurate?
+0:Collective nouns must always take singular verbs. | 1:Police always takes the same agreement as committee. | 2:A committee can take singular unit agreement or plural member agreement. | 3:Plural collective agreement proves that the noun is grammatically misspelled.
+KEY:2 British English permits unit/member agreement with many collective nouns; the behaviour of individual nouns and varieties needs qualification.
+
+gv5-d10-q04 [gv5-d10-m02] Review the intended inclusive statement: Everyone has their own copy. Which judgement is accurate?
+0:Change has to have because their is plural in spelling. | 1:Replace everyone with everyones. | 2:Their is impossible after a singular antecedent in all standard English. | 3:No error: everyone takes has, while singular their supplies inclusive reference.
+KEY:3 The singular finite agreement belongs to everyone. Established singular they/their can supply inclusive personal reference.
+
+gv5-d10-q05 [gv5-d10-m03] Choose careful formal existential agreement: There ____ several practical difficulties.
+0:are | 1:is | 2:has | 3:does
+KEY:0 The plural postverbal noun phrase takes are in the target formal pattern. Informal there’s with a plural is a separate register-sensitive use.
+
+gv5-d10-q06 [gv5-d10-m03] One of the books that ____ the method is missing. The relative clause explicitly describes the plural group of books.
+0:explains | 1:explain | 2:is explain | 3:has explains
+KEY:1 The stated antecedent of that is plural books, so explain is appropriate. Outer one separately takes main-clause is.
+
+gv5-d10-q07 [gv5-d10-m04] Half of the evidence ____ missing.
+0:are | 1:have | 2:is | 3:do
+KEY:2 Evidence is a mass noun in this use, so the fraction takes singular is.
+
+gv5-d10-q08 [gv5-d10-m04] The number of completed applications ____ risen.
+0:have | 1:are | 2:were | 3:has
+KEY:3 The number names a single figure, so has is the ordinary agreement choice. A number of applications have … is a different quantifying construction.
+
+gv5-d10-q09 [gv5-d10-m04] Which pair correctly contrasts the discipline with numerical figures?
+0:Statistics is demanding; these statistics are incomplete. | 1:Statistics are demanding as a discipline; these statistics is incomplete. | 2:Statistics be demanding; these statistics am incomplete. | 3:Statistics have demanding; these statistics has incomplete.
+KEY:0 The academic discipline takes singular agreement; the demonstratively identified figures are plural.
+
+gv5-d10-q10 [gv5-d10-m02] Which statement about None of the candidates is/are available is most reliable?
+0:Only are has ever been standard. | 1:Both singular and plural agreement occur; interpretation and register guidance should be stated. | 2:None always means exactly one. | 3:Neither construction contains a subject.
+KEY:1 Authorities record both singular and plural agreement with none of a countable set. A context-free absolute prohibition is unreliable.

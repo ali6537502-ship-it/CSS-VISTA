@@ -45,7 +45,7 @@ const quickActions: LinkCard[] = [
   },
   {
     title: 'English Grammar Course',
-    description: '30 days · 840 quiz questions',
+    description: '30 days · lessons, practice & reference',
     to: '/grammar-course',
     icon: BookOpen,
     tone: 'emerald',

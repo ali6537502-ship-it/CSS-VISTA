@@ -26,7 +26,8 @@ import Mentors from '@/pages/Mentors'
 import Services from '@/pages/Services'
 import Analysis from '@/pages/Analysis'
 import GrammarVocab from '@/pages/GrammarVocab'
-import GrammarCourse from '@/pages/GrammarCourse'
+import GrammarCourse from '@/features/grammar-v5/Course'
+import type { Catalog as GrammarCatalog } from '@/features/grammar-v5/types'
 import GKWorld from '@/pages/gk/GKWorld'
 import OneLinerGK from '@/pages/OneLinerGK'
 import LanguageGrammar from '@/pages/LanguageGrammar'
@@ -163,7 +164,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/services', () => <Services />),
   page('/analysis', () => <Analysis />),
   page('/grammar-vocabulary', () => <GrammarVocab />),
-  page('/grammar-course', () => <GrammarCourse />),
+  page('/grammar-course', () => <GrammarCourse initialCatalog={JSON.parse(readFileSync(join(process.cwd(), 'public/grammar/v5/index.json'), 'utf8')) as GrammarCatalog} />),
   page('/gk', () => <GKWorld />),
   page('/one-liner-gk', () => <OneLinerGK />),
   page('/language-grammar', () => <LanguageGrammar />),

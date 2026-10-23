@@ -1,0 +1,1350 @@
+{
+  "day": 6,
+  "id": "gv5-day-06",
+  "title": "Present-Time Expressions and Aspect",
+  "orientation": "Present-time writing involves more than saying what is happening this second. A medical receptionist states opening hours, describes a temporary queue, reports that test results have arrived and explains how long a patient has been waiting. Each choice presents the situation differently. Today you will build and compare four common constructions, including their questions and negatives. You will also separate tense, aspect and actual time, so that a familiar time word cannot mislead you into a mechanical answer. Begin with the simple and progressive modules; then use the perfect modules to connect earlier activity with now. The final practice revisits noun phrases, reference and auxiliary structure from Days 1–5. Study the advanced analyses when useful, and allow additional review time before independent writing.",
+  "outcomes": [
+    "Form present simple, progressive, perfect and perfect progressive affirmatives, questions and negatives.",
+    "Explain a habit/state/activity/result contrast in context.",
+    "Identify the finite auxiliary and the participle forms in a perfect progressive.",
+    "Choose a construction from an intended temporal meaning rather than one signal word.",
+    "Edit a present-time paragraph using Days 1–6 concepts."
+  ],
+  "prerequisiteDays": [
+    4,
+    5
+  ],
+  "modules": [
+    {
+      "id": "gv5-d06-m01",
+      "title": "Present simple: tense, time and a speaker’s general view",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d06-c01",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c06",
+        "gv5-topic-d06-c08"
+      ],
+      "definition": "The present simple is a finite present-tense construction without progressive or perfect marking. It commonly presents states, habits and generalisations; present tense does not restrict its reference to this instant.",
+      "foundation": [
+        "Begin with a distinction between a form and the time you mean. In Sara checks the filters every Friday, checks is present tense, but the sentence describes a routine across many Fridays. In Sara knows the building, knows describes a state that holds now without claiming it is permanent. Use the base form with I, you, we and they: they check. With a third-person singular subject, add the appropriate ending: she checks, he watches, the pump carries water. Be has its own forms am, is and are. Have becomes has; do becomes does. Read the complete subject before choosing the form."
+      ],
+      "intermediate": [
+        "For ordinary lexical verbs, make a negative with do not or does not followed by the base form: The sensor does not work. Make a question by placing do or does before the subject: Does the sensor work? The ending belongs to does, so does not works duplicates the marking. With be, use The sensor is not ready and Is the sensor ready?, without added do. Frequency expressions such as often and every week help communicate a habit, but they are clues to meaning, not switches that automatically force one construction. A routine can be temporary and still be presented as a routine."
+      ],
+      "advanced": [
+        "Present simple also supports instructions, demonstrations, commentaries and conventional summaries of texts: First you loosen the screw; the article argues for repair. These uses need not describe timeless truths. Context can even give a present form future reference, as in The inspection begins tomorrow, or past narrative reference, as in So I open the door and there is the missing parcel. Learn these as established uses of a grammatical form rather than extra inflected tenses. In formal prose, maintain a clear viewpoint, while allowing a justified change when moving from a past event to a continuing consequence."
+      ],
+      "expert": [
+        "Aspect concerns how a situation is viewed internally; tense locates a grammatical viewpoint relative to a reference time. Many grammatical accounts recognise present and past as English’s two inflectional tenses, while classroom accounts often organise twelve tense-aspect patterns. These descriptions count different things and need not conflict if the terminology is explicit. Simple does not mean easy or short. A simple-present verb can occur in a highly embedded sentence. Present-tense form does not certify factual truth: The moon consists of cheese is grammatically formed but factually false. Grammatical analysis and evaluating a claim are separate tasks."
+      ],
+      "patterns": [
+        {
+          "form": "subject + base/-s form",
+          "meaning": "A present simple affirmative with ordinary lexical verbs."
+        },
+        {
+          "form": "does/do + subject + base?; subject + does/do not + base",
+          "meaning": "Question and negative forms; only the auxiliary carries present agreement."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The clinic opens at eight on weekdays.",
+          "analysis": "Opens presents a regular schedule; clinic is third-person singular."
+        },
+        {
+          "sentence": "Does this code identify the customer or the order?",
+          "analysis": "Does precedes this code; identify remains the base form."
+        },
+        {
+          "sentence": "The report describes the leak that damaged the store last winter.",
+          "analysis": "Describes gives a current textual summary; damaged locates a different, past event. Both tenses are justified."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Rafi repairs bicycles.",
+          "b": "Rafi is repairing a bicycle.",
+          "note": "Both grammatical: A characterises his work or habit; B presents an activity as in progress."
+        }
+      ],
+      "exceptions": [
+        "Present forms can refer beyond present time: The workshop starts on Monday. Do not infer the event time from the verb ending alone."
+      ],
+      "mistakes": [
+        {
+          "problem": "The machine do not start.",
+          "repair": "The machine does not start.",
+          "reason": "Singular machine selects does; start stays base."
+        },
+        {
+          "problem": "Is she knows the route?",
+          "repair": "Does she know the route?",
+          "reason": "An ordinary lexical know forms this simple-present question with does, not be."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Tense",
+          "definition": "A grammatical verb distinction associated with temporal viewpoint.",
+          "example": "works contrasts with worked."
+        },
+        {
+          "term": "Aspect",
+          "definition": "A way of presenting an event’s internal temporal organisation.",
+          "example": "is working views activity in progress."
+        }
+      ],
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-m02",
+      "title": "Present progressive: activity, temporary patterns and changing states",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d06-c02",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c06"
+      ],
+      "definition": "The present progressive, also called present continuous, consists of present be plus an -ing form and normally presents a situation as ongoing, temporary, developing or arranged.",
+      "foundation": [
+        "Build this construction with am, is or are and the -ing form: I am checking; the technician is checking; the technicians are checking. Keep both parts. The technician checking the meter is not a complete ordinary declarative clause on its own. Add not after be for a negative, and move be before the subject for a question: Is the technician checking the meter? The main activity does not need to be happening at precisely the second of speech. I am reading a long biography can remain true while you stop to eat. The relevant interval is understood from context."
+      ],
+      "intermediate": [
+        "Compare a general description with a current arrangement: We use the upstairs room on Fridays describes a routine; We are using the upstairs room this month presents a temporary pattern. Neither form guarantees permanence or a fixed duration. Progressive constructions also describe change: The river is rising. With always, they can convey a speaker’s reaction to repeated events: She is always finding useful shortcuts can express admiration, while He is always losing receipts can express irritation. The emotional evaluation comes from the context and wording, not from a compulsory negative meaning in always."
+      ],
+      "advanced": [
+        "Verb meaning matters. Know and belong normally resist a progressive interpretation in their ordinary state senses: I know the password; the keys belong to Maya. Other verbs change interpretation: I think the estimate is low expresses an opinion, while I am thinking about the estimate presents mental activity. We have a small office describes possession; We are having a meeting describes an event. Avoid learning an absolute blacklist of spellings. Ask which sense is being used and whether the construction invites an activity, temporary behaviour or developing experience."
+      ],
+      "expert": [
+        "A progressive viewpoint does not itself assert that an event reaches its endpoint. The team is building a bridge does not entail that a bridge will be completed. The same construction can combine with repeated events, as in The phone is ringing every few minutes: a sequence of bounded rings forms an ongoing temporary pattern. Some innovative or expressive progressive statives are established in informal use, while other combinations remain unusual. Describe them by sense, register and communicative purpose rather than assuming that every unfamiliar -ing form is either universally wrong or universally interchangeable with the simple."
+      ],
+      "patterns": [
+        {
+          "form": "am/is/are + -ing",
+          "meaning": "Progressive affirmative."
+        },
+        {
+          "form": "am/is/are + not + -ing; Am/Is/Are + subject + -ing?",
+          "meaning": "Negation and subject–auxiliary inversion."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "I am sorting the photographs at the moment.",
+          "analysis": "Am + sorting presents current activity."
+        },
+        {
+          "sentence": "The library is staying open later during revision week.",
+          "analysis": "A repeated temporary arrangement can take progressive marking."
+        },
+        {
+          "sentence": "The director is being unusually patient while we test the equipment.",
+          "analysis": "Being presents temporary behaviour, not a permanent identification."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The soup tastes smoky.",
+          "b": "The chef is tasting the soup.",
+          "note": "Both grammatical: the first reports a perceived quality; the second presents deliberate sampling."
+        }
+      ],
+      "exceptions": [
+        "An -ing ending is not enough to identify a progressive: Swimming helps me relax contains an -ing clause as subject, without progressive be."
+      ],
+      "mistakes": [
+        {
+          "problem": "They are repair the roof.",
+          "repair": "They are repairing the roof.",
+          "reason": "Progressive be selects an -ing form."
+        },
+        {
+          "problem": "We are having three laptops in the cupboard.",
+          "repair": "We have three laptops in the cupboard.",
+          "reason": "The intended possession sense normally uses simple have; having a meeting has a different sense."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Progressive",
+          "definition": "A construction that views a situation as ongoing or developing.",
+          "example": "The queue is growing."
+        },
+        {
+          "term": "Stative interpretation",
+          "definition": "A meaning describing a state rather than an unfolding activity.",
+          "example": "She knows the answer."
+        }
+      ],
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-m03",
+      "title": "Present perfect: experience, results and time extending to now",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d06-c03",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c07"
+      ],
+      "definition": "The present perfect combines present have with a past participle, connecting a prior situation with a present reference point. Its uses include experience, present results and situations continuing to now.",
+      "foundation": [
+        "Use have or has followed by the past participle: I have finished; she has written; the files have arrived. Regular participles often end in -ed, but irregular ones must be learnt: written, seen, gone, taken. Make negatives with have not or has not and questions by moving have or has before the subject: Has the courier arrived? Do not add does. The construction looks back from now. We have received the parcel can announce a result relevant to a present conversation, while We received it at ten yesterday locates an event at a finished past time."
+      ],
+      "intermediate": [
+        "For experience, present perfect places an event somewhere in a period leading up to now: I have visited that museum twice. It need not identify the exact dates. For continuing states, it can link a past beginning with now: I have known Amal for six years. For a current tally, I have checked twelve forms today counts completed checks within a relevant period treated as open. Today can also accompany simple past when the speaker treats the relevant opportunity or activity as finished. The temporal interpretation must be read from the situation, rather than assigning one automatic construction to a time word."
+      ],
+      "advanced": [
+        "A definite finished-past adverbial locating the same event normally conflicts with present perfect in standard usage: I have sent it yesterday should be I sent it yesterday. However, the mere presence of a date does not create an error: I have lived here since 2019 is standard, because 2019 marks the beginning of a continuing interval. A past date inside another clause can also coexist with present perfect. British English often uses present perfect with just, already and yet where American English also readily uses simple past. These are established patterns of variation, not evidence of inferior grammar."
+      ],
+      "expert": [
+        "Present relevance is a useful teaching description but cannot mean that every past event whose consequences matter must take present perfect. A writer can say The factory closed in 2020, so employment is still low. Likewise, perfect marking does not always assert a completed activity: I have lived here for years can describe continued residence. Separate the event, its reference interval and the speaker’s current purpose. In a formal account, explicitly dated historical events normally take past forms, while a present assessment may use perfect to summarise the evidence accumulated so far. Changes in form should track these distinctions."
+      ],
+      "patterns": [
+        {
+          "form": "have/has + past participle",
+          "meaning": "Present perfect; have is finite and the participle is non-finite."
+        },
+        {
+          "form": "Have/Has + subject + past participle?",
+          "meaning": "A perfect question requires inversion of have, without do-support."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The committee has published its decision.",
+          "analysis": "A present announcement looks back to completed publication."
+        },
+        {
+          "sentence": "Have you ever repaired a radio?",
+          "analysis": "Ever asks about experience up to now, without a specified occasion."
+        },
+        {
+          "sentence": "I have kept every letter she sent during her first year abroad.",
+          "analysis": "Have kept has a present viewpoint; sent locates the earlier letter-writing in its own past interval."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "We have owned this flat for ten years.",
+          "b": "We owned that flat for ten years.",
+          "note": "Both grammatical: A normally includes continued ownership; B presents a completed past ownership period."
+        }
+      ],
+      "exceptions": [
+        "Simple past with just/already/yet is common standard American usage. Specify the editorial convention when a task contrasts regional defaults."
+      ],
+      "mistakes": [
+        {
+          "problem": "He has wrote the address.",
+          "repair": "He has written the address.",
+          "reason": "Perfect have selects the past participle written."
+        },
+        {
+          "problem": "Did you have finished?",
+          "repair": "Have you finished?",
+          "reason": "The intended present-perfect question inverts have rather than adding did."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Past participle",
+          "definition": "The verb form selected by perfect have and used in other constructions.",
+          "example": "written in has written."
+        },
+        {
+          "term": "Reference time",
+          "definition": "The viewpoint against which an event is temporally interpreted.",
+          "example": "Now is the viewpoint in has arrived."
+        }
+      ],
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-m04",
+      "title": "Present perfect progressive and cumulative application",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d06-c04",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c07",
+        "gv5-topic-d06-c09"
+      ],
+      "definition": "The present perfect progressive consists of have/has been plus an -ing form. It presents activity over a period connected to now, including recent activity whose traces are still evident.",
+      "foundation": [
+        "Build the form in order: have or has, then been, then the activity in its -ing form. We have been repairing the fence. For a negative, place not after have: We have not been repairing it. For a question, invert the first auxiliary: Have you been repairing it? Been is the participle of be selected by perfect have, while repairing is selected by progressive be. This order follows the grammar of the verb phrase you studied on Day 5. A long verb phrase still needs only its first auxiliary to carry present agreement."
+      ],
+      "intermediate": [
+        "Use the construction to foreground duration or process: I have been preparing the accounts all morning. The work may continue, or it may have just stopped. If a colleague arrives to find ledgers everywhere, the same sentence can explain the present evidence without claiming that you are still working. Compare I have prepared three statements, which foregrounds a completed tally, with I have been preparing statements, which foregrounds the activity. The simple and progressive perfect can overlap: She has worked here for years and She has been working here for years can both describe current employment."
+      ],
+      "advanced": [
+        "Count the events and check the verb sense before choosing. A single arrival is normally expressed as The parcel has arrived, rather than has been arriving; a repeated pattern can make The parcels have been arriving all morning natural. A continuing state such as knowing a person normally uses perfect simple: I have known her since school. For duration, for introduces a length of time and since a starting point. Neither word automatically requires progressive aspect. I have been ill for a week is perfect simple with a state, not a progressive form."
+      ],
+      "expert": [
+        "Apply the whole first phase while reading a present-time paragraph. Identify noun-phrase heads before selecting has or have; distinguish a determiner from a pronoun; track what it or they refers to; then analyse the auxiliary chain and intended time. This is cumulative grammatical reasoning, not a separate tense trick. In Today the volunteers are sorting books; they have already labelled two shelves, volunteers controls are, they refers back clearly, sorting has progressive marking and have labelled supplies a completed result. A learner’s ability to recognise these forms should be checked separately from the ability to produce and explain an original paragraph."
+      ],
+      "patterns": [
+        {
+          "form": "have/has + been + -ing",
+          "meaning": "Perfect progressive links a process to the present."
+        },
+        {
+          "form": "How long + have/has + subject + been + -ing?",
+          "meaning": "Question foregrounding duration when the context establishes an ongoing/recent activity."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "She has been practising the introduction for an hour.",
+          "analysis": "The focus is duration of practice connected with now."
+        },
+        {
+          "sentence": "Your sleeves are dusty. Have you been cleaning the shelves?",
+          "analysis": "Recent activity is inferred from present traces; it need not still be occurring."
+        },
+        {
+          "sentence": "The volunteers have been checking labels, and each box now has a clear destination.",
+          "analysis": "Have agrees with volunteers; has agrees with each box. Activity leads to a present result."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "I have read the report.",
+          "b": "I have been reading the report.",
+          "note": "Both grammatical: A can present completed reading; B foregrounds the activity and does not itself confirm completion."
+        }
+      ],
+      "exceptions": [
+        "A repeated series of short events can be progressive: Customers have been arriving since nine. The construction does not require one unbroken action."
+      ],
+      "mistakes": [
+        {
+          "problem": "She has being waiting outside.",
+          "repair": "She has been waiting outside.",
+          "reason": "Perfect has selects participial been, not being."
+        },
+        {
+          "problem": "I have been knowing the porter for years.",
+          "repair": "I have known the porter for years.",
+          "reason": "Ordinary know as acquaintance resists progressive aspect."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Perfect progressive",
+          "definition": "Perfect have plus progressive be, presenting prior/continuing activity.",
+          "example": "They have been discussing the design."
+        },
+        {
+          "term": "Duration",
+          "definition": "The length of time over which a situation holds or develops.",
+          "example": "for three hours"
+        }
+      ],
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d06-q01",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Complete the simple-present negative: This camera ____ store sound.",
+      "options": [
+        "is not",
+        "has not",
+        "does not",
+        "do not"
+      ],
+      "answer": 2,
+      "why": "A singular subject takes does; store remains base. The other auxiliaries do not form this simple-present negative.",
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which verb phrase is present progressive?",
+      "options": [
+        "has measured",
+        "is measuring",
+        "measures",
+        "had measured"
+      ],
+      "answer": 1,
+      "why": "Present be + -ing makes progressive aspect. Perfect have + participle and simple measures have different structures.",
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-q03",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Supply the irregular participle required by perfect have: She has ____ the timetable.",
+      "options": [
+        "writing",
+        "written",
+        "write",
+        "wrote"
+      ],
+      "answer": 1,
+      "why": "Have selects written. Wrote is past simple; writing is an -ing form; write is base.",
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence contains a present perfect progressive?",
+      "options": [
+        "The staff have been checking the seals.",
+        "The staff are checking the seals.",
+        "The staff checked the seals.",
+        "The staff have checked the seals."
+      ],
+      "answer": 0,
+      "why": "Have been checking combines present perfect have with progressive be + -ing. The other forms omit one or both aspects.",
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q05",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Choose the error, or No error: The printer (A) does not starts (B) automatically (C).",
+      "options": [
+        "B",
+        "A",
+        "C",
+        "No error"
+      ],
+      "answer": 0,
+      "why": "Does already carries agreement, so use start. The subject and adverb are well formed.",
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q06",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Choose the error, or No error: We (A) are having lunch (B) in the courtyard (C).",
+      "options": [
+        "B",
+        "C",
+        "A",
+        "No error"
+      ],
+      "answer": 3,
+      "why": "Have lunch is an activity and permits progressive aspect. There is no possession-sense restriction here.",
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which description matches I have known Zara since 2021?",
+      "options": [
+        "One named meeting completed in 2021 only.",
+        "A future plan to meet Zara.",
+        "A state of acquaintance extending from a past starting point towards now.",
+        "A progressive verb form because since appears."
+      ],
+      "answer": 2,
+      "why": "Have known is perfect simple, not progressive. Since marks the beginning of a relevant continuing interval.",
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In Has Omar been waiting?, which word is the finite auxiliary?",
+      "options": [
+        "Omar",
+        "been",
+        "waiting",
+        "Has"
+      ],
+      "answer": 3,
+      "why": "Has carries present agreement and inverts with the subject. Been and waiting are non-finite verb forms.",
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q09",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Write the third-person singular of carry in The courier ___ the smaller bags.",
+      "model": "The courier carries the smaller bags.",
+      "rubric": [
+        "Change consonant + y to -ies.",
+        "Use singular agreement with courier."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q10",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Order these words as a neutral simple-present question: this valve / does / close / automatically.",
+      "model": "Does this valve close automatically?",
+      "rubric": [
+        "Place does before the subject.",
+        "Keep close in the base form."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q11",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Identify the verb phrase and subject in The two assistants are counting the tickets.",
+      "model": "Subject: The two assistants. Verb phrase: are counting.",
+      "rubric": [
+        "Include the whole subject noun phrase.",
+        "Identify are as finite and counting as the -ing form."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-q12",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare I live with my aunt and I am living with my aunt this month.",
+      "model": "The first presents residence as a general fact; the second foregrounds a temporary current arrangement.",
+      "rubric": [
+        "Describe the viewpoint difference.",
+        "Do not claim the first necessarily means permanent residence."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-q13",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Complete with have/has and the participle of take: The coordinator ___ ___ the keys.",
+      "model": "The coordinator has taken the keys.",
+      "rubric": [
+        "Select has for coordinator.",
+        "Use participial taken, not took."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-q14",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify has finished in The technician has finished, identifying tense and aspect.",
+      "model": "Has is present tense; has finished has perfect aspect.",
+      "rubric": [
+        "Separate tense from aspect.",
+        "Identify finished as a participle."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-q15",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Reconstruct: been / the volunteers / have / working / all afternoon.",
+      "model": "The volunteers have been working all afternoon.",
+      "rubric": [
+        "Keep have before been.",
+        "Place working after progressive been."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q16",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain why both I have taught here for years and I have been teaching here for years can be grammatical.",
+      "model": "Both can describe continuing employment; the progressive foregrounds activity/duration, while the simple presents the fact or total experience.",
+      "rubric": [
+        "Accept both forms in suitable context.",
+        "Explain focus without inventing a strict permanent/temporary division."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q17",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "In The handbook explains how the device worked during the trial, explain the two verb tenses.",
+      "model": "Explains is a present textual summary; worked refers to the completed trial.",
+      "rubric": [
+        "Identify the different reference frames.",
+        "Do not correct a justified tense change."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q18",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Use progressive be with an -ing form of grow: The queue ___ ___ longer while we speak.",
+      "model": "The queue is growing longer while we speak.",
+      "rubric": [
+        "Use is with queue.",
+        "Use growing, not grow after progressive be."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-q19",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare I have lost my access card with I lost my access card last Monday.",
+      "model": "The perfect announces a current issue; simple past dates the loss. The past event may still matter now.",
+      "rubric": [
+        "Explain present announcement vs dated event.",
+        "Do not say simple past means there is no present consequence."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-q20",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "A colleague has finished cleaning and has wet gloves. Can the colleague say “I have been washing the windows” to explain this evidence? Explain.",
+      "model": "Yes. Perfect progressive can describe recent activity that has stopped but has present traces.",
+      "rubric": [
+        "State that ongoing activity is not obligatory.",
+        "Link the activity to the present evidence."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q21",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine as a clear present-time description: The office opens at nine. The office does not open on Saturdays.",
+      "model": "The office opens at nine but does not open on Saturdays.",
+      "rubric": [
+        "Retain both schedule facts.",
+        "Keep base open after does not."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q22",
+      "type": "response",
+      "kind": "splitting",
+      "prompt": "Split while preserving the temporary situation: The archive is moving upstairs this week, so the reading room is operating from the hall.",
+      "model": "The archive is moving upstairs this week. As a result, the reading room is operating from the hall.",
+      "rubric": [
+        "Retain both temporary progressive situations.",
+        "Preserve the causal relation."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-q23",
+      "type": "response",
+      "kind": "function",
+      "prompt": "In These notebooks are mine; I have kept them since school, identify the antecedent of them and the perfect phrase.",
+      "model": "Them refers to these notebooks; have kept is present perfect.",
+      "rubric": [
+        "Resolve the plural pronoun clearly.",
+        "Identify have + participle kept."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-q24",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Repair form errors only: The engineers has been testing the alarm. It are working now. They have wrote a short report.",
+      "model": "The engineers have been testing the alarm. It is working now. They have written a short report.",
+      "rubric": [
+        "Correct plural have and singular is.",
+        "Use written after have while preserving the intended times."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q25",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write one simple-present routine and its question using review.",
+      "model": "I review my notes on Sundays. Do I review my notes on Sundays?",
+      "rubric": [
+        "State a repeated routine.",
+        "Use do + base review in the question."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-q26",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write a present-progressive sentence about temporary work and its negative.",
+      "model": "Nadia is covering the reception desk this week. Negative alternative: Nadia is not covering the reception desk this week.",
+      "rubric": [
+        "Keep the same subject, activity and time reference in the two alternative versions.",
+        "Use is + -ing and is not + -ing; do not assert both contradictory versions as one factual report."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-q27",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why is I have worked here since 2019 compatible with its date, unlike I have joined here in 2019 in the intended dated-event reading?",
+      "model": "Since 2019 marks a continuing interval’s beginning; in 2019 locates joining in a finished past period, normally requiring I joined in 2019.",
+      "rubric": [
+        "Distinguish starting-point and event-location adverbials.",
+        "Explain why a date does not automatically ban perfect."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-q28",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write two linked sentences contrasting a completed tally with activity today.",
+      "model": "I have checked six labels today. I have been checking the remaining boxes since lunch.",
+      "rubric": [
+        "Use a clear completed tally.",
+        "Use perfect progressive for a duration/process without claiming all boxes are finished."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d06-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "She does not reads the notices.",
+      "model": "She does not read the notices.",
+      "rubric": [
+        "Keep base read after does.",
+        "Retain the simple-present negative."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The mechanic repairing the wheel now.",
+      "model": "The mechanic is repairing the wheel now.",
+      "rubric": [
+        "Supply finite is.",
+        "Keep repairing for the intended ongoing action."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Have he seen the message?",
+      "model": "Has he seen the message?",
+      "rubric": [
+        "Use has with he.",
+        "Retain participial seen."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "They has been waiting since eight.",
+      "model": "They have been waiting since eight.",
+      "rubric": [
+        "Use have with they.",
+        "Keep been waiting and the starting point."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "I have received it yesterday.",
+      "model": "I received it yesterday.",
+      "rubric": [
+        "Use simple past for this dated completed event.",
+        "Keep the time expression and event meaning."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PRES",
+        "cambridge-presentpast",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d06-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "I am having a short break. State whether change is necessary.",
+      "model": "No change is necessary: have a break denotes an activity.",
+      "rubric": [
+        "Recognise the valid activity sense.",
+        "Do not replace it just because have can also be stative."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-continuous-i-am-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d06-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "We have known the caretaker for years. State whether change is necessary.",
+      "model": "No change is necessary: this continuing state uses perfect simple.",
+      "rubric": [
+        "Recognise perfect simple despite duration.",
+        "Do not require progressive after for."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The couriers have being delivering parcels all morning.",
+      "model": "The couriers have been delivering parcels all morning.",
+      "rubric": [
+        "Use been after perfect have.",
+        "Retain delivering after progressive be."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d06-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Turn The scanner records each entry into a negative and a question.",
+      "model": "The scanner does not record each entry. Does the scanner record each entry?",
+      "rubric": [
+        "Use does with scanner.",
+        "Keep record in the base form in both."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-simple-i-work",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d06-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Say that an activity started at nine and continues now; foreground duration using present perfect progressive: We test the microphones.",
+      "model": "We have been testing the microphones since nine.",
+      "rubric": [
+        "Use have been testing.",
+        "Use since for the starting point; keep the activity continuous to now."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-present-perfect-simple-or-present-perfect-continuous",
+        "cambridge-for-or-since",
+        "C-VERB"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d06-writing01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write 100–140 words updating a colleague about a project: include a routine, a temporary activity, a completed result and duration to now. Annotate the four verb phrases.",
+    "model": "Our team checks every incoming form before sending it to the review desk. This week we are testing a shorter process with a small group of volunteers. We have already reviewed twenty applications, and we have been recording processing times since Monday. The first results suggest that the revised checklist may reduce repeated requests for information, but we do not yet have enough evidence for a firm conclusion. Two colleagues are checking whether applicants understand the new wording. We will compare their comments with the timing records before recommending a permanent change. For now, the ordinary process remains available to anyone who needs it.\n\nAnalysis: Checks expresses a routine; are testing presents a temporary activity; have reviewed presents a completed result; have been recording links duration to now.",
+    "rubric": [
+      "Include all four constructions with logical time references.",
+      "Check subjects, auxiliaries, participles and clear pronoun antecedents; the model is a structural sample, not a scored original response."
+    ],
+    "alternatives": [
+      "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+    ],
+    "conceptId": "gv5-d06-m04",
+    "difficulty": "Intermediate",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "cambridge-present-perfect-simple-or-present-perfect-continuous",
+      "cambridge-for-or-since",
+      "C-VERB"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d06-recall01",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Recall Day 1: in The new guide explains the route, identify subject, verb and direct object.",
+      "model": "Subject: The new guide; verb: explains; direct object: the route.",
+      "rubric": [
+        "Include complete noun phrases.",
+        "Distinguish functions from the word class noun."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d01-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d06-recall02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Recall countability: correct These informations are useful.",
+      "model": "This information is useful.",
+      "rubric": [
+        "Use noncount information in the intended general sense.",
+        "Match the determiner and singular verb to that sense."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d02-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d06-recall03",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 5: parse have been reviewing into auxiliary selections.",
+      "model": "Perfect have selects been, the participle of be; progressive be selects reviewing.",
+      "rubric": [
+        "Identify perfect and progressive.",
+        "Explain why been reviewing follows have in this order."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d05-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I can explain whether a sentence presents a routine, current process, result or duration.",
+    "I can form questions without adding unnecessary do.",
+    "I distinguish a dated completed event from a since-phrase.",
+    "I can explain a grammatical alternative rather than automatically reject it.",
+    "I review writing quality separately from objective accuracy."
+  ],
+  "sources": [
+    {
+      "id": "C-PRES",
+      "title": "Present perfect simple ( I have worked ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-i-have-worked",
+      "consulted": "2026-10-21",
+      "note": "Relevant definitions and constructions checked in the retrieved source body; original course explanations and examples."
+    },
+    {
+      "id": "C-VARIATION",
+      "title": "British and American English - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/british-and-american-english",
+      "consulted": "2026-10-21",
+      "note": "Relevant definitions and constructions checked in the retrieved source body; original course explanations and examples."
+    },
+    {
+      "id": "C-VERB",
+      "title": "Verbs: basic forms - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/verbs-basic-forms",
+      "consulted": "2026-10-21",
+      "note": "Relevant definitions and constructions checked in the retrieved source body; original course explanations and examples."
+    },
+    {
+      "id": "british-council-stative",
+      "title": "Stative verbs | LearnEnglish",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/stative-verbs",
+      "consulted": "2026-10-21",
+      "note": "State/action interpretation and usual restrictions, including be/have/see/taste sense contrasts, consulted."
+    },
+    {
+      "id": "cambridge-for-or-since",
+      "title": "For or since ? - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/for-or-since",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-present-continuous-i-am-working",
+      "title": "Present continuous ( I am working ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-continuous-i-am-working",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-present-perfect-simple-or-present-perfect-continuous",
+      "title": "Present perfect simple or present perfect continuous? - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-present-perfect-continuous",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-present-simple-i-work",
+      "title": "Present simple ( I work ) - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-presentpast",
+      "title": "Past simple or present perfect? - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+      "consulted": "2026-10-21",
+      "note": "Title and relevant body text checked; used for qualified rule/variation analysis."
+    }
+  ],
+  "editorialNotes": []
+}

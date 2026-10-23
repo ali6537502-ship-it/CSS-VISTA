@@ -13,6 +13,7 @@ import { clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
 export default function Mistakes() {
   const [mistakes, setMistakes] = useState<Mistake[]>([])
   const [qs, setQs] = useState<Record<string, BankQuestion>>({})
+  const [grammarLinks, setGrammarLinks] = useState<Record<string, string>>({})
   const [cat, setCat] = useState('all')
   const [status, setStatus] = useState<'all' | 'unreviewed' | 'repeated' | 'recent' | 'resolved'>('all')
   const [topic, setTopic] = useState('all')
@@ -32,8 +33,19 @@ export default function Mistakes() {
         if (!m.some((mistake) => mistake.id === id)) return
         map[id] = { id, q: question.question, o: question.options, a: question.answer, e: question.explanation, s: question.topic || question.category, d: question.difficulty === 'Easy' ? 'Basic' : question.difficulty === 'Hard' ? 'Advanced' : 'Intermediate' }
       })
-      setQs(map)
+      setQs(old => ({ ...old, ...map }))
     })
+    if (m.some(x => x.id.startsWith('gv5-'))) {
+      void Promise.all([import('@/features/grammar-v5/content').then(m => m.loadCatalog()), fetch('/grammar/v5/mistake-index.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error('Grammar details unavailable'); return r.json() as Promise<BankQuestion[]> })]).then(([catalog, questions]) => {
+        const wanted = new Set(m.map(x => x.id)), links: Record<string, string> = {}, map: Record<string, BankQuestion> = {}
+        for (const q of questions) if (wanted.has(q.id)) {
+          map[q.id] = q
+          const item = catalog.items.find(i => i.id === q.id)
+          if (item) links[q.id] = item.day ? `/grammar-course?day=${item.day}&section=${item.group}&item=${item.id}` : `/grammar-course?view=lab&mode=${item.group}&item=${item.id}`
+        }
+        setGrammarLinks(links); setQs(old => ({ ...old, ...map }))
+      }).catch(() => { /* Keep notebook records visible when the grammar bank is offline. */ })
+    }
   }
 
   useEffect(load, [])
@@ -158,7 +170,8 @@ export default function Mistakes() {
                   <p className="mt-2 text-sm text-muted-foreground">Question details unavailable (id: {m.id}).</p>
                 )}
                 <div className="no-print mt-3 flex flex-wrap gap-1.5 border-t pt-2.5">
-                  <Link to={`/gk/quiz?mode=wrong`} className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-pine hover:bg-secondary">
+                  {q?.e && <p className="w-full text-sm leading-7">{q.e}</p>}
+                  <Link to={grammarLinks[m.id] ?? '/gk/quiz?mode=wrong'} className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-pine hover:bg-secondary">
                     <RotateCcw className="h-3.5 w-3.5" /> Retry
                   </Link>
                   <button onClick={() => { toggleMistakeRevised(m.id); load() }} className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-50">

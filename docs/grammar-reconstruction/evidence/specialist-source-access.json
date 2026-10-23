@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://www.ox.ac.uk/public-affairs/style-guide",
+    "finalUrl": "https://www.ox.ac.uk/about/the-university/brand/style-guide",
+    "status": 200,
+    "sha256": "21cd50b77b44cbd07463b4e0343eb2a60a1717087eee75650581a310824392ff"
+  },
+  {
+    "url": "https://style.mla.org/apostrophes-three-ways/",
+    "finalUrl": "https://style.mla.org/apostrophes-three-ways/",
+    "status": 200,
+    "sha256": "f4867db67385c1a642f98bfaf6e85d63bb2c1544537b3da266eb185b15069d21"
+  },
+  {
+    "url": "https://www.sfu.ca/person/dearmond/322/322.control.htm",
+    "finalUrl": "https://www.sfu.ca/person/dearmond/322/322.control.htm",
+    "status": 200,
+    "sha256": "9656175ae126580dc3900b923b961b0c20c3b3c470dbe256a5cc6dec6274cb44"
+  },
+  {
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/nouns-s-and-s",
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/",
+    "status": 200,
+    "sha256": "faf2711dc66f2ca334f6422897bbc033cd893c6411aa49e7cc2bdced0885f508"
+  }
+]

@@ -68,7 +68,7 @@
     "test:search-readiness": "node --test tests/searchReadiness.test.mjs",
     "test:seo": "node --test tests/searchReadiness.test.mjs tests/studyMaterialSeo.test.mjs tests/subjectSelection.test.ts tests/mcqAudit.test.mjs tests/pastPaperCollectionQuality.test.mjs",
     "test:subject-selection": "node --test tests/subjectSelection.test.ts",
-    "test:all": "npm run test:seo && npm run test:editorial && npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:css-eligibility && npm run test:mpt && npm run test:mpt-release && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes && npm run test:grammar && npm run test:precis && npm run test:answer-timer",
+    "test:all": "npm run test:seo && npm run test:editorial && npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:css-eligibility && npm run test:mpt && npm run test:mpt-release && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes && npm run test:grammar && npm run test:grammar-v5 && npm run test:precis && npm run test:answer-timer",
     "generate:book-catalogue": "node scripts/generate-book-catalogue.mjs",
     "audit:book-catalogue": "node scripts/generate-book-catalogue.mjs --check",
     "package:vistagram": "node scripts/package-vistagram.mjs",
@@ -103,7 +103,9 @@
     "test:topics-security": "node tests/topics/security.mjs",
     "audit:browser:seo": "node tests/browser/seo-readiness.mjs && node tests/browser/ad-state.mjs",
     "audit:editorial": "node scripts/editorial/build-book-reviews.mjs --check && node scripts/editorial/build-journal-transcripts.mjs --check && node scripts/editorial/reviewed-mcqs.mjs --check && node scripts/seo/build-rights-inventory.mjs --check && python3 scripts/import_optional_notes.py --check",
-    "test:editorial": "node --test tests/bookEditorial.test.mjs tests/mcqEditorial.test.mjs tests/journalTranscripts.test.ts && python3 tests/editorial/test_optional_note_reviews.py"
+    "test:editorial": "node --test tests/bookEditorial.test.mjs tests/mcqEditorial.test.mjs tests/journalTranscripts.test.ts && python3 tests/editorial/test_optional_note_reviews.py",
+    "test:grammar-v5": "node scripts/grammar-v5/build.mjs --check && node --test tests/grammarV5.test.ts tests/tutor/return.test.ts",
+    "audit:grammar-release": "node scripts/grammar-v5/build.mjs --check --release"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -1,0 +1,1545 @@
+{
+  "day": 25,
+  "id": "gv5-day-25",
+  "title": "Usage, Collocations and Frequently Confused Constructions",
+  "orientation": "Usage problems require more than a list of forbidden words. A form can be structurally wrong, unsuitable for an intended meaning, unusually phrased, informal, regional or merely different from a chosen house style. This lesson gives those judgements distinct names and applies them to lexical pairs, complements, prepositions, countability and agreement. You will test the meaning before editing and learn when two grammatical constructions express different relationships. British English remains the course’s editorial default, while established American and regional uses receive accurate labels. Some examples address patterns familiar to Urdu-speaking learners, but the instruction does not assume that every learner shares the same first language or errors. The advanced work asks you to justify a correction with a source-sensitive explanation and to preserve sentences that are already defensible. None of the newly authored tasks is presented as an official examination item or a verified examiner preference.",
+  "outcomes": [
+    "Choose confusable words by sense and construction.",
+    "Use lexical complements without inventing absolute following-word rules.",
+    "Explain contextual countability and agreement.",
+    "Identify legitimate regional and register variation.",
+    "Write an evidence-based editing note that preserves intended meaning."
+  ],
+  "prerequisiteDays": [
+    23,
+    24
+  ],
+  "modules": [
+    {
+      "id": "gv5-d25-m01",
+      "title": "Confusable words: meaning before substitution",
+      "taxonomy": [
+        "G",
+        "L",
+        "P",
+        "Q"
+      ],
+      "coverageIds": [
+        "gv5-topic-d25-c01"
+      ],
+      "definition": "Confusable words are expressions whose spelling, sound or associated meaning makes them easy to interchange. A reliable choice depends on sense, grammatical pattern and context; a simple noun-versus-verb shortcut is sometimes useful but not exhaustive.",
+      "foundation": [
+        "Learn a contrast inside a meaningful sentence. Advice is normally the noun for a recommendation; advise is the related verb: Your advice helped; please advise me. Lose means fail to retain or win, whereas loose commonly means not firmly attached: Do not lose the loose screw. Principal can mean main or the head of an institution; principle names a rule or belief. A spelling resemblance does not make two words interchangeable. Identify the intended message first, then choose the form and the complement pattern that expresses it."
+      ],
+      "intermediate": [
+        "Affect is commonly a verb meaning influence, while effect commonly names a result. Those common patterns do not exhaust either word. Effect can be a verb meaning bring about: The agreement effected a change. Affect also has a specialised noun sense in psychology. Judicial concerns courts or judges; judicious means showing sound judgement. A judge’s decision can therefore be judicial even if it is unwise, and a judicious decision need not come from a court. Questions must provide enough context to distinguish the intended senses rather than pretend one adjective is always the better choice."
+      ],
+      "advanced": [
+        "Other useful contrasts include complement, which completes or fits something, and compliment, which expresses praise; imply, which presents an indirect suggestion, and infer, which draws a conclusion from evidence. Economic concerns an economy; economical describes sparing use of resources. Farther and further overlap in distance uses, while further also clearly means additional. Continual often highlights repetition and continuous an unbroken process, but contexts and established senses overlap. Do not turn a useful tendency into an absolute rule when a reliable dictionary records a broader range."
+      ],
+      "expert": [
+        "Lexical diagnosis differs from proving a syntactic error. An unusual but meaningful word may be grammatical; a near-synonym can make a false or inappropriate claim without breaking syntax. Evaluate three questions separately: Is the form possible? Does it express the intended sense? Does it suit the register? In an objective item, the supplied definition or situation should eliminate alternative senses. In original writing, explain a proposed replacement. Replacing judicial with judicious merely because the latter sounds approving can change a legal classification into an evaluation; that is not a meaning-preserving correction."
+      ],
+      "patterns": [
+        {
+          "form": "advise + person + to-infinitive",
+          "meaning": "A common advice-giving verb pattern."
+        },
+        {
+          "form": "effect + noun phrase",
+          "meaning": "The verb can mean bring about, as in effect a change."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The adviser offered practical advice.",
+          "analysis": "The person noun and uncountable advice belong to different patterns."
+        },
+        {
+          "sentence": "The reforms affected prices, but their effects differed across districts.",
+          "analysis": "Affected means influenced; effects names results."
+        },
+        {
+          "sentence": "The mediator effected an agreement after a judicious intervention.",
+          "analysis": "Effected means brought about; judicious evaluates judgement rather than identifying a court function."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The panel reviewed a judicial decision.",
+          "b": "The panel reviewed a judicious decision.",
+          "note": "Both are grammatical but different: the first identifies a court-related decision, the second evaluates its wisdom."
+        }
+      ],
+      "exceptions": [
+        "Effect is not restricted to noun use: To effect a repair means to bring it about. Affect has a specialised noun use; use a dictionary to identify its disciplinary sense."
+      ],
+      "mistakes": [
+        {
+          "problem": "Please advice the visitors to retain their tickets.",
+          "repair": "Please advise the visitors to retain their tickets.",
+          "reason": "The imperative requires the verb advise."
+        },
+        {
+          "problem": "The new rules will effect the daily routine, meaning influence it.",
+          "repair": "The new rules will affect the daily routine.",
+          "reason": "For the specified influence meaning, affect is the appropriate verb; effect would require a bring-about interpretation."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "collocation",
+          "definition": "A conventional association of words in a particular sense or pattern.",
+          "example": "reach a conclusion"
+        },
+        {
+          "term": "lexical sense",
+          "definition": "A particular meaning of a word in context.",
+          "example": "effect meaning bring about"
+        }
+      ],
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-m02",
+      "title": "Lexical patterns and preposition choices",
+      "taxonomy": [
+        "G",
+        "L",
+        "P",
+        "Q"
+      ],
+      "coverageIds": [
+        "gv5-topic-d25-c02",
+        "gv5-topic-d25-c03"
+      ],
+      "definition": "Lexical grammar concerns the grammatical patterns selected by particular words and senses. A preposition may be required in one pattern while a different construction uses no preposition or a different complement.",
+      "foundation": [
+        "Compare discuss the proposal with a discussion about the proposal. The verb discuss ordinarily takes its topic as a direct object; the related noun discussion has other complement patterns. Learn words with example frames instead of memorising a single preposition beside an isolated dictionary form. Depend on the result is one common pattern, but depend can also occur without an expressed complement when the context supplies it. An incomplete classroom rule such as every verb must take its memorised preposition can therefore create mistakes."
+      ],
+      "intermediate": [
+        "Insist illustrates why a lexical pattern is not an absolute following-word rule. A speaker can insist on a receipt, insist on checking the figures, insist that the bill is wrong, or insist that the figures be checked. The choice affects form and sometimes meaning: insisting that a claim is true asserts it firmly, whereas insisting that an action be done demands that action. Capable of handling the task contrasts with able to handle the task. Similar meanings do not license the same complementation after every adjective."
+      ],
+      "advanced": [
+        "Prepositions can also change a relationship rather than merely distinguish right from wrong. An increase in prices identifies what increases; an increase of ten per cent measures its amount. Inform someone of a decision and inform someone about a new service are both established patterns. Between and among depend on the relationship being expressed; between can identify distinct relationships involving more than two participants, so the number of names alone does not settle every case. Check a dictionary’s sense and examples, especially when a purported correction declares an unfamiliar combination impossible."
+      ],
+      "expert": [
+        "Many restrictions belong to a particular sense, construction or register. Compare consist of with be composed of; active comprise and passive be comprised of are established, although some editorial traditions prefer alternatives. A teacher can recommend comprises for economy without marking every comprised of as a grammatical error. Identify whether the problem is a missing complement, an incompatible form or a stylistic preference. When several constructions express the same message, preserve the intended participants, direction and scope. Replacing a preposition mechanically may change the relationship even if the result remains grammatical."
+      ],
+      "patterns": [
+        {
+          "form": "insist on + noun/-ing",
+          "meaning": "A demand or firm requirement focused through on."
+        },
+        {
+          "form": "insist (that) + finite clause",
+          "meaning": "A firmly asserted proposition or a demanded action, depending on clause form and context."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "We discussed the revised timetable.",
+          "analysis": "Discuss takes its topic as a direct object here."
+        },
+        {
+          "sentence": "The guide informed us about the new entrance and of the revised fee.",
+          "analysis": "Both information patterns can be valid; neither preposition is universally forbidden."
+        },
+        {
+          "sentence": "She insisted that the committee should reconsider the evidence.",
+          "analysis": "A standard British mandative pattern uses should in a that-clause."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "An increase in rent was announced.",
+          "b": "An increase of five per cent was announced.",
+          "note": "Both are grammatical: in identifies the changing variable; of identifies the size of the increase."
+        }
+      ],
+      "exceptions": [
+        "A common pairing does not exclude other clause patterns: insist on a receipt and insist that a receipt be issued are both standard."
+      ],
+      "mistakes": [
+        {
+          "problem": "We discussed about the timetable.",
+          "repair": "We discussed the timetable.",
+          "reason": "For the intended ordinary transitive topic pattern, discuss takes a direct object."
+        },
+        {
+          "problem": "She is capable to prepare the accounts.",
+          "repair": "She is capable of preparing the accounts.",
+          "reason": "Capable selects of + noun/-ing in this pattern; able to prepare is a valid alternative."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "complementation",
+          "definition": "The patterns of complements selected by a word.",
+          "example": "insist on checking; insist that we check"
+        },
+        {
+          "term": "lexical restriction",
+          "definition": "A limit associated with a particular word or sense.",
+          "example": "capable of doing, not capable to do in this pattern"
+        }
+      ],
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-m03",
+      "title": "Countability, agreement and national alternatives",
+      "taxonomy": [
+        "G",
+        "L",
+        "P",
+        "Q"
+      ],
+      "coverageIds": [
+        "gv5-topic-d25-c04",
+        "gv5-topic-d25-c06"
+      ],
+      "definition": "Countability and agreement are grammatical choices associated with a noun’s sense and the construction in which it occurs. National conventions can favour different choices without making all alternatives errors.",
+      "foundation": [
+        "In ordinary general English, information, advice, furniture and equipment are uncountable. Write some information or two pieces of information, not two informations for that intended sense. The restriction belongs to English usage, not to whether the real-world objects can be counted. A piece, item, study or other appropriate unit can express an individual instance. Other nouns change their countability with meaning: paper can be a material, while a paper can be an article or examination. Learn the intended sense and a natural counting expression together."
+      ],
+      "intermediate": [
+        "Research is normally uncountable for an activity or body of investigation: extensive research. Plural researches is also established, especially when separate investigations are in view, but it is less frequent and is not an ordinary substitute for studies in every context. A standard learner explanation should acknowledge such documented uses without encouraging an unnatural plural in every research context. Agreement also depends on analysis: the news is singular in standard use; the scissors are plural; a pair of scissors is singular because pair heads that noun phrase. A measurement can be treated as one amount: Ten kilometres is a long walk."
+      ],
+      "advanced": [
+        "Collective nouns such as committee can take singular unit agreement or plural member agreement in British English: The committee has issued its decision; The committee are divided in their opinions. American edited usage more often favours singular agreement for the unit. Consistency of reference is useful, but an overt switch to members can justify different number. Data admits plural and mass-noun agreement under established usage and disciplinary conventions. The data are incomplete and The data is incomplete therefore need a stated editorial context before a test can require one form exclusively."
+      ],
+      "expert": [
+        "A national comparison must specify what varies. American English often permits a past simple with just, already or yet in contexts where a British default favours present perfect; it also has gotten in many get constructions. These are established alternatives, not automatic tense mistakes. Conversely, choosing a national label cannot justify a malformed auxiliary sequence such as has went. Fewer is a common edited choice for individually counted plural items; less is standard with measurements and amounts, as in less than ten miles. The rule concerns how the quantity is construed, not just the visible plural ending."
+      ],
+      "patterns": [
+        {
+          "form": "uncountable noun → quantity expression + of + noun",
+          "meaning": "Expresses separate units without inventing an ordinary plural of the mass noun."
+        },
+        {
+          "form": "collective unit/member interpretation → suitable agreement",
+          "meaning": "Regional convention and intended reference affect the available choices."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The office bought three items of equipment.",
+          "analysis": "Items supplies the countable units; equipment remains uncountable."
+        },
+        {
+          "sentence": "The committee are exchanging their individual views.",
+          "analysis": "British member-oriented agreement is appropriate in this context."
+        },
+        {
+          "sentence": "Less than eight kilometres remains to be surveyed.",
+          "analysis": "Less than treats the distance as an amount; a plural unit word does not by itself require fewer."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The data are available.",
+          "b": "The data is available.",
+          "note": "Both are established; discipline and house style can specify the preferred analysis."
+        }
+      ],
+      "exceptions": [
+        "Plural researches is documented in particular contexts, but research is normally uncountable in ordinary academic statements. Do not treat a historical or specialist sense as the everyday default."
+      ],
+      "mistakes": [
+        {
+          "problem": "They supplied several useful informations.",
+          "repair": "They supplied several useful pieces of information.",
+          "reason": "The intended ordinary information sense is uncountable."
+        },
+        {
+          "problem": "The news are encouraging.",
+          "repair": "The news is encouraging.",
+          "reason": "News has singular agreement in this ordinary standard construction."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "notional agreement",
+          "definition": "Agreement influenced by interpreted meaning rather than form alone.",
+          "example": "The team are arguing among themselves."
+        },
+        {
+          "term": "mass noun",
+          "definition": "A noun used without ordinary individual counting in a particular sense.",
+          "example": "some equipment"
+        }
+      ],
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-m04",
+      "title": "Register, regional English and evidence-based editing",
+      "taxonomy": [
+        "G",
+        "L",
+        "P",
+        "Q"
+      ],
+      "coverageIds": [
+        "gv5-topic-d25-c05",
+        "gv5-topic-d25-c07",
+        "gv5-topic-d25-c08"
+      ],
+      "definition": "Register is language choice associated with purpose, audience and situation. A form can be grammatical and standard in a regional variety while a different expression is clearer for an unfamiliar international audience.",
+      "foundation": [
+        "Begin an edit by identifying the intended reader. A message to a friend, a laboratory report and an administrative request have different expectations. Formality does not require rare words, constant passive voice or avoidance of every contraction in every genre. A direct active sentence can be entirely formal: The committee rejected the bid. Neutral clear language is often the most effective default. If an assignment asks for a particular register, revise toward that register while distinguishing the preference from a claim of universal grammatical incorrectness."
+      ],
+      "intermediate": [
+        "Some learners find English articles, countability, auxiliary patterns or prepositions difficult because their other languages organise these relationships differently. Urdu-speaking learners may recognise particular translation habits, but no individual’s error profile should be guessed from first-language identity. For example, practise He has a question rather than He has question, and Did she attend? rather than Did she attended? Explain the English pattern itself. Do not present every regional expression as evidence of deficient thought or assume that all learners share one background."
+      ],
+      "advanced": [
+        "Prepone is recorded in Indian English with the meaning move to an earlier time. For readers unfamiliar with it, bring forward the meeting can communicate more widely. That editorial decision does not prove prepone nonexistent. A request for someone’s good name may be a regional politeness formula; good name also has the established reputation sense in protect the organisation’s good name. Context therefore matters before a word pair is labelled wrong. Likewise, American insure can mean ensure; a British default may reserve insure mainly for insurance without declaring that broader American use invalid."
+      ],
+      "expert": [
+        "Use a transparent editorial vocabulary. Ungrammatical for the intended standard pattern identifies a structural problem; unusual identifies frequency or idiomaticity; informal identifies register; regional identifies distribution; misleading identifies an interpretation problem. These labels can overlap, but none should stand in for evidence. If a sentence is already grammatical, say so and explain any optional revision. A source register should identify the authority and the sense actually checked. Newly authored practice should never claim to be an official past question or an examiner’s preference without authentic supporting records."
+      ],
+      "patterns": [
+        {
+          "form": "purpose + audience + meaning → register choice",
+          "meaning": "Selects wording for the communicative situation without inventing a universal grammar ban."
+        },
+        {
+          "form": "diagnosis label + evidence + optional alternative",
+          "meaning": "Makes editing reasoning explicit and reviewable."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Please bring the appointment forward to Thursday.",
+          "analysis": "An internationally clear paraphrase of prepone in its recorded regional sense."
+        },
+        {
+          "sentence": "The American guide advises readers to insure that the valve is closed.",
+          "analysis": "Insure can have a make-certain sense in established American use; ensure matches the course’s British default."
+        },
+        {
+          "sentence": "The department’s good name depends on honest reporting.",
+          "analysis": "Good name has a standard reputation meaning and is not inherently faulty."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The policy was rejected.",
+          "b": "The committee rejected the policy.",
+          "note": "Both are grammatical and can be formal. The active version identifies the actor; the passive may suit a different information focus."
+        }
+      ],
+      "exceptions": [
+        "Regional labels describe use; they do not make every such form unsuitable in its own audience. A wider-audience alternative can be recommended explicitly as an editorial choice."
+      ],
+      "mistakes": [
+        {
+          "problem": "Did she attended the seminar?",
+          "repair": "Did she attend the seminar?",
+          "reason": "Do-support carries the tense; the lexical verb has its base form."
+        },
+        {
+          "problem": "He has question about the procedure.",
+          "repair": "He has a question about the procedure.",
+          "reason": "Question is an ordinary singular countable noun in this intended sense and needs a determiner."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "regional variation",
+          "definition": "Differences in established use associated with geographical communities.",
+          "example": "prepone in Indian English"
+        },
+        {
+          "term": "register-sensitive revision",
+          "definition": "An edit made for purpose and audience rather than a universal grammar law.",
+          "example": "bring forward for an unfamiliar audience"
+        }
+      ],
+      "sourceIds": [
+        "cambridge-formal",
+        "cambridge-prepone",
+        "cambridge-insure",
+        "C-VARIATION",
+        "C-NOUN"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d25-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose the word meaning give a recommendation: Please ____ the new staff about the procedure.",
+      "options": [
+        "advice",
+        "advise",
+        "advisingness",
+        "advisedly"
+      ],
+      "answer": 1,
+      "why": "Advise is the verb required after imperative please; advice is the related noun.",
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence uses effect as a standard verb meaning bring about?",
+      "options": [
+        "The agreement effected a change.",
+        "The agreement had an effect.",
+        "The effects were uneven.",
+        "The effect of the agreement was small."
+      ],
+      "answer": 0,
+      "why": "Effected means brought about; the other uses are nouns. Effect is not restricted to noun use.",
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which adjective means relating to courts, without saying a decision was wise?",
+      "options": [
+        "judicious",
+        "judicial",
+        "economical",
+        "sensible"
+      ],
+      "answer": 1,
+      "why": "Judicial identifies a legal/court relationship; judicious evaluates sound judgement.",
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-q04",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Choose the genuine error: We discussed about the revised budget.",
+      "options": [
+        "We",
+        "discussed about the revised budget",
+        "revised",
+        "No error"
+      ],
+      "answer": 1,
+      "why": "For the intended ordinary transitive discuss pattern, remove about. The noun discussion can take about.",
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement about insist is accurate?",
+      "options": [
+        "It takes only an infinitive with no subject.",
+        "It must always be followed immediately by on.",
+        "It can take on + noun/-ing or a that-clause.",
+        "It can never express a demand."
+      ],
+      "answer": 2,
+      "why": "Both insist on checking and insist that we check are standard patterns.",
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which expression identifies the SIZE of a rise, rather than what rises?",
+      "options": [
+        "an increase in salaries",
+        "an increase in attendance",
+        "an increase of six per cent",
+        "an increase in demand"
+      ],
+      "answer": 2,
+      "why": "Of six per cent measures the amount; in + variable identifies what changes.",
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which is standard ordinary usage?",
+      "options": [
+        "many informations",
+        "three equipments",
+        "a furniture",
+        "several pieces of advice"
+      ],
+      "answer": 3,
+      "why": "Advice is uncountable in the intended ordinary sense; pieces supplies countable units.",
+      "conceptId": "gv5-d25-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-q08",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Choose the genuine error in formal British English: The committee are divided in their views.",
+      "options": [
+        "No error",
+        "The committee",
+        "are divided",
+        "their views"
+      ],
+      "answer": 0,
+      "why": "British member-oriented collective agreement can be plural; the supplied context makes it appropriate.",
+      "conceptId": "gv5-d25-m03",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which judgement about prepone is defensible?",
+      "options": [
+        "It is recorded in Indian English; bring forward may be clearer to unfamiliar readers.",
+        "It always means postpone.",
+        "It is a mandatory international form.",
+        "It is not an English word in any variety."
+      ],
+      "answer": 0,
+      "why": "The dictionary records regional use. Audience-based paraphrase is distinct from a universal error judgement.",
+      "conceptId": "gv5-d25-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-formal",
+        "cambridge-prepone",
+        "cambridge-insure",
+        "C-VARIATION",
+        "C-NOUN"
+      ]
+    },
+    {
+      "id": "gv5-d25-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which correction repairs a genuine auxiliary-pattern error?",
+      "options": [
+        "colour → color in every document",
+        "committee are → committee is in every British context",
+        "insure → ensure in every American context",
+        "has went → has gone"
+      ],
+      "answer": 3,
+      "why": "The present perfect requires the participle gone. The other changes depend on region, register or interpretation.",
+      "conceptId": "gv5-d25-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-formal",
+        "cambridge-prepone",
+        "cambridge-insure",
+        "C-VARIATION",
+        "C-NOUN"
+      ]
+    },
+    {
+      "id": "gv5-d25-r01",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain advice/advise using one sentence containing both.",
+      "model": "Please advise me whether this advice applies to my case.",
+      "rubric": [
+        "Use advise as a verb.",
+        "Use advice as a noun in the intended sense."
+      ],
+      "alternatives": [
+        "Equivalent original sentences are valid."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-r02",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Complete for the meaning not firmly attached: The ____ handle may fall off.",
+      "model": "loose",
+      "rubric": [
+        "Choose the adjective for insecure attachment.",
+        "Do not substitute lose."
+      ],
+      "alternatives": [
+        "An adjective such as unsecured may fit meaning but does not test this pair."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-r03",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Identify the word classes and meanings of effects and effected: The effects were clear after the team effected a repair.",
+      "model": "Effects is a plural noun naming results; effected is a past-tense verb meaning brought about.",
+      "rubric": [
+        "Distinguish category by construction.",
+        "Identify the two related senses."
+      ],
+      "alternatives": [
+        "Equivalent grammatical labels with explanations are valid."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-r04",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why is The court issued a judicial decision not automatically wrong because judicious exists?",
+      "model": "Judicial means court-related; judicious means wise. The sentence can describe a court decision without evaluating its wisdom.",
+      "rubric": [
+        "Give both senses.",
+        "Recognise possible grammaticality."
+      ],
+      "alternatives": [
+        "A context explicitly requiring wise might favour judicious."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-r05",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Use suitable patterns: She is capable ____ handling it and able ____ explain it.",
+      "model": "of; to",
+      "rubric": [
+        "Capable takes of + -ing.",
+        "Able takes a to-infinitive in this pattern."
+      ],
+      "alternatives": [
+        "Accept a different response only if it preserves all stated propositions and satisfies the specific instruction, including supplied words, requested construction and sentence count. A grammatical recast that changes those constraints does not complete this task."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-r06",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Change the insist-on pattern into a that-clause without changing the demand: They insist on an independent review.",
+      "model": "They insist that an independent review be conducted.",
+      "rubric": [
+        "Retain the demand.",
+        "Supply a grammatical finite clause."
+      ],
+      "alternatives": [
+        "They insist that an independent review should be conducted is standard British English."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-r07",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare an increase in fees with an increase of ten pounds.",
+      "model": "In fees identifies the variable that rises; of ten pounds gives the size of a rise.",
+      "rubric": [
+        "Identify variable versus amount.",
+        "Accept both forms."
+      ],
+      "alternatives": [
+        "An increase of ten pounds in fees combines both relationships."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-r08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair the ordinary information pattern: They sent three useful informations.",
+      "model": "They sent three useful pieces of information.",
+      "rubric": [
+        "Use a suitable counting expression.",
+        "Retain three units and usefulness."
+      ],
+      "alternatives": [
+        "They sent three useful facts is valid if the intended units are facts."
+      ],
+      "conceptId": "gv5-d25-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-r09",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why The data is incomplete cannot be condemned solely because data historically has a plural origin.",
+      "model": "Modern standard usage includes mass-noun singular agreement as well as plural agreement; discipline and house style can specify a preference.",
+      "rubric": [
+        "Distinguish history from current use.",
+        "Mention both analyses and editorial context."
+      ],
+      "alternatives": [
+        "A field requiring data are can still stipulate that form for its work."
+      ],
+      "conceptId": "gv5-d25-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-r10",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine into a clear standard sentence: We discussed the budget. The discussion was with the treasurer.",
+      "model": "We discussed the budget with the treasurer.",
+      "rubric": [
+        "Keep the topic direct object.",
+        "Keep the treasurer as interlocutor."
+      ],
+      "alternatives": [
+        "We had a discussion about the budget with the treasurer is also valid."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-r11",
+      "type": "response",
+      "kind": "splitting",
+      "prompt": "Split without changing scope: Although some researchers prefer plural data, mass-noun agreement is established in other contexts.",
+      "model": "Some researchers prefer plural data. However, mass-noun agreement is established in other contexts.",
+      "rubric": [
+        "Keep some and other contexts.",
+        "Retain contrast without claiming exclusivity."
+      ],
+      "alternatives": [
+        "Two sentences using nevertheless can also express the relationship."
+      ],
+      "conceptId": "gv5-d25-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-r12",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Order: the revised terms / us / informed / the clerk / about.",
+      "model": "The clerk informed us about the revised terms.",
+      "rubric": [
+        "Keep us as recipient.",
+        "Attach about to the information topic."
+      ],
+      "alternatives": [
+        "Accept a different response only if it preserves all stated propositions and satisfies the specific instruction, including supplied words, requested construction and sentence count. A grammatical recast that changes those constraints does not complete this task."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-r13",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare prepone the meeting and bring the meeting forward for readers unfamiliar with Indian English.",
+      "model": "Both can express moving the meeting earlier, but bring forward is likely to be more widely understood by that specified audience.",
+      "rubric": [
+        "Recognise the recorded regional sense.",
+        "State an audience-based reason for the paraphrase."
+      ],
+      "alternatives": [
+        "Specify an exact earlier date to remove any directional ambiguity."
+      ],
+      "conceptId": "gv5-d25-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-formal",
+        "cambridge-prepone",
+        "cambridge-insure",
+        "C-VARIATION",
+        "C-NOUN"
+      ]
+    },
+    {
+      "id": "gv5-d25-r14",
+      "type": "response",
+      "kind": "function",
+      "prompt": "In Please advise the applicants to retain a copy, identify applicants and to retain a copy.",
+      "model": "The applicants is the object/recipient of advice; to retain a copy is the infinitival complement describing the advised action.",
+      "rubric": [
+        "Identify recipient and action.",
+        "Do not call the infinitive a finite tense."
+      ],
+      "alternatives": [
+        "Equivalent school-grammar labels are valid when functions are explained."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-r15",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Edit the intended ordinary patterns without changing the claim: The adviser give many useful advices. She insisted that the plan is reconsidered as a demand, using mandative be.",
+      "model": "The adviser gives much useful advice. She insisted that the plan be reconsidered.",
+      "rubric": [
+        "Repair singular-subject agreement.",
+        "Use ordinary uncountable advice.",
+        "Use the stipulated mandative passive be."
+      ],
+      "alternatives": [
+        "A great deal of useful advice and should be reconsidered are valid alternatives."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-r16",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why can changing The court’s judicial decision to The court’s judicious decision change meaning?",
+      "model": "It replaces a legal classification with an evaluation of wisdom; the source may not support that evaluation.",
+      "rubric": [
+        "Identify semantic change.",
+        "Do not call the source automatically ungrammatical."
+      ],
+      "alternatives": [
+        "A neutral paraphrase is the decision issued by the court."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-r17",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write two sentences explaining a pattern that a learner finds difficult without assuming all Urdu-speaking learners make that error.",
+      "model": "Some learners omit articles before ordinary singular countable nouns. In I have a question, a is required for the intended nonspecific question.",
+      "rubric": [
+        "Teach the English construction.",
+        "Avoid attributing an error to every member of a language group."
+      ],
+      "alternatives": [
+        "An example involving auxiliary do or a lexical pattern is also valid."
+      ],
+      "conceptId": "gv5-d25-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-formal",
+        "cambridge-prepone",
+        "cambridge-insure",
+        "C-VARIATION",
+        "C-NOUN"
+      ]
+    },
+    {
+      "id": "gv5-d25-r18",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "A guide labels insure that the door is locked always wrong. Evaluate that claim.",
+      "model": "It is too categorical: insure has a make-certain sense in established American use. Ensure matches the course’s British default.",
+      "rubric": [
+        "Identify legitimate regional use.",
+        "Separate editorial recommendation from universal correctness."
+      ],
+      "alternatives": [
+        "Insure against damage would instead use the insurance sense."
+      ],
+      "conceptId": "gv5-d25-m04",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-formal",
+        "cambridge-prepone",
+        "cambridge-insure",
+        "C-VARIATION",
+        "C-NOUN"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d25-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair for ordinary recommendation meaning: She gave me an advice.",
+      "model": "She gave me advice.",
+      "rubric": [
+        "Use ordinary uncountable advice.",
+        "Remove an or add a counting expression."
+      ],
+      "alternatives": [
+        "She gave me a piece of advice is valid."
+      ],
+      "conceptId": "gv5-d25-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: He is capable to manage the records.",
+      "model": "He is capable of managing the records.",
+      "rubric": [
+        "Use of + -ing after capable.",
+        "Retain management ability."
+      ],
+      "alternatives": [
+        "He is able to manage the records is valid."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "No change if grammatical: The department is comprised of three divisions.",
+      "model": "No change required.",
+      "rubric": [
+        "Accept the established passive pattern.",
+        "Recognise that some styles may prefer comprises."
+      ],
+      "alternatives": [
+        "The department comprises three divisions is a valid stylistic alternative."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair the intended influence meaning: The delay had a negative affect on attendance.",
+      "model": "The delay had a negative effect on attendance.",
+      "rubric": [
+        "Use result noun effect.",
+        "Retain negative influence on attendance."
+      ],
+      "alternatives": [
+        "The delay negatively affected attendance is valid."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: The clerk did not informed us about the change.",
+      "model": "The clerk did not inform us about the change.",
+      "rubric": [
+        "Did carries past tense.",
+        "Keep the base form inform and accept about."
+      ],
+      "alternatives": [
+        "The clerk did not inform us of the change is valid."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-insist",
+        "D25-inform",
+        "cambridge-between",
+        "D25-between-dict",
+        "cambridge-comprise",
+        "C-PREP"
+      ]
+    },
+    {
+      "id": "gv5-d25-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "No change if grammatical in a British member-oriented context: The staff are sharing their individual concerns.",
+      "model": "No change required.",
+      "rubric": [
+        "Accept member-focused plural agreement.",
+        "Keep consistent plural reference."
+      ],
+      "alternatives": [
+        "The staff members are sharing their individual concerns is an explicit alternative."
+      ],
+      "conceptId": "gv5-d25-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-NOUN",
+        "C-NUM",
+        "C-AGREE",
+        "cambridge-data",
+        "D25-research",
+        "D25-research-oxford",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d25-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: Please do not loose the receipt.",
+      "model": "Please do not lose the receipt.",
+      "rubric": [
+        "Use lose for fail to retain.",
+        "Retain negation and object."
+      ],
+      "alternatives": [
+        "Please keep the receipt is a positive paraphrase."
+      ],
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-advise",
+        "D25-affect",
+        "D25-effect",
+        "cambridge-judicial"
+      ]
+    },
+    {
+      "id": "gv5-d25-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: Each applicant have question about the form.",
+      "model": "Each applicant has a question about the form.",
+      "rubric": [
+        "Each applicant takes singular has.",
+        "Question needs a determiner for this ordinary sense."
+      ],
+      "alternatives": [
+        "Every applicant has a question about the form. Retain the question’s topic as well as repairing agreement and the determiner."
+      ],
+      "conceptId": "gv5-d25-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-formal",
+        "cambridge-prepone",
+        "cambridge-insure",
+        "C-VARIATION",
+        "C-NOUN"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d25-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Recast without on, retaining a demand: The tenant insisted on receiving a written receipt.",
+      "model": "The tenant insisted that they receive a written receipt.",
+      "rubric": [
+        "Keep tenant as demander and receipt recipient.",
+        "Use a grammatical demand clause."
+      ],
+      "alternatives": [
+        "The tenant insisted that they should receive a written receipt is valid. Singular they is accepted."
+      ],
+      "conceptId": "gv5-d25-m02",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D25-insist"
+      ]
+    },
+    {
+      "id": "gv5-d25-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "For an unfamiliar international audience, paraphrase Move the hearing earlier than its scheduled date using bring forward.",
+      "model": "Bring the hearing forward from its scheduled date.",
+      "rubric": [
+        "Keep earlier movement, not postponement.",
+        "Use a grammatical particle construction."
+      ],
+      "alternatives": [
+        "Bring the hearing forward to an explicitly earlier date is clearer when dates are known."
+      ],
+      "conceptId": "gv5-d25-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-prepone"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d25-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write a 90–120-word editing note to a colleague. Explain one genuine grammatical correction, one lexical-sense distinction and one legitimate regional or style alternative. Include examples and state why you would or would not change each.",
+    "model": "In the draft, did not attended needs to become did not attend because did carries the past tense and the lexical verb uses its base form. The phrase a judicial decision is grammatical when it means a court-related decision; changing it to judicious would add an evaluation of wisdom. Finally, color is a standard American spelling, although our publication uses the British default colour. I would normalise that spelling under the stated house style while preserving any authentic spelling inside an exact quotation or official name. These three edits therefore require different explanations.",
+    "rubric": [
+      "Distinguish structural error, lexical meaning and standard variation.",
+      "Provide a specific example and reason for each.",
+      "Do not make unsupported examiner or language-group claims.",
+      "Use the rubric as self-review rather than exact wording comparison."
+    ],
+    "alternatives": [
+      "Other accurately explained constructions and established alternatives are valid."
+    ],
+    "conceptId": "gv5-d25-m04",
+    "difficulty": "Advanced",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "cambridge-formal",
+      "C-VARIATION",
+      "cambridge-judicial"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d25-rec01",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 24: Why can James’s and James’ both be defensible possessives?",
+      "model": "Different established house styles treat singular names ending in s differently.",
+      "rubric": [
+        "Identify stylistic variation.",
+        "Do not confuse either with an ordinary plural."
+      ],
+      "alternatives": [
+        "Use the required guide consistently."
+      ],
+      "conceptId": "gv5-d24-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d25-rec02",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 17: Distinguish must not leave from need not leave.",
+      "model": "Must not leave prohibits departure; need not leave removes an obligation to depart.",
+      "rubric": [
+        "Keep prohibition distinct from absence of necessity.",
+        "Do not infer that staying is compulsory in the second."
+      ],
+      "alternatives": [
+        "Does not have to leave can paraphrase the second in an appropriate context."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d25-rec03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Recall Day 10: Repair The quality of these reports are improving.",
+      "model": "The quality of these reports is improving.",
+      "rubric": [
+        "Identify singular head quality.",
+        "Do not agree with reports inside the of-phrase."
+      ],
+      "alternatives": [
+        "These reports are improving in quality is a grammatical recast."
+      ],
+      "conceptId": "gv5-d10-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I identify the intended sense before changing a word.",
+    "I distinguish a lexical pattern from an absolute prohibition.",
+    "I can recognise a legitimate regional alternative.",
+    "I do not overcorrect a grammatical sentence.",
+    "I explain an edit with the appropriate kind of evidence."
+  ],
+  "sources": [
+    {
+      "id": "C-AGREE",
+      "title": "Subject–verb agreement - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "C-NOUN",
+      "title": "Nouns: countable and uncountable - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/nouns-countable-and-uncountable",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "C-NUM",
+      "title": "Nouns: singular and plural - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/nouns-singular-and-plural",
+      "consulted": "2026-10-21",
+      "note": "Actual number and collective-agreement entry consulted; specialist variation is explicitly qualified."
+    },
+    {
+      "id": "C-PREP",
+      "title": "Prepositions - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "C-VARIATION",
+      "title": "British and American English - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/british-and-american-english",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "D25-advise",
+      "title": "ADVISE | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/advise",
+      "consulted": "2026-10-21",
+      "note": "Actual relevant entry consulted for the particular lexical sense or pattern; course material is original."
+    },
+    {
+      "id": "D25-affect",
+      "title": "AFFECT | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/affect",
+      "consulted": "2026-10-21",
+      "note": "Actual relevant entry consulted for the particular lexical sense or pattern; course material is original."
+    },
+    {
+      "id": "D25-between-dict",
+      "title": "BETWEEN | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/between",
+      "consulted": "2026-10-21",
+      "note": "Actual relevant entry consulted for the particular lexical sense or pattern; course material is original."
+    },
+    {
+      "id": "D25-effect",
+      "title": "EFFECT | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/effect",
+      "consulted": "2026-10-21",
+      "note": "Actual relevant entry consulted for the particular lexical sense or pattern; course material is original."
+    },
+    {
+      "id": "D25-inform",
+      "title": "INFORM | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/inform",
+      "consulted": "2026-10-21",
+      "note": "Actual relevant entry consulted for the particular lexical sense or pattern; course material is original."
+    },
+    {
+      "id": "D25-insist",
+      "title": "INSIST | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/insist",
+      "consulted": "2026-10-21",
+      "note": "Actual relevant entry consulted for the particular lexical sense or pattern; course material is original."
+    },
+    {
+      "id": "D25-research",
+      "title": "RESEARCH | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/research",
+      "consulted": "2026-10-21",
+      "note": "Actual relevant entry consulted for the particular lexical sense or pattern; course material is original."
+    },
+    {
+      "id": "D25-research-oxford",
+      "title": "research noun - Definition, pictures, pronunciation and usage notes | Oxford Advanced Learner's Dictionary at OxfordLearnersDictionaries.com",
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/research_1",
+      "consulted": "2026-10-21",
+      "note": "Oxford explicitly notes less frequent plural researches in British English; this is distinguished from the ordinary uncountable use."
+    },
+    {
+      "id": "cambridge-between",
+      "title": "Between or among?",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/between-or-among",
+      "consulted": "2026-10-21",
+      "note": "Distinct relationships versus membership in a group; avoid an absolute two-versus-more rule."
+    },
+    {
+      "id": "cambridge-comprise",
+      "title": "Consist, comprise or compose?",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/consist-comprise-or-compose",
+      "consulted": "2026-10-21",
+      "note": "Active comprise and passive be comprised of checked."
+    },
+    {
+      "id": "cambridge-data",
+      "title": "data",
+      "url": "https://dictionary.cambridge.org/dictionary/english/data",
+      "consulted": "2026-10-21",
+      "note": "Singular mass and plural agreement checked."
+    },
+    {
+      "id": "cambridge-formal",
+      "title": "Formal and informal language",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/formal-and-informal-language",
+      "consulted": "2026-10-21",
+      "note": "Register preferences versus grammatical correctness checked."
+    },
+    {
+      "id": "cambridge-insure",
+      "title": "insure",
+      "url": "https://dictionary.cambridge.org/dictionary/english/insure",
+      "consulted": "2026-10-21",
+      "note": "American make-certain sense checked."
+    },
+    {
+      "id": "cambridge-judicial",
+      "title": "judicial",
+      "url": "https://dictionary.cambridge.org/dictionary/english/judicial",
+      "consulted": "2026-10-21",
+      "note": "Judicial means relating to courts or the legal system; a judicial decision is valid."
+    },
+    {
+      "id": "cambridge-prepone",
+      "title": "prepone",
+      "url": "https://dictionary.cambridge.org/dictionary/english/prepone",
+      "consulted": "2026-10-21",
+      "note": "Indian English regional label and meaning checked."
+    }
+  ],
+  "editorialNotes": []
+}

@@ -1,0 +1,79 @@
+name: Grammar reconstruction verification
+on:
+  pull_request:
+    branches: [main]
+    paths: ['content/grammar/**', 'src/features/grammar-v5/**', 'public/grammar/**', 'public/api/_grammar_v5*', 'public/api/student/grammar-v5.php', 'scripts/grammar-v5/**', 'tests/grammar-v5/**', 'tests/grammarV5.test.ts', 'tests/browser/grammar-v5*.mjs', 'scripts/prerender/routes.tsx', 'public/api/_tutor_context.php', 'public/api/_planner.php', 'public/api/student/planner.php', 'public/api/_tutor_grammar_v5.php', '.github/workflows/grammar-reconstruction.yml']
+concurrency:
+  group: grammar-reconstruction-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  native-grammar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: cssvista_briefing_test
+          MYSQL_ROOT_PASSWORD: cssvista_ci_only
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pcssvista_ci_only"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      CI: 'true'
+      CSSV_DB_HOST: 127.0.0.1
+      CSSV_DB_NAME: cssvista_briefing_test
+      CSSV_DB_USER: root
+      CSSV_DB_PASSWORD: cssvista_ci_only
+      CSSV_SITE_ORIGIN: http://localhost:4173
+      CSSV_APP_SECRET: isolated-grammar-ci-only-not-production-123456789012345678901234567890
+      CSSV_PRIVATE_STORAGE_DIR: /tmp/cssv-grammar-private
+      CSSV_CONFIG_FILE: /tmp/cssv-grammar-private/config.php
+      PHP_CLI_SERVER_WORKERS: '8'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, mbstring, curl, fileinfo
+      - run: npm run install:ci
+      - name: Validate manuscript, deterministic artifacts and preservation
+        run: |
+          node scripts/grammar-v5/build.mjs --check
+          node --test tests/grammarV5.test.ts
+          npm run test:grammar
+          php tests/grammar-v5/unit.php
+          php tests/tutor/unit.php
+          php -l public/api/student/grammar-v5.php
+      - name: Run the existing native account backend against disposable MySQL
+        run: |
+          mkdir -p /tmp/cssv-grammar-private test-artifacts
+          php tests/current-affairs/setup.php
+          php -d opcache.enable=0 -S localhost:4173 -t public tests/pro/router.php > test-artifacts/grammar-v5-php.log 2>&1 &
+          node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+          node tests/grammar-v5/security.mjs
+      - name: Install browser tools and build the actual Hostinger application
+        run: |
+          npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
+          npm exec --prefix tests/browser -- playwright-core install --with-deps chromium
+          npm run build
+      - name: Test the built public course and signed-in native account journey
+        shell: bash
+        run: |
+          node tests/browser/runtime.mjs > test-artifacts/grammar-v5-browser-runtime.log 2>&1 &
+          node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+          browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
+          CSSV_BROWSER_EXECUTABLE="$browser_path" CSSV_GRAMMAR_ORIGIN=https://localhost:3444 node tests/browser/grammar-v5.mjs
+          CSSV_BROWSER_EXECUTABLE="$browser_path" CSSV_GRAMMAR_ORIGIN=https://localhost:3444 node tests/browser/grammar-v5-account.mjs
+          CSSV_BROWSER_EXECUTABLE="$browser_path" CSSV_GRAMMAR_ORIGIN=https://localhost:3444 node tests/browser/grammar-v5-accessibility.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: grammar-v5-native-evidence
+          path: test-artifacts/grammar-v5-*

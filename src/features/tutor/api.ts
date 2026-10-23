@@ -104,6 +104,7 @@ export type TutorCatalog = {
 }
 export function learningReturn(context: TutorContext, attempt: string) {
   const url = new URL(context.return_path, 'https://www.css-vista.com')
+  if (url.pathname === '/grammar-course' && context.id.startsWith('grammar:') && !url.searchParams.has('edition')) url.searchParams.set('edition', 'legacy')
   if (['/grammar-course', '/account/precis'].includes(url.pathname))
     url.searchParams.set('attempt', attempt)
   return url.pathname + url.search

@@ -1,0 +1,1620 @@
+{
+  "day": 14,
+  "id": "gv5-day-14",
+  "title": "Clauses and Sentence Architecture",
+  "orientation": "Clauses provide the main architecture of English sentences. Once you can locate them, you can decide which ideas stand as the principal message, which depend on another expression and where a written sentence needs a boundary. This matters when a short answer becomes an extended explanation: adding because, although or a reporting clause changes relationships, not merely length. You will distinguish finite and non-finite clauses, compare declarative, interrogative, imperative and exclamative forms, and examine how a form can serve different communicative purposes. You will also build simple, compound and complex sentences using a clearly stated classification convention. Bracketed visual parsing will make the relationships visible in plain text. The editing work treats fragments, fused sentences and comma splices as different problems, while recognising that conversation, headings and deliberate stylistic fragments need a different contextual judgement from an ordinary formal paragraph.",
+  "outcomes": [
+    "Identify main and subordinate clauses, including non-finite structures.",
+    "Distinguish clause form from communicative function.",
+    "Classify sentence architecture using the stated finite-clause convention.",
+    "Repair fragments, fused sentences and comma splices without changing logical relationships.",
+    "Represent clause boundaries and embedding with accessible bracketed parsing."
+  ],
+  "prerequisiteDays": [
+    1,
+    5,
+    13
+  ],
+  "modules": [
+    {
+      "id": "gv5-d14-m01",
+      "title": "Main, subordinate, finite and non-finite clauses",
+      "taxonomy": [
+        "H",
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-topic-d14-c01",
+        "gv5-topic-d14-c02"
+      ],
+      "definition": "A clause is a grammatical unit organised around a verb. Main clauses supply a principal message; subordinate clauses function within a larger structure. Finite and non-finite distinguish verb forms and clause construction, not whether an event is real.",
+      "foundation": [
+        "The train stopped is a main declarative clause. In the train stopped because a signal failed, because a signal failed is a subordinate reason clause associated with the main event. The first clause can form an independent neutral statement; the because-clause normally relies on a larger construction in formal connected prose. A clause is not simply any group of words that happens to contain a noun and a verb spelling. Identify the grammatical organisation of the group and its relation to the larger sentence. A phrase can contain a clause, as in the promise that she would return."
+      ],
+      "intermediate": [
+        "A finite clause contains a finite verb or auxiliary, as in she returns, she returned and she may return. The modal may is finite even though it does not display a person contrast such as returns versus return. A non-finite clause is headed by an infinitival or participial form without independent tense inflection: to return soon, returning home, or signed yesterday in the noun phrase the documents signed yesterday. A non-finite clause can still express time relative to context. In she hoped to return next week, next week gives time reference, while to return remains non-finite."
+      ],
+      "advanced": [
+        "Non-finite clauses often leave their subject understood: she hopes to return normally makes her the intended returner. Some have an expressed subject: for the visitors to arrive early would be convenient. The clause for the visitors to arrive early serves as the subject of would be convenient, despite lacking independent tense. Finite clauses may also function as subjects, objects or other complements. Whether the grant will continue remains unclear has a finite interrogative clause as its subject. The whole sentence is declarative; the embedded subject clause does not use direct-question inversion."
+      ],
+      "expert": [
+        "The main/subordinate distinction is not identical to the finite/non-finite distinction. Many subordinate clauses are finite, while other subordinate clauses are non-finite. Imperatives deserve separate attention because their ordinary main verb is a plain form and their subject is usually unexpressed: take your seat. Different grammatical frameworks discuss their finiteness differently; this course identifies the imperative construction rather than inferring that take your seat is an ungrammatical fragment. Supplementary non-finite clauses such as weather permitting have their own internal structure. The practical question is how the clause is licensed and interpreted in the complete construction, not whether it mechanically contains a written subject plus an overt tense ending."
+      ],
+      "patterns": [
+        {
+          "form": "main clause + because + finite subordinate clause",
+          "meaning": "The subordinate clause supplies a reason for the principal message."
+        },
+        {
+          "form": "for + expressed subject + to-infinitive clause",
+          "meaning": "A non-finite clause can contain its own expressed subject."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The meeting ended because the chair was ill.",
+          "analysis": "Ended and was are finite; the because-clause is subordinate."
+        },
+        {
+          "sentence": "To postpone the decision would be unwise.",
+          "analysis": "The to-infinitival clause functions as subject of the main predicate."
+        },
+        {
+          "sentence": "Whether the figures have changed remains uncertain.",
+          "analysis": "A finite embedded question functions as the subject; the complete sentence is declarative."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She knows that the office is closed.",
+          "b": "She hopes to leave early.",
+          "note": "Both contain a subordinate complement; the first has a finite content clause, while the second has a non-finite infinitival clause."
+        }
+      ],
+      "exceptions": [
+        "A grammatical imperative normally has an unexpressed subject: please wait is not a fragment simply because you is absent.",
+        "A non-finite clause may have an explicit subject, as in for the guests to leave, and may contain temporal expressions without acquiring independent tense."
+      ],
+      "mistakes": [
+        {
+          "problem": "Whether has the result changed remains unclear.",
+          "repair": "Whether the result has changed remains unclear.",
+          "reason": "The embedded interrogative subject takes ordinary statement order rather than direct-question inversion."
+        },
+        {
+          "problem": "Because the printer failed. The assistant used another machine.",
+          "repair": "Because the printer failed, the assistant used another machine.",
+          "reason": "Join the reason clause to its main clause in ordinary formal prose."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "finite clause",
+          "definition": "A clause containing a finite verb or auxiliary.",
+          "example": "whether she has arrived"
+        },
+        {
+          "term": "non-finite clause",
+          "definition": "A clause headed by a non-finite verb form without independent tense inflection.",
+          "example": "for Sam to arrive early"
+        },
+        {
+          "term": "subordination",
+          "definition": "A relation in which a clause is dependent within a larger construction.",
+          "example": "because the road was closed"
+        }
+      ],
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-m02",
+      "title": "Clause forms and communicative purposes",
+      "taxonomy": [
+        "H",
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-topic-d14-c03",
+        "gv5-topic-d14-c04"
+      ],
+      "definition": "Clause form describes grammatical construction, such as declarative or interrogative. Communicative function describes what a speaker uses it to do, such as state, ask, request or exclaim; the two do not correspond one to one.",
+      "foundation": [
+        "A declarative clause commonly places a subject before its verb: the workshop begins at ten. An interrogative clause commonly asks a question: does the workshop begin at ten? An imperative commonly directs action: begin the workshop at ten. An exclamative commonly expresses a reaction to a striking degree or quality: how quickly the workshop ended! These are useful central patterns, not interchangeable labels for punctuation marks. A full stop does not turn a question-shaped clause into a declarative, and an exclamation mark alone does not make a structure an exclamative clause.",
+        "A question tag is a short question attached to another clause: The drawer is locked, isn’t it? For an ordinary confirmation tag, identify the statement’s auxiliary or modal and the subject it refers to. Use a subject pronoun in the tag and normally reverse polarity: a positive statement takes a negative tag; a negative statement takes a positive tag. With no auxiliary in a positive simple present or past statement, use do, does or did: Sara checks the receipts, doesn’t she? This is a useful starting pattern, not a rule for every conversational tag."
+      ],
+      "intermediate": [
+        "Interrogatives include yes-no and wh-patterns. Does Amina teach here? is a yes-no interrogative. Where does Amina teach? asks for a place. Who teaches here? asks about the subject and does not need do-support or an extra subject after the verb. An embedded question normally has different order: I wonder where Amina teaches. The complete clause I wonder ... is declarative, although one part is an interrogative complement. Pay attention to the boundary at which each form label applies rather than treating a sentence containing any wh-word as one direct question.",
+        "In The gate has not opened, has it?, the tag repeats auxiliary has and refers to the gate as it. Negative words also matter: Nobody has signed yet, have they? treats nobody as negative and uses a positive tag. Nobody takes singular has in the statement, while the referring singular they takes have in the tag. Never similarly supports a positive confirmation tag: You never park here, do you? Two conventional special cases are I’m next, aren’t I? and Let’s check again, shall we? The uncontracted am I not? is possible in a formal style. After an imperative, will you? is common, but can you?, could you? and won’t you? can express different interpersonal attitudes. Do not apply statement polarity mechanically to commands."
+      ],
+      "advanced": [
+        "Form and purpose can diverge. Could you close the window? is interrogative in form but often functions as a polite request. You will submit the form today can function as an instruction, prediction or reminder depending on situation and intonation. Imperatives can offer advice, invitations or permissions as well as commands: have another biscuit. A declarative with rising intonation may seek confirmation in conversation, but the absence of inversion remains part of its grammatical form. Describe the form and the likely use separately instead of replacing grammatical analysis with a guess about the speaker's attitude.",
+        "Ordinary opposite-polarity tags often invite confirmation. Falling intonation commonly signals greater confidence; rising intonation commonly leaves more room for a genuine check. Neither tone mechanically determines a speaker’s intention. A positive statement can also have a positive tag: You locked it, did you? may register newly received information, surprise or a challenge. Context and delivery decide among these readings. Thus didn’t you? and did you? can both be grammatical after You locked it, but they are not automatically interchangeable. Informal right? and yeah? can remain unchanged across different subjects; they belong to conversational usage and do not follow the auxiliary agreement pattern."
+      ],
+      "expert": [
+        "The central what- and how-exclamative patterns have their own order: what an unusual design this is; how carefully she explained it. A question can also express surprise: wasn't that remarkable? It remains interrogative in construction even when it performs an exclamatory function. In formal writing, punctuation should reflect the complete utterance and its intended force. An indirect question embedded in a statement usually ends with a full stop, while can you tell me where the office is? ends with a question mark because the complete construction is a direct interrogative. These distinctions become essential in reporting speech and in distinguishing an embedded question from a faulty inversion.",
+        "An echo question can repeat a heard statement or leave the questioned expression in its original position: You put the parcel where? This can request repetition or express surprise; it is not a failed attempt at neutral Where did you put the parcel? Negative yes-no questions also carry expectations: Isn’t the library open? often checks a belief that it is open; Won’t you sit down? can invite. The full not normally follows the subject in Is the library not open?, which sounds more formal than Isn’t the library open? When answering a negative question, add an explicit clause to avoid misunderstanding: Yes, it is open; No, it isn’t open. Form, interaction, register and interpretation must all be considered before correcting conversational word order."
+      ],
+      "patterns": [
+        {
+          "form": "auxiliary + subject + lexical verb",
+          "meaning": "A central yes-no interrogative pattern: does she agree?"
+        },
+        {
+          "form": "what + noun phrase + subject + verb / how + adjective or adverb + subject + verb",
+          "meaning": "Central exclamative patterns; their word order differs from a neutral direct question."
+        },
+        {
+          "form": "statement + auxiliary/modal + subject pronoun?",
+          "meaning": "An ordinary confirmation tag normally reverses statement polarity and preserves subject reference."
+        },
+        {
+          "form": "declarative order + wh-expression in the questioned position",
+          "meaning": "One conversational echo-question pattern: You sent it to whom? It is not the default neutral information question."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The door is open.",
+          "analysis": "A declarative commonly used as a statement, but it could also hint that someone should close the door."
+        },
+        {
+          "sentence": "Who authorised the payment?",
+          "analysis": "A subject wh-question uses authorised directly without adding did."
+        },
+        {
+          "sentence": "Could you tell me where the archive is?",
+          "analysis": "The complete sentence is interrogative, while the embedded question where the archive is has no inversion."
+        },
+        {
+          "sentence": "The spare key is in the drawer, isn’t it?",
+          "analysis": "Positive is takes negative isn’t; it refers to the key."
+        },
+        {
+          "sentence": "Nobody has signed yet, have they?",
+          "analysis": "Negative nobody supports a positive tag; singular they takes have, although nobody takes has."
+        },
+        {
+          "sentence": "Let’s compare the two estimates, shall we?",
+          "analysis": "The conventional shall we tag seeks agreement to an inclusive suggestion."
+        },
+        {
+          "sentence": "You stored the files where?",
+          "analysis": "A conversational echo question keeps where in place to check or react to the location just mentioned."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "How quickly did she finish?",
+          "b": "How quickly she finished!",
+          "note": "The first is a direct interrogative; the second is a how-exclamative with subject before verb."
+        },
+        {
+          "a": "You locked it, didn’t you?",
+          "b": "You locked it, did you?",
+          "note": "Both are possible. The first commonly seeks confirmation; the second can respond to newly received information or convey surprise/challenge. Intonation and context constrain interpretation."
+        },
+        {
+          "a": "Isn’t the library open?",
+          "b": "Is the library not open?",
+          "note": "Both are negative interrogatives. The full not usually follows the subject and is more formal; neither construction guarantees a particular answer."
+        }
+      ],
+      "exceptions": [
+        "A subject wh-question such as who left? does not use the same auxiliary-subject inversion as who did she meet?",
+        "Communicative force depends on context: a polite interrogative can request action without being an imperative in grammatical form.",
+        "Opposite polarity is the ordinary confirmation pattern, not a ban on positive-positive tags. Imperative tags have their own conventional choices.",
+        "Nobody can take singular has in the main clause and referring singular they with have in a tag; agreement is local to each clause.",
+        "Echo questions and invariant conversational tags should not be judged solely by the pattern for neutral inverted yes-no questions."
+      ],
+      "mistakes": [
+        {
+          "problem": "I wonder where is the station.",
+          "repair": "I wonder where the station is.",
+          "reason": "The interrogative complement is embedded inside a declarative construction."
+        },
+        {
+          "problem": "How beautiful is this courtyard!, intended as a neutral how-exclamative.",
+          "repair": "How beautiful this courtyard is!",
+          "reason": "The central how-exclamative pattern places the subject before the verb; an inverted version would require a different interrogative interpretation."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "interrogative",
+          "definition": "A clause form characteristically used for questions.",
+          "example": "Did the meeting finish?"
+        },
+        {
+          "term": "communicative function",
+          "definition": "The action performed through an expression in context.",
+          "example": "Could you wait? can function as a request"
+        },
+        {
+          "term": "exclamative",
+          "definition": "A grammatical construction characteristically expressing a striking degree or quality.",
+          "example": "What a quiet room this is!"
+        },
+        {
+          "term": "question tag",
+          "definition": "A short interrogative attached to a clause to invite a response, often using an auxiliary and a referring pronoun.",
+          "example": "The bus has left, hasn’t it?"
+        },
+        {
+          "term": "echo question",
+          "definition": "A conversational question repeating or querying recently heard information, often retaining statement order.",
+          "example": "You booked how many rooms?"
+        }
+      ],
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED",
+        "F-TAGS",
+        "F-BC-TAGS",
+        "F-ECHO",
+        "F-YESNO"
+      ]
+    },
+    {
+      "id": "gv5-d14-m03",
+      "title": "Simple, coordinated and subordinate architecture",
+      "taxonomy": [
+        "H",
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-topic-d14-c05",
+        "gv5-topic-d14-c06"
+      ],
+      "definition": "Sentence architecture describes how clauses combine. In the finite-clause classroom classification used here, a simple sentence has one main finite clause, a compound sentence coordinates main clauses, and a complex sentence includes finite subordination.",
+      "foundation": [
+        "A simple sentence can still be long: the patient researcher in the upstairs office checked all the entries carefully. Its length does not create another main clause. A compound sentence joins main clauses, as in the researcher checked the entries, and her colleague verified the totals. A complex sentence includes a subordinate finite clause: the researcher checked the entries because several totals looked unusual. A compound-complex sentence has at least two coordinated main finite clauses and at least one subordinate finite clause. These labels offer a useful first map, but they do not replace a detailed analysis of every embedded unit."
+      ],
+      "intermediate": [
+        "State the counting convention when non-finite clauses are present. For the classroom labels in this lesson, the researcher hopes to finish today has one main finite clause and an infinitival complement. We describe that full structure rather than pretending that to finish today contains no clause. Some grammatical accounts use complex more broadly to include non-finite subordination. A different count based on an explicit convention need not be an error. What matters for accurate editing is that you recognise the complement relationship and the understood subject, even if a school exercise uses a narrower label."
+      ],
+      "advanced": [
+        "Coordination can occur below clause level. Amina opened and checked the package coordinates predicates sharing a subject and object; it does not automatically display two separately expressed main clauses. In Amina opened the package and Bilal checked the contents, the two subjects help reveal full clause coordination. Subordinate clauses can fill selected complement positions: she believes that the claim is mistaken. Others serve as adjuncts expressing reason, condition or time: she left when the discussion ended. A clause modifying a noun, such as the claim that the witness repeated, has a different internal relation from the content clause in the claim that the witness was mistaken."
+      ],
+      "expert": [
+        "Subordination establishes grammatical dependency without determining every logical inference. Although the road was wet, the driver continued presents a concession, but grammar alone does not tell us whether continuing was wise. Coordination with and can suggest sequence, addition or other relations from context. Avoid assuming that any two grammatical clauses can be joined without changing the message. When transforming a complex sentence into two independent sentences, preserve the reason, condition or qualification through explicit wording if it is important. Similarly, an embedded complement can contain further subordination: she said that she would leave if the meeting ran late. A layered parse shows the conditional clause inside the reported content rather than attaching it automatically to said."
+      ],
+      "patterns": [
+        {
+          "form": "main finite clause + coordinator + main finite clause",
+          "meaning": "Full main-clause coordination under the classroom convention."
+        },
+        {
+          "form": "main clause containing [content clause containing [adjunct clause]]",
+          "meaning": "Subordination can be nested within another subordinate clause."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The technician opened and cleaned the scanner.",
+          "analysis": "The sentence coordinates predicates with shared arguments; and does not by itself prove two full main clauses."
+        },
+        {
+          "sentence": "The technician opened the scanner, and the assistant photographed its interior.",
+          "analysis": "Two separately expressed main clauses form compound architecture."
+        },
+        {
+          "sentence": "The technician said that the scanner would work if the sensor was replaced.",
+          "analysis": "The reported content includes a conditional clause; brackets can make that embedding explicit."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The clerk knows that the form is missing.",
+          "b": "The form that the clerk needs is missing.",
+          "note": "The first that-clause gives content selected by knows; the second modifies form through a relative relation."
+        }
+      ],
+      "exceptions": [
+        "Some descriptions count non-finite subordination when calling a sentence complex; use the specified convention and still identify the non-finite clause.",
+        "A sentence with several coordinated verbs is not automatically a compound sentence with several fully independent clauses."
+      ],
+      "mistakes": [
+        {
+          "problem": "The workshop ended because the tutor was ill, and therefore because was a coordinator.",
+          "repair": "Because introduces a subordinate reason clause; and is a coordinator in the larger wording.",
+          "reason": "Classify connectors by their actual construction, not by the fact that both connect ideas."
+        },
+        {
+          "problem": "The assistant said that would return after lunch.",
+          "repair": "The assistant said that she would return after lunch.",
+          "reason": "The finite content clause needs its subject in this intended reading; that does not fill the subject position here."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "compound-complex sentence",
+          "definition": "Under the stated convention, a sentence with main-clause coordination and finite subordination.",
+          "example": "The office closed because the lift failed, and visitors returned later."
+        },
+        {
+          "term": "content clause",
+          "definition": "A clause expressing content selected by a head such as a verb or noun.",
+          "example": "that the figures are reliable in I believe that the figures are reliable"
+        }
+      ],
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-m04",
+      "title": "Clause boundaries and accessible visual parsing",
+      "taxonomy": [
+        "H",
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-topic-d14-c07",
+        "gv5-topic-d14-c08"
+      ],
+      "definition": "A sentence-boundary error occurs when written clauses are left without the relationship or punctuation their intended construction needs. A bracketed parse can reveal missing main clauses, fused clauses and comma splices.",
+      "foundation": [
+        "For ordinary formal paragraphs, a subordinate reason clause alone usually leaves the sentence unfinished: because the road was blocked. Adding a main clause completes the intended relationship: because the road was blocked, the delivery arrived late. A fragment may instead lack a main predicate, as in the report beside the printer. That noun phrase is perfectly useful as a label or answer fragment, but it is not a full neutral declarative sentence about what the report did or was. Context decides whether fragmentary wording is a defect or a deliberate feature of a heading, conversation or literary style."
+      ],
+      "intermediate": [
+        "Two independent clauses placed together without a suitable boundary form a fused sentence: the lights failed the audience waited. Joining them only with a comma creates a comma splice: the lights failed, the audience waited. Some teaching uses run-on as a broad label for both; this course names the specific error whenever possible. Repairs include a full stop, a semicolon, a coordinator with appropriate punctuation, or subordination that preserves the intended relation. A colon can also join a complete first clause to a second clause that explains or specifies it. Do not use a connector merely because it produces grammatical punctuation; its meaning must fit."
+      ],
+      "advanced": [
+        "A linking adverb does not behave like a coordinating conjunction. The lights failed; however, the audience waited is a grammatical contrast between independent clauses. However does not itself license joining those clauses with a comma alone. Commas around supplementary clauses and introductory material follow additional conventions developed fully in Day 24. A comma before and between short closely connected main clauses can be a style choice; the essential point here is not to separate a subject from its predicate or create a boundary that contradicts the intended structure."
+      ],
+      "expert": [
+        "Use textual brackets as a visual parsing method that is also readable by assistive technology. In [MAIN the courier waited [SUBORDINATE because the office was closed]], the inner clause supplies a reason within the main construction. More detailed brackets can identify [SUBJECT NP the courier] and [VERB GROUP waited]. A parse is a representation of an analysis, not a substitute for explaining it. If a sentence seems awkward, locate the finite clauses, identify any non-finite complements, label the connectors and then inspect the boundaries. This sequence avoids a common editing error: fixing a perceived comma problem while leaving the actual missing main clause or mistaken logical relationship untouched."
+      ],
+      "patterns": [
+        {
+          "form": "[MAIN ... [SUBORDINATE because ...]]",
+          "meaning": "A readable nesting shows that the reason clause is dependent in the whole construction."
+        },
+        {
+          "form": "independent clause ; however, independent clause",
+          "meaning": "A semicolon or full stop supplies the boundary; however signals a logical contrast."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The path was flooded. We took the bridge.",
+          "analysis": "Two independent sentences have an explicit full-stop boundary."
+        },
+        {
+          "sentence": "The path was flooded, so we took the bridge.",
+          "analysis": "So coordinates two clauses while expressing the resulting action."
+        },
+        {
+          "sentence": "[MAIN We took the bridge [SUBORDINATE because the path was flooded]].",
+          "analysis": "The bracketed parse shows the reason clause as subordinate to the main message."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Although the deadline had passed. The office accepted the form.",
+          "b": "Although the deadline had passed, the office accepted the form.",
+          "note": "The first is fragmentary as ordinary connected formal prose; the second joins the concession clause to its main clause."
+        }
+      ],
+      "exceptions": [
+        "Fragments are normal in headings and many conversational answers; the requirement for full sentences concerns the specified writing context.",
+        "Run-on has broad and narrow teaching uses. Naming fused sentence or comma splice avoids a terminology-based false disagreement."
+      ],
+      "mistakes": [
+        {
+          "problem": "The forms arrived, we checked them.",
+          "repair": "The forms arrived; we checked them.",
+          "reason": "A comma alone does not supply the intended formal boundary between independent clauses."
+        },
+        {
+          "problem": "The proposal was expensive, however it was approved.",
+          "repair": "The proposal was expensive; however, it was approved.",
+          "reason": "However is a linking adverb here; the independent clauses need their own licensed boundary."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "fused sentence",
+          "definition": "Independent clauses placed together without a suitable boundary.",
+          "example": "The bell rang the doors opened."
+        },
+        {
+          "term": "comma splice",
+          "definition": "Independent clauses joined by a comma alone where formal prose needs another boundary or grammatical link.",
+          "example": "The bell rang, the doors opened."
+        },
+        {
+          "term": "sentence fragment",
+          "definition": "An expression lacking the structure expected of a complete sentence in its writing context.",
+          "example": "Although the office was closed."
+        }
+      ],
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d14-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which bracketed unit is a finite subordinate clause in “We waited because the gate was locked”?",
+      "options": [
+        "the gate",
+        "locked",
+        "because the gate was locked",
+        "We waited"
+      ],
+      "answer": 2,
+      "why": "Because the gate was locked has finite was and is a subordinate reason clause. We waited is the main clause.",
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "What is the status of “for the visitors to arrive early” in “For the visitors to arrive early would be convenient”?",
+      "options": [
+        "A non-finite clause functioning as subject",
+        "An independent imperative",
+        "A noun with no clause structure",
+        "A finite interrogative"
+      ],
+      "answer": 0,
+      "why": "The expressed subject the visitors belongs to a to-infinitival clause. That whole clause functions as subject of would be convenient.",
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "How should “Could you close the door?” normally be analysed in a polite request context?",
+      "options": [
+        "A subordinate clause without a main clause",
+        "Imperative form only",
+        "Exclamative form because it is polite",
+        "Interrogative form functioning as a request"
+      ],
+      "answer": 3,
+      "why": "The auxiliary precedes the subject, giving interrogative form; its likely communicative function is requesting action.",
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which is the neutral subject wh-question?",
+      "options": [
+        "Who did authorises the transfer?",
+        "Who authorised did the transfer?",
+        "Who authorised the transfer?",
+        "Who did authorised the transfer?"
+      ],
+      "answer": 2,
+      "why": "Who is the subject, so the ordinary question does not add do-support before the lexical past form.",
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which is the central how-exclamative pattern?",
+      "options": [
+        "How carefully she worked!",
+        "How carefully did she work?",
+        "Did she work how carefully?",
+        "How did she worked carefully?"
+      ],
+      "answer": 0,
+      "why": "How carefully she worked has exclamative order. How carefully did she work? is a direct interrogative.",
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Under this lesson’s finite-clause classroom convention, which example clearly has compound architecture?",
+      "options": [
+        "The assistant opened and sorted the post.",
+        "The assistant opened the post, and her colleague checked the register.",
+        "The assistant opened the post because the manager asked her.",
+        "The assistant wanted to sort the post."
+      ],
+      "answer": 1,
+      "why": "The keyed sentence has two separately expressed main finite clauses joined by and. The other examples have different architecture under the stated convention.",
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement describes “She hopes to leave” accurately without hiding a terminology choice?",
+      "options": [
+        "Every grammar must call the sentence simple for the same reason.",
+        "There is a main finite clause containing an infinitival complement clause; labels such as complex depend on the stated convention.",
+        "There are two independent finite sentences.",
+        "To leave cannot be a clause because it has no tense ending."
+      ],
+      "answer": 1,
+      "why": "A precise structural description recognises the non-finite complement and allows explicit classification conventions.",
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence repairs a fused boundary without adding an unsupported causal or concessive relation?",
+      "options": [
+        "The bell rang; the doors opened.",
+        "The bell rang the doors opened.",
+        "Because the bell rang. The doors opened.",
+        "The bell rang, the doors opened."
+      ],
+      "answer": 0,
+      "why": "The semicolon supplies a formal boundary between the related independent clauses without selecting a new causal connector.",
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-q09",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "In ordinary formal prose, assess: (A) Although the office was closed, (B) the guard accepted the envelope (C) and logged its arrival.",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "No error"
+      ],
+      "answer": 3,
+      "why": "The concession clause is attached to a main clause, and the two predicates share the subject the guard. No repair is required.",
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Why is a comma alone insufficient in “The room was small, however it held everyone” in ordinary formal prose?",
+      "options": [
+        "Everyone must be plural.",
+        "However is a linking adverb and does not itself coordinate the independent clauses.",
+        "The second clause contains no finite verb.",
+        "Small cannot be predicative."
+      ],
+      "answer": 1,
+      "why": "A semicolon or full stop should provide the boundary before however; held is a finite verb and the other suggested faults are not present.",
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r11",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Identify finite and non-finite clauses in “The guide asked us to wait”.",
+      "model": "The guide asked us to wait is the main finite clause, with finite asked. To wait is a non-finite infinitival complement whose understood subject is us.",
+      "rubric": [
+        "Identify asked as finite.",
+        "Recognise the embedded to-infinitival clause and its understood participants."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-r12",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why the time phrase next month does not make to return finite in “She plans to return next month”.",
+      "model": "To return has non-finite form; next month supplies temporal interpretation. Time reference and tense inflection are different grammatical matters.",
+      "rubric": [
+        "Distinguish tense form from interpreted time.",
+        "Keep plans as the main finite verb."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-r13",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "In “Whether the hall is available remains uncertain”, identify the subject and its structural class.",
+      "model": "Whether the hall is available is a finite interrogative subordinate clause functioning as subject.",
+      "rubric": [
+        "Give the whole subject clause.",
+        "Identify finite is within it and remains as the main verb."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-r14",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare the form and likely purpose of “The window is open” and “Could you close the window?” in a cold room.",
+      "model": "The first is declarative and may state a fact or hint at a request. The second is interrogative and commonly makes a polite request.",
+      "rubric": [
+        "Give both form labels.",
+        "Do not infer purpose from form alone."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-r15",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite the embedded question correctly: “I wonder why did the meeting end early.”",
+      "model": "I wonder why the meeting ended early.",
+      "rubric": [
+        "Remove direct-question inversion in the embedded question.",
+        "Retain past-time meaning."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-r16",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Contrast “What a narrow path this is!” with “Is this path narrow?”",
+      "model": "The first is a what-exclamative reacting to a striking quality; the second is a yes-no interrogative asking about that quality.",
+      "rubric": [
+        "Identify the noun-phrase exclamative pattern.",
+        "Identify the auxiliary-subject order in the yes-no question."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-r17",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Use all words to make a central how-exclamative: carefully / how / she / explained / it.",
+      "model": "How carefully she explained it!",
+      "rubric": [
+        "Put how carefully first.",
+        "Keep subject she before explained."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-r18",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify by the stated finite-clause convention and identify the clause relationship: “The office was quiet because the staff were at lunch”.",
+      "model": "It is complex: the main clause the office was quiet contains an associated finite reason clause because the staff were at lunch.",
+      "rubric": [
+        "Identify one main finite clause and finite subordination.",
+        "Name the reason relationship."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r19",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify “The office was quiet because the staff were at lunch, and the receptionist used the time to file records” under the stated convention.",
+      "model": "It is compound-complex: two coordinated main finite clauses occur, with a because-clause subordinate to the first. The second main clause also contains the infinitival complement to file records.",
+      "rubric": [
+        "Locate the two main finite clauses.",
+        "Identify both the finite reason clause and the non-finite complement."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r20",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why “She packed and labelled the parcels” need not be counted as two fully independent clauses.",
+      "model": "Packed and labelled coordinate predicates sharing the same expressed subject and object. Counting and or finite-looking verb forms alone does not establish two separate main clauses.",
+      "rubric": [
+        "Identify the shared subject and object.",
+        "Distinguish predicate coordination from clearly expressed full clause coordination."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r21",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Bracket the embedding in “He said that he would wait if the office reopened”, attaching the condition to the waiting.",
+      "model": "[MAIN He said [CONTENT that he would wait [CONDITION if the office reopened]]].",
+      "rubric": [
+        "Place the condition within the reported content.",
+        "Keep said as the main reporting verb."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r22",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair a fragment in ordinary formal prose without changing its concession: “Although the route was longer. We chose it.”",
+      "model": "Although the route was longer, we chose it.",
+      "rubric": [
+        "Attach the concession clause to its main clause.",
+        "Retain although rather than substituting an unrelated logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r23",
+      "type": "response",
+      "kind": "splitting",
+      "prompt": "Split into two formal sentences while preserving the reason: “We stayed inside because the storm had intensified.”",
+      "model": "The storm had intensified. For that reason, we stayed inside.",
+      "rubric": [
+        "Produce two complete sentences.",
+        "Preserve the causal relation through explicit wording."
+      ],
+      "alternatives": [
+        "We stayed inside. The storm had intensified, which was our reason for remaining indoors."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r24",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine with a semicolon, without changing vocabulary: “The desk was empty. The files had been moved.”",
+      "model": "The desk was empty; the files had been moved.",
+      "rubric": [
+        "Join two independent clauses with a semicolon.",
+        "Retain tense and wording."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r25",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Give an accessible bracketed parse of “The driver waited because the road was blocked”, showing the reason clause.",
+      "model": "[MAIN The driver waited [REASON because the road was blocked]].",
+      "rubric": [
+        "Place the finite reason clause inside the complete main construction.",
+        "Name waited and was as the relevant finite verbs."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-r26",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why is “Please take your seat” a grammatical complete instruction despite lacking an expressed you?",
+      "model": "It is an imperative. Its subject is ordinarily understood as the addressee, and the main verb uses the plain form take.",
+      "rubric": [
+        "Identify imperative construction.",
+        "Do not require an overt subject or past/present ending."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-r27",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain the punctuation contrast: “I asked where the office was.” / “Could you tell me where the office is?”",
+      "model": "The first complete sentence is declarative and reports a question, so it ends with a full stop. The second is a direct interrogative containing an embedded question, so the complete sentence takes a question mark.",
+      "rubric": [
+        "Analyse the form of each complete sentence.",
+        "Keep embedded question order uninverted in both."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-r28",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Edit this formal paragraph: “The lift stopped the visitors used the stairs. Because the office was on the third floor. The climb took several minutes, however everyone arrived.”",
+      "model": "The lift stopped; the visitors used the stairs. Because the office was on the third floor, the climb took several minutes. However, everyone arrived.",
+      "rubric": [
+        "Repair the fused first boundary.",
+        "Attach the because-clause to an appropriate main clause.",
+        "Supply a full boundary before however."
+      ],
+      "alternatives": [
+        "Other repairs are valid if the same events and reason are retained without invented details."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-tag01",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Supply an ordinary confirmation tag: The spare key is in the drawer, ____?",
+      "model": "isn’t it?",
+      "rubric": [
+        "Use negative is after the positive statement.",
+        "Use it to refer to the singular key."
+      ],
+      "alternatives": [
+        "is it not? is a possible more formal uncontracted tag."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag02",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Supply an ordinary confirmation tag: Nobody has signed yet, ____?",
+      "model": "have they?",
+      "rubric": [
+        "Treat nobody as negative, so use a positive tag.",
+        "Use referring singular they with have; do not copy has without checking the tag subject."
+      ],
+      "alternatives": [
+        "An explicitly restructured question can be grammatical, but this task asks for the ordinary attached tag."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare You locked it, didn’t you? and You locked it, did you? Are both grammatical? Describe likely uses without claiming that intonation fixes only one meaning.",
+      "model": "Both can be grammatical. The opposite-polarity tag commonly seeks confirmation; the positive-positive tag can react to new information, surprise or challenge. Context and intonation distinguish particular uses.",
+      "rubric": [
+        "Accept both constructions rather than imposing opposite polarity universally.",
+        "Explain a plausible interactional contrast and qualify it by context."
+      ],
+      "alternatives": [
+        "Other context-supported interpretations are valid if explained."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag04",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Supply conventional tags for these contexts: (a) an inclusive suggestion: Let’s check the totals, ____? (b) ordinary confirmation: I’m next, ____?",
+      "model": "(a) shall we? (b) aren’t I?",
+      "rubric": [
+        "Use the conventional shall we for the inclusive let’s suggestion.",
+        "Recognise aren’t I as the usual contracted negative tag after I am."
+      ],
+      "alternatives": [
+        "For (b), am I not? is possible in a more formal style. Explain any regional alternative instead of calling it the universal default."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d14-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Because the bridge was closed. The bus followed another route.",
+      "model": "Because the bridge was closed, the bus followed another route.",
+      "rubric": [
+        "Attach the reason clause to its main clause.",
+        "Preserve the reason and the alternative route."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Whether was the letter delivered remains uncertain.",
+      "model": "Whether the letter was delivered remains uncertain.",
+      "rubric": [
+        "Use embedded interrogative order.",
+        "Keep the entire whether-clause as the subject."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "C-NONFINITE",
+        "D-clauses-finite-and-non-finite",
+        "D-clauses_2"
+      ]
+    },
+    {
+      "id": "gv5-d14-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Do you know why did they leave?",
+      "model": "Do you know why they left?",
+      "rubric": [
+        "Keep inversion in the outer direct question.",
+        "Remove it from the embedded question."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "How carefully did she explained the procedure?",
+      "model": "How carefully did she explain the procedure?",
+      "rubric": [
+        "Use the base form explain after did.",
+        "Retain the interrogative degree question."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-clause-types",
+        "D-clauses_2",
+        "E-REPORTED"
+      ]
+    },
+    {
+      "id": "gv5-d14-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The reviewer thinks that is the claim unsupported, meaning the reviewer judges the claim unsupported.",
+      "model": "The reviewer thinks that the claim is unsupported.",
+      "rubric": [
+        "Give the finite content clause its subject.",
+        "Use declarative complement order."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The printer failed the assistant replaced it.",
+      "model": "The printer failed, and the assistant replaced it.",
+      "rubric": [
+        "Provide a valid boundary/link between main clauses.",
+        "Retain both events."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The hall was full, however the side room was empty.",
+      "model": "The hall was full; however, the side room was empty.",
+      "rubric": [
+        "Separate independent clauses with a licensed boundary.",
+        "Retain the contrast."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "“Close the gate before you leave.” Decide whether an expressed subject is required.",
+      "model": "No change is required. Close the gate is an imperative with an ordinarily understood subject.",
+      "rubric": [
+        "Accept the grammatical imperative.",
+        "Identify before you leave as a finite time clause."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-tag-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The speaker intends an ordinary opposite-polarity confirmation tag, without echo or challenge: You didn’t call, didn’t you? Revise the tag for that stated purpose.",
+      "model": "You didn’t call, did you?",
+      "rubric": [
+        "Use a positive tag after the negative statement for the stated confirmation pattern.",
+        "Keep past time and the same addressee."
+      ],
+      "alternatives": [
+        "The prompt fixes the intended ordinary confirmation; marked conversational echo readings do not make every same-polarity sequence universally ungrammatical."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The tag is intended to refer to the same addressee as you: You could help, couldn’t he? Correct that reference.",
+      "model": "You could help, couldn’t you?",
+      "rubric": [
+        "Keep could as the modal and the negative confirmation tag.",
+        "Refer to the stated addressee with you rather than switching to he."
+      ],
+      "alternatives": [
+        "A different full question may be grammatical, but must keep the same intended addressee and possibility."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d14-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Join the sentences using although without changing the stated events: “The room was crowded. The discussion continued.”",
+      "model": "Although the room was crowded, the discussion continued.",
+      "rubric": [
+        "Attach the concession clause to a main clause.",
+        "Preserve both events while explicitly adopting the stipulated concessive relation."
+      ],
+      "alternatives": [
+        "The discussion continued although the room was crowded."
+      ],
+      "conceptId": "gv5-d14-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "D-clause-types",
+        "D-complements",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d14-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Replace because with two complete sentences and an explicit reason marker: “The guests waited outside because the door was locked.”",
+      "model": "The door was locked. For that reason, the guests waited outside.",
+      "rubric": [
+        "Write two complete independent sentences.",
+        "Preserve the reason for waiting."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLAUSE",
+        "D-clauses_2",
+        "C-PUNCT",
+        "C-CONJ"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d14-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write an 80–110-word account of a delayed appointment. Include a simple sentence, clear main-clause coordination, finite subordination and a polite request in interrogative form. Add a bracketed parse of one complex sentence.",
+    "model": "The clinic opened late on Monday. Several patients waited outside, and the receptionist explained the delay when the door finally opened. Because a water pipe had burst upstairs, two consultation rooms were unavailable. A nurse directed visitors to the remaining rooms and checked their appointment times. “Could you wait near the noticeboard until your name is called?” she asked one family. Most people followed the new arrangements, although the crowded entrance remained noisy for several minutes. The staff later opened a second waiting area and explained how the remaining appointments would be managed.\n\nAnalysis: [MAIN [REASON Because a water pipe had burst upstairs], two consultation rooms were unavailable]. The question-shaped request functions politely as an instruction.",
+    "rubric": [
+      "Include all four specified construction types.",
+      "Keep clause boundaries and logical relations clear.",
+      "Make the bracketed parse match the sentence and show the reason clause’s dependency."
+    ],
+    "alternatives": [
+      "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+    ],
+    "conceptId": "gv5-d14-m04",
+    "difficulty": "Intermediate",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "C-CLAUSE",
+      "D-clauses_2",
+      "C-PUNCT",
+      "C-CONJ"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d14-rec01",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Recall Day 5: identify the finite auxiliary in “The forms have been checked”.",
+      "model": "Have is the finite auxiliary; been and checked are participial forms in the perfect passive construction.",
+      "rubric": [
+        "Identify have rather than the lexical participle.",
+        "Recognise the perfect-passive sequence."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d05-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-rec02",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Recall Day 13: give the phrase class and function of “near the entrance” in “The desk near the entrance is reserved”.",
+      "model": "Near the entrance is a prepositional phrase functioning as a postmodifier of desk.",
+      "rubric": [
+        "Name the phrase category.",
+        "Identify the noun it modifies."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d13-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-rec03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 11: distinguish “She spoke quietly” from “She seemed quiet”.",
+      "model": "Quietly is an adverb modifying the speaking event; quiet is an adjective functioning as subject complement after seemed.",
+      "rubric": [
+        "Identify both word classes.",
+        "Explain the different grammatical functions."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I distinguish main/subordinate status from finite/non-finite form.",
+    "I describe clause form separately from communicative purpose.",
+    "I state the convention used for simple and complex sentence labels.",
+    "I locate independent clauses before selecting punctuation.",
+    "I preserve logical relationships when splitting or combining sentences.",
+    "I can produce a bracketed parse that shows embedding clearly."
+  ],
+  "sources": [
+    {
+      "id": "C-CLAUSE",
+      "title": "Clauses and sentences",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-and-sentences",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-CONJ",
+      "title": "Conjunctions",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conjunctions",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-NONFINITE",
+      "title": "Finite and non-finite verbs",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/finite-and-non-finite-verbs",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-PUNCT",
+      "title": "Punctuation",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/punctuation",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "D-clause-types",
+      "title": "Clause types",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clause-types",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-clauses-finite-and-non-finite",
+      "title": "Clauses: finite and non-finite",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-clauses_2",
+      "title": "Clauses",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses_2",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-complements",
+      "title": "Complements",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/complements",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "E-REPORTED",
+      "title": "Reported speech: indirect speech",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "F-TAGS",
+      "title": "Question tags — Cambridge English Grammar Today",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/question-tags",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for auxiliary choice, opposite/same polarity, intonation, imperative tags and informal invariant tags. Original teaching and tasks."
+    },
+    {
+      "id": "F-BC-TAGS",
+      "title": "Question tags — British Council LearnEnglish",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/question-tags",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for negative statements including nobody with singular they, and I am/aren’t I."
+    },
+    {
+      "id": "F-ECHO",
+      "title": "Questions: echo and checking questions — Cambridge English Grammar Today",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-echo-and-checking-questions",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for declarative echo questions, wh-words in situ and their conversational purposes."
+    },
+    {
+      "id": "F-YESNO",
+      "title": "Questions: yes-no questions — Cambridge English Grammar Today",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-yes-no-questions-are-you-feeling-cold",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for negative questions, expected confirmation, offers and contracted versus uncontracted not."
+    }
+  ],
+  "editorialNotes": []
+}

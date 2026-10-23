@@ -1,0 +1,1243 @@
+{
+  "day": 21,
+  "id": "gv5-day-21",
+  "title": "Direct and Indirect Speech",
+  "orientation": "Reporting language is used in meeting minutes, academic summaries, journalism and ordinary conversation. A reliable report tells readers who spoke, what was claimed and how the reported message relates to the present situation. This lesson starts with direct quotation and simple indirect statements, then develops tense viewpoint, embedded questions and the different patterns selected by reporting verbs. You will compare alternative grammatical reports rather than memorise a table of obligatory substitutions. Earlier lessons on pronouns, clause complementation, modality and non-finite forms supply the tools. The advanced work asks you to preserve uncertainty, commitment and the distinction between advice and successful persuasion. Open-ended transformations have more than one defensible solution when their reference context differs; state your assumptions and use the rubric to check meaning as well as form.",
+  "outcomes": [
+    "Distinguish direct quotation from indirect content reporting.",
+    "Construct embedded questions with suitable word order.",
+    "Choose a defensible backshift from the reporting context.",
+    "Preserve participants, time, place and modal force in a report.",
+    "Use say, tell, ask, suggest and advise with appropriate complements."
+  ],
+  "prerequisiteDays": [
+    19,
+    20
+  ],
+  "modules": [
+    {
+      "id": "gv5-d21-m01",
+      "title": "Quoting, reporting and choosing a perspective",
+      "taxonomy": [
+        "D",
+        "I",
+        "N"
+      ],
+      "coverageIds": [
+        "gv5-topic-d21-c01",
+        "gv5-topic-d21-c03",
+        "gv5-topic-d21-c04"
+      ],
+      "definition": "Direct speech presents words as a quotation; indirect speech reports their content from the current speaker’s perspective. A report can preserve a message without reproducing its wording.",
+      "foundation": [
+        "Begin with who said what to whom. In a direct quotation, the pronouns and expressions such as here and tomorrow belong to the original speaking situation: Mina said, “I will return tomorrow.” In an indirect report, the reporter constructs a new clause: Mina said that she would return the following day. That introduces the reported statement and can often be omitted after common verbs. Quotation marks are needed for a claim to reproduce words exactly; they are not needed merely because a sentence mentions someone’s ideas."
+      ],
+      "intermediate": [
+        "Change reference by identifying actual people, places and times, rather than by applying a substitution list blindly. If I report my own promise, I remains I. If the report occurs in the same room on the same day, here and today may remain appropriate. A reporting verb can be present when a statement is current: The notice says that applications close on Friday. Past reporting locates the act of speaking before now. The reported clause then locates its own event relative to that act and the reporter’s present."
+      ],
+      "advanced": [
+        "Thought reporting follows comparable patterns: Rafi thought that the entrance was locked. It need not describe spoken words. Reporters must distinguish a source’s claim from their own endorsement. The manager claimed that the stock was safe does not establish that it was safe. Words such as admitted, alleged and confirmed introduce evidential and evaluative meanings beyond said. A faithful transformation therefore preserves uncertainty and attribution, not just tense forms. Do not turn “I may resign” into a statement that the person definitely resigned or promised to resign."
+      ],
+      "expert": [
+        "Direct and indirect are constructions, not degrees of factual accuracy. An exact quotation can be misleading if its context is removed; a carefully attributed paraphrase can be accurate. Traditional transformation exercises often supply a single decontextualised reporting time. Real discourse permits several perspectives, so a defensible answer states its assumed reporting situation. Free indirect discourse blends a narrator’s voice with a character’s viewpoint without a reporting clause; it is useful to recognise in literary prose, but ordinary formal reports should make attribution clear whenever readers might otherwise confuse the source with the writer."
+      ],
+      "patterns": [
+        {
+          "form": "X said (that) + finite clause",
+          "meaning": "Reports a proposition; reference is interpreted from the reporting context."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Nida said, “I need this key.”",
+          "analysis": "I and this are anchored to Nida’s original situation."
+        },
+        {
+          "sentence": "Nida said that she needed that key.",
+          "analysis": "The report changes person and points back to the identified key."
+        },
+        {
+          "sentence": "I said that I would remain here until Friday.",
+          "analysis": "Self-report preserves I; here is valid if the reporter is still in the relevant place."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The witness said, “I saw a van.”",
+          "b": "The witness said that she had seen a van.",
+          "note": "Both report a message; only the first claims to quote those words."
+        }
+      ],
+      "exceptions": [
+        "If the reporter and original speaker are the same person, a first-person pronoun need not change: I said I was ready."
+      ],
+      "mistakes": [
+        {
+          "problem": "Ali said me that he was ready.",
+          "repair": "Ali told me that he was ready.",
+          "reason": "Tell takes a recipient object here; said to me is another valid pattern."
+        },
+        {
+          "problem": "The notice says that applications closed tomorrow.",
+          "repair": "The notice says that applications close tomorrow.",
+          "reason": "For a current notice announcing a future deadline, close gives scheduled future reference."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "reporting clause",
+          "definition": "A clause identifying a communication or thought.",
+          "example": "The guide explained ..."
+        },
+        {
+          "term": "deixis",
+          "definition": "Reference tied to a speaking context, such as I, here and now.",
+          "example": "She said she would stay here."
+        }
+      ],
+      "sourceIds": [
+        "cambridge-indirect",
+        "cambridge-punctuation"
+      ]
+    },
+    {
+      "id": "gv5-d21-m02",
+      "title": "Backshift and temporal relationships",
+      "taxonomy": [
+        "D",
+        "I",
+        "N"
+      ],
+      "coverageIds": [
+        "gv5-topic-d21-c02",
+        "gv5-topic-d21-c08"
+      ],
+      "definition": "Backshift is the use of a more remote tense form in a reported clause, commonly after past reporting. It does not necessarily mean that the reported situation has ceased to be true.",
+      "foundation": [
+        "A common reporting sequence moves present to past: “I am tired” becomes She said she was tired. A present perfect can become a past perfect, and will can become would. These changes allow the report to be viewed from the earlier speaking time. The past form in She said she lived nearby can describe residence simultaneous with her speaking, not residence before it. Keep separate the time of the report, the time of the original statement and the time of the event described."
+      ],
+      "intermediate": [
+        "Backshift is often optional when information remains true or relevant: He said that his sister works in a laboratory is normal if her work continues. He said that his sister worked in a laboratory can be equally appropriate and does not itself prove that she has left. A clear past sequence can also be reported without changing every past simple to past perfect. In a conventional transformation exercise, use the specified reporting viewpoint; in actual writing, choose the form that accurately communicates the intended relationships."
+      ],
+      "advanced": [
+        "Backshift is more strongly motivated when a current-tense report would suggest a present truth that the writer does not intend. On Monday she said that the bridge was closed; it reopened on Tuesday. Describing that Monday message as she said the bridge is closed in a Wednesday report would be misleading without a special quotation-like perspective. Past perfect normally remains past perfect. Could, should, would, might and ought to often remain unchanged, while must may remain or become had to depending on whether it expresses continuing necessity, an earlier obligation or a deduction."
+      ],
+      "expert": [
+        "The term sequence of tenses describes relationships, not a mechanical rule requiring all verbs in a sentence to share tense. A past reporting verb can combine with a present generalisation, a past event and a future-in-the-past prediction in one grammatical report. Modal past forms may express politeness or hypothesis rather than earlier time. In expert analysis, distinguish absolute time reference to the reporter’s now from relative time reference to an earlier viewpoint. If two answers differ only in a legitimate viewpoint, explain the difference rather than treating one as a grammatical failure."
+      ],
+      "patterns": [
+        {
+          "form": "said + past clause",
+          "meaning": "Often simultaneous with the original speaking time."
+        },
+        {
+          "form": "said + had + past participle",
+          "meaning": "Often places an event before an earlier speaking viewpoint."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "In April, she said that she was applying for funding.",
+          "analysis": "The application was current at the April speaking time."
+        },
+        {
+          "sentence": "He said that water expands when it freezes.",
+          "analysis": "The present reports an enduring generalisation."
+        },
+        {
+          "sentence": "The pilot said that the aircraft had landed before dawn.",
+          "analysis": "The landing precedes the past report."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She said she is unwell.",
+          "b": "She said she was unwell.",
+          "note": "Both can be valid; the first highlights continuing relevance, the second adopts the earlier viewpoint."
+        }
+      ],
+      "exceptions": [
+        "The past perfect is not shifted into an invented earlier tense: She said she had already paid remains possible."
+      ],
+      "mistakes": [
+        {
+          "problem": "She said that she had had had enough.",
+          "repair": "She said that she had had enough.",
+          "reason": "Past perfect had had is possible; an additional had has no grammatical role."
+        },
+        {
+          "problem": "Reporting Wednesday, after reopening: On Monday he said the bridge is closed.",
+          "repair": "On Monday he said the bridge was closed.",
+          "reason": "The supplied context calls for the earlier closure, not a current closure."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "backshift",
+          "definition": "A shift to a more remote tense form in reporting.",
+          "example": "am ready → was ready"
+        },
+        {
+          "term": "future-in-the-past",
+          "definition": "A future viewed from an earlier reference point.",
+          "example": "She said she would telephone."
+        }
+      ],
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-m03",
+      "title": "Reported questions and embedded interrogatives",
+      "taxonomy": [
+        "D",
+        "I",
+        "N"
+      ],
+      "coverageIds": [
+        "gv5-topic-d21-c05"
+      ],
+      "definition": "An embedded interrogative is a question-like clause functioning inside a larger construction. Its word order normally differs from that of an independent question.",
+      "foundation": [
+        "Compare Where is the archive? with She asked where the archive was. The reporting clause supplies the act of asking; the embedded clause uses the order where + subject + verb. For yes–no questions, use whether or if: He asked whether the office was open. These words introduce alternatives rather than an asserted fact. Do not add that before whether or a question word in this pattern. Punctuation belongs to the whole sentence: She asked where it was. ends with a full stop."
+      ],
+      "intermediate": [
+        "The whole sentence can itself be a direct question: Do you know where the archive is? takes a question mark because Do you know ...? is interrogative. Inside it, the archive is retains embedded order. Subject questions need special care: Who signed the register? becomes She asked who signed the register. Here who is the subject, so there is no separate subject to move in front of signed. Do-support disappears in ordinary embedded questions: Why did they leave? becomes He asked why they had left or why they left."
+      ],
+      "advanced": [
+        "If and whether overlap but are not interchangeable everywhere. Use whether before a to-infinitive (whether to apply), after a preposition (about whether it is safe), and immediately before or not (whether or not we agree). If is common for indirect yes–no questions, though it can be confused with a condition in some contexts. Ask may take a recipient (She asked me where I lived), but wonder normally does not: She wondered where I lived. A request shaped as a question may need reporting by communicative purpose rather than literal interrogative form."
+      ],
+      "expert": [
+        "Embedded questions need not report an earlier spoken question. The issue is whether the evidence is sufficient and I know how the device works contain interrogative content without a speech event. An exclamative such as how quickly they responded has a different meaning from the question how quickly did they respond? Some varieties and informal echoes permit patterns resembling direct-question order inside a report; this course’s formal edited default uses ordinary embedded order. Quoted questions remain direct speech and retain their own order: She asked, “Where is the archive?” Distinguish that quotation from an unquoted embedded clause."
+      ],
+      "patterns": [
+        {
+          "form": "asked + wh-word + subject + verb",
+          "meaning": "Reports a wh-question without question inversion."
+        },
+        {
+          "form": "asked + whether/if + clause",
+          "meaning": "Reports a yes–no question."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The clerk asked whether I had an appointment.",
+          "analysis": "Whether introduces the yes–no alternatives."
+        },
+        {
+          "sentence": "Do you remember where we stored the backups?",
+          "analysis": "The outer question requires ?, while the embedded clause uses we stored."
+        },
+        {
+          "sentence": "She asked who had authorised the payment.",
+          "analysis": "Who is the embedded subject; the sequence is already correct."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "He asked where was the exit.",
+          "b": "He asked where the exit was.",
+          "note": "The first is faulty in the course’s formal embedded-question pattern; the second retains subject–verb order."
+        }
+      ],
+      "exceptions": [
+        "A subject wh-question may look unchanged when embedded: Who arrived? → She asked who arrived."
+      ],
+      "mistakes": [
+        {
+          "problem": "I wondered that whether the gate was locked.",
+          "repair": "I wondered whether the gate was locked.",
+          "reason": "Whether itself introduces the embedded interrogative."
+        },
+        {
+          "problem": "They discussed if to appeal.",
+          "repair": "They discussed whether to appeal.",
+          "reason": "An interrogative to-infinitive takes whether, not if."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "embedded interrogative",
+          "definition": "An interrogative clause inside a larger construction.",
+          "example": "I know where she works."
+        },
+        {
+          "term": "subject question",
+          "definition": "A question whose question word functions as subject.",
+          "example": "Who called?"
+        }
+      ],
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-m04",
+      "title": "Commands, requests and reporting-verb patterns",
+      "taxonomy": [
+        "D",
+        "I",
+        "N"
+      ],
+      "coverageIds": [
+        "gv5-topic-d21-c06",
+        "gv5-topic-d21-c07",
+        "gv5-topic-d21-c09"
+      ],
+      "definition": "A reporting verb selects a grammatical complement and contributes its own meaning. Reporting an instruction, promise, suggestion or exclamation requires preserving that communicative meaning.",
+      "foundation": [
+        "Commands and many requests can be reported with a recipient and a to-infinitive: “Close the hatch” becomes She told us to close the hatch. Put not before to for a prohibition: She warned us not to touch the cable. Asked us to can report a polite request, while ordered us to makes it stronger. These choices matter: an invitation is not automatically an order. A reported exclamation may use a content clause or an evaluative verb: “What a useful guide!” can become She exclaimed that the guide was very useful."
+      ],
+      "intermediate": [
+        "Learn a verb’s complete pattern. Say that ... and say to someone that ... differ from tell someone that ... . Advise someone to apply, promise to return and apologise for arriving late have different complement structures. Suggest allows an -ing clause or a finite content clause: They suggested waiting; they suggested that we wait or should wait. It does not normally take a recipient plus to-infinitive with that meaning: suggested us to wait is not the standard pattern. Deny taking the money and deny that one took it likewise offer different grammatical forms."
+      ],
+      "advanced": [
+        "Reporting verbs can change the message if selected carelessly. Promise implies commitment, admit implies acceptance of an unwelcome fact, and persuade describes successfully influencing someone rather than merely advising them. He advised me to appeal does not entail I appealed. Negation also has a scope: He did not promise to return denies a promise; He promised not to return reports a promise of non-return. A formal transformation must preserve agency, addressee, obligation, uncertainty and time relations, even if a more elaborate sentence sounds impressive."
+      ],
+      "expert": [
+        "Traditional reported-speech exercises sometimes treat every question as a request for information and every imperative as an order. Actual utterances can have indirect functions: “Could you lower the screen?” is usually a request, while “Have a seat” can be an invitation. Choose the reporting construction from the supplied situation. A reporting passive such as Participants were advised to retain copies can appropriately background the adviser; it does not make an instruction more authoritative by itself. When a verb’s possible complements vary with meaning or register, consult a learner’s dictionary and compare complete original sentences before ruling out an unfamiliar form."
+      ],
+      "patterns": [
+        {
+          "form": "tell/ask/advise + person + (not) to-infinitive",
+          "meaning": "Reports directives while retaining an addressee."
+        },
+        {
+          "form": "suggest + -ing / that-clause",
+          "meaning": "Reports a proposal without the nonstandard suggest-person-to pattern."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The technician warned visitors not to unplug the server.",
+          "analysis": "Not scopes over unplug; visitors are the understood actors."
+        },
+        {
+          "sentence": "The committee suggested that the trial should continue.",
+          "analysis": "Mandative should is a standard British pattern."
+        },
+        {
+          "sentence": "He promised not to disclose the names.",
+          "analysis": "The commitment concerns non-disclosure, not absence of a promise."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She advised me to resign.",
+          "b": "She persuaded me to resign.",
+          "note": "Both grammatical; the second normally entails successful influence, so it cannot automatically replace the first."
+        }
+      ],
+      "exceptions": [
+        "Help can allow a to-infinitive or bare infinitive, but that flexibility must not be transferred to every reporting verb."
+      ],
+      "mistakes": [
+        {
+          "problem": "The officer suggested me to appeal.",
+          "repair": "The officer suggested that I appeal.",
+          "reason": "Suggest takes an appropriate content clause here; advised me to appeal changes the force."
+        },
+        {
+          "problem": "She told that the meeting was cancelled.",
+          "repair": "She said that the meeting was cancelled.",
+          "reason": "Tell normally requires an object recipient in this reporting pattern."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "complement pattern",
+          "definition": "A construction selected by a head word.",
+          "example": "advise someone to wait"
+        },
+        {
+          "term": "scope of negation",
+          "definition": "The part of a message affected by not.",
+          "example": "promise not to publish"
+        }
+      ],
+      "sourceIds": [
+        "cambridge-indirect",
+        "cambridge-formal"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d21-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which unquoted report has ordinary embedded-question order?",
+      "options": [
+        "She asked where did the keys be.",
+        "She asked where the keys were.",
+        "She asked where were the keys.",
+        "She asked that where the keys were."
+      ],
+      "answer": 1,
+      "why": "An embedded non-subject wh-question uses subject–verb order; where does not combine with that here.",
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Use standard reported-request grammar: The steward asked us ____.",
+      "options": [
+        "waiting",
+        "to wait",
+        "that to wait",
+        "wait"
+      ],
+      "answer": 1,
+      "why": "Ask + recipient + to-infinitive reports this request; a bare form or gerund does not fill that pattern.",
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "A Wednesday report describes a gate that reopened on Tuesday. On Monday the guard said that the gate ____ .",
+      "options": [
+        "was closed",
+        "will close yesterday",
+        "has closed tomorrow",
+        "is closed now"
+      ],
+      "answer": 0,
+      "why": "Was closed adopts Monday’s viewpoint; is closed now would incorrectly assert current closure.",
+      "conceptId": "gv5-d21-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q04",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Choose the genuine error in formal edited English: “She asked whether to wait and I wondered where the exit was.”",
+      "options": [
+        "I wondered",
+        "No error",
+        "whether to wait",
+        "where the exit was"
+      ],
+      "answer": 1,
+      "why": "Whether can introduce a to-infinitive and the embedded wh-clause has ordinary order.",
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence reports a suggestion using a standard complement pattern?",
+      "options": [
+        "He suggested us returning to.",
+        "He suggested that to return.",
+        "He suggested us to return.",
+        "He suggested to us that we return."
+      ],
+      "answer": 3,
+      "why": "Suggest can take a that-clause and a to-phrase addressee; the alternatives mix incompatible patterns.",
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which form places the warning against disclosure inside the reported instruction?",
+      "options": [
+        "She warned not us disclose it.",
+        "She warned us to not it disclose.",
+        "She did not warn us to disclose it.",
+        "She warned us not to disclose it."
+      ],
+      "answer": 3,
+      "why": "Not to disclose is the prohibited action; did not warn denies the act of warning.",
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The original speaker and reporter are both me. Which report preserves that identity?",
+      "options": [
+        "I said that I was ready.",
+        "I said that myself was ready.",
+        "I said that she was ready, meaning myself.",
+        "I said that they were me ready."
+      ],
+      "answer": 0,
+      "why": "Self-report can keep I; an automatic I→he/she replacement would change reference.",
+      "conceptId": "gv5-d21-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which full sentence requires a question mark?",
+      "options": [
+        "She asked where the archive was",
+        "I wondered whether the archive was open",
+        "Do you know whether the archive is open",
+        "The notice explains when the archive opens"
+      ],
+      "answer": 2,
+      "why": "The outer clause Do you know ...? asks a direct question; its embedded clause keeps statement order.",
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which claim about backshift is accurate?",
+      "options": [
+        "Was in a report proves the state has ended.",
+        "Every past report must change every tense.",
+        "A past report can retain present tense for a still-current fact.",
+        "Past perfect must become a new earlier tense."
+      ],
+      "answer": 2,
+      "why": "Backshift reflects viewpoint; continuing truth can justify present tense, and a shifted past need not imply cessation.",
+      "conceptId": "gv5-d21-m02",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which reporting verb normally asserts successful influence?",
+      "options": [
+        "persuaded",
+        "mentioned",
+        "advised",
+        "suggested"
+      ],
+      "answer": 0,
+      "why": "Persuaded someone to do something normally entails successful influence; advice and suggestions need not be followed.",
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r01",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify the two constructions: Nura said, “I agree.” / Nura said that she agreed.",
+      "model": "First: direct quotation. Second: indirect statement.",
+      "rubric": [
+        "Identify quotation versus content report.",
+        "Explain the different reference point of I/she."
+      ],
+      "alternatives": [
+        "Equivalent grammatical terminology is acceptable."
+      ],
+      "conceptId": "gv5-d21-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r02",
+      "type": "response",
+      "kind": "function",
+      "prompt": "In He asked me whether I had a pass, identify me and the whether-clause.",
+      "model": "Me is the recipient object of asked; whether I had a pass is the interrogative content of the question.",
+      "rubric": [
+        "Identify the recipient.",
+        "Recognise the embedded yes–no question."
+      ],
+      "alternatives": [
+        "Frameworks differ over complement labels; the functions must remain clear."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r03",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Complete a report made the following week: On Monday she said, “I am ill.” → On Monday she said that she ____ ill.",
+      "model": "was",
+      "rubric": [
+        "Use a past form for the supplied earlier viewpoint.",
+        "Do not assert current illness without evidence."
+      ],
+      "alternatives": [
+        "Is can work only if continuing truth is explicitly intended; explain that assumption."
+      ],
+      "conceptId": "gv5-d21-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r04",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Report later, in a different city: Amir said to me, “I will meet you here tomorrow.”",
+      "model": "Amir told me that he would meet me there the following day.",
+      "rubric": [
+        "Map I to Amir and you to the reporter.",
+        "Adjust place/time for the stated changed context.",
+        "Use tell + recipient."
+      ],
+      "alternatives": [
+        "Amir said to me that ... is also valid."
+      ],
+      "conceptId": "gv5-d21-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r05",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain the distinction: She said she works there / She said she worked there.",
+      "model": "The first highlights a still-current situation; the second adopts the earlier viewpoint and does not itself prove she has left.",
+      "rubric": [
+        "Allow both grammatical forms.",
+        "Distinguish viewpoint from factual cessation."
+      ],
+      "alternatives": [
+        "Context can support additional readings."
+      ],
+      "conceptId": "gv5-d21-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r06",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Order these units as an indirect question: asked / the clerk / I / where / could pay.",
+      "model": "I asked where the clerk could pay.",
+      "rubric": [
+        "Use where + subject + modal.",
+        "Retain every supplied unit."
+      ],
+      "alternatives": [
+        "The clerk asked where I could pay also uses every unit; identify the changed questioner and payer."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r07",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Report as an indirect question: The visitor asked, “Who opened the side door?”",
+      "model": "The visitor asked who had opened the side door.",
+      "rubric": [
+        "Keep who as subject.",
+        "Retain the opening event."
+      ],
+      "alternatives": [
+        "Who opened the side door is also possible when the past sequence is clear."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r08",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain: He did not promise to publish / He promised not to publish.",
+      "model": "The first denies a promise to publish; the second affirms a promise of non-publication.",
+      "rubric": [
+        "Locate the scope of not.",
+        "Do not treat the statements as equivalent."
+      ],
+      "alternatives": [
+        "Equivalent explicit paraphrases are valid."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r09",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine without claiming the advice was followed: The solicitor advised me. “Keep the receipts.”",
+      "model": "The solicitor advised me to keep the receipts.",
+      "rubric": [
+        "Retain advice, not successful persuasion.",
+        "Make me the understood keeper."
+      ],
+      "alternatives": [
+        "The solicitor advised that I keep the receipts is possible."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r10",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Give a possible direct quotation for He told us not to enter the workshop.",
+      "model": "He told us, “Do not enter the workshop.”",
+      "rubric": [
+        "Preserve the negative directive.",
+        "Retain us as addressees."
+      ],
+      "alternatives": [
+        "Exact original words are unknown; “Don’t go into the workshop” is another possible reconstruction."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r11",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: He asked me that why had I left.",
+      "model": "He asked me why I had left.",
+      "rubric": [
+        "Remove that before why.",
+        "Use embedded I had left order."
+      ],
+      "alternatives": [
+        "He asked me why I left may fit a clear chronology."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r12",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "In The notice says applications close tomorrow, explain why a past tense is not required.",
+      "model": "Says presents a current notice; close gives a scheduled future event, and tomorrow is anchored to the reporting day.",
+      "rubric": [
+        "Identify present reporting.",
+        "Explain scheduled future reference."
+      ],
+      "alternatives": [
+        "A past report would require a different context."
+      ],
+      "conceptId": "gv5-d21-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r13",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Report politely as a request, not a claim about physical ability: “Could you move your bag?” the guard said to me.",
+      "model": "The guard asked me to move my bag.",
+      "rubric": [
+        "Preserve request function.",
+        "Map your to my."
+      ],
+      "alternatives": [
+        "The guard requested that I move my bag is a formal alternative."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r14",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify the content in She knew where the file was: reported spoken question, embedded interrogative, or imperative?",
+      "model": "An embedded interrogative; no earlier spoken question is asserted.",
+      "rubric": [
+        "Identify the clause type.",
+        "Separate construction from a speech event."
+      ],
+      "alternatives": [
+        "Nominal interrogative clause is acceptable terminology."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r15",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Edit: The curator said me that the gallery was closed. I asked where was the new entrance and she told me wait outside.",
+      "model": "The curator told me that the gallery was closed. I asked where the new entrance was, and she told me to wait outside.",
+      "rubric": [
+        "Repair tell/say recipient pattern.",
+        "Repair embedded word order.",
+        "Supply to in the directive."
+      ],
+      "alternatives": [
+        "Said to me and asked me to wait are valid where force is preserved."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r16",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Can The witness admitted taking the file automatically replace The witness said she took the file? Explain.",
+      "model": "No. Admitted adds acknowledgement of an unwelcome or disputed fact; said is neutral about that attitude.",
+      "rubric": [
+        "Identify the added stance.",
+        "Preserve attribution without inventing admission."
+      ],
+      "alternatives": [
+        "A supplied context of confession could license admitted."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r17",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Complete using the suitable interrogative linker: We argued about ____ to postpone the visit.",
+      "model": "whether",
+      "rubric": [
+        "Use whether before a to-infinitive.",
+        "Recognise the complement of about."
+      ],
+      "alternatives": [
+        "Whether or not to postpone is also grammatical."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-r18",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write a two-sentence report of an original promise and an unfulfilled suggestion; make their different status explicit.",
+      "model": "Lina promised to send a replacement. Omar suggested waiting until Friday, but we decided to contact the supplier immediately.",
+      "rubric": [
+        "Distinguish commitment from suggestion.",
+        "Do not claim the promised act occurred.",
+        "State that the suggestion was not followed."
+      ],
+      "alternatives": [
+        "Original reports meeting these conditions are valid."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d21-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct: She told that she was leaving.",
+      "model": "She said that she was leaving.",
+      "rubric": [
+        "Use say + content or tell + recipient.",
+        "Preserve the departure report."
+      ],
+      "alternatives": [
+        "She told me that she was leaving is valid if me is supplied by context."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct: He asked where did we park the car.",
+      "model": "He asked where we had parked the car.",
+      "rubric": [
+        "Remove do-support.",
+        "Use embedded subject–verb order."
+      ],
+      "alternatives": [
+        "He asked where we parked the car is also possible."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct: The sign warned visitors to not the cable touch.",
+      "model": "The sign warned visitors not to touch the cable.",
+      "rubric": [
+        "Place not before the infinitive.",
+        "Keep visitors as actors."
+      ],
+      "alternatives": [
+        "Warned visitors that they must not touch ... is valid."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct: The chair suggested us to vote again.",
+      "model": "The chair suggested that we vote again.",
+      "rubric": [
+        "Use a standard suggest complement.",
+        "Retain the proposal rather than inventing an order."
+      ],
+      "alternatives": [
+        "The chair suggested voting again is valid when the actors are understood."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Decide whether correction is needed: He said that his daughter works at this hospital. She still works here.",
+      "model": "No change is needed.",
+      "rubric": [
+        "Recognise continuing truth.",
+        "Retain here/this if the reporter is at the hospital."
+      ],
+      "alternatives": [
+        "Worked is also possible with an earlier viewpoint."
+      ],
+      "conceptId": "gv5-d21-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct: I wondered if to disclose the names.",
+      "model": "I wondered whether to disclose the names.",
+      "rubric": [
+        "Use whether + to-infinitive.",
+        "Retain the unresolved choice."
+      ],
+      "alternatives": [
+        "I wondered if I should disclose the names is valid."
+      ],
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct: She asked to me, “Are you ready?”",
+      "model": "She asked me, “Are you ready?”",
+      "rubric": [
+        "Ask takes the recipient directly in this pattern.",
+        "Keep direct-question punctuation."
+      ],
+      "alternatives": [
+        "She said to me, “Are you ready?” is possible but changes the reporting verb."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct only if necessary: The analyst said that the figures had already been checked.",
+      "model": "No change is required.",
+      "rubric": [
+        "Accept past perfect passive.",
+        "Do not create a further backshift."
+      ],
+      "alternatives": [
+        "The analyst said the figures had already been checked is also correct."
+      ],
+      "conceptId": "gv5-d21-m02",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d21-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "A visitor said to the receptionist, “Please do not give my number to anyone.” Report the request.",
+      "model": "The visitor asked the receptionist not to give the visitor’s number to anyone.",
+      "rubric": [
+        "Preserve the addressee and prohibition.",
+        "Allow singular their without guessing gender."
+      ],
+      "alternatives": [
+        "His or her is valid only if the relevant identity is known."
+      ],
+      "conceptId": "gv5-d21-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    },
+    {
+      "id": "gv5-d21-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Report the claim without endorsing it: The vendor said, “This coating may last ten years.”",
+      "model": "The vendor said that the coating might last ten years.",
+      "rubric": [
+        "Keep the claim attributed.",
+        "Preserve possibility rather than certainty."
+      ],
+      "alternatives": [
+        "May may remain if continuing current relevance is intended."
+      ],
+      "conceptId": "gv5-d21-m02",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-indirect"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d21-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write a 100–140-word meeting report. Include one statement, one question, one suggestion and one instruction. Invent the meeting, identify its timing, and preserve the differences in force.",
+    "model": "At Tuesday’s meeting, the librarian said that the reading room needed better lighting near the rear tables. A student representative asked whether the room could stay open later during the examination period. The librarian suggested trialling an extra hour on Thursdays, but no decision was taken about staffing or cost. She asked the student representatives to collect comments before Friday and to distinguish requests for quiet study from requests for group work. The representatives agreed to prepare a short account of the comments. The group would review that account the following week; it did not promise a permanent extension or claim that every reader wanted the same change.\n\nAnalysis: Said reports a statement; asked whether reports a question; suggested reports a proposal; asked…to collect reports an instruction/request. No suggestion is converted into a decision.",
+    "rubric": [
+      "Use at least four distinct reporting patterns.",
+      "Maintain identifiable speakers/addressees and coherent times.",
+      "Preserve proposal versus decision versus instruction.",
+      "Check embedded-question order; judge original prose separately from objective scores."
+    ],
+    "alternatives": [
+      "The model illustrates patterns, not a required wording or an automatic grade."
+    ],
+    "conceptId": "gv5-d21-m04",
+    "difficulty": "Advanced",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "cambridge-indirect"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d21-rec01",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Recall Day 20: In She asked us to wait, who is understood as the subject of wait?",
+      "model": "Us: we are the people expected to wait.",
+      "rubric": [
+        "Identify understood subject.",
+        "Distinguish it from she."
+      ],
+      "alternatives": [
+        "Frameworks may call this object control."
+      ],
+      "conceptId": "gv5-d20-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d21-rec02",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 17: Explain the difference between might leave and must leave in a reported statement.",
+      "model": "Might commonly expresses possibility; must may express obligation or deduction, so the context must identify which.",
+      "rubric": [
+        "Distinguish modal meanings.",
+        "Avoid assuming must always means obligation."
+      ],
+      "alternatives": [
+        "Natural context-specific paraphrases are valid."
+      ],
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d21-rec03",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 15: Identify the content clause in We believe that the archive is safe.",
+      "model": "That the archive is safe complements believe and expresses the proposition believed.",
+      "rubric": [
+        "Identify the whole clause.",
+        "Do not label it a relative clause."
+      ],
+      "alternatives": [
+        "Traditional noun-clause terminology is acceptable."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I can explain why a tense or pronoun changed.",
+    "I can identify the whole sentence’s punctuation.",
+    "I can retain a still-current present form when justified.",
+    "I can distinguish a suggestion from a promise or instruction."
+  ],
+  "sources": [
+    {
+      "id": "cambridge-formal",
+      "title": "Formal and informal language",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/formal-and-informal-language",
+      "consulted": "2026-10-21",
+      "note": "Register preferences versus grammatical correctness checked."
+    },
+    {
+      "id": "cambridge-indirect",
+      "title": "Reported speech: indirect speech",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+      "consulted": "2026-10-21",
+      "note": "Backshift, continuing truth, questions, commands and reporting perspectives checked against actual entry."
+    },
+    {
+      "id": "cambridge-punctuation",
+      "title": "Punctuation",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/punctuation",
+      "consulted": "2026-10-21",
+      "note": "Clause boundaries, quotations, lists and punctuation alternatives checked."
+    }
+  ],
+  "editorialNotes": []
+}

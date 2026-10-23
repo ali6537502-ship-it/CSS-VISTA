@@ -1,0 +1,25 @@
+{
+  "editorialMethod": "Categories describe the operation elicited by each concept, not the learner's inferred mental cause. Exact feedback and the linked concept identify the specific principle. Multi-issue editing is labelled mixed editing rather than assigned a fictitious single cause.",
+  "labels": {"word-formation":"Word formation", "sentence-analysis":"Grammatical analysis", "number":"Noun number", "countability":"Countability", "articles":"Article selection", "determiners":"Determiners and quantification", "case":"Pronoun case", "reference":"Reference", "verb-form":"Verb form and auxiliaries", "verb-pattern":"Verb pattern", "tense":"Tense and time", "aspect":"Aspect", "agreement":"Agreement", "comparison":"Degree and comparison", "modifier":"Modifier placement and scope", "preposition":"Preposition selection", "particle":"Particles and multi-word verbs", "phrase":"Phrase structure", "clause":"Clause structure", "parallelism":"Coordination and parallelism", "modality":"Modality", "conditional":"Conditions and mood", "voice":"Voice and causatives", "non-finite":"Non-finite structure", "reporting":"Speech reporting", "punctuation":"Punctuation", "conventions":"Spelling and conventions", "word-choice":"Word choice", "register":"Register and variation", "cohesion":"Textual cohesion", "meaning":"Meaning preservation", "mixed-editing":"Mixed editing", "learning-evidence":"Review and learning evidence"},
+  "conceptGroups": {
+    "word-formation":["d01-m02","ref-morph-processes","ref-morph-productivity"],
+    "sentence-analysis":["d01-m01","d01-m03","d01-m04","d29-m01"],
+    "number":["d02-m01"],"countability":["d02-m02"],"articles":["d03-m01","d03-m02"],"determiners":["d03-m03","d03-m04"],
+    "case":["d04-m01"],"reference":["d04-m02","d04-m03","d04-m04"],
+    "verb-form":["d05-m01","d05-m02"],"verb-pattern":["d05-m03","d05-m04","d12-m03","d20-m02","d25-m02"],
+    "tense":["d06-m01","d07-m01","d07-m04","d09-m01","d09-m02","d09-m03","d09-m04"],
+    "aspect":["d06-m02","d06-m03","d06-m04","d07-m02","d07-m03","d08-m01","d08-m02","d08-m03","d08-m04"],
+    "agreement":["d10-m01","d10-m02","d10-m03","d10-m04"],
+    "modifier":["d11-m01","d11-m03","d11-m04","d22-m01","d22-m02"],"comparison":["d11-m02"],
+    "preposition":["d12-m01","d12-m02"],"particle":["d12-m04"],
+    "phrase":["d02-m03","d02-m04","d13-m01","d13-m02","d13-m03","d13-m04"],
+    "clause":["d14-m01","d14-m02","d14-m03","d14-m04","d15-m01","d15-m02","d15-m03","d15-m04","d16-m01","d16-m03","d16-m04","d23-m01","d23-m02","d23-m03","d23-m04"],
+    "parallelism":["d16-m02","d22-m03"],"modality":["d17-m01","d17-m02","d17-m03","d17-m04"],
+    "conditional":["d18-m01","d18-m02","d18-m03","d18-m04"],"voice":["d19-m01","d19-m02","d19-m03","d19-m04"],
+    "non-finite":["d20-m01","d20-m03","d20-m04"],"reporting":["d21-m01","d21-m02","d21-m03","d21-m04"],
+    "punctuation":["d24-m01","d24-m02","d24-m03"],"conventions":["d24-m04"],"word-choice":["d25-m01"],"register":["d25-m03","d25-m04","d28-m03"],
+    "cohesion":["d26-m01","d26-m02"],"meaning":["d22-m04","d26-m03","d27-m01","d27-m02","d27-m03","d28-m02","ref-negation-scope","ref-presupposition"],
+    "mixed-editing":["d28-m01","d28-m04","d29-m02"],"learning-evidence":["d29-m03","d30-m01","d30-m02","d30-m03"]
+  },
+  "itemOverrides": {"gv5-d29-r14":"mixed-editing","gv5-d30-r14":"mixed-editing","gv5-d29-c06":"comparison","gv5-d30-q15":"comparison"}
+}

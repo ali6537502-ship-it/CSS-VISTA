@@ -1,0 +1,95 @@
+gv5-d30-q01 [gv5-d01-m04] In The librarian gave the visitor a receipt, which phrase is the indirect object?
+0:the visitor | 1:a receipt | 2:gave the visitor | 3:The librarian
+KEY:0 The visitor is the recipient indirect object; a receipt is the direct object and The librarian is the subject.
+
+gv5-d30-q02 [gv5-d01-m02] In teacher + -s, what does the final -s express?
+0:Adjective comparison | 1:Plural inflection | 2:A change from noun to adjective | 3:A new lexical verb
+KEY:1 The suffix marks grammatical number on the noun teachers. It does not create a different word class.
+
+gv5-d30-q03 [gv5-d13-m01] What is the head of these remarkably accurate measurements of rainfall?
+0:these | 1:remarkably | 2:measurements | 3:rainfall
+KEY:2 Measurements heads the whole noun phrase. Rainfall heads the smaller noun phrase inside the of-phrase.
+
+gv5-d30-q04 [gv5-d14-m01] In an analysis of the archive report, which quoted expression has non-finite verb structure?
+0:Did the archivist check the index? | 1:The archivist checked the index. | 2:whether the archivist checked the index | 3:to check the revised index
+KEY:3 To check the revised index is an infinitival non-finite clause. The other expressions contain finite verb structure.
+
+gv5-d30-q05 [gv5-d02-m02] The mentor offered three useful ____ of advice.
+0:pieces | 1:advicees | 2:advices | 3:a piece
+KEY:0 Pieces is a countable plural unit compatible with three. Advice stays uncountable in this ordinary general sense.
+
+gv5-d30-q06 [gv5-d03-m01] Introduce one unidentified Member of Parliament using the spoken initials /em piː/: ____ MP attended the meeting.
+0:A | 1:An | 2:These | 3:Many
+KEY:1 MP begins with a vowel sound when pronounced as initials, so an is the appropriate indefinite article.
+
+gv5-d30-q07 [gv5-d04-m03] A colleague uses they as their personal pronoun. Which sentence respects that pronoun choice and ordinary agreement?
+0:They prepares the summary. | 1:They is preparing the summary. | 2:They are preparing the summary. | 3:They am preparing the summary.
+KEY:2 Singular they ordinarily retains the verb forms used with they, including are. The singular referent does not require is.
+
+gv5-d30-q08 [gv5-d02-m03] Several children jointly use the room. Which possessive is standard?
+0:the childrens’s room | 1:the childrens room | 2:the childrens’ room | 3:the children’s room
+KEY:3 Children is an irregular plural without final s, so the possessive adds apostrophe + s.
+
+gv5-d30-q09 [gv5-d07-m01] The courier ____ the parcel last Tuesday and then left.
+0:delivered | 1:is delivering | 2:has been delivered, with courier as agent | 3:has delivered
+KEY:0 The completed delivery is placed in a finished past period by last Tuesday. Past simple delivered fits the narrative.
+
+gv5-d30-q10 [gv5-d19-m01] Choose the present-perfect passive corresponding to The technician has checked the alarms.
+0:The alarms had check by the technician. | 1:The alarms have been checked by the technician. | 2:The alarms has checked by the technician. | 3:The alarms have being checked by the technician.
+KEY:1 Have been checked preserves present perfect and adds passive be + past participle, with plural agreement for alarms.
+
+gv5-d30-q11 [gv5-d17-m02] The speaker is uncertain, not imposing a duty: The lights are off; the staff might be upstairs. What does might express?
+0:A comparative degree | 1:A prohibition | 2:A possible explanation | 3:A completed obligation
+KEY:2 Might presents a possibility based on the available situation. It does not impose a requirement or prohibition.
+
+gv5-d30-q12 [gv5-d20-m02] Complete the established pattern: The organisers avoided ____ the two appointments.
+0:overlapped | 1:overlap | 2:to overlap | 3:overlapping
+KEY:3 Avoid normally selects an -ing complement in this intended meaning: avoided overlapping.
+
+gv5-d30-q13 [gv5-d15-m01] Which sentence uses an object relative without repeating its object?
+0:The guide that we consulted was helpful. | 1:The guide that we consulted it was helpful. | 2:The guide which we consulted it was helpful. | 3:The guide whom we consulted was helpful, when guide means a book.
+KEY:0 The relative marker corresponds to the object of consulted, so the object is not repeated as it. The context explicitly makes guide a book rather than a person.
+
+gv5-d30-q14 [gv5-d12-m04] Replace the object with a pronoun: Please put away the folders.
+0:Please put away them. | 1:Please put them away. | 2:Please put to them away. | 3:Please put away to them.
+KEY:1 With this separable phrasal verb, an unstressed object pronoun normally occurs between verb and particle: put them away.
+
+gv5-d30-q15 [gv5-d22-m03] Which sentence explicitly compares one building’s energy use with another building’s energy use?
+0:This building’s energy use is lower than the next building is old. | 1:This building’s energy use is lower than the next building. | 2:This building’s energy use is lower than that of the next building. | 3:This building’s energy use is lower than expensive buildings.
+KEY:2 That of the next building identifies its energy use, producing a logically parallel comparison.
+
+gv5-d30-q16 [gv5-d22-m01] Lina is intended to have examined the chart. Which version explicitly preserves that interpretation?
+0:Having examined the chart, the discrepancy was surprising. | 1:To examine the chart, the discrepancy appeared large. | 2:After examining the chart, the discrepancy surprised Lina. | 3:After Lina examined the chart, the discrepancy surprised her.
+KEY:3 The finite after-clause names Lina as examiner. The main clause then states the discrepancy’s effect on her without assigning examination to the discrepancy.
+
+gv5-d30-q17 [gv5-d24-m01] Which version uses a semicolon to join two complete related main clauses?
+0:The hearing ended; the witnesses left. | 1:The hearing; ended the witnesses left. | 2:The hearing ended; because the room closed. | 3:The hearing ended the; witnesses left.
+KEY:0 The first version places a complete main clause on each side of the semicolon. The other placements interrupt structure or do not provide the requested pair.
+
+gv5-d30-q18 [gv5-d24-m04] Which editorial judgement is defensible?
+0:Every American spelling is a grammatical error in English. | 1:Established British and American spellings can both be standard; a publication may choose a consistent convention. | 2:British English always requires -ize and never permits -ise. | 3:A spelling preference proves that a sentence has the wrong subject.
+KEY:1 Established regional spelling alternatives should be distinguished from grammar errors. Consistent editorial choices can be appropriate without invalidating other standard conventions.
+
+gv5-d30-q19 [gv5-d24-m02] The archive has revised ____ opening hours.
+0:it is | 1:it’s | 2:its | 3:its’
+KEY:2 Its is the possessive determiner. Expanding it’s as it is or it has does not fit this noun phrase.
+
+gv5-d30-q20 [gv5-d25-m01] The revised fee had an immediate ____ on demand.
+0:effective | 1:affecting | 2:affect | 3:effect
+KEY:3 The noun effect fits after an immediate and before on. The specialised noun affect does not carry the intended result meaning here.
+
+gv5-d30-q21 [gv5-d26-m03] Only twelve volunteers answered a survey. Which claim is appropriately limited to that evidence?
+0:The volunteers’ replies suggest support within that small responding group. | 1:The entire town has certainly changed its view. | 2:Every resident supports the change. | 3:The replies prove universal support.
+KEY:0 The selected claim identifies the limited responding group and uses suggest rather than making an unsupported universal or certain conclusion.
+
+gv5-d30-q22 [gv5-d26-m01] A report mentions both a damaged scanner and a delayed delivery. Which continuation explicitly identifies the scanner as what was replaced?
+0:It was replaced, with no other identifying context. | 1:The scanner was replaced. | 2:This was replaced, with no other identifying context. | 3:That happened.
+KEY:1 Repeating the scanner removes the competing reference and states the replacement clearly. It or this may be recoverable in some contexts, but the question requires explicit identification.
+
+gv5-d30-q23 [gv5-d27-m01] Original: Some rural libraries may extend their hours if the pilot is funded. Which summary preserves the main qualifications?
+0:Funding has increased because every library opens longer. | 1:All libraries will open longer. | 2:Some rural libraries may open longer if the pilot receives funding. | 3:Rural libraries have extended their hours permanently.
+KEY:2 The selected version preserves limited quantity, rural scope, possibility and the funding condition. The others change certainty, time, coverage or logical relationship.
+
+gv5-d30-q24 [gv5-d28-m02] Original: The laboratory may repeat the test after the equipment is repaired. Which revision preserves the commitment and sequence?
+0:The laboratory will certainly repeat the test before the equipment is repaired. | 1:The equipment was repaired because the test was repeated. | 2:Every laboratory must repeat all tests. | 3:After the equipment is repaired, the laboratory may repeat the test.
+KEY:3 The selected revision changes ordering of the clauses without changing possibility or the repair-before-repetition sequence. The other versions add or reverse important content.

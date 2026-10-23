@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/grammar-course",
+    "violations": []
+  },
+  {
+    "path": "/grammar-course?day=24&section=gv5-d24-m02",
+    "violations": []
+  },
+  {
+    "path": "/grammar-course?day=1&section=questions",
+    "violations": []
+  },
+  {
+    "path": "/grammar-course?day=20&section=writing",
+    "violations": []
+  },
+  {
+    "path": "/grammar-course?view=profile",
+    "violations": []
+  },
+  {
+    "path": "/grammar-course?view=reference&guide=glossary",
+    "violations": []
+  }
+]

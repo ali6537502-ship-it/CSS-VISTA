@@ -2,7 +2,7 @@
 declare(strict_types=1);
 require __DIR__.'/../../public/api/_tutor_context.php';require __DIR__.'/../../public/api/_tutor_schema.php';
 $n=0;function check(bool $v,string $why):void{global $n;$n++;if(!$v)throw new RuntimeException($why);}function reject(callable $f):void{global $n;try{$f();}catch(InvalidArgumentException){$n++;return;}throw new RuntimeException('Invalid tutor data accepted.');}
-$contexts=cssv_tutor_static_contexts();check(count(array_filter($contexts,fn($c)=>$c['category']==='grammar'))===126,'Grammar rules missing');
+$contexts=cssv_tutor_static_contexts();check(count(array_filter($contexts,fn($c)=>$c['category']==='grammar' && empty($c['legacy_alias'])))===120,'Reconstructed Grammar contexts missing');check(count(array_filter($contexts,fn($c)=>!empty($c['legacy_alias'])))===126,'Historical assistance links missing');check(isset($contexts['grammar-v5:gv5-d01-m03']),'New concept context unavailable');
 foreach($contexts as $c){check(mb_strlen($c['text'])<=16000&&$c['text']!=='','Unbounded/empty context');check(str_starts_with($c['return_path'],'/')&&!str_starts_with($c['return_path'],'//'),'Arbitrary return URL');}
 foreach(['precis:2','precis:18','precis:20','precis:appendix-c'] as $id)check(!isset($contexts[$id]),'Official-pending/model chapter exposed through tutor');
 check(str_contains($contexts['maths:percentage']['text'],'25%')&&str_contains($contexts['maths:percentage']['text'],'16.'),'Deterministic percent changed');check(str_contains($contexts['maths:mean']['text'],'mean is 6.'),'Mean changed');check(str_contains($contexts['maths:ratio']['text'],'2:3'),'Ratio changed');

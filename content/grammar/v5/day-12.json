@@ -1,0 +1,1321 @@
+{
+  "day": 12,
+  "id": "gv5-day-12",
+  "title": "Prepositions, Particles and Verb Patterns",
+  "orientation": "Prepositions connect an expression with a place, time, source, cause or another relationship. They also participate in lexical patterns such as depend on and interested in. A useful course therefore needs both meaning and word-pattern knowledge: some choices can be reasoned through, while others must be checked in a reliable dictionary. This lesson teaches you to identify the whole prepositional phrase, distinguish it from a movable particle, and select a verb pattern without changing the intended meaning. These distinctions matter in ordinary messages as much as formal reports: look up the address and look after the address do not differ merely in style. You will also review earlier tense, aspect and agreement work in short contextual tasks. Treat the review as evidence for deciding what to revisit, rather than as a single label for your writing ability.",
+  "outcomes": [
+    "Interpret temporal, spatial and abstract preposition meanings.",
+    "Identify preposition heads and their complements.",
+    "Distinguish particles, prepositional verbs and phrasal-prepositional verbs.",
+    "Place personal-pronoun objects correctly with separable particle verbs.",
+    "Use cumulative review to identify a specific earlier distinction needing revision."
+  ],
+  "prerequisiteDays": [
+    1,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "modules": [
+    {
+      "id": "gv5-d12-m01",
+      "title": "Time, space and abstract relationships",
+      "taxonomy": [
+        "G",
+        "L"
+      ],
+      "coverageIds": [
+        "gv5-topic-d12-c01",
+        "gv5-topic-d12-c02"
+      ],
+      "definition": "A preposition commonly heads a phrase expressing a relationship; spatial meanings often extend to time, cause, means and other abstract relations.",
+      "foundation": [
+        "Begin with visible relations: a folder on the desk, a letter in the folder, a visitor at the gate. In often presents containment, on often presents contact with a surface, and at can locate an activity or point. These are useful meaning patterns, not a size-based rule that decides every case. A person may be at the office as a workplace or in the office as an interior. Direction contrasts with location: the child is in the garden, but runs into the garden. From identifies a source or starting point, while towards gives a direction without guaranteeing arrival."
+      ],
+      "intermediate": [
+        "Time expressions have conventional patterns: at noon, on Tuesday, in October and in the evening. On Tuesday morning includes a named day and therefore differs from in the morning. At night is a conventional expression; during the night selects an interval. Since gives a starting point, for a duration, by a deadline and until an endpoint for continuation. I will send it by Friday promises completion no later than Friday; I will stay until Friday describes a continuing stay. These choices interact with tense and aspect, so a time word cannot substitute for understanding the event."
+      ],
+      "advanced": [
+        "Abstract uses include cause because of the delay, purpose for the examination, means by train, instrument with a key and relationship between two proposals. The same preposition can express different meanings, and alternative constructions may make related claims. Between is not restricted to exactly two: negotiations between the five named departments presents separate participants, whereas disagreement among the staff presents a group setting. By and with differ when an agent and an instrument are expressed: the cabinet was opened by the caretaker with a spare key. Learning the entire relation is more reliable than translating one preposition in isolation."
+      ],
+      "expert": [
+        "Spatial perspectives permit legitimate alternatives: a bird in a tree and an apple on a tree select different relationships, not different sized locations. Abstract prepositions can be productive rather than arbitrary: under pressure and beyond the budget extend spatial schemas. Nevertheless, idiomatic selection limits prediction, and region or institutional convention may affect at the weekend versus on the weekend. Give the intended time span, route or relation before declaring an alternative wrong. In cumulative review, separate an aspect error from a preposition error: has lived here since March requires an appropriate verb phrase as well as since, and a past residence ending before now needs a different temporal frame."
+      ],
+      "patterns": [
+        {
+          "form": "by + deadline",
+          "meaning": "Completion occurs no later than the stated time."
+        },
+        {
+          "form": "until + endpoint",
+          "meaning": "A state or activity continues up to a boundary."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The parcel travelled from Quetta to Sukkur.",
+          "analysis": "From identifies source and to identifies destination."
+        },
+        {
+          "sentence": "The office will remain open until six.",
+          "analysis": "Until marks the endpoint of a continuing state."
+        },
+        {
+          "sentence": "The agreement between the four laboratories covers shared equipment.",
+          "analysis": "Between presents distinguishable participants; four does not make it ungrammatical."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Please finish by Thursday.",
+          "b": "Please remain until Thursday.",
+          "note": "Different event relations: deadline for completion versus endpoint of continuation."
+        }
+      ],
+      "exceptions": [
+        "At the weekend is a common British pattern; on the weekend is established American usage.",
+        "Between can relate more than two individually identified participants."
+      ],
+      "mistakes": [
+        {
+          "problem": "The meeting starts in Monday.",
+          "repair": "The meeting starts on Monday.",
+          "reason": "A named day takes on in this ordinary temporal construction."
+        },
+        {
+          "problem": "She has worked here since three years.",
+          "repair": "She has worked here for three years.",
+          "reason": "Three years expresses duration; since normally introduces a starting point."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "source",
+          "definition": "The starting place or origin of a relation.",
+          "example": "from Multan"
+        },
+        {
+          "term": "deadline",
+          "definition": "The latest time by which completion is required.",
+          "example": "by noon"
+        }
+      ],
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-m02",
+      "title": "Prepositional phrases, complements and stranding",
+      "taxonomy": [
+        "G",
+        "L"
+      ],
+      "coverageIds": [
+        "gv5-topic-d12-c03",
+        "gv5-topic-d12-c04"
+      ],
+      "definition": "A prepositional phrase contains a preposition as head and, commonly, a complement; the complete phrase can perform several grammatical functions.",
+      "foundation": [
+        "In beside the window, beside is the preposition and the window is its noun-phrase complement. The whole phrase can describe a noun, as in the desk beside the window, or locate an event, as in she waited beside the window. Pronouns normally use their object form after a preposition: with her, between you and me. The complement need not be one isolated word. A complex noun phrase such as the narrow window at the end of the hall remains a single complement of beside even though it contains another prepositional phrase."
+      ],
+      "intermediate": [
+        "Common complements include noun phrases, pronouns and -ing clauses: about the delay, with us, without checking the figures. Prepositions can also take other kinds of complement in particular patterns: from there has a place expression; until after the interview contains another prepositional phrase; surprised at what she wrote has a wh-clause. The familiar instruction use -ing after a preposition is useful when choosing an ordinary non-finite verbal complement, but it should not be expanded into the false claim that every complement is a gerund or that clauses can never follow a preposition."
+      ],
+      "advanced": [
+        "In a question or relative construction, a preposition may remain at the end while its complement is understood earlier: Which bench did you sit on? This is preposition stranding and is normal standard English. On which bench did you sit? moves the preposition together with the question phrase, a pattern often called pied-piping. It is more formal and can sound natural in legal or academic contexts. Selection matters: we cannot freely separate parts of every idiom, and some fronted patterns are very unnatural. Where both versions are established, choose according to register and clarity rather than a blanket ban on sentence-final prepositions."
+      ],
+      "expert": [
+        "Function and category remain distinct. In the proposal on transport, the prepositional phrase postmodifies a noun; in interested in transport, it complements an adjective; in rely on transport, it belongs to the verb's lexical pattern. Modern grammatical frameworks differ in their classification of before in before lunch and before she left: some keep a broader preposition category, while many teaching grammars call the finite-clause use a conjunction. This course names the framework where it matters and always identifies the complement and function. A change of label must not turn an otherwise acceptable construction into an alleged error."
+      ],
+      "patterns": [
+        {
+          "form": "preposition + noun phrase / -ing clause / licensed wh-clause",
+          "meaning": "The complement type depends on the preposition and construction."
+        },
+        {
+          "form": "wh-phrase ... preposition / preposition + wh-phrase ...",
+          "meaning": "Stranding and pied-piping are alternative question patterns where licensed."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The folder beside the printer is empty.",
+          "analysis": "Beside the printer postmodifies folder; beside is its head."
+        },
+        {
+          "sentence": "We left without checking the figures.",
+          "analysis": "Without takes an -ing clause as complement."
+        },
+        {
+          "sentence": "The question on which the panel disagreed concerned funding.",
+          "analysis": "On which is a fronted prepositional phrase inside the relative clause."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Which file are you referring to?",
+          "b": "To which file are you referring?",
+          "note": "Both standard: the second is more formal; neither is wrong merely because of preposition placement."
+        }
+      ],
+      "exceptions": [
+        "Prepositions license several complement types; at what she wrote is a genuine wh-clause complement.",
+        "Frameworks may call before she left a subordinating conjunction pattern or a preposition with a clause complement; the label must be stated consistently."
+      ],
+      "mistakes": [
+        {
+          "problem": "We spoke between you and I.",
+          "repair": "We spoke between you and me.",
+          "reason": "In the intended prepositional coordination, use the ordinary object case me."
+        },
+        {
+          "problem": "She left without to sign the receipt.",
+          "repair": "She left without signing the receipt.",
+          "reason": "Without in this non-finite complement pattern takes an -ing clause, not a to-infinitive."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "stranding",
+          "definition": "Leaving a preposition apart from its fronted or understood complement.",
+          "example": "the chair I sat on"
+        },
+        {
+          "term": "pied-piping",
+          "definition": "Moving a preposition together with its dependent phrase.",
+          "example": "the chair on which I sat"
+        }
+      ],
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-m03",
+      "title": "Lexical selection, fixed combinations and meaning",
+      "taxonomy": [
+        "G",
+        "L"
+      ],
+      "coverageIds": [
+        "gv5-topic-d12-c05",
+        "gv5-topic-d12-c08"
+      ],
+      "definition": "Lexical selection is the requirement or preference of a particular word for a complement pattern, including a specific preposition where its meaning requires one.",
+      "foundation": [
+        "Some verb patterns are straightforward only after the whole expression is learned: depend on a colleague, listen to a recording, discuss a problem. Discuss takes a direct object in the ordinary meaning illustrated here; listen introduces the thing heard with to. Do not infer that one pattern applies to every synonym. Explain a problem to someone differs from tell someone about a problem. A useful dictionary entry records the word's sense, the types of complement it permits, and examples of the actual construction. Keep a pattern notebook using complete short sentences, not an undifferentiated list of supposedly interchangeable prepositions."
+      ],
+      "intermediate": [
+        "Adjectives and nouns select patterns too: interested in a subject, responsible for a decision, an increase in costs and a solution to a problem. Some words allow alternatives with overlapping meanings or different emphases; a dictionary, not a simplistic single-partner slogan, should resolve a doubtful case. Insist on a receipt and insist that the receipt be issued are both grammatical. The first contains a prepositional complement; the second contains a content clause. Insist does not always need on. Likewise, enter the room and enter into an agreement use different senses and should not be collapsed into one prohibition."
+      ],
+      "advanced": [
+        "The spelling to belongs to different constructions. In hope to leave, it marks an infinitive. In look forward to leaving, it is a preposition within a lexical pattern and takes an -ing complement. Be used to describes accustomedness and differs from used to for a past habit: she is used to cycling versus she used to cycle. No visual shortcut based solely on the word to can decide the structure. Look at the governing expression and the intended meaning. A correct form may still make the wrong claim: used to work does not by itself say that work continues now."
+      ],
+      "expert": [
+        "Lexical grammar overlaps vocabulary, syntax and register. Different from is an appropriate British editorial default; different than is established in American English, while different to occurs especially in British speech. Formal preference does not justify scoring a standard regional alternative as universally wrong. In review, explain the selected sense and its complement, then compare a close alternative. This is particularly useful when a first language distributes relations differently, including for many Urdu-speaking learners, but no learner should be presumed to make the same error because of background. Record personal evidence from actual writing and practice, and revisit patterns that genuinely cause difficulty."
+      ],
+      "patterns": [
+        {
+          "form": "insist on + noun phrase / -ing clause",
+          "meaning": "Demand or maintain something in an on-pattern."
+        },
+        {
+          "form": "insist that + content clause",
+          "meaning": "State insistence through a proposition or mandative clause."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "We discussed the revised timetable.",
+          "analysis": "Discuss takes the timetable directly in the intended sense."
+        },
+        {
+          "sentence": "Rida insisted that the minutes were accurate.",
+          "analysis": "The content clause expresses the proposition she maintained; no on is needed."
+        },
+        {
+          "sentence": "The team is used to working remotely but used to meet in person.",
+          "analysis": "Accustomedness takes -ing; the past-habit construction takes a base infinitive."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She is used to working late.",
+          "b": "She used to work late.",
+          "note": "Both standard, with accustomedness versus past-habit meaning."
+        }
+      ],
+      "exceptions": [
+        "Insist also takes content clauses, so insist always takes on is false.",
+        "A verb's other sense can permit another pattern: enter a hall versus enter into negotiations."
+      ],
+      "mistakes": [
+        {
+          "problem": "They discussed about the new rota.",
+          "repair": "They discussed the new rota.",
+          "reason": "In the ordinary discuss-a-topic pattern the topic is a direct object."
+        },
+        {
+          "problem": "We look forward to meet your team.",
+          "repair": "We look forward to meeting your team.",
+          "reason": "The lexical expression look forward to takes an -ing complement here."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "lexical selection",
+          "definition": "A word's constraints or preferences concerning its complements.",
+          "example": "depend on support"
+        },
+        {
+          "term": "infinitival to",
+          "definition": "The marker introducing a to-infinitive rather than a preposition.",
+          "example": "hope to finish"
+        }
+      ],
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-m04",
+      "title": "Particles, multi-word verbs and cumulative review",
+      "taxonomy": [
+        "G",
+        "L"
+      ],
+      "coverageIds": [
+        "gv5-topic-d12-c06",
+        "gv5-topic-d12-c07",
+        "gv5-topic-d12-c09"
+      ],
+      "definition": "Multi-word verbs combine a verb with a particle, preposition or both; their object-placement patterns reveal important differences.",
+      "foundation": [
+        "In turn off the lamp, off is a particle in a phrasal verb. With this separable pattern, an ordinary noun object can precede or follow the particle: turn the lamp off and turn off the lamp. A personal-pronoun object normally comes between: turn it off. This placement is not available with look after a child: after introduces its complement, so look the child after is not the ordinary care-for construction. Learn whether a particular expression is transitive or intransitive as well as whether it separates; the bus broke down needs no object, whereas someone may break down a calculation into parts."
+      ],
+      "intermediate": [
+        "Traditional teaching often calls all multi-word expressions phrasal verbs, but a narrower classification distinguishes three patterns. A phrasal verb has a particle, such as give up; a prepositional verb has a selected preposition, such as rely on; a phrasal-prepositional verb has both, such as put up with. In put up with the noise, the noun complement follows with. The whole expression means tolerate, but its meaning is not obtained by translating each word separately. Dictionaries vary in their labels, so check the actual object placement shown by their examples rather than treating a broad label as a complete rule."
+      ],
+      "advanced": [
+        "Formality belongs to individual expressions and contexts. Carry out an investigation and account for an increase are entirely at home in formal writing, although put off may be less formal than postpone. A single-word substitute must preserve meaning: give up a habit, give up a seat and give up hope do not all invite the same replacement. Longer noun objects often favour position after a particle because it is easier to process the verb sequence before a heavy phrase. Personal-pronoun placement remains the useful elementary diagnostic for many separable particle verbs, but idiomatic restrictions still require lexical checking."
+      ],
+      "expert": [
+        "The cumulative tasks revisit past narrative sequence, perfect/progressive meanings, future reference, agreement and degree from Days 7–11. Separate first-encounter recognition from an immediate retry: seeing the same item again can measure recall of that item without demonstrating transfer to a new sentence. For each error, name the underlying distinction before choosing a review lesson. A perfect-aspect error in has been waiting since noon should link to aspect and temporal reference, not merely be counted as a generic preposition mistake. Open-response explanations and short corrections supply production evidence through self-review; a displayed model is an aid to analysis, not an independent automated grade."
+      ],
+      "patterns": [
+        {
+          "form": "separable verb + noun + particle / verb + particle + noun",
+          "meaning": "Both positions occur with an ordinary noun object where the lexical pattern permits."
+        },
+        {
+          "form": "separable verb + personal pronoun + particle",
+          "meaning": "Ordinary placement: turn it off, not turn off it."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Please turn the reading lamp off.",
+          "analysis": "The noun object precedes the separable particle."
+        },
+        {
+          "sentence": "Please turn it off before leaving.",
+          "analysis": "The personal pronoun appears between verb and particle."
+        },
+        {
+          "sentence": "We could not put up with the noise from the generator.",
+          "analysis": "Put up with is phrasal-prepositional; the complement follows with."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "look up the number / look the number up",
+          "b": "look after the child / not normally look the child after",
+          "note": "Different lexical patterns, not a free choice of where every small word can move."
+        }
+      ],
+      "exceptions": [
+        "Some phrasal verbs are intransitive: the generator broke down.",
+        "A formally acceptable multi-word verb need not be replaced by a single word merely to look academic."
+      ],
+      "mistakes": [
+        {
+          "problem": "Please turn off it.",
+          "repair": "Please turn it off.",
+          "reason": "A personal-pronoun object normally precedes the separable particle."
+        },
+        {
+          "problem": "She looked the visitor after.",
+          "repair": "She looked after the visitor.",
+          "reason": "After is a selected preposition in the intended care-for meaning, not a freely movable particle."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "particle",
+          "definition": "A small word in a multi-word verb with its own placement behaviour.",
+          "example": "off in switch it off"
+        },
+        {
+          "term": "phrasal-prepositional verb",
+          "definition": "A lexical combination containing a verb, particle and preposition.",
+          "example": "put up with noise"
+        }
+      ],
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d12-q01",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Complete the ordinary temporal expression: The seminar is ____ Tuesday.",
+      "options": [
+        "on",
+        "at",
+        "into",
+        "in"
+      ],
+      "answer": 0,
+      "why": "A named day takes on in this expression. In normally introduces a larger period; at locates a point such as noon.",
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which instruction sets a completion deadline rather than a period of continued waiting?",
+      "options": [
+        "Stay through Friday.",
+        "Wait until Friday.",
+        "Remain until Friday.",
+        "Send the form by Friday."
+      ],
+      "answer": 3,
+      "why": "By Friday gives the latest completion time for sending. The other instructions describe continuation.",
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which analysis is correct for “without checking the total”?",
+      "options": [
+        "without + -ing clause",
+        "without + independent interrogative",
+        "without + adjective only",
+        "without + to-infinitive"
+      ],
+      "answer": 0,
+      "why": "Checking the total is an -ing clause serving as complement of without.",
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement is accurate?",
+      "options": [
+        "A preposition can never end a standard English sentence.",
+        "Which chair did you sit on? is standard preposition stranding.",
+        "On which chair did you sit? is always ungrammatical.",
+        "All prepositions have exactly one complement type."
+      ],
+      "answer": 1,
+      "why": "Stranding is established standard English; pied-piping is also possible. Complement licensing varies lexically.",
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-q05",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "We look forward to ____ the revised draft.",
+      "options": [
+        "receiving",
+        "received",
+        "to receive",
+        "receive"
+      ],
+      "answer": 0,
+      "why": "To belongs to the lexical expression look forward to and takes an -ing complement here.",
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence uses a grammatical content-clause pattern after insist?",
+      "options": [
+        "She insisted on that the figures were correct.",
+        "She insisted to that the figures were correct.",
+        "She insisted for that the figures were correct.",
+        "She insisted that the figures were correct."
+      ],
+      "answer": 3,
+      "why": "Insist may take a content clause directly. Adding on/to/for before this that-clause does not produce the intended pattern.",
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which version uses ordinary personal-pronoun placement with separable turn off?",
+      "options": [
+        "Turn off of it.",
+        "Turn off it.",
+        "Turn it off.",
+        "Turn it of."
+      ],
+      "answer": 2,
+      "why": "The personal pronoun normally appears between turn and off.",
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which expression is phrasal-prepositional in the narrower three-way classification?",
+      "options": [
+        "rely on the schedule",
+        "put up with the noise",
+        "sleep peacefully",
+        "turn the lamp off"
+      ],
+      "answer": 1,
+      "why": "Put up with contains verb, particle and preposition. Turn off has a particle; rely on is prepositional in this classification.",
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Cumulative review: which sentence explicitly locates an event before a second past event?",
+      "options": [
+        "She has left before the bus arrived.",
+        "She had left before the bus arrived.",
+        "She will leave before the bus arrived.",
+        "She is leaving before the bus arrived."
+      ],
+      "answer": 1,
+      "why": "Had left gives the earlier past event in a coherent past narrative. The other tense combinations do not express the stipulated temporal relationship in this context.",
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d12-q10",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Cumulative review, standard edited agreement: (A) The list of revised dates (B) are ready (C) for publication.",
+      "options": [
+        "No error",
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": 2,
+      "why": "List is the singular head of the subject, so is ready is required. Revised dates is inside an of-phrase.",
+      "conceptId": "gv5-d10-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d12-r11",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain “She stayed at the office” versus “She stayed in the office”.",
+      "model": "At presents the office as a workplace or location; in foregrounds its interior. Both may describe the same stay from different perspectives.",
+      "rubric": [
+        "Identify location perspective rather than a correctness contrast.",
+        "Recognise both as grammatical."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-r12",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Use by or until: “Please submit the request ____ noon. I will remain here ____ noon.”",
+      "model": "by; until",
+      "rubric": [
+        "Use by for a completion deadline.",
+        "Use until for continuation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-r13",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why between is possible in “a treaty between five named states”.",
+      "model": "Between can relate distinct individual participants even when there are more than two. The sentence presents the states as separate parties to the treaty.",
+      "rubric": [
+        "Reject the exactly-two-only rule.",
+        "Identify the distinct-participant reading."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-r14",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Identify the agent and instrument in “The lock was opened by the porter with a brass key”.",
+      "model": "The porter is the agent; a brass key is the instrument.",
+      "rubric": [
+        "Associate by with the agent here.",
+        "Associate with with the instrument."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-r15",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Parse “beside the printer” in “the folder beside the printer”.",
+      "model": "Beside is the preposition head; the printer is its noun-phrase complement; the complete phrase postmodifies folder.",
+      "rubric": [
+        "Identify head and complement.",
+        "Distinguish internal structure from the phrase’s modifying function."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-r16",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Give a more formal pied-piped version of “Which report are you referring to?”",
+      "model": "To which report are you referring?",
+      "rubric": [
+        "Move to together with which report.",
+        "Keep interrogative auxiliary-subject order."
+      ],
+      "alternatives": [
+        "The original is already grammatical; the task asks for an alternative register."
+      ],
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-r17",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify the complement after at: “We were surprised at what the committee proposed”.",
+      "model": "What the committee proposed is a wh-clause functioning as complement of at.",
+      "rubric": [
+        "Identify a clause, not merely a single noun.",
+        "Keep at as the governing preposition."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-r18",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain why “without checking” is not a to-infinitive pattern.",
+      "model": "Without is a preposition selecting an -ing clause in this use. Checking heads that clause; no infinitival to belongs to the pattern.",
+      "rubric": [
+        "Identify the preposition and -ing form.",
+        "Do not generalise that every preposition must take only this complement type."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-r19",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare “She used to commute” and “She is used to commuting”.",
+      "model": "The first describes a past habit; the second means she is accustomed to commuting.",
+      "rubric": [
+        "Distinguish past habit from accustomedness.",
+        "Identify base infinitive versus -ing complement."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-r20",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine using discuss: “We considered the timetable. We talked about it for an hour.”",
+      "model": "We considered the timetable and discussed it for an hour.",
+      "rubric": [
+        "Use discuss with its direct object.",
+        "Retain the duration."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-r21",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite “They insisted on an immediate reply” with a mandative that-clause.",
+      "model": "They insisted that a reply be sent immediately.",
+      "rubric": [
+        "Use a grammatical mandative clause.",
+        "Preserve urgency without inventing who sends the reply."
+      ],
+      "alternatives": [
+        "They insisted that a reply should be sent immediately."
+      ],
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-r22",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why is “enter into negotiations” not disproved by the ordinary correction “enter the hall”, without into?",
+      "model": "Enter has different lexical senses and complement patterns. Participating in negotiations is an established enter into pattern; physical entry into a hall often takes the place directly as an object.",
+      "rubric": [
+        "Identify the two senses.",
+        "Avoid an all-senses prohibition on prepositions."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-r23",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Replace the noun object with it: “Please write down the address”.",
+      "model": "Please write it down.",
+      "rubric": [
+        "Place it between verb and particle.",
+        "Retain the instruction to record the address."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-r24",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Distinguish look up, look after and put up with using the narrower multi-word-verb categories.",
+      "model": "Look up can be a phrasal particle verb; look after is a prepositional verb; put up with is phrasal-prepositional.",
+      "rubric": [
+        "Identify the particle pattern in look up.",
+        "Identify selected after and the two small words in put up with."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-r25",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain why carry out an investigation need not be replaced in formal prose.",
+      "model": "Carry out is established in formal contexts; register depends on the lexical expression and context, not on the mere presence of multiple words.",
+      "rubric": [
+        "Reject a blanket structural-category ban.",
+        "Preserve the precise intended action when considering a synonym."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-r26",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Cumulative aspect review: “He has been waiting since noon.” Explain the duration and current connection without saying he must still be waiting this instant.",
+      "model": "The waiting began at noon and extends to the present reference period. Context may describe ongoing waiting or very recently ended waiting with a present consequence.",
+      "rubric": [
+        "Explain since as a starting point.",
+        "Avoid treating the progressive as proof of continuation at the exact speaking moment."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-r27",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Recast “I will finish the report no later than noon tomorrow” using future perfect and by.",
+      "model": "By noon tomorrow, I will have finished the report.",
+      "rubric": [
+        "Use will have + past participle.",
+        "Retain a completion deadline."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d09-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d12-r28",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Cumulative edit: “The team have finished the report yesterday. They discussed about the findings and wrote down it.” Preserve a British notional-plural reading of team.",
+      "model": "The team finished the report yesterday. They discussed the findings and wrote it down.",
+      "rubric": [
+        "Use past simple with the completed yesterday frame.",
+        "Remove about after discuss in this pattern.",
+        "Place it before the separable particle down."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d12-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "We shall wait by six, meaning that our waiting continues until six.",
+      "model": "We shall wait until six.",
+      "rubric": [
+        "Use until for the stipulated continuation.",
+        "Retain the endpoint six."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The application is due in Wednesday.",
+      "model": "The application is due on Wednesday.",
+      "rubric": [
+        "Use on with the named day.",
+        "Preserve due as the predicate."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositions_2",
+        "C-PRES"
+      ]
+    },
+    {
+      "id": "gv5-d12-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "She left without to check the receipt.",
+      "model": "She left without checking the receipt.",
+      "rubric": [
+        "Use an -ing complement of without.",
+        "Retain who left and what was not checked."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "This is the bench we sat on. Decide whether standard grammar requires a change.",
+      "model": "No change is required. The final on is normal preposition stranding.",
+      "rubric": [
+        "Accept the original.",
+        "Explain stranding without a sentence-final-preposition ban."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "We are looking forward to see you.",
+      "model": "We are looking forward to seeing you.",
+      "rubric": [
+        "Use the licensed -ing complement.",
+        "Keep the future anticipated meeting."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The manager discussed about the invoice.",
+      "model": "The manager discussed the invoice.",
+      "rubric": [
+        "Use the topic directly as object of discuss.",
+        "Do not replace the intended discussion with another action."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositions_2",
+        "D-prepositional-phrases",
+        "E-PATTERN"
+      ]
+    },
+    {
+      "id": "gv5-d12-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Please turn off them, referring to two lamps.",
+      "model": "Please turn them off.",
+      "rubric": [
+        "Use the personal-pronoun placement before the particle.",
+        "Keep plural reference them."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "My neighbour looked the children after.",
+      "model": "My neighbour looked after the children.",
+      "rubric": [
+        "Keep the selected after next to its noun-phrase complement.",
+        "Preserve the care-for meaning."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d12-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Transform without implying that the original is wrong: “The colleague who I worked with has retired.” Front the preposition and use formal whom.",
+      "model": "The colleague with whom I worked has retired.",
+      "rubric": [
+        "Move with with its relative pronoun.",
+        "Retain the relative relation and the retirement."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-prepositional-phrases",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d12-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Express “We cannot tolerate the noise” using put up with.",
+      "model": "We cannot put up with the noise.",
+      "rubric": [
+        "Keep the negative modal cannot.",
+        "Use the complete phrasal-prepositional expression."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-phrasal-verbs-and-multi-word-verbs",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d12-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write an 80–110-word message arranging a study meeting. Include a day/time, a source or route, a completion deadline, one lexical preposition pattern, and a separable particle verb with a pronoun object. Annotate each.",
+    "model": "Our next study meeting is on Thursday at four. I will travel from the university to the library by bus. Please send your questions by noon so that I can group them before we meet. We will discuss the practice passage first, then look at the examples on reported speech. I am interested in hearing how you interpreted the final paragraph. If the projector is already on, please turn it off before we leave. The room booking has been confirmed, and a printed copy of the passage will be available at reception.\n\nAnalysis: on Thursday/at four give day and time; from/to give route; by noon is a deadline; interested in is lexical; turn it off separates the particle verb with its pronoun object.",
+    "rubric": [
+      "Use five required patterns with the intended meanings.",
+      "Place the personal pronoun correctly.",
+      "Retain clear scheduling and deadline information."
+    ],
+    "alternatives": [
+      "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+    ],
+    "conceptId": "gv5-d12-m03",
+    "difficulty": "Intermediate",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "D-prepositions_2",
+      "D-prepositional-phrases",
+      "E-PATTERN"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d12-rec01",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 8: contrast “She worked here for a year” and “She has worked here for a year”.",
+      "model": "The first locates the employment in a completed past frame; the second connects a year of employment with the present and commonly allows a continuing interpretation.",
+      "rubric": [
+        "Identify the different reference frames.",
+        "Do not let for alone choose the tense."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d08-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d12-rec02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Recall Day 10: “The number of corrections have increased.”",
+      "model": "The number of corrections has increased.",
+      "rubric": [
+        "Make the verb agree with number.",
+        "Retain the perfect construction."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d10-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d12-rec03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 11: explain “He worked hard” versus “He hardly worked”.",
+      "model": "Hard expresses effort; hardly means almost not, so the second describes very little activity.",
+      "rubric": [
+        "Give both meanings.",
+        "Do not treat -ly as a predictable spelling variant."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I explain the relation before choosing a preposition.",
+    "I distinguish a preposition’s complement from the function of the whole phrase.",
+    "I recognise standard stranding and formal pied-piping.",
+    "I check lexical patterns by sense and context.",
+    "I place personal pronouns before separable particles.",
+    "I name the specific earlier concept behind a cumulative-review error."
+  ],
+  "sources": [
+    {
+      "id": "C-AGREE",
+      "title": "Subject verb agreement",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-PAST",
+      "title": "Past perfect simple ( I had worked )",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-simple-i-had-worked",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-PRES",
+      "title": "Present perfect simple ( I have worked )",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-i-have-worked",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "D-phrasal-verbs-and-multi-word-verbs",
+      "title": "Phrasal verbs and multi-word verbs",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/phrasal-verbs-and-multi-word-verbs",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-prepositional-phrases",
+      "title": "Prepositional phrases",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositional-phrases",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-prepositions_2",
+      "title": "Prepositions",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions_2",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "E-PATTERN",
+      "title": "Verb patterns: verb + infinitive or verb + -ing?",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    }
+  ],
+  "editorialNotes": []
+}

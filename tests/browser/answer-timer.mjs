@@ -112,11 +112,11 @@ try {
   await page.getByRole('button', { name: 'Full Paper: MCQs + 4 Answers' }).click()
   await page.getByRole('button', { name: 'Resume attempt' }).click()
   await page.getByText('MCQ section (20 questions)', { exact: true }).waitFor()
-  await page.getByRole('button', { name: 'Finish MCQs — start Q1' }).click()
+  await page.getByRole('button', { name: /^Finish MCQs [—-] start Q1$/ }).click()
   await page.getByText('MCQs completed in 10:00', { exact: false }).waitFor()
   await page.getByText('Current answer allocation: 42:30', { exact: true }).waitFor()
   // Finishing Q1 promptly transfers the saved writing time to the remaining answers.
-  await page.getByRole('button', { name: 'Finish Q1 — start Q2' }).click()
+  await page.getByRole('button', { name: /^Finish Q1 [—-] start Q2$/ }).click()
   await page.getByText(/Current answer allocation: 56:/).waitFor()
   await page.getByRole('button', { name: 'End paper' }).click()
   assert.deepEqual(errors, [], 'No timer JavaScript page errors')

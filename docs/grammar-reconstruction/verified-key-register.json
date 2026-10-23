@@ -1,0 +1,5334 @@
+{
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "method": "Editorial assessment of the stated context, selected answer, distractors and reasoning. Options were rearranged before first publication, retaining correct answer text. Automated structure checks supplement editorial review and do not establish linguistic correctness.",
+  "keys": [
+    {
+      "id": "gv5-d01-q01",
+      "key": 1,
+      "correctText": "The gardener",
+      "explanationHash": "799149e451776d75eed9292cf8cb92573b2a86ecbb1c81a8d14ece2da2bcdaa3",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-d01-q02",
+      "key": 1,
+      "correctText": "-s",
+      "explanationHash": "cc426740fce8fa93c8534257fc44c550962a4e0a9b4231ae65a6f95d63477353",
+      "conceptId": "gv5-d01-m02",
+      "sourceIds": [
+        "source-a016595c7d84bc",
+        "source-f97a2154fcf48e",
+        "source-ebed13706aced2",
+        "source-c81befbecce753",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d01-q03",
+      "key": 0,
+      "correctText": "verb",
+      "explanationHash": "3a2766196207b5b074fd5bb11923e5dd70abf294723b44a7dd6e13bf18b2c96f",
+      "conceptId": "gv5-d01-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-b7519a9fb89ab0",
+        "source-fb277fd6f4e9a7"
+      ]
+    },
+    {
+      "id": "gv5-d01-q04",
+      "key": 2,
+      "correctText": "It is the subject and is affected by the opening.",
+      "explanationHash": "85ee7b7ebe2ea082950799340d9392cb4a419a13e7e02299904c01f1a65e452d",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-d01-q05",
+      "key": 1,
+      "correctText": "to repair the roof",
+      "explanationHash": "f5a9d15688d415e3de4157f09afdda6af5397caa9819875c4b72697501327334",
+      "conceptId": "gv5-d01-m01",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-58353073c867f7",
+        "source-15b65ce5c1b751",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d01-q06",
+      "key": 2,
+      "correctText": "a noun functioning as a modifier",
+      "explanationHash": "1b03b8f55a62a1117c6298a2f0c99c2873cb88d9e4ab17d5bb5284817b762226",
+      "conceptId": "gv5-d01-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-b7519a9fb89ab0",
+        "source-fb277fd6f4e9a7"
+      ]
+    },
+    {
+      "id": "gv5-d01-q07",
+      "key": 0,
+      "correctText": "C",
+      "explanationHash": "2a470eb796e5142db67bc0f7fae295a333127aa0c78593df33d46fdfdbde6632",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-d01-q08",
+      "key": 3,
+      "correctText": "No error",
+      "explanationHash": "467453f2eacc0618e557eb43e9f92a8933d15f319f3b7812fe18f852f3577fbb",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-d01-q09",
+      "key": 0,
+      "correctText": "kind → kindness",
+      "explanationHash": "09e22e5833d3c49d73065e13be581dfdbb25dcd458a9c48bca3663ed1376c696",
+      "conceptId": "gv5-d01-m02",
+      "sourceIds": [
+        "source-a016595c7d84bc",
+        "source-f97a2154fcf48e",
+        "source-ebed13706aced2",
+        "source-c81befbecce753",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d01-q10",
+      "key": 3,
+      "correctText": "an object complement",
+      "explanationHash": "c6caf949e536b448ca6e90866b2278edb3768fe086187d09483f578e95d87856",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-d02-q01",
+      "key": 3,
+      "correctText": "criteria",
+      "explanationHash": "6393a2db1524b38d2dd4fbb93af6bca35c5b4c4c9d850e32d0633b4c7d8eadd0",
+      "conceptId": "gv5-d02-m01",
+      "sourceIds": [
+        "source-5e8743788d0639",
+        "source-fb277fd6f4e9a7",
+        "source-a95ed69b7ca939",
+        "source-b6c1a3fe28cfd4"
+      ]
+    },
+    {
+      "id": "gv5-d02-q02",
+      "key": 1,
+      "correctText": "pieces of information",
+      "explanationHash": "82e303729c6ebbf4cc8cff1e57e917f965e76aa464c0acd1c16946d7a7eda4f4",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-d02-q03",
+      "key": 0,
+      "correctText": "the children’s reading room",
+      "explanationHash": "13bbb7278792678654041ac5df5745f8587b1640a6960684f9e4f2c9a19c559d",
+      "conceptId": "gv5-d02-m03",
+      "sourceIds": [
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-d02-q04",
+      "key": 2,
+      "correctText": "library",
+      "explanationHash": "d1319a18db6bbf2255bf383e04d14c86a6c59a7d7cfa05437faf0f268127fb53",
+      "conceptId": "gv5-d02-m04",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-fb277fd6f4e9a7",
+        "source-fb41efc1d03fc7",
+        "source-d6af2eef369812"
+      ]
+    },
+    {
+      "id": "gv5-d02-q05",
+      "key": 2,
+      "correctText": "Coffees is a conventional count use meaning servings.",
+      "explanationHash": "105e428dcab28cd1cd094a6ff2eafeca75f491afc9b4c4f2f86fd4ccc53e63c0",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-d02-q06",
+      "key": 1,
+      "correctText": "is",
+      "explanationHash": "a26aa81162ae0f01e7db6652b79d04f10b20c4b58504bce5fc6ed43d4512e972",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-d02-q07",
+      "key": 3,
+      "correctText": "No error",
+      "explanationHash": "4d1e00a6bb564bafd520ce029c85ca474057c4c75010193ef1c530b834babcec",
+      "conceptId": "gv5-d02-m03",
+      "sourceIds": [
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-d02-q08",
+      "key": 1,
+      "correctText": "B",
+      "explanationHash": "9010a777acc11cf331f1e56fe94787d8d2d4679ea2964d716a8f8cf118569361",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-d02-q09",
+      "key": 0,
+      "correctText": "sisters-in-law",
+      "explanationHash": "1871bb9e0d12b6085a0174820a52f97a3df0374e9a30160c63cbc931ddf5ac43",
+      "conceptId": "gv5-d02-m01",
+      "sourceIds": [
+        "source-5e8743788d0639",
+        "source-fb277fd6f4e9a7",
+        "source-a95ed69b7ca939",
+        "source-b6c1a3fe28cfd4"
+      ]
+    },
+    {
+      "id": "gv5-d02-q10",
+      "key": 0,
+      "correctText": "Plural agreement presents the members individually.",
+      "explanationHash": "e2f0b94a222daac5967d1516a46cdf84af99cfce257fab4f79ebbbdf43b14bd2",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-d03-q01",
+      "key": 3,
+      "correctText": "an",
+      "explanationHash": "adf66957bdd9ceca7d15c10bcd41db11d79172c401d9536c1cf981a60bf57c6c",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d03-q02",
+      "key": 1,
+      "correctText": "The noun phrase is indefinite but refers to a specific book.",
+      "explanationHash": "cb9d2a703852fb823a8311ce3a48628c89ee820cd4507350aa8723a46b6acd49",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d03-q03",
+      "key": 0,
+      "correctText": "the Indus",
+      "explanationHash": "b108b9f0f6ddcac83b717ddafee14ec41e99fa2452632bd4af32f0e3bb768bdc",
+      "conceptId": "gv5-d03-m02",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d03-q04",
+      "key": 1,
+      "correctText": "my three new folders",
+      "explanationHash": "cd6812fe5dbd434c12757666b112d417d07ec9a829bd83e586051194dee02f3e",
+      "conceptId": "gv5-d03-m03",
+      "sourceIds": [
+        "source-b7519a9fb89ab0",
+        "source-2b69beb54eca89",
+        "source-5de3dcfc2c8b36"
+      ]
+    },
+    {
+      "id": "gv5-d03-q05",
+      "key": 1,
+      "correctText": "a few",
+      "explanationHash": "fd494310af467b57f038d9a9e1f138a89114da9e8681d2b6bb744b8a7795f944",
+      "conceptId": "gv5-d03-m04",
+      "sourceIds": [
+        "source-129df932b28c56",
+        "source-d8d7c7adb6ed42",
+        "source-39615bb337754a",
+        "source-2b69beb54eca89"
+      ]
+    },
+    {
+      "id": "gv5-d03-q06",
+      "key": 0,
+      "correctText": "No proposals were accepted.",
+      "explanationHash": "08451b73004c3ce3ceef144dd3a5de40d3cc889d3223322f8de18124b65609eb",
+      "conceptId": "gv5-d03-m03",
+      "sourceIds": [
+        "source-b7519a9fb89ab0",
+        "source-2b69beb54eca89",
+        "source-5de3dcfc2c8b36"
+      ]
+    },
+    {
+      "id": "gv5-d03-q07",
+      "key": 3,
+      "correctText": "No error",
+      "explanationHash": "81a1c207ded6189838fbb2932280afe200c2cd6ef289325659699430cef0af24",
+      "conceptId": "gv5-d03-m04",
+      "sourceIds": [
+        "source-129df932b28c56",
+        "source-d8d7c7adb6ed42",
+        "source-39615bb337754a",
+        "source-2b69beb54eca89"
+      ]
+    },
+    {
+      "id": "gv5-d03-q08",
+      "key": 2,
+      "correctText": "fewer files",
+      "explanationHash": "26714b3afc66d6ecd314dc7094c9e996da65c89fb3cd1261645547aff7f18139",
+      "conceptId": "gv5-d03-m04",
+      "sourceIds": [
+        "source-129df932b28c56",
+        "source-d8d7c7adb6ed42",
+        "source-39615bb337754a",
+        "source-2b69beb54eca89"
+      ]
+    },
+    {
+      "id": "gv5-d03-q09",
+      "key": 2,
+      "correctText": "In hospital is a usual British patient pattern; in the hospital is a usual American patient pattern.",
+      "explanationHash": "191ee43e5bf30a8b7f875dd00ee015c5f451da0c12424787790581329770f7dc",
+      "conceptId": "gv5-d03-m02",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d03-q10",
+      "key": 0,
+      "correctText": "The violin can have generic reference to the instrument type.",
+      "explanationHash": "75410664e4fdbffcc5380ec2d77a45f54125fb4283e9c01751b559e1a8df7a89",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d04-q01",
+      "key": 3,
+      "correctText": "me",
+      "explanationHash": "e97e9abcce372c7a921e4f8ea03e608f685b81926098b683f295afba5e0f67aa",
+      "conceptId": "gv5-d04-m01",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-d04-q02",
+      "key": 1,
+      "correctText": "Leena blamed herself.",
+      "explanationHash": "8c6c980fd93af1cf428f37c40a6b0bd79a740ecda5818c149c589561e7216e50",
+      "conceptId": "gv5-d04-m01",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-d04-q03",
+      "key": 0,
+      "correctText": "Who",
+      "explanationHash": "11e39dae07be91dd3048db1ac465d45bf8bfd8948e44f053140b5a8117de0cff",
+      "conceptId": "gv5-d04-m02",
+      "sourceIds": [
+        "source-5b7819d35530f4",
+        "source-59422752b96e10",
+        "source-b7519a9fb89ab0",
+        "source-54fe3d4f8cbf83"
+      ]
+    },
+    {
+      "id": "gv5-d04-q04",
+      "key": 2,
+      "correctText": "They normally overlap and can refer to mutual relations among two or more people.",
+      "explanationHash": "aec5fb12324f75532ebbc047b1ae221f8782071ca513b531588c5efbb3f79c97",
+      "conceptId": "gv5-d04-m02",
+      "sourceIds": [
+        "source-5b7819d35530f4",
+        "source-59422752b96e10",
+        "source-b7519a9fb89ab0",
+        "source-54fe3d4f8cbf83"
+      ]
+    },
+    {
+      "id": "gv5-d04-q05",
+      "key": 1,
+      "correctText": "They are",
+      "explanationHash": "ac9df54733fc0c73ab3be9fada1404b4d862580148e8685ad13999b5acb8fba0",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-8491a7a9cd1ef0",
+        "source-c8c8eb61823502",
+        "source-a240777d42125f",
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-d04-q06",
+      "key": 0,
+      "correctText": "It fills a dummy subject position.",
+      "explanationHash": "a531acbfe462286c1541d66951e69fa93347b14e6f70e8b6d56d146eb7d2ee17",
+      "conceptId": "gv5-d04-m04",
+      "sourceIds": [
+        "source-a091ce7ce11036",
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d04-q07",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "bda53424c642bde2fb9d3683ac40af9d054c7764813bdfc43acbbc61886e2dc8",
+      "conceptId": "gv5-d04-m01",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-d04-q08",
+      "key": 2,
+      "correctText": "She has more than one plausible antecedent.",
+      "explanationHash": "031768eff170b6134ca36a53fe014c77ea59f5d03706445935d2f9eac648300b",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-8491a7a9cd1ef0",
+        "source-c8c8eb61823502",
+        "source-a240777d42125f",
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-d04-q09",
+      "key": 1,
+      "correctText": "A locative expression identifying a place.",
+      "explanationHash": "93a20a7a8d70338d83f70cff9e1db893efd7c4fc4a35f9fc90c3130eb0042397",
+      "conceptId": "gv5-d04-m04",
+      "sourceIds": [
+        "source-a091ce7ce11036",
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d04-q10",
+      "key": 3,
+      "correctText": "She can anticipate Nida as its later identification.",
+      "explanationHash": "663820bf5584bcfa6eec0715ae4417dbd226408baf0c5b13a1e98d1affa4f372",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-8491a7a9cd1ef0",
+        "source-c8c8eb61823502",
+        "source-a240777d42125f",
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-d05-q01",
+      "key": 0,
+      "correctText": "written",
+      "explanationHash": "7c28215b857b215bd7eb1999dcc1fd0bc0f331c2cacd0fb43d2652511236f749",
+      "conceptId": "gv5-d05-m01",
+      "sourceIds": [
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794"
+      ]
+    },
+    {
+      "id": "gv5-d05-q02",
+      "key": 1,
+      "correctText": "arrive",
+      "explanationHash": "5fc68f7b38baad965df1ff97be8351aeaacc658a00018f06e428704669fd2c3e",
+      "conceptId": "gv5-d05-m02",
+      "sourceIds": [
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794",
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-f36cfc25889ed4"
+      ]
+    },
+    {
+      "id": "gv5-d05-q03",
+      "key": 0,
+      "correctText": "An object complement describing the plan.",
+      "explanationHash": "58e75060415db358731aa7cf815668f2538506728779621f488c40d7a0dda61c",
+      "conceptId": "gv5-d05-m03",
+      "sourceIds": [
+        "source-22086aff3a3fbc",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-15b65ce5c1b751",
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d05-q04",
+      "key": 3,
+      "correctText": "An active intransitive clause with wax as affected subject.",
+      "explanationHash": "2f757cbc18ea0d1f3619372ff7c6b8c319c6ff23a681840cd6a6ca6a8935749d",
+      "conceptId": "gv5-d05-m04",
+      "sourceIds": [
+        "source-1dcf9da383e052",
+        "source-f0dab5a2a68798",
+        "source-22086aff3a3fbc",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d05-q05",
+      "key": 1,
+      "correctText": "revise",
+      "explanationHash": "c67c9bc58ca34a0ca512bc177cf462fc98bac0bf4d5005337c0914ee4c9d8b97",
+      "conceptId": "gv5-d05-m01",
+      "sourceIds": [
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794"
+      ]
+    },
+    {
+      "id": "gv5-d05-q06",
+      "key": 2,
+      "correctText": "Is she ready?",
+      "explanationHash": "d3a1e4dad4758086dfb730de3790f6b7b9517f926b408ad82771523650e1e27f",
+      "conceptId": "gv5-d05-m02",
+      "sourceIds": [
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794",
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-f36cfc25889ed4"
+      ]
+    },
+    {
+      "id": "gv5-d05-q07",
+      "key": 3,
+      "correctText": "No error",
+      "explanationHash": "51f9d4107b9310f9010d64d274cd5df0519777a233d2908d885978ca112abc0d",
+      "conceptId": "gv5-d05-m02",
+      "sourceIds": [
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794",
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-f36cfc25889ed4"
+      ]
+    },
+    {
+      "id": "gv5-d05-q08",
+      "key": 0,
+      "correctText": "Taste has a dynamic action sense in this sentence.",
+      "explanationHash": "896f00c2430d424a6b295f3b3a55303c4613a50e737fcae01d5c0d20fba1317a",
+      "conceptId": "gv5-d05-m04",
+      "sourceIds": [
+        "source-1dcf9da383e052",
+        "source-f0dab5a2a68798",
+        "source-22086aff3a3fbc",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d05-q09",
+      "key": 2,
+      "correctText": "The tutor gave the learner a booklet.",
+      "explanationHash": "84e4dc607d08411541be87402e3f272be37df56d94a218432e9ce5368abccc36",
+      "conceptId": "gv5-d05-m03",
+      "sourceIds": [
+        "source-22086aff3a3fbc",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-15b65ce5c1b751",
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d05-q10",
+      "key": 1,
+      "correctText": "may",
+      "explanationHash": "8a8530e222e94f8b4fb7e3866afbd38824c83b25be6b09db010ed3b848512a99",
+      "conceptId": "gv5-d05-m01",
+      "sourceIds": [
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794"
+      ]
+    },
+    {
+      "id": "gv5-d06-q01",
+      "key": 2,
+      "correctText": "does not",
+      "explanationHash": "00c0c490b1a9ca4ea906212ff05de7ab14020eeb7a93530861000a87a0869c7b",
+      "conceptId": "gv5-d06-m01",
+      "sourceIds": [
+        "source-c84bd5cbd02264",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d06-q02",
+      "key": 1,
+      "correctText": "is measuring",
+      "explanationHash": "a98bef26a41d7f1f2ac979f10f88f16fe96c12a1d2b0315ca410b012bec3669f",
+      "conceptId": "gv5-d06-m02",
+      "sourceIds": [
+        "source-2bc25481c69832",
+        "source-f0dab5a2a68798"
+      ]
+    },
+    {
+      "id": "gv5-d06-q03",
+      "key": 1,
+      "correctText": "written",
+      "explanationHash": "f79ec186efe7c174e899d6e35c6f9717cc55b54fec9fd00fc1e72b9873de6024",
+      "conceptId": "gv5-d06-m03",
+      "sourceIds": [
+        "source-ca6ab50c9fe853",
+        "source-c1a93519194932",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d06-q04",
+      "key": 0,
+      "correctText": "The staff have been checking the seals.",
+      "explanationHash": "0af1eeee03ee0b388a2a45aec25683c516404fc72f82d1bbf1fe96d8c7691e63",
+      "conceptId": "gv5-d06-m04",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-aa53e406bdc491",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d06-q05",
+      "key": 0,
+      "correctText": "B",
+      "explanationHash": "0416322074bbfbe398e5f19131f1eed7372f098ef5c5babf54c46f99224b8185",
+      "conceptId": "gv5-d06-m01",
+      "sourceIds": [
+        "source-c84bd5cbd02264",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d06-q06",
+      "key": 3,
+      "correctText": "No error",
+      "explanationHash": "9040183678d31b5fc5b2391a26dbda0859630a60798357a249a92cf1be9cda1c",
+      "conceptId": "gv5-d06-m02",
+      "sourceIds": [
+        "source-2bc25481c69832",
+        "source-f0dab5a2a68798"
+      ]
+    },
+    {
+      "id": "gv5-d06-q07",
+      "key": 2,
+      "correctText": "A state of acquaintance extending from a past starting point towards now.",
+      "explanationHash": "88ff7cdc2e83bc3df752803a6b7a253b9bdae7388e2cd0fb170f15363d9933f8",
+      "conceptId": "gv5-d06-m03",
+      "sourceIds": [
+        "source-ca6ab50c9fe853",
+        "source-c1a93519194932",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d06-q08",
+      "key": 3,
+      "correctText": "Has",
+      "explanationHash": "086dfe0d1e66aa554fbf374c3ed6c958f9e6b9403d59208a9af9dfacf3cfff26",
+      "conceptId": "gv5-d06-m04",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-aa53e406bdc491",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d07-q01",
+      "key": 1,
+      "correctText": "lock",
+      "explanationHash": "89617a3cf32d5af471c172c143f52751ef5188626bfa322176355ba3bbcb67f0",
+      "conceptId": "gv5-d07-m01",
+      "sourceIds": [
+        "source-007ab40b0b452f",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d07-q02",
+      "key": 3,
+      "correctText": "were carrying",
+      "explanationHash": "c68abcabcc9bd5f3564ee5e0232cc7e6fc500d5f1f361bb6d6af83e046385e95",
+      "conceptId": "gv5-d07-m02",
+      "sourceIds": [
+        "source-37d1fb575c6adc",
+        "source-f0dab5a2a68798"
+      ]
+    },
+    {
+      "id": "gv5-d07-q03",
+      "key": 3,
+      "correctText": "gone",
+      "explanationHash": "3e230845c30ed09ed0d99e099268a0dfbda468de29f6f09fb2aa80765e3b226d",
+      "conceptId": "gv5-d07-m03",
+      "sourceIds": [
+        "source-eecf7dafccbf50",
+        "source-b02fa179bf3088"
+      ]
+    },
+    {
+      "id": "gv5-d07-q04",
+      "key": 2,
+      "correctText": "Sara is used to working nights.",
+      "explanationHash": "d3b0b395bd409015cd4ca2be3a09de6d7c39fdcc03c9d2280df11588bbe6ba36",
+      "conceptId": "gv5-d07-m04",
+      "sourceIds": [
+        "source-b08f94d0abde7f",
+        "source-f8ef51164863ad"
+      ]
+    },
+    {
+      "id": "gv5-d07-q05",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "453a13d643ffa629a7691cf044e2ab71bc7fa87528a1cd38db35bf31641fdc9e",
+      "conceptId": "gv5-d07-m01",
+      "sourceIds": [
+        "source-007ab40b0b452f",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d07-q06",
+      "key": 2,
+      "correctText": "had been inspecting",
+      "explanationHash": "54c784a9e546b0a8c06c55d45034da6508e49472a34ed156a8c965161a096d75",
+      "conceptId": "gv5-d07-m03",
+      "sourceIds": [
+        "source-eecf7dafccbf50",
+        "source-b02fa179bf3088"
+      ]
+    },
+    {
+      "id": "gv5-d07-q07",
+      "key": 0,
+      "correctText": "Rebuilding was in progress at the relevant past time.",
+      "explanationHash": "3fb6a2dd78202b060d9cd127528f2b53454c0dadd862a0ab34cf46bccdf242c1",
+      "conceptId": "gv5-d07-m02",
+      "sourceIds": [
+        "source-37d1fb575c6adc",
+        "source-f0dab5a2a68798"
+      ]
+    },
+    {
+      "id": "gv5-d07-q08",
+      "key": 1,
+      "correctText": "use",
+      "explanationHash": "c64c71e135288544ce792a919b2027a54df3768181e445c221b40afbdaf7efb4",
+      "conceptId": "gv5-d07-m04",
+      "sourceIds": [
+        "source-b08f94d0abde7f",
+        "source-f8ef51164863ad"
+      ]
+    },
+    {
+      "id": "gv5-d08-q01",
+      "key": 2,
+      "correctText": "has been checking",
+      "explanationHash": "57d9f65f540c5019c6c23d63bfc1dcf1c93e477e9c5570b0b7a8cba01ae5504f",
+      "conceptId": "gv5-d08-m01",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-a79546fdace5e0",
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-d08-q02",
+      "key": 2,
+      "correctText": "Whether the clock is now completely repaired",
+      "explanationHash": "fafc20338d017ebd634756ecfd986c1ed8c8e0409265ead2ba9c74e5f9ff4ce5",
+      "conceptId": "gv5-d08-m01",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-a79546fdace5e0",
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-d08-q03",
+      "key": 3,
+      "correctText": "We have three storage rooms.",
+      "explanationHash": "3d2f79e35997c05dfbbd2f8ac74dd5ef614bca5edbc91331c21f43b78bd080e9",
+      "conceptId": "gv5-d08-m02",
+      "sourceIds": [
+        "source-f0dab5a2a68798",
+        "source-88d14ab6136199"
+      ]
+    },
+    {
+      "id": "gv5-d08-q04",
+      "key": 3,
+      "correctText": "Tasting describes deliberate sampling, a dynamic interpretation.",
+      "explanationHash": "8920c14f9d6f2fdf5adf9386b689d58994e3a27352fdc4c02aa37f5c7bfcde77",
+      "conceptId": "gv5-d08-m02",
+      "sourceIds": [
+        "source-f0dab5a2a68798",
+        "source-88d14ab6136199"
+      ]
+    },
+    {
+      "id": "gv5-d08-q05",
+      "key": 1,
+      "correctText": "since",
+      "explanationHash": "dda86a49be20ac024c29059a33764ca5e07fb24646c8811e08d5edde6feec2f8",
+      "conceptId": "gv5-d08-m03",
+      "sourceIds": [
+        "source-aa53e406bdc491",
+        "source-ef3e812f3fb26c",
+        "source-44c9bc31ab8158",
+        "source-eecf7dafccbf50"
+      ]
+    },
+    {
+      "id": "gv5-d08-q06",
+      "key": 0,
+      "correctText": "for",
+      "explanationHash": "424c652d4147d805fbf703d6de59d74ce2a1d3170717918ca0b5ed9b45fa4c76",
+      "conceptId": "gv5-d08-m03",
+      "sourceIds": [
+        "source-aa53e406bdc491",
+        "source-ef3e812f3fb26c",
+        "source-44c9bc31ab8158",
+        "source-eecf7dafccbf50"
+      ]
+    },
+    {
+      "id": "gv5-d08-q07",
+      "key": 1,
+      "correctText": "Submit the form by Friday.",
+      "explanationHash": "fc511b6cc0ee54d5a8c14dcad3c3106c18a8831e7c5a89cc0d21ed480e63d96b",
+      "conceptId": "gv5-d08-m03",
+      "sourceIds": [
+        "source-aa53e406bdc491",
+        "source-ef3e812f3fb26c",
+        "source-44c9bc31ab8158",
+        "source-eecf7dafccbf50"
+      ]
+    },
+    {
+      "id": "gv5-d08-q08",
+      "key": 0,
+      "correctText": "British English often uses I have just sent it; American English also commonly uses I just sent it.",
+      "explanationHash": "c40d135bede7dd5118cb8481a98d3ca94da62551c5e7b1e8578aec3176017fcb",
+      "conceptId": "gv5-d08-m04",
+      "sourceIds": [
+        "source-35b08d956b9e9f",
+        "source-b95713ca5526fb",
+        "source-af1f4261eb75b1",
+        "source-37be5609b5c953",
+        "source-9761ab1edb0e5f",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d08-q09",
+      "key": 1,
+      "correctText": "No error: the perfect progressive naturally presents the recent checking activity.",
+      "explanationHash": "a8efcb526d362bb81b3e9848e282f29ae053f03742524f661097437fd87043d7",
+      "conceptId": "gv5-d08-m01",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-a79546fdace5e0",
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-d08-q10",
+      "key": 0,
+      "correctText": "Lately normally frames a recent interval; recently also readily locates a single past event.",
+      "explanationHash": "e98ad53a681e3732ef96fc430f2a8e009ef37ac3113d4dabfc9fc8613e3b75c4",
+      "conceptId": "gv5-d08-m04",
+      "sourceIds": [
+        "source-35b08d956b9e9f",
+        "source-b95713ca5526fb",
+        "source-af1f4261eb75b1",
+        "source-37be5609b5c953",
+        "source-9761ab1edb0e5f",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d09-q01",
+      "key": 2,
+      "correctText": "She will inspect the roof.",
+      "explanationHash": "24000fa8aad2520ad3f057e94a7658ad3a9e4c558c40a24defc1cff9495298d0",
+      "conceptId": "gv5-d09-m01",
+      "sourceIds": [
+        "source-e48023284fa4ed",
+        "source-60a104cf8211b4"
+      ]
+    },
+    {
+      "id": "gv5-d09-q02",
+      "key": 1,
+      "correctText": "Proposing joint action",
+      "explanationHash": "1ea8e4e7ccf5f01aa1f8fa07ae52ef5799ff2118c9d8a819bc4b94814dac66e3",
+      "conceptId": "gv5-d09-m01",
+      "sourceIds": [
+        "source-e48023284fa4ed",
+        "source-60a104cf8211b4"
+      ]
+    },
+    {
+      "id": "gv5-d09-q03",
+      "key": 1,
+      "correctText": "The construction can present a prior intention.",
+      "explanationHash": "6633aa8474b1a682009b003c07a6d601e9e000bc725505ae862006e897a25fdf",
+      "conceptId": "gv5-d09-m01",
+      "sourceIds": [
+        "source-e48023284fa4ed",
+        "source-60a104cf8211b4"
+      ]
+    },
+    {
+      "id": "gv5-d09-q04",
+      "key": 1,
+      "correctText": "A present-simple schedule can refer to a future event.",
+      "explanationHash": "ca1acb5e213bff4bba38f514ee5128723016185b9ebb0ccdd6f6273a1fc8cebd",
+      "conceptId": "gv5-d09-m02",
+      "sourceIds": [
+        "source-fd380d90a9dc1a",
+        "source-5ca26d5f6101ad"
+      ]
+    },
+    {
+      "id": "gv5-d09-q05",
+      "key": 3,
+      "correctText": "are meeting",
+      "explanationHash": "fc089b7b8f7099385a22eb76deee4504a0ca085451978b287e7be9bde9238ed3",
+      "conceptId": "gv5-d09-m02",
+      "sourceIds": [
+        "source-fd380d90a9dc1a",
+        "source-5ca26d5f6101ad"
+      ]
+    },
+    {
+      "id": "gv5-d09-q06",
+      "key": 0,
+      "correctText": "will have been waiting",
+      "explanationHash": "08556571f84f751f127b095d44f2bcaed7b1731373ea5e9cfd65502f1b19e08f",
+      "conceptId": "gv5-d09-m03",
+      "sourceIds": [
+        "source-1a60bd11a38c5f",
+        "source-265ff20b9cb0da",
+        "source-8c254b0b44ea03",
+        "source-88d14ab6136199"
+      ]
+    },
+    {
+      "id": "gv5-d09-q07",
+      "key": 2,
+      "correctText": "read",
+      "explanationHash": "54c0e2bec2e24af5e56507dbb5c96cd3fb94c3f161592ad3cfed3ed50a7f3e2c",
+      "conceptId": "gv5-d09-m03",
+      "sourceIds": [
+        "source-1a60bd11a38c5f",
+        "source-265ff20b9cb0da",
+        "source-8c254b0b44ea03",
+        "source-88d14ab6136199"
+      ]
+    },
+    {
+      "id": "gv5-d09-q08",
+      "key": 0,
+      "correctText": "No error: will can express willingness in the condition.",
+      "explanationHash": "96b43a515d0bdb29e55856339a7bbeb0332357b2d6c3b69936bdcc4220e73832",
+      "conceptId": "gv5-d09-m04",
+      "sourceIds": [
+        "source-901e6631c7d82a",
+        "source-9fcbdb35005527",
+        "source-89176b529bbc02",
+        "source-ef3e812f3fb26c"
+      ]
+    },
+    {
+      "id": "gv5-d09-q09",
+      "key": 3,
+      "correctText": "I wonder when the guest will arrive.",
+      "explanationHash": "a41752a9f4fb0a09d80c5f108907540aa4c1f5d97974aee4bfd44e01aafbacef",
+      "conceptId": "gv5-d09-m04",
+      "sourceIds": [
+        "source-901e6631c7d82a",
+        "source-9fcbdb35005527",
+        "source-89176b529bbc02",
+        "source-ef3e812f3fb26c"
+      ]
+    },
+    {
+      "id": "gv5-d09-q10",
+      "key": 0,
+      "correctText": "would leave",
+      "explanationHash": "34d629151dfdffbad0c9063bb3443281cfbeac50cb00731774d97246bd57e53a",
+      "conceptId": "gv5-d09-m04",
+      "sourceIds": [
+        "source-901e6631c7d82a",
+        "source-9fcbdb35005527",
+        "source-89176b529bbc02",
+        "source-ef3e812f3fb26c"
+      ]
+    },
+    {
+      "id": "gv5-d10-q01",
+      "key": 3,
+      "correctText": "is",
+      "explanationHash": "6e6a216df512823e705d61350a30126c7fe7e6eaacd984edee028a255d2bef67",
+      "conceptId": "gv5-d10-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-dee460d0260d9b",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d10-q02",
+      "key": 1,
+      "correctText": "They do not normally distinguish singular from plural: she arrived / they arrived.",
+      "explanationHash": "5613d76d2baad5864b0dd7fba7ea0c41c9c32384ad642e353126dbc225f60787",
+      "conceptId": "gv5-d10-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-dee460d0260d9b",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d10-q03",
+      "key": 0,
+      "correctText": "A committee can take singular unit agreement or plural member agreement.",
+      "explanationHash": "d7a655efab8b8713534e98e7db63e8e8df2eb4afb9911c7ce3580fd235d68572",
+      "conceptId": "gv5-d10-m02",
+      "sourceIds": [
+        "source-fa438d9714f33f",
+        "source-5e8743788d0639",
+        "source-8cf60a1688508e",
+        "source-b558c0e9b89f1a",
+        "source-a49c734e279b1a",
+        "source-6d5d2fbb856026",
+        "source-dee460d0260d9b"
+      ]
+    },
+    {
+      "id": "gv5-d10-q04",
+      "key": 1,
+      "correctText": "No error: everyone takes has, while singular their supplies inclusive reference.",
+      "explanationHash": "07eaf3486c7541d730df756a36a0ae5831a1c5ec8bef28505439d1311fa57a11",
+      "conceptId": "gv5-d10-m02",
+      "sourceIds": [
+        "source-fa438d9714f33f",
+        "source-5e8743788d0639",
+        "source-8cf60a1688508e",
+        "source-b558c0e9b89f1a",
+        "source-a49c734e279b1a",
+        "source-6d5d2fbb856026",
+        "source-dee460d0260d9b"
+      ]
+    },
+    {
+      "id": "gv5-d10-q05",
+      "key": 1,
+      "correctText": "are",
+      "explanationHash": "4a8d3701643799912e7a120e93b9054bcb494861138fbd579f5b69cc8f30e984",
+      "conceptId": "gv5-d10-m03",
+      "sourceIds": [
+        "source-b04555eae72042",
+        "source-dee460d0260d9b",
+        "source-f36cfc25889ed4",
+        "source-43b3913aec1e91"
+      ]
+    },
+    {
+      "id": "gv5-d10-q06",
+      "key": 0,
+      "correctText": "explain",
+      "explanationHash": "21c99dbbfcd5bca5cef3d2db7d5254a1080574fb702369cdfeba5dc2260741b9",
+      "conceptId": "gv5-d10-m03",
+      "sourceIds": [
+        "source-b04555eae72042",
+        "source-dee460d0260d9b",
+        "source-f36cfc25889ed4",
+        "source-43b3913aec1e91"
+      ]
+    },
+    {
+      "id": "gv5-d10-q07",
+      "key": 0,
+      "correctText": "is",
+      "explanationHash": "1037327a4326b1fe4016c6e36ee09314ebe5f6402af6b3519cea0faa15a26912",
+      "conceptId": "gv5-d10-m04",
+      "sourceIds": [
+        "source-dee460d0260d9b",
+        "source-5e8743788d0639",
+        "source-e7e8a77edf2a6f",
+        "source-0a1520eb3317af",
+        "source-3e42fea943d431"
+      ]
+    },
+    {
+      "id": "gv5-d10-q08",
+      "key": 2,
+      "correctText": "has",
+      "explanationHash": "e9891a0d7d1a7ec85facc081c34769fd160337c421b39ff350b823425974b42e",
+      "conceptId": "gv5-d10-m04",
+      "sourceIds": [
+        "source-dee460d0260d9b",
+        "source-5e8743788d0639",
+        "source-e7e8a77edf2a6f",
+        "source-0a1520eb3317af",
+        "source-3e42fea943d431"
+      ]
+    },
+    {
+      "id": "gv5-d10-q09",
+      "key": 2,
+      "correctText": "Statistics is demanding; these statistics are incomplete.",
+      "explanationHash": "007f66f6806be6b5da745f6a6ae10e05250115f3cb5bb65f447d1fb414eeb2aa",
+      "conceptId": "gv5-d10-m04",
+      "sourceIds": [
+        "source-dee460d0260d9b",
+        "source-5e8743788d0639",
+        "source-e7e8a77edf2a6f",
+        "source-0a1520eb3317af",
+        "source-3e42fea943d431"
+      ]
+    },
+    {
+      "id": "gv5-d10-q10",
+      "key": 3,
+      "correctText": "Both singular and plural agreement occur; interpretation and register guidance should be stated.",
+      "explanationHash": "7c38d74d4809423c5264e43106ad6ebba18b74e2ac51180f41aa801d5f2fcae0",
+      "conceptId": "gv5-d10-m02",
+      "sourceIds": [
+        "source-fa438d9714f33f",
+        "source-5e8743788d0639",
+        "source-8cf60a1688508e",
+        "source-b558c0e9b89f1a",
+        "source-a49c734e279b1a",
+        "source-6d5d2fbb856026",
+        "source-dee460d0260d9b"
+      ]
+    },
+    {
+      "id": "gv5-d11-q01",
+      "key": 3,
+      "correctText": "quiet is an adjective functioning as subject complement",
+      "explanationHash": "e620691ddd5ad8d0c043658045317f1c94e27e28c5c48a03ea7d9f71fbe6e2d5",
+      "conceptId": "gv5-d11-m01",
+      "sourceIds": [
+        "source-605aba8561eab2",
+        "source-58353073c867f7",
+        "source-1a30fc7f658cdc"
+      ]
+    },
+    {
+      "id": "gv5-d11-q02",
+      "key": 0,
+      "correctText": "exhausted",
+      "explanationHash": "64d336cafe920026121991d7bdd24bc5ee416781e033583976bf1349437642e3",
+      "conceptId": "gv5-d11-m01",
+      "sourceIds": [
+        "source-605aba8561eab2",
+        "source-58353073c867f7",
+        "source-1a30fc7f658cdc"
+      ]
+    },
+    {
+      "id": "gv5-d11-q03",
+      "key": 2,
+      "correctText": "colder than",
+      "explanationHash": "bea8af97d29d010a31b46f61dcd94c805792ab91d91e562568d2fac1d311a972",
+      "conceptId": "gv5-d11-m02",
+      "sourceIds": [
+        "source-8ddf38a0fd2628",
+        "source-930d01e686ac67",
+        "source-c9e3872504dda3"
+      ]
+    },
+    {
+      "id": "gv5-d11-q04",
+      "key": 2,
+      "correctText": "much",
+      "explanationHash": "764c5c2cc0ce79a8d78fe2f04c4575873ae4f7d474dcf475959925f51cde4d41",
+      "conceptId": "gv5-d11-m02",
+      "sourceIds": [
+        "source-8ddf38a0fd2628",
+        "source-930d01e686ac67",
+        "source-c9e3872504dda3"
+      ]
+    },
+    {
+      "id": "gv5-d11-q05",
+      "key": 1,
+      "correctText": "It places a submission within a relatively strong group.",
+      "explanationHash": "df5b6892030f6addbc305a7c9ce15d53281be575dc47b98d6a62530ab96825f0",
+      "conceptId": "gv5-d11-m02",
+      "sourceIds": [
+        "source-8ddf38a0fd2628",
+        "source-930d01e686ac67",
+        "source-c9e3872504dda3"
+      ]
+    },
+    {
+      "id": "gv5-d11-q06",
+      "key": 1,
+      "correctText": "hard",
+      "explanationHash": "7b2b2633289af5637f2350bea51442ba90deef13895d122eb63530211dc74206",
+      "conceptId": "gv5-d11-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-8ddf38a0fd2628",
+        "source-886c8cf34966b2",
+        "source-e2ea6705d28178",
+        "source-ca2d512f202f95"
+      ]
+    },
+    {
+      "id": "gv5-d11-q07",
+      "key": 0,
+      "correctText": "The clerk replied politely.",
+      "explanationHash": "65d44aaf1cd3ca2f102ca015c8f6e8576b58b6730e1b10297c06c7ea2d542cd8",
+      "conceptId": "gv5-d11-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-8ddf38a0fd2628",
+        "source-886c8cf34966b2",
+        "source-e2ea6705d28178",
+        "source-ca2d512f202f95"
+      ]
+    },
+    {
+      "id": "gv5-d11-q08",
+      "key": 3,
+      "correctText": "They intended to withhold an answer.",
+      "explanationHash": "c617d7f860088e8f51a937a488d727d7b40ff179eb67f1e51dbff7649453ad1d",
+      "conceptId": "gv5-d11-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-8ddf38a0fd2628",
+        "source-886c8cf34966b2",
+        "source-e2ea6705d28178",
+        "source-ca2d512f202f95"
+      ]
+    },
+    {
+      "id": "gv5-d11-q09",
+      "key": 1,
+      "correctText": "Only Maya sent the map.",
+      "explanationHash": "4a305d5a8efb6ffb0cc7158f511b48cf4ef12b85d04678bb5e32bcc14972b829",
+      "conceptId": "gv5-d11-m04",
+      "sourceIds": [
+        "source-5c48dc3ab4712a",
+        "source-886c8cf34966b2",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d11-q10",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "44cf587e9747f74f1884f66ab30c864cd01f251d4751a8834fb1115250b1c167",
+      "conceptId": "gv5-d11-m04",
+      "sourceIds": [
+        "source-5c48dc3ab4712a",
+        "source-886c8cf34966b2",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d12-q01",
+      "key": 0,
+      "correctText": "on",
+      "explanationHash": "e19241f1c627b19902bda0b5347b556af7ce177968320bd5d4153b23b5e05f5f",
+      "conceptId": "gv5-d12-m01",
+      "sourceIds": [
+        "source-70e3bfdac01616",
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-d12-q02",
+      "key": 3,
+      "correctText": "Send the form by Friday.",
+      "explanationHash": "2c15bf5ab0e8e032d9279d65e55d88c495162b2d417fce7cc979d7736fe65612",
+      "conceptId": "gv5-d12-m01",
+      "sourceIds": [
+        "source-70e3bfdac01616",
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-d12-q03",
+      "key": 0,
+      "correctText": "without + -ing clause",
+      "explanationHash": "4c5f461a534f86955d86a99b9ee6cb5f7eaaa62c9be1bb44967e78e3a8447b27",
+      "conceptId": "gv5-d12-m02",
+      "sourceIds": [
+        "source-84ae307be3e618",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d12-q04",
+      "key": 1,
+      "correctText": "Which chair did you sit on? is standard preposition stranding.",
+      "explanationHash": "5cbf07c1bb5b3665fc72aee0bdf2654d0833bbc15cf52215cfdd32d48d942a46",
+      "conceptId": "gv5-d12-m02",
+      "sourceIds": [
+        "source-84ae307be3e618",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d12-q05",
+      "key": 0,
+      "correctText": "receiving",
+      "explanationHash": "34fefed2991cee379de967c47ed37c67f8ccf7dfe11ee0234e75fe1228ad2d45",
+      "conceptId": "gv5-d12-m03",
+      "sourceIds": [
+        "source-70e3bfdac01616",
+        "source-84ae307be3e618",
+        "source-ccfbea5f751a50"
+      ]
+    },
+    {
+      "id": "gv5-d12-q06",
+      "key": 3,
+      "correctText": "She insisted that the figures were correct.",
+      "explanationHash": "9580de62a8ec264affdcea0dd0064cdf4c40f5fff78c5eb34b61f89a45aaa814",
+      "conceptId": "gv5-d12-m03",
+      "sourceIds": [
+        "source-70e3bfdac01616",
+        "source-84ae307be3e618",
+        "source-ccfbea5f751a50"
+      ]
+    },
+    {
+      "id": "gv5-d12-q07",
+      "key": 2,
+      "correctText": "Turn it off.",
+      "explanationHash": "b97490413425bf394701c679ce6a067909193db355154f44768091fcf3fa74fa",
+      "conceptId": "gv5-d12-m04",
+      "sourceIds": [
+        "source-dc50449ecddf62",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d12-q08",
+      "key": 1,
+      "correctText": "put up with the noise",
+      "explanationHash": "345651dcf38fa02d162c946c153f7e794fd6d768559feddb08bbaea84c1b73a4",
+      "conceptId": "gv5-d12-m04",
+      "sourceIds": [
+        "source-dc50449ecddf62",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d12-q09",
+      "key": 1,
+      "correctText": "She had left before the bus arrived.",
+      "explanationHash": "83ff5d232438d4739265310d7c2e538bf78e7100cf322866d9853060b2ad5dce",
+      "conceptId": "gv5-d07-m03",
+      "sourceIds": [
+        "source-eecf7dafccbf50",
+        "source-b02fa179bf3088"
+      ]
+    },
+    {
+      "id": "gv5-d12-q10",
+      "key": 2,
+      "correctText": "B",
+      "explanationHash": "7eeb61925d4e46efb05496480a3948e4fa526ecd15bc582c00ddbd5ded94df07",
+      "conceptId": "gv5-d10-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-dee460d0260d9b",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-d13-q01",
+      "key": 0,
+      "correctText": "suitcase",
+      "explanationHash": "528e5f42c84541469e808b26ec936147e388f90f414cc9480056b8aa9391efbc",
+      "conceptId": "gv5-d13-m01",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-a26f490947be2a",
+        "source-3cb399907c285d",
+        "source-7fbbabb6fbc6f9",
+        "source-84ae307be3e618"
+      ]
+    },
+    {
+      "id": "gv5-d13-q02",
+      "key": 1,
+      "correctText": "might have missed",
+      "explanationHash": "210687cbbd1c849c574c8995f4f5be8478a6773ebdd6b238f699f3a866ddb0e7",
+      "conceptId": "gv5-d13-m01",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-a26f490947be2a",
+        "source-3cb399907c285d",
+        "source-7fbbabb6fbc6f9",
+        "source-84ae307be3e618"
+      ]
+    },
+    {
+      "id": "gv5-d13-q03",
+      "key": 1,
+      "correctText": "prepositional phrase",
+      "explanationHash": "8d90da20f1cf69517d6e1e54df6852b70ca4736fad7ba7f63239bd4d0777b027",
+      "conceptId": "gv5-d13-m01",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-a26f490947be2a",
+        "source-3cb399907c285d",
+        "source-7fbbabb6fbc6f9",
+        "source-84ae307be3e618"
+      ]
+    },
+    {
+      "id": "gv5-d13-q04",
+      "key": 0,
+      "correctText": "In “the chair beside the window”, beside the window is a prepositional phrase functioning as postmodifier.",
+      "explanationHash": "72ed8144f8ea74459731b9532d8eb27f4ba6be7d17cd3891e191259477067e21",
+      "conceptId": "gv5-d13-m02",
+      "sourceIds": [
+        "source-49ac929acd7fe5",
+        "source-d6af2eef369812",
+        "source-63b41bcf84b05f",
+        "source-3cb399907c285d"
+      ]
+    },
+    {
+      "id": "gv5-d13-q05",
+      "key": 2,
+      "correctText": "A complement is licensed by its head and may be optional in a given lexical pattern.",
+      "explanationHash": "658482e13573b40063eaf3c0d42fba4a1f2636c652a0a5cc569e0e1f34753af1",
+      "conceptId": "gv5-d13-m02",
+      "sourceIds": [
+        "source-49ac929acd7fe5",
+        "source-d6af2eef369812",
+        "source-63b41bcf84b05f",
+        "source-3cb399907c285d"
+      ]
+    },
+    {
+      "id": "gv5-d13-q06",
+      "key": 3,
+      "correctText": "is",
+      "explanationHash": "4473dc6aded193d9d24c6596df89e0222b318d57def6c507d274cd7fc5131535",
+      "conceptId": "gv5-d13-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-d6af2eef369812",
+        "source-1ceaeffe194685"
+      ]
+    },
+    {
+      "id": "gv5-d13-q07",
+      "key": 2,
+      "correctText": "Different possible attachments of with the binoculars.",
+      "explanationHash": "e19e908b60bc78714f09575c3d7adff3598fd68f30f92f2761b6f8027c0ecb99",
+      "conceptId": "gv5-d13-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-d6af2eef369812",
+        "source-1ceaeffe194685"
+      ]
+    },
+    {
+      "id": "gv5-d13-q08",
+      "key": 1,
+      "correctText": "The replacement supports the grouping as a noun phrase in that object position.",
+      "explanationHash": "42a00e724772006d4c714d5d047273c09f0ba54fda0a2a4105ea3d3bcd9f8213",
+      "conceptId": "gv5-d13-m04",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812"
+      ]
+    },
+    {
+      "id": "gv5-d13-q09",
+      "key": 3,
+      "correctText": "[NP [AP very helpful] colleague]",
+      "explanationHash": "5fdf0580bc67dfae3e5577f4a722763d532e12e1a43d25dfedb335672ec40d35",
+      "conceptId": "gv5-d13-m04",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812"
+      ]
+    },
+    {
+      "id": "gv5-d13-q10",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "4507572bf38c3f6d4877135efdbbf5f58a84504553653a8a50cc49c2bc54949b",
+      "conceptId": "gv5-d13-m04",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812"
+      ]
+    },
+    {
+      "id": "gv5-d14-q01",
+      "key": 2,
+      "correctText": "because the gate was locked",
+      "explanationHash": "4ccd45b10806c8785714771f49d2e31ed7f2527063e70293f8ae48cdf4403fb0",
+      "conceptId": "gv5-d14-m01",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-1ceaeffe194685"
+      ]
+    },
+    {
+      "id": "gv5-d14-q02",
+      "key": 0,
+      "correctText": "A non-finite clause functioning as subject",
+      "explanationHash": "a7e5cd43e67e99e138fac54eeab790e9ad3c503132fe56c1d76e4380c6c7149a",
+      "conceptId": "gv5-d14-m01",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-1ceaeffe194685"
+      ]
+    },
+    {
+      "id": "gv5-d14-q03",
+      "key": 3,
+      "correctText": "Interrogative form functioning as a request",
+      "explanationHash": "12d31ab079786b3eacb6b193f9a720bc72b5b4481a34d260f82e39e9ef396785",
+      "conceptId": "gv5-d14-m02",
+      "sourceIds": [
+        "source-ef9d400d1dbaab",
+        "source-1ceaeffe194685",
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d14-q04",
+      "key": 2,
+      "correctText": "Who authorised the transfer?",
+      "explanationHash": "67bdbdd1a57f412e601b72d948f1ba6cb961a4c001b916ee081353d00f072df9",
+      "conceptId": "gv5-d14-m02",
+      "sourceIds": [
+        "source-ef9d400d1dbaab",
+        "source-1ceaeffe194685",
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d14-q05",
+      "key": 0,
+      "correctText": "How carefully she worked!",
+      "explanationHash": "8d210baee235c95ad38506c6d9aa3f14916ed598581f40cd460872e03539a725",
+      "conceptId": "gv5-d14-m02",
+      "sourceIds": [
+        "source-ef9d400d1dbaab",
+        "source-1ceaeffe194685",
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d14-q06",
+      "key": 1,
+      "correctText": "The assistant opened the post, and her colleague checked the register.",
+      "explanationHash": "1fc1d08b7a0492cda796808c0571504847d8da498edcf6914f499b26fe0c66e1",
+      "conceptId": "gv5-d14-m03",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-1ceaeffe194685",
+        "source-ef9d400d1dbaab",
+        "source-d6af2eef369812",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d14-q07",
+      "key": 1,
+      "correctText": "There is a main finite clause containing an infinitival complement clause; labels such as complex depend on the stated convention.",
+      "explanationHash": "a56bae576524c9859da809a565cb2c821f7e97f55a205ccd28fcd033f444b9d9",
+      "conceptId": "gv5-d14-m03",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-1ceaeffe194685",
+        "source-ef9d400d1dbaab",
+        "source-d6af2eef369812",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d14-q08",
+      "key": 0,
+      "correctText": "The bell rang; the doors opened.",
+      "explanationHash": "1dd16493481f766b0c0bd7b5b8aafb41b722e59d142d94cf248fb50772c2ef67",
+      "conceptId": "gv5-d14-m04",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-1ceaeffe194685",
+        "source-93f2b5c2495752",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d14-q09",
+      "key": 3,
+      "correctText": "No error",
+      "explanationHash": "e1797ed6cfc5c456b04991a6cd7d94caff2bacaabb9c0821e95d9dafcfe435d6",
+      "conceptId": "gv5-d14-m04",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-1ceaeffe194685",
+        "source-93f2b5c2495752",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d14-q10",
+      "key": 1,
+      "correctText": "However is a linking adverb and does not itself coordinate the independent clauses.",
+      "explanationHash": "46a1f10e1681cd3a98c248b74c7ac390c6918524aae6d15bd50f28ba72c2f426",
+      "conceptId": "gv5-d14-m04",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-1ceaeffe194685",
+        "source-93f2b5c2495752",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d15-q01",
+      "key": 0,
+      "correctText": "The applicants who registered online received a link.",
+      "explanationHash": "7b373a64e6e6c8921ea5aae70126cf14109e346ef158ff666fcc59cfbb62d132",
+      "conceptId": "gv5-d15-m01",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1",
+        "source-5b7819d35530f4",
+        "source-028ce099d2bb32",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d15-q02",
+      "key": 1,
+      "correctText": "whose",
+      "explanationHash": "e279c7b7f703f8569f877d8f5eef769e808c5269e0a2246630a9cfd9220bf37b",
+      "conceptId": "gv5-d15-m01",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1",
+        "source-5b7819d35530f4",
+        "source-028ce099d2bb32",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d15-q03",
+      "key": 2,
+      "correctText": "Defining which is grammatical, though some editorial styles prefer that.",
+      "explanationHash": "a189baa8f1ab9c6129190cbf91b0e9981089ce523b7f9a25417a1d1569301a8d",
+      "conceptId": "gv5-d15-m01",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1",
+        "source-5b7819d35530f4",
+        "source-028ce099d2bb32",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d15-q04",
+      "key": 3,
+      "correctText": "The file I requested has arrived.",
+      "explanationHash": "1ea8703fd10becf98fa405377b408f014a10e3655ad05fa0e8e23b2dcb43610d",
+      "conceptId": "gv5-d15-m02",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1",
+        "source-a70db92421dbc9",
+        "source-5b7819d35530f4",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d15-q05",
+      "key": 1,
+      "correctText": "A non-finite participial postmodifier with a passive interpretation.",
+      "explanationHash": "c6b664ebdf53dd8d6ea568b1819a7c971335cb4d3b65af6242036a8f38fe4031",
+      "conceptId": "gv5-d15-m02",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1",
+        "source-a70db92421dbc9",
+        "source-5b7819d35530f4",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d15-q06",
+      "key": 0,
+      "correctText": "It supplies the content of the claim.",
+      "explanationHash": "ec5bd9e4e5bfb4d1fd9e352253686b9b32c0373bee9a73b73f7aa7b7e908212d",
+      "conceptId": "gv5-d15-m03",
+      "sourceIds": [
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812",
+        "source-89176b529bbc02",
+        "source-ccfbea5f751a50",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-d15-q07",
+      "key": 1,
+      "correctText": "whether",
+      "explanationHash": "c588516585750f2ccc0748422f9c76c005847e6b38d63f662b06769c04af4152",
+      "conceptId": "gv5-d15-m03",
+      "sourceIds": [
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812",
+        "source-89176b529bbc02",
+        "source-ccfbea5f751a50",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-d15-q08",
+      "key": 2,
+      "correctText": "We know where the archive is.",
+      "explanationHash": "e759379ea5fb17ba82f4264179ea4ea22953d779fde67cec2e3bd0cb595fbe62",
+      "conceptId": "gv5-d15-m03",
+      "sourceIds": [
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812",
+        "source-89176b529bbc02",
+        "source-ccfbea5f751a50",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-d15-q09",
+      "key": 0,
+      "correctText": "We left early so that we could catch the shuttle.",
+      "explanationHash": "7d0e11eb2c074b6d32cba53a2c9c451b0793fb9ddaeb167f2dea51a5d96fd122",
+      "conceptId": "gv5-d15-m04",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-1ceaeffe194685",
+        "source-a70db92421dbc9",
+        "source-89176b529bbc02",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d15-q10",
+      "key": 3,
+      "correctText": "No error",
+      "explanationHash": "0968e8a03453662e47b1215a77c4ffb46fae14458e741b77b17d5bec3c68b4a5",
+      "conceptId": "gv5-d15-m04",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-1ceaeffe194685",
+        "source-a70db92421dbc9",
+        "source-89176b529bbc02",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-d16-q01",
+      "key": 1,
+      "correctText": "Predicative descriptions of the room",
+      "explanationHash": "23906186f446cd8bdf978cd237a876ef14efa0e6161c282f2fa554c193d6ea34",
+      "conceptId": "gv5-d16-m01",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-2ce8f4ad32dfe5"
+      ]
+    },
+    {
+      "id": "gv5-d16-q02",
+      "key": 0,
+      "correctText": "Mina checked the forms and Omar stamped them.",
+      "explanationHash": "4885f0d6ddf4b9a6e2d9f3e4acae5f0db5703b12370c2ead06b7fddbaccc4708",
+      "conceptId": "gv5-d16-m01",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-2ce8f4ad32dfe5"
+      ]
+    },
+    {
+      "id": "gv5-d16-q03",
+      "key": 0,
+      "correctText": "are",
+      "explanationHash": "4e62cdcb939d86f7dd9cdbb5c5846cf02fe8918f96c9d56596155838672ccc22",
+      "conceptId": "gv5-d16-m02",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-8db1cebfd15ccb",
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-d16-q04",
+      "key": 0,
+      "correctText": "Neither application was approved.",
+      "explanationHash": "d51c3fbecd7f4939e14014afa0f7f5b911e5b17e3a7fcb7df4efe6099dce9bdf",
+      "conceptId": "gv5-d16-m02",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-8db1cebfd15ccb",
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-d16-q05",
+      "key": 3,
+      "correctText": "Not only did the team finish early.",
+      "explanationHash": "9191aa4123b107a2d1f1dc517320256b7be9d7b7b7ce4fdd5de1fe6515283a11",
+      "conceptId": "gv5-d16-m02",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-8db1cebfd15ccb",
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-d16-q06",
+      "key": 1,
+      "correctText": "because",
+      "explanationHash": "cf6e64fd65c8eee40381183e4c86950dc4694a885d08dccf04093a4d9632e95f",
+      "conceptId": "gv5-d16-m03",
+      "sourceIds": [
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d16-q07",
+      "key": 2,
+      "correctText": "Although the room was small, everyone found a seat.",
+      "explanationHash": "c4b418376b86d0388ce494ee9ae979d46652bbc47ea9ef9544e6b75de017c4b4",
+      "conceptId": "gv5-d16-m03",
+      "sourceIds": [
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d16-q08",
+      "key": 1,
+      "correctText": "so that",
+      "explanationHash": "5a8e2d25a478b63c9f16a869a308fbaa1a6094c176abaeb2474dc9ded734b35f",
+      "conceptId": "gv5-d16-m03",
+      "sourceIds": [
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-d16-q09",
+      "key": 3,
+      "correctText": "The independent clauses need an appropriate boundary.",
+      "explanationHash": "ab5dbee2a1c0f7326c4f542b096fa73c360f9b9c5001fac8708b34b7baff10ac",
+      "conceptId": "gv5-d16-m04",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d16-q10",
+      "key": 2,
+      "correctText": "No error",
+      "explanationHash": "8a310facd8fc189cd44e96a46b7d8e94c2438bee4f86c2b2491150af11b7a12a",
+      "conceptId": "gv5-d16-m04",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d17-q01",
+      "key": 0,
+      "correctText": "have",
+      "explanationHash": "18107ea8ab5e7c663d2ee8eeb8f2229b72761125de601ff23baff6eeac798132",
+      "conceptId": "gv5-d17-m01",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-32e349b2ed28e5",
+        "source-7bb68e7575962d"
+      ]
+    },
+    {
+      "id": "gv5-d17-q02",
+      "key": 0,
+      "correctText": "Must you leave?",
+      "explanationHash": "e46aa80808b098b9f229ed48968609fecbcd29a36ce9a553488d6bcc129c1e78",
+      "conceptId": "gv5-d17-m01",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-32e349b2ed28e5",
+        "source-7bb68e7575962d"
+      ]
+    },
+    {
+      "id": "gv5-d17-q03",
+      "key": 2,
+      "correctText": "I want to be able to read it.",
+      "explanationHash": "944491085b3aff0725df5e92f63f8c6a4c6ca20902b4ccde4f514998cf20393f",
+      "conceptId": "gv5-d17-m01",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-32e349b2ed28e5",
+        "source-7bb68e7575962d"
+      ]
+    },
+    {
+      "id": "gv5-d17-q04",
+      "key": 0,
+      "correctText": "You must not enter.",
+      "explanationHash": "c60e30f6fa6d82c4d2ceced437ceb531c9e89bfff384f5fd67ebcf30259a6bc1",
+      "conceptId": "gv5-d17-m02",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-d17-q05",
+      "key": 3,
+      "correctText": "An evidence-based inference",
+      "explanationHash": "1ff553d98d208a14cebf75d0c2d12c76e184d77a543ea98f3b56cdbf87cb3d7d",
+      "conceptId": "gv5-d17-m02",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-d17-q06",
+      "key": 1,
+      "correctText": "A request",
+      "explanationHash": "a4d375a9ff5d97739cff7fea60b9862690850c0296facc73d541285aaba0a52a",
+      "conceptId": "gv5-d17-m02",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-d17-q07",
+      "key": 2,
+      "correctText": "need not have",
+      "explanationHash": "619e4ca25a68c44ed51df7777965d17e5864c0a1a35d1575609d3990b29d4f12",
+      "conceptId": "gv5-d17-m03",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-7bb68e7575962d",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-d17-q08",
+      "key": 1,
+      "correctText": "It states absence of necessity but leaves performance open.",
+      "explanationHash": "7dcd3b94a10fce7e497c8228d93a91bbfd30edcb95de743cf4ccf7f87be1c610",
+      "conceptId": "gv5-d17-m03",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-7bb68e7575962d",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-d17-q09",
+      "key": 1,
+      "correctText": "wrote must be written",
+      "explanationHash": "bec090d50ae51cd4ebb37b4cf0faf372e81dbacf542f18480e9461f006eb89ad",
+      "conceptId": "gv5-d17-m03",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-7bb68e7575962d",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-d17-q10",
+      "key": 3,
+      "correctText": "The pilot suggests a possible benefit in the sampled group.",
+      "explanationHash": "55d914d9083f2ff0264ed50660c7ce1e2b438e74e47163115cc34eb0bf4f326e",
+      "conceptId": "gv5-d17-m04",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-d18-q01",
+      "key": 3,
+      "correctText": "If the printer works tomorrow, we will use it.",
+      "explanationHash": "aecd865350cf0464d9aacdb29e8339c73184df6acb31b74e5d35e935fce38d66",
+      "conceptId": "gv5-d18-m01",
+      "sourceIds": [
+        "source-9fcbdb35005527",
+        "source-1bb5d453fe6dc8",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d18-q02",
+      "key": 0,
+      "correctText": "If we had brought the key, we could have entered.",
+      "explanationHash": "8306c9294cfa4271d7a9ad52bd646d6966470152fda74c627da93d4c50f85572",
+      "conceptId": "gv5-d18-m01",
+      "sourceIds": [
+        "source-9fcbdb35005527",
+        "source-1bb5d453fe6dc8",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d18-q03",
+      "key": 0,
+      "correctText": "Will legitimately expresses willingness in this if-clause.",
+      "explanationHash": "7352d0a779d10fa3cc8059466bf4a3b514a56c70ee514455e3f6ff7290bc6368",
+      "conceptId": "gv5-d18-m01",
+      "sourceIds": [
+        "source-9fcbdb35005527",
+        "source-1bb5d453fe6dc8",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d18-q04",
+      "key": 2,
+      "correctText": "had noted",
+      "explanationHash": "4592ef373e6d36ab6c078d3cfdb7e77da934b5ce435336fa5be417eb96304c8c",
+      "conceptId": "gv5-d18-m02",
+      "sourceIds": [
+        "source-e74cc44a499c12",
+        "source-bfa29371339537",
+        "source-04540f9554f61f",
+        "source-bee4db2d8bf977",
+        "source-9fcbdb35005527"
+      ]
+    },
+    {
+      "id": "gv5-d18-q05",
+      "key": 1,
+      "correctText": "I would rather you waited outside.",
+      "explanationHash": "e37d0989708815bd4b4fb578b5dce4bfc973a41f63079f5a10d8fb103c3ff19f",
+      "conceptId": "gv5-d18-m02",
+      "sourceIds": [
+        "source-e74cc44a499c12",
+        "source-bfa29371339537",
+        "source-04540f9554f61f",
+        "source-bee4db2d8bf977",
+        "source-9fcbdb35005527"
+      ]
+    },
+    {
+      "id": "gv5-d18-q06",
+      "key": 2,
+      "correctText": "seen",
+      "explanationHash": "2d721eb79f41e259936b271bbf37314ebb1d9aacd1139252ac38f5bc0c13cc86",
+      "conceptId": "gv5-d18-m03",
+      "sourceIds": [
+        "source-1bb5d453fe6dc8",
+        "source-9fcbdb35005527"
+      ]
+    },
+    {
+      "id": "gv5-d18-q07",
+      "key": 0,
+      "correctText": "Should you need a copy, contact reception.",
+      "explanationHash": "668e5988b8d570b8d5ca9de44ae6856876f03ef68cc6ad397453c6cf8cb147d2",
+      "conceptId": "gv5-d18-m03",
+      "sourceIds": [
+        "source-1bb5d453fe6dc8",
+        "source-9fcbdb35005527"
+      ]
+    },
+    {
+      "id": "gv5-d18-q08",
+      "key": 3,
+      "correctText": "Should be is a legitimate mandative alternative.",
+      "explanationHash": "2b7d807a129759102af58d941c75305118cb9803f17dfd54f34e967a98b5316b",
+      "conceptId": "gv5-d18-m04",
+      "sourceIds": [
+        "source-3e6d246caea47b",
+        "source-9fcbdb35005527",
+        "source-10e4340e83d799",
+        "source-63cc2ee69b424a",
+        "source-7432e196e7a5da"
+      ]
+    },
+    {
+      "id": "gv5-d18-q09",
+      "key": 1,
+      "correctText": "No error",
+      "explanationHash": "c18190559f54d694ea728eda11fd5f830e201ddd309ae942bcaf1d635a939145",
+      "conceptId": "gv5-d18-m04",
+      "sourceIds": [
+        "source-3e6d246caea47b",
+        "source-9fcbdb35005527",
+        "source-10e4340e83d799",
+        "source-63cc2ee69b424a",
+        "source-7432e196e7a5da"
+      ]
+    },
+    {
+      "id": "gv5-d18-q10",
+      "key": 1,
+      "correctText": "An indicative content clause reports her assertion.",
+      "explanationHash": "a8131112efe88c58338c26d79d0af72cfd1fda126d76f82204b4fafb461aa988",
+      "conceptId": "gv5-d18-m04",
+      "sourceIds": [
+        "source-3e6d246caea47b",
+        "source-9fcbdb35005527",
+        "source-10e4340e83d799",
+        "source-63cc2ee69b424a",
+        "source-7432e196e7a5da"
+      ]
+    },
+    {
+      "id": "gv5-d19-q01",
+      "key": 1,
+      "correctText": "is being repaired",
+      "explanationHash": "5c33358d1c33fd1c5ed4516b750dfd015302e5f3810982a7684fa2bd0628f851",
+      "conceptId": "gv5-d19-m01",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-445532eb0f5c35",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d19-q02",
+      "key": 0,
+      "correctText": "written",
+      "explanationHash": "0b652545a4c9ad8bcba18f2d1c7d7318010d41e6a3d10efdce3e065f360dff8d",
+      "conceptId": "gv5-d19-m01",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-445532eb0f5c35",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d19-q03",
+      "key": 3,
+      "correctText": "to be checked",
+      "explanationHash": "7c2c800d987b352b218bdcbff01a4736aa09055bef29d615b1f8a7a286f6e1e2",
+      "conceptId": "gv5-d19-m01",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-445532eb0f5c35",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d19-q04",
+      "key": 0,
+      "correctText": "Survival is attributed as a belief, with earlier time reference.",
+      "explanationHash": "0c1bfefedf8abc2dfab61108d80150bab5f8e39615262712f35c97f35cf7465e",
+      "conceptId": "gv5-d19-m02",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-266c3ac8d0e174",
+        "source-a1d750e1351f47",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d19-q05",
+      "key": 2,
+      "correctText": "Get-passives can describe a positive event.",
+      "explanationHash": "aacb4a425ed5cc33b6c75488837e7a4103c2107ccb752d9a7d8303cfab2c9a7f",
+      "conceptId": "gv5-d19-m02",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-266c3ac8d0e174",
+        "source-a1d750e1351f47",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d19-q06",
+      "key": 3,
+      "correctText": "start",
+      "explanationHash": "2ecd209a3d2ef4073e13fbf5760559e5cc4882747f2b297ddea7b9a4682bdb8f",
+      "conceptId": "gv5-d19-m03",
+      "sourceIds": [
+        "source-481dd675b53cdd",
+        "source-1faf37a18b3e37",
+        "source-f72ea287b27b1d",
+        "source-a4b8f505f226f9",
+        "source-44d9470b0f7cc1"
+      ]
+    },
+    {
+      "id": "gv5-d19-q07",
+      "key": 1,
+      "correctText": "help me check / help me to check",
+      "explanationHash": "34e09584bdfb334e27f1083e79c09c92a3ae8fde6ce8ecf50bbaeb51dde41693",
+      "conceptId": "gv5-d19-m03",
+      "sourceIds": [
+        "source-481dd675b53cdd",
+        "source-1faf37a18b3e37",
+        "source-f72ea287b27b1d",
+        "source-a4b8f505f226f9",
+        "source-44d9470b0f7cc1"
+      ]
+    },
+    {
+      "id": "gv5-d19-q08",
+      "key": 2,
+      "correctText": "No error",
+      "explanationHash": "249f16571100e4ff598372b857532450961392be6bc3f9b47e0486b38b488f7e",
+      "conceptId": "gv5-d19-m03",
+      "sourceIds": [
+        "source-481dd675b53cdd",
+        "source-1faf37a18b3e37",
+        "source-f72ea287b27b1d",
+        "source-a4b8f505f226f9",
+        "source-44d9470b0f7cc1"
+      ]
+    },
+    {
+      "id": "gv5-d19-q09",
+      "key": 1,
+      "correctText": "The complaint was looked into.",
+      "explanationHash": "575f2d6c36f51ecee29da38d27c01d115e22c07f1214e978c8ff01f24a72909e",
+      "conceptId": "gv5-d19-m04",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-5532e2d7078060",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-d19-q10",
+      "key": 0,
+      "correctText": "Active intransitive change of state",
+      "explanationHash": "0196b7c0143cb80f91f394e69aa3f1295e92ee65aad34431a4c9cc25613706b6",
+      "conceptId": "gv5-d19-m04",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-5532e2d7078060",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-d20-q01",
+      "key": 1,
+      "correctText": "to finish today",
+      "explanationHash": "282293349f9550fea9bf16d6eafe3deb021885ab39ba917f077490e9ab81ad3d",
+      "conceptId": "gv5-d20-m01",
+      "sourceIds": [
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-dab92de230863e",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d20-q02",
+      "key": 0,
+      "correctText": "written",
+      "explanationHash": "157273d00b5cc0904375aa5adaa1fd014ec3162d09926c9edcee1e115578a0ef",
+      "conceptId": "gv5-d20-m01",
+      "sourceIds": [
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-dab92de230863e",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d20-q03",
+      "key": 1,
+      "correctText": "Reading the files carefully contains a verbal reading with an object and adverb.",
+      "explanationHash": "b2b9fcd7eb88251a7f66c4d454877d13cbc7fa85b054207f3d6de4d7ade49a4c",
+      "conceptId": "gv5-d20-m01",
+      "sourceIds": [
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-dab92de230863e",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-d20-q04",
+      "key": 1,
+      "correctText": "meeting",
+      "explanationHash": "eb7f029f9d4db629765f4bf0bf4de829292c5bf432e0f485bca233987c8f3afd",
+      "conceptId": "gv5-d20-m02",
+      "sourceIds": [
+        "source-ccfbea5f751a50",
+        "source-dab92de230863e",
+        "source-a4b8f505f226f9",
+        "source-1faf37a18b3e37",
+        "source-f72ea287b27b1d"
+      ]
+    },
+    {
+      "id": "gv5-d20-q05",
+      "key": 3,
+      "correctText": "The purpose of pausing another activity",
+      "explanationHash": "b78e35f564e2495480d8a07e15452b5c5321c5af59b42049b14d323de1ff5ead",
+      "conceptId": "gv5-d20-m02",
+      "sourceIds": [
+        "source-ccfbea5f751a50",
+        "source-dab92de230863e",
+        "source-a4b8f505f226f9",
+        "source-1faf37a18b3e37",
+        "source-f72ea287b27b1d"
+      ]
+    },
+    {
+      "id": "gv5-d20-q06",
+      "key": 3,
+      "correctText": "No error: help permits an infinitive with or without to.",
+      "explanationHash": "e4812804ae3cfc30d9131d64afbf87e619b7857e6fe1b09ef3aecf964c768aec",
+      "conceptId": "gv5-d20-m02",
+      "sourceIds": [
+        "source-ccfbea5f751a50",
+        "source-dab92de230863e",
+        "source-a4b8f505f226f9",
+        "source-1faf37a18b3e37",
+        "source-f72ea287b27b1d"
+      ]
+    },
+    {
+      "id": "gv5-d20-q07",
+      "key": 2,
+      "correctText": "After Samir inspected the roof, the leak was obvious to him.",
+      "explanationHash": "6cb22bb45b6d3a54174da977dec7ba6016ed8b9f5b88c7f7e159cd9fe0c4ae8b",
+      "conceptId": "gv5-d20-m03",
+      "sourceIds": [
+        "source-473784fba0527d",
+        "source-a70db92421dbc9",
+        "source-6908b83f55a46c",
+        "source-dab92de230863e",
+        "source-b760c623998f7d"
+      ]
+    },
+    {
+      "id": "gv5-d20-q08",
+      "key": 0,
+      "correctText": "Weather permitting, Nora will visit.",
+      "explanationHash": "c476ef1b0f972f7400f6af5ad4a2ba2dae88dac84c25ba8c424ddbefa18c34f2",
+      "conceptId": "gv5-d20-m03",
+      "sourceIds": [
+        "source-473784fba0527d",
+        "source-a70db92421dbc9",
+        "source-6908b83f55a46c",
+        "source-dab92de230863e",
+        "source-b760c623998f7d"
+      ]
+    },
+    {
+      "id": "gv5-d20-q09",
+      "key": 2,
+      "correctText": "Omar",
+      "explanationHash": "2ac5963a423450b32f00e0f7c365d8719166f1d37c842da2dd9f173aa2fea322",
+      "conceptId": "gv5-d20-m04",
+      "sourceIds": [
+        "source-b61da788662118",
+        "source-a1d750e1351f47",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-d20-q10",
+      "key": 0,
+      "correctText": "There seems to be a delay.",
+      "explanationHash": "bc39f3b39ca8fc8ef7dd38e3850d9048b44bebc6f81f925c3b6bba266d444825",
+      "conceptId": "gv5-d20-m04",
+      "sourceIds": [
+        "source-b61da788662118",
+        "source-a1d750e1351f47",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-d21-q01",
+      "key": 1,
+      "correctText": "She asked where the keys were.",
+      "explanationHash": "25bdb0819436f44a1af4f6b3e511c90f4e54bdbfdf88a3cf793fdab641a25ced",
+      "conceptId": "gv5-d21-m03",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q02",
+      "key": 1,
+      "correctText": "to wait",
+      "explanationHash": "9f4fecb58a8294a45f81b2288e496a316811a342ca3771c17d4fe476ed3bbfc5",
+      "conceptId": "gv5-d21-m04",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q03",
+      "key": 0,
+      "correctText": "was closed",
+      "explanationHash": "97bddc37e8e896e7efe70c8c17fb1fe82173b6629e54416609ed4f4a5011f418",
+      "conceptId": "gv5-d21-m02",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q04",
+      "key": 1,
+      "correctText": "No error",
+      "explanationHash": "626b5ee9da7b466b4a668ec7e43b6e0c220d3bc7989a90a134b8b7879a470f42",
+      "conceptId": "gv5-d21-m03",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q05",
+      "key": 3,
+      "correctText": "He suggested to us that we return.",
+      "explanationHash": "5264ff68f629f32ad821cc5a9885e02f51e9e557eccce88e5af8af5cec967dde",
+      "conceptId": "gv5-d21-m04",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q06",
+      "key": 3,
+      "correctText": "She warned us not to disclose it.",
+      "explanationHash": "43dafa9bf8dbd3718ec2b1805d5c06c116c7b62cdd63720c01bd00beff841a90",
+      "conceptId": "gv5-d21-m04",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q07",
+      "key": 0,
+      "correctText": "I said that I was ready.",
+      "explanationHash": "bef0af8681858b4fac00c27a31079dc8b6cbeb119a6548ff8f61d98504b84bd4",
+      "conceptId": "gv5-d21-m01",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q08",
+      "key": 2,
+      "correctText": "Do you know whether the archive is open",
+      "explanationHash": "280fc08194ec5262e8144e5f69c5fbb119796d2475b27740dbc0d30dbf361cc5",
+      "conceptId": "gv5-d21-m03",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q09",
+      "key": 2,
+      "correctText": "A past report can retain present tense for a still-current fact.",
+      "explanationHash": "361c1d293d4a86299e23ff8d8c8cda55aee25e228eee66839fbb2a85851c4907",
+      "conceptId": "gv5-d21-m02",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d21-q10",
+      "key": 0,
+      "correctText": "persuaded",
+      "explanationHash": "4bfe8c2dff7d7de7d1bb53c623640d37826a84214c507750629250db1d7a3c5a",
+      "conceptId": "gv5-d21-m04",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d22-q01",
+      "key": 0,
+      "correctText": "Asha",
+      "explanationHash": "46e26d8b08f0c447e33cf9dc4dedc301ad8dea3eae061680a7e2663eb3ed5c97",
+      "conceptId": "gv5-d22-m01",
+      "sourceIds": [
+        "source-43eb829d65d5b4",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d22-q02",
+      "key": 1,
+      "correctText": "Carrying a parcel, the courier entered.",
+      "explanationHash": "1691f37cca266e38117cfa000844459b3d43dc707bb39ebd988044590fc8f0f8",
+      "conceptId": "gv5-d22-m01",
+      "sourceIds": [
+        "source-43eb829d65d5b4",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d22-q03",
+      "key": 0,
+      "correctText": "Not all the claims were approved.",
+      "explanationHash": "14d95b0ffb08e1c34cd8b48b05a6aabac265cb011d935bc4a829d02a120995df",
+      "conceptId": "gv5-d22-m02",
+      "sourceIds": [
+        "source-16d109b31fac43",
+        "source-2e5cd32b34733d"
+      ]
+    },
+    {
+      "id": "gv5-d22-q04",
+      "key": 1,
+      "correctText": "No error",
+      "explanationHash": "fbb41e6687eb1c118939232594cb477b2feea51ec6f846730cfb8d243116e8e1",
+      "conceptId": "gv5-d22-m01",
+      "sourceIds": [
+        "source-43eb829d65d5b4",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d22-q05",
+      "key": 1,
+      "correctText": "She enjoys drafting and editing.",
+      "explanationHash": "cdfd16ddf647b6965fd86c2585e1299bd495f42149de2466221ac89f09f6ca22",
+      "conceptId": "gv5-d22-m03",
+      "sourceIds": [
+        "source-42dc4d1cdfd2d8",
+        "source-8db1cebfd15ccb",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-d22-q06",
+      "key": 3,
+      "correctText": "Her salary is higher than her assistant’s salary.",
+      "explanationHash": "7bc314e1d3a02fc09ce81f5e74cb6e1f37eb108a34a620994b51fedcac21436c",
+      "conceptId": "gv5-d22-m04",
+      "sourceIds": [
+        "source-42dc4d1cdfd2d8",
+        "source-2ce8f4ad32dfe5",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d22-q07",
+      "key": 0,
+      "correctText": "They reached a decision to postpone the visit.",
+      "explanationHash": "132056d580c0b2f7834a4625076f37462f141e8a2d5c91fe5667b084acbdbe28",
+      "conceptId": "gv5-d22-m04",
+      "sourceIds": [
+        "source-42dc4d1cdfd2d8",
+        "source-2ce8f4ad32dfe5",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d22-q08",
+      "key": 3,
+      "correctText": "The server failed. This interrupted the booking service.",
+      "explanationHash": "716dd0deaabd5cc1aaa7080449b298bd27b9c8516f1b50bd15e74dc1c3a56c07",
+      "conceptId": "gv5-d22-m02",
+      "sourceIds": [
+        "source-16d109b31fac43",
+        "source-2e5cd32b34733d"
+      ]
+    },
+    {
+      "id": "gv5-d22-q09",
+      "key": 2,
+      "correctText": "to answer calls",
+      "explanationHash": "df11443336742d01f780a6259f10d6431b6f1850e28081054995450c3078a63c",
+      "conceptId": "gv5-d22-m03",
+      "sourceIds": [
+        "source-42dc4d1cdfd2d8",
+        "source-8db1cebfd15ccb",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-d22-q10",
+      "key": 2,
+      "correctText": "The meeting finished, we left.",
+      "explanationHash": "d95c2cb81a2a41b535a1a31dcd7f916580c110b0b44bf14b2de8d09a1e4034eb",
+      "conceptId": "gv5-d22-m01",
+      "sourceIds": [
+        "source-43eb829d65d5b4",
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d23-q01",
+      "key": 1,
+      "correctText": "have we used",
+      "explanationHash": "888f45854f59de9a3b37776355bf1e441bb873b80686e84c3651eae5c93ca196",
+      "conceptId": "gv5-d23-m01",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-52104a3b64e06c",
+        "source-1bb5d453fe6dc8"
+      ]
+    },
+    {
+      "id": "gv5-d23-q02",
+      "key": 0,
+      "correctText": "Nobody objected.",
+      "explanationHash": "c7678ea907f8ec9437707dbc71cf9902eb8a009d43e9baea2536e6c0d7ff90cc",
+      "conceptId": "gv5-d23-m01",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-52104a3b64e06c",
+        "source-1bb5d453fe6dc8"
+      ]
+    },
+    {
+      "id": "gv5-d23-q03",
+      "key": 0,
+      "correctText": "Had we noticed, we would have stopped.",
+      "explanationHash": "404bc5d6740ff5796dffa01e18bb856630555ffed3b072bfd9fa7b7960e1ae37",
+      "conceptId": "gv5-d23-m01",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-52104a3b64e06c",
+        "source-1bb5d453fe6dc8"
+      ]
+    },
+    {
+      "id": "gv5-d23-q04",
+      "key": 1,
+      "correctText": "No error",
+      "explanationHash": "8a218db3300d5ef8f585cf064471395bc8af428d54b472f1daf87880c58d9e98",
+      "conceptId": "gv5-d23-m01",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-52104a3b64e06c",
+        "source-1bb5d453fe6dc8"
+      ]
+    },
+    {
+      "id": "gv5-d23-q05",
+      "key": 3,
+      "correctText": "It was the porters who found the crate.",
+      "explanationHash": "7774d771e5027700ea2fac49b2be2141dc9fb1113f29f27a5a333bd06669bb4f",
+      "conceptId": "gv5-d23-m02",
+      "sourceIds": [
+        "source-897ffbdb4059a3",
+        "source-d20d5991870574"
+      ]
+    },
+    {
+      "id": "gv5-d23-q06",
+      "key": 2,
+      "correctText": "Acts as dummy/anticipatory subject.",
+      "explanationHash": "265334e1b8de4a08538cb033c2787d172e2857d732052a73d564cbf061556c4c",
+      "conceptId": "gv5-d23-m03",
+      "sourceIds": [
+        "source-f3cb8cbb1e0c8b",
+        "source-b04555eae72042",
+        "source-d20d5991870574"
+      ]
+    },
+    {
+      "id": "gv5-d23-q07",
+      "key": 3,
+      "correctText": "are",
+      "explanationHash": "4aeb5ceec9a34955d4e0008e8e815674e606a5cd4295312a7bacbd6f2262ad17",
+      "conceptId": "gv5-d23-m03",
+      "sourceIds": [
+        "source-f3cb8cbb1e0c8b",
+        "source-b04555eae72042",
+        "source-d20d5991870574"
+      ]
+    },
+    {
+      "id": "gv5-d23-q08",
+      "key": 0,
+      "correctText": "She does remember the code.",
+      "explanationHash": "c2270cb9480806d08611ae61fd76b162b8dc3f46d4a1623ec871cf2a4abe53fe",
+      "conceptId": "gv5-d23-m04",
+      "sourceIds": [
+        "source-028b7ffa729def",
+        "source-773e3d2df84661",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d23-q09",
+      "key": 2,
+      "correctText": "has",
+      "explanationHash": "c5cbaafc822cbf2599f8cef51624f1d77fb27609f19861393bfd8cc9576691f5",
+      "conceptId": "gv5-d23-m04",
+      "sourceIds": [
+        "source-028b7ffa729def",
+        "source-773e3d2df84661",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d23-q10",
+      "key": 1,
+      "correctText": "The adjective is fronted in a concessive construction.",
+      "explanationHash": "06e10753ea0897c3506a458a39228f1ac3c007e576e57d0c0c327fcd1e2108cb",
+      "conceptId": "gv5-d23-m01",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-52104a3b64e06c",
+        "source-1bb5d453fe6dc8"
+      ]
+    },
+    {
+      "id": "gv5-d24-q01",
+      "key": 3,
+      "correctText": "The train stopped; we waited.",
+      "explanationHash": "3d8bb15dd2c3bbcd60336bded2219fe49ba04216520df0638813319cffed698f",
+      "conceptId": "gv5-d24-m01",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-2ce8f4ad32dfe5",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-d24-q02",
+      "key": 2,
+      "correctText": "Because the road was closed, we turned back.",
+      "explanationHash": "5e71ac636450f511ae73821e46f3aec14dea14017eb8451b767cc7638dba8f9e",
+      "conceptId": "gv5-d24-m01",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-2ce8f4ad32dfe5",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-d24-q03",
+      "key": 2,
+      "correctText": "the teachers’ lounge",
+      "explanationHash": "bad0d9761adfd3d9e2a5b7dbcb23013e2aa99e64f5e35f4c7f85b0f92c3c1d63",
+      "conceptId": "gv5-d24-m02",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-8cf60a1688508e",
+        "source-fb41efc1d03fc7",
+        "source-b5b38b055ab426",
+        "source-bb04455ae3afd3"
+      ]
+    },
+    {
+      "id": "gv5-d24-q04",
+      "key": 0,
+      "correctText": "Its clear",
+      "explanationHash": "76852ed10d25f716f3da42b9724ea1891da61f45fe74800d81772e1d6d58e788",
+      "conceptId": "gv5-d24-m02",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-8cf60a1688508e",
+        "source-fb41efc1d03fc7",
+        "source-b5b38b055ab426",
+        "source-bb04455ae3afd3"
+      ]
+    },
+    {
+      "id": "gv5-d24-q05",
+      "key": 0,
+      "correctText": "Do you know whether the gate was open?",
+      "explanationHash": "fe961937dd7f9cd4f0c0948fde512924134774fd9488f6b7d778f5d43438da0f",
+      "conceptId": "gv5-d24-m03",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-89176b529bbc02",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-d24-q06",
+      "key": 1,
+      "correctText": "a three-year contract",
+      "explanationHash": "aa1ea6761ac5db7d1c84c15fe11805fd22327a0521e47f6c26c45a7ea734aedb",
+      "conceptId": "gv5-d24-m03",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-89176b529bbc02",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-d24-q07",
+      "key": 3,
+      "correctText": "Single or double outer marks can follow established style conventions.",
+      "explanationHash": "c1604242de86c30a4074c49b667325fcf90fe6591da51b48b485c852de018a9f",
+      "conceptId": "gv5-d24-m03",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-89176b529bbc02",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-d24-q08",
+      "key": 0,
+      "correctText": "color",
+      "explanationHash": "9fd0eb0cfcb8123745109126ec9d526daf10c5fb86e788c8c095253352621b6a",
+      "conceptId": "gv5-d24-m04",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-8cf60a1688508e",
+        "source-bd36d7502df16b",
+        "source-bb04455ae3afd3"
+      ]
+    },
+    {
+      "id": "gv5-d24-q09",
+      "key": 1,
+      "correctText": "No error",
+      "explanationHash": "5be8dc557366c4b557855b05a9a737415a0e4c0240002a00f9ce866493d11166",
+      "conceptId": "gv5-d24-m03",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-89176b529bbc02",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-d24-q10",
+      "key": 1,
+      "correctText": "The omission reverses the represented meaning.",
+      "explanationHash": "19c9b3c0c9c4541a2475ee3575a9a2f0a6110f22ee7c75abe7599a5f25f8184a",
+      "conceptId": "gv5-d24-m03",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-89176b529bbc02",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-d25-q01",
+      "key": 1,
+      "correctText": "advise",
+      "explanationHash": "85db3a8b7cb4663f23481023a7ad2b8f66414f1b3421cd5d86f12efa97d006f7",
+      "conceptId": "gv5-d25-m01",
+      "sourceIds": [
+        "source-d1c9bd91ec669b",
+        "source-c8a280ba934bd7",
+        "source-f3988fbed0a134",
+        "source-de295c8f9dba2d"
+      ]
+    },
+    {
+      "id": "gv5-d25-q02",
+      "key": 0,
+      "correctText": "The agreement effected a change.",
+      "explanationHash": "b6755b100f90b5d6f0c3c9fdbb26bffcca5c512fc04a5b54d9d05741ee6adb28",
+      "conceptId": "gv5-d25-m01",
+      "sourceIds": [
+        "source-d1c9bd91ec669b",
+        "source-c8a280ba934bd7",
+        "source-f3988fbed0a134",
+        "source-de295c8f9dba2d"
+      ]
+    },
+    {
+      "id": "gv5-d25-q03",
+      "key": 1,
+      "correctText": "judicial",
+      "explanationHash": "8e22f1ed3ac3800c440b55cb25b9af501169d30425cb782fd8d071bd9b085bcd",
+      "conceptId": "gv5-d25-m01",
+      "sourceIds": [
+        "source-d1c9bd91ec669b",
+        "source-c8a280ba934bd7",
+        "source-f3988fbed0a134",
+        "source-de295c8f9dba2d"
+      ]
+    },
+    {
+      "id": "gv5-d25-q04",
+      "key": 1,
+      "correctText": "discussed about the revised budget",
+      "explanationHash": "4c792f124c20a4a4e5414b9d6a4f2659ca10757c0a1d3d815231c5817a26c93e",
+      "conceptId": "gv5-d25-m02",
+      "sourceIds": [
+        "source-9ed1c4e8bff777",
+        "source-f19b5fb022dfc1",
+        "source-624ab6294e2bb8",
+        "source-3d6f341171cc0f",
+        "source-3584b7a9f9bc59",
+        "source-a62dca14faa64b"
+      ]
+    },
+    {
+      "id": "gv5-d25-q05",
+      "key": 2,
+      "correctText": "It can take on + noun/-ing or a that-clause.",
+      "explanationHash": "252ffddedcb5b0547bc77f9556f90ffe20bbba5f3bb80cbd23ed6099581688ca",
+      "conceptId": "gv5-d25-m02",
+      "sourceIds": [
+        "source-9ed1c4e8bff777",
+        "source-f19b5fb022dfc1",
+        "source-624ab6294e2bb8",
+        "source-3d6f341171cc0f",
+        "source-3584b7a9f9bc59",
+        "source-a62dca14faa64b"
+      ]
+    },
+    {
+      "id": "gv5-d25-q06",
+      "key": 2,
+      "correctText": "an increase of six per cent",
+      "explanationHash": "9176036b9e4c6a095d35c945fb90141b5f10cc71040a25cfa37d178bf1e3d00e",
+      "conceptId": "gv5-d25-m02",
+      "sourceIds": [
+        "source-9ed1c4e8bff777",
+        "source-f19b5fb022dfc1",
+        "source-624ab6294e2bb8",
+        "source-3d6f341171cc0f",
+        "source-3584b7a9f9bc59",
+        "source-a62dca14faa64b"
+      ]
+    },
+    {
+      "id": "gv5-d25-q07",
+      "key": 3,
+      "correctText": "several pieces of advice",
+      "explanationHash": "ba2cf4cf11731114f8c7408dd50a9bbc784fb2392e54f8b72f82303790dc1751",
+      "conceptId": "gv5-d25-m03",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-24f0ac0bd69ddf",
+        "source-d683fd9c85a960",
+        "source-090178afec1c2c",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d25-q08",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "b865aa51508772dcfb00d01602f24c22389e07afff41933126cdffd5a2956d5e",
+      "conceptId": "gv5-d25-m03",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-24f0ac0bd69ddf",
+        "source-d683fd9c85a960",
+        "source-090178afec1c2c",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d25-q09",
+      "key": 0,
+      "correctText": "It is recorded in Indian English; bring forward may be clearer to unfamiliar readers.",
+      "explanationHash": "8d07810a16c78406163801deb54234b1b67014742669c5644256b8d1a2789222",
+      "conceptId": "gv5-d25-m04",
+      "sourceIds": [
+        "source-f7c1a80292d10b",
+        "source-777ef904b95b58",
+        "source-b30c57ec4e32c9",
+        "source-8cf60a1688508e",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d25-q10",
+      "key": 3,
+      "correctText": "has went → has gone",
+      "explanationHash": "3057167f28b8cfbaa5712d3b5fb18192f8cb1b721477c3cf7ac219836a3f573f",
+      "conceptId": "gv5-d25-m04",
+      "sourceIds": [
+        "source-f7c1a80292d10b",
+        "source-777ef904b95b58",
+        "source-b30c57ec4e32c9",
+        "source-8cf60a1688508e",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d26-q01",
+      "key": 0,
+      "correctText": "the parcel",
+      "explanationHash": "4ee771da938f7246f3aed403b3ec9e5ae5b4ca8e1ddc871a0501668941484009",
+      "conceptId": "gv5-d26-m01",
+      "sourceIds": [
+        "source-2e5cd32b34733d",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-d26-q02",
+      "key": 2,
+      "correctText": "did so",
+      "explanationHash": "1be7d5b0d225eb3a7bf3f180e2016b313cca82b76dcb60cbec9ff1223905ad5f",
+      "conceptId": "gv5-d26-m01",
+      "sourceIds": [
+        "source-2e5cd32b34733d",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-d26-q03",
+      "key": 2,
+      "correctText": "No error",
+      "explanationHash": "b9607831ea0f251134da02be5be556390eb12685db98b681801ed7cfb343d574",
+      "conceptId": "gv5-d26-m02",
+      "sourceIds": [
+        "source-2e5cd32b34733d",
+        "source-eecf7dafccbf50",
+        "source-ca6ab50c9fe853",
+        "source-3cb07649187495"
+      ]
+    },
+    {
+      "id": "gv5-d26-q04",
+      "key": 1,
+      "correctText": "unexpected contrast",
+      "explanationHash": "85e93b887aaf279d03d667872cf0790b885910433003471db8e9deca4d8b6a50",
+      "conceptId": "gv5-d26-m02",
+      "sourceIds": [
+        "source-2e5cd32b34733d",
+        "source-eecf7dafccbf50",
+        "source-ca6ab50c9fe853",
+        "source-3cb07649187495"
+      ]
+    },
+    {
+      "id": "gv5-d26-q05",
+      "key": 0,
+      "correctText": "The six interviewees expressed support.",
+      "explanationHash": "50d8050a1c63265477888582b31c05d37a3338ca8bbef352f496befd41621d85",
+      "conceptId": "gv5-d26-m03",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-3e3ac15bcaeafc",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-d26-q06",
+      "key": 0,
+      "correctText": "Their approval surprised us.",
+      "explanationHash": "3f320306b7ee53478bdbffdbd48341b775331dfd91ad2f62a846494858fcaad2",
+      "conceptId": "gv5-d26-m03",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-3e3ac15bcaeafc",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-d26-q07",
+      "key": 1,
+      "correctText": "The map was later found.",
+      "explanationHash": "8ddcd72ddc78ba84f649df836b935c50e66a81e2475dd1ae82549ac8df8e2063",
+      "conceptId": "gv5-d26-m01",
+      "sourceIds": [
+        "source-2e5cd32b34733d",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-d26-q08",
+      "key": 3,
+      "correctText": "Cohesive links can exist in an incoherent argument.",
+      "explanationHash": "17d1aee4144945c1fa5e7205a8c8e1722b14586e01a0dc16cc3827ee37e6dcaa",
+      "conceptId": "gv5-d26-m01",
+      "sourceIds": [
+        "source-2e5cd32b34733d",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-d26-q09",
+      "key": 3,
+      "correctText": "The measure may have caused the change.",
+      "explanationHash": "9919c93e223bcafa31cfd78eade3b8aa096446295f662954f7b2b9fd73d56542",
+      "conceptId": "gv5-d26-m03",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-3e3ac15bcaeafc",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-d26-q10",
+      "key": 1,
+      "correctText": "No error",
+      "explanationHash": "84997d9cc530da678c3fe83189ed20fac92d8bf55f24af1bb135c9163778304d",
+      "conceptId": "gv5-d26-m01",
+      "sourceIds": [
+        "source-2e5cd32b34733d",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-d27-q01",
+      "key": 1,
+      "correctText": "The panel decided to close the room.",
+      "explanationHash": "7035b1027c9a3f3e6666c82602a52a58516fdf09643058247c076428cd44658d",
+      "conceptId": "gv5-d27-m01",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-43b3913aec1e91",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-d27-q02",
+      "key": 0,
+      "correctText": "The treatment could benefit some patients.",
+      "explanationHash": "9338fedfb51130f5eebd5072730a88c680dadd655402793a41497a1558ded920",
+      "conceptId": "gv5-d27-m02",
+      "sourceIds": [
+        "source-3e3ac15bcaeafc",
+        "source-43b3913aec1e91",
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d27-q03",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "bac63d78f75d430a502f291b6fdc0cb5d7ca0a89f141d5daaa62e00fe94c4842",
+      "conceptId": "gv5-d27-m01",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-43b3913aec1e91",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-d27-q04",
+      "key": 1,
+      "correctText": "Not all applications succeeded.",
+      "explanationHash": "3aca73184e9f543534d206159a1f4d075fcc5bde78e04564c43bbf95f01acc69",
+      "conceptId": "gv5-d27-m02",
+      "sourceIds": [
+        "source-3e3ac15bcaeafc",
+        "source-43b3913aec1e91",
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d27-q05",
+      "key": 2,
+      "correctText": "I have lived here since 2017.",
+      "explanationHash": "5752af1c71e873207400c0b2a2e0363eba9557abfff077704b42dc1c8b0c802f",
+      "conceptId": "gv5-d27-m03",
+      "sourceIds": [
+        "source-f7c1a80292d10b",
+        "source-ca6ab50c9fe853",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d27-q06",
+      "key": 3,
+      "correctText": "The particular assignment’s instructions.",
+      "explanationHash": "e8822d470ac9aab10c8517f22f431024182db1429c17dbd9843a989320af39cd",
+      "conceptId": "gv5-d27-m01",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-43b3913aec1e91",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-d27-q07",
+      "key": 0,
+      "correctText": "Fares rose because journeys became shorter.",
+      "explanationHash": "9e3bd200cb70cf4ab308ed3575ec25183fdbedab78acdb745ac58b24d5ed8ae9",
+      "conceptId": "gv5-d27-m02",
+      "sourceIds": [
+        "source-3e3ac15bcaeafc",
+        "source-43b3913aec1e91",
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d27-q08",
+      "key": 3,
+      "correctText": "We request that you retain a copy.",
+      "explanationHash": "23f31cd7433be2f541f23800fa93d7f69903c99281e8dac3d0e545520fed7ceb",
+      "conceptId": "gv5-d27-m03",
+      "sourceIds": [
+        "source-f7c1a80292d10b",
+        "source-ca6ab50c9fe853",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d27-q09",
+      "key": 1,
+      "correctText": "The trial overlapped with examinations.",
+      "explanationHash": "2c52a72f467efc95ccc739bed99f7996ea4b972d1d945421ff8d262819285ba0",
+      "conceptId": "gv5-d27-m01",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-43b3913aec1e91",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-d27-q10",
+      "key": 2,
+      "correctText": "Its focus and therefore the claim can change.",
+      "explanationHash": "e5eb9164f6c180c3dcc36b2640b37e27b6dba6f15f93c9bbc0f01b87f2447d9b",
+      "conceptId": "gv5-d27-m02",
+      "sourceIds": [
+        "source-3e3ac15bcaeafc",
+        "source-43b3913aec1e91",
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d28-q01",
+      "key": 3,
+      "correctText": "Quality is singular but have is plural here.",
+      "explanationHash": "a6cd474653aebee33559d4b2b503b6b1d3d3918feea4430b4cfdcddd725ae1b5",
+      "conceptId": "gv5-d28-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-58353073c867f7",
+        "source-5e8743788d0639",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-d28-q02",
+      "key": 1,
+      "correctText": "Not all applications succeeded.",
+      "explanationHash": "0dce2b20156a267f10f2baf92db7d9e2b29853d569835616071551eb9852a544",
+      "conceptId": "gv5-d28-m02",
+      "sourceIds": [
+        "source-3cb07649187495",
+        "source-43b3913aec1e91",
+        "source-897ffbdb4059a3",
+        "source-028b7ffa729def",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d28-q03",
+      "key": 2,
+      "correctText": "No error",
+      "explanationHash": "580119ea118d5f4f1485f1180d34818afcce6e906f8d980e9e4564215e141b76",
+      "conceptId": "gv5-d28-m03",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-8cf60a1688508e",
+        "source-89176b529bbc02",
+        "source-5e8743788d0639",
+        "source-f3988fbed0a134",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-d28-q04",
+      "key": 0,
+      "correctText": "The appeal was rejected by the assessor.",
+      "explanationHash": "c40a733d07c449f307dbd3e813e307499e40fd919005d8b8189b6ca6713ca262",
+      "conceptId": "gv5-d28-m02",
+      "sourceIds": [
+        "source-3cb07649187495",
+        "source-43b3913aec1e91",
+        "source-897ffbdb4059a3",
+        "source-028b7ffa729def",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d28-q05",
+      "key": 1,
+      "correctText": "The first reports advice without entailing compliance.",
+      "explanationHash": "2b521770340f982ec102d8d7ae4fa5d1948dbf0f7e6248568001db4696c90370",
+      "conceptId": "gv5-d28-m02",
+      "sourceIds": [
+        "source-3cb07649187495",
+        "source-43b3913aec1e91",
+        "source-897ffbdb4059a3",
+        "source-028b7ffa729def",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d28-q06",
+      "key": 3,
+      "correctText": "By whom the report was signed remains unclear.",
+      "explanationHash": "f247132b5aeb6dbf02fb1138293c0379f59ee3317a39f52d7744cb01417da277",
+      "conceptId": "gv5-d28-m03",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-8cf60a1688508e",
+        "source-89176b529bbc02",
+        "source-5e8743788d0639",
+        "source-f3988fbed0a134",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-d28-q07",
+      "key": 1,
+      "correctText": "The trial will reduce costs.",
+      "explanationHash": "670d616e6a8416532d730b67a2a32b3acc2aafb6f09054e987cb36e4ff903de4",
+      "conceptId": "gv5-d28-m04",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-a95ed69b7ca939",
+        "source-10e4340e83d799",
+        "source-3e3ac15bcaeafc",
+        "source-2e5cd32b34733d"
+      ]
+    },
+    {
+      "id": "gv5-d28-q08",
+      "key": 0,
+      "correctText": "was presented",
+      "explanationHash": "fa273d1c294054c2916ec16ae7304f07e58c3b73f8d82437e6f89ef6514d71f5",
+      "conceptId": "gv5-d28-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-58353073c867f7",
+        "source-5e8743788d0639",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-d28-q09",
+      "key": 2,
+      "correctText": "Only the clerk checked the forms.",
+      "explanationHash": "380700b24eeaa30c62cda3c52a89a6bbb8790a7b3bc325ebd1b5144362c5c0ea",
+      "conceptId": "gv5-d28-m02",
+      "sourceIds": [
+        "source-3cb07649187495",
+        "source-43b3913aec1e91",
+        "source-897ffbdb4059a3",
+        "source-028b7ffa729def",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d28-q10",
+      "key": 0,
+      "correctText": "It should permit different repairs that preserve the required meaning.",
+      "explanationHash": "59a92d712dd4017b8251c04e491a30a75a6d92f2c7f0eb4a641703232ec01298",
+      "conceptId": "gv5-d28-m04",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-a95ed69b7ca939",
+        "source-10e4340e83d799",
+        "source-3e3ac15bcaeafc",
+        "source-2e5cd32b34733d"
+      ]
+    },
+    {
+      "id": "gv5-d29-q01",
+      "key": 0,
+      "correctText": "Glass is a noun functioning as a modifier of roof.",
+      "explanationHash": "7f1acb295abcbb30dd8529bd836eda4ad59d6595d1569d0d3588ea140de200ac",
+      "conceptId": "gv5-d01-m03",
+      "sourceIds": [
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d29-q02",
+      "key": 1,
+      "correctText": "Forms a noun from the adjective careless",
+      "explanationHash": "41c55df7b948526ba627f796f1d456703a65417105b3fef2d4f63207d18bc54c",
+      "conceptId": "gv5-d01-m02",
+      "sourceIds": [
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d29-q03",
+      "key": 1,
+      "correctText": "record",
+      "explanationHash": "369254b7a20de983561858bdff167e05b6f9e570eec9bcfb5ee2a1c864c4ac14",
+      "conceptId": "gv5-d05-m02",
+      "sourceIds": [
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d29-q04",
+      "key": 3,
+      "correctText": "items",
+      "explanationHash": "e76e672ae8b9457adc0c119def110022695706ad189c23aecca5eefb66768abb",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d29-q05",
+      "key": 3,
+      "correctText": "an",
+      "explanationHash": "5a28470194d87d437698b2985a5f54c565bcc2c2d75b5ce2b87f4e5f96e0dbec",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36"
+      ]
+    },
+    {
+      "id": "gv5-d29-q06",
+      "key": 3,
+      "correctText": "We have a little time, so we can check the figures.",
+      "explanationHash": "58012a68e3f59af509d1f8f4458d9467ed84bea766cb4bd8dfc6b4acbd407fcd",
+      "conceptId": "gv5-d03-m04",
+      "sourceIds": [
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d29-q07",
+      "key": 1,
+      "correctText": "The sentence uses established singular-they reference.",
+      "explanationHash": "94b798736360399932c7eb4a211716f1aab24230e8aec22727039882bcc420e3",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517"
+      ]
+    },
+    {
+      "id": "gv5-d29-q08",
+      "key": 1,
+      "correctText": "me",
+      "explanationHash": "59aaab6cc41611c53260c82f28161c3f2a8832dc34c5048f768ab7a8c8c62e01",
+      "conceptId": "gv5-d04-m01",
+      "sourceIds": [
+        "source-c040d9e0859517"
+      ]
+    },
+    {
+      "id": "gv5-d29-q09",
+      "key": 3,
+      "correctText": "sounded",
+      "explanationHash": "6f103f070dd803df47e82b97b72cc834f16ed4fa8f791bc451ce19fcd875cd86",
+      "conceptId": "gv5-d07-m01",
+      "sourceIds": [
+        "source-eecf7dafccbf50"
+      ]
+    },
+    {
+      "id": "gv5-d29-q10",
+      "key": 1,
+      "correctText": "The team has been sorting the files since nine and is still doing so.",
+      "explanationHash": "7dd120d302475a5d0ad45cd6fa9898e0561929cadd8cd1dc94aebf28162d321b",
+      "conceptId": "gv5-d06-m04",
+      "sourceIds": [
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-d29-q11",
+      "key": 0,
+      "correctText": "will have repaired",
+      "explanationHash": "268c5f4b191b28644106579308d3c9da7d9e599ec9522ec5ca3e82e2b268dc37",
+      "conceptId": "gv5-d09-m03",
+      "sourceIds": [
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d29-q12",
+      "key": 2,
+      "correctText": "has",
+      "explanationHash": "b4a13e47d6aceafb7be2543310d858047a927766decfb01b60d929075d1a65e1",
+      "conceptId": "gv5-d10-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-d29-q13",
+      "key": 3,
+      "correctText": "Our running costs are lower than those of the other building.",
+      "explanationHash": "2263a8439ba31e2000f2cf0862a21061f7c538454c0b748530ee4a58e7f851fb",
+      "conceptId": "gv5-d22-m03",
+      "sourceIds": [
+        "source-8ddf38a0fd2628"
+      ]
+    },
+    {
+      "id": "gv5-d29-q14",
+      "key": 0,
+      "correctText": "Only Nadia knows the access code.",
+      "explanationHash": "c0497a2df03627d2f1ea586616bb689008339269243967a540ed61f8b1dc39fc",
+      "conceptId": "gv5-d11-m04",
+      "sourceIds": [
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d29-q15",
+      "key": 0,
+      "correctText": "on checking",
+      "explanationHash": "ee72af6a6bd3ee2054f4f37fb389e86781f4cd58a25d87e7ec51a01c45599364",
+      "conceptId": "gv5-d25-m02",
+      "sourceIds": [
+        "source-9ed1c4e8bff777",
+        "source-f19b5fb022dfc1",
+        "source-624ab6294e2bb8",
+        "source-3d6f341171cc0f",
+        "source-3584b7a9f9bc59",
+        "source-a62dca14faa64b"
+      ]
+    },
+    {
+      "id": "gv5-d29-q16",
+      "key": 2,
+      "correctText": "avenue",
+      "explanationHash": "281d4169fc4a00c76fb0d7c4a41deb46b05af1e5969fad6c5b7956e0964ae032",
+      "conceptId": "gv5-d13-m01",
+      "sourceIds": [
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d29-q17",
+      "key": 3,
+      "correctText": "The guard nodded because the visitor had identified herself.",
+      "explanationHash": "8f769164898bbe0f0f9aff8eb8335d0f678183e774f9bf905f12935052fbe729",
+      "conceptId": "gv5-d14-m03",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5"
+      ]
+    },
+    {
+      "id": "gv5-d29-q18",
+      "key": 2,
+      "correctText": "The painting that we borrowed is insured.",
+      "explanationHash": "d254b4dfae73a6fd287544fe61010ba231961488dc5ec97022d058cb854683c2",
+      "conceptId": "gv5-d15-m01",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1"
+      ]
+    },
+    {
+      "id": "gv5-d29-q19",
+      "key": 2,
+      "correctText": "The test ended; however, the review continued.",
+      "explanationHash": "1851da3e768b869237367290c06ac93bdbdb916f64bfca9a56db65bab01ac9e9",
+      "conceptId": "gv5-d16-m04",
+      "sourceIds": [
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d29-q20",
+      "key": 0,
+      "correctText": "needn’t have reserved",
+      "explanationHash": "dbce1a49f9304f3335c38d4b4222e746edf85669796cf69e09d49c316754a5ea",
+      "conceptId": "gv5-d17-m03",
+      "sourceIds": [
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d29-q21",
+      "key": 1,
+      "correctText": "would be living",
+      "explanationHash": "a984e5feb76b22fb321fd4cf9f646a889ea3194fcce02ac4593699c1ad1afe01",
+      "conceptId": "gv5-d18-m01",
+      "sourceIds": [
+        "source-9fcbdb35005527"
+      ]
+    },
+    {
+      "id": "gv5-d29-q22",
+      "key": 2,
+      "correctText": "The warning might have been removed.",
+      "explanationHash": "8497331388cf876b373741ecb9ae1a0c9d076c9c2940bf9f260aa38421a6063a",
+      "conceptId": "gv5-d19-m01",
+      "sourceIds": [
+        "source-3cb07649187495"
+      ]
+    },
+    {
+      "id": "gv5-d29-q23",
+      "key": 2,
+      "correctText": "to check the map",
+      "explanationHash": "4480fb9b3fb2bc83a4d9162060e04a5315bebc6aa4d6ee6b58b6c64b9441878b",
+      "conceptId": "gv5-d20-m01",
+      "sourceIds": [
+        "source-ccfbea5f751a50"
+      ]
+    },
+    {
+      "id": "gv5-d29-q24",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "b156871f50c0763b0316daadcf2245d1f44bb735cfed250cbf33ad688c188d91",
+      "conceptId": "gv5-d21-m03",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-d29-q25",
+      "key": 1,
+      "correctText": "After Mira inspected the cable, the damage alarmed her.",
+      "explanationHash": "d227dd686438da2dcdaf9b70c3e8c722a6685c26548a76be6b6c57992f651b85",
+      "conceptId": "gv5-d22-m01",
+      "sourceIds": [
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d29-q26",
+      "key": 3,
+      "correctText": "Only after the inspection did we open the vault.",
+      "explanationHash": "eb97cad142702041b0377e87bc26be0c1f4d6707a6c27987dc0a55c3dc7b913e",
+      "conceptId": "gv5-d23-m01",
+      "sourceIds": [
+        "source-f36cfc25889ed4"
+      ]
+    },
+    {
+      "id": "gv5-d29-q27",
+      "key": 2,
+      "correctText": "the nurses’ lockers",
+      "explanationHash": "9b8d20db670bd388cd71c33421ed99de42b7ab105a11ad32138b155a818e288f",
+      "conceptId": "gv5-d24-m02",
+      "sourceIds": [
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d29-q28",
+      "key": 0,
+      "correctText": "No error",
+      "explanationHash": "e2c89e3bbd4da1743c06b5536129446dcf9ff121531fd7616361e3adb3555847",
+      "conceptId": "gv5-d10-m02",
+      "sourceIds": [
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-d29-tag01",
+      "key": 3,
+      "correctText": "have they",
+      "explanationHash": "da534fcb58d06dd419e56737d95a4432e5fa6dc23a780ff3a948bbb3e1fc07a3",
+      "conceptId": "gv5-d14-m02",
+      "sourceIds": [
+        "source-ef9d400d1dbaab",
+        "source-1ceaeffe194685",
+        "source-89176b529bbc02",
+        "source-87abd5256028a9",
+        "source-798d4263fc6e87",
+        "source-92d827cce9b472",
+        "source-c4f7acd64e00ab"
+      ]
+    },
+    {
+      "id": "gv5-d30-q01",
+      "key": 2,
+      "correctText": "the visitor",
+      "explanationHash": "aeb4f1d19d20248c704c93b062362d76422f16fdbb69d6e47d8a0b82b49f045c",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5"
+      ]
+    },
+    {
+      "id": "gv5-d30-q02",
+      "key": 3,
+      "correctText": "Plural inflection",
+      "explanationHash": "de94a9b6b9c77bf848c7d3effaa5b9c0b089cf3a8944d01b7b084e73edb64e89",
+      "conceptId": "gv5-d01-m02",
+      "sourceIds": [
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d30-q03",
+      "key": 0,
+      "correctText": "measurements",
+      "explanationHash": "3ff5c5f7ac532ab7bf72d6197a1d6311e41678abf9f94cc16b7f43e5479700af",
+      "conceptId": "gv5-d13-m01",
+      "sourceIds": [
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-d30-q04",
+      "key": 3,
+      "correctText": "to check the revised index",
+      "explanationHash": "2e1db1a8f9f3df1ed8f01a5bcb765b5ec9b7133b2865bc49238f1a1d1667be45",
+      "conceptId": "gv5-d14-m01",
+      "sourceIds": [
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d30-q05",
+      "key": 1,
+      "correctText": "pieces",
+      "explanationHash": "a615f72398de0401f2703982ec93461ac7abd7da5628be5f729db94a3ed213b0",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-d30-q06",
+      "key": 2,
+      "correctText": "An",
+      "explanationHash": "9d7038dd47cb622d73b0f119a344d504d829b615fbd39a4f0556cb5a1490e5c8",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36"
+      ]
+    },
+    {
+      "id": "gv5-d30-q07",
+      "key": 2,
+      "correctText": "They are preparing the summary.",
+      "explanationHash": "787a9cf948d3a7cf38a58deeea09b3e79a811bdf151e2cf8c740b5148bc1d75c",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517"
+      ]
+    },
+    {
+      "id": "gv5-d30-q08",
+      "key": 3,
+      "correctText": "the children’s room",
+      "explanationHash": "256d82c306dc8ea05561474baf89facf83697150144267f476997a3639d06604",
+      "conceptId": "gv5-d02-m03",
+      "sourceIds": [
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d30-q09",
+      "key": 1,
+      "correctText": "delivered",
+      "explanationHash": "c66235003b16b6c3eaeb41180ff90d489a14b3533ec29c275c5be80114f316aa",
+      "conceptId": "gv5-d07-m01",
+      "sourceIds": [
+        "source-eecf7dafccbf50"
+      ]
+    },
+    {
+      "id": "gv5-d30-q10",
+      "key": 1,
+      "correctText": "The alarms have been checked by the technician.",
+      "explanationHash": "68e650bcf21ea6d55a8e8e0d3af494d291b9806cb7bea9ef29b93a3304b39a0c",
+      "conceptId": "gv5-d19-m01",
+      "sourceIds": [
+        "source-3cb07649187495"
+      ]
+    },
+    {
+      "id": "gv5-d30-q11",
+      "key": 2,
+      "correctText": "A possible explanation",
+      "explanationHash": "1560cc251206dea147d3c588f0a166321d8bb352e80e54f134b831280e9d339b",
+      "conceptId": "gv5-d17-m02",
+      "sourceIds": [
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-d30-q12",
+      "key": 3,
+      "correctText": "overlapping",
+      "explanationHash": "c88a808cb8a58365ed763d16a85d3f9d89ec7df5cf9947d506881527c5187038",
+      "conceptId": "gv5-d20-m02",
+      "sourceIds": [
+        "source-ccfbea5f751a50"
+      ]
+    },
+    {
+      "id": "gv5-d30-q13",
+      "key": 0,
+      "correctText": "The guide that we consulted was helpful.",
+      "explanationHash": "64d15c363660d8513833c62babee1a5246b39a46c1af39f481f1f48e6c10e3d6",
+      "conceptId": "gv5-d15-m01",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1"
+      ]
+    },
+    {
+      "id": "gv5-d30-q14",
+      "key": 2,
+      "correctText": "Please put them away.",
+      "explanationHash": "219251fcfaff87e0754dda28ccaa1ba7c73c85442666f83224a30905c1e59eb9",
+      "conceptId": "gv5-d12-m04",
+      "sourceIds": [
+        "source-dc50449ecddf62"
+      ]
+    },
+    {
+      "id": "gv5-d30-q15",
+      "key": 0,
+      "correctText": "This building’s energy use is lower than that of the next building.",
+      "explanationHash": "bc0ac76e8bf1e2ce311b3b792cccd52b07aaa6f3ec1aaef64cd78584211b834a",
+      "conceptId": "gv5-d22-m03",
+      "sourceIds": [
+        "source-8ddf38a0fd2628"
+      ]
+    },
+    {
+      "id": "gv5-d30-q16",
+      "key": 0,
+      "correctText": "After Lina examined the chart, the discrepancy surprised her.",
+      "explanationHash": "92b1ac316d1bc00085fd4717d6977c04a848b374c7fa3fdb4cb6eb177a64fdad",
+      "conceptId": "gv5-d22-m01",
+      "sourceIds": [
+        "source-445532eb0f5c35"
+      ]
+    },
+    {
+      "id": "gv5-d30-q17",
+      "key": 3,
+      "correctText": "The hearing ended; the witnesses left.",
+      "explanationHash": "d1c026a0d069690d9c03757aa5b90a1e0560bdde649127757880bf7bd56e5714",
+      "conceptId": "gv5-d24-m01",
+      "sourceIds": [
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d30-q18",
+      "key": 1,
+      "correctText": "Established British and American spellings can both be standard; a publication may choose a consistent convention.",
+      "explanationHash": "ca7b61146fb23a6890c488ee3628a96842b373ffdbe3b11e7d6d16fbb81329e3",
+      "conceptId": "gv5-d24-m04",
+      "sourceIds": [
+        "source-8cf60a1688508e",
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d30-q19",
+      "key": 0,
+      "correctText": "its",
+      "explanationHash": "850ef9a32b11a2a408aae645b46c2a03ce6e08c63f92caf8f4aaea5626ae644b",
+      "conceptId": "gv5-d24-m02",
+      "sourceIds": [
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-d30-q20",
+      "key": 1,
+      "correctText": "effect",
+      "explanationHash": "e8080de1bc685ae0e20344f2c7a026bd8508bfea6ff661ce6e928aca8da172f3",
+      "conceptId": "gv5-d25-m01",
+      "sourceIds": [
+        "source-f3988fbed0a134",
+        "source-c8a280ba934bd7"
+      ]
+    },
+    {
+      "id": "gv5-d30-q21",
+      "key": 2,
+      "correctText": "The volunteers’ replies suggest support within that small responding group.",
+      "explanationHash": "163efeb53562a23e0e1dc1b4b710645eeb7ef6842af3d82e20284e00218c843b",
+      "conceptId": "gv5-d26-m03",
+      "sourceIds": [
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-d30-q22",
+      "key": 3,
+      "correctText": "The scanner was replaced.",
+      "explanationHash": "b2f46d51e0e1509db18abcc524cd5a95924e75078f9e39078bb17e67ff368905",
+      "conceptId": "gv5-d26-m01",
+      "sourceIds": [
+        "source-2e5cd32b34733d"
+      ]
+    },
+    {
+      "id": "gv5-d30-q23",
+      "key": 1,
+      "correctText": "Some rural libraries may open longer if the pilot receives funding.",
+      "explanationHash": "06dd517168349f2cf0523f2c32a3219d7e2b8239da27612c4953205ddb7c7310",
+      "conceptId": "gv5-d27-m01",
+      "sourceIds": [
+        "source-3e3ac15bcaeafc",
+        "source-9fcbdb35005527"
+      ]
+    },
+    {
+      "id": "gv5-d30-q24",
+      "key": 0,
+      "correctText": "After the equipment is repaired, the laboratory may repeat the test.",
+      "explanationHash": "146dce845819dbebdcf52161318e967dcac776625d7482831f1011040ecf58af",
+      "conceptId": "gv5-d28-m02",
+      "sourceIds": [
+        "source-3e3ac15bcaeafc",
+        "source-2ce8f4ad32dfe5"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q01",
+      "key": 1,
+      "correctText": "The volunteers",
+      "explanationHash": "2b71a547ba76efd7d5595a650445bdd3329adb6d43925a0dae22212e55f1ed12",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q02",
+      "key": 1,
+      "correctText": "Stone is a noun functioning as a modifier.",
+      "explanationHash": "50fb6106d20c46a2ac989ed4e37ded9c249f4f26930022b936a3086963061d9a",
+      "conceptId": "gv5-d01-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-b7519a9fb89ab0",
+        "source-fb277fd6f4e9a7"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q03",
+      "key": 3,
+      "correctText": "minutes",
+      "explanationHash": "1e7f7e1b9991b5bb5dc2e10ce53218237e1537a8247ce69b83582ead7190b8fc",
+      "conceptId": "gv5-d13-m01",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-a26f490947be2a",
+        "source-3cb399907c285d",
+        "source-7fbbabb6fbc6f9",
+        "source-84ae307be3e618"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q04",
+      "key": 2,
+      "correctText": "It is a grammatical imperative with an ordinarily unexpressed subject.",
+      "explanationHash": "45936ac1049a201f096da1dd78612dd736f84db43124292fe4431c3a79e409ca",
+      "conceptId": "gv5-d14-m01",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-1ceaeffe194685"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q05",
+      "key": 1,
+      "correctText": "equipment",
+      "explanationHash": "16cee417fd8ad329cc16803fd01adc0d250ad643ded2704db1f4b8d640793ad6",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q06",
+      "key": 0,
+      "correctText": "an",
+      "explanationHash": "d2b200a525f55b8554559053705016b58ff1c4d1b7c07ef424b8ec2d2089c6c8",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q07",
+      "key": 3,
+      "correctText": "the children’s playroom",
+      "explanationHash": "b67f8a3603f86732f69ed62b73d88960d24bfaf6c9d4a0d7afc61ebe264db84f",
+      "conceptId": "gv5-d02-m03",
+      "sourceIds": [
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q08",
+      "key": 2,
+      "correctText": "It can refer to a person whose gender is unknown or whose pronoun is they.",
+      "explanationHash": "e04a532576de766e2abf30cb5e731bed77e06b5d1b52c1cf62c86b1f637a20f1",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-8491a7a9cd1ef0",
+        "source-c8c8eb61823502",
+        "source-a240777d42125f",
+        "source-287989cd31ff3a",
+        "source-875cf442627771",
+        "source-9ce5998c5a5d1a"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q09",
+      "key": 0,
+      "correctText": "visited",
+      "explanationHash": "bdb62486a82856e4ff19d1a1dc6ad7b79acf0de2b415e3cfed3c901b2ba923f5",
+      "conceptId": "gv5-d07-m01",
+      "sourceIds": [
+        "source-007ab40b0b452f",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q10",
+      "key": 0,
+      "correctText": "She has been cataloguing records for two hours and is still doing so.",
+      "explanationHash": "453d0d0bc1638d14a0af35b3a9a2d7f19d2435ee9f95b4141c374508b92ddca5",
+      "conceptId": "gv5-d06-m04",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-aa53e406bdc491",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q11",
+      "key": 2,
+      "correctText": "A confident inference from evidence",
+      "explanationHash": "470a9b217cbf0bab5cb40a3fe8f77432282633414cc6f1ca4564f9d7b259994a",
+      "conceptId": "gv5-d17-m02",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q12",
+      "key": 3,
+      "correctText": "touching",
+      "explanationHash": "83b159b9657ad894ad2350493d45f97bbf08a6c90493f3068c5b07575d8c6ecc",
+      "conceptId": "gv5-d20-m01",
+      "sourceIds": [
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-dab92de230863e",
+        "source-6908b83f55a46c",
+        "source-d85ca5e784b8e3",
+        "source-1b181d51d43d3f"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q13",
+      "key": 3,
+      "correctText": "politely",
+      "explanationHash": "024395991dc4f7c22a475ff9754f04c61bd44ee555a9cdd8bd4cc4f66a6944f6",
+      "conceptId": "gv5-d11-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-8ddf38a0fd2628",
+        "source-886c8cf34966b2",
+        "source-e2ea6705d28178",
+        "source-ca2d512f202f95"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q14",
+      "key": 3,
+      "correctText": "The document that I requested arrived.",
+      "explanationHash": "c482b45390ac8ef4a424473970cbe04374e6b0eeae0d3c140d67be7c476641d4",
+      "conceptId": "gv5-d15-m01",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1",
+        "source-5b7819d35530f4",
+        "source-028ce099d2bb32",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q15",
+      "key": 1,
+      "correctText": "clarify decisions",
+      "explanationHash": "43b354139509be406f209afc6ec4e03a8f31a73fb56ff4dcb55b59733ae7cb04",
+      "conceptId": "gv5-d22-m03",
+      "sourceIds": [
+        "source-42dc4d1cdfd2d8",
+        "source-8db1cebfd15ccb",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q16",
+      "key": 1,
+      "correctText": "Please turn it off.",
+      "explanationHash": "97a147d358eeeaefcb25abeb7d5252ffa54841d83c8e2a308183960bb47b473c",
+      "conceptId": "gv5-d12-m04",
+      "sourceIds": [
+        "source-dc50449ecddf62",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q17",
+      "key": 0,
+      "correctText": "The rain stopped; the match resumed.",
+      "explanationHash": "ecfd70f8c49990c8ba78709852be26a94dc098fe4f1963610c07dfeb5235dfab",
+      "conceptId": "gv5-d24-m01",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-2ce8f4ad32dfe5",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q18",
+      "key": 0,
+      "correctText": "its",
+      "explanationHash": "9244f16f4d4ac2d2db5da4cf52ed64ddb44a2aa5f4388b02d077b61ea1aba4c6",
+      "conceptId": "gv5-d24-m02",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-8cf60a1688508e",
+        "source-fb41efc1d03fc7",
+        "source-b5b38b055ab426",
+        "source-bb04455ae3afd3"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q19",
+      "key": 1,
+      "correctText": "The new timetable begins on Monday.",
+      "explanationHash": "50384f14c8463fa34bad01cfee39ed5b6fe6c0b53ec3e01e773c18e7169be9d9",
+      "conceptId": "gv5-d24-m01",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-2ce8f4ad32dfe5",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q20",
+      "key": 0,
+      "correctText": "effect",
+      "explanationHash": "6c74370c8a42861f88680c7549a557d59aa6b6e318a412f48990b066e33ff068",
+      "conceptId": "gv5-d25-m01",
+      "sourceIds": [
+        "source-d1c9bd91ec669b",
+        "source-c8a280ba934bd7",
+        "source-f3988fbed0a134",
+        "source-de295c8f9dba2d"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q21",
+      "key": 3,
+      "correctText": "The reference can be ambiguous and may need clarification.",
+      "explanationHash": "3cd2d13eebc43fb7d4aa0beb4b0d0e6f0a8d7e9255d1b1a9e3c056a2bf2040c3",
+      "conceptId": "gv5-d22-m02",
+      "sourceIds": [
+        "source-16d109b31fac43",
+        "source-2e5cd32b34733d"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q22",
+      "key": 2,
+      "correctText": "The data may indicate an association.",
+      "explanationHash": "25e5728eea90d6a879c2837e73301ede90b8796497f3975bf70c68839ff00136",
+      "conceptId": "gv5-d26-m03",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-3e3ac15bcaeafc",
+        "source-f7c1a80292d10b"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q23",
+      "key": 2,
+      "correctText": "Some pilot clinics may open longer if funding continues.",
+      "explanationHash": "db5f934ab9f4c38830451cef3d23e760dcafa62120b93d415fa059f92832e4bb",
+      "conceptId": "gv5-d27-m01",
+      "sourceIds": [
+        "source-a8b3fc5e4c8c96",
+        "source-43b3913aec1e91",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-diagnostic-q24",
+      "key": 2,
+      "correctText": "The visitor asked where the records desk was.",
+      "explanationHash": "2f8b471ea25ac53d53b4f126f502768a6875500e44a10ddc0c836ee8fea73b1f",
+      "conceptId": "gv5-d21-m03",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q01",
+      "key": 3,
+      "correctText": "verb",
+      "explanationHash": "5d7c87f6f58c23e37e3d275eaf6b27a8763c1f8a24fa20c3ab614a0c07b5977b",
+      "conceptId": "gv5-d01-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-b7519a9fb89ab0",
+        "source-fb277fd6f4e9a7"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q02",
+      "key": 0,
+      "correctText": "The board considered the proposal workable.",
+      "explanationHash": "e6dbadc27f6c67e59e10980beefb556bb95e9fb1fd318eab9b144f7099a24898",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q03",
+      "key": 1,
+      "correctText": "children",
+      "explanationHash": "5366640c1252bbecfa03eed88702a03dc2c62f1347ce9d9fb2b0b51f3a9d8e91",
+      "conceptId": "gv5-d02-m01",
+      "sourceIds": [
+        "source-5e8743788d0639",
+        "source-fb277fd6f4e9a7",
+        "source-a95ed69b7ca939",
+        "source-b6c1a3fe28cfd4"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q04",
+      "key": 3,
+      "correctText": "Their research supports the claim.",
+      "explanationHash": "199265808ae74a7af641d5c9e150044e39d2aa6a45e0cc2a43e845c7d502ea10",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q05",
+      "key": 2,
+      "correctText": "a",
+      "explanationHash": "894a546306373c7b1430ae12cb3c57bac2d8ef6845e14f60c9d9676aade57801",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q06",
+      "key": 0,
+      "correctText": "A few chairs remain; we can lend you two.",
+      "explanationHash": "cd65c123d37c0d695a8dfccce9760e1410c5575acd3f38dca14374f1e95fe4f6",
+      "conceptId": "gv5-d03-m04",
+      "sourceIds": [
+        "source-129df932b28c56",
+        "source-d8d7c7adb6ed42",
+        "source-39615bb337754a",
+        "source-2b69beb54eca89"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q07",
+      "key": 1,
+      "correctText": "me",
+      "explanationHash": "86229db58de8f74a22f6ace686c508a15a7b51ca29c0093c8f7a54eb78047c89",
+      "conceptId": "gv5-d04-m01",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q08",
+      "key": 0,
+      "correctText": "Their is established singular-they reference.",
+      "explanationHash": "79abfc1e9039401a7e8ab29089d1dd60feff114065f2e598f92925b7fd661fb0",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-8491a7a9cd1ef0",
+        "source-c8c8eb61823502",
+        "source-a240777d42125f",
+        "source-287989cd31ff3a",
+        "source-875cf442627771",
+        "source-9ce5998c5a5d1a"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q09",
+      "key": 1,
+      "correctText": "destroy",
+      "explanationHash": "ffa6976ebe0b37e2d5565588d663b9b445cd92ad58f9c8649003fb6a81de5860",
+      "conceptId": "gv5-d05-m02",
+      "sourceIds": [
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794",
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-f36cfc25889ed4"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q10",
+      "key": 2,
+      "correctText": "a subject complement",
+      "explanationHash": "e5611e4cc7032f7392a40a97fb2c9f7c1b1dd63df458ca69d0abd5dea5939463",
+      "conceptId": "gv5-d05-m03",
+      "sourceIds": [
+        "source-22086aff3a3fbc",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-15b65ce5c1b751",
+        "source-58353073c867f7"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q11",
+      "key": 3,
+      "correctText": "have received",
+      "explanationHash": "ec67336af56ed7c0cc926ce0d829ba57c69a747f0694ec87cbd4dc0a2330a7c5",
+      "conceptId": "gv5-d06-m03",
+      "sourceIds": [
+        "source-ca6ab50c9fe853",
+        "source-c1a93519194932",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-phase-1-q12",
+      "key": 2,
+      "correctText": "are working",
+      "explanationHash": "39a1e679b416cacb6bc4fc4482efbfc561dff66ee6fa0150f3afbc31afa71b8b",
+      "conceptId": "gv5-d06-m02",
+      "sourceIds": [
+        "source-2bc25481c69832",
+        "source-f0dab5a2a68798"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q01",
+      "key": 0,
+      "correctText": "inspected",
+      "explanationHash": "6732a904a0e520e22ef376fe0fe2d08eaf602b0c0de3d5af81d86d9603d13822",
+      "conceptId": "gv5-d07-m01",
+      "sourceIds": [
+        "source-007ab40b0b452f",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q02",
+      "key": 1,
+      "correctText": "We used to own that house.",
+      "explanationHash": "cda235e757553f5f37602147fa28e7f814e0d2dcb77eb2fa12f08c15b45fe1cc",
+      "conceptId": "gv5-d07-m04",
+      "sourceIds": [
+        "source-b08f94d0abde7f",
+        "source-f8ef51164863ad"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q03",
+      "key": 0,
+      "correctText": "The activity is viewed over a period connected to now; completion is not guaranteed.",
+      "explanationHash": "7b36b20554e92730a7178b4343ce8af03004d77d60c4e42f4fbe1694fd707e77",
+      "conceptId": "gv5-d08-m01",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-a79546fdace5e0",
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q04",
+      "key": 1,
+      "correctText": "since",
+      "explanationHash": "ca185bd4202b69bc99093431d5c61b5364b9cef64253167fb46a8af3526b6248",
+      "conceptId": "gv5-d08-m03",
+      "sourceIds": [
+        "source-aa53e406bdc491",
+        "source-ef3e812f3fb26c",
+        "source-44c9bc31ab8158",
+        "source-eecf7dafccbf50"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q05",
+      "key": 2,
+      "correctText": "A fixed arrangement: We are meeting the translator at ten tomorrow.",
+      "explanationHash": "a4a3a8349f1c163b672c6fb67cd64983381bc7c3b8bc219ae3adecbb71e0679e",
+      "conceptId": "gv5-d09-m02",
+      "sourceIds": [
+        "source-fd380d90a9dc1a",
+        "source-5ca26d5f6101ad"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q06",
+      "key": 2,
+      "correctText": "If you will wait here, I will fetch the supervisor.",
+      "explanationHash": "68d69f8d7ea97a0373a53e03301e36fa82eac260b9d6cd29616f8995ff9acb14",
+      "conceptId": "gv5-d09-m04",
+      "sourceIds": [
+        "source-901e6631c7d82a",
+        "source-9fcbdb35005527",
+        "source-89176b529bbc02",
+        "source-ef3e812f3fb26c"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q07",
+      "key": 3,
+      "correctText": "is",
+      "explanationHash": "f2b4c800b28431639ba0f770fa5238bb4064fcbf74d26fc6160f844fda2b912f",
+      "conceptId": "gv5-d10-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-dee460d0260d9b",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q08",
+      "key": 2,
+      "correctText": "Agreement can reflect unit versus member interpretation, with regional preferences.",
+      "explanationHash": "a88041ddf4af5e49ff0d3ee43a346323bc4899b76dd388434edb94fc850a6ae7",
+      "conceptId": "gv5-d10-m02",
+      "sourceIds": [
+        "source-fa438d9714f33f",
+        "source-5e8743788d0639",
+        "source-8cf60a1688508e",
+        "source-b558c0e9b89f1a",
+        "source-a49c734e279b1a",
+        "source-6d5d2fbb856026",
+        "source-dee460d0260d9b"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q09",
+      "key": 0,
+      "correctText": "shorter",
+      "explanationHash": "23412c8f102802e6545e9a6a0073884f29f14dfb513e8acefc21e7dcad26387e",
+      "conceptId": "gv5-d11-m02",
+      "sourceIds": [
+        "source-8ddf38a0fd2628",
+        "source-930d01e686ac67",
+        "source-c9e3872504dda3"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q10",
+      "key": 3,
+      "correctText": "Hard can mean with effort; hardly means scarcely.",
+      "explanationHash": "00f1f877a025391dd657e812d1cbce71e656831246a0ee1777f369eaadeebb6f",
+      "conceptId": "gv5-d11-m03",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-8ddf38a0fd2628",
+        "source-886c8cf34966b2",
+        "source-e2ea6705d28178",
+        "source-ca2d512f202f95"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q11",
+      "key": 1,
+      "correctText": "Who did you speak to? is standard in ordinary English.",
+      "explanationHash": "cfc930b7c6d848495182aa0ed2be3b5cfa3a695ef156df969ae3e70964c42953",
+      "conceptId": "gv5-d12-m02",
+      "sourceIds": [
+        "source-84ae307be3e618",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q12",
+      "key": 1,
+      "correctText": "hand it in",
+      "explanationHash": "75bb89ce3a466f6a1c77ae6d85c56e31d1136b9a234f7f7af067fab8871105b8",
+      "conceptId": "gv5-d12-m04",
+      "sourceIds": [
+        "source-dc50449ecddf62",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q13",
+      "key": 3,
+      "correctText": "boxes",
+      "explanationHash": "63a1f25cc9425c458218d48903b706ead79104226fb919800a6661537b5b7df3",
+      "conceptId": "gv5-d01-m04",
+      "sourceIds": [
+        "source-15b65ce5c1b751",
+        "source-d8d773260d5fa1",
+        "source-d6af2eef369812",
+        "source-4bea8b5c1c8314"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q14",
+      "key": 3,
+      "correctText": "some useful advice",
+      "explanationHash": "068c301856fbe51a151cc3f5a8cca97db0104a0bb7ac547da15526956afaee0d",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q15",
+      "key": 0,
+      "correctText": "A / the",
+      "explanationHash": "df0d2b029bce794fbf787ba9304bc4ef80760ba5abef3d53b0409baa80a913a7",
+      "conceptId": "gv5-d03-m01",
+      "sourceIds": [
+        "source-5de3dcfc2c8b36",
+        "source-a95ed69b7ca939"
+      ]
+    },
+    {
+      "id": "gv5-phase-2-q16",
+      "key": 2,
+      "correctText": "me",
+      "explanationHash": "93b88f007abc713ac838103bd47bed32c85efdf36dd81e37c97063b8cc4425f2",
+      "conceptId": "gv5-d04-m01",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q01",
+      "key": 2,
+      "correctText": "maps",
+      "explanationHash": "f927ff1359f46293eddd2e5fda499d63040672372acb40a7a49ed7fbd6ccbafb",
+      "conceptId": "gv5-d13-m01",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-a26f490947be2a",
+        "source-3cb399907c285d",
+        "source-7fbbabb6fbc6f9",
+        "source-84ae307be3e618"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q02",
+      "key": 1,
+      "correctText": "Substitution, movement and coordination can supply evidence, but individual tests have restrictions.",
+      "explanationHash": "00dfb2a0940f7d28648e08cd9a5f430887064126d641ba19d607fedc52679200",
+      "conceptId": "gv5-d13-m04",
+      "sourceIds": [
+        "source-58353073c867f7",
+        "source-49ac929acd7fe5",
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q03",
+      "key": 3,
+      "correctText": "to observe the hearing",
+      "explanationHash": "38f717a40a979be849e350b7ef2a74bb0fa408d3a3f6c94cf5c776f5f9ea9af9",
+      "conceptId": "gv5-d14-m01",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-445532eb0f5c35",
+        "source-a70db92421dbc9",
+        "source-1ceaeffe194685"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q04",
+      "key": 1,
+      "correctText": "The files arrived; the clerk checked them.",
+      "explanationHash": "a29664f8abc27fa6904b7d6ab6a5b4dc43f53ad0cde2f477902214840e68c206",
+      "conceptId": "gv5-d14-m04",
+      "sourceIds": [
+        "source-2ce8f4ad32dfe5",
+        "source-1ceaeffe194685",
+        "source-93f2b5c2495752",
+        "source-701ec209075aec"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q05",
+      "key": 0,
+      "correctText": "a supplementary relative adding information about the identified neighbour",
+      "explanationHash": "835e90789cc2106b22d4289f67a1f23d280555f55ce0f2a32acf486766cefa75",
+      "conceptId": "gv5-d15-m01",
+      "sourceIds": [
+        "source-e3ac7fb8fbb2e1",
+        "source-5b7819d35530f4",
+        "source-028ce099d2bb32",
+        "source-70e3bfdac01616"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q06",
+      "key": 1,
+      "correctText": "where she has put the key",
+      "explanationHash": "37fddbc9bfc980da1e38711593f98b237738596ad9a60038daffa8a687fe6cd8",
+      "conceptId": "gv5-d15-m03",
+      "sourceIds": [
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812",
+        "source-89176b529bbc02",
+        "source-ccfbea5f751a50",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q07",
+      "key": 1,
+      "correctText": "improve access",
+      "explanationHash": "67507f8c37ba5e3d0b93f1c62c01a35cd1c52fdb1ce44addc44bf6d0df4f8a09",
+      "conceptId": "gv5-d16-m02",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-8db1cebfd15ccb",
+        "source-287989cd31ff3a"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q08",
+      "key": 3,
+      "correctText": "The trial ended; however, the review continued.",
+      "explanationHash": "c4ffc7893794af84239e3791e32d409640c7e68f85f309efe30c83e85619cc67",
+      "conceptId": "gv5-d16-m04",
+      "sourceIds": [
+        "source-701ec209075aec",
+        "source-93f2b5c2495752"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q09",
+      "key": 1,
+      "correctText": "A criticism of an unperformed past action",
+      "explanationHash": "2f2b86dc3fd2f1731664ffdea7de1f791cbef4989467a37b12ed693537504633",
+      "conceptId": "gv5-d17-m03",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-7bb68e7575962d",
+        "source-32e349b2ed28e5"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q10",
+      "key": 2,
+      "correctText": "an obligation",
+      "explanationHash": "ae9fee1f218ee648e6a0f43d7905e138239e8b9ea262bc3a7f6b22616fe99853",
+      "conceptId": "gv5-d17-m04",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q11",
+      "key": 0,
+      "correctText": "had seen",
+      "explanationHash": "554a86aa39b8a80acdabc060b765153709832db861dbeefbe2c98c15b7219da4",
+      "conceptId": "gv5-d18-m01",
+      "sourceIds": [
+        "source-9fcbdb35005527",
+        "source-1bb5d453fe6dc8",
+        "source-10e4340e83d799"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q12",
+      "key": 0,
+      "correctText": "The committee recommended that she should attend is an established British construction.",
+      "explanationHash": "aa338d25e64f967901f1a0b9e1a805fe39f5712a92ebca81ec8a241389f991d5",
+      "conceptId": "gv5-d18-m04",
+      "sourceIds": [
+        "source-3e6d246caea47b",
+        "source-9fcbdb35005527",
+        "source-10e4340e83d799",
+        "source-63cc2ee69b424a",
+        "source-7432e196e7a5da"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q13",
+      "key": 3,
+      "correctText": "is",
+      "explanationHash": "118733d90abb981155e5f2446aa436ab071197a763fb757c6887189cb3f7be64",
+      "conceptId": "gv5-d02-m02",
+      "sourceIds": [
+        "source-a95ed69b7ca939",
+        "source-5e8743788d0639",
+        "source-287989cd31ff3a",
+        "source-8cf60a1688508e",
+        "source-5bdfd5772dae31"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q14",
+      "key": 3,
+      "correctText": "their",
+      "explanationHash": "6cec6ed78db04a0bcb80cb7b2888501b9ee2e37ddef22bb173d3d7f2ffddbe7b",
+      "conceptId": "gv5-d04-m03",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-8491a7a9cd1ef0",
+        "source-c8c8eb61823502",
+        "source-a240777d42125f",
+        "source-287989cd31ff3a",
+        "source-875cf442627771",
+        "source-9ce5998c5a5d1a"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q15",
+      "key": 2,
+      "correctText": "has",
+      "explanationHash": "a05730faf4d2c00ca92fe4a658a58f5191174388a0a045a770af99d80e740ff0",
+      "conceptId": "gv5-d05-m02",
+      "sourceIds": [
+        "source-773e3d2df84661",
+        "source-beec0c93fa3794",
+        "source-5532e2d7078060",
+        "source-445532eb0f5c35",
+        "source-f36cfc25889ed4"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q16",
+      "key": 0,
+      "correctText": "checked",
+      "explanationHash": "3ec1cba954b4ec906239224180c55c75174babf662b1678ecfb2aecb49da4836",
+      "conceptId": "gv5-d07-m01",
+      "sourceIds": [
+        "source-007ab40b0b452f",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q17",
+      "key": 0,
+      "correctText": "Deliver the parcel by noon.",
+      "explanationHash": "33823bc7c247a00850ec870888b8defd8626c608756a412ba8d8896e8386df91",
+      "conceptId": "gv5-d08-m03",
+      "sourceIds": [
+        "source-aa53e406bdc491",
+        "source-ef3e812f3fb26c",
+        "source-44c9bc31ab8158",
+        "source-eecf7dafccbf50"
+      ]
+    },
+    {
+      "id": "gv5-phase-3-q18",
+      "key": 2,
+      "correctText": "departs",
+      "explanationHash": "c1a6b68a61e933fbac6a14a612326aab40cb68b5694b7f04f6bb047d399f09ba",
+      "conceptId": "gv5-d09-m02",
+      "sourceIds": [
+        "source-fd380d90a9dc1a",
+        "source-5ca26d5f6101ad"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q01",
+      "key": 0,
+      "correctText": "The copies have been signed by the clerk.",
+      "explanationHash": "647c9a86c2b655cbbebf3a86cbcc700b4d8061adddcdb551ba0293220e36efc1",
+      "conceptId": "gv5-d19-m01",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-445532eb0f5c35",
+        "source-6908b83f55a46c"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q02",
+      "key": 3,
+      "correctText": "The issue was referred to in the report.",
+      "explanationHash": "483d48c6d9553f87e42103341846bb15e81532c1b992661be496adb23b73185d",
+      "conceptId": "gv5-d19-m04",
+      "sourceIds": [
+        "source-b35577171ea742",
+        "source-5532e2d7078060",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q03",
+      "key": 3,
+      "correctText": "I paused another activity in order to read the notice.",
+      "explanationHash": "42a0a99231f5556cdcca7d1ac5514d4f7cd8d2db23b3db1a43ea8c523b472ac0",
+      "conceptId": "gv5-d20-m02",
+      "sourceIds": [
+        "source-ccfbea5f751a50",
+        "source-dab92de230863e",
+        "source-a4b8f505f226f9",
+        "source-1faf37a18b3e37",
+        "source-f72ea287b27b1d"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q04",
+      "key": 2,
+      "correctText": "After Maya read the draft, the error became obvious.",
+      "explanationHash": "1723cccfa963d586151c1924745d77d8fc44ef852cffe175f209818367c6665b",
+      "conceptId": "gv5-d20-m04",
+      "sourceIds": [
+        "source-b61da788662118",
+        "source-a1d750e1351f47",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q05",
+      "key": 0,
+      "correctText": "She said that the office is open on Sundays.",
+      "explanationHash": "f8df2e7be7592a2b5ec3a4fa53f38fccf640a5dab3c98539e8d9f1cfc42568a5",
+      "conceptId": "gv5-d21-m02",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q06",
+      "key": 0,
+      "correctText": "The clerk asked whether the manager had approved it.",
+      "explanationHash": "4b30873b943ff42cfe9e35e6e8bf1f0ef3ff9378a07bdd9752cd5f1f69c59d45",
+      "conceptId": "gv5-d21-m03",
+      "sourceIds": [
+        "source-89176b529bbc02"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q07",
+      "key": 2,
+      "correctText": "Attachment of with a telescope can be ambiguous.",
+      "explanationHash": "7a447d4469b80f26c2966ce0a18c74d42d8aa7990fd49d44e91af877986a83f9",
+      "conceptId": "gv5-d22-m02",
+      "sourceIds": [
+        "source-16d109b31fac43",
+        "source-2e5cd32b34733d"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q08",
+      "key": 1,
+      "correctText": "Our rent is higher than that of the neighbouring office.",
+      "explanationHash": "2ea89264e6c75cb7a66c08856e8b0d73d005de5e9492a7359a0c2a24befb8f1c",
+      "conceptId": "gv5-d22-m03",
+      "sourceIds": [
+        "source-42dc4d1cdfd2d8",
+        "source-8db1cebfd15ccb",
+        "source-028b7ffa729def"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q09",
+      "key": 1,
+      "correctText": "Never have we seen such flooding.",
+      "explanationHash": "a0abf658f5860d45d4e826ee21ab7fdf4444f2452de3fec2f06b2e853031d4ec",
+      "conceptId": "gv5-d23-m01",
+      "sourceIds": [
+        "source-f36cfc25889ed4",
+        "source-52104a3b64e06c",
+        "source-1bb5d453fe6dc8"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q10",
+      "key": 1,
+      "correctText": "substitution/reduced repetition of the predicate",
+      "explanationHash": "9bf3e44c3e2dd78ce60db2c37586247502298fbc0e6cc54187cb95641172e130",
+      "conceptId": "gv5-d23-m04",
+      "sourceIds": [
+        "source-028b7ffa729def",
+        "source-773e3d2df84661",
+        "source-8cf60a1688508e"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q11",
+      "key": 2,
+      "correctText": "the teachers’ schedules",
+      "explanationHash": "d9a0dcc0dc9055b92a202515f75f843c7f4c91f67dc498407718c548837e4b5b",
+      "conceptId": "gv5-d24-m02",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-8cf60a1688508e",
+        "source-fb41efc1d03fc7",
+        "source-b5b38b055ab426",
+        "source-bb04455ae3afd3"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q12",
+      "key": 3,
+      "correctText": "Established styles use either single or double outer marks, with consistent nesting.",
+      "explanationHash": "662e5e412435ecadf939c1e8efe9934c6bbade5db31d7088ad3ca308be6279b4",
+      "conceptId": "gv5-d24-m03",
+      "sourceIds": [
+        "source-93f2b5c2495752",
+        "source-89176b529bbc02",
+        "source-c9f14a7debeeb5"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q13",
+      "key": 2,
+      "correctText": "criteria",
+      "explanationHash": "3f598d6898d3f79867348520664313232a16f2dabf36b57606321bc3b0234d3b",
+      "conceptId": "gv5-d02-m01",
+      "sourceIds": [
+        "source-5e8743788d0639",
+        "source-fb277fd6f4e9a7",
+        "source-a95ed69b7ca939",
+        "source-b6c1a3fe28cfd4"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q14",
+      "key": 0,
+      "correctText": "me",
+      "explanationHash": "4b3fba75a49b8b716e1670fed4ea18671019a0bb3a2bfb98bb7318b118ec6fec",
+      "conceptId": "gv5-d04-m01",
+      "sourceIds": [
+        "source-c040d9e0859517",
+        "source-170117f00cc224",
+        "source-fb41efc1d03fc7"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q15",
+      "key": 0,
+      "correctText": "An activity is viewed over a period connected to now; completion is not guaranteed.",
+      "explanationHash": "4448b53b7bae851345386f8e3648450a7525b2c36e3be72c4e472e720fe10af9",
+      "conceptId": "gv5-d08-m01",
+      "sourceIds": [
+        "source-88d14ab6136199",
+        "source-a79546fdace5e0",
+        "source-ca6ab50c9fe853"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q16",
+      "key": 1,
+      "correctText": "is",
+      "explanationHash": "75102c63400e4cb623e71a448f2380ff9ca6d5713a39e8913804e52e07635c1e",
+      "conceptId": "gv5-d10-m01",
+      "sourceIds": [
+        "source-287989cd31ff3a",
+        "source-dee460d0260d9b",
+        "source-5532e2d7078060"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q17",
+      "key": 3,
+      "correctText": "where the next meeting is",
+      "explanationHash": "b36f135c292c6d7f2f4ad200143423793c0c0610176163afe7bbe85e04c137ca",
+      "conceptId": "gv5-d15-m03",
+      "sourceIds": [
+        "source-1ceaeffe194685",
+        "source-d6af2eef369812",
+        "source-89176b529bbc02",
+        "source-ccfbea5f751a50",
+        "source-a70db92421dbc9"
+      ]
+    },
+    {
+      "id": "gv5-phase-4-q18",
+      "key": 1,
+      "correctText": "The lock might be damaged.",
+      "explanationHash": "a0d7f0b08f55d42bd2b46ee2c6d834dc6ed572ec3de450b4f0eded70338f322a",
+      "conceptId": "gv5-d17-m04",
+      "sourceIds": [
+        "source-10e4340e83d799",
+        "source-3e3ac15bcaeafc"
+      ]
+    },
+    {
+      "id": "gv5-ref-meaning-q01",
+      "key": 1,
+      "correctText": "At least one ticket was not sold.",
+      "explanationHash": "5415089b31c4605deb860a0e73525ac0790206d6a99750fd6a8c3712149f00ed",
+      "conceptId": "gv5-ref-negation-scope",
+      "sourceIds": [
+        "source-c5aeee4ead1514",
+        "source-a3c15737ad3e61",
+        "source-c6656ba16f39b1"
+      ]
+    },
+    {
+      "id": "gv5-ref-meaning-q02",
+      "key": 0,
+      "correctText": "That the painting was moved",
+      "explanationHash": "5025743f66d06b83258d527da37bcc92cb87f59503efe0307fc3c0ee47981b3d",
+      "conceptId": "gv5-ref-presupposition",
+      "sourceIds": [
+        "source-a83d66871c2ac7",
+        "source-a3c15737ad3e61"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-q01",
+      "key": 1,
+      "correctText": "a bottle / They bottle the juice",
+      "explanationHash": "b1297439a80306d0bf61b19b934e885c9b783a52d470b06bd21e9164b5c42c76",
+      "conceptId": "gv5-ref-morph-processes",
+      "sourceIds": [
+        "source-c81befbecce753",
+        "source-50a90a203e61ad",
+        "source-b2b7332c9f54f4",
+        "source-14981994c4d0b7",
+        "source-abb4eb7aa69725"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-q02",
+      "key": 0,
+      "correctText": "Productivity concerns extension to suitable forms and can be constrained.",
+      "explanationHash": "fa89423d5883b370acb6998df0881b9b23044da65f5cd02b87818c8578ada6c3",
+      "conceptId": "gv5-ref-morph-productivity",
+      "sourceIds": [
+        "source-de22cd3f568f72",
+        "source-6121c7a85de23d",
+        "source-5d44e2f0f7c24c",
+        "source-abb4eb7aa69725"
+      ]
+    }
+  ],
+  "byDay": [
+    {
+      "day": 1,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 2,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 3,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 4,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 5,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 6,
+      "concepts": 4,
+      "objective": 8,
+      "response": 34
+    },
+    {
+      "day": 7,
+      "concepts": 4,
+      "objective": 8,
+      "response": 34
+    },
+    {
+      "day": 8,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 9,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 10,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 11,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 12,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 13,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 14,
+      "concepts": 4,
+      "objective": 10,
+      "response": 38
+    },
+    {
+      "day": 15,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 16,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 17,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 18,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 19,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 20,
+      "concepts": 4,
+      "objective": 10,
+      "response": 33
+    },
+    {
+      "day": 21,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 22,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 23,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 24,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 25,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 26,
+      "concepts": 3,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 27,
+      "concepts": 3,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 28,
+      "concepts": 4,
+      "objective": 10,
+      "response": 32
+    },
+    {
+      "day": 29,
+      "concepts": 3,
+      "objective": 29,
+      "response": 34
+    },
+    {
+      "day": 30,
+      "concepts": 3,
+      "objective": 24,
+      "response": 34
+    }
+  ],
+  "counts": {
+    "distinctItems": 1429,
+    "objective": 421,
+    "response": 1008
+  }
+}

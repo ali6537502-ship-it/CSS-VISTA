@@ -1,0 +1,3353 @@
+{
+  "scope": "Existing authored Days 21–30; read-only audit",
+  "sourceSnapshot": "/tmp/cssvista-original.json, generated from src/data/grammarCourse.ts before edits",
+  "reviewDate": "2026-10-21",
+  "method": "Every authored field, rule, model, example, objective prompt/options/key/explanation, correction/model/note, writing task/checklist and recap was read. Selected disputed claims were checked against fetched Cambridge pages; direct counterexamples and semantic comparisons were used for remaining editorial findings. No production or project files were modified.",
+  "summary": {
+    "days": 10,
+    "objectiveQuestions": 160,
+    "corrections": 60,
+    "workedExamples": 85,
+    "issues": 122,
+    "severityCounts": {
+      "high": 70,
+      "moderate": 20,
+      "low": 1,
+      "blocker": 31
+    }
+  },
+  "perDay": {
+    "21": {
+      "title": "Punctuation that carries meaning",
+      "rules": 4,
+      "terms": 4,
+      "workedExamples": 10,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 10,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Strong matched-mark and basic clause-boundary practice; explicit possessive and quotation models.",
+      "coverageOmissions": "Missing full punctuation taxonomy: hyphens, slash, ellipsis outside quotations, question/exclamation scope, decimal/date convention, numeric forms, abbreviation conventions, style-guide comparison. No advanced quoted-punctuation variation."
+    },
+    "22": {
+      "title": "Concision: saying it in fewer words",
+      "rules": 4,
+      "terms": 4,
+      "workedExamples": 10,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 11,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Useful emphasis on preserving qualifications and replacing overloaded noun/verb strings.",
+      "coverageOmissions": "No balanced treatment of useful nominalisation, semantic entailment of transformations, deletion of attribution/modality, or genre-driven concision."
+    },
+    "23": {
+      "title": "Formal register and precise diction",
+      "rules": 4,
+      "terms": 4,
+      "workedExamples": 10,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 11,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Original work/academic examples, affect/effect and hedging practice.",
+      "coverageOmissions": "Insufficient genre variation, first-person evidence, legitimate contractions/abbreviations, lexical polysemy, BrE/AmE orthography, epistemic versus deontic commitment."
+    },
+    "24": {
+      "title": "Cohesion: making a paragraph flow",
+      "rules": 4,
+      "terms": 4,
+      "workedExamples": 9,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 9,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Introduces given–new order, reference, substitution/ellipsis and summary nouns.",
+      "coverageOmissions": "No coherence/cohesion distinction, thematic progression options, reference chains across extended authentic-style texts, textual scope/ambiguity analysis, or sound advanced information structure."
+    },
+    "25": {
+      "title": "Words that are constantly confused",
+      "rules": 3,
+      "terms": 3,
+      "workedExamples": 10,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 10,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "A broad starting set of confused words and common spelling traps.",
+      "coverageOmissions": "Little treatment of contextual exceptions, regional legitimacy, polysemy, lexical verb patterns, adjective/noun complementation and register-sensitive test design."
+    },
+    "26": {
+      "title": "The minimum-correction method",
+      "rules": 4,
+      "terms": 3,
+      "workedExamples": 9,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 10,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Useful principle of preserving intended meaning and avoiding unnecessary edits.",
+      "coverageOmissions": "Correction method rests on unverified exam model and fails to recognise no-error/variation; no systematic alternative-answer rubrics or layered syntactic diagnosis."
+    },
+    "27": {
+      "title": "Grammar inside précis writing",
+      "rules": 4,
+      "terms": 3,
+      "workedExamples": 8,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 11,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Practises relatives/participles, boundary repair and preserving scope.",
+      "coverageOmissions": "No complete authored source passage with précis model and rubric, no synthesis/translation grammar, no robust entailment comparison, and no assessment of independent extended prose."
+    },
+    "28": {
+      "title": "Editing a paragraph under pressure",
+      "rules": 4,
+      "terms": 3,
+      "workedExamples": 7,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 7,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Mixed errors appear in paragraph context and correction tasks.",
+      "coverageOmissions": "Only 4-sentence selection sets and 6 short editing tasks; no substantive multi-layer paragraph analysis, valid suspicious sentences/no-error choice, register-sensitive alternative rubrics or genuine unfamiliar expert structures."
+    },
+    "29": {
+      "title": "Timed simulation across the whole syllabus",
+      "rules": 3,
+      "terms": 3,
+      "workedExamples": 7,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 7,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Mixed 16-item review draws from several earlier areas, includes timed suggestion.",
+      "coverageOmissions": "Not a comprehensive exam: narrow coverage, absent complex clause analysis, non-finite control/raising, information structure, advanced modality/aspect, transformations and controlled independent writing."
+    },
+    "30": {
+      "title": "Mastery and a maintenance plan",
+      "rules": 4,
+      "terms": 4,
+      "workedExamples": 5,
+      "objectiveQuestions": 16,
+      "corrections": 6,
+      "models": 7,
+      "allAuthoredFieldsRead": true,
+      "externalVerification": "Selected disputed constructions verified; every substantive claim has not been independently cross-checked against external authorities.",
+      "strengths": "Emphasises maintenance and active production after course completion.",
+      "coverageOmissions": "No integrated capstone, comparable diagnostic baseline, new unexposed test forms, calibrated topic-level proficiency report or a complete advanced revision/reference roadmap."
+    }
+  },
+  "issues": [
+    {
+      "id": "G21-01",
+      "day": 21,
+      "location": "rules[0].plain / points[0,3]; checklist[0]",
+      "severity": "high",
+      "category": "accuracy",
+      "quote": "Both sides must be complete sentences / never before a dependent clause",
+      "explanation": "The lesson itself correctly teaches semicolons in internally punctuated lists, where the items need not be complete sentences. The universal test contradicts that use. A semicolon before and is also possible between lengthy internally punctuated clauses.",
+      "proposedCorrection": "Scope the complete-clause test to clause joining; separately teach list use and optional semicolons with complex coordination.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/punctuation"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-02",
+      "day": 21,
+      "location": "rules[0].points[4]",
+      "severity": "moderate",
+      "category": "unsupported_claim",
+      "quote": "One or two semicolons in an essay show control; a dozen show mannerism.",
+      "explanation": "No fixed number distinguishes effective punctuation from mannerism. Length and rhetorical purpose matter.",
+      "proposedCorrection": "Advise purposeful use without numerical limits.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-03",
+      "day": 21,
+      "location": "rules[1].plain / points[3,4]; checklist[1]",
+      "severity": "high",
+      "category": "accuracy",
+      "quote": "Never write a colon after a preposition or a verb / Do not use a colon and namely or such as together",
+      "explanation": "A colon can follow a complete statement whose final word is a verb (e.g. Only one problem remained: funding). Colons also introduce subtitles, labels and speech after He said. Some namely constructions legitimately use punctuation.",
+      "proposedCorrection": "Teach clause completeness in running prose; do not forbid the immediately preceding word class. Explain headings, labels, direct speech and style-dependent namely constructions.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/punctuation"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-04",
+      "day": 21,
+      "location": "rules[1].models[2].note",
+      "severity": "low",
+      "category": "label",
+      "quote": "Complete statement, then a short emphasised phrase.",
+      "explanation": "where were the missing files? is an independent interrogative clause, not a phrase.",
+      "proposedCorrection": "Label the second part a direct question/interrogative clause.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/punctuation"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-05",
+      "day": 21,
+      "location": "rules[2].plain",
+      "severity": "moderate",
+      "category": "style_as_error",
+      "quote": "Confusing that weight is itself a small stylistic error",
+      "explanation": "Commas, dashes and parentheses often offer legitimate rhetorical alternatives. Loud/quiet is a useful metaphor, not an objectively graded scale.",
+      "proposedCorrection": "Describe differences as rhetorical options and evaluate the actual context.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/punctuation"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-06",
+      "day": 21,
+      "location": "rules[3].points[2]; d21q12",
+      "severity": "blocker",
+      "category": "ambiguous_key",
+      "quote": "A quotation inside a quotation takes single marks / answer index 1",
+      "explanation": "d21q12 options B and C are both valid: double outer/single inner and single outer/double inner. Cambridge explicitly gives both.",
+      "proposedCorrection": "Specify the house style in the prompt, accept B and C, or replace the distractor. Explain both British and American conventions.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/punctuation"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-07",
+      "day": 21,
+      "location": "d21q11",
+      "severity": "blocker",
+      "category": "ambiguous_key",
+      "quote": "Which is an acceptable formal possessive ... Cervantes’s novel / Cervantes’ novel",
+      "explanation": "Both apostrophe-plus-s and apostrophe-only are defensible style conventions for singular names ending in s. The prompt asks any acceptable formal possessive, so B cannot be uniquely keyed. Cervantes is a Spanish early-modern author, not a classical ancient name.",
+      "proposedCorrection": "Ask for a specified style convention or accept both forms; avoid the misleading classical label.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-08",
+      "day": 21,
+      "location": "d21q3",
+      "severity": "high",
+      "category": "assessment_design",
+      "quote": "Lahore, Punjab, (A) Quetta, Balochistan, (B) and Gilgit ... key A",
+      "explanation": "The proposed correction changes boundaries in both A and B. The item asks for one faulty segment although its explanation repairs two segments. Semicolons improve clarity but not every internally punctuated list requires them.",
+      "proposedCorrection": "Ask learners to rewrite the whole list or underline both separator positions; explain the readability rationale.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/punctuation"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-09",
+      "day": 21,
+      "location": "d21q10",
+      "severity": "high",
+      "category": "ambiguous_key",
+      "quote": "The boy’s hostel accommodates two hundred boys. / The boys’ hostel ...",
+      "explanation": "Accommodation capacity does not determine ownership: a hostel owned by one boy could house 200 boys. A plural attributive reading is also possible in some institution names.",
+      "proposedCorrection": "State explicitly that the intended meaning is a hostel for the boys; test the intended possessive form rather than infer it from capacity.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-10",
+      "day": 21,
+      "location": "examples[9]",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "He said the file is closed, but no order was issued.",
+      "explanation": "This is grammatical indirect speech without backshift while closure remains relevant. Converting to a direct quotation changes reporting mode and presumes exact words that were never supplied.",
+      "proposedCorrection": "Retain it as a legitimate indirect report; contrast it with direct speech as a different construction, not a correction.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-11",
+      "day": 21,
+      "location": "rules[3].models[1] / example[8]",
+      "severity": "moderate",
+      "category": "instructional_inconsistency",
+      "quote": "The tribunal held: “The delay is wholly unexplained.” / A singular name always takes ... before the s",
+      "explanation": "The speech-after-verb model contradicts the absolute prohibition on colons after verbs. The possessive always wording also conflicts with the lesson’s own apostrophe-only alternative.",
+      "proposedCorrection": "Rewrite local notes with appropriate scope and style qualifications.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/punctuation"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-12",
+      "day": 21,
+      "location": "corrections[3,5] / transfer",
+      "severity": "moderate",
+      "category": "instructional_quality",
+      "quote": "the two accused’s statement / add exactly one semicolon, one colon ...",
+      "explanation": "Zero-plural accused used as an attributive group possessive is awkward for beginners; a plural statement situation needs explicit context. Requiring exactly one of each mark can reward ornamental punctuation.",
+      "proposedCorrection": "Prefer the statements of the two accused where needed, explain the zero plural, and ask for justified opportunities rather than mandatory insertions.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-01",
+      "day": 22,
+      "location": "terms[1] / rules[1]",
+      "severity": "high",
+      "category": "definition",
+      "quote": "Nominalisation: Turning a strong verb into a weak noun",
+      "explanation": "Nominalisation is a word-formation/syntactic process, not inherently weakness. Academic writing legitimately packages prior information and technical concepts into noun phrases.",
+      "proposedCorrection": "Define nominalisation neutrally and compare useful versus overloaded uses.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-02",
+      "day": 22,
+      "location": "rules[0].plain; points[0,4]; d22w3",
+      "severity": "blocker",
+      "category": "false_error",
+      "quote": "A conclusion is already final by definition / final conclusion is redundant",
+      "explanation": "Conclusion also means a judgement reached after consideration, which may be tentative, provisional or final. The same item offers provisional conclusion as meaningful while claiming all conclusions are final. each and every, one and the same and first and foremost can add deliberate emphasis.",
+      "proposedCorrection": "Use an unambiguous local redundancy example; explain that final conclusion and emphatic pairs are context-dependent style choices.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/dictionary/english/conclusion"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-03",
+      "day": 22,
+      "location": "rules[0].points[5]; models[2]; examples[6]; d22q11",
+      "severity": "blocker",
+      "category": "variation",
+      "quote": "unique, perfect, complete and essential do not take more, most or very / quite unique is wrong",
+      "explanation": "Absolute adjectives can have extended, approximative or evaluative readings; quite unique can mean completely unique. The item conflates degree modifiers with maximisers and prescriptive caution with grammatical impossibility.",
+      "proposedCorrection": "Teach literal absolute readings and figurative degree uses; frame unmodified unique as a conservative style choice and redesign the MCQ.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-04",
+      "day": 22,
+      "location": "examples[6].why",
+      "severity": "high",
+      "category": "label",
+      "quote": "put forward is a nominalisation that reduces to proposed",
+      "explanation": "put forward is a multiword/phrasal verb, not a noun formation.",
+      "proposedCorrection": "Call it a phrasal verb; explain that proposed may be more economical in this context.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-05",
+      "day": 22,
+      "location": "examples[8]",
+      "severity": "blocker",
+      "category": "meaning_changed",
+      "quote": "The scheme, which works well, failed last year. → ... usually works well in most districts ... failed everywhere",
+      "explanation": "The original is grammatical. The supposed correction invents usually, most districts and everywhere; no source passage licenses them.",
+      "proposedCorrection": "Supply an explicit original passage containing the qualifications or remove the false correction; never invent facts to teach preservation.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-06",
+      "day": 22,
+      "location": "d22q10 / corrections[0,3,5]",
+      "severity": "high",
+      "category": "meaning_changed",
+      "quote": "Every fact ... survives in nine words / at this point in time is removed",
+      "explanation": "The 9-word model drops considerable, several quarters and finally; these can matter. c4 removes basically (approximately/largely), changing strength to completely correct. c6 drops current-time information. c1 is shorter but note says one wordy connector removed not one word.",
+      "proposedCorrection": "Evaluate essential meaning rather than promise no loss. Preserve limiting modifiers and time reference, or explain explicitly which low-priority details are intentionally omitted.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-07",
+      "day": 22,
+      "location": "d22w4 / d22q5",
+      "severity": "high",
+      "category": "missing_context",
+      "quote": "Which version keeps all the content? / Which version is over-cut?",
+      "explanation": "No original proposition/passage is supplied. Learners cannot determine which facts and qualifiers must be preserved; q5 option D also changes causal to temporal relation.",
+      "proposedCorrection": "Supply the original and the intended relation, then create one meaning-preserving answer.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-08",
+      "day": 22,
+      "location": "examples / correction framing / checklist[2]",
+      "severity": "moderate",
+      "category": "style_as_error",
+      "quote": "I never open a sentence with it is important to note that",
+      "explanation": "Many examples are grammatical but wordy. Wrong/right labels conceal the distinction between grammatical repair and stylistic editing; a discourse emphasis phrase can sometimes be useful.",
+      "proposedCorrection": "Label as less economical / suggested revision; explain that the phrase may be used purposefully.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-01",
+      "day": 23,
+      "location": "rules[0].plain / points[2]; examples; checklist[0]",
+      "severity": "high",
+      "category": "register",
+      "quote": "A contraction ... has no place in writing meant to be read carefully / No ... abbreviations",
+      "explanation": "Contractions are less typical of highly formal prose but not universally ungrammatical or excluded from edited writing. etc., standard abbreviations, formulae and an ampersand in names can be appropriate.",
+      "proposedCorrection": "Distinguish grammaticality from formality and house style; identify accepted abbreviations rather than ban all.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/formal-and-informal-language"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-02",
+      "day": 23,
+      "location": "rules[0].table rows for but/so/show/deal with",
+      "severity": "moderate",
+      "category": "style",
+      "quote": "but → however / show → demonstrate",
+      "explanation": "Show and deal with can be normal formal words; but and however differ syntactically and cannot always replace each other. Longer vocabulary is not automatically more formal or accurate.",
+      "proposedCorrection": "Provide context-sensitive alternatives and punctuation/word-class cautions.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/formal-and-informal-language"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-03",
+      "day": 23,
+      "location": "rules[1].points[4,5]",
+      "severity": "high",
+      "category": "accuracy",
+      "quote": "One qualification is enough / A precise figure ... is a stronger hedge",
+      "explanation": "Different hedges may separately mark evidence source, probability and scope. A precise figure supplies specificity, not necessarily hedging; it may be fabricated or highly uncertain.",
+      "proposedCorrection": "Teach economy without a fixed one-hedge limit; separate precision, attribution, scope and epistemic caution.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-04",
+      "day": 23,
+      "location": "rules[3].plain / points[0,3,4]",
+      "severity": "high",
+      "category": "accuracy",
+      "quote": "Formal writing usually avoids I and you / removes any subject at all",
+      "explanation": "First person is accepted or encouraged in many academic and professional genres. It is believed has the grammatical dummy subject it; an agentless passive does not lack a subject.",
+      "proposedCorrection": "Teach genre requirements and distinguish grammatical subject from semantic agent. Avoid unsupported examiner preferences.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/formal-and-informal-language"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-05",
+      "day": 23,
+      "location": "examples[7]",
+      "severity": "blocker",
+      "category": "ambiguous_correction",
+      "quote": "From his tone, the minister implied ... → inferred ... The minister is the listener here",
+      "explanation": "The identity of his is unspecified. If his refers to the minister, the original means he suggested something through his tone and is grammatical. The correction assumes an unstated other speaker.",
+      "proposedCorrection": "Write From the secretary’s tone, the minister inferred ...; show both readings.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-06",
+      "day": 23,
+      "location": "d23q7",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "The judgment was a historical moment ... historical merely means relating to the past",
+      "explanation": "The sentence can mean a moment in legal history. Historic stresses significance and may be stylistically preferable, but context does not make historical ungrammatical.",
+      "proposedCorrection": "Ask which word explicitly means historically important or provide context excluding the other reading.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-07",
+      "day": 23,
+      "location": "d23q6",
+      "severity": "high",
+      "category": "ambiguous_key",
+      "quote": "The measure was economic rather than political: it saved money",
+      "explanation": "Economic can validly mean connected with financial/economic considerations, contrasted with political, and economical can mean money-saving. Both can fit the supplied context.",
+      "proposedCorrection": "Ask which adjective means thrifty, or change the carrier sentence to remove the economic reading.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-08",
+      "day": 23,
+      "location": "d23q9",
+      "severity": "high",
+      "category": "regional_variation",
+      "quote": "Candidates should ... practice/practise ... key BrE only",
+      "explanation": "The prompt omits its intended British spelling convention, so practice ... practice is standard American English. The explanation identifies BrE only after grading.",
+      "proposedCorrection": "State Use British spelling before the question, and teach the American alternative.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/formal-and-informal-language"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-09",
+      "day": 23,
+      "location": "d23w3",
+      "severity": "moderate",
+      "category": "unsupported_claim",
+      "quote": "Which claim is defensible? The policy failed in most districts",
+      "explanation": "Qualification does not make a claim defensible without evidence; the selected assertion could be false. The task tests appropriate degree of commitment rather than factual defensibility.",
+      "proposedCorrection": "Ask which claim is appropriately limited in scope, with an explicit evidence sample.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-10",
+      "day": 23,
+      "location": "examples[3,5,6,9]; corrections[0,5]",
+      "severity": "high",
+      "category": "meaning_changed",
+      "quote": "totally useless → achieves none of its stated objectives / printer affected everyone → shortage affected everyone",
+      "explanation": "These revisions alter propositions: usefulness need not equal stated objectives; repeated evening load-shedding may be continuous each evening; removing It is believed erases attribution/uncertainty; replacing a printer’s effects with a stationery shortage invents cause.",
+      "proposedCorrection": "Retain agent, source, modality, time, scope and cause. Label alternate stylistic versions as such, not meaning-preserving corrections.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-11",
+      "day": 23,
+      "location": "examples[4].right / why",
+      "severity": "moderate",
+      "category": "punctuation_meaning",
+      "quote": "The committee comprises five members, who compose the report.",
+      "explanation": "The inserted comma changes a potentially identifying relative into a supplementary one without context. compose the report is a valid write/produce use, not a test of parts making a whole.",
+      "proposedCorrection": "Keep the original relative punctuation unless the intended scope is supplied; separate lexical senses.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-01",
+      "day": 24,
+      "location": "rules[0].plain",
+      "severity": "high",
+      "category": "internal_contradiction",
+      "quote": "buries its link ... in the middle or at the start instead of the end",
+      "explanation": "The paragraph first correctly recommends familiar material at the start, then calls a link at the start a cause of disconnectedness.",
+      "proposedCorrection": "Revise to say burying given information at the end can hinder flow; show alternative information structures.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-02",
+      "day": 24,
+      "location": "rules[0].points[4]; pitfalls[1]; checklist[0]",
+      "severity": "moderate",
+      "category": "overgeneralisation",
+      "quote": "Do not begin three consecutive sentences with the same subject / Every sentence begins with something ... known",
+      "explanation": "Repeated subjects can create intentional thematic continuity; new topics and contrastive focus can legitimately appear initially. Given-before-new is a useful default, not a grammatical law.",
+      "proposedCorrection": "Teach thematic progression, deliberate repetition and exceptions.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-03",
+      "day": 24,
+      "location": "rules[1].table row contested claim→This assumption",
+      "severity": "moderate",
+      "category": "meaning_changed",
+      "quote": "a contested claim → This assumption",
+      "explanation": "A claim need not be an assumption. Summary nouns may add evaluation or misrepresent a source.",
+      "proposedCorrection": "Use this claim unless assumption is independently justified; explain evaluative effects.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-04",
+      "day": 24,
+      "location": "rules[2].models[0,1]; examples[6]; corrections[4]",
+      "severity": "high",
+      "category": "unverified_facts",
+      "quote": "2019 smog ... no prosecutions / 2023 average civil suit ... over seven years",
+      "explanation": "Precise factual claims are presented without evidence. The course offers no authentic source confirming zero prosecutions or the average case duration.",
+      "proposedCorrection": "Use clearly labelled fictional teaching scenarios or cite verified official records; do not publish these as established facts.",
+      "supportingReferences": [],
+      "verificationStatus": "unsupported_factual_claim_no_source_in_authored_lesson",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-05",
+      "day": 24,
+      "location": "rules[2].points; d24q4,q8; transfer",
+      "severity": "moderate",
+      "category": "overgeneralisation",
+      "quote": "One paragraph, one claim / a true topic sentence",
+      "explanation": "A paragraph may advance related claims under one controlling idea. Topic sentences may report facts and may appear after an opening example; d24q4 options A and D could be topic sentences with suitable continuation.",
+      "proposedCorrection": "Teach unity around a controlling purpose; evaluate topic sentences in a complete paragraph.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-06",
+      "day": 24,
+      "location": "rules[3] / d24q12; examples[8]",
+      "severity": "high",
+      "category": "regional_variation",
+      "quote": "a singular subject like ... committee should keep it, not they",
+      "explanation": "BrE permits notional plural reference to a collective; a shift from institutional action to members can be legitimate. The explicitly consistent singular option is pedagogically defensible, but other options should not be globally called incorrect.",
+      "proposedCorrection": "Specify singular institutional reference in tests; contrast member-reference and explain contextual coherence.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/nouns-singular-and-plural"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-07",
+      "day": 24,
+      "location": "d24q5",
+      "severity": "blocker",
+      "category": "incorrect_key",
+      "quote": "The voice shifts to the passive ... B",
+      "explanation": "A policy was announced, provinces were not consulted and implementation began are all grammatical; A and B are both passive. There is no stated reason B breaks cohesion and D can naturally express an undisclosed current cost.",
+      "proposedCorrection": "Replace with an actual demonstrable grammatical or referential inconsistency.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-08",
+      "day": 24,
+      "location": "examples[1,7]; d24q9; d28q10; checklist[1]",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "A bare this refers to nothing precise / Every This and These ... followed by a noun",
+      "explanation": "This can refer clearly to a preceding proposition or whole situation without a noun. The bench example is grammatical; its revision actually opens with lawyers (new information) while claiming the given judgement opens it.",
+      "proposedCorrection": "Teach when a summary noun improves precision, while accepting clear propositional this. Correct the contradictory worked-example note.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/it-this-and-that-in-paragraphs"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-09",
+      "day": 24,
+      "location": "examples[0,1,4]; corrections[0,4]",
+      "severity": "blocker",
+      "category": "meaning_changed",
+      "quote": "failed → failed within two years / met twice → only twice in three years / ... annexures ... omitted",
+      "explanation": "Revisions invent a government agent, deadlines, time spans and effects on small farmers; c1 changes after two years to within two years. Example 4 drops missing annexures and inserts a causal link not established by the original. c5 turns no prosecutions followed into emergency produced none, and more laws will not help into change nothing.",
+      "proposedCorrection": "Supply an explicit source passage or retain facts and qualifiers exactly. Separate grammar editing from adding evidence.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-10",
+      "day": 24,
+      "location": "examples[3]; corrections[5]",
+      "severity": "high",
+      "category": "modifier_attachment",
+      "quote": "The policy was announced ... without consulting the provinces",
+      "explanation": "The new non-finite adjunct conventionally shares subject with the passive clause, inviting a dangling interpretation (policy did not consult). c6 interprets this as a requirement, which the original never states.",
+      "proposedCorrection": "Write The ministry announced the policy without consulting the provinces, or another version preserving an explicit agent; do not invent a requirement.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-01",
+      "day": 25,
+      "location": "terms[2]",
+      "severity": "high",
+      "category": "definition",
+      "quote": "False friend: A word used in local English with a meaning it does not have in standard English",
+      "explanation": "False friends are similar-looking/sounding words in different languages with different meanings. Regional semantic variation is not the definition.",
+      "proposedCorrection": "Define cross-linguistic false friends accurately; discuss local lexical variation separately.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-02",
+      "day": 25,
+      "location": "rules[0].points[0] / plain",
+      "severity": "high",
+      "category": "overgeneralisation",
+      "quote": "affect verb / effect noun / two different parts of speech",
+      "explanation": "Effect is also a standard verb meaning bring about; affect is also a noun in psychology. Day23 does acknowledge effect as a verb, so these simplified statements conflict.",
+      "proposedCorrection": "Teach the common contrast and explicit specialist/verb exceptions.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-03",
+      "day": 25,
+      "location": "rules[0].table between/among; examples[2]; d25w3; corrections[3]",
+      "severity": "blocker",
+      "category": "incorrect_rule_and_key",
+      "quote": "Between is for two; among is for three or more",
+      "explanation": "Between can relate more than two distinct parties, shares or items; dividing a prize between five winners is valid. Number alone does not choose the preposition.",
+      "proposedCorrection": "Explain distinct relationships versus group inclusion; replace the MCQ or accept both readings.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/between-or-among"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-04",
+      "day": 25,
+      "location": "rules[0].table less/fewer, farther/further, continual/continuous",
+      "severity": "high",
+      "category": "variation",
+      "quote": "fewer countable / less uncountable; farther physical / further additional",
+      "explanation": "These are useful defaults with important exceptions: less with measured time/money/distance and informal plural count nouns; further also physical distance; continual can have an extended continuous sense.",
+      "proposedCorrection": "Add meaning, register and measurement qualifications instead of presenting the table as a complete rule.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-05",
+      "day": 25,
+      "location": "rules[1].plain / points / models[1]; checklist[2]",
+      "severity": "blocker",
+      "category": "regional_variation",
+      "quote": "Prepone is not standard written English / examiner ... marks them as errors",
+      "explanation": "Cambridge records prepone as Indian English. It is an established regional word; international alternatives may improve accessibility but that does not make it universally incorrect. No examiner evidence is supplied.",
+      "proposedCorrection": "Label regional use and recommend bring forward for a broad audience; remove unverified marking claims.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/dictionary/english/prepone"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-06",
+      "day": 25,
+      "location": "rules[1].points[3]",
+      "severity": "high",
+      "category": "regional_variation",
+      "quote": "Intimate (as verb, meaning inform) → inform, notify",
+      "explanation": "Intimate is a formal standard verb meaning hint/make known indirectly; it is not itself erroneous. For simple notification, inform may be clearer.",
+      "proposedCorrection": "Distinguish indirect intimation, formal announcement and a regionally conventional notification formula.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/dictionary/english/intimate"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-07",
+      "day": 25,
+      "location": "rules[1].points[7,8] / models[2]",
+      "severity": "high",
+      "category": "overgeneralisation",
+      "quote": "Passing out from college / good name is never used by native speakers",
+      "explanation": "Pass out is standard for completing training at a military/police college; good name is standard for reputation though not a neutral request for someone’s name. The universal wording erases legitimate senses.",
+      "proposedCorrection": "Teach the intended local formula and its audience, then show the standard alternative senses separately.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-08",
+      "day": 25,
+      "location": "rules[2].models[2]",
+      "severity": "high",
+      "category": "malformed_example",
+      "quote": "The officer occurred, occurrence, referred: the tribunal referred ...",
+      "explanation": "The opening sequence is not a grammatical clause. The note the doubled consonant survives every added ending is false (refer→reference does not double).",
+      "proposedCorrection": "Replace with a natural sentence and explain stress-based doubling with exceptions.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-09",
+      "day": 25,
+      "location": "d25q3",
+      "severity": "blocker",
+      "category": "ambiguous_or_no_valid_answer",
+      "quote": "We must ensure that the files reach on time",
+      "explanation": "Reach normally requires an object when it means arrive at a destination; arrive on time would be idiomatic. Insure meaning make certain is also standard AmE, so A cannot be universally rejected.",
+      "proposedCorrection": "Use arrive on time and specify British editorial convention or accept American insure.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/dictionary/english/insure"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-10",
+      "day": 25,
+      "location": "d25q4; examples[6]",
+      "severity": "blocker",
+      "category": "false_error",
+      "quote": "The magistrate reached a judicial decision ... accepted as fair",
+      "explanation": "A decision of a magistrate can be judicial and also fair. The context does not require judicious; the original is correct.",
+      "proposedCorrection": "Ask explicitly which word means wise, or offer both acceptable meanings.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/dictionary/english/judicial"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-11",
+      "day": 25,
+      "location": "d25q10; corrections[4]",
+      "severity": "high",
+      "category": "style_as_error",
+      "quote": "analyze ... programme ... defence → analyze declared error",
+      "explanation": "Consistency is a reasonable editorial requirement but analyze is a valid AmE spelling, not a grammar error. Questions must state the house style beforehand. British spelling also permits some -ize forms.",
+      "proposedCorrection": "State British house style in the task and classify the correction as editorial consistency.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-12",
+      "day": 25,
+      "location": "examples[7]",
+      "severity": "moderate",
+      "category": "oversimplification",
+      "quote": "Loose is the adjective ... verb is loosen",
+      "explanation": "Loose is also a verb. Loosen restrictions is the ordinary collocation, but a word-class assertion that loose cannot be a verb is false.",
+      "proposedCorrection": "Explain normal collocation and rare/literary verb loose separately.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/dictionary/english/loose"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-13",
+      "day": 25,
+      "location": "d25q8 / d25q12",
+      "severity": "moderate",
+      "category": "assessment_quality",
+      "quote": "The two candidates ... the latter / general’s high morale among troops",
+      "explanation": "Latter lacks an explicit previously ordered pair; last can also refer to the last of two unless a convention is stipulated. Replacing moral with morale leaves an unnatural claim about a general’s morale among troops rather than the troops’ morale.",
+      "proposedCorrection": "Name the two candidates in order; use The troops’ high morale was credited with contributing to victory.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-01",
+      "day": 26,
+      "location": "goal / why / examTip / rules[0,1,3]",
+      "severity": "blocker",
+      "category": "unverified_exam_claim",
+      "quote": "This is always a four-option ... exactly one error ... rewrite marked wrong",
+      "explanation": "The course supplies no authentic record demonstrating universal FPSC format, exactly one error, or automatic rejection of legitimate rewrites. It also contradicts itself by giving examples with multiple faults.",
+      "proposedCorrection": "Describe a course practice strategy and follow the actual task instructions; remove invented examiner intentions and universal scoring assertions.",
+      "supportingReferences": [],
+      "verificationStatus": "no_authentic_examination_evidence_provided",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-02",
+      "day": 26,
+      "location": "rules[0].models[0]; examples[0]; d26w1",
+      "severity": "blocker",
+      "category": "singular_they",
+      "quote": "Each ... has submitted his form / their declared pronoun fault",
+      "explanation": "Singular they/their is accepted for an indefinite singular antecedent. The minimum repair in d26w1 is have→has; changing their→his is unnecessary and can change inclusive reference. The true minimum is absent from the options.",
+      "proposedCorrection": "Retain their and repair the verb only; explain singular they and plural agreement after they.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-03",
+      "day": 26,
+      "location": "rules[1].models[0]; d26q4; corrections[1,5]; d26q11",
+      "severity": "blocker",
+      "category": "regional_variation",
+      "quote": "The committee have / board of directors have declared wrong",
+      "explanation": "BrE permits plural agreement with collectives viewed as members. d26q4 has two fully coherent standard options (A plural and B singular). The modal context does not force singular in all other examples.",
+      "proposedCorrection": "Use explicit institutional/member context or remove agreement from the error list; assess the genuinely wrong participle took/taken separately.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/nouns-singular-and-plural"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-04",
+      "day": 26,
+      "location": "rules[2].models[2]",
+      "severity": "high",
+      "category": "incorrect_analysis",
+      "quote": "Not a single objection was raised ... Fronted negative with correct inversion",
+      "explanation": "Not a single objection is the subject in ordinary subject–verb order. No subject–auxiliary inversion occurs. Negative subject NPs do not trigger the inversion associated with fronted negative adjuncts.",
+      "proposedCorrection": "Explain the distinction and contrast Not once was an objection raised.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-05",
+      "day": 26,
+      "location": "examples[2,7]",
+      "severity": "blocker",
+      "category": "false_error",
+      "quote": "Only the faulty repetition of the subject / redundant it needed removing",
+      "explanation": "Repeating a subject pronoun in coordinated independent clauses is grammatical. Both originals are legitimate; deletion is stylistic economy, and the second explanation explicitly admits the repeated subject was not ungrammatical.",
+      "proposedCorrection": "Mark no error or present alternative concise revisions without treating them as obligatory.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-06",
+      "day": 26,
+      "location": "d26w4",
+      "severity": "blocker",
+      "category": "ambiguous_key",
+      "quote": "Although he was ill, but he attended → B minimal",
+      "explanation": "B deletes but; C deletes Although. Both are one-word deletions preserving the contrast. The explanation falsely says B changes least.",
+      "proposedCorrection": "Accept both B and C or specify preserve the concessive subordinate clause.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-07",
+      "day": 26,
+      "location": "d26q9",
+      "severity": "high",
+      "category": "assessment_design",
+      "quote": "fault at B / repair the officer took a decision",
+      "explanation": "The proposed repair modifies B and C, not a unique segment. Dangling modification is a relationship between structures rather than necessarily one local wrong word.",
+      "proposedCorrection": "Ask for a complete rewrite with an explicit agent and rubric rather than a single faulty segment.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-08",
+      "day": 26,
+      "location": "corrections[3].note",
+      "severity": "blocker",
+      "category": "incorrect_rule",
+      "quote": "Since requires the present perfect continuous",
+      "explanation": "Since does not require continuous aspect; has lived in Lahore since 2015 is standard. The second verb need not change if current employment began at an unspecified time.",
+      "proposedCorrection": "Accept simple and progressive perfect for continuing residence and explain meaning differences; preserve current is working unless a shared duration is intended.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-01",
+      "day": 27,
+      "location": "terms[1] vs rules[1]",
+      "severity": "high",
+      "category": "internal_inconsistency",
+      "quote": "Reported frame ... third person and the past / choose present simple",
+      "explanation": "The definition dictates past tense while instruction and models use present analysis. A summary may legitimately report mixed time relations.",
+      "proposedCorrection": "Define a consistent reporting perspective and preserve the source’s temporal relationships; present or past frames depend on purpose.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-02",
+      "day": 27,
+      "location": "rules[0].points[3]; d27q2",
+      "severity": "blocker",
+      "category": "meaning_changed",
+      "quote": "wheat, rice, cotton and sugar cane → major crops without loss",
+      "explanation": "Major is an added evaluation and a class label discards the exact members. Whether this omission is appropriate depends on the source argument.",
+      "proposedCorrection": "Give a source context in which the examples are illustrative and explicitly distinguish compression from exact equivalence.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-03",
+      "day": 27,
+      "location": "rules[0].models word counts",
+      "severity": "moderate",
+      "category": "count_inaccuracy",
+      "quote": "Original 22 words / compressed 13 words / original 20",
+      "explanation": "Several displayed counts are inaccurate under ordinary whitespace tokenisation; exact counts need a declared convention.",
+      "proposedCorrection": "Compute counts using the same documented course word-count method; remove inaccurate numbers.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-04",
+      "day": 27,
+      "location": "rules[0].models[3].note",
+      "severity": "high",
+      "category": "incorrect_analysis",
+      "quote": "the nominalisation [becomes] a plain adjective",
+      "explanation": "The original that the provincial law was unconstitutional is a content clause, not a nominalisation; the revision changes it to an object + predicative adjective construction.",
+      "proposedCorrection": "Name the transformation accurately and explain clause complementation.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-05",
+      "day": 27,
+      "location": "examples[3]; d27q4",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "The writer argued ... is weak and he says ... / holds frame",
+      "explanation": "An earlier argument and a present assertion can be deliberately distinct, and present evidence can coexist with past states. Without a source/time context multiple choices are grammatical.",
+      "proposedCorrection": "Specify one contemporaneous reporting frame in the question, or require learners to explain possible time readings.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-06",
+      "day": 27,
+      "location": "examples[4,5] / d27w2 / d27q3 / d27q7",
+      "severity": "blocker",
+      "category": "missing_source",
+      "quote": "The passage ... [qualifications and causal argument] supplied",
+      "explanation": "No source passage is provided to substantiate the claimed missing qualifications, causal argument or which details are dispensable. d27q3 is grammatically a coordinated content clause and cannot be declared wrong for lacking an unstated contrast.",
+      "proposedCorrection": "Supply the source passage alongside each preservation question and identify the required meaning explicitly.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-07",
+      "day": 27,
+      "location": "examples[7]",
+      "severity": "high",
+      "category": "meaning_changed",
+      "quote": "affecting agriculture badly → affecting agricultural output",
+      "explanation": "The correction deletes badly, losing negative evaluation, and narrows agriculture to output. The text’s own preservation principle is violated.",
+      "proposedCorrection": "Keep adverse effect and scope; e.g. The writer states that climate change is harming agriculture.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-08",
+      "day": 27,
+      "location": "d27q1; corrections[0]",
+      "severity": "blocker",
+      "category": "meaning_changed",
+      "quote": "decided to withdraw → withdrew / finally decided to reverse → finally reversed",
+      "explanation": "Deciding to perform an action does not entail actually performing it. The keyed answer asserts an event absent from the original.",
+      "proposedCorrection": "Retain decided to withdraw/reverse when preserving meaning; use models that reduce words elsewhere.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-09",
+      "day": 27,
+      "location": "d27q5; rules[3]",
+      "severity": "moderate",
+      "category": "exam_instruction",
+      "quote": "360 words requires ... 120 / Always count and state the number",
+      "explanation": "A one-third target depends on instructions; it is not a grammatical requirement. Count/state conventions need an official task source.",
+      "proposedCorrection": "State For this task, use one third and require word count explicitly.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-10",
+      "day": 27,
+      "location": "d27q10; corrections[3]",
+      "severity": "high",
+      "category": "meaning_changed",
+      "quote": "and the scheme lapsed → after funding stopped",
+      "explanation": "Coordination alone does not assert temporal sequence or cause. The selected compression adds after without a contextual warrant.",
+      "proposedCorrection": "Supply a source that states the sequence or retain and.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-11",
+      "day": 27,
+      "location": "corrections[2]",
+      "severity": "high",
+      "category": "meaning_changed",
+      "quote": "I agree that we must do something → [writer argues] it must be strengthened",
+      "explanation": "Removing the summariser’s opinion is appropriate but attributing that proposed solution to the source is not licensed.",
+      "proposedCorrection": "Retain only the writer’s stated argument unless the source also calls for strengthening.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-12",
+      "day": 27,
+      "location": "why / rules[0,2]",
+      "severity": "moderate",
+      "category": "unsupported_claim",
+      "quote": "précis lost more often to grammar ... marked down twice ... técnique",
+      "explanation": "Exam score distribution and double deduction are unsupported. técnique is an editorial typo.",
+      "proposedCorrection": "Remove unverified marking-frequency claims; repair technique spelling.",
+      "supportingReferences": [],
+      "verificationStatus": "no_examiner_or_statistical_evidence_in_lesson",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-01",
+      "day": 28,
+      "location": "rules[0,1,3]; terms[1]; examTip; recap",
+      "severity": "high",
+      "category": "unsupported_statistics",
+      "quote": "catch a third of your errors / every candidate repeats same three / 200 words under a minute",
+      "explanation": "These numerical and universal claims are not supported by research or course measurement. Error types and reading speeds vary. The alleged first/last position exam trap has no cited evidence.",
+      "proposedCorrection": "Offer targeted passes as one strategy, encourage timing one’s own work and deriving personal categories from actual attempts.",
+      "supportingReferences": [],
+      "verificationStatus": "no_empirical_or_official_source_in_lesson",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-02",
+      "day": 28,
+      "location": "examples[0,2]; corrections[0,1,4]",
+      "severity": "high",
+      "category": "variation",
+      "quote": "data was → were / their plan → its plan / aimed to reduce → aimed at reducing",
+      "explanation": "Data can be singular mass or plural depending on register; singular their is legitimate; aimed to reduce is widely standard in passive purposive patterns. Definite poverty/rural areas can be correct with known referents.",
+      "proposedCorrection": "Distinguish true agreement errors from valid variants and context-dependent article choice. For data explicitly state a scientific plural house style if desired.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/dictionary/english/data"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-03",
+      "day": 28,
+      "location": "examples[3]; corrections[3]",
+      "severity": "blocker",
+      "category": "false_error",
+      "quote": "pointless shift of voice / missing backshift",
+      "explanation": "Mixing active and passive is grammatical and can support flow; backshift is optional if the reported state remains true. The course lacks contextual constraints establishing these as faults.",
+      "proposedCorrection": "Correct the present perfect with yesterday and comma splice; preserve or explicitly discuss valid voice/backshift alternatives.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-04",
+      "day": 28,
+      "location": "examples[4].why",
+      "severity": "high",
+      "category": "incorrect_analysis",
+      "quote": "the participle phrase attaches to no subject",
+      "explanation": "The original has a left-dislocated The tribunal plus participle followed by a separate passive clause, so the problem is a detached topic and clause construction; tribunal is in fact the intended participant of having heard.",
+      "proposedCorrection": "Describe the broken main-clause structure accurately and restore The tribunal ... dismissed.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-05",
+      "day": 28,
+      "location": "examples[5]",
+      "severity": "moderate",
+      "category": "meaning_changed",
+      "quote": "many reasons → several reasons: the funds and the weather",
+      "explanation": "The edit promises several reasons while listing two, and removes ordering markers without explaining a logic change.",
+      "proposedCorrection": "Use two reasons if only two are intended, or retain many and introduce examples with including.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-06",
+      "day": 28,
+      "location": "d28q10",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "This is the problem ... vague reference",
+      "explanation": "The referent can be the contrast between adequate law and weak enforcement; propositional this is valid. Naming the gap may clarify, but the original is not necessarily faulty.",
+      "proposedCorrection": "Ask which revision makes the intended referent explicit; supply the intended referent.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/it-this-and-that-in-paragraphs"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-07",
+      "day": 28,
+      "location": "corrections[2].note",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "came to know ... non-standard expression",
+      "explanation": "Came to know can be standard English for became aware/learnt, even if learnt of is more economical here. The correction also invents an officer not named in the original.",
+      "proposedCorrection": "Label the phrase as grammatical and specify an agent in the exercise context or use an explicit after-clause without inventing facts.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-08",
+      "day": 28,
+      "location": "corrections[5].model",
+      "severity": "moderate",
+      "category": "regional_variation",
+      "quote": "no action was taken yet → no action has yet been taken",
+      "explanation": "The perfect is a suitable British default, while AmE may use simple past with yet. Non-compliant hyphenation is an orthographic convention; no explanation is supplied.",
+      "proposedCorrection": "Explain regional aspect preferences and hyphenation separately; do not count all alternatives as universal errors.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-01",
+      "day": 29,
+      "location": "why / rules[1] / terms[1]",
+      "severity": "high",
+      "category": "unsupported_proficiency_claim",
+      "quote": "only figure that predicts your paper / after four weeks first instinct usually right",
+      "explanation": "An uncalibrated 16-item self-study test cannot predict examination performance; first-instinct reliability and regional-ear generalisations are unsupported.",
+      "proposedCorrection": "Report task-specific evidence only, invite reasoned review and avoid time-bound proficiency claims.",
+      "supportingReferences": [],
+      "verificationStatus": "no_validation_or_empirical_source_in_lesson",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-02",
+      "day": 29,
+      "location": "rules[2]; transfer; assessment inventory",
+      "severity": "blocker",
+      "category": "coverage",
+      "quote": "whole syllabus / exact conditions ... sixteen auto-marked items",
+      "explanation": "The simulation is 4 warm-up + 12 drill + 6 corrections, heavily concentrated on basic agreement, tense, articles, verb patterns and reporting. It omits numerous previously taught and approved advanced domains, provides no parsing, ambiguity, extended editing or independently assessed writing. It cannot substantiate comprehensive mastery or exact official exam conditions.",
+      "proposedCorrection": "Build a mapped balanced cumulative examination with distinct skill domains, difficulty and reporting; describe practice timing as course conditions.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-03",
+      "day": 29,
+      "location": "d29q12",
+      "severity": "blocker",
+      "category": "incorrect_key",
+      "quote": "is comprised of ... not the formal register construction",
+      "explanation": "Cambridge Grammar Today explicitly accepts be comprised of and describes comprise as formal. Options A and B are standard. The explanation also gives Day17 as source although that lesson is non-finites, not this lexical entry.",
+      "proposedCorrection": "Accept A and B or specify a conservative house-style preference; correct the conceptual lesson mapping.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/consist-comprise-or-compose"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-04",
+      "day": 29,
+      "location": "d29w3; examples[1]; corrections[1]",
+      "severity": "high",
+      "category": "incorrect_rule",
+      "quote": "Since ... takes present perfect continuous",
+      "explanation": "The selected continuous answer is defensible among supplied options but the explanation is too categorical: has worked is also possible.",
+      "proposedCorrection": "Explain simple/perfect-progressive alternatives and their aspectual emphasis; do not teach since as a unique-form trigger.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-05",
+      "day": 29,
+      "location": "corrections[2]",
+      "severity": "high",
+      "category": "variation",
+      "quote": "ask that takes the subjunctive",
+      "explanation": "Mandative should is standard British usage; indicative forms may also occur with different factive/assertive readings. The correction should not imply an invariant rule.",
+      "proposedCorrection": "Teach ask that it be/should be re-examined and distinguish a request from an assertion of fact.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-06",
+      "day": 29,
+      "location": "corrections[3].note",
+      "severity": "high",
+      "category": "incorrect_analysis",
+      "quote": "which was reported ... pronoun no clear antecedent and agreement error",
+      "explanation": "Which can refer to the preceding whole finding/event, taking singular was. A plural which referring to irregularities would take were. The intended antecedent needs specification.",
+      "proposedCorrection": "Explain both readings and make an unambiguous correction according to the intended proposition.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-07",
+      "day": 29,
+      "location": "examples[3,6]; corrections[4]",
+      "severity": "moderate",
+      "category": "unverified_facts",
+      "quote": "Lahore population greater than Karachi / literacy comparisons / fewer facilities than any other city",
+      "explanation": "These real-world comparative assertions have no verified source and may be false or undefined (facilities by what measure?).",
+      "proposedCorrection": "Use fictional towns or clearly label hypothetical statistics; verify factual examples before publication.",
+      "supportingReferences": [],
+      "verificationStatus": "unverified_real_world_assertions",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-01",
+      "day": 30,
+      "location": "why / rules[0,1,3] / recap",
+      "severity": "high",
+      "category": "unsupported_outcome_claim",
+      "quote": "will lose most of it / fifteen minutes ... preserves everything / any article / every tense",
+      "explanation": "Retention and mastery are not guaranteed by a fixed routine; time markers alone do not determine tense/aspect, and not all passives are available or idiomatic across combinations. Any rule/any statement claims exceed the taught material.",
+      "proposedCorrection": "Frame the routine as adjustable practice and set specific demonstrable outcomes with exceptions.",
+      "supportingReferences": [],
+      "verificationStatus": "no_retention_or_proficiency_validation_in_lesson",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-02",
+      "day": 30,
+      "location": "rules[1].models[0]",
+      "severity": "moderate",
+      "category": "misleading_metric",
+      "quote": "45 hours of maintained accuracy",
+      "explanation": "Fifteen minutes daily for approximately 180 days is 45 hours of practice, not 45 hours of demonstrated accuracy.",
+      "proposedCorrection": "Call it approximately 45 hours of practice; do not imply measured retention.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-03",
+      "day": 30,
+      "location": "rules[2] / examples[1,2]; d30w4",
+      "severity": "high",
+      "category": "assessment_confidence",
+      "quote": "chronological list cannot be revised / repeated simulation measures progress",
+      "explanation": "Chronological logs remain usable with filters; lists/context have complementary uses. Repeating identical questions can reflect memory of items rather than transfer or proficiency. Day30 labels a 16-item simulation production despite mainly recognition choices.",
+      "proposedCorrection": "Track prior exposure, use new comparable items, separate recognition from production, and permit multiple workable notebook organisations.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-04",
+      "day": 30,
+      "location": "d30q2",
+      "severity": "blocker",
+      "category": "ambiguous_key",
+      "quote": "By the end of this year ... will clear / will have cleared",
+      "explanation": "Both future simple (will clear by the deadline) and future perfect (will have cleared viewed from deadline) are standard. By does not require future perfect.",
+      "proposedCorrection": "Ask which explicitly views completion retrospectively from the future point or use a contrast explanation instead of unique correctness.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-05",
+      "day": 30,
+      "location": "d30q5",
+      "severity": "blocker",
+      "category": "ambiguous_key",
+      "quote": "She told me that she submitted / had submitted the file the previous day",
+      "explanation": "Backshift of past simple is not invariably required, particularly with clear time reference. No original direct speech or intended chronology is supplied.",
+      "proposedCorrection": "Supply a direct quotation and require a conventional backshift exercise while accepting an unbackshifted report where meaning remains clear.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-06",
+      "day": 30,
+      "location": "d30q10",
+      "severity": "blocker",
+      "category": "no_error_unavailable",
+      "quote": "Find the error: Due to the fact that ... made a decision",
+      "explanation": "Every segment is grammatical; wordiness is stylistic. The explanation admits another wordy nominalisation, defeating the single-error premise.",
+      "proposedCorrection": "Provide a genuine no-error option or ask explicitly for a concise rewrite.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-07",
+      "day": 30,
+      "location": "d30q12",
+      "severity": "blocker",
+      "category": "ambiguous_key",
+      "quote": "Not only was the report late but also incomplete",
+      "explanation": "A is grammatical coordination of predicative adjectives with shared subject/copula and inversion; B is also valid clause coordination. Cambridge gives analogous ellipsis Not only will they paint ... but also the inside.",
+      "proposedCorrection": "Accept A and B or ask for the version with two explicit finite clauses.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/not-only-but-also"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-08",
+      "day": 30,
+      "location": "d30q1; corrections[5]",
+      "severity": "high",
+      "category": "variation",
+      "quote": "Neither ... were ... always singular",
+      "explanation": "Formal edited singular neither of is the conservative default; plural agreement occurs in established usage, especially informal contexts. The test must state its targeted formal convention.",
+      "proposedCorrection": "Explain register and notional agreement, and label the preferred formal pattern rather than treating all plural uses as impossible.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-09",
+      "day": 30,
+      "location": "corrections[0]",
+      "severity": "blocker",
+      "category": "false_error",
+      "quote": "their→his / informed about→of",
+      "explanation": "Singular their is valid and inform someone about a transfer is standard. Only have→has and were→was are necessary for the intended singular reading.",
+      "proposedCorrection": "Retain inclusive pronoun and acceptable about; list valid alternatives in rubric.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-10",
+      "day": 30,
+      "location": "corrections[1]",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "funds which ... → funds that ... defining relative",
+      "explanation": "Defining which is standard British English. Changing it to that is optional, not a required grammatical repair.",
+      "proposedCorrection": "Retain defining which; explain British/US editorial preferences without prohibiting standard usage.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-11",
+      "day": 30,
+      "location": "corrections[2]",
+      "severity": "high",
+      "category": "false_error",
+      "quote": "two backshifts and more natural adverb position",
+      "explanation": "He said he is not aware and will cooperate can be a legitimate still-current report; fully at the end is grammatical though focus differs.",
+      "proposedCorrection": "Supply time context requiring retrospective reporting, or accept both and explain meaning/focus differences.",
+      "supportingReferences": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verificationStatus": "authoritative_web_source_consulted",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-12",
+      "day": 30,
+      "location": "corrections[4]",
+      "severity": "blocker",
+      "category": "meaning_changed",
+      "quote": "case is closed → case be closed / subjunctive after deciding",
+      "explanation": "Deciding that a case is closed can be a factual conclusion. Deciding that it be closed can be a directive. The model changes the reading and shifts the second clause only, with no supplied context.",
+      "proposedCorrection": "Repair dangling modification using After the committee had examined ... and retain the intended factual/directive complement. Teach the distinction explicitly.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-13",
+      "day": 30,
+      "location": "whole assessment / transfer",
+      "severity": "blocker",
+      "category": "coverage",
+      "quote": "Final Mastery assessment",
+      "explanation": "The writing task is a maintenance plan and comparison with Week1, not an integrated capstone. There is no initial diagnostic for a comparable baseline, no independent controlled writing rubric and no topic-level capstone report in authored data.",
+      "proposedCorrection": "Author a mapped capstone with recognition, explanation, transformations, editing, analysis and original prose, comparable diagnostic domains and honest self-review/assessment limits.",
+      "supportingReferences": [],
+      "verificationStatus": "editorial_review_or_direct_counterexample; external_verification_pending",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-13",
+      "day": 21,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "Punctuation is tested through underlined-segment error-spotting (a colon, semicolon, dash or apostrophe hidden among four options) and through \"which sentence is punctuated correctly\" MCQs, almost never through open punctuation-insertion. The classic trap is a mark that is legal in isolation but wrong for its neighbours — a colon straight after a verb, or one half of a matched pair (dash, bracket) present while the other half is silently swapped for a comma. Possessive apostrophes are trapped by presenting a plural-looking noun (witness, accused, children) so you must tell a regular plural from an irregular one before adding ’s or just the apostrophe.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-09",
+      "day": 22,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "Concision is tested as \"choose the most concise version without loss of meaning\" MCQs, where at least one option is short not because it is well written but because it has quietly deleted a qualifier, condition or fact. The main trap is exactly this: an appealingly brief option that has lost information, set beside a correct option that is only slightly shorter than the original. A secondary trap dresses up a nominalisation or a wordy phrase as the \"formal-sounding\" choice, rewarding candidates who mistake length for register.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-12",
+      "day": 23,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "Diction and register are tested as gap-fill vocabulary items pairing near-identical confusables (affect/effect, imply/infer, principal/principle, stationary/stationery) and as \"which sentence is most formal/defensible\" MCQs. The trap word is nearly always the more frequent one in ordinary speech, planted where the rarer, correct partner is actually required, so familiarity itself misleads you. A second trap offers an overstated or double-hedged option that sounds impressively formal but is either indefensible or commits to nothing at all.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-11",
+      "day": 24,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "Cohesion is tested indirectly — through \"which pair of sentences flows better\" MCQs and through underlined-segment items that plant a tense, person or number shift inside an otherwise correct passage — rather than through any direct question about cohesion as a term. The trap segment is grammatically perfect read alone, so the fault only appears when it is checked against the sentence before it; examiners rely on candidates reading sentence by sentence instead of checking the seam between them. A second trap is a vague this or it opening a sentence with more than one plausible referent in the sentence before.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-14",
+      "day": 25,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "This topic is tested as a fill-in-the-blank vocabulary item or as an error-spotting sentence with one pair swapped, almost never as a full-sentence rewrite. The examiner's favourite trap is to plant the rarer but correct word — judicious, elicit, flout — as the option that \"looks wrong\", banking on candidates who only half-know it to talk themselves out of the right answer.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-09",
+      "day": 26,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "This is always a four-option \"select the corrected sentence\" item. The trap option fixes the real fault but also rewrites an unrelated correct phrase, and that option is marked wrong for touching more than the fault. A second trap offers a genuinely better rewrite that changes meaning or voice — correct answer discipline means resisting exactly the option a strong writer's instinct prefers.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-13",
+      "day": 27,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "Précis grammar is tested through the marking scheme itself rather than through discrete questions: examiners deduct marks for fragments, comma splices, tense or person drift and lost qualifications inside your own compressed prose, so the \"question format\" is your own paragraph read back to you. Within auto-marked practice items, the trap is an option that compresses correctly but silently drops a qualifying phrase — it reads perfectly grammatical while quietly changing what the passage said.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-09",
+      "day": 28,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "Paragraph-editing questions present four or five numbered sentences and ask which one is faulty — never which word — so the trap is that most of the sentences are flawless and deliberately unremarkable, tempting candidates to keep hunting past the actual answer. The planted error tends to sit in the first or last sentence, exactly where attention is weakest, so check those two positions before reading the set in order.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-08",
+      "day": 29,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "Mixed-topic sections like this one carry no label telling you which day's rule an item is testing, exactly as the real paper does, so the mechanics trap is not in any single item but in the order you attempt them: a candidate who solves items strictly in sequence burns time on a hard agreement item before reaching an easy preposition item worth the identical one mark. Skim the whole set first, answer everything you can name a rule for immediately, and mark the rest for a single review pass.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-14",
+      "day": 30,
+      "location": "why / examTip / examinational rule wording",
+      "severity": "high",
+      "category": "source_gap",
+      "quote": "On the day itself, work the grammar and error-spotting section before the composition and précis: it gives the fastest return per minute, and finishing it first leaves the rest of the paper for slower writing. Inside the section, answer in two passes — everything you can name a rule for immediately, then return only to marked items — rather than moving strictly left to right, since one hard item held too long costs you three easy ones elsewhere.",
+      "explanation": "The authored lesson cites no official paper, marking scheme or examiner report for its asserted format, trap frequency or scoring preference. This audit has not verified those examination assertions against authentic records.",
+      "proposedCorrection": "Remove examiner-intention/frequency claims or verify each against identified official records; label all authored practice as original.",
+      "supportingReferences": [],
+      "verificationStatus": "official_exam_source_not_supplied_or_verified",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G21-14",
+      "day": 21,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G22-10",
+      "day": 22,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G23-13",
+      "day": 23,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G24-12",
+      "day": 24,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G25-15",
+      "day": 25,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G26-10",
+      "day": 26,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G27-14",
+      "day": 27,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G28-10",
+      "day": 28,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G29-09",
+      "day": 29,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    },
+    {
+      "id": "G30-15",
+      "day": 30,
+      "location": "assessment metadata and practice counts",
+      "severity": "high",
+      "category": "assessment_structure",
+      "quote": "16 objective items; 6 corrections",
+      "explanation": "All objective questions use choice, gap or spot with one key. No per-item difficulty, concept, ability domain or alternative-answer/rubric fields are present. Most error-spotting sets have no no-error possibility. The requested 25–35 daily items and 8–12 corrections are not present.",
+      "proposedCorrection": "Build verified concept-tagged items, expand selectively with distinct productive formats and meaningful rubrics; do not inflate counts by re-labelling duplicates.",
+      "supportingReferences": [],
+      "verificationStatus": "direct_authored_data_inventory",
+      "implementationStatus": "identified_not_implemented"
+    }
+  ],
+  "questionReviewInventory": [
+    {
+      "id": "d21w1",
+      "day": 21,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "The rains failed; the crop failed.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21w2",
+      "day": 21,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "The paper includes three parts: précis, comprehension and grammar.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21w3",
+      "day": 21,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "the children’s school",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21w4",
+      "day": 21,
+      "group": "warmUp",
+      "key": 2,
+      "keyText": "The report — issued in May — was withdrawn.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q1",
+      "day": 21,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q2",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The finding was clear: the audit had been falsified.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q3",
+      "day": 21,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q4",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Ali and Sara’s report",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q5",
+      "day": 21,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q6",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The rate (7.4 per cent) was the lowest since 2016.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q7",
+      "day": 21,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q8",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "“The scheme … was never launched.”",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q9",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q10",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The boys’ hostel accommodates two hundred boys.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q11",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Cervantes’ novel",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d21q12",
+      "day": 21,
+      "group": "drill",
+      "key": 1,
+      "keyText": "She reported, “He said, ‘Get out,’ twice.”",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22w1",
+      "day": 22,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "Because it rained, the match was cancelled.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22w2",
+      "day": 22,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "The board decided to postpone the meeting.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22w3",
+      "day": 22,
+      "group": "warmUp",
+      "key": 0,
+      "keyText": "final conclusion",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22w4",
+      "day": 22,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "Because funding stopped in 2019, the scheme lapsed in most districts.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q1",
+      "day": 22,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Several reasons explain why the policy failed.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q2",
+      "day": 22,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q3",
+      "day": 22,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The auditor examined the accounts.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q4",
+      "day": 22,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q5",
+      "day": 22,
+      "group": "drill",
+      "key": 2,
+      "keyText": "The scheme lapsed.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q6",
+      "day": 22,
+      "group": "drill",
+      "key": 0,
+      "keyText": "if the appeal is dismissed",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q7",
+      "day": 22,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q8",
+      "day": 22,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The policy has had a limited effect.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q9",
+      "day": 22,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q10",
+      "day": 22,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Under pressure, the government reversed its earlier decision.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q11",
+      "day": 22,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The scheme is a unique programme in the province.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d22q12",
+      "day": 22,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23w1",
+      "day": 23,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "The government did not investigate the issue.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23w2",
+      "day": 23,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "affect",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23w3",
+      "day": 23,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "The policy failed in most districts.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23w4",
+      "day": 23,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "principal … principle",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q1",
+      "day": 23,
+      "group": "drill",
+      "key": 3,
+      "keyText": "D",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q2",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The reforms failed to achieve their stated objectives.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q3",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "inferred",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q4",
+      "day": 23,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q5",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The data suggest that enforcement has weakened.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q6",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "economical",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q7",
+      "day": 23,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q8",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The government must address the deficit; otherwise the position will deteriorate sharply.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q9",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "practise … practice",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q10",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "establish the cause of the delay",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q11",
+      "day": 23,
+      "group": "drill",
+      "key": 0,
+      "keyText": "complement",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d23q12",
+      "day": 23,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The reforms failed, and nothing ultimately changed.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24w1",
+      "day": 24,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "A committee was formed. Its members were three officials.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24w2",
+      "day": 24,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "This delay is unacceptable.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24w3",
+      "day": 24,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "If you study daily, you improve.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24w4",
+      "day": 24,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "State the single claim of the paragraph.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q1",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The tribunal reserved judgement. That judgement, delivered six months later, changed the law.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q2",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q3",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "This refusal was never formally recorded.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q4",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Enforcement, not legislation, is the binding constraint.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q5",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q6",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The first proposal was costly; the second, less so.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q7",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The funds lapsed. Moreover, the work stopped.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q8",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "One, supported and linked.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q9",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q10",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Claim, explanation, evidence, link",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q11",
+      "day": 24,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d24q12",
+      "day": 24,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The committee submitted its report, but it later withdrew it.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25w1",
+      "day": 25,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "effect",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25w2",
+      "day": 25,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "fewer",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25w3",
+      "day": 25,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "among",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25w4",
+      "day": 25,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "advise",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q1",
+      "day": 25,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q2",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "stationary",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q3",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "We must ensure that the files reach on time.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q4",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q5",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "eminent … imminent",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q6",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Kindly take the necessary action and reply.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q7",
+      "day": 25,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q8",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "latter",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q9",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Everyone was present except the treasurer.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q10",
+      "day": 25,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q11",
+      "day": 25,
+      "group": "drill",
+      "key": 1,
+      "keyText": "flouting",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d25q12",
+      "day": 25,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26w1",
+      "day": 26,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "Each of the boys has submitted his form.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26w2",
+      "day": 26,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "He is senior to me.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26w3",
+      "day": 26,
+      "group": "warmUp",
+      "key": 0,
+      "keyText": "Attached to the letter are two annexures.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26w4",
+      "day": 26,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "Although he was ill, he attended.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q1",
+      "day": 26,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q2",
+      "day": 26,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The quality of the answers was disappointing.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q3",
+      "day": 26,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q4",
+      "day": 26,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The committee has announced its decision.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q5",
+      "day": 26,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q6",
+      "day": 26,
+      "group": "drill",
+      "key": 1,
+      "keyText": "He suggested postponing the meeting.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q7",
+      "day": 26,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q8",
+      "day": 26,
+      "group": "drill",
+      "key": 0,
+      "keyText": "The report, which ran to four hundred pages, was never read.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q9",
+      "day": 26,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q10",
+      "day": 26,
+      "group": "drill",
+      "key": 1,
+      "keyText": "If I had known, I would have informed you.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q11",
+      "day": 26,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d26q12",
+      "day": 26,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The report highlights the fact that funds were misused.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27w1",
+      "day": 27,
+      "group": "warmUp",
+      "key": 0,
+      "keyText": "The officer appointed in May has resigned.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27w2",
+      "day": 27,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "The scheme, launched in 2019, failed in most districts.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27w3",
+      "day": 27,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "The writer argues that enforcement is the real constraint.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27w4",
+      "day": 27,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "Announced in 2019, the scheme was never funded.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q1",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Having failed twice, he withdrew.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q2",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "the major crops",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q3",
+      "day": 27,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q4",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The writer argues that enforcement is weak although the law is adequate.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q5",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "120 words",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q6",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q7",
+      "day": 27,
+      "group": "drill",
+      "key": 2,
+      "keyText": "For example, in one district a single inspector covered forty factories.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q8",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The policy failed for structural reasons.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q9",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The writer argues that …",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q10",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The scheme lapsed in most districts after funding stopped in 2019.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q11",
+      "day": 27,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The scheme, successful mostly in urban centres, was extended nationwide.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d27q12",
+      "day": 27,
+      "group": "drill",
+      "key": 2,
+      "keyText": "The circular reversed two years of policy without consultation.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28w1",
+      "day": 28,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28w2",
+      "day": 28,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28w3",
+      "day": 28,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28w4",
+      "day": 28,
+      "group": "warmUp",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q1",
+      "day": 28,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q2",
+      "day": 28,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q3",
+      "day": 28,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q4",
+      "day": 28,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q5",
+      "day": 28,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q6",
+      "day": 28,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q7",
+      "day": 28,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q8",
+      "day": 28,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q9",
+      "day": 28,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q10",
+      "day": 28,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q11",
+      "day": 28,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d28q12",
+      "day": 28,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29w1",
+      "day": 29,
+      "group": "warmUp",
+      "key": 2,
+      "keyText": "was",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29w2",
+      "day": 29,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "has risen",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29w3",
+      "day": 29,
+      "group": "warmUp",
+      "key": 2,
+      "keyText": "has been working",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29w4",
+      "day": 29,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "postponing",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q1",
+      "day": 29,
+      "group": "drill",
+      "key": 2,
+      "keyText": "C",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q2",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "passes",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q3",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "He is one of those officers who never admit a mistake.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q4",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q5",
+      "day": 29,
+      "group": "drill",
+      "key": 3,
+      "keyText": "No article",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q6",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "He asked me where I was going.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q7",
+      "day": 29,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q8",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "that",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q9",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "I am looking forward to meeting you.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q10",
+      "day": 29,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q11",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "had destroyed",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d29q12",
+      "day": 29,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The committee comprises five members.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30w1",
+      "day": 30,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "One page per error type, each entry giving the wrong sentence, the correction and the rule.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30w2",
+      "day": 30,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "Writing three sentences that use a rule.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30w3",
+      "day": 30,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "In whole phrases from real sentences.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30w4",
+      "day": 30,
+      "group": "warmUp",
+      "key": 1,
+      "keyText": "Your error profile on a repeated simulation.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q1",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q2",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "will have cleared",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q3",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The committee recommended that he be transferred.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q4",
+      "day": 30,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q5",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "had submitted",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q6",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The course improves reading, writing and speaking.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q7",
+      "day": 30,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q8",
+      "day": 30,
+      "group": "drill",
+      "key": 2,
+      "keyText": "are",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q9",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "The quality of the answers was poor.",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q10",
+      "day": 30,
+      "group": "drill",
+      "key": 0,
+      "keyText": "A",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q11",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "B",
+      "reviewStatus": "editorially_read_no_individual_defect_identified",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    },
+    {
+      "id": "d30q12",
+      "day": 30,
+      "group": "drill",
+      "key": 1,
+      "keyText": "Not only was the report late but it was also incomplete.",
+      "reviewStatus": "flagged_in_matrix",
+      "note": "Not certification of all possible readings; independent external answer-key verification remains necessary before publication."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/punctuation",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/formal-and-informal-language",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/nouns-singular-and-plural",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/not-only-but-also",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/dictionary/english/prepone",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/consist-comprise-or-compose",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/dictionary/english/insure",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/dictionary/english/judicial",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/dictionary/english/data",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/dictionary/english/intimate",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/it-this-and-that-in-paragraphs",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/between-or-among",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/dictionary/english/loose",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/dictionary/english/conclusion",
+      "authority": "Cambridge Dictionary / English Grammar Today",
+      "consultedDate": "2026-10-21",
+      "status": "successfully_fetched_and_relevant_text_read",
+      "copiedIntoCourse": false
+    }
+  ],
+  "limitations": [
+    "No official examination-format or examiner-preference claims have been authenticated.",
+    "Selected authoritative web pages verify particular disputed constructions; no claim is made that every substantive statement has already been checked against multiple authorities.",
+    "A full review by an independent human grammar editor and complete coverage mapping remain release requirements.",
+    "Some unavailable source requests returned HTTP 520 and are not cited as consulted evidence.",
+    "No browser/device/account software QA is within this academic read-only audit."
+  ]
+}

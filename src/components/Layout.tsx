@@ -1265,10 +1265,11 @@ export default function Layout() {
         </div>
       </main>
 
-      {/* Exam focus mode (docs/mpt D-36): no floating shortcut or bottom bar over
-          an active MPT examination or its Roll Number gate. */}
-      {!MPT_FOCUS_PATH.test(location.pathname) && <DeferredVistaShortcut />}
+      {/* Keep floating shortcuts clear of grammar reading and practice. The
+          course has inline notes, bookmarks, revision and assistance controls. */}
+      {!MPT_FOCUS_PATH.test(location.pathname) && location.pathname !== '/grammar-course' && <DeferredVistaShortcut />}
 
+      {/* Exam focus mode (docs/mpt D-36) also removes the mobile bottom bar. */}
       {!MPT_FOCUS_PATH.test(location.pathname) && <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
         <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">
           {mobileBottomNav.map((item) => {

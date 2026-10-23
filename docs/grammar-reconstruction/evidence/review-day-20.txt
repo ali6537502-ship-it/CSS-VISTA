@@ -1,0 +1,39 @@
+gv5-d20-q01 [gv5-d20-m01] In The archivist hopes to finish today, which expression is the non-finite complement?
+0:today alone | 1:The archivist | 2:hopes | 3:to finish today
+KEY:3 To finish today is an infinitival clause complement. Hopes is the finite matrix verb; today alone is only an adverbial expression.
+
+gv5-d20-q02 [gv5-d20-m01] Complete the perfect passive infinitive: The letter appears to have been ____.
+0:written | 1:writing | 2:write | 3:wrote
+KEY:0 Have been written is a perfect passive chain ending in the lexical participle written.
+
+gv5-d20-q03 [gv5-d20-m01] Which analysis distinguishes a verbal -ing clause from a noun phrase?
+0:Every spelling ending in -ing is automatically a verb. | 1:Carefully is an adjective modifying a noun in reading the files carefully. | 2:Reading the files carefully contains a verbal reading with an object and adverb. | 3:The careful reading of the files must contain a finite verb.
+KEY:2 The direct object the files and adverb carefully support a verbal analysis. A noun reading instead permits determiner/adjective and an of-phrase.
+
+gv5-d20-q04 [gv5-d20-m02] We look forward to ____ the new curator.
+0:meet | 1:meeting | 2:met | 3:meets
+KEY:1 In look forward to, to is prepositional and the following activity complement uses -ing.
+
+gv5-d20-q05 [gv5-d20-m02] Mina stopped to read the notice. What does the infinitive normally express?
+0:The purpose of pausing another activity | 1:Proof that the notice was never read | 2:A past passive event | 3:The ending of the reading activity
+KEY:0 Stopped to read normally means paused in order to read; stopped reading would mean ceased reading.
+
+gv5-d20-q06 [gv5-d20-m02] Review: They helped us to carry the boxes.
+0:Helped must always be followed by an -ing form. | 1:To must be removed because help never allows it. | 2:Us must be replaced by we. | 3:No error: help permits an infinitive with or without to.
+KEY:3 Help us carry and help us to carry are both standard; the object pronoun us is appropriate.
+
+gv5-d20-q07 [gv5-d20-m03] The intended inspector is Samir. Which revision clearly supplies that participant?
+0:Having inspected the roof, the leak was obvious. | 1:After Samir inspected the roof, the leak was obvious to him. | 2:Having inspected the roof, the leak inspected Samir. | 3:After the roof inspected Samir, the leak was obvious.
+KEY:1 The finite after-clause explicitly identifies Samir as inspector while preserving that he found the leak obvious.
+
+gv5-d20-q08 [gv5-d20-m03] Which opening clause has its own expressed subject rather than an ordinary shared main-clause subject?
+0:Having checked the list, Nora called. | 1:To check the list, Nora stayed. | 2:Weather permitting, Nora will visit. | 3:Warned about the closure, Nora stayed.
+KEY:2 Weather permitting is an absolute construction with weather as its own subject. The other examples have an understood participant linked to Nora.
+
+gv5-d20-q09 [gv5-d20-m04] In Amina persuaded Omar to attend, who is the understood attendee in the ordinary intended reading?
+0:Both must attend | 1:No participant can be inferred | 2:Amina only | 3:Omar
+KEY:3 Persuade licenses object/goal control: Omar is the intended attendee, while Amina is the persuader.
+
+gv5-d20-q10 [gv5-d20-m04] Which example supports a raising analysis of seem rather than an agentive subject-control analysis?
+0:There seems to be a delay. | 1:The technician tried to restart the machine. | 2:The supervisor persuaded us to stay. | 3:The guide asked us to wait.
+KEY:0 Dummy there can occur with seems to be without naming an agent of seem. Try, persuade and ask in the other examples involve participant/control relationships.

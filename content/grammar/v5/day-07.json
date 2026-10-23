@@ -1,0 +1,1327 @@
+{
+  "day": 7,
+  "id": "gv5-day-07",
+  "title": "Past-Time Expressions and Narrative Grammar",
+  "orientation": "A narrative has a moving viewpoint. It tells us what happened, what was already happening, what had happened earlier and what regularly happened in a former period. These distinctions matter in a personal account, a historical answer and a workplace incident report. Today you will build the four main past-time constructions and compare their meanings, rather than assign a form from event length alone. You will also distinguish a former habit from being accustomed to something. Keep a simple timeline beside the first examples: mark the main past reference point, then place earlier events and ongoing background around it. In the exercises, retain a grammatical alternative when it conveys a defensible meaning. A transformation should preserve the stated sequence, not merely replace one verb phrase with a more elaborate one.",
+  "outcomes": [
+    "Form past simple, progressive, perfect and perfect progressive questions and negatives.",
+    "Distinguish foreground event, background and earlier situation.",
+    "Explain when simple past can replace past perfect after a sequencing connector.",
+    "Use used to, habitual would and be used to with their distinct meanings.",
+    "Write a coherent narrative with justified viewpoint changes."
+  ],
+  "prerequisiteDays": [
+    5,
+    6
+  ],
+  "modules": [
+    {
+      "id": "gv5-d07-m01",
+      "title": "Past simple: completed events, states and narrative steps",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d07-c01",
+        "gv5-topic-d07-c05",
+        "gv5-topic-d07-c08",
+        "gv5-topic-d07-c09"
+      ],
+      "definition": "The past simple uses a finite past form and commonly locates events or states within a past frame. It can describe single events, sequences, repeated activities and past states.",
+      "foundation": [
+        "To report a completed event, use the past form: The courier knocked. Regular forms normally add -ed; irregular forms include took, wrote, brought and left. A past form need not mention its date in the same sentence if the conversation already establishes when: Who moved the box? Mina moved it. Past simple can also describe a state: The office belonged to a local charity. Do not equate past tense with physical action. In a narrative, a sequence such as She unlocked the door, entered and switched on the light normally advances the story from one event to the next."
+      ],
+      "intermediate": [
+        "Ordinary lexical verbs use did not + base in negatives and Did + subject + base in questions: They did not return; Did they return? Did carries the tense, so did returned duplicates past marking. Be instead uses was or were and inverts directly: Was the office open? It was not open. A subject question normally lacks added did: Who opened the gate? Compare Who did you meet?, where who is the object and you is the subject. Negation, emphasis or another structure can change the auxiliary pattern, so first identify what the question is asking."
+      ],
+      "advanced": [
+        "Past simple can cover a long period or a repeated routine: She worked there for twenty years; We walked to school every day. The length of an event does not by itself require progressive aspect. A finished past interval normally permits simple past even if its effects continue now: The bridge closed last month, and traffic is still diverted. A present consequence does not force present perfect. Conversely, a past form may express hypothetical distance rather than past time in a later lesson’s conditional construction. Meaning comes from the whole clause and context."
+      ],
+      "expert": [
+        "In historical and biographical writing, establish dates and reference frames clearly. Past forms report events; present forms can evaluate a source that is available now: The expedition left in 1912; the diary describes its first week. Such a shift is justified, not a lapse in consistency. The historic present is another established narrative choice, but a beginner should maintain one narrative viewpoint until a reason for changing it is clear. Tense consistency means coherent relationships between viewpoints, rather than banning every different tense from one paragraph or assuming that each past verb moves the narrative clock forward."
+      ],
+      "patterns": [
+        {
+          "form": "subject + past form",
+          "meaning": "Past simple affirmative."
+        },
+        {
+          "form": "did not + base; Did + subject + base?",
+          "meaning": "Ordinary lexical negatives and non-subject questions."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The assistant locked the cabinet at six.",
+          "analysis": "Locked locates a completed event in a specified past interval."
+        },
+        {
+          "sentence": "Who brought the spare battery?",
+          "analysis": "Who is the subject, so this affirmative subject question uses brought without did."
+        },
+        {
+          "sentence": "The laboratory operated for thirty years before it closed.",
+          "analysis": "A long completed period can use simple past; duration does not compel progressive."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Who called Nadia?",
+          "b": "Who did Nadia call?",
+          "note": "Both grammatical: who is subject in A, object in B. Word order and auxiliary choice reflect that difference."
+        }
+      ],
+      "exceptions": [
+        "Past be has was/were rather than did be: Were the windows open? It also appears in irrealis constructions, which Day 18 develops."
+      ],
+      "mistakes": [
+        {
+          "problem": "Did the visitors arrived?",
+          "repair": "Did the visitors arrive?",
+          "reason": "Use base arrive after did."
+        },
+        {
+          "problem": "The room did not be warm.",
+          "repair": "The room was not warm.",
+          "reason": "Ordinary past be negates directly in this intended state description."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Narrative viewpoint",
+          "definition": "The temporal position from which a story is told.",
+          "example": "A writer recounts yesterday’s visit using past forms."
+        },
+        {
+          "term": "Subject question",
+          "definition": "A question asking for the subject itself.",
+          "example": "Who rang the bell?"
+        }
+      ],
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-m02",
+      "title": "Past progressive: background, overlap and an unfinished viewpoint",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d07-c02",
+        "gv5-topic-d07-c05",
+        "gv5-topic-d07-c06",
+        "gv5-topic-d07-c08"
+      ],
+      "definition": "The past progressive combines was/were with an -ing form, presenting a situation as in progress around a past reference time. It does not by itself establish completion or interruption.",
+      "foundation": [
+        "Use was or were + -ing: I was listening; they were listening. Add not after was/were for a negative and invert that auxiliary for a question: Were they listening? This construction lets a narrator place a reader inside an activity. At ten, the workers were loading the van says loading was in progress around ten. It does not itself tell us when the task started or finished. A past time expression is therefore compatible with progressive aspect. The slogan yesterday means simple past is too broad: Yesterday at ten, we were loading the van is grammatical."
+      ],
+      "intermediate": [
+        "When one event occurs during another, progressive often supplies background while simple past introduces the event: I was checking the address when the taxi arrived. Calling this an interruption is convenient, but the arrival need not stop the checking. Two progressives can present overlap: While I was checking, Salma was packing. Two simple pasts can also describe concurrent completed activities: While I checked the address, Salma packed. These are different viewpoints, not competing versions where one must be an error. A question must specify the intended scene before it can demand a particular aspect."
+      ],
+      "advanced": [
+        "Progressive also supports temporary repeated past activity: During the renovation, we were meeting in the kitchen every morning. Compare We met in the kitchen every morning for an ordinary retrospective habit. The progressive can suggest an unfolding pattern with boundaries in the context. With always, a speaker may express an attitude to repetition: He was always volunteering for difficult jobs. Context may make this admiring rather than critical. State verbs retain sense-dependent restrictions. I knew the answer is the ordinary form for knowledge; I was thinking about the answer presents an active process."
+      ],
+      "expert": [
+        "The so-called imperfective viewpoint shows an internal phase without asserting the whole event’s completion. She was crossing the road when I saw her does not guarantee that she reached the far side, though ordinary knowledge may suggest it. Do not confuse what the grammar entails with what a reader reasonably infers. Similarly, an achievement can receive a progressive reading when an event has an approach or repeated phases: The guests were arriving as the musicians tuned up. This does not make arrive an unrestricted substitute for every stative verb. Interpret the lexical meaning and the viewpoint together."
+      ],
+      "patterns": [
+        {
+          "form": "was/were + -ing",
+          "meaning": "Past progressive affirmative."
+        },
+        {
+          "form": "While + past progressive, past simple/progressive",
+          "meaning": "A common way to frame an overlapping situation, not a compulsory tense recipe."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "At sunrise, the team was unloading the truck.",
+          "analysis": "The narrator views unloading as in progress at sunrise."
+        },
+        {
+          "sentence": "The radio was playing when the power failed.",
+          "analysis": "Was playing is background; failed marks a new event. The relation is supplied by context."
+        },
+        {
+          "sentence": "Guests were arriving throughout the afternoon, while volunteers were directing them to the hall.",
+          "analysis": "Two overlapping repeated patterns are presented as ongoing."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "I wrote the email when the meeting ended.",
+          "b": "I was writing the email when the meeting ended.",
+          "note": "A normally presents writing as a complete event associated with the end; B places the meeting’s end during ongoing writing."
+        }
+      ],
+      "exceptions": [
+        "A short event can occur in a progressive when viewed in development or repetition: A light was flashing. Duration is not a mechanical verb-type label."
+      ],
+      "mistakes": [
+        {
+          "problem": "They was discussing the route.",
+          "repair": "They were discussing the route.",
+          "reason": "They selects were."
+        },
+        {
+          "problem": "Was she waited outside?",
+          "repair": "Was she waiting outside?",
+          "reason": "Past progressive be requires the -ing form waiting."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Background",
+          "definition": "A situation framing the narrative’s foregrounded event.",
+          "example": "It was raining when the delivery arrived."
+        },
+        {
+          "term": "Imperfective viewpoint",
+          "definition": "An internal view that need not assert an event’s completion.",
+          "example": "was constructing the tower"
+        }
+      ],
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-m03",
+      "title": "Past perfect and past perfect progressive: looking back from then",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d07-c03",
+        "gv5-topic-d07-c04",
+        "gv5-topic-d07-c06",
+        "gv5-topic-d07-c08",
+        "gv5-topic-d07-c09"
+      ],
+      "definition": "The past perfect uses had plus a past participle to relate a prior situation to a past viewpoint. The past perfect progressive adds been + -ing to foreground a process or duration leading towards that viewpoint.",
+      "foundation": [
+        "Imagine arriving at a workshop yesterday and finding it empty. The instructor had left tells the reader that the departure preceded your arrival. Had left is past perfect: had + the participle left. It looks back from a past viewpoint rather than directly from now. Make negatives with had not and questions with Had + subject: Had the instructor left? No separate did is needed. The reference point can appear in the same sentence, elsewhere in the story or in the shared conversation. It need not be a second event explicitly named after every perfect verb."
+      ],
+      "intermediate": [
+        "Past perfect does more than put the earliest of two events in a special form. It can establish background information, report an earlier statement, or show that a plan changed: I had intended to stay, but the last train was leaving. Where before or after already establishes sequence, simple past may be sufficient: After she locked the room, she handed over the keys. Past perfect can still foreground completion: After she had locked the room, she handed over the keys. Do not mark every simple past before another past as wrong, or assume that past perfect cannot appear with dates."
+      ],
+      "advanced": [
+        "For activity leading towards a past viewpoint, use had been + -ing: We had been waiting for an hour when the caretaker arrived. The waiting may then stop or continue. It can also explain traces at a past moment: The pavement was wet because it had been raining. Rain might already have stopped. Compare had written three letters, a completed tally, with had been writing letters, an activity. With states such as knowing someone, ordinary past perfect simple is used: We had known each other for years. Since and for express starting point and duration; they do not compel progressive aspect."
+      ],
+      "expert": [
+        "Analyse reference relationships before rewriting. In When the assistant arrived, the gate had closed, closing is earlier than arrival. In When the assistant arrived, the gate closed, the natural reading links closing with the arrival, though wider context can modify that interpretation. A transformation from one to the other may change the facts. Perfect marking also occurs in counterfactual constructions discussed later: If we had left earlier is an imagined past, not a historical claim that we actually left earlier. Keep time sequence, modality and the truth of a proposition distinct when interpreting a perfect form."
+      ],
+      "patterns": [
+        {
+          "form": "had + past participle",
+          "meaning": "Prior situation viewed from a past reference point."
+        },
+        {
+          "form": "had been + -ing",
+          "meaning": "Activity or duration leading up to a past viewpoint."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "By noon, the team had checked all the meters.",
+          "analysis": "The checks are completed by the past reference point noon."
+        },
+        {
+          "sentence": "Had you been working there long when the building closed?",
+          "analysis": "Had been working asks about duration preceding the closure."
+        },
+        {
+          "sentence": "The guide had promised a longer visit, but we left early because the weather worsened.",
+          "analysis": "The earlier promise is distinguished from the later departure; the promise does not guarantee fulfilment."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She had repaired two chairs.",
+          "b": "She had been repairing chairs.",
+          "note": "A foregrounds a completed tally; B foregrounds activity and does not itself count finished chairs."
+        }
+      ],
+      "exceptions": [
+        "Past perfect accepts definite past reference points: By 2018, the shop had closed. The restriction on present perfect with finished event times does not apply identically."
+      ],
+      "mistakes": [
+        {
+          "problem": "Had she went home?",
+          "repair": "Had she gone home?",
+          "reason": "Perfect had selects the participle gone."
+        },
+        {
+          "problem": "He had been waited for an hour.",
+          "repair": "He had been waiting for an hour.",
+          "reason": "Progressive been selects waiting; the intended construction is active, not passive."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Anteriority",
+          "definition": "A temporal relation in which one situation is earlier than a reference point.",
+          "example": "The train had left before our arrival."
+        },
+        {
+          "term": "Past perfect progressive",
+          "definition": "Had been plus an -ing form, viewing earlier activity from then.",
+          "example": "had been repairing"
+        }
+      ],
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-m04",
+      "title": "Past habits, used to, habitual would and coherent reporting",
+      "taxonomy": [
+        "D",
+        "E"
+      ],
+      "coverageIds": [
+        "gv5-topic-d07-c05",
+        "gv5-topic-d07-c07",
+        "gv5-topic-d07-c08",
+        "gv5-topic-d07-c09"
+      ],
+      "definition": "Used to + base describes a past habit or state contrasted with the present. Habitual would + base recalls repeated past events within an established past frame; it is distinct from other modal meanings of would.",
+      "foundation": [
+        "To describe an earlier routine, you can use simple past: We walked along the canal after school. Used to can explicitly contrast that routine with the present: We used to walk there, but the path is closed now. It also describes a past state: The yard used to belong to my grandparents. The form does not change with the person of the subject. In carefully edited questions and negatives, use Did you use to live here? and We did not use to live here. Spellings with used after did occur, but the uninflected use is this course’s formal editorial default."
+      ],
+      "intermediate": [
+        "Once a past frame is established, would can recall typical events: During our summer visits, Grandfather would open the shop early and we would sweep the pavement. It need not imply a conditional promise. Ordinary continuing states usually take used to or simple past rather than habitual would: We used to own a small shop. Some repeated situations containing be can occur with habitual would when they mean something that repeatedly happened, such as On market days, the street would be crowded. The key is an established repeated-event reading, not a prohibition on the spelling be."
+      ],
+      "advanced": [
+        "Distinguish used to from be used to and get used to. I used to work nights describes an earlier habit. I am used to working nights means night work is familiar; to here is a preposition, so working follows it. I am getting used to working nights describes becoming accustomed. The similarity in sound conceals different structures. Avoid turning a whole story into would without first orienting the reader: outside a past frame, would can suggest a hypothetical outcome, a polite request or a future viewed from the past. Clear time framing prevents this ambiguity."
+      ],
+      "expert": [
+        "When reporting history, preserve whether an event was asserted, remembered as a habit, merely planned or imagined. The phrase was going to open expresses a past intention, without proving that opening occurred. Used to normally implies a contrast with current circumstances, but it should not be used to invent a change that the evidence does not support. If a source simply records regular deliveries in 1990, simple past may be the most neutral choice. A reliable historical paragraph can combine simple past narrative, progressive background, perfect anteriority and habitual constructions when each serves a clear temporal or discourse function."
+      ],
+      "patterns": [
+        {
+          "form": "used to + base; did not use to + base",
+          "meaning": "Past habit/state and the formal negative default."
+        },
+        {
+          "form": "past frame + would + base",
+          "meaning": "A typical repeated past event, when context establishes the habitual reading."
+        },
+        {
+          "form": "be/get used to + noun or -ing",
+          "meaning": "Being/becoming accustomed; not the same construction as used to + base."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The station used to have a wooden roof.",
+          "analysis": "Used to describes a former state."
+        },
+        {
+          "sentence": "When I was an apprentice, we would check the shutters every evening.",
+          "analysis": "The opening frame establishes habitual past events."
+        },
+        {
+          "sentence": "I used to work alone, but I am now used to sharing the workshop.",
+          "analysis": "The first construction describes a former habit; the second describes current familiarity."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She used to visit on Sundays.",
+          "b": "She would visit on Sundays during that winter.",
+          "note": "Both can describe repeated visits; used to more readily establishes the past contrast, while would relies on the supplied frame."
+        }
+      ],
+      "exceptions": [
+        "Habitual would can describe repeated temporary states in context: On delivery days, the corridor would be full of boxes. It does not normally replace used to for an unchanging possession state."
+      ],
+      "mistakes": [
+        {
+          "problem": "We are used to visit that library when we were children.",
+          "repair": "We used to visit that library when we were children.",
+          "reason": "A former habit uses used to + base, without are."
+        },
+        {
+          "problem": "She is used to work late now.",
+          "repair": "She is used to working late now.",
+          "reason": "In the accustomed construction, to is a preposition followed here by an -ing clause."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Habitual would",
+          "definition": "Would used for recurring past events within an established frame.",
+          "example": "Every Friday he would call."
+        },
+        {
+          "term": "Accustomed",
+          "definition": "Familiar through experience.",
+          "example": "I am used to the noise."
+        }
+      ],
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d07-q01",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Form a past-simple question: Did the caretaker ____ the gate?",
+      "options": [
+        "locks",
+        "lock",
+        "locked",
+        "locking"
+      ],
+      "answer": 1,
+      "why": "Did carries past marking, so lock is base. The other forms duplicate tense/agreement or use an -ing form.",
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which phrase is past progressive?",
+      "options": [
+        "had carried",
+        "carried",
+        "have carried",
+        "were carrying"
+      ],
+      "answer": 3,
+      "why": "Were + -ing forms past progressive; the other choices are perfect or simple past.",
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-q03",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Use the participle required by had: The bus had ____ before we reached the stop.",
+      "options": [
+        "goes",
+        "went",
+        "going",
+        "gone"
+      ],
+      "answer": 3,
+      "why": "Had selects participial gone, not went, going or goes.",
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence means that night work is familiar to Sara now?",
+      "options": [
+        "Sara would work nights if asked.",
+        "Sara was going to work nights.",
+        "Sara is used to working nights.",
+        "Sara used to work nights."
+      ],
+      "answer": 2,
+      "why": "Be used to + -ing means accustomed; the others describe a former habit, a hypothetical response or an earlier intention.",
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-q05",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Choose the error, or No error: Who (A) opened the storeroom (B) yesterday (C)?",
+      "options": [
+        "No error",
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": 0,
+      "why": "Who is the subject; this affirmative subject question does not require did. All segments are grammatical.",
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which construction explicitly foregrounds the duration of activity before a past reference point?",
+      "options": [
+        "inspected",
+        "was inspecting",
+        "had been inspecting",
+        "has inspected"
+      ],
+      "answer": 2,
+      "why": "Had been + -ing is past perfect progressive. Past progressive gives an internal past view without itself marking anterior duration.",
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "What does They were rebuilding the wall assert on its own?",
+      "options": [
+        "Rebuilding was in progress at the relevant past time.",
+        "The work had not begun.",
+        "The wall was definitely completed.",
+        "The work will never finish."
+      ],
+      "answer": 0,
+      "why": "Progressive presents an internal phase. It does not alone assert completion or non-completion of the whole project.",
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-q08",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Use the formal edited negative of a former habit: We did not ____ to take that road.",
+      "options": [
+        "uses",
+        "use",
+        "used",
+        "using"
+      ],
+      "answer": 1,
+      "why": "After did, the course uses base use in this construction. The -d spelling occurs, but use is the stated formal default.",
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-q09",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Identify the past-simple verbs in She opened the box, read the note and smiled.",
+      "model": "Opened, read and smiled are past simple.",
+      "rubric": [
+        "Identify all three finite predicates.",
+        "Recognise read as past from this narrative context."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-q10",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Order: the supplier / did / why / cancel / the order?",
+      "model": "Why did the supplier cancel the order?",
+      "rubric": [
+        "Place why before did and the subject.",
+        "Use base cancel."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-q11",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Use past progressive with wait: At seven yesterday, the drivers ___ outside.",
+      "model": "At seven yesterday, the drivers were waiting outside.",
+      "rubric": [
+        "Use were with plural drivers.",
+        "Supply waiting after be."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-q12",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare While Laila cooked, I cleaned with While Laila was cooking, I was cleaning.",
+      "model": "Both can describe overlap; the simple pair presents the activities as whole events, while the progressive pair views them as ongoing.",
+      "rubric": [
+        "Accept both as grammatical.",
+        "Explain viewpoint rather than invent an obligatory interruption."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-q13",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Use past perfect progressive: Before the alarm rang, we ___ ___ ___ for an hour. Use rehearse.",
+      "model": "Before the alarm rang, we had been rehearsing for an hour.",
+      "rubric": [
+        "Use had been rehearsing in that order.",
+        "Retain duration before the past reference point."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-q14",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain the order in When we reached the cabin, the guide had lit the fire.",
+      "model": "Lighting precedes reaching; reaching supplies the past viewpoint for had lit.",
+      "rubric": [
+        "Place both events on a timeline.",
+        "Identify lit as a participle after had."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-q15",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare I used to share an office with I am used to sharing an office.",
+      "model": "The first describes a former arrangement contrasted with now; the second describes current familiarity.",
+      "rubric": [
+        "Identify the different meanings.",
+        "Explain base share vs preposition + sharing."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-q16",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Use habitual would in two sentences about a clearly established childhood routine.",
+      "model": "When I stayed with my aunt as a child, she would make tea before sunrise. I would help her open the shop.",
+      "rubric": [
+        "Establish an explicit past frame.",
+        "Use repeated events rather than one isolated occurrence."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-q17",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine into one chronological sentence: He checked the seal. He signed the form. He handed over the parcel.",
+      "model": "He checked the seal, signed the form and handed over the parcel.",
+      "rubric": [
+        "Retain the event order.",
+        "Use coordinated past predicates with a clear shared subject."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-q18",
+      "type": "response",
+      "kind": "function",
+      "prompt": "In The volunteers were packing when the manager called, identify background and foreground.",
+      "model": "Were packing is the ongoing background; called introduces the event occurring during it.",
+      "rubric": [
+        "Identify both verb phrases.",
+        "Do not assume the call necessarily stopped the packing."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-q19",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain why After I locked the door, I left does not need correction to had locked.",
+      "model": "After already marks the sequence; simple past is grammatical. Had locked can additionally foreground prior completion.",
+      "rubric": [
+        "Accept the original.",
+        "Distinguish optional emphasis from an obligatory tense rule."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-q20",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Complete the accustomed construction with prepare: I am getting used to ___ meals for six people.",
+      "model": "I am getting used to preparing meals for six people.",
+      "rubric": [
+        "Use -ing after prepositional to.",
+        "Keep the becoming-familiar meaning."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-q21",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain the shift: The volunteers arrived in 2006; their archive now records the village’s history.",
+      "model": "Arrived is a past event; records describes the archive’s current role.",
+      "rubric": [
+        "Give a temporal reason for each form.",
+        "Do not demand the same tense for unlike situations."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-q22",
+      "type": "response",
+      "kind": "splitting",
+      "prompt": "Split this into two clear sentences, preserving overlap: The crew were testing the pump while the supervisor was recording the readings.",
+      "model": "The crew were testing the pump. At the same time, the supervisor was recording the readings.",
+      "rubric": [
+        "Retain two progressive activities.",
+        "Explicitly preserve overlap."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-q23",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Repair verb forms: We had drove for an hour when the engine stopped. It had been make a strange sound before that.",
+      "model": "We had driven for an hour when the engine stopped. It had been making a strange sound before that.",
+      "rubric": [
+        "Use driven after had.",
+        "Use making after progressive been."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-q24",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "A report says The business was going to open in May. Does this establish that it opened?",
+      "model": "No. It reports an earlier plan or intention; fulfilment requires further evidence.",
+      "rubric": [
+        "Separate intention from occurrence.",
+        "Do not silently change was going to open into opened."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-q25",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write a completed past state with a duration, using own.",
+      "model": "My grandparents owned the cottage for fifteen years before they sold it.",
+      "rubric": [
+        "Use simple past for ownership.",
+        "Provide a clearly completed interval."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-q26",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Does At midnight she was writing her final chapter prove she finished it? Explain.",
+      "model": "No. It places the activity in progress at midnight without asserting its endpoint.",
+      "rubric": [
+        "Identify the internal viewpoint.",
+        "Separate inference from grammatical assertion."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-q27",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write one sentence explaining a past result through recent earlier activity.",
+      "model": "The floor was wet because the cleaners had been washing it.",
+      "rubric": [
+        "Use a past result and earlier progressive activity.",
+        "Do not require the cleaning to continue at the result moment."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-q28",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Revise only if needed and explain: During school holidays, the kitchen would be full of cousins. We used to own a larger table then.",
+      "model": "No grammatical change is required. Would be describes a recurring holiday situation; used to own describes a former possession state.",
+      "rubric": [
+        "Recognise the repeated-event frame for would be.",
+        "Avoid a blanket ban on habitual would with the spelling be."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d07-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The assistant did not brought the keys.",
+      "model": "The assistant did not bring the keys.",
+      "rubric": [
+        "Use base bring after did.",
+        "Preserve the negative past statement."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-past-simple-i-worked",
+        "C-VERB"
+      ]
+    },
+    {
+      "id": "gv5-d07-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "At noon, we was unloading the van.",
+      "model": "At noon, we were unloading the van.",
+      "rubric": [
+        "Use were with we.",
+        "Retain ongoing past unloading."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "When the inspector arrived, the staff had already wrote the log.",
+      "model": "When the inspector arrived, the staff had already written the log.",
+      "rubric": [
+        "Use participle written.",
+        "Preserve completion before arrival."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Intended meaning: her own continuing activity, not someone making her work. Correct: She had been worked for hours before the break.",
+      "model": "She had been working for hours before the break.",
+      "rubric": [
+        "Use working after progressive been.",
+        "Preserve duration before the break."
+      ],
+      "alternatives": [
+        "The original had been worked can be a legitimate passive if somebody made her work; that is a different meaning from the active activity specified here."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "I am used to take the train now.",
+      "model": "I am used to taking the train now.",
+      "rubric": [
+        "Use an -ing clause after prepositional to.",
+        "Retain the present familiarity meaning."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "We used to owned a shop on this street.",
+      "model": "We used to own a shop on this street.",
+      "rubric": [
+        "Use base own after used to.",
+        "Preserve a former possession state."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    },
+    {
+      "id": "gv5-d07-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "While the guards watched the gate, the attendants checked tickets. Is correction necessary?",
+      "model": "No change is necessary: the simple past can present two concurrent completed activities.",
+      "rubric": [
+        "Accept the valid simple pair.",
+        "Do not force progressive from while alone."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-past-continuous-i-was-working",
+        "british-council-stative"
+      ]
+    },
+    {
+      "id": "gv5-d07-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "By 2015, the family had moved to a smaller house. Is correction necessary?",
+      "model": "No change is necessary: past perfect can combine with a definite past reference point.",
+      "rubric": [
+        "Recognise legitimate past-perfect dating.",
+        "Do not transfer the present-perfect event-time restriction to past perfect."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d07-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Combine: We reached the depot at nine. The delivery left at eight. Explicitly mark departure as earlier.",
+      "model": "By the time we reached the depot at nine, the delivery had left an hour earlier.",
+      "rubric": [
+        "Preserve the nine-o’clock arrival and eight-o’clock departure.",
+        "Use a coherent relation between the earlier departure and later arrival."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-PAST",
+        "cambridge-past-perfect-continuous-i-had-been-working"
+      ]
+    },
+    {
+      "id": "gv5-d07-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite as a former habit explicitly contrasted with now: I cycle to the office every day. Now I work from home.",
+      "model": "I used to cycle to the office every day, but now I work from home.",
+      "rubric": [
+        "Use used to + base cycle.",
+        "Retain the current contrast."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d07-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-used-to",
+        "cambridge-would"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d07-writing01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write 120–160 words reporting a minor workplace incident. Establish a past viewpoint, include progressive background, an earlier event and a duration leading up to the incident. Do not invent a real historical claim.",
+    "model": "At nine on Tuesday, we were preparing a display when a shelf slipped from one support. We had moved the heavier boxes to the floor earlier, so nobody was standing beneath a heavy load. The team had been checking the fittings for half an hour before the incident, but the loose bracket had not been visible from the entrance. We stopped work immediately and asked everyone to leave the corner beside the window. While one colleague marked the area, another called the building technician. The technician arrived shortly afterwards and examined both supports. She found a damaged fixing and advised us to keep the shelf empty until it could be replaced. We recorded the incident before reopening the rest of the room. This is an invented practice scenario, rather than a report of a real event.\n\nAnalysis: Were preparing is background; had moved is earlier than the slip; had been checking expresses duration leading up to that past point.",
+    "rubric": [
+      "Use each requested temporal relation clearly.",
+      "Check auxiliary order, participles and justified tense changes; assess factual clarity as well as form."
+    ],
+    "alternatives": [
+      "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+    ],
+    "conceptId": "gv5-d07-m03",
+    "difficulty": "Intermediate",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "C-PAST",
+      "cambridge-past-perfect-continuous-i-had-been-working"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d07-recall01",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Recall Day 1: identify the direct object in The storm damaged the roof.",
+      "model": "The roof is the direct object; The storm is the subject.",
+      "rubric": [
+        "Identify the complete object phrase.",
+        "Do not confuse semantic patient with grammatical subject."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d01-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d07-recall02",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 5: identify the finite verb in were carrying and explain carrying.",
+      "model": "Were is finite; carrying is the non-finite -ing form selected by progressive be.",
+      "rubric": [
+        "Separate finite from non-finite forms.",
+        "Identify the auxiliary’s role."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d05-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d07-recall03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 6: contrast I have finished the log with I had finished the log before the visit.",
+      "model": "The first looks back from now; the second looks back from a past visit.",
+      "rubric": [
+        "Identify each reference point.",
+        "Keep perfect aspect distinct from tense."
+      ],
+      "alternatives": [
+        "Accept another wording that preserves the stated situation, temporal relationships and required construction."
+      ],
+      "conceptId": "gv5-d06-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I identify a past reference point before adding had.",
+    "I do not choose aspect from length alone.",
+    "I preserve whether a task was completed or merely in progress.",
+    "I distinguish used to work from am used to working.",
+    "I can explain each tense change in my narrative."
+  ],
+  "sources": [
+    {
+      "id": "C-PAST",
+      "title": "Past perfect simple ( I had worked ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-simple-i-had-worked",
+      "consulted": "2026-10-21",
+      "note": "Relevant definitions and constructions checked in the retrieved source body; original course explanations and examples."
+    },
+    {
+      "id": "C-VERB",
+      "title": "Verbs: basic forms - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/verbs-basic-forms",
+      "consulted": "2026-10-21",
+      "note": "Relevant definitions and constructions checked in the retrieved source body; original course explanations and examples."
+    },
+    {
+      "id": "british-council-stative",
+      "title": "Stative verbs | LearnEnglish",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/stative-verbs",
+      "consulted": "2026-10-21",
+      "note": "State/action interpretation and usual restrictions, including be/have/see/taste sense contrasts, consulted."
+    },
+    {
+      "id": "cambridge-past-continuous-i-was-working",
+      "title": "Past continuous ( I was working ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-continuous-i-was-working",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-past-perfect-continuous-i-had-been-working",
+      "title": "Past perfect continuous ( I had been working ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-continuous-i-had-been-working",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-past-simple-i-worked",
+      "title": "Past simple ( I worked ) - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-simple-i-worked",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-used-to",
+      "title": "Used to - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/used-to",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    },
+    {
+      "id": "cambridge-would",
+      "title": "Would - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/would",
+      "consulted": "2026-10-21",
+      "note": "Relevant form and meaning sections consulted; tendencies are not treated as exhaustive grammar laws."
+    }
+  ],
+  "editorialNotes": []
+}

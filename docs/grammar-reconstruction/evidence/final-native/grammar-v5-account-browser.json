@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "checks": [
+    "real browser sign-in",
+    "browser to native PHP to MySQL",
+    "fresh second device",
+    "mobile reading and note controls",
+    "conflict preserves live draft",
+    "backup before loading account copy",
+    "lost response exact replay"
+  ],
+  "pageErrors": []
+}

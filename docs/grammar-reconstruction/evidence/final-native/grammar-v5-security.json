@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "checks": [
+    "ownership",
+    "CSRF",
+    "unknown fields",
+    "exact idempotent replay",
+    "concurrent-device CAS",
+    "immutable first response",
+    "long text",
+    "restoration",
+    "canonical receipt",
+    "legacy preservation",
+    "attempt isolation",
+    "private implementation denial",
+    "preparation dashboard uses new evidence without adopting legacy completion"
+  ]
+}

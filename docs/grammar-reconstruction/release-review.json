@@ -1,0 +1,37 @@
+{
+  "curriculumVersion": "grammar-v5-2026-10",
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "reviewedAt": "2026-10-22T19:00:23.426838+00:00",
+  "allObjectivesReviewed": true,
+  "allLessonsReviewed": true,
+  "accountJourneyVerified": true,
+  "releaseBlockers": [],
+  "academicEvidence": [
+    "audit-days-1-10.json",
+    "audit-days-11-20.json",
+    "audit-days-21-30.json",
+    "curriculum-map.json",
+    "coverage-matrix.json",
+    "verified-key-register.json",
+    "source-register.json",
+    "evidence/resumed-editorial-review.json"
+  ],
+  "technicalEvidence": {
+    "nativeRun": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39837712322",
+    "testedHead": "a45e6d529b51c4f39a19edcd49c84a78929b8467",
+    "retainedReports": "evidence/final-native/",
+    "publicBrowserChecks": 53,
+    "nativeAccountBrowserChecks": 7,
+    "nativeApiSecurityChecks": 13,
+    "accessibilityViews": 6,
+    "finalCommitChecks": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/107/checks",
+    "note": "Retained evidence verifies the final application and current teaching digest. Subsequent changes concern browser-test typography selectors and documentation only. Every required check must still pass for the final PR commit before publication; the release record retains exact final-commit and production evidence."
+  },
+  "publicationGate": "Publish only after every required check for the final PR commit succeeds. Production observations are recorded separately against the deployed fingerprint.",
+  "limits": [
+    "Open writing is self-reviewed against models and rubrics, without an automatic grammar mark.",
+    "Difficulty and diagnostic starting-depth suggestions are instructional, not calibrated CEFR or examination certifications.",
+    "Earlier temporary detailed reconstruction-review dossiers were lost on environment restart; the original audit matrices, final manuscripts, key/source registers and resumed review/testing evidence are retained.",
+    "Native account flows were tested with disposable MySQL and real PHP/browser code; no production learner records were accessed."
+  ]
+}

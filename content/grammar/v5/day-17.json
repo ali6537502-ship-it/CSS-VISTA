@@ -1,0 +1,1312 @@
+{
+  "day": 17,
+  "id": "gv5-day-17",
+  "title": "Modal Verbs and Modality",
+  "orientation": "A modal expression changes the strength or kind of a claim. The samples are contaminated states a conclusion directly; the samples might be contaminated presents a possibility; the samples must be contaminated presents an inference. In a workplace instruction, must can instead impose a requirement. These are differences in meaning that affect safety notices, professional requests, academic claims and everyday conversation. Today you will connect form with purpose rather than memorise one translation for each modal. Earlier work on auxiliaries, tense and aspect will help you build questions, negatives and references to earlier events. The deeper sections examine the scope of negation, the strength of a speaker's commitment and the limits of apparently simple modal scales. Do not attach fixed numerical probabilities to might, should or must: evidence, context, tone and the type of claim all matter.",
+  "outcomes": [
+    "Form modal questions and negatives without unnecessary do-support.",
+    "Distinguish permission, obligation, ability and inference in context.",
+    "Interpret modal-perfect constructions and their time reference.",
+    "Use hedging to limit a claim without disguising the evidence."
+  ],
+  "prerequisiteDays": [
+    5,
+    8,
+    16
+  ],
+  "modules": [
+    {
+      "id": "gv5-d17-m01",
+      "title": "Core modals, marginal forms and substitutes",
+      "taxonomy": [
+        "D",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-topic-d17-c04"
+      ],
+      "definition": "Core modal auxiliaries are a small class including can, could, may, might, will, would, shall, should and must; related expressions share some, but not all, of their grammatical behaviour.",
+      "foundation": [
+        "A core modal comes before the base form of the next verb: can swim, might leave, must be. It has no third-person singular -s: She can swim, not she cans swim. Form a negative directly with not and a question by moving the modal before the subject: She cannot attend; Can she attend? Ordinary do-support is unnecessary. The next verb can itself be an auxiliary: may have arrived, should be working. These simple structural facts apply even when the whole verb phrase expresses a complicated time relationship."
+      ],
+      "intermediate": [
+        "Core modals lack ordinary infinitival and participial forms. To express ability after want, use want to be able to, not want to can. For a past obligation, had to often supplies a form that must lacks. Ought to contains to, while need and dare have both modal-like and lexical patterns. Compare Need we leave? with Do we need to leave? The former is relatively formal and more characteristic of British usage. Names such as semi-modal and marginal modal vary between grammars; learn the actual pattern rather than assuming all related expressions behave identically."
+      ],
+      "advanced": [
+        "Have to, be able to, be supposed to and be allowed to use ordinary auxiliary and tense machinery: Does she have to leave? She has been able to work. They can follow a core modal: She may have to leave. Two core modals do not normally appear together in the edited international standard taught here; use might be able to rather than might can. Some regional English varieties permit multiple modals. Describing that variation does not make the form appropriate for every written context, nor does the course default make the regional construction meaningless."
+      ],
+      "expert": [
+        "Modal form and temporal meaning are not a simple present/past table. Could can describe earlier ability, present tentative possibility or a polite request; would can describe reported future reference, willingness or a hypothetical result. A core modal may stand alone when its complement is recoverable: Can she attend? She can. This is ellipsis, not an incomplete sentence. When analysing a modal chain, identify the finite modal first, then each following auxiliary and its required verb form. This prevents incorrect forms such as should has gone or must to leave without making an inaccurate claim that every word following a modal is a lexical infinitive."
+      ],
+      "patterns": [
+        {
+          "form": "modal + base form",
+          "meaning": "The base form can be a lexical verb or an auxiliary."
+        },
+        {
+          "form": "modal + subject + base form?",
+          "meaning": "Canonical interrogative order without do-support."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Nida can swim.",
+          "analysis": "Can has no -s with the singular subject."
+        },
+        {
+          "sentence": "Does Nida have to swim today?",
+          "analysis": "Have to uses do-support here; it is not a core modal."
+        },
+        {
+          "sentence": "Nida might have been swimming when the call arrived.",
+          "analysis": "Might precedes perfect have, participial been and progressive swimming."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Need we print the agenda?",
+          "b": "Do we need to print the agenda?",
+          "note": "Both grammatical: modal-like need is more formal; lexical need takes to and do-support."
+        }
+      ],
+      "exceptions": [
+        "Related expressions need individual patterns: ought to includes to, but core should takes a base form. Recoverable complements may be omitted: Yes, she can."
+      ],
+      "mistakes": [
+        {
+          "problem": "She cans attend tomorrow.",
+          "repair": "She can attend tomorrow.",
+          "reason": "Core can has no third-person -s."
+        },
+        {
+          "problem": "Do you must leave?",
+          "repair": "Must you leave?",
+          "reason": "A core modal forms the question through inversion, not do-support."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "modal auxiliary",
+          "definition": "An auxiliary expressing meanings such as possibility, obligation or willingness.",
+          "example": "They may arrive."
+        },
+        {
+          "term": "semi-modal",
+          "definition": "A label for an expression with some modal properties and some ordinary verb properties.",
+          "example": "Do we need to wait?"
+        }
+      ],
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-m02",
+      "title": "Ability, permission, necessity and inference",
+      "taxonomy": [
+        "D",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-topic-d17-c01",
+        "gv5-topic-d17-c02",
+        "gv5-topic-d17-c03"
+      ],
+      "definition": "Modal meaning includes judgments about what is possible or likely and attitudes towards what people are able, permitted, required or willing to do.",
+      "foundation": [
+        "Use can for present ability in a suitable context: Farah can read the script. Can or may can grant permission, with may often more formal. Must can impose a strong obligation; must not can prohibit. Do not confuse prohibition with absence of obligation: You must not enter excludes entry; You do not have to enter permits a choice. Should commonly gives advice or expresses an expected outcome. The same words can serve different purposes, so a label should explain the sentence in context rather than become a permanent dictionary tag."
+      ],
+      "intermediate": [
+        "Could often describes general past ability: At ten, she could swim well. For a specific successful event, managed to or was able to is often clearer: Despite the current, she managed to reach the bank. However could occurs naturally in many negative, perception and mental-activity contexts: I could hear the bell. Will can express prediction, willingness, insistence or a promise. Would commonly softens a request: Would you close the door? The interrogative asks about willingness on its surface but usually functions as a request, not a test of physical ability."
+      ],
+      "advanced": [
+        "Deductive must presents a conclusion drawn from evidence: The lights are on; someone must be inside. Deductive cannot rejects a possibility: She cannot be inside; the room was sealed before she arrived. This is different from cannot as prohibition or inability. May not is particularly scope-sensitive: The office may not open means opening is uncertain, whereas You may not enter in an official notice normally denies permission. Should can express expectation as well as advice: The parcel should arrive today. A speaker's confidence is affected by evidence and the type of statement, so a universal numerical ranking is misleading."
+      ],
+      "expert": [
+        "Necessity and possibility are interpreted relative to assumptions, rules, abilities or evidence. In deontic necessity, the relevant background includes regulations; in epistemic necessity, it includes what the speaker believes the evidence establishes. Neither use automatically guarantees compliance or factual truth. The student must attend does not assert attendance, and The student must be attending is a strong inference that may prove mistaken. Advanced interpretation therefore separates the modal's type from the truth of its complement. A precise explanation says what the speaker commits to and what remains open, rather than replacing a modal with an unconditional assertion."
+      ],
+      "patterns": [
+        {
+          "form": "must not + verb",
+          "meaning": "Commonly prohibits the action."
+        },
+        {
+          "form": "do not have to + verb",
+          "meaning": "Expresses lack of necessity; it does not by itself prohibit."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "You may use the side entrance.",
+          "analysis": "In this permission context, may authorises entry."
+        },
+        {
+          "sentence": "The courier should arrive before noon.",
+          "analysis": "Should states an expectation rather than an obligation imposed on the speaker."
+        },
+        {
+          "sentence": "The laboratory must be empty: its lights are off and the staff have left.",
+          "analysis": "Must presents an evidence-based inference, not an order to empty the room."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "You must not submit a duplicate.",
+          "b": "You do not have to submit a duplicate.",
+          "note": "Both grammatical: prohibition versus absence of obligation."
+        }
+      ],
+      "exceptions": [
+        "Could is not excluded from every specific past event: I could hear the warning is natural. Distinguish the meaning and lexical context before replacing it."
+      ],
+      "mistakes": [
+        {
+          "problem": "The rules say entry is optional: You must not enter.",
+          "repair": "The rules say entry is optional: You do not have to enter.",
+          "reason": "The original wording prohibits rather than permits an optional action."
+        },
+        {
+          "problem": "I want to can interpret this chart.",
+          "repair": "I want to be able to interpret this chart.",
+          "reason": "Ability after an infinitival complement requires a substitute for core can."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "deduction",
+          "definition": "An inference based on evidence or assumptions.",
+          "example": "She must be home; her car is outside."
+        },
+        {
+          "term": "prohibition",
+          "definition": "A requirement that an action not occur.",
+          "example": "Visitors must not touch the exhibits."
+        }
+      ],
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-m03",
+      "title": "Modal perfects: evidence, regret and unnecessary actions",
+      "taxonomy": [
+        "D",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-topic-d17-c05",
+        "gv5-topic-d17-c06",
+        "gv5-topic-d17-c07"
+      ],
+      "definition": "A modal-perfect construction combines a modal with have and a past participle, often locating a situation before the current or another reference point while retaining the modal meaning.",
+      "foundation": [
+        "Begin with the form: modal + have + past participle. Must have left draws an inference about a departure; might have left leaves it possible; should have left often evaluates an earlier obligation or sensible action. Have stays in its base form even after a singular subject: she might have gone. The lexical participle must be correct: could have written, not could have wrote. These forms are not all reports of completed facts. Modal meaning determines whether an event is inferred, merely possible, desired or counterfactual."
+      ],
+      "intermediate": [
+        "She must have missed the train presents a strong inference. She might have missed it does not assert that she did. She should have checked the timetable often criticises an omission, but should have can also express expectation: The train should have arrived by now, although I have not checked. Could have describes an unrealised opportunity in one context and a possible explanation in another. I could have called, but chose not to is different from That noise could have been the printer. Always identify the time and the intended modal reading before paraphrasing."
+      ],
+      "advanced": [
+        "Need not have + participle normally says an action happened but was unnecessary: I need not have printed the agenda; everyone had a digital copy. Did not need to states lack of necessity; it does not logically settle whether the action happened. We did not need to print it, but we did is coherent. In everyday conversation, did not need to often suggests that the action was omitted, but that inference can be cancelled. A reliable assessment must supply the event facts instead of treating a common implication as a universal rule."
+      ],
+      "expert": [
+        "The perfect can locate an event before a future reference point: By Friday, the laboratory must have completed the audit can be a requirement with a deadline, rather than a past deduction. Negation also changes modal scope: cannot have left denies the possibility of an earlier departure; might not have left presents the possibility of non-departure. Should not have sent the file usually evaluates sending negatively and commonly implies it happened, but expectation contexts can alter the interpretation. Avoid deriving truth or falsity solely from the modal-perfect shape; test the interpretation against the surrounding discourse."
+      ],
+      "patterns": [
+        {
+          "form": "must have + participle",
+          "meaning": "Commonly an inference about an earlier situation; context can supply a deadline requirement."
+        },
+        {
+          "form": "need not have + participle",
+          "meaning": "An action is treated as having occurred unnecessarily."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The gate is locked; the caretaker must have left.",
+          "analysis": "An inference concerns an earlier departure."
+        },
+        {
+          "sentence": "We need not have paid for delivery; collection was free.",
+          "analysis": "The payment is presented as having happened unnecessarily."
+        },
+        {
+          "sentence": "By the next inspection, the contractor must have repaired the roof.",
+          "analysis": "The perfect locates required completion before a future deadline."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "I need not have printed it.",
+          "b": "I did not need to print it, but I did.",
+          "note": "Both present unnecessary printing as actual; the second makes actuality explicit because did not need to alone leaves it open."
+        }
+      ],
+      "exceptions": [
+        "Did not need to often suggests non-performance, but the suggestion is defeasible. Should have may express expectation rather than criticism; do not mark those readings as errors."
+      ],
+      "mistakes": [
+        {
+          "problem": "She might has taken the key.",
+          "repair": "She might have taken the key.",
+          "reason": "Have remains base form after a modal."
+        },
+        {
+          "problem": "He should have wrote yesterday.",
+          "repair": "He should have written yesterday.",
+          "reason": "Perfect have requires the past participle written."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "modal perfect",
+          "definition": "A modal followed by have plus a past participle.",
+          "example": "The parcel may have arrived."
+        },
+        {
+          "term": "defeasible inference",
+          "definition": "A usual interpretation that context can cancel without contradiction.",
+          "example": "We did not need to pay, but paid anyway."
+        }
+      ],
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-m04",
+      "title": "Epistemic and deontic meaning, hedging and commitment",
+      "taxonomy": [
+        "D",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-topic-d17-c08",
+        "gv5-topic-d17-c09"
+      ],
+      "definition": "Epistemic modality concerns the status of a proposition as possible, probable or necessary given evidence; deontic modality concerns permission, requirements and related norms.",
+      "foundation": [
+        "Compare The visitor must be in the lobby with The visitor must sign the register. The first is usually an inference; the second is usually a requirement. These labels help explain why the same auxiliary has different paraphrases. Academic and professional writing often needs a calibrated degree of commitment. The results suggest that the treatment may help makes a limited claim. The treatment helps states the conclusion more directly. A hedge is useful when it reflects uncertainty or a restricted evidential basis, not when it merely makes a sentence longer."
+      ],
+      "intermediate": [
+        "Hedging can use modals, adverbs and lexical verbs: may, might, possibly, probably, appear and suggest. These expressions interact with context rather than assign fixed percentages. Probably is stronger than possibly in ordinary neutral use, but a whole sentence's force also depends on its evidence and qualifications. The proposal may reduce delays in small offices limits both certainty and domain. Removing in small offices broadens the claim even if may stays. In revision, track the population, time, conditions and strength of the original assertion as well as its verb form."
+      ],
+      "advanced": [
+        "Over-hedging can obscure a well-supported statement: It may perhaps possibly be the case that the meter is faulty stacks similar reservations without specifying the uncertainty. Prefer The meter may be faulty; a second test is needed. Conversely a legal requirement should not be weakened accidentally: Staff must report hazards is not equivalent to Staff might report hazards. Politeness may soften how a request is expressed without changing the speaker's practical expectation. Would you please send the invoice? still requests action, although its form is an interrogative about willingness."
+      ],
+      "expert": [
+        "Scope distinguishes a possibility of a negative proposition from a denial of possibility: It may not be safe leaves open that it is unsafe; It cannot be safe presents safety as excluded by the evidence. An epistemic statement can still be mistaken, and a deontic rule can still be broken. Transparent analysis should therefore state the modal base in plain language: given the available evidence, under the rules, or with the person's present abilities. These are explanatory paraphrases, not rigid word-by-word translations. The goal is to preserve a writer's justified commitment and a reader's ability to see what supports it."
+      ],
+      "patterns": [
+        {
+          "form": "may + base-form verb phrase",
+          "meaning": "The modal can express possibility and takes semantic scope over the proposition."
+        },
+        {
+          "form": "must + base-form verb phrase",
+          "meaning": "The modal can express a requirement or inference, according to context."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The device may fail at very low temperatures.",
+          "analysis": "A possibility is limited to a stated condition."
+        },
+        {
+          "sentence": "Operators must disconnect the power before cleaning.",
+          "analysis": "The modal expresses a procedural obligation."
+        },
+        {
+          "sentence": "The small trial suggests a benefit, but larger studies are needed before a general recommendation.",
+          "analysis": "The claim's scope and evidence are explicitly qualified rather than ornamented."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The report may be inaccurate.",
+          "b": "The report must be inaccurate.",
+          "note": "Both grammatical; the second represents a much stronger inference in the same epistemic context."
+        }
+      ],
+      "exceptions": [
+        "Formal hedging need not use a modal: The evidence is limited is a direct, precise statement of a limitation. A hedge must not silently weaken a quoted obligation."
+      ],
+      "mistakes": [
+        {
+          "problem": "The rule requires disclosure: Applicants might disclose all fees.",
+          "repair": "The rule requires disclosure: Applicants must disclose all fees.",
+          "reason": "Might does not preserve the stated obligation."
+        },
+        {
+          "problem": "The data certainly prove a universal benefit. [one small pilot only]",
+          "repair": "The pilot suggests a possible benefit in the sampled group.",
+          "reason": "Limit commitment and population to the stated evidence; the issue is overclaiming, not merely word form."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "epistemic",
+          "definition": "Concerning the assessment of knowledge or evidence.",
+          "example": "The lights are on; she must be there."
+        },
+        {
+          "term": "deontic",
+          "definition": "Concerning permission, obligation or norms.",
+          "example": "You must wear a badge."
+        }
+      ],
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d17-q01",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Choose the core-modal verb chain: “She might ____ arrived.”",
+      "options": [
+        "have",
+        "having",
+        "to have",
+        "has"
+      ],
+      "answer": 0,
+      "why": "The first verb after might takes base form have; perfect have then takes arrived.",
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which question uses core must without unnecessary do-support?",
+      "options": [
+        "Must you leave?",
+        "Does you must leave?",
+        "Must do you leave?",
+        "Do you must leave?"
+      ],
+      "answer": 0,
+      "why": "Core must forms the interrogative by inversion.",
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose an infinitival expression of ability after want.",
+      "options": [
+        "I want to can read it.",
+        "I want can to read it.",
+        "I want to be able to read it.",
+        "I want to could read it."
+      ],
+      "answer": 2,
+      "why": "Core can has no ordinary to-infinitive; be able to supplies the required form.",
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "A notice means entry is forbidden. Which wording preserves that meaning?",
+      "options": [
+        "You must not enter.",
+        "You need not enter.",
+        "You may choose to enter.",
+        "You do not have to enter."
+      ],
+      "answer": 0,
+      "why": "Must not prohibits entry; the other wordings allow a choice or remove obligation.",
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In “Her car is outside; she must be home”, must primarily expresses:",
+      "options": [
+        "A past habit",
+        "A completed promise",
+        "An order for her to go home",
+        "An evidence-based inference"
+      ],
+      "answer": 3,
+      "why": "The evidence supports a deduction about location rather than a directive.",
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In “Would you close the window, please?”, the usual communicative function is:",
+      "options": [
+        "A prohibition",
+        "A request",
+        "A report of a past habit",
+        "A claim that closing is impossible"
+      ],
+      "answer": 1,
+      "why": "The interrogative conventionally requests action; it need not test ability literally.",
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-q07",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "The waiting happened but was unnecessary: “You ____ waited; I had my own key.” Choose the construction that explicitly carries that reading.",
+      "options": [
+        "must not to have",
+        "could not to have",
+        "need not have",
+        "did not need to have to"
+      ],
+      "answer": 2,
+      "why": "Need not have + participle presents the waiting as actual and unnecessary.",
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement is accurate about “We did not need to pay”?",
+      "options": [
+        "It entails that we did not pay.",
+        "It states absence of necessity but leaves performance open.",
+        "It prohibits payment.",
+        "It entails that we paid."
+      ],
+      "answer": 1,
+      "why": "Non-payment may be suggested in conversation, but the sentence can be followed by but we paid anyway.",
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-q09",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Assess the verb chain: “She should have wrote the address.”",
+      "options": [
+        "have must be has",
+        "wrote must be written",
+        "No error",
+        "should must be shoulds"
+      ],
+      "answer": 1,
+      "why": "Perfect have requires the past participle written.",
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which version limits its claim to the evidence of a small pilot?",
+      "options": [
+        "The pilot proves no study is needed.",
+        "Every population must benefit.",
+        "The treatment always works for everyone.",
+        "The pilot suggests a possible benefit in the sampled group."
+      ],
+      "answer": 3,
+      "why": "The version referring to a possible benefit preserves uncertainty and limits the population instead of generalising beyond the stated evidence.",
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    },
+    {
+      "id": "gv5-d17-r11",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Order: she / can / attend / tomorrow / ?",
+      "model": "Can she attend tomorrow?",
+      "rubric": [
+        "Put modal before subject.",
+        "Keep attend in base form."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-r12",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Identify the finite modal and following auxiliaries in “They might have been waiting”.",
+      "model": "Might is finite; have marks the perfect, been supplies progressive be, and waiting is the lexical -ing form.",
+      "rubric": [
+        "Identify might as finite.",
+        "Keep have/been distinct from lexical waiting."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-r13",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare “Need we wait?” and “Do we need to wait?”",
+      "model": "Both ask about necessity; the first uses formal modal-like need, the second ordinary lexical need with to and do-support.",
+      "rubric": [
+        "Explain the shared meaning.",
+        "Identify the form difference."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-r14",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Supply an expression of past obligation: “Under last year’s rules, we ____ register in person.”",
+      "model": "had to.",
+      "rubric": [
+        "Express past necessity.",
+        "Retain register in base form after to."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-r15",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify can in “Nora can read Braille” and “Nora can leave now; the supervisor has approved it”.",
+      "model": "Ability in the first; permission in the second.",
+      "rubric": [
+        "Use the surrounding evidence.",
+        "Do not assign one fixed meaning to can."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r16",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain “You must not call” versus “You do not have to call”.",
+      "model": "The first prohibits calling; the second removes an obligation and leaves the choice open.",
+      "rubric": [
+        "State prohibition.",
+        "State optionality without turning it into a ban."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r17",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Interpret “The train should arrive at noon” as expectation, not advice.",
+      "model": "The speaker expects arrival around noon; the sentence is not advising the train to act.",
+      "rubric": [
+        "Identify expected event.",
+        "Distinguish epistemic expectation from advice."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r18",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write one polite request using could, then give its direct imperative equivalent.",
+      "model": "Could you send the receipt, please? / Please send the receipt.",
+      "rubric": [
+        "Use could + subject + base verb.",
+        "Preserve the requested action in the imperative."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r19",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain “She must have left” versus “She might have left”.",
+      "model": "The first presents a strong inference about departure; the second leaves departure merely possible. Neither is an eyewitness report by form alone.",
+      "rubric": [
+        "Identify the degree difference.",
+        "Do not say might asserts departure."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r20",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Use the required participles: “He may have ____ (write) the note and could have ____ (take) the key.”",
+      "model": "written; taken.",
+      "rubric": [
+        "Use participles after perfect have.",
+        "Keep both modal possibilities."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r21",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why “We did not need to print it, but we did” is coherent.",
+      "model": "The first clause denies necessity, not occurrence; the second specifies that printing happened anyway.",
+      "rubric": [
+        "Distinguish necessity from actuality.",
+        "Explain the cancellable non-performance implication."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r22",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Express retrospective unnecessary action: “I printed six copies. Only one was needed.”",
+      "model": "I need not have printed six copies; only one was needed.",
+      "rubric": [
+        "Retain actual printing.",
+        "Express absence of necessity retrospectively."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r23",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Interpret “By Monday, the team must have completed the audit” as a deadline requirement.",
+      "model": "Completion is required before Monday; the perfect need not describe an event earlier than the present moment.",
+      "rubric": [
+        "Identify future reference point.",
+        "Preserve deontic requirement."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-r24",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Label the main modal reading: “Visitors must show identification” / “That must be the inspector; nobody else has an appointment”.",
+      "model": "Deontic requirement / epistemic deduction.",
+      "rubric": [
+        "Use rules versus evidence as the distinction.",
+        "Identify the relevant complement."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    },
+    {
+      "id": "gv5-d17-r25",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Revise overclaiming: “We surveyed twelve volunteers. This proves that the treatment will help every patient.”",
+      "model": "We surveyed twelve volunteers. The findings suggest a possible benefit in that group; broader claims require further evidence.",
+      "rubric": [
+        "Retain the sample size.",
+        "Limit strength and population."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    },
+    {
+      "id": "gv5-d17-r26",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain “It may not be safe” versus “It cannot be safe”.",
+      "model": "The first presents possible non-safety; the second excludes safety under the speaker’s assumptions.",
+      "rubric": [
+        "Identify the scope of negation.",
+        "Avoid treating both as the same certainty."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    },
+    {
+      "id": "gv5-d17-r27",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why is “must” not proof that an obligation was obeyed?",
+      "model": "A requirement specifies what ought to happen; it does not assert that people complied.",
+      "rubric": [
+        "Separate norm from fact.",
+        "Give a plausible breach as an illustration."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    },
+    {
+      "id": "gv5-d17-r28",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write an evidence-based inference and state the evidence separately.",
+      "model": "The lights are off and the last bus has gone. The office may already be closed.",
+      "rubric": [
+        "Provide observable evidence.",
+        "Choose a modal strength the evidence can support."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d17-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: She musts attend the meeting.",
+      "model": "She must attend the meeting.",
+      "rubric": [
+        "Remove third-person -s from a core modal.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: Do they can open the file?",
+      "model": "Can they open the file?",
+      "rubric": [
+        "Use modal inversion without do.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: The parcel might has arrived.",
+      "model": "The parcel might have arrived.",
+      "rubric": [
+        "Use base have after might.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: He could have took the earlier bus.",
+      "model": "He could have taken the earlier bus.",
+      "rubric": [
+        "Use the participle taken after have.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: Entry is optional: You must not enter.",
+      "model": "Entry is optional: You do not have to enter.",
+      "rubric": [
+        "Match absence of obligation rather than prohibition.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: We did not need to pay, but we paid anyway.",
+      "model": "No change.",
+      "rubric": [
+        "Absence of necessity is compatible with actual payment.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: I hope to can interpret the results soon.",
+      "model": "I hope to be able to interpret the results soon.",
+      "rubric": [
+        "Use an infinitival substitute for can.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms",
+        "V-need"
+      ]
+    },
+    {
+      "id": "gv5-d17-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed without changing the intended meaning: The estimate may be wrong.",
+      "model": "No change.",
+      "rubric": [
+        "May legitimately hedges the proposition.",
+        "Accept an equivalent grammatical repair that retains modal strength."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "C-HEDGE"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d17-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite “It is not necessary for visitors to book” with have to.",
+      "model": "Visitors do not have to book.",
+      "rubric": [
+        "Deny necessity.",
+        "Do not turn the sentence into a prohibition."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-modality-forms"
+      ]
+    },
+    {
+      "id": "gv5-d17-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite as a past deduction: “Given the locked gate, I conclude that the caretaker has left.”",
+      "model": "Given the locked gate, the caretaker must have left.",
+      "rubric": [
+        "Use must have + participle.",
+        "Retain inference rather than claim direct observation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-MODAL",
+        "V-need",
+        "V-modality-forms"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d17-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write a 100-word advice note about interpreting a small survey. Include one possibility, one expectation, one requirement and one unnecessary past action. Label each modal reading.",
+    "model": "The survey may reveal a useful pattern, but twelve responses cannot represent every resident. A second survey should give a clearer picture if it includes more neighbourhoods. Researchers must explain how they selected participants and report unanswered questions. We need not have printed the first chart in colour; the labels were sufficient. The next report should distinguish an association from a causal explanation. Readers can compare the figures, but they should also examine the sample and the wording of the questions. Any recommendation ought to remain proportionate to the evidence rather than turn a tentative result into a universal claim.\n\nAnalysis: May reveal expresses possibility; should give expresses expectation; must explain expresses a requirement; need not have printed presents an actual but unnecessary past action.",
+    "rubric": [
+      "Include all four specified modal functions.",
+      "Keep possibility separate from obligation and expectation.",
+      "State the evidential limits explicitly."
+    ],
+    "alternatives": [
+      "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+    ],
+    "conceptId": "gv5-d17-m04",
+    "difficulty": "Advanced",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "C-MODAL",
+      "C-HEDGE"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d17-rec01",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 5: in “Does the editor have to approve it?”, why does does appear?",
+      "model": "Have to is built with ordinary lexical have here; does supplies question support, unlike a core modal.",
+      "rubric": [
+        "Identify lexical have.",
+        "Contrast core must without do."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d05-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d17-rec02",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Recall Day 8: give the participle in “They have ____ (write) the report”.",
+      "model": "written.",
+      "rubric": [
+        "Use the perfect participle.",
+        "Do not substitute past simple wrote."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d05-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d17-rec03",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 16: explain the relation in “The sample is small; therefore, the conclusion must be limited”.",
+      "model": "Therefore presents an inference; must expresses a requirement or a reasoned necessity to limit the conclusion in this editorial context.",
+      "rubric": [
+        "Identify the inference relation.",
+        "Allow an explicitly justified modal reading."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I form modal chains with the required base and participial forms.",
+    "I distinguish a prohibition from no obligation.",
+    "I explain evidence-based and rule-based necessity separately.",
+    "I do not infer non-performance automatically from did not need to.",
+    "I preserve qualifications when strengthening or weakening a claim."
+  ],
+  "sources": [
+    {
+      "id": "C-HEDGE",
+      "title": "Hedges ( just )",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/hedges-just",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-MODAL",
+      "title": "Modality: meanings and uses",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/modality-meanings-and-uses",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "V-modality-forms",
+      "title": "Modality: forms",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/modality-forms",
+      "consulted": "2026-10-21",
+      "note": "Named article body and title retrieved and consulted; original course examples supplied independently."
+    },
+    {
+      "id": "V-need",
+      "title": "Need",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/need",
+      "consulted": "2026-10-21",
+      "note": "Named article body and title retrieved and consulted; original course examples supplied independently."
+    }
+  ],
+  "editorialNotes": []
+}
