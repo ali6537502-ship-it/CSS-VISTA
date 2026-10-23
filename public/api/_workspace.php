@@ -53,7 +53,7 @@ function cssv_workspace_project(PDO $pdo,string $user,array $f): array {
         foreach(['skills_workspaces','handwriting_pages','topic_writing_bindings'] as $table)if(isset($tables[$table]))$exclude.=" AND NOT EXISTS(SELECT 1 FROM `$table` x WHERE x.writing_id=r.id AND x.user_id=r.user_id)";
     }
     if(isset($tables['topic_writing_bindings']))$exclude=($exclude?$exclude.' AND ':'')."NOT EXISTS(SELECT 1 FROM topic_writing_bindings b WHERE b.writing_id=r.id AND b.user_id=r.user_id)";
-    $add('writing_records','writing','r.id','r.title',"CONCAT('/account/preparation?writing=',r.id)",'CAST(r.version AS CHAR)',"'Independent response saved; versions retained'",'r.updated_at',$exclude?:'1=1');
+    $add('writing_records','writing','r.id','r.title',"CONCAT('/account/preparation?writing=',r.id)",'CAST(r.version AS CHAR)',"'Writing saved; versions retained'",'r.updated_at',$exclude?:'1=1');
     $add('factbook_entries','factbook','r.id','r.title',"CONCAT('/factbook?entry=',r.id)",'NULL',"'Personal reference; verification is student-entered'",'r.updated_at','r.deleted_at IS NULL AND r.archived_at IS NULL');
     $add('grammar_learning_v5','grammar','r.attempt_id',"'English Grammar — reconstructed edition'","CONCAT('/grammar-course?edition=v5&attempt=',r.attempt_id)","'v5'","'Recorded responses and self-review; open course for first/latest evidence'",'r.updated_at');
     $add('grammar_progress','grammar','r.attempt_id',"'English Grammar — earlier course'","CONCAT('/grammar-course?edition=legacy&attempt=',r.attempt_id)","'legacy'","'Earlier-course evidence; separate from v5'",'r.updated_at');
