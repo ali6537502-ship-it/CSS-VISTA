@@ -1,0 +1,44 @@
+{
+  "observedAt": "2026-10-23T00:35:26.373Z",
+  "origin": "https://www.css-vista.com",
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "passed": true,
+  "results": [
+    {
+      "width": 320,
+      "layout": {
+        "width": 320,
+        "scroll": 320,
+        "main": 1,
+        "h1": 1
+      },
+      "objectiveFeedbackAndReinforcement": true,
+      "immutableFirstResponse": true,
+      "floatingShortcutAbsent": true,
+      "questionTagTeaching": true,
+      "expertDisclosure": true,
+      "newResponseModel": true,
+      "anonymousDraftSurvivedReload": true,
+      "splitInfinitiveReference": true
+    },
+    {
+      "width": 1440,
+      "layout": {
+        "width": 1440,
+        "scroll": 1440,
+        "main": 1,
+        "h1": 1
+      },
+      "objectiveFeedbackAndReinforcement": true,
+      "immutableFirstResponse": true,
+      "floatingShortcutAbsent": true,
+      "questionTagTeaching": true,
+      "expertDisclosure": true,
+      "newResponseModel": true,
+      "anonymousDraftSurvivedReload": true,
+      "splitInfinitiveReference": true
+    }
+  ],
+  "pageErrors": [],
+  "limits": "Fresh anonymous browser contexts only. No production account, saved learner record or server progress was modified."
+}

@@ -1,0 +1,9 @@
+{
+  "observedAt": "2026-10-23T00:18:47.837608+00:00",
+  "run": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007061",
+  "headSha": "ddaf5813e433cd039b3cb07bae7ee4a62f0a48b9",
+  "artifactId": 12469480006,
+  "archiveSha256": "c606bfc8e0f365478979afb1f949704f99d4ac16f94eea12c37646bb5174e310",
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "method": "Exact final PR-head GitHub Actions artifact downloaded via the connected GitHub tool. JSON reports retained; original archive includes isolated CI logs and is not republished with production evidence."
+}

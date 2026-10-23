@@ -1,0 +1,299 @@
+{
+  "observedAt": "2026-10-23T00:35:00.976Z",
+  "origin": "https://www.css-vista.com",
+  "mergeSha": "04308bd5f6e0a6a2f8b1e3783f30da5c41779b64",
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "passed": true,
+  "deployment": {
+    "schemaVersion": 1,
+    "gitSha": "04308bd5f6e0a6a2f8b1e3783f30da5c41779b64",
+    "source": "git-rev-parse-head",
+    "buildTarget": "hostinger",
+    "builtAt": "2026-10-23T00:34:13.494Z"
+  },
+  "counts": {
+    "days": 30,
+    "entries": 120,
+    "objective": 421,
+    "response": 1008
+  },
+  "page": {
+    "status": 200,
+    "ms": 789,
+    "authoredFoundationInStaticHTML": true,
+    "adLoaderAbsent": true
+  },
+  "nativeEndpoint": {
+    "unauthenticatedStatus": 401,
+    "privateImplementationStatus": 403
+  },
+  "publishedResources": [
+    {
+      "file": "day-01.json",
+      "status": 200,
+      "ms": 698,
+      "bytes": 52551,
+      "sha256": "6bd6c6cfcd196333c86291a59664a4aa4dc07bc9629cce5fa30d907cdb39bda8"
+    },
+    {
+      "file": "day-02.json",
+      "status": 200,
+      "ms": 881,
+      "bytes": 52531,
+      "sha256": "495100abdb93675c8c579ff2d74a38e19608aa9074b03eb649fadea5d3987471"
+    },
+    {
+      "file": "day-03.json",
+      "status": 200,
+      "ms": 675,
+      "bytes": 51633,
+      "sha256": "ecd44faf915eaa43e411e7e358efed858c44dab3fbd5a33cbb26f9d7671b5ad7"
+    },
+    {
+      "file": "day-04.json",
+      "status": 200,
+      "ms": 736,
+      "bytes": 54938,
+      "sha256": "6cf56e4565a95f24cb9ef015c5422d2c332574c4250f7405c855595992576cc0"
+    },
+    {
+      "file": "day-05.json",
+      "status": 200,
+      "ms": 715,
+      "bytes": 55039,
+      "sha256": "fd15249a3f3f296c9d3542a4be31d33cde8be750a2214d9beba1dfecadcb4c85"
+    },
+    {
+      "file": "day-06.json",
+      "status": 200,
+      "ms": 723,
+      "bytes": 49449,
+      "sha256": "de50ee36b694dc45ec8ba2b9717f65a88018c80894c013d9e5c12a6cf8f2da69"
+    },
+    {
+      "file": "day-07.json",
+      "status": 200,
+      "ms": 655,
+      "bytes": 48669,
+      "sha256": "d402f20f0ec53f1c4351e3ead567aa690a527242c41b4e90dd7e852efaa8d008"
+    },
+    {
+      "file": "day-08.json",
+      "status": 200,
+      "ms": 408,
+      "bytes": 57054,
+      "sha256": "947fb16f571b2d07cedce46a0d42514a06e6a334208eb0967e4cd3021cc4932e"
+    },
+    {
+      "file": "day-09.json",
+      "status": 200,
+      "ms": 669,
+      "bytes": 55320,
+      "sha256": "10792959cb5ad03090eedf97679a5344487657c6ee50a4adee9069756439d6ac"
+    },
+    {
+      "file": "day-10.json",
+      "status": 200,
+      "ms": 715,
+      "bytes": 60456,
+      "sha256": "2ae9edeabf9fc9954a599ed1bd13283121440d8390a4bb33fd8c96d9d756cf0f"
+    },
+    {
+      "file": "day-11.json",
+      "status": 200,
+      "ms": 1070,
+      "bytes": 51864,
+      "sha256": "27cc779d69177dfc236eca486aa3a158f86054ec9a22786061ac06bba9a367e6"
+    },
+    {
+      "file": "day-12.json",
+      "status": 200,
+      "ms": 737,
+      "bytes": 48835,
+      "sha256": "9f1e17a979966958cc0de43e45f2b144c3654fe6c71329e19fb6cf0443efe07d"
+    },
+    {
+      "file": "day-13.json",
+      "status": 200,
+      "ms": 729,
+      "bytes": 54935,
+      "sha256": "195b34cd9dc3f3ce3fdc35aab4ccd65a53193c86146cc68696f6216ce5f72708"
+    },
+    {
+      "file": "day-14.json",
+      "status": 200,
+      "ms": 693,
+      "bytes": 67447,
+      "sha256": "6eb38fe7361e222c0ce82cbe0b9b2defc7ee9d8e5cfd2f7629f50a4010846ec6"
+    },
+    {
+      "file": "day-15.json",
+      "status": 200,
+      "ms": 415,
+      "bytes": 58202,
+      "sha256": "22d28ea8dc041e6ccb1cd086ba76e14b8037126064be204a374bab70b4e30ad6"
+    },
+    {
+      "file": "day-16.json",
+      "status": 200,
+      "ms": 629,
+      "bytes": 48435,
+      "sha256": "ba4190c22bf57ef794acfec79ceb3eb456b40d395cbeb59619feaec47f8eeade"
+    },
+    {
+      "file": "day-17.json",
+      "status": 200,
+      "ms": 780,
+      "bytes": 46707,
+      "sha256": "eca66609ee159b6987903a8318c62ff1971562e7225d901d40720d6ceb1d9a68"
+    },
+    {
+      "file": "day-18.json",
+      "status": 200,
+      "ms": 690,
+      "bytes": 55220,
+      "sha256": "ea9260860166514a2915bd91ac088dd3037c314a86855af95d0d083ac5fc9f00"
+    },
+    {
+      "file": "day-19.json",
+      "status": 200,
+      "ms": 677,
+      "bytes": 54590,
+      "sha256": "7831b373b55eaacb797c1ab77cbc9386ded4d603b13d71c968cbbd808c434977"
+    },
+    {
+      "file": "day-20.json",
+      "status": 200,
+      "ms": 403,
+      "bytes": 62667,
+      "sha256": "fc232344a106678c9cbb3d827f5ac2f1850b86ede06932113bdc5e5be9b2251c"
+    },
+    {
+      "file": "day-21.json",
+      "status": 200,
+      "ms": 649,
+      "bytes": 42673,
+      "sha256": "552dab6bb0ef407a154c0021feeab4dd8e093fbe4d798d76c3d24dd3bad5d020"
+    },
+    {
+      "file": "day-22.json",
+      "status": 200,
+      "ms": 660,
+      "bytes": 48456,
+      "sha256": "852eb586f75a97ae8b1d6eb8babed5afa110ba83264379fe4c0a285515a50a3b"
+    },
+    {
+      "file": "day-23.json",
+      "status": 200,
+      "ms": 407,
+      "bytes": 48014,
+      "sha256": "da7ab758011eda970b9699e6a36c2cbc82daceebf38dc8c69a0d86b38378ab05"
+    },
+    {
+      "file": "day-24.json",
+      "status": 200,
+      "ms": 411,
+      "bytes": 51223,
+      "sha256": "35d32983b9668fe2f023438cf69cc1177e486dc367f4c3a6f26092d854ba9362"
+    },
+    {
+      "file": "day-25.json",
+      "status": 200,
+      "ms": 398,
+      "bytes": 54200,
+      "sha256": "0275193e9fd81910b2f8832ff5429f019b84acac3a3aeebddc8ed9d7b48e862c"
+    },
+    {
+      "file": "day-26.json",
+      "status": 200,
+      "ms": 685,
+      "bytes": 42959,
+      "sha256": "9a0ff63b5e006f0ba7a3b82403ac81df31b039b07f679f47a912588fc73add4e"
+    },
+    {
+      "file": "day-27.json",
+      "status": 200,
+      "ms": 732,
+      "bytes": 43023,
+      "sha256": "a5b3087fca70ffe9e8eaa9f4564889a8ba0b0419fa7fa994d0364ccc2d82a523"
+    },
+    {
+      "file": "day-28.json",
+      "status": 200,
+      "ms": 690,
+      "bytes": 55210,
+      "sha256": "5c5fe145785500cf8d99487145ccf72da982b8d2f025cc6b68e6eb3ea888c124"
+    },
+    {
+      "file": "day-29.json",
+      "status": 200,
+      "ms": 687,
+      "bytes": 70959,
+      "sha256": "5e1c26e9b22d6cf03b84ffd19fe89f22ac067cfd59e8520f924f6d68cbf7c52b"
+    },
+    {
+      "file": "day-30.json",
+      "status": 200,
+      "ms": 678,
+      "bytes": 74305,
+      "sha256": "332b696dedf714f465737e7ad10b46daf43accda572b2428244fc560e50301e0"
+    },
+    {
+      "file": "diagnostic.json",
+      "status": 200,
+      "ms": 707,
+      "bytes": 20173,
+      "sha256": "7b7d3cce0c99c06aa3020adeafc8ea6501c494c3e14f6deaa7dc1316dc5de6c6"
+    },
+    {
+      "file": "mistake-index.json",
+      "status": 200,
+      "ms": 709,
+      "bytes": 179386,
+      "sha256": "d3e0008b0ccb4bd56d2264a91df19a2e9518de59b764afd385d6790d63350df6"
+    },
+    {
+      "file": "phase-1.json",
+      "status": 200,
+      "ms": 703,
+      "bytes": 9946,
+      "sha256": "b9e87c365e4e4e066911562236be701c4432f15c8b91ecef7ffc5ebb590c10bb"
+    },
+    {
+      "file": "phase-2.json",
+      "status": 200,
+      "ms": 664,
+      "bytes": 12836,
+      "sha256": "02ce2c56d36988d90a08060141ddee9e5371b1932abdb24157c2a1d09eb15547"
+    },
+    {
+      "file": "phase-3.json",
+      "status": 200,
+      "ms": 673,
+      "bytes": 15061,
+      "sha256": "a4910bec60bf234768119ec85890fb0f51bd63075d232343aee629c668c31b2c"
+    },
+    {
+      "file": "phase-4.json",
+      "status": 200,
+      "ms": 653,
+      "bytes": 14266,
+      "sha256": "aee5f0be1a1a2eaed39838b18323681bbcfe7f97ec1cd12424fa17b5b07dd9d7"
+    },
+    {
+      "file": "reference-meaning.json",
+      "status": 200,
+      "ms": 374,
+      "bytes": 21760,
+      "sha256": "5b6bbefab9f1f61524eeee89af779e4c5f57344c7ead2eba3b499953428553e0"
+    },
+    {
+      "file": "reference-word-formation.json",
+      "status": 200,
+      "ms": 407,
+      "bytes": 23284,
+      "sha256": "a2272749fafc7a29a3cf54641384241e8e68004bae3e3e73ad3805a133ed4528"
+    }
+  ],
+  "limits": "Read-only public production verification. Native signed-in saving/restoration/concurrency were verified against disposable MySQL and the built application; production learner records were not accessed."
+}

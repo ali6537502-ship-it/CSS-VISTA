@@ -1,0 +1,159 @@
+{
+  "baseRefName": "main",
+  "headRefOid": "ddaf5813e433cd039b3cb07bae7ee4a62f0a48b9",
+  "isDraft": false,
+  "mergeStateStatus": "CLEAN",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:11:47Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007266/job/120161913574",
+      "name": "Protected accounts and automatic Git publishing",
+      "startedAt": "2026-10-23T00:06:40Z",
+      "status": "COMPLETED",
+      "workflowName": "Current affairs verification"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:17:40Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007061/job/120162054449",
+      "name": "native-grammar",
+      "startedAt": "2026-10-23T00:07:05Z",
+      "status": "COMPLETED",
+      "workflowName": "Grammar reconstruction verification"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:29:56Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007122/job/120167020517",
+      "name": "Hostinger parity — npm ci + npm run build",
+      "startedAt": "2026-10-23T00:21:35Z",
+      "status": "COMPLETED",
+      "workflowName": "Hostinger build check"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:07:05Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007282/job/120161654645",
+      "name": "MPT application, roll number, attempt and scoring rules (mysql:8.0)",
+      "startedAt": "2026-10-23T00:05:57Z",
+      "status": "COMPLETED",
+      "workflowName": "MPT examination verification"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:08:42Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007063/job/120161651872",
+      "name": "MPT editorial release gate (repaired live series)",
+      "startedAt": "2026-10-23T00:05:56Z",
+      "status": "COMPLETED",
+      "workflowName": "MPT release audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:10:23Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007156/job/120161652816",
+      "name": "payment-invariants",
+      "startedAt": "2026-10-23T00:05:56Z",
+      "status": "COMPLETED",
+      "workflowName": "Pro membership foundations"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:06:17Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007044/job/120161651920",
+      "name": "profile-contract",
+      "startedAt": "2026-10-23T00:05:56Z",
+      "status": "COMPLETED",
+      "workflowName": "Profile contract check"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:06:25Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007220/job/120161652878",
+      "name": "Validate daily Vistagram batches",
+      "startedAt": "2026-10-23T00:05:56Z",
+      "status": "COMPLETED",
+      "workflowName": "Vistagram verification"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:06:44Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007282/job/120161655093",
+      "name": "MPT application, roll number, attempt and scoring rules (mariadb:10.11)",
+      "startedAt": "2026-10-23T00:05:56Z",
+      "status": "COMPLETED",
+      "workflowName": "MPT examination verification"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:11:47Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007266/job/120163720205",
+      "name": "Verify exact deployed SHA, briefing routes and protection",
+      "startedAt": "2026-10-23T00:11:48Z",
+      "status": "COMPLETED",
+      "workflowName": "Current affairs verification"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:10:59Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007122/job/120167021751",
+      "name": "Hostinger parity — npm install + build:hostinger",
+      "startedAt": "2026-10-23T00:07:04Z",
+      "status": "COMPLETED",
+      "workflowName": "Hostinger build check"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:29:56Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007122/job/120169788635",
+      "name": "Live exact deployment fingerprint",
+      "startedAt": "2026-10-23T00:29:57Z",
+      "status": "COMPLETED",
+      "workflowName": "Hostinger build check"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:29:56Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007122/job/120169788488",
+      "name": "Live Hostinger backend readiness",
+      "startedAt": "2026-10-23T00:29:57Z",
+      "status": "COMPLETED",
+      "workflowName": "Hostinger build check"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:29:56Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007122/job/120169788756",
+      "name": "Live Book Summaries readiness",
+      "startedAt": "2026-10-23T00:29:57Z",
+      "status": "COMPLETED",
+      "workflowName": "Hostinger build check"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-23T00:29:56Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39876007122/job/120169788863",
+      "name": "Live AdSense and crawler readiness",
+      "startedAt": "2026-10-23T00:29:57Z",
+      "status": "COMPLETED",
+      "workflowName": "Hostinger build check"
+    }
+  ],
+  "baseRefOid": "30dabb4ebe828ec31c3d20c8257f61a1c0a27317"
+}
