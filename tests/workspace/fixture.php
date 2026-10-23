@@ -12,9 +12,9 @@ if($action==='seed'){
  $pdo->prepare("INSERT INTO writing_records(id,user_id,attempt_id,kind,title,version) VALUES(?,?,?,'paragraph',?,1)")->execute([$id,$user,$a,$title]);
  $pdo->prepare('INSERT INTO writing_versions(id,writing_id,version,text,text_hash,word_count) VALUES(?,?,1,?,?,9)')->execute([cssv_uuid_v4(),$id,$text,hash('sha256',$text)]);}
  $subject=cssv_uuid_v4();$entry=cssv_uuid_v4();
- $pdo->prepare("INSERT INTO factbook_subjects(id,user_id,name,description,icon,cover_style,accent_color,exam_label,position) VALUES(?,?,'TEST ONLY personal references','','book','classic','#14543D','',0)")->execute([$subject,$user]);
+ $pdo->prepare("INSERT INTO factbook_subjects(id,user_id,name,description,icon,cover_style,accent_color,exam_label,position,created_at,updated_at) VALUES(?,?,'TEST ONLY personal references','','book','classic','#14543D','',0,NOW(6),NOW(6))")->execute([$subject,$user]);
  $html='<unknown><unknown><img src=x onerror="window.__factbookUnsafe=1"></unknown></unknown><p>Legacy meaning <strong>kept</strong> — اردو</p>';
- $pdo->prepare("INSERT INTO factbook_entries(id,user_id,subject_id,title,entry_type,content,importance,revision_status,bookmarked,source_count,personal_remarks,search_text,position) VALUES(?,?,?,'TEST ONLY legacy rich note','rich-note',?,'normal','not-reviewed',0,0,'','',0)")->execute([$entry,$user,$subject,json_encode(['html'=>$html],JSON_THROW_ON_ERROR)]);
+ $pdo->prepare("INSERT INTO factbook_entries(id,user_id,subject_id,title,entry_type,content,importance,revision_status,bookmarked,source_count,personal_remarks,search_text,position,created_at,updated_at) VALUES(?,?,?,'TEST ONLY legacy rich note','rich-note',?,'normal','not-reviewed',0,0,'','',0,NOW(6),NOW(6))")->execute([$entry,$user,$subject,json_encode(['html'=>$html],JSON_THROW_ON_ERROR)]);
  echo json_encode(['attempt'=>$a,'writing'=>$ids,'factbook'=>$entry]);
 }elseif($action==='digest'){
  $q=$pdo->prepare('SELECT r.id,r.user_id,r.attempt_id,r.kind,r.title,r.version,v.id version_id,v.text,v.text_hash,v.version text_version FROM writing_records r JOIN writing_versions v ON v.writing_id=r.id WHERE r.user_id=? ORDER BY r.id,v.version');$q->execute([$argv[2]]);echo hash('sha256',json_encode($q->fetchAll(),JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR));
