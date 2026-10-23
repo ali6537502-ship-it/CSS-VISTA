@@ -1,6 +1,6 @@
 # CSS VISTA Pro transformation progress
 
-Development branch: `feat/pro-workspace-transformation-20261023`. Main baseline: `ffeedde80be9af6a9915bf360e8eb7bba821917f`. Candidate: `964beeb50e4f7bfe83c2394bc16736ea55993dad`. This is an unfinished transformation under the existing release hold. Read `ledger.json`, `DECISIONS.md`, current AGENTS.md and git status/history before continuing.
+Draft PR: [#109](https://github.com/ali6537502-ship-it/CSS-VISTA/pull/109). Development branch: `feat/pro-workspace-transformation-20261023`. Main baseline: `ffeedde80be9af6a9915bf360e8eb7bba821917f`. Candidate: `964beeb50e4f7bfe83c2394bc16736ea55993dad`. This is an unfinished transformation under the existing release hold. Read `ledger.json`, `DECISIONS.md`, current AGENTS.md and git status/history before continuing.
 
 ## Implemented development scope
 
@@ -17,7 +17,7 @@ Development branch: `feat/pro-workspace-transformation-20261023`. Main baseline:
 
 Actual commands and safe evidence hashes are recorded in `ledger.json`. Raw logs, database backups, synthetic sessions, screenshots and runtime evidence are outside Git at `/workspace/css-vista-evidence` and ignored `test-artifacts`. Do not publish those raw files. First-run config-directory failures, browser assertions tied to retired UI, the real Grammar return defect, real contrast failures and a concurrent-build browser timeout are retained separately from successful reruns.
 
-Locally verified scope includes main baseline typecheck/lint/strict build; integrated standard/content/native tests; two-account search isolation/pagination/read preservation; topic exact-text/hash/version continuity and schema parity; private dossier validation; admin counter/429; built workspace at 320/390/768/1024/1440 and sanitizer attack cases; a quiescent 96-table synthetic MySQL backup/restore. This is not host readiness, representative performance, real-provider evaluation, independent human approval or field accessibility evidence. Final rerun results supersede interim summaries only when actually recorded.
+Locally verified scope includes main baseline typecheck/lint/strict build; integrated standard/content/native tests; two-account search isolation/pagination/read preservation; topic exact-text/hash/version continuity and schema parity; private dossier validation; admin counter/429; built workspace at 320/390/768/1024/1440 and sanitizer attack cases; a quiescent 96-table synthetic MySQL backup/restore. This is not host readiness, representative performance, real-provider evaluation, independent human approval or field accessibility evidence. All 19 browser programs now have successful local results after the recorded reruns. The final local artifact identifies application commit `ed6d6150ef919a6fd108ef11c0e15bc90040ad7d`; later changes pin verification evidence and documentation. Final-head GitHub CI remains a separate gate.
 
 ## Phase state and remaining work
 
@@ -30,7 +30,7 @@ Locally verified scope includes main baseline typecheck/lint/strict build; integ
 | P4 academic completion | Blocked | Exact package retrieval/hash, current source reconciliation, 53 outstanding affairs reviews and rechecks, bounded Ability/Précis/skills additions and independent academic approval |
 | P5 publishing/operations | Exact-dossier gate implemented; operation readiness blocked | Actual independent approval artifacts/operator installation; full dossier/coverage/operational UI, host maintenance/private-storage/mail/backup readiness and withdrawal/stale/replay matrix |
 | P6 convergence | Partial verification | Complete manual keyboard/AT/zoom/software-keyboard and Urdu/math task evidence, complete unique contrast review, CSP report-only/enforcement, ASVS matrix and representative lab/query/load/field budgets |
-| P7 final held packet | In progress; release blocked | Final source checks/reruns and draft PR; all unresolved earlier gates; final exact-head CI and separately authorized host preparation |
+| P7 final held packet | In progress; release blocked | Draft PR #109 and local checks are recorded; all unresolved earlier gates, final exact-head CI and separately authorized host preparation remain |
 
 The partial engineering items above are uncompleted work, not invented external blockers. Continue them independently while exact content and academic/operator evidence are unavailable. Do not mark the full transformation complete from routes, counts, a build or synthetic tests.
 
