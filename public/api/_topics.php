@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__.'/_learning.php';
-require_once __DIR__.'/_topics_core.php';
+require_once __DIR__.'/_topics_core.php';require_once __DIR__.'/_topics_writing.php';require_once __DIR__.'/_topics_review.php';
 require_once __DIR__.'/_topics_schema.php';
 
 function cssv_topics_ensure(PDO $pdo): void {
     static $ready=false;if($ready)return;cssv_learning_ensure($pdo);
     if((int)$pdo->query("SELECT GET_LOCK('cssvista-topics-schema-v1',5)")->fetchColumn()!==1)throw new RuntimeException('topics_schema_busy');
-    try{foreach([...cssv_topics_schema_statements(),...cssv_topics_guided_schema_statements()] as $sql)$pdo->exec($sql);$ready=true;}finally{$pdo->query("SELECT RELEASE_LOCK('cssvista-topics-schema-v1')");}
+    try{foreach([...cssv_topics_schema_statements(),...cssv_topics_guided_schema_statements(),...cssv_topic_writing_schema()] as $sql)$pdo->exec($sql);$ready=true;}finally{$pdo->query("SELECT RELEASE_LOCK('cssvista-topics-schema-v1')");}
 }
 function cssv_topic_progress(PDO $pdo,string $user,string $attempt,string $version): array {
     $q=$pdo->prepare('SELECT * FROM attempt_topic_progress WHERE user_id=? AND attempt_id=? AND topic_version_id=?');$q->execute([$user,$attempt,$version]);$r=$q->fetch();
@@ -91,8 +91,10 @@ function cssv_topic_mutation(PDO $pdo,string $user,array $body): array {
             }elseif($action==='draft'){
                 if(!is_int($body['expected_draft_version']??null)||$body['expected_draft_version']<0)throw new InvalidArgumentException('Provide the saved draft version.');
                 if($body['expected_draft_version']!==$r['draft_version'])throw new DomainException('Your notes or writing changed elsewhere. Compare the saved draft before replacing it.');
+                $priorText=['notes'=>$r['notes'],'draft'=>$r['draft']];
                 foreach(['notes','draft'] as $key){$value=$body[$key]??null;if(!is_string($value)||!mb_check_encoding($value,'UTF-8')||mb_strlen($value)>8000)throw new InvalidArgumentException('Keep notes and writing within 8,000 characters each.');$r[$key]=trim($value);}
                 $r['draft_words']=cssv_learning_words($r['draft']);if($r['draft_words']>$definition['practice']['max_words'])throw new InvalidArgumentException('Keep independent writing within the stated word limit.');$r['draft_version']++;
+                foreach(['notes','draft'] as $slot)cssv_topic_writing_append($pdo,$user,$attempt,$version,$slot,$priorText[$slot],$r[$slot],$definition['title']);
             }elseif(in_array($action,['quiz','review'],true)){
                 if($action==='review'&&(!$r['next_revision']||$r['next_revision']>$today))throw new DomainException('Revision becomes available on its scheduled Pakistan date.');
                 $graded=cssv_topic_grade($definition,$action==='review'?'revision':'learn',$body['choices']??null);
@@ -109,8 +111,10 @@ function cssv_topic_mutation(PDO $pdo,string $user,array $body): array {
     }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
 }
 function cssv_topic_admin_mutation(PDO $pdo,array $admin,array $body): array {
-    $action=$body['action']??'';$fields=['action','request_id','expected_revision'];
-    cssv_pro_fields($body,match($action){'import'=>[...$fields,'topic'],'publish'=>[...$fields,'topic_id','version_id','reviewed','review_note'],'unpublish'=>[...$fields,'topic_id'],default=>throw new InvalidArgumentException('Choose a topic publication action.')});
+    $action=$body['action']??'';
+    if($action==='publish')cssv_pro_release_require_open();
+    $fields=['action','request_id','expected_revision'];
+    cssv_pro_fields($body,match($action){'import'=>[...$fields,'topic'],'publish'=>[...$fields,'topic_id','version_id','reviewed','review_note','review_manifest_id'],'unpublish'=>[...$fields,'topic_id'],default=>throw new InvalidArgumentException('Choose a topic publication action.')});
     $request=cssv_pro_id($body['request_id']??null);$expected=$body['expected_revision']??null;if(!is_int($expected)||$expected<0||$expected>1000000)throw new InvalidArgumentException('Refresh the topic publication revision.');
     $definition=$action==='import'?cssv_topic_definition($body['topic']??null):null;$topic=$definition['id']??cssv_topic_slug($body['topic_id']??null);
     $payload=$body;unset($payload['request_id']);$hash=hash('sha256',json_encode(['topic-editor-v1',$payload],JSON_THROW_ON_ERROR));$adminId=(string)$admin['admin_id'];
@@ -134,7 +138,8 @@ function cssv_topic_admin_mutation(PDO $pdo,array $admin,array $body): array {
             $q=$pdo->prepare('SELECT content,content_hash FROM pro_topic_versions WHERE id=? AND topic_id=?');$q->execute([$version,$topic]);$row=$q->fetch();if(!$row)throw new OutOfBoundsException('Choose a version belonging to this topic.');
             $approved=cssv_topic_definition(json_decode($row['content'],true,64,JSON_THROW_ON_ERROR));
             if(!hash_equals($row['content_hash'],cssv_topic_hash($approved)))throw new DomainException('This source version failed its integrity check.');
-            $pdo->prepare('UPDATE pro_topics SET title=?,summary=?,category=?,published_version_id=?,revision=revision+1 WHERE id=?')->execute([$approved['title'],$approved['summary'],$approved['category'],$version,$topic]);$details=['review_note'=>$note,'content_hash'=>$row['content_hash']];
+            $review=cssv_topic_review_load($body['review_manifest_id']??null,$version,$row['content_hash']);
+            $pdo->prepare('UPDATE pro_topics SET title=?,summary=?,category=?,published_version_id=?,revision=revision+1 WHERE id=?')->execute([$approved['title'],$approved['summary'],$approved['category'],$version,$topic]);$details=['review_note'=>$note,'content_hash'=>$row['content_hash'],'review_manifest_id'=>$body['review_manifest_id'],'review'=>$review];
         }else{
             if(!$current||!$current['published_version_id'])throw new OutOfBoundsException('Published topic not found.');$version=$current['published_version_id'];$pdo->prepare('UPDATE pro_topics SET published_version_id=NULL,revision=revision+1 WHERE id=?')->execute([$topic]);
         }

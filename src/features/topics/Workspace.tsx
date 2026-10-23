@@ -277,7 +277,7 @@ export default function TopicWorkspace({
                     ['Started', load.data.stats.started],
                     ['Practised', load.data.stats.practised],
                     ['Revision due', load.data.stats.due],
-                    ['Mastered', load.data.stats.mastered],
+                    ['Practice and recall recorded', load.data.stats.mastered],
                   ].map(([label, count]) => (
                     <div key={label} className="rounded-2xl border bg-white p-4">
                       <p className="text-xs text-slate-500">{label}</p>

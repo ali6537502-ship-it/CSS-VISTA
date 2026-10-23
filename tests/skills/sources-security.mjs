@@ -9,6 +9,7 @@ const php = (...args) => process.env.CSSV_TEST_PHP_CONTAINER
   ? execFileSync('docker', ['--host=unix:///var/run/docker.sock', 'exec', process.env.CSSV_TEST_PHP_CONTAINER, 'php', ...args], { env, encoding: 'utf8' }).trim()
   : execFileSync('php', args, { env, encoding: 'utf8' }).trim()
 async function call(path, jar = new Map(), body, extra = {}) {
+  if(path==='admin/topics.php' && body?.action==='publish' && body.version_id && !body.review_manifest_id) body={...body,review_manifest_id:php('tests/topics/review-fixture.php',body.version_id)}
   const headers = { ...extra }
   if (jar.size) headers.Cookie = [...jar].map(([k, v]) => `${k}=${v}`).join('; ')
   if (body) { headers['Content-Type'] = 'application/json'; headers['X-CSRF-Token'] = jar.get('cssv_csrf') || jar.get('cssv_owner_csrf') || ''; Object.assign(headers, extra) }
