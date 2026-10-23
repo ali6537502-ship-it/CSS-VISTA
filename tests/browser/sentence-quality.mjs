@@ -99,9 +99,9 @@ try{
  // Existing ordinary Expression and Précis paths must not become guided Studio paths.
  for(const [from,workspace,target] of [['expression','invalid-workspace','/account/expression'],['precis',legacyId,'/account/precis']]){
   await page.goto(base+'/grammar-course?day=2&from='+from+'&workspace='+workspace+'&writing='+legacyId)
-  const link=page.getByRole('link',{name:from==='precis'?'Return to Précis Lab':'Return to Expression Lab',exact:true}),href=new URL(await link.getAttribute('href'),base)
+  const link=page.getByRole('link',{name:from==='precis'?'Return to your précis work':'Return to your Expression Lab work',exact:true}),href=new URL(await link.getAttribute('href'),base)
   assert.equal(href.pathname,target);assert.equal(href.searchParams.get('workspace'),null);assert.equal(href.searchParams.get('view'),null);assert.equal(href.searchParams.get('writing'),legacyId)
  }
  assert.deepEqual(JSON.parse(php('tests/skills/fixture.php','snapshot',user)),[]);assert.deepEqual(errors,[])
- console.log('PASS actual Sentence Studio: six lessons/all levels, selected-choice feedback, immutable history, Grammar/Error Lab/reference return continuity, independent short writing and revision, refresh/device/expiry, v2 preserved, 320–1440 widths and zero AI usage')
+ console.log('PASS actual Sentence Studio: six lessons/all levels, selected-choice feedback, immutable history, Grammar/practice/reference return continuity, independent short writing and revision, refresh/device/expiry, v2 preserved, 320–1440 widths and zero AI usage')
 }catch(error){console.log('Sentence quality failed:',error.message);throw error}finally{await browser.close()}

@@ -13,6 +13,9 @@ async function user(){const email=`workspace-${randomUUID()}@example.invalid`,id
 const endpoint='student/workspace.php',a=await user(),b=await user();
 const seeded=JSON.parse(php('tests/workspace/fixture.php','seed',a.id));
 const before=php('tests/workspace/fixture.php','digest',a.id)
+assert.equal((await call('factbook/data.php',a.jar,{action:'save_entry',entry:{id:seeded.factbook,content:{html:[]}},sources:[],tags:[]})).status,422,'Native formatted-note shape bypassed')
+assert.equal((await call('factbook/data.php',b.jar,{action:'save_entry',entry:{id:seeded.factbook,content:{html:'foreign overwrite'}},sources:[],tags:[]})).status,404,'Factbook ownership bypassed')
+assert.equal((await call('factbook/data.php',a.jar,{action:'save_entry',entry:{id:seeded.factbook,content:{html:'<p>TEST ONLY saved personal reference</p>'}},sources:[],tags:[]})).status,200,'Compatible native rich note failed')
 assert.equal((await call(endpoint)).status,401)
 const incomplete=await user();php('tests/pro/fixture.php','incomplete',incomplete.id);assert.equal((await call(endpoint,incomplete.jar)).status,403)
 assert.equal((await call(endpoint,a.jar,undefined,{'X-CSSV-User':b.id})).status,409)

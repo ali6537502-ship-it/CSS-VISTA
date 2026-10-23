@@ -64,7 +64,7 @@ function Workspace({ catalog, user, attempt }: { catalog: Catalog; user?: string
   const nav = [{ id: 'dashboard', title: 'Course path' }, { id: 'lesson', title: 'Your lesson' }, { id: 'reference', title: 'Reference library' }, { id: 'lab', title: 'Practice and revision' }, { id: 'profile', title: 'Learning profile' }, { id: 'saved', title: 'Bookmarks and notes' }, { id: 'legacy', title: 'Earlier work' }]
   const origin = ['expression', 'precis'].includes(params.get('from') ?? '') ? params.get('from') : ['expression', 'precis'].includes(params.get('origin') ?? '') ? params.get('origin') : undefined
   const back = new URLSearchParams(attempt ? { attempt } : {})
-  for (const key of ['writing', 'version', 'workspace']) { const value = params.get(key); if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value) }
+  for (const key of ['writing', 'version', ...(origin === 'expression' ? ['workspace'] : [])]) { const value = params.get(key); if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value) }
   const returnParams = new URLSearchParams(back)
   if (origin === 'expression' && back.has('workspace')) returnParams.set('view', 'studio')
   const returnTo = origin ? `/account/${origin}${returnParams.size ? `?${returnParams}` : ''}` : undefined
