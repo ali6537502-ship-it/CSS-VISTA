@@ -1,8 +1,8 @@
 {
-  "last_verified_at": "2026-10-23T17:58:12.486881+00:00",
+  "last_verified_at": "2026-10-23T18:10:19.100891+00:00",
   "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
   "candidate_sha": "964beeb50e4f7bfe83c2394bc16736ea55993dad",
-  "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+  "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
   "branch": "feat/pro-workspace-transformation-20261023",
   "overall_status": "in_progress_not_release_ready",
   "deployed": false,
@@ -48,7 +48,7 @@
       "objective": "reconcile and freeze baseline",
       "status": "blocked",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [],
       "remaining_work_or_blocker": "Exact private package and actual host applied/checksum inventory unavailable.",
       "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
@@ -59,7 +59,7 @@
       "objective": "security and durable work",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [
         "P0"
       ],
@@ -72,7 +72,7 @@
       "objective": "workspace and continuation",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [
         "P0"
       ],
@@ -85,7 +85,7 @@
       "objective": "Library Review Progress",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [
         "P0"
       ],
@@ -98,7 +98,7 @@
       "objective": "bounded academic completion",
       "status": "blocked",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [
         "P0"
       ],
@@ -111,7 +111,7 @@
       "objective": "publishing and operations",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [
         "P0"
       ],
@@ -124,7 +124,7 @@
       "objective": "visual accessibility performance",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [
         "P0"
       ],
@@ -137,7 +137,7 @@
       "objective": "held verification packet",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "4290a30a9429caab1d9aa981baf892b1f7b62acc",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "dependencies": [
         "P0"
       ],
@@ -683,6 +683,16 @@
       "group": "final-affected",
       "command": "tests/browser/sentence-quality.mjs",
       "exit_code": 0
+    },
+    {
+      "group": "frozen-application",
+      "command": "tests/browser/workspace.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "frozen-application",
+      "command": "tests/browser/pro-pause.mjs",
+      "exit_code": 0
     }
   ],
   "evidence_manifest": [
@@ -922,6 +932,21 @@
       "bytes": 30369
     },
     {
+      "reference": "private-local-evidence:factbook-final-build.log",
+      "sha256": "3266ab82fba1a9b365ce79be046c4b28aabd1715d307f232cecb313ac57aa514",
+      "bytes": 29845
+    },
+    {
+      "reference": "private-local-evidence:factbook-final-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "reference": "private-local-evidence:factbook-final-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
       "reference": "private-local-evidence:final-build.log",
       "sha256": "17b9e97dcb8e964037fe74f040b40e256fed2ec76ef88466b3abb54b51a5505d",
       "bytes": 30103
@@ -1025,6 +1050,56 @@
       "reference": "private-local-evidence:final3-typecheck.log",
       "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
       "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:frozen-browser/results.txt",
+      "sha256": "1905c5e761160ae10e6e4ac449587b866fe69a783dae93e8fc5c3de24a50a7aa",
+      "bytes": 60
+    },
+    {
+      "reference": "private-local-evidence:frozen-browser/tests-browser-pro-pause.mjs.log",
+      "sha256": "64500953bc14f10d9e712e2a3a40d154c700a4f0ec5035dcddb610c6e662217a",
+      "bytes": 254
+    },
+    {
+      "reference": "private-local-evidence:frozen-browser/tests-browser-workspace.mjs.log",
+      "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83",
+      "bytes": 183
+    },
+    {
+      "reference": "private-local-evidence:frozen-build-result.txt",
+      "sha256": "1756c0a6e62af1fba11e4d79ef3d3daab62963e0783ffbe29456372de21c65a0",
+      "bytes": 33
+    },
+    {
+      "reference": "private-local-evidence:frozen-build.log",
+      "sha256": "7fa5d60e3bd54338dce73660dc7afcf84f868e7837370b085dab0e25cc588811",
+      "bytes": 30103
+    },
+    {
+      "reference": "private-local-evidence:frozen-preservation.log",
+      "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:frozen-profile-contract.log",
+      "sha256": "1d26538e074a75a0dc4e12cbe0bf0beb994e46a54ed8b0e34cf97176f5e5f88c",
+      "bytes": 136
+    },
+    {
+      "reference": "private-local-evidence:frozen-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:frozen-workspace-node.log",
+      "sha256": "a0b4d70c79775be42a771988929606f12944062e159c64ee53ad7946215ee7af",
+      "bytes": 448
+    },
+    {
+      "reference": "private-local-evidence:gate-landmark-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
     },
     {
       "reference": "private-local-evidence:grammar-release.log",
@@ -1402,6 +1477,11 @@
       "bytes": 360
     },
     {
+      "reference": "private-local-evidence:paused-landmark-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
       "reference": "private-local-evidence:php-image.log",
       "sha256": "68377f72d6fa896d5f0ac9a15a5d0f0a6b5989b2610529169ce348fbcede06b1",
       "bytes": 275822
@@ -1538,15 +1618,15 @@
   "live_paused": true,
   "live_fingerprint_cache_variants_agree": true,
   "rollback": "See MIGRATIONS.md and RELEASE-PACKET.md; no destructive down migrations.",
-  "next_safe_action": "Complete final reruns and draft PR; continue P3/P6 implementation around blocked exact content and academic/operator evidence.",
+  "next_safe_action": "Observe final-head draft PR CI. Continue unfinished P3/P6 and editorial/operator work from PROGRESS.md; keep production release closed.",
   "local_verification_summary": {
-    "recorded_at": "2026-10-23T17:58:12.414979+00:00",
+    "recorded_at": "2026-10-23T18:10:19.100891+00:00",
     "tested_application_build": {
       "schemaVersion": 1,
-      "gitSha": "ed6d6150ef919a6fd108ef11c0e15bc90040ad7d",
+      "gitSha": "517e2e0c81d6530fb5689358f0c471e87f34d937",
       "source": "git-rev-parse-head",
       "buildTarget": "hostinger",
-      "builtAt": "2026-10-23T17:55:24.449Z"
+      "builtAt": "2026-10-23T18:06:48.727Z"
     },
     "latest_program_results": {
       "tests/skills/unit.php": 0,
@@ -1655,13 +1735,16 @@
     "docs/pro/sentence-content-quality.md",
     "docs/pro/tasks-1-4-private-completion.md",
     "docs/pro/topic-academic-quality-review.md",
+    "docs/pro/transformation/ACCESSIBILITY.md",
     "docs/pro/transformation/DECISIONS.md",
     "docs/pro/transformation/MIGRATIONS.md",
     "docs/pro/transformation/PROGRESS.md",
     "docs/pro/transformation/RELEASE-PACKET.md",
+    "docs/pro/transformation/REVIEW-DOSSIER-FORMAT.md",
     "docs/pro/transformation/ROUTES.md",
     "docs/pro/transformation/SECURITY.md",
     "docs/pro/transformation/baseline-manifest.json",
+    "docs/pro/transformation/ledger.json",
     "docs/pro/transformation/preservation-exceptions.json",
     "docs/pro/writing-revision-review.md",
     "package-lock.json",
@@ -1713,6 +1796,7 @@
     "src/App.tsx",
     "src/components/Layout.tsx",
     "src/components/NotificationCenter.tsx",
+    "src/components/ProfileGate.tsx",
     "src/data/routeRegistry.mjs",
     "src/features/ability/Course.tsx",
     "src/features/ability/api.ts",
@@ -1726,6 +1810,7 @@
     "src/features/library/Search.tsx",
     "src/features/membership/CouponAccess.tsx",
     "src/features/membership/ProGate.tsx",
+    "src/features/membership/ProRelease.tsx",
     "src/features/membership/api.ts",
     "src/features/precis/Practice.tsx",
     "src/features/precis/api.ts",
@@ -1828,7 +1913,7 @@
     "tests/workspace/routes.test.mjs",
     "tests/workspace/security.mjs"
   ],
-  "last_tested_application_sha": "ed6d6150ef919a6fd108ef11c0e15bc90040ad7d",
+  "last_tested_application_sha": "517e2e0c81d6530fb5689358f0c471e87f34d937",
   "content_manifest_hash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
   "core_verification": [
     {
@@ -1888,6 +1973,30 @@
     {
       "command": "node --test tests/workspace/routes.test.mjs",
       "exit_code": 0
+    },
+    {
+      "command": "node scripts/check-profile-contract.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "npx eslint src/features/membership/ProGate.tsx src/components/ProfileGate.tsx tests/browser/workspace.mjs",
+      "exit_code": 0
+    }
+  ],
+  "backup_artifacts": [
+    {
+      "reference": "private-local-evidence:synthetic-backup-final.sql",
+      "sha256": "55e4d2bbdc530efec14bd7f731ba8dee7a4082b6380128ebae2d007f9ce7df6b",
+      "scope": "Disposable synthetic MySQL only; private file, not committed."
+    },
+    {
+      "reference": "private-local-evidence:synthetic-backup.sql",
+      "sha256": "544bb06b87ddc651ac4636279bd8c4b77baca35a5efbadbaf86c756b72db6186",
+      "scope": "Disposable synthetic MySQL only; private file, not committed."
     }
   ]
 }
