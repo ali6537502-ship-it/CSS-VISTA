@@ -58,6 +58,11 @@ try {
       return route.continue()
     })
     const page = await context.newPage(), errors = [], studyMetadataRequests = []
+    // The static foundation preview is readable before client activation. Wait
+    // for the real catalogue request before exercising its lesson button.
+    const grammarReady = path === '/grammar-course'
+      ? page.waitForResponse(response => new URL(response.url()).pathname === '/grammar/v5/index.json')
+      : undefined
     page.on('request', (request) => { if (/\/studyMaterialMeta-[^/]+\.js/.test(request.url())) studyMetadataRequests.push(new URL(request.url()).pathname) })
     page.on('pageerror', error => errors.push(error.message))
     const response = await page.goto(origin + path, { waitUntil: 'networkidle' })
@@ -289,10 +294,13 @@ try {
     if (path === '/grammar-course') {
       assert.ok(rawHTML.includes('Grammar describes the patterns by which words and larger units combine and change form.'), 'Raw grammar page includes actual authored lesson explanation')
       assert.ok(state.robots.every(value => !value.includes('noindex')), 'Public grammar lesson remains intentionally indexable')
+      await (await grammarReady).finished()
       await page.getByRole('button', { name: 'Start with Day 1', exact: true }).click()
-      await page.getByRole('heading', { name: 'Grammar, meaning and units of structure', exact: true }).waitFor()
-      record.fullLessonCharacters = (await page.locator('main').first().innerText()).length
-      assert.ok(await page.getByRole('heading', { name: 'Grammar, meaning and units of structure', exact: true }).count(), 'Guest can access authored grammar lesson')
+      await page.waitForURL(url => url.searchParams.get('day') === '1' && url.searchParams.get('section') === 'gv5-d01-m01')
+      const lesson = page.getByRole('region', { name: 'Day 1 lesson', exact: true })
+      await lesson.getByRole('heading', { name: 'Grammar, meaning and units of structure', exact: true }).waitFor()
+      record.fullLessonCharacters = (await lesson.innerText()).length
+      assert.ok((await lesson.innerText()).includes('Foundation'), 'Guest can access the actual authored lesson beyond the dashboard preview')
     }
     if (path === '/fpsc-updates') {
       const currency = page.getByRole('complementary', { name: 'Schedule source and currency', exact: true })
