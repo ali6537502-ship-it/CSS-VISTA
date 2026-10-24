@@ -39,3 +39,7 @@ A local MySQL-to-MariaDB 11.4.13 synthetic restore matches all 96 table digests 
 ## Factbook backup preparation — 24 October
 
 New development adds complete bounded Factbook v2 export/restore and legacy v1 compatibility, private-image staging and metadata-only restore receipts. Additive 028 must be inventoried with its exact checksum alongside both unchanged 026 files and 027. See MIGRATIONS.md for transaction, replay, ambiguous-commit, cleanup and rollback boundaries. Local 17-format MySQL and 97-table MariaDB rehearsals support this bounded feature; actual-host database/private-storage recovery, capacity and manual AT remain unverified. No backup bodies, private images or synthetic sessions are committed. Nothing is merged or deployed by this continuation.
+
+## Learn catalog continuation
+
+Development now connects existing subject/study-area metadata to Learn search/filtering, pages fixed/native published courses together and preserves topic/writing primary-home navigation. It adds no schema, content edition, progress/body store or activation. Native publication-pointer ownership, pause/free/expiry and metadata-only output are tested separately from browser navigation. Full academic relationship review and manual/field validation remain open; inspect the latest ledger/PR checks before any separately authorized release.

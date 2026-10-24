@@ -1,8 +1,8 @@
 {
-  "last_verified_at": "2026-10-24T10:18:41.503805+00:00",
+  "last_verified_at": "2026-10-24T13:28:21.470614+00:00",
   "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
   "candidate_sha": "964beeb50e4f7bfe83c2394bc16736ea55993dad",
-  "current_commit": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+  "current_commit": "3ebe19c93a0e54d809d5b859e78bdff2d43101b8",
   "branch": "feat/pro-workspace-transformation-20261023",
   "overall_status": "in_progress_not_release_ready",
   "deployed": false,
@@ -73,11 +73,11 @@
       "objective": "workspace and continuation",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "current_commit": "3ebe19c93a0e54d809d5b859e78bdff2d43101b8",
       "dependencies": [
         "P0"
       ],
-      "remaining_work_or_blocker": "Six homes implemented; complete reviewed course relationships and usability validation remain.",
+      "remaining_work_or_blocker": "Native subject/study-area filtering, unified catalog paging and preparation-view breadcrumb/current-home state are implemented and locally verified. Full reviewed course/unit/lesson relationships, remaining domain navigation/mobile task states and actual usability evidence remain.",
       "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
       "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
     },
@@ -1619,7 +1619,7 @@
   "live_paused": true,
   "live_fingerprint_cache_variants_agree": true,
   "rollback": "See MIGRATIONS.md and RELEASE-PACKET.md; no destructive down migrations.",
-  "next_safe_action": "Observe latest exact-head draft PR CI, then continue unfinished catalog/domain-draft, editorial/operator and P6 work; keep production release closed.",
+  "next_safe_action": "Observe latest exact-head draft PR CI; continue remaining domain draft/recovery, reviewed course relationships and editorial/operator/P6 engineering while the release hold remains active.",
   "local_verification_summary": {
     "recorded_at": "2026-10-23T18:10:19.100891+00:00",
     "tested_application_build": {
@@ -1914,7 +1914,7 @@
     "tests/workspace/routes.test.mjs",
     "tests/workspace/security.mjs"
   ],
-  "last_tested_application_sha": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+  "last_tested_application_sha": "3ebe19c93a0e54d809d5b859e78bdff2d43101b8",
   "content_manifest_hash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
   "core_verification": [
     {
@@ -2094,7 +2094,7 @@
       "Manual accessibility and operational release gates"
     ]
   },
-  "previous_verified_application_sha": "531892d381f52994174853187fb0cfa2af1e55b7",
+  "previous_verified_application_sha": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
   "continuation_20261024_import_recovery": {
     "application_source_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
     "prior_ci_head": "07c445348480b6f3ed4f8ee47a010fc47a997442",
@@ -2331,6 +2331,121 @@
       {
         "reference": "private-local-evidence:20261024-factbook/mariadb-verified.log",
         "sha256": "3d93c8c24e1a74e1b76b78361de1f2ff9f9a6f14171603179ff405463707262a"
+      }
+    ]
+  },
+  "continuation_20261024_catalog": {
+    "recorded_at": "2026-10-24T13:28:21.470614+00:00",
+    "application_commit": "3ebe19c93a0e54d809d5b859e78bdff2d43101b8",
+    "tested_artifact": {
+      "schemaVersion": 1,
+      "gitSha": "3ebe19c93a0e54d809d5b859e78bdff2d43101b8",
+      "source": "git-rev-parse-head",
+      "buildTarget": "hostinger",
+      "builtAt": "2026-10-24T13:22:20.265Z"
+    },
+    "production_deployed": false,
+    "schema_changes": false,
+    "implemented": [
+      "Learn metadata search and existing subject/study-area mappings from currently published owned editions",
+      "One 20-item sequence for fixed courses and published topics, correct has_more and stable URL filters/paging",
+      "Permission-filtered subject counts; explicit unsupported-filter rejection; metadata-only direct read without personal record unions",
+      "Contextual primary home and breadcrumbs: topic preparation Learn, saved/new writing Write, attempt management Today; explicit aria-current on nested routes"
+    ],
+    "verification": [
+      "Native 25-edition 20/5 paging, exact subject/count/multi-mapping, no repeated fixed courses, literal wildcard search",
+      "Free, expiry, pause, draft, withdrawal and mismatched publication-pointer boundaries; no lesson blocks/keys/source descriptors in payload",
+      "Equivalent MariaDB 11.4 metadata query rehearsal; native HTTP guards tested separately on MySQL",
+      "Built browser five widths, search/subject controls, reload/Back/page transitions, empty/expiry, canonical course destination and current-home breadcrumbs",
+      "No new attempts/writing/topic progress/checks from opening a course; zero automated axe violations, no page errors",
+      "Five navigation/private-include tests, typecheck, strict build, changed-file lint; full lint succeeds with one existing unchanged Introduction hook warning",
+      "Existing workspace native security/retrieval and shared browser regressions"
+    ],
+    "commands": [
+      "node tests/workspace/catalog.mjs",
+      "CSSV_TEST_PHP_CONTAINER=cssvista-test-mariadb-php node tests/workspace/catalog-rehearsal.mjs",
+      "node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs",
+      "npm run typecheck",
+      "npm run lint",
+      "node scripts/build-target.mjs hostinger --strict",
+      "node tests/browser/catalog.mjs",
+      "node tests/browser/workspace.mjs",
+      "node tests/browser/workspace-retrieval.mjs",
+      "node scripts/transformation/check-preservation.mjs"
+    ],
+    "ci_at_recording": {
+      "previous_green_head": "2333a84f03ddab686b9278bdd82567a4868f2c80",
+      "latest_checks": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/109/checks",
+      "status": "Read latest exact-head checks after push; prior eight green workflows do not imply the new head passed."
+    },
+    "corrections": [
+      "Synthetic fixture explicitly loads native bootstrap",
+      "Nested dropdown label replaced by explicit label association",
+      "Browser filter assertion waits for a result unique to the new page instead of sampling the old list",
+      "NavLink suppresses aria-current on nested URLs; explicit home links preserve current-home accessibility state"
+    ],
+    "remaining": [
+      "Reviewed complete course/unit/lesson relationships and remaining domain task navigation",
+      "Remaining domain draft/recovery adapters and physical cross-device/manual AT usability",
+      "Exact private package, 53 affairs reviews and independent academic/relevance approval",
+      "Actual-host/fresh schema/private-storage/operations readiness, CSP/ASVS and representative performance"
+    ],
+    "evidence": [
+      {
+        "reference": "private-local-evidence:20261024-catalog/native.log",
+        "sha256": "e12a3710eec93bfd833561e99fcd16d63e807eb65ee147821452b54892e5f95b"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/mariadb.log",
+        "sha256": "3ed13eb4b9f3cb17e42db02b9cd77bcf45dcbb79c5406d772315de8a0c7c91dc"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/unit.log",
+        "sha256": "6d2a59024d6d3dd2584bfcf65060ece410e603b70f7c0e7149fd2b1ecdc07fba"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/typecheck.log",
+        "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/lint.log",
+        "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/changed-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/navigation-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/preservation.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/build-frozen.log",
+        "sha256": "2e3a81150cb3dbd829640318552711c77fa7357d6adbe25a0d4eacccc806e183"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/browser-verified.log",
+        "sha256": "90544367bf980922d71f43e9178dab4c69e9de4c285591a7344539bf0e770cbc"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/workspace-security.log",
+        "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/retrieval.log",
+        "sha256": "3b0822fd519a2b9593b6f194f17729731eabe50593f7ed729d97e86224ea2269"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/workspace-browser.log",
+        "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83"
+      },
+      {
+        "reference": "private-local-evidence:20261024-catalog/retrieval-browser.log",
+        "sha256": "07d9274d306cadf12dbe6b19fcc3215a377c119987a4769c9f2374e7fa01b979"
       }
     ]
   }
