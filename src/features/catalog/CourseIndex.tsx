@@ -19,7 +19,7 @@ export default function CourseIndex() {
   return <AccountPage title="Learn" intro="Browse a course before choosing a preparation attempt. Your personal work stays in its existing workspace.">
     <form onSubmit={search} className="mb-6 grid gap-4 rounded-xl border bg-white p-4 sm:grid-cols-[1fr_1fr_auto]">
       <label className="grid gap-2 text-sm font-semibold">Find a course<input key={query} name="q" defaultValue={query} maxLength={120} className={control} type="search" /></label>
-      <label className="grid gap-2 text-sm font-semibold">Subject or study area<select key={`${subject}:${Boolean(load.data)}`} name="subject" defaultValue={subject} className={control}><option value="">All subjects</option>{(load.data?.catalog_subjects || []).map(item => <option key={item.id} value={item.id}>{item.title} ({item.count})</option>)}</select></label>
+      <div className="grid gap-2 text-sm font-semibold"><label htmlFor="catalog-subject">Subject or study area</label><select id="catalog-subject" key={`${subject}:${Boolean(load.data)}`} name="subject" defaultValue={subject} className={control}><option value="">All subjects</option>{(load.data?.catalog_subjects || []).map(item => <option key={item.id} value={item.id}>{item.title} ({item.count})</option>)}</select></div>
       <button type="submit" className="min-h-11 self-end rounded-lg bg-pine px-5 py-3 text-sm font-semibold text-white">Find courses</button>
       {(query || subject) && <Link className="inline-flex min-h-11 items-center text-[#14543D] underline" to="/account/learn">Clear course filters</Link>}
     </form>

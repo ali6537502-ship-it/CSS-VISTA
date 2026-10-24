@@ -3,6 +3,7 @@ declare(strict_types=1);
 if(getenv('CI')!=='true'||getenv('CSSV_DB_NAME')!=='cssvista_briefing_test')throw new RuntimeException('Disposable database required.');
 require_once __DIR__.'/../../public/api/_bootstrap_core.php';require_once __DIR__.'/../../public/api/_topics.php';require_once __DIR__.'/../topics/source.php';
 $pdo=cssv_db();cssv_topics_ensure($pdo);$user=$argv[2]??'';$q=$pdo->prepare("SELECT id FROM users WHERE id=? AND email LIKE '%@example.invalid'");$q->execute([$user]);if(!$q->fetchColumn())throw new RuntimeException('Synthetic user required.');
+if($argv[1]==='page'){require_once __DIR__.'/../../public/api/_workspace.php';$f=cssv_workspace_filters(json_decode($argv[3]??'{}',true,16,JSON_THROW_ON_ERROR));echo json_encode(cssv_workspace_catalog_page($pdo,true,cssv_workspace_tables($pdo),$f),JSON_THROW_ON_ERROR);exit;}
 if($argv[1]==='counts'){$out=[];foreach(['preparation_attempts','writing_records','attempt_topic_progress','attempt_topic_checks'] as $table){$q=$pdo->prepare('SELECT COUNT(*) FROM `'.$table.'` WHERE user_id=?');$q->execute([$user]);$out[$table]=(int)$q->fetchColumn();}echo json_encode($out);exit;}
 if($argv[1]==='seed'){
  $prefix='test-only-catalog-'.substr(cssv_uuid_v4(),0,8);$needle='TEST ONLY catalog '.substr(cssv_uuid_v4(),0,8);$admin=$pdo->query('SELECT id FROM admin_accounts ORDER BY id LIMIT 1')->fetchColumn();if(!$admin)throw new RuntimeException('Synthetic admin fixture required.');$ids=[];$versions=[];
