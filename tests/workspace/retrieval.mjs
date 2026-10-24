@@ -23,6 +23,8 @@ const review=await read({view:'review'});assert.deepEqual(review.items.map(i=>i.
 assert.ok(review.items.find(i=>i.domain==='grammar').destination.includes('mode=due'))
 assert.ok(review.items.find(i=>i.domain==='ability').destination.includes('unit='+a.fixture.ability_unit))
 assert.equal(review.items.find(i=>i.domain==='ability').review_reason,'unresolved_mistake')
+assert.equal(review.items.find(i=>i.domain==='precis').review_count,1,'Future spaced retries were counted as due')
+assert.equal((await read({state:'unfinished',type:'precis'})).items[0].review_count,2,'Pending spaced retry was discarded')
 for(const item of review.items)assert.equal((await read({view:'review'},b)).items.some(other=>other.id===item.id),false,'Foreign account review leaked')
 const legacy=await read({course:'grammar-legacy'});assert.equal(legacy.items.length,1);assert.ok(legacy.items[0].destination.includes('view=legacy'))
 const saved=await read({state:'saved',type:'writing'});assert.equal(saved.items.length,6)

@@ -23,9 +23,9 @@ try{
  await page.getByRole('textbox',{name:'Search saved work',exact:true}).fill('climate policy');await page.getByRole('button',{name:'Search',exact:true}).click()
  await page.getByRole('link',{name:'Climate adaptation policy outline',exact:true}).waitFor()
  assert.equal(new URL(page.url()).searchParams.get('state'),'saved');assert.equal(new URL(page.url()).searchParams.get('type'),'writing')
- await page.getByLabel('Work status',{exact:true}).selectOption('unfinished');await page.getByRole('status').filter({hasText:'No available saved work'}).waitFor()
- await page.goBack();await page.getByRole('link',{name:'Climate adaptation policy outline',exact:true}).waitFor();assert.equal(await page.getByLabel('Work status',{exact:true}).inputValue(),'saved')
- await page.goto('https://localhost:3444/account/library/search?collection='+fixture.collection);await page.getByRole('link',{name:'Budget evidence notes',exact:true}).waitFor();assert.equal(await page.getByLabel('My Factbook collection',{exact:true}).inputValue(),fixture.collection)
+ await page.getByRole('combobox',{name:'Work status',exact:true}).selectOption('unfinished');await page.getByRole('status').filter({hasText:'No available saved work'}).waitFor()
+ await page.goBack();await page.getByRole('link',{name:'Climate adaptation policy outline',exact:true}).waitFor();assert.equal(await page.getByRole('combobox',{name:'Work status',exact:true}).inputValue(),'saved')
+ await page.goto('https://localhost:3444/account/library/search?collection='+fixture.collection);await page.getByRole('link',{name:'Budget evidence notes',exact:true}).waitFor();assert.equal(await page.getByRole('combobox',{name:'My Factbook collection',exact:true}).inputValue(),fixture.collection)
  await page.goto('https://localhost:3444/account/library/search?source=current-affairs&from=2002-03-04&to=2002-03-04');await page.getByRole('link',{name:'TEST ONLY Climate finance briefing visible',exact:true}).waitFor();assert.equal(await page.getByLabel('From date',{exact:true}).inputValue(),'2002-03-04')
  await page.goto('https://localhost:3444/account/review');await page.getByRole('link',{name:'English Grammar — scheduled retrieval',exact:true}).waitFor();await page.getByRole('link',{name:'Précis — fixed-drill review',exact:true}).waitFor();assert.equal(await page.getByRole('link',{name:/^General Ability —/}).count(),1)
  await page.goto('https://localhost:3444/account/progress');await page.getByRole('heading',{name:'Account evidence',exact:true}).waitFor();await page.getByRole('link',{name:'Saved paragraph writing',exact:true}).waitFor();await page.getByRole('heading',{name:'This browser’s preparation record',exact:true}).waitFor()
@@ -36,4 +36,4 @@ try{
  await page.goBack();await page.getByRole('button',{name:'More results',exact:true}).waitFor();assert.equal(new URL(page.url()).searchParams.has('offset'),false)
  assert.deepEqual(errors,[])
  console.log('PASS: native built search controls at five widths; saved/query filters survive submit and Back; owned collection, source/date retrieval and three native review domains; no page errors. Synthetic Chromium verification only.')
-}finally{await browser.close()}
+}catch(error){console.log(await page.locator('form').ariaSnapshot());throw error}finally{await browser.close()}
