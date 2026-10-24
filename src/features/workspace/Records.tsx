@@ -3,9 +3,11 @@ import type { WorkspaceItem } from './api'
 import { safeStudyReturn } from './navigation'
 export function WorkspaceRecords({ items }: { items: WorkspaceItem[] }) {
   return <ul className="divide-y divide-[#D7E0DA] rounded-xl border border-[#D7E0DA] bg-white">{items.map(item => <li key={`${item.domain}:${item.id}`} className="min-w-0 p-4">
-    <p className="text-xs font-semibold text-[#47564D]">{item.domain} · synchronized{item.due_at ? ` · due ${item.due_at}` : ''}</p>
+    <p className="text-xs font-semibold text-[#47564D]">{item.course_title || item.domain} · account record{item.saved ? ' · saved' : ''}{item.unfinished ? ' · recorded unfinished' : ''}{item.due_at ? ` · due ${item.due_at}` : ''}</p>
     <Link to={safeStudyReturn(item.destination)} className="mt-1 inline-flex min-h-11 items-center break-words text-base font-semibold text-[#14543D] underline underline-offset-4">{item.title || 'Untitled saved work'}</Link>
     <p className="text-sm leading-6 text-[#47564D]">{item.evidence}</p>
+    {item.source_title && <p className="mt-1 text-xs text-[#47564D]">{item.source_title}{item.source_date ? ` · source date ${item.source_date}` : ''}</p>}
+    {item.review_count > 0 && <p className="mt-1 text-xs text-[#47564D]">{item.review_count} {item.review_reason === 'unresolved_mistake' ? 'recorded incorrect answers' : item.review_reason === 'fixed_drill_review' ? 'fixed drills to revisit' : 'scheduled recall items'}</p>}
     {item.edition && <p className="mt-1 break-all text-xs text-[#47564D]">Edition/version: {item.edition}</p>}
   </li>)}</ul>
 }

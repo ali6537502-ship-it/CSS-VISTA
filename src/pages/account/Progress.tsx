@@ -1,3 +1,5 @@
+import { useWorkspace } from '@/features/workspace/api'
+import { WorkspaceHold, WorkspaceLoad } from '@/features/workspace/Records'
 import AttemptContinuation from '@/features/preparation/Continuation'
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
@@ -5,6 +7,7 @@ import { AccountPage, EmptyNote, Metric, SectionTitle, daysRemaining, formatStud
 
 export default function AccountProgress() {
   const { snapshot } = useAccountSnapshot()
+  const evidence = useWorkspace()
   const syllabusTotal = useSyllabusTotal()
   const syllabusPercent = syllabusTotal ? Math.round((snapshot.syllabusCompleted / syllabusTotal) * 100) : 0
   const examDays = daysRemaining(snapshot.state.studyPlanner?.examDate)
@@ -25,6 +28,16 @@ export default function AccountProgress() {
         </Link>
       }
     >
+      <section className="mb-8 space-y-4" aria-labelledby="account-evidence-title">
+        <h2 id="account-evidence-title" className="text-lg font-semibold">Account evidence</h2>
+        <p className="text-sm leading-7 text-[#47564D]">These are counts of currently accessible native records, not scores or mastery levels. Open the original course for first and latest responses, saved versions and assessment limits. Earlier Grammar editions stay separate.</p>
+        {!evidence.data ? <WorkspaceLoad error={evidence.error} retry={evidence.refresh} /> : <>
+          <WorkspaceHold paused={evidence.data.paused} />
+          {evidence.data.facets.courses.length ? <ul className="grid gap-3 sm:grid-cols-2">{evidence.data.facets.courses.map(course => <li key={course.id} className="min-w-0 rounded-xl border p-4"><Link to={`/account/library/search?course=${encodeURIComponent(course.id)}`} className="inline-flex min-h-11 items-center break-words font-semibold text-[#14543D] underline">{course.title}</Link><p className="text-sm text-[#47564D]">{course.count} account record{course.count === 1 ? '' : 's'}</p></li>)}</ul> : <p>No accessible account evidence yet.</p>}
+        </>}
+        <Link to="/account/review" className="inline-flex min-h-11 items-center text-[#14543D] underline">Open scheduled recall and mistake review</Link>
+      </section>
+      <h2 className="mb-3 text-lg font-semibold">This browser’s preparation record</h2>
       <p className="mb-5 rounded-xl border p-4 text-sm leading-7">The metrics below belong to this browser. Syllabus ticks are self-reported completion; recorded quiz results measure those attempts. They do not establish mastery or predict examination marks.</p>
       <Link to="/account/library/search" className="mb-5 inline-flex min-h-11 items-center text-[#14543D] underline">Open synchronized evidence and saved versions</Link>
       <AttemptContinuation />

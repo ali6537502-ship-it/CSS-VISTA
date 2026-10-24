@@ -23,8 +23,12 @@ if (($argv[1] ?? '')==='user') {
     $pdo->prepare("INSERT INTO users(id,email,password_hash,auth_source,email_verified_at,created_at) VALUES(?,?,?,'local',NOW(6),NOW(6))")->execute([$id,$email,password_hash('TEST ONLY native fixture password',PASSWORD_BCRYPT)]);
     $pdo->prepare("INSERT INTO student_profiles(user_id,display_name,phone,date_of_birth,gender,city,province_region,country,css_attempt_year,preparation_level,optional_subjects,education,profile_photo_path,profile_photo_bytes) VALUES(?,'TEST ONLY','+923001234567','2000-01-01','Other','TEST ONLY','TEST ONLY','Pakistan',2027,'Starting out','[\"TEST ONLY\"]','TEST ONLY','test-only-fixture.jpg',1024)")->execute([$id]);echo $id;exit;
 }
-$id=cssv_uuid_v4();
-$pdo->prepare('INSERT INTO admin_accounts (id,email,password_hash,totp_secret_cipher,totp_enabled_at) VALUES (?,?,?,?,NOW(6))')->execute([$id,'fixture-admin@example.invalid',password_hash(bin2hex(random_bytes(32)),PASSWORD_DEFAULT),'isolated-test-unused']);
+$q=$pdo->prepare('SELECT id FROM admin_accounts WHERE email=?');
+$q->execute(['fixture-admin@example.invalid']);$id=$q->fetchColumn();
+if(!$id){
+    $id=cssv_uuid_v4();
+    $pdo->prepare('INSERT INTO admin_accounts (id,email,password_hash,totp_secret_cipher,totp_enabled_at) VALUES (?,?,?,?,NOW(6))')->execute([$id,'fixture-admin@example.invalid',password_hash(bin2hex(random_bytes(32)),PASSWORD_DEFAULT),'isolated-test-unused']);
+}
 $token=bin2hex(random_bytes(32)); $csrf=bin2hex(random_bytes(32));
 $pdo->prepare('INSERT INTO admin_sessions (id,admin_id,token_hash,csrf_hash,mfa_verified_at,expires_at) VALUES (?,?,?,?,NOW(6),DATE_ADD(NOW(6),INTERVAL 1 HOUR))')->execute([cssv_uuid_v4(),$id,cssv_hash_secret($token),cssv_hash_secret($csrf)]);
 file_put_contents(dirname(__DIR__,2).'/test-artifacts/admin-session.json',json_encode(['token'=>$token,'csrf'=>$csrf],JSON_THROW_ON_ERROR));
