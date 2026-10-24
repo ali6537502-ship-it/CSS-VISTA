@@ -73,6 +73,7 @@ export type Progress = {
   current_day: number
   current_chapter: number
   completed: number[]
+  saved_drills?: SavedDrill[]
   profile: {
     basis: string
     items: {
@@ -84,6 +85,13 @@ export type Progress = {
       review_ids: string[]
     }[]
   }
+}
+export type SavedDrill = {
+  question_id: string
+  choice: number
+  correct: boolean
+  explanation: string
+  created_at: string
 }
 export const blankScratch = (): Scratch => ({
   topic: '',

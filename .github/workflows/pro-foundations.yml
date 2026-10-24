@@ -2,7 +2,7 @@ name: Pro membership foundations
 on:
   pull_request:
     branches: [main]
-    paths: ['tests/browser/**', 'server/bin/pro-topic-package-check.php', 'public/api/_skills*.php', 'public/api/student/skills.php', 'src/features/skills/**', 'src/pages/account/Skills.tsx', 'scripts/skills/**', 'tests/skills/**', 'server/sql/025_integrated_skills.sql', 'public/api/_ability*.php', 'public/api/student/ability.php', 'server/sql/024_general_ability.sql', 'src/features/ability/**', 'scripts/ability/**', 'tests/ability/**', 'public/api/_topics*.php', 'public/api/student/topics.php', 'public/api/admin/topics.php', 'server/sql/022_native_pro_topics.sql', 'server/sql/023_topic_guided_results.sql', 'tests/topics/**', 'src/features/topics/**', 'src/pages/admin/TopicsPanel.tsx', 'src/pages/admin/Admin.tsx', 'src/pages/AccountHome.tsx', 'public/api/_planner*.php', 'public/api/student/planner.php', 'server/sql/020_attempt_planner.sql', 'server/sql/021_connected_reading.sql', 'tests/reading/**', 'src/features/preparation/**', 'src/pages/account/Learning.tsx', 'src/pages/account/Progress.tsx', 'src/pages/account/Tasks.tsx', 'src/components/FpscSyllabusPlanner.tsx', 'tests/planner/**', 'public/api/_tutor*.php', 'public/api/student/tutor.php', 'server/sql/019_scoped_tutor.sql', 'src/features/tutor/**', 'src/pages/account/Tutor.tsx', 'scripts/tutor/**', 'tests/tutor/**', 'public/api/_mentor*.php', 'public/api/student/mentor.php', 'server/sql/018_mentor_records.sql', 'src/features/mentor/**', 'src/pages/account/AnswerPerformance.tsx', 'tests/mentor/**', 'public/api/_precis*.php', 'public/api/student/precis.php', 'public/api/student/precis-feedback.php', 'server/sql/017_precis_evaluations.sql', 'server/sql/016_precis_lab.sql', 'src/features/precis/**', 'src/pages/account/Precis.tsx', 'scripts/precis/**', 'tests/precis/**', 'tests/precis.test.ts', 'public/api/_grammar*.php', 'public/api/student/grammar.php', 'server/sql/015_grammar_progress.sql', 'scripts/grammar/**', 'tests/grammar/**', 'tests/grammarSync.test.ts', 'src/features/grammar/**', 'src/pages/LanguageGrammar.tsx', 'tests/grammarState.test.ts', 'tests/grammarPractice.test.ts', 'public/api/_expression*.php', 'public/api/student/expression.php', 'tests/expression/**', 'src/features/expression/**', 'src/pages/account/Expression.tsx', 'src/pages/GrammarCourse.tsx', 'public/api/_handwriting*.php', 'public/api/student/handwriting*.php', 'server/sql/014_handwriting_workflow.sql', 'server/bin/handwriting-maintenance.php', 'tests/handwriting/**', 'src/features/handwriting/**', 'src/pages/account/Handwriting.tsx', 'public/api/_premium*.php', 'public/api/student/premium-content.php', 'public/api/_premium_files/**', 'scripts/package-premium-content.mjs', 'public/api/_pro*.php', 'public/api/_learning*.php', 'public/api/_ai*.php', 'public/api/student/learning.php', 'public/api/student/ai-usage.php', 'public/api/admin/ai-usage.php', 'server/sql/013_learning_foundations.sql', 'tests/learning/**', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
+    paths: ['public/.htaccess', 'src/App.tsx', 'src/pages/account/shared.tsx', 'src/features/workspace/**', 'src/features/catalog/**', 'src/features/library/**', 'src/features/review/**', 'src/features/learning/**', 'src/pages/account/Library.tsx', 'src/lib/hostingerApi.ts', 'src/data/routeRegistry.mjs', 'public/api/_bootstrap*.php', 'public/api/_account_auth.php', 'public/api/_profile*.php', 'public/api/_pro_release.php', 'public/api/_workspace*.php', 'public/api/student/workspace.php', 'tests/workspace/**', 'tests/preservation/**', 'package.json', 'package-lock.json', 'src/features/factbook/**', 'src/pages/Factbook.tsx', 'public/api/factbook/**', 'server/sql/028_factbook_backup_receipts.sql', 'public/api/_factbook*.php', 'public/api/student/coupons.php', 'public/api/admin/coupons.php', 'src/features/membership/**', 'src/pages/account/Membership.tsx', 'src/pages/admin/CouponsPanel.tsx', 'server/sql/026_pro_coupons.sql', 'server/sql/027_topic_writing_bindings.sql', 'tests/browser/**', 'server/bin/pro-topic-package-check.php', 'public/api/_skills*.php', 'public/api/student/skills.php', 'src/features/skills/**', 'src/pages/account/Skills.tsx', 'scripts/skills/**', 'tests/skills/**', 'tests/academic/**', 'server/sql/025_integrated_skills.sql', 'public/api/_ability*.php', 'public/api/student/ability.php', 'server/sql/024_general_ability.sql', 'src/features/ability/**', 'scripts/ability/**', 'tests/ability/**', 'public/api/_topics*.php', 'public/api/student/topics.php', 'public/api/admin/topics.php', 'server/sql/022_native_pro_topics.sql', 'server/sql/023_topic_guided_results.sql', 'tests/topics/**', 'tests/topicOptionOrder.test.ts', 'src/features/topics/**', 'src/pages/admin/TopicsPanel.tsx', 'src/pages/admin/Admin.tsx', 'src/pages/AccountHome.tsx', 'public/api/_planner*.php', 'public/api/student/planner.php', 'server/sql/020_attempt_planner.sql', 'server/sql/021_connected_reading.sql', 'tests/reading/**', 'src/features/preparation/**', 'src/pages/account/Learning.tsx', 'src/pages/account/Progress.tsx', 'src/pages/account/Tasks.tsx', 'src/components/FpscSyllabusPlanner.tsx', 'tests/planner/**', 'public/api/_tutor*.php', 'public/api/student/tutor.php', 'server/sql/019_scoped_tutor.sql', 'src/features/tutor/**', 'src/pages/account/Tutor.tsx', 'scripts/tutor/**', 'tests/tutor/**', 'public/api/_mentor*.php', 'public/api/student/mentor.php', 'server/sql/018_mentor_records.sql', 'src/features/mentor/**', 'src/pages/account/AnswerPerformance.tsx', 'tests/mentor/**', 'public/api/_precis*.php', 'public/api/student/precis.php', 'public/api/student/precis-feedback.php', 'server/sql/017_precis_evaluations.sql', 'server/sql/016_precis_lab.sql', 'src/features/precis/**', 'src/pages/account/Precis.tsx', 'scripts/precis/**', 'tests/precis/**', 'tests/precis.test.ts', 'public/api/_grammar*.php', 'public/api/student/grammar.php', 'server/sql/015_grammar_progress.sql', 'scripts/grammar/**', 'tests/grammar/**', 'tests/grammarSync.test.ts', 'src/features/grammar/**', 'src/pages/LanguageGrammar.tsx', 'tests/grammarState.test.ts', 'tests/grammarPractice.test.ts', 'public/api/_expression*.php', 'public/api/student/expression.php', 'tests/expression/**', 'src/features/expression/**', 'src/pages/account/Expression.tsx', 'src/pages/GrammarCourse.tsx', 'public/api/_handwriting*.php', 'public/api/student/handwriting*.php', 'server/sql/014_handwriting_workflow.sql', 'server/bin/handwriting-maintenance.php', 'tests/handwriting/**', 'src/features/handwriting/**', 'src/pages/account/Handwriting.tsx', 'public/api/_premium*.php', 'public/api/student/premium-content.php', 'public/api/_premium_files/**', 'scripts/package-premium-content.mjs', 'public/api/_pro*.php', 'public/api/_learning*.php', 'public/api/_ai*.php', 'public/api/student/learning.php', 'public/api/student/ai-usage.php', 'public/api/admin/ai-usage.php', 'server/sql/013_learning_foundations.sql', 'tests/learning/**', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
 permissions:
   contents: read
 jobs:
@@ -44,20 +44,30 @@ jobs:
         run: npm run install:ci
       - name: Check syntax and pure membership rules
         run: |
-          for file in public/api/_skills*.php public/api/student/skills.php tests/skills/*.php public/api/_ability*.php public/api/student/ability.php tests/ability/*.php public/api/_topics*.php public/api/student/topics.php public/api/admin/topics.php tests/topics/*.php public/api/_planner*.php public/api/student/planner.php tests/planner/*.php tests/reading/*.php public/api/_tutor*.php public/api/student/tutor.php tests/tutor/*.php public/api/_mentor*.php public/api/student/mentor.php tests/mentor/*.php public/api/_precis*.php public/api/student/precis.php public/api/student/precis-feedback.php tests/precis/*.php public/api/_grammar*.php public/api/student/grammar.php tests/grammar/*.php public/api/_pro*.php public/api/_learning*.php public/api/_ai*.php public/api/_handwriting*.php public/api/_expression*.php public/api/student/expression.php tests/expression/*.php public/api/student/handwriting*.php public/api/student/membership.php public/api/admin/payments.php public/api/student/learning.php public/api/student/ai-usage.php public/api/admin/ai-usage.php tests/pro/*.php tests/learning/*.php tests/handwriting/*.php server/bin/handwriting-maintenance.php server/bin/ai-operation-sweep.php server/bin/pro-topic-package-check.php; do php -l "$file"; done
+          for file in public/api/_skills*.php public/api/student/skills.php tests/skills/*.php tests/academic/*.php public/api/_ability*.php public/api/student/ability.php tests/ability/*.php public/api/_topics*.php public/api/student/topics.php public/api/admin/topics.php tests/topics/*.php public/api/_planner*.php public/api/student/planner.php tests/planner/*.php tests/reading/*.php public/api/_tutor*.php public/api/student/tutor.php tests/tutor/*.php public/api/_mentor*.php public/api/student/mentor.php tests/mentor/*.php public/api/_precis*.php public/api/student/precis.php public/api/student/precis-feedback.php tests/precis/*.php public/api/_grammar*.php public/api/student/grammar.php tests/grammar/*.php public/api/_pro*.php public/api/_learning*.php public/api/_ai*.php public/api/_handwriting*.php public/api/_expression*.php public/api/student/expression.php tests/expression/*.php public/api/student/handwriting*.php public/api/student/membership.php public/api/student/coupons.php public/api/admin/coupons.php public/api/admin/payments.php public/api/student/learning.php public/api/student/ai-usage.php public/api/admin/ai-usage.php tests/pro/*.php tests/learning/*.php tests/handwriting/*.php server/bin/handwriting-maintenance.php server/bin/ai-operation-sweep.php server/bin/pro-topic-package-check.php; do php -l "$file"; done
           php tests/skills/unit.php
+          php tests/academic/unit.php
+          node --test tests/academic/cost.test.mjs
+          node --test tests/academic/review.test.mjs
+          php server/bin/pro-readiness.php
           python3 scripts/skills/author-curriculum.py --check
+          python3 scripts/skills/author-essay-guidance.py --check
           php tests/ability/unit.php
+          php tests/ability/evidence-unit.php
           node tests/ability/content.mjs
           node tests/ability/reasoning.mjs
           python3 scripts/ability/author-course.py --check
           php tests/topics/unit.php
+          php tests/topics/writing-unit.php
+          php tests/topics/review-unit.php
+          node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs tests/workspace/imports.test.ts
           php tests/reading/unit.php
           php tests/planner/unit.php
           php tests/tutor/unit.php
           node scripts/tutor/export-grammar.mjs --check
           php tests/mentor/unit.php
           php tests/pro/unit.php
+          php tests/pro/coupons-unit.php
           php tests/learning/unit.php
           php tests/handwriting/unit.php
           php tests/expression/unit.php
@@ -67,6 +77,7 @@ jobs:
           node scripts/grammar/export-catalog.mjs --check
           node tests/pro/grammar-preservation.mjs
           node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts tests/precis.test.ts
+          node --test tests/topicOptionOrder.test.ts
       - name: Create isolated database and HTTP runtime
         run: |
           mkdir -p /tmp/cssv-pro-private test-artifacts
@@ -76,22 +87,35 @@ jobs:
       - name: Verify payments, learning, handwriting and expression lifecycle
         run: |
           node tests/skills/security.mjs
+          node tests/skills/quality-security.mjs
+          node tests/skills/sentence-quality-security.mjs
+          node tests/skills/essay-quality-security.mjs
           node tests/skills/ai-security.mjs
           node tests/skills/sources-security.mjs
           node tests/ability/security.mjs
           node tests/ability/reasoning-security.mjs
           node tests/topics/security.mjs
+          php tests/topics/writing-preservation.php
           node tests/reading/security.mjs
           node tests/planner/security.mjs
+          node tests/planner/ability-evidence.mjs
           node tests/tutor/security.mjs
           node tests/pro/security.mjs
+          node tests/pro/coupons-security.mjs
           node tests/pro/paid-access.mjs
           php tests/pro/release-unit.php
           node tests/pro/release-pause.mjs
           node tests/mentor/security.mjs
           node tests/learning/security.mjs
           node tests/handwriting/security.mjs
+          node tests/handwriting/privacy-security.mjs
           node tests/expression/security.mjs
+          node tests/workspace/security.mjs
+          node tests/workspace/retrieval.mjs
+          node tests/workspace/import-security.mjs
+          php tests/workspace/factbook-backup-unit.php
+          node tests/workspace/factbook-backup.mjs
+          php tests/preservation/native-snapshot.php projections > test-artifacts/workspace-query-plans.json
           node tests/grammar/security.mjs
           node tests/precis/security.mjs
           node tests/precis/feedback-security.mjs
@@ -105,9 +129,25 @@ jobs:
           node tests/browser/runtime-routing.mjs
           node tests/browser/runtime.mjs > test-artifacts/browser-runtime.log 2>&1 &
           node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+          node tests/browser/workspace.mjs
+          node tests/browser/workspace-retrieval.mjs
+          node tests/browser/workspace-import.mjs
+          node tests/browser/factbook-backup.mjs
           node tests/browser/skills.mjs
+          node tests/browser/connected-skills.mjs
+          node tests/browser/topic-options.mjs
+          node tests/browser/reasoning-quality.mjs
+          node tests/browser/sentence-quality.mjs
+          node tests/browser/essay-quality.mjs
+          node tests/browser/handwriting-privacy.mjs
           node tests/browser/ability.mjs
+          node tests/browser/learning-continuity.mjs
+          node tests/browser/precis.mjs
+          node tests/browser/mentor-history.mjs
           node tests/browser/pro-pause.mjs
+          node tests/browser/coupons.mjs
+          node tests/browser/accessibility.mjs
+          node --test tests/browser/contrast-review.test.mjs
       - name: Service diagnostics on failure
         if: failure()
         run: tail -n 80 test-artifacts/pro-php.log

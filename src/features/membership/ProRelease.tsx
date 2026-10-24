@@ -18,7 +18,7 @@ export function ProReleaseProvider({ children }: { children: ReactNode }) {
 }
 
 export function ProPausedNotice() {
-  return <main className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold text-slate-950">CSS Vista Pro is temporarily unavailable</h1><p className="mt-4 text-sm leading-7 text-slate-600">We are finalising the Pro learning experience. Your saved work and account records are retained.</p><Link to="/account/dashboard?plan=free" className="mt-6 inline-flex min-h-11 items-center rounded-xl border px-5 text-sm font-semibold">Open Free account</Link></main>
+  return <section className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold text-slate-950">CSS Vista Pro is temporarily unavailable</h1><p className="mt-4 text-sm leading-7 text-slate-600">We are finalising the Pro learning experience. Your saved work and account records are retained.</p><Link to="/account/dashboard?plan=free" className="mt-6 inline-flex min-h-11 items-center rounded-xl border px-5 text-sm font-semibold">Open Free account</Link></section>
 }
 
 export function ProReleaseOutlet() {

@@ -51,7 +51,8 @@ function TopicEditor({ data, refresh }: { data: Queue; refresh: () => void }) {
   const [selected, setSelected] = useState(''),
     [preview, setPreview] = useState<Version>(),
     [reviewed, setReviewed] = useState(false),
-    [reviewNote, setReviewNote] = useState('')
+    [reviewNote, setReviewNote] = useState(''),
+    [reviewManifest, setReviewManifest] = useState('')
   const [versions, setVersions] = useState<{ id: string; title: string; as_of: string }[]>([])
   const [importing, setImporting] = useState(false)
   const batchRunning = useRef(false),
@@ -444,6 +445,10 @@ function TopicEditor({ data, refresh }: { data: Queue; refresh: () => void }) {
                   placeholder="Record the sources and corrections you checked."
                 />
               </div>
+              <label className="grid gap-2 text-sm font-semibold">Approved private review dossier SHA256
+                <input className={field} value={reviewManifest} onChange={event => setReviewManifest(event.target.value.trim())} maxLength={64} disabled={blocked} />
+                <span className="text-sm font-normal leading-7">An operator must retain an independent academic review, coverage/source/key evidence and exact owner authorization in private storage, bound to this edition and content hash. This checkbox cannot replace that dossier. Pro publication remains held.</span>
+              </label>
               <label className="flex items-start gap-3 text-sm leading-7">
                 <input
                   type="checkbox"
@@ -457,7 +462,7 @@ function TopicEditor({ data, refresh }: { data: Queue; refresh: () => void }) {
               </label>
               <button
                 className={primary}
-                disabled={blocked || !reviewed || !reviewNote.trim()}
+                disabled={blocked || !reviewed || !reviewNote.trim() || !/^[a-f0-9]{64}$/.test(reviewManifest)}
                 onClick={() =>
                   void mutate({
                     action: 'publish',
@@ -466,6 +471,7 @@ function TopicEditor({ data, refresh }: { data: Queue; refresh: () => void }) {
                     expected_revision: current.revision,
                     reviewed,
                     review_note: reviewNote,
+                    review_manifest_id: reviewManifest,
                   })
                 }
               >

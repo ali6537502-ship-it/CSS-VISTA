@@ -1,0 +1,1194 @@
+[
+    {
+        "id": "education-knowledge-economy-and-human-capital",
+        "feature": "essay",
+        "title": "Education, Knowledge Economy & Human Capital",
+        "level": "beginner",
+        "explanation": "Treat education as a lifelong system from foundational learning to research and innovation, linking access, quality, equity, skills and institutional governance to productivity and citizenship.",
+        "example": "Use the research directions to formulate questions. They are not a supplied thesis or a verified evidence bank.",
+        "task": "Develop your own thesis and outline within Education, Knowledge Economy & Human Capital.",
+        "roadmap": {
+            "slug": "education-knowledge-economy-and-human-capital",
+            "sections": [
+                {
+                    "letter": "A",
+                    "title": "Scope & Conceptual Foundation",
+                    "instruction": "Define and Distinguish",
+                    "kind": "terms",
+                    "items": [
+                        {
+                            "id": "a7af99f6e",
+                            "text": "Education access"
+                        },
+                        {
+                            "id": "a2c5068e3",
+                            "text": "Learning outcomes"
+                        },
+                        {
+                            "id": "aa8155e14",
+                            "text": "Foundational literacy\/numeracy"
+                        },
+                        {
+                            "id": "aa7ffe1a0",
+                            "text": "Human capital"
+                        },
+                        {
+                            "id": "afe53c90b",
+                            "text": "Knowledge economy"
+                        },
+                        {
+                            "id": "aec92cfcc",
+                            "text": "Skills mismatch"
+                        },
+                        {
+                            "id": "aacd4e334",
+                            "text": "TVET"
+                        },
+                        {
+                            "id": "ac524dd4e",
+                            "text": "Higher education"
+                        },
+                        {
+                            "id": "a6585825d",
+                            "text": "Research and development"
+                        },
+                        {
+                            "id": "a91602424",
+                            "text": "Lifelong learning"
+                        },
+                        {
+                            "id": "a9cde4c99",
+                            "text": "Digital literacy"
+                        },
+                        {
+                            "id": "a9950910b",
+                            "text": "Teacher effectiveness"
+                        },
+                        {
+                            "id": "af104d050",
+                            "text": "Curriculum"
+                        },
+                        {
+                            "id": "abf346a45",
+                            "text": "Assessment"
+                        },
+                        {
+                            "id": "a44cffd01",
+                            "text": "Education finance"
+                        },
+                        {
+                            "id": "a0cd706eb",
+                            "text": "Equity"
+                        },
+                        {
+                            "id": "a33cdda79",
+                            "text": "School readiness"
+                        },
+                        {
+                            "id": "aedbb7d5a",
+                            "text": "Learning poverty"
+                        },
+                        {
+                            "id": "a29391003",
+                            "text": "Innovation ecosystem"
+                        }
+                    ]
+                },
+                {
+                    "letter": "B",
+                    "title": "Origin, Evolution & Turning Points",
+                    "instruction": "",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "bfa42ddfc",
+                            "text": "Trace the shift from enrolment-focused education policy to learning outcomes and skills."
+                        },
+                        {
+                            "id": "b319aef5d",
+                            "text": "Build a Pakistan education timeline around constitutional responsibility, devolution, major policy changes and assessment reforms."
+                        },
+                        {
+                            "id": "baf313d4b",
+                            "text": "Track the expansion of higher education, universities, research funding and quality assurance."
+                        },
+                        {
+                            "id": "b27079910",
+                            "text": "Trace TVET and skills policy evolution and the connection to labour-market demand."
+                        },
+                        {
+                            "id": "bce6320da",
+                            "text": "Study how digital education and AI changed the meaning of literacy and employability."
+                        }
+                    ]
+                },
+                {
+                    "letter": "C",
+                    "title": "Analytical Frameworks",
+                    "instruction": "Master Before Data Collection",
+                    "kind": "frameworks",
+                    "items": [
+                        {
+                            "id": "c72a644c6",
+                            "text": "Access-quality-equity-relevance framework"
+                        },
+                        {
+                            "id": "ce5cca3ba",
+                            "text": "Human capital theory"
+                        },
+                        {
+                            "id": "c61ff97fd",
+                            "text": "Capabilities approach"
+                        },
+                        {
+                            "id": "c798dafd4",
+                            "text": "Education production function"
+                        },
+                        {
+                            "id": "c256b1a3f",
+                            "text": "Learning poverty\/foundational learning"
+                        },
+                        {
+                            "id": "c22286929",
+                            "text": "School-to-work transition"
+                        },
+                        {
+                            "id": "c9e35a1e8",
+                            "text": "Knowledge-economy chain: learning → skills → R&D → innovation → productivity"
+                        },
+                        {
+                            "id": "cff978e3e",
+                            "text": "Lifelong-learning model"
+                        }
+                    ]
+                },
+                {
+                    "letter": "D",
+                    "title": "Master Dimensions",
+                    "instruction": "Build a Separate Evidence Folder for Each",
+                    "kind": "dimensions",
+                    "items": [
+                        {
+                            "id": "dc49f3119",
+                            "text": "Early childhood and school readiness."
+                        },
+                        {
+                            "id": "de2726348",
+                            "text": "Primary\/secondary access and retention."
+                        },
+                        {
+                            "id": "df8c26b54",
+                            "text": "Learning outcomes and assessment."
+                        },
+                        {
+                            "id": "daeab18e9",
+                            "text": "Teacher recruitment, training, attendance, support and incentives."
+                        },
+                        {
+                            "id": "d4d72438f",
+                            "text": "Curriculum, textbooks, language of instruction and assessment alignment."
+                        },
+                        {
+                            "id": "d210621aa",
+                            "text": "Gender, disability, income and regional inequality."
+                        },
+                        {
+                            "id": "dacf4c8b8",
+                            "text": "Education finance, spending efficiency and school infrastructure."
+                        },
+                        {
+                            "id": "d0eb92ff8",
+                            "text": "TVET, apprenticeships and employer linkages."
+                        },
+                        {
+                            "id": "d5e489015",
+                            "text": "Higher education quality, research, governance and employability."
+                        },
+                        {
+                            "id": "d68165498",
+                            "text": "Digital literacy, AI literacy and online\/hybrid education."
+                        },
+                        {
+                            "id": "dc216c6d7",
+                            "text": "Research, innovation and university-industry collaboration."
+                        },
+                        {
+                            "id": "dd26c97b7",
+                            "text": "Citizenship, tolerance, critical thinking and social cohesion."
+                        }
+                    ]
+                },
+                {
+                    "letter": "E",
+                    "title": "Data & Evidence",
+                    "instruction": "Collect, Time-Stamp and Source",
+                    "kind": "indicators",
+                    "items": [
+                        {
+                            "id": "ee677c0f7",
+                            "text": "literacy by age, sex and region."
+                        },
+                        {
+                            "id": "e1647362c",
+                            "text": "enrolment and completion rates."
+                        },
+                        {
+                            "id": "ecb2cd84c",
+                            "text": "out-of-school children."
+                        },
+                        {
+                            "id": "ef4fcd182",
+                            "text": "learning-assessment results."
+                        },
+                        {
+                            "id": "e1850afc3",
+                            "text": "teacher-student ratios and teacher indicators."
+                        },
+                        {
+                            "id": "e49d4f61b",
+                            "text": "school infrastructure."
+                        },
+                        {
+                            "id": "ed869dd8f",
+                            "text": "education spending and unit costs."
+                        },
+                        {
+                            "id": "e336d4ca6",
+                            "text": "TVET enrolment, completion and employment."
+                        },
+                        {
+                            "id": "ea40f71dc",
+                            "text": "higher-education enrolment and graduate output."
+                        },
+                        {
+                            "id": "e346de597",
+                            "text": "research publications, patents and R&D spending."
+                        },
+                        {
+                            "id": "e7fda5def",
+                            "text": "digital access in schools\/households."
+                        },
+                        {
+                            "id": "ebd473f12",
+                            "text": "employment outcomes by education level."
+                        }
+                    ]
+                },
+                {
+                    "letter": "F",
+                    "title": "Pakistan Deep-Dive",
+                    "instruction": "Mandatory Directions",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "f0b97e102",
+                            "text": "Disaggregate every education indicator by province, gender, rural\/urban and income where possible."
+                        },
+                        {
+                            "id": "f27f92947",
+                            "text": "Build a foundational-learning file: what children can actually read, understand and calculate at key grades."
+                        },
+                        {
+                            "id": "ff0459505",
+                            "text": "Study out-of-school children by age, region and reason, not just the national total."
+                        },
+                        {
+                            "id": "f8ffeeecf",
+                            "text": "Map public, private, madrasa and non-formal education systems and their regulatory\/governance issues."
+                        },
+                        {
+                            "id": "f9a374b5a",
+                            "text": "Examine teacher policy: recruitment, deployment, professional development, classroom support and accountability."
+                        },
+                        {
+                            "id": "f08288679",
+                            "text": "Study curriculum and assessment alignment; distinguish learning goals from examination incentives."
+                        },
+                        {
+                            "id": "fc0bf96b8",
+                            "text": "Map TVET pathways and employer demand in priority sectors."
+                        },
+                        {
+                            "id": "fe8f79f9b",
+                            "text": "Assess university quality through faculty, research, governance, graduate employability and industry linkages."
+                        },
+                        {
+                            "id": "fb81bdafa",
+                            "text": "Study digital divide, device\/connectivity access and AI-assisted learning opportunities and risks."
+                        },
+                        {
+                            "id": "ffc9cd1eb",
+                            "text": "Connect education reform to demographic dividend, women’s participation, productivity and social mobility."
+                        }
+                    ]
+                },
+                {
+                    "letter": "G",
+                    "title": "Global & Comparative Case Bank",
+                    "instruction": "",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "gae2d6631",
+                            "text": "Vietnam: strong learning outcomes relative to income."
+                        },
+                        {
+                            "id": "g86e4aca1",
+                            "text": "Finland: teacher professionalism and system coherence, noting contextual differences."
+                        },
+                        {
+                            "id": "g559ac4fe",
+                            "text": "Singapore: skills, teacher development and knowledge-economy alignment."
+                        },
+                        {
+                            "id": "gaa5468d2",
+                            "text": "Germany: vocational\/apprenticeship pathways."
+                        },
+                        {
+                            "id": "gf76a6ada",
+                            "text": "India: large-scale foundational-learning and digital-public-education initiatives."
+                        },
+                        {
+                            "id": "g91cb9ccf",
+                            "text": "One case where rapid enrolment expansion did not produce learning gains."
+                        }
+                    ]
+                },
+                {
+                    "letter": "H",
+                    "title": "Laws, Policies, Reports & Primary Documents",
+                    "instruction": "Verify Status; Extract Relevant Sections",
+                    "kind": "documents",
+                    "items": [
+                        {
+                            "id": "h3743a016",
+                            "text": "Pakistan education statistics and economic survey."
+                        },
+                        {
+                            "id": "h8fc68f4f",
+                            "text": "PBS education\/literacy data."
+                        },
+                        {
+                            "id": "h2abd76b2",
+                            "text": "UNESCO Institute for Statistics."
+                        },
+                        {
+                            "id": "hddf040d1",
+                            "text": "UNESCO Global Education Monitoring Report."
+                        },
+                        {
+                            "id": "hcaa66ba9",
+                            "text": "UNICEF Pakistan."
+                        },
+                        {
+                            "id": "he4b8c9b5",
+                            "text": "HEC annual\/statistical reports."
+                        },
+                        {
+                            "id": "h34621eff",
+                            "text": "provincial education-sector plans."
+                        },
+                        {
+                            "id": "hbe315624",
+                            "text": "WIPO innovation indicators."
+                        }
+                    ]
+                },
+                {
+                    "letter": "I",
+                    "title": "Priority Source Families",
+                    "instruction": "Use Latest Available Data; Preserve Methodology",
+                    "kind": "sources",
+                    "items": [
+                        {
+                            "id": "ia9f169e2",
+                            "text": "Pakistan Economic Survey."
+                        },
+                        {
+                            "id": "i8dcfdcd5",
+                            "text": "PBS."
+                        },
+                        {
+                            "id": "i572ad2b4",
+                            "text": "UNESCO UIS."
+                        },
+                        {
+                            "id": "if56d47df",
+                            "text": "UNESCO GEM Report."
+                        },
+                        {
+                            "id": "ib5db201b",
+                            "text": "UNICEF Pakistan."
+                        },
+                        {
+                            "id": "i4c0fe28c",
+                            "text": "HEC Pakistan."
+                        },
+                        {
+                            "id": "i5fb13376",
+                            "text": "provincial education departments."
+                        },
+                        {
+                            "id": "i0a8d660c",
+                            "text": "WIPO."
+                        }
+                    ]
+                },
+                {
+                    "letter": "J",
+                    "title": "Counterarguments, Trade-Offs & Contested Questions",
+                    "instruction": "",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "j9e46025f",
+                            "text": "Access vs quality: should systems expand seats first or fix learning first?"
+                        },
+                        {
+                            "id": "j8e83961f",
+                            "text": "Public vs private provision and the role of regulation."
+                        },
+                        {
+                            "id": "j6c0f8a7d",
+                            "text": "Mother-tongue instruction vs national\/international languages."
+                        },
+                        {
+                            "id": "ja1f7d804",
+                            "text": "Standardized testing: accountability tool or teaching distortion?"
+                        },
+                        {
+                            "id": "jc99145f1",
+                            "text": "University expansion vs quality and research concentration."
+                        },
+                        {
+                            "id": "j119addd1",
+                            "text": "AI in education: personalized learning vs dependency and academic integrity."
+                        }
+                    ]
+                },
+                {
+                    "letter": "K",
+                    "title": "Reform & Solution Directions",
+                    "instruction": "Short \/ Medium \/ Long Term",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "kce5e15e3",
+                            "text": "Make foundational learning the first system-wide priority."
+                        },
+                        {
+                            "id": "k1c4aa4f8",
+                            "text": "Use teacher coaching, subject support and deployment reform rather than training alone."
+                        },
+                        {
+                            "id": "k7015ccae",
+                            "text": "Align curriculum, textbooks, classroom practice and assessment."
+                        },
+                        {
+                            "id": "k5116a616",
+                            "text": "Target excluded groups with transport, stipends, flexible schooling and disability support."
+                        },
+                        {
+                            "id": "k77a94894",
+                            "text": "Build employer-linked TVET and apprenticeship systems."
+                        },
+                        {
+                            "id": "kc9866185",
+                            "text": "Reform university governance, research incentives and career services."
+                        },
+                        {
+                            "id": "k50c5d26a",
+                            "text": "Develop national digital\/AI literacy standards."
+                        },
+                        {
+                            "id": "k03fcfac7",
+                            "text": "Use education data for school-level diagnosis while protecting against gaming and exclusion."
+                        }
+                    ]
+                },
+                {
+                    "letter": "L",
+                    "title": "Essay \/ Analytical Title Bank",
+                    "instruction": "Research Angles, Not Predicted Papers",
+                    "kind": "titles",
+                    "items": [
+                        {
+                            "id": "la43bf7ae",
+                            "text": "Education reform is economic reform"
+                        },
+                        {
+                            "id": "l1bc9fa5a",
+                            "text": "Schooling without learning is a development failure"
+                        },
+                        {
+                            "id": "l87a5f9a6",
+                            "text": "Human capital and Pakistan’s demographic future"
+                        },
+                        {
+                            "id": "lde4c68e8",
+                            "text": "From degrees to skills: rethinking employability"
+                        },
+                        {
+                            "id": "l2fbe76b4",
+                            "text": "Knowledge economy begins with foundational learning"
+                        },
+                        {
+                            "id": "lc6baa4d5",
+                            "text": "AI and the future of education"
+                        },
+                        {
+                            "id": "lb8ec7181",
+                            "text": "Education inequality and social mobility"
+                        },
+                        {
+                            "id": "l0f83d642",
+                            "text": "Universities as engines of innovation and national development"
+                        }
+                    ]
+                },
+                {
+                    "letter": "M",
+                    "title": "Theme-Specific Search Seed",
+                    "instruction": "",
+                    "kind": "search",
+                    "items": [
+                        {
+                            "id": "m14fdd92d",
+                            "text": "“Education, Knowledge Economy & Human Capital official report” — then replace “official report” with the exact indicator, policy, law or institution being researched."
+                        }
+                    ]
+                }
+            ]
+        },
+        "attribution": "Existing CSS Vista Essay Themes 2027 research roadmap; preserve its research directions and source-verification requirements.",
+        "stages": [
+            {
+                "id": "understanding",
+                "title": "1 · Understand the theme",
+                "teach": "Read the actual roadmap brief. State the central issue, a boundary and a question within that boundary. The roadmap gives research directions; it does not establish that every listed claim is true.",
+                "example": "For a broad access theme, studying a specific barrier can be within scope; a disconnected personal preference may not be.",
+                "question": "Explain the theme in two simple sentences. Name one issue that belongs within it.",
+                "min_words": 12
+            },
+            {
+                "id": "brainstorm",
+                "title": "2 · Brainstorm",
+                "teach": "Generate your own ideas. Connect each to the theme and identify at least one idea that should be excluded. Beginners: start with who is affected, how and why. Intermediate: consider institutions and alternatives. Advanced: examine conditions and trade-offs.",
+                "example": "An access proposal could raise questions about timing, resources and unequal effects; those are questions for research, not proven findings.",
+                "question": "Who is affected, what difficulty might they face, and why does it belong to this theme?",
+                "min_words": 15
+            },
+            {
+                "id": "thesis",
+                "title": "3 · Develop a thesis",
+                "teach": "A theme is a topic; a thesis is a defensible central argument about it. State your position, reasoning direction and necessary qualification. Use the actual theme, not a generic slogan.",
+                "example": "A trial can be defended under specified conditions without claiming it will solve every problem.",
+                "question": "What do you think about one issue within the theme, and what is your main reason?",
+                "min_words": 8
+            },
+            {
+                "id": "argument",
+                "title": "4 · Construct arguments",
+                "teach": "Develop a claim, reason and relevant support. Mark the evidence you still need. You can send this saved work to the Argumentation Builder and explicitly bring its revision back.",
+                "example": "Explain why the reason supports the thesis rather than adding an unrelated impressive quotation.",
+                "question": "Write one claim, explain your reason, and name the evidence you would need.",
+                "min_words": 20
+            },
+            {
+                "id": "analysis",
+                "title": "5 · Analyse critically",
+                "teach": "Examine a mechanism, competing view, limitation and implication. Use the Analytical Builder to strengthen your own analysis without replacing your essay record.",
+                "example": "A plausible explanation still needs an alternative explanation and a way to distinguish them.",
+                "question": "What is one possible objection, and when might your proposed answer fail?",
+                "min_words": 20
+            },
+            {
+                "id": "outline",
+                "title": "6 · Build an outline",
+                "teach": "Organise your thesis, main headings, arguments, evidence needs and conclusion. Check relevance, sequence, overlap and balance. Each heading needs a clear job.",
+                "example": "A useful outline separates the central claim, supporting reasoning, serious objection and qualified conclusion.",
+                "question": "Arrange your thesis, two different reasons, an objection and a conclusion into headings.",
+                "min_words": 30
+            },
+            {
+                "id": "practice",
+                "title": "7 · Practise and revise",
+                "teach": "Write an independent paragraph or essay draft based on your outline. Review organisation, logic, expression and coherence. Saved revisions preserve earlier versions; optional AI feedback is formative and cannot change human mentor marks.",
+                "example": "After drafting, check whether each paragraph advances the thesis and whether factual support is actually verified.",
+                "question": "Write one paragraph from your outline in your own words.",
+                "min_words": 30
+            }
+        ],
+        "edition": "skills-2026-10-v3"
+    },
+    {
+        "id": "palestine-international-law-and-crisis-of-global-governance",
+        "feature": "essay",
+        "title": "Palestine, International Law & Crisis of Global Governance",
+        "level": "advanced",
+        "explanation": "Build a legal-institutional and humanitarian research file that clearly separates verified facts, legal questions, court findings or orders, state positions and contested political claims.",
+        "example": "Use the research directions to formulate questions. They are not a supplied thesis or a verified evidence bank.",
+        "task": "Develop your own thesis and outline within Palestine, International Law & Crisis of Global Governance.",
+        "roadmap": {
+            "slug": "palestine-international-law-and-crisis-of-global-governance",
+            "sections": [
+                {
+                    "letter": "A",
+                    "title": "Scope & Conceptual Foundation",
+                    "instruction": "Define and Distinguish",
+                    "kind": "terms",
+                    "items": [
+                        {
+                            "id": "a061d1a1d",
+                            "text": "Self-determination"
+                        },
+                        {
+                            "id": "a885141cc",
+                            "text": "Occupation"
+                        },
+                        {
+                            "id": "a98c97915",
+                            "text": "International humanitarian law"
+                        },
+                        {
+                            "id": "a78e37b21",
+                            "text": "International human rights law"
+                        },
+                        {
+                            "id": "a6e329ccf",
+                            "text": "Distinction"
+                        },
+                        {
+                            "id": "a0ed9edc4",
+                            "text": "Proportionality"
+                        },
+                        {
+                            "id": "aa87446e9",
+                            "text": "Military necessity"
+                        },
+                        {
+                            "id": "a452d454e",
+                            "text": "Collective punishment"
+                        },
+                        {
+                            "id": "a4db193e7",
+                            "text": "Humanitarian access"
+                        },
+                        {
+                            "id": "a2a64b96e",
+                            "text": "State recognition"
+                        },
+                        {
+                            "id": "ac7238278",
+                            "text": "War crimes"
+                        },
+                        {
+                            "id": "afc19766c",
+                            "text": "Crimes against humanity"
+                        },
+                        {
+                            "id": "a5aed5424",
+                            "text": "Genocide Convention"
+                        },
+                        {
+                            "id": "a4d5bc03f",
+                            "text": "Jurisdiction"
+                        },
+                        {
+                            "id": "a93c0cb1f",
+                            "text": "Advisory opinion"
+                        },
+                        {
+                            "id": "a8775882e",
+                            "text": "Provisional measures"
+                        },
+                        {
+                            "id": "a7e44d7dd",
+                            "text": "Accountability"
+                        },
+                        {
+                            "id": "a2fe18904",
+                            "text": "Veto power"
+                        }
+                    ]
+                },
+                {
+                    "letter": "B",
+                    "title": "Origin, Evolution & Turning Points",
+                    "instruction": "",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "b21b118be",
+                            "text": "Build a carefully sourced timeline from late Ottoman\/British Mandate background through UN partition debates, wars, occupation and peace-process milestones."
+                        },
+                        {
+                            "id": "b273f99b1",
+                            "text": "Trace the evolution of the Palestinian question in UN organs and international courts."
+                        },
+                        {
+                            "id": "b14cc48fa",
+                            "text": "Separate major wars and territorial changes from later settlement, blockade and peace-process developments."
+                        },
+                        {
+                            "id": "b6d28c9fa",
+                            "text": "Build a timeline of relevant ICJ\/ICC proceedings using official court documents only."
+                        },
+                        {
+                            "id": "b68961c38",
+                            "text": "Track humanitarian and displacement developments using UN agencies, clearly date-stamping every figure."
+                        }
+                    ]
+                },
+                {
+                    "letter": "C",
+                    "title": "Analytical Frameworks",
+                    "instruction": "Master Before Data Collection",
+                    "kind": "frameworks",
+                    "items": [
+                        {
+                            "id": "cb937b10b",
+                            "text": "UN Charter and collective security"
+                        },
+                        {
+                            "id": "c1cb09128",
+                            "text": "Self-determination"
+                        },
+                        {
+                            "id": "c970f7810",
+                            "text": "Law of occupation"
+                        },
+                        {
+                            "id": "cec809101",
+                            "text": "IHL conduct-of-hostilities rules"
+                        },
+                        {
+                            "id": "c702d710c",
+                            "text": "International criminal accountability"
+                        },
+                        {
+                            "id": "c6dd14e7f",
+                            "text": "State responsibility"
+                        },
+                        {
+                            "id": "c607bed45",
+                            "text": "Recognition and statehood"
+                        },
+                        {
+                            "id": "c768b23ce",
+                            "text": "Security Council veto and institutional legitimacy"
+                        },
+                        {
+                            "id": "c0e9ec256",
+                            "text": "Global-governance legitimacy"
+                        }
+                    ]
+                },
+                {
+                    "letter": "D",
+                    "title": "Master Dimensions",
+                    "instruction": "Build a Separate Evidence Folder for Each",
+                    "kind": "dimensions",
+                    "items": [
+                        {
+                            "id": "d279a2c1c",
+                            "text": "Historical context and competing narratives."
+                        },
+                        {
+                            "id": "dea4b1122",
+                            "text": "Status of territory and self-determination."
+                        },
+                        {
+                            "id": "d7e728795",
+                            "text": "Occupation law and settlements."
+                        },
+                        {
+                            "id": "dbfc624a9",
+                            "text": "Conduct of hostilities and civilian protection."
+                        },
+                        {
+                            "id": "d74307960",
+                            "text": "Humanitarian access and displacement."
+                        },
+                        {
+                            "id": "dfa5ac77e",
+                            "text": "UN Security Council and General Assembly roles."
+                        },
+                        {
+                            "id": "db3bdd090",
+                            "text": "ICJ and ICC jurisdiction and proceedings."
+                        },
+                        {
+                            "id": "d1ca2c531",
+                            "text": "Recognition, diplomacy and statehood."
+                        },
+                        {
+                            "id": "d565198e1",
+                            "text": "Peace-process frameworks and obstacles."
+                        },
+                        {
+                            "id": "d9f2f1125",
+                            "text": "Global-governance legitimacy and selective-enforcement debate."
+                        },
+                        {
+                            "id": "db9fc1e9b",
+                            "text": "Regional security and humanitarian spillovers."
+                        },
+                        {
+                            "id": "d1a84468e",
+                            "text": "Pakistan’s official diplomatic position."
+                        }
+                    ]
+                },
+                {
+                    "letter": "E",
+                    "title": "Data & Evidence",
+                    "instruction": "Collect, Time-Stamp and Source",
+                    "kind": "indicators",
+                    "items": [
+                        {
+                            "id": "e014a2c75",
+                            "text": "UN resolutions and voting records."
+                        },
+                        {
+                            "id": "e8a8d7f2d",
+                            "text": "ICJ and ICC official case documents."
+                        },
+                        {
+                            "id": "e7887359a",
+                            "text": "UN OCHA humanitarian indicators."
+                        },
+                        {
+                            "id": "eef4a557f",
+                            "text": "UNRWA data within mandate and methodology limits."
+                        },
+                        {
+                            "id": "e0819b46e",
+                            "text": "UNHCR\/displacement data where applicable."
+                        },
+                        {
+                            "id": "eb5be8603",
+                            "text": "recognition and diplomatic developments."
+                        },
+                        {
+                            "id": "e8e40b027",
+                            "text": "aid flows and access indicators."
+                        },
+                        {
+                            "id": "e132ccf3b",
+                            "text": "official ceasefire and negotiation documents."
+                        },
+                        {
+                            "id": "e5d652363",
+                            "text": "Pakistan official statements."
+                        }
+                    ]
+                },
+                {
+                    "letter": "F",
+                    "title": "Pakistan Deep-Dive",
+                    "instruction": "Mandatory Directions",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "f0ede9b57",
+                            "text": "Use only official Foreign Office or UN mission statements to describe Pakistan’s position."
+                        },
+                        {
+                            "id": "fb48c33f6",
+                            "text": "Map Pakistan’s voting and diplomatic participation in relevant UN forums when required."
+                        },
+                        {
+                            "id": "fd4df222a",
+                            "text": "Separate public rhetoric from formal legal and diplomatic positions."
+                        },
+                        {
+                            "id": "faf08b4ef",
+                            "text": "Prepare the theme for essay use through international law, humanitarian governance and multilateral legitimacy rather than partisan advocacy."
+                        }
+                    ]
+                },
+                {
+                    "letter": "G",
+                    "title": "Global & Comparative Case Bank",
+                    "instruction": "",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "g6efcd2d0",
+                            "text": "Compare Security Council responses across conflicts carefully and with like-for-like legal or institutional questions."
+                        },
+                        {
+                            "id": "g7b8c357f",
+                            "text": "Use other occupation or self-determination cases only for specific legal principles, not simplistic equivalence."
+                        },
+                        {
+                            "id": "g9f3f73cb",
+                            "text": "Study peace-process cases for negotiation design, guarantees and implementation."
+                        },
+                        {
+                            "id": "gfcef12ae",
+                            "text": "Study international-criminal-justice cases to understand jurisdiction and enforcement limits."
+                        }
+                    ]
+                },
+                {
+                    "letter": "H",
+                    "title": "Laws, Policies, Reports & Primary Documents",
+                    "instruction": "Verify Status; Extract Relevant Sections",
+                    "kind": "documents",
+                    "items": [
+                        {
+                            "id": "he9c8fa65",
+                            "text": "UN Charter."
+                        },
+                        {
+                            "id": "h76187e5d",
+                            "text": "Geneva Conventions and ICRC IHL resources."
+                        },
+                        {
+                            "id": "hbae306bc",
+                            "text": "relevant UN Security Council and General Assembly resolutions."
+                        },
+                        {
+                            "id": "hd9c5139c",
+                            "text": "ICJ official judgments, orders and advisory opinions."
+                        },
+                        {
+                            "id": "h75660f87",
+                            "text": "ICC official filings and decisions."
+                        },
+                        {
+                            "id": "hf70b82d6",
+                            "text": "UN OCHA occupied Palestinian territory reporting."
+                        },
+                        {
+                            "id": "h0f5c748b",
+                            "text": "UNRWA official data."
+                        },
+                        {
+                            "id": "ha90c3fe9",
+                            "text": "Pakistan Ministry of Foreign Affairs statements."
+                        }
+                    ]
+                },
+                {
+                    "letter": "I",
+                    "title": "Priority Source Families",
+                    "instruction": "Use Latest Available Data; Preserve Methodology",
+                    "kind": "sources",
+                    "items": [
+                        {
+                            "id": "i9fa7107f",
+                            "text": "United Nations."
+                        },
+                        {
+                            "id": "ibad37a4e",
+                            "text": "UN Security Council."
+                        },
+                        {
+                            "id": "i005ff932",
+                            "text": "ICJ."
+                        },
+                        {
+                            "id": "i683a2660",
+                            "text": "ICC."
+                        },
+                        {
+                            "id": "i53d17537",
+                            "text": "ICRC."
+                        },
+                        {
+                            "id": "i753ac5d1",
+                            "text": "UN OCHA."
+                        },
+                        {
+                            "id": "iaf6e7af8",
+                            "text": "UNRWA."
+                        },
+                        {
+                            "id": "i0b9b24af",
+                            "text": "Ministry of Foreign Affairs Pakistan."
+                        }
+                    ]
+                },
+                {
+                    "letter": "J",
+                    "title": "Counterarguments, Trade-Offs & Contested Questions",
+                    "instruction": "",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "j223538bb",
+                            "text": "Effectiveness and legitimacy of the Security Council veto."
+                        },
+                        {
+                            "id": "j55a17a74",
+                            "text": "Universal international law vs allegations of selective enforcement."
+                        },
+                        {
+                            "id": "j1fd7e73f",
+                            "text": "Legal accountability vs political feasibility of enforcement."
+                        },
+                        {
+                            "id": "ja6b932d1",
+                            "text": "Humanitarian access and security claims."
+                        },
+                        {
+                            "id": "j9d6b16de",
+                            "text": "Recognition and statehood as legal, diplomatic and political questions."
+                        },
+                        {
+                            "id": "j7506aa6c",
+                            "text": "Can international courts influence conflicts without direct enforcement power?"
+                        }
+                    ]
+                },
+                {
+                    "letter": "K",
+                    "title": "Reform & Solution Directions",
+                    "instruction": "Short \/ Medium \/ Long Term",
+                    "kind": "directions",
+                    "items": [
+                        {
+                            "id": "k686cd235",
+                            "text": "Strengthen evidence-based humanitarian monitoring and civilian-protection mechanisms."
+                        },
+                        {
+                            "id": "ke02b1431",
+                            "text": "Support consistent application of international law and transparent legal reasoning."
+                        },
+                        {
+                            "id": "k5b084fee",
+                            "text": "Improve ceasefire-monitoring and humanitarian-access arrangements."
+                        },
+                        {
+                            "id": "k73d9dbc5",
+                            "text": "Study Security Council reform proposals neutrally, including feasibility constraints."
+                        },
+                        {
+                            "id": "kd7aa489e",
+                            "text": "Support diplomacy that links immediate humanitarian protection to durable political settlement."
+                        },
+                        {
+                            "id": "k2d818bf1",
+                            "text": "Protect independence and due process of international judicial institutions."
+                        }
+                    ]
+                },
+                {
+                    "letter": "L",
+                    "title": "Essay \/ Analytical Title Bank",
+                    "instruction": "Research Angles, Not Predicted Papers",
+                    "kind": "titles",
+                    "items": [
+                        {
+                            "id": "l87cc8a46",
+                            "text": "Palestine and the crisis of global governance"
+                        },
+                        {
+                            "id": "lbab1fd04",
+                            "text": "International law without enforcement: principle or promise?"
+                        },
+                        {
+                            "id": "l2fb3bfba",
+                            "text": "The Security Council veto and the legitimacy of the United Nations"
+                        },
+                        {
+                            "id": "le39d5565",
+                            "text": "Humanitarian law in contemporary conflict"
+                        },
+                        {
+                            "id": "l015bad53",
+                            "text": "Self-determination and the international system"
+                        },
+                        {
+                            "id": "l0de6330a",
+                            "text": "Can international courts constrain war?"
+                        },
+                        {
+                            "id": "ldfc66c7b",
+                            "text": "Selective enforcement and the credibility of global institutions"
+                        },
+                        {
+                            "id": "lffa55ddd",
+                            "text": "Peace requires both law and politics"
+                        }
+                    ]
+                },
+                {
+                    "letter": "M",
+                    "title": "Theme-Specific Search Seed",
+                    "instruction": "",
+                    "kind": "search",
+                    "items": [
+                        {
+                            "id": "m0ff34e59",
+                            "text": "“Palestine, International Law & Crisis of Global Governance official report” — then replace “official report” with the exact indicator, policy, law or institution being researched."
+                        }
+                    ]
+                }
+            ]
+        },
+        "attribution": "Existing CSS Vista Essay Themes 2027 research roadmap; preserve its research directions and source-verification requirements.",
+        "stages": [
+            {
+                "id": "understanding",
+                "title": "1 · Understand the theme",
+                "teach": "Read the actual roadmap brief. State the central issue, a boundary and a question within that boundary. The roadmap gives research directions; it does not establish that every listed claim is true.",
+                "example": "For a broad access theme, studying a specific barrier can be within scope; a disconnected personal preference may not be.",
+                "question": "Define the contested concept, the limits of the theme and a plausible competing framing.",
+                "min_words": 12
+            },
+            {
+                "id": "brainstorm",
+                "title": "2 · Brainstorm",
+                "teach": "Generate your own ideas. Connect each to the theme and identify at least one idea that should be excluded. Beginners: start with who is affected, how and why. Intermediate: consider institutions and alternatives. Advanced: examine conditions and trade-offs.",
+                "example": "An access proposal could raise questions about timing, resources and unequal effects; those are questions for research, not proven findings.",
+                "question": "Develop competing explanations, structural dimensions and trade-offs; justify the scope you exclude.",
+                "min_words": 15
+            },
+            {
+                "id": "thesis",
+                "title": "3 · Develop a thesis",
+                "teach": "A theme is a topic; a thesis is a defensible central argument about it. State your position, reasoning direction and necessary qualification. Use the actual theme, not a generic slogan.",
+                "example": "A trial can be defended under specified conditions without claiming it will solve every problem.",
+                "question": "Construct a qualified thesis that specifies a mechanism, limits and the rival view it challenges.",
+                "min_words": 8
+            },
+            {
+                "id": "argument",
+                "title": "4 · Construct arguments",
+                "teach": "Develop a claim, reason and relevant support. Mark the evidence you still need. You can send this saved work to the Argumentation Builder and explicitly bring its revision back.",
+                "example": "Explain why the reason supports the thesis rather than adding an unrelated impressive quotation.",
+                "question": "Develop a defensible inference, state its assumptions, and explain how authentic evidence could challenge it.",
+                "min_words": 20
+            },
+            {
+                "id": "analysis",
+                "title": "5 · Analyse critically",
+                "teach": "Examine a mechanism, competing view, limitation and implication. Use the Analytical Builder to strengthen your own analysis without replacing your essay record.",
+                "example": "A plausible explanation still needs an alternative explanation and a way to distinguish them.",
+                "question": "Use a counterfactual and competing mechanism to evaluate your claim; weigh short- and long-term trade-offs.",
+                "min_words": 20
+            },
+            {
+                "id": "outline",
+                "title": "6 · Build an outline",
+                "teach": "Organise your thesis, main headings, arguments, evidence needs and conclusion. Check relevance, sequence, overlap and balance. Each heading needs a clear job.",
+                "example": "A useful outline separates the central claim, supporting reasoning, serious objection and qualified conclusion.",
+                "question": "Create an evaluative outline that distinguishes evidence, inference, rebuttal, limitations and the resulting judgement.",
+                "min_words": 30
+            },
+            {
+                "id": "practice",
+                "title": "7 · Practise and revise",
+                "teach": "Write an independent paragraph or essay draft based on your outline. Review organisation, logic, expression and coherence. Saved revisions preserve earlier versions; optional AI feedback is formative and cannot change human mentor marks.",
+                "example": "After drafting, check whether each paragraph advances the thesis and whether factual support is actually verified.",
+                "question": "Write an independent analytical essay draft or substantial section, then examine the weakest inferential link.",
+                "min_words": 30
+            }
+        ],
+        "edition": "skills-2026-10-v3"
+    }
+]

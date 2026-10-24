@@ -11,6 +11,7 @@ try{
    cssv_pro_fields($_FILES,['image']);$result=cssv_handwriting_upload($pdo,$user,$_POST,$_FILES['image']??[]);cssv_json(['ok'=>true,...$result]);
   }
   $body=cssv_request_json(30000);$action=$body['action']??'';
+  if($action==='discard_image')cssv_json(['ok'=>true,...cssv_handwriting_discard_image($pdo,$user,$body)]);
   if(in_array($action,['edit','confirm'],true))cssv_json(['ok'=>true,...cssv_handwriting_mutation($pdo,$user,$body)]);
   $operation=cssv_handwriting_reserve($pdo,$user,$body);cssv_handwriting_execute($pdo,$operation);cssv_json(['ok'=>true,'operation_id'=>$operation,'operation'=>cssv_ai_owned_operation($pdo,$operation,$user)]);
  }

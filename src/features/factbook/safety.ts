@@ -1,4 +1,6 @@
-const ALLOWED_TAGS = new Set(['P', 'BR', 'STRONG', 'B', 'EM', 'I', 'U', 'OL', 'UL', 'LI', 'H2', 'H3', 'H4', 'BLOCKQUOTE', 'HR', 'A', 'SUP', 'SUB', 'MARK', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD'])
+import DOMPurify from 'dompurify'
+
+const ALLOWED_TAGS = ['P', 'BR', 'STRONG', 'B', 'EM', 'I', 'U', 'OL', 'UL', 'LI', 'H2', 'H3', 'H4', 'BLOCKQUOTE', 'HR', 'A', 'SUP', 'SUB', 'MARK', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD']
 
 export function safeWebUrl(value: string): string {
   const trimmed = value.trim()
@@ -16,40 +18,26 @@ export function sanitizePlainText(value: string, maxLength = 50_000): string {
 }
 
 export function sanitizeRichText(html: string): string {
-  if (typeof DOMParser === 'undefined') return sanitizePlainText(html, 200_000)
-  const document = new DOMParser().parseFromString(html, 'text/html')
-  const walk = (node: Node) => {
-    Array.from(node.childNodes).forEach((child) => {
-      if (child.nodeType === Node.COMMENT_NODE) {
-        child.remove()
-        return
-      }
-      if (child.nodeType === Node.ELEMENT_NODE) {
-        const element = child as HTMLElement
-        if (!ALLOWED_TAGS.has(element.tagName)) {
-          element.replaceWith(...Array.from(element.childNodes))
-          return
-        }
-        Array.from(element.attributes).forEach((attribute) => {
-          const allowed = element.tagName === 'A' && ['href', 'title'].includes(attribute.name)
-          if (!allowed) element.removeAttribute(attribute.name)
-        })
-        if (element.tagName === 'A') {
-          const safe = safeWebUrl(element.getAttribute('href') ?? '')
-          if (safe) {
-            element.setAttribute('href', safe)
-            element.setAttribute('target', '_blank')
-            element.setAttribute('rel', 'noopener noreferrer nofollow')
-          } else {
-            element.removeAttribute('href')
-          }
-        }
-      }
-      walk(child)
-    })
+  // Sanitize the complete bounded input. Cutting serialized HTML afterwards can
+  // produce a different parse on reinsertion (mutation XSS).
+  if (!DOMPurify.isSupported) return ''
+  const clean = DOMPurify.sanitize(html.slice(0, 200_000), {
+    ALLOWED_TAGS,
+    ALLOWED_ATTR: ['href', 'title'],
+    ALLOW_DATA_ATTR: false,
+    ALLOW_ARIA_ATTR: false,
+    RETURN_TRUSTED_TYPE: false,
+  })
+  const document = new DOMParser().parseFromString(clean, 'text/html')
+  for (const anchor of document.querySelectorAll('a')) {
+    const safe = safeWebUrl(anchor.getAttribute('href') ?? '')
+    if (safe) {
+      anchor.setAttribute('href', safe)
+      anchor.setAttribute('target', '_blank')
+      anchor.setAttribute('rel', 'noopener noreferrer nofollow')
+    } else anchor.removeAttribute('href')
   }
-  walk(document.body)
-  return document.body.innerHTML.slice(0, 200_000)
+  return document.body.innerHTML
 }
 
 export function searchableText(content: Record<string, unknown>): string {

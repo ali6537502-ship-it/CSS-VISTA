@@ -72,6 +72,10 @@ function cssv_pro_order(PDO $pdo, string $id, ?string $userId): array
     foreach ($order['submissions'] as &$s) { $s['submitted_at']=cssv_pro_iso($s['submitted_at']); $s['reviewed_at']=cssv_pro_iso($s['reviewed_at']); } unset($s);
     $q=$pdo->prepare('SELECT activated_at,starts_at,expires_at FROM pro_grants WHERE order_id=?'); $q->execute([$id]);
     $grant=$q->fetch(); $order['grant']=$grant ? array_map('cssv_pro_iso',$grant) : null;
+    require_once __DIR__.'/_pro_coupons.php';
+    cssv_coupon_ensure_schema($pdo);
+    $q=$pdo->prepare('SELECT base_amount_minor,amount_minor FROM pro_coupon_redemptions WHERE order_id=? AND user_id=?'); $q->execute([$id,$order['user_id']]);
+    $discount=$q->fetch(); $order['discount']=$discount ? ['base_amount_minor'=>(int)$discount['base_amount_minor'],'discount_minor'=>(int)$discount['base_amount_minor']-(int)$discount['amount_minor']] : null;
     return $order;
 }
 

@@ -6,7 +6,7 @@ export const stateLabels: Record<TopicState, string> = {
   understood: 'Understood',
   practised: 'Practised',
   revision_due: 'Revision due',
-  mastered: 'Mastered',
+  mastered: 'Practice and recall recorded',
 }
 export const categories: Record<string, string> = {
   history: 'History & foundations',

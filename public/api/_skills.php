@@ -12,7 +12,7 @@ function cssv_skills_resume(PDO $pdo,string $user,string $attempt): array {
     foreach($q->fetchAll(PDO::FETCH_COLUMN) as $id){
         $w=cssv_skills_workspace($pdo,$user,$id);$v=cssv_skills_version($pdo,$user,$w);$stage=$w['source']['stages'][$v['evidence']['next']];
         $path=match($w['feature']){'sentence'=>'/account/expression?view=studio&','argument'=>'/account/argumentation?','analysis'=>'/account/analytical-skills?','essay'=>'/account/essay-builder?'};
-        $rows[]=['id'=>$id,'feature'=>$w['feature'],'title'=>$w['source']['title'],'version'=>$v['version'],'level'=>$w['level'],'next_stage'=>$stage['title'],'recorded'=>count($v['evidence']['recorded']),'all_recorded'=>$v['evidence']['all_recorded'],'to'=>$path.'workspace='.$id];
+        $rows[]=['id'=>$id,'feature'=>$w['feature'],'title'=>$w['source']['title'],'version'=>$v['version'],'level'=>$w['level'],'next_stage'=>$stage['title'],'total_stages'=>count($w['source']['stages']),'recorded'=>count($v['evidence']['recorded']),'all_recorded'=>$v['evidence']['all_recorded'],'to'=>$path.'workspace='.$id];
     }return $rows;
 }
 function cssv_skills_workspace(PDO $pdo,string $user,string $id): array {
@@ -43,6 +43,13 @@ function cssv_skills_append(PDO $pdo,string $user,array $w,array $answers,int $p
     $pdo->prepare('INSERT INTO skills_versions(version_id,workspace_id,answers,evidence) VALUES(?,?,?,?)')->execute([$id,$w['id'],json_encode($answers,JSON_THROW_ON_ERROR),json_encode($evidence,JSON_THROW_ON_ERROR)]);
     $pdo->prepare('UPDATE skills_workspaces SET writing_id=?,version=?,position=? WHERE id=? AND user_id=?')->execute([$writing,$version,$position,$w['id'],$user]);
     return ['workspace_id'=>$w['id'],'writing_id'=>$writing,'version_id'=>$id,'version'=>$version,'evidence'=>$evidence];
+}
+/** Bounded owned references; paging never loads or changes student writing. */
+function cssv_skills_linked(PDO $pdo,string $user,string $parent,mixed $offset=0): array {
+    $offset=filter_var($offset,FILTER_VALIDATE_INT,['options'=>['min_range'=>0,'max_range'=>100000]]);
+    if($offset===false)throw new InvalidArgumentException('Choose a valid linked-practice page.');
+    $q=$pdo->prepare('SELECT s.id,s.feature,s.lesson_id,s.version,s.writing_id,v.id AS version_id FROM skills_workspaces s LEFT JOIN writing_versions v ON v.writing_id=s.writing_id AND v.version=s.version WHERE s.user_id=? AND s.parent_id=? ORDER BY s.updated_at DESC,s.id DESC LIMIT 21 OFFSET '.(int)$offset);$q->execute([$user,$parent]);$children=$q->fetchAll();
+    return ['children'=>array_slice($children,0,20),'children_offset'=>(int)$offset,'has_more_children'=>count($children)>20];
 }
 function cssv_skills_mutation(PDO $pdo,string $user,array $body): array {
     $action=$body['action']??'';

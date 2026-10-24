@@ -11,6 +11,10 @@ foreach([['target_date'=>'2027-02-30'],['target_date'=>'2026-02-20'],['optional_
 $result=['summary'=>'Work on agreement.','findings'=>[['code'=>'subject_verb_agreement','severity'=>'moderate','excerpt'=>'She go','explanation'=>'The verb does not agree with the subject.','hint'=>'Check the third-person singular form.']]];
 check(cssv_writing_result($result,'She go to school.')===$result,'Anchored structured feedback');
 foreach([['excerpt'=>'He go'],['code'=>'invented'],['severity'=>'critical']] as $bad){$r=$result;$r['findings'][0]=[...$r['findings'][0],...$bad];try{cssv_writing_result($r,'She go to school.');throw new RuntimeException('Invalid feedback accepted');}catch(InvalidArgumentException){}}
+foreach(['Your score is 90','Official marks: 80','You scored 75','I am your official examiner'] as $prose){
+ try{cssv_writing_result(['summary'=>$prose,'findings'=>[]],'A correct independent sentence.');throw new RuntimeException('Invented marking claim accepted');}catch(InvalidArgumentException){}
+}
+check(cssv_writing_result(['summary'=>'This is instructional feedback, not official marks.','findings'=>[]],'A correct sentence.')['findings']===[],'Useful marking disclaimer rejected');
 check(cssv_ai_usage_parse(['usage'=>['input_tokens'=>10,'output_tokens'=>5,'input_tokens_details'=>['cached_tokens'=>4]]])===['input_tokens'=>10,'output_tokens'=>5,'cached_tokens'=>4],'Token report');
 check(cssv_ai_usage_parse([])['input_tokens']===null,'Missing tokens not fabricated as zero');
 check(cssv_ai_usage_parse(['usage'=>['input_tokens'=>1,'input_tokens_details'=>['cached_tokens'=>4]]])['cached_tokens']===null,'Invalid cached count rejected');

@@ -28,7 +28,7 @@ try {
   for (const width of [320,390,768,1440]) {
     await page.setViewportSize({width,height:1000})
     await page.goto(base+'/account/dashboard?plan=pro')
-    await page.getByRole('heading',{name:'Free features',exact:true}).waitFor()
+    await page.getByRole('heading',{name:'Free study tools',exact:true}).waitFor()
     assert.equal(await page.getByRole('link',{name:'Pro account',exact:true}).count(),0)
     const links=await page.locator('a[href]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')))
     assert.deepEqual(links.filter(isProDestination),[],'Visible paused Pro links in account navigation')
@@ -37,6 +37,7 @@ try {
   for (const path of ['/account/expression','/account/precis','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/general-ability','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/ai-usage','/account/membership','/current-affairs','/study-material/essay-themes','/account/preparation?view=topics']) {
     await page.goto(base+path)
     await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
+    assert.equal(await page.locator('main').count(),1,'Paused routes must retain one primary landmark')
     assert.equal(await page.locator('main textarea, main input[type=file]').count(),0)
   }
   await page.goto(base+'/account/preparation?attempt='+attempt)
@@ -52,8 +53,12 @@ try {
   assert.equal(await page.getByRole('heading',{name:'Weekly Current Affairs Magazine',exact:true}).count(),0)
   const after=(await (await context.request.get(base+'/api/student/membership.php')).json()).membership
   assert.deepEqual(after,before,'Pause changed membership/expiry')
+  php('tests/pro/fixture.php','expire',id)
+  for(const path of ['/account/general-ability?view=history','/account/precis?view=skills']){await page.goto(base+path);await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()}
+  assert.equal((await context.request.get(base+'/api/student/ability.php?view=history')).status(),503,'Expired history bypassed production pause')
+  assert.equal((await context.request.get(base+'/api/student/precis.php')).status(),503,'Expired Précis bypassed production pause')
   assert.deepEqual(errors,[])
   mkdirSync(root+'/test-artifacts',{recursive:true})
   await page.screenshot({path:root+'/test-artifacts/pro-paused-home.png'})
-  console.log('PASS: active Pro account remains Free-only while paused; paid links omitted, fourteen direct routes blocked, 320–1440 reflow, free Grammar and Vistagram reading retained, expiry unchanged, no page errors. Disposable database only.')
+  console.log('PASS: active Pro account remains Free-only while paused; paid links omitted, fourteen direct routes plus expired history blocked, 320–1440 reflow, free Grammar and Vistagram reading retained, expiry unchanged, no page errors. Disposable database only.')
 } finally { php('tests/pro/release-fixture.php','restore');await browser.close() }

@@ -70,7 +70,7 @@ const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
-const AccountHome = lazy(() => import('./pages/AccountHome'))
+const AccountHome = lazy(() => import('./features/workspace/Today'))
 const AccountTasks = lazy(() => import('./pages/account/Tasks'))
 const AccountProgress = lazy(() => import('./pages/account/Progress'))
 const AccountEnglish = lazy(() => import('./pages/account/English'))
@@ -85,6 +85,10 @@ const AccountAnswerPerformance = lazy(() => import('./pages/account/AnswerPerfor
 const AccountLearning = lazy(() => import('./pages/account/Learning'))
 const AccountAiUsage = lazy(() => import('./pages/account/AiUsage'))
 const AccountMembership = lazy(() => import('./pages/account/Membership'))
+const AccountLearn = lazy(() => import('./features/catalog/CourseIndex'))
+const AccountWrite = lazy(() => import('./features/workspace/Write'))
+const AccountReview = lazy(() => import('./features/review/Queue'))
+const AccountSearch = lazy(() => import('./features/library/Search'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
 const MptArea = lazy(() => import('./pages/mpt/MptArea'))
@@ -214,19 +218,23 @@ export default function App() {
             its own focused page, so a bookmark or a refresh lands where the
             student expects. */}
         <Route path="/account/dashboard" element={<ProfileGate><S><AccountHome /></S></ProfileGate>} />
+        <Route path="/account/learn" element={<ProfileGate><S><AccountLearn /></S></ProfileGate>} />
+        <Route path="/account/writing" element={<ProfileGate><S><AccountWrite /></S></ProfileGate>} />
+        <Route path="/account/review" element={<ProfileGate><S><AccountReview /></S></ProfileGate>} />
+        <Route path="/account/library/search" element={<ProfileGate><S><AccountSearch /></S></ProfileGate>} />
         <Route path="/account/tasks" element={<ProfileGate><S><AccountTasks /></S></ProfileGate>} />
         <Route path="/account/progress" element={<ProfileGate><S><AccountProgress /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
-        <Route path="/account/precis" element={<ProfileGate><ProGate feature="Précis Mastery Lab"><S><AccountPrecis /></S></ProGate></ProfileGate>} />
+        <Route path="/account/precis" element={<ProfileGate><ProGate feature="Précis Mastery Lab" allowExpiredHistory><S><AccountPrecis /></S></ProGate></ProfileGate>} />
         <Route path="/account/argumentation" element={<ProfileGate><S><AccountSkills feature="argument" /></S></ProfileGate>} />
         <Route path="/account/analytical-skills" element={<ProfileGate><S><AccountSkills feature="analysis" /></S></ProfileGate>} />
         <Route path="/account/essay-builder" element={<ProfileGate><S><AccountSkills feature="essay" /></S></ProfileGate>} />
-        <Route path="/account/general-ability" element={<ProfileGate><ProGate feature="General Ability"><S><AccountGeneralAbility /></S></ProGate></ProfileGate>} />
+        <Route path="/account/general-ability" element={<ProfileGate><ProGate feature="General Ability" allowExpiredHistory expiredHistoryView="history"><S><AccountGeneralAbility /></S></ProGate></ProfileGate>} />
         <Route path="/account/handwriting" element={<ProfileGate><S><AccountHandwriting /></S></ProfileGate>} />
         <Route path="/account/ask-vista" element={<ProfileGate><S><AccountTutor /></S></ProfileGate>} />
-        <Route path="/account/answer-performance" element={<ProfileGate><ProGate feature="My Answer Performance"><S><AccountAnswerPerformance /></S></ProGate></ProfileGate>} />
+        <Route path="/account/answer-performance" element={<ProfileGate><ProGate feature="My Answer Performance" retainedHistoryMessage="Your saved questions, mentor marks, comments and correction history are retained. Renew Pro to reopen your records."><S><AccountAnswerPerformance /></S></ProGate></ProfileGate>} />
         <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
         <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />
         <Route path="/account/membership" element={<ProfileGate><S><AccountMembership /></S></ProfileGate>} />

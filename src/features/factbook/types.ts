@@ -120,7 +120,7 @@ export interface FactbookPreferences {
 export interface FactbookRevision {
   id: string
   entry_id: string
-  snapshot: Partial<FactbookEntry>
+  snapshot: Partial<FactbookEntry> & { _backup_import?: { original_revision_id: string; recorded_at: string | null } }
   created_at: string
 }
 
@@ -159,7 +159,7 @@ export interface FactbookFilters {
   pageSize?: number
 }
 
-export interface FactbookBackup {
+export interface LegacyFactbookBackup {
   format: 'css-vista-factbook'
   version: 1
   exported_at: string
@@ -167,8 +167,19 @@ export interface FactbookBackup {
   categories: FactbookCategory[]
   entries: FactbookEntry[]
   collections: FactbookCollection[]
-  preferences: FactbookPreferences
+  preferences: FactbookPreferences | null
+  related?: Record<string, Record<string, unknown>[]>
+  media_blobs?: Record<string, string>
 }
+
+export interface NativeFactbookBackup {
+  format: 'css-vista-factbook'; version: 2; json_encoding: 'stored-json'; exported_at: string;
+  subjects: FactbookSubject[]; categories: FactbookCategory[];
+  entries: (Omit<FactbookEntry, 'content' | 'sources' | 'tags' | 'media'> & { content: string })[];
+  collections: FactbookCollection[]; preferences: FactbookPreferences | null;
+  related: Record<string, Record<string, unknown>[]>; media_blobs: Record<string, string>;
+}
+export type FactbookBackup = LegacyFactbookBackup | NativeFactbookBackup
 
 export interface PrintSettings {
   title: string

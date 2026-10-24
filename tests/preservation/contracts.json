@@ -1,0 +1,262 @@
+{
+  "synthetic_only": true,
+  "scope": "Contract fixtures; native domain suites provide persistence evidence. No production records.",
+  "domains": [
+    {
+      "domain": "identity_sessions_recovery",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000010",
+      "original_text": "Synthetic original identity_sessions_recovery — اردو\nPreserve whitespace.\n",
+      "sha256": "18941810d128ee6e7a3894d4cbe225a78130170ad5b4f563895818bba7fc7448",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "identity_sessions_recovery"
+      ]
+    },
+    {
+      "domain": "membership_orders_grants",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000011",
+      "original_text": "Synthetic original membership_orders_grants — اردو\nPreserve whitespace.\n",
+      "sha256": "1d733e6619f87d3e1520a8a089ace255f89808a4ac3f94c21c4af265aa4fb55e",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "membership_orders_grants"
+      ]
+    },
+    {
+      "domain": "attempts_plans_local",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000012",
+      "original_text": "Synthetic original attempts_plans_local — اردو\nPreserve whitespace.\n",
+      "sha256": "be23e93d731eb427d65d86ba93293b667c71a3d1b2719a060b80ccd1b9adfa74",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "attempts_plans_local"
+      ]
+    },
+    {
+      "domain": "writing_versions_transfers",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000013",
+      "original_text": "Synthetic original writing_versions_transfers — اردو\nPreserve whitespace.\n",
+      "sha256": "78333d5738ddd1f013d81d4003a349726a7f35ff6ade923df1724994d64c4a4a",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "writing_versions_transfers"
+      ]
+    },
+    {
+      "domain": "precis_sources_feedback",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000014",
+      "original_text": "Synthetic original precis_sources_feedback — اردو\nPreserve whitespace.\n",
+      "sha256": "620e6572fc0fd0237c728825f2338c42a847fc47db7b4b5413ab77a3aa74675d",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "precis_sources_feedback"
+      ]
+    },
+    {
+      "domain": "topic_editions_choices_drafts",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000015",
+      "original_text": "Synthetic original topic_editions_choices_drafts — اردو\nPreserve whitespace.\n",
+      "sha256": "4a58d302adad06864b351229efee156572d60a402a46983c309f4409e3f7da1f",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "topic_editions_choices_drafts"
+      ]
+    },
+    {
+      "domain": "ability_first_latest",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000016",
+      "original_text": "Synthetic original ability_first_latest — اردو\nPreserve whitespace.\n",
+      "sha256": "331ce87aab187160ac7d95ddb67c0765ab04f5ab4be3a5ef557b81946168aae9",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "ability_first_latest"
+      ]
+    },
+    {
+      "domain": "skills_versions_operations",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000017",
+      "original_text": "Synthetic original skills_versions_operations — اردو\nPreserve whitespace.\n",
+      "sha256": "35a732a3d8e7a7a361dc0a55fd5340d90cae7ea4bff8af67e6be9da91d245aff",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "skills_versions_operations"
+      ]
+    },
+    {
+      "domain": "handwriting_confirmed_retention",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000018",
+      "original_text": "Synthetic original handwriting_confirmed_retention — اردو\nPreserve whitespace.\n",
+      "sha256": "66641415007ee2297a907459d2ad7c5c25264876cf25f024e8d188e6a0a61e46",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "handwriting_confirmed_retention"
+      ]
+    },
+    {
+      "domain": "mentor_original_corrections",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000019",
+      "original_text": "Synthetic original mentor_original_corrections — اردو\nPreserve whitespace.\n",
+      "sha256": "0f75cc01ef0a2c3387024e21ad0d8e85d8db3b6ea2a6b1fa215534f0544fd1d1",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "mentor_original_corrections"
+      ]
+    },
+    {
+      "domain": "reading_recall_sources",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000020",
+      "original_text": "Synthetic original reading_recall_sources — اردو\nPreserve whitespace.\n",
+      "sha256": "8c83449ef3d56cdbe2e239c361da5aea9c818c6465aa2434dd08bf053dbb22ce",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "reading_recall_sources"
+      ]
+    },
+    {
+      "domain": "factbook_hierarchy_revisions",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000021",
+      "original_text": "Synthetic original factbook_hierarchy_revisions — اردو\nPreserve whitespace.\n",
+      "sha256": "acdaa326952a9b630f77107a7859d1c155820b3a963657485193eadcbd0e09a1",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "factbook_hierarchy_revisions"
+      ]
+    },
+    {
+      "domain": "bookmarks_mistakes_quizzes",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000022",
+      "original_text": "Synthetic original bookmarks_mistakes_quizzes — اردو\nPreserve whitespace.\n",
+      "sha256": "341bf3599d9e26273e641af8950353b963c1f0395e81d865b8d12b3d40bd2ae0",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "bookmarks_mistakes_quizzes"
+      ]
+    },
+    {
+      "domain": "grammar_legacy_and_v5",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000023",
+      "original_text": "Synthetic original grammar_legacy_and_v5 — اردو\nPreserve whitespace.\n",
+      "sha256": "421679716a389d7d82f1c85a34a56875d2d7365bd71ee8d11eb31ad2e64006f6",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "legacy",
+        "v5"
+      ]
+    },
+    {
+      "domain": "free_routes_science_seo_hold",
+      "owner_id": "00000000-0000-4000-8000-000000000001",
+      "foreign_owner_id": "00000000-0000-4000-8000-000000000002",
+      "record_id": "00000000-0000-4000-8000-000000000024",
+      "original_text": "Synthetic original free_routes_science_seo_hold — اردو\nPreserve whitespace.\n",
+      "sha256": "2d8ed0b5304b0d3cca5b1f14746f709cd8d03b8d541d491939609c8302b20c57",
+      "version_order": [
+        1,
+        2
+      ],
+      "retained_on_expiry": true,
+      "read_after_expiry": "verify_domain_policy",
+      "namespaces": [
+        "free_routes_science_seo_hold"
+      ]
+    }
+  ]
+}

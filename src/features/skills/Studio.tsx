@@ -12,6 +12,7 @@ import {
 import { ProBadge } from "@/features/membership/AccountSections";
 import { grammarLink } from "@/features/expression/api";
 import { useStudioSave } from "./useStudioSave";
+import RevisionComparison from "./RevisionComparison";
 import {
   names,
   skillsLink,
@@ -300,7 +301,7 @@ function Exercise({
                 type="radio"
                 name="recognition"
                 required
-                disabled={old || save.busy}
+                disabled={old || save.busy || !!save.pending}
                 checked={draft.response === i}
                 onChange={() => setDraft({ base: w.version, response: i })}
                 className="mt-1 h-5 w-5 shrink-0"
@@ -314,7 +315,7 @@ function Exercise({
           {stage.question || "Saved response"}
           <textarea
             required
-            disabled={old}
+            disabled={old || save.busy || !!save.pending}
             className={`${inputStyle} min-h-52 font-normal leading-8`}
             maxLength={
               w.feature === "essay" && stage.id === "practice" ? 20000 : 6000
@@ -323,10 +324,17 @@ function Exercise({
             onChange={(e) => setDraft({ ...draft, response: e.target.value })}
           />
           <span className="text-xs font-normal text-slate-500">
-            This stage needs at least {stage.min_words} words for a recorded
+            This stage needs at least {stage.min_words} {stage.min_words === 1 ? "word" : "words"} for a recorded
             practice response. Length does not prove correctness.
           </span>
         </label>
+      )}
+      {stage.review && saved?.evidence.recorded.includes(stage.id) && (
+        <details className="rounded-xl border border-slate-200 bg-white p-4">
+          <summary className="min-h-11 cursor-pointer font-semibold">Self-review this saved response</summary>
+          <p className="mt-3 text-sm leading-7">Use these checks to revise your own work. They do not certify that your response is correct.</p>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7">{stage.review.map(item => <li key={item}>{item}</li>)}</ul>
+        </details>
       )}
       {status === "error" && (
         <p role="alert" className="text-sm text-red-700">
@@ -523,10 +531,23 @@ function FeedbackPanel({ detail, save }: { detail: Detail; save: Saver }) {
   );
 }
 function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
+  const [params, setParams] = useSearchParams();
+  const offset = params.get("children_offset") || "0";
+  const page = useLearning<Pick<Detail, "children" | "children_offset" | "has_more_children">>(
+    offset !== "0" ? `skills.php?workspace_id=${detail.workspace.id}&view=linked&children_offset=${encodeURIComponent(offset)}` : undefined,
+  );
+  const linked = offset === "0" ? detail : page.data;
+  function linkedPage(offset: number) {
+    const next = new URLSearchParams(params);
+    if (offset) next.set("children_offset", String(offset));
+    else next.delete("children_offset");
+    setParams(next);
+  }
   const [range, setRange] = useState<{start:number;end:number} | null>(null);
   const [field, setField] = useState(""),
     [target, setTarget] = useState<Feature>("argument");
   const [review, setReview] = useState("");
+  const [selectedLesson, setSelectedLesson] = useState({ feature: target, id: "" });
   const returned = useLearning<Detail>(
     review ? `skills.php?workspace_id=${review}` : undefined,
   );
@@ -548,6 +569,9 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
   );
   const catalog = useLearning<Overview>(`skills.php?view=catalog&feature=${target}`);
   const lesson =
+    catalog.data?.catalog.find(
+      (c) => selectedLesson.feature === target && c.id === selectedLesson.id,
+    ) ||
     catalog.data?.catalog.find((c) => c.level === detail.workspace.level) ||
     catalog.data?.catalog[0];
   return (
@@ -589,6 +613,28 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
           </select>
         </label>
       </div>
+      <label className="grid gap-2 text-sm font-semibold">
+        Linked practice lesson
+        <select
+          className={inputStyle}
+          aria-describedby={`${detail.workspace.id}-linked-lesson-summary`}
+          value={lesson?.id || ""}
+          disabled={!catalog.data?.catalog.length}
+          onChange={(event) =>
+            setSelectedLesson({ feature: target, id: event.target.value })
+          }
+        >
+          {!lesson && <option value="">Choose a practice lesson</option>}
+          {catalog.data?.catalog.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.title} · {item.level}
+            </option>
+          ))}
+        </select>
+      </label>
+      <p id={`${detail.workspace.id}-linked-lesson-summary`} className="text-sm leading-7 text-slate-600">
+        {lesson?.summary || catalog.error || "Loading available lessons…"}
+      </p>
       {field && <label className="grid gap-2 text-sm font-semibold">Select a passage (optional)
       <textarea readOnly className={`${inputStyle} min-h-36 font-normal leading-7`} value={String(detail.saved?.answers[field] || '')} onSelect={event=>{const element=event.currentTarget;const start=Array.from(element.value.slice(0,element.selectionStart)).length;const end=Array.from(element.value.slice(0,element.selectionEnd)).length;setRange(end>start?{start,end}:null)}} />
       <span className="font-normal leading-7">{range ? `${range.end-range.start} characters selected. Only that passage will be refined and returned.` : 'Highlight one sentence or paragraph to refine part of a longer response. With no selection, the whole response is linked.'}</span>
@@ -633,10 +679,12 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
           Return to the original workspace
         </Link>
       )}
-      {detail.children.length > 0 && (
+      {page.error && <p role="alert" className="text-sm">{page.error} <button className={secondaryStyle} onClick={page.refresh}>Retry linked history</button></p>}
+      {!linked && !page.error && <p role="status" className="text-sm">Loading linked practices…</p>}
+      {linked && linked.children.length > 0 && (
         <div className="space-y-3">
           <h4 className="font-semibold">Linked revisions</h4>
-          {detail.children.map((child) => (
+          {linked.children.map((child) => (
             <div
               key={child.id}
               className="flex flex-wrap items-center gap-3 rounded-lg border p-3"
@@ -662,6 +710,12 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
             </div>
           ))}
         </div>
+      )}
+      {linked && (linked.children_offset > 0 || linked.has_more_children) && (
+        <nav aria-label="Linked practice pages" className="flex flex-wrap gap-3">
+          <button className={secondaryStyle} disabled={linked.children_offset === 0 || save.busy || !!save.pending} onClick={() => linkedPage(Math.max(0, linked.children_offset - 20))}>Newer linked practices</button>
+          <button className={secondaryStyle} disabled={!linked.has_more_children || save.busy || !!save.pending} onClick={() => linkedPage(linked.children_offset + 20)}>Older linked practices</button>
+        </nav>
       )}
       {review && !child && (
         <p role={returned.error ? "alert" : "status"} className="text-sm">
@@ -739,6 +793,7 @@ function Session({
     Number(versionParams.get("versions_offset")) || 0,
   );
   const [compare, setCompare] = useState("");
+  const [linkedRefresh, setLinkedRefresh] = useState(0);
   const earlier = useLearning<Detail>(
     compare
       ? `skills.php?workspace_id=${w.id}&version_id=${compare}`
@@ -773,22 +828,22 @@ function Session({
             {w.statement || w.source.task}
           </p>
         )}
-        {w.source.grammar_day && (
+        {w.source.grammar_day && (save.busy || save.pending ? <button type="button" disabled className="inline-flex min-h-11 items-center text-sm font-semibold opacity-60">Review the existing Grammar lesson · day {w.source.grammar_day}</button> : (
           <Link
             className="inline-flex min-h-11 items-center text-sm font-semibold underline"
-            to={grammarLink(w.source.grammar_day, undefined, undefined, w.attempt_id)}
+            to={grammarLink(w.source.grammar_day, w.writing_id || undefined, saved?.version_id, w.attempt_id, w.id)}
           >
             Review the existing Grammar lesson · day {w.source.grammar_day}
           </Link>
-        )}
-        {w.writing_id && (
+        ))}
+        {w.writing_id && (save.busy || save.pending ? <button type="button" disabled className="inline-flex min-h-11 items-center text-sm font-semibold opacity-60">Open this wording in saved writing</button> : (
           <Link
             className="inline-flex min-h-11 items-center text-sm font-semibold underline"
             to={`/account/preparation?writing=${w.writing_id}${saved ? `&version=${saved.version_id}` : ""}`}
           >
             Open this wording in saved writing
           </Link>
-        )}
+        ))}
         {w.source.roadmap && (
           <>
             <Link
@@ -828,6 +883,9 @@ function Session({
               ? "Understanding check saved"
               : "Review the distinction and try again"}
           </h3>
+          {!saved.evidence.check_feedback.correct && saved.evidence.check_feedback.choice_explanation && (
+            <p className="text-sm leading-7"><span className="font-semibold">Why this choice needs review: </span>{saved.evidence.check_feedback.choice_explanation}</p>
+          )}
           <p className="text-sm leading-7">
             {saved.evidence.check_feedback.explanation}
           </p>
@@ -862,7 +920,7 @@ function Session({
           <button
             key={item.id}
             className={`${secondaryStyle} ${position === i ? "border-slate-900 bg-slate-100" : ""}`}
-            disabled={active && i > (saved?.evidence.next ?? 0)}
+            disabled={save.busy || !!save.pending || (active && i > (saved?.evidence.next ?? 0))}
             aria-current={position === i ? "step" : undefined}
             onClick={() => setPosition(i)}
           >
@@ -961,20 +1019,16 @@ function Session({
               </Link>
             )}
           </nav>
+          {compare && !earlier.data && !earlier.error && (
+            <p role="status" className="text-sm">Loading the saved comparison…</p>
+          )}
           {earlier.data?.saved && (
-            <div className="grid min-w-0 gap-4 md:grid-cols-2">
-              {[earlier.data.saved, saved].map((v) => (
-                <article
-                  key={v.version_id}
-                  className="min-w-0 rounded-xl border p-4"
-                >
-                  <h4 className="font-semibold">Version {v.version}</h4>
-                  <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-8">
-                    {v.text}
-                  </p>
-                </article>
-              ))}
-            </div>
+            <RevisionComparison
+              key={`${earlier.data.saved.version_id}:${saved.version_id}`}
+              source={w.source}
+              before={earlier.data.saved}
+              after={saved}
+            />
           )}
           {earlier.error && (
             <p role="alert" className="text-sm">
@@ -992,8 +1046,8 @@ function Session({
         </Link>
       )}
       <FeedbackPanel key={`${detail.saved?.version_id || "new"}:${detail.configuration.policy_hash || "disabled"}`} detail={detail} save={save} />
-      {active && saved && !old && <Transfers detail={detail} save={save} />}
-      <button className={secondaryStyle} onClick={refresh}>
+      {active && saved && !old && <Transfers key={`${versionParams.get("children_offset") || "0"}:${linkedRefresh}`} detail={detail} save={save} />}
+      <button className={secondaryStyle} onClick={() => { refresh(); setLinkedRefresh(value => value + 1); }}>
         Refresh saved status
       </button>
     </div>
@@ -1014,7 +1068,9 @@ export default function Studio({ feature }: { feature: Feature }) {
       ? `skills.php?workspace_id=${encodeURIComponent(workspace)}${version ? `&version_id=${encodeURIComponent(version)}` : ""}&offset=${Math.max(0, Number(params.get("versions_offset")) || 0)}`
       : undefined,
   );
+  const [confirmedVersion, setConfirmedVersion] = useState<{ user: string; workspace: string; version: number }>();
   function confirmed(result: Receipt) {
+    if (user && result.workspace_id && typeof result.version === "number") setConfirmedVersion({ user: user.id, workspace: result.workspace_id, version: result.version });
     if (result.workspace_id)
       navigate(
         skillsLink(
@@ -1027,6 +1083,7 @@ export default function Studio({ feature }: { feature: Feature }) {
   }
   const save = useStudioSave(user?.id || "", confirmed);
   const load = workspace ? detail : overview;
+  const awaitingConfirmedVersion = !!workspace && confirmedVersion?.user === user?.id && confirmedVersion?.workspace === workspace && (!detail.data || detail.data.workspace.version < confirmedVersion.version);
   if (!user) return null;
   return (
     <div className="space-y-6">
@@ -1061,7 +1118,7 @@ export default function Studio({ feature }: { feature: Feature }) {
         </nav>
       </header>
       <Recovery save={save} />
-      {!load.data ? (
+      {!load.data || awaitingConfirmedVersion ? (
         <section role={load.error ? "alert" : "status"} className={panelStyle}>
           {load.error || "Loading your learning workspace…"}
           {load.error && (

@@ -14,7 +14,7 @@ import './current-affairs.css'
 
 const links = [
   ['/account/dashboard', 'Back to My CSS Vista'], [briefingRoot, 'Current Affairs'],
-  ['/account/factbook', 'Daily Factbook'], [briefingRoot + '/archive', 'Archive'],
+  ['/account/factbook', 'Daily Facts'], [briefingRoot + '/archive', 'Archive'],
   ['/account/saved', 'Saved Items'], ['/account/search', 'Search'], ['/account/settings', 'Profile & Settings'],
 ]
 function AccountNavigation() {
@@ -113,7 +113,7 @@ function Feed({ mode }: { mode: 'briefing' | 'facts' | 'saved' | 'search' }) {
   query.set('view', mode === 'facts' ? 'factbook' : 'feed')
   if (mode === 'saved') query.set('saved', '1')
   const result = useBriefing(query.toString(), feedSchema)
-  const title = { briefing: 'Current Affairs', facts: 'Daily Factbook', saved: 'My Saved Items', search: 'Search the Archive' }[mode]
+  const title = { briefing: 'Current Affairs', facts: 'Daily Facts', saved: 'My Saved Items', search: 'Search the Archive' }[mode]
   const subtitle = { briefing: 'The Current Affairs developments that matter, one clear explanation at a time.', facts: 'Facts, figures and quick GK, ready for revision.', saved: 'Your personal collection of developments worth revisiting.', search: 'Find a topic across headlines, explanations, institutions, facts and original sources.' }[mode]
   return <>
     <header className="ca-heading"><p className="ca-eyebrow">CSS VISTA CURRENT AFFAIRS</p><h1>{title}</h1><p>{subtitle}</p>{result.data && mode === 'briefing' && <EditionMeta summary={result.data.summary} />}</header>

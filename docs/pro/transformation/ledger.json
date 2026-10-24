@@ -1,0 +1,2337 @@
+{
+  "last_verified_at": "2026-10-24T10:18:41.503805+00:00",
+  "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+  "candidate_sha": "964beeb50e4f7bfe83c2394bc16736ea55993dad",
+  "current_commit": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+  "branch": "feat/pro-workspace-transformation-20261023",
+  "overall_status": "in_progress_not_release_ready",
+  "deployed": false,
+  "expected_private_package_sha256": "05e46f50b827e91996674ebc041c0b166ec180e78c04f171bd81fde7e8817890",
+  "private_package_retrieved": false,
+  "preservation_manifest_hash": "826b024fb45d6479fdcb7f9a061ccdbdfb9f43023dc1f4cb50a151c468d12d6c",
+  "migration_checksums": {
+    "017_precis_evaluations.sql": "e2523356805406e8a0b9f7673555e69ffb52b71235ba57e46f8b8df68765a2ae",
+    "004_hostinger_notifications.sql": "483eabe4b69b6391d51e35d4450f61f2ee3fac862a23af653b15fbd9fa88150f",
+    "013_learning_foundations.sql": "22c1cd9baddcd0cacf7a19c7cdb74d4397a4b36b0aadcb180697d929ba0e3245",
+    "007_student_profile_photo_60kb.sql": "62379476abdb08c853147820a9db1727b5523ea723fae213c8b2c07797d4fad2",
+    "026_grammar_learning_v5.sql": "a885c65aff402307a5e61a44de733831f5ef2ae68274c9b2837e7ab01b70be0f",
+    "021_connected_reading.sql": "381867ace377c5f41f8da4e9340caaf27612d44525f7f0c1648a6532514503e5",
+    "006_native_account_mail.sql": "f4fd709a3d2de4bc965c7a3ef7176969e14317a92f4328e7f75e1ef9749fe614",
+    "026_pro_coupons.sql": "aacb5ad41363f7cc58bbe667d52c8f6a84932201fa92835110545743f70d96ee",
+    "027_topic_writing_bindings.sql": "0be51157d2ac79811b4b4532c8939c3207bcbe3a67670878a6ea0be995d8af46",
+    "009_journal_articles.sql": "6894135306b731d3ba07e57c2a4bf378c500b3a510ecfee031f7b7b7f4903d1c",
+    "019_scoped_tutor.sql": "bd72eb364b222ff4b4340cd6080b54a62bf55e341758e0595bcaf7dca12ab80e",
+    "012_pro_membership.sql": "b74671b361baadeddeb3005385178c02f7922eadcc89d663d26467e910f5280d",
+    "022_native_pro_topics.sql": "85cfe296e6405e8bd46dff85924b31cabb819b0c49c04751e30bf1f192855df5",
+    "024_general_ability.sql": "76d9c854e6e1033aa0ca929b0ec654ceba196ba4dd13f45062c32087adf98913",
+    "001_hostinger_core_schema.sql": "e4d7a14d3b7cd7926f7979d71d10f7bde47a3f35cfcc8c52797234efab90dee6",
+    "014_handwriting_workflow.sql": "cce0ca9820a92e9d9451a0ea60ec92a03aa84e69f03740d6253cbb74c89d957c",
+    "005_current_affairs.sql": "a5fd6344e290383a3a9347d8fbc45fca12becd1a8eedefce2e562666935bdba5",
+    "025_integrated_skills.sql": "79561652e0317e8c0b90bd7bf54a07d9410a004392ccd89b4ed93316eb4a5b60",
+    "003_profile_photo_15kb.sql": "7ea797f6afebeb1b64ed52279796fceb622dd909e3e69436a0efe9e35ec9d45c",
+    "008_previous_student_history.sql": "a8411c4ed05aee4a86a81bf82f986dc0d9dca0cb9c70c5442ececb07c3e1260c",
+    "016_precis_lab.sql": "a252685e57e5f47eeac1897bc1e7088552fc75249bf2976f01029cb5bb407b02",
+    "023_topic_guided_results.sql": "dfb842a7c15dba6b5fad104bc40d06d08d5a2f739ba8280fc703bd3fcb8fc4c4",
+    "010_mpt_exam_system.down.sql": "9edac750dc21d5954abc7c97eae124a19c0f7e5f772fd2c2e99b5a815436bd36",
+    "018_mentor_records.sql": "79326fe555875d80e075c69e30ec0e1c7f26c68a48bbf7c6dbba7723172fdb9f",
+    "002_hostinger_hardening.sql": "9155cb5be6cd9ee87b7764c3fccf7750aa1b3c8bfea12688329c0c1453e86316",
+    "020_attempt_planner.sql": "75996ac98f4560dfa077203f4069798839c949c3dfb39c906eebc01a1b9f3548",
+    "010_mpt_exam_system.sql": "c6b50b232d9ccf4e70eb80251e66e6981ceb2eaff8db95cc82bff81c53785414",
+    "015_grammar_progress.sql": "bb42bc5c9021ebf15aea361b8a71d34c3fd5b93dbfec324334f6771ca4c32450",
+    "028_factbook_backup_receipts.sql": "9d620408040bc6af69ee82aaca0ec1ad67e2e5b15ce219c55739785bc47fe878"
+  },
+  "migration_026_resolution": "Original full filenames/bytes retained; named-lock runtime initializers coexist in disposable MySQL. Host applied state remains unverified.",
+  "academic_review_status": "No new independent human academic approval in this session.",
+  "operations_status": "Quiescent synthetic MySQL 8.0.46 -> MariaDB 11.4.13 restore/retrieval verified; actual host/private storage/mail/maintenance and full fresh-init/upgrade coverage remain unverified.",
+  "phases": [
+    {
+      "phase": "P0",
+      "objective": "reconcile and freeze baseline",
+      "status": "blocked",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
+      "dependencies": [],
+      "remaining_work_or_blocker": "Local MariaDB 11.4 restore/read rehearsal passes. Exact private package, host applied/checksum/version inventory and full fresh initializer/upgrade matrix remain.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
+    },
+    {
+      "phase": "P1",
+      "objective": "security and durable work",
+      "status": "in_progress",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+      "dependencies": [
+        "P0"
+      ],
+      "remaining_work_or_blocker": "Bounded Factbook v2 complete graph and legacy v1 restore now implemented and locally verified. Full legacy/print/mobile/adversarial/capacity/manual AT matrix, actual-host recovery and wider security work remain.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
+    },
+    {
+      "phase": "P2",
+      "objective": "workspace and continuation",
+      "status": "in_progress",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "dependencies": [
+        "P0"
+      ],
+      "remaining_work_or_blocker": "Six homes implemented; complete reviewed course relationships and usability validation remain.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
+    },
+    {
+      "phase": "P3",
+      "objective": "Library Review Progress",
+      "status": "in_progress",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
+      "dependencies": [
+        "P0"
+      ],
+      "remaining_work_or_blocker": "Bounded cached-answer preview/receipts/original draft resume and separate-browser replay now pass. Additional domain-draft coverage, reviewed catalog relationships, independent relevance and representative load/physical-device checks remain.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Continue local import preview and recovery receipts, then wider domain/academic/operational checks while preserving the release hold."
+    },
+    {
+      "phase": "P4",
+      "objective": "bounded academic completion",
+      "status": "blocked",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "dependencies": [
+        "P0"
+      ],
+      "remaining_work_or_blocker": "Exact package unavailable; 53 affairs reviews, bounded domain additions and independent academic approvals remain.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
+    },
+    {
+      "phase": "P5",
+      "objective": "publishing and operations",
+      "status": "in_progress",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "dependencies": [
+        "P0"
+      ],
+      "remaining_work_or_blocker": "Exact private dossier gate implemented; complete editorial/operator UI and authenticated host readiness remain.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
+    },
+    {
+      "phase": "P6",
+      "objective": "visual accessibility performance",
+      "status": "in_progress",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
+      "dependencies": [
+        "P0"
+      ],
+      "remaining_work_or_blocker": "Private initial MySQL/MariaDB query plans and bounded import keyboard/axe checks captured; representative load/field budgets, full manual AT/device/zoom and CSP/ASVS convergence remain.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
+    },
+    {
+      "phase": "P7",
+      "objective": "held verification packet",
+      "status": "in_progress",
+      "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
+      "dependencies": [
+        "P0"
+      ],
+      "remaining_work_or_blocker": "Current local affected suites pass; exact new-head CI and all remaining academic/content/operations gates remain. Release hold active.",
+      "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
+      "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
+    }
+  ],
+  "features": [
+    {
+      "id": "affairs",
+      "primary_home": "learn",
+      "state": "partial; exact private package blocked"
+    },
+    {
+      "id": "ability",
+      "primary_home": "learn",
+      "state": "existing 25 units retained"
+    },
+    {
+      "id": "grammar_legacy",
+      "primary_home": "learn",
+      "state": "namespace retained"
+    },
+    {
+      "id": "grammar_v5",
+      "primary_home": "learn",
+      "state": "curriculum retained; guided return fixed"
+    },
+    {
+      "id": "expression_sentence",
+      "primary_home": "write",
+      "state": "existing revisions retained"
+    },
+    {
+      "id": "argumentation_analysis",
+      "primary_home": "write",
+      "state": "existing immutable workflows retained"
+    },
+    {
+      "id": "essays_themes",
+      "primary_home": "write",
+      "state": "existing 25 themes and source IDs retained"
+    },
+    {
+      "id": "precis",
+      "primary_home": "write",
+      "state": "sources/context/history retained"
+    },
+    {
+      "id": "handwriting",
+      "primary_home": "write",
+      "state": "existing validation/confirmed text/retention retained; genuine OCR blocked"
+    },
+    {
+      "id": "mentor",
+      "primary_home": "write",
+      "state": "student-entered external feedback; active-only access retained"
+    },
+    {
+      "id": "reading",
+      "primary_home": "library",
+      "state": "topic/reading projection implemented; remaining personal adapters outstanding"
+    },
+    {
+      "id": "factbook",
+      "primary_home": "library",
+      "state": "maintained sanitizer and entry link; full legacy matrix outstanding"
+    },
+    {
+      "id": "planner",
+      "primary_home": "today",
+      "state": "existing attempts/plans plus recent-work resume and scoped recovery"
+    },
+    {
+      "id": "tutor",
+      "primary_home": "utility",
+      "state": "current Grammar v5 context retained; providers closed"
+    },
+    {
+      "id": "membership_usage",
+      "primary_home": "utility",
+      "state": "existing native ledger, price and duration; collection/coupons/providers closed"
+    }
+  ],
+  "verification_commands_and_exit_codes": [
+    {
+      "group": "native",
+      "command": "tests/skills/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/academic/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/ability/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/ability/evidence-unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/topics/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/reading/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/planner/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/tutor/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/mentor/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/pro/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/pro/coupons-unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/pro/release-unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/learning/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/handwriting/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/expression/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/grammar/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/precis/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/precis/feedback-unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/grammar-v5/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/skills/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/skills/quality-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/skills/sentence-quality-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/skills/essay-quality-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/skills/ai-security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/skills/sources-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/ability/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/ability/reasoning-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/topics/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/reading/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/planner/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/planner/ability-evidence.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/tutor/security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/pro/security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/pro/coupons-security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/pro/paid-access.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/pro/release-pause.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/mentor/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/learning/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/handwriting/security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/handwriting/privacy-security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/expression/security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/grammar/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/precis/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native",
+      "command": "tests/precis/feedback-security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native",
+      "command": "tests/grammar-v5/security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/skills/ai-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/planner/ability-evidence.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/tutor/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/pro/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/pro/coupons-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/pro/release-pause.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/handwriting/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/handwriting/privacy-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/expression/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/precis/feedback-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "native-rerun",
+      "command": "tests/grammar-v5/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/topics/review-unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/topics/writing-unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/topics/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/learning/unit.php",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/topics/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/skills/sources-security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/learning/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "final-native",
+      "command": "tests/workspace/security.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "final-native",
+      "command": "tests/topics/writing-preservation.php",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/workspace.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/skills.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/connected-skills.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/topic-options.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/reasoning-quality.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/sentence-quality.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/essay-quality.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/handwriting-privacy.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/ability.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/learning-continuity.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/precis.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/mentor-history.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/pro-pause.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/coupons.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/accessibility.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/contrast-review.test.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/grammar-v5.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/grammar-v5-account.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser",
+      "command": "tests/browser/grammar-v5-accessibility.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser-rerun",
+      "command": "tests/browser/workspace.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser-rerun",
+      "command": "tests/browser/sentence-quality.mjs",
+      "exit_code": 1
+    },
+    {
+      "group": "browser-rerun",
+      "command": "tests/browser/topic-options.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser-rerun",
+      "command": "tests/browser/pro-pause.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser-rerun",
+      "command": "tests/browser/accessibility.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "browser-rerun",
+      "command": "tests/browser/grammar-v5.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "final-affected",
+      "command": "tests/workspace/security.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "final-affected",
+      "command": "tests/browser/sentence-quality.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "frozen-application",
+      "command": "tests/browser/workspace.mjs",
+      "exit_code": 0
+    },
+    {
+      "group": "frozen-application",
+      "command": "tests/browser/pro-pause.mjs",
+      "exit_code": 0
+    }
+  ],
+  "evidence_manifest": [
+    {
+      "reference": "private-local-evidence:ability-author.log",
+      "sha256": "778bf849ddb42287f953a89e9896d1876b389c0070af3c10fc5e1d61606eddce",
+      "bytes": 105
+    },
+    {
+      "reference": "private-local-evidence:ability-content.log",
+      "sha256": "d10adf679d96484bc28c0a191045926698558a12c831aae970f09ec6373aebfb",
+      "bytes": 194
+    },
+    {
+      "reference": "private-local-evidence:ability-reasoning.log",
+      "sha256": "b3dacc3458e8db566e6788bff392ecf63c09d1b83f2d880ac33d58d4fa6ae1c5",
+      "bytes": 196
+    },
+    {
+      "reference": "private-local-evidence:accessibility-summary.json",
+      "sha256": "37848a98f895a7d6f03b1f3ef425149c74e440b336f256939d3aa2c2d6485aa1",
+      "bytes": 179
+    },
+    {
+      "reference": "private-local-evidence:added-node-tests.log",
+      "sha256": "becc11578892d16b2397699e1777ac91f7d51b266ebef53cc9b6c0a82c53b2ed",
+      "bytes": 1552
+    },
+    {
+      "reference": "private-local-evidence:audit-after.json",
+      "sha256": "dbd6eac0d580eac66ff509618843e2b8d1856349c6dee8ba097eca7c903a17f5",
+      "bytes": 2194
+    },
+    {
+      "reference": "private-local-evidence:audit-final.json",
+      "sha256": "5f5eefabfcd421ffb5d118c69e8f6a89203fad543c9ab5dc050fde0166b4c5fc",
+      "bytes": 365
+    },
+    {
+      "reference": "private-local-evidence:audit-fix.log",
+      "sha256": "f85ce5e53ffe7e4da8756e368859b93495d73ef685ef99faa76cee8203112cff",
+      "bytes": 944
+    },
+    {
+      "reference": "private-local-evidence:audit-full.json",
+      "sha256": "f17f20957a6d60628cf7c5efb94ab9ed3bff450390371f66f9a9f1cde7ee47c6",
+      "bytes": 25684
+    },
+    {
+      "reference": "private-local-evidence:audit-production.json",
+      "sha256": "94066ca97c76d861fb3ae990ba50372150b86583087c420a9b1dc42b13a5a61c",
+      "bytes": 365
+    },
+    {
+      "reference": "private-local-evidence:baseline-build.log",
+      "sha256": "53767f0cf619500f9af186275f2e4d3c537d58fc19b21da805ea0533252b678c",
+      "bytes": 30184
+    },
+    {
+      "reference": "private-local-evidence:baseline-lint.log",
+      "sha256": "e446c0f58f2dbfd0bd745545b735f8b544eb60854b5b4ccfae7f2d01aa08da19",
+      "bytes": 380
+    },
+    {
+      "reference": "private-local-evidence:baseline-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:browser/results.txt",
+      "sha256": "a2057db59490ccc7af06b44a62b86c822e9ba15ba40980bbe8b70b1cea636b41",
+      "bytes": 655
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-ability.mjs.log",
+      "sha256": "27970a7074acbf26c19655eb60513e39b7134fd40e9d573bc611e532e1a78f14",
+      "bytes": 273
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-accessibility.mjs.log",
+      "sha256": "c62cc068e9390cc7d70e9c7238c8028720c288ceb357e8927beb6d882ec26d9a",
+      "bytes": 6002
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-connected-skills.mjs.log",
+      "sha256": "9c577f3463d68595e5ae1f36d805a2fa3f711da467d4142ac39f8cacba5d3d91",
+      "bytes": 307
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-contrast-review.test.mjs.log",
+      "sha256": "8ab8eafc2b3ce26fe2a4f9f8e8d808349eeb3df8dd1a7803aff25359a998fedd",
+      "bytes": 664
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-coupons.mjs.log",
+      "sha256": "e37c638ce4169e0441378e22000d0bf77a33f3a464f4bab55a98d02ad5946ede",
+      "bytes": 294
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-essay-quality.mjs.log",
+      "sha256": "e1dd09f5b66ca4e513fe91ba11df2757076d6d92e4b6701aae90d687126f2fd7",
+      "bytes": 230
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-grammar-v5-accessibility.mjs.log",
+      "sha256": "de587d96c327a642cc5f793c48905f55e35cd8e8d309b0146df25c40baea34a1",
+      "bytes": 78
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-grammar-v5-account.mjs.log",
+      "sha256": "ff362a306a27f0595d2588db4c8bf43c5b95488acb26dadb86ccb1906e4e6ab7",
+      "bytes": 125
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-grammar-v5.mjs.log",
+      "sha256": "7db9cc0821f4b5b09d5cb19d98289a0aec6f777dda5154c5b4b24a635fadd3b2",
+      "bytes": 654
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-handwriting-privacy.mjs.log",
+      "sha256": "0e8e194acb51307efd4d9f69e155c4bc64643c09a2fa4bc927991d8befc87c4f",
+      "bytes": 292
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-learning-continuity.mjs.log",
+      "sha256": "272983d3fbda51164b79dcb905248594238a421d1b972b2008e57c9baca175b6",
+      "bytes": 256
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-mentor-history.mjs.log",
+      "sha256": "2c3d452ef4fc31aa55d0dedf3dd6bc7f9fab059532de533eeba0baf0cd51325d",
+      "bytes": 327
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-precis.mjs.log",
+      "sha256": "657760de59d8d17892b54f18d76efa8dd95f8f8ff630ec2bcb0b7e9925aec6fe",
+      "bytes": 375
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-pro-pause.mjs.log",
+      "sha256": "2fe2709779caba526b07fbad5a4a61662d27dccbf4512a1f5b943ef76e8a58fe",
+      "bytes": 450
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-reasoning-quality.mjs.log",
+      "sha256": "f0ac47378f5fcdc1ede5846b220b02e216c9fcfe75156c478b488c593b041a04",
+      "bytes": 281
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-sentence-quality.mjs.log",
+      "sha256": "1f12543dc5a09128c92c52854b554194bd22a6751ba6f4b44d44449e9aa7f472",
+      "bytes": 766
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-skills.mjs.log",
+      "sha256": "dea1ede975fe5a64f90c489af01ad47859865f5b6c1fc2f080f2e9792c62f386",
+      "bytes": 346
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-topic-options.mjs.log",
+      "sha256": "1f47f3fc664fe8d3b45ee611d6d2a2a08c579aa2149deffab9cf9f512a15a5c4",
+      "bytes": 173
+    },
+    {
+      "reference": "private-local-evidence:browser/tests-browser-workspace.mjs.log",
+      "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83",
+      "bytes": 183
+    },
+    {
+      "reference": "private-local-evidence:browser-install.log",
+      "sha256": "4aaef3acc3c4b16766abf61c4f4aa2d3bd413e2fe822d3edd6cfa9d7e7334efa",
+      "bytes": 24
+    },
+    {
+      "reference": "private-local-evidence:browser-rerun/results.txt",
+      "sha256": "3fcedc3f382e3bc0eac5265b0fdc9ccb83ecce51115de55516a0ca586e2fa3cf",
+      "bytes": 196
+    },
+    {
+      "reference": "private-local-evidence:browser-rerun/tests-browser-accessibility.mjs.log",
+      "sha256": "204d4c51f3607b148384f78b3e1bb34ecf88ee6bc5b10e3b92f99e61609372f6",
+      "bytes": 2218
+    },
+    {
+      "reference": "private-local-evidence:browser-rerun/tests-browser-grammar-v5.mjs.log",
+      "sha256": "e317a61bcab3d5254a49e45ad83e4ce2d0662eb2850378be475016aff784922a",
+      "bytes": 172
+    },
+    {
+      "reference": "private-local-evidence:browser-rerun/tests-browser-pro-pause.mjs.log",
+      "sha256": "64500953bc14f10d9e712e2a3a40d154c700a4f0ec5035dcddb610c6e662217a",
+      "bytes": 254
+    },
+    {
+      "reference": "private-local-evidence:browser-rerun/tests-browser-sentence-quality.mjs.log",
+      "sha256": "55708895e63cd336ce07450c8c1412c714c15db26c2faeeb04845463cb8a817d",
+      "bytes": 621
+    },
+    {
+      "reference": "private-local-evidence:browser-rerun/tests-browser-topic-options.mjs.log",
+      "sha256": "1f47f3fc664fe8d3b45ee611d6d2a2a08c579aa2149deffab9cf9f512a15a5c4",
+      "bytes": 173
+    },
+    {
+      "reference": "private-local-evidence:browser-rerun/tests-browser-workspace.mjs.log",
+      "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83",
+      "bytes": 183
+    },
+    {
+      "reference": "private-local-evidence:browser-runtime.log",
+      "sha256": "623320d22e8c044046d43c4d2ac286b18f4b99608b0162649a50cf604906770b",
+      "bytes": 37
+    },
+    {
+      "reference": "private-local-evidence:chromium-install.log",
+      "sha256": "32f3bfddeab5efac86d569e3b25b55e93b5383bfff61cd0ce1d1ccd889eba7c7",
+      "bytes": 6835
+    },
+    {
+      "reference": "private-local-evidence:disposable-schema.json",
+      "sha256": "578568bcb72b6c22df4d9048962f6226133cf33d27cf43b54b1c2014107b1e0c",
+      "bytes": 145590
+    },
+    {
+      "reference": "private-local-evidence:dompurify-install.log",
+      "sha256": "65c731cd02e19c79f6f5a3e84a4dd64a49acd6c47d2ee551d7cc9da191e8c96c",
+      "bytes": 24
+    },
+    {
+      "reference": "private-local-evidence:essay-author.log",
+      "sha256": "03a4e09fccabe9eabfd81e94a2262225ee2d015ec6c7808adace04773861f783",
+      "bytes": 84
+    },
+    {
+      "reference": "private-local-evidence:exact-build.log",
+      "sha256": "554fc0a76c0310afe3b9192562ae3d2c63092edb76331440d73857c9fc87ac68",
+      "bytes": 30369
+    },
+    {
+      "reference": "private-local-evidence:factbook-final-build.log",
+      "sha256": "3266ab82fba1a9b365ce79be046c4b28aabd1715d307f232cecb313ac57aa514",
+      "bytes": 29845
+    },
+    {
+      "reference": "private-local-evidence:factbook-final-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "reference": "private-local-evidence:factbook-final-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:final-build.log",
+      "sha256": "17b9e97dcb8e964037fe74f040b40e256fed2ec76ef88466b3abb54b51a5505d",
+      "bytes": 30103
+    },
+    {
+      "reference": "private-local-evidence:final-focused-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "reference": "private-local-evidence:final-lint.log",
+      "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb",
+      "bytes": 395
+    },
+    {
+      "reference": "private-local-evidence:final-native/results.txt",
+      "sha256": "f89077922d612714f0c3947e81f8726343e23d6e5309cdcaeaaafdd49478fd64",
+      "bytes": 278
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-learning-security.mjs.log",
+      "sha256": "650dd658dc94ff84fad5f77789e01d8b797864d8f5ef24fe3b429718ec48fa88",
+      "bytes": 310
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-learning-unit.php.log",
+      "sha256": "d8e637787a75ac89d712e80d3fa1cb5fd4a7fbe644d94cf71ebbd78f7e59ab6d",
+      "bytes": 108
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-skills-sources-security.mjs.log",
+      "sha256": "7b9805f9e484b66fa31d881101be5c7b78fc1c6d09d3715a0be0544627684997",
+      "bytes": 200
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-topics-review-unit.php.log",
+      "sha256": "980c7f5fcf495a71b52f3c0b47e7ea828566988865005dc7f655ac7081a0dcaa",
+      "bytes": 100
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-topics-security.mjs.log",
+      "sha256": "bac680231913d0ed5067a8b80f161e5dfa232ea4e934eed25336649d28a4e73e",
+      "bytes": 285
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-topics-unit.php.log",
+      "sha256": "91cf507b4c34f6679aedccb87e4fbc0a4ae4cac60e7e152768c2cd88b1647519",
+      "bytes": 82
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-topics-writing-unit.php.log",
+      "sha256": "cf66917bb78ddd857cf3b0302ca9dff9d81537043450f4a927fc8d5d5ff9a4ae",
+      "bytes": 55
+    },
+    {
+      "reference": "private-local-evidence:final-native/tests-workspace-security.mjs.log",
+      "sha256": "b31031b55314af668f0f9af2049969f7306ac8fc4bd4a0674add23a695a2bf52",
+      "bytes": 1567
+    },
+    {
+      "reference": "private-local-evidence:final-native/topic-baseline.log",
+      "sha256": "1b49b34bc88a20c2b0c7b9a4225b64360ea52b7881afc3c2591bf7f14e47fd17",
+      "bytes": 163
+    },
+    {
+      "reference": "private-local-evidence:final-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:final2-build.log",
+      "sha256": "e114bc2282e4d15c9f932a2215427a99af8b510c95f0b3693ff7b350d606f3f2",
+      "bytes": 30369
+    },
+    {
+      "reference": "private-local-evidence:final2-lint.log",
+      "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb",
+      "bytes": 395
+    },
+    {
+      "reference": "private-local-evidence:final2-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:final3-lint.log",
+      "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb",
+      "bytes": 395
+    },
+    {
+      "reference": "private-local-evidence:final3-node.log",
+      "sha256": "e807d2b9567a4b209ccbc6e57639977a859c23a92b94befa6ed9aba67ffddafe",
+      "bytes": 1644
+    },
+    {
+      "reference": "private-local-evidence:final3-preservation.log",
+      "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:final3-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:frozen-browser/results.txt",
+      "sha256": "1905c5e761160ae10e6e4ac449587b866fe69a783dae93e8fc5c3de24a50a7aa",
+      "bytes": 60
+    },
+    {
+      "reference": "private-local-evidence:frozen-browser/tests-browser-pro-pause.mjs.log",
+      "sha256": "64500953bc14f10d9e712e2a3a40d154c700a4f0ec5035dcddb610c6e662217a",
+      "bytes": 254
+    },
+    {
+      "reference": "private-local-evidence:frozen-browser/tests-browser-workspace.mjs.log",
+      "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83",
+      "bytes": 183
+    },
+    {
+      "reference": "private-local-evidence:frozen-build-result.txt",
+      "sha256": "1756c0a6e62af1fba11e4d79ef3d3daab62963e0783ffbe29456372de21c65a0",
+      "bytes": 33
+    },
+    {
+      "reference": "private-local-evidence:frozen-build.log",
+      "sha256": "7fa5d60e3bd54338dce73660dc7afcf84f868e7837370b085dab0e25cc588811",
+      "bytes": 30103
+    },
+    {
+      "reference": "private-local-evidence:frozen-preservation.log",
+      "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:frozen-profile-contract.log",
+      "sha256": "1d26538e074a75a0dc4e12cbe0bf0beb994e46a54ed8b0e34cf97176f5e5f88c",
+      "bytes": 136
+    },
+    {
+      "reference": "private-local-evidence:frozen-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:frozen-workspace-node.log",
+      "sha256": "a0b4d70c79775be42a771988929606f12944062e159c64ee53ad7946215ee7af",
+      "bytes": 448
+    },
+    {
+      "reference": "private-local-evidence:gate-landmark-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "reference": "private-local-evidence:grammar-release.log",
+      "sha256": "3025a96f6c65ce3a9267b081834adb54927ef7b5b18b4aa7548288c65194d8d7",
+      "bytes": 244
+    },
+    {
+      "reference": "private-local-evidence:held-final-audit.json",
+      "sha256": "5f5eefabfcd421ffb5d118c69e8f6a89203fad543c9ab5dc050fde0166b4c5fc",
+      "bytes": 365
+    },
+    {
+      "reference": "private-local-evidence:held-final-build.log",
+      "sha256": "f8ebceff56b8c87d177f1bdd74d5712af0e2f737a2f57cfcc719a1e972be4a44",
+      "bytes": 30369
+    },
+    {
+      "reference": "private-local-evidence:held-final-lint.log",
+      "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb",
+      "bytes": 395
+    },
+    {
+      "reference": "private-local-evidence:held-final-node.log",
+      "sha256": "5eb10992ef21c381e836c37eac61203c7774af0fee27a60622619e7e2070ed83",
+      "bytes": 749
+    },
+    {
+      "reference": "private-local-evidence:held-final-preservation.log",
+      "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:held-final-production-audit.json",
+      "sha256": "5f5eefabfcd421ffb5d118c69e8f6a89203fad543c9ab5dc050fde0166b4c5fc",
+      "bytes": 365
+    },
+    {
+      "reference": "private-local-evidence:held-final-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:helper-routing.log",
+      "sha256": "ae0b7def5d808bc4dbd607c27ffe52a79f2ae2e1186fe7208b5ccbf78ca5df07",
+      "bytes": 200
+    },
+    {
+      "reference": "private-local-evidence:install-main.log",
+      "sha256": "0285f801bc668314de82abcf3de73730ef7819c8a7a21beafa04bea7a442c923",
+      "bytes": 299
+    },
+    {
+      "reference": "private-local-evidence:integrated-build.log",
+      "sha256": "78f535d8c850ce9088609f5a1864842723f7f6ba647fe1ace8cbbacedf576548",
+      "bytes": 29845
+    },
+    {
+      "reference": "private-local-evidence:integrated-lint.log",
+      "sha256": "7fb28fabae2e3097d350b3578428455341090adc97b5b2694d9764cfc917d434",
+      "bytes": 563
+    },
+    {
+      "reference": "private-local-evidence:integrated-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:live-fingerprint-varied.json",
+      "sha256": "cd1607b8400b2be982ae3edf40a3900f656eaed3f8e4a9ea707d1e1630ce8430",
+      "bytes": 186
+    },
+    {
+      "reference": "private-local-evidence:live-fingerprint.json",
+      "sha256": "cd1607b8400b2be982ae3edf40a3900f656eaed3f8e4a9ea707d1e1630ce8430",
+      "bytes": 186
+    },
+    {
+      "reference": "private-local-evidence:live-pro-release.json",
+      "sha256": "b817f7e157752d020719140aa6d503f7fbbe5fdcc7faeaa822c974e3d3ea8d12",
+      "bytes": 15
+    },
+    {
+      "reference": "private-local-evidence:native/results.txt",
+      "sha256": "261be174e45dfd82b3735794a2444b7c2f23f17f0c22b5e2e3bc0b45748fa586",
+      "bytes": 1344
+    },
+    {
+      "reference": "private-local-evidence:native/tests-ability-evidence-unit.php.log",
+      "sha256": "1ad23e62b0e6da0b162020ceaea37baf7737fe9f9bc70c6afec249c78cbae668",
+      "bytes": 145
+    },
+    {
+      "reference": "private-local-evidence:native/tests-ability-reasoning-security.mjs.log",
+      "sha256": "7a7845aad0f9f1c0d80ec37267f82a9b856889bb699f5e045fb2e076e4dbaae3",
+      "bytes": 202
+    },
+    {
+      "reference": "private-local-evidence:native/tests-ability-security.mjs.log",
+      "sha256": "a7d67f37b4b80cec7ae4d0cc1fd11d4003fd57bb2adcb69872a8185947158869",
+      "bytes": 187
+    },
+    {
+      "reference": "private-local-evidence:native/tests-ability-unit.php.log",
+      "sha256": "2072bf2705088d423dee39fb51c0af6bb09f474ee9a35b6cf07c6bf089e55688",
+      "bytes": 138
+    },
+    {
+      "reference": "private-local-evidence:native/tests-academic-unit.php.log",
+      "sha256": "22d60026558af8abbf9770c824493007e5acc7dceeb8b9a9941a1e9013dbd358",
+      "bytes": 196
+    },
+    {
+      "reference": "private-local-evidence:native/tests-expression-security.mjs.log",
+      "sha256": "3354b71ce810b0d14a2370bb602fa51a0597c01eab5421536df1c7ea75ccf9d0",
+      "bytes": 477
+    },
+    {
+      "reference": "private-local-evidence:native/tests-expression-unit.php.log",
+      "sha256": "16e9311d04ccce4b83692c011844cfa5393934e0ff52e53a0a5e57a21f1ed3f6",
+      "bytes": 120
+    },
+    {
+      "reference": "private-local-evidence:native/tests-grammar-security.mjs.log",
+      "sha256": "33e97d119a5b6160de399186ee1748a4698e663e5bdd88cc67b9c469f7706885",
+      "bytes": 288
+    },
+    {
+      "reference": "private-local-evidence:native/tests-grammar-unit.php.log",
+      "sha256": "49f50d037f02546f418d99e85230fa52dc2f21c29475bb41d10a9eb1e1d055eb",
+      "bytes": 192
+    },
+    {
+      "reference": "private-local-evidence:native/tests-grammar-v5-security.mjs.log",
+      "sha256": "b1ae09109d1c9d3dc00ffa8ab0e8f4da9b05be53c3fc7280b7087a5cc747cb1e",
+      "bytes": 1158
+    },
+    {
+      "reference": "private-local-evidence:native/tests-grammar-v5-unit.php.log",
+      "sha256": "cac1feb182c8939b57fe0157f14e71f5989cd32abaac9c1680c8ed806072f718",
+      "bytes": 148
+    },
+    {
+      "reference": "private-local-evidence:native/tests-handwriting-privacy-security.mjs.log",
+      "sha256": "c2c5362283934d53aee5b8d1f97583b0f1f93c28fe2738a6590e5be5830afe19",
+      "bytes": 656
+    },
+    {
+      "reference": "private-local-evidence:native/tests-handwriting-security.mjs.log",
+      "sha256": "720b9ebf887d29b9cbf12f94cb7cd81a7ee1875855b4265855197cdeb9b5cd71",
+      "bytes": 476
+    },
+    {
+      "reference": "private-local-evidence:native/tests-handwriting-unit.php.log",
+      "sha256": "94b8cbad55bd19cf42fa59a6a644c505d88374db5fc70a31d5b7b22cc98253ef",
+      "bytes": 120
+    },
+    {
+      "reference": "private-local-evidence:native/tests-learning-security.mjs.log",
+      "sha256": "650dd658dc94ff84fad5f77789e01d8b797864d8f5ef24fe3b429718ec48fa88",
+      "bytes": 310
+    },
+    {
+      "reference": "private-local-evidence:native/tests-learning-unit.php.log",
+      "sha256": "d8e637787a75ac89d712e80d3fa1cb5fd4a7fbe644d94cf71ebbd78f7e59ab6d",
+      "bytes": 108
+    },
+    {
+      "reference": "private-local-evidence:native/tests-mentor-security.mjs.log",
+      "sha256": "ffebd4c970253cd04741474a9a69d3ab8e6a8371ea347d9a7aa89fcd99a243a1",
+      "bytes": 327
+    },
+    {
+      "reference": "private-local-evidence:native/tests-mentor-unit.php.log",
+      "sha256": "dd28dce58a7218e2d44178e1b89d099e38cbc2a7cfd2eaaf5ce5811925f0b6c3",
+      "bytes": 120
+    },
+    {
+      "reference": "private-local-evidence:native/tests-planner-ability-evidence.mjs.log",
+      "sha256": "55300927cc3ee1ae69af8bee506bef36430f206db95b3be5cccb8121a0956a86",
+      "bytes": 1743
+    },
+    {
+      "reference": "private-local-evidence:native/tests-planner-security.mjs.log",
+      "sha256": "7ca5a5d89448f03f6ad787c93095d580483f0dbbdafb20e76e8bc511f3d59662",
+      "bytes": 423
+    },
+    {
+      "reference": "private-local-evidence:native/tests-planner-unit.php.log",
+      "sha256": "384b25932bd0ae5bbf76e88f84f4fa1ba3aa67c1cf72bf5bbc7442a2cccd6ebb",
+      "bytes": 203
+    },
+    {
+      "reference": "private-local-evidence:native/tests-precis-feedback-security.mjs.log",
+      "sha256": "7ce016b7aa270fc6e615850c4e45dc800a0fc2cdb49628ef757ebaf10c27fff0",
+      "bytes": 478
+    },
+    {
+      "reference": "private-local-evidence:native/tests-precis-feedback-unit.php.log",
+      "sha256": "0923b31e75deae3b15ca627b9cbde72a0966103bb3ae9ce31ec7771e98d2a8ee",
+      "bytes": 153
+    },
+    {
+      "reference": "private-local-evidence:native/tests-precis-security.mjs.log",
+      "sha256": "022788679bac412ce7d133156e5f9051d1ec1cb9ee50bbe601f0ee02f5cb22f6",
+      "bytes": 260
+    },
+    {
+      "reference": "private-local-evidence:native/tests-precis-unit.php.log",
+      "sha256": "92b089313df56c865751d6a1d09aa052133a0a44e746722cbe7c226f5710746b",
+      "bytes": 108
+    },
+    {
+      "reference": "private-local-evidence:native/tests-pro-coupons-security.mjs.log",
+      "sha256": "dcb1a2bbb7435510d23fc806dd9c3361c19fea41aae02dd270decc22133b9212",
+      "bytes": 474
+    },
+    {
+      "reference": "private-local-evidence:native/tests-pro-coupons-unit.php.log",
+      "sha256": "fcafe2162c4a61fa84437a764d208999ecdd364a043b7390704d2188c794f516",
+      "bytes": 91
+    },
+    {
+      "reference": "private-local-evidence:native/tests-pro-paid-access.mjs.log",
+      "sha256": "383caa714f6013559915f745107741d6cc796853d9f62b9a17dbcea71733ca1c",
+      "bytes": 215
+    },
+    {
+      "reference": "private-local-evidence:native/tests-pro-release-pause.mjs.log",
+      "sha256": "d5a15c0b3b69e65ce8c14f570f7f6b68ca2a993fd597584eea1f5859919f3921",
+      "bytes": 1728
+    },
+    {
+      "reference": "private-local-evidence:native/tests-pro-release-unit.php.log",
+      "sha256": "ca2639f10e64702d5fcae2ae4c004e91780d0e49a8d229223763ba71210b05f5",
+      "bytes": 135
+    },
+    {
+      "reference": "private-local-evidence:native/tests-pro-security.mjs.log",
+      "sha256": "e0092ea487653adf0a871f2dfdafc71e43ca690681008da7006edf2a5c32e29d",
+      "bytes": 463
+    },
+    {
+      "reference": "private-local-evidence:native/tests-pro-unit.php.log",
+      "sha256": "42afe65f6ed311a10af2901bd5998ca2ce97163a8e7e3162eecb779616fdac68",
+      "bytes": 87
+    },
+    {
+      "reference": "private-local-evidence:native/tests-reading-security.mjs.log",
+      "sha256": "ce96fa3f792081967924ea52f8c4a46a69c35b2825bab77a9c31d60866f1fde9",
+      "bytes": 380
+    },
+    {
+      "reference": "private-local-evidence:native/tests-reading-unit.php.log",
+      "sha256": "173a4e470946eab6fe42c4e8df69eb2388abe51ebb41341ac236aa681bf54f9c",
+      "bytes": 160
+    },
+    {
+      "reference": "private-local-evidence:native/tests-skills-ai-security.mjs.log",
+      "sha256": "55edfa77362d95b7e58f120ce29315cb9d8f9e1568fb22b55d2ab6e18d275416",
+      "bytes": 473
+    },
+    {
+      "reference": "private-local-evidence:native/tests-skills-essay-quality-security.mjs.log",
+      "sha256": "77343210b7db738911c19899163107134b823eb551928b8eeaacde0719abb5f7",
+      "bytes": 169
+    },
+    {
+      "reference": "private-local-evidence:native/tests-skills-quality-security.mjs.log",
+      "sha256": "1873d59132c752e4a23cad6512e1eeadb6346dc055891a5837560a640b8455bc",
+      "bytes": 230
+    },
+    {
+      "reference": "private-local-evidence:native/tests-skills-security.mjs.log",
+      "sha256": "d289e335234c42df2679a1045b9ba6816e389fb8d749bc610d6720cefe1871ec",
+      "bytes": 200
+    },
+    {
+      "reference": "private-local-evidence:native/tests-skills-sentence-quality-security.mjs.log",
+      "sha256": "27686deb00d89bd34132248478483a4140735963643e715ee15e0fe0375f1834",
+      "bytes": 206
+    },
+    {
+      "reference": "private-local-evidence:native/tests-skills-sources-security.mjs.log",
+      "sha256": "7b9805f9e484b66fa31d881101be5c7b78fc1c6d09d3715a0be0544627684997",
+      "bytes": 200
+    },
+    {
+      "reference": "private-local-evidence:native/tests-skills-unit.php.log",
+      "sha256": "de961a2e5d422cf8d162016b269ae88c04ed2d6413bcbf6e19bf04ada24e404c",
+      "bytes": 151
+    },
+    {
+      "reference": "private-local-evidence:native/tests-topics-security.mjs.log",
+      "sha256": "bac680231913d0ed5067a8b80f161e5dfa232ea4e934eed25336649d28a4e73e",
+      "bytes": 285
+    },
+    {
+      "reference": "private-local-evidence:native/tests-topics-unit.php.log",
+      "sha256": "91cf507b4c34f6679aedccb87e4fbc0a4ae4cac60e7e152768c2cd88b1647519",
+      "bytes": 82
+    },
+    {
+      "reference": "private-local-evidence:native/tests-tutor-security.mjs.log",
+      "sha256": "9fae632de0aaa45a43d6c39ab9b9f7745ac8730531e807dc077b1c5a7f07e920",
+      "bytes": 467
+    },
+    {
+      "reference": "private-local-evidence:native/tests-tutor-unit.php.log",
+      "sha256": "c54c63eca84f1be33f5e628fc613849e4573802f3aebad5e41bcd7fd3b2cef37",
+      "bytes": 179
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/results.txt",
+      "sha256": "591c681470865b5eb40ee95aee3147ee511e74b542e7a3184cd6054cdc544b74",
+      "bytes": 358
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-expression-security.mjs.log",
+      "sha256": "170f6cc058cf9fd55ee122c14cd38933b021dcae77342499ac8b144e33ea3d87",
+      "bytes": 411
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-grammar-v5-security.mjs.log",
+      "sha256": "ab82a6dab76fc94ce0388ab80061eb29018c301dd00145c0c2fd841e8c4937d8",
+      "bytes": 116
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-handwriting-privacy-security.mjs.log",
+      "sha256": "d68aa3d88b000bf3f2ca3cd8652fa194bfa15eb33d378016ab93ab241807913d",
+      "bytes": 279
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-handwriting-security.mjs.log",
+      "sha256": "5458f9111966bfe5b33fcf72d7aa9120b74b945ff0d8bb9f36b08e933988d0a9",
+      "bytes": 437
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-planner-ability-evidence.mjs.log",
+      "sha256": "5c6dbbfa308a7d0d4a5c599e6b7cb3ffa94a1264432a03b06781f2074c541302",
+      "bytes": 257
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-precis-feedback-security.mjs.log",
+      "sha256": "3edef93ad39b503981d38c3aabfdd264769b825880df05fb62f529b805f5b54c",
+      "bytes": 391
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-pro-coupons-security.mjs.log",
+      "sha256": "92516cd8698c22219e7415b380e9deaf3d0261ad9e66f27e75ccf24efef7bc72",
+      "bytes": 295
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-pro-release-pause.mjs.log",
+      "sha256": "184c5378dc636dd58d5b91fd779bf8cf3ce844eba3d29aeed0866282e9cef613",
+      "bytes": 221
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-pro-security.mjs.log",
+      "sha256": "d535241b8c93923c988ff381704712020952680ff24401e5802b469d76ba8ae0",
+      "bytes": 242
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-skills-ai-security.mjs.log",
+      "sha256": "0c36349401f9de91c9fe5e01601f785f8a8296c907b23234d7f0750d27ffaf40",
+      "bytes": 261
+    },
+    {
+      "reference": "private-local-evidence:native-rerun/tests-tutor-security.mjs.log",
+      "sha256": "ebca08fa3dedd913599a0aac0b899ea902279f3c290f22a910ad11325308ab85",
+      "bytes": 455
+    },
+    {
+      "reference": "private-local-evidence:navigation-final.log",
+      "sha256": "e83f690049c3e8092b05932a75d30c9d4855aedd5345bed89852322952ea2508",
+      "bytes": 360
+    },
+    {
+      "reference": "private-local-evidence:paused-landmark-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "reference": "private-local-evidence:php-image.log",
+      "sha256": "68377f72d6fa896d5f0ac9a15a5d0f0a6b5989b2610529169ce348fbcede06b1",
+      "bytes": 275822
+    },
+    {
+      "reference": "private-local-evidence:preservation-final.log",
+      "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:preservation.log",
+      "sha256": "d6e544fa6956b1e2bcf4b1bb3b5ab21e442ff0650320a53416bbd005445fa184",
+      "bytes": 167
+    },
+    {
+      "reference": "private-local-evidence:pro-readiness.json",
+      "sha256": "b672d5641874ae980e8dbcb03e2ce1b0c4dadf0fb718813d139c0c9879f720d0",
+      "bytes": 1147
+    },
+    {
+      "reference": "private-local-evidence:restore-final.json",
+      "sha256": "413a6a9880730cdb40c811f77f9fa6b464edb14c94b73607dd67cac4346dfbdd",
+      "bytes": 24766
+    },
+    {
+      "reference": "private-local-evidence:restore-results.json",
+      "sha256": "8d378952229a557729e284776ed85bc5d2ccb169a0a60f9875fad68cd9f90ed6",
+      "bytes": 24802
+    },
+    {
+      "reference": "private-local-evidence:review-lint.log",
+      "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb",
+      "bytes": 395
+    },
+    {
+      "reference": "private-local-evidence:review-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:selector-parser-update.log",
+      "sha256": "b5278eb54dd2e0ff2403b7ea3d7bfa4abbfdc1bff7cfb7ac91cf8bbf73852294",
+      "bytes": 49
+    },
+    {
+      "reference": "private-local-evidence:sentence-final-browser-result.txt",
+      "sha256": "d6b5faffa777a4bac9c46550fc257e7fdb2688359f814e3c4820e5e51fc2d100",
+      "bytes": 37
+    },
+    {
+      "reference": "private-local-evidence:sentence-final-browser.log",
+      "sha256": "79b22e35fe2e5093a466e026efcdd169ee78b27b57593cfccd688ca83662e2b3",
+      "bytes": 257
+    },
+    {
+      "reference": "private-local-evidence:skills-author.log",
+      "sha256": "98a449abca133359dd439fd5b6ce47be3b8c1c805b7b79e9c253d35c053046b8",
+      "bytes": 122
+    },
+    {
+      "reference": "private-local-evidence:test-all.log",
+      "sha256": "6f5add7ec83fdc25c5e4152f491cda2574bb1fde1d55ff65daf03ab2fafeefee",
+      "bytes": 29063
+    },
+    {
+      "reference": "private-local-evidence:topic-baseline-preservation.log",
+      "sha256": "1b49b34bc88a20c2b0c7b9a4225b64360ea52b7881afc3c2591bf7f14e47fd17",
+      "bytes": 163
+    },
+    {
+      "reference": "private-local-evidence:topic-schema-parity.log",
+      "sha256": "cf66917bb78ddd857cf3b0302ca9dff9d81537043450f4a927fc8d5d5ff9a4ae",
+      "bytes": 55
+    },
+    {
+      "reference": "private-local-evidence:topic-typecheck.log",
+      "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+      "bytes": 39
+    },
+    {
+      "reference": "private-local-evidence:topic-writing-native.log",
+      "sha256": "bac680231913d0ed5067a8b80f161e5dfa232ea4e934eed25336649d28a4e73e",
+      "bytes": 285
+    },
+    {
+      "reference": "private-local-evidence:verification-latest.json",
+      "sha256": "77964e9086e81aaa8a087dce1c5e4fe2ef01728e57791f81ca111aef3f82021b",
+      "bytes": 3337
+    },
+    {
+      "reference": "private-local-evidence:workspace-browser.log",
+      "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83",
+      "bytes": 183
+    },
+    {
+      "reference": "private-local-evidence:workspace-final-native.log",
+      "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:workspace-final-native2-result.txt",
+      "sha256": "3d9480d20bd45c3b9b6fef49b0cd52df7f6a7855c9b554f4f3fa498725366ea5",
+      "bytes": 31
+    },
+    {
+      "reference": "private-local-evidence:workspace-final-native2.log",
+      "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:workspace-native.log",
+      "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086",
+      "bytes": 213
+    },
+    {
+      "reference": "private-local-evidence:workspace-node.log",
+      "sha256": "e6520fec157ca0bb2ad1c725c872f86310d2d04ba8ecffc07bf5bb43bb87883f",
+      "bytes": 657
+    }
+  ],
+  "known_risks": [
+    "Full transformation unfinished; do not infer completion from routes/build/tests.",
+    "Prior public premium-source history requires owner-reviewed response.",
+    "Real-intent search, full due federation/local import and manual AT/representative performance remain.",
+    "Raw evidence/backups/sessions stay outside public Git."
+  ],
+  "live_observation": {
+    "schemaVersion": 1,
+    "gitSha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
+    "source": "git-rev-parse-head",
+    "buildTarget": "hostinger",
+    "builtAt": "2026-10-23T07:15:33.585Z"
+  },
+  "live_paused": true,
+  "live_fingerprint_cache_variants_agree": true,
+  "rollback": "See MIGRATIONS.md and RELEASE-PACKET.md; no destructive down migrations.",
+  "next_safe_action": "Observe latest exact-head draft PR CI, then continue unfinished catalog/domain-draft, editorial/operator and P6 work; keep production release closed.",
+  "local_verification_summary": {
+    "recorded_at": "2026-10-23T18:10:19.100891+00:00",
+    "tested_application_build": {
+      "schemaVersion": 1,
+      "gitSha": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "source": "git-rev-parse-head",
+      "buildTarget": "hostinger",
+      "builtAt": "2026-10-23T18:06:48.727Z"
+    },
+    "latest_program_results": {
+      "tests/skills/unit.php": 0,
+      "tests/academic/unit.php": 0,
+      "tests/ability/unit.php": 0,
+      "tests/ability/evidence-unit.php": 0,
+      "tests/topics/unit.php": 0,
+      "tests/reading/unit.php": 0,
+      "tests/planner/unit.php": 0,
+      "tests/tutor/unit.php": 0,
+      "tests/mentor/unit.php": 0,
+      "tests/pro/unit.php": 0,
+      "tests/pro/coupons-unit.php": 0,
+      "tests/pro/release-unit.php": 0,
+      "tests/learning/unit.php": 0,
+      "tests/handwriting/unit.php": 0,
+      "tests/expression/unit.php": 0,
+      "tests/grammar/unit.php": 0,
+      "tests/precis/unit.php": 0,
+      "tests/precis/feedback-unit.php": 0,
+      "tests/grammar-v5/unit.php": 0,
+      "tests/skills/security.mjs": 0,
+      "tests/skills/quality-security.mjs": 0,
+      "tests/skills/sentence-quality-security.mjs": 0,
+      "tests/skills/essay-quality-security.mjs": 0,
+      "tests/skills/ai-security.mjs": 0,
+      "tests/skills/sources-security.mjs": 0,
+      "tests/ability/security.mjs": 0,
+      "tests/ability/reasoning-security.mjs": 0,
+      "tests/topics/security.mjs": 0,
+      "tests/reading/security.mjs": 0,
+      "tests/planner/security.mjs": 0,
+      "tests/planner/ability-evidence.mjs": 0,
+      "tests/tutor/security.mjs": 0,
+      "tests/pro/security.mjs": 0,
+      "tests/pro/coupons-security.mjs": 0,
+      "tests/pro/paid-access.mjs": 0,
+      "tests/pro/release-pause.mjs": 0,
+      "tests/mentor/security.mjs": 0,
+      "tests/learning/security.mjs": 0,
+      "tests/handwriting/security.mjs": 0,
+      "tests/handwriting/privacy-security.mjs": 0,
+      "tests/expression/security.mjs": 0,
+      "tests/grammar/security.mjs": 0,
+      "tests/precis/security.mjs": 0,
+      "tests/precis/feedback-security.mjs": 0,
+      "tests/grammar-v5/security.mjs": 0,
+      "tests/topics/review-unit.php": 0,
+      "tests/topics/writing-unit.php": 0,
+      "tests/workspace/security.mjs": 0,
+      "tests/topics/writing-preservation.php": 0,
+      "tests/browser/workspace.mjs": 0,
+      "tests/browser/skills.mjs": 0,
+      "tests/browser/connected-skills.mjs": 0,
+      "tests/browser/topic-options.mjs": 0,
+      "tests/browser/reasoning-quality.mjs": 0,
+      "tests/browser/sentence-quality.mjs": 0,
+      "tests/browser/essay-quality.mjs": 0,
+      "tests/browser/handwriting-privacy.mjs": 0,
+      "tests/browser/ability.mjs": 0,
+      "tests/browser/learning-continuity.mjs": 0,
+      "tests/browser/precis.mjs": 0,
+      "tests/browser/mentor-history.mjs": 0,
+      "tests/browser/pro-pause.mjs": 0,
+      "tests/browser/coupons.mjs": 0,
+      "tests/browser/accessibility.mjs": 0,
+      "tests/browser/contrast-review.test.mjs": 0,
+      "tests/browser/grammar-v5.mjs": 0,
+      "tests/browser/grammar-v5-account.mjs": 0,
+      "tests/browser/grammar-v5-accessibility.mjs": 0
+    },
+    "all_latest_pass": true,
+    "standard_node_tests": 277,
+    "browser_programs": 19,
+    "restore": {
+      "tables": 96,
+      "all_row_digests_equal": true,
+      "scope": "quiescent synthetic MySQL 8 only"
+    },
+    "academic_approval": "No new independent human approval",
+    "deployment": "none",
+    "ci": "Final-head CI must be observed separately"
+  },
+  "draft_pr": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/109",
+  "files_changed": [
+    ".github/workflows/grammar-reconstruction.yml",
+    ".github/workflows/pro-foundations.yml",
+    "AGENTS.md",
+    "docs/pro/accessibility-checks.md",
+    "docs/pro/coupon-access.md",
+    "docs/pro/expiry-history-continuity.md",
+    "docs/pro/integrated-private-candidate.md",
+    "docs/pro/launch-policy-draft.md",
+    "docs/pro/learning-evidence-continuity.md",
+    "docs/pro/original-text-topic-continuation.md",
+    "docs/pro/original-text-topic-courses.md",
+    "docs/pro/pakistan-affairs-economics-history.md",
+    "docs/pro/pakistan-affairs-federalism.md",
+    "docs/pro/pakistan-affairs-governance-units.md",
+    "docs/pro/pakistan-affairs-reform-courses.md",
+    "docs/pro/pakistan-affairs-representation-course.md",
+    "docs/pro/phase-2-handwriting.md",
+    "docs/pro/phase-9-guided-courses.md",
+    "docs/pro/precis-guided-continuity.md",
+    "docs/pro/reasoning-content-quality.md",
+    "docs/pro/sentence-content-quality.md",
+    "docs/pro/tasks-1-4-private-completion.md",
+    "docs/pro/topic-academic-quality-review.md",
+    "docs/pro/transformation/ACCESSIBILITY.md",
+    "docs/pro/transformation/DECISIONS.md",
+    "docs/pro/transformation/MIGRATIONS.md",
+    "docs/pro/transformation/PROGRESS.md",
+    "docs/pro/transformation/RELEASE-PACKET.md",
+    "docs/pro/transformation/REVIEW-DOSSIER-FORMAT.md",
+    "docs/pro/transformation/ROUTES.md",
+    "docs/pro/transformation/SECURITY.md",
+    "docs/pro/transformation/baseline-manifest.json",
+    "docs/pro/transformation/ledger.json",
+    "docs/pro/transformation/preservation-exceptions.json",
+    "docs/pro/writing-revision-review.md",
+    "package-lock.json",
+    "package.json",
+    "public/.htaccess",
+    "public/api/_ability_evidence.php",
+    "public/api/_ability_evidence_core.php",
+    "public/api/_factbook.php",
+    "public/api/_handwriting.php",
+    "public/api/_handwriting_core.php",
+    "public/api/_handwriting_provider.php",
+    "public/api/_learning.php",
+    "public/api/_learning_core.php",
+    "public/api/_planner.php",
+    "public/api/_planner_reports.php",
+    "public/api/_planner_rules.php",
+    "public/api/_precis.php",
+    "public/api/_precis_core.php",
+    "public/api/_premium_files/essay-guidance.json",
+    "public/api/_premium_files/skills-curriculum.json",
+    "public/api/_pro.php",
+    "public/api/_pro_coupon_core.php",
+    "public/api/_pro_coupon_schema.php",
+    "public/api/_pro_coupons.php",
+    "public/api/_pro_readiness.php",
+    "public/api/_skills.php",
+    "public/api/_skills_ai.php",
+    "public/api/_skills_core.php",
+    "public/api/_topics.php",
+    "public/api/_topics_review.php",
+    "public/api/_topics_writing.php",
+    "public/api/_workspace.php",
+    "public/api/admin/coupons.php",
+    "public/api/admin/topics.php",
+    "public/api/student/coupons.php",
+    "public/api/student/handwriting.php",
+    "public/api/student/learning.php",
+    "public/api/student/planner.php",
+    "public/api/student/skills.php",
+    "public/api/student/topics.php",
+    "public/api/student/workspace.php",
+    "scripts/skills/author-curriculum.py",
+    "scripts/skills/author-essay-guidance.py",
+    "scripts/transformation/check-preservation.mjs",
+    "server/bin/pro-readiness.php",
+    "server/config/config.example.php",
+    "server/sql/026_pro_coupons.sql",
+    "server/sql/027_topic_writing_bindings.sql",
+    "src/App.tsx",
+    "src/components/Layout.tsx",
+    "src/components/NotificationCenter.tsx",
+    "src/components/ProfileGate.tsx",
+    "src/data/routeRegistry.mjs",
+    "src/features/ability/Course.tsx",
+    "src/features/ability/api.ts",
+    "src/features/catalog/CourseIndex.tsx",
+    "src/features/current-affairs/Workspace.tsx",
+    "src/features/expression/api.ts",
+    "src/features/factbook/EntryEditor.tsx",
+    "src/features/factbook/safety.ts",
+    "src/features/grammar-v5/Course.tsx",
+    "src/features/handwriting/Transcription.tsx",
+    "src/features/library/Search.tsx",
+    "src/features/membership/CouponAccess.tsx",
+    "src/features/membership/ProGate.tsx",
+    "src/features/membership/ProRelease.tsx",
+    "src/features/membership/api.ts",
+    "src/features/precis/Practice.tsx",
+    "src/features/precis/api.ts",
+    "src/features/preparation/Plan.tsx",
+    "src/features/preparation/Reports.tsx",
+    "src/features/preparation/api.ts",
+    "src/features/review/Queue.tsx",
+    "src/features/skills/RevisionComparison.tsx",
+    "src/features/skills/Studio.tsx",
+    "src/features/skills/api.ts",
+    "src/features/topics/Guided.tsx",
+    "src/features/topics/Lesson.tsx",
+    "src/features/topics/Workspace.tsx",
+    "src/features/topics/WritingHistory.tsx",
+    "src/features/topics/optionOrder.ts",
+    "src/features/topics/types.ts",
+    "src/features/workspace/Breadcrumbs.tsx",
+    "src/features/workspace/Navigation.tsx",
+    "src/features/workspace/Records.tsx",
+    "src/features/workspace/Recovery.tsx",
+    "src/features/workspace/Today.tsx",
+    "src/features/workspace/Write.tsx",
+    "src/features/workspace/api.ts",
+    "src/features/workspace/navigation.ts",
+    "src/features/workspace/recovery.ts",
+    "src/index.css",
+    "src/pages/AccountHome.tsx",
+    "src/pages/Factbook.tsx",
+    "src/pages/GrammarCourse.tsx",
+    "src/pages/LanguageGrammar.tsx",
+    "src/pages/account/Library.tsx",
+    "src/pages/account/Membership.tsx",
+    "src/pages/account/Progress.tsx",
+    "src/pages/account/shared.tsx",
+    "src/pages/admin/Admin.tsx",
+    "src/pages/admin/CouponsPanel.tsx",
+    "src/pages/admin/TopicsPanel.tsx",
+    "tests/ability/evidence-unit.php",
+    "tests/academic/README.md",
+    "tests/academic/cases.json",
+    "tests/academic/cost.mjs",
+    "tests/academic/cost.test.mjs",
+    "tests/academic/export.php",
+    "tests/academic/review.mjs",
+    "tests/academic/review.test.mjs",
+    "tests/academic/unit.php",
+    "tests/browser/README.md",
+    "tests/browser/ability.mjs",
+    "tests/browser/accessibility.mjs",
+    "tests/browser/connected-skills.mjs",
+    "tests/browser/contrast-review.mjs",
+    "tests/browser/contrast-review.test.mjs",
+    "tests/browser/coupons.mjs",
+    "tests/browser/essay-quality.mjs",
+    "tests/browser/handwriting-privacy.mjs",
+    "tests/browser/learning-continuity.mjs",
+    "tests/browser/mentor-history.mjs",
+    "tests/browser/precis.mjs",
+    "tests/browser/pro-pause.mjs",
+    "tests/browser/reasoning-quality.mjs",
+    "tests/browser/sentence-quality.mjs",
+    "tests/browser/skills.mjs",
+    "tests/browser/topic-options.mjs",
+    "tests/browser/visible-control.mjs",
+    "tests/browser/workspace.mjs",
+    "tests/handwriting/privacy-security.mjs",
+    "tests/learning/unit.php",
+    "tests/mentor/fixture.php",
+    "tests/mentor/security.mjs",
+    "tests/planner/ability-evidence-fixture.php",
+    "tests/planner/ability-evidence.mjs",
+    "tests/precis/fixture.php",
+    "tests/precis/security.mjs",
+    "tests/precis/unit.php",
+    "tests/preservation/contracts.json",
+    "tests/pro/coupons-fixture.php",
+    "tests/pro/coupons-security.mjs",
+    "tests/pro/coupons-unit.php",
+    "tests/skills/ai-security.mjs",
+    "tests/skills/essay-legacy-sources.json",
+    "tests/skills/essay-quality-security.mjs",
+    "tests/skills/fixture.php",
+    "tests/skills/legacy-sources.json",
+    "tests/skills/quality-security.mjs",
+    "tests/skills/reasoning-answer-key.json",
+    "tests/skills/security.mjs",
+    "tests/skills/sentence-answer-key.json",
+    "tests/skills/sentence-legacy-sources.json",
+    "tests/skills/sentence-quality-security.mjs",
+    "tests/skills/sources-security.mjs",
+    "tests/skills/unit.php",
+    "tests/topicOptionOrder.test.ts",
+    "tests/topics/review-fixture.php",
+    "tests/topics/review-unit.php",
+    "tests/topics/security.mjs",
+    "tests/topics/writing-preservation.php",
+    "tests/topics/writing-unit.php",
+    "tests/workspace/fixture.php",
+    "tests/workspace/navigation.test.ts",
+    "tests/workspace/routes.test.mjs",
+    "tests/workspace/security.mjs"
+  ],
+  "last_tested_application_sha": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+  "content_manifest_hash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "core_verification": [
+    {
+      "command": "npm run install:ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0,
+      "note": "one preexisting warning"
+    },
+    {
+      "command": "npm run test:all",
+      "exit_code": 0,
+      "note": "277 tests"
+    },
+    {
+      "command": "npm run build:hostinger:strict",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run audit:grammar-release",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit --omit=dev --json",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/ability/author-course.py --check",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/skills/author-curriculum.py --check",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/skills/author-essay-guidance.py --check",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/transformation/check-preservation.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test tests/workspace/navigation.test.ts tests/topicOptionOrder.test.ts",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test tests/workspace/routes.test.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/check-profile-contract.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "npx eslint src/features/membership/ProGate.tsx src/components/ProfileGate.tsx tests/browser/workspace.mjs",
+      "exit_code": 0
+    }
+  ],
+  "backup_artifacts": [
+    {
+      "reference": "private-local-evidence:synthetic-backup-final.sql",
+      "sha256": "55e4d2bbdc530efec14bd7f731ba8dee7a4082b6380128ebae2d007f9ce7df6b",
+      "scope": "Disposable synthetic MySQL only; private file, not committed."
+    },
+    {
+      "reference": "private-local-evidence:synthetic-backup.sql",
+      "sha256": "544bb06b87ddc651ac4636279bd8c4b77baca35a5efbadbaf86c756b72db6186",
+      "scope": "Disposable synthetic MySQL only; private file, not committed."
+    },
+    {
+      "reference": "private-local-evidence:20261024-import/synthetic-mariadb-frozen.sql",
+      "sha256": "c378112b97137cac2ccbd4d87460497eff8637306e62211f64b6c50cdc252666",
+      "scope": "Quiescent disposable synthetic MySQL snapshot restored unchanged into local MariaDB 11.4.13; not a production learner-data backup."
+    }
+  ],
+  "continuation_20261024": {
+    "application_source_commit": "316b4aef3ab02c5e86dd69344787270e3672845c",
+    "prior_ci_head": "fbb6305793fa3046bfce74351868bf0342826051",
+    "prior_ci_workflows_passed": 8,
+    "scope": "Native library filters/owned collections/CA and personal-source adapters; Grammar, Ability and Precis review; account evidence counts. No schema or release change.",
+    "retrieval_intents": {
+      "hits": 30,
+      "total": 30,
+      "fixture": "synthetic owned records and current catalog; not independent academic/user panel validation"
+    },
+    "accessibility": "Two changed-page axe tag scans reported zero violations; manual, incomplete and assistive-technology checks remain.",
+    "evidence": [
+      {
+        "reference": "private-local-evidence:20261024/retrieval-native.log",
+        "sha256": "3b0822fd519a2b9593b6f194f17729731eabe50593f7ed729d97e86224ea2269",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/workspace-security.log",
+        "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/typecheck.log",
+        "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/lint.log",
+        "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/progress-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/final-test-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/workspace-unit.log",
+        "sha256": "df077dd855b04253a92f0feb97c071b1f50382d2aacff76785c7d233cfa3e7c4",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/retrieval-browser.log",
+        "sha256": "07d9274d306cadf12dbe6b19fcc3215a377c119987a4769c9f2374e7fa01b979",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/workspace-browser.log",
+        "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/preservation.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8",
+        "scope": "Synthetic local verification only"
+      },
+      {
+        "reference": "private-local-evidence:20261024/build-frozen.log",
+        "sha256": "de4c8b6f269c877a518beb9d80d948393df90179a98282dd3cdbb94182555fbd",
+        "scope": "Full strict Hostinger artifact build; no deployment"
+      },
+      {
+        "reference": "private-local-evidence:20261024/retrieval-browser-frozen.log",
+        "sha256": "07d9274d306cadf12dbe6b19fcc3215a377c119987a4769c9f2374e7fa01b979",
+        "scope": "Final frozen 316b4ae built UI + native disposable backend; five widths, filters/Back/pagination, sources/collections, three review domains, account evidence and two axe scans. Zero page errors/automated violations; not manual accessibility certification."
+      }
+    ],
+    "final_build": {
+      "command": "node scripts/build-target.mjs hostinger --strict",
+      "exit_code": 0,
+      "artifact_source_sha": "316b4aef3ab02c5e86dd69344787270e3672845c",
+      "note": "Full strict build after final application changes; build-generated public source files restored independently."
+    },
+    "new_head_ci": "Awaiting push of evidence-only commit; prior eight-workflow success is not the new head result.",
+    "deployed": false,
+    "remaining": [
+      "Independent academic/relevance/user review",
+      "Exact private content package and affairs reviews",
+      "Local import preview/receipts and cross-device coverage",
+      "MariaDB host compatibility and representative query/load plans",
+      "Manual accessibility and operational release gates"
+    ]
+  },
+  "previous_verified_application_sha": "531892d381f52994174853187fb0cfa2af1e55b7",
+  "continuation_20261024_import_recovery": {
+    "application_source_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
+    "prior_ci_head": "07c445348480b6f3ed4f8ee47a010fc47a997442",
+    "prior_ci_workflows_passed": 8,
+    "new_head_ci": "Consult the exact draft PR #109 head checks; this ledger records local evidence, not a future CI conclusion.",
+    "scope": "Explicit cached-answer preview/ownership/destination/import via existing immutable writing and native receipts; account drafts resume original form/request; original exports and metadata-only recovery; accurate cached-progress labels; bounded MySQL/MariaDB restore/plan rehearsal.",
+    "schema_changes": false,
+    "deployed": false,
+    "unit_tests": 8,
+    "browser_programs_passed": [
+      "workspace-import",
+      "workspace-retrieval",
+      "workspace"
+    ],
+    "browser_scope": "Native backend and real committed-save response loss; same import replays across independent Chromium sessions and JSON key reordering; viewport widths 320,390,768,1024,1440; export/keyboard confirmation; zero page errors and one import-page automated axe scan with zero violations. Not manual AT or physical-device certification.",
+    "native_scope": "Owned receipt/no-store/body exclusion; concurrent duplicate replay; exact text/hash/version; changed source/foreign attempt denied; release hold; existing learning/security and workspace suites pass.",
+    "mariadb_rehearsal": {
+      "mysql": "8.0.46",
+      "mariadb": "11.4.13-MariaDB-ubu2404",
+      "table_count": 96,
+      "snapshot_quiescent": true,
+      "restored_row_bytes_and_types_match": true,
+      "projection_count": 15,
+      "projection_hashes_match": true,
+      "private_plan_count": {
+        "mysql": 12,
+        "mariadb": 12
+      },
+      "dump_sha256": "c378112b97137cac2ccbd4d87460497eff8637306e62211f64b6c50cdc252666",
+      "scope": "Synthetic local snapshot/retrieval compatibility only; not actual host or representative load/field evidence."
+    },
+    "known_harness_and_fix_history": "Initial browser runtime absent, then scroll-position axe/test cache assumptions corrected. Existing progress backup JSON field reordering exposed an import replay defect, corrected with canonical source identity. A draft-resume JSX syntax error was caught by typecheck/build and fixed before push. Failed logs remain private.",
+    "evidence": [
+      {
+        "reference": "private-local-evidence:20261024-import/typecheck.log",
+        "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/full-lint.log",
+        "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/final-ui-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/import-unit.log",
+        "sha256": "d7e017119b1ba04a21f74081ff785d21ae071360353ac685d49961be27ee6111"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/workspace-unit.log",
+        "sha256": "a5236c44db46f19c8e16f560fc99a7c9f8ca0384d3504f466131cbcd33be8e49"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/import-native-final.log",
+        "sha256": "2406d16663e0e0f5b09dbf22d5826c143d1f3f051b906655e5b7719e1577ec15"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/learning-security.log",
+        "sha256": "650dd658dc94ff84fad5f77789e01d8b797864d8f5ef24fe3b429718ec48fa88"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/workspace-security.log",
+        "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/build-verified.log",
+        "sha256": "5884098daf64864bdc2aacc4be3fb51f5109e10a3562203572ac6f9f56bace31"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/import-browser-verified.log",
+        "sha256": "0666b9ecabe9700e060a114c2ab6ecc8cac48bae1559b83820254c68774cfb8f"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/retrieval-browser.log",
+        "sha256": "07d9274d306cadf12dbe6b19fcc3215a377c119987a4769c9f2374e7fa01b979"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/workspace-browser.log",
+        "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/preservation.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/rehearsal-summary.json",
+        "sha256": "bbc32bc7550057790bcbae4321f981379c67dbb343fbf630c6c579daec0cce5f"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mysql-frozen-before.json",
+        "sha256": "8d1763686e610adcd18aa0195db7699bdf79a34940f94459d1f3bbe8f0a71aad"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mysql-frozen-after.json",
+        "sha256": "8d1763686e610adcd18aa0195db7699bdf79a34940f94459d1f3bbe8f0a71aad"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mariadb-frozen-digest.json",
+        "sha256": "8e359a1e7e92d717c240d09dc558403d4594a78a4363b08d814bfc7fe0625b5b"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mysql-final-projections.json",
+        "sha256": "41362c7a0ab7842a30148e7c768c2ee56c1781a42031b657a14fcdf09d2e8bb8"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mariadb-final-projections.json",
+        "sha256": "c20ffb27e97791c5670e91a34862ecf03e7c799bc089a8844d7a5f50ee4f7a2d"
+      }
+    ],
+    "remaining": [
+      "Additional domain-draft/import coverage and complete course relationships",
+      "Exact content package and 53 affairs reviews plus independent academic/relevance validation",
+      "Full Factbook/import/export/print matrix and editorial/operator workflow",
+      "Exact host inventory and fresh migration/initializer coverage",
+      "Representative load/field budgets, CSP/ASVS and manual accessibility"
+    ]
+  },
+  "continuation_20261024_factbook": {
+    "recorded_at": "2026-10-24T10:18:41.503805+00:00",
+    "application_commit": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+    "tested_artifact": {
+      "schemaVersion": 1,
+      "gitSha": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+      "source": "git-rev-parse-head",
+      "buildTarget": "hostinger",
+      "builtAt": "2026-10-24T10:16:08.205Z"
+    },
+    "production_deployed": false,
+    "implemented": [
+      "Owned v2 graph export of all twelve existing Factbook tables including archive/trash, blocks, collections, preferences, history and private raster bytes",
+      "Stored JSON strings preserve text and empty object/array types; complete legacy v1 nested files remain supported",
+      "Preflight all records/images, new owned IDs, atomic SQL graph plus metadata-only receipt, private image staging and generated-file-only cleanup",
+      "Same-file/mode/settings replay retains later edits; read-only receipt recovery; explicit full wipe clears own receipts",
+      "Accessible confirmation, import focus return, same-file reselection, safe active print preview and one-shot entry links cleared when dismissed"
+    ],
+    "limits": {
+      "json_bytes": 16777216,
+      "records": 10000,
+      "aggregate_image_bytes": 8388608,
+      "image_bytes": 5242880,
+      "image_pixels": 16000000,
+      "private_image_quota_bytes": 524288000
+    },
+    "local_results": {
+      "native": "17 entry formats; all states, exact content/date/ownership remap, blocks, collections/preferences/history/images, concurrent replay, foreign/stale account, malformed fields/timestamps/relations/cycles, missing bytes, SQL rollback, worker termination before commit and after real commit before response, receipt/429, collection edit and full wipe",
+      "browser": "Built Chromium: actual download; editor/print safe DOM and no autosave/read mutations; restore at five widths, keyboard/focus and scoped axe; real committed response loss, read-only receipt and same-file retry; originals retained",
+      "mariadb": {
+        "server": "11.4.13-MariaDB-ubu2404",
+        "tables": 97,
+        "entries": 17,
+        "history": 1,
+        "private_images": 1,
+        "schema_parity": true,
+        "originals_retained": true
+      },
+      "unit": "8 Factbook/routes Node tests plus PHP migration/canonical/graph bound tests",
+      "lint_typecheck_strict_build": "passed"
+    },
+    "commands": [
+      "node --test tests/factbook.test.ts tests/workspace/routes.test.mjs",
+      "php tests/workspace/factbook-backup-unit.php",
+      "CI=true CSSV_DB_NAME=cssvista_briefing_test CSSV_TEST_PHP_CONTAINER=cssvista-test-php node tests/workspace/factbook-backup.mjs",
+      "CI=true CSSV_DB_NAME=cssvista_briefing_test CSSV_TEST_PHP_CONTAINER=cssvista-test-mariadb-php node tests/workspace/factbook-backup-rehearsal.mjs",
+      "npm run typecheck",
+      "npm run lint",
+      "node scripts/build-target.mjs hostinger --strict",
+      "node scripts/transformation/check-preservation.mjs",
+      "node tests/browser/factbook-backup.mjs",
+      "node tests/browser/workspace.mjs"
+    ],
+    "ci_at_recording": {
+      "previous_green_head": "bfebbd929ef481643afb9534ecaf073e9f78efd9",
+      "latest_checks": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/109/checks",
+      "status": "Read latest exact-head checks after push; not inferred from prior eight green workflows."
+    },
+    "failed_runs_retained": [
+      "Fixture timestamp requirement corrected",
+      "Shared-IP-only low quota corrected with separate account/shared limits",
+      "Browser selector corrected to actual JSON accept list",
+      "Real import focus return fixed",
+      "Real stale linked-entry reopen on restore refresh fixed",
+      "Expired synthetic admin fixture regenerated; workspace security passed",
+      "MariaDB source comparison corrected for unordered SQL rows; original digests/content remain unchanged"
+    ],
+    "not_claimed": [
+      "Actual-host/version/settings readiness, fresh migration/initializer matrix or full DB/private-storage host restore",
+      "Actual PDO commit-ack transport failure, host power loss/directory fsync or filesystem certification",
+      "Large-file streaming, representative capacity/load/field performance",
+      "Complete manual AT/zoom/mobile/software-keyboard or full legacy/print/adversarial matrix",
+      "Academic approval, exact private package, 53 affairs reviews, operations readiness, production release"
+    ],
+    "evidence": [
+      {
+        "reference": "private-local-evidence:20261024-factbook/native-verified.log",
+        "sha256": "fd087716a9a20e44705466f0c023cb45ce83cea39fd3e177128d8f28cfd975b2"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/native-unit.log",
+        "sha256": "95e255dc0b585fa767b3695e874d9c62a1836ea79175d9294a45455ce5dba018"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/unit.log",
+        "sha256": "151b31bd69dfa83d6bb681c5a1cdc31aa1fb7a464b6e642dbe71eb03ab5f0248"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/typecheck.log",
+        "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/full-lint.log",
+        "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/build-verified.log",
+        "sha256": "167ef0992ae97dd292590eff0281ba33c8144ae0a612745b7c16f05ee685bd2f"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/browser-verified.log",
+        "sha256": "077888464c489a2279de8d01b4f3c962b2c7c1e58a000aa4df3bdf33c6f92911"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/workspace-security-verified.log",
+        "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/workspace-browser.log",
+        "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/preservation.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/mariadb-verified.log",
+        "sha256": "3d93c8c24e1a74e1b76b78361de1f2ff9f9a6f14171603179ff405463707262a"
+      }
+    ]
+  }
+}

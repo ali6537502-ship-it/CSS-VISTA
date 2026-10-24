@@ -1,0 +1,6 @@
+{
+  "src/features/grammar-v5/Course.tsx": {
+    "sha256": "cc6c2650c1e31bf5bed97517b8ac64dd740c2b9ac9109fe59aa7f15f040369b4",
+    "reason": "Preserve exact guided Expression workspace/version return and separate Pr\u00e9cis return; curriculum/state/server catalogs remain unchanged."
+  }
+}

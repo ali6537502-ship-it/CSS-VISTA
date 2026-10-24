@@ -43,7 +43,8 @@ function cssv_skills_ai_result(array $data,array $input): array {
     }unset($flag);
     $question=cssv_learning_string($data['next_question']??null,400,'one next learning question');
     foreach([$writing['summary'],$question,...array_column($writing['findings'],'explanation'),...array_column($writing['findings'],'hint'),...array_column($criteria,'explanation'),...array_column($criteria,'hint'),...array_column($flags,'explanation')] as $prose){
-        if(preg_match('~https?://|www\.|\b(?:examiner|official)\s+(?:marks?|score)|\b(?:your|student)\s+(?:score|marks?)\s*(?:is|are|:|=)|\b(?:scored|awarded)\s+\d+~iu',$prose))throw new InvalidArgumentException('Unsupported citation or examination marking claim.');
+        cssv_writing_instructional_prose($prose);
+        if(preg_match('~https?://|www\.~iu',$prose))throw new InvalidArgumentException('Unsupported citation or examination marking claim.');
     }
     return [...$writing,'criteria'=>$criteria,'evidence_flags'=>$flags,'next_question'=>$question,'rubric_version'=>'skills-instruction-v1','assessment'=>'Instructional rubric feedback; not official marks or independently verified factual research.'];
 }
@@ -80,7 +81,7 @@ function cssv_skills_ai_reserve(PDO $pdo,string $user,array $body): string {
         if($policy!==$config['policy_version']||!hash_equals($config['policy_hash'],$noticeHash))throw new DomainException('The processing notice changed. Review the current version.');
         $answers=array_filter($v['answers'],fn($key)=>$key!=='check',ARRAY_FILTER_USE_KEY);
         if($w['feature']==='sentence'&&cssv_learning_words($v['text'])>80)throw new InvalidArgumentException('Use one sentence of at most 80 words for this shared sentence-feedback allowance.');
-        if(!$answers||cssv_learning_words(implode(' ',$answers))<3)throw new InvalidArgumentException('Save independent writing before requesting feedback.');
+        if(!$answers||cssv_learning_words(implode(' ',$answers))<($w['feature']==='sentence'?1:3))throw new InvalidArgumentException('Save independent writing before requesting feedback.');
         $q=$pdo->prepare("SELECT id FROM ai_operations WHERE user_id=? AND version_id=? AND state IN ('reserved','in_flight','unknown','succeeded') LIMIT 1");$q->execute([$user,$version]);if($q->fetchColumn())throw new DomainException('This version already has feedback or a pending request. Recover its saved status.');
         $input=['policy_version'=>$policy,'policy_hash'=>$noticeHash,'feature'=>$w['feature'],'level'=>$w['level'],'stage'=>$v['evidence']['response_stage']??$w['source']['stages'][$v['evidence']['next']]['id'],'statement'=>$w['statement']?:$w['source']['task'],
             'source'=>['id'=>$w['lesson_id'],'title'=>$w['source']['title'],'explanation'=>$w['source']['explanation'],'attribution'=>$w['source']['attribution']],
