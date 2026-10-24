@@ -16,7 +16,12 @@ const homes: Record<string, typeof workspaceDestinations[number]['id']> = {
   '/account/search': 'library', '/account/factbook': 'library',
   '/account/saved': 'library', '/account/library/search': 'library',
 }
-export function workspaceHome(pathname: string) {
+export function workspaceHome(pathname: string, search = '') {
+  if (pathname === '/account/preparation') {
+    const params = new URLSearchParams(search)
+    const home = params.has('writing') || params.get('new') === 'writing' ? 'write' : params.get('view') === 'topics' ? 'learn' : 'today'
+    return workspaceDestinations.find(item => item.id === home)
+  }
   return workspaceDestinations.find(item => item.to === pathname || item.id === homes[pathname])
 }
 

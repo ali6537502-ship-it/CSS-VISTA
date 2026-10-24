@@ -27,3 +27,10 @@ test('pending recovery stays account-scoped and preserves original request bytes
   assert.equal(preparationRecovery(storage,'foreign').length,0)
   assert.equal(JSON.stringify([...values]),before)
 })
+
+test('preparation navigation follows the actual topic or writing view without changing opaque query values', () => {
+  assert.equal(workspaceHome('/account/preparation','?view=topics&attempt=opaque&topic=edition')?.id,'learn')
+  assert.equal(workspaceHome('/account/preparation','?view=topics&writing=opaque&version=retained')?.id,'write')
+  assert.equal(workspaceHome('/account/preparation','?new=writing')?.id,'write')
+  assert.equal(workspaceHome('/account/preparation','?attempt=opaque')?.id,'today')
+})
