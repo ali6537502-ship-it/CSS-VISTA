@@ -1,8 +1,8 @@
 {
-  "last_verified_at": "2026-10-24T05:44:18.552286+00:00",
+  "last_verified_at": "2026-10-24T10:18:41.503805+00:00",
   "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
   "candidate_sha": "964beeb50e4f7bfe83c2394bc16736ea55993dad",
-  "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
+  "current_commit": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
   "branch": "feat/pro-workspace-transformation-20261023",
   "overall_status": "in_progress_not_release_ready",
   "deployed": false,
@@ -37,7 +37,8 @@
     "002_hostinger_hardening.sql": "9155cb5be6cd9ee87b7764c3fccf7750aa1b3c8bfea12688329c0c1453e86316",
     "020_attempt_planner.sql": "75996ac98f4560dfa077203f4069798839c949c3dfb39c906eebc01a1b9f3548",
     "010_mpt_exam_system.sql": "c6b50b232d9ccf4e70eb80251e66e6981ceb2eaff8db95cc82bff81c53785414",
-    "015_grammar_progress.sql": "bb42bc5c9021ebf15aea361b8a71d34c3fd5b93dbfec324334f6771ca4c32450"
+    "015_grammar_progress.sql": "bb42bc5c9021ebf15aea361b8a71d34c3fd5b93dbfec324334f6771ca4c32450",
+    "028_factbook_backup_receipts.sql": "9d620408040bc6af69ee82aaca0ec1ad67e2e5b15ce219c55739785bc47fe878"
   },
   "migration_026_resolution": "Original full filenames/bytes retained; named-lock runtime initializers coexist in disposable MySQL. Host applied state remains unverified.",
   "academic_review_status": "No new independent human academic approval in this session.",
@@ -59,11 +60,11 @@
       "objective": "security and durable work",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "current_commit": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
       "dependencies": [
         "P0"
       ],
-      "remaining_work_or_blocker": "Core remediations implemented; final Factbook path and complete security/restore coverage remain.",
+      "remaining_work_or_blocker": "Bounded Factbook v2 complete graph and legacy v1 restore now implemented and locally verified. Full legacy/print/mobile/adversarial/capacity/manual AT matrix, actual-host recovery and wider security work remain.",
       "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
       "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
     },
@@ -1618,7 +1619,7 @@
   "live_paused": true,
   "live_fingerprint_cache_variants_agree": true,
   "rollback": "See MIGRATIONS.md and RELEASE-PACKET.md; no destructive down migrations.",
-  "next_safe_action": "Observe final-head draft PR CI. Continue unfinished P3/P6 and editorial/operator work from PROGRESS.md; keep production release closed.",
+  "next_safe_action": "Observe latest exact-head draft PR CI, then continue unfinished catalog/domain-draft, editorial/operator and P6 work; keep production release closed.",
   "local_verification_summary": {
     "recorded_at": "2026-10-23T18:10:19.100891+00:00",
     "tested_application_build": {
@@ -1913,7 +1914,7 @@
     "tests/workspace/routes.test.mjs",
     "tests/workspace/security.mjs"
   ],
-  "last_tested_application_sha": "531892d381f52994174853187fb0cfa2af1e55b7",
+  "last_tested_application_sha": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
   "content_manifest_hash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
   "core_verification": [
     {
@@ -2093,7 +2094,7 @@
       "Manual accessibility and operational release gates"
     ]
   },
-  "previous_verified_application_sha": "316b4aef3ab02c5e86dd69344787270e3672845c",
+  "previous_verified_application_sha": "531892d381f52994174853187fb0cfa2af1e55b7",
   "continuation_20261024_import_recovery": {
     "application_source_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
     "prior_ci_head": "07c445348480b6f3ed4f8ee47a010fc47a997442",
@@ -2210,6 +2211,127 @@
       "Full Factbook/import/export/print matrix and editorial/operator workflow",
       "Exact host inventory and fresh migration/initializer coverage",
       "Representative load/field budgets, CSP/ASVS and manual accessibility"
+    ]
+  },
+  "continuation_20261024_factbook": {
+    "recorded_at": "2026-10-24T10:18:41.503805+00:00",
+    "application_commit": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+    "tested_artifact": {
+      "schemaVersion": 1,
+      "gitSha": "a5937c4bbdbe59ebe7242c11147d2c2e70803c49",
+      "source": "git-rev-parse-head",
+      "buildTarget": "hostinger",
+      "builtAt": "2026-10-24T10:16:08.205Z"
+    },
+    "production_deployed": false,
+    "implemented": [
+      "Owned v2 graph export of all twelve existing Factbook tables including archive/trash, blocks, collections, preferences, history and private raster bytes",
+      "Stored JSON strings preserve text and empty object/array types; complete legacy v1 nested files remain supported",
+      "Preflight all records/images, new owned IDs, atomic SQL graph plus metadata-only receipt, private image staging and generated-file-only cleanup",
+      "Same-file/mode/settings replay retains later edits; read-only receipt recovery; explicit full wipe clears own receipts",
+      "Accessible confirmation, import focus return, same-file reselection, safe active print preview and one-shot entry links cleared when dismissed"
+    ],
+    "limits": {
+      "json_bytes": 16777216,
+      "records": 10000,
+      "aggregate_image_bytes": 8388608,
+      "image_bytes": 5242880,
+      "image_pixels": 16000000,
+      "private_image_quota_bytes": 524288000
+    },
+    "local_results": {
+      "native": "17 entry formats; all states, exact content/date/ownership remap, blocks, collections/preferences/history/images, concurrent replay, foreign/stale account, malformed fields/timestamps/relations/cycles, missing bytes, SQL rollback, worker termination before commit and after real commit before response, receipt/429, collection edit and full wipe",
+      "browser": "Built Chromium: actual download; editor/print safe DOM and no autosave/read mutations; restore at five widths, keyboard/focus and scoped axe; real committed response loss, read-only receipt and same-file retry; originals retained",
+      "mariadb": {
+        "server": "11.4.13-MariaDB-ubu2404",
+        "tables": 97,
+        "entries": 17,
+        "history": 1,
+        "private_images": 1,
+        "schema_parity": true,
+        "originals_retained": true
+      },
+      "unit": "8 Factbook/routes Node tests plus PHP migration/canonical/graph bound tests",
+      "lint_typecheck_strict_build": "passed"
+    },
+    "commands": [
+      "node --test tests/factbook.test.ts tests/workspace/routes.test.mjs",
+      "php tests/workspace/factbook-backup-unit.php",
+      "CI=true CSSV_DB_NAME=cssvista_briefing_test CSSV_TEST_PHP_CONTAINER=cssvista-test-php node tests/workspace/factbook-backup.mjs",
+      "CI=true CSSV_DB_NAME=cssvista_briefing_test CSSV_TEST_PHP_CONTAINER=cssvista-test-mariadb-php node tests/workspace/factbook-backup-rehearsal.mjs",
+      "npm run typecheck",
+      "npm run lint",
+      "node scripts/build-target.mjs hostinger --strict",
+      "node scripts/transformation/check-preservation.mjs",
+      "node tests/browser/factbook-backup.mjs",
+      "node tests/browser/workspace.mjs"
+    ],
+    "ci_at_recording": {
+      "previous_green_head": "bfebbd929ef481643afb9534ecaf073e9f78efd9",
+      "latest_checks": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/109/checks",
+      "status": "Read latest exact-head checks after push; not inferred from prior eight green workflows."
+    },
+    "failed_runs_retained": [
+      "Fixture timestamp requirement corrected",
+      "Shared-IP-only low quota corrected with separate account/shared limits",
+      "Browser selector corrected to actual JSON accept list",
+      "Real import focus return fixed",
+      "Real stale linked-entry reopen on restore refresh fixed",
+      "Expired synthetic admin fixture regenerated; workspace security passed",
+      "MariaDB source comparison corrected for unordered SQL rows; original digests/content remain unchanged"
+    ],
+    "not_claimed": [
+      "Actual-host/version/settings readiness, fresh migration/initializer matrix or full DB/private-storage host restore",
+      "Actual PDO commit-ack transport failure, host power loss/directory fsync or filesystem certification",
+      "Large-file streaming, representative capacity/load/field performance",
+      "Complete manual AT/zoom/mobile/software-keyboard or full legacy/print/adversarial matrix",
+      "Academic approval, exact private package, 53 affairs reviews, operations readiness, production release"
+    ],
+    "evidence": [
+      {
+        "reference": "private-local-evidence:20261024-factbook/native-verified.log",
+        "sha256": "fd087716a9a20e44705466f0c023cb45ce83cea39fd3e177128d8f28cfd975b2"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/native-unit.log",
+        "sha256": "95e255dc0b585fa767b3695e874d9c62a1836ea79175d9294a45455ce5dba018"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/unit.log",
+        "sha256": "151b31bd69dfa83d6bb681c5a1cdc31aa1fb7a464b6e642dbe71eb03ab5f0248"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/typecheck.log",
+        "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/full-lint.log",
+        "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/build-verified.log",
+        "sha256": "167ef0992ae97dd292590eff0281ba33c8144ae0a612745b7c16f05ee685bd2f"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/browser-verified.log",
+        "sha256": "077888464c489a2279de8d01b4f3c962b2c7c1e58a000aa4df3bdf33c6f92911"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/workspace-security-verified.log",
+        "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/workspace-browser.log",
+        "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/preservation.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8"
+      },
+      {
+        "reference": "private-local-evidence:20261024-factbook/mariadb-verified.log",
+        "sha256": "3d93c8c24e1a74e1b76b78361de1f2ff9f9a6f14171603179ff405463707262a"
+      }
     ]
   }
 }
