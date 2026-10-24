@@ -33,6 +33,7 @@ if($argv[1]==='seed'){
   fb_insert($pdo,'factbook_sources',['entry_id'=>$id,'title'=>'TEST ONLY source','author_organization'=>'TEST ONLY','web_address'=>'https://example.invalid/reference','verification_note'=>'TEST ONLY private reference note'],$user);
   if($index===0){$row=fb_row($pdo,'factbook_entries',$id,$user);fb_revision($pdo,$row,$user);}
  }
+ fb_insert($pdo,'factbook_entry_blocks',['entry_id'=>$entries[0],'block_type'=>'text','content'=>['text'=>'TEST ONLY retained block — اردو','rows'=>[1,true]]],$user);
  $tag=fb_insert($pdo,'factbook_tags',['name'=>'TEST ONLY retained tag'],$user)['id'];fb_insert($pdo,'factbook_entry_tags',['entry_id'=>$entries[0],'tag_id'=>$tag],$user);
  $collection=fb_insert($pdo,'factbook_collections',['name'=>'TEST ONLY mixed collection','archived_at'=>'2025-01-01'],$user)['id'];foreach([$entries[0],$entries[1],$entries[2]] as $index=>$id)fb_insert($pdo,'factbook_collection_entries',['collection_id'=>$collection,'entry_id'=>$id,'position'=>$index],$user);
  fb_insert($pdo,'factbook_preferences',['default_view'=>'compact','default_print_layout'=>'spacious','autosave_enabled'=>($argv[4]??'')==='autosave','source_reminders'=>false,'revision_labels'=>true],$user);

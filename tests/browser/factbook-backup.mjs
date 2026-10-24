@@ -17,6 +17,7 @@ page.on('pageerror',error=>errors.push(error.message))
 await context.route('**/*',route=>new URL(route.request().url()).hostname==='localhost'?route.continue():route.abort())
 const base='https://localhost:3444',artifacts='test-artifacts/factbook-backup'
 mkdirSync(artifacts,{recursive:true})
+await context.tracing.start({screenshots:true,snapshots:true})
 let writes=0
 page.on('request',request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/api/factbook/data.php'&&request.postDataJSON()?.action==='save_entry')writes++})
 try{
@@ -25,7 +26,7 @@ try{
  await page.goto(base+'/factbook?entry='+rich)
  const editor=page.getByRole('textbox',{name:'Formatted note',exact:true});await editor.waitFor();await page.waitForTimeout(1600)
  assert.match(await editor.innerText(),/meaning kept — اردو/);assert.equal(await editor.locator('[onerror],img,script').count(),0);assert.equal(writes,0);assert.equal(digest(),before)
- await page.getByRole('button',{name:'Close entry editor'}).click()
+ await page.getByRole('button',{name:'Close entry editor'}).click();assert.equal(new URL(page.url()).searchParams.get('entry'),null)
  await page.getByRole('button',{name:'Settings & Trash',exact:true}).click()
  const downloading=page.waitForEvent('download');await page.getByRole('button',{name:'Export complete backup',exact:true}).click();const download=await downloading,file=artifacts+'/complete.json';await download.saveAs(file)
  const backup=JSON.parse(readFileSync(file,'utf8'));assert.equal(backup.entries.length,17);assert.equal(backup.related.factbook_revisions.length,1);assert.equal(backup.related.factbook_media.length,1);assert.ok(backup.entries.some(e=>e.deleted_at));assert.ok(backup.entries.some(e=>e.archived_at));assert.equal(digest(),before)
@@ -47,9 +48,9 @@ try{
  await modal.getByRole('button',{name:'Close',exact:true}).click();await page.getByRole('button',{name:'Check last restore receipt',exact:true}).click();await page.getByText(/Restore confirmed: 17 entries/).waitFor();assert.equal(posts,1,'Receipt check resent restore')
  const restoredDigest=digest();assert.notEqual(restoredDigest,before)
  await choose();modal=page.getByRole('dialog',{name:'Validate Factbook Backup'});await modal.getByRole('checkbox',{name:/I recognise this as my own backup/}).check();await modal.getByRole('button',{name:'Confirm Import',exact:true}).click();await modal.waitFor({state:'detached'});await page.getByText(/Earlier restore confirmed/).waitFor();assert.equal(digest(),restoredDigest,'Same-file retry duplicated records')
- const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Export complete backup',exact:true}).click();const afterFile=artifacts+'/after.json';await(await downloaded).saveAs(afterFile);const after=JSON.parse(readFileSync(afterFile,'utf8'));assert.equal(after.entries.length,34);for(const entry of backup.entries)assert.deepEqual(after.entries.find(e=>e.id===entry.id),entry)
+ const [downloaded]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export complete backup',exact:true}).click()]);const afterFile=artifacts+'/after.json';await downloaded.saveAs(afterFile);const after=JSON.parse(readFileSync(afterFile,'utf8'));assert.equal(after.entries.length,34);for(const entry of backup.entries)assert.deepEqual(after.entries.find(e=>e.id===entry.id),entry)
  const copiedRich=after.entries.find(e=>e.entry_type==='rich-note'&&e.id!==rich);await page.goto(base+'/factbook?entry='+copiedRich.id);await editor.waitFor();await page.waitForTimeout(1600);assert.equal(writes,0);assert.equal(digest(),restoredDigest);assert.equal(await page.evaluate(()=>window.__unsafeFactbook||0),0)
  assert.deepEqual(errors,[])
  writeFileSync(artifacts+'/browser.json',JSON.stringify({formats:17,widths:[320,390,768,1024,1440],lostResponseRecovered:true,readMutations:writes,axeViolations:[],pageErrors:errors,scope:'Built Chromium native test. No physical device, manual AT or PDF artifact certification.'},null,2))
  console.log('PASS: built native backup/download, safe read/print without autosave, 17 formats/all states/history/image bytes, restore modal at five widths, keyboard/focus/axe, real committed lost-response receipt and same-file replay; originals retained.')
-}finally{await browser.close()}
+}catch(error){writeFileSync(artifacts+'/failure.html',await page.content());await page.screenshot({path:artifacts+'/failure.png',fullPage:true});throw error}finally{await context.tracing.stop({path:artifacts+'/trace.zip'});await browser.close()}
