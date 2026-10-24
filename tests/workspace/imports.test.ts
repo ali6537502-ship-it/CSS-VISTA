@@ -20,7 +20,8 @@ test('replay identity survives reordering and separates accounts, destinations a
  const source=importSources(storage({'cssvista:v1':JSON.stringify({savedAnswers:[answer]})}),a,true).sources[0]
  const key=await importIdentity(a,source,attempt),same=await importIdentity(a,source,attempt);assert.equal(key.request,same.request);assert.match(key.request,/^[a-f0-9-]{14}4[a-f0-9-]{21}$/)
  const reordered=importSources(storage({'cssvista:v1':JSON.stringify({savedAnswers:[{...answer,id:'new'},answer]})}),a,true).sources[1];assert.equal((await importIdentity(a,reordered,attempt)).request,key.request)
- assert.notEqual((await importIdentity(b,source,attempt)).request,key.request);assert.notEqual((await importIdentity(a,source,b)).request,key.request);assert.notEqual((await importIdentity(a,{...source,raw:source.raw+' '},attempt)).request,key.request)
+ assert.notEqual((await importIdentity(b,source,attempt)).request,key.request);assert.notEqual((await importIdentity(a,source,b)).request,key.request);assert.notEqual((await importIdentity(a,{...source,raw:JSON.stringify({...answer,minutes:41})},attempt)).request,key.request)
+ const canonicalCopy={...source,raw:JSON.stringify(Object.fromEntries(Object.entries(answer).reverse()))};assert.equal((await importIdentity(a,canonicalCopy,attempt)).request,key.request)
  const s=storage({});retainImport(s,a,key);assert.deepEqual(importJournals(s,a),[key]);assert.deepEqual(importJournals(s,b),[]);assert.ok(!JSON.stringify([...s.map]).includes('Original response'))
  assert.throws(()=>retainImport({setItem(){throw Error('Quota')}},a,key),/Quota/)
 })

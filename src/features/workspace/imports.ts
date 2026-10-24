@@ -54,7 +54,13 @@ async function digest(text: string) {
 }
 export async function importIdentity(user: string, source: ImportSource, attempt: string): Promise<ImportJournal> {
   if (!validId.test(user) || !validId.test(attempt)) throw Error('Choose your account and preparation attempt.')
-  const fingerprint = await digest(source.raw)
+  function canonical(value: unknown): unknown {
+    if (Array.isArray(value)) return value.map(canonical)
+    if (record(value)) return Object.fromEntries(Object.keys(value).sort().map(key => [key,canonical(value[key])]))
+    return value
+  }
+  // Existing account progress backup may reorder JSON fields; it must not duplicate an import.
+  const fingerprint = await digest(JSON.stringify(canonical(JSON.parse(source.raw))))
   const hash = await digest(JSON.stringify(['cssvista-writing-import-v1',user,source.key,fingerprint,attempt,source.title,source.text,source.kind]))
   const hex = hash.slice(0,12) + '4' + hash.slice(13,16) + 'a' + hash.slice(17,32)
   const request = `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`
