@@ -1,8 +1,8 @@
 {
-  "last_verified_at": "2026-10-24T04:28:30.171326+00:00",
+  "last_verified_at": "2026-10-24T05:44:18.552286+00:00",
   "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
   "candidate_sha": "964beeb50e4f7bfe83c2394bc16736ea55993dad",
-  "current_commit": "316b4aef3ab02c5e86dd69344787270e3672845c",
+  "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
   "branch": "feat/pro-workspace-transformation-20261023",
   "overall_status": "in_progress_not_release_ready",
   "deployed": false,
@@ -41,16 +41,16 @@
   },
   "migration_026_resolution": "Original full filenames/bytes retained; named-lock runtime initializers coexist in disposable MySQL. Host applied state remains unverified.",
   "academic_review_status": "No new independent human academic approval in this session.",
-  "operations_status": "Synthetic MySQL restore verified; production host/private storage/mail/maintenance unavailable.",
+  "operations_status": "Quiescent synthetic MySQL 8.0.46 -> MariaDB 11.4.13 restore/retrieval verified; actual host/private storage/mail/maintenance and full fresh-init/upgrade coverage remain unverified.",
   "phases": [
     {
       "phase": "P0",
       "objective": "reconcile and freeze baseline",
       "status": "blocked",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
       "dependencies": [],
-      "remaining_work_or_blocker": "Exact private package and actual host applied/checksum inventory unavailable.",
+      "remaining_work_or_blocker": "Local MariaDB 11.4 restore/read rehearsal passes. Exact private package, host applied/checksum/version inventory and full fresh initializer/upgrade matrix remain.",
       "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
       "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
     },
@@ -85,11 +85,11 @@
       "objective": "Library Review Progress",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "316b4aef3ab02c5e86dd69344787270e3672845c",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
       "dependencies": [
         "P0"
       ],
-      "remaining_work_or_blocker": "Native filters/owned collections/CA and source adapters/review federation implemented; independent relevance validation, explicit local import/receipts, cross-device coverage and representative query/load plans remain.",
+      "remaining_work_or_blocker": "Bounded cached-answer preview/receipts/original draft resume and separate-browser replay now pass. Additional domain-draft coverage, reviewed catalog relationships, independent relevance and representative load/physical-device checks remain.",
       "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
       "next_safe_action": "Continue local import preview and recovery receipts, then wider domain/academic/operational checks while preserving the release hold."
     },
@@ -124,11 +124,11 @@
       "objective": "visual accessibility performance",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
       "dependencies": [
         "P0"
       ],
-      "remaining_work_or_blocker": "Final contrast rerun, manual AT/device/zoom and representative performance/CSP/ASVS coverage remain.",
+      "remaining_work_or_blocker": "Private initial MySQL/MariaDB query plans and bounded import keyboard/axe checks captured; representative load/field budgets, full manual AT/device/zoom and CSP/ASVS convergence remain.",
       "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
       "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
     },
@@ -137,11 +137,11 @@
       "objective": "held verification packet",
       "status": "in_progress",
       "baseline_sha": "ffeedde80be9af6a9915bf360e8eb7bba821917f",
-      "current_commit": "517e2e0c81d6530fb5689358f0c471e87f34d937",
+      "current_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
       "dependencies": [
         "P0"
       ],
-      "remaining_work_or_blocker": "Local affected suites pass and draft PR #109 is open. Exact-head CI and all unresolved earlier scope/approval/operations gates remain.",
+      "remaining_work_or_blocker": "Current local affected suites pass; exact new-head CI and all remaining academic/content/operations gates remain. Release hold active.",
       "rollback": "Retain additive data, receipts and topic guards; revert presentation independently.",
       "next_safe_action": "Read progress/decision log and finish unresolved independent checks; keep release closed."
     }
@@ -1913,7 +1913,7 @@
     "tests/workspace/routes.test.mjs",
     "tests/workspace/security.mjs"
   ],
-  "last_tested_application_sha": "316b4aef3ab02c5e86dd69344787270e3672845c",
+  "last_tested_application_sha": "531892d381f52994174853187fb0cfa2af1e55b7",
   "content_manifest_hash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
   "core_verification": [
     {
@@ -1997,6 +1997,11 @@
       "reference": "private-local-evidence:synthetic-backup.sql",
       "sha256": "544bb06b87ddc651ac4636279bd8c4b77baca35a5efbadbaf86c756b72db6186",
       "scope": "Disposable synthetic MySQL only; private file, not committed."
+    },
+    {
+      "reference": "private-local-evidence:20261024-import/synthetic-mariadb-frozen.sql",
+      "sha256": "c378112b97137cac2ccbd4d87460497eff8637306e62211f64b6c50cdc252666",
+      "scope": "Quiescent disposable synthetic MySQL snapshot restored unchanged into local MariaDB 11.4.13; not a production learner-data backup."
     }
   ],
   "continuation_20261024": {
@@ -2088,5 +2093,123 @@
       "Manual accessibility and operational release gates"
     ]
   },
-  "previous_verified_application_sha": "517e2e0c81d6530fb5689358f0c471e87f34d937"
+  "previous_verified_application_sha": "316b4aef3ab02c5e86dd69344787270e3672845c",
+  "continuation_20261024_import_recovery": {
+    "application_source_commit": "531892d381f52994174853187fb0cfa2af1e55b7",
+    "prior_ci_head": "07c445348480b6f3ed4f8ee47a010fc47a997442",
+    "prior_ci_workflows_passed": 8,
+    "new_head_ci": "Consult the exact draft PR #109 head checks; this ledger records local evidence, not a future CI conclusion.",
+    "scope": "Explicit cached-answer preview/ownership/destination/import via existing immutable writing and native receipts; account drafts resume original form/request; original exports and metadata-only recovery; accurate cached-progress labels; bounded MySQL/MariaDB restore/plan rehearsal.",
+    "schema_changes": false,
+    "deployed": false,
+    "unit_tests": 8,
+    "browser_programs_passed": [
+      "workspace-import",
+      "workspace-retrieval",
+      "workspace"
+    ],
+    "browser_scope": "Native backend and real committed-save response loss; same import replays across independent Chromium sessions and JSON key reordering; viewport widths 320,390,768,1024,1440; export/keyboard confirmation; zero page errors and one import-page automated axe scan with zero violations. Not manual AT or physical-device certification.",
+    "native_scope": "Owned receipt/no-store/body exclusion; concurrent duplicate replay; exact text/hash/version; changed source/foreign attempt denied; release hold; existing learning/security and workspace suites pass.",
+    "mariadb_rehearsal": {
+      "mysql": "8.0.46",
+      "mariadb": "11.4.13-MariaDB-ubu2404",
+      "table_count": 96,
+      "snapshot_quiescent": true,
+      "restored_row_bytes_and_types_match": true,
+      "projection_count": 15,
+      "projection_hashes_match": true,
+      "private_plan_count": {
+        "mysql": 12,
+        "mariadb": 12
+      },
+      "dump_sha256": "c378112b97137cac2ccbd4d87460497eff8637306e62211f64b6c50cdc252666",
+      "scope": "Synthetic local snapshot/retrieval compatibility only; not actual host or representative load/field evidence."
+    },
+    "known_harness_and_fix_history": "Initial browser runtime absent, then scroll-position axe/test cache assumptions corrected. Existing progress backup JSON field reordering exposed an import replay defect, corrected with canonical source identity. A draft-resume JSX syntax error was caught by typecheck/build and fixed before push. Failed logs remain private.",
+    "evidence": [
+      {
+        "reference": "private-local-evidence:20261024-import/typecheck.log",
+        "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/full-lint.log",
+        "sha256": "c72cd34b3c5965bedf89d5b34ed41a4cbecc8dadc910385fb3b8ca8ecbe84ecb"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/final-ui-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/import-unit.log",
+        "sha256": "d7e017119b1ba04a21f74081ff785d21ae071360353ac685d49961be27ee6111"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/workspace-unit.log",
+        "sha256": "a5236c44db46f19c8e16f560fc99a7c9f8ca0384d3504f466131cbcd33be8e49"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/import-native-final.log",
+        "sha256": "2406d16663e0e0f5b09dbf22d5826c143d1f3f051b906655e5b7719e1577ec15"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/learning-security.log",
+        "sha256": "650dd658dc94ff84fad5f77789e01d8b797864d8f5ef24fe3b429718ec48fa88"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/workspace-security.log",
+        "sha256": "5fd71b7c3d2892a791f9a0003a05706568be1e999dfd2ee7bd15cf04c9e30086"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/build-verified.log",
+        "sha256": "5884098daf64864bdc2aacc4be3fb51f5109e10a3562203572ac6f9f56bace31"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/import-browser-verified.log",
+        "sha256": "0666b9ecabe9700e060a114c2ab6ecc8cac48bae1559b83820254c68774cfb8f"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/retrieval-browser.log",
+        "sha256": "07d9274d306cadf12dbe6b19fcc3215a377c119987a4769c9f2374e7fa01b979"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/workspace-browser.log",
+        "sha256": "b7f7cd8ca95f9d84e4c356bc7bde2a75b4fb48f0e2a8ec908e8e27e87322ba83"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/preservation.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/rehearsal-summary.json",
+        "sha256": "bbc32bc7550057790bcbae4321f981379c67dbb343fbf630c6c579daec0cce5f"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mysql-frozen-before.json",
+        "sha256": "8d1763686e610adcd18aa0195db7699bdf79a34940f94459d1f3bbe8f0a71aad"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mysql-frozen-after.json",
+        "sha256": "8d1763686e610adcd18aa0195db7699bdf79a34940f94459d1f3bbe8f0a71aad"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mariadb-frozen-digest.json",
+        "sha256": "8e359a1e7e92d717c240d09dc558403d4594a78a4363b08d814bfc7fe0625b5b"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mysql-final-projections.json",
+        "sha256": "41362c7a0ab7842a30148e7c768c2ee56c1781a42031b657a14fcdf09d2e8bb8"
+      },
+      {
+        "reference": "private-local-evidence:20261024-import/mariadb-final-projections.json",
+        "sha256": "c20ffb27e97791c5670e91a34862ecf03e7c799bc089a8844d7a5f50ee4f7a2d"
+      }
+    ],
+    "remaining": [
+      "Additional domain-draft/import coverage and complete course relationships",
+      "Exact content package and 53 affairs reviews plus independent academic/relevance validation",
+      "Full Factbook/import/export/print matrix and editorial/operator workflow",
+      "Exact host inventory and fresh migration/initializer coverage",
+      "Representative load/field budgets, CSP/ASVS and manual accessibility"
+    ]
+  }
 }

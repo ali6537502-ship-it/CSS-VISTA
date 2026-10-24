@@ -29,3 +29,9 @@ After any separately authorized deployment or rollback, verify the actual live f
 ## Honest status boundaries
 
 No production deployment or live authenticated journey is performed by this work. Local provider fixtures are TEST ONLY. No new academic unit has independent human approval from this session. Production host/schema/private-storage readiness, source rights and prior public exposure response remain unverified. The progress ledger records bounded implementation and tests separately from the full transformation's outstanding work.
+
+## Latest bounded verification — 24 October recovery continuation
+
+Frozen application artifact: `531892d381f52994174853187fb0cfa2af1e55b7`; later documentation records evidence only. Library now previews explicit cached-answer copies, preserves originals and resumes existing account drafts through their original save flow. Native receipt recovery and immutable-version replay pass interrupted-response and independent-browser tests. Generic progress backup is retained and accurately labelled; cached history opens its actual writing tool.
+
+A local MySQL-to-MariaDB 11.4.13 synthetic restore matches all 96 table digests and fifteen retrieval projections. Raw SQL dumps and plans stay private. These results do not establish actual host settings, full fresh-upgrade paths, source rights, academic approval, representative load, manual accessibility or release permission. Current-head CI must be checked on draft PR #109; the earlier `07c4453` head passed all eight workflows.
