@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once __DIR__.'/_pro.php';
 require_once __DIR__.'/_workspace_sources.php';
+require_once __DIR__.'/_workspace_catalog.php';
 
 /** Read projections only. Domain APIs retain all command, edition and save authority. */
 function cssv_workspace_tables(PDO $pdo): array {
@@ -18,7 +19,7 @@ function cssv_workspace_filters(array $input): array {
     $offset=filter_var($input['offset']??0,FILTER_VALIDATE_INT,['options'=>['min_range'=>0,'max_range'=>10000]]);
     if($offset===false)throw new InvalidArgumentException('Choose a valid results page.');
     $out=['q'=>trim($q),'type'=>$type,'view'=>$view,'offset'=>$offset];
-    foreach(['state','course','source','from','to','collection'] as $key){
+    foreach(['state','course','source','from','to','collection','subject'] as $key){
         $value=$input[$key]??'';
         if(!is_string($value)||strlen($value)>140)throw new InvalidArgumentException('Check your library filters.');
         $out[$key]=$value;
@@ -28,6 +29,8 @@ function cssv_workspace_filters(array $input): array {
     foreach(['from','to'] as $key)if($out[$key]!==''&&(!preg_match('/^\d{4}-\d{2}-\d{2}$/D',$out[$key])||!checkdate((int)substr($out[$key],5,2),(int)substr($out[$key],8,2),(int)substr($out[$key],0,4))))throw new InvalidArgumentException('Choose a real date.');
     if($out['from']!==''&&$out['to']!==''&&$out['from']>$out['to'])throw new InvalidArgumentException('The end date must follow the start date.');
     if($out['collection']!==''&&!preg_match('/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/Di',$out['collection']))throw new InvalidArgumentException('Choose a valid personal collection.');
+    if($out['subject']!==''&&($view!=='catalog'||!isset(cssv_workspace_subjects()[$out['subject']])))throw new InvalidArgumentException('Choose a supported catalog subject.');
+    if($view==='catalog')foreach(['state','course','source','from','to','collection'] as $key)if($out[$key]!=='')throw new InvalidArgumentException('Use course search and subject filters in Learn.');
     return $out;
 }
 /** Filters apply only to already authorized projections, before counts and paging. */
@@ -66,6 +69,7 @@ function cssv_workspace_project(PDO $pdo,string $user,array $f): array {
     $membership=isset($tables['pro_memberships'])?cssv_pro_membership($pdo,$user):['status'=>'free'];
     $premium=!$paused&&$membership['status']==='active';
     $history=!$paused&&in_array($membership['status'],['active','expired'],true);
+    if($f['view']==='catalog')return ['ok'=>true,'user_id'=>$user,'paused'=>$paused,'premium_available'=>$premium,...cssv_workspace_catalog_page($pdo,$premium,$tables,$f),'items'=>[],'offset'=>$f['offset'],'facets'=>['courses'=>[],'sources'=>[]],'collections'=>[],'scope'=>'Published course metadata and existing native course destinations; opening gives no study credit.','review_scope'=>'Open Review for recorded recall evidence.'];
     $f['collections_available']=isset($tables['factbook_collection_entries']);
     $parts=[];$args=[];
     $add=function(string $table,string $domain,string $id,string $title,string $path,string $edition,string $evidence,string $updated,string $where='1=1',string $due='NULL',array $extra=[])use(&$parts,&$args,$user,$f,$tables):void{
@@ -121,11 +125,7 @@ function cssv_workspace_project(PDO $pdo,string $user,array $f): array {
             $facets[$kind]=array_map(fn($row)=>['id'=>$row['id'],'title'=>cssv_workspace_text($row['title']),'count'=>(int)$row['count']],array_slice($q->fetchAll(),0,100));
         }
     }
-    $catalog=$f['view']==='catalog'?cssv_workspace_catalog($premium):[];
-    if($f['view']==='catalog'&&$premium&&isset($tables['pro_topics'])){
-        $q=$pdo->prepare('SELECT id,title,summary,category,published_version_id FROM pro_topics WHERE published_version_id IS NOT NULL AND (LOCATE(?,title)>0 OR id=?) ORDER BY category,id LIMIT 21 OFFSET '.$f['offset']);$q->execute([$f['q'],$f['q']]);$topics=$q->fetchAll();$more=count($topics)>20;
-        foreach(array_slice($topics,0,20) as $t)$catalog[]=['id'=>$t['id'],'kind'=>'course','title'=>cssv_workspace_text($t['title']),'summary'=>cssv_workspace_text($t['summary'],600),'parentId'=>$t['category'],'subjectIds'=>['affairs'],'canonicalDestination'=>'/account/preparation?view=topics&topic='.rawurlencode($t['id']),'editionId'=>$t['published_version_id'],'accessClass'=>'pro','reviewState'=>'published_existing_edition','order'=>count($catalog),'syllabusRefs'=>[],'tags'=>[],'prerequisites'=>[],'outcomeSummary'=>cssv_workspace_text($t['summary'],600)];
-    }
+    $catalog=[];
     $collections=[];
     if(isset($tables['factbook_collections'],$tables['factbook_collection_entries'],$tables['factbook_entries'])){
         $q=$pdo->prepare('SELECT c.id,c.name title,COUNT(e.id) count FROM factbook_collections c LEFT JOIN factbook_collection_entries ce ON ce.collection_id=c.id AND ce.user_id=c.user_id LEFT JOIN factbook_entries e ON e.id=ce.entry_id AND e.user_id=c.user_id AND e.deleted_at IS NULL AND e.archived_at IS NULL WHERE c.user_id=? GROUP BY c.id,c.name ORDER BY c.name,c.id LIMIT 100');

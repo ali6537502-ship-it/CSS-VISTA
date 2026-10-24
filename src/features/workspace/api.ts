@@ -14,7 +14,7 @@ export type CatalogItem = {
 export type WorkspaceFacet = { id: string; title: string; count: number }
 export type WorkspaceData = {
   user_id: string; paused: boolean; premium_available: boolean; items: WorkspaceItem[];
-  catalog: CatalogItem[]; has_more: boolean; offset: number; scope: string; review_scope: string; facets: { courses: WorkspaceFacet[]; sources: WorkspaceFacet[] }; collections: WorkspaceFacet[]
+  catalog: CatalogItem[]; catalog_subjects?: WorkspaceFacet[]; has_more: boolean; offset: number; scope: string; review_scope: string; facets: { courses: WorkspaceFacet[]; sources: WorkspaceFacet[] }; collections: WorkspaceFacet[]
 }
 export function useWorkspace(query = 'view=recent') {
   return useLearning<WorkspaceData>(`workspace.php?${query}`)
