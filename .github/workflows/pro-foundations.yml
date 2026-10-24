@@ -60,7 +60,7 @@ jobs:
           php tests/topics/unit.php
           php tests/topics/writing-unit.php
           php tests/topics/review-unit.php
-          node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs
+          node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs tests/workspace/imports.test.ts
           php tests/reading/unit.php
           php tests/planner/unit.php
           php tests/tutor/unit.php
@@ -112,6 +112,7 @@ jobs:
           node tests/expression/security.mjs
           node tests/workspace/security.mjs
           node tests/workspace/retrieval.mjs
+          node tests/workspace/import-security.mjs
           node tests/grammar/security.mjs
           node tests/precis/security.mjs
           node tests/precis/feedback-security.mjs
@@ -127,6 +128,7 @@ jobs:
           node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
           node tests/browser/workspace.mjs
           node tests/browser/workspace-retrieval.mjs
+          node tests/browser/workspace-import.mjs
           node tests/browser/skills.mjs
           node tests/browser/connected-skills.mjs
           node tests/browser/topic-options.mjs

@@ -9,6 +9,12 @@ try {
   cssv_enforce_rate_limit($pdo,'learning_write',$userId,240,3600);cssv_log_security_event($pdo,'learning_write',$userId,$userId);
   cssv_json(['ok'=>true,...cssv_learning_mutation($pdo,$userId,cssv_request_json(100000))]);
  }
+ if(isset($_GET['request_id'])){
+  $request=cssv_pro_id($_GET['request_id']);
+  $q=$pdo->prepare('SELECT result,created_at FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$userId,$request]);$receipt=$q->fetch();
+  if(!$receipt)throw new OutOfBoundsException('No confirmed save receipt was found for this account.');
+  cssv_json(['ok'=>true,'request_id'=>$request,'confirmed_at'=>cssv_pro_iso($receipt['created_at']),'result'=>json_decode($receipt['result'],true,16,JSON_THROW_ON_ERROR)]);
+ }
  if(isset($_GET['version_id']))cssv_json(['ok'=>true,'writing_version'=>cssv_learning_version($pdo,cssv_pro_id($_GET['version_id']),$userId)]);
  if(isset($_GET['writing_id']))cssv_json(['ok'=>true,'writing'=>cssv_learning_writing($pdo,cssv_pro_id($_GET['writing_id']),$userId)]);
  if(isset($_GET['attempt_id']))cssv_json(['ok'=>true,'attempt'=>cssv_learning_attempt($pdo,cssv_pro_id($_GET['attempt_id']),$userId)]);
