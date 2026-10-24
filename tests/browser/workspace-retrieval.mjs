@@ -12,13 +12,18 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CS
 const context=await browser.newContext({ignoreHTTPSErrors:true}),page=await context.newPage(),errors=[]
 page.on('pageerror',error=>errors.push(error.message))
 await context.route('**/*',route=>new URL(route.request().url()).hostname==='localhost'?route.continue():route.abort())
+async function audit(){
+ await page.addScriptTag({path:new URL('./node_modules/axe-core/axe.min.js',import.meta.url).pathname})
+ const violations=await page.evaluate(async()=>{const result=await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']}});return result.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))})
+ assert.deepEqual(violations,[],'Automated accessibility violations; incomplete/manual checks remain separate')
+}
 try{
  await page.goto('https://localhost:3444/account');await page.getByLabel('Email address',{exact:true}).fill(email);await page.getByLabel('Password',{exact:true}).fill('TEST ONLY native fixture password');await page.getByRole('button',{name:'Sign in securely',exact:true}).click();await page.waitForURL('**/account/dashboard')
  for(const width of [320,390,768,1024,1440]){
   await page.setViewportSize({width,height:1000});await page.goto('https://localhost:3444/account/library/search?type=writing&state=saved')
   await page.getByRole('link',{name:'Climate adaptation policy outline',exact:true}).waitFor()
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Filter overflow at ${width}`)
-  if(width===320){mkdirSync('test-artifacts/workspace-retrieval',{recursive:true});await page.screenshot({path:'test-artifacts/workspace-retrieval/filters-320.png',fullPage:true})}
+  if(width===320){await audit();mkdirSync('test-artifacts/workspace-retrieval',{recursive:true});await page.screenshot({path:'test-artifacts/workspace-retrieval/filters-320.png',fullPage:true})}
  }
  await page.getByRole('textbox',{name:'Search saved work',exact:true}).fill('climate policy');await page.getByRole('button',{name:'Search',exact:true}).click()
  await page.getByRole('link',{name:'Climate adaptation policy outline',exact:true}).waitFor()
@@ -28,7 +33,7 @@ try{
  await page.goto('https://localhost:3444/account/library/search?collection='+fixture.collection);await page.getByRole('link',{name:'Budget evidence notes',exact:true}).waitFor();assert.equal(await page.getByRole('combobox',{name:'My Factbook collection',exact:true}).inputValue(),fixture.collection)
  await page.goto('https://localhost:3444/account/library/search?source=current-affairs&from=2002-03-04&to=2002-03-04');await page.getByRole('link',{name:'TEST ONLY Climate finance briefing visible',exact:true}).waitFor();assert.equal(await page.getByLabel('From date',{exact:true}).inputValue(),'2002-03-04')
  await page.goto('https://localhost:3444/account/review');await page.getByRole('link',{name:'English Grammar — scheduled retrieval',exact:true}).waitFor();await page.getByRole('link',{name:'Précis — fixed-drill review',exact:true}).waitFor();assert.equal(await page.getByRole('link',{name:/^General Ability —/}).count(),1)
- await page.goto('https://localhost:3444/account/progress');await page.getByRole('heading',{name:'Account evidence',exact:true}).waitFor();await page.getByRole('link',{name:'Saved paragraph writing',exact:true}).waitFor();await page.getByRole('heading',{name:'This browser’s preparation record',exact:true}).waitFor()
+ await page.goto('https://localhost:3444/account/progress');await page.getByRole('heading',{name:'Account evidence',exact:true}).waitFor();await page.getByRole('link',{name:'Saved paragraph writing',exact:true}).waitFor();await page.getByRole('heading',{name:'This browser’s preparation record',exact:true}).waitFor();await audit()
  php('tests/workspace/fixture.php','seed',user)
  await page.goto('https://localhost:3444/account/library/search?type=writing&state=saved&from=2026-01-01')
  await page.getByRole('button',{name:'More results',exact:true}).click();await page.getByRole('button',{name:'Previous results',exact:true}).waitFor()
