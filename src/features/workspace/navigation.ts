@@ -19,7 +19,7 @@ const homes: Record<string, typeof workspaceDestinations[number]['id']> = {
 export function workspaceHome(pathname: string, search = '') {
   if (pathname === '/account/preparation') {
     const params = new URLSearchParams(search)
-    const home = params.has('writing') || params.get('new') === 'writing' ? 'write' : params.get('view') === 'topics' ? 'learn' : 'today'
+    const home = Boolean(params.get('writing')) || params.get('new') === 'writing' ? 'write' : params.get('view') === 'topics' ? 'learn' : 'today'
     return workspaceDestinations.find(item => item.id === home)
   }
   return workspaceDestinations.find(item => item.to === pathname || item.id === homes[pathname])

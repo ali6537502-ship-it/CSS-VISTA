@@ -33,4 +33,5 @@ test('preparation navigation follows the actual topic or writing view without ch
   assert.equal(workspaceHome('/account/preparation','?view=topics&writing=opaque&version=retained')?.id,'write')
   assert.equal(workspaceHome('/account/preparation','?new=writing')?.id,'write')
   assert.equal(workspaceHome('/account/preparation','?attempt=opaque')?.id,'today')
+  assert.equal(workspaceHome('/account/preparation','?view=topics&writing=')?.id,'learn')
 })
