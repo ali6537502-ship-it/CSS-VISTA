@@ -69,10 +69,44 @@ function cssv_skills_source(string $feature,mixed $id,string $level): array {
             'advanced'=>['understanding'=>'Define the contested concept, the limits of the theme and a plausible competing framing.','brainstorm'=>'Develop competing explanations, structural dimensions and trade-offs; justify the scope you exclude.','thesis'=>'Construct a qualified thesis that specifies a mechanism, limits and the rival view it challenges.','argument'=>'Develop a defensible inference, state its assumptions, and explain how authentic evidence could challenge it.','analysis'=>'Use a counterfactual and competing mechanism to evaluate your claim; weigh short- and long-term trade-offs.','outline'=>'Create an evaluative outline that distinguishes evidence, inference, rebuttal, limitations and the resulting judgement.','practice'=>'Write an independent analytical essay draft or substantial section, then examine the weakest inferential link.']};
         foreach($source['stages'] as &$stage)$stage['question']=$questions[$stage['id']];unset($stage);
     }
-    $source['edition']=cssv_skills_package()['version'];return $source;
+    $source['edition']=cssv_skills_package()['version'];
+    if($feature==='essay'){
+        $guidance=json_decode((string)file_get_contents(__DIR__.'/_premium_files/essay-guidance.json'),true,64,JSON_THROW_ON_ERROR);
+        foreach($guidance['themes'] as $guide)if($guide['slug']===$id)break;
+        if(($guide['slug']??null)!==$id)throw new OutOfBoundsException('Reviewed theme guidance is unavailable.');
+        $source['roadmap_brief']=$source['explanation'];
+        $source['explanation']=$guide['meaning'].' '.$source['explanation'];
+        $source['example']='Hypothetical practice: '.$guide['scenario'].' '.$guide['distinction'];
+        $source['edition']=$guidance['version'];
+        $review=[
+            'understanding'=>['Define the central concept in your own words.',$guide['distinction']],
+            'brainstorm'=>['Explain how each selected idea belongs to the theme.','Separate conceptual ideas from factual claims that still need a source.'],
+            'thesis'=>['Take a position rather than just announcing a topic.','State the reason or relationship you will defend, with an appropriate limit.'],
+            'argument'=>['Connect the reason to the claim instead of repeating the claim.','Label unverified evidence; do not invent a source to fill a gap.'],
+            'analysis'=>['Consider a serious alternative or objection.','Explain a condition or observation that could change your judgement.'],
+            'outline'=>['Give each heading a different job and connect it to the thesis.','Include evidence needs, an objection and a qualified conclusion.'],
+            'practice'=>['Check whether each paragraph advances the intended argument.','Revise independently and preserve the qualifications in your earlier wording.']
+        ];
+        foreach($source['stages'] as &$stage){
+            $stage['teach'].=' Practice focus: '.$guide['focus'].'.';
+            $stage['review']=$review[$stage['id']];
+            if($stage['id']==='understanding'){
+                $stage['teach']=$guide['meaning'].' Scope distinction: '.$guide['distinction'];
+                $stage['example']='Hypothetical practice: '.$guide['scenario'];
+                $stage['question']=$level==='beginner'?'What does this theme mean in your own words?':$stage['question'];
+            }else $stage['question'].=' Use the hypothetical focus: '.$guide['focus'].'.';
+        }unset($stage);
+    }
+    return $source;
 }
 function cssv_skills_public_source(array $source): array {
-    if(isset($source['check']))unset($source['check']['answer'],$source['check']['explanation']);return $source;
+    if(isset($source['check']))unset($source['check']['answer'],$source['check']['explanation'],$source['check']['option_feedback']);
+    foreach($source['stages'] as &$stage)$stage['min_words']=cssv_skills_min_words($source['feature'],$stage);unset($stage);
+    return $source;
+}
+/** A legitimate imperative can be one word; length records participation only. */
+function cssv_skills_min_words(string $feature,array $stage): int {
+    return $feature==='sentence'&&in_array($stage['id'],['draft','revision'],true)?1:(int)$stage['min_words'];
 }
 function cssv_skills_answers(array $answers,array $source): array {
     cssv_pro_fields($answers,array_column($source['stages'],'id'));$out=[];
@@ -89,8 +123,11 @@ function cssv_skills_evidence(array $source,array $answers): array {
         $value=$answers[$stage['id']]??null;
         if($stage['id']==='check'){
             $met=$value!==null&&$value===$source['check']['answer'];
-            if($value!==null)$feedback=['correct'=>$met,'chosen'=>$source['check']['options'][$value],'answer'=>$source['check']['options'][$source['check']['answer']],'explanation'=>$source['check']['explanation']];
-        }else $met=is_string($value)&&cssv_learning_words($value)>=$stage['min_words'];
+            if($value!==null){
+                $feedback=['correct'=>$met,'chosen'=>$source['check']['options'][$value],'answer'=>$source['check']['options'][$source['check']['answer']],'explanation'=>$source['check']['explanation']];
+                if(is_string($source['check']['option_feedback'][$value]??null))$feedback['choice_explanation']=$source['check']['option_feedback'][$value];
+            }
+        }else $met=is_string($value)&&cssv_learning_words($value)>=cssv_skills_min_words($source['feature'],$stage);
         if($met)$recorded[]=$stage['id'];
         if($index===$first&&$met)$first++;
     }

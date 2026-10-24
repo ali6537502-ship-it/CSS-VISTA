@@ -361,7 +361,7 @@ function Quiz({
     </form>
   );
 }
-function CourseHome({ data }: { data: CourseData }) {
+function CourseHome({ data, preparation }: { data: CourseData; preparation?: string }) {
   const done = data.units.filter((u) => u.complete).length;
   const topics = data.units.length, lessons = data.units.reduce((sum, unit) => sum + unit.lessons.length, 0);
   const current =
@@ -400,7 +400,7 @@ function CourseHome({ data }: { data: CourseData }) {
             </p>
             <Link
               className="mt-6 inline-flex min-h-12 items-center gap-3 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950"
-              to={courseLink(current.id, nextLesson)}
+              to={courseLink(current.id, nextLesson, preparation)}
             >
               {done ? "Continue learning" : "Start learning"}
               <ArrowRight className="h-4 w-4" />
@@ -485,7 +485,7 @@ function CourseHome({ data }: { data: CourseData }) {
               .map((unit) => (
                 <Link
                   key={unit.id}
-                  to={courseLink(unit.id)}
+                  to={courseLink(unit.id, undefined, preparation)}
                   className="group rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700"
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -526,6 +526,8 @@ function CourseHome({ data }: { data: CourseData }) {
 function History() {
   const [params, setParams] = useSearchParams();
   const offset = Math.max(0, Number(params.get("offset")) || 0);
+  const preparation = params.get("preparation");
+  const context: Record<string, string> = preparation ? { preparation } : {};
   const history = useLearning<HistoryData>(
     `ability.php?view=history&offset=${offset}`,
   );
@@ -566,6 +568,7 @@ function History() {
             className={secondary}
             onClick={() =>
               setParams({
+                ...context,
                 view: "history",
                 offset: String(Math.max(0, offset - 20)),
               })
@@ -578,7 +581,7 @@ function History() {
           <button
             className={secondary}
             onClick={() =>
-              setParams({ view: "history", offset: String(offset + 20) })
+              setParams({ ...context, view: "history", offset: String(offset + 20) })
             }
           >
             Next
@@ -588,7 +591,7 @@ function History() {
     </section>
   );
 }
-function Workspace({ user }: { user: string }) {
+function Workspace({ user, preparation }: { user: string; preparation?: string }) {
   const [params] = useSearchParams(),
     unit = params.get("unit"),
     lessonId = params.get("lesson");
@@ -679,11 +682,11 @@ function Workspace({ user }: { user: string }) {
           )}
         </section>
       ) : !unit ? (
-        <CourseHome data={data} />
+        <CourseHome data={data} preparation={preparation} />
       ) : topic && lesson ? (
         <>
           <Link
-            to={courseLink()}
+            to={courseLink(undefined, undefined, preparation)}
             className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-slate-500"
           >
             <ArrowLeft className="h-4 w-4" /> All topics
@@ -708,7 +711,7 @@ function Workspace({ user }: { user: string }) {
             {topic.lessons.map((l, i) => (
               <Link
                 key={l.id}
-                to={courseLink(unit, l.id)}
+                to={courseLink(unit, l.id, preparation)}
                 aria-current={
                   !isQuiz && lesson.id === l.id ? "page" : undefined
                 }
@@ -725,7 +728,7 @@ function Workspace({ user }: { user: string }) {
               </Link>
             ))}
             <Link
-              to={courseLink(unit, "quiz")}
+              to={courseLink(unit, "quiz", preparation)}
               aria-current={isQuiz ? "page" : undefined}
               className={`${secondary} ${isQuiz ? "border-emerald-700 bg-emerald-50 text-emerald-900" : ""}`}
             >
@@ -763,7 +766,7 @@ function Workspace({ user }: { user: string }) {
                   </p>
                 </div>
               </article>
-              <Link className={secondary} to={`/account/ask-vista?context=${encodeURIComponent(`ability:${unit}:${lesson.id}`)}`}>Ask VISTA about this method</Link>
+              <Link className={secondary} to={`/account/ask-vista?context=${encodeURIComponent(`ability:${unit}:${lesson.id}`)}${preparation ? `&attempt=${encodeURIComponent(preparation)}` : ""}`}>Ask VISTA about this method</Link>
               <Explorer key={`${unit}:${lesson.id}`} unit={unit} />
               <WorkedExample key={lesson.id} lesson={lesson} />
               <Practice
@@ -791,7 +794,7 @@ function Workspace({ user }: { user: string }) {
           )}
           <div className="flex flex-wrap gap-3">
             {next && (
-              <Link className={button} to={courseLink(unit, next)}>
+              <Link className={button} to={courseLink(unit, next, preparation)}>
                 {next === "quiz" ? "Open topic quiz" : "Next lesson"}
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -812,7 +815,7 @@ function Workspace({ user }: { user: string }) {
                 <Layers className="h-4 w-4" /> Save my place
               </button>
             )}
-            <Link className={secondary} to={courseLink()}>
+            <Link className={secondary} to={courseLink(undefined, undefined, preparation)}>
               <RotateCcw className="h-4 w-4" /> Return to topic path
             </Link>
           </div>
@@ -826,7 +829,7 @@ function Workspace({ user }: { user: string }) {
       ) : (
         <p role="alert" className={panel}>
           This topic is unavailable.{" "}
-          <Link className="underline" to={courseLink()}>
+          <Link className="underline" to={courseLink(undefined, undefined, preparation)}>
             Return to the course
           </Link>
           .
@@ -835,26 +838,36 @@ function Workspace({ user }: { user: string }) {
     </div>
   );
 }
+function PreparationReturn({ preparation }: { preparation: string }) {
+  const load = useLearning<{ attempt: { id: string; target_year: number } }>(`learning.php?attempt_id=${encodeURIComponent(preparation)}`);
+  return <section className={`${panel} mb-5`} aria-label="Preparation context">
+    {load.data ? <><Link className={secondary} to={`/account/preparation?attempt=${load.data.attempt.id}`}><ArrowLeft className="h-4 w-4" />Return to CSS {load.data.attempt.target_year} preparation</Link><p className="mt-3 text-sm leading-7 text-slate-600">General Ability progress belongs to your account and is shared across preparation attempts. Returning here does not count the same exercise as new work.</p></> : <p role={load.error ? "alert" : "status"} className="text-sm leading-7">{load.error ? "This preparation reference is unavailable. Your course progress remains with your account." : "Checking your preparation link…"}</p>}
+  </section>;
+}
 export default function GeneralAbility() {
   const { user } = useAccount();
+  const [params] = useSearchParams();
+  const requested = params.get("preparation") || "";
+  const preparation = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(requested) ? requested : undefined;
   return (
     <AccountPage
       title="General Ability"
       intro="Learn the method, work through examples and keep your maths practice in one place."
       action={<ProBadge />}
     >
+      {preparation && <PreparationReturn key={`${user?.id}:${preparation}`} preparation={preparation} />}
       <nav
         aria-label="General Ability workspace"
         className="mb-7 flex flex-wrap gap-3"
       >
-        <Link className={secondary} to={courseLink()}>
+        <Link className={secondary} to={courseLink(undefined, undefined, preparation)}>
           <BookOpen className="h-4 w-4" /> Course
         </Link>
-        <Link className={secondary} to="/account/general-ability?view=history">
+        <Link className={secondary} to={`/account/general-ability?view=history${preparation ? `&preparation=${encodeURIComponent(preparation)}` : ""}`}>
           Saved work
         </Link>
       </nav>
-      {user && <Workspace key={user.id} user={user.id} />}
+      {user && <Workspace key={user.id} user={user.id} preparation={preparation} />}
     </AccountPage>
   );
 }

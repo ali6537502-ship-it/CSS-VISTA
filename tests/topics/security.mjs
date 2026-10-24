@@ -27,6 +27,7 @@ const php = (...args) =>
       ).trim()
     : execFileSync('php', args, { env, encoding: 'utf8' }).trim()
 async function call(path, body, jar = new Map(), extra = {}) {
+  if(path==='admin/topics.php' && body?.action==='publish' && body.version_id && !body.review_manifest_id) body={...body, review_manifest_id:php('tests/topics/review-fixture.php',body.version_id)}
   const headers = {
     Accept: 'application/json',
     'User-Agent': 'CSSVistaTopicsIsolation',
@@ -301,6 +302,15 @@ assert.equal(
 detail = await get()
 assert.equal(detail.data.progress.state, 'practised')
 assert.equal(detail.data.progress.draft_version, 1)
+const writingHistoryPath = `${endpoint}?view=writing_history&attempt=${own}&topic_version_id=${detail.data.topic.version_id}`
+const writingHistory = await call(writingHistoryPath, undefined, a.jar)
+assert.equal(writingHistory.status, 200)
+assert.equal(writingHistory.data.versions.length, 4)
+assert.equal(writingHistory.data.versions.filter(v => v.imported_baseline && v.text === '').length, 2)
+assert.equal(writingHistory.data.versions.find(v => v.slot === 'draft' && !v.imported_baseline).text, draft)
+assert.equal((await call(writingHistoryPath, undefined, b.jar)).status, 404)
+assert.equal((await call('student/learning.php?writing_id='+writingHistory.data.versions[0].writing_id, undefined, a.jar)).status,409)
+
 assert.equal(
   (
     await act(
@@ -377,6 +387,7 @@ assert.equal(
   0,
   'Separate attempts inherited topic work',
 )
+assert.equal((await call(writingHistoryPath, undefined, a.jar)).data.versions.length,4,'Retry or stale write duplicated immutable topic versions')
 const history = await call(
   `${endpoint}?view=history&attempt=${own}&topic=${topicId}`,
   undefined,

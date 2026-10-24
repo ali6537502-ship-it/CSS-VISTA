@@ -97,7 +97,7 @@ export type PlanData = {
   }[]
   revision_total: number
   overdue: Task[]
-  continue: { grammar: string; precis: string }
+  continue: { grammar: string; precis: string; ability?: string | null }
 }
 export type Mutation = Record<string, unknown>
 type Pending = { user: string; attempt: string; body: Mutation }

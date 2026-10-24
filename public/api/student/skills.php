@@ -10,7 +10,7 @@ try{
         if(($body['action']??null)==='evaluate'){$id=cssv_skills_ai_reserve($pdo,$user,$body);cssv_skills_ai_execute($pdo,$id);cssv_json(['ok'=>true,'skills_receipt'=>true,'operation'=>cssv_ai_owned_operation($pdo,$id,$user)]);}
         cssv_json(['ok'=>true,...cssv_skills_mutation($pdo,$user,$body)]);
     }
-    cssv_pro_fields($_GET,['feature','workspace_id','version_id','request_id','view','offset']);
+    cssv_pro_fields($_GET,['feature','workspace_id','version_id','request_id','view','offset','children_offset']);
     $membership=cssv_pro_membership($pdo,$user);$active=$membership['status']==='active';
     if(isset($_GET['request_id'])){
         $request=cssv_pro_id($_GET['request_id']);$q=$pdo->prepare('SELECT result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);$raw=$q->fetchColumn();
@@ -19,14 +19,15 @@ try{
         if(!$id)throw new OutOfBoundsException('Saved skills request not found.');cssv_json(['ok'=>true,'skills_receipt'=>true,'operation'=>cssv_ai_owned_operation($pdo,$id,$user)]);
     }
     if(isset($_GET['workspace_id'])){
-        $w=cssv_skills_workspace($pdo,$user,cssv_pro_id($_GET['workspace_id']));$v=cssv_skills_version($pdo,$user,$w,isset($_GET['version_id'])?cssv_pro_id($_GET['version_id']):null);
+        $w=cssv_skills_workspace($pdo,$user,cssv_pro_id($_GET['workspace_id']));$linked=cssv_skills_linked($pdo,$user,$w['id'],$_GET['children_offset']??0);
+        if(($_GET['view']??null)==='linked')cssv_json(['ok'=>true,...$linked]);
+        $v=cssv_skills_version($pdo,$user,$w,isset($_GET['version_id'])?cssv_pro_id($_GET['version_id']):null);
         $source=$w['source'];$w['source']=$active?cssv_skills_public_source($source):['title'=>$source['title'],'id'=>$source['id'],'feature'=>$source['feature'],'stages'=>array_map(fn($s)=>array_intersect_key($s,array_flip(['id','title','min_words'])),$source['stages'])];
         $versionOffset=filter_var($_GET['offset']??0,FILTER_VALIDATE_INT,['options'=>['min_range'=>0,'max_range'=>100000]]);if($versionOffset===false)throw new InvalidArgumentException('Invalid version page.');
         $q=$pdo->prepare('SELECT v.id,v.version,v.word_count,v.created_at FROM writing_versions v JOIN skills_versions s ON s.version_id=v.id WHERE s.workspace_id=? ORDER BY v.version DESC LIMIT 51 OFFSET '.(int)$versionOffset);$q->execute([$w['id']]);$versions=$q->fetchAll();$versionMore=count($versions)>50;$versions=array_slice($versions,0,50);
         $q=$pdo->prepare('SELECT o.id FROM ai_operations o JOIN skills_ai_inputs s ON s.operation_id=o.id WHERE o.user_id=? AND s.workspace_id=? ORDER BY (o.version_id=?) DESC,o.created_at DESC,o.id DESC LIMIT 20');$q->execute([$user,$w['id'],$v['version_id']??null]);$ops=array_map(fn($id)=>cssv_ai_owned_operation($pdo,$id,$user),$q->fetchAll(PDO::FETCH_COLUMN));
-        $q=$pdo->prepare('SELECT s.id,s.feature,s.lesson_id,s.version,s.writing_id,v.id AS version_id FROM skills_workspaces s LEFT JOIN writing_versions v ON v.writing_id=s.writing_id AND v.version=s.version WHERE s.user_id=? AND s.parent_id=? ORDER BY s.updated_at DESC LIMIT 20');$q->execute([$user,$w['id']]);$children=$q->fetchAll();
         $w['parent_feature']=$w['parent_id']?cssv_skills_workspace($pdo,$user,$w['parent_id'])['feature']:null;
-        cssv_json(['ok'=>true,'membership'=>$membership,'workspace'=>$w,'saved'=>$v,'versions'=>$versions,'has_more_versions'=>$versionMore,'operations'=>$ops,'children'=>$children,'configuration'=>cssv_skills_ai_configuration($w['feature'])]);
+        cssv_json(['ok'=>true,'membership'=>$membership,'workspace'=>$w,'saved'=>$v,'versions'=>$versions,'has_more_versions'=>$versionMore,'operations'=>$ops,...$linked,'configuration'=>cssv_skills_ai_configuration($w['feature'])]);
     }
     $feature=cssv_skills_feature($_GET['feature']??'sentence');
     $offset=filter_var($_GET['offset']??0,FILTER_VALIDATE_INT,['options'=>['min_range'=>0,'max_range'=>100000]]);if($offset===false)throw new InvalidArgumentException('Choose a valid saved-work page.');

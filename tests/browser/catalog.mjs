@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict'
+import {execFileSync} from 'node:child_process'
+import {mkdirSync,writeFileSync} from 'node:fs'
+import {randomUUID} from 'node:crypto'
+import {chromium} from './node_modules/playwright-core/index.mjs'
+if(process.env.CI!=='true'||process.env.CSSV_DB_NAME!=='cssvista_briefing_test')throw Error('Disposable runtime required')
+const php=(...args)=>process.env.CSSV_TEST_PHP_CONTAINER?execFileSync('docker',['exec',process.env.CSSV_TEST_PHP_CONTAINER,'php',...args],{encoding:'utf8'}).trim():execFileSync('php',args,{encoding:'utf8'}).trim()
+const email=`catalog-browser-${randomUUID()}@example.invalid`,user=php('tests/current-affairs/setup.php','user',email),seed=JSON.parse(php('tests/workspace/catalog-fixture.php','seed',user))
+php('tests/precis/fixture.php','activate',user)
+const before=php('tests/workspace/catalog-fixture.php','counts',user),browser=await chromium.launch({headless:true,executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath()})
+const context=await browser.newContext({ignoreHTTPSErrors:true}),page=await context.newPage(),errors=[]
+page.on('pageerror',error=>errors.push(error.message));await context.route('**/*',route=>new URL(route.request().url()).hostname==='localhost'?route.continue():route.abort())
+const base='https://localhost:3444',path='/account/learn?q='+encodeURIComponent(seed.needle),courseLinks=()=>page.getByRole('link',{name:new RegExp(seed.needle)})
+try{
+ await page.goto(base+'/account');await page.getByLabel('Email address',{exact:true}).fill(email);await page.getByLabel('Password',{exact:true}).fill('TEST ONLY native fixture password');await page.getByRole('button',{name:'Sign in securely',exact:true}).click();await page.waitForURL('**/account/dashboard')
+ for(const width of [320,390,768,1024,1440]){await page.setViewportSize({width,height:1000});await page.goto(base+path);await courseLinks().first().waitFor();assert.equal(await courseLinks().count(),20);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Catalog overflow '+width)}
+ await page.getByRole('button',{name:'More courses',exact:true}).click();await page.waitForURL('**offset=20');await page.getByRole('link',{name:seed.needle+' 24',exact:true}).waitFor();assert.equal(await courseLinks().count(),5)
+ await page.goBack();await page.getByRole('link',{name:seed.needle+' 00',exact:true}).waitFor();assert.equal(await courseLinks().count(),20)
+ await page.getByLabel('Subject or study area',{exact:true}).selectOption('pakistan-affairs');await page.getByRole('button',{name:'Find courses',exact:true}).click();await page.waitForURL('**subject=pakistan-affairs');await page.getByRole('link',{name:seed.needle+' 24',exact:true}).waitFor();assert.equal(await courseLinks().count(),13);assert.equal(await page.getByLabel('Subject or study area',{exact:true}).inputValue(),'pakistan-affairs')
+ await page.reload();await courseLinks().first().waitFor();assert.equal(await page.getByLabel('Subject or study area',{exact:true}).inputValue(),'pakistan-affairs');assert.equal(await page.getByLabel('Find a course',{exact:true}).inputValue(),seed.needle)
+ await page.addScriptTag({path:'tests/browser/node_modules/axe-core/axe.min.js'});const violations=await page.evaluate(async()=>{const r=await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});return r.violations.map(v=>v.id)});assert.deepEqual(violations,[])
+ await page.getByLabel('Find a course',{exact:true}).fill('TEST ONLY no matching course '+randomUUID());await page.getByRole('button',{name:'Find courses',exact:true}).click();await page.getByText('No available courses match these filters. Clear them or choose another subject.',{exact:true}).waitFor()
+ await page.goBack();await courseLinks().first().waitFor();assert.equal(await courseLinks().count(),13);assert.equal(await page.getByLabel('Subject or study area',{exact:true}).inputValue(),'pakistan-affairs')
+ const link=page.getByRole('link',{name:seed.needle+' 00',exact:true});assert.match(await link.getAttribute('href'),new RegExp('topic='+seed.ids[0]));await link.click();await page.waitForURL('**topic='+seed.ids[0]);await page.getByRole('heading',{name:'My Preparation',exact:true,level:1}).waitFor();await page.getByRole('navigation',{name:'Breadcrumb',exact:true}).getByRole('link',{name:'Learn',exact:true}).waitFor();assert.equal(await page.getByRole('navigation',{name:'Study workspace',exact:true}).getByRole('link',{name:'Learn',exact:true}).getAttribute('aria-current'),'page');assert.equal(php('tests/workspace/catalog-fixture.php','counts',user),before)
+ php('tests/pro/fixture.php','expire',user);await page.goto(base+'/account/learn');await page.getByRole('link',{name:'English Grammar',exact:true}).waitFor();assert.equal(await courseLinks().count(),0)
+ assert.deepEqual(errors,[]);mkdirSync('test-artifacts/catalog',{recursive:true});writeFileSync('test-artifacts/catalog/browser.json',JSON.stringify({widths:[320,390,768,1024,1440],pagination:true,filtersReloadBack:true,empty:true,expiry:true,axeViolations:violations,pageErrors:errors,scope:'Chromium lab; no academic relevance or manual AT certification'},null,2));console.log('PASS: built Learn subject/search filters, reload/Back, 20/5 pagination, empty and expiry states, canonical destination, five widths, scoped axe and no writing mutations.')
+}finally{await browser.close()}

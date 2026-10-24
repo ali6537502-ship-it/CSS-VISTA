@@ -38,6 +38,13 @@ function fb_values(string $table,array $values,string $user,bool $insert): array
         if(!isset($schema[$key]))cssv_fail('This factbook field cannot be changed.',422,'invalid_field');
         $out[$key]=fb_value($schema[$key],$value);
     }
+    if($table==='factbook_entries'&&isset($out['content'])){
+        $content=json_decode($out['content'],true,32,JSON_THROW_ON_ERROR);
+        if(!is_array($content)||(array_is_list($content)&&$content!==[]))cssv_fail('Entry content must be a structured object.',422,'invalid_content');
+        if(array_key_exists('html',$content)&&(!is_string($content['html'])||mb_strlen($content['html'])>200000))cssv_fail('Formatted notes must be text within 200,000 characters.',422,'invalid_content');
+        // Retained source text stays JSON data. All HTML sinks, including editor,
+        // loaded revisions, imports and print, use the maintained browser sanitizer.
+    }
     foreach(['subject_id','category_id','parent_id','entry_id','tag_id','collection_id'] as $key)if(isset($out[$key]))$out[$key]=fb_uuid($out[$key]);
     foreach(['name','title'] as $key)if(isset($out[$key])&&trim($out[$key])==='')cssv_fail('Add a title or name before saving.',422,'missing_name');
     foreach(['color','accent_color'] as $key)if(isset($out[$key])&&!preg_match('/^#[0-9a-f]{6}$/i',$out[$key]))cssv_fail('Choose a valid colour.',422,'invalid_colour');

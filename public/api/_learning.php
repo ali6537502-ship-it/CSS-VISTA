@@ -20,6 +20,10 @@ function cssv_learning_guided(PDO $pdo,string $writingId,string $userId): ?array
 function cssv_learning_has_guided(PDO $pdo): bool {
     static $exists;return $exists??=(bool)$pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='skills_workspaces'")->fetchColumn();
 }
+function cssv_learning_topic_binding(PDO $pdo,string $writing,string $user): ?array {
+    if(!(bool)$pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='topic_writing_bindings'")->fetchColumn())return null;
+    $q=$pdo->prepare('SELECT attempt_id,topic_version_id,slot FROM topic_writing_bindings WHERE writing_id=? AND user_id=?');$q->execute([$writing,$user]);return $q->fetch()?:null;
+}
 function cssv_learning_attempt(PDO $pdo,string $id,string $userId): array {
     $q=$pdo->prepare('SELECT * FROM preparation_attempts WHERE id=? AND user_id=?');$q->execute([$id,$userId]);$a=$q->fetch();
     if (!$a) throw new OutOfBoundsException('Preparation attempt not found.');
@@ -29,14 +33,14 @@ function cssv_learning_attempt(PDO $pdo,string $id,string $userId): array {
 }
 function cssv_learning_writing(PDO $pdo,string $id,string $userId): array {
     $q=$pdo->prepare('SELECT * FROM writing_records WHERE id=? AND user_id=?');$q->execute([$id,$userId]);$w=$q->fetch();
-    if (!$w)throw new OutOfBoundsException('Writing record not found.');$w['version']=(int)$w['version'];$w['guided_workspace']=cssv_learning_guided($pdo,$id,$userId);
+    if (!$w)throw new OutOfBoundsException('Writing record not found.');if(cssv_learning_topic_binding($pdo,$id,$userId))throw new DomainException('Open this edition-bound writing in its topic workspace.');$w['version']=(int)$w['version'];$w['guided_workspace']=cssv_learning_guided($pdo,$id,$userId);
     foreach(['created_at','updated_at'] as $k)$w[$k]=cssv_pro_iso($w[$k]);
     $q=$pdo->prepare('SELECT id,version,word_count,created_at FROM writing_versions WHERE writing_id=? ORDER BY version DESC');$q->execute([$id]);$w['versions']=$q->fetchAll();
     foreach($w['versions'] as &$v){$v['version']=(int)$v['version'];$v['word_count']=(int)$v['word_count'];$v['created_at']=cssv_pro_iso($v['created_at']);}unset($v);return $w;
 }
 function cssv_learning_version(PDO $pdo,string $id,string $userId): array {
     $q=$pdo->prepare('SELECT v.*,w.user_id,w.kind,w.attempt_id FROM writing_versions v JOIN writing_records w ON w.id=v.writing_id WHERE v.id=? AND w.user_id=?');$q->execute([$id,$userId]);$v=$q->fetch();
-    if (!$v)throw new OutOfBoundsException('Writing version not found.');$v['version']=(int)$v['version'];$v['word_count']=(int)$v['word_count'];$v['created_at']=cssv_pro_iso($v['created_at']);return $v;
+    if (!$v)throw new OutOfBoundsException('Writing version not found.');if(cssv_learning_topic_binding($pdo,$v['writing_id'],$userId))throw new DomainException('Open this edition-bound writing in its topic workspace.');$v['version']=(int)$v['version'];$v['word_count']=(int)$v['word_count'];$v['created_at']=cssv_pro_iso($v['created_at']);return $v;
 }
 function cssv_learning_mutation(PDO $pdo,string $userId,array $body): array {
     $action=$body['action'] ?? '';

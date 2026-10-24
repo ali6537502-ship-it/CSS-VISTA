@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router'
 import { ArrowLeft, Copy, LoaderCircle } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { AccountPage } from './shared'
+import CouponAccess from '@/features/membership/CouponAccess'
 import { learningDestination, membershipRequest, money, pakistanTime, requestIdentity, statusLabels, useMembership, useMembershipExpired, type OrderResponse, type Overview } from '@/features/membership/api'
 
 const button = 'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-pine px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine'
@@ -39,6 +40,7 @@ function OrderDetail({ id }: { id: string }) {
   return <section className="space-y-6">
     <Link to="/account/membership" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-pine"><ArrowLeft className="h-4 w-4" />All payments</Link>
     <header><h2 className="text-xl font-bold text-slate-950">{statusLabels[order.status]}</h2><p className="mt-2 break-all text-sm text-slate-500">Order reference: {order.id}</p><p className="mt-2 text-sm text-slate-600">{money(order.amount_minor)} · {order.duration_days} days · created {pakistanTime(order.created_at)}</p></header>
+    {order.discount && <p className="rounded-lg bg-slate-50 p-4 text-sm">Coupon discount: {money(order.discount.discount_minor)} off {money(order.discount.base_amount_minor)}. Your agreed payment is {money(order.amount_minor)}.</p>}
     {pending && <p role="status" className="text-sm text-slate-500">Refreshing order status…</p>}
     {error && <p role="alert" className="text-sm text-red-800">{error}</p>}
     {message && <p role="status" className="rounded-lg border bg-slate-50 p-4 text-sm">{message}</p>}
@@ -90,6 +92,7 @@ export default function MembershipPage() {
           {data.product.collection_enabled ? <><div className="mt-5 border-t pt-5"><h3 className="font-semibold">Purchase terms</h3><p className="mt-3 whitespace-pre-wrap text-sm leading-7">{data.product.terms_text}</p></div><label className="mt-5 flex items-start gap-3 text-sm leading-6"><input type="checkbox" checked={accepted} onChange={event => setAcceptedRevision(event.target.checked ? data.product.product_revision : null)} className="mt-1 h-5 w-5 shrink-0 accent-emerald-800" />I have read and accept these purchase terms.</label><button type="button" disabled={!accepted || busy || pending} onClick={() => void create()} className={`${button} mt-5`}>{busy && <LoaderCircle className="h-4 w-4 animate-spin" />}{active ? 'Create renewal order' : expired ? 'Renew access — 30 days' : 'Get Pro — 30 days'}</button></> : <p role="status" className="mt-5 rounded-lg bg-slate-50 p-4 text-sm leading-7 text-slate-600">Pro purchases are not open yet. No payment is required. Your existing free study tools remain available.</p>}
           {failure && <p role="alert" className="mt-4 text-sm leading-6 text-red-800">{failure}</p>}
         </section>
+        {user && <CouponAccess key={user.id} userId={user.id} product={data.product} returnTo={learningDestination(params.get('returnTo'))} onChanged={order => { if (order) setParams({ order }); refresh() }} />}
         <section><div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-lg font-semibold">Payment history</h2><button type="button" disabled={pending} onClick={refresh} className={secondary}>{pending ? 'Refreshing…' : 'Refresh status'}</button></div>{error && <p role="alert" className="mt-3 text-sm text-red-800">{error}</p>}{data.orders.length === 0 ? <p className="mt-4 rounded-xl border border-dashed p-6 text-sm text-slate-500">You have no payment orders.</p> : <ul className="mt-4 divide-y rounded-xl border">{data.orders.map(order => <li key={order.id}><Link to={`?order=${order.id}`} className="flex min-h-16 flex-wrap items-center justify-between gap-3 p-4 hover:bg-slate-50"><span><span className="block font-semibold">{statusLabels[order.status]}</span><span className="mt-1 block text-sm text-slate-500">{pakistanTime(order.created_at)}</span></span><span className="text-sm font-semibold">{money(order.amount_minor)} · View order</span></Link></li>)}</ul>}<nav aria-label="Payment history pages" className="mt-4 flex flex-wrap gap-3"><button disabled={offset === 0 || pending} className={secondary} onClick={() => setOffset(value => Math.max(0, value - 50))}>Previous page</button><button disabled={!data.has_more || pending} className={secondary} onClick={() => setOffset(value => value + 50)}>Next page</button></nav></section>
       </>}
     </div>}

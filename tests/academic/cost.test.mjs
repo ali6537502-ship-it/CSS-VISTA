@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict'
+import {test} from 'node:test'
+import {observedCost} from './cost.mjs'
+// Arithmetic fixtures only. These rates and identifiers are not live provider evidence.
+const packet={status:'REQUIRES_HUMAN_ACADEMIC_REVIEW',provider_response_id:'resp_arithmetic_fixture',configured_model:'ARITHMETIC-only',reported_model:'ARITHMETIC-only',tokens:{input_tokens:1000,output_tokens:500,cached_tokens:200}},rates={model:'ARITHMETIC-only',source_url:'https://openai.com/api/pricing/',checked_on:'2026-01-01',input_usd_per_million:2,cached_input_usd_per_million:1,output_usd_per_million:4}
+test('Observed-token arithmetic, not a real price or profitability assertion',()=>{const r=observedCost({...packet,provider_response_id:'resp_arithmetic'},rates);assert.equal(r.usd,.0038);assert.equal(r.kind,'reported-token estimate')})
+test('Missing detail stays bounded; missing totals, test transport, mismatched model and unsafe sources fail',()=>{const base={...packet,provider_response_id:'resp_arithmetic'};assert.equal(observedCost({...base,tokens:{...base.tokens,cached_tokens:null}},rates).kind,'input-cost upper bound; cached detail missing');for(const p of [{...base,tokens:{...base.tokens,input_tokens:null}},{...base,tokens:{...base.tokens,cached_tokens:1001}},{...base,provider_response_id:'TEST-only-result'},packet])assert.throws(()=>observedCost(p,rates));assert.throws(()=>observedCost(base,{...rates,model:'other'}));assert.throws(()=>observedCost(base,{...rates,source_url:'https://user:password@openai.com/'}))})

@@ -29,7 +29,7 @@ export type Stage = {
   teach?: string;
   example?: string;
   question?: string;
-  min_words: number;
+  min_words: number; review?: string[];
 };
 export type Source = {
   id: string;
@@ -69,6 +69,7 @@ export type Evidence = {
     chosen: string;
     answer: string;
     explanation: string;
+    choice_explanation?: string;
   } | null;
   basis: string;
 };
@@ -151,6 +152,8 @@ export type Detail = {
     created_at: string;
   }[];
   operations: Operation[];
+  children_offset: number;
+  has_more_children: boolean;
   children: {
     id: string;
     feature: Feature;

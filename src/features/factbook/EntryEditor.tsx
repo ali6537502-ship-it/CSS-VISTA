@@ -4,7 +4,7 @@ import {
   Link2, List, ListOrdered, Plus, Quote, Redo2, Save, Trash2, Underline, X,
 } from 'lucide-react'
 import { ENTRY_TYPE_DEFINITIONS, ENTRY_TYPE_MAP, createEmptyContent } from './entryTypes'
-import { sanitizeRichText } from './safety'
+import { safeWebUrl, sanitizeRichText } from './safety'
 import type {
   FactbookCategory, FactbookEntryDraft, FactbookMedia, FactbookSubject, SaveState,
 } from './types'
@@ -57,7 +57,13 @@ function RichEditor({ value, onChange }: { value: string; onChange(value: string
     { label: 'Block quotation', icon: Quote, name: 'formatBlock', value: 'blockquote' },
     { label: 'Heading', icon: Redo2, name: 'formatBlock', value: 'h3' },
   ]
-  return <div className="overflow-hidden rounded-xl border border-emerald-900/15 bg-white focus-within:ring-2 focus-within:ring-emerald-700/15"><div className="flex flex-wrap gap-1 border-b bg-secondary/50 p-2">{tools.map((tool) => <button key={tool.label} type="button" onClick={() => command(tool.name, tool.value)} className="rounded-lg p-2 text-slate-600 hover:bg-white hover:text-pine" aria-label={tool.label} title={tool.label}><tool.icon className="h-4 w-4" /></button>)}<button type="button" onClick={() => { const url = window.prompt('Paste an http or https link'); if (url) command('createLink', url) }} className="rounded-lg p-2 text-slate-600 hover:bg-white hover:text-pine" aria-label="Add link"><Link2 className="h-4 w-4" /></button></div><div ref={editor} contentEditable suppressContentEditableWarning role="textbox" aria-multiline="true" aria-label="Formatted note" onInput={(event) => onChange(sanitizeRichText(event.currentTarget.innerHTML))} className="factbook-rich min-h-52 px-4 py-3 text-sm leading-7 outline-none" /></div>
+  return <div className="overflow-hidden rounded-xl border border-emerald-900/15 bg-white focus-within:ring-2 focus-within:ring-emerald-700/15"><div className="flex flex-wrap gap-1 border-b bg-secondary/50 p-2">{tools.map((tool) => <button key={tool.label} type="button" onClick={() => command(tool.name, tool.value)} className="rounded-lg p-2 text-slate-600 hover:bg-white hover:text-pine" aria-label={tool.label} title={tool.label}><tool.icon className="h-4 w-4" /></button>)}<button type="button" onClick={() => { const url = window.prompt('Paste an http or https link'); if (url && safeWebUrl(url)) command('createLink', safeWebUrl(url)) }} className="rounded-lg p-2 text-slate-600 hover:bg-white hover:text-pine" aria-label="Add link"><Link2 className="h-4 w-4" /></button></div><div ref={editor} contentEditable suppressContentEditableWarning role="textbox" aria-multiline="true" aria-label="Formatted note" onPaste={(event) => {
+      event.preventDefault()
+      // Clipboard HTML must never enter the live editor before sanitization.
+      const html = event.clipboardData.getData('text/html')
+      if (html) command('insertHTML', sanitizeRichText(html))
+      else command('insertText', event.clipboardData.getData('text/plain'))
+    }} onDrop={(event) => { event.preventDefault() }} onInput={(event) => onChange(sanitizeRichText(event.currentTarget.innerHTML))} className="factbook-rich min-h-52 px-4 py-3 text-sm leading-7 outline-none" /></div>
 }
 
 function StringListEditor({ label, items, onChange }: { label: string; items: string[]; onChange(items: string[]): void }) {

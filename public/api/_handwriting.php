@@ -54,6 +54,27 @@ function cssv_handwriting_upload(PDO $pdo,string $user,array $body,array $file):
   $result=['page_id'=>$id];$pdo->prepare('INSERT INTO learning_requests(user_id,request_id,payload_hash,result) VALUES(?,?,?,?)')->execute([$user,$request,$hash,json_encode($result,JSON_THROW_ON_ERROR)]);$pdo->commit();return $result;
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();if($created && $target && is_file($target))unlink($target);throw $e;}
 }
+/** Retire only the owned temporary image; educational and operation records survive. */
+function cssv_handwriting_discard_image(PDO $pdo,string $user,array $body): array {
+ cssv_pro_fields($body,['action','request_id','page_id','expected_version']);
+ if(($body['action']??null)!=='discard_image')throw new InvalidArgumentException('Choose image removal.');
+ $id=cssv_pro_id($body['page_id']??null);$request=cssv_pro_id($body['request_id']??null);
+ $expected=$body['expected_version']??null;if(!is_int($expected)||$expected<0)throw new InvalidArgumentException('Refresh the page before removing its image.');
+ $hash=hash('sha256',json_encode(['handwriting-discard-image-v1',$id,$expected],JSON_THROW_ON_ERROR));
+ $pdo->beginTransaction();try{
+  cssv_learning_owner_lock($pdo,$user);$page=cssv_handwriting_page($pdo,$id,$user,true);
+  $q=$pdo->prepare('SELECT payload_hash,result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);
+  if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This request was used for a different image removal.');$result=json_decode($prior['result'],true,16,JSON_THROW_ON_ERROR);$pdo->commit();}
+  else{
+   if((int)$page['transcription_version']!==$expected)throw new DomainException('The transcription changed elsewhere. Refresh before removing its image.');
+   $pdo->prepare('UPDATE handwriting_pages SET image_expires_at=LEAST(image_expires_at,NOW(6)) WHERE id=? AND user_id=?')->execute([$id,$user]);
+   $result=['page_id'=>$id,'image_retired'=>true];
+   $pdo->prepare('INSERT INTO learning_requests(user_id,request_id,payload_hash,result) VALUES(?,?,?,?)')->execute([$user,$request,$hash,json_encode($result,JSON_THROW_ON_ERROR)]);$pdo->commit();
+  }
+ }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
+ // Availability is already retired even if physical deletion needs a cleanup retry.
+ $result['image_deleted']=cssv_handwriting_purge($pdo,$id);return $result;
+}
 function cssv_handwriting_add_transcription(PDO $pdo,array $page,string $text,string $source,bool $uncertain): int {
  $v=(int)$page['transcription_version']+1;$pdo->prepare('INSERT INTO handwriting_transcriptions(id,page_id,version,text,text_hash,uncertain,source) VALUES(?,?,?,?,?,?,?)')->execute([cssv_uuid_v4(),$page['id'],$v,$text,hash('sha256',$text),$uncertain?1:0,$source]);
  $pdo->prepare("UPDATE handwriting_pages SET transcription_version=?,confirmed_transcription_version=NULL,confirmed_hash=NULL,confirmed_text_version_id=NULL,state='awaiting_confirmation',version=version+1 WHERE id=?")->execute([$v,$page['id']]);return $v;

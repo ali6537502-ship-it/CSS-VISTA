@@ -1,0 +1,29 @@
+# Integrated private Pro candidate — 12 October 2026
+
+The owner asked to continue the combined learning-flow review and start implementation. This candidate combines the already-tested draft #91 (`2f43716572ba2ee98672e7260b1f55cd03527a09`) and draft #92 (`e8fd337b2eb70466a978c59acd76fd887b1d8c54`) on `feat/pro-integrated-candidate`, based on unchanged main `cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8`. It merges only development branches. Neither source draft nor this candidate is merged into auto-deployed main.
+
+Preserved private improvements include activity-specific immutable comparison, explicit linked lesson choice, valid short-sentence practice, guided Précis recognition/recovery, permitted Précis/Ability expiry history and the mentor renewal policy/retention checks. No source library conversion resumes. Real AI, payment collection and production publication remain disabled/held.
+
+## Cross-feature audit and focused repair
+
+Linked refinement and explicit return already existed; they are not rebuilt. Students can save an essay response, send it to Argumentation, then Analysis, then Sentence Studio. Each child owns its source version, selected activity and immutable writing history. Returned work creates a new version only after the student compares it and explicitly saves it. Nested returns preserve intermediate records and the original essay. Selected-passage bounds, native ownership, CSRF, version conflicts and pending-request recovery remain unchanged.
+
+Inspection found that a parent endpoint returned only the newest 20 linked practices, without a next-page marker or navigation. A student accumulating more branches could no longer find an older linked revision from its original workspace.
+
+`student/skills.php` now validates a separate `children_offset`, fetches 21 owned child references, returns 20 and indicates whether another page exists. An ID tie-breaker makes equal update timestamps deterministic. This remains a bounded query against existing tables; no migration, new history system or record rewrite is introduced. The selected saved version and its version-page offset remain independent.
+
+The same endpoint offers a references-only `view=linked` response, excluding source text, saved writing, versions and feedback. This lets the linked-history panel load independently of the editor. The studio provides Newer/Older linked-practice buttons with descriptive navigation, disabled limits and pending-save protection. It retains workspace/version parameters, resets the child comparison when changing pages or refreshing saved status, and sends the child offset to the native endpoint. The existing saved-status action also refreshes the selected linked-history page. Opening an older child uses its existing stable route; return/compare behavior remains unchanged. Invalid offsets fail, foreign parents remain inaccessible, and no lesson reading or paging consumes AI.
+
+## Verification scope
+
+Native security tests create real synthetic linked requests beyond 20, deliberately tie their update timestamps in the guarded disposable fixture, and check that pages contain every child once in deterministic order. They compare unchanged saved writing/version histories, reject invalid offsets and foreign-parent access, and keep unrelated child lists isolated.
+
+The new built `tests/browser/connected-skills.mjs` exercises essay→argument→analysis→sentence and nested explicit return through actual controls. It checks original-version preservation, lost accepted adoption recovery without duplication, the common Saved Writing link, independent-device draft conflicts and explicit resolution, older-child paging/reopen/refresh, mobile widths, account ownership and zero AI usage. Test wording is explicitly synthetic hypothetical instructional material. It does not demonstrate real AI educational quality or establish production student readiness.
+
+A new draft-safety assertion reproduced lost words when the first paging implementation remounted the editor before its debounced autosave. The corrected panel keeps the editor mounted and loads only the bounded child references; the regression types and immediately pages before autosave, then verifies the exact draft and refresh recovery. This failure is recorded rather than claiming that the initial happy-path journey covered it.
+
+The existing skills, Précis, Ability, mentor and Pro-pause browser suites are retained in CI. Provider tests continue to use labelled TEST ONLY transports, separately from genuine academic calibration. Real provider/model capability, reviewed processing notices/allowances, handwriting retention/trials and commercial policies remain outstanding. No academic scores or live success are inferred from a valid schema or an isolated browser test.
+
+Final commands, outcomes, exact candidate SHA and CI evidence are recorded in the draft PR and private release report. The release hold remains active throughout this work.
+
+Local validation passed for the combined candidate: TypeScript, lint, PHP syntax, skills pure/native lifecycle and paging assertions, authored-curriculum check, labelled TEST ONLY AI regressions, strict Hostinger build, and the full corrected connected browser journey. The immediate typing/paging regression now preserves the exact draft; references-only refresh and later browser refresh preserve it as well. The linked-history mobile panel was visually inspected. Existing build warnings remain; no new error was introduced. The generated Vistagram timestamp was restored to avoid unrelated changes. Other combined Précis, Ability and mentor journeys passed locally; final skills/pause regression and exact-head CI are recorded separately in the private validation manifest and PR. These checks do not activate real AI or certify paid-launch readiness.

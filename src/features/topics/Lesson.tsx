@@ -1,3 +1,4 @@
+import TopicWritingHistory from './WritingHistory'
 import { useEffect, useId, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, Bookmark, Check, ChevronRight, LockKeyhole } from 'lucide-react'
@@ -23,6 +24,7 @@ import {
 } from './types'
 import { topicPanel } from './styles'
 import { GuidedSection, MistakeReview } from './Guided'
+import { orderedTopicOptions } from './optionOrder'
 
 type Send = (body: Record<string, unknown>) => Promise<void>
 function PendingAction({ action }: { action: PreparationAction }) {
@@ -159,7 +161,7 @@ function KnowledgeCheck({
               {index + 1}. {question.prompt}
             </legend>
             <div className="mt-3 grid gap-3">
-              {question.options.map((option, i) => (
+              {orderedTopicOptions(question).map(({ option, index: i }) => (
                 <label
                   key={i}
                   className={`flex min-h-12 cursor-pointer items-start gap-3 rounded-xl border p-4 text-sm leading-6 ${choices[question.id] === i ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200 hover:bg-slate-50'}`}
@@ -510,6 +512,7 @@ export default function TopicLesson({
         )}
       </header>
       <PendingAction action={action} />
+      <TopicWritingHistory key={data.topic.version_id} attempt={attempt} edition={data.topic.version_id} revision={data.progress.draft_version} />
       {!active || !definition ? (
         <section className={topicPanel}>
           <LockKeyhole className="h-6 w-6 text-indigo-700" aria-hidden="true" />
@@ -737,7 +740,7 @@ export default function TopicLesson({
               </p>
               <p>
                 Understanding requires the studied sections and at least 80% in the fixed check.
-                Practised adds your independent writing. Mastered adds a successful scheduled recall
+                Practised adds your independent writing. Practice and recall recorded adds a successful scheduled recall
                 check; it describes this module’s recorded work.
               </p>
               {definition.references.map((r) => (
