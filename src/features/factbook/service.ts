@@ -558,108 +558,23 @@ export function newEntryDraft(subjectId: string, categoryId: string | null = nul
 }
 
 export async function exportCompleteFactbook(userId: string): Promise<FactbookBackup> {
-  const client = await requireClient()
-  const [subjects, categoryResult, collections, preferences] = await Promise.all([
-    loadFactbookSubjects(userId),
-    client.from('factbook_categories').select('*').eq('user_id', userId).is('deleted_at', null).order('position'),
-    loadFactbookCollections(userId),
-    loadFactbookPreferences(userId),
-  ])
-  if (categoryResult.error) throw new Error(messageFrom(categoryResult.error, 'Categories could not be exported.'))
-  const entries: FactbookEntry[] = []
-  let page = 0
-  let hasMore = true
-  while (hasMore && page < 1000) {
-    const result = await loadFactbookEntries(userId, { page, pageSize: 100 })
-    entries.push(...result.entries)
-    hasMore = result.hasMore
-    page += 1
-  }
-  for (const entry of entries) {
-    entry.media = await Promise.all(entry.media.map(async (item) => {
-      if (!item.signed_url) return { ...item, signed_url: undefined }
-      try {
-        const response = await fetch(item.signed_url)
-        if (!response.ok) return { ...item, signed_url: undefined }
-        const blob = await response.blob()
-        const backup_data_url = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader()
-          reader.onload = () => resolve(String(reader.result))
-          reader.onerror = () => reject(reader.error)
-          reader.readAsDataURL(blob)
-        })
-        return { ...item, signed_url: undefined, backup_data_url }
-      } catch { return { ...item, signed_url: undefined } }
-    }))
-  }
-  return {
-    format: 'css-vista-factbook', version: 1, exported_at: new Date().toISOString(),
-    subjects, categories: asRows(categoryResult.data) as unknown as FactbookCategory[], entries, collections, preferences,
-  }
+  const { exportFactbookBackup } = await import('./backup')
+  return exportFactbookBackup(userId)
 }
 
 export function validateFactbookBackup(value: unknown): FactbookBackup {
   if (!value || typeof value !== 'object') throw new Error('This file is not a Factbook backup.')
   const candidate = value as Partial<FactbookBackup>
-  if (candidate.format !== 'css-vista-factbook' || candidate.version !== 1) throw new Error('This backup format or version is not supported.')
-  if (!Array.isArray(candidate.subjects) || !Array.isArray(candidate.categories) || !Array.isArray(candidate.entries)) throw new Error('The backup is missing required Factbook records.')
-  if (candidate.subjects.length > 500 || candidate.categories.length > 20_000 || candidate.entries.length > 100_000) throw new Error('This backup exceeds the safe import limits.')
+  if (candidate.format !== 'css-vista-factbook' || ![1,2].includes(candidate.version ?? 0)) throw new Error('This backup format or version is not supported.')
+  if (!Array.isArray(candidate.subjects) || !Array.isArray(candidate.categories) || !Array.isArray(candidate.entries) || candidate.collections !== undefined && !Array.isArray(candidate.collections)) throw new Error('The backup is missing required record lists.')
+  if (candidate.subjects.some(row => !row || typeof row !== 'object' || typeof row.name !== 'string' || typeof row.id !== 'string') || candidate.entries.some(row => !row || typeof row !== 'object') || candidate.preferences !== undefined && candidate.preferences !== null && (typeof candidate.preferences !== 'object' || Array.isArray(candidate.preferences))) throw new Error('The backup contains invalid record metadata. No records were changed.')
+  if (candidate.subjects.length + candidate.categories.length + candidate.entries.length + (candidate.collections?.length ?? 0) > 10000 || new TextEncoder().encode(JSON.stringify(value)).length > 16 * 1024 * 1024 - 1024) throw new Error('This backup exceeds the supported 16 MB / 10,000 record limit. The original is unchanged.')
   return candidate as FactbookBackup
 }
 
-export async function importFactbookBackup(userId: string, backup: FactbookBackup, mode: 'new' | 'merge' = 'new') {
-  const subjectMap = new Map<string, string>()
-  const categoryMap = new Map<string, string>()
-  const existingSubjects = mode === 'merge' ? await loadFactbookSubjects(userId) : []
-  for (const subject of backup.subjects) {
-    const existing = existingSubjects.find((item) => item.name.localeCompare(subject.name, undefined, { sensitivity: 'accent' }) === 0)
-    if (existing) subjectMap.set(subject.id, existing.id)
-    else {
-      const created = await createFactbookSubject(userId, { ...subject, id: undefined, name: mode === 'new' ? `${subject.name} (Imported)` : subject.name })
-      subjectMap.set(subject.id, created.id)
-    }
-  }
-  const pending = [...backup.categories]
-  for (let pass = 0; pass < backup.categories.length + 1 && pending.length; pass += 1) {
-    for (let index = pending.length - 1; index >= 0; index -= 1) {
-      const category = pending[index]
-      if (!category) continue
-      if (category.parent_id && !categoryMap.has(category.parent_id)) continue
-      const subjectId = subjectMap.get(category.subject_id)
-      if (!subjectId) { pending.splice(index, 1); continue }
-      const parentId = category.parent_id ? categoryMap.get(category.parent_id) : null
-      let existing: FactbookCategory | undefined
-      if (mode === 'merge') {
-        const existingCategories = await loadFactbookCategories(userId, subjectId)
-        existing = existingCategories.find((item) => item.parent_id === (parentId ?? null) && item.name.localeCompare(category.name, undefined, { sensitivity: 'accent' }) === 0)
-      }
-      if (existing) categoryMap.set(category.id, existing.id)
-      else {
-        const created = await createFactbookCategory(userId, subjectId, { ...category, id: undefined, parent_id: parentId })
-        categoryMap.set(category.id, created.id)
-      }
-      pending.splice(index, 1)
-    }
-  }
-  let importedEntries = 0
-  for (const entry of backup.entries) {
-    const subjectId = subjectMap.get(entry.subject_id)
-    if (!subjectId) continue
-    const saved = await saveFactbookEntry(userId, {
-      ...entry, id: undefined, subject_id: subjectId,
-      category_id: entry.category_id ? categoryMap.get(entry.category_id) ?? null : null,
-      sources: entry.sources ?? [], tags: entry.tags ?? [],
-    })
-    for (const media of entry.media ?? []) {
-      if (!media.backup_data_url || !/^data:image\/(?:jpeg|png|webp|gif);base64,/i.test(media.backup_data_url)) continue
-      const blob = await fetch(media.backup_data_url).then((response) => response.blob())
-      if (blob.size <= 0 || blob.size > 5 * 1024 * 1024) continue
-      const { uploadFactbookImage } = await import('./media')
-      await uploadFactbookImage({ userId, entryId: saved.id, file: new File([blob], media.file_name, { type: blob.type }), caption: media.caption, altText: media.alt_text || media.file_name || 'Imported factbook image', source: media.source })
-    }
-    importedEntries += 1
-  }
-  return { subjects: subjectMap.size, categories: categoryMap.size, entries: importedEntries }
+export async function importFactbookBackup(userId: string, backup: FactbookBackup, mode: 'new' | 'merge' = 'new', applyPreferences = true) {
+  const { restoreFactbookBackup } = await import('./backup')
+  return restoreFactbookBackup(userId, validateFactbookBackup(backup), mode, applyPreferences)
 }
 
 export async function deleteAllFactbookData(userId: string, confirmation: string) {

@@ -26,12 +26,14 @@ try {
         foreach($ids as $entry)fb_row($pdo,'factbook_entries',fb_uuid($entry),$user);
         $pdo->prepare('DELETE FROM factbook_collection_entries WHERE collection_id=? AND user_id=?')->execute([$id,$user]);
         foreach(array_values(array_unique($ids)) as $position=>$entry)fb_insert($pdo,'factbook_collection_entries',['collection_id'=>$id,'entry_id'=>$entry,'position'=>$position],$user);
+        if((int)$pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='factbook_backup_requests'")->fetchColumn())$pdo->prepare('DELETE FROM factbook_backup_requests WHERE user_id=?')->execute([$user]);
         $result=['ok'=>true];
     } elseif($action==='delete_all') {
         if(($body['confirmation']??'')!=='DELETE MY FACTBOOK')cssv_fail('Type DELETE MY FACTBOOK to confirm.',422,'confirmation_required');
         $pdo->prepare('DELETE FROM factbook_entries WHERE user_id=?')->execute([$user]);
         $pdo->prepare('UPDATE factbook_categories SET parent_id=NULL WHERE user_id=?')->execute([$user]);
         foreach(['factbook_subjects','factbook_collections','factbook_tags','factbook_media','factbook_preferences'] as $table)$pdo->prepare("DELETE FROM $table WHERE user_id=?")->execute([$user]);
+        if((int)$pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='factbook_backup_requests'")->fetchColumn())$pdo->prepare('DELETE FROM factbook_backup_requests WHERE user_id=?')->execute([$user]);
         $result=['ok'=>true];
     } else {
         $table=$body['table']??'';$op=$body['operation']??'select';
