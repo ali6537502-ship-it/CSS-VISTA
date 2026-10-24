@@ -21,7 +21,7 @@ export default function AccountProgress() {
   return (
     <AccountPage
       title="Progress"
-      intro="Device-only practice and self-reported preparation are shown separately from account-owned evidence."
+      intro="Browser-cached practice and self-reported preparation are shown separately from structured account evidence."
       action={
         <Link to="/exam-intelligence" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-800">
           Exam Intelligence <ArrowRight className="h-4 w-4" />
@@ -38,7 +38,7 @@ export default function AccountProgress() {
         <Link to="/account/review" className="inline-flex min-h-11 items-center text-[#14543D] underline">Open scheduled recall and mistake review</Link>
       </section>
       <h2 className="mb-3 text-lg font-semibold">This browser’s preparation record</h2>
-      <p className="mb-5 rounded-xl border p-4 text-sm leading-7">The metrics below belong to this browser. Syllabus ticks are self-reported completion; recorded quiz results measure those attempts. They do not establish mastery or predict examination marks.</p>
+      <p className="mb-5 rounded-xl border p-4 text-sm leading-7">The metrics below come from this browser’s cached progress. The existing account progress backup may restore them on another browser. Syllabus ticks are self-reported completion; recorded quiz results measure those attempts. They do not establish mastery or predict examination marks.</p>
       <Link to="/account/library/search" className="mb-5 inline-flex min-h-11 items-center text-[#14543D] underline">Open synchronized evidence and saved versions</Link>
       <AttemptContinuation />
       <SectionTitle>Where you stand</SectionTitle>
