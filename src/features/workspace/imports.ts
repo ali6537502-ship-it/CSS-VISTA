@@ -82,3 +82,12 @@ export function importJournals(storage: Pick<Storage,'length'|'key'|'getItem'>, 
   }
   return out
 }
+
+export function pendingWritingSave(storage: ReadStorage, user: string): { request: string } | undefined {
+  const raw = storage.getItem(`cssvista:learning-request:${user}:writing:new`)
+  if (!raw) return
+  try {
+    const value: unknown = JSON.parse(raw)
+    if (record(value) && typeof value.id === 'string' && validId.test(value.id) && typeof value.hash === 'string' && /^[a-f0-9]{64}$/.test(value.hash)) return { request: value.id }
+  } catch { /* Retain the original request pointer. */ }
+}

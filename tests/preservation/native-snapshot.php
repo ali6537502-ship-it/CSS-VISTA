@@ -9,12 +9,12 @@ if($mode==='digest'){
     foreach($pdo->query('SHOW TABLES')->fetchAll(PDO::FETCH_COLUMN) as $table){
         if(!preg_match('/^[a-z0-9_]+$/D',$table))throw new RuntimeException('Unexpected test table.');
         $rows=$pdo->query('SELECT * FROM `'.$table.'`')->fetchAll(PDO::FETCH_ASSOC);$encoded=[];
-        foreach($rows as $row){ksort($row);$encoded[]=json_encode($row,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_SUBSTITUTE);}
+        foreach($rows as $row){ksort($row);foreach($row as &$value)if(is_string($value))$value=['binary_base64'=>base64_encode($value)];unset($value);$encoded[]=json_encode($row,JSON_THROW_ON_ERROR);}
         sort($encoded,SORT_STRING);$manifest[$table]=['rows'=>count($rows),'sha256'=>hash('sha256',implode("\n",$encoded))];
     }
     ksort($manifest);echo json_encode(['engine'=>$version,'tables'=>$manifest],JSON_THROW_ON_ERROR|JSON_PRETTY_PRINT)."\n";
 }elseif($mode==='projections'){
-    // Capture only safe plan metadata, never query parameters, source bodies or assessment keys.
+    // Private test evidence only: optimizer conditions can include fixture IDs and assessment predicates. Never publish raw plans.
     class WorkspacePlanStatement extends PDOStatement {
         public static array $plans=[];
         protected function __construct(private PDO $connection){}

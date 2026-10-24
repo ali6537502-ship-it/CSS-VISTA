@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { importIdentity, importJournals, importSources, importText, retainImport } from '../../src/features/workspace/imports.ts'
+import { importIdentity, importJournals, importSources, importText, pendingWritingSave, retainImport } from '../../src/features/workspace/imports.ts'
 const a='11111111-1111-4111-a111-111111111111', b='22222222-2222-4222-a222-222222222222', attempt='33333333-3333-4333-a333-333333333333'
 const answer={id:'local-1',question:'Why institutions matter?',subject:'TEST ONLY',date:'2025-01-01',minutes:40,outline:'Original outline',intro:'Original introduction',text:'  Original response\r\nاردو x² = 4 🧪  ',conclusion:'Original conclusion'}
 function storage(entries: Record<string,string>){const map=new Map(Object.entries(entries)),reads:string[]=[];return {map,reads,get length(){return map.size},key:(n:number)=>[...map.keys()][n]||null,getItem:(key:string)=>{reads.push(key);return map.get(key)??null},setItem:(key:string,value:string)=>{map.set(key,value)}}}
@@ -24,4 +24,9 @@ test('replay identity survives reordering and separates accounts, destinations a
  const canonicalCopy={...source,raw:JSON.stringify(Object.fromEntries(Object.entries(answer).reverse()))};assert.equal((await importIdentity(a,canonicalCopy,attempt)).request,key.request)
  const s=storage({});retainImport(s,a,key);assert.deepEqual(importJournals(s,a),[key]);assert.deepEqual(importJournals(s,b),[]);assert.ok(!JSON.stringify([...s.map]).includes('Original response'))
  assert.throws(()=>retainImport({setItem(){throw Error('Quota')}},a,key),/Quota/)
+})
+
+test('existing writing request discovery reads only this account and never erases a pending identity',()=>{
+ const key=`cssvista:learning-request:${a}:writing:new`,s=storage({[key]:JSON.stringify({id:attempt,hash:'a'.repeat(64)})}),before=[...s.map]
+ assert.deepEqual(pendingWritingSave(s,a),{request:attempt});assert.equal(pendingWritingSave(s,b),undefined);assert.deepEqual([...s.map],before)
 })

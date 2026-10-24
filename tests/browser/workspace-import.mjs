@@ -27,11 +27,22 @@ await page.route('**/api/student/learning.php',async route=>{
 try{
  await login(page)
  await page.evaluate(({raw,foreign})=>{localStorage.setItem('cssvista:v1',raw);localStorage.setItem(`cssvista:draft:learning:v1:${foreign}:new`,JSON.stringify({title:'FOREIGN ACCOUNT DRAFT',kind:'paragraph',text:'FOREIGN PRIVATE TEXT'}))},{raw,foreign})
+ const priorRequest=randomUUID(),draft={title:'TEST ONLY Own account draft',text:'TEST ONLY pending normal writing',kind:'paragraph',attemptId:seeded.attempt,baseVersion:0}
+ const prior=await page.evaluate(async({user,request,draft,attempt})=>{
+  const body={action:'writing_save',expected_version:0,attempt_id:attempt,kind:draft.kind,title:draft.title,text:draft.text}
+  const csrf=decodeURIComponent(document.cookie.split('; ').find(v=>v.startsWith('cssv_csrf='))?.slice('cssv_csrf='.length)||'')
+  const response=await fetch('/api/student/learning.php',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf,'X-CSSV-User':user},body:JSON.stringify({...body,request_id:request})})
+  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(body))),hash=[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('')
+  localStorage.setItem(`cssvista:draft:learning:v1:${user}:new`,JSON.stringify(draft));sessionStorage.setItem(`cssvista:learning-request:${user}:writing:new`,JSON.stringify({id:request,hash}))
+  return response.status
+ },{user,request:priorRequest,draft,attempt:seeded.attempt});assert.equal(prior,200);posts=0
  for(const width of [320,390,768,1024,1440]){
   await page.setViewportSize({width,height:1000});await open();assert.equal(await page.getByRole('button',{name:'Preview: '+answer.question,exact:true}).count(),0,'Unscoped writing was adopted without inspection')
   assert.equal((await page.locator('main').innerText()).includes('FOREIGN PRIVATE TEXT'),false)
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Import controls overflow at ${width}`)
  }
+ await page.getByRole('button',{name:'Preview: Your unsaved account writing draft',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Confirm import as new writing',exact:true}).count(),0);await page.getByRole('link',{name:'Resume original writing draft',exact:true}).waitFor()
+ await page.getByRole('button',{name:'Check earlier writing receipt',exact:true}).click();await page.getByRole('link',{name:'Open earlier confirmed writing',exact:true}).waitFor();assert.equal(posts,0)
  raw=await page.evaluate(()=>localStorage.getItem('cssvista:v1'));assert.deepEqual(JSON.parse(raw).savedAnswers,[answer]);assert.deepEqual(JSON.parse(raw).quizResults,[{score:100}])
  await page.getByRole('button',{name:'Inspect this browser’s saved answers',exact:true}).click();await select()
  const confirm=page.getByRole('button',{name:'Confirm import as new writing',exact:true}),ownership=page.getByRole('checkbox',{name:/I recognise this as my own writing/})
@@ -42,7 +53,7 @@ try{
  const violations=await page.evaluate(async()=>{const result=await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']}});return result.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))});assert.deepEqual(violations,[])
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Selected preview overflows at 320 pixels')
  mkdirSync('test-artifacts/workspace-import',{recursive:true});await page.screenshot({path:'test-artifacts/workspace-import/preview-320.png',fullPage:true})
- const [exported]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export original browser writing',exact:true}).click()]);const backup=JSON.parse(readFileSync(await exported.path(),'utf8'));assert.equal(backup.unscopedBrowserRecord,raw)
+ const [exported]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export original browser writing',exact:true}).click()]);const backup=JSON.parse(readFileSync(await exported.path(),'utf8'));assert.equal(backup.unscopedBrowserRecord,raw);assert.deepEqual(JSON.parse(backup.accountDraft),draft)
  await ownership.focus();await page.keyboard.press('Space');assert.equal(await ownership.isChecked(),true)
  await page.evaluate(()=>{const data=JSON.parse(localStorage.getItem('cssvista:v1'));data.savedAnswers[0].text='Changed after preview';localStorage.setItem('cssvista:v1',JSON.stringify(data))})
  await confirm.click();await page.getByRole('alert').filter({hasText:'changed after this preview'}).waitFor();assert.equal(posts,0)
@@ -57,7 +68,9 @@ try{
  // Re-preview the unchanged original and same destination: native receipt replay creates no duplicate.
  await open();await page.getByRole('button',{name:'Inspect this browser’s saved answers',exact:true}).click();await select();await ownership.check();await confirm.click();await page.getByRole('status').filter({hasText:'Account save confirmed'}).waitFor();assert.equal(posts,2)
  assert.equal(await page.getByRole('link',{name:'Open confirmed writing version 1',exact:true}).getAttribute('href'),destination)
- const second=await browser.newContext({ignoreHTTPSErrors:true});await second.route('**/*',route=>new URL(route.request().url()).hostname==='localhost'?route.continue():route.abort());const another=await second.newPage();await login(another);await another.goto('https://localhost:3444'+destination);await another.getByRole('heading',{name:answer.question,exact:true}).waitFor();assert.ok((await another.locator('main').innerText()).includes('Original body — اردو x² = 4 🧪'));await second.close()
+ const second=await browser.newContext({ignoreHTTPSErrors:true});await second.route('**/*',route=>new URL(route.request().url()).hostname==='localhost'?route.continue():route.abort());const another=await second.newPage();await login(another);await another.goto('https://localhost:3444'+destination);await another.getByRole('heading',{name:answer.question,exact:true}).waitFor();assert.ok((await another.locator('main').innerText()).includes('Original body — اردو x² = 4 🧪'));
+ await another.evaluate(answer=>{const state=JSON.parse(localStorage.getItem('cssvista:v1')||'{}');state.savedAnswers=[Object.fromEntries(Object.entries(answer).reverse())];localStorage.setItem('cssvista:v1',JSON.stringify(state))},answer)
+ await another.goto('https://localhost:3444/account/library');await another.getByRole('button',{name:'Preview browser writing imports',exact:true}).click();await another.getByRole('button',{name:'Inspect this browser’s saved answers',exact:true}).click();await another.getByRole('button',{name:'Preview: '+answer.question,exact:true}).click();await another.getByRole('combobox',{name:'Destination preparation attempt',exact:true}).selectOption(seeded.attempt);await another.getByRole('checkbox',{name:/I recognise this as my own writing/}).check();await another.getByRole('button',{name:'Confirm import as new writing',exact:true}).click();await another.getByRole('link',{name:'Open confirmed writing version 1',exact:true}).waitFor();assert.equal(await another.getByRole('link',{name:'Open confirmed writing version 1',exact:true}).getAttribute('href'),destination,'Restored cache field ordering created another account record');await second.close()
  const writingId=new URL(destination,'https://localhost').searchParams.get('writing')
  const data=await page.evaluate(async id=>{const r=await fetch('/api/student/learning.php?writing_id='+id);return r.json()},writingId);assert.equal(data.writing.versions.length,1)
  await page.goto('https://localhost:3444/account/progress');await page.getByRole('heading',{name:'This browser’s preparation record',exact:true}).waitFor();const retained=await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:v1')));assert.deepEqual(retained.savedAnswers,[answer]);assert.deepEqual(retained.quizResults,[{score:100}]);assert.deepEqual(retained.subjectProgress,{test:100})
