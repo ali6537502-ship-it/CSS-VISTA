@@ -328,9 +328,19 @@ test('no public API endpoint is caught by an .htaccess <Files>/<FilesMatch> deny
   for (const block of htaccess.matchAll(/<(Files|FilesMatch)\s+"([^"]+)">([\s\S]*?)<\/\1>/g)) {
     if (!/Require all denied|Deny from all/.test(block[3])) continue
     const pattern = block[2]
-    denies.push(block[1] === 'Files' ? (name) => name === pattern : (name) => new RegExp(pattern).test(name))
+    if (block[1] === 'Files') denies.push((name) => name === pattern)
+    else {
+      // Apache PCRE supports a leading case-insensitive flag; JavaScript
+      // takes that flag as a RegExp constructor argument instead.
+      const insensitive = pattern.startsWith('(?i)')
+      const expression = new RegExp(insensitive ? pattern.slice(4) : pattern, insensitive ? 'i' : '')
+      denies.push((name) => expression.test(name))
+    }
   }
   assert.ok(denies.length > 0, 'expected the private-config deny blocks to be present')
+  for (const name of ['.env', '.ENV.PRODUCTION', 'config.php.bak', 'CONFIG.PHP.BACKUP', 'private.pem', 'backup.sqlite']) {
+    assert.ok(denies.some((deny) => deny(name)), `${name} must remain protected`)
+  }
   const endpoints: string[] = []
   const walk = (dir: string) => {
     for (const entry of readdirSync(join(dist, dir), { withFileTypes: true })) {
