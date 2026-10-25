@@ -22,6 +22,7 @@ import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
 import RouteSeo from '@/components/RouteSeo'
+import { shouldRenderDrawerLinks } from '@/lib/drawerVisibility'
 import { requestPageBack } from '@/lib/backNavigation'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
@@ -1037,7 +1038,7 @@ export default function Layout() {
                   </span>
                 </div>
                 <div className="space-y-0.5">
-                  {desktopMoreLinks.map((item) => (
+                  {shouldRenderDrawerLinks(openDrop === 'More') && desktopMoreLinks.map((item) => (
                     <NavLink
                       key={item.to}
                       to={item.to}
@@ -1192,7 +1193,7 @@ export default function Layout() {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-2 pb-4">
-            {mobileQuickLinks.map((item) => (
+            {shouldRenderDrawerLinks(mobileOpen) && mobileQuickLinks.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
@@ -1215,7 +1216,7 @@ export default function Layout() {
           <p className="border-t px-3 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
             More categories
           </p>
-          {nav.filter((item) => !('to' in item) || !mobileQuickPaths.has(item.to!)).map((item) =>
+          {shouldRenderDrawerLinks(mobileOpen) && nav.filter((item) => !('to' in item) || !mobileQuickPaths.has(item.to!)).map((item) =>
             'to' in item ? (
               <NavLink
                 key={item.label}

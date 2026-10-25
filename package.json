@@ -36,7 +36,7 @@
     "test:answer-timer": "node --test tests/accurateCountdown.test.ts tests/answerTimerRecovery.test.ts",
     "test:factbook": "node --test tests/factbook.test.ts",
     "test:pagination": "node --test tests/questionPagination.test.ts",
-    "test:navigation": "node --test tests/navigationState.test.ts",
+    "test:navigation": "node --test tests/navigationState.test.ts tests/drawerVisibility.test.ts",
     "test:intelligence": "node --test tests/examIntelligence.test.ts",
     "test:css-2026-result": "node --test tests/css2026Result.test.ts",
     "test:css-eligibility": "node --test tests/cssEligibility.test.ts",
