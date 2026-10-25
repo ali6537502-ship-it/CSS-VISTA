@@ -1,3 +1,5 @@
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
+import { ResourceCover } from '@/features/workspace/Visuals'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 
 import { Archive, ArrowRight, Bookmark, Newspaper, Search, Sparkles } from 'lucide-react'
@@ -17,6 +19,7 @@ const destinations = [
 
 export default function AccountLibrary() {
   const { snapshot } = useAccountSnapshot()
+  const paused = useProReleasePaused()
   const membership = useMembership<Overview>()
   const expired = useMembershipExpired(membership.data?.membership.expires_at)
   const active = membership.data?.membership.status === 'active' && !expired && !membership.error
@@ -36,7 +39,14 @@ export default function AccountLibrary() {
         </Link>
       }
     >
-      <div className="ws-panel mb-6"><h2 className="font-bold text-lg">Your saved study records</h2><div className="flex flex-wrap gap-4 mt-3"><Link className="ws-action" to="/gk/quiz?mode=saved">Saved MCQs</Link><Link className="ws-action" to="/answer-writing">Saved writing</Link><Link className="ws-action" to="/grammar-course?view=saved">Grammar notes & bookmarks</Link><Link className="ws-action" to="/resources">Research bookmarks</Link><Link className="ws-action" to="/account/directory">Find all features & resources</Link></div></div>
+      <div className="ws-section-head"><h2>Your reading room</h2><Link to="/account/directory">Explore all resources <ArrowRight size={15}/></Link></div>
+      <div className="ws-resource-shelf">{[
+        {to:'/gk/quiz?mode=saved',title:'Saved MCQs',kind:'PRACTICE',tone:'blue',detail:'Questions to revisit'},
+        {to:'/answer-writing',title:'Your writing notebook',kind:'WRITING',tone:'peach',detail:'Drafts, outlines & saved answers'},
+        {to:'/grammar-course?view=saved',title:'Grammar notes',kind:'NOTES',tone:'lavender',detail:'Bookmarked rules & reflections'},
+        {to:'/resources',title:'Research bookmarks',kind:'RESEARCH',tone:'mint',detail:'Sources worth keeping'},
+      ].map(item => <Link className="ws-resource-link" key={item.to} to={item.to}><ResourceCover kind={item.kind} tone={item.tone}/><h3>{item.title}</h3><p>{item.detail}</p></Link>)}</div>
+
       <div className="rounded-2xl border border-slate-200 p-5 sm:p-6">
         <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">Saved on this device</p>
         <p className="mt-2 text-3xl font-bold text-slate-950">{snapshot.savedResources}</p>
@@ -51,7 +61,7 @@ export default function AccountLibrary() {
         </section>
       )}
 
-      <section className="mt-12">
+      {!paused && <section className="mt-12">
         <SectionTitle>Open your library</SectionTitle>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {destinations.map(({ to, icon: Icon, title, detail }) => (
@@ -73,7 +83,7 @@ export default function AccountLibrary() {
             </Link>
           ))}
         </div>
-      </section>
+      </section>}
     </AccountPage>
   )
 }

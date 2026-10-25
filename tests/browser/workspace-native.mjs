@@ -1,6 +1,7 @@
 import { chromium } from 'playwright-core'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
+import { mkdirSync } from 'node:fs'
 import { isolateNetwork } from './isolated-network.mjs'
 if(process.env.CI!=='true'||process.env.CSSV_DB_NAME!=='cssvista_briefing_test') throw Error('Disposable database required')
 const base=process.env.CSSV_TEST_BROWSER_ORIGIN||'https://localhost:3444'
@@ -12,6 +13,7 @@ php('tests/current-affairs/setup.php','user',email)
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||'/usr/bin/chromium',headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:390,height:960},reducedMotion:'reduce'})
 await isolateNetwork(context,base)
+mkdirSync('test-artifacts/visual-after',{recursive:true})
 const page=await context.newPage();page.setDefaultTimeout(30000)
 try{
  await page.goto(base+'/account')
@@ -49,6 +51,15 @@ try{
  const other=await second.newPage()
  await other.goto(base+'/account/subjects')
  for(const name of sample)await other.getByRole('heading',{name,exact:true}).waitFor()
+ for (const [route,title] of [['progress','My Performance'],['tasks','My Study Plan'],['library','My Library']]) {
+  await other.goto(base+'/account/'+route);await other.getByRole('heading',{name:title,exact:true}).waitFor();if(route==='tasks')await other.getByText('Your agenda is open',{exact:true}).waitFor();if(route==='progress'){await other.getByText('No recorded MCQ attempts',{exact:true}).first().waitFor();const glyph=await other.getByRole('img',{name:'Recorded MCQ accuracy percentage: no records',exact:true}).locator('span svg').boundingBox();assert.ok(glyph&&glyph.width<=32&&glyph.height<=32,'Empty-state symbol stays within its intended size')}await other.waitForTimeout(250);await other.screenshot({path:`test-artifacts/visual-after/native-${route}-1440.png`,fullPage:true})
+ }
+ await other.goto(base+'/account/settings')
+ await other.getByRole('heading',{name:'Your profile, your learning space',exact:true}).waitFor()
+ await other.screenshot({path:'test-artifacts/visual-after/native-settings-1440.png',fullPage:true})
+ await page.getByRole('tab',{name:'Security',exact:true}).click()
+ await page.getByRole('heading',{name:'Password recovery',exact:true}).waitFor()
+ await page.screenshot({path:'test-artifacts/visual-after/native-settings-security-390.png',fullPage:true})
  await second.close()
  page.on('dialog',dialog=>dialog.accept())
  await page.goto(base+'/answer-timer')

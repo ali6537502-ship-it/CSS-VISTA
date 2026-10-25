@@ -1,3 +1,4 @@
+import { subjectVisual } from '@/features/workspace/Visuals'
 import { targetDays } from '@/features/workspace/model'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
@@ -106,12 +107,12 @@ export function useSyllabusTotal() {
 export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
   const { user, syncStatus } = useAccount()
   return (
-    <main className="min-h-screen bg-white">
+    <main className="ws-account-page min-h-screen bg-white">
       <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <Link to="/account/dashboard" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-800">
           <ArrowLeft className="h-4 w-4" /> My CSS Vista
         </Link>
-        <header className="mt-3 flex flex-wrap items-start justify-between gap-4">
+        <header className="ws-page-heading mt-3 flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{title}</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-500">{intro}</p>
@@ -130,7 +131,7 @@ export function AccountPage({ title, intro, action, children }: { title: string;
         </header>
 
         {syncStatus === 'syncing' && <p role="status" className="ws-muted mt-5">Account progress is syncing. Device records are shown while updates arrive.</p>}
-        <div className="mt-9">{children}</div>
+        <div className="ws-page-body mt-9">{children}</div>
         {/* Signed-in account content. Advertising eligibility is decided by the
             route registry, not by this page. */}
         <div className="mt-12"><AuthenticatedAccountAd /></div>
@@ -145,7 +146,7 @@ export function SectionTitle({ children }: { children: ReactNode }) {
 
 export function Metric({ label, value, detail }: { label: string; value: string | number; detail: string }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+    <div className="ws-metric rounded-2xl border border-slate-200 bg-white p-5">
       <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">{label}</p>
       <p className="mt-2 text-2xl font-bold text-slate-950">{value}</p>
       <p className="mt-1 text-xs leading-5 text-slate-500">{detail}</p>
@@ -154,14 +155,14 @@ export function Metric({ label, value, detail }: { label: string; value: string 
 }
 
 export function EmptyNote({ children }: { children: ReactNode }) {
-  return <p className="rounded-2xl border border-dashed border-slate-200 px-4 py-10 text-center text-sm text-slate-500">{children}</p>
+  return <p className="ws-empty rounded-2xl border border-dashed border-slate-200 px-4 py-10 text-center text-sm text-slate-500">{children}</p>
 }
 
 export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: () => void }) {
   const done = task.status === 'completed'
   const [error, setError] = useState('')
   return (
-    <div className={`flex items-start gap-3 rounded-xl border px-3.5 py-3 ${done ? 'border-emerald-200 bg-emerald-50' : 'border-slate-200 bg-white'}`}>
+    <div data-subject-tone={subjectVisual(task.subject).tone} className={`ws-agenda-task flex items-start gap-3 rounded-xl border px-3.5 py-3 ${done ? 'border-emerald-200 bg-emerald-50' : 'border-slate-200 bg-white'}`}>
       <button
         type="button"
         onClick={() => {
@@ -173,6 +174,7 @@ export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: 
           refresh()
         }}
         className={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border ${done ? 'border-emerald-700 bg-emerald-700 text-white' : 'border-slate-300 text-slate-500 hover:border-emerald-700 hover:text-emerald-800'}`}
+        aria-pressed={done}
         aria-label={done ? `Mark ${task.topic} incomplete` : `Mark ${task.topic} complete`}
       >
         {done ? <Check className="h-4 w-4" /> : <span className="h-2.5 w-2.5 rounded-full border border-current" />}

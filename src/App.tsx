@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Navigate, Routes, Route } from 'react-router'
+import { Navigate, Routes, Route, useLocation } from 'react-router'
 import { ProfileGate } from './components/ProfileGate'
 import Layout from './components/Layout'
 import ProGate, { SelectedStudyGate } from './features/membership/ProGate'
@@ -124,6 +124,8 @@ const ContactCssVista = lazy(() => import('./pages/LegalTrust').then((m) => ({ d
 const EditorialPolicy = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.EditorialPolicy })))
 
 function PageLoader() {
+  const { pathname } = useLocation()
+  if (pathname.startsWith('/account/')) return <div className="ws-loading-layout" role="status" aria-label="Loading your workspace" data-cssv-ad-state="loading"><span className="sr-only">Loading your workspace…</span><div className="ws-loading-feature"><i/><i/><i/></div><div className="ws-loading-companion"><b/><i/><i/></div><div className="ws-loading-agenda"><i/><i/><i/></div></div>
   return (
     <div className="mx-auto max-w-7xl space-y-4 px-4 py-10" aria-label="Loading page" data-cssv-ad-state="loading">
       <div className="h-8 w-1/3 animate-pulse rounded bg-secondary" />

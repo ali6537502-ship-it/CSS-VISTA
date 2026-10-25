@@ -1,3 +1,4 @@
+import PlannerWeek from '@/features/workspace/PlannerWeek'
 import AttemptContinuation from '@/features/preparation/Continuation'
 import { Link } from 'react-router'
 import { ArrowRight, CalendarCheck2, CheckCircle2 } from 'lucide-react'
@@ -19,8 +20,8 @@ export default function AccountTasks() {
         </Link>
       }
     >
-      <div className="ws-panel mb-6"><h2 className="font-bold text-lg">Manage your preparation</h2><div className="flex flex-wrap gap-4 mt-3 text-sm font-semibold"><Link className="min-h-11 inline-flex items-center underline" to="/account/plan">Weekly schedule & settings</Link><Link className="min-h-11 inline-flex items-center underline" to="/fpsc-syllabus">Syllabus planner</Link><Link className="min-h-11 inline-flex items-center underline" to="/checklists">Study goals & checklists</Link><Link className="min-h-11 inline-flex items-center underline" to="/mistakes">Revision notebook</Link></div><p className="ws-muted">Scheduled syllabus tasks appear below. My CSS Attempts keeps your account-linked preparation plans separately.</p></div>
-      <AttemptContinuation />
+      <PlannerWeek />
+      <nav className="ws-plan-toolbar" aria-label="Study plan tools"><Link to="/account/plan">Schedule & settings</Link><Link to="/fpsc-syllabus">Syllabus planner</Link><Link to="/checklists">Study goals</Link><Link to="/mistakes">Revision notebook</Link></nav>
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-slate-200 p-5">
           <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">Planned today</p>
@@ -43,9 +44,10 @@ export default function AccountTasks() {
             ? todayRemaining.map((task) => <TaskItem key={task.id} task={task} refresh={refresh} />)
             : (
               <div className="rounded-2xl border border-dashed border-slate-200 px-4 py-10 text-center">
-                <CheckCircle2 className="mx-auto h-7 w-7 text-emerald-700" />
-                <p className="mt-2 text-sm font-bold text-slate-900">Nothing left for today</p>
-                <p className="mt-1 text-sm text-slate-500">Add more from the planner whenever you are ready.</p>
+                {snapshot.todayTasks.length ? <CheckCircle2 className="mx-auto h-7 w-7 text-emerald-700" /> : <CalendarCheck2 className="mx-auto h-7 w-7 text-emerald-700" />}
+                <p className="mt-2 text-sm font-bold text-slate-900">{snapshot.todayTasks.length ? 'Nothing left for today' : 'Your agenda is open'}</p>
+                <p className="mt-1 text-sm text-slate-500">{snapshot.todayTasks.length ? 'Add more from the planner whenever you are ready.' : 'Choose syllabus topics and plan your first focused session.'}</p>
+                {!snapshot.todayTasks.length && <Link className="ws-action mt-4" to="/account/plan">Create your study plan</Link>}
               </div>
             )}
         </div>
@@ -77,6 +79,8 @@ export default function AccountTasks() {
             : <EmptyNote>Nothing scheduled after today. <Link className="font-semibold text-emerald-800 underline" to="/account/plan">Plan your week</Link>.</EmptyNote>}
         </div>
       </section>
+
+      <div className="mt-10"><AttemptContinuation /></div>
 
       <p className="mt-10 flex items-center gap-2 text-sm text-slate-500">
         <CalendarCheck2 className="h-4 w-4 text-emerald-700" />
