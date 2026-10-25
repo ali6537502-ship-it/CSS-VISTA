@@ -22,7 +22,7 @@ export default function TrustFooter() {
   }
 
   const isAdmin = location.pathname === '/sadiaali' || location.pathname.startsWith('/sadiaali/')
-  const isFocusedStudy = location.pathname === '/gk/quiz'
+  const isFocusedStudy = location.pathname.startsWith('/account/') || location.pathname === '/gk/quiz'
     || location.pathname === '/five-minute'
     || location.pathname.startsWith('/mpt/bank/')
     || location.pathname.startsWith('/notes/view/')

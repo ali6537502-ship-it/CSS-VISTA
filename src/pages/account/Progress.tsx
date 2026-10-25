@@ -1,15 +1,14 @@
+import { SubjectOverview } from './Subjects'
 import AttemptContinuation from '@/features/preparation/Continuation'
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
-import { AccountPage, EmptyNote, Metric, SectionTitle, daysRemaining, formatStudyTime, useAccountSnapshot, useSyllabusTotal } from './shared'
+import { AccountPage, EmptyNote, Metric, SectionTitle, daysRemaining, formatStudyTime, useAccountSnapshot } from './shared'
 
 export default function AccountProgress() {
   const { snapshot } = useAccountSnapshot()
-  const syllabusTotal = useSyllabusTotal()
-  const syllabusPercent = syllabusTotal ? Math.round((snapshot.syllabusCompleted / syllabusTotal) * 100) : 0
   const examDays = daysRemaining(snapshot.state.studyPlanner?.examDate)
-  const examYear = snapshot.state.studyPlanner?.examDate
-    ? new Date(`${snapshot.state.studyPlanner.examDate}T12:00:00`).getFullYear()
+  const examYear = examDays !== null && snapshot.state.studyPlanner?.examDate
+    ? Number(snapshot.state.studyPlanner.examDate.slice(0, 4))
     : null
   const latestMockPct = snapshot.latestMock
     ? Math.round((snapshot.latestMock.score / Math.max(1, snapshot.latestMock.total)) * 100)
@@ -17,7 +16,7 @@ export default function AccountProgress() {
 
   return (
     <AccountPage
-      title="Progress & Mocks"
+      title="My Performance"
       intro="Everything you have measured so far: preparation, practice, revision and recorded mock attempts."
       action={
         <Link to="/exam-intelligence" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-800">
@@ -25,12 +24,13 @@ export default function AccountProgress() {
         </Link>
       }
     >
+      <div className="ws-panel mb-6"><div className="flex flex-wrap gap-4 text-sm font-semibold"><a className="underline min-h-11 inline-flex items-center" href="#attempts">All recorded attempts</a><Link className="underline min-h-11 inline-flex items-center" to="/mistakes">Recorded errors & revision</Link><Link className="underline min-h-11 inline-flex items-center" to="/account/subjects">Selected subject coverage</Link></div></div>
       <AttemptContinuation />
       <SectionTitle>Where you stand</SectionTitle>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Metric label="Target exam" value={examYear ? `CSS ${examYear}` : 'Not set'} detail={examYear ? 'From your planner date' : 'Set an exam date in Planner'} />
         <Metric label="Days remaining" value={examDays ?? '—'} detail={examDays === null ? 'Set your exam date first' : 'Based on your planner date'} />
-        <Metric label="Syllabus progress" value={`${syllabusPercent}%`} detail={`${snapshot.syllabusCompleted} topics completed`} />
+        <Metric label="Syllabus progress" value={snapshot.syllabusCompleted} detail="Manually completed tracked items; not assessed mastery" />
         <Metric label="Study streak" value={`${snapshot.stats.streak}d`} detail={`${snapshot.stats.accuracy}% overall MCQ accuracy`} />
         <Metric label="MCQs attempted" value={snapshot.stats.attempted.toLocaleString()} detail={`${snapshot.stats.accuracy}% accuracy`} />
         <Metric label="Saved resources" value={snapshot.savedResources} detail="Bookmarks and saved answers" />
@@ -64,7 +64,7 @@ export default function AccountProgress() {
             </div>
           )}
           <div className="mt-5 flex flex-wrap gap-2">
-            <Link to="/gk/quiz?mode=mpt-mock" className="inline-flex min-h-11 items-center rounded-lg bg-emerald-900 px-4 text-xs font-bold text-white">CSS MPT Mock</Link>
+            <Link to="/account/practice" className="ws-action">Open available practice</Link>
           </div>
         </div>
       </section>
@@ -72,27 +72,15 @@ export default function AccountProgress() {
       <section className="mt-12">
         <SectionTitle>Subject progress</SectionTitle>
         <div className="mt-4 rounded-2xl border border-slate-200 p-5 sm:p-6">
-          {snapshot.subjectProgress.length
-            ? (
-              <div className="space-y-4">
-                {snapshot.subjectProgress.map(([subject, value]) => (
-                  <div key={subject}>
-                    <div className="mb-1.5 flex items-center justify-between text-xs">
-                      <span className="font-semibold text-slate-700">{subject}</span><span className="text-slate-500">{value}%</span>
-                    </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-                      <span className="block h-full rounded-full bg-emerald-700" style={{ width: `${Math.max(0, Math.min(100, value))}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )
-            : <p className="text-sm text-slate-500">Mark topics in the syllabus to build your subject progress.</p>}
+          <p className="ws-muted mb-5">Manual completion of tracked syllabus items for your current subjects. Reading and assessment scores remain separate.</p>
+          <SubjectOverview compact />
           <Link to="/fpsc-syllabus" className="mt-5 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-emerald-800">
             Open My Syllabus <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
+
+      <section id="attempts" className="ws-panel mt-8"><h2 className="font-bold text-lg">Recorded practice history</h2>{snapshot.state.quizResults.length ? <ul className="divide-y">{snapshot.state.quizResults.map(result => <li key={result.id} className="py-4 text-sm"><strong>{result.category}</strong><p>{result.score} / {result.total} · {new Date(result.date).toLocaleDateString('en-PK')}</p></li>)}</ul> : <p className="ws-muted mt-3">No practice results recorded yet. <Link to="/account/practice" className="underline">Choose a practice tool</Link>.</p>}</section>
 
       <section className="mt-12">
         <SectionTitle>Recent learning</SectionTitle>

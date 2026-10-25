@@ -1,3 +1,4 @@
+import { targetDays } from '@/features/workspace/model'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
@@ -8,7 +9,6 @@ import { getRevisionStats, getStudyAnalytics, recentActivities } from '@/lib/pro
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { AuthenticatedAccountAd } from '@/components/Ads'
-import { ProBadge } from '@/features/membership/AccountSections'
 
 export function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -25,10 +25,8 @@ export function formatStudyTime(seconds: number) {
 }
 
 export function daysRemaining(examDate?: string) {
-  if (!examDate) return null
-  const target = new Date(`${examDate}T12:00:00`)
-  if (Number.isNaN(target.getTime())) return null
-  return Math.max(0, Math.ceil((target.getTime() - Date.now()) / 86_400_000))
+  const days = targetDays(examDate, localTaskDateKey())
+  return days === null || days < 0 ? null : days
 }
 
 /**
@@ -37,6 +35,7 @@ export function daysRemaining(examDate?: string) {
  * app refreshes every one of them.
  */
 export function useAccountSnapshot() {
+  const { user, syncStatus } = useAccount()
   const [version, setVersion] = useState(0)
 
   useEffect(() => {
@@ -47,6 +46,10 @@ export function useAccountSnapshot() {
 
   const snapshot = useMemo(() => {
     void version
+    // Native hydration writes storage without emitting a progress event.
+    // Re-read this presentation snapshot when the account or sync phase changes.
+    void user?.id
+    void syncStatus
     const state = getState()
     const activeTasks = activeStudyTasks(state.studyScheduleTasks ?? [], readTaskArchiveState())
     const due = dueStudyTasks(activeTasks)
@@ -71,7 +74,7 @@ export function useAccountSnapshot() {
       subjectProgress: Object.entries(state.subjectProgress ?? {}).sort((left, right) => right[1] - left[1]).slice(0, 5),
       savedResources: (state.bookmarks?.length ?? 0) + (state.savedAnswers?.length ?? 0),
     }
-  }, [version])
+  }, [version, user?.id, syncStatus])
 
   return { snapshot, refresh: () => setVersion((value) => value + 1) }
 }
@@ -101,7 +104,7 @@ export function useSyllabusTotal() {
  * so moving between them feels like one product rather than four.
  */
 export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
-  const { user } = useAccount()
+  const { user, syncStatus } = useAccount()
   return (
     <main className="min-h-screen bg-white">
       <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
@@ -125,19 +128,8 @@ export function AccountPage({ title, intro, action, children }: { title: string;
             </Link>
           )}
         </header>
-        <nav aria-label="Account" className="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold text-slate-600">
-          <Link to="/account/dashboard?plan=free" className="inline-flex min-h-11 items-center hover:text-pine">Free account</Link>
-          <Link to="/account/dashboard?plan=pro" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Pro account <ProBadge /></Link>
-          <Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link>
-          <Link to="/account/preparation" className="inline-flex min-h-11 items-center hover:text-pine">My Preparation</Link>
-          <Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance <ProBadge /></Link>
-          <Link to="/account/general-ability" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">General Ability <ProBadge /></Link>
-          <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Ask VISTA <ProBadge /></Link>
-          <Link to="/account/essay-builder" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Essay Builder <ProBadge /></Link>
-          <Link to="/account/argumentation" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Argumentation <ProBadge /></Link>
-          <Link to="/account/analytical-skills" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Analysis <ProBadge /></Link>
-          <Link to="/account/ai-usage" className="inline-flex min-h-11 items-center hover:text-pine">AI Usage</Link>
-        </nav>
+
+        {syncStatus === 'syncing' && <p role="status" className="ws-muted mt-5">Account progress is syncing. Device records are shown while updates arrive.</p>}
         <div className="mt-9">{children}</div>
         {/* Signed-in account content. Advertising eligibility is decided by the
             route registry, not by this page. */}
@@ -167,12 +159,17 @@ export function EmptyNote({ children }: { children: ReactNode }) {
 
 export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: () => void }) {
   const done = task.status === 'completed'
+  const [error, setError] = useState('')
   return (
     <div className={`flex items-start gap-3 rounded-xl border px-3.5 py-3 ${done ? 'border-emerald-200 bg-emerald-50' : 'border-slate-200 bg-white'}`}>
       <button
         type="button"
         onClick={() => {
-          updateStudyScheduleTask(task.id, { status: done ? 'in-progress' : 'completed' })
+          const status = done ? 'in-progress' : 'completed'
+          const current = getState().studyScheduleTasks.find(t => t.id === task.id)
+          if (current?.status === status) return
+          updateStudyScheduleTask(task.id, { status })
+          setError(getState().studyScheduleTasks.find(t => t.id === task.id)?.status === status ? '' : 'Task could not be saved on this device. Try again.')
           refresh()
         }}
         className={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border ${done ? 'border-emerald-700 bg-emerald-700 text-white' : 'border-slate-300 text-slate-500 hover:border-emerald-700 hover:text-emerald-800'}`}
@@ -185,8 +182,9 @@ export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: 
         <div className="mt-1 flex flex-wrap gap-2 text-[11px] text-slate-500">
           <span>{task.subject}</span>
           {task.time && <span>{task.time}</span>}
-          <span>{formatMinutes(task.minutes)}</span>
+          <span>{formatMinutes(task.minutes)} estimated</span>
         </div>
+        {error && <p role="alert" className="text-sm text-red-800 mt-2">{error}</p>}
       </div>
     </div>
   )

@@ -28,7 +28,7 @@ try {
   for (const width of [320,390,768,1440]) {
     await page.setViewportSize({width,height:1000})
     await page.goto(base+'/account/dashboard?plan=pro')
-    await page.getByRole('heading',{name:'Free features',exact:true}).waitFor()
+    await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
     assert.equal(await page.getByRole('link',{name:'Pro account',exact:true}).count(),0)
     const links=await page.locator('a[href]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')))
     assert.deepEqual(links.filter(isProDestination),[],'Visible paused Pro links in account navigation')

@@ -11,14 +11,15 @@ export default function AccountTasks() {
 
   return (
     <AccountPage
-      title="Today’s Plan"
+      title="My Study Plan"
       intro="What you set out to study today, and anything still waiting from earlier."
       action={
-        <Link to="/study-planner" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-800">
+        <Link to="/account/plan" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-800">
           Open Planner <ArrowRight className="h-4 w-4" />
         </Link>
       }
     >
+      <div className="ws-panel mb-6"><h2 className="font-bold text-lg">Manage your preparation</h2><div className="flex flex-wrap gap-4 mt-3 text-sm font-semibold"><Link className="min-h-11 inline-flex items-center underline" to="/account/plan">Weekly schedule & settings</Link><Link className="min-h-11 inline-flex items-center underline" to="/fpsc-syllabus">Syllabus planner</Link><Link className="min-h-11 inline-flex items-center underline" to="/checklists">Study goals & checklists</Link><Link className="min-h-11 inline-flex items-center underline" to="/mistakes">Revision notebook</Link></div><p className="ws-muted">Scheduled syllabus tasks appear below. My CSS Attempts keeps your account-linked preparation plans separately.</p></div>
       <AttemptContinuation />
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-slate-200 p-5">
@@ -73,7 +74,7 @@ export default function AccountTasks() {
         <div className="mt-4 space-y-2.5">
           {upcoming.length
             ? upcoming.slice(0, 8).map((task) => <TaskItem key={task.id} task={task} refresh={refresh} />)
-            : <EmptyNote>Nothing scheduled after today. <Link className="font-semibold text-emerald-800 underline" to="/study-planner">Plan your week</Link>.</EmptyNote>}
+            : <EmptyNote>Nothing scheduled after today. <Link className="font-semibold text-emerald-800 underline" to="/account/plan">Plan your week</Link>.</EmptyNote>}
         </div>
       </section>
 

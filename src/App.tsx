@@ -72,6 +72,10 @@ const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
+const AccountSubjects = lazy(() => import('./pages/account/Subjects'))
+const AccountPractice = lazy(() => import('./pages/account/WorkspaceSections').then(m => ({ default:m.Practice })))
+const AccountDirectory = lazy(() => import('./pages/account/WorkspaceSections').then(m => ({ default:m.Directory })))
+const AccountMore = lazy(() => import('./pages/account/WorkspaceSections').then(m => ({ default:m.More })))
 const AccountHome = lazy(() => import('./pages/AccountHome'))
 const AccountTasks = lazy(() => import('./pages/account/Tasks'))
 const AccountProgress = lazy(() => import('./pages/account/Progress'))
@@ -218,6 +222,11 @@ export default function App() {
             its own focused page, so a bookmark or a refresh lands where the
             student expects. */}
         <Route path="/account/dashboard" element={<ProfileGate><S><AccountHome /></S></ProfileGate>} />
+        <Route path="/account/subjects" element={<ProfileGate><S><AccountSubjects /></S></ProfileGate>} />
+        <Route path="/account/practice" element={<ProfileGate><S><AccountPractice /></S></ProfileGate>} />
+        <Route path="/account/directory" element={<ProfileGate><S><AccountDirectory /></S></ProfileGate>} />
+        <Route path="/account/more" element={<ProfileGate><S><AccountMore /></S></ProfileGate>} />
+        <Route path="/account/plan" element={<ProfileGate><S><StudyPlanner /></S></ProfileGate>} />
         <Route path="/account/tasks" element={<ProfileGate><S><AccountTasks /></S></ProfileGate>} />
         <Route path="/account/progress" element={<ProfileGate><S><AccountProgress /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />

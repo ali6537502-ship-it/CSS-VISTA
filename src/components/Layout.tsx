@@ -1,5 +1,7 @@
 import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { isProDestination } from '@/features/membership/proDestinations'
+import StudentWorkspace from '@/features/workspace/StudentWorkspace'
+import { ProfileGate } from '@/components/ProfileGate'
 import { ProReleaseOutlet } from '@/features/membership/ProRelease'
 import { AvailableStudyLink as Link, AvailableStudyNavLink as NavLink } from '@/features/membership/ProRelease'
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -974,6 +976,10 @@ export default function Layout() {
     navigate(fallbackRoute(location.pathname), { replace: true })
   }
 
+  if (location.pathname.startsWith('/account/') && !MPT_FOCUS_PATH.test(location.pathname)) {
+    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></ProfileGate></>
+  }
+
   return (
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">
       <RouteSeo />
@@ -1153,7 +1159,7 @@ export default function Layout() {
             </section>
           </div>
         )}
-        <BackBar onBack={goBack} />
+        <BackBar onBack={goBack} />{user && <Link to="/account/dashboard" className="block px-4 py-2 text-sm font-semibold text-emerald-900">Return to my preparation workspace</Link>}
       </header>
 
       {shouldShowCss2026ResultAnnouncement(location.pathname) && <Css2026ResultAnnouncement />}

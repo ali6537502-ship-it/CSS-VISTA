@@ -1,3 +1,6 @@
+import { targetDays } from '@/features/workspace/model'
+import { optionalGroups } from '@/data/syllabus'
+import { validateSubjectCombination } from '@/lib/subjectSelection'
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
@@ -18,7 +21,6 @@ import FpscSyllabusPlanner from '@/components/FpscSyllabusPlanner'
 
 export default function StudyPlanner() {
   const initial = getState()
-  const [openedAt] = useState(() => Date.now())
   const stored = initial.studyPlanner
   const hasSavedSchedule = (initial.studyScheduleTasks ?? []).length > 0
   const [settings, setSettings] = useState<Omit<StudyPlannerSettings, 'configuredAt'>>(
@@ -29,7 +31,7 @@ export default function StudyPlanner() {
           restDay: stored.restDay,
           selectedOptionals: stored.selectedOptionals,
         }
-      : defaultStudyPlannerSettings(),
+      : { ...defaultStudyPlannerSettings(), examDate: '' },
   )
   const [savedSettings, setSavedSettings] = useState(stored)
   const [completed, setCompleted] = useState<string[]>(
@@ -44,11 +46,15 @@ export default function StudyPlanner() {
     [revisionStats.due, settings, today],
   )
   const completedCount = tasks.filter((task) => completed.includes(task.id)).length
-  const examTime = new Date(`${settings.examDate}T00:00:00+05:00`).getTime()
-  const examDatePassed = Number.isFinite(examTime) && examTime < openedAt
-  const daysLeft = Math.max(0, Math.ceil((examTime - openedAt) / 86400000))
+  const daysLeft = targetDays(settings.examDate, today)
+  const examDatePassed = daysLeft !== null && daysLeft < 0
 
+  const recognized = optionalGroups.flatMap(g => g.subjects).filter(s => settings.selectedOptionals.includes(s.name))
+  const validation = validateSubjectCombination(recognized)
+  const unknown = settings.selectedOptionals.filter(name => !recognized.some(s => s.name === name))
+  const optionalErrors = [...validation.violations, ...unknown.map(name => `Unrecognized saved subject: ${name}`)]
   function saveSettings() {
+    if (optionalErrors.length || daysLeft === null) return
     saveStudyPlanner(settings)
     setSavedSettings(getState().studyPlanner)
   }
@@ -73,7 +79,7 @@ export default function StudyPlanner() {
               <input
                 type="date"
                 value={settings.examDate}
-                min={new Date().toISOString().slice(0, 10)}
+                min={localDateKey()}
                 onChange={(event) => setSettings((current) => ({ ...current, examDate: event.target.value }))}
                 className="mt-1.5 h-10 w-full rounded-md border px-3 font-normal text-foreground"
               />
@@ -110,6 +116,7 @@ export default function StudyPlanner() {
 
           <div className="mt-5">
             <p className="text-sm font-semibold text-pine">Your optional subjects</p>
+            {unknown.map(name => <div key={name} className="flex flex-wrap items-center gap-2 text-sm text-red-800"><span>Unrecognized saved subject: {name}</span><button type="button" className="min-h-11 underline" onClick={() => setSettings(current => ({...current,selectedOptionals:current.selectedOptionals.filter(value => value !== name)}))}>Remove from this selection</button></div>)}
             <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {allOptionalSubjects.map((subject) => {
                 const selected = settings.selectedOptionals.includes(subject)
@@ -139,8 +146,11 @@ export default function StudyPlanner() {
           </div>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
+            {daysLeft === null && <p className="w-full text-sm text-slate-600">Choose a valid target date before saving your schedule settings.</p>}
+            {optionalErrors.length > 0 && <p role="alert" className="w-full text-sm text-red-800">{optionalErrors.join('. ')}. Existing records are retained; choose a valid combination before saving.</p>}
             <button
               type="button"
+              disabled={optionalErrors.length > 0 || daysLeft === null}
               onClick={saveSettings}
               className="inline-flex h-10 items-center gap-2 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"
             >
@@ -184,8 +194,8 @@ export default function StudyPlanner() {
         <section className="grid gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-slate-200 bg-white p-4">
             <div className="flex items-center gap-2 text-slate-600"><CalendarCheck2 className="h-4 w-4 text-emerald-800" /><span className="text-[10px] font-extrabold uppercase tracking-wide">Exam countdown</span></div>
-            <p className="mt-2 text-2xl font-bold text-pine">{examDatePassed ? '--' : daysLeft}</p>
-            <p className="text-xs text-muted-foreground">{examDatePassed ? 'Set a new exam date in Plan management.' : 'days to your selected examination date'}</p>
+            <p className="mt-2 text-2xl font-bold text-pine">{examDatePassed ? '--' : daysLeft ?? 'Not set'}</p>
+            <p className="text-xs text-muted-foreground">{daysLeft === null ? 'Choose your own target date in Plan management.' : examDatePassed ? 'Set a new exam date in Plan management.' : 'days to your selected examination date'}</p>
           </div>
           <div className="rounded-xl border border-slate-200 bg-white p-4">
             <div className="flex items-center gap-2 text-slate-600"><RotateCcw className="h-4 w-4 text-emerald-800" /><span className="text-[10px] font-extrabold uppercase tracking-wide">Smart revision</span></div>

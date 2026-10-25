@@ -36,6 +36,7 @@ export default function AccountLibrary() {
         </Link>
       }
     >
+      <div className="ws-panel mb-6"><h2 className="font-bold text-lg">Your saved study records</h2><div className="flex flex-wrap gap-4 mt-3"><Link className="ws-action" to="/gk/quiz?mode=saved">Saved MCQs</Link><Link className="ws-action" to="/answer-writing">Saved writing</Link><Link className="ws-action" to="/grammar-course?view=saved">Grammar notes & bookmarks</Link><Link className="ws-action" to="/resources">Research bookmarks</Link><Link className="ws-action" to="/account/directory">Find all features & resources</Link></div></div>
       <div className="rounded-2xl border border-slate-200 p-5 sm:p-6">
         <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">Saved on this device</p>
         <p className="mt-2 text-3xl font-bold text-slate-950">{snapshot.savedResources}</p>
