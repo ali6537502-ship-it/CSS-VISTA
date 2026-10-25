@@ -36,6 +36,7 @@ ErrorDocument 404 /404.html
 # as literal public files. These rules run before application routing so search
 # engines always receive the requested resource instead of an HTML shell.
 <IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
   AddType text/plain .txt
   AddType application/xml .xml
   AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document .docx

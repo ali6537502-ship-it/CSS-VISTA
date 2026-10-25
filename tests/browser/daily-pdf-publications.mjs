@@ -84,7 +84,7 @@ try {
         },
       });
     });
-    await page.goto("http://localhost:5173/current-affairs-daily");
+    await page.goto((process.env.CSSV_DAILY_BROWSER_ORIGIN || "http://localhost:5173") + "/current-affairs-daily");
     await page.locator(".dp-card").first().waitFor();
     assert.equal(await page.locator(".dp-card").count(), 7);
     await page.locator(".dp-feature img").evaluate((img) => img.decode());

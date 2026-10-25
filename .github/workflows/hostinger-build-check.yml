@@ -74,6 +74,7 @@ jobs:
           browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
           CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/daily-pdf.mjs
           CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/daily-pdf-publications.mjs
+          CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/daily-pdf-production.mjs
 
       - name: Verify public rendering, tools and advertising state in Chromium
         shell: bash

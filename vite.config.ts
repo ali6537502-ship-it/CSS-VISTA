@@ -35,5 +35,14 @@ export default defineConfig({
   build: {
     outDir: process.env.CSSV_BUILD_TARGET === 'sites' ? 'dist/client' : 'dist',
     copyPublicDir: false,
+    rollupOptions: {
+      output: {
+        // Hostinger serves raw .mjs assets as text/plain. Emit module assets as
+        // .js so browsers accept PDF workers and cached broken URLs are replaced.
+        assetFileNames: asset => asset.names.some(name => name.endsWith('.mjs'))
+          ? 'assets/[name]-[hash].js'
+          : 'assets/[name]-[hash][extname]',
+      },
+    },
   },
 });
