@@ -87,6 +87,8 @@ if (target === 'hostinger') {
   await import('./apply-adsense-html-policy.mjs')
   await import('./split-sitemap-index.mjs')
   run('scripts/package-current-affairs.mjs')
+  run('scripts/daily-pdf/package.mjs')
+  run('scripts/daily-pdf/routes.mjs')
   run('scripts/write-deployment-fingerprint.mjs')
   await import('./audit-hostinger-build-v2.mjs')
   // Production-integrity gates. These fail the normal build.

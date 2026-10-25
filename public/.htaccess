@@ -123,6 +123,7 @@ ErrorDocument 404 /404.html
 
   # Preserve publisher Authorization on PHP/FastCGI deployments.
   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  RewriteRule ^api/(?:_daily_release(?:/|$)|_daily_pdf\.php$) - [F,L,NC]
   RewriteRule ^api/(?:_premium[^/]*\.php|_premium_files(?:/|$)) - [F,L,NC]
   # Protected PHP release payloads and helpers can only be included server-side.
   RewriteRule ^api/(?:_skills[^/]*\.php(?:/|$)|_ability[^/]*\.php$|_topics[^/]*\.php$|_planner[^/]*\.php$|_tutor[^/]*\.php$|_mentor[^/]*\.php$|_precis[^/]*\.php$|_grammar[^/]*\.php$|_briefing_release(?:/|$)|_current_affairs[^/]*\.php$|_mpt|_resource_files(?:/|$)|_resources\.php$) - [F,L,NC]

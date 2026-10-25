@@ -1,0 +1,54 @@
+name: Daily PDF publication verification
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  publishing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: cssvista_briefing_test
+          MYSQL_ROOT_PASSWORD: test-only-password
+        ports: ['3306:3306']
+        options: --health-cmd="mysqladmin ping -h localhost -ptest-only-password" --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      CI: 'true'
+      CSSV_DB_HOST: 127.0.0.1
+      CSSV_DB_NAME: cssvista_briefing_test
+      CSSV_DB_USER: root
+      CSSV_DB_PASSWORD: test-only-password
+      CSSV_APP_SECRET: isolated-test-secret-not-a-production-credential
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, mbstring, fileinfo
+          ini-values: upload_max_filesize=25M, post_max_size=30M
+      - run: sudo apt-get update && sudo apt-get install -y qpdf
+      - run: npm ci --no-audit --no-fund
+      - run: npm run test:daily-pdf && npm run validate:daily-pdf
+      - name: Prepare isolated owner session and durable test storage
+        run: |
+          mkdir -p test-artifacts "$RUNNER_TEMP/daily-pdf"
+          echo "CSSV_PRIVATE_STORAGE_DIR=$RUNNER_TEMP/daily-pdf" >> "$GITHUB_ENV"
+          php tests/current-affairs/setup.php
+          php -l public/api/_daily_pdf.php
+          php -l public/api/daily-pdf.php
+          php -l public/api/admin/daily-pdf.php
+      - name: Test authenticated upload, delivery and both catalogue sources
+        run: |
+          php -S 127.0.0.1:4174 -t public > test-artifacts/daily-pdf-server.log 2>&1 &
+          node -e "const run=async()=>{for(let i=0;i<30;i++){try{await fetch('http://127.0.0.1:4174/api/daily-pdf.php');return}catch{}await new Promise(r=>setTimeout(r,300))}process.exit(1)};run()"
+          node tests/daily-pdf/integration.mjs

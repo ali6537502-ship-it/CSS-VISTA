@@ -1,11 +1,10 @@
-import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
-  CheckCircle2, ClipboardCheck, Download, FileText, Globe2, LibraryBig,
-  Newspaper, NotebookPen, PlayCircle, Printer, Search, Eye, EyeOff,
+  CheckCircle2, ClipboardCheck, FileText, Globe2, LibraryBig,
+  NotebookPen, PlayCircle, Search, Eye, EyeOff,
   TimerReset, UserPlus, type LucideIcon,
 } from 'lucide-react'
 import { getState, getStats } from '@/lib/store'
@@ -15,7 +14,7 @@ import { cardIcons } from '@/data/homeCardIcons'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
-import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
+import { DailyWidget } from '@/features/daily-pdf/Library'
 import { useAccount } from '@/lib/accountContext'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
@@ -117,9 +116,6 @@ function openSearch() {
   window.dispatchEvent(new Event('cssvista:open-search'))
 }
 
-function printMagazinePdf(pdfUrl: string) {
-  void import('@/components/PrintMenu').then(({ printPdfFile }) => printPdfFile(pdfUrl))
-}
 
 function HomeHero() {
   const { user } = useAccount()
@@ -289,82 +285,6 @@ function AnimatedCollapse({ open, children }: { open: boolean; children: ReactNo
   )
 }
 
-function WeeklyMagazineCard() {
-  const available = Boolean(weeklyMagazine.pdfUrl)
-
-  return (
-    <section className="cssv-reveal mt-6" aria-labelledby="weekly-magazine-title">
-      <SectionHeading title="Weekly Current Affairs Magazine" eyebrow="Read · revise · retain" />
-      <article className="cssv-glass-panel relative overflow-hidden rounded-2xl border">
-        <div className="grid gap-0 min-[360px]:grid-cols-[minmax(0,1fr)_118px] sm:grid-cols-[minmax(0,1fr)_190px] lg:grid-cols-[minmax(0,1fr)_210px]">
-          <div className="min-w-0 p-3.5 pr-2 sm:p-5">
-            <div className="flex items-start gap-3">
-              <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800">
-                <Newspaper className="h-5 w-5" />
-              </span>
-              <div className="min-w-0">
-                <p className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">{weeklyMagazine.issue}</p>
-                <h3 id="weekly-magazine-title" className="mt-0.5 text-[16px] font-bold tracking-[-0.02em] text-slate-900">{weeklyMagazine.title}</h3>
-                <p className="mt-1 max-w-2xl text-[11px] leading-relaxed text-slate-500 sm:text-xs">{weeklyMagazine.description}</p>
-                {weeklyMagazine.pageCount && <span className="mt-1.5 inline-flex rounded-full bg-emerald-50 px-2 py-0.5 text-[8px] font-bold text-emerald-800">{weeklyMagazine.pageCount} pages · Free issue</span>}
-              </div>
-            </div>
-            <ul className="mt-3 hidden gap-1.5 text-[10px] text-slate-600 min-[390px]:grid sm:grid-cols-3">
-              {weeklyMagazine.coverage.map((item) => (
-                <li key={item} className="flex items-start gap-1.5"><span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />{item}</li>
-              ))}
-            </ul>
-            <div className="no-print mt-4 flex flex-wrap gap-2">
-              {available && weeklyMagazine.pdfUrl ? (
-                <a href={weeklyMagazine.pdfUrl} download className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg bg-emerald-900 px-3 text-[10px] font-bold text-white">
-                  <Download className="h-3.5 w-3.5" /> Free PDF download
-                </a>
-              ) : (
-                <button type="button" disabled className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-slate-100 px-3 text-[10px] font-bold text-slate-400">
-                  <Download className="h-3.5 w-3.5" /> Free PDF · Coming soon
-                </button>
-              )}
-              {available && weeklyMagazine.pdfUrl && <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-bold text-emerald-900"><Eye className="h-3.5 w-3.5" /> View</a>}
-              <button
-                type="button"
-                disabled={!available || !weeklyMagazine.pdfUrl}
-                onClick={() => weeklyMagazine.pdfUrl && printMagazinePdf(weeklyMagazine.pdfUrl)}
-                className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-bold text-emerald-900 disabled:cursor-not-allowed disabled:text-slate-400"
-              >
-                <Printer className="h-3.5 w-3.5" /> Print magazine
-              </button>
-            </div>
-            <details className="no-print mt-3 rounded-lg border bg-white/70 p-2.5">
-              <summary className="cursor-pointer text-[10px] font-bold text-emerald-900">Past weeks magazine archive</summary>
-              <div className="mt-2 space-y-2">{weeklyMagazines.map((issue) => <div key={issue.issue} className="flex flex-wrap items-center gap-2 rounded-md bg-secondary/50 p-2 text-[10px]"><time className="mr-auto font-bold text-slate-700" dateTime={issue.publishedDate}>{new Date(`${issue.publishedDate}T12:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</time>{issue.pdfUrl && <><a href={issue.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">View</a><a href={issue.pdfUrl} download className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Download</a><button type="button" onClick={() => issue.pdfUrl && printMagazinePdf(issue.pdfUrl)} className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Print</button></>}</div>)}</div>
-            </details>
-          </div>
-          <div className="relative min-h-[168px] overflow-hidden bg-emerald-950 p-2.5 min-[360px]:min-h-0 sm:min-h-[230px] sm:p-4">
-            <span className="absolute -right-12 -top-12 h-36 w-36 rounded-full border border-amber-300/25" aria-hidden="true" />
-            <span className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-emerald-700/35" aria-hidden="true" />
-            {available && weeklyMagazine.pdfUrl && weeklyMagazine.coverUrl ? (
-              <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[146px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl min-[360px]:min-h-[176px] sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
-                <img
-                  src={weeklyMagazine.coverUrl}
-                  srcSet={weeklyMagazine.coverUrl.includes('03-september-2026') ? '/magazines/css-vista-current-affairs-weekly-03-september-2026-240.webp 240w, /magazines/css-vista-current-affairs-weekly-03-september-2026-320.webp 320w, /magazines/css-vista-current-affairs-weekly-03-september-2026-480.webp 480w, /magazines/css-vista-current-affairs-weekly-03-september-2026.webp 900w' : undefined}
-                  sizes="(max-width: 639px) 24vw, (max-width: 1023px) 34vw, 320px"
-                  alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`}
-                  width="900"
-                  height="1273"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-auto max-h-[168px] w-full object-contain object-center min-[360px]:max-h-[210px] sm:max-h-full"
-                />
-              </a>
-            ) : (
-              <span className="relative grid h-full place-items-center rounded-lg border border-white/15 bg-white/10 text-[9px] font-black uppercase tracking-[0.18em] text-white">Weekly briefing</span>
-            )}
-          </div>
-        </div>
-      </article>
-    </section>
-  )
-}
 
 function getContinueProgress(activity: Activity | undefined, stats: ReturnType<typeof getStats>, state: ReturnType<typeof getState>) {
   if (!activity) return 0
@@ -374,7 +294,6 @@ function getContinueProgress(activity: Activity | undefined, stats: ReturnType<t
 }
 
 export default function Home() {
-  const proPaused = useProReleasePaused()
   const location = useLocation()
   const { user } = useAccount()
   const [showContinueStudy, setShowContinueStudy] = useState(true)
@@ -479,7 +398,7 @@ export default function Home() {
 
         <MptMockStrip className="mt-3" />
 
-        {!proPaused && <WeeklyMagazineCard />}
+        <DailyWidget />
 
         <Suspense fallback={null}><VistagramHomePreview /></Suspense>
 

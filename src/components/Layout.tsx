@@ -45,7 +45,8 @@ const nav = [
   { label: 'Books by Sir Ali', to: '/books' },
   { label: 'VISTA Journal', to: '/journal' },
   { label: 'Vistagram', to: '/vistagram' },
-  { label: 'Current Affairs Daily', to: '/daily-briefing' },
+  { label: 'Current Affairs Daily', to: '/current-affairs-daily' },
+  { label: 'Daily Briefing', to: '/daily-briefing' },
   {
     label: 'Subjects',
     items: [
@@ -133,6 +134,7 @@ const nav = [
 const primaryNav = [
   { label: 'Home', to: '/', icon: HomeIcon },
   { label: 'Vistagram', to: '/vistagram', icon: Sparkles },
+  { label: 'Current Affairs Daily', to: '/current-affairs-daily', icon: Newspaper },
   { label: 'Subject MCQs', to: '/css-mcqs', icon: ClipboardList },
   { label: 'GK World', to: '/gk', icon: Globe2 },
   ...(!MPT_HIBERNATED ? [{ label: 'MPT Practice', to: '/mpt', icon: PenLine }] : []),
@@ -150,6 +152,7 @@ const mobileBottomNav = [
 const mobileQuickLinks = [
   { label: 'Home', to: '/', icon: HomeIcon },
   { label: 'Vistagram', to: '/vistagram', icon: Sparkles },
+  { label: 'Current Affairs Daily', to: '/current-affairs-daily', icon: Newspaper },
   ...sortHomeCardsByPriority(defaultHomeCards.filter((item) => item.visible && !(MPT_HIBERNATED && (item.to.startsWith('/mpt') || item.id === 'mpt-grand-mock'))))
     .map((item) => ({
       label: item.title,
