@@ -51,9 +51,8 @@ for (let attempt = 1; attempt <= 18; attempt++) {
 }
 assert.ok(ready, 'Hostinger has not exposed the authenticated briefing endpoint for the exact deployed SHA. Check deployment and private database configuration.')
 const health = await (await get('/api/health.php')).json()
-assert.equal(health.database?.reachable, true, 'Production database is not reachable')
-assert.equal(health.database?.schema_ready, true, 'Existing account schema is not ready')
-assert.equal(health.configured?.native_accounts, true, 'Native Hostinger accounts are not deployed')
+assert.deepEqual(health, { ok: true }, 'Public health must expose only runtime liveness')
+assert.equal((await get('/api/admin/health.php')).status, 401, 'Detailed diagnostics must require the MFA admin session')
 for (const path of ['/daily-briefing','/account','/account/dashboard','/account/current-affairs','/account/current-affairs/archive','/account/factbook','/account/saved','/account/search','/account/settings']) {
   const response = await get(path)
   const html = await response.text()
@@ -74,4 +73,4 @@ for (const path of ['/api/_briefing_release/catalog.php','/api/_current_affairs.
   assert.equal(response.status, 200, '/api/mpt/flow.php must be reachable on Hostinger')
   assert.equal(typeof (await response.json()).enabled, 'boolean', '/api/mpt/flow.php must return the flag')
 }
-console.log(`PASS: exact deployment fingerprint ${expectedSha}, production routes, anonymous content protection, private response caching and backend readiness. Authenticated Current Affairs visibility must still be verified by the publishing workflow with an authorized account.`)
+console.log(`PASS: exact deployment fingerprint ${expectedSha}, production routes, anonymous content protection, private response caching and public backend liveness. Authenticated Current Affairs visibility must still be verified by the publishing workflow with an authorized account.`)

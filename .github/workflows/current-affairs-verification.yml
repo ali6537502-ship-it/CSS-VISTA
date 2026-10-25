@@ -78,6 +78,12 @@ jobs:
         run: |
           php -d "sendmail_path=php $GITHUB_WORKSPACE/tests/account-native/mail-capture.php" -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/php-service.log 2>&1 &
           node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+      - name: Verify private operational diagnostics
+        run: |
+          php -l public/api/_health.php
+          php -l public/api/health.php
+          php -l public/api/admin/health.php
+          node tests/security/health.mjs
       - name: Verify native PHP accounts, ownership and publishing
         run: |
           php tests/resource-access.php

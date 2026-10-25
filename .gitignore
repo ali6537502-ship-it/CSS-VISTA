@@ -7,3 +7,21 @@ test-artifacts/
 __pycache__/
 *.pyc
 dist-ssr
+
+# Runtime credentials and private deployment material.
+.env
+.env.*
+!.env.example
+!.env.hostinger.example
+**/config.php
+cssv-private/
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+*.db
+*.bak
+*.backup
+*.sql.gz
