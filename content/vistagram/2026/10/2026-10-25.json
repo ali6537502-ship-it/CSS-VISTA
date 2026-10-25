@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "profile": "daily-six",
+  "date": "2026-10-25",
+  "published_at": "2026-10-25T12:01:53+05:00",
+  "edition": "CSS Vistagram Daily Six — 25 October 2026",
+  "editorial_safety": {
+    "neutral_factual": true,
+    "non_partisan": true,
+    "no_personal_attacks": true,
+    "respectful_of_state_and_religion": true,
+    "no_defamation_or_inflammatory_framing": true
+  },
+  "posts": [
+    {
+      "id": "pakistan-national-assembly-standing-committees-oversight",
+      "slug": "pakistan-national-assembly-standing-committees-oversight",
+      "dedupeKey": "pakistan-national-assembly-standing-committees-oversight",
+      "scope": "Pakistan",
+      "title": "Pakistan's Parliamentary Committees: How Legislative Oversight Works",
+      "excerpt": "An examination-focused guide to the National Assembly's standing committees, scrutiny of bills and ministerial accountability beyond plenary debates.",
+      "type": "Explainer",
+      "category": "Constitutional Law",
+      "topic": "Constitutional Structures — Parliamentary Government and Pakistan's 1973 Constitution",
+      "tags": [
+        "Constitutional Law",
+        "Pakistan",
+        "National Assembly",
+        "Standing Committees",
+        "Parliamentary Oversight",
+        "Legislation"
+      ],
+      "sections": [
+        {
+          "heading": "Why committees matter in a parliamentary system",
+          "paragraphs": [
+            "Parliament does not examine every public issue only through speeches in its main chamber. Much of its detailed work is delegated to smaller committees that can study documents, question officials and report findings to the House. In Pakistan, the National Assembly has standing committees associated with government ministries, alongside committees serving other parliamentary functions. Rule 198 of the Assembly's Rules of Procedure provides the framework for ministry-related standing committees. The important constitutional idea is that elected representatives must be able to scrutinize executive activity, not merely vote on legislation. Committee work is therefore a practical bridge between the principle of responsible government and the day-to-day administration of public programmes."
+          ]
+        },
+        {
+          "heading": "Scrutiny of bills and the limits of committee authority",
+          "paragraphs": [
+            "A bill referred to a standing committee can be examined clause by clause, allowing members to consider its purpose, language and administrative implications. Committees may suggest amendments and report their recommendations to the Assembly. The rules also allow the House to proceed in specified circumstances when a committee report is not presented in time. This distinction matters: a committee helps the legislature investigate and deliberate, but it is not a separate lawmaking chamber with a general veto over bills. The final legislative decision remains subject to the applicable parliamentary and constitutional procedures. For an analytical answer, distinguish referral, scrutiny, reporting and final passage rather than treating them as interchangeable stages."
+          ]
+        },
+        {
+          "heading": "Monitoring ministries, spending and public concerns",
+          "paragraphs": [
+            "The National Assembly's committee rules permit standing committees to examine the expenditure, administration, delegated legislation, public petitions and policies of the ministries and associated public bodies within their remit. Committees can communicate findings and recommendations and seek responses from the relevant ministry. These powers create opportunities to test whether a programme is being implemented as intended, whether subordinate rules remain consistent with legislative objectives and whether public concerns deserve further examination. The Public Accounts Committee has a more specialised financial accountability role, including examination of public accounts and reports of the Auditor-General. Committee scrutiny should not be confused with direct executive management: ministries administer programmes, while parliamentary bodies question and evaluate them."
+          ]
+        },
+        {
+          "heading": "How to assess effectiveness without partisanship",
+          "paragraphs": [
+            "The existence of committees does not by itself demonstrate effective oversight. A careful assessment would ask whether committees receive timely records, have adequate research support, hold substantive hearings, publish useful reports and secure reasoned responses to their recommendations. Attendance, cross-party cooperation and follow-up are relevant institutional considerations, but a single meeting or headline cannot establish overall performance. The United States Library of Congress's comparative account describes Pakistan's standing committees as instruments of legislative monitoring, while the National Assembly's own rules explain their formal powers. A strong CSS answer should connect constitutional accountability with these procedural mechanisms and separate what the rules authorise from what any particular committee has achieved in practice."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Constitutional Law: parliamentary structures, responsible government and the constitutional framework of Pakistan.",
+        "Distinguish legislative scrutiny, executive administration and audit-based financial accountability."
+      ],
+      "sources": [
+        {
+          "label": "National Assembly — Rules Relating to Committees",
+          "url": "https://na.gov.pk/pac/?q=rules-relating-committees"
+        },
+        {
+          "label": "National Assembly — Official Rules and Constitutional Downloads",
+          "url": "https://na.gov.pk/en/downloads.php"
+        },
+        {
+          "label": "Library of Congress — National Parliaments: Pakistan",
+          "url": "https://wwws.loc.gov/law/help/national-parliaments/pakistan.php"
+        }
+      ],
+      "evergreen": true
+    },
+    {
+      "id": "salt-range-khewra-evaporites-rock-strata-geology",
+      "slug": "salt-range-khewra-evaporites-rock-strata-geology",
+      "dedupeKey": "salt-range-khewra-evaporites-rock-strata-geology",
+      "scope": "Pakistan",
+      "title": "The Salt Range and Khewra: How Ancient Seas Formed Rock Salt",
+      "excerpt": "A Pakistan-based earth-science case study of evaporite minerals, sedimentary layers, folding and the geological record exposed in the Salt Range.",
+      "type": "Explainer",
+      "category": "General Science & Ability",
+      "topic": "Environmental Science — Lithosphere: Minerals, Rock Types and Plate Tectonics",
+      "tags": [
+        "General Science & Ability",
+        "Pakistan",
+        "Salt Range",
+        "Khewra",
+        "Halite",
+        "Evaporites",
+        "Geology"
+      ],
+      "sections": [
+        {
+          "heading": "From dissolved minerals to rock salt",
+          "paragraphs": [
+            "Rock salt offers a useful way to understand the relationship between water, minerals and sedimentary rocks. When water containing dissolved salts evaporates under suitable conditions, its dissolved substances can become concentrated enough to crystallise. Halite, the mineral form of sodium chloride, is a familiar evaporite mineral; gypsum is another important example. Over long periods, repeated deposition and burial can preserve layers of such material within the geological record. The United States Geological Survey explains the physical properties and formation settings of evaporite minerals. This process differs from the cooling of molten material that forms igneous rocks and from the heat-and-pressure transformation that forms metamorphic rocks. Classifying the formation mechanism is more useful than simply memorising mineral names."
+          ]
+        },
+        {
+          "heading": "Why the Salt Range is a geological classroom",
+          "paragraphs": [
+            "Pakistan's Salt Range in Punjab exposes a succession of rocks that helps geologists read events from different periods of Earth history. Pakistan's submission to UNESCO's World Heritage tentative list describes fossil-bearing strata, sedimentary sequences, folding and faulting, as well as substantial rock-salt deposits. The exposed layers can be interpreted through stratigraphy: lower and upper units, their composition and their fossil content help reconstruct changing environments. This does not mean every rock in the range formed at the same time or by the same process. Salt deposits, limestone, shale and fossil-rich beds preserve different clues. A useful examination diagram would show sedimentary layers before and after deformation, with a separate label for evaporite formation."
+          ]
+        },
+        {
+          "heading": "How buried layers become part of a mountain landscape",
+          "paragraphs": [
+            "Depositing salt in an ancient basin is only one stage of the story. Later tectonic forces can compress, fold, fault and uplift rock sequences. Erosion then removes some overlying material and reveals older beds at or near the surface. The UNESCO tentative-list description connects the Salt Range's present landscape with the structural effects of plate movement and highlights its exceptional exposures. At Khewra, the geological resource has also supported mining and tourism over a long historical period. A scientific explanation should keep three processes distinct: original sediment deposition, subsequent tectonic deformation and eventual surface exposure. These steps illustrate why the location of a mineral deposit today need not resemble the environment in which that mineral first accumulated."
+          ]
+        },
+        {
+          "heading": "Scientific value, resource use and careful interpretation",
+          "paragraphs": [
+            "The Salt Range is useful for teaching more than extraction of a commercially valuable mineral. Fossils help illustrate changes in life and past environments; rock sequences provide relative chronological evidence; and folds and faults demonstrate the forces that reshape Earth's crust. Rock salt is also soluble in water, so groundwater conditions matter when thinking about preservation and geological hazards. UNESCO records the Salt Range and Khewra Salt Mine on Pakistan's tentative list, not as an inscribed World Heritage property; the distinction should be stated accurately. For a CSS response, link the case study to the syllabus terms lithosphere, minerals, rock types and plate tectonics. Avoid unsupported claims about precise reserves, health benefits or mining output."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "General Science & Ability: lithosphere, minerals and rocks, stratigraphy and plate tectonics.",
+        "Explain evaporite deposition, tectonic deformation and erosion as separate stages using a Pakistan example."
+      ],
+      "sources": [
+        {
+          "label": "UNESCO World Heritage Centre — Salt Range and Khewra Salt Mine (Tentative List)",
+          "url": "https://whc.unesco.org/en/tentativelists/6118/"
+        },
+        {
+          "label": "U.S. Geological Survey — Physical Properties of Evaporite Minerals",
+          "url": "https://www.usgs.gov/publications/physical-properties-evaporite-minerals"
+        },
+        {
+          "label": "U.S. Geological Survey — Origin and Chemical Composition of Evaporite Deposits",
+          "url": "https://www.usgs.gov/publications/origin-and-chemical-composition-evaporite-deposits"
+        }
+      ],
+      "evergreen": true
+    },
+    {
+      "id": "mohenjo-daro-heritage-tourism-conservation-geography",
+      "slug": "mohenjo-daro-heritage-tourism-conservation-geography",
+      "dedupeKey": "mohenjo-daro-heritage-tourism-conservation-geography",
+      "scope": "Pakistan",
+      "title": "Moenjodaro: Heritage Tourism, Urban Planning and Conservation",
+      "excerpt": "How a major archaeological site in Sindh connects cultural tourism, ancient settlement geography and the responsibilities of heritage conservation.",
+      "type": "Explainer",
+      "category": "Geography",
+      "topic": "Human Geography — Geography of Tourism and Recreation: Cultural Heritage and Its Impacts",
+      "tags": [
+        "Geography",
+        "Pakistan",
+        "Moenjodaro",
+        "Heritage Tourism",
+        "Sindh",
+        "Conservation",
+        "Settlement Geography"
+      ],
+      "sections": [
+        {
+          "heading": "Why an archaeological city belongs in geography",
+          "paragraphs": [
+            "The geography of tourism is not limited to beaches, mountains or hotels. Cultural and archaeological sites attract visitors because of their location, historical significance and the meanings communities attach to them. Moenjodaro, in Sindh's Indus valley, provides a particularly rich example. UNESCO identifies the archaeological ruins as a World Heritage property representing a major urban centre of the Indus civilisation. The site's planned streets, built structures and drainage features also make it relevant to settlement geography. A visitor may encounter it as a heritage destination, while a geographer can examine the relationship between river landscapes, urban form, access, interpretation and the pressures created by tourism. These perspectives are complementary rather than competing."
+          ]
+        },
+        {
+          "heading": "Reading the ancient settlement through its physical layout",
+          "paragraphs": [
+            "UNESCO's description distinguishes a raised citadel area from the lower town and points to the settlement's organised layout and sanitation infrastructure. These physical remains allow researchers to investigate how an ancient urban population arranged streets, buildings and communal facilities. Archaeological interpretation must nevertheless be careful: surviving walls and drains provide evidence of design, but do not answer every question about social hierarchy, political authority or everyday life. The Indus civilisation flourished long before modern Pakistan existed, and the site should be discussed as part of the region's shared human history. For a geography answer, connect built form with settlement functions and explain how rivers, terrain and material conditions shape where communities live."
+          ]
+        },
+        {
+          "heading": "Tourism opportunities and conservation responsibilities",
+          "paragraphs": [
+            "Heritage tourism can support learning, local guiding, interpretation and associated services, but its value depends on safeguarding the resource that visitors come to see. Moenjodaro's brick structures are vulnerable to environmental pressures. UNESCO's World Heritage assessment identifies salinity associated with groundwater conditions as a threat to foundations and materials. The organisation's conservation work also emphasises risk reduction and the strengthening of local management capacity. Unmanaged foot traffic, inappropriate construction or inadequate drainage can complicate protection at fragile archaeological places. The relevant policy question is therefore not simply how to increase visitor numbers. It is how access, site maintenance, conservation expertise and community benefit can be managed together over time."
+          ]
+        },
+        {
+          "heading": "Turning the case into an analytical examination answer",
+          "paragraphs": [
+            "Begin by defining cultural heritage tourism and locating Moenjodaro in the Indus valley. Explain the evidence of planned urban settlement and distinguish verified archaeological features from speculation. Next discuss how a World Heritage designation can support recognition and educational value without automatically guaranteeing adequate protection or economic benefit. Then analyse the relationship among visitors, surrounding communities, conservation authorities and environmental risks. UNESCO reported renewed conservation-focused cooperation in Sindh during 2026, but such an announcement should not be presented as proof that every conservation challenge has been resolved. Conclude with a balanced framework: protect authenticity, manage visitor impacts, interpret the site accurately and make tourism compatible with long-term preservation."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Geography: tourism and recreation, human settlements, and social and environmental impacts of tourism.",
+        "Use Moenjodaro as a verified Pakistan case study without conflating archaeological evidence with conjecture."
+      ],
+      "sources": [
+        {
+          "label": "UNESCO World Heritage Centre — Archaeological Ruins at Moenjodaro",
+          "url": "https://whc.unesco.org/en/list/138"
+        },
+        {
+          "label": "UNESCO — Heritage Conservation Mission to Sindh, May 2026",
+          "url": "https://www.unesco.org/en/articles/unesco-strengthens-strategic-partnerships-and-heritage-conservation-during-high-level-mission-sindh"
+        }
+      ],
+      "evergreen": true
+    },
+    {
+      "id": "congress-vienna-metternich-concert-europe-balance-power",
+      "slug": "congress-vienna-metternich-concert-europe-balance-power",
+      "dedupeKey": "congress-vienna-metternich-concert-europe-balance-power",
+      "scope": "Global",
+      "title": "The Congress of Vienna: Metternich, Legitimacy and the Balance of Power",
+      "excerpt": "An analytical European History guide to the post-Napoleonic settlement, great-power consultation and the tensions between stability and political change.",
+      "type": "Explainer",
+      "category": "European History",
+      "topic": "The Concert of Europe (1815–1830) — Congress of Vienna, Metternich and Balance of Power",
+      "tags": [
+        "European History",
+        "Congress of Vienna",
+        "Metternich",
+        "Concert of Europe",
+        "Legitimacy",
+        "Balance of Power"
+      ],
+      "sections": [
+        {
+          "heading": "Europe's diplomatic problem after Napoleon",
+          "paragraphs": [
+            "The defeat of Napoleonic France left European rulers with a practical question: how could they prevent renewed domination by one power while settling disputes created by years of warfare? The Congress of Vienna, conducted in 1814–1815, brought major diplomatic representatives together to negotiate a new European order. Austrian statesman Klemens von Metternich played a leading role, alongside representatives of Britain, Russia, Prussia and France. The congress was not a modern international organisation with universal voting rights. It was primarily a negotiation among influential states whose military strength and diplomatic leverage shaped the settlement. Understanding this starting point helps explain both its ability to coordinate major powers and the limits of its representativeness."
+          ]
+        },
+        {
+          "heading": "Legitimacy, compensation and the balance of power",
+          "paragraphs": [
+            "Two ideas are central to interpreting Vienna. Legitimacy supported the restoration of established dynastic authority after revolutionary and Napoleonic upheavals. Balance of power sought to prevent one state from gaining a position that threatened the security of others. Territorial adjustments and diplomatic bargains were used to pursue these aims, although the principles were not applied with perfect consistency. France's return to European diplomacy also illustrates that a defeated state could eventually be reintegrated into the great-power system. The settlement should therefore not be reduced to a map exercise. It was an attempt to construct rules of coexistence among states that distrusted one another, while giving substantial weight to monarchical order and existing hierarchies."
+          ]
+        },
+        {
+          "heading": "The Concert and the practice of consultation",
+          "paragraphs": [
+            "The Concert of Europe refers to the pattern of consultation among leading powers that followed the Vienna settlement. Meetings and congresses provided opportunities to discuss security questions and disputes rather than relying exclusively on unilateral action. The gathering at Aix-la-Chapelle in 1818 is one example of this early postwar diplomacy. Yet the participating powers did not always agree about intervention in other states' internal affairs, especially when liberal or nationalist movements challenged established governments. Metternich's preference for political stability and resistance to revolutionary change must be analysed alongside British concerns about intervention and the differing ambitions of continental powers. A useful answer explains both the cooperative mechanism and the disagreements that limited it."
+          ]
+        },
+        {
+          "heading": "Achievements, limitations and an exam framework",
+          "paragraphs": [
+            "The Vienna settlement helped create a framework for European diplomacy after prolonged war, but it did not remove rivalry, social conflict or demands for constitutional and national change. Its stability was uneven, and later European history cannot be explained solely by the decisions of 1815. A balanced evaluation separates the Congress of Vienna as a diplomatic settlement from the Concert as an evolving practice of consultation. It also distinguishes the ideal of equilibrium from the actual distribution of influence among states. In an examination, organise the argument around context, principles, territorial and institutional outcomes, Metternich's political outlook and the tension between conservative order and emerging liberal and nationalist pressures. Avoid the unsupported claim that the system eliminated war."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "European History: Congress of Vienna, Metternich's era, Congress System and balance of power.",
+        "Evaluate diplomatic stability and conservative restoration together, rather than offering a one-sided verdict."
+      ],
+      "sources": [
+        {
+          "label": "Encyclopedia.com — Congress of Vienna",
+          "url": "https://www.encyclopedia.com/history/encyclopedias-almanacs-transcripts-and-maps/congress-vienna"
+        },
+        {
+          "label": "Larousse — Congrès de Vienne",
+          "url": "https://www.larousse.fr/encyclopedie/divers/Vienne/148853"
+        },
+        {
+          "label": "Treccani — Congresso di Vienna",
+          "url": "https://www.treccani.it/enciclopedia/congresso-di-vienna/"
+        }
+      ],
+      "evergreen": true
+    },
+    {
+      "id": "optical-fiber-core-cladding-data-transmission-gsa",
+      "slug": "optical-fiber-core-cladding-data-transmission-gsa",
+      "dedupeKey": "optical-fiber-core-cladding-data-transmission-gsa",
+      "scope": "Global",
+      "title": "Optical Fiber Communication: How Light Carries Digital Information",
+      "excerpt": "A beginner-friendly science explanation of fiber cores, cladding, total internal reflection, attenuation and the conversion between electrical and optical signals.",
+      "type": "Explainer",
+      "category": "General Science & Ability",
+      "topic": "Information Technology — Telecommunications: Fiber Optics and Communication Fundamentals",
+      "tags": [
+        "General Science & Ability",
+        "Fiber Optics",
+        "Telecommunications",
+        "Total Internal Reflection",
+        "Networking",
+        "Optical Signals"
+      ],
+      "sections": [
+        {
+          "heading": "What travels through an optical fiber",
+          "paragraphs": [
+            "A fiber-optic communication link transmits information using light guided through a thin strand of transparent material, usually glass. A transmitter converts an electrical or digital information stream into a controlled optical signal, and a receiver detects incoming light and reconstructs the information. The fiber is not carrying an electrical current through its glass core in the same way that a copper wire carries an electrical signal. This distinction explains one of its practical advantages: the guided optical signal is not directly disrupted by ordinary electromagnetic interference affecting electrical conductors. Fiber links are used in communication networks because they can support high information capacity and long-distance transmission when the equipment and installation are suitable."
+          ]
+        },
+        {
+          "heading": "Core, cladding and the principle of guidance",
+          "paragraphs": [
+            "A typical optical fiber has a central core surrounded by cladding and an outer protective coating. The core and cladding have carefully selected optical properties, including a slightly higher refractive index in the core. Under suitable launch conditions, light remains guided within the core. The school-level explanation uses total internal reflection at the core–cladding boundary, a phenomenon related to Snell's law of refraction. A common mistake is to think the protective plastic jacket itself reflects the light; its primary role is mechanical protection, while the optical guidance comes from the engineered core–cladding structure. The Fiber Optic Association's technical guide explains this distinction and the importance of the range of angles at which light can enter the fiber."
+          ]
+        },
+        {
+          "heading": "Why speed and distance still have limits",
+          "paragraphs": [
+            "Optical fibers are efficient, but they do not deliver unlimited performance. Attenuation means that optical power decreases as the signal travels; absorption, scattering, connectors and bends can contribute to losses. Dispersion refers to spreading of optical pulses or differences in propagation that can make neighbouring symbols harder to distinguish. Engineers manage these constraints through fiber design, suitable wavelengths, signal processing, careful installation and appropriate equipment. Single-mode and multimode fibers serve different practical needs: the former supports one guided spatial mode under its design conditions, while the latter can support multiple modes. The choice depends on network distance, bandwidth requirements and the complete communication system, not merely on the appearance of the cable."
+          ]
+        },
+        {
+          "heading": "A simple end-to-end exam explanation",
+          "paragraphs": [
+            "Imagine a message travelling between two network devices. First, electronics encode the data and drive an optical source such as a laser or light-emitting diode. Second, light propagates through the fiber while its core and cladding guide the signal. Third, the optical receiver converts the arriving signal back into an electrical form that digital equipment can interpret. At every stage, the design must allow for signal strength, timing and error detection. This sequence is enough to answer a foundational CSS question without claiming that every network uses the same fiber or equipment. For higher marks, add a labelled core–cladding diagram and briefly compare optical communication with copper transmission in terms of interference, losses and deployment needs."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "General Science & Ability: telecommunications, wireless and wired communication, and fiber-optic fundamentals.",
+        "Draw and label the core, cladding and protective jacket; explain total internal reflection and attenuation."
+      ],
+      "sources": [
+        {
+          "label": "Fiber Optic Association — Optical Fiber Fundamentals",
+          "url": "https://www.thefoa.org/tech/ref/basic/fiber.html"
+        },
+        {
+          "label": "Fiber Optic Association — Total Internal Reflection",
+          "url": "https://thefoa.org/tech/ref/basic/total_internal_reflection.html"
+        },
+        {
+          "label": "IEEE Technology Navigator — Optical Fiber",
+          "url": "https://technav.ieee.org/topic/optical-fiber/"
+        }
+      ],
+      "evergreen": true
+    },
+    {
+      "id": "wid-wad-gad-gender-development-frameworks",
+      "slug": "wid-wad-gad-gender-development-frameworks",
+      "dedupeKey": "wid-wad-gad-gender-development-frameworks",
+      "scope": "Global",
+      "title": "WID, WAD and GAD: Three Ways to Analyse Gender and Development",
+      "excerpt": "A comparative Gender Studies guide to inclusion-focused projects, women's economic agency and the analysis of unequal social relations in development policy.",
+      "type": "Explainer",
+      "category": "Gender Studies",
+      "topic": "Gender and Development — WID, WAD and GAD Approaches",
+      "tags": [
+        "Gender Studies",
+        "Women in Development",
+        "Women and Development",
+        "Gender and Development",
+        "Development Policy",
+        "Gender Analysis"
+      ],
+      "sections": [
+        {
+          "heading": "The question that shaped development debates",
+          "paragraphs": [
+            "Development policy has long asked how economic and social change affects women and men differently. One early response was Women in Development, or WID, which emphasised bringing women more visibly into development programmes, employment opportunities and access to resources. This approach helped challenge the neglect of women's productive contributions. However, adding a project for women does not automatically change the institutions and relationships that influence who controls income, property or decisions. The Food and Agriculture Organization traces the historical shift from WID toward Gender and Development and explains why a narrow project-based focus proved insufficient. These approaches are analytical lenses, not rigid stages through which every country or institution must pass."
+          ]
+        },
+        {
+          "heading": "WID and WAD ask different questions",
+          "paragraphs": [
+            "Women in Development tends to ask how women can be included in existing development activities and gain access to opportunities from which they have been excluded. Women and Development, or WAD, places stronger emphasis on women's existing economic contributions and on the wider economic structures that can limit the benefits they receive from their work. A WAD analysis therefore challenges the assumption that women were previously outside productive life and need only be added to it. Scholarly discussions of the WID–WAD–GAD sequence highlight these different diagnoses of inequality. For example, training women for paid work may be useful, but an evaluation should also ask whether the earnings, working conditions and decision-making power actually improve."
+          ]
+        },
+        {
+          "heading": "GAD shifts attention to relationships and institutions",
+          "paragraphs": [
+            "Gender and Development, or GAD, examines the socially organised relationships, roles and power arrangements that affect people across households, markets, communities and public institutions. Its analysis includes women and men rather than treating women as a single uniform category. A GAD-informed programme might investigate who performs unpaid care, who can access land or credit, whose preferences shape services and how these patterns vary across social groups. FAO describes gender analysis and gender mainstreaming as tools for improving the design, implementation and evaluation of programmes. This perspective does not make women-specific services irrelevant. Instead, it asks whether targeted services and broader institutional reforms address the causes of unequal opportunities and outcomes."
+          ]
+        },
+        {
+          "heading": "Comparing approaches in a practical examination answer",
+          "paragraphs": [
+            "Consider a rural livelihoods initiative. A WID-oriented response might provide training and equipment to women who have been excluded from support. A WAD-oriented critique would ask whether women already perform substantial agricultural work without receiving fair access to returns and productive assets. A GAD-oriented design would examine household decision-making, market access, unpaid responsibilities and institutional rules affecting different participants. These are illustrative analytical applications, not claims about the results of a particular real programme. A strong CSS answer should define each acronym, explain its central question, identify its contribution and limitations, and show how the approaches can guide different policy choices. Avoid treating any framework as a universal solution independent of local evidence."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Gender Studies: Gender and Development approaches — WID, WAD and GAD.",
+        "Use one policy scenario to distinguish access, economic agency and structural gender relations."
+      ],
+      "sources": [
+        {
+          "label": "FAO — From Women in Development to Gender and Development",
+          "url": "https://www.fao.org/4/y3969e/y3969e02.htm"
+        },
+        {
+          "label": "FAO — Gender and Development Plan of Action",
+          "url": "https://www.fao.org/4/y2209e/y2209e03.htm"
+        },
+        {
+          "label": "Palgrave Macmillan — Gender and Development (chapter abstract)",
+          "url": "https://ideas.repec.org/h/pal/palchp/978-1-137-42647-5_2.html"
+        }
+      ],
+      "evergreen": true
+    }
+  ]
+}
