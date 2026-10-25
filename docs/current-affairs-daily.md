@@ -2,7 +2,7 @@
 
 ## Scope and architecture
 
-This feature is independent of `/daily-briefing` articles and the protected `/current-affairs` learning collection. Historical weekly data and filenames in `src/data/weeklyMagazine.ts` remain unchanged; the existing protected route now labels that tab **Weekly Archive**. The homepage promotion is replaced by a live daily widget. No daily PDF or sample edition has been published.
+This feature is independent of `/daily-briefing` articles and the protected `/current-affairs` learning collection. Historical weekly data and filenames in `src/data/weeklyMagazine.ts` remain unchanged; the existing protected route now labels that tab **Weekly Archive**. The homepage promotion is replaced by a live daily widget. The owner-supplied 19–25 October 2026 daily editions are now included in the publication source. No sample edition is used.
 
 Public routes: `/current-affairs-daily` and `/current-affairs-daily/YYYY-MM-DD`. The existing primary navigation places Daily PDFs beside Vistagram and labels news analysis **Daily Briefing**. Existing mobile menus gain the daily destination.
 
@@ -42,7 +42,7 @@ Only one edition identity per date is accepted: `daily-YYYY-MM-DD`. Duplicate su
 
 ## ChatGPT → GitHub publication routine
 
-The owner must attach an actual completed PDF and explicitly authorize its publication. Do not generate content, publish a placeholder or infer rights from filenames. No PDF was attached for this implementation.
+The owner must attach an actual completed PDF and explicitly authorize its publication. Do not generate content, publish a placeholder or infer rights from filenames. The first owner-approved batch contains seven PDFs for 19–25 October 2026.
 
 Preferred preparation from an authorized local checkout:
 
@@ -62,7 +62,7 @@ content/current-affairs-daily/2026/10/2026-10-25.json
 
 Review the prepared files before committing. No publication is live merely because preparation or a commit succeeded.
 
-Metadata fields: `id`, `date`, `title`, `file` (relative dated PDF path), `status` (`draft`, `scheduled`, `published`), `source: "github"`, integer `version`, SHA-256 `sha256`, and explicit ISO `publishedAt` with timezone. Optional `description`, `topics`, `cover`. Size and page count are always derived by the packager. `updatedAt` should be supplied for metadata corrections. Draft/scheduled PDFs remain protected server-side and are never served until publicly eligible. `publishedAt` controls visibility independently of edition date; there is no midnight synthetic publication.
+Metadata fields: `id`, `date`, `title`, `file` (relative dated PDF path), `status` (`draft`, `scheduled`, `published`), `source: "github"`, integer `version`, SHA-256 `sha256`, and explicit ISO `publishedAt` with timezone. Optional `description`, `topics`, `cover`, and a derived `contentCredentialsSha256` when C2PA provenance is present. Size and page count are always derived by the packager. `updatedAt` should be supplied for metadata corrections. Draft/scheduled PDFs remain protected server-side and are never served until publicly eligible. `publishedAt` controls visibility independently of edition date; there is no midnight synthetic publication.
 
 Optional cover files go in `content/current-affairs-daily/covers/` using `daily-YYYY-MM-DD-<32 lowercase hex characters>.png`; set `cover` to that filename. Supply only a genuine first-page export or approved cover. The build checks PNG header/dimensions/size and copies it to the guarded release. Future image formats require explicit validation support.
 
@@ -95,3 +95,7 @@ Back up the four new tables together with the private `daily-pdf` tree. Use the 
 ## Validation and remaining release work
 
 See `docs/current-affairs-daily-validation.md` for actual results, not promises. Production owner login/upload, qpdf execution, durable storage permissions, deployment retention, CDN behavior and live binary delivery must be verified on Hostinger after release authorization. No hosting secrets are available in this development environment. The dated repository release hold must be resolved by the owner before merging this feature to automatically deployed main. This feature does not reopen Pro, MPT, payments or AI.
+
+## Content Credentials in supplied PDFs
+
+The GitHub packager preserves the original 25 October 2026 PDF, including its embedded Content Credentials. Its narrowly recognized C2PA/JUMBF metadata container is bounded and hashed; script/launch attachments, unknown attachment names/types and active/external SVG thumbnail content remain rejected. PDF document/page scripts remain rejected. This verifies container integrity, not cryptographic authorship or the truth of the publication. The complete PDF SHA-256 still matches the supplied original. This exception applies to GitHub validation; the separate server-upload parser remains fail-closed.

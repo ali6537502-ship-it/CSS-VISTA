@@ -81,21 +81,35 @@ try {
     await page.getByRole("button", { name: "Reset Filters" }).click();
     await page.getByRole("button", { name: "Next", exact: true }).click();
     await page.getByText("Page 2 of 2", { exact: true }).waitFor();
-    await page.getByText("Browse publication calendar").click();
+    if (!(await page.locator(".dp-calendar").evaluate((el) => el.open)))
+      await page.getByText("Browse publication calendar").click();
     await page.getByLabel("Month and year").fill("2026-10");
     assert.ok(
-      await page.getByRole("link", { name: "Read 25 October 2026" }).count(),
+      await page
+        .locator(".dp-days")
+        .getByRole("link", { name: "Read 25 October 2026" })
+        .count(),
     );
-    await page.getByRole("link", { name: "Read 25 October 2026" }).click();
+    await page
+      .locator(".dp-days")
+      .getByRole("link", { name: "Read 25 October 2026" })
+      .click();
     await page.getByLabel("Jump to page").waitFor();
     await page.locator("canvas").waitFor();
-    await page.waitForFunction(()=>{const c=document.querySelector('canvas');return c && c.height===c.width && c.getContext('2d').getImageData(0,0,1,1).data[3]===255});
-    await page.getByRole('button',{name:'Next',exact:true}).click();
-    assert.equal(await page.getByLabel('Jump to page').inputValue(),'2');
-    await page.getByRole('button',{name:'Previous',exact:true}).click();
-    assert.equal(await page.getByLabel('Jump to page').inputValue(),'1');
-    await page.getByLabel('Jump to page').fill('3');
-    assert.equal(await page.getByLabel('Jump to page').inputValue(),'3');
+    await page.waitForFunction(() => {
+      const c = document.querySelector("canvas");
+      return (
+        c &&
+        c.height === c.width &&
+        c.getContext("2d").getImageData(0, 0, 1, 1).data[3] === 255
+      );
+    });
+    await page.getByRole("button", { name: "Next", exact: true }).click();
+    assert.equal(await page.getByLabel("Jump to page").inputValue(), "2");
+    await page.getByRole("button", { name: "Previous", exact: true }).click();
+    assert.equal(await page.getByLabel("Jump to page").inputValue(), "1");
+    await page.getByLabel("Jump to page").fill("3");
+    assert.equal(await page.getByLabel("Jump to page").inputValue(), "3");
     await page.getByRole("button", { name: "Zoom in" }).click();
     await page.getByRole("button", { name: "Fit width" }).click();
     await page.getByRole("link", { name: "Download original PDF" }).waitFor();

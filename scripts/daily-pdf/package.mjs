@@ -2,6 +2,7 @@ import { readdir, readFile, mkdir, writeFile, cp, rm } from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { createHash } from "node:crypto";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
+import { contentCredentialsDigest } from "./credentials.mjs";
 const root = resolve(import.meta.dirname, "../..");
 export async function catalogue(
   base = join(root, "content/current-affairs-daily"),
@@ -102,8 +103,9 @@ export async function catalogue(
     });
     try {
       const pdf = await task.promise;
-      if (await pdf.getAttachments())
-        throw Error("Embedded files are forbidden");
+      const credentials = contentCredentialsDigest(await pdf.getAttachments());
+      if (credentials !== (r.contentCredentialsSha256 || null))
+        throw Error("Content Credentials integrity metadata mismatch");
       for (let n = 1; n <= pdf.numPages; n++) {
         const page = await pdf.getPage(n);
         if (await page.getJSActions())
