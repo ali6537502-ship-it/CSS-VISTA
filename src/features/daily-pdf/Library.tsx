@@ -157,11 +157,15 @@ export default function DailyLibrary() {
   return (
     <main className="dp-library">
       <header className="dp-header">
-        <p className="dp-eyebrow">CSS VISTA</p>
+        <p className="dp-eyebrow">CSS VISTA · FREE PUBLICATIONS</p>
         <h1>CURRENT AFFAIRS DAILY</h1>
         <p>
           Your daily collection of Current Affairs publications. Read online,
           download your edition, and revisit previous publications anytime.
+        </p>
+        <p className="dp-public-access">
+          Free public access · No sign-in or membership required to read or
+          download these daily editions.
         </p>
       </header>
       {error && (

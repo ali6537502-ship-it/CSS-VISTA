@@ -158,7 +158,10 @@ export default function DailyReader() {
       {edition && (
         <>
           <h1>{edition.title}</h1>
-          <p>{dateLabel(edition.date)}</p>
+          <p>
+            {dateLabel(edition.date)} · Free public edition · No sign-in
+            required
+          </p>
         </>
       )}
       <div className="dp-reader" ref={root}>
@@ -242,7 +245,7 @@ export default function DailyReader() {
             </button>
           </p>
         )}
-        <div ref={stage} className="dp-reader-stage">
+        <div ref={stage} className="dp-reader-stage" hidden={!pdf && !loading}>
           <canvas
             ref={canvas}
             className="dp-reader-canvas"

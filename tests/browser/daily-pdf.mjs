@@ -61,7 +61,7 @@ try {
         },
       });
     });
-    await page.goto("http://localhost:5173/current-affairs-daily");
+    await page.goto((process.env.CSSV_DAILY_BROWSER_ORIGIN || "http://localhost:5173") + "/current-affairs-daily");
     await page
       .getByRole("heading", { name: "CURRENT AFFAIRS DAILY", exact: true })
       .waitFor();

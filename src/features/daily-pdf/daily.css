@@ -359,3 +359,11 @@
   margin-top: auto;
   padding-top: 18px;
 }
+.dp-public-access {
+  font-size: 14px;
+  font-weight: 600;
+  color: #255b43;
+  border-left: 3px solid #346c52;
+  padding-left: 14px;
+  margin-top: 18px;
+}
