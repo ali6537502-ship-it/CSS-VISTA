@@ -108,6 +108,13 @@ try {
     await page.waitForFunction(
       () => document.querySelectorAll(".dp-card").length === 7,
     );
+    for (const image of await page.locator('.dp-card img').all()) {
+      await image.scrollIntoViewIfNeeded();
+      await image.evaluate(img => img.decode());
+      assert.equal(await image.evaluate(img => img.naturalWidth),720);
+    }
+    assert.equal(pdfFetches,0,'scrolling covers must not fetch PDFs');
+    await page.evaluate(()=>window.scrollTo(0,0));
     await page.screenshot({
       path: `test-artifacts/daily-pdf/october-library-${width}.png`,
       fullPage: true,
