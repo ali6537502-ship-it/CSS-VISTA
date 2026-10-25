@@ -47,3 +47,8 @@ test('subject search destinations resolve original syllabus identifiers', () => 
     assert.ok(data.subjects.some((s:{slug:string;name:string}) => s.slug === slug && s.name === feature.title), feature.title)
   }
 })
+
+test('planner goals and scheduling are discoverable through the canonical workspace registry', () => {
+  assert.ok(searchFeatures('study goals').some(feature => feature.id === 'plan' && feature.to === '/account/tasks'))
+  assert.ok(searchFeatures('import schedule').some(feature => feature.id === 'plan'))
+})

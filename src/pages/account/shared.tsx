@@ -1,9 +1,10 @@
 import { subjectVisual } from '@/features/workspace/Visuals'
+import WorkspaceAvatar from '@/features/workspace/WorkspaceAvatar'
 import { targetDays } from '@/features/workspace/model'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
-import { ArrowLeft, Check, UserRound } from 'lucide-react'
+import { ArrowLeft, Check } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats, updateStudyScheduleTask, type StudyScheduleTask } from '@/lib/store'
 import { getRevisionStats, getStudyAnalytics, recentActivities } from '@/lib/progress'
@@ -122,9 +123,7 @@ export function AccountPage({ title, intro, action, children }: { title: string;
               to="/account/settings"
               className="inline-flex min-h-11 items-center gap-2.5 rounded-full border border-slate-200 px-4 text-sm font-semibold text-slate-700 hover:border-emerald-700 hover:text-emerald-800"
             >
-              {user?.photo_complete
-                ? <img src="/api/student/photo-view.php" alt="" className="h-7 w-7 rounded-full object-cover" />
-                : <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-100"><UserRound className="h-4 w-4" /></span>}
+              <span className="ws-inline-avatar"><WorkspaceAvatar user={user}/></span>
               My profile
             </Link>
           )}

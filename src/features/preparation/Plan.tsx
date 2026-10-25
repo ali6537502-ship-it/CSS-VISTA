@@ -2,6 +2,7 @@ import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useState } from 'react'
 
 import { ArrowRight, CalendarDays, Clock3, RotateCcw } from 'lucide-react'
+import { subjectVisual } from '@/features/workspace/Visuals'
 import {
   field,
   primary,
@@ -31,7 +32,7 @@ function TaskRow({
     Number.isInteger(Number(minutes)) && Number(minutes) > 0 && Number(minutes) <= remaining
   const base = { task_id: task.id, expected_version: task.version }
   return (
-    <article className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+    <article className={`prep-task pl-tone-${subjectVisual(task.snapshot.subject).tone} min-w-0 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5`}>
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700">
@@ -212,7 +213,7 @@ export default function PreparationPlan({
     c = p.summary
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-indigo-200 bg-indigo-50/50 p-5 sm:p-7">
+      <section className="prep-continue rounded-2xl border border-indigo-200 bg-indigo-50/50 p-5 sm:p-7">
         <p className="text-xs font-semibold uppercase tracking-widest text-indigo-700">
           Your next study session
         </p>
@@ -235,7 +236,7 @@ export default function PreparationPlan({
           receive no progress credit.
         </p>
       </section>
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="prep-metrics grid gap-3 sm:grid-cols-3">
         {[
           [Clock3, `${p.budget} minutes`, 'Daily time budget'],
           [RotateCcw, `${data.revision_total} due`, 'Scheduled section reviews'],
