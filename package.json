@@ -106,7 +106,7 @@
     "test:editorial": "node --test tests/bookEditorial.test.mjs tests/mcqEditorial.test.mjs tests/journalTranscripts.test.ts && python3 tests/editorial/test_optional_note_reviews.py",
     "test:grammar-v5": "node scripts/grammar-v5/build.mjs --check && node --test tests/grammarV5.test.ts tests/tutor/return.test.ts",
     "audit:grammar-release": "node scripts/grammar-v5/build.mjs --check --release",
-    "test:daily-pdf": "node --test tests/dailyPdf.test.mjs",
+    "test:daily-pdf": "node --test tests/dailyPdf.test.mjs tests/daily-pdf/credentials.test.mjs",
     "validate:daily-pdf": "node scripts/daily-pdf/package.mjs --check"
   },
   "dependencies": {

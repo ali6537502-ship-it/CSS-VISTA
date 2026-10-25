@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { Edition } from "./api";
-// Authentic previews are deferred until visible; no PDF fetch occurs in archive cards.
-// Covers can be supplied by the publisher in a future verified image pipeline.
+// Approved cover images load lazily; browsing cards never fetches full PDFs.
 export default function Cover({ edition }: { edition: Edition }) {
   if (edition.coverUrl)
     return (

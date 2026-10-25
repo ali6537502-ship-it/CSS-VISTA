@@ -187,8 +187,26 @@ export default function DailyLibrary() {
       {data?.latest && (
         <>
           <Feature edition={data.latest} />
+          <nav className="dp-date-strip" aria-label="Quick edition access">
+            <p className="dp-eyebrow">Choose your edition</p>
+            <div>
+              {data.dates.slice(0, 7).map((date) => (
+                <Link key={date} to={"/current-affairs-daily/" + date}>
+                  <time dateTime={date}>{dateLabel(date)}</time>
+                  <span>Read edition →</span>
+                </Link>
+              ))}
+            </div>
+          </nav>
           <section className="dp-archive">
             <h2>Explore Previous Editions</h2>
+            <p className="dp-meta" role="status">
+              {data.total} {data.total === 1 ? "edition" : "editions"} available
+              {period || query
+                ? " for your selection"
+                : " in the publication archive"}
+              . Search, choose a date, or open an edition below.
+            </p>
             <div className="dp-filters">
               <label>
                 Search metadata
@@ -238,7 +256,7 @@ export default function DailyLibrary() {
                 Reset Filters
               </button>
             </div>
-            <details className="dp-calendar">
+            <details className="dp-calendar" open>
               <summary>Browse publication calendar</summary>
               <div className="dp-actions">
                 <button
@@ -294,29 +312,46 @@ export default function DailyLibrary() {
                 No editions found for the selected period.
               </p>
             )}
-            <div className="dp-grid">
-              {data.items.map((e, i) => (
-                <div key={e.id}>
-                  {(i === 0 ||
-                    e.date.slice(0, 7) !==
-                      data.items[i - 1].date.slice(0, 7)) && (
-                    <h3>{dateLabel(e.date).replace(/^\d+ /, "")}</h3>
-                  )}
-                  <article className="dp-card">
-                    <Cover edition={e} />
-                    <time dateTime={e.date}>{dateLabel(e.date)}</time>
-                    <h3>
-                      <Link to={editionPath(e)}>{e.title}</Link>
-                    </h3>
-                    <p className="dp-meta">
-                      {e.pageCount ? e.pageCount + " pages · " : ""}
-                      {(e.size / 1048576).toFixed(1)} MB
-                    </p>
-                    <Actions edition={e} />
-                  </article>
-                </div>
-              ))}
-            </div>
+            {[...new Set(data.items.map((e) => e.date.slice(0, 7)))].map(
+              (month) => (
+                <section
+                  key={month}
+                  className="dp-month"
+                  aria-label={dateLabel(month + "-01").replace(/^\d+ /, "")}
+                >
+                  <h3>{dateLabel(month + "-01").replace(/^\d+ /, "")}</h3>
+                  <div className="dp-grid">
+                    {data.items
+                      .filter((e) => e.date.startsWith(month))
+                      .map((e) => (
+                        <article key={e.id} className="dp-card">
+                          <Link
+                            to={editionPath(e)}
+                            aria-label={"Read " + dateLabel(e.date)}
+                            className="dp-cover-link"
+                          >
+                            <Cover edition={e} />
+                          </Link>
+                          <time dateTime={e.date}>{dateLabel(e.date)}</time>
+                          <h4>
+                            <Link to={editionPath(e)}>{e.title}</Link>
+                          </h4>
+                          <p className="dp-meta">
+                            {e.pageCount ? e.pageCount + " pages · " : ""}
+                            {(e.size / 1048576).toFixed(1)} MB · PDF
+                          </p>
+                          {e.description && (
+                            <p className="dp-card-description">
+                              {e.description}
+                            </p>
+                          )}
+                          <Actions edition={e} />
+                        </article>
+                      ))}
+                  </div>
+                </section>
+              ),
+            )}
             {data.total > 12 && (
               <nav className="dp-actions" aria-label="Archive pagination">
                 <button

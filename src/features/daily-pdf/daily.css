@@ -297,3 +297,65 @@
   max-width: 170px;
   margin-bottom: 20px;
 }
+.dp-date-strip {
+  padding: 28px 0 0;
+}
+.dp-date-strip > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.dp-date-strip a {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #dce5db;
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+.dp-date-strip a:hover {
+  border-color: #346c52;
+}
+.dp-date-strip time {
+  font-size: 13px;
+  font-weight: 700;
+}
+.dp-date-strip span {
+  font-size: 12px;
+  color: #526a5d;
+}
+.dp-month {
+  margin: 28px 0;
+}
+.dp-month > h3 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.dp-card {
+  display: flex;
+  flex-direction: column;
+}
+.dp-card h4 {
+  font-size: 17px;
+  line-height: 1.45;
+  margin: 12px 0;
+}
+.dp-cover-link {
+  display: block;
+  margin-bottom: 8px;
+}
+.dp-card-description {
+  font-size: 13px;
+  color: #526a5d;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.dp-card .dp-actions {
+  margin-top: auto;
+  padding-top: 18px;
+}

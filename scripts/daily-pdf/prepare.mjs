@@ -1,6 +1,8 @@
 import { readFile, writeFile, mkdir, access, rm } from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { createHash } from "node:crypto";
+import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
+import { contentCredentialsDigest } from "./credentials.mjs";
 import { catalogue } from "./package.mjs";
 const [input, ...args] = process.argv.slice(2);
 if (!input)
@@ -43,11 +45,24 @@ for (const p of [meta, target])
     if (e.code !== "ENOENT") throw e;
   }
 const bytes = await readFile(resolve(input));
+const task = getDocument({
+  data: new Uint8Array(bytes),
+  isEvalSupported: false,
+});
+let credentials;
+try {
+  credentials = contentCredentialsDigest(
+    await (await task.promise).getAttachments(),
+  );
+} finally {
+  await task.destroy();
+}
 await mkdir(month, { recursive: true });
-let wrotePdf=false, wroteMetadata=false;
+let wrotePdf = false,
+  wroteMetadata = false;
 try {
   await writeFile(target, bytes, { flag: "wx" });
-  wrotePdf=true;
+  wrotePdf = true;
   await writeFile(
     meta,
     JSON.stringify(
@@ -60,6 +75,7 @@ try {
         source: "github",
         version: 1,
         sha256: createHash("sha256").update(bytes).digest("hex"),
+        ...(credentials ? { contentCredentialsSha256: credentials } : {}),
         publishedAt: new Date().toISOString(),
         description: "",
         topics: [],
@@ -69,13 +85,13 @@ try {
     ) + "\n",
     { flag: "wx" },
   );
-  wroteMetadata=true;
+  wroteMetadata = true;
   await catalogue(root);
   console.log(
     "Prepared validated PDF and metadata. Review, commit and deploy; this is NOT a live-publication confirmation.",
   );
 } catch (e) {
-  if(wrotePdf) await rm(target, { force: true });
-  if(wroteMetadata) await rm(meta, { force: true });
+  if (wrotePdf) await rm(target, { force: true });
+  if (wroteMetadata) await rm(meta, { force: true });
   throw e;
 }
