@@ -12,6 +12,16 @@ ErrorDocument 404 /404.html
   </IfModule>
 </Files>
 
+# Credential files and editor/backup copies must never be downloadable.
+<FilesMatch "(?i)^(?:\.env(?:\..*)?|config\.php(?:[.~_-].*)?|.*\.(?:pem|key|p12|pfx|sqlite3?|db|bak|backup))$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
 # One-time bootstrap schema payloads are server-readable only.
 <FilesMatch "^_bootstrap_schema\.(?:sql|txt)$">
   <IfModule mod_authz_core.c>
@@ -55,6 +65,10 @@ ErrorDocument 404 /404.html
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Keep same-origin PDF objects usable. Script restrictions are staged in
+  # report-only mode so AdSense behavior can be reviewed before enforcement.
+  Header always set Content-Security-Policy "upgrade-insecure-requests; base-uri 'self'; object-src 'self' blob:; frame-ancestors 'self'"
+  Header always set Content-Security-Policy-Report-Only "script-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.googletagservices.com https://*.googleadservices.com https://*.google.com https://*.gstatic.com; script-src-attr 'none'"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
@@ -102,6 +116,10 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Never serve version-control metadata or internal PHP helpers directly.
+  RewriteRule (^|/)\.(?:git|svn|hg)(?:/|$) - [F,L,NC]
+  RewriteRule ^api/_[^/]*\.php(?:/|$) - [F,L,NC]
 
   # Preserve publisher Authorization on PHP/FastCGI deployments.
   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

@@ -1,3 +1,5 @@
+import createDOMPurify from 'dompurify'
+
 const ALLOWED_TAGS = new Set(['P', 'BR', 'STRONG', 'B', 'EM', 'I', 'U', 'OL', 'UL', 'LI', 'H2', 'H3', 'H4', 'BLOCKQUOTE', 'HR', 'A', 'SUP', 'SUB', 'MARK', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD'])
 
 export function safeWebUrl(value: string): string {
@@ -15,41 +17,45 @@ export function sanitizePlainText(value: string, maxLength = 50_000): string {
   return value.replaceAll(String.fromCharCode(0), '').slice(0, maxLength)
 }
 
+let richTextPurifier: ReturnType<typeof createDOMPurify> | undefined
+
+function escapeRichText(input: string): string {
+  return input.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;')
+}
+
 export function sanitizeRichText(html: string): string {
-  if (typeof DOMParser === 'undefined') return sanitizePlainText(html, 200_000)
-  const document = new DOMParser().parseFromString(html, 'text/html')
-  const walk = (node: Node) => {
-    Array.from(node.childNodes).forEach((child) => {
-      if (child.nodeType === Node.COMMENT_NODE) {
-        child.remove()
+  const input = sanitizePlainText(html, 200_000)
+  // Rendering without a DOM must also be safe for an HTML insertion sink.
+  if (typeof window === 'undefined' || !window.document) {
+    return escapeRichText(input)
+  }
+  if (!richTextPurifier) {
+    const purifier = createDOMPurify(window)
+    if (!purifier.isSupported) return escapeRichText(input)
+    richTextPurifier = purifier
+    richTextPurifier.addHook('afterSanitizeAttributes', (node) => {
+      if (node.tagName !== 'A') {
+        node.removeAttribute('href')
+        node.removeAttribute('title')
         return
       }
-      if (child.nodeType === Node.ELEMENT_NODE) {
-        const element = child as HTMLElement
-        if (!ALLOWED_TAGS.has(element.tagName)) {
-          element.replaceWith(...Array.from(element.childNodes))
-          return
-        }
-        Array.from(element.attributes).forEach((attribute) => {
-          const allowed = element.tagName === 'A' && ['href', 'title'].includes(attribute.name)
-          if (!allowed) element.removeAttribute(attribute.name)
-        })
-        if (element.tagName === 'A') {
-          const safe = safeWebUrl(element.getAttribute('href') ?? '')
-          if (safe) {
-            element.setAttribute('href', safe)
-            element.setAttribute('target', '_blank')
-            element.setAttribute('rel', 'noopener noreferrer nofollow')
-          } else {
-            element.removeAttribute('href')
-          }
-        }
-      }
-      walk(child)
+      const safe = safeWebUrl(node.getAttribute('href') ?? '')
+      if (safe) {
+        node.setAttribute('href', safe)
+        node.setAttribute('target', '_blank')
+        node.setAttribute('rel', 'noopener noreferrer nofollow')
+      } else node.removeAttribute('href')
     })
   }
-  walk(document.body)
-  return document.body.innerHTML.slice(0, 200_000)
+  // Let the sanitizer traverse disallowed wrappers and their descendants.
+  // Never truncate sanitized HTML: that can change how the browser parses it.
+  return richTextPurifier.sanitize(input, {
+    ALLOWED_TAGS: Array.from(ALLOWED_TAGS, (tag) => tag.toLowerCase()),
+    ALLOWED_ATTR: ['href', 'title'],
+    ALLOW_DATA_ATTR: false,
+    ALLOW_ARIA_ATTR: false,
+  })
 }
 
 export function searchableText(content: Record<string, unknown>): string {
