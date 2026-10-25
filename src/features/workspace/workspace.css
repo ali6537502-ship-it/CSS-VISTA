@@ -21,6 +21,8 @@
 .ws-top-search svg:last-child { margin-left:32px; }
 .ws-account { display:grid; grid-template-columns:38px auto; column-gap:11px; font-size:12px; font-weight:600; max-width:45%; overflow-wrap:anywhere; }
 .ws-avatar { grid-row:span 2; display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:#eee8dc; color:#685940; font-size:15px; }
+.ws-avatar { overflow:hidden; font-weight:700; }
+.ws-avatar img { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
 .ws-account small { font-size:10px; color:#7b847b; font-weight:400; }
 .ws-content { min-width:0; max-width:1480px; padding:30px 36px 56px; margin:auto; overflow-wrap:anywhere; }
 .ws-content main { min-height:0; background:transparent; }

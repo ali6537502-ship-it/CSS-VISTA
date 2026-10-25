@@ -35,6 +35,28 @@ formats changed. No package or font dependency was added. Logo files are unchang
 SVG artwork is decorative and ignored by assistive technology. Resource covers are
 format illustrations, not claims that a particular document exists in an account.
 
+### Header profile photo follow-up
+
+W17 — verified with browser fixtures: `WorkspaceAvatar.tsx` now displays the
+student's existing uploaded photo in the small header circle, with their initial
+while loading or when no photo is available. It uses the existing private
+`student/photo-view.php` endpoint and `photo_complete` session field; no upload,
+storage, schema or authorization contracts change. Requests carry the existing
+account-binding header, use no-store caching, and abort on account changes.
+Temporary image URLs are revoked. The existing profile-updated event refreshes
+the photo. The original profile/settings link and accessible name remain intact.
+
+Executed checks: `npm run typecheck`, scoped ESLint for WorkspaceAvatar and
+StudentWorkspace, and `npx vite build --outDir /tmp/cssv-avatar-build` passed.
+`CSSV_TEST_BROWSER_ORIGIN=http://127.0.0.1:5177 node tests/browser/workspace-avatar.mjs`
+passed against that compiled UI with disposable API fixtures: photo display at
+1440/390/320 pixels, failed-photo fallback, profile refresh, and delayed response
+after switching accounts. The responsive test caught and resolved an initial
+mobile selector conflict. Development-server session hydration prevented the first
+fixture attempts from reaching the workspace; final verification used the compiled
+UI. Actual native photo upload was not re-exercised in this follow-up. No remote
+write or deployment occurred.
+
 ## Executed review and checks
 
 - TypeScript passed; changed-file ESLint passed with no errors or warnings.
