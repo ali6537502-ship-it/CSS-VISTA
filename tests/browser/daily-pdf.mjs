@@ -17,8 +17,8 @@ const records = Array.from({ length: 14 }, (_, i) => {
     topics: ["Pakistan"],
     source: i % 2 ? "admin" : "github",
     status: "published",
-    size: document().length,
-    pageCount: 1,
+    size: document(3).length,
+    pageCount: 3,
     version: 1,
     pdfUrl: "/api/daily-pdf.php?file=daily-" + date,
     downloadUrl: "/api/daily-pdf.php?file=daily-" + date + "&download=1",
@@ -36,7 +36,7 @@ try {
       if (u.searchParams.has("file"))
         return route.fulfill({
           contentType: "application/pdf",
-          body: document(),
+          body: document(3),
         });
       let items = records;
       const q = u.searchParams.get("q"),
@@ -89,6 +89,13 @@ try {
     await page.getByRole("link", { name: "Read 25 October 2026" }).click();
     await page.getByLabel("Jump to page").waitFor();
     await page.locator("canvas").waitFor();
+    await page.waitForFunction(()=>{const c=document.querySelector('canvas');return c && c.height===c.width && c.getContext('2d').getImageData(0,0,1,1).data[3]===255});
+    await page.getByRole('button',{name:'Next',exact:true}).click();
+    assert.equal(await page.getByLabel('Jump to page').inputValue(),'2');
+    await page.getByRole('button',{name:'Previous',exact:true}).click();
+    assert.equal(await page.getByLabel('Jump to page').inputValue(),'1');
+    await page.getByLabel('Jump to page').fill('3');
+    assert.equal(await page.getByLabel('Jump to page').inputValue(),'3');
     await page.getByRole("button", { name: "Zoom in" }).click();
     await page.getByRole("button", { name: "Fit width" }).click();
     await page.getByRole("link", { name: "Download original PDF" }).waitFor();

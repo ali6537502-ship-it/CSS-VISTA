@@ -8,7 +8,7 @@ Verified in this workspace:
 * `npm run typecheck`: passed. The final Hostinger build also runs TypeScript compilation.
 * `npm run test:daily-pdf`: 12 passed, zero failures. Covers valid PDF parsing and accurate derived metadata, an empty catalogue, hash mismatch, traversal, wrong source, identity/date mismatch, invalid timestamps/versions/topics, missing binaries and disguised HTML.
 * `node tests/daily-pdf/integration.mjs` with `CI=true`, exact disposable database `cssvista_briefing_test`, temporary PHP 8.4/MariaDB/qpdf and loopback HTTP: passed. Real multipart upload, authenticated draft preview, publication without rebuild, anonymous and CSRF rejection, malformed/oversized PDFs, both sources together, duplicate-date protection, PDF ranges and attachment headers, withdrawal across repeated ingestion, private replacement with retained source/identity, scheduling, removal and audit were exercised.
-* `node tests/browser/daily-pdf.mjs`: passed at 320, 768 and 1440px. Verifies no horizontal library overflow, title/date archive, metadata search, pagination, calendar navigation, deep-link reader, actual PDF.js worker rendering, zoom/fit controls, download link and browser back. Browser catalogue/PDF responses use explicitly intercepted fixtures; this is not a production backend test. Screenshots are in ignored `test-artifacts/daily-pdf/`.
+* `node tests/browser/daily-pdf.mjs`: passed at 320, 768 and 1440px. Verifies no horizontal library overflow, title/date archive, metadata search, pagination, calendar navigation, deep-link reader, actual PDF.js worker rendering (painted-canvas assertion), three-page next/previous/jump controls, zoom/fit controls, download link and browser back. Browser catalogue/PDF responses use explicitly intercepted fixtures; this is not a production backend test. Screenshots are in ignored `test-artifacts/daily-pdf/`.
 * `npm audit --omit=dev`: zero reported vulnerabilities.
 * PHP lint: all three introduced PHP source files pass.
 
@@ -31,3 +31,5 @@ Production verification is pending: Hostinger qpdf/exec capability, private dura
 * `tests/daily-pdf/`, `tests/dailyPdf.test.mjs`, `tests/browser/daily-pdf.mjs`, `tests/productionRoutes.test.ts`, `.github/workflows/daily-pdf-verification.yml`: repeatable validation.
 
 The operations handbook is [current-affairs-daily.md](current-affairs-daily.md).
+
+Final clean production build passed at implementation commit `1fc6654`, including the dynamic reader shell and all existing artifact gates. Subsequent changes only strengthen browser fixture coverage and this validation record.
