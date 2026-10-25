@@ -14,6 +14,8 @@ Verified in this workspace:
 
 `npm run build:hostinger` passed, including TypeScript, Vite, MPT, SEO, search-readiness, route-integrity, internal-link and duplicate-content gates. Final direct-navigation tests exposed the need for a dynamic date-reader rewrite; the new `scripts/daily-pdf/routes.mjs` generates an ad-free noindex reader shell so admin editions support refresh without rebuilding. The corrected artifact passes all 17 route tests, route-integrity and search-readiness audits. `npm run test:all` passed with exit code 0, including the new validator tests and all existing suite commands. An initial route check caught a new homepage loading placeholder; it was corrected in source rather than weakening the SEO assertion.
 
+The independent GitHub Actions [Daily PDF publication verification](https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/40160346792) also passed on commit `8818a64`, including actual MySQL/PHP/qpdf upload and cross-source checks. The final artifact audit additionally caught inherited library social metadata in the dynamic reader shell; that metadata is removed and regression assertions now cover it.
+
 Production verification is pending: Hostinger qpdf/exec capability, private durable storage and PHP request limits, real owner MFA session/upload on Hostinger, atomic deployment/retention behavior, CDN/header behavior, and a real supplied edition’s live URL/hash. GitHub binary blob support is present in the connected tool schema; no actual publication file was attached or authorized for this implementation, so no live GitHub-PDF publication is claimed. Repository release-hold policy keeps the feature on a development branch/draft PR.
 
 ## Change map

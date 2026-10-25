@@ -369,6 +369,9 @@ test('daily PDF routes are separate public ad-free readers and private binaries 
     assert.match(metaRobots(served(path)), /noindex/, path)
     assert.ok(!sitemapUrls.has(`${CANONICAL_ORIGIN}${path}`))
   }
+  const readerShell = served('/current-affairs-daily/2026-10-25')
+  assert.doesNotMatch(readerShell, /property="og:url"/, 'dynamic shell must not inherit the library social URL')
+  assert.doesNotMatch(readerShell, /id="cssv-route-structured-data"/, 'dynamic shell must not inherit library structured data')
   for (const path of ['/api/_daily_release/catalog.php', '/api/_daily_release/2026/10/daily-2026-10-25-v1.pdf', '/api/_daily_pdf.php']) {
     assert.equal(request(path).status, 403, path)
   }
