@@ -1,7 +1,7 @@
 {
   "date": "2026-10-26",
-  "published_at": "2026-10-26T19:06:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 26 October 2026 | Evening Update (through 19:06 PKT)",
+  "published_at": "2026-10-26T19:39:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 26 October 2026 | Evening Update (through 19:39 PKT)",
   "schema_version": 1,
   "stories": [
     {
@@ -746,6 +746,126 @@
           "title": "UK sanctions 15 commanders from rival Sudan factions over wartime rape",
           "url": "https://www.reuters.com/world/uk/uk-sanctions-15-commanders-rival-sudan-factions-over-wartime-rape-2026-10-26/",
           "published_at": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-26-sudan-electricity-drone-attacks",
+      "category": "World — Sudan Conflict and Humanitarian Infrastructure",
+      "headline": "Drone strikes disrupt electricity across four Sudanese states, state operator says",
+      "summary": "Sudan Electricity Holding Company reported on 26 October that drone attacks damaged five substations and disrupted power in Sennar, Gedaref, White Nile and Gezira. It blamed the Rapid Support Forces; Reuters said the attribution could not be independently verified.",
+      "what_happened": "The state operator identified the affected substations as Sinja, El Hawata, Al Fao, Mashkour and Al-Junaid. It warned that damage to the southeastern grid could affect the wider national network. Reuters said the RSF had not immediately responded to a request for comment. Anadolu Agency separately reported the electricity company's account.",
+      "explanation": "The four-state count comes from the operator's statement. The blackout and damage were reported by the operator; responsibility for the strikes remains an allegation rather than an independently verified finding.",
+      "background": "Sudan's civil war between the army and the RSF began in April 2023. Repeated attacks on power infrastructure undermine medical refrigeration, hospitals, clean-water pumping and agricultural irrigation.",
+      "why_it_matters": "Critical civilian infrastructure is central to international humanitarian law and emergency relief. Electricity outages compound Sudan's humanitarian crisis and obstruct economic recovery.",
+      "pakistan_perspective": "This case provides a comparative study of civilian infrastructure protection, humanitarian access and energy-system resilience relevant to conflict and security analysis.",
+      "regional_implications": "The reported outages disrupt civilian services in multiple army-controlled states.",
+      "global_implications": "The incident adds to concerns about drone warfare and the protection of essential civilian services.",
+      "key_takeaways": [
+        "On 26 October 2026, Sudan's electricity operator identified four states affected by reported drone strikes.",
+        "The operator attributed the attacks to the RSF; Reuters could not independently verify responsibility.",
+        "The operator named five damaged substations."
+      ],
+      "facts": [
+        "Sudan Electricity Holding Company identified Sennar, Gedaref, White Nile and Gezira as the four affected states on 26 October 2026."
+      ],
+      "quick_gk": [
+        {
+          "label": "Affected states",
+          "value": "Four: Sennar, Gedaref, White Nile and Gezira (operator's report, 26 October 2026)."
+        }
+      ],
+      "question_angles": [
+        "How many states did Sudan Electricity Holding Company identify as affected by the 26 October power disruptions?"
+      ],
+      "topics": [
+        "Sudan civil war",
+        "Humanitarian law",
+        "Critical infrastructure",
+        "Energy security"
+      ],
+      "countries": [
+        "Sudan"
+      ],
+      "institutions": [
+        "Sudan Electricity Holding Company",
+        "Rapid Support Forces"
+      ],
+      "reports": [],
+      "treaties": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Drone strikes cut power across southeast Sudan, operator says",
+          "url": "https://www.reuters.com/business/energy/drone-strikes-cut-power-across-southeast-sudan-operator-says-2026-10-26/",
+          "published_at": "2026-10-26"
+        },
+        {
+          "publisher": "Anadolu Agency",
+          "title": "RSF drone strikes damage 5 power substations, cause blackout in Sudan",
+          "url": "https://aa.com.tr/en/africa/rsf-drone-strikes-damage-5-power-substations-cause-blackout-in-sudan/4101140",
+          "published_at": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-26-uae-copernicus-oil-spill",
+      "category": "World — Marine Pollution and Gulf Energy Security",
+      "headline": "Satellite images show widening offshore UAE oil spill as coastal restrictions continue",
+      "summary": "Reuters reported on 26 October that EU Copernicus Sentinel-2 images dated 24 October showed a widening oil spill approaching Umm Al Quwain in the UAE. Authorities had closed beaches in affected northern emirates and were assessing environmental damage.",
+      "what_happened": "The images show a widening slick near the northern UAE coastline. Authorities had announced containment operations and restrictions in Umm Al Quwain, Sharjah and Ras Al Khaimah. UAE officials had not identified the tanker or confirmed the cause. Experts interviewed by Reuters associated the slick with the damaged tanker Gem No. 2; that identification was not an official finding.",
+      "explanation": "The 26 October development was fresh reporting based on satellite images acquired on 24 October. The initial containment announcement and some beach closures occurred on earlier dates. Satellite images help monitor oil pollution but cannot alone establish legal responsibility.",
+      "background": "The Gulf's busy shipping routes and regional conflict expose coastal ecosystems, fisheries and desalination-dependent communities to maritime pollution risks.",
+      "why_it_matters": "The spill connects maritime security, environmental governance, emergency response and satellite remote sensing. Potential threats include coastal fisheries, biodiversity and seawater desalination facilities.",
+      "pakistan_perspective": "Pakistan's Arabian Sea coastline, fishing communities and shipping corridors face analogous ship-source pollution risks, making this a useful case study in marine protection.",
+      "regional_implications": "Restrictions on northern UAE coastal access affect tourism, fisheries and maritime activity.",
+      "global_implications": "The incident demonstrates environmental risks along conflict-affected shipping corridors and the importance of earth-observation programmes.",
+      "key_takeaways": [
+        "Reuters reported the widening spill on 26 October using Copernicus Sentinel-2 imagery dated 24 October.",
+        "The spill approached Umm Al Quwain; coastal restrictions also affected Sharjah and Ras Al Khaimah.",
+        "Officials had not confirmed the tanker identity or spill cause."
+      ],
+      "facts": [
+        "EU Copernicus Sentinel-2 satellite imagery dated 24 October 2026 showed a widening oil spill off Umm Al Quwain, reported on 26 October."
+      ],
+      "quick_gk": [
+        {
+          "label": "Satellite programme",
+          "value": "EU Copernicus Sentinel-2; images dated 24 October, reported 26 October 2026."
+        }
+      ],
+      "question_angles": [
+        "Which EU satellite programme provided images of the widening UAE offshore oil spill reported on 26 October?"
+      ],
+      "topics": [
+        "Marine pollution",
+        "Copernicus Sentinel-2",
+        "Remote sensing",
+        "Strait of Hormuz"
+      ],
+      "countries": [
+        "United Arab Emirates"
+      ],
+      "institutions": [
+        "EU Copernicus programme",
+        "UAE Ministry of Climate Change and Environment"
+      ],
+      "reports": [],
+      "treaties": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Oil spill off UAE widens, satellite images show, prompting more beach closures",
+          "url": "https://www.reuters.com/world/middle-east/oil-spill-off-uae-widens-satellite-images-show-prompting-more-beach-closures-2026-10-26/",
+          "published_at": "2026-10-26"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "Oil spill off UAE coast prompts beach closures, cleanup effort",
+          "url": "https://www.reuters.com/business/environment/uae-says-tanker-oil-spill-affects-beaches-umm-al-quwain-2026-10-23/",
+          "published_at": "2026-10-23"
         }
       ]
     }

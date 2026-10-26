@@ -928,5 +928,35 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/uk/uk-sanctions-15-commanders-rival-sudan-factions-over-wartime-rape-2026-10-26/"
+  },
+  {
+    "id": "current-affairs-20261026-15",
+    "q": "How many Sudanese states did Sudan Electricity Holding Company report losing power following drone strikes on 26 October 2026?",
+    "o": [
+      "Two",
+      "Three",
+      "Four",
+      "Six"
+    ],
+    "a": 2,
+    "e": "The operator listed Sennar, Gedaref, White Nile and Gezira, a total of four states. Responsibility for the strikes was not independently verified. Sources: Reuters; Anadolu Agency.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/drone-strikes-cut-power-across-southeast-sudan-operator-says-2026-10-26/"
+  },
+  {
+    "id": "current-affairs-20261026-16",
+    "q": "Which EU satellite programme provided imagery of the widening oil spill off the UAE reported on 26 October 2026?",
+    "o": [
+      "Copernicus Sentinel-2",
+      "Landsat 9",
+      "Himawari-9",
+      "GOES-18"
+    ],
+    "a": 0,
+    "e": "Reuters used images dated 24 October 2026 from the EU's Copernicus Sentinel-2 programme to report on the widening offshore spill. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/oil-spill-off-uae-widens-satellite-images-show-prompting-more-beach-closures-2026-10-26/"
   }
 ]

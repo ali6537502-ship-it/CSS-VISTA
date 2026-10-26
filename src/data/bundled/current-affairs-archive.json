@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 561,
+  "count": 563,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -3926,6 +3926,20 @@
     {
       "id": "current-affairs-archive-20261026-14",
       "text": "The United Kingdom sanctioned 15 individuals from rival Sudanese conflict factions on 26 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261026-15",
+      "text": "On 26 October 2026, Sudan's electricity operator reported outages in four states: Sennar, Gedaref, White Nile and Gezira, following drone strikes.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261026-16",
+      "text": "EU Copernicus Sentinel-2 images dated 24 October 2026 showed a widening offshore oil spill near Umm Al Quwain, UAE, reported by Reuters on 26 October.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
