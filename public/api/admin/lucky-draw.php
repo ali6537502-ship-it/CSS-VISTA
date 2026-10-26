@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 $body = cssv_request_json(8192);
 $action = (string)($body['action'] ?? '');
-if (!in_array($action, ['new', 'save', 'visibility', 'draw'], true)) cssv_fail('Unknown draw action.', 400, 'unknown_action');
+if (!in_array($action, ['new', 'save', 'visibility', 'draw', 'additional_winner'], true)) cssv_fail('Unknown draw action.', 400, 'unknown_action');
 try {
     $pdo->beginTransaction();
     $current = cssv_draw_current($pdo, true);
@@ -100,6 +100,36 @@ try {
             ->execute([trim($title), trim($description), $closesAt, $count, $id]);
         $pdo->commit();
         cssv_json(['ok' => true, 'message' => 'Draw settings saved.']);
+    }
+    if ($action === 'additional_winner') {
+        // Only a completed, single-winner draw may gain its one-time second winner.
+        // The campaign row is locked above, so two owner requests cannot add two extra winners.
+        if ($current['drawn_at'] === null || (int)$current['winner_count'] !== 1) {
+            cssv_fail('The one-time second-winner draw is not available.', 409, 'second_winner_unavailable');
+        }
+        $existing = $pdo->prepare('SELECT COUNT(*) FROM lucky_draw_winners WHERE campaign_id=?');
+        $existing->execute([$id]);
+        if ((int)$existing->fetchColumn() !== 1) {
+            cssv_fail('The completed draw must have exactly one recorded winner.', 409, 'invalid_winner_state');
+        }
+        // Do not reopen applications or redraw, delete, or overwrite the original result.
+        $remaining = $pdo->prepare(
+            'SELECT e.id FROM lucky_draw_entries e
+             WHERE e.campaign_id=? AND NOT EXISTS (
+                 SELECT 1 FROM lucky_draw_winners w
+                 WHERE w.campaign_id=e.campaign_id AND w.entry_id=e.id
+             ) ORDER BY e.applied_at,e.id'
+        );
+        $remaining->execute([$id]);
+        $eligible = $remaining->fetchAll(PDO::FETCH_COLUMN);
+        if (!$eligible) cssv_fail('There are no remaining applicants to select.', 409, 'no_remaining_entries');
+        $chosen = $eligible[random_int(0, count($eligible) - 1)];
+        $pdo->prepare('INSERT INTO lucky_draw_winners(campaign_id,position,entry_id,selected_at) VALUES(?,?,?,UTC_TIMESTAMP(6))')
+            ->execute([$id, 2, $chosen]);
+        $pdo->prepare('UPDATE lucky_draw_campaigns SET winner_count=2 WHERE id=?')->execute([$id]);
+        $pdo->commit();
+        cssv_json(['ok' => true, 'winners' => cssv_draw_winners($pdo, $id),
+            'message' => 'Second winner selected from the original applicants. The first result is unchanged.']);
     }
     if ($current['drawn_at'] !== null) cssv_fail('Winners have already been selected. The result cannot be redrawn.', 409, 'already_drawn');
     $stmt = $pdo->prepare('SELECT id FROM lucky_draw_entries WHERE campaign_id=? ORDER BY applied_at,id');
