@@ -163,3 +163,11 @@ by the older unsafe timer implementation. To roll back visual changes, retain th
 account-isolation patch; do not restore the demonstrated shared-device exposure or
 clear the new recovery keys. An older unpatched binary cannot be called a lossless
 rollback for newly saved in-progress timers. Original legacy recovery remains intact.
+
+## Subsequent account-entry follow-up
+
+The easier native signup, four saved profile steps, private photo preparation,
+final fixture checks and comparable original/current dashboard benchmark are
+recorded in [signup-flow.md](signup-flow.md). Its measurements supersede the
+earlier absence of a comparable performance baseline; physical-device and
+official-source limitations remain explicit.

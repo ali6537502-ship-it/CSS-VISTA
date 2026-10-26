@@ -944,6 +944,7 @@ export default function Layout() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen, searchOpen])
   useEffect(() => {
+    if (/^\/account(?:\/|$)/.test(location.pathname) && !MPT_FOCUS_PATH.test(location.pathname)) return
     const openSearch = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLocaleLowerCase() === 'k') {
         event.preventDefault()
@@ -961,7 +962,7 @@ export default function Layout() {
       window.removeEventListener('keydown', openSearch)
       window.removeEventListener('cssvista:open-search', openSearchFromPage)
     }
-  }, [])
+  }, [location.pathname])
 
   const goBack = () => {
     if (requestPageBack()) return
@@ -978,6 +979,15 @@ export default function Layout() {
 
   if (location.pathname.startsWith('/account/') && !MPT_FOCUS_PATH.test(location.pathname)) {
     return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></ProfileGate></>
+  }
+
+  if (location.pathname === '/account') {
+    return <div className="flex min-h-screen flex-col bg-[#faf9f5]">
+      <RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice />
+      <a href="#account-entry" className="sr-only z-50 rounded-lg bg-white p-3 text-pine focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to account</a>
+      <header className="border-b border-[#e1e6dd] bg-white/90"><div className="mx-auto flex min-h-20 max-w-6xl items-center justify-between gap-4 px-4 py-3"><Logo className="h-11 w-auto max-w-[185px] object-contain"/><Link to="/" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-pine"><ArrowLeft size={16}/>Back to website</Link></div></header>
+      <div id="account-entry" tabIndex={-1} className="flex-1 pb-[env(safe-area-inset-bottom)]"><div className="cssv-route-stage"><ProReleaseOutlet /></div></div>
+    </div>
   }
 
   return (
