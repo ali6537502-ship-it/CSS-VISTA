@@ -22,6 +22,7 @@ export default function LuckyDrawPanel() {
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   const [spinning, setSpinning] = useState(false)
+  const [extraSpin, setExtraSpin] = useState(false)
   const [rollingName, setRollingName] = useState('')
   const [reveal, setReveal] = useState(true)
 
@@ -70,20 +71,32 @@ export default function LuckyDrawPanel() {
     try {
       // A secure random selection is recorded on the server BEFORE the presentation starts.
       await ownerRequest('admin/lucky-draw.php', { method: 'POST', body: JSON.stringify({ action: 'draw' }) })
-      setSpinning(true); setReveal(false)
+      setExtraSpin(false); setSpinning(true); setReveal(false)
       setNotice('The winners are securely recorded. Revealing results…')
       await load()
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Could not select winners.') }
     finally { setBusy(false) }
   }
+  const spinSecondWinner = async () => {
+    if (!data?.campaign || !window.confirm('Choose one additional winner from the SAME applications? The existing winner stays unchanged and cannot be selected again. This one-time result is permanent.')) return
+    setBusy(true); setError(''); setNotice('')
+    try {
+      await ownerRequest('admin/lucky-draw.php', { method: 'POST', body: JSON.stringify({ action: 'additional_winner' }) })
+      setExtraSpin(true); setSpinning(true); setReveal(false)
+      setNotice('Second winner securely recorded from the remaining original applicants. Revealing both winners…')
+      await load()
+    } catch (reason) { setError(reason instanceof Error ? reason.message : 'Could not select the second winner.') }
+    finally { setBusy(false) }
+  }
   useEffect(() => {
     if (!spinning) return
-    const pool = data?.entries.map(entry => entry.name) || []
+    const firstWinnerNumber = extraSpin ? data?.winners.find(w => w.position === 1)?.number : undefined
+    const pool = data?.entries.filter(entry => entry.number !== firstWinnerNumber).map(entry => entry.name) || []
     let at = 0
     const timer = window.setInterval(() => { if (pool.length) setRollingName(pool[(at++) % pool.length]) }, 90)
     const finish = window.setTimeout(() => { window.clearInterval(timer); setSpinning(false); setRollingName(''); setReveal(true) }, 3500)
     return () => { window.clearInterval(timer); window.clearTimeout(finish) }
-  }, [spinning, data?.entries])
+  }, [spinning, extraSpin, data?.entries, data?.winners])
 
   const current = data?.campaign && data.campaign.id === data.current_id
   return (
@@ -142,9 +155,16 @@ export default function LuckyDrawPanel() {
                     <div className="rounded-xl bg-slate-50 p-4"><Trophy className="mx-auto h-5 w-5 text-amber-600" /><p className="mt-1 text-2xl font-black text-pine">{data.campaign.winner_count}</p><p className="text-xs text-muted-foreground">Winner slots</p></div>
                   </div>
                   <div className="mt-5 flex min-h-[190px] flex-col items-center justify-center rounded-2xl border border-amber-200 bg-gradient-to-b from-amber-50 to-white p-6 text-center">
-                    {spinning ? <><Gift className="h-9 w-9 animate-bounce text-amber-600" /><p className="mt-2 text-xs font-bold uppercase tracking-widest text-amber-700">Selecting lucky names</p><h3 className="mt-3 break-words text-2xl font-black text-pine" aria-live="off">{rollingName || 'Good luck!'}</h3></> : data.winners.length && reveal ? <><Trophy className="h-9 w-9 text-amber-600" /><p className="mt-2 text-xs font-bold uppercase tracking-widest text-amber-700">Winners · permanent result</p>{data.winners.map(w => <p key={w.position} className="mt-2 text-xl font-black text-pine">{w.position}. {w.name} <span className="text-sm font-normal text-slate-500">#{w.number}</span></p>)}</> : <><Gift className="h-10 w-10 text-amber-600" /><h3 className="mt-3 text-xl font-bold text-pine">Ready for the draw?</h3><p className="mt-2 text-sm text-muted-foreground">Winners are chosen uniformly at random on the server, without repeats.</p></>}
+                    {spinning ? <><Gift className="h-9 w-9 animate-bounce text-amber-600" /><p className="mt-2 text-xs font-bold uppercase tracking-widest text-amber-700">{extraSpin ? 'Selecting the second winner' : 'Selecting lucky names'}</p><h3 className="mt-3 break-words text-2xl font-black text-pine" aria-live="off">{rollingName || 'Good luck!'}</h3></> : data.winners.length && reveal ? <><Trophy className="h-9 w-9 text-amber-600" /><p className="mt-2 text-xs font-bold uppercase tracking-widest text-amber-700">Winners · permanent result</p>{data.winners.map(w => <p key={w.position} className="mt-2 text-xl font-black text-pine">{w.position}. {w.name} <span className="text-sm font-normal text-slate-500">#{w.number}</span></p>)}</> : <><Gift className="h-10 w-10 text-amber-600" /><h3 className="mt-3 text-xl font-bold text-pine">Ready for the draw?</h3><p className="mt-2 text-sm text-muted-foreground">Winners are chosen uniformly at random on the server, without repeats.</p></>}
                   </div>
                   {current && !data.campaign.drawn_at && <button disabled={busy || spinning || data.total < data.campaign.winner_count} onClick={() => void spin()} className="mt-4 w-full rounded-xl bg-amber-500 px-5 py-3.5 text-sm font-black text-slate-950 hover:bg-amber-400 disabled:opacity-40">Run Lucky Draw · Select {data.campaign.winner_count} winner{data.campaign.winner_count === 1 ? '' : 's'}</button>}
+                  {current && !!data.campaign.drawn_at && data.campaign.winner_count === 1 && data.winners.length === 1 && data.total > 1 && (
+                    <div className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4">
+                      <p className="text-sm font-semibold text-amber-950">Need one more winner from this draw?</p>
+                      <p className="mt-1 text-xs text-amber-900">Select one additional winner from the original applications, excluding the first winner. No new entries or replacement of the first result.</p>
+                      <button type="button" disabled={busy || spinning} onClick={() => void spinSecondWinner()} className="mt-3 w-full rounded-xl bg-amber-500 px-5 py-3.5 text-sm font-black text-slate-950 hover:bg-amber-400 disabled:opacity-40">Draw Second Winner · One Time</button>
+                    </div>
+                  )}
                   {data.campaign.drawn_at && <p className="mt-3 text-center text-xs text-muted-foreground">Selected {dateTime(data.campaign.drawn_at)}. This result cannot be redrawn.</p>}
                 </section>
               </div>
