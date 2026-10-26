@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     $id = (int)$campaign['id'];
     if (isset($_GET['status'])) {
-        cssv_json(['ok' => true, 'visible' => true]);
+        $accepting = $campaign['drawn_at'] === null && ($campaign['closes_at'] === null || strtotime((string)$campaign['closes_at'] . ' UTC') > time());
+        cssv_json(['ok' => true, 'visible' => true, 'accepting' => $accepting, 'drawn' => $campaign['drawn_at'] !== null]);
     }
     $page = max(1, (int)($_GET['page'] ?? 1));
     $mine = null;
