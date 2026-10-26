@@ -1,3 +1,5 @@
+import '@/features/workspace/account.css'
+import { StudyRail } from '@/features/workspace/StudyFlow'
 import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { isProDestination } from '@/features/membership/proDestinations'
 import { ProReleaseOutlet } from '@/features/membership/ProRelease'
@@ -1262,12 +1264,13 @@ export default function Layout() {
         </nav>
       </aside>
 
-      <main className="flex-1 pb-[calc(200px+env(safe-area-inset-bottom))] md:pb-0">
+      <main className={`flex-1 pb-[calc(200px+env(safe-area-inset-bottom))] md:pb-0 ${location.pathname.startsWith('/account') ? 'account-canvas' : ''}`}>
         <div
           key={location.pathname}
           className={`cssv-route-stage route-transition-${routeTransition}`}
           style={renderRestoreMinHeight ? { minHeight: `${renderRestoreMinHeight}px` } : undefined}
         >
+          <StudyRail />
           <ProReleaseOutlet />
         </div>
       </main>

@@ -1,3 +1,4 @@
+import StudyFlow from './StudyFlow'
 import SaveRecovery from './Recovery'
 import { useAccount } from '@/lib/accountContext'
 import { Link, useSearchParams } from 'react-router'
@@ -13,6 +14,7 @@ export default function Today() {
     {!load.data ? <WorkspaceLoad error={load.error} retry={load.refresh} /> : <div className="space-y-8">
       {user && <SaveRecovery key={user.id} user={user.id} />}
       <WorkspaceHold paused={load.data.paused} />
+      <StudyFlow />
       {params.has('plan') && <p className="text-sm text-[#47564D]">Your {params.get('plan') === 'pro' ? 'Pro' : 'Free'} entry opens the same account. Access follows your current membership and availability.</p>}
       <section className="rounded-xl border border-[#D7E0DA] bg-white p-5 sm:p-6">
         <h2 className="text-xl font-semibold">{load.data.items.length ? 'Continue your recent work' : 'Choose your first lesson'}</h2>

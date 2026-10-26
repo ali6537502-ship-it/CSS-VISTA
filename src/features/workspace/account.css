@@ -1,0 +1,12 @@
+.account-canvas { --account-line: #d7e0da; background: linear-gradient(160deg,#f1f6f2 0%,#fafbf8 65%); }
+.account-canvas h1 { letter-spacing: -.035em; }
+.account-canvas h2 { letter-spacing: -.015em; }
+.account-canvas input:not([type=checkbox]):not([type=radio]),
+.account-canvas select, .account-canvas textarea { border-color: var(--account-line); border-radius: .75rem; }
+.account-canvas button:focus-visible, .account-canvas a:focus-visible,
+.account-canvas input:focus-visible, .account-canvas select:focus-visible,
+.account-canvas textarea:focus-visible { outline: 2px solid #166a91; outline-offset: 3px; }
+.account-canvas .rounded-2xl.border { box-shadow: 0 3px 14px rgb(23 37 31 / 3%); }
+@media (prefers-reduced-motion: no-preference) {
+ .account-canvas a, .account-canvas button { transition: background-color .15s, border-color .15s; }
+}

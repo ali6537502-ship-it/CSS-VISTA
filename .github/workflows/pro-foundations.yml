@@ -116,6 +116,7 @@ jobs:
           php tests/workspace/factbook-backup-unit.php
           node tests/workspace/factbook-backup.mjs
           node tests/workspace/catalog.mjs
+          node --test tests/workspace/study.test.ts
           php tests/preservation/native-snapshot.php projections > test-artifacts/workspace-query-plans.json
           node tests/grammar/security.mjs
           node tests/precis/security.mjs
@@ -135,6 +136,7 @@ jobs:
           node tests/browser/workspace-import.mjs
           node tests/browser/factbook-backup.mjs
           node tests/browser/catalog.mjs
+          node tests/browser/study-flow.mjs
           node tests/browser/skills.mjs
           node tests/browser/connected-skills.mjs
           node tests/browser/topic-options.mjs

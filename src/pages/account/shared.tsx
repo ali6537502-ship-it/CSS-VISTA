@@ -1,3 +1,4 @@
+import '@/features/workspace/account.css'
 import WorkspaceBreadcrumbs from '@/features/workspace/Breadcrumbs'
 import WorkspaceNavigation from '@/features/workspace/Navigation'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
@@ -104,7 +105,7 @@ export function useSyllabusTotal() {
 export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
   const { user } = useAccount()
   return (
-    <div className="min-h-screen bg-[#F6F8F7] text-[#17251F] [&_.text-slate-500]:text-[#47564D]">
+    <div className="account-canvas min-h-screen bg-[#F6F8F7] text-[#17251F] [&_.text-slate-500]:text-[#47564D]">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
         <Link to="/account/dashboard" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-800">
           <ArrowLeft className="h-4 w-4" /> My CSS Vista
