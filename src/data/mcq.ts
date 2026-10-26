@@ -216,17 +216,19 @@ export async function sampleQuestions(
   const idx = await getBankIndex()
   const cats = idx.categories.filter((c) => slugs.includes(c.slug) && c.count > 0)
   if (cats.length === 0) return []
-  const pool: BankQuestion[] = []
-  await Promise.all(
+  const categoryPools = await Promise.all(
     cats.map(async (c) => {
       // pick up to two random chunks per category - enough variety for a quiz pool
       const picks = new Set<number>()
       picks.add(Math.floor(rng() * c.chunks))
       if (c.chunks > 1) picks.add(Math.floor(rng() * c.chunks))
       const parts = await Promise.all([...picks].map((i) => getChunk(c.slug, i)))
-      pool.push(...parts.flat())
+      return parts.flat()
     }),
   )
+  // Preserve catalogue order regardless of shard response timing. A seeded daily
+  // quiz must rebuild the same paper so its existing recovery signature matches.
+  const pool = categoryPools.flat()
   // shuffle pool, take n
   const arr = dedupeBankQuestions(pool)
   for (let i = arr.length - 1; i > 0; i--) {

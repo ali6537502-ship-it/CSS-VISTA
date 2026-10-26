@@ -8,24 +8,32 @@ import { mergedPastPapers } from '@/lib/admin'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
+import { useAccount } from '@/lib/accountContext'
+import { readLocalStudySession, writeLocalStudySession } from '@/lib/localStudySession'
 import { PAPER_MCQ_SECONDS, PAPER_QUESTION_SECONDS, PAPER_TOTAL_SECONDS, allocatedAnswerSeconds, paperQuestionTargetSeconds, SINGLE_RESUME_KEY, PAPER_RESUME_KEY,
   parseSingleSnapshot, parsePaperSnapshot, restoredSingleSeconds, restoredPaperClocks,
   type SingleTimerSnapshot, type PaperSnapshot } from '@/lib/answerTimerRecovery'
 
-function readSingleSnapshot(): SingleTimerSnapshot | null {
+function readSingleSnapshot(accountId: string | null): SingleTimerSnapshot | null {
   try {
-    const raw = localStorage.getItem(SINGLE_RESUME_KEY)
+    const raw = readLocalStudySession(SINGLE_RESUME_KEY, accountId)
     return raw ? parseSingleSnapshot(JSON.parse(raw)) : null
   } catch {
     return null
   }
 }
 
-function writeSingleSnapshot(snapshot: SingleTimerSnapshot) {
-  try { localStorage.setItem(SINGLE_RESUME_KEY, JSON.stringify(snapshot)) } catch { /* storage may be unavailable */ }
+function writeSingleSnapshot(snapshot: SingleTimerSnapshot, accountId: string | null) {
+  writeLocalStudySession(SINGLE_RESUME_KEY, JSON.stringify(snapshot), accountId)
 }
 
 export default function AnswerTimer() {
+  const { user, loading } = useAccount()
+  if (loading) return <p role="status" className="p-8 text-center">Loading your timer…</p>
+  return <AccountAnswerTimer key={user?.id ?? 'guest'} accountId={user?.id ?? null} />
+}
+
+function AccountAnswerTimer({ accountId }: { accountId: string | null }) {
   const [tab, setTab] = useState<'single' | 'paper'>('single')
   const [alertMode, setAlertMode] = useState<TimerAlertMode>(() => {
     try {
@@ -88,8 +96,8 @@ export default function AnswerTimer() {
           onKeepAwakeChange={setKeepAwake}
         />
         {tab === 'single'
-          ? <SingleTimer alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />
-          : <PaperTimer alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />}
+          ? <SingleTimer accountId={accountId} alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />
+          : <PaperTimer accountId={accountId} alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />}
       </div>
     </div>
   )
@@ -99,9 +107,9 @@ function usePaperTitles() {
   return useMemo(() => mergedPastPapers(seedPapers).map((p) => p.title), [])
 }
 
-function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
+function SingleTimer({ accountId, alertMode, notificationsEnabled, keepAwake }: { accountId: string | null; alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const paperTitles = usePaperTitles()
-  const saved = useMemo(() => readSingleSnapshot(), [])
+  const saved = useMemo(() => readSingleSnapshot(accountId), [accountId])
   const [question, setQuestion] = useState(saved?.question ?? '')
   const [customMin, setCustomMin] = useState(saved?.minutes ?? 35)
   const initialRemaining = useMemo(() => saved ? restoredSingleSeconds(saved) : null, [saved])
@@ -136,8 +144,8 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
       remaining: getRemaining(),
       running,
       savedAt: Date.now(),
-    })
-  }, [customMin, question, running, getRemaining])
+    }, accountId)
+  }, [accountId, customMin, question, running, getRemaining])
 
   useEffect(() => {
     if (skipFirstSave.current) { skipFirstSave.current = false; return }
@@ -328,16 +336,16 @@ function PastTimerSessions({ refreshKey }: { refreshKey: number }) {
   )
 }
 
-function readPaperSnapshot(): PaperSnapshot | null {
+function readPaperSnapshot(accountId: string | null): PaperSnapshot | null {
   try {
-    const raw = localStorage.getItem(PAPER_RESUME_KEY)
+    const raw = readLocalStudySession(PAPER_RESUME_KEY, accountId)
     return raw ? parsePaperSnapshot(JSON.parse(raw)) : null
   } catch {
     return null
   }
 }
 
-function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
+function PaperTimer({ accountId, alertMode, notificationsEnabled, keepAwake }: { accountId: string | null; alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const [questions, setQuestions] = useState<string[]>(['', '', '', ''])
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
   const [current, setCurrent] = useState(-1)
@@ -359,18 +367,13 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
   // it. The wall-clock anchors are persisted, so resuming accounts honestly for
   // the time that passed while the tab was gone.
   useEffect(() => {
-    const snapshot = readPaperSnapshot()
+    const snapshot = readPaperSnapshot(accountId)
     if (snapshot) setResumable(snapshot)
-  }, [])
+  }, [accountId])
 
   const persistPaper = useCallback((snapshot: PaperSnapshot | null) => {
-    try {
-      if (snapshot) localStorage.setItem(PAPER_RESUME_KEY, JSON.stringify(snapshot))
-      else localStorage.removeItem(PAPER_RESUME_KEY)
-    } catch {
-      /* storage full or blocked */
-    }
-  }, [])
+    writeLocalStudySession(PAPER_RESUME_KEY, snapshot ? JSON.stringify(snapshot) : null, accountId)
+  }, [accountId])
 
   const snapshotNow = useCallback((): PaperSnapshot => ({
     questions,

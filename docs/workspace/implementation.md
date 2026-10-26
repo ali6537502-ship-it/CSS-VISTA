@@ -1,5 +1,7 @@
 # Student workspace review
 
+Later preservation checks and fixes: [verification follow-up](verification-followup.md).
+
 ## Revision and release boundary
 
 Base: `13091aed6355556a5aceae8d4c9efe774cbee6ad`; branch: `review/student-workspace`.
@@ -35,7 +37,7 @@ Other legacy aliases remain declared in App.tsx and routeRegistry.mjs; none remo
 
 ## Data-flow and preservation review
 
-AccountProvider session → ProfileGate → workspace → existing pages. AccountProvider's moveProgress stashes the old owner and restores the new owner before rendering account content. hostingerSync merges supported snapshots, checks account identity before applying responses, and retains the existing sync delay and errors. None of these modules were edited.
+AccountProvider session → ProfileGate → workspace → existing pages. AccountProvider's moveProgress stashes the old owner and restores the new owner before rendering account content. hostingerSync merges supported snapshots, checks account identity before applying responses, and retains the existing sync delay and errors. The sync protocol and merge logic are unchanged. The later account-isolation fix adds a legacy local-session ownership binding before moveProgress; see verification-followup.md.
 
 Saved optional names → studyPlanner settings → subject presentation. Syllabus JSON slug + section/item index → unchanged `slug:section:item` identifiers → TaskItem/updateStudyScheduleTask → store save and PROGRESS_CHANGED_EVENT → useAccountSnapshot subscribers. Generated daily suggestions/planTaskCompletions remain separate from studyScheduleTasks. Native My CSS Attempts remains separate and explicitly labeled. Existing PlannerDashboard supplies weekly planning and editing. No competing task database.
 
@@ -79,19 +81,19 @@ Statuses reflect actual verification, not a build-only completion claim.
 | W03 | Six slots, alternative and saved optionals / Subjects, model | workspace.test.ts + browser alternative | verified adapter; official source recheck blocked |
 | W04 | Optional group validation / StudyPlanner, existing validator | sample + other valid + invalid fixtures | verified shared validator; verified native save, keyboard validation, and restoration in a fresh context |
 | W05 | Complete six-view planner / features/planner, PlannerDashboard, ScheduledSyllabusBoard, FpscSyllabusPlanner, preparation presentation | six-width workflow, native task/goal sync, native reviewed-plan and partial-work journey | verified in disposable browser/native journeys; see planner-restructure.md |
-| W06 | Practice and assessment continuity / WorkspaceSections, unchanged timer and engines | existing answer-timer/MPT tests; paused-route fixture | verified unit recovery and native answer-timer navigation/refresh; full mock session unverified |
-| W07 | Performance and honest measurement / Progress, shared, model | selector tests, fixture recorded results | verified fixture records; no new overall readiness score |
-| W08 | Library / Library, existing saved modes | route/source trace, fixture record retention | implemented; real bookmark→reader native planner API security verified; full browser planning journey partly verified |
+| W06 | Practice and assessment continuity / WorkspaceSections, unchanged timer and engines | existing answer-timer/MPT tests; paused-route fixture | verified native single/paper A→B→A recovery and complete 100-question PMS mock→Performance→sync; see verification-followup.md |
+| W07 | Performance and honest measurement / Progress, shared, model | selector tests, fixture recorded results | verified fixture records and native mock history; source-topic counts exclude completed personal/import tasks; no new overall readiness score |
+| W08 | Library / Library, existing saved modes | route/source trace, fixture record retention | verified saved MCQ→Library→reopened question/refresh, research bookmark retention and native account isolation; external publisher content not visited |
 | W09 | Registry/search/pins / registry, FeatureFinder, preferences | search/pause tests and browser pin fixture | verified in browser fixtures; see validation.txt |
-| W10 | Onboarding / AccountHome | persisted dismissal UI; no academic defaults | implemented; complete keyboard journey unverified |
-| W11 | Auth/account isolation/sync / original AccountProvider, hostingerSync, ProfileGate | unchanged contracts; browser fixture switch | verified native ownership/security, sign-in/out and delayed fresh-context restoration; late-response switch scenario unverified |
+| W10 | Onboarding / AccountHome | native keyboard dismissal/reopen/refresh and all five real destinations; no academic defaults | verified native keyboard guidance and unchanged academic records; see verification-followup.md |
+| W11 | Auth/account isolation/sync / original AccountProvider, hostingerSync, ProfileGate | unchanged contracts; browser fixture switch | verified native ownership/security, sign-in/out, delayed fresh-context restoration and A-response delivery after B hydration in the same browser document |
 | W12 | Entitlements/expired/pause / unchanged ProGate, ProReleaseOutlet and native policies | existing tests; pause fixture; no guard changes | verified native free/active/expired direct access and paused release tests |
 | W13 | Responsive/accessibility / workspace.css, shell | six widths, reading order/focus styles, screenshot review | verified six-width fixture navigation/screenshots and keyboard controls; no formal WCAG certification |
 | W14 | Brand/tokens/performance / authentic logo, CSS tokens | screenshot review; bundle/build output | implemented; comparable before/after performance not measured |
 | W15 | URLs/direct refresh/ad policy / routeRegistry.mjs | production routes, route/link audits | verified strict build, direct refresh and link audits |
 | W16 | Release safety/review / this report and local branch | git diff review, no push/deploy | verified local-only |
 
-Remaining integration limitations include offline→online transitions with unsynced work, late native responses during an actual account switch, active assessment navigation/refresh and complete bookmark→resource browser journeys. Native login/logout, membership tiers, planner ownership and reading history were additionally exercised as recorded below. Frontend fixtures are not substitutes for these. Run the existing disposable MySQL/PHP CI jobs before release. No production accounts used.
+These formerly outstanding integration scenarios were exercised in the later verification follow-up: offline→online with unsynced work, delayed native responses after account changes, mock refresh/resume, and bookmark content reopening. Native login/logout, membership tiers, planner ownership and reading history were additionally exercised as recorded below. Frontend fixtures are not substitutes for these. Run the existing disposable MySQL/PHP CI jobs before release. No production accounts used.
 
 ## Verification log
 
@@ -117,22 +119,20 @@ The build generates unrelated dated Vistagram manifests/posts and question-ID ar
 | Scenario | Executed evidence | Remaining boundary |
 |---|---|---|
 | Empty account | compiled fixture empty state; native fresh planner target unset | no academic seed writes |
-| Returning records | fixture task/bookmark/result retained after navigation and refresh | full bookmark content reopening not browser exercised |
+| Returning records | fixture task/bookmark/result retained after navigation and refresh | MCQ reopening/refresh and research bookmark retention verified in native browser fixtures |
 | Comparative selection | six-slot unit test and browser selector; previous statuses retained | new local display preference intentionally does not sync |
 | Sample and another valid selection | shared validator unit tests; sample saved through native browser | official FPSC PDF recheck unavailable |
 | Invalid/unknown choices | group validator; keyboard removal disables native form save; unknown correction preserves history | malformed historical variants reviewed in source |
 | Free/active/expired/paused | native paid-access, pro-security, release-pause; native browser paused routes | no production entitlements changed |
 | Suspended MPT | existing release gate and tests; fixture route redirects | MPT flag remains true |
-| Slow load/API failure/save failure | delayed real native progress; 503 fixture panels; quota-failure task readback | offline reconnection with unsynced work not exercised |
-| Other account | fixture account switch; native ownership/CSRF/account-binding suites | deliberately late live-browser responses across a switch not exercised |
-| Active answer timer | answerTimerRecovery tests; native browser navigation/refresh check listed in validation | native mock examination navigation remains unverified |
+| Slow load/API failure/save failure | delayed real native progress; 503 fixture panels; quota-failure task readback | loaded-page offline work, failed sync and reconnection verified; no offline document cache |
+| Other account | fixture account switch; native ownership/CSRF/account-binding suites | delayed A response after real native B-session hydration verified; no A data applied to B |
+| Active answer timer | answerTimerRecovery tests; native browser navigation/refresh check listed in validation | full PMS mock refresh/resume with original deadline, 100 answers, single result and native sync verified; MPT remains suspended |
 | Midnight/overdue | native planner/reading date boundary checks; targetDays tests | no new timezone preference introduced |
-| Keyboard/narrow layouts | six widths; mobile More→Subjects; sidebar collapse; keyboard optional validation | real on-screen keyboard and landscape review not performed |
+| Keyboard/narrow layouts | six widths; mobile More→Subjects; sidebar collapse; keyboard optional validation | touch and portrait/landscape emulation verified; physical devices and real on-screen keyboards unavailable |
 
-Existing preservation boundary requiring review: public answer-timer recovery uses
-`cssvista:single-answer-timer` and `cssvista:paper-attempt`, outside accountSync's
-primary/tool-key allowlist. This change preserves those identifiers and the original
-public timer contract. Same-user navigation/refresh continuity passed the native
-browser journey. Ownership of those pre-existing device-wide snapshots across a
-logout/account switch has not been verified; do not extrapolate the new workspace
-preference/isolation checks into a claim of complete timer-record account isolation.
+The later verification follow-up reproduced and fixed the pre-existing shared-device
+timer exposure. Original recovery keys remain intact; account-owned local recovery
+uses an additive adapter outside cloud sync. A→B→A single/paper recovery and a late
+A sync response after B hydration passed. See [verification-followup.md](verification-followup.md)
+for exact storage/rollback constraints and the remaining hardware/source limits.

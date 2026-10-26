@@ -1,5 +1,8 @@
 # Visual redesign review
 
+Later functional preservation checks and fixes are recorded in
+[verification follow-up](verification-followup.md).
+
 Revision starting point: be5ab2101cce77d375932942f9f6ad16e4656d6a.
 Branch: review/student-workspace. No remote writes or deployment.
 

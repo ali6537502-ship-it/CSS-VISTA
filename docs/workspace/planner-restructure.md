@@ -143,10 +143,11 @@ this document and the regression tests are committed review evidence.
 Fixtures are disposable and kept outside production source paths. Native records
 use the isolated `cssvista_briefing_test` database and localhost runtime only.
 
-Known limits: physical-device keyboards and landscape are not certified. Existing
-public timer ownership across logout/account switch and a live offline/reconnect
-conflict remain outside this planner presentation change. No production account was
-used for testing. Automated accessibility checks are not a formal WCAG certification.
+The original limits from this planner commit were followed up in
+[preservation verification](verification-followup.md), including timer ownership,
+offline/reconnect, conflicts and landscape emulation. Physical-device keyboards
+remain unavailable. No production account was used for testing. Automated
+accessibility checks are not a formal WCAG certification.
 
 ## Review and rollback
 

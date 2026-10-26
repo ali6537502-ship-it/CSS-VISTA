@@ -9,6 +9,10 @@ export function compulsoryCatalogue(comparative = false) {
   return compulsorySlots.map(([slug,name],i) => ({ slug: i === 5 && comparative ? 'comparative-religions' : slug, name: i === 5 && comparative ? 'Comparative Study of Major Religions (For Non-Muslims)' : name, marks:100 }))
 }
 export const optionalCatalogue = optionalGroups.flatMap(g => g.subjects)
+/** Count recorded source-topic identifiers, excluding personal/import task statuses. */
+export function completedSourceTopics(statuses: Record<string, string> | undefined) {
+  return Object.entries(statuses ?? {}).filter(([id, status]) => status === 'completed' && /^[a-z0-9-]+:\d+:\d+$/.test(id)).length
+}
 export function topicCoverage(subject: SyllabusSubject | undefined, statuses: Record<string,string>) {
   const ids = subject?.sections.flatMap((s,i) => s.items.map((_,j) => `${subject.slug}:${i}:${j}`)) ?? []
   const completed = ids.filter(id => statuses[id] === 'completed').length

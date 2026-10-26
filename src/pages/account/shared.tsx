@@ -1,6 +1,6 @@
 import { subjectVisual } from '@/features/workspace/Visuals'
 import WorkspaceAvatar from '@/features/workspace/WorkspaceAvatar'
-import { targetDays } from '@/features/workspace/model'
+import { completedSourceTopics, targetDays } from '@/features/workspace/model'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
@@ -58,7 +58,6 @@ export function useAccountSnapshot() {
     const today = localTaskDateKey()
     const todayTasks = activeTasks.filter((task) => task.date === today)
     const mockResults = state.quizResults.filter((result) => result.mockKind === 'gk' || result.mockKind === 'mpt')
-    const statuses = Object.values(state.syllabusItemStatuses ?? {})
     return {
       state,
       stats: getStats(),
@@ -72,7 +71,7 @@ export function useAccountSnapshot() {
       todayMinutes: todayTasks.reduce((sum, task) => sum + task.minutes, 0),
       mockResults,
       latestMock: mockResults[0] ?? null,
-      syllabusCompleted: statuses.filter((status) => status === 'completed').length,
+      syllabusCompleted: completedSourceTopics(state.syllabusItemStatuses),
       subjectProgress: Object.entries(state.subjectProgress ?? {}).sort((left, right) => right[1] - left[1]).slice(0, 5),
       savedResources: (state.bookmarks?.length ?? 0) + (state.savedAnswers?.length ?? 0),
     }

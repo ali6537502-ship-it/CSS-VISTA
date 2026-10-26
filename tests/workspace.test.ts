@@ -1,9 +1,16 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { compulsoryCatalogue, topicCoverage, targetDays, optionalCatalogue } from '../src/features/workspace/model.ts'
+import { completedSourceTopics, compulsoryCatalogue, topicCoverage, targetDays, optionalCatalogue } from '../src/features/workspace/model.ts'
 import { validateSubjectCombination } from '../src/lib/subjectSelection.ts'
 import { activeSection, featureState, features, searchFeatures } from '../src/features/workspace/registry.ts'
+test('completed personal and imported tasks do not masquerade as syllabus source progress', () => {
+  const statuses = { 'manual:private-task': 'completed', 'ai-schedule:imported-task': 'completed', 'political-science:0:0': 'completed', 'current-affairs:1:2': 'in-progress' }
+  assert.equal(completedSourceTopics(statuses), 1)
+  assert.equal(completedSourceTopics({ 'manual:only-task': 'completed' }), 0)
+  assert.equal(completedSourceTopics(undefined), 0)
+  assert.equal(statuses['manual:private-task'], 'completed', 'Presentation does not change stored task history')
+})
 test('six compulsory slots preserve the alternative without double counting', () => {
   for (const alternative of [false,true]) {
     const slots = compulsoryCatalogue(alternative)
