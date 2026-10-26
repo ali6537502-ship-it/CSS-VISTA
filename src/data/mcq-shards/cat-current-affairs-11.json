@@ -718,5 +718,215 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.dawn.com/news/2039605/pms-aide-vows-full-polio-eradication-as-this-years-tally-stands-at-seven"
+  },
+  {
+    "id": "current-affairs-20261026-01",
+    "q": "What policy rate did Pakistan's MPC announce on 26 October 2026?",
+    "o": [
+      "10.5%",
+      "11.0%",
+      "12.0%",
+      "13.5%"
+    ],
+    "a": 2,
+    "e": "On 26 October 2026, Pakistan's MPC raised the policy rate by 50 basis points to 12%, effective 27 October. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039956"
+  },
+  {
+    "id": "current-affairs-20261026-02",
+    "q": "Which two Pakistani bodies would be merged under the proposed umbrella privatisation commission bill reported on 26 October 2026?",
+    "o": [
+      "FBR and SECP",
+      "Privatisation Commission and Public-Private Partnership Authority",
+      "SBP and Competition Commission",
+      "Planning Commission and Finance Division"
+    ],
+    "a": 1,
+    "e": "The proposed Privatisation and Public-Private Partnership Commission would merge Pakistan's Privatisation Commission and Public-Private Partnership Authority. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039826"
+  },
+  {
+    "id": "current-affairs-20261026-03",
+    "q": "Which UN specialised agency issued the policy brief 'Food Supply for Healthy Diets in Pakistan' reported on 26 October 2026?",
+    "o": [
+      "World Health Organization",
+      "Food and Agriculture Organization",
+      "UNESCO",
+      "International Labour Organization"
+    ],
+    "a": 1,
+    "e": "An FAO policy brief reported on 26 October 2026 said more than 60% of Pakistanis could not afford a healthy diet. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039816/pakistans-food-supply-fails-own-dietary-guidelines-fao"
+  },
+  {
+    "id": "current-affairs-20261026-04",
+    "q": "In which city was the third Pakistan-China Spokespersons' Dialogue held on 26 October 2026?",
+    "o": [
+      "Beijing",
+      "Shanghai",
+      "Islamabad",
+      "Karachi"
+    ],
+    "a": 2,
+    "e": "The third Pakistan-China Spokespersons' Dialogue was held in Islamabad on 26 October 2026. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039966/pakistan-china-call-for-enhanced-cooperation-between-foreign-ministries-fo"
+  },
+  {
+    "id": "current-affairs-20261026-05",
+    "q": "Which Pakistani institution issued the 26 October 2026 rebuttal of Afghan Taliban civilian-casualty allegations?",
+    "o": [
+      "State Bank of Pakistan",
+      "Foreign Office",
+      "Election Commission of Pakistan",
+      "National Disaster Management Authority"
+    ],
+    "a": 1,
+    "e": "Pakistan's Foreign Office issued a rebuttal to Afghan Taliban civilian-casualty allegations on 26 October 2026. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039958/pakistan-rejects-afghan-talibans-claims-of-civilian-casualties-in-counterterrorism-operations"
+  },
+  {
+    "id": "current-affairs-20261026-06",
+    "q": "How many high-risk union councils were targeted by the special Peshawar polio booster campaign beginning 26 October 2026?",
+    "o": [
+      "24",
+      "36",
+      "48",
+      "72"
+    ],
+    "a": 2,
+    "e": "The polio booster campaign beginning 26 October 2026 in Peshawar targeted 48 high-risk union councils. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039779/special-polio-drive-in-peshawars-high-risk-ucs-begins-today"
+  },
+  {
+    "id": "current-affairs-20261026-07",
+    "q": "Which High Court ruled, in a decision reported on 26 October 2026, that a mother's remarriage alone cannot conclusively deny her child custody?",
+    "o": [
+      "Lahore High Court",
+      "Sindh High Court",
+      "Peshawar High Court",
+      "Islamabad High Court"
+    ],
+    "a": 2,
+    "e": "The Peshawar High Court held that a mother's remarriage alone is not a conclusive ground to deny child custody, as reported on 26 October 2026. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039780/mother-cant-be-denied-childs-custody-over-second-marriage-rules-phc"
+  },
+  {
+    "id": "current-affairs-20261026-08",
+    "q": "Which Pakistani institution condemned attacks affecting Saudi Arabia's Makkah and Madina regions on 26 October 2026?",
+    "o": [
+      "Ministry of Commerce",
+      "Foreign Office",
+      "State Bank",
+      "National Assembly Secretariat"
+    ],
+    "a": 1,
+    "e": "Pakistan's Foreign Office issued a condemnation on 26 October 2026 of Houthi attacks affecting Saudi Arabia's Makkah and Madina regions. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039960/pakistan-condemns-houthi-attacks-targeting-makkah-madina-as-grave-violation-of-saudi-sovereignty"
+  },
+  {
+    "id": "current-affairs-20261026-09",
+    "q": "Which city hosted the 26 October 2026 de-escalation talks involving senior officials from Pakistan, Saudi Arabia, Türkiye and Iran?",
+    "o": [
+      "Doha",
+      "Tehran",
+      "Ankara",
+      "Riyadh"
+    ],
+    "a": 1,
+    "e": "Senior officials from Pakistan, Saudi Arabia and Türkiye met Iranian authorities in Tehran on 26 October 2026. Source: Reuters; Associated Press.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/top-officials-mecca-pact-countries-meet-iranian-officials-tehran-monday-two-2026-10-26/"
+  },
+  {
+    "id": "current-affairs-20261026-10",
+    "q": "Which Saudi pipeline was named in the Houthis' claimed attacks on 26 October 2026?",
+    "o": [
+      "Trans-Arabian Gas Pipeline",
+      "East-West crude oil pipeline",
+      "Kirkuk-Ceyhan Pipeline",
+      "Baku-Tbilisi-Ceyhan Pipeline"
+    ],
+    "a": 1,
+    "e": "The Houthis claimed on 26 October 2026 to have targeted Saudi Arabia's East-West crude oil pumping stations and King Khalid International Airport; Saudi confirmation was pending. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/houthis-say-they-attacked-east-west-oil-pumping-stations-no-saudi-confirmation-2026-10-26/"
+  },
+  {
+    "id": "current-affairs-20261026-11",
+    "q": "Who won Brazil's 2026 presidential runoff against Flávio Bolsonaro?",
+    "o": [
+      "Jair Bolsonaro",
+      "Fernando Haddad",
+      "Luiz Inácio Lula da Silva",
+      "Geraldo Alckmin"
+    ],
+    "a": 2,
+    "e": "Luiz Inácio Lula da Silva defeated Flávio Bolsonaro in Brazil's 2026 presidential runoff, securing a fourth presidential term. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2039915/brazils-leftist-president-lula-wins-fourth-term-in-dramatic-comeback"
+  },
+  {
+    "id": "current-affairs-20261026-12",
+    "q": "Which AI company unveiled US IPO paperwork on 26 October 2026?",
+    "o": [
+      "Anthropic",
+      "Mistral AI",
+      "Cohere",
+      "Hugging Face"
+    ],
+    "a": 0,
+    "e": "Anthropic publicly unveiled its US IPO paperwork on 26 October 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/legal/litigation/anthropics-ipo-close-look-ai-frontrunners-rapid-growth-spiraling-costs-2026-10-26/"
+  },
+  {
+    "id": "current-affairs-20261026-13",
+    "q": "Which country's parliament authorised military support for Saudi Arabia's defence on 26 October 2026?",
+    "o": [
+      "Jordan",
+      "Egypt",
+      "Oman",
+      "Algeria"
+    ],
+    "a": 1,
+    "e": "Egypt's parliament authorised military support for Saudi Arabia's defence on 26 October 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/egypt-approves-military-support-saudi-arabia-after-houthi-attacks-escalate-2026-10-26/"
+  },
+  {
+    "id": "current-affairs-20261026-14",
+    "q": "How many commanders and officials linked to Sudan's rival factions did the UK sanction on 26 October 2026?",
+    "o": [
+      "8",
+      "12",
+      "15",
+      "25"
+    ],
+    "a": 2,
+    "e": "The United Kingdom sanctioned 15 individuals from rival Sudanese conflict factions on 26 October 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/uk/uk-sanctions-15-commanders-rival-sudan-factions-over-wartime-rape-2026-10-26/"
   }
 ]
