@@ -2448,5 +2448,58 @@
         "sha256": "07d9274d306cadf12dbe6b19fcc3215a377c119987a4769c9f2374e7fa01b979"
       }
     ]
+  },
+  "daily_study_20261026": {
+    "recorded_at": "2026-10-26T03:00:02.918497+00:00",
+    "application_commit": "4f4951cc7d5ae4a409567b31f1eea8e70ac3fb5c",
+    "status": "initial_flow_and_shared_style_implemented_full_reform_in_progress",
+    "deployed": false,
+    "checks": [
+      "Six study/navigation tests",
+      "Typecheck and changed-component lint",
+      "Strict Hostinger build",
+      "125 source pins plus documented exception and preservation contracts",
+      "Native Free browser flow, four stages, reload and course-filtered review at five widths"
+    ],
+    "remaining": [
+      "Pro session-specific browser matrix",
+      "Full lesson-specific writing and feedback-to-revision evidence",
+      "Saved cross-device plans",
+      "Individual tool layout redesign and full account visual/manual accessibility matrix"
+    ],
+    "evidence": [
+      {
+        "reference": "private-local-evidence:20261026-study/study-browser.log",
+        "sha256": "4cd4fa100d976c539aece64f539745b1741e94186fb83fbb2242c5a5f229a750"
+      },
+      {
+        "reference": "private-local-evidence:20261026-study/study-layout-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "reference": "private-local-evidence:20261026-study/study-preservation.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8"
+      },
+      {
+        "reference": "private-local-evidence:20261026-study/study-unit.log",
+        "sha256": "cd4bfefa79c30d1fae496fb5a6100c8846b919ffeeab3261969a6861f7084ac0"
+      },
+      {
+        "reference": "private-local-evidence:20261026-study/preservation-final.log",
+        "sha256": "540735f6b33a3bc1ebd4ed665a2827ab9e4ef99c08e0f60247f4b6d126d83ef8"
+      },
+      {
+        "reference": "private-local-evidence:20261026-study/study-typecheck-final.log",
+        "sha256": "b99856a74005cd24f404739d3d23a493ae079e967e1b12c8a8ea014afc92146d"
+      },
+      {
+        "reference": "private-local-evidence:20261026-study/study-lint-final.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "reference": "private-local-evidence:20261026-study/study-build-final.log",
+        "sha256": "5f1e40ba83f449d6a796b1f2d3b33663e1e1f96c73b17e62ac0579c0edee35fe"
+      }
+    ]
   }
 }
