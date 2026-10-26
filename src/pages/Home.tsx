@@ -16,6 +16,7 @@ import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
 import { DailyWidget } from '@/features/daily-pdf/Library'
 import { useAccount } from '@/lib/accountContext'
+import LuckyDrawDiscovery from '@/components/LuckyDrawDiscovery'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 
@@ -484,6 +485,7 @@ export default function Home() {
           </div>
         </section>
 
+        <LuckyDrawDiscovery />
         <DeferredHomeExtras />
 
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
