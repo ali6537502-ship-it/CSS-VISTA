@@ -1018,5 +1018,215 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.un.org/en/egypt-guterres-warns-against-iran-us-escalation"
+  },
+  {
+    "id": "current-affairs-20261027-pak-china-cpic",
+    "q": "Which new bilateral information initiative was launched by Pakistan and China on 27 October 2026?",
+    "o": [
+      "China-Pakistan Information Corridor (CPIC)",
+      "China-Pakistan Economic Corridor (CPEC)",
+      "South Asian Information Network (SAIN)",
+      "China-Pakistan Digital Customs Union"
+    ],
+    "a": 0,
+    "e": "The CPIC is a newly launched information and cultural-cooperation initiative, separate from CPEC. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040200/pakistan-china-launch-information-corridor-cpic-to-counter-misleading-narratives-promote-cultural-exchange"
+  },
+  {
+    "id": "current-affairs-20261027-pak-unsc-veto",
+    "q": "Which UN General Assembly resolution did Pakistan cite in support of debate following a Security Council veto?",
+    "o": [
+      "Resolution 76/262",
+      "Resolution 377(V)",
+      "Resolution 2758",
+      "Resolution 181(II)"
+    ],
+    "a": 0,
+    "e": "Resolution 76/262 provides for General Assembly scrutiny following the use of a Security Council veto. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040183/at-unga-debate-pakistan-warns-against-adding-more-permanent-members-to-security-council-extending-veto-privileges"
+  },
+  {
+    "id": "current-affairs-20261027-pak-regional-trade",
+    "q": "What was Pakistan's reported trade deficit with nine regional countries in July–September FY27?",
+    "o": [
+      "$3.93 billion",
+      "$4.97 billion",
+      "$5.92 billion",
+      "$944.24 million"
+    ],
+    "a": 1,
+    "e": "The $4.97 billion deficit was reported for the first quarter of FY27, compared with $3.93 billion a year earlier. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040061"
+  },
+  {
+    "id": "current-affairs-20261027-pak-kashmir-black-day",
+    "q": "Which date is observed in Pakistan as Kashmir Black Day?",
+    "o": [
+      "5 February",
+      "14 August",
+      "27 October",
+      "6 September"
+    ],
+    "a": 2,
+    "e": "The annual observance takes place on 27 October. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040175/pakistan-reaffirms-solidarity-with-kashmiris-on-black-day-calls-for-end-to-rights-violations"
+  },
+  {
+    "id": "current-affairs-20261027-china-middle-east-envoy",
+    "q": "Which Chinese spokesperson announced plans for renewed Middle East envoy diplomacy on 27 October 2026?",
+    "o": [
+      "Mao Ning",
+      "Guo Jiakun",
+      "Wang Wenbin",
+      "Hua Chunying"
+    ],
+    "a": 1,
+    "e": "Guo Jiakun announced the planned mission at a regular foreign-ministry briefing. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/china-send-envoy-middle-east-near-future-amid-conflict-spillover-2026-10-27/"
+  },
+  {
+    "id": "current-affairs-20261027-saudi-houthi-interceptions",
+    "q": "How many ballistic missiles did the Saudi-led coalition say it intercepted on 27 October 2026?",
+    "o": [
+      "Two",
+      "Three",
+      "Four",
+      "Seven"
+    ],
+    "a": 1,
+    "e": "The coalition reported three missiles toward the Eastern Region and four drones toward the Southern Region. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/saudi-led-coalition-says-it-intercepted-houthi-missiles-drones-attacking-kingdom-2026-10-27/"
+  },
+  {
+    "id": "current-affairs-20261027-israel-parliamentary-election",
+    "q": "What is the electoral threshold for parties to win Knesset seats in Israel's 2026 election?",
+    "o": [
+      "2.0%",
+      "3.25%",
+      "5.0%",
+      "7.5%"
+    ],
+    "a": 1,
+    "e": "Reuters reported the 3.25% threshold; the election outcome was not known at the cutoff. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/israel-election-what-happens-after-polls-close-2026-10-27/"
+  },
+  {
+    "id": "current-affairs-20261027-irena-renewables-slowdown",
+    "q": "According to IRENA figures cited on 27 October 2026, what was global renewable power capacity at end-2025?",
+    "o": [
+      "3,149 GW",
+      "4,457 GW",
+      "5,149 GW",
+      "6,921 GW"
+    ],
+    "a": 2,
+    "e": "IRENA's cited 2025 total was 5,149 GW after 692 GW of additions. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/world-add-less-clean-energy-capacity-this-year-renewables-agency-chief-says-2026-10-27/"
+  },
+  {
+    "id": "current-affairs-20261027-bank-korea-ai-chip-risk",
+    "q": "Which institution modelled a possible $50–100 billion semiconductor export shortfall in 2027?",
+    "o": [
+      "Bank of Japan",
+      "Bank of Korea",
+      "People's Bank of China",
+      "Reserve Bank of Australia"
+    ],
+    "a": 1,
+    "e": "The Bank of Korea presented a pessimistic conditional scenario, not an actual 2027 outcome. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/bank-korea-warns-countrys-chip-exports-could-fall-by-up-100-billion-if-ai-2026-10-27/"
+  },
+  {
+    "id": "current-affairs-20261027-wmo-greenhouse-2025",
+    "q": "What global average CO2 concentration for 2025 did the WMO's 2026 bulletin report?",
+    "o": [
+      "423.9 ppm",
+      "426.8 ppm",
+      "430.8 ppm",
+      "449.2 ppm"
+    ],
+    "a": 1,
+    "e": "The WMO bulletin reported 426.8 ppm for 2025; this is atmospheric concentration, not annual emissions. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040196/greenhouse-gas-levels-hit-new-record-highs-in-2025-un"
+  },
+  {
+    "id": "current-affairs-20261027-cyclone-arnab-evacuations",
+    "q": "Which two Indian states were the focus of evacuation orders ahead of Cyclone Arnab?",
+    "o": [
+      "Gujarat and Maharashtra",
+      "Kerala and Tamil Nadu",
+      "Andhra Pradesh and Odisha",
+      "West Bengal and Assam"
+    ],
+    "a": 2,
+    "e": "Authorities ordered evacuations in Andhra Pradesh and Odisha before the forecast 28 October landfall. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040202/india-orders-evacuations-in-andhra-pradesh-odisha-as-cyclone-arnab-looms"
+  },
+  {
+    "id": "current-affairs-20261027-ecb-housing-loan-demand",
+    "q": "What net change in euro-area housing-loan demand did banks report in the ECB's Q3 2026 survey?",
+    "o": [
+      "-12%",
+      "-15%",
+      "-27%",
+      "+27%"
+    ],
+    "a": 2,
+    "e": "The survey's net demand reading was -27%, compared with a previously expected -12%. Source: European Central Bank.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.ecb.europa.eu/stats/ecb_surveys/bank_lending_survey/pdf/ecb.blssurvey2026q3~c6a731e213.en.pdf"
+  },
+  {
+    "id": "current-affairs-20261027-reuters-global-inflation-poll",
+    "q": "For how many of the 50 surveyed economies did Reuters' October 2026 poll raise 2027 inflation forecasts?",
+    "o": [
+      "15",
+      "23",
+      "31",
+      "50"
+    ],
+    "a": 2,
+    "e": "The poll reported upward revisions in 31 of 50 economies; these are forecasts, not observed inflation. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/high-inflation-persist-globally-into-next-year-reuters-poll-shows-2026-10-27/"
+  },
+  {
+    "id": "current-affairs-20261027-drc-ebola-10000",
+    "q": "Which Ebola virus species caused the major 2026 outbreak in DR Congo reported on 27 October?",
+    "o": [
+      "Zaire ebolavirus",
+      "Sudan ebolavirus",
+      "Bundibugyo ebolavirus",
+      "Reston ebolavirus"
+    ],
+    "a": 2,
+    "e": "The 2026 DR Congo outbreak was attributed to the Bundibugyo species; Reuters reported 10,060 confirmed cases as of 27 October. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/healthcare-pharmaceuticals/congos-ebola-infections-surpass-10000-government-says-2026-10-27/"
   }
 ]

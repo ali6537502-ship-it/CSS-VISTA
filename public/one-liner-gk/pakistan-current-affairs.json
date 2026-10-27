@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 232,
+  "count": 236,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1623,6 +1623,34 @@
     {
       "id": "pakistan-current-affairs-20261026-10",
       "text": "Pakistan was among 26 signatories to the UN Accra Convention on Negotiable Cargo Documents on 26 October 2026; the treaty was not yet in force.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261027-01",
+      "text": "Pakistan and China launched the China-Pakistan Information Corridor (CPIC) in Islamabad on 27 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261027-02",
+      "text": "Pakistan reaffirmed support for UN General Assembly resolution 76/262 in a Security Council veto debate reported on 27 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261027-03",
+      "text": "Pakistan's reported trade deficit with nine regional countries rose 26.62% to $4.97 billion in July–September FY27.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261027-04",
+      "text": "Pakistan observes Kashmir Black Day on 27 October, commemorating events in Srinagar in 1947.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
