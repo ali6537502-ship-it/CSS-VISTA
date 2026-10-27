@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 const base = process.env.CSSV_TEST_BROWSER_ORIGIN || 'http://127.0.0.1:5177'
 if (!['localhost', '127.0.0.1'].includes(new URL(base).hostname)) throw Error('Loopback fixtures only')
 const browser = await chromium.launch({ executablePath: '/usr/bin/chromium', headless: true, args: ['--no-sandbox'] })
-const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } })
+const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 1440, height: 1000 } })
 let user = { id: 'avatar-fixture-a', email: 'avatar-a@example.invalid', display_name: 'Alice', user_metadata: { full_name: 'Alice' }, photo_complete: true, profile_complete: true }
 let photoFails = false, delayed = false
 const photoRequests = []

@@ -89,7 +89,7 @@ Statuses reflect actual verification, not a build-only completion claim.
 | W11 | Auth/account isolation/sync / original AccountProvider, hostingerSync, ProfileGate | unchanged contracts; browser fixture switch | verified native ownership/security, sign-in/out, delayed fresh-context restoration and A-response delivery after B hydration in the same browser document |
 | W12 | Entitlements/expired/pause / unchanged ProGate, ProReleaseOutlet and native policies | existing tests; pause fixture; no guard changes | verified native free/active/expired direct access and paused release tests |
 | W13 | Responsive/accessibility / workspace.css, shell | six widths, reading order/focus styles, screenshot review | verified six-width fixture navigation/screenshots and keyboard controls; no formal WCAG certification |
-| W14 | Brand/tokens/performance / authentic logo, CSS tokens | screenshot review; bundle/build output | implemented; comparable before/after performance not measured |
+| W14 | Brand/tokens/performance / authentic logo, CSS tokens | screenshot review; bundle/build output | verified local original/current benchmark; see the latest verification-followup.md results |
 | W15 | URLs/direct refresh/ad policy / routeRegistry.mjs | production routes, route/link audits | verified strict build, direct refresh and link audits |
 | W16 | Release safety/review / this report and local branch | git diff review, no push/deploy | verified local-only |
 

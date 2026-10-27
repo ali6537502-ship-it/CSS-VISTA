@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import { readFile, readdir, stat } from 'node:fs/promises'
 import { execFileSync } from 'node:child_process'
+import { randomUUID } from 'node:crypto'
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw new Error('Disposable CI database required')
-const base = 'http://localhost:4173/api/'
+const base = process.env.CSSV_TEST_ACCOUNT_API_ORIGIN || 'http://localhost:4173/api/'
+if (!['localhost', '127.0.0.1'].includes(new URL(base).hostname)) throw Error('Loopback account API required')
 const a = new Map(), b = new Map()
 async function call(path, body, jar = new Map(), extra = {}, method = body === undefined ? 'GET' : 'POST') {
   const headers = { Accept: 'application/json', 'User-Agent': 'CSSVistaNativeTest', ...extra }
@@ -22,7 +24,7 @@ async function mailToken(email, kind, previous = null) {
   }
   throw new Error('Expected test email was not accepted by the local mail transport')
 }
-const email = 'native-recovery@example.invalid', password = 'TEST ONLY original password', next = 'TEST ONLY replacement password'
+const email = `native-recovery-${randomUUID()}@example.invalid`, password = 'TEST ONLY original password', next = 'TEST ONLY replacement password'
 assert.equal((await call('auth/supabase-session.php', {})).status, 410)
 assert.equal((await call('auth/register.php', { email, password, full_name: 'TEST ONLY Reader' }, a, { Origin: 'https://untrusted.invalid' })).status, 403)
 const registration = await call('auth/register.php', { email, password, full_name: 'TEST ONLY Reader' }, a)
@@ -93,7 +95,7 @@ for (const key of ['display_name','phone','date_of_birth','gender','city','provi
 }
 assert.equal((await call('auth/session.php',undefined,a)).data.user.profile_complete,true)
 assert.equal((await call('student/progress.php', { payload: {} }, a, {}, 'PUT')).status, 200, 'New account progress could not sync')
-const otherEmail = 'native-second@example.invalid'
+const otherEmail = `native-second-${randomUUID()}@example.invalid`
 const otherId = execFileSync('php', ['tests/current-affairs/setup.php', 'user', otherEmail], { encoding: 'utf8' }).trim()
 assert.equal((await call('auth/login.php', { email: otherEmail, password: 'TEST ONLY native fixture password' }, b)).status, 200)
 assert.equal((await call('student/progress.php', { payload: { 'cssvista:v1': { test: 'private progress' } } }, a, {}, 'PUT')).status, 200)

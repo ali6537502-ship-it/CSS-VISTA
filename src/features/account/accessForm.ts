@@ -1,4 +1,4 @@
-import { safeReturnTo } from '../current-affairs/model.ts'
+import { safeReturnTo } from '../../lib/safeReturnTo.ts'
 export type AccountMode = 'sign-in' | 'create'
 export type AccessValues = { name: string; email: string; password: string; confirmation: string; resetCode: string }
 export function accountDestination(value: string | null) {

@@ -157,8 +157,9 @@ request lists, asset sizes and shift sources are retained in `results.json`;
 ## Verification limits
 
 Physical iOS/Android devices and real on-screen keyboards are unavailable. No real
-SMTP recovery email was sent; invalid-code/confirmation and recovery-link behavior
-are exercised with native APIs retained. Fixture/fresh-context synchronization is
+SMTP recovery email was sent. The later full verification additionally passed
+successful code and reset-link recovery, old-session revocation and retained
+records using native captured messages; see verification-followup.md. Fixture/fresh-context synchronization is
 not proof of live cross-device delivery. Paused Pro checks do not certify unpaused
 paid operation. The prior official FPSC source recheck was unavailable; this change
 does not modify examination content. Automated scans supplement keyboard and focus

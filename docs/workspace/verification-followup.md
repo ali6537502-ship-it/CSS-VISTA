@@ -1,5 +1,178 @@
 # Workspace preservation verification follow-up
 
+## Full workspace verification — 27 October 2026
+
+Starting revision: `9c221f9a642cd2b41f924a22f19e7101f64f3345`, clean
+`review/student-workspace` branch. This review covers the complete dashboard,
+planner, subjects, practice, performance, library, settings, photo and single-page
+signup work. Tests use disposable native PHP/MySQL accounts and Chromium against
+compiled loopback HTTPS, with off-origin requests blocked. No production student
+account or record was used. No deployment, remote write or workflow dispatch ran.
+
+Two issues were found and corrected during this verification:
+
+- `ProfileGate → accessForm → Current Affairs model` unnecessarily pulled Zod and
+  its feature schemas into the initial dashboard bundle. The unchanged
+  `safeReturnTo` policy now lives in `src/lib/safeReturnTo.ts`; the Current Affairs
+  module re-exports it for compatibility. Existing return-path security tests pass.
+- The new whole-workspace native accessibility scan exposed low-contrast subject
+  metadata, shortcut badges, performance supporting text and decorative resource
+  labels. `workspace.css` now uses opaque/darker text, shared ink for resource
+  labels and larger small subject labels. No information, controls or checks were
+  removed. Diagnostic scans and the subsequent actual compiled-artifact scans both passed; final results follow.
+
+The added `account-recovery.mjs` exercises successful browser recovery by code and
+by reset link using real captured native messages. Both revoke the old session,
+retain saved profile/bookmarks/results, preserve return query/hash and reject
+replay. Link tokens are removed from the browser fragment. This verifies the
+application and local mail handoff, not real external SMTP or inbox delivery.
+
+### Requirement coverage
+
+Existing detailed locations/inventories: [implementation](implementation.md),
+[planner restructuring](planner-restructure.md), [visual design](visual-redesign.md)
+and [single-page signup](signup-flow.md).
+
+| ID | Requirement and implementation | Executed evidence / status |
+|---|---|---|
+| F01 | Seven connected sections, routes, navigation and genuine empty/error states; StudentWorkspace, account pages | workspace, workspace-visual, native workspace, routing and strict route/link audits: verified |
+| F02 | Daily continuation, saved tasks, actual metrics and date handling; AccountHome, shared selectors | workspace/task fixtures, native task save/refresh, original date/metric tests: verified |
+| F03 | Six compulsory slots, explicit alternative, saved optionals and both sample/other valid combinations; catalogue adapter, original validator | workspace/subject unit tests and browser selection/refresh: verified implementation; current official FPSC source recheck blocked |
+| F04 | Full planner and existing preparation attempts; PlannerWorkspace, native preparation workspace | Six personal views at six widths; seven native attempt views, partial work and history: verified |
+| F05 | Practice, quiz/mock/result/performance and active timers | answer-timer, account-continuity and quiz-account-race; actual native result readback: verified |
+| F06 | Saved library, feature search, shortcuts and optional guidance | bookmark reopening/account isolation, keyboard search/pins/dismiss/reopen: verified |
+| F07 | Single-page signup, profile, private photo and security | signup, avatar, native account security and successful browser code/link recovery: verified |
+| F08 | Native persistence, offline/reconnect, conflicts, failed writes and account switches | Eight account-continuity scenarios, native planner/learning/reading ownership and writing versions: verified |
+| F09 | Guest/free/active/expired/paused permissions, trusted API/file guards, MPT and advertising restrictions | pro/security, paid-access, paused browser routes, MPT units/flag and compiled no-ad/noindex routing: verified |
+| F10 | Desktop/mobile layouts, readable controls, keyboard and accessible charts | Six-width interactions, touch/landscape/reduced viewport; fourteen populated native page/viewport scans: verified |
+| F11 | Build, lint, type safety and existing regression suite | 330 Node + 5 Python tests; 14 focused account/Current Affairs tests; typecheck, lint and strict audits: verified |
+| F12 | Comparable performance with preserved loading behavior | Same six-run original/current benchmark; final measurement recorded below |
+| F13 | Physical devices, actual inbox delivery and production cross-device certification | Explicit limits below; not claimed as verified |
+
+### Executed commands and evidence
+
+- `npm run test:all`: **330 Node + 5 Python passed**, zero failures, repeated after
+  the redirect import fix. The subsequent presentation change is CSS only.
+- `node --test tests/currentAffairs.test.ts tests/accountSetup.test.ts`: 14 passed.
+- `npm run typecheck`, `npm run lint`, scoped ESLint and
+  `node scripts/check-profile-contract.mjs`: passed. Full lint retains the one
+  existing `Introduction.tsx:116` hook warning. No test or lint rule was disabled.
+- `npm run verify:hostinger:strict`: passed again after the final
+  contrast/typography fixes. Executed audits cover 115 registry routes,
+  1,025 sitemap URLs, 63,953 links, genuine 404s, private/no-ad documents,
+  duplicate content and frozen MPT export. Existing build warnings remain.
+- PHP units: `tests/pro/unit.php`, `learning/unit.php`, `planner/unit.php` (225
+  assertions), `reading/unit.php` (21), `topics/unit.php` (51), `mpt/unit.php`
+  (24,920 passed), `mpt/flag.php`, `pro/release-unit.php` and
+  `account-native/mail-config.php`: passed in the disposable container.
+- Native integration: `tests/account-native/security.mjs`, `tests/pro/security.mjs`,
+  `pro/paid-access.mjs`, `planner/security.mjs`, `reading/security.mjs` and
+  `learning/security.mjs`: passed. No real provider calls or payment occurred.
+- Browser harnesses executed successfully: `workspace.mjs`, `workspace-visual.mjs`,
+  `planner-workspace.mjs` (`CSSV_TEST_AXE=true`), `workspace-avatar.mjs`,
+  `answer-timer.mjs`, `runtime-routing.mjs`, `signup.mjs`, `account-recovery.mjs`,
+  `workspace-native.mjs`, `planner-native.mjs`, `workspace-guidance.mjs`,
+  `account-continuity.mjs`, `quiz-account-race.mjs` and `pro-pause.mjs`.
+  Account, visual/native workspace and pause/routing journeys were rerun against
+  the artifact containing the redirect import fix. The final contrast artifact
+  additionally passed the six-width workspace journey, seven-section visual
+  review, runtime routing and fourteen populated native accessibility scans.
+  These final scans use the actual built stylesheet without diagnostic overrides.
+- Automated review includes six populated planner views and two signup states
+  with zero reported violations. The broader native scan found the issues above;
+  the failing evidence is retained, not relabeled as passing.
+
+All fourteen source-style diagnostics cover populated pages and actual profile
+fields at 390/1440. Browser interactions also cover 320/375/390/768/1024/1440,
+portrait/landscape and reduced-height 390×420. Rendered screenshots were inspected
+for all seven sections and the weekly/native planners, including loading, error,
+sanitized records and actual saved-profile controls. No formal WCAG certification
+is claimed. Current review artifacts and exact command statuses are under ignored
+`test-artifacts/final-verification/`; logs are copied there before delivery.
+
+### Final comparable performance
+
+`CSSV_PERFORMANCE_BEFORE=/workspace/cssv-performance-before/dist node
+ tests/browser/workspace-performance.mjs` passed after all other browser work
+finished. Three interleaved cold-context runs per build use original
+`13091aed6355556a5aceae8d4c9efe774cbee6ad`, the current artifact, identical sanitized
+free-account APIs, 390×844, 4× CPU slowdown, 100ms latency, 400KiB/s download,
+100KiB/s upload and disabled cache. These are local uncompressed artifacts.
+
+| Median | Original | Final |
+|---|---:|---:|
+| Initial route JS/CSS body bytes | 966,071 | 895,280 |
+| JS/CSS requests | 25 | 21 |
+| Observed resource requests | 37 | 32 |
+| Useful dashboard heading | 5,142ms | 4,631ms |
+| Observed LCP | 1,748ms | 1,956ms |
+| Observed CLS | 0.0095 | 0.0194 |
+
+Initial route code is **7.33% smaller** than the original.
+The diagnostic artifact before the redirect-import correction transferred 985,968
+JS/CSS bytes; the final artifact transfers 895,280. Current main JS/CSS remains
+41,806 bytes larger than the original main entry, while the route needs fewer
+subsequent modules/requests. Observed LCP was 208ms later, while useful dashboard
+content appeared 512ms earlier. LCP ranges were 1,744–1,792ms before and
+1,896–2,000ms after; heading ranges were 5,108–5,344ms and 4,532–4,716ms.
+The richer interface's critical entry remains a refinement opportunity; these
+three-run fixture observations do not establish production timings or a general
+speed guarantee. No protected datasets or unexpected APIs loaded in the benchmark.
+
+Raw per-request/shift data: `test-artifacts/workspace-performance/results.json`.
+The actual pre-correction artifact is retained in
+`test-artifacts/final-verification/performance-before-helper-fix.json`.
+All 813 source-file hashes matched the final build input after browser validation.
+
+### Fixture corrections and safety
+
+An initial native request raced the disposable server restart. A later native
+account test correctly reported that the local Pro fixture's private configuration
+was writable, whereas this existing account harness expects environment-only,
+non-writable configuration. Its original assertion remains intact: it passed using
+an additional loopback PHP runtime on port 4178 with environment-only test mail.
+`CSSV_TEST_ACCOUNT_API_ORIGIN` is loopback-only and defaults to the original URL.
+Fixture accounts now have unique emails; no prior account was deleted to rerun it.
+A repeated recovery run also hit the genuine native rate limit. Only guarded
+fixture counters were prepared; no limiter was disabled. The signup preparation
+helper now supports narrowly scoped prior `recovery-browser-…@example.invalid`
+TEST ONLY reset-request counters, checks CLI/CI and the actual database, and retains
+all accounts, academic records and unrelated security events.
+
+Local mail uses the existing invalid-domain-only `mail-capture.php`; the new
+read helper additionally checks the actual test database and mailbox prefix.
+Temporary test mail/config settings were restored after the final runs; the
+original native session API returned HTTP 200 and the fixture mail transport
+returned to its original unconfigured state. The additional mail runtime stopped. They
+were never applied to production. Avatar fixtures now trust the loopback runtime's
+self-signed test certificate; no production TLS verification changed.
+
+### Verification boundaries
+
+- Official FPSC page, alternate canonical host and both repository-linked PDF URLs
+  all returned HTTP 503 with upstream TLS certificate verification failures. No
+  TLS check was bypassed and no examination source was rewritten. Current official
+  re-verification needs a working authoritative source connection or official PDF.
+- No physical iOS/Android device or actual on-screen keyboard is attached. Chromium
+  touch/orientation/reduced-height checks are emulation, not hardware certification.
+- No configured real test mailbox/SMTP service is available. Captured-message
+  recovery passed; external delivery, spam routing and inbox receipt remain unverified.
+- Native cross-session restore and synchronization passed using separate contexts
+  and actual disposable records. Live production cross-device write tests were not
+  run because this assignment prohibits modifying production student data.
+- Read-only production checks returned account-page HTTP 200 and deployment SHA
+  `815e3fcefd61c62bffc7a5d7858593621757d215`; that is a different revision from this
+  review branch. These checks are not live verification of the new interface.
+
+The final diff contains no data schema, authentication/session, entitlement,
+payment/provider configuration, release-flag or persisted academic-format changes.
+Revert this verification follow-up to restore prior styling/imports; all saved
+records remain compatible and require no clearing or migration. Keep the earlier
+account-isolation fixes described below. Deployment still requires separate
+explicit authorization and the established release procedure.
+
+## Earlier preservation investigation
+
 Review base: `18368a78a86884ccf4ecae035b4fd41cef66af28`, branch
 `review/student-workspace`. All account records used here are disposable fixtures
 in `cssvista_briefing_test`, served over loopback HTTPS. Production was untouched.
