@@ -7,6 +7,7 @@ import { StudentProfilePanel } from '@/components/StudentProfilePanel'
 import { AuthenticatedAccountAd } from '@/components/Ads'
 import { useAccount } from '@/lib/accountContext'
 import AccessForm from '@/features/account/AccessForm'
+import RegistrationForm from '@/features/account/RegistrationForm'
 import { accountDestination, accessIssues, type AccessValues, type AccountMode } from '@/features/account/accessForm'
 
 const button = 'inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-pine px-5 py-2 text-sm font-semibold text-white disabled:opacity-60'
@@ -86,6 +87,7 @@ export default function Account() {
     try { const result = await account.signOut(); if (result.error) setError(result.error) }
     finally { setBusy(false) }
   }
+  if (!loading && mode === 'create' && !reset && !verify && (!user || !user.profile_complete)) return <main><div className="mx-auto max-w-6xl px-4 py-8 sm:py-10"><RegistrationForm destination={destination}/></div></main>
   if (!loading && user && !user.profile_complete && !reset && !verify) return <ProfileGate>{null}</ProfileGate>
   if (!loading && user && !reset && !verify && params.get('settings') !== '1') return <Navigate to={destination} replace />
   const notices = <div>{error && <p role="alert" className="ac-error">{error}</p>}{message && <p role="status" className="ac-success">{message}</p>}</div>

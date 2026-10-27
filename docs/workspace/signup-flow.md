@@ -1,166 +1,134 @@
-# Easier native account setup
+# Single-page signup follow-up
 
-Local review branch: `review/student-workspace`. Starting revision:
-`838258b17bbc053e4c06dfea45104b1142e85785` (clean working tree).
-This extends the seven-section workspace and full planner recorded in
-[implementation.md](implementation.md), [planner-restructure.md](planner-restructure.md),
-[visual-redesign.md](visual-redesign.md) and [verification-followup.md](verification-followup.md).
-No production deployment, remote push, new dependency or database migration.
+The owner's latest instruction replaces the four-step registration flow from
+`d17963c37e430392809e4a333653f1e240baa0f9`: signup must contain everything in one
+window. Work remains local on `review/student-workspace`; production is untouched.
 
-## Flow and preservation
+## Implementation and preservation
 
-Account creation asks for name, email and one password, with a show/hide control.
-The native API already creates a signed-in account without email confirmation;
-no new verification requirement or authentication policy was introduced. Password
-recovery retains confirmation, existing token links and the six-digit code flow.
-The browser validates new passwords against the existing 72-byte native cap;
-legacy sign-in does not acquire a new password-length restriction.
+`RegistrationForm.tsx` now displays account credentials, personal/contact details,
+study preferences, previous CSS Vista history and the photo together. One
+**Create my account** submission validates every section before creating an account.
+There are no Next/Back steps or separate photo-save button. Incomplete returning
+accounts use the same page with their actual saved details and **Finish account
+setup**. Completed-account settings retain their existing editing sections.
 
-Setup uses four short saved sections: Contact, About you, Your studies, Your photo.
-The mandatory previous-student question is now in Contact. Before this change, a
-real fresh native fixture received HTTP 422 when saving About you because that
-required answer was hidden in the next section. Historical reproduction and
-sanitized captures: `tests/browser/signup-before.mjs` (requires the original built
-artifact and `CSSV_EXPECT_OLD_SIGNUP=true`), `test-artifacts/signup/before/`.
+The single submission orchestrates the existing register, profile and private-photo
+endpoints. These are separate operations, not a new atomic API. If a later save
+fails, the account remains created, inputs and prepared photo remain on the page,
+and retry resumes without registering another account. Passwords are cleared after
+successful registration and never persisted by this interface. Refresh restores
+server-saved fields; unsaved drafts and photos are not promised across reload.
+Actual server readbacks confirm saved fields, private photo bytes and all twelve
+native completion checks before opening the intended destination.
 
-All existing twelve native profile checks still apply. The native profile and
-progress services remain the authority; incomplete accounts cannot sync merely
-because a step looks complete. The saved progress bar uses the server's checks.
-The existing server default country is retained. No academic history is seeded.
+`ProfileFields` and `AccountPassword` reuse existing controls. Shared
+`profilePersistence.ts` refreshes untouched fields before the existing full-profile
+POST, detects conflicting edits and confirms saved values. Unsupported untouched
+list formats block writes and preserve records. The existing endpoint has no
+atomic version check: a simultaneous edit between GET and POST remains an existing
+limitation. No stronger concurrency guarantee is claimed.
 
-Profile subject search edits only the existing profile shortlist. It does not
-replace the planner's validated examination combination, require 600 marks at
-registration, substitute sample subjects or erase imported subject names. The
-existing native profile API accepts partial shortlists. Full combination validation
-continues in My Study Plan, using the established shared validator.
+Account-bound requests and ownership checks run before and after asynchronous
+operations; stale signup operations cannot continue into a different account.
+The native session and twelve-check profile gate remain authoritative. No auth,
+database, membership, release-flag, progress, timer, scoring or sync contracts were
+changed. No new dependencies, schema, preference keys or academic fixtures were
+added to production code. The original StudentProfilePanel import remains a
+compatibility re-export.
 
-Larger JPG/PNG/WebP photos can be resized locally, previewed and explicitly saved.
-The original public compressor's algorithm is shared through `photoCompression.ts`;
-the server upload remains at most 60 KiB. The public tool's selected-size/download
-workflow is retained. Saved photos use the existing private, account-bound avatar.
+The profile shortlist retains historical subject names and remains distinct from
+the planner's validated 600-mark selection. Signup neither seeds sample subjects
+nor creates another combination validator. JPG/PNG/WebP preparation reuses the
+existing local compressor, accepts source files up to 20 MB and saves at most
+60 KiB through the existing private-photo API. The public compressor and header
+avatar remain connected to their original workflows.
 
-Writes remain on existing native endpoints. A profile step refreshes untouched
-server fields before the full-profile POST and reads back changed fields before
-showing success. Conflicting fields retain the draft and require review. Unsupported untouched list formats stop the full-profile write and retain records
-and drafts; imported service entries have an explicit removal control. This
-reduces stale overwrites; the existing endpoint has no atomic version check, so it
-cannot guarantee protection against a simultaneous write between GET and POST.
-No new concurrency policy or API contract is claimed. Failed saves retain draft
-inputs in memory; drafts/passwords are not written to browser storage. Saved steps
-resume from real server requirements after refresh. Unsaved drafts are not promised
-to survive a page reload.
+## Routes and composition
 
-No student identifiers, storage keys, serialized progress shapes, authentication
-APIs, memberships, assessment algorithms, timers or release flags were changed.
-Account-bound requests and stale-response guards remain enforced. The original
-StudentProfilePanel import is retained as a compatibility re-export.
-
-## Routes and interface
-
-`/account`, `?mode=create`, `?settings=1`, reset/code-recovery/legacy-verification
-links remain supported. A sanitized return destination keeps its query and anchor
-through account creation, required profile completion and recovery links. Self
-redirects to `/account` recover to the dashboard. Mode switches use router history.
-
-Account entry now has an authentic-logo header and a website return link, without
-the public ticker, full navigation, floating shortcuts or public bottom bar. The
-existing legal/privacy controls remain available in one compact footer. All public
-routes keep their normal website navigation. The public search keyboard handler is
-not registered where its dialog is absent, preventing a hidden scroll lock.
+`/account?mode=create` is the complete form. `/account`, settings, reset-code,
+legacy verification and sanitized return links retain their existing behavior.
+The destination's query and hash survive signup and required profile recovery.
+One main landmark, the authentic logo, website-return link and compact legal
+footer remain. No public bottom navigation competes with signup. Desktop uses a
+two-column form with section dividers; tablet/mobile stack the same fields without
+step navigation or horizontal overflow. Form errors, pending writes and photo
+preparation have visible states; validation focuses the first invalid control.
 
 ## Requirement checklist
 
-| ID | Requirement and implementation | Verification | Status |
+| ID | Requirement / implementation | Evidence | Status |
 |---|---|---|---|
-| SU-01 | Three-field account creation; AccessForm, accessForm, Account | Native registration, duplicate click/email, password visibility; accountSetup tests | verified |
-| SU-02 | Short saved steps and required history first; profileForm, StudentProfileForm | Native first-step save, history/services, failed save/retry, refresh | verified |
-| SU-03 | Existing profile gate and private records | Native progress 403 before twelve checks, 200 after; preservation suites | verified |
-| SU-04 | Searchable existing shortlist, retain unknown names; ProfileSubjects | Adapter tests and native saved shortlist; unchanged planner validator | verified |
-| SU-05 | Local photo resizing, explicit save and private avatar | Real PNG >60KiB, failed save/retry, native readback <=60KiB; public download | verified |
-| SU-06 | Return links, modes and recovery; Account, accessForm, AccessForm | Query/hash destination; browser history; duplicate email; invalid reset and legacy links | verified |
-| SU-07 | Recoverable errors, scoped writes and stale-account guards | Failed POST/load/upload; conflict review; fresh untouched fields; isolation regressions | verified |
-| SU-08 | Compact responsive entry and profile, no competing mobile navigation | Actual browser interactions/screens at six widths; five panel accessibility scans | verified |
-| SU-09 | Preserve planner, progress, assessments, membership and paused MPT | Full suite; native workspace, continuity, quiz race and Pro pause | verified |
-| SU-10 | Comparable dashboard performance | Original/current compiled artifacts; same fixture and throttling | verified |
+| SU-01 | All signup fields together; RegistrationForm, Account | Native whole-form validation; one submit; no step controls | verified |
+| SU-02 | One submission and recovery; registrationModel, profilePersistence | Native happy path, double-submit guard, failed profile/photo save and retry | verified |
+| SU-03 | Native required profile gate; ProfileGate | Progress denied before twelve requirements, permitted after native completion | verified |
+| SU-04 | Existing shortlist and historical values; ProfileFields, ProfileSubjects | Native imported subjects/services retained; incompatible-list write blocked | verified |
+| SU-05 | Existing private photo and public compressor | Real large PNG resized, previewed, saved/read back; public file downloaded | verified |
+| SU-06 | Existing URLs, signin and recovery; Account, AccessForm | Query/hash return; mode/back history; duplicate email; invalid reset/legacy links | verified |
+| SU-07 | Account isolation and safe writes; profilePersistence, RegistrationForm | Held signup write plus account switch; no stale draft/upload or next-account mutation | verified |
+| SU-08 | Responsive single-page form and accessibility | Six viewport captures, landscape, keyboard, two zero-violation automated scans | verified |
+| SU-09 | Planner, history, sync, timer and membership preservation | Full suite plus native workspace/continuity/paused-access checks | verified |
 
-## Verification
+## Current verification
 
-Executed checks:
+Executed against this working revision:
 
-- `npm run test:all`: **329 Node tests + 5 Python tests passed**. After the
-  final compatibility safeguards, `npm run test:workspace` passed all 28 tests
-  (including eight account-setup cases). No tests were disabled.
-- `npm run typecheck`: passed. The final strict production build also type-checked.
-- `npm run lint`: passed with one pre-existing `Introduction.tsx:116` hook warning;
-  scoped ESLint passed for changed components, helpers and browser tests.
-- `npm run build:hostinger:strict`: passed, including Hostinger preflight, content,
-  MPT export, advertising, search, route, link and duplicate-content audits:
-  115 registry routes, 1,025 sitemap URLs and 63,953 internal links checked.
-  Existing Rollup annotation/import warnings and large-chunk notices remain.
-  `verify:hostinger:strict` was not separately repeated; its preflight and strict
-  build operations were executed by the actual build target. No deployment ran.
-- `node scripts/check-profile-contract.mjs`: passed. Source ownership checks now
-  follow the extracted real form and retain all native/server/admin assertions.
-- Disposable Docker PHP checks: `tests/planner/unit.php` (225 assertions),
-  `tests/pro/unit.php`, `tests/learning/unit.php`, `tests/mpt/unit.php`
-  (24,905 passed) and `tests/mpt/flag.php`: all passed.
-- `tests/browser/signup.mjs`: actual native registration, all four profile steps,
-  hidden-history regression, duplicate submission/email, failed load/save/upload,
-  saved-step refresh, retained drafts, fresh untouched fields, conflict review,
-  imported subject containing a comma, incompatible-list write prevention, explicit
-  imported-service removal, real >60KiB image compression/private
-  upload, actual twelve-check gate, query/hash return, sign-out/sign-in,
-  recovery errors/links, legacy verification and public compressor download passed.
-  Five panel accessibility scans reported zero violations. Actual screens were
-  captured at 320/375/390/768/1024/1440; landscape and keyboard controls were
-  exercised. First profile input visibility and absence of public bottom navigation
-  are asserted at the narrow widths. One main landmark is asserted throughout
-  signup and profile setup, alongside validation focus, tab order and Space controls. Empty, validation, API-failure and retry
-  states are represented; screenshots contain sanitized fixtures only.
-- `tests/browser/workspace-native.mjs`: passed again against the final artifact:
-  existing sign-in, planner tasks/goals, selected optional subjects, refresh,
-  sync and fresh-context restoration, timer navigation/refresh and sign-out.
-- `tests/browser/account-continuity.mjs`, `quiz-account-race.mjs` and
-  `pro-pause.mjs`: passed during this follow-up. Evidence covers account isolation,
-  offline local work/reconnection, bookmarks, sync conflicts and failed-write retry,
-  late responses, mock/result/performance restoration, active timer ownership,
-  fourteen paused protected routes, retained free features and membership expiry.
-  These services and their business logic were not rewritten.
+- `npm run test:all`: **330 Node tests and 5 Python tests passed**, zero failures.
+  Includes 29 workspace tests and nine focused account-setup cases.
+- `npm run typecheck`: passed.
+- `npm run lint`: zero errors; one pre-existing hook warning at
+  `src/features/current-affairs/Introduction.tsx:116`.
+- `node scripts/check-profile-contract.mjs`: passed; all existing native/API,
+  required-history, photo-limit, admin and schema assertions remain.
+- `npm run build:hostinger:strict`: passed, including preflight, typecheck,
+  content/MPT/advertising/search audits, 115 registry routes, 1,025 sitemap URLs,
+  63,953 links and duplicate checks. Existing Rollup annotation/import and chunk
+  warnings remain. This is a local build, not a deployment.
+- `node tests/browser/signup.mjs`: passed against the finished production artifact
+  and real disposable PHP/MySQL APIs. Evidence covers whole-form validation before
+  registration, one-click successful creation/profile/photo save, duplicate clicks
+  and email, failed profile/photo saves with retained drafts and no duplicate
+  account, failed profile load/retry, refresh, actual twelve-check gate, private
+  avatar, query/hash destination, legacy values, conflicting edits, unsupported
+  lists, signout/signin, invalid recovery links/code and public compressor download.
+  A held signup write followed by login as another native account confirms no
+  stale draft, stale photo upload or mutation of the next account. Two automated
+  accessibility scans reported zero violations; keyboard, password visibility,
+  one main landmark, tab order, narrow-width controls and landscape were exercised.
+- `node tests/browser/workspace-native.mjs`: passed; actual planner task/goal saves
+  and refresh, optional settings, subjects, account sync, fresh-context restoration,
+  timer navigation/refresh and sign-out.
+- `node tests/browser/account-continuity.mjs`: all eight scenarios passed:
+  timer ownership, offline/online recovery, bookmark/library reopening, sync
+  conflict preservation, failed-write retry, late account-switch responses,
+  mock/result/performance restoration and touch/landscape/reduced-height controls.
+- `node tests/browser/pro-pause.mjs`: passed; active entitlement retained while
+  paused, fourteen direct protected routes blocked, free Grammar/Vistagram reading
+  available, expiry unchanged, 320–1440 reflow and no page errors. Only the guarded
+  fixture database's release state was temporarily set and restored.
+- An additional read-only browser pass captured fresh empty signup at 320/1440
+  and whole-form validation at 320; no account was created.
 
-Native browser runs use `CI=true CSSV_DB_NAME=cssvista_briefing_test
-CSSV_TEST_PHP_CONTAINER=cssv-workspace-native`, loopback HTTPS port 3444, Chromium
-and the existing off-origin network blocker. Repeated signup runs correctly hit
-the six-per-hour native limit. `tests/account-native/signup-fixture.php` checks
-both environment and actual database name and prepares only this harness's
-`signup-…@example.invalid` TEST ONLY registration counters. It never changes the
-limiter, accounts, sessions or academic records. Other initial harness failures
-were corrected fixture expectations (the existing default country and blank phone,
-label matching and preserved sign-in return destination); one run overlapped an
-artifact rebuild and was discarded. Final native results use a finished build.
+Logs: `/tmp/cssv-single-signup-{all,types,lint,contract,build,browser,preservation}.log`.
+Copies are retained in ignored `test-artifacts/signup/single-window/logs/`.
 
-Final session logs: `/tmp/cssv-signup-final-build.log`,
-`/tmp/cssv-signup-all.log`, `/tmp/cssv-signup-compatibility-unit.log`,
-`/tmp/cssv-signup-delivery-types.log`, `/tmp/cssv-signup-delivery-lint.log`,
-`/tmp/cssv-signup-final-lint.log`, `/tmp/cssv-signup-final-browser.log`,
-`/tmp/cssv-signup-final-contract.log`, `/tmp/cssv-signup-final-preservation.log`,
-`/tmp/cssv-signup-preservation.log`, `/tmp/cssv-signup-native-units.log` and
-`/tmp/cssv-signup-final-performance.log`.
+All native browser runs target guarded disposable `cssvista_briefing_test` accounts
+through loopback HTTPS port 3446, Chromium and the existing off-origin blocker.
+`tests/account-native/signup-fixture.php` prepares only this harness's TEST ONLY
+registration counters; the six-per-hour native limit remains unchanged.
 
-Review artifacts: `test-artifacts/signup/after/results.json`, the five-panel
-six-width captures in that directory, `test-artifacts/signup/before/`,
-`test-artifacts/signup/source.sha256` and `test-artifacts/workspace-performance/`.
-The final source hashes were checked after browser verification. Main changes:
-`src/features/account/` (presentation, adapters and validations), compatibility
-`StudentProfilePanel`, `Account`, `ProfileGate`, `Layout`, `TrustFooter`, shared
-`photoCompression`, public `PhotoCompressor`, contract script and focused tests.
-No generated editorial changes are included.
+Review artifacts: `test-artifacts/signup/single-window/results.json`,
+`single-{320,375,390,768,1024,1440}.png`, `empty-{320,1440}.png`,
+`validation-320.png`, `landscape.png` and `save-error.png`. Profile-loading
+failure and retry are also asserted by the native signup test.
+Screens contain disposable `@example.invalid` records, never live students.
 
-### Comparable dashboard benchmark
+## Historical dashboard benchmark (previous revision)
 
 `CSSV_PERFORMANCE_BEFORE=/workspace/cssv-performance-before/dist node
- tests/browser/workspace-performance.mjs` compares the original
+ tests/browser/workspace-performance.mjs` At revision `d17963c`, this command compared the original
 `13091aed6355556a5aceae8d4c9efe774cbee6ad` build in a detached local worktree with
-the final working artifact. Three interleaved cold-context runs per build use the
+the then-current working artifact. Three interleaved cold-context runs per build use the
 same Chromium, 390×844 viewport, 4× CPU slowdown, 100ms latency, 400KiB/s download,
 100KiB/s upload, disabled cache and identical sanitized free-account API responses.
 MPT is disabled and Pro paused in both fixtures. All other network origins are
@@ -186,36 +154,29 @@ shift includes the existing synchronization message disappearing. Raw timings,
 request lists, asset sizes and shift sources are retained in `results.json`;
 `diagnostic-before-loading-fix.json` preserves the actual diagnosis.
 
-### Explicit verification limits
+## Verification limits
 
-Physical iOS/Android devices and real on-screen keyboards were unavailable. The
-new flow did not send real recovery email or execute a successful SMTP-delivered
-reset; recovery links, confirmation validation and native invalid-code rejection
-were exercised, and the native reset APIs remain unchanged. Live cross-device
-services are not certified by fresh-context fixture sync. Successful unpaused Pro
-operation is not a claim of this paused-release test. The earlier official FPSC
-source recheck remains unavailable (upstream TLS verification failure/HTTP 503);
-no examination material was changed in this follow-up. Prior workspace limitations
-remain documented in verification-followup.md. These limits do not authorize
-production deployment or weakening existing account gates.
-Review images/results are local ignored artifacts using disposable `@example.invalid`
-accounts, never live students. Automated accessibility scans supplement keyboard
-and focus checks; they do not certify WCAG conformance.
+Physical iOS/Android devices and real on-screen keyboards are unavailable. No real
+SMTP recovery email was sent; invalid-code/confirmation and recovery-link behavior
+are exercised with native APIs retained. Fixture/fresh-context synchronization is
+not proof of live cross-device delivery. Paused Pro checks do not certify unpaused
+paid operation. The prior official FPSC source recheck was unavailable; this change
+does not modify examination content. Automated scans supplement keyboard and focus
+checks and do not certify WCAG conformance. The benchmark above belongs to the
+previous dashboard revision; it was not rerun as a signup performance measurement.
 
 ## Release and rollback
 
-AGENTS.md retains the product release hold. Repository workflows include main/PR
-build checks, manual schema bootstrap and production monitoring; external Hostinger
-hooks cannot be established as safe for a review push. Deliver locally. Do not
-push main, merge, dispatch a workflow or deploy under this assignment.
+Deployment triggers were inspected again; existing workflows include main/PR
+builds, manual schema bootstrap and live deployment monitoring. External Hostinger
+hooks are not established as safe for a review push. No remote write, workflow
+dispatch, production data change or deployment is part of this task.
 
-After separate release authorization and confirmation of deployment hooks, use the
-repository's locked npm installation, `npm run verify:hostinger:strict`, full suite,
-profile contract and native fixture checks. Review the generated fingerprint and
-private/ad-disabled routes before the existing release procedure. No bootstrap,
-secrets, payment changes or flags are required for this frontend change.
+After separate release authorization and deployment-hook review, use locked npm
+installation, `npm run verify:hostinger:strict`, `npm run test:all`, the profile
+contract check and the native fixture journeys before the established release
+procedure. No bootstrap, secret, payment or release-flag changes are needed.
 
-Reverting the signup change restores the prior interface without clearing any
-student data. All saved values/photos use existing contracts and remain readable
-by the previous revision. Keep the prior account-isolation and timer recovery fixes;
-do not roll back those preservation patches or clear browser storage.
+Revert this follow-up commit to restore the previous interface. Existing saved
+fields and photos remain readable by the prior revision; rollback needs no data
+migration or storage clearing. Keep earlier account-isolation and timer fixes.

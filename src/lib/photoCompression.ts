@@ -13,6 +13,15 @@ export type CompressionResult = {
   quality: number
 }
 
+export async function prepareProfilePhoto(input: File) {
+  if (!['image/jpeg', 'image/png', 'image/webp'].includes(input.type)) throw new Error('Choose a JPG, PNG or WebP photo.')
+  if (input.size < 512) throw new Error('Choose a valid photo file.')
+  if (input.size > MAX_INPUT_BYTES) throw new Error('Choose a photo smaller than 20 MB.')
+  const file = input.size > 60 * 1024 ? new File([(await compressImage(input, 60)).blob], 'profile-photo.jpg', { type: 'image/jpeg' }) : input
+  if (file.size > 60 * 1024) throw new Error('Profile photo must be 60 KB or smaller. Please resize the photo and upload it again.')
+  return { file, note: file === input ? `${formatBytes(file.size)} · ready to save` : `Resized on your device: ${formatBytes(input.size)} → ${formatBytes(file.size)}. Preview it before saving.` }
+}
+
 export function formatBytes(bytes: number) {
   if (bytes < 1024) return `${bytes} B`
   return `${(bytes / 1024).toFixed(1)} KB`

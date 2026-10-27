@@ -1,10 +1,19 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { accountDestination, accessIssues, type AccessValues } from '../src/features/account/accessForm.ts'
+import { registrationIssues } from '../src/features/account/registrationModel.ts'
 import { firstIncompleteProfileStep, incompatibleProfileList, profileDraft, profileIssues, profilePayload, profileSteps, type StudentProfile } from '../src/features/account/profileForm.ts'
 
 const access: AccessValues = { name: 'Test Student', email: 'student@example.invalid', password: 'eight words long', confirmation: '', resetCode: '' }
 const contact = { display_name: 'Test Student', phone: '+923001234567', whatsapp: '', previous_css_vista_student: 'No' }
+test('one-page signup validates all existing profile requirements and photo together', () => {
+  const complete = { ...contact, date_of_birth: '2000-01-01', gender: 'Other', city: 'Test', province_region: 'Test', country: 'Pakistan', css_attempt_year: '2027', preparation_level: 'Starting out', optional_subjects: '["Political Science"]', education: 'Bachelor degree' }
+  assert.deepEqual(registrationIssues(complete, true), {})
+  const invalid = registrationIssues({ ...complete, phone: '', city: '', education: '' }, false)
+  for (const field of ['phone', 'city', 'education', 'photo']) assert.ok(invalid[field])
+  assert.deepEqual(registrationIssues({ ...complete, phone: '', whatsapp: '+923001234567' }, true), {})
+  assert.deepEqual(complete.optional_subjects, '["Political Science"]', 'Validation does not seed a full planner combination')
+})
 test('account creation needs three fields; legacy sign-in does not acquire new password restrictions', () => {
   assert.deepEqual(accessIssues(access, 'create', false, false), {})
   assert.deepEqual(accessIssues({ ...access, password: 'old' }, 'sign-in', false, false), {})

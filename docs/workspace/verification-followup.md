@@ -166,8 +166,8 @@ rollback for newly saved in-progress timers. Original legacy recovery remains in
 
 ## Subsequent account-entry follow-up
 
-The easier native signup, four saved profile steps, private photo preparation,
-final fixture checks and comparable original/current dashboard benchmark are
-recorded in [signup-flow.md](signup-flow.md). Its measurements supersede the
+The single-page native signup (superseding the four-step form), private photo
+preparation, fixture checks and historical original/current dashboard benchmark
+are recorded in [signup-flow.md](signup-flow.md). The benchmark supersedes the
 earlier absence of a comparable performance baseline; physical-device and
 official-source limitations remain explicit.

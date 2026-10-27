@@ -30,6 +30,7 @@ requireText(
   "multiOptions: ['Batch', 'Test Series', 'Purchased Notes']",
 )
 if (!profileUi.includes('<fieldset')) failures.push('StudentProfilePanel: service checklist must use a fieldset')
+requireText('src/features/account/ProfileFields.tsx', '<fieldset', 'field.multiOptions')
 
 requireText(
   'public/api/student/profile.php',
