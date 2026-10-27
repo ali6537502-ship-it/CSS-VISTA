@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 563,
+  "count": 567,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -3940,6 +3940,34 @@
     {
       "id": "current-affairs-archive-20261026-16",
       "text": "EU Copernicus Sentinel-2 images dated 24 October 2026 showed a widening offshore oil spill near Umm Al Quwain, UAE, reported by Reuters on 26 October.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261026-17",
+      "text": "The UN Independent International Commission of Inquiry on Ukraine reported findings on civilian energy-infrastructure attacks to the General Assembly on 26 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261026-18",
+      "text": "A UN Independent International Commission of Inquiry presented findings on Gaza and the West Bank to the General Assembly on 26 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261026-19",
+      "text": "Pakistan was among 26 signatories to the UN Accra Convention on Negotiable Cargo Documents on 26 October 2026; the treaty was not yet in force.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261026-20",
+      "text": "UN Secretary-General António Guterres urged maximum restraint in the US–Iran conflict from Cairo on 26 October 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

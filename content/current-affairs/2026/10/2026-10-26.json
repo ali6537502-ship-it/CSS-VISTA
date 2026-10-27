@@ -1,7 +1,7 @@
 {
   "date": "2026-10-26",
   "published_at": "2026-10-26T19:39:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 26 October 2026 | Evening Update (through 19:39 PKT)",
+  "edition": "CSS VISTA — Daily Current Affairs | 26 October 2026 | Final Edition (00:00–23:59 PKT)",
   "schema_version": 1,
   "stories": [
     {
@@ -595,9 +595,9 @@
       "category": "World — Technology and Digital Economy",
       "headline": "Anthropic publishes US IPO paperwork, revealing rapid AI revenue growth and high costs",
       "summary": "AI company Anthropic unveiled US initial public offering paperwork on 26 October. Reuters reported first-half 2026 revenue of $16.29 billion and operating losses of $693 million, highlighting the scale and financial risks of the AI infrastructure race.",
-      "what_happened": "The company moved from an earlier confidential filing to public IPO documentation. Reuters reported major cloud-computing commitments and a governance structure designed to retain founder influence.",
+      "what_happened": "The company moved from an earlier confidential filing to public IPO documentation. Reuters reported major cloud-computing commitments and a governance structure designed to retain founder influence. A separate Reuters report said the filing disclosed a month-long pause in model training for security hardening and security incidents during AI evaluations.",
       "background": "AI firms require capital-intensive computing infrastructure, while public listings expose governance and financing arrangements to wider scrutiny.",
-      "why_it_matters": "The filing raises issues of AI market concentration, corporate governance, data-centre energy demand and investor exposure to emerging technologies.",
+      "why_it_matters": "The filing raises issues of AI market concentration, corporate governance, data-centre energy demand and investor exposure to emerging technologies. The disclosures illustrate AI evaluation controls, access permissions and cybersecurity risks.",
       "pakistan_perspective": "Pakistan's digital economy faces opportunities and constraints from rising AI adoption, compute costs and global technology investment.",
       "regional_implications": "",
       "global_implications": "",
@@ -620,7 +620,8 @@
       "topics": [
         "Artificial intelligence",
         "Initial public offerings",
-        "Technology governance"
+        "Technology governance",
+        "AI cybersecurity"
       ],
       "countries": [
         "United States"
@@ -639,6 +640,12 @@
           "publisher": "Reuters",
           "title": "Anthropic's IPO: A close look at AI frontrunner's rapid growth, spiraling costs",
           "url": "https://www.reuters.com/legal/litigation/anthropics-ipo-close-look-ai-frontrunners-rapid-growth-spiraling-costs-2026-10-26/",
+          "published_at": "2026-10-26"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "Anthropic discloses month-long training pause, AI security breaches in IPO filing",
+          "url": "https://www.reuters.com/legal/litigation/anthropic-discloses-month-long-training-pause-ai-security-breaches-ipo-filing-2026-10-26/",
           "published_at": "2026-10-26"
         }
       ]
@@ -868,6 +875,261 @@
           "published_at": "2026-10-23"
         }
       ]
+    },
+    {
+      "id": "ca-2026-10-26-ukraine-un-energy-inquiry",
+      "category": "World — International Humanitarian Law",
+      "headline": "UN inquiry reports international crimes linked to attacks on Ukraine's energy infrastructure",
+      "summary": "On 26 October 2026, the UN Independent International Commission of Inquiry on Ukraine reported findings that Russian authorities committed war crimes and crimes against humanity through attacks on civilian energy infrastructure. These are investigative findings, not criminal-court judgments.",
+      "what_happened": "The commission reported to the UN General Assembly that repeated attacks deprived civilians of heating and electricity during the 2025–26 winter. It also reported evidence of deceptive or coercive military recruitment of men from 29 countries.",
+      "background": "International humanitarian law protects civilians and restricts attacks on civilian objects. A commission of inquiry investigates and assesses evidence but does not issue criminal convictions.",
+      "why_it_matters": "The findings concern civilian protection, accountability for infrastructure attacks and trafficking into armed conflict.",
+      "pakistan_perspective": "Relevant to Pakistan's examination of international humanitarian law, UN investigative mechanisms and protection against deceptive overseas recruitment.",
+      "regional_implications": "Energy-infrastructure attacks affect Ukraine's civilian resilience and European energy-security planning.",
+      "global_implications": "The report contributes to international discussions of war crimes accountability and civilian infrastructure.",
+      "key_takeaways": [
+        "The UN Independent International Commission of Inquiry on Ukraine reported findings on civilian energy-infrastructure attacks to the General Assembly on 26 October 2026.",
+        "The findings concern civilian protection, accountability for infrastructure attacks and trafficking into armed conflict."
+      ],
+      "facts": [
+        "The UN Independent International Commission of Inquiry on Ukraine reported findings on civilian energy-infrastructure attacks to the General Assembly on 26 October 2026."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "The UN Independent International Commission of Inquiry on Ukraine reported findings on civilian energy-infrastructure attacks to the General Assembly on 26 October 2026."
+        }
+      ],
+      "question_angles": [
+        "Which UN-mandated body reported findings about attacks on Ukraine's civilian energy infrastructure on 26 October 2026?"
+      ],
+      "topics": [
+        "Ukraine",
+        "International humanitarian law",
+        "Civilian infrastructure"
+      ],
+      "countries": [
+        "Ukraine",
+        "Russia"
+      ],
+      "institutions": [
+        "United Nations General Assembly",
+        "Independent International Commission of Inquiry on Ukraine"
+      ],
+      "reports": [
+        "UN Commission of Inquiry on Ukraine findings, 26 October 2026"
+      ],
+      "treaties": [],
+      "people": [
+        "Erik Møse"
+      ],
+      "sources": [
+        {
+          "publisher": "United Nations",
+          "title": "Ukraine: Investigators find Russia committed war crimes by targeting civilians",
+          "url": "https://www.un.org/en/node/249470",
+          "published_at": "2026-10-26"
+        },
+        {
+          "publisher": "Associated Press",
+          "title": "Russia committed war crimes in Ukraine by attacking its energy grid, UN-backed inquiry says",
+          "url": "https://apnews.com/article/27ee6394694bb30a7f1eab9addced768",
+          "published_at": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-26-un-commission-gaza-west-bank",
+      "category": "World — Human Rights and International Law",
+      "headline": "UN commission presents findings on alleged atrocity crimes in Gaza and the West Bank",
+      "summary": "A UN Independent International Commission of Inquiry reported findings on 26 October 2026 alleging war crimes and crimes against humanity in the occupied Palestinian territory and continuing genocidal acts in Gaza. Its findings are not binding judgments of an international court.",
+      "what_happened": "The commission's report to the UN General Assembly assessed civilian harm, displacement and alleged abuses in Gaza and the West Bank. It also criticised abuses attributed to Palestinian Authority security forces.",
+      "background": "The Independent International Commission of Inquiry on the Occupied Palestinian Territory, including East Jerusalem, and Israel operates under a UN Human Rights Council mandate. Its reports are investigative, not judicial rulings.",
+      "why_it_matters": "The findings bear on civilian protection, occupation, accountability, self-determination and international humanitarian law.",
+      "pakistan_perspective": "Relevant to Pakistan's support for Palestinian self-determination and its positions in international humanitarian-law discussions.",
+      "regional_implications": "The report may influence diplomatic pressure, humanitarian access and governance debates.",
+      "global_implications": "It illustrates the roles and limits of UN commissions and international courts.",
+      "key_takeaways": [
+        "A UN Independent International Commission of Inquiry presented findings on Gaza and the West Bank to the General Assembly on 26 October 2026.",
+        "The findings bear on civilian protection, occupation, accountability, self-determination and international humanitarian law."
+      ],
+      "facts": [
+        "A UN Independent International Commission of Inquiry presented findings on Gaza and the West Bank to the General Assembly on 26 October 2026."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "A UN Independent International Commission of Inquiry presented findings on Gaza and the West Bank to the General Assembly on 26 October 2026."
+        }
+      ],
+      "question_angles": [
+        "Which UN investigative body issued findings on Gaza and the West Bank on 26 October 2026?"
+      ],
+      "topics": [
+        "Gaza",
+        "West Bank",
+        "International law",
+        "Human rights investigations"
+      ],
+      "countries": [
+        "Israel",
+        "Palestine"
+      ],
+      "institutions": [
+        "United Nations Human Rights Council",
+        "United Nations General Assembly",
+        "Independent International Commission of Inquiry on the Occupied Palestinian Territory"
+      ],
+      "reports": [
+        "Commission of Inquiry report to the 81st UN General Assembly"
+      ],
+      "treaties": [],
+      "people": [
+        "Srinivasan Muralidhar"
+      ],
+      "sources": [
+        {
+          "publisher": "WAFA",
+          "title": "Israel has committed war crimes and crimes against humanity in the Occupied Palestinian Territory amid continuing genocide in Gaza, UN Commission of Inquiry finds",
+          "url": "https://english.wafa.ps/Pages/Details/176354",
+          "published_at": "2026-10-26"
+        },
+        {
+          "publisher": "Mirage News",
+          "title": "UN Finds Israel Committed War Crimes, Crimes Against Humanity in Gaza",
+          "url": "https://www.miragenews.com/un-finds-israel-committed-war-crimes-crimes-1766515/",
+          "published_at": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-26-accra-convention-pakistan-signature",
+      "category": "Pakistan — International Trade and Treaties",
+      "headline": "Pakistan joins 26 signatories of UN Accra Convention on negotiable cargo documents",
+      "summary": "The UN Treaty Collection listed Pakistan among 26 countries signing the United Nations Convention on Negotiable Cargo Documents in Accra, Ghana, on 26 October 2026. The treaty was not yet in force; signature is distinct from ratification.",
+      "what_happened": "The UN depositary status record dated 26 October listed 26 signatories, including Pakistan, China, Ghana, Nigeria and Saudi Arabia. The agreement provides a framework for negotiable cargo documents in paper or electronic form across transport modes.",
+      "background": "Adopted by the UN General Assembly on 15 December 2025, the treaty enters into force 180 days after the tenth instrument of ratification, acceptance, approval or accession is deposited. Signing alone does not activate it.",
+      "why_it_matters": "Harmonised negotiable cargo documents could support trade finance, logistics and multimodal transport.",
+      "pakistan_perspective": "Pakistan's signature creates a potential route to domestic legal alignment on cargo documentation and trade finance; ratification and implementation are separate steps.",
+      "regional_implications": "Common documentary standards could help cross-border freight and trade finance once implemented.",
+      "global_implications": "The agreement addresses transferability of cargo documents across different modes and formats.",
+      "key_takeaways": [
+        "Pakistan was among 26 signatories to the UN Accra Convention on Negotiable Cargo Documents on 26 October 2026; the treaty was not yet in force.",
+        "Harmonised negotiable cargo documents could support trade finance, logistics and multimodal transport."
+      ],
+      "facts": [
+        "Pakistan was among 26 signatories to the UN Accra Convention on Negotiable Cargo Documents on 26 October 2026; the treaty was not yet in force."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "Pakistan was among 26 signatories to the UN Accra Convention on Negotiable Cargo Documents on 26 October 2026; the treaty was not yet in force."
+        }
+      ],
+      "question_angles": [
+        "Which United Nations convention did Pakistan sign in Accra, Ghana, on 26 October 2026?"
+      ],
+      "topics": [
+        "International trade law",
+        "Multimodal transport",
+        "Trade finance",
+        "Treaty ratification"
+      ],
+      "countries": [
+        "Pakistan",
+        "Ghana",
+        "China",
+        "Saudi Arabia"
+      ],
+      "institutions": [
+        "United Nations Treaty Collection",
+        "United Nations Commission on International Trade Law"
+      ],
+      "reports": [],
+      "treaties": [
+        "United Nations Convention on Negotiable Cargo Documents"
+      ],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "United Nations Treaty Collection",
+          "title": "United Nations Convention on Negotiable Cargo Documents",
+          "url": "https://treaties-prod.un.org/pages/ViewDetails.aspx?chapter=10&clang=_en&mtdsg_no=X-22&src=TREATY",
+          "published_at": "2026-10-26",
+          "source_type": "official treaty status"
+        },
+        {
+          "publisher": "FIATA",
+          "title": "Regulatory Alert : Driving Forward the Ratification of the NCD Convention",
+          "url": "https://fiata.org/n/regulatory-alert--driving-forward-the-ratification/",
+          "published_at": "2026-06-26"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-26-guterres-cairo-iran-us",
+      "category": "World — Diplomacy and Conflict Prevention",
+      "headline": "UN chief urges US–Iran restraint and freedom of navigation during Cairo visit",
+      "summary": "UN Secretary-General António Guterres called from Cairo on 26 October 2026 for diplomatic solutions to the US–Iran conflict and restoration of navigational rights around the Strait of Hormuz and Bab al-Mandab.",
+      "what_happened": "The UN said Guterres met Egyptian President Abdel Fattah el-Sisi and Foreign Minister Badr Abdelatty. He urged maximum restraint and warned that further escalation could become uncontrollable.",
+      "background": "Conflict affecting Gulf shipping routes has heightened concerns about energy prices and the security of international navigation.",
+      "why_it_matters": "The remarks highlight preventive diplomacy, the law of the sea and the economic importance of major maritime chokepoints.",
+      "pakistan_perspective": "Pakistan depends on energy imports and participates in regional diplomacy, making secure maritime routes relevant to its economy and foreign policy.",
+      "regional_implications": "Navigation through Hormuz and Bab al-Mandab affects Gulf security, Red Sea trade and energy supplies.",
+      "global_implications": "Disruption of these chokepoints can raise costs across global energy and freight markets.",
+      "key_takeaways": [
+        "UN Secretary-General António Guterres urged maximum restraint in the US–Iran conflict from Cairo on 26 October 2026.",
+        "The remarks highlight preventive diplomacy, the law of the sea and the economic importance of major maritime chokepoints."
+      ],
+      "facts": [
+        "UN Secretary-General António Guterres urged maximum restraint in the US–Iran conflict from Cairo on 26 October 2026."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "UN Secretary-General António Guterres urged maximum restraint in the US–Iran conflict from Cairo on 26 October 2026."
+        }
+      ],
+      "question_angles": [
+        "In which city did UN Secretary-General António Guterres call for restraint in the US–Iran conflict on 26 October 2026?"
+      ],
+      "topics": [
+        "United Nations",
+        "Conflict prevention",
+        "Strait of Hormuz",
+        "Bab al-Mandab"
+      ],
+      "countries": [
+        "Egypt",
+        "Iran",
+        "United States"
+      ],
+      "institutions": [
+        "United Nations",
+        "Office of the UN Secretary-General"
+      ],
+      "reports": [],
+      "treaties": [],
+      "people": [
+        "António Guterres",
+        "Abdel Fattah el-Sisi",
+        "Badr Abdelatty"
+      ],
+      "sources": [
+        {
+          "publisher": "United Nations",
+          "title": "In Egypt, Guterres warns against Iran-US escalation",
+          "url": "https://www.un.org/en/egypt-guterres-warns-against-iran-us-escalation",
+          "published_at": "2026-10-26"
+        },
+        {
+          "publisher": "United Nations Secretary-General",
+          "title": "Noon briefing of 26 October 2026",
+          "url": "https://www.un.org/sg/fr/node/401528",
+          "published_at": "2026-10-26"
+        }
+      ]
     }
-  ]
+  ],
+  "finalized_at": "2026-10-27T07:00:46+05:00"
 }

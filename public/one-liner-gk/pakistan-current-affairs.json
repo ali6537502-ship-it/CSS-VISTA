@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 231,
+  "count": 232,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1616,6 +1616,13 @@
     {
       "id": "pakistan-current-affairs-20261026-09",
       "text": "Senior officials from Pakistan, Saudi Arabia and Türkiye met Iranian authorities in Tehran on 26 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261026-10",
+      "text": "Pakistan was among 26 signatories to the UN Accra Convention on Negotiable Cargo Documents on 26 October 2026; the treaty was not yet in force.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

@@ -958,5 +958,65 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/middle-east/oil-spill-off-uae-widens-satellite-images-show-prompting-more-beach-closures-2026-10-26/"
+  },
+  {
+    "id": "current-affairs-20261026-17",
+    "q": "Which UN-mandated body reported findings about attacks on Ukraine's civilian energy infrastructure on 26 October 2026?",
+    "o": [
+      "International Court of Justice",
+      "Independent International Commission of Inquiry on Ukraine",
+      "OSCE Minsk Group",
+      "International Criminal Court"
+    ],
+    "a": 1,
+    "e": "The Independent International Commission of Inquiry on Ukraine presented investigative findings to the UN General Assembly, not court convictions. Source: United Nations.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.un.org/en/node/249470"
+  },
+  {
+    "id": "current-affairs-20261026-18",
+    "q": "Which UN investigative body issued findings on Gaza and the West Bank on 26 October 2026?",
+    "o": [
+      "UN Security Council Sanctions Committee",
+      "International Court of Justice",
+      "Independent International Commission of Inquiry on the Occupied Palestinian Territory and Israel",
+      "UN Peacebuilding Commission"
+    ],
+    "a": 2,
+    "e": "The UN-mandated Independent International Commission of Inquiry on the Occupied Palestinian Territory, including East Jerusalem, and Israel presented the findings. These are not court judgments. Source: WAFA.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://english.wafa.ps/Pages/Details/176354"
+  },
+  {
+    "id": "current-affairs-20261026-19",
+    "q": "Which United Nations convention did Pakistan sign in Accra, Ghana, on 26 October 2026?",
+    "o": [
+      "Convention on Negotiable Cargo Documents",
+      "Rotterdam Rules on Carriage of Goods",
+      "Hamburg Rules on Carriage of Goods by Sea",
+      "Convention on International Sale of Goods"
+    ],
+    "a": 0,
+    "e": "The UN Treaty Collection records Pakistan among 26 signatories of the Accra Convention on Negotiable Cargo Documents on 26 October 2026. Signing is not ratification. Source: United Nations Treaty Collection.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://treaties-prod.un.org/pages/ViewDetails.aspx?chapter=10&clang=_en&mtdsg_no=X-22&src=TREATY"
+  },
+  {
+    "id": "current-affairs-20261026-20",
+    "q": "In which city did UN Secretary-General António Guterres call for restraint in the US–Iran conflict on 26 October 2026?",
+    "o": [
+      "Tehran",
+      "Doha",
+      "Geneva",
+      "Cairo"
+    ],
+    "a": 3,
+    "e": "Guterres made the appeal in Cairo and called for restoration of navigation rights around Hormuz and Bab al-Mandab. Source: United Nations.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.un.org/en/egypt-guterres-warns-against-iran-us-escalation"
   }
 ]
