@@ -1,55 +1,9 @@
 {
   "schema_version": 1,
   "date": "2026-10-28",
-  "published_at": "2026-10-28T14:20:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 28 October 2026 | Issue No. 1",
+  "published_at": "2026-10-28T19:05:10+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 28 October 2026 | Evening Update (00:00–19:00 PKT)",
   "stories": [
-    {
-      "id": "ca-2026-10-28-lead-wmo-record",
-      "category": "World — Climate Science and Environment",
-      "headline": "Atmospheric carbon dioxide reaches new record",
-      "summary": "WMO reported on Tuesday, 27 October that the global average CO₂ concentration reached 426.8 ppm in 2025, alongside record methane and nitrous oxide levels.",
-      "what_happened": "On Tuesday, 27 October 2026, the World Meteorological Organization reported a 2025 mean atmospheric carbon dioxide concentration of 426.8 parts per million, or 153% of the estimated 1750 baseline. Methane reached 1,948 parts per billion and nitrous oxide reached 339.1 ppb. Carbon dioxide increased by 2.8 ppm from 2024. These are measurements of atmospheric concentrations, not annual emissions.",
-      "background": "WMO's annual Greenhouse Gas Bulletin records the concentrations of long-lived greenhouse gases. Emissions accumulate to the extent they are not absorbed by land and ocean sinks.",
-      "why_it_matters": "These accumulated gases increase long-term warming risks and affect climate adaptation, water management and energy policy.",
-      "pakistan_perspective": "Pakistan's vulnerability to extreme heat, floods and water stress increases the relevance of international mitigation and adaptation commitments.",
-      "key_takeaways": [
-        "The 2025 mean global CO₂ concentration was 426.8 ppm.",
-        "Methane averaged 1,948 ppb and nitrous oxide 339.1 ppb in 2025.",
-        "Concentration and annual emissions are distinct measurements."
-      ],
-      "what_to_watch": [],
-      "question_angles": [
-        "What global average CO2 concentration for 2025 did the WMO's 2026 bulletin report?"
-      ],
-      "topics": [
-        "Greenhouse gases",
-        "WMO",
-        "COP31"
-      ],
-      "countries": [
-        "Pakistan",
-        "Türkiye"
-      ],
-      "organisations": [
-        "World Meteorological Organization"
-      ],
-      "quick_gk": [
-        "WMO's 2026 bulletin reported a 2025 global average atmospheric CO2 concentration of 426.8 ppm."
-      ],
-      "sources": [
-        {
-          "publisher": "World Meteorological Organization",
-          "title": "Greenhouse gas levels once again reach record high",
-          "url": "https://wmo.int/news/media-centre/greenhouse-gas-levels-once-again-reach-record-high"
-        },
-        {
-          "publisher": "World Meteorological Organization",
-          "title": "Greenhouse Gas Bulletin No. 22",
-          "url": "https://public.wmo.int/resources/publication-series/greenhouse-gas-bulletin/no-22"
-        }
-      ]
-    },
     {
       "id": "ca-2026-10-28-pak-fuel-prices",
       "category": "Pakistan — Economy and Energy",
@@ -148,46 +102,6 @@
       ]
     },
     {
-      "id": "ca-2026-10-28-pak-china-cpic",
-      "category": "Pakistan — Foreign Relations and Digital Cooperation",
-      "headline": "Pakistan and China launch information corridor",
-      "summary": "On 27 October, Pakistan and China launched an information corridor covering media, business, think tanks and culture and tourism.",
-      "what_happened": "Information Minister Ataullah Tarar described four pillars: media; business and enterprises; think tanks; and culture and tourism. The Islamabad ceremony was attended by Chinese spokesperson Mao Ning and Ambassador Jiang Zaidong. Tarar described an 18-organisation media news-exchange working group and a planned trade portal.",
-      "background": "CPIC is an information and people-to-people initiative distinct from the China-Pakistan Economic Corridor (CPEC), which focuses on infrastructure and economic connectivity.",
-      "why_it_matters": "The launch shows an expansion of bilateral cooperation beyond roads and energy into digital communication, trade information and public diplomacy.",
-      "pakistan_perspective": "For Pakistan, the project may improve trade-information access and cultural engagement, but effectiveness depends on verifiable outcomes and independent evaluation.",
-      "key_takeaways": [
-        "Pakistan and China launched the China-Pakistan Information Corridor (CPIC) in Islamabad on 27 October 2026.",
-        "The launch shows an expansion of bilateral cooperation beyond roads and energy into digital communication, trade information and public diplomacy."
-      ],
-      "what_to_watch": [],
-      "question_angles": [
-        "Which new bilateral information initiative was launched by Pakistan and China on 27 October 2026?"
-      ],
-      "topics": [
-        "Pakistan-China relations",
-        "Digital diplomacy",
-        "Information integrity"
-      ],
-      "countries": [
-        "Pakistan",
-        "China"
-      ],
-      "organisations": [
-        "China-Pakistan Information Corridor"
-      ],
-      "quick_gk": [
-        "Pakistan and China launched the China-Pakistan Information Corridor (CPIC) in Islamabad on 27 October 2026."
-      ],
-      "sources": [
-        {
-          "publisher": "Dawn",
-          "title": "Pakistan, China launch information corridor CPIC",
-          "url": "https://www.dawn.com/news/2040200/pakistan-china-launch-information-corridor-cpic-to-counter-misleading-narratives-promote-cultural-exchange"
-        }
-      ]
-    },
-    {
       "id": "ca-2026-10-28-pak-shrimp-farming",
       "category": "Pakistan — Blue Economy",
       "headline": "Government sets 120-day shrimp farming roadmap",
@@ -269,88 +183,6 @@
       ]
     },
     {
-      "id": "ca-2026-10-28-world-irena-capacity",
-      "category": "World — Climate and Energy Transition",
-      "headline": "IRENA chief warns renewable additions may slow",
-      "summary": "On 27 October, IRENA's director-general said annual global renewable-capacity additions could slow in 2026 compared with 2025.",
-      "what_happened": "Director-General Francesco La Camera cited inadequate electricity transmission and distribution infrastructure, grid curtailment and trade barriers. Reuters reported that renewable installations including hydropower reached 5,149 GW in 2025 after 692 GW of additions.",
-      "background": "Generation capacity is useful only if grids can transmit and distribute output. Curtailment occurs when available renewable power cannot be accepted by the system.",
-      "why_it_matters": "The statement highlights grid investment as a major bottleneck in the energy transition. It is a forecast without a numerical 2026 additions estimate.",
-      "pakistan_perspective": "Pakistan's solar and wind expansion similarly depends on transmission investment, grid integration and reliable distribution.",
-      "key_takeaways": [
-        "The warning concerns additions in 2026, not a fall in total renewable capacity.",
-        "Reuters cited 692 GW of global renewable additions in 2025.",
-        "Reuters reported 5,149 GW in total renewable generating capacity in 2025."
-      ],
-      "what_to_watch": [],
-      "question_angles": [
-        "According to IRENA figures cited on 27 October 2026, what was global renewable power capacity at end-2025?"
-      ],
-      "topics": [
-        "Renewable energy",
-        "Grid constraints",
-        "Climate mitigation"
-      ],
-      "countries": [
-        "China",
-        "Pakistan"
-      ],
-      "organisations": [
-        "International Renewable Energy Agency"
-      ],
-      "quick_gk": [
-        "IRENA reported global renewable power capacity of 5,149 GW at the end of 2025."
-      ],
-      "sources": [
-        {
-          "publisher": "Reuters",
-          "title": "World to add less clean energy capacity this year, renewables agency chief says",
-          "url": "https://www.reuters.com/business/energy/world-add-less-clean-energy-capacity-this-year-renewables-agency-chief-says-2026-10-27/"
-        }
-      ]
-    },
-    {
-      "id": "ca-2026-10-28-world-inflation-outlook",
-      "category": "World — Global Economy and Inflation",
-      "headline": "Economists raise inflation forecasts across 31 economies",
-      "summary": "A Reuters poll released on 27 October found upward revisions in 2027 inflation forecasts for 31 of 50 economies.",
-      "what_happened": "More than 500 economists participated in the October survey. Reuters reported higher 2027 inflation expectations for 31 of 50 economies and growth forecasts upgraded for 23. Its global growth median was 3.0% for 2026 and 3.2% for 2027; these are poll forecasts, not outcomes.",
-      "background": "Energy supply disruptions, interest-rate expectations and AI-related investment affect inflation and growth forecasts. A forecast revision does not imply inflation is certain to materialise.",
-      "why_it_matters": "The findings demonstrate the possibility of sustained price pressure despite relatively resilient economic activity.",
-      "pakistan_perspective": "Pakistan's import bill, inflation and financing costs are sensitive to oil prices and global interest-rate conditions.",
-      "key_takeaways": [
-        "More than 500 economists participated in the survey.",
-        "Inflation forecasts for 2027 were revised upward for 31 of 50 economies.",
-        "Growth forecasts were raised for 23 economies."
-      ],
-      "what_to_watch": [],
-      "question_angles": [
-        "For how many of the 50 surveyed economies did Reuters' October 2026 poll raise 2027 inflation forecasts?"
-      ],
-      "topics": [
-        "Global inflation",
-        "Economic forecasts",
-        "Energy prices"
-      ],
-      "countries": [
-        "Pakistan",
-        "United States"
-      ],
-      "organisations": [
-        "Reuters"
-      ],
-      "quick_gk": [
-        "A Reuters October 2026 poll raised 2027 inflation forecasts for 31 of 50 surveyed economies."
-      ],
-      "sources": [
-        {
-          "publisher": "Reuters",
-          "title": "High inflation to persist globally into next year, poll shows",
-          "url": "https://www.reuters.com/world/china/high-inflation-persist-globally-into-next-year-reuters-poll-shows-2026-10-27/"
-        }
-      ]
-    },
-    {
       "id": "ca-2026-10-28-world-qatar-hormuz",
       "category": "World — Middle East Diplomacy",
       "headline": "Qatar urges Iran to reopen Hormuz for mediation",
@@ -424,20 +256,20 @@
     {
       "id": "ca-2026-10-28-world-cyclone-arnab",
       "category": "World — Natural Hazards and Disaster Management",
-      "headline": "India orders evacuations ahead of Cyclone Arnab",
-      "summary": "Authorities ordered nearly 100,000 residents to evacuate parts of Andhra Pradesh and Odisha on 27 October before the cyclone's expected landfall.",
-      "what_happened": "AFP reported nearly 100,000 people were told to leave vulnerable areas. The India Meteorological Department forecast a very severe cyclonic storm with gusts reaching about 150 km/h. Landfall had not occurred at the reporting cutoff.",
+      "headline": "Cyclone Arnab makes landfall on India's southeastern coast",
+      "summary": "On 28 October, Cyclone Arnab made landfall in Andhra Pradesh with sustained winds of 115–125 km/h, according to the India Meteorological Department; no deaths were initially reported.",
+      "what_happened": "The India Meteorological Department reported on 28 October that Cyclone Arnab struck Andhra Pradesh as a very severe cyclonic storm, with sustained winds of 115–125 km/h and gusts up to 140 km/h. Authorities had instructed around 50,000 people in Andhra Pradesh and 48,000 in Odisha to move to safety. The chief minister reported no deaths in the initial assessment; the final damage assessment was not yet available.",
       "background": "Tropical cyclones bring high winds, storm surges and heavy rain; early warning and timely evacuation reduce exposure.",
-      "why_it_matters": "The event demonstrates the importance of disaster risk reduction, coastal planning and cross-border weather coordination.",
+      "why_it_matters": "Advance warnings, evacuation and local response illustrate how disaster risk reduction can limit casualties during intense Bay of Bengal cyclones.",
       "pakistan_perspective": "The Bay of Bengal cyclone hazard has lessons for Pakistan's coastal warning systems and regional disaster preparedness.",
       "key_takeaways": [
-        "Authorities issued evacuation orders on 27 October.",
-        "The reported affected states were Andhra Pradesh and Odisha.",
-        "The 28 October forecast landfall was not counted as a 27 October event."
+        "Cyclone Arnab made landfall in Andhra Pradesh on 28 October 2026.",
+        "The IMD reported sustained winds of 115–125 km/h and gusts up to 140 km/h.",
+        "Initial reports indicated no deaths; later damage assessments could revise the picture."
       ],
       "what_to_watch": [],
       "question_angles": [
-        "Which two Indian states were the focus of evacuation orders ahead of Cyclone Arnab?"
+        "In which Indian state did Cyclone Arnab make landfall on 28 October 2026?"
       ],
       "topics": [
         "Tropical cyclones",
@@ -453,14 +285,428 @@
         "India Meteorological Department"
       ],
       "quick_gk": [
-        "India ordered nearly 100,000 people to evacuate ahead of Cyclone Arnab on 27 October 2026."
+        "Cyclone Arnab made landfall in Andhra Pradesh on 28 October 2026, according to the IMD."
       ],
       "sources": [
         {
           "publisher": "AFP via Dawn",
           "title": "India orders evacuations as Cyclone Arnab looms",
           "url": "https://www.dawn.com/news/2040202/india-orders-evacuations-in-andhra-pradesh-odisha-as-cyclone-arnab-looms"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Cyclone Arnab lashes India coast, no deaths reported",
+          "url": "https://www.dawn.com/news/2040415/cyclone-arnab-lashes-india-coast-no-deaths-reported"
         }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-border",
+      "category": "Pakistan — Border Security and Foreign Relations",
+      "headline": "Pakistan and Afghanistan trade accusations after deadly cross-border firing",
+      "summary": "Pakistani authorities reported one civilian killed and five injured in South Waziristan after firing from the Afghan side; Afghan authorities made counter-allegations that Reuters could not independently verify.",
+      "what_happened": "Reuters reported on 28 October that the deputy commissioner of South Waziristan Lower attributed firing at homes and a market to Afghan Taliban positions, reporting one death and five injuries. Afghan Taliban officials alleged Pakistani drone strikes in Paktika and said their forces retaliated. Reuters stated that it could not verify either side's claims.",
+      "background": "Cross-border security incidents and disputes over militant sanctuaries have strained Pakistan–Afghanistan relations and disrupted border trade.",
+      "why_it_matters": "The incident highlights escalation risks, civilian protection and the need for verifiable communication channels and border de-escalation.",
+      "pakistan_perspective": "Civilian safety, border trade and regional counterterrorism diplomacy are directly affected; claims about responsibility must remain attributed until independently established.",
+      "key_takeaways": [
+        "Pakistani officials reported one civilian death and five injuries in South Waziristan.",
+        "Afghan officials issued counter-allegations that Reuters could not independently verify."
+      ],
+      "question_angles": [
+        "Which Pakistani border region was named in the 28 October Reuters report?"
+      ],
+      "topics": [
+        "Pakistan–Afghanistan relations",
+        "Border security",
+        "Conflict de-escalation"
+      ],
+      "countries": [
+        "Pakistan",
+        "Afghanistan"
+      ],
+      "institutions": [
+        "District Administration South Waziristan Lower"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistan says Afghan firing kills one in border district",
+          "url": "https://www.reuters.com/world/asia-pacific/pakistan-says-afghan-firing-kills-one-border-district-2026-10-28/"
+        }
+      ],
+      "quick_gk": [
+        "Pakistani officials reported one civilian death and five injuries in South Waziristan."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-kp-local-polls",
+      "category": "Pakistan — Elections and Constitutional Governance",
+      "headline": "Election Commission orders local polls where KP delimitation is complete",
+      "summary": "The ECP ordered the election programme to be prepared for Khyber Pakhtunkhwa districts with completed delimitations, while excluding districts under special emergency arrangements.",
+      "what_happened": "On 28 October the Election Commission of Pakistan directed its office to submit an election programme for KP districts where local-government delimitation had been completed. The order excluded 12 districts subject to special emergency arrangements and sought delimitation schedules for other eligible districts. The ECP cited Articles 218(3), 140A(2), 219(d), 220 and 222 of the Constitution and relevant Elections Act 2017 provisions.",
+      "background": "KP local bodies' terms expired in phases in March and June 2026; the province has been under emergency measures since 11 October.",
+      "why_it_matters": "The decision raises important questions about constitutional duties to conduct local elections during a security emergency and about the scope of election administration.",
+      "pakistan_perspective": "The order does not itself mean polling has occurred or that a final date has been fixed for all KP districts.",
+      "key_takeaways": [
+        "The ECP ordered programmes for KP districts with completed delimitation.",
+        "Twelve specially designated districts were excluded.",
+        "Article 140A concerns local government."
+      ],
+      "question_angles": [
+        "Which constitutional article concerns local government in Pakistan?"
+      ],
+      "topics": [
+        "Election Commission of Pakistan",
+        "Local government",
+        "Constitutional law"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Election Commission of Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "ECP orders immediate local body polls in KP districts demarcated, sans those under ARDC",
+          "url": "https://www.dawn.com/news/2040445/ecp-orders-immediate-local-body-polls-in-kp-districts-demarcated-sans-those-under-ardc"
+        }
+      ],
+      "quick_gk": [
+        "The ECP ordered programmes for KP districts with completed delimitation."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-justice-kayani",
+      "category": "Pakistan — Judiciary and Constitutional Affairs",
+      "headline": "Lahore High Court Justice Mohsin Akhtar Kayani submits resignation",
+      "summary": "Justice Mohsin Akhtar Kayani resigned on 28 October, citing health concerns and his assessment that recent constitutional changes had undermined high-court independence.",
+      "what_happened": "Dawn reported that Justice Mohsin Akhtar Kayani submitted his resignation to Pakistan's president on 28 October. In his letter, he cited health reasons and concerns about the judiciary, specifically giving his own assessment of the 26th and 27th Constitutional Amendments and executive influence over judicial appointments and transfers. His views are attributed statements, not a court finding.",
+      "background": "Justice Kayani previously served at the Islamabad High Court and transferred to the Lahore High Court in April 2026. Judicial transfers and institutional independence have been contested in recent constitutional litigation.",
+      "why_it_matters": "The resignation places renewed attention on separation of powers, judicial independence and constitutional amendment debates.",
+      "pakistan_perspective": "Whether the resignation is accepted and how the judiciary responds are separate from the concerns expressed in the letter.",
+      "key_takeaways": [
+        "Justice Mohsin Akhtar Kayani submitted his resignation on 28 October 2026.",
+        "He was serving at the Lahore High Court.",
+        "The resignation letter expressed concerns about judicial independence; these remain his assessment."
+      ],
+      "question_angles": [
+        "Which high court was Justice Kayani serving in when he submitted his resignation?"
+      ],
+      "topics": [
+        "Judicial independence",
+        "26th Constitutional Amendment",
+        "27th Constitutional Amendment"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Lahore High Court",
+        "Islamabad High Court"
+      ],
+      "people": [
+        "Justice Mohsin Akhtar Kayani"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "'Conscience does not permit': LHC's Justice Kayani resigns, cites 'executive's growing control' over judiciary",
+          "url": "https://www.dawn.com/news/2040428/conscience-does-not-permit-lhcs-justice-kayani-resigns-cites-executives-growing-control-over-judiciary"
+        }
+      ],
+      "quick_gk": [
+        "Justice Mohsin Akhtar Kayani submitted his resignation on 28 October 2026."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-ai-alibaba",
+      "category": "Pakistan — Digital Economy and Artificial Intelligence",
+      "headline": "Prime minister reviews AI and digitalisation cooperation with Alibaba",
+      "summary": "At an Islamabad meeting on 28 October, Prime Minister Shehbaz Sharif directed agencies to accelerate AI applications in agriculture, public services, cancer detection and trade under cooperation with Alibaba.",
+      "what_happened": "The Prime Minister's Office said a meeting chaired by Shehbaz Sharif on 28 October reviewed collaboration with Alibaba Group. Directions included an AI-assisted cancer early-detection pilot, a proposed 15-day AI training programme for IT graduates through Ignite, petroleum supply-chain analytics and digital tools for agricultural exports. These were plans and directions, not completed nationwide rollouts.",
+      "background": "Digital public services and export facilitation depend on reliable data systems, privacy safeguards, infrastructure and human capacity.",
+      "why_it_matters": "AI implementation in public administration and trade could affect competitiveness, regulatory oversight and health-service delivery, subject to implementation and independent evaluation.",
+      "pakistan_perspective": "The government's announced targets should be assessed against actual deployment, procurement transparency and measurable outcomes.",
+      "key_takeaways": [
+        "The prime minister reviewed cooperation with Alibaba Group on 28 October.",
+        "A 15-day AI training programme was directed through Ignite.",
+        "An AI-assisted cancer detection project was discussed, not declared fully deployed."
+      ],
+      "question_angles": [
+        "Which company is partnering with Pakistan on the reviewed AI initiatives?"
+      ],
+      "topics": [
+        "Artificial intelligence",
+        "Digital government",
+        "Trade facilitation"
+      ],
+      "countries": [
+        "Pakistan",
+        "China"
+      ],
+      "organisations": [
+        "Alibaba Group",
+        "Ignite"
+      ],
+      "institutions": [
+        "Prime Minister's Office",
+        "Oil and Gas Regulatory Authority"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Secret to country's development lies in AI and digitisation, PM Shehbaz stresses",
+          "url": "https://www.dawn.com/news/2040459/secret-to-countrys-development-lies-in-ai-and-digitisation-pm-shehbaz-stresses"
+        }
+      ],
+      "quick_gk": [
+        "The prime minister reviewed cooperation with Alibaba Group on 28 October."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-construction-reform",
+      "category": "Pakistan — Economic Governance and Regulation",
+      "headline": "Government considers construction regulator and three-year defect-liability rule",
+      "summary": "A 28 October policy meeting discussed a proposed construction-sector authority framework and a defect-liability period of at least three years for major public projects.",
+      "what_happened": "Economic Affairs Minister Ahad Cheema chaired consultations on the proposed Construction Industry Development Authority Bill. Officials debated a single authority versus separate regulatory and promotional bodies. The Public Procurement Regulatory Authority was directed to begin work on a defect-liability period of at least three years for major projects; application thresholds remain under discussion.",
+      "background": "Construction procurement and defect-liability arrangements can improve project quality but require transparent dispute resolution and enforceable standards.",
+      "why_it_matters": "The proposal affects public infrastructure governance, contractors' financial exposure and safeguards against construction defects.",
+      "pakistan_perspective": "The measures remain proposals and consultations, not an enacted three-year liability requirement for every project.",
+      "key_takeaways": [
+        "A three-year or longer defect-liability period was discussed for major projects.",
+        "A proposed Construction Industry Development Authority Bill remains under consultation."
+      ],
+      "question_angles": [
+        "What minimum defect-liability period was proposed for major public projects?"
+      ],
+      "topics": [
+        "Public procurement",
+        "Infrastructure governance",
+        "Construction regulation"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Public Procurement Regulatory Authority",
+        "Ministry of Economic Affairs"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Govt considering creation of 2 regulatory authorities for construction industry, 3-year liability period for projects",
+          "url": "https://www.dawn.com/news/2040454/govt-considering-creation-of-2-regulatory-authorities-for-construction-industry-3-year-liability-period-for-projects"
+        }
+      ],
+      "quick_gk": [
+        "A three-year or longer defect-liability period was discussed for major projects."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-wheat-import",
+      "category": "Pakistan — Food Security and Trade",
+      "headline": "Karachi Port receives 51,000-tonne wheat shipment amid supply monitoring",
+      "summary": "Karachi Port Trust reported the arrival of a vessel carrying 51,000 metric tonnes of wheat on 28 October, while officials reviewed national wheat supply and import plans.",
+      "what_happened": "Karachi Port Trust said the MV GOKOVA M arrived at Karachi Port on 28 October carrying a declared manifest of 51,000 metric tonnes of wheat. Separately, Deputy Prime Minister Ishaq Dar chaired a steering-committee meeting on grain availability and import plans. The government said it was monitoring wheat and flour prices and aiming to maintain adequate stocks.",
+      "background": "Strategic grain reserves, imports and domestic production affect staple-food availability, inflation and agricultural incentives.",
+      "why_it_matters": "The shipment illustrates short-term food-security measures and the importance of transparent stock and procurement information.",
+      "pakistan_perspective": "A single shipment does not by itself establish national wheat sufficiency or a future price trend.",
+      "key_takeaways": [
+        "A 51,000-metric-tonne wheat shipment arrived at Karachi Port on 28 October.",
+        "The vessel was MV GOKOVA M.",
+        "Officials reviewed wheat stocks and import plans."
+      ],
+      "question_angles": [
+        "How many metric tonnes of wheat were reported aboard MV GOKOVA M?"
+      ],
+      "topics": [
+        "Wheat imports",
+        "Food security",
+        "Trade logistics"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Karachi Port Trust",
+        "Steering Committee on Wheat"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Consignment of imported wheat arrives at Karachi port",
+          "url": "https://www.dawn.com/news/2040463/consignment-of-imported-wheat-arrives-at-karachi-port"
+        }
+      ],
+      "quick_gk": [
+        "A 51,000-metric-tonne wheat shipment arrived at Karachi Port on 28 October."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-oil-refinery-risk",
+      "category": "World — Energy Markets and Gulf Security",
+      "headline": "Oil rises as Saudi refinery strike claim heightens supply fears",
+      "summary": "Reuters reported Brent near $115 per barrel on 28 October as traders reacted to a Houthi claim of a strike on a major Saudi refinery; Saudi authorities had not immediately confirmed that specific strike.",
+      "what_happened": "At 13:13 GMT on 28 October, Reuters reported Brent crude futures at about $115.02 a barrel, up around 1%, and WTI at $101.61. Yemen's Houthis had claimed to hit a Saudi refinery with capacity of 550,000 barrels per day. Saudi authorities had not immediately confirmed the specific claim. Market participants cited wider conflict and shipping risks as sources of the price premium.",
+      "background": "Saudi crude production and refining are critical to global energy markets. Regional military incidents can influence prices before the extent of physical damage is established.",
+      "why_it_matters": "Oil price volatility affects Pakistan's import bill, inflation and external financing requirements.",
+      "pakistan_perspective": "Pakistan is exposed to higher import costs and petroleum-price pass-through; reported market prices are time-specific, not closing prices.",
+      "key_takeaways": [
+        "Reuters reported Brent near $115.02 per barrel at 13:13 GMT on 28 October.",
+        "The Houthi refinery-strike claim was not immediately confirmed by Saudi authorities.",
+        "The claimed refinery capacity was 550,000 barrels per day."
+      ],
+      "question_angles": [
+        "What refinery capacity was associated with the unconfirmed Houthi strike claim?"
+      ],
+      "topics": [
+        "Oil prices",
+        "Gulf security",
+        "Energy imports"
+      ],
+      "countries": [
+        "Saudi Arabia",
+        "Yemen",
+        "Pakistan"
+      ],
+      "organisations": [
+        "OPEC+"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Oil up 1% as Saudi Arabian refinery attack reignites supply concerns",
+          "url": "https://www.reuters.com/world/asia-pacific/oil-prices-rise-after-attack-saudi-arabian-refinery-reignites-supply-concerns-2026-10-28/"
+        }
+      ],
+      "quick_gk": [
+        "Reuters reported Brent near $115.02 per barrel at 13:13 GMT on 28 October."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-israel-election-count",
+      "category": "World — Elections and Middle East Politics",
+      "headline": "Israel's partial election count shows no bloc with a majority",
+      "summary": "With roughly 66% of votes counted on 28 October, Netanyahu's bloc was projected at 54 seats in Israel's 120-member parliament, below a governing majority.",
+      "what_happened": "Dawn reported on 28 October that with 66% of ballots counted, the bloc of Prime Minister Benjamin Netanyahu was projected at 54 Knesset seats, Gadi Eisenkot's opposition bloc at 48 and non-aligned Arab parties at 18. These were partial figures, subject to change as counting continued. No governing coalition had been confirmed at the reporting cutoff.",
+      "background": "Israel's proportional parliamentary system often requires coalition-building to secure at least 61 seats in the 120-member Knesset.",
+      "why_it_matters": "The composition of Israel's next government could affect Gaza policy, regional diplomacy and the future of coalition governance.",
+      "pakistan_perspective": "Pakistan's Middle East diplomacy and positions on Palestinian rights make developments in Israel's coalition formation relevant.",
+      "key_takeaways": [
+        "Israel's Knesset has 120 seats; a majority requires 61.",
+        "Partial counts on 28 October did not give either major bloc a majority.",
+        "The 54-seat projection was provisional."
+      ],
+      "question_angles": [
+        "How many Knesset seats are needed for a majority?"
+      ],
+      "topics": [
+        "Parliamentary elections",
+        "Coalition government",
+        "Middle East"
+      ],
+      "countries": [
+        "Israel",
+        "Palestine"
+      ],
+      "people": [
+        "Benjamin Netanyahu",
+        "Gadi Eisenkot"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Netanyahu bloc leads as Israeli votes counted, but no majority",
+          "url": "https://www.dawn.com/news/2040402/netanyahu-bloc-leads-as-israeli-votes-counted-but-no-majority"
+        }
+      ],
+      "quick_gk": [
+        "Israel's Knesset has 120 seats; a majority requires 61."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-satellite-intelligence",
+      "category": "World — Security Technology and Geopolitics",
+      "headline": "AP investigation examines alleged Russian satellite support for Gulf attacks",
+      "summary": "An Associated Press investigation published on 28 October described satellite reconnaissance patterns around 40 strikes in the Gulf; the analysis did not independently establish the transfer of intelligence to armed groups.",
+      "what_happened": "AP reported that Geneva-based AURORAH Geosignal Intelligence analysed 40 attacks between July and October 2026 and found Russian reconnaissance satellites repeatedly positioned near targets before and after strikes. Officials alleged intelligence support to Iranian-aligned groups, but the firm had not intercepted actual intelligence transmissions. Russia had no immediate comment on the specific allegations.",
+      "background": "Satellite imagery and geospatial intelligence are increasingly relevant to conflict, infrastructure protection and attribution of attacks.",
+      "why_it_matters": "The findings raise questions about proxy warfare, intelligence sharing, commercial satellite data and evidence standards in armed conflicts.",
+      "pakistan_perspective": "The allegations concern Saudi energy infrastructure and wider Gulf stability, with indirect implications for Pakistan's energy security and regional relationships.",
+      "key_takeaways": [
+        "AURORAH analysed 40 reported attacks.",
+        "Satellite-position correlations do not by themselves prove intelligence transfers.",
+        "AP reported allegations, not a judicial finding of responsibility."
+      ],
+      "question_angles": [
+        "How many attacks were included in the satellite-pattern analysis reported by AP?"
+      ],
+      "topics": [
+        "Satellite intelligence",
+        "Proxy conflict",
+        "Geospatial surveillance"
+      ],
+      "countries": [
+        "Russia",
+        "Saudi Arabia",
+        "Iran",
+        "Yemen"
+      ],
+      "organisations": [
+        "AURORAH Geosignal Intelligence"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Russian satellites help Iran’s allies strike Saudi Arabia, data and officials say",
+          "url": "https://apnews.com/article/russia-iran-satellite-intelligence-houthis-iraqi-militias-0989403fb38ccd9d7c9ad11a16e28d24"
+        }
+      ],
+      "quick_gk": [
+        "AURORAH analysed 40 reported attacks."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-cuba-unga-embargo",
+      "category": "World — United Nations and International Law",
+      "headline": "UN General Assembly prepares annual vote on US embargo of Cuba",
+      "summary": "On 28 October, the UN General Assembly was due to vote on its annual non-binding resolution calling for an end to the US embargo of Cuba; the outcome was not yet confirmed at the reporting cutoff.",
+      "what_happened": "AP reported on 28 October that the UN General Assembly was set to consider the annual Cuba embargo resolution amid heightened US–Cuba tensions. The 2025 resolution had passed 165–7 with 12 abstentions. No 2026 voting result is claimed here, as the vote had not been verified at this edition's cutoff.",
+      "background": "General Assembly resolutions express member-state positions but generally do not impose legally binding changes to US sanctions law.",
+      "why_it_matters": "The debate illustrates the limits of multilateral pressure, the role of sanctions and tensions between sovereignty and national trade policy.",
+      "pakistan_perspective": "The case is useful for understanding the UN General Assembly's powers and the distinction between political resolutions and binding legal instruments.",
+      "key_takeaways": [
+        "The Cuba embargo resolution is considered by the UN General Assembly.",
+        "The 2025 vote was 165 in favour, seven against and 12 abstentions.",
+        "The 2026 vote outcome was unconfirmed at this reporting cutoff."
+      ],
+      "question_angles": [
+        "Which UN organ considers the annual resolution on the US embargo of Cuba?"
+      ],
+      "topics": [
+        "United Nations General Assembly",
+        "Sanctions",
+        "International law"
+      ],
+      "countries": [
+        "Cuba",
+        "United States"
+      ],
+      "institutions": [
+        "United Nations General Assembly"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "UN holds annual vote on condemning US embargo on Cuba as tensions spill into public",
+          "url": "https://apnews.com/article/us-cuba-embargo-un-general-assembly-trump-52ab17ec75d26cd9d1893915ce18f414"
+        }
+      ],
+      "quick_gk": [
+        "The Cuba embargo resolution is considered by the UN General Assembly."
       ]
     }
   ]
