@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "published_at": "2026-10-28T14:20:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 28 October 2026 | Issue No. 1",
+  "stories": [
+    {
+      "id": "ca-2026-10-28-lead-wmo-record",
+      "category": "World — Climate Science and Environment",
+      "headline": "Atmospheric carbon dioxide reaches new record",
+      "summary": "WMO reported on Tuesday, 27 October that the global average CO₂ concentration reached 426.8 ppm in 2025, alongside record methane and nitrous oxide levels.",
+      "what_happened": "On Tuesday, 27 October 2026, the World Meteorological Organization reported a 2025 mean atmospheric carbon dioxide concentration of 426.8 parts per million, or 153% of the estimated 1750 baseline. Methane reached 1,948 parts per billion and nitrous oxide reached 339.1 ppb. Carbon dioxide increased by 2.8 ppm from 2024. These are measurements of atmospheric concentrations, not annual emissions.",
+      "background": "WMO's annual Greenhouse Gas Bulletin records the concentrations of long-lived greenhouse gases. Emissions accumulate to the extent they are not absorbed by land and ocean sinks.",
+      "why_it_matters": "These accumulated gases increase long-term warming risks and affect climate adaptation, water management and energy policy.",
+      "pakistan_perspective": "Pakistan's vulnerability to extreme heat, floods and water stress increases the relevance of international mitigation and adaptation commitments.",
+      "key_takeaways": [
+        "The 2025 mean global CO₂ concentration was 426.8 ppm.",
+        "Methane averaged 1,948 ppb and nitrous oxide 339.1 ppb in 2025.",
+        "Concentration and annual emissions are distinct measurements."
+      ],
+      "what_to_watch": [],
+      "question_angles": [
+        "What global average CO2 concentration for 2025 did the WMO's 2026 bulletin report?"
+      ],
+      "topics": [
+        "Greenhouse gases",
+        "WMO",
+        "COP31"
+      ],
+      "countries": [
+        "Pakistan",
+        "Türkiye"
+      ],
+      "organisations": [
+        "World Meteorological Organization"
+      ],
+      "quick_gk": [
+        "WMO's 2026 bulletin reported a 2025 global average atmospheric CO2 concentration of 426.8 ppm."
+      ],
+      "sources": [
+        {
+          "publisher": "World Meteorological Organization",
+          "title": "Greenhouse gas levels once again reach record high",
+          "url": "https://wmo.int/news/media-centre/greenhouse-gas-levels-once-again-reach-record-high"
+        },
+        {
+          "publisher": "World Meteorological Organization",
+          "title": "Greenhouse Gas Bulletin No. 22",
+          "url": "https://public.wmo.int/resources/publication-series/greenhouse-gas-bulletin/no-22"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-fuel-prices",
+      "category": "Pakistan — Economy and Energy",
+      "headline": "Pakistan revises petrol and diesel prices",
+      "summary": "The government announced a Rs3.19 petrol-price cut and a Rs2.25 diesel-price increase on 27 October, with new rates effective 28 October.",
+      "what_happened": "On Tuesday, 27 October 2026, the government announced that the ex-depot petrol price would fall from Rs379.25 to Rs376.06 per litre and high-speed diesel would rise from Rs395.82 to Rs398.07 per litre. The adjustment was effective Wednesday, 28 October.",
+      "background": "Pakistan's petroleum pricing mechanism reflects international refined-product benchmarks and domestic charges. The date of implementation is distinct from the announcement date.",
+      "why_it_matters": "Fuel price differences affect household travel and freight or agricultural costs in different ways.",
+      "key_takeaways": [
+        "Petrol decreased by Rs3.19 per litre.",
+        "High-speed diesel increased by Rs2.25 per litre.",
+        "New rates were announced on 27 October for 28 October implementation."
+      ],
+      "question_angles": [
+        "Explain why a diesel increase can affect inflation even if petrol prices decline."
+      ],
+      "topics": [
+        "Energy prices",
+        "Inflation",
+        "Oil regulation"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Petroleum Division",
+        "Oil and Gas Regulatory Authority"
+      ],
+      "sources": [
+        {
+          "publisher": "Business Recorder",
+          "title": "Govt cuts petrol price by Rs3.19, hikes diesel by Rs2.25 per litre",
+          "url": "https://www.brecorder.com/news/40446155/govt-cuts-petrol-price-by-rs319-hikes-diesel-by-rs225-per-litre"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Govt cuts petrol price by Rs3.19 per litre, ups diesel rate by Rs2.25",
+          "url": "https://www.dawn.com/news/2040249/govt-cuts-petrol-price-by-rs319-per-litre-ups-high-speed-diesel-rate-by-rs225"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Petrol ex-depot price",
+          "value": "Rs376.06 per litre",
+          "source": "Business Recorder",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "High-speed diesel price",
+          "value": "Rs398.07 per litre",
+          "source": "Business Recorder",
+          "date": "2026-10-28"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-aml-cft",
+      "category": "Pakistan — Law and Financial Regulation",
+      "headline": "AML committee approves regulatory reform proposals",
+      "summary": "On 27 October, the national AML-CFT executive committee approved proposals concerning currency-transaction reporting, maritime law and virtual assets.",
+      "what_happened": "On Tuesday, 27 October 2026, Finance Minister Muhammad Aurangzeb chaired the 19th meeting of the National Executive Committee on Anti-Money Laundering and Countering the Financing of Terrorism. It approved a proposed revision of Currency Transaction Report thresholds, proposed inclusion of Section 28 of the Pakistan Maritime Zones Act, 2023 in Schedule I of the Anti-Money Laundering Act, and proposed adding the Pakistan Virtual Assets Regulatory Authority to Schedule IV.",
+      "background": "The Financial Monitoring Unit and relevant regulators oversee parts of Pakistan's AML-CFT framework. An executive committee's approval of proposed amendments does not by itself establish that all legislative changes have entered into force.",
+      "why_it_matters": "Financial integrity requires effective monitoring, interagency cooperation and legal coverage of emerging payment and virtual-asset risks.",
+      "key_takeaways": [
+        "The meeting was the AML-CFT NEC's 19th.",
+        "Currency Transaction Report thresholds were reviewed.",
+        "Proposals addressed maritime law and a virtual-assets authority."
+      ],
+      "question_angles": [
+        "Distinguish approval of a reform proposal from its enactment into law."
+      ],
+      "topics": [
+        "Money laundering",
+        "Financial regulation",
+        "Virtual assets"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Finance Division",
+        "Financial Monitoring Unit",
+        "Pakistan Virtual Assets Regulatory Authority"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "Finance Minister chairs 19th meeting of NEC on AML-CFT",
+          "url": "https://pid.gov.pk/site/press_detail/34545"
+        },
+        {
+          "publisher": "Business Recorder",
+          "title": "Pakistan reviews AML-CFT framework, approves key regulatory changes",
+          "url": "https://www.brecorder.com/news/40446148/pakistan-reviews-aml-cft-framework-approves-key-regulatory-changes"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-china-cpic",
+      "category": "Pakistan — Foreign Relations and Digital Cooperation",
+      "headline": "Pakistan and China launch information corridor",
+      "summary": "On 27 October, Pakistan and China launched an information corridor covering media, business, think tanks and culture and tourism.",
+      "what_happened": "Information Minister Ataullah Tarar described four pillars: media; business and enterprises; think tanks; and culture and tourism. The Islamabad ceremony was attended by Chinese spokesperson Mao Ning and Ambassador Jiang Zaidong. Tarar described an 18-organisation media news-exchange working group and a planned trade portal.",
+      "background": "CPIC is an information and people-to-people initiative distinct from the China-Pakistan Economic Corridor (CPEC), which focuses on infrastructure and economic connectivity.",
+      "why_it_matters": "The launch shows an expansion of bilateral cooperation beyond roads and energy into digital communication, trade information and public diplomacy.",
+      "pakistan_perspective": "For Pakistan, the project may improve trade-information access and cultural engagement, but effectiveness depends on verifiable outcomes and independent evaluation.",
+      "key_takeaways": [
+        "Pakistan and China launched the China-Pakistan Information Corridor (CPIC) in Islamabad on 27 October 2026.",
+        "The launch shows an expansion of bilateral cooperation beyond roads and energy into digital communication, trade information and public diplomacy."
+      ],
+      "what_to_watch": [],
+      "question_angles": [
+        "Which new bilateral information initiative was launched by Pakistan and China on 27 October 2026?"
+      ],
+      "topics": [
+        "Pakistan-China relations",
+        "Digital diplomacy",
+        "Information integrity"
+      ],
+      "countries": [
+        "Pakistan",
+        "China"
+      ],
+      "organisations": [
+        "China-Pakistan Information Corridor"
+      ],
+      "quick_gk": [
+        "Pakistan and China launched the China-Pakistan Information Corridor (CPIC) in Islamabad on 27 October 2026."
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Pakistan, China launch information corridor CPIC",
+          "url": "https://www.dawn.com/news/2040200/pakistan-china-launch-information-corridor-cpic-to-counter-misleading-narratives-promote-cultural-exchange"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-shrimp-farming",
+      "category": "Pakistan — Blue Economy",
+      "headline": "Government sets 120-day shrimp farming roadmap",
+      "summary": "A prime-ministerial subcommittee set a 120-day deadline on 27 October for a roadmap to develop shrimp farming, processing and exports.",
+      "what_happened": "On Tuesday, 27 October 2026, a subcommittee established a 120-day preparation timetable for a national shrimp aquaculture roadmap. Maritime Affairs Minister Muhammad Junaid Anwar Chaudhry chaired the meeting. The proposals cover production, disease control, processing, certification and export markets, with cooperation among federal and provincial authorities.",
+      "background": "Aquaculture requires management of coastal water quality, disease, feed, supply chains and export standards.",
+      "why_it_matters": "The roadmap could contribute to export diversification, subject to feasibility, investment and environmental safeguards. A timetable is not a forecast of revenue.",
+      "key_takeaways": [
+        "The national roadmap deadline is 120 days.",
+        "Proposed action covers farming, processing and exports.",
+        "Reported planning decisions do not guarantee output or employment."
+      ],
+      "question_angles": [
+        "Discuss the economic opportunities and ecological constraints of coastal aquaculture."
+      ],
+      "topics": [
+        "Aquaculture",
+        "Blue economy",
+        "Exports"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Ministry of Maritime Affairs"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "National shrimp aquaculture roadmap",
+          "url": "https://pid.gov.pk/site/press_detail/34535"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Govt sets 120-day deadline for shrimp-farming roadmap",
+          "url": "https://www.dawn.com/news/2040236/in-bid-to-boost-exports-govt-sets-120-day-deadline-for-roadmap-to-expand-shrimp-farming"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-judicial-bench-book",
+      "category": "Pakistan — Law and Governance",
+      "headline": "Judicial bench book targets rape trial practice",
+      "summary": "A ten-chapter judicial guide presented on 27 October addresses the handling of rape trials and evidence.",
+      "what_happened": "On Tuesday, 27 October 2026, a bench book on adjudicating rape cases was launched in Islamabad. Supreme Court Justice Ayesha A. Malik addressed the gathering. The Ministry of Human Rights described ten chapters organised around the trial process and applicable legal and judicial guidance.",
+      "background": "Bench books organise reference material and courtroom practice; they are not themselves newly enacted criminal laws or judgments.",
+      "why_it_matters": "Consistent use could strengthen due process and reduce stereotypes, depending on training, judicial practice and safeguards for all parties.",
+      "key_takeaways": [
+        "The bench book was launched on 27 October.",
+        "It has ten chapters.",
+        "It is guidance, not an amendment of criminal law."
+      ],
+      "question_angles": [
+        "How can judicial practice guides support access to justice while respecting due-process rights?"
+      ],
+      "topics": [
+        "Judicial training",
+        "Gender-based violence",
+        "Access to justice"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Ministry of Human Rights",
+        "Legal Aid Society"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Justice Ayesha Malik challenges assumptions blaming women for inviting rape",
+          "url": "https://www.dawn.com/news/2040251/justice-ayesha-malik-challenges-assumptions-blaming-women-for-inviting-rape"
+        },
+        {
+          "publisher": "APP via UrduPoint",
+          "title": "Bench book launched to strengthen adjudication",
+          "url": "https://www.urdupoint.com/en/pakistan/bench-book-launched-to-strengthen-adjudicatio-2278384.html"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-irena-capacity",
+      "category": "World — Climate and Energy Transition",
+      "headline": "IRENA chief warns renewable additions may slow",
+      "summary": "On 27 October, IRENA's director-general said annual global renewable-capacity additions could slow in 2026 compared with 2025.",
+      "what_happened": "Director-General Francesco La Camera cited inadequate electricity transmission and distribution infrastructure, grid curtailment and trade barriers. Reuters reported that renewable installations including hydropower reached 5,149 GW in 2025 after 692 GW of additions.",
+      "background": "Generation capacity is useful only if grids can transmit and distribute output. Curtailment occurs when available renewable power cannot be accepted by the system.",
+      "why_it_matters": "The statement highlights grid investment as a major bottleneck in the energy transition. It is a forecast without a numerical 2026 additions estimate.",
+      "pakistan_perspective": "Pakistan's solar and wind expansion similarly depends on transmission investment, grid integration and reliable distribution.",
+      "key_takeaways": [
+        "The warning concerns additions in 2026, not a fall in total renewable capacity.",
+        "Reuters cited 692 GW of global renewable additions in 2025.",
+        "Reuters reported 5,149 GW in total renewable generating capacity in 2025."
+      ],
+      "what_to_watch": [],
+      "question_angles": [
+        "According to IRENA figures cited on 27 October 2026, what was global renewable power capacity at end-2025?"
+      ],
+      "topics": [
+        "Renewable energy",
+        "Grid constraints",
+        "Climate mitigation"
+      ],
+      "countries": [
+        "China",
+        "Pakistan"
+      ],
+      "organisations": [
+        "International Renewable Energy Agency"
+      ],
+      "quick_gk": [
+        "IRENA reported global renewable power capacity of 5,149 GW at the end of 2025."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "World to add less clean energy capacity this year, renewables agency chief says",
+          "url": "https://www.reuters.com/business/energy/world-add-less-clean-energy-capacity-this-year-renewables-agency-chief-says-2026-10-27/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-inflation-outlook",
+      "category": "World — Global Economy and Inflation",
+      "headline": "Economists raise inflation forecasts across 31 economies",
+      "summary": "A Reuters poll released on 27 October found upward revisions in 2027 inflation forecasts for 31 of 50 economies.",
+      "what_happened": "More than 500 economists participated in the October survey. Reuters reported higher 2027 inflation expectations for 31 of 50 economies and growth forecasts upgraded for 23. Its global growth median was 3.0% for 2026 and 3.2% for 2027; these are poll forecasts, not outcomes.",
+      "background": "Energy supply disruptions, interest-rate expectations and AI-related investment affect inflation and growth forecasts. A forecast revision does not imply inflation is certain to materialise.",
+      "why_it_matters": "The findings demonstrate the possibility of sustained price pressure despite relatively resilient economic activity.",
+      "pakistan_perspective": "Pakistan's import bill, inflation and financing costs are sensitive to oil prices and global interest-rate conditions.",
+      "key_takeaways": [
+        "More than 500 economists participated in the survey.",
+        "Inflation forecasts for 2027 were revised upward for 31 of 50 economies.",
+        "Growth forecasts were raised for 23 economies."
+      ],
+      "what_to_watch": [],
+      "question_angles": [
+        "For how many of the 50 surveyed economies did Reuters' October 2026 poll raise 2027 inflation forecasts?"
+      ],
+      "topics": [
+        "Global inflation",
+        "Economic forecasts",
+        "Energy prices"
+      ],
+      "countries": [
+        "Pakistan",
+        "United States"
+      ],
+      "organisations": [
+        "Reuters"
+      ],
+      "quick_gk": [
+        "A Reuters October 2026 poll raised 2027 inflation forecasts for 31 of 50 surveyed economies."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "High inflation to persist globally into next year, poll shows",
+          "url": "https://www.reuters.com/world/china/high-inflation-persist-globally-into-next-year-reuters-poll-shows-2026-10-27/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-qatar-hormuz",
+      "category": "World — Middle East Diplomacy",
+      "headline": "Qatar urges Iran to reopen Hormuz for mediation",
+      "summary": "Qatar urged Iran on 27 October to end threats against Gulf neighbours and reopen the Strait of Hormuz as a sign of commitment to mediation.",
+      "what_happened": "On Tuesday, 27 October 2026, Qatar's Foreign Ministry publicly called on Iran to refrain from threats against Gulf Arab states and to reopen the Strait of Hormuz to improve prospects for mediation. Reuters reported the statement by a ministry spokesperson. Earlier diplomatic visits are background to Tuesday's appeal.",
+      "background": "The Strait of Hormuz lies between Iran and Oman and connects the Persian Gulf with the Gulf of Oman and Arabian Sea. It carries international energy shipments.",
+      "why_it_matters": "Maritime restrictions influence shipping, insurance and energy import costs. Mediation needs reciprocal actions and credible signals.",
+      "key_takeaways": [
+        "Qatar's statement was made public on 27 October.",
+        "Doha asked for the Strait of Hormuz to be reopened.",
+        "The statement did not establish an Iranian agreement or a mediated settlement."
+      ],
+      "question_angles": [
+        "Assess how Gulf maritime security affects South Asian energy importers."
+      ],
+      "topics": [
+        "Gulf diplomacy",
+        "Energy security",
+        "Maritime chokepoints"
+      ],
+      "countries": [
+        "Qatar",
+        "Iran"
+      ],
+      "institutions": [
+        "Qatar Ministry of Foreign Affairs"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Qatar says Iran needs to show good intentions for mediation",
+          "url": "https://www.reuters.com/world/asia-pacific/qatar-says-iran-needs-show-good-intentions-mediation-efforts-succeed-2026-10-27/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-sudan-power-strike",
+      "category": "World — Humanitarian Security",
+      "headline": "Sudan drone strike disrupts electricity across two states",
+      "summary": "A Sudanese electricity-sector official said a drone strike damaged a transformer station and interrupted electricity supplies on 27 October.",
+      "what_happened": "On Tuesday, 27 October 2026, an official at Sudan's electricity company told AFP that drones attributed to the Rapid Support Forces struck the Al-Markhiyat transformer station. The official identified power outages affecting areas of Khartoum and Al-Jazira states. This attribution is a reported claim rather than an independently established determination of the attackers.",
+      "background": "Sudan's conflict between its armed forces and Rapid Support Forces began in April 2023. Attacks reported the previous day form background and are not counted as Tuesday's event.",
+      "why_it_matters": "Damage to electricity infrastructure can affect hospitals, water pumps and communications. International humanitarian law requires parties to distinguish civilian objects from military objectives.",
+      "key_takeaways": [
+        "The reported target was the Al-Markhiyat transformer station.",
+        "Outages affected areas of Khartoum and Al-Jazira states.",
+        "The source's attribution of responsibility must remain qualified."
+      ],
+      "question_angles": [
+        "Explain international humanitarian-law protections for civilian infrastructure."
+      ],
+      "topics": [
+        "Sudan",
+        "Civilian protection",
+        "International humanitarian law"
+      ],
+      "countries": [
+        "Sudan"
+      ],
+      "institutions": [
+        "Sudan national electricity company"
+      ],
+      "sources": [
+        {
+          "publisher": "AFP via Dawn",
+          "title": "Sudan drone strikes kill 21, cause mass outages in east",
+          "url": "https://www.dawn.com/news/2040194/sudan-drone-strikes-kill-21-cause-mass-outages-in-east"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-cyclone-arnab",
+      "category": "World — Natural Hazards and Disaster Management",
+      "headline": "India orders evacuations ahead of Cyclone Arnab",
+      "summary": "Authorities ordered nearly 100,000 residents to evacuate parts of Andhra Pradesh and Odisha on 27 October before the cyclone's expected landfall.",
+      "what_happened": "AFP reported nearly 100,000 people were told to leave vulnerable areas. The India Meteorological Department forecast a very severe cyclonic storm with gusts reaching about 150 km/h. Landfall had not occurred at the reporting cutoff.",
+      "background": "Tropical cyclones bring high winds, storm surges and heavy rain; early warning and timely evacuation reduce exposure.",
+      "why_it_matters": "The event demonstrates the importance of disaster risk reduction, coastal planning and cross-border weather coordination.",
+      "pakistan_perspective": "The Bay of Bengal cyclone hazard has lessons for Pakistan's coastal warning systems and regional disaster preparedness.",
+      "key_takeaways": [
+        "Authorities issued evacuation orders on 27 October.",
+        "The reported affected states were Andhra Pradesh and Odisha.",
+        "The 28 October forecast landfall was not counted as a 27 October event."
+      ],
+      "what_to_watch": [],
+      "question_angles": [
+        "Which two Indian states were the focus of evacuation orders ahead of Cyclone Arnab?"
+      ],
+      "topics": [
+        "Tropical cyclones",
+        "Disaster management",
+        "Early warning"
+      ],
+      "countries": [
+        "India",
+        "Sri Lanka",
+        "Nepal"
+      ],
+      "organisations": [
+        "India Meteorological Department"
+      ],
+      "quick_gk": [
+        "India ordered nearly 100,000 people to evacuate ahead of Cyclone Arnab on 27 October 2026."
+      ],
+      "sources": [
+        {
+          "publisher": "AFP via Dawn",
+          "title": "India orders evacuations as Cyclone Arnab looms",
+          "url": "https://www.dawn.com/news/2040202/india-orders-evacuations-in-andhra-pradesh-odisha-as-cyclone-arnab-looms"
+        }
+      ]
+    }
+  ]
+}
