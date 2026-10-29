@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 610,
+  "count": 622,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4269,6 +4269,90 @@
     {
       "id": "current-affairs-archive-20261028-world-ukraine-talks-timing",
       "text": "On 28 October 2026, Ukraine's president proposed Abu Dhabi as a possible venue for renewed talks with Russia and the US; no date was confirmed.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-pak-china-green-channel",
+      "text": "The 29 October 2026 Pakistan-China agricultural green-channel agreement concerns the Sost–Khunjerab crossing.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-pak-singapore-visit",
+      "text": "On 29 October 2026, Pakistan announced Singapore Foreign Minister Vivian Balakrishnan's planned 30 October Islamabad visit.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-pak-rights-lawyers-verdict",
+      "text": "On 29 October 2026, a Rawalpindi anti-terrorism court sentenced Imaan Mazari-Hazir and Hadi Ali Chattha to ten years each in a security-route case.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-pak-electoral-reform-committee",
+      "text": "Bilawal Bhutto-Zardari urged the opposition to participate in the parliamentary electoral-reforms committee on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-afghan-opium-rise",
+      "text": "UNODC reported a 330% rise in Afghan opium-poppy cultivation to more than 43,000 hectares in 2026; Taliban authorities disputed the estimate.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-north-korea-missiles",
+      "text": "South Korea reported about ten North Korean short-range missile launches from Wonsan on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-us-q3-gdp",
+      "text": "The 29 October 2026 US advance estimate put Q3 real GDP growth at a 3.4% annualised rate.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-ecb-lagarde-exit",
+      "text": "The ECB announced on 29 October 2026 that Christine Lagarde would leave office on 7 February 2027.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-ecb-holds-rates",
+      "text": "The ECB held its deposit facility rate at 2.5% on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-italy-ilva-ruling",
+      "text": "Italy's Court of Cassation upheld a health- and environment-based shutdown order for Ilva blast furnaces in Taranto on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-finland-google-probe",
+      "text": "Finnish police announced an environmental-law investigation near Muhos involving a planned Google data-centre site on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-us-freezer-cyber-probe",
+      "text": "Reuters reported on 29 October 2026 that US military investigators were examining freezer failures at at least six commissaries as a possible cyber incident.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

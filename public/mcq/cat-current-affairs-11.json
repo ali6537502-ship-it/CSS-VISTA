@@ -1663,5 +1663,185 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/next-round-ukraine-talks-depends-middle-east-other-factors-kremlin-aide-says-2026-10-28/"
+  },
+  {
+    "id": "current-affairs-20261029-pak-china-green-channel",
+    "q": "At which crossing did Pakistan and China sign an agricultural green-channel customs agreement on 29 October 2026?",
+    "o": [
+      "Wagah–Attari",
+      "Sost–Khunjerab",
+      "Torkham",
+      "Taftan–Mirjaveh"
+    ],
+    "a": 1,
+    "e": "Pakistan and China signed an agreement on 29 October to give agreed agricultural products priority processing at the Sost–Khunjerab border, retaining risk-based customs checks. Source: Press Information Department.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://pid.gov.pk/site/press_detail/34582"
+  },
+  {
+    "id": "current-affairs-20261029-pak-singapore-visit",
+    "q": "Which country's foreign minister was scheduled to visit Pakistan on 30 October 2026?",
+    "o": [
+      "Malaysia",
+      "Thailand",
+      "Singapore",
+      "Indonesia"
+    ],
+    "a": 2,
+    "e": "Pakistan announced on 29 October that Singaporean Foreign Minister Vivian Balakrishnan was scheduled to visit Islamabad on 30 October, coinciding with 60 years of diplomatic relations. Source: Ministry of Foreign Affairs Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://mofa.gov.pk/press-releases/curtain-raiser-minister-for-foreign-affairs-of-singapores-official-visit-to-islamabad-30-october-2026"
+  },
+  {
+    "id": "current-affairs-20261029-pak-rights-lawyers-verdict",
+    "q": "Which court delivered the 29 October 2026 security-route verdict against Imaan Mazari-Hazir and Hadi Ali Chattha?",
+    "o": [
+      "Federal Shariat Court",
+      "Lahore High Court",
+      "Supreme Court",
+      "Anti-Terrorism Court"
+    ],
+    "a": 3,
+    "e": "A Rawalpindi anti-terrorism court sentenced Imaan Mazari-Hazir and Hadi Ali Chattha to ten years each on 29 October in a security-route case stemming from 2024. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/pakistan-court-jails-prominent-rights-couple-10-years-family-says-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-pak-electoral-reform-committee",
+    "q": "Which committee was at the centre of Bilawal Bhutto-Zardari's 29 October 2026 appeal to the opposition?",
+    "o": [
+      "Public Accounts Committee",
+      "Electoral Reforms Committee",
+      "National Finance Commission",
+      "Council of Common Interests"
+    ],
+    "a": 1,
+    "e": "On 29 October, Bilawal Bhutto-Zardari called on National Assembly Opposition Leader Mehmood Khan Achakzai to ensure opposition participation in the parliamentary electoral-reforms committee. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040707"
+  },
+  {
+    "id": "current-affairs-20261029-world-afghan-opium-rise",
+    "q": "What increase in Afghan opium-poppy cultivation did UNODC report on 29 October 2026?",
+    "o": [
+      "33%",
+      "130%",
+      "230%",
+      "330%"
+    ],
+    "a": 3,
+    "e": "UNODC reported on 29 October that Afghanistan's estimated opium-poppy cultivation increased by 330% in 2026 to more than 43,000 hectares, compared with 10,000 hectares in 2025. Source: Associated Press.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/79cadee77bbb5870a5d7ddb8d004981d"
+  },
+  {
+    "id": "current-affairs-20261029-world-north-korea-missiles",
+    "q": "Which North Korean coastal town was identified as the origin of the 29 October 2026 missile launches?",
+    "o": [
+      "Wonsan",
+      "Sinuiju",
+      "Kaesong",
+      "Haeju"
+    ],
+    "a": 0,
+    "e": "South Korea's military reported on 29 October that North Korea fired about ten short-range ballistic missiles from Wonsan toward its eastern waters, each travelling roughly 250 kilometres. Source: Associated Press.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/b1a2feff5944a71c716ed37fd94e8aa5"
+  },
+  {
+    "id": "current-affairs-20261029-world-us-q3-gdp",
+    "q": "What annualised US real GDP growth rate was reported in the advance estimate for Q3 2026?",
+    "o": [
+      "2.4%",
+      "2.8%",
+      "3.4%",
+      "4.2%"
+    ],
+    "a": 2,
+    "e": "The US Bureau of Economic Analysis reported on 29 October that real GDP increased at a 3.4% annualised rate in the third quarter of 2026, above the Reuters consensus forecast of 3.2%. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/us/us-economic-growth-accelerates-third-quarter-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-world-ecb-lagarde-exit",
+    "q": "What date did the ECB announce for Christine Lagarde's departure as its president?",
+    "o": [
+      "7 February 2027",
+      "31 October 2026",
+      "1 January 2027",
+      "31 October 2027"
+    ],
+    "a": 0,
+    "e": "The European Central Bank announced on 29 October that President Christine Lagarde would step down on 7 February 2027, before the scheduled end of her term. Source: European Central Bank.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr261029~abbb6dc64b.fr.html"
+  },
+  {
+    "id": "current-affairs-20261029-world-ecb-holds-rates",
+    "q": "At what deposit facility rate did the ECB hold monetary policy on 29 October 2026?",
+    "o": [
+      "1.50%",
+      "2.00%",
+      "2.50%",
+      "3.50%"
+    ],
+    "a": 2,
+    "e": "The European Central Bank held rates unchanged on 29 October, leaving the deposit facility rate at 2.5%, while warning that oil and gas costs were adding to inflation risks. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/ecb-keeps-rates-unchanged-points-mounting-inflation-risk-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-world-italy-ilva-ruling",
+    "q": "In which Italian city is the former Ilva steelworks affected by the 29 October high-court decision?",
+    "o": [
+      "Genoa",
+      "Taranto",
+      "Turin",
+      "Naples"
+    ],
+    "a": 1,
+    "e": "Italy's Court of Cassation upheld a lower-court order to shut blast furnaces at the former Ilva steelworks in Taranto on health and environmental grounds on 29 October. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/italys-top-court-upholds-shutdown-former-ilva-steelworks-setback-meloni-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-world-finland-google-probe",
+    "q": "Near which Finnish town is the Google data-centre project under environmental-law investigation?",
+    "o": [
+      "Espoo",
+      "Oulu",
+      "Muhos",
+      "Tampere"
+    ],
+    "a": 2,
+    "e": "Finnish police announced on 29 October a criminal investigation into suspected environmental-law breaches at a planned Google data-centre site near Muhos in northern Finland. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/environment/finland-launches-criminal-probe-suspected-environmental-damage-google-data-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-world-us-freezer-cyber-probe",
+    "q": "What equipment failures were being investigated as a possible cyber incident by the Pentagon in October 2026?",
+    "o": [
+      "Military-base refrigeration systems",
+      "Airport radar transmitters",
+      "Naval fuel pipelines",
+      "Satellite navigation receivers"
+    ],
+    "a": 0,
+    "e": "Reuters reported on 29 October that US military investigators were treating unexplained freezer malfunctions at several military-base commissaries as a possible cyberattack, with no confirmed cause or attribution. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/technology/pentagon-treating-military-base-freezer-malfunctions-suspected-cyberattack-2026-10-29/"
   }
 ]

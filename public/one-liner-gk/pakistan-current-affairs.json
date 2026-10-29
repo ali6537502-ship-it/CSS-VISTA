@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 249,
+  "count": 253,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1742,6 +1742,34 @@
     {
       "id": "pakistan-current-affairs-20261028-pak-kp-constitutional-debate",
       "text": "Articles 232 and 234 of Pakistan's Constitution were cited for the October 2026 emergency and governor's rule measures in KP, debated in Parliament on 28 October.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-pak-china-green-channel",
+      "text": "The 29 October 2026 Pakistan-China agricultural green-channel agreement concerns the Sost–Khunjerab crossing.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-pak-singapore-visit",
+      "text": "On 29 October 2026, Pakistan announced Singapore Foreign Minister Vivian Balakrishnan's planned 30 October Islamabad visit.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-pak-rights-lawyers-verdict",
+      "text": "On 29 October 2026, a Rawalpindi anti-terrorism court sentenced Imaan Mazari-Hazir and Hadi Ali Chattha to ten years each in a security-route case.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-pak-electoral-reform-committee",
+      "text": "Bilawal Bhutto-Zardari urged the opposition to participate in the parliamentary electoral-reforms committee on 29 October 2026.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
