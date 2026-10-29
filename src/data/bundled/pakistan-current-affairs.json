@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 253,
+  "count": 254,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1770,6 +1770,13 @@
     {
       "id": "pakistan-current-affairs-20261029-pak-electoral-reform-committee",
       "text": "Bilawal Bhutto-Zardari urged the opposition to participate in the parliamentary electoral-reforms committee on 29 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-pak-saudi-investment-talks",
+      "text": "Pakistan's finance minister and Saudi ambassador discussed investment in agriculture, minerals and mining on 29 October 2026.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

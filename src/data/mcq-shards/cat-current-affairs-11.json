@@ -1843,5 +1843,65 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/technology/pentagon-treating-military-base-freezer-malfunctions-suspected-cyberattack-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261028-world-wb-commodity-outlook",
+    "q": "What change in global commodity prices did the World Bank's October 2026 outlook forecast for 2026?",
+    "o": [
+      "A 7% decrease",
+      "A 23% increase",
+      "A 10% decrease",
+      "A 32% increase"
+    ],
+    "a": 1,
+    "e": "The World Bank projected a 23% rise in global commodity prices for 2026, not a realized full-year result. Source: World Bank.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.worldbank.org/en/news/press-release/2026/10/28/commodity-markets-outlook-october-2026"
+  },
+  {
+    "id": "current-affairs-20261029-pak-saudi-investment-talks",
+    "q": "Which sectors were discussed for investment by Pakistan's finance minister and the Saudi ambassador on 29 October 2026?",
+    "o": [
+      "Shipbuilding and aviation",
+      "Agriculture, minerals and mining",
+      "Semiconductors and nuclear reactors",
+      "Railway electrification only"
+    ],
+    "a": 1,
+    "e": "The Finance Division identified agriculture, minerals and mining; no new investment agreement was signed. Source: Press Information Department.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://pid.gov.pk/site/press_detail/34581"
+  },
+  {
+    "id": "current-affairs-20261029-world-hormuz-tanker-mine-claims",
+    "q": "Which waterway was named in Iran's unverified 29 October 2026 tanker-mine allegation?",
+    "o": [
+      "Strait of Malacca",
+      "Bosporus",
+      "Strait of Hormuz",
+      "Bab el-Mandeb"
+    ],
+    "a": 2,
+    "e": "Iran alleged mine incidents in the Strait of Hormuz; AP could not independently verify the three-vessel account. Source: Associated Press.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/c11dac838a072af25ba8d0eb81d01035"
+  },
+  {
+    "id": "current-affairs-20261029-world-qatarenergy-woodside-lng",
+    "q": "How long is the Woodside–QatarEnergy Louisiana LNG supply agreement announced on 29 October 2026?",
+    "o": [
+      "10 years",
+      "15 years",
+      "20 years",
+      "25 years"
+    ],
+    "a": 2,
+    "e": "The agreement runs for 20 years and covers up to 3 million tonnes of LNG annually. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/australias-woodside-supply-qatarenergy-with-louisiana-lng-20-year-deal-2026-10-29/"
   }
 ]

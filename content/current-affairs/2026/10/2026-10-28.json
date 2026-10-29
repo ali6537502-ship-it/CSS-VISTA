@@ -1051,6 +1051,79 @@
           "url": "https://www.reuters.com/world/next-round-ukraine-talks-depends-middle-east-other-factors-kremlin-aide-says-2026-10-28/"
         }
       ]
+    },
+    {
+      "id": "ca-2026-10-28-world-wb-commodity-outlook",
+      "category": "World — Economy and Commodity Markets",
+      "headline": "World Bank forecasts a 23% increase in global commodity prices in 2026",
+      "summary": "The World Bank's Commodity Markets Outlook, released on 28 October, forecast a 23% rise in global commodity prices in 2026 amid energy disruption and food-supply risks.",
+      "what_happened": "The World Bank forecast that energy prices would rise 32% in 2026, food prices about 10% in 2026 and 7% in 2027, and Brent crude would average $91 per barrel in 2026. Its baseline projects overall commodity prices falling 7% in 2027. These are projections, not realized outcomes.",
+      "background": "The October 2026 Commodity Markets Outlook covers energy, agriculture, metals and related global commodity markets. Its baseline assumes that supply-related conflicts do not intensify substantially.",
+      "why_it_matters": "Higher oil, fertilizer and food import costs threaten inflation, external balances and food security. Conflict, grain-shipping disruption and El Niño could magnify the risks.",
+      "pakistan_perspective": "Pakistan's dependence on imported energy makes global price forecasts relevant to inflation, the current account and agricultural costs. The figures are global projections, not Pakistan-specific price increases.",
+      "regional_implications": "South Asian energy importers are particularly vulnerable to disruption in Gulf shipping.",
+      "global_implications": "The World Bank warns that commodity markets could remain exposed to shocks even if prices moderate in 2027.",
+      "key_takeaways": [
+        "The World Bank forecast global commodity prices up 23% in 2026 and down 7% in 2027.",
+        "Energy prices are projected to rise 32% in 2026.",
+        "The report was published on 28 October 2026; all figures are forecasts."
+      ],
+      "facts": [
+        "The World Bank's October 2026 Commodity Markets Outlook forecast a 23% rise in global commodity prices during 2026."
+      ],
+      "statistics": [
+        {
+          "label": "Forecast global commodity-price change",
+          "value": "+23%",
+          "source": "World Bank",
+          "year": "2026"
+        },
+        {
+          "label": "Forecast energy-price change",
+          "value": "+32%",
+          "source": "World Bank",
+          "year": "2026"
+        },
+        {
+          "label": "Forecast Brent average",
+          "value": "US$91 per barrel",
+          "source": "World Bank",
+          "year": "2026"
+        }
+      ],
+      "what_to_watch": [
+        "Future World Bank revisions and energy-supply developments."
+      ],
+      "question_angles": [
+        "How would higher energy and food commodity prices affect Pakistan's balance of payments and inflation?"
+      ],
+      "topics": [
+        "Commodity Markets Outlook",
+        "Energy security",
+        "Food security",
+        "Inflation"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "World Bank"
+      ],
+      "reports": [
+        "Commodity Markets Outlook — October 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "World Bank",
+          "title": "Commodity Prices Set to Increase by 23% in 2026 as Global Shocks Mount",
+          "url": "https://www.worldbank.org/en/news/press-release/2026/10/28/commodity-markets-outlook-october-2026"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "World Bank sees commodity prices up 23% in 2026 due to Middle East war, other shocks",
+          "url": "https://www.reuters.com/business/world-bank-sees-commodity-prices-up-23-2026-due-middle-east-war-other-shocks-2026-10-28/"
+        }
+      ]
     }
   ]
 }

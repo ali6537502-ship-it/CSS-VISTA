@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 622,
+  "count": 626,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4353,6 +4353,34 @@
     {
       "id": "current-affairs-archive-20261029-world-us-freezer-cyber-probe",
       "text": "Reuters reported on 29 October 2026 that US military investigators were examining freezer failures at at least six commissaries as a possible cyber incident.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261028-world-wb-commodity-outlook",
+      "text": "The World Bank's October 2026 Commodity Markets Outlook forecast a 23% rise in global commodity prices during 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-pak-saudi-investment-talks",
+      "text": "Pakistan's finance minister and Saudi ambassador discussed investment in agriculture, minerals and mining on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-hormuz-tanker-mine-claims",
+      "text": "On 29 October 2026 Iran alleged tanker mine incidents in the Strait of Hormuz; the three-vessel claim was unverified.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-qatarenergy-woodside-lng",
+      "text": "Woodside announced a 20-year agreement to supply QatarEnergy with up to 3 million tonnes of Louisiana LNG annually on 29 October 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

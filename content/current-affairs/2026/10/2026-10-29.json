@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-10-29",
-  "published_at": "2026-10-29T19:00:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 29 October 2026 | Evening Update (00:00–19:00 PKT; preliminary)",
+  "published_at": "2026-10-29T19:36:01+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 29 October 2026 | Evening Update (00:00–19:36 PKT; preliminary)",
   "stories": [
     {
       "id": "ca-2026-10-29-pak-china-green-channel",
@@ -509,6 +509,179 @@
           "publisher": "Reuters",
           "title": "EXCLUSIVE: Pentagon treating military base freezer malfunctions as suspected cyberattack, officials say",
           "url": "https://www.reuters.com/technology/pentagon-treating-military-base-freezer-malfunctions-suspected-cyberattack-2026-10-29/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-29-pak-saudi-investment-talks",
+      "category": "Pakistan — Economic Diplomacy",
+      "headline": "Pakistan and Saudi Arabia discuss agricultural and mining investment",
+      "summary": "Finance Minister Muhammad Aurangzeb and Saudi Ambassador Rajeh Tami Albugamy discussed investment in agriculture, minerals and mining on 29 October; no new binding investment agreement was announced.",
+      "what_happened": "Pakistan's Finance Division reported discussions on business-to-business cooperation, agriculture, minerals, mining and Pakistan's potential as a regional transit hub. The meeting also covered regional conflict and economic stability. No new contract or disbursement was specified.",
+      "background": "Pakistan is seeking to deepen commercial investment ties with Saudi Arabia alongside existing strategic and financial cooperation.",
+      "why_it_matters": "Investment in agriculture and minerals could diversify exports, but discussions are not equivalent to executed investment projects.",
+      "pakistan_perspective": "The talks bear on export diversification, investment climate and economic diplomacy.",
+      "regional_implications": "Regional energy disruption increases the value of diversified supply chains and commercial links.",
+      "key_takeaways": [
+        "Aurangzeb met Saudi Ambassador Rajeh Tami Albugamy on 29 October.",
+        "Agriculture, minerals and mining were discussed.",
+        "No signed investment agreement was announced at the meeting."
+      ],
+      "facts": [
+        "Pakistan's finance minister and Saudi ambassador discussed investment opportunities in agriculture, minerals and mining on 29 October 2026."
+      ],
+      "what_to_watch": [
+        "Whether a specific signed investment agreement follows."
+      ],
+      "question_angles": [
+        "Assess the contribution of Saudi investment to Pakistan's export-led growth."
+      ],
+      "topics": [
+        "Pakistan–Saudi Arabia relations",
+        "Foreign investment",
+        "Mining",
+        "Agriculture"
+      ],
+      "countries": [
+        "Pakistan",
+        "Saudi Arabia"
+      ],
+      "institutions": [
+        "Finance Division"
+      ],
+      "people": [
+        "Muhammad Aurangzeb",
+        "Rajeh Tami Albugamy"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "FINANCE MINISTER, SAUDI AMBASSADOR DISCUSS ECONOMIC COOPERATION, INVESTMENT AND BILATERAL TIES",
+          "url": "https://pid.gov.pk/site/press_detail/34581"
+        },
+        {
+          "publisher": "Business Recorder",
+          "title": "Pakistan, KSA discuss investment in agriculture, minerals",
+          "url": "https://www.brecorder.com/news/40446496"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-29-world-hormuz-tanker-mine-claims",
+      "category": "World — Middle East Security",
+      "headline": "Iran alleges tanker mine incidents in Hormuz; three-vessel account remains unverified",
+      "summary": "On 29 October Iran's Revolutionary Guards claimed three tankers struck mines in the Strait of Hormuz. AP could not independently confirm the claim; a British maritime monitor separately reported a burning vessel.",
+      "what_happened": "Iranian state media cited the Revolutionary Guards as saying three tankers struck mines while using a restricted route. AP could not verify the vessels, circumstances or casualties. UK Maritime Trade Operations separately reported a vessel on fire, without establishing any link to the three-tanker allegation.",
+      "background": "The Strait of Hormuz is a major route for Gulf oil and gas exports. Wartime allegations must be distinguished from independent maritime observations.",
+      "why_it_matters": "Reports of possible mining increase shipping-risk concerns and can affect energy prices and insurance even before the underlying claims are verified.",
+      "pakistan_perspective": "Pakistan's Gulf energy imports are exposed to shipping uncertainty around the strait.",
+      "regional_implications": "The report adds uncertainty for Gulf exporters, maritime authorities and South Asian importers.",
+      "global_implications": "Potential tanker disruption raises wider oil and LNG supply concerns.",
+      "key_takeaways": [
+        "Iran claimed three tankers struck mines on 29 October; the claim was not independently confirmed.",
+        "A UK maritime monitor separately reported a burning vessel.",
+        "The reported incidents should not be presented as established facts."
+      ],
+      "facts": [
+        "On 29 October 2026 Iran's Revolutionary Guards alleged tanker mine incidents in the Strait of Hormuz; the three-vessel account was unverified."
+      ],
+      "what_to_watch": [
+        "Independent identification of vessels and maritime-agency incident updates."
+      ],
+      "question_angles": [
+        "Explain the strategic importance of the Strait of Hormuz to Pakistan's energy security."
+      ],
+      "topics": [
+        "Strait of Hormuz",
+        "Maritime security",
+        "Energy security"
+      ],
+      "countries": [
+        "Iran",
+        "Oman",
+        "Pakistan"
+      ],
+      "institutions": [
+        "Islamic Revolutionary Guard Corps",
+        "United Kingdom Maritime Trade Operations"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Iran says 3 oil tankers struck mines, and other Mideast news",
+          "url": "https://apnews.com/article/c11dac838a072af25ba8d0eb81d01035"
+        },
+        {
+          "publisher": "Arab News",
+          "title": "Iran’s Revolutionary Guards say three oil tankers hit mines in Strait of Hormuz",
+          "url": "https://www.arabnews.pk/world/irans-revolutionary-guards-say-three-oil-tankers-hit-mines-in-strait-of-hormuz-3005544"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-29-world-qatarenergy-woodside-lng",
+      "category": "World — Energy Security",
+      "headline": "QatarEnergy signs 20-year Louisiana LNG supply agreement with Woodside",
+      "summary": "Woodside and QatarEnergy announced on 29 October a 20-year agreement for up to 3 million tonnes of LNG per year from Louisiana, diversifying QatarEnergy's contracted supply outside the Gulf.",
+      "what_happened": "Woodside agreed to supply QatarEnergy from Louisiana LNG for 20 years. Deliveries are expected to begin in 2030 from the project's second train and rise to up to 3 million tonnes annually after the third train starts. First LNG production is targeted for 2029, not yet achieved.",
+      "background": "The Louisiana project's three-train foundation capacity is 16.5 million tonnes annually. QatarEnergy is diversifying sources amid disruption to Gulf LNG exports.",
+      "why_it_matters": "Long-term supply contracts can reduce dependence on a single maritime chokepoint and underpin investment in LNG infrastructure.",
+      "pakistan_perspective": "Pakistan's LNG procurement is vulnerable to Gulf shipping disruptions, although this deal does not guarantee any deliveries to Pakistan.",
+      "regional_implications": "Gulf energy suppliers are diversifying contractual sources outside the region.",
+      "global_implications": "The deal highlights the growing role of US LNG in global energy security.",
+      "key_takeaways": [
+        "Woodside and QatarEnergy signed a 20-year LNG supply agreement.",
+        "The contract covers up to 3 million tonnes per year.",
+        "Deliveries are expected from 2030; the project's first LNG is targeted for 2029."
+      ],
+      "facts": [
+        "On 29 October 2026 Woodside announced a 20-year agreement to supply QatarEnergy with up to 3 million tonnes of LNG annually from Louisiana."
+      ],
+      "statistics": [
+        {
+          "label": "LNG contract term",
+          "value": "20 years",
+          "source": "Reuters",
+          "date": "2026-10-29"
+        },
+        {
+          "label": "Maximum annual LNG supply",
+          "value": "3 million tonnes",
+          "source": "Reuters",
+          "date": "2026-10-29"
+        }
+      ],
+      "what_to_watch": [
+        "Louisiana LNG construction and actual supply commencement."
+      ],
+      "question_angles": [
+        "How do long-term LNG agreements alter energy security for importing economies?"
+      ],
+      "topics": [
+        "Liquefied natural gas",
+        "Energy security",
+        "International trade"
+      ],
+      "countries": [
+        "Qatar",
+        "United States",
+        "Australia",
+        "Pakistan"
+      ],
+      "organisations": [
+        "QatarEnergy",
+        "Woodside Energy"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "QatarEnergy secures 20-year US LNG supply from Woodside amid Hormuz blockade",
+          "url": "https://www.reuters.com/business/energy/australias-woodside-supply-qatarenergy-with-louisiana-lng-20-year-deal-2026-10-29/"
+        },
+        {
+          "publisher": "Offshore Energy",
+          "title": "QatarEnergy locks in more US LNG through 20-year deal with Woodside",
+          "url": "https://www.offshore-energy.biz/2026/10/29/qatarenergy-locks-in-more-us-lng-through-20-year-deal-with-woodside"
         }
       ]
     }
