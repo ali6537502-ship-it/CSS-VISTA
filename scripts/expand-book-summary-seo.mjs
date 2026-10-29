@@ -68,7 +68,7 @@ function pageBody(book) {
     .slice(0, 6)
     .map((candidate) => `<li><a href="/book-summaries/${escapeHtml(candidate.slug)}">${escapeHtml(candidate.title)} by ${escapeHtml(candidate.author)}</a></li>`)
     .join('')
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><a href="/">Home</a> · <a href="/book-summaries">Book Summaries</a></nav><article class="mt-6"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista book summary</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(book.title)} Summary</h1><p class="mt-2 text-base text-slate-600">by ${escapeHtml(book.author)}</p><div class="mt-6 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-5"><p class="leading-7">${escapeHtml(plainText(book.excerpt))}</p></div><section class="mt-8" aria-label="Complete book summary">${summaryHtml(reviewedBookBody(book))}</section>${sourcesHtml(book)}</article>${related ? `<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Related book summaries"><h2 class="font-display text-2xl font-bold text-pine">Related book summaries</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${related}</ul></nav>` : ''}<p class="mt-8"><a href="/book-summaries" class="font-bold text-emerald-800 underline">Browse all 100 book summaries</a></p></main>`
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><a href="/">Home</a> · <a href="/book-summaries">Book Summaries</a></nav><article class="mt-6"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista book summary</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(book.title)} Summary</h1><p class="mt-2 text-base text-slate-600">Book by ${escapeHtml(book.author)}</p><p class="mt-2 text-sm text-slate-600">Summary by <a href="/mentors" class="font-semibold text-emerald-800 underline">Sir Ali Hassan Sargana</a></p><div class="mt-6 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-5"><p class="leading-7">${escapeHtml(plainText(book.excerpt))}</p></div><section class="mt-8" aria-label="Complete book summary">${summaryHtml(reviewedBookBody(book))}</section>${sourcesHtml(book)}</article>${related ? `<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Related book summaries"><h2 class="font-display text-2xl font-bold text-pine">Related book summaries</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${related}</ul></nav>` : ''}<p class="mt-8"><a href="/book-summaries" class="font-bold text-emerald-800 underline">Browse all 100 book summaries</a></p></main>`
 }
 
 function jsonLd(book, canonical, description) {
@@ -82,6 +82,7 @@ function jsonLd(book, canonical, description) {
         url: canonical,
         mainEntityOfPage: canonical,
         inLanguage: 'en',
+        author: { '@type': 'Person', name: 'Sir Ali Hassan Sargana', url: `${siteOrigin}/mentors` },
         about: { '@type': 'Book', name: book.title, author: { '@type': 'Person', name: book.author } },
         publisher: { '@type': 'Organization', name: 'CSS Vista', url: `${siteOrigin}/` },
       },
@@ -110,10 +111,10 @@ function renderPage(template, book) {
     .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeHtml(description)}" />`)
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
-    .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${siteOrigin}${escapeHtml(book.cover)}" />`)
+    .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${siteOrigin}/images/logo.webp" />`)
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(description)}" />`)
-    .replace(/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${siteOrigin}${escapeHtml(book.cover)}" />`)
+    .replace(/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${siteOrigin}/images/logo.webp" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
     .replace(/\s*<script id="cssv-route-structured-data"[^>]*>[\s\S]*?<\/script>/, '')
     .replace('</head>', `    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(book, canonical, description)}</script>\n  </head>`)
