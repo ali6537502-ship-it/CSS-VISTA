@@ -5,6 +5,8 @@ import {
   LibraryBig, Minus, Plus, Printer, Search, Sparkles, X,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
+import BookSummaryCover from '@/components/BookSummaryCover'
+import { STUDY_MATERIAL_AUTHOR } from '@/data/contentProvenance'
 import {
   bookCatalogueNow,
   hasSummaryBodies,
@@ -283,17 +285,14 @@ function BookReader({
       <article className="book-summary-reader relative flex h-[100dvh] max-h-[100dvh] min-h-0 w-full flex-col overflow-hidden bg-[#fcfdfc]">
         <span className="absolute inset-x-0 top-0 z-20 h-1 bg-slate-100"><span className="cssv-progress block h-full bg-amber-400" style={{ width: `${localReadingState.completed ? 100 : readingProgress}%` }} /></span>
         <header className="flex shrink-0 items-start gap-4 border-b bg-white px-4 py-4 sm:px-6">
-          <img
-            src={book.cover}
-            alt={`Cover of ${book.title}`}
-            className="hidden h-28 w-[74px] rounded-md border object-cover shadow-sm sm:block"
-          />
+          <BookSummaryCover book={book} className="hidden h-28 w-[74px] shrink-0 sm:flex" />
           <div className="min-w-0 flex-1">
             <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">{categoryName}</p>
             <h2 id="book-summary-title" className="mt-1 font-display text-2xl font-bold leading-tight text-pine sm:text-3xl">
               {book.title}
             </h2>
-            <p className="mt-1 text-sm text-muted-foreground">by {book.author}</p>
+            <p className="mt-1 text-sm text-muted-foreground">Book by {book.author}</p>
+            <p className="mt-1 text-xs text-muted-foreground">Summary by <Link to="/mentors" className="font-semibold text-emerald-800 underline">{STUDY_MATERIAL_AUTHOR}</Link></p>
             <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1">
                 <Clock3 className="h-3.5 w-3.5" /> {readingMinutes} min read
@@ -356,19 +355,6 @@ function BookReader({
                 <><SummaryBody body={reviewedBody} /><BookSources slug={book.slug} /></>
               )}
             </div>
-            {book.coverSource && (
-              <p className="mt-9 border-t pt-4 text-xs text-muted-foreground">
-                Cover metadata from{' '}
-                <a
-                  href={book.coverSource}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-emerald-800 hover:underline"
-                >
-                  {book.coverProvider}
-                </a>.
-              </p>
-            )}
             <div className="no-print mt-8 grid grid-cols-2 gap-2 border-t pt-5">
               {previousBook ? <button type="button" onClick={() => onOpenBook(previousBook)} className="cssv-tap inline-flex min-h-11 items-center justify-start gap-2 rounded-lg border px-3 text-left text-xs font-bold text-pine hover:bg-secondary"><ArrowLeft className="h-4 w-4 shrink-0" /><span className="line-clamp-1">{previousBook.title}</span></button> : <span />}
               {nextBook && <button type="button" onClick={() => onOpenBook(nextBook)} className="cssv-tap inline-flex min-h-11 items-center justify-end gap-2 rounded-lg border px-3 text-right text-xs font-bold text-pine hover:bg-secondary"><span className="line-clamp-1">{nextBook.title}</span><ArrowRight className="h-4 w-4 shrink-0" /></button>}
@@ -379,7 +365,8 @@ function BookReader({
         <section className="book-summary-print-area" aria-label={`Printable summary of ${book.title}`}>
           <p className="text-xs font-bold uppercase tracking-wide text-emerald-800">{categoryName}</p>
           <h1 className="mt-2 text-2xl font-bold text-emerald-950">{book.title}</h1>
-          <p className="mt-1 text-sm">by {book.author}</p>
+          <p className="mt-1 text-sm">Book by {book.author}</p>
+          <p className="mt-1 text-sm">Summary by {STUDY_MATERIAL_AUTHOR}</p>
           <div className="mt-5 border-l-4 border-amber-400 bg-amber-50 p-4"><p className="leading-7">{book.excerpt}</p></div>
           <SummaryBody body={reviewedBody} />
           <BookSources slug={book.slug} />
@@ -529,6 +516,8 @@ export default function BookSummaries() {
     const metaUpdates: Array<[string, string]> = [
       ['meta[name="description"]', description],
       ['meta[name="robots"]', respectServerNoindex(`/book-summaries/${activeBook.slug}`, 'index, follow, max-image-preview:large')],
+      ['meta[property="og:image"]', 'https://www.css-vista.com/images/logo.webp'],
+      ['meta[name="twitter:image"]', 'https://www.css-vista.com/images/logo.webp'],
       ['meta[property="og:title"]', title],
       ['meta[property="og:type"]', 'article'],
       ['meta[property="og:description"]', description],
@@ -555,6 +544,7 @@ export default function BookSummaries() {
         {
           '@type': 'Article',
           headline: `${activeBook.title} summary`,
+          author: { '@type': 'Person', name: STUDY_MATERIAL_AUTHOR, url: 'https://www.css-vista.com/mentors' },
           description,
           url: canonical,
           mainEntityOfPage: canonical,
@@ -704,12 +694,7 @@ export default function BookSummaries() {
                     className="cssv-tap group flex overflow-hidden rounded-xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:flex-col"
                   >
                     <div className="relative w-[116px] shrink-0 overflow-hidden bg-gradient-to-br from-emerald-50 to-stone-100 sm:aspect-[4/3] sm:w-full">
-                      <img
-                        src={book.cover}
-                        alt={`Cover of ${book.title}`}
-                        loading="lazy"
-                        className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.035] sm:p-3"
-                      />
+                      <BookSummaryCover book={book} className="mx-auto my-3 h-36 w-24 sm:h-44 sm:w-32" />
                       {book.priority && (
                         <span className="absolute left-2 top-2 rounded-full bg-amber-400 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-950 shadow">
                           Priority

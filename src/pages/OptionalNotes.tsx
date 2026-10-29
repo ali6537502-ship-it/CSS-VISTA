@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import { ArrowRight, Search } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
+import { STUDY_MATERIAL_AUTHOR } from '@/data/contentProvenance'
 import {
   optionalGroupsWithNotes, optionalSubjectTotal, optionalTopicTotal, optionalWordTotal,
 } from '@/data/optionalNotes'
@@ -30,6 +31,7 @@ export default function OptionalNotes() {
         description={`Topic-wise study notes for ${optionalSubjectTotal()} CSS optional subjects across all seven FPSC groups — ${optionalTopicTotal()} topics and roughly ${Math.round(optionalWordTotal() / 1000)},000 words. Choose your group, then your subject, then the topic you are studying today.`}
       />
       <div className="mx-auto max-w-7xl px-4 py-6">
+      <p className="mb-3 text-sm text-muted-foreground">Notes by <Link to="/mentors" className="font-semibold text-emerald-800 underline">{STUDY_MATERIAL_AUTHOR}</Link></p>
       <nav aria-label="Breadcrumb" className="mb-3 flex flex-wrap items-center gap-1.5 text-[12px] text-muted-foreground">
           <Link to="/study-material" className="font-medium text-emerald-800 hover:underline underline-offset-2">CSS Study Material</Link>
           <span aria-hidden="true">/</span>

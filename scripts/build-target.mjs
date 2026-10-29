@@ -85,6 +85,7 @@ if (target === 'hostinger') {
   // The homepage keeps Google's official loader for direct verification, while
   // private, utility, interactive and other ad-disabled route HTML does not.
   await import('./apply-adsense-html-policy.mjs')
+  await import('./apply-book-cover-policy.mjs')
   await import('./split-sitemap-index.mjs')
   run('scripts/package-current-affairs.mjs')
   run('scripts/daily-pdf/package.mjs')

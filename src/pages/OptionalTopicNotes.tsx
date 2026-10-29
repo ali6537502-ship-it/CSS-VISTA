@@ -5,6 +5,7 @@ import {
   findOptionalTopic, loadOptionalTopic, optionalTopicNow, topicOutline, type TopicPayload,
 } from '@/data/optionalNotes'
 import { NoteBlocks } from '@/features/optional-notes/Blocks'
+import { STUDY_MATERIAL_AUTHOR } from '@/data/contentProvenance'
 
 export default function OptionalTopicNotes() {
   const { subject: subjectSlug = '', topic: topicSlug = '' } = useParams()
@@ -58,6 +59,7 @@ export default function OptionalTopicNotes() {
 
       <header className="mt-3 rounded-xl border bg-white p-4">
         <h1 className="font-display text-xl font-bold leading-tight text-pine sm:text-2xl">{topic.title}</h1>
+        <p className="mt-2 text-xs text-muted-foreground">Notes by <Link to="/mentors" className="font-semibold text-emerald-800 underline">{STUDY_MATERIAL_AUTHOR}</Link></p>
         <p className="mt-1.5 text-[12px] font-medium tabular-nums text-muted-foreground">
           {subject.subject} · Group {subject.group} · {topic.words.toLocaleString()} words ·
           about {Math.max(1, Math.round(topic.words / 200))} min read
