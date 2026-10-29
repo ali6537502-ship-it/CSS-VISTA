@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-10-28",
-  "published_at": "2026-10-28T19:05:10+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 28 October 2026 | Evening Update (00:00–19:00 PKT)",
+  "published_at": "2026-10-28T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 28 October 2026 | Final Edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-10-28-pak-fuel-prices",
@@ -589,16 +589,16 @@
     {
       "id": "ca-2026-10-28-world-israel-election-count",
       "category": "World — Elections and Middle East Politics",
-      "headline": "Israel's partial election count shows no bloc with a majority",
-      "summary": "With roughly 66% of votes counted on 28 October, Netanyahu's bloc was projected at 54 seats in Israel's 120-member parliament, below a governing majority.",
-      "what_happened": "Dawn reported on 28 October that with 66% of ballots counted, the bloc of Prime Minister Benjamin Netanyahu was projected at 54 Knesset seats, Gadi Eisenkot's opposition bloc at 48 and non-aligned Arab parties at 18. These were partial figures, subject to change as counting continued. No governing coalition had been confirmed at the reporting cutoff.",
+      "headline": "Israel's election count points to coalition deadlock",
+      "summary": "With around 86–88% of votes counted on 28 October, projections gave Netanyahu's bloc 53 seats, the main opposition bloc 48 and Arab-led parties 19, leaving no established 61-seat majority.",
+      "what_happened": "After the 27 October election, counting continued on 28 October. Reuters reported projections of 53 seats for Benjamin Netanyahu's bloc, 48 for Gadi Eisenkot's opposition grouping and 19 for Arab-led parties, out of 120 Knesset seats. Associated Press reported about 88% counted and said final results could come on 29 October. The projections were not final certified results.",
       "background": "Israel's proportional parliamentary system often requires coalition-building to secure at least 61 seats in the 120-member Knesset.",
-      "why_it_matters": "The composition of Israel's next government could affect Gaza policy, regional diplomacy and the future of coalition governance.",
+      "why_it_matters": "A coalition requires support of at least 61 members in the 120-seat Knesset. The vote highlights the role of Arab-led parties and the possibility of extended coalition negotiations or a caretaker administration.",
       "pakistan_perspective": "Pakistan's Middle East diplomacy and positions on Palestinian rights make developments in Israel's coalition formation relevant.",
       "key_takeaways": [
-        "Israel's Knesset has 120 seats; a majority requires 61.",
-        "Partial counts on 28 October did not give either major bloc a majority.",
-        "The 54-seat projection was provisional."
+        "Projected blocs on 28 October: 53, 48 and 19 seats respectively.",
+        "A Knesset majority requires 61 of 120 seats.",
+        "The count remained preliminary on 28 October."
       ],
       "question_angles": [
         "How many Knesset seats are needed for a majority?"
@@ -618,13 +618,22 @@
       ],
       "sources": [
         {
-          "publisher": "Dawn",
-          "title": "Netanyahu bloc leads as Israeli votes counted, but no majority",
-          "url": "https://www.dawn.com/news/2040402/netanyahu-bloc-leads-as-israeli-votes-counted-but-no-majority"
+          "publisher": "Reuters",
+          "title": "Netanyahu set to remain caretaker after inconclusive Israeli election",
+          "url": "https://www.reuters.com/world/middle-east/netanyahu-eisenkot-stake-rival-claims-lead-israel-after-deadlocked-vote-2026-10-28/"
+        },
+        {
+          "publisher": "Associated Press",
+          "title": "Netanyahu and top rival face postelection choices that could redefine Israeli politics",
+          "url": "https://apnews.com/article/d4680e90210c9a8611853fda9d0deb61"
         }
       ],
       "quick_gk": [
         "Israel's Knesset has 120 seats; a majority requires 61."
+      ],
+      "what_to_watch": [
+        "Final certification of votes including absentee ballots.",
+        "Whether any grouping can negotiate a 61-seat majority."
       ]
     },
     {
@@ -672,19 +681,20 @@
     {
       "id": "ca-2026-10-28-world-cuba-unga-embargo",
       "category": "World — United Nations and International Law",
-      "headline": "UN General Assembly prepares annual vote on US embargo of Cuba",
-      "summary": "On 28 October, the UN General Assembly was due to vote on its annual non-binding resolution calling for an end to the US embargo of Cuba; the outcome was not yet confirmed at the reporting cutoff.",
-      "what_happened": "AP reported on 28 October that the UN General Assembly was set to consider the annual Cuba embargo resolution amid heightened US–Cuba tensions. The 2025 resolution had passed 165–7 with 12 abstentions. No 2026 voting result is claimed here, as the vote had not been verified at this edition's cutoff.",
-      "background": "General Assembly resolutions express member-state positions but generally do not impose legally binding changes to US sanctions law.",
-      "why_it_matters": "The debate illustrates the limits of multilateral pressure, the role of sanctions and tensions between sovereignty and national trade policy.",
+      "headline": "UN General Assembly calls for end to US embargo on Cuba in 130–17 vote",
+      "summary": "On 28 October, the UN General Assembly adopted its annual non-binding call to end the US embargo on Cuba by 130 votes to 17, with 25 abstentions; support was lower than in 2025.",
+      "what_happened": "The General Assembly adopted the Cuba embargo resolution on 28 October 2026 with 130 countries in favour, 17 against and 25 abstaining. The comparable 2025 tally was 165 in favour, seven against and 12 abstaining. Germany and Italy were among countries that abstained in 2026. The General Assembly's resolution is not binding on the United States.",
+      "background": "The General Assembly has repeatedly called for the embargo to end since 1992, except for the pandemic-related interruption in 2020. Ending the US statutory embargo ultimately requires action by the US Congress.",
+      "why_it_matters": "The shift in voting reveals changing diplomatic positions while highlighting the difference between General Assembly recommendations and enforceable domestic sanctions policy.",
       "pakistan_perspective": "The case is useful for understanding the UN General Assembly's powers and the distinction between political resolutions and binding legal instruments.",
       "key_takeaways": [
-        "The Cuba embargo resolution is considered by the UN General Assembly.",
-        "The 2025 vote was 165 in favour, seven against and 12 abstentions.",
-        "The 2026 vote outcome was unconfirmed at this reporting cutoff."
+        "2026 vote: 130 for, 17 against, 25 abstentions.",
+        "2025 vote: 165 for, seven against, 12 abstentions.",
+        "The resolution is non-binding and does not itself repeal US sanctions."
       ],
       "question_angles": [
-        "Which UN organ considers the annual resolution on the US embargo of Cuba?"
+        "Compare the 2025 and 2026 UN General Assembly votes on the Cuba embargo.",
+        "Why does a General Assembly recommendation not itself repeal US sanctions?"
       ],
       "topics": [
         "United Nations General Assembly",
@@ -700,13 +710,346 @@
       ],
       "sources": [
         {
+          "publisher": "Reuters",
+          "title": "US sways more countries to oppose UN resolution condemning its Cuba embargo",
+          "url": "https://www.reuters.com/world/americas/us-gets-more-countries-oppose-un-resolution-condemning-its-cuba-embargo-2026-10-28/"
+        },
+        {
           "publisher": "Associated Press",
-          "title": "UN holds annual vote on condemning US embargo on Cuba as tensions spill into public",
-          "url": "https://apnews.com/article/us-cuba-embargo-un-general-assembly-trump-52ab17ec75d26cd9d1893915ce18f414"
+          "title": "UN condemns US economic embargo of Cuba though more nations sit out after Trump administration push",
+          "url": "https://apnews.com/article/52ab17ec75d26cd9d1893915ce18f414"
         }
       ],
       "quick_gk": [
         "The Cuba embargo resolution is considered by the UN General Assembly."
+      ],
+      "global_implications": "The vote reflects competing assessments of unilateral sanctions, sovereignty, humanitarian effects and US-Cuba relations.",
+      "statistics": [
+        {
+          "label": "Votes in favour of Cuba embargo resolution",
+          "value": "130",
+          "source": "Reuters",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "Votes against Cuba embargo resolution",
+          "value": "17",
+          "source": "Reuters",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "Abstentions on Cuba embargo resolution",
+          "value": "25",
+          "source": "Reuters",
+          "date": "2026-10-28"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-taiwan-overflight",
+      "category": "Pakistan — Foreign Relations and Civil Aviation",
+      "headline": "Pakistan grants overflight permission to two Taiwanese airlines",
+      "summary": "Civil Aviation Authority documents dated 28 October authorised China Airlines and EVA Air flights through Pakistan's airspace until 27 March 2027, following reports of a restriction.",
+      "what_happened": "Pakistan's Civil Aviation Authority issued documents approving passenger and cargo overflights by Taiwan-based China Airlines and EVA Air from 28 October 2026 to 27 March 2027. The documents followed media reports of an earlier restriction linked to Pakistan's One-China policy. They did not explain whether the approval was a reversal.",
+      "background": "Pakistan recognises Beijing and follows a One-China policy. Overflight rights concern civil aviation and should not be confused with diplomatic recognition.",
+      "why_it_matters": "The episode illustrates the intersection of aviation regulation, bilateral ties with China and the commercial consequences of airspace decisions.",
+      "pakistan_perspective": "The approval demonstrates why official aviation documents, rather than preliminary reports alone, are essential when assessing a changing regulatory decision.",
+      "regional_implications": "Asia-Europe air routes and air carriers can be affected by airspace access restrictions.",
+      "key_takeaways": [
+        "China Airlines and EVA Air were approved to use Pakistani airspace.",
+        "The authorisations run from 28 October 2026 through 27 March 2027.",
+        "The approval documents do not establish why a reported earlier restriction was imposed or lifted."
+      ],
+      "question_angles": [
+        "Which two Taiwanese carriers received Pakistani overflight permission on 28 October 2026?"
+      ],
+      "topics": [
+        "Civil aviation",
+        "One-China policy",
+        "Airspace rights",
+        "Pakistan-China relations"
+      ],
+      "countries": [
+        "Pakistan",
+        "China",
+        "Taiwan"
+      ],
+      "institutions": [
+        "Pakistan Civil Aviation Authority"
+      ],
+      "organisations": [
+        "China Airlines",
+        "EVA Air"
+      ],
+      "people": [
+        "Khawaja Muhammad Asif"
+      ],
+      "quick_gk": [
+        "Pakistan approved overflights by China Airlines and EVA Air from 28 October 2026 through 27 March 2027."
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Pakistan approves flights by Taiwanese airlines after reported restrictions",
+          "url": "https://apnews.com/article/7bb2640abcf979880afe06f842522f46"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Pakistan allows Taiwanese airlines to use airspace till March 2027",
+          "url": "https://www.dawn.com/news/2040438/pakistan-bars-taiwanese-airlines-from-its-airspace-in-line-with-one-china-policy-report"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-kp-constitutional-debate",
+      "category": "Pakistan — Constitutional Affairs",
+      "headline": "National Assembly debate renews scrutiny of emergency and governor's rule in KP",
+      "summary": "On 28 October, JUI-F leader Maulana Fazlur Rehman challenged the constitutional use of emergency and governor's rule in Khyber Pakhtunkhwa; a federal minister defended the measures.",
+      "what_happened": "During National Assembly proceedings on 28 October, Maulana Fazlur Rehman accused the federal government of misusing the Constitution by imposing emergency and governor's rule in KP. Parliamentary Affairs Minister Dr Tariq Fazal Chaudhary defended the measures and described their duration and territorial application. The exchange was a parliamentary disagreement, not a judicial ruling.",
+      "background": "The federal government announced emergency and governor's rule in KP on 11 October under Articles 232 and 234. A joint parliamentary sitting endorsed the proclamations on 15 October. Their legality and political consequences remained contested.",
+      "why_it_matters": "The dispute raises questions about federalism, constitutional safeguards, provincial autonomy and parliamentary oversight of emergency powers.",
+      "pakistan_perspective": "It is essential to distinguish a political allegation of constitutional misuse from an authoritative judicial finding.",
+      "key_takeaways": [
+        "The 28 October debate concerned emergency and governor's rule in KP.",
+        "Articles 232 and 234 provide the relevant constitutional frameworks.",
+        "The parliamentary exchange did not itself invalidate the proclamations."
+      ],
+      "question_angles": [
+        "Differentiate Article 232 emergency powers from Article 234 constitutional machinery provisions.",
+        "What safeguards govern federal intervention in provincial affairs?"
+      ],
+      "topics": [
+        "Constitution of Pakistan",
+        "Federalism",
+        "Emergency powers",
+        "Provincial autonomy"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "National Assembly of Pakistan"
+      ],
+      "people": [
+        "Maulana Fazlur Rehman",
+        "Tariq Fazal Chaudhary"
+      ],
+      "quick_gk": [
+        "Articles 232 and 234 of Pakistan's Constitution were cited in the October 2026 emergency and governor's rule measures in KP."
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Fazl accuses govt of 'misusing' Constitution when imposing emergency, governor's rule in KP",
+          "url": "https://www.dawn.com/news/2040486"
+        },
+        {
+          "publisher": "Radio Pakistan",
+          "title": "'President promulgates emergency, governor’s rule in KP'",
+          "url": "https://radio.gov.pk/11-10-2026/president-promulgates-emergency-governors-rule-in-kp"
+        },
+        {
+          "publisher": "Business Recorder",
+          "title": "Joint session ratifies Emergency, Governor’s rule in KP",
+          "url": "https://www.brecorder.com/news/40444485"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-lancet-climate-health",
+      "category": "World — Climate and Public Health",
+      "headline": "WHO highlights 2026 Lancet Countdown findings on climate-related health harms",
+      "summary": "On 28 October, WHO highlighted a Lancet Countdown assessment tracking 54 climate-health indicators, reporting a nearly 36% rise in average annual heat-related deaths after the Paris Agreement compared with the preceding decade.",
+      "what_happened": "WHO's 28 October update on the 2026 Lancet Countdown described accelerating health risks from heat, drought and hydrological extremes. It reported that heat was linked to an estimated 710,000 deaths worldwide in 2023, with more than 70% of that burden attributed to human-caused climate change. The study tracks 54 indicators.",
+      "background": "The Lancet Countdown is a research collaboration led by University College London, developed in strategic collaboration with WHO. Attribution-based estimates are not individual death-certificate counts.",
+      "why_it_matters": "Climate impacts affect health systems, labour productivity, food security and emergency preparedness, making adaptation and emissions reduction important public-health policies.",
+      "pakistan_perspective": "Pakistan's heatwaves, flood exposure and disease risks underscore the value of heat-health action plans and early warning systems.",
+      "global_implications": "The report strengthens the evidence base for integrating health into climate policy ahead of COP31.",
+      "key_takeaways": [
+        "The 2026 Lancet Countdown tracks 54 climate-health indicators.",
+        "WHO reported an estimated 710,000 heat-related deaths globally in 2023.",
+        "The WHO summary attributed over 70% of that 2023 heat-related burden to human-caused climate change."
+      ],
+      "question_angles": [
+        "Which report tracks 54 climate-and-health indicators in 2026?",
+        "Why is climate adaptation a public-health intervention?"
+      ],
+      "topics": [
+        "Climate change",
+        "Public health",
+        "Heat mortality",
+        "COP31"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "World Health Organization",
+        "University College London"
+      ],
+      "reports": [
+        "2026 Lancet Countdown on Health and Climate Change"
+      ],
+      "statistics": [
+        {
+          "label": "Climate and health indicators",
+          "value": "54",
+          "source": "World Health Organization",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "Estimated heat-related deaths in 2023",
+          "value": "710,000 worldwide",
+          "source": "World Health Organization",
+          "year": "2023"
+        }
+      ],
+      "quick_gk": [
+        "WHO's 28 October 2026 Lancet Countdown update described 54 indicators linking climate change and health."
+      ],
+      "sources": [
+        {
+          "publisher": "World Health Organization",
+          "title": "Climate change is a growing health emergency, Lancet Countdown warns",
+          "url": "https://www.who.int/news/item/28-10-2026-climate-change-is-a-growing-health-emergency--lancet-countdown-warns"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-who-tb-injectables",
+      "category": "World — Global Health and Medical Innovation",
+      "headline": "WHO outlines targets for future long-acting injectable TB regimens",
+      "summary": "On 28 October, WHO announced target regimen profiles for long-acting tuberculosis medicines, including a single-injection preventive target and a treatment target of no more than four months.",
+      "what_happened": "WHO released an update explaining its target regimen profiles for long-acting injectable tuberculosis prevention and treatment. The preventive target is a complete course in one injection at one encounter; the disease-treatment target is no longer than four months and requires three or fewer dosing encounters. These are development goals, not an announcement of approved replacement medicines.",
+      "background": "Tuberculosis treatment commonly involves lengthy oral regimens, and researchers are exploring injections that could reduce treatment burden while preserving efficacy, safety and patient choice.",
+      "why_it_matters": "The profiles can guide developers and health systems toward practical, equitable and easier-to-complete treatment regimens.",
+      "pakistan_perspective": "Pakistan's TB programmes could benefit from future validated treatment innovations, but any adoption requires clinical evidence, regulatory review and affordability.",
+      "key_takeaways": [
+        "The WHO preventive profile targets one injection in one encounter.",
+        "The TB disease-treatment profile targets no more than four months.",
+        "The WHO profiles guide research; they are not approvals of a new treatment."
+      ],
+      "question_angles": [
+        "What is the maximum duration targeted for a long-acting injectable TB disease regimen in WHO's 2026 profiles?"
+      ],
+      "topics": [
+        "Tuberculosis",
+        "WHO guidance",
+        "Medical research",
+        "Treatment adherence"
+      ],
+      "institutions": [
+        "World Health Organization"
+      ],
+      "reports": [
+        "Target regimen profiles for long-acting injectables for tuberculosis prevention and treatment"
+      ],
+      "quick_gk": [
+        "WHO's 2026 target profile for long-acting injectable TB disease treatment specifies no more than four months and three or fewer dosing encounters."
+      ],
+      "sources": [
+        {
+          "publisher": "World Health Organization",
+          "title": "WHO releases target regimen profiles for long-acting injectables for TB",
+          "url": "https://www.who.int/japan/news/detail-global/28-10-2026-who-releases-target-regimen-profiles-for-long-acting-injectables-for-tb"
+        },
+        {
+          "publisher": "World Health Organization",
+          "title": "Target regimen profiles for long-acting injectables for tuberculosis prevention and treatment",
+          "url": "https://www.who.int/publications/i/item/9789240125506"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-spain-rail-safety",
+      "category": "World — Infrastructure and Public Safety",
+      "headline": "Spain investigates deadly high-speed rail collision near Toledo",
+      "summary": "Two high-speed trains collided near Urda in Toledo province on 28 October, killing at least 68 people according to Reuters' updated reporting; authorities began investigating signalling and traffic-control decisions.",
+      "what_happened": "A Renfe high-speed train struck a stationary Iryo service near Urda on 28 October. Reuters reported at least 68 deaths and 80 injuries in an updated account. Officials said a signalling or computer communications failure had stopped traffic before a decision authorised the Renfe train to proceed. The exact causal sequence remained under investigation.",
+      "background": "Spain has an extensive high-speed railway network. An earlier fatal rail collision in January 2026 had already intensified discussion of infrastructure maintenance and safety systems.",
+      "why_it_matters": "The incident highlights the need for independent investigations, robust fail-safe signalling, maintenance and emergency response.",
+      "global_implications": "Rail operators elsewhere may review operating procedures for degraded signalling conditions and control-centre authorisations.",
+      "key_takeaways": [
+        "The 28 October collision occurred near Urda in Toledo province.",
+        "The trains involved were operated by Renfe and Iryo.",
+        "The cause remained under investigation; early explanations should not be treated as final findings."
+      ],
+      "question_angles": [
+        "In which Spanish province did the October 2026 high-speed rail collision occur?"
+      ],
+      "topics": [
+        "Transport safety",
+        "Infrastructure resilience",
+        "Rail regulation"
+      ],
+      "countries": [
+        "Spain"
+      ],
+      "institutions": [
+        "Spanish Ministry of Transport"
+      ],
+      "organisations": [
+        "Renfe",
+        "Iryo"
+      ],
+      "quick_gk": [
+        "Two high-speed trains operated by Renfe and Iryo collided near Urda in Spain's Toledo province on 28 October 2026."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "At least 68 people dead in Spain's second major train crash this year",
+          "url": "https://www.reuters.com/world/two-high-speed-trains-rear-end-spain-rail-operator-says-2026-10-28/"
+        },
+        {
+          "publisher": "Al Jazeera",
+          "title": "Train crash in Spain kills at least 68 people",
+          "url": "https://www.aljazeera.com/news/2026/10/28/injuries-reported-after-two-trains-collide-in-spain"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-ukraine-talks-timing",
+      "category": "World — Conflict and Diplomacy",
+      "headline": "Kremlin aide says timing of further Ukraine talks remains uncertain",
+      "summary": "Comments made on 28 October by Kremlin foreign policy aide Yuri Ushakov cast doubt on near-term trilateral talks, while Ukraine's president suggested an Abu Dhabi meeting in early November.",
+      "what_happened": "Reuters reported that Yuri Ushakov said the timing of renewed Russia-Ukraine-US consultations depended on battlefield and wider Middle East developments. Ukrainian President Volodymyr Zelenskiy said he hoped for a meeting in Abu Dhabi between 6 and 10 November. Moscow had not proposed a firm date, and no new meeting was confirmed.",
+      "background": "US-mediated discussions have sought to find a path toward a settlement of the war in Ukraine. European governments have pressed to participate, while the Kremlin described the existing format as three-sided.",
+      "why_it_matters": "Diplomatic timing, representation and security conditions remain major obstacles to conflict resolution.",
+      "regional_implications": "The Middle East conflict can affect international diplomatic priorities and the feasibility of other peace talks.",
+      "pakistan_perspective": "The case illustrates how simultaneous regional crises complicate mediation and foreign-policy coordination.",
+      "key_takeaways": [
+        "The proposed meeting venue was Abu Dhabi.",
+        "Zelenskiy mentioned 6–10 November as a hoped-for window, not a confirmed schedule.",
+        "The described consultation format involved Russia, Ukraine and the United States."
+      ],
+      "question_angles": [
+        "Which city was mentioned as a possible venue for renewed Ukraine talks in November 2026?"
+      ],
+      "topics": [
+        "Russia-Ukraine war",
+        "Peace diplomacy",
+        "Middle East security"
+      ],
+      "countries": [
+        "Russia",
+        "Ukraine",
+        "United States",
+        "United Arab Emirates"
+      ],
+      "people": [
+        "Yuri Ushakov",
+        "Volodymyr Zelenskiy"
+      ],
+      "quick_gk": [
+        "On 28 October 2026, Ukraine's president suggested Abu Dhabi for possible renewed talks with Russia and the US in early November; no meeting date was confirmed."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Next round of Ukraine talks depends on Middle East, other factors, Kremlin aide says",
+          "url": "https://www.reuters.com/world/next-round-ukraine-talks-depends-middle-east-other-factors-kremlin-aide-says-2026-10-28/"
+        }
       ]
     }
   ]
