@@ -202,12 +202,12 @@ export default function Guide({
 
   const catalog = data.catalog
   const requestedChapter = params.get('chapter')
+  const savedChapter = progress ? String(progress.current_chapter) : null
   const fallbackPath = guidePaths.find((path) =>
-    path.chapters.some((id) => id === requestedChapter),
+    path.chapters.some((id) => id === (requestedChapter || savedChapter)),
   )
   const path = guidePath(params.get('guide_path') || fallbackPath?.id || null)
   const chapters = availableGuideChapters(path, catalog?.chapters || [])
-  const savedChapter = progress ? String(progress.current_chapter) : null
   const selectedChapter =
     chapters.find((chapter) => chapter.id === requestedChapter) ||
     chapters.find((chapter) => chapter.id === savedChapter) ||
