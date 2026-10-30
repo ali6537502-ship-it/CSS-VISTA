@@ -1,5 +1,6 @@
 import PerformanceVisual from '@/features/workspace/PerformanceVisual'
 import AccountGSATutorCard from '@/features/gsa-tutor/AccountGSATutorCard'
+import AccountGSATutorCard from '@/features/gsa-tutor/AccountGSATutorCard'
 import { SubjectOverview } from './Subjects'
 import AttemptContinuation from '@/features/preparation/Continuation'
 import { Link } from 'react-router'
@@ -27,6 +28,7 @@ export default function AccountProgress() {
       }
     >
       <PerformanceVisual />
+      <div className="my-6"><AccountGSATutorCard /></div>
       <div className="my-6"><AccountGSATutorCard /></div>
       <div className="ws-panel mb-6"><div className="flex flex-wrap gap-4 text-sm font-semibold"><a className="underline min-h-11 inline-flex items-center" href="#attempts">All recorded attempts</a><Link className="underline min-h-11 inline-flex items-center" to="/mistakes">Recorded errors & revision</Link><Link className="underline min-h-11 inline-flex items-center" to="/account/subjects">Selected subject coverage</Link></div></div>
       <AttemptContinuation />
