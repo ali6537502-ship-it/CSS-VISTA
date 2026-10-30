@@ -51,7 +51,7 @@ const guideBase={action:'guide_setup',request_id:randomUUID(),attempt_id:attempt
 assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),attempt_id:bAttempt},a.jar)).status,404)
 assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),target_days:1},a.jar)).status,422)
 assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),target_days:61},a.jar)).status,422)
-assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID()},free.jar)).status,404)
+assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID()},free.jar)).status,403,'Free membership must not save a premium guide plan')
 const createdPlan=await call(endpoint,guideBase,a.jar)
 assert.equal(createdPlan.status,200,JSON.stringify(createdPlan.data))
 assert.equal(createdPlan.data.target_days,14)
