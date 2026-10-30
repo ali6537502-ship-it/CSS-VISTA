@@ -190,7 +190,7 @@ root.addEventListener('click',async e=>{
  if(t.dataset.phase!==undefined){ui.phase=Number(t.dataset.phase);draw();return}
  if(t.dataset.choice){ui.selected=t.dataset.choice;const item=byId.get(ui.id),c=chapterCache.get(item.chapter),q=questionFor(c.sections.find(x=>x.id===ui.id),c);if(q&&ui.selected!==q.answer){saved.revisit[ui.id]={at:new Date().toISOString(),kind:'question',questionId:q.id};notify()}draw();return}
  if(t.dataset.quizChoice){saveQuizAnswer(t.dataset.quizChoice);return}
- if(t.dataset.grade){chooseGrade(t.dataset.grade);return}
+ if(t.dataset.grade){ui.grade=t.dataset.grade;draw();return}
  switch(t.dataset.action){
   case 'editplan':ui.setupDays=saved.plan.days;ui.setupDate=saved.plan.startDate;saved.plan=null;ui.view='course';draw();break;
   case 'saveplan':{
