@@ -17,5 +17,9 @@ $context=cssv_precis_context(['title'=>'TEST ONLY title','scratch'=>['central_id
 try{cssv_precis_context(['title'=>'x','scratch'=>['admin'=>true],'self_check'=>[]]);throw new RuntimeException('Unknown scratch accepted');}catch(InvalidArgumentException){$count++;}
 try{cssv_precis_context(['title'=>'x','scratch'=>['topic'=>'x'],'self_check'=>['fidelity'=>6]]);throw new RuntimeException('Invalid self-score accepted');}catch(InvalidArgumentException){$count++;}
 check(cssv_precis_source(['passage_id'=>'example-1'])['text']===$book['passages'][0]['text'],'Trusted source changed');
-$migration=(string)file_get_contents(__DIR__.'/../../server/sql/016_precis_lab.sql');foreach(cssv_precis_schema_statements() as $sql)check(str_contains($migration,$sql.';'),'Schema / SQL mismatch');
+$migration=(string)file_get_contents(__DIR__.'/../../server/sql/016_precis_lab.sql').(string)file_get_contents(__DIR__.'/../../server/sql/027_precis_adaptive_guide.sql');foreach(cssv_precis_schema_statements() as $sql)check(str_contains($migration,$sql.';'),'Schema / SQL mismatch');
+check(cssv_precis_guide_unit_count()>60,'Handbook cannot support student-selected 60-day course');
+check(cssv_precis_known_guide_unit('1:0'),'Real handbook unit was not recognised');
+check(!cssv_precis_known_guide_unit('4:0'),'Heading incorrectly marked as a completed reading block');
+check(!cssv_precis_known_guide_unit('25:1000'),'Unknown handbook section was accepted');
 echo "PASS: $count Précis content, answer isolation, qualification, evidence, count, context and schema assertions.\n";
