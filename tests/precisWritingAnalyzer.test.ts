@@ -80,7 +80,7 @@ test('empty answer receives an actionable prompt, not a made-up evaluation', () 
 
 test('accepted owner-handbook worked models do not trigger false source or length alarms', () => {
   const imported = readFileSync(new URL('../public/api/_precis_handbook.php', import.meta.url), 'utf8')
-  const embedded = imported.match(/<<<'HANDBOOK'\\n([\\s\\S]*?)\\nHANDBOOK/u)
+  const embedded = imported.match(/<<<'HANDBOOK'\n([\s\S]*?)\nHANDBOOK/u)
   assert.ok(embedded, 'Owner handbook catalogue must remain readable')
   const handbook = JSON.parse(embedded[1]) as {
     passages: { id: string; text: string; model: string; model_title: string; limit: number | null }[]
