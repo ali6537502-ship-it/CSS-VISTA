@@ -46,6 +46,34 @@ assert.equal((await call(endpoint,{action:'reveal_model',request_id:randomUUID()
 const custom={...body,request_id:randomUUID(),original:'TEST ONLY private practice source with at least twenty words for learning, keeping its original meaning and relevant logical qualification during compression.',source_label:'TEST ONLY personally supplied teaching passage',word_limit:25};delete custom.passage_id
 const customSaved=await call(endpoint,custom,a.jar);assert.equal(customSaved.status,200);assert.equal((await call(`${endpoint}?writing_id=${customSaved.data.writing_id}&version_id=${saved.data.version_id}`,undefined,a.jar)).status,404,'Wrong-record version accepted')
 const own=(await call(`${endpoint}?writing_id=${customSaved.data.writing_id}`,undefined,a.jar)).data;assert.equal(own.source.limit,25);assert.equal(own.source.text,custom.original)
+// Adaptive student-paced Guide: account-scoped plan, immutable source units and safe replanning.
+const guideBase={action:'guide_setup',request_id:randomUUID(),attempt_id:attempt,target_days:14,expected_version:0}
+assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),attempt_id:bAttempt},a.jar)).status,404)
+assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),target_days:1},a.jar)).status,422)
+assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),target_days:61},a.jar)).status,422)
+assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID()},free.jar)).status,403,'Free membership must not save a premium guide plan')
+const createdPlan=await call(endpoint,guideBase,a.jar)
+assert.equal(createdPlan.status,200,JSON.stringify(createdPlan.data))
+assert.equal(createdPlan.data.target_days,14)
+assert.equal((await call(endpoint,guideBase,a.jar)).data.version,1,'Lost response duplicated plan save')
+assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID()},a.jar)).status,409,'Stale plan overwrote progress')
+let personalised=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan
+assert.equal(personalised.target_days,14)
+assert.deepEqual(personalised.completed_units,[])
+const unit={action:'guide_mark',request_id:randomUUID(),attempt_id:attempt,unit_id:'1:0',expected_version:1}
+assert.equal((await call(endpoint,{...unit,request_id:randomUUID(),unit_id:'4:0'},a.jar)).status,422,'Heading marked as lesson')
+assert.equal((await call(endpoint,{...unit,request_id:randomUUID(),unit_id:'1:200'},a.jar)).status,422,'Unknown chapter block marked')
+assert.equal((await call(endpoint,{...unit,request_id:randomUUID(),attempt_id:bAttempt},a.jar)).status,404)
+assert.equal((await call(endpoint,unit,a.jar)).status,200)
+assert.equal((await call(endpoint,unit,a.jar)).data.completed_count,1)
+assert.equal((await call(endpoint,{...unit,request_id:randomUUID()},a.jar)).status,409,'Stale progress overwrote completed units')
+const replanned=await call(endpoint,{action:'guide_setup',request_id:randomUUID(),attempt_id:attempt,target_days:30,expected_version:2},a.jar)
+assert.equal(replanned.status,200,JSON.stringify(replanned.data))
+assert.equal(replanned.data.completed_count,1)
+personalised=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan
+assert.equal(personalised.target_days,30)
+assert.deepEqual(personalised.completed_units,['1:0'])
+assert.equal((await call(`${endpoint}?attempt_id=${attempt}`,undefined,b.jar)).status,404)
 const prog={action:'progress_save',request_id:randomUUID(),attempt_id:attempt,expected_version:0,current_day:4,completed:[1,2,3]}
 assert.equal((await call(endpoint,prog,a.jar)).status,200);assert.equal((await call(endpoint,prog,a.jar)).data.version,1)
 assert.equal((await call(endpoint,{...prog,request_id:randomUUID(),current_day:5},a.jar)).status,409)

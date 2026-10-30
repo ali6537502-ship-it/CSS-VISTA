@@ -33,14 +33,17 @@ try {
     await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
     assert.equal(await page.getByRole('link',{name:'Pro account',exact:true}).count(),0)
     const links=await page.locator('a[href]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')))
-    assert.deepEqual(links.filter(isProDestination),[],'Visible paused Pro links in account navigation')
+    assert.deepEqual(links.filter(link=>isProDestination(link) && !new URL(link,base).pathname.startsWith('/account/precis')),[],'Visible paused Pro links in account navigation')
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile overflow')
   }
-  for (const path of ['/account/expression','/account/precis','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/general-ability','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/ai-usage','/account/membership','/current-affairs','/study-material/essay-themes','/account/preparation?view=topics']) {
+  for (const path of ['/account/expression','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/general-ability','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/ai-usage','/account/membership','/current-affairs','/study-material/essay-themes','/account/preparation?view=topics']) {
     await page.goto(base+path)
     await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
     assert.equal(await page.locator('main textarea, main input[type=file]').count(),0)
   }
+  await page.goto(base+'/account/precis?view=guide&attempt='+attempt)
+  await page.getByRole('heading',{name:'Learn Précis at your own pace'}).waitFor()
+  assert.equal(await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).count(),0)
   await page.goto(base+'/account/preparation?attempt='+attempt)
   await page.getByRole('button',{name:'Reading & revision',exact:true}).click()
   assert.equal(new URL(page.url()).searchParams.get('kind'),'vistagram')

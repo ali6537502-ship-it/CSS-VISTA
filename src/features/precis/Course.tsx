@@ -221,7 +221,7 @@ export default function Course({
             </p>
           )}
         </section>
-        {chapter && <><ChapterBody chapter={chapter} />{['1','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','19','21','22'].includes(chapter.id) && <Link className={secondaryStyle} to={`/account/ask-vista?category=precis&context=precis:${chapter.id}&attempt=${attempt}`}>Ask about this method</Link>}</>}
+        {chapter && <><ChapterBody chapter={chapter} />{['1','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','19','21','22'].includes(chapter.id) && <Link className={secondaryStyle} to={`/account/precis?view=guide&chapter=${chapter.id}&attempt=${attempt}`}>Learn this chapter with VISTA Guide</Link>}</>}
       </div>
     </div>
   )

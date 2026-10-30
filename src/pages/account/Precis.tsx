@@ -7,11 +7,13 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { useLearning } from '@/features/learning/api'
 import { panelStyle, primaryStyle, secondaryStyle, inputStyle } from '@/features/handwriting/styles'
 import { pakistanTime } from '@/features/membership/api'
 import { AccountPage } from './shared'
 import Course from '@/features/precis/Course'
+import Guide from '@/features/precis/Guide'
 import Practice, { SkillProfile } from '@/features/precis/Practice'
 import Composer from '@/features/precis/Composer'
 import History from '@/features/precis/History'
@@ -19,13 +21,15 @@ import Feedback, { WritingEvidence } from '@/features/precis/Feedback'
 import type { Detail, Overview, Progress } from '@/features/precis/api'
 const views = [
   ['home', 'Overview'],
-  ['course', 'Guided course'],
+  ['guide', 'Learn with VISTA Guide'],
+  ['course', 'Complete handbook'],
   ['skills', 'Skill practice'],
   ['write', 'Full practice'],
   ['timed', 'Timed practice'],
   ['review', 'Error review'],
 ]
 function Workspace() {
+  const proPaused = useProReleasePaused()
   const [params, setParams] = useSearchParams(),
     writing = params.get('writing'),
     version = params.get('version'),
@@ -102,10 +106,10 @@ function Workspace() {
           <div className="self-center rounded-2xl border border-white/15 p-5">
             <p className="text-xs text-slate-300">Full evaluation</p>
             <p className="mt-3 text-xl font-semibold">
-              {data.evaluation_enabled ? 'Source-bound feedback' : 'Not open yet'}
+              {data.evaluation_enabled && !proPaused ? 'Source-bound feedback' : 'Not open yet'}
             </p>
             <p className="mt-3 text-xs leading-6 text-slate-300">
-              {data.evaluation_enabled
+              {data.evaluation_enabled && !proPaused
                 ? 'Save your own draft, review its evidence, then revise independently.'
                 : 'Use the course, drills and saved drafts now. Personal meaning and title feedback is not open yet.'}
             </p>
@@ -219,12 +223,12 @@ function Workspace() {
             }}
             onVersion={(id) => setParams({ writing, version: id })}
           />
-          <Feedback
+          {!proPaused && <Feedback
             key={`feedback:${detail.data.version.id}`}
             detail={detail.data}
             skills={data.skills}
             active={active}
-          />
+          />}
           {active && (
             <div id="precis-rewrite" tabIndex={-1} className="scroll-mt-24">
               <Composer
@@ -239,6 +243,8 @@ function Workspace() {
             </div>
           )}
         </>
+      ) : active && view === 'guide' ? (
+        <Guide data={data} attempt={attempt} progress={progress.data} refresh={progress.refresh} />
       ) : active && view === 'course' ? (
         <Course data={data} attempt={attempt} progress={progress.data} refresh={progress.refresh} />
       ) : active && ['skills', 'review'].includes(view) ? (
@@ -301,9 +307,15 @@ function Workspace() {
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 className={primaryStyle}
+                to={`/account/precis?view=guide${attempt ? `&attempt=${attempt}` : ''}`}
+              >
+                Learn with VISTA Guide
+              </Link>
+              <Link
+                className={secondaryStyle}
                 to={`/account/precis?view=course${attempt ? `&attempt=${attempt}` : ''}`}
               >
-                Continue course
+                Complete handbook
               </Link>
               <Link
                 className={secondaryStyle}
@@ -365,7 +377,7 @@ function Workspace() {
           </section>
         </>
       )}
-      {!writing && (view === 'home' || !active) && attempt && (
+      {!writing && (view === 'home' || !active) && attempt && !proPaused && (
         <WritingEvidence key={attempt} attempt={attempt} />
       )}
       {!writing && (view === 'home' || !active) && progress.data && (
