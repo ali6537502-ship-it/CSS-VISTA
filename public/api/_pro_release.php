@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-// Owner release hold, 12 October 2026. Reopening requires a reviewed release.
+// Owner authorises the Précis Guide release on 30 October 2026.
+// All other Pro capabilities, external evaluation and payment collection remain paused.
 // The sole preview exception is the existing isolated CI database, never a cookie,
 // request header, student role or publicly writable configuration.
 function cssv_pro_release_paused(): bool {
@@ -16,6 +17,6 @@ function cssv_pro_release_require_open(): void {
 }
 
 function cssv_pro_release_student_endpoint(string $script): bool {
-    return in_array(basename($script), ['precis.php','precis-feedback.php','expression.php','skills.php','handwriting.php','handwriting-image.php','tutor.php','topics.php','ability.php','mentor.php','ai-usage.php'], true)
+    return in_array(basename($script), ['precis-feedback.php','expression.php','skills.php','handwriting.php','handwriting-image.php','tutor.php','topics.php','ability.php','mentor.php','ai-usage.php'], true)
         && basename(dirname($script)) === 'student';
 }
