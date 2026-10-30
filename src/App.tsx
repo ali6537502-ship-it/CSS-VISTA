@@ -248,7 +248,7 @@ export default function App() {
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
-        <Route path="/account/precis" element={<ProfileGate><ProGate feature="Précis Course" allowWhilePaused><S><AccountPrecis /></S></ProGate></ProfileGate>} />
+        <Route path="/account/precis" element={<ProfileGate><S><AccountPrecis /></S></ProfileGate>} />
         <Route path="/account/argumentation" element={<ProfileGate><S><AccountSkills feature="argument" /></S></ProfileGate>} />
         <Route path="/account/analytical-skills" element={<ProfileGate><S><AccountSkills feature="analysis" /></S></ProfileGate>} />
         <Route path="/account/essay-builder" element={<ProfileGate><S><AccountSkills feature="essay" /></S></ProfileGate>} />
