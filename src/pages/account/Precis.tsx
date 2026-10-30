@@ -8,7 +8,6 @@ import Guide from '@/features/precis/Guide'
 import type { Overview, Progress } from '@/features/precis/api'
 
 function PrecisCourse() {
-  const { user } = useAccount()
   const [params, setParams] = useSearchParams()
   const overview = useLearning<Overview>('precis.php')
   const attempt = params.get('attempt') || ''
