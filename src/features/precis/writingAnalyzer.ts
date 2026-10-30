@@ -206,7 +206,7 @@ export function analyzePrecisWriting({ original, draft, title, limit }: AnalyzeI
         certainty: rule.certainty || 'detected', label: rule.label,
         excerpt: match[0],
         explanation: rule.explanation, advice: rule.advice,
-        start: match.index, end: match.index + match[0].length, handbook: rule.handbook,
+        start: match.index ?? 0, end: (match.index ?? 0) + match[0].length, handbook: rule.handbook,
       })
     }
   }
@@ -239,7 +239,7 @@ export function analyzePrecisWriting({ original, draft, title, limit }: AnalyzeI
       add({
         id:rule.id, group:rule.group, certainty:rule.certainty || 'detected',
         label:rule.label, excerpt:excerptNear(draft,match,12), explanation:rule.explanation,
-        advice:rule.advice, start:match.index, end:match.index + match[0].length,
+        advice:rule.advice, start:match.index ?? 0, end:(match.index ?? 0) + match[0].length,
         handbook:rule.handbook,
       })
     }
