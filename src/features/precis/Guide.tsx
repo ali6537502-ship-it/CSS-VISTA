@@ -18,7 +18,7 @@ import {
 } from './guideModel'
 import type { Overview, Progress, Question } from './api'
 
-function OriginalBlock({ block }: { block: ReturnType<typeof handbookUnits>[number]['block'] }) {
+function OriginalBlock({ block }: { block: ReturnType<typeof handbookUnits>[number]['blocks'][number]['block'] }) {
   if (block.type === 'table') {
     return (
       <div
@@ -277,7 +277,7 @@ export default function Guide({
           Learn Précis at your own pace
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
-          Your complete handbook, in its original order: all {data.catalog.chapters.length} chapters and appendices.
+          Your complete handbook, in its original order: 22 chapters and three appendices.
           Choose how many days you want to study. Each day contains the original material,
           a short practice step and a clear place to continue.
         </p>
@@ -325,7 +325,7 @@ export default function Guide({
                 Your {chosenDays}-day course
               </h4>
               <p className="mt-2 text-xs leading-6 text-slate-600">
-                {units.length} original handbook reading sections, divided by amount of source material.
+                {units.length} original handbook lesson sections, divided by amount of source material.
                 No chapter is omitted or repeated.
               </p>
               <ol className="mt-4 grid max-h-72 gap-2 overflow-y-auto pr-1">
@@ -413,7 +413,9 @@ export default function Guide({
                     {unit.chapterTitle.replace(/^\d+\.\s*/, '')}
                   </h4>
                   <p className="mt-1 text-sm font-medium text-indigo-700">{unit.section}</p>
-                  <OriginalBlock block={unit.block} />
+                  <div className="space-y-5">
+                    {unit.blocks.map((item) => <OriginalBlock key={item.index} block={item.block} />)}
+                  </div>
                   {unit.chapterId === '2' && <p className="mt-4 text-xs leading-6 text-amber-800">
                     Examination details in the original handbook are identified as pending official verification.
                     Follow the current question instructions.
