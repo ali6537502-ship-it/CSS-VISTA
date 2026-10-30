@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/publish-oct-30-daily-pdf.yml'
-      - 'content/current-affairs-daily/2026/10/2026-10-30.source.txt.json'
+      - 'scripts/daily-pdf/sources/2026-10-30.pages.json'
       - 'scripts/daily-pdf/render-approved-pages.py'
   workflow_dispatch:
 
@@ -35,7 +35,7 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check reportlab==4.2.5
           python scripts/daily-pdf/render-approved-pages.py \
-            content/current-affairs-daily/2026/10/2026-10-30.source.txt.json \
+            scripts/daily-pdf/sources/2026-10-30.pages.json \
             /tmp/css-vista-daily-2026-10-30.pdf
       - name: Create hashed PDF and matching catalogue metadata
         run: |
