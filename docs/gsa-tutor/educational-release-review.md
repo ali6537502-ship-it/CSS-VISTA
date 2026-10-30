@@ -46,7 +46,7 @@
 | 26 | 25 | 4 | 3 |
 | 27 | 19 | 3 | 5 |
 | 28 | 15 | 3 | 57 |
-| **Total** | **250** | **31** | **108** |
+| **Total** | **250** | **31** | **111** |
 
 **Assessment gaps:** Chapters 2, 6, 7, 8, 11, 14, 20 and 23 have fewer than four source MCQs; Chapters 1, 2, 3, 6, 8, 10, 11, 12, 14, 15, 21 and 22 have no analytical model answer. Chapters 3, 8, 11, 12, 14, 15, 20, 21 and 25 have no direct in-chapter source link. This alone does not establish that the underlying science is incorrect; it means verification and assessment material are insufficiently documented.
 
