@@ -521,6 +521,7 @@ export default function Composer({
                 <textarea
                   rows={12}
                   maxLength={20000}
+                  spellCheck={true}
                   value={draft.text}
                   onChange={(e) => setDraft((d) => ({ ...d, text: e.target.value }))}
                   className={`${inputStyle} resize-y bg-white text-base leading-8`}
