@@ -9,7 +9,6 @@ export const homeFeaturePriority = [
   'exam-intelligence',
   'study-planner',
   'gsa-tutor',
-  'gsa-tutor',
   'css-subject-mcqs',
   'gk',
   'mpt',
@@ -67,7 +66,6 @@ export function sortHomeCardsByPriority<T extends HomeCard>(cards: T[]): T[] {
 export const defaultHomeCards: HomeCard[] = [
   { id: 'exam-intelligence', title: 'VISTA Exam Intelligence', desc: 'Your personal preparation command center', to: '/exam-intelligence', icon: 'ChartNoAxesCombined', visible: true, order: 0.25 },
   { id: 'gsa-tutor', title: 'GSA Tutor', desc: 'General Science interactive lessons and personalised study durations', to: '/gsa-tutor', icon: 'BookOpen', visible: true, order: 1.2 },
-  { id: 'gsa-tutor', title: 'GSA Tutor', desc: 'Interactive General Science lessons with a personalised timetable', to: '/gsa-tutor', icon: 'BookOpen', visible: true, order: 1.2 },
   { id: 'start-css', title: 'Start CSS', desc: 'Eligibility, stages and roadmap', to: '/start-css', icon: 'BookOpen', visible: true, order: 1 },
   { id: 'css-eligibility-calculator', title: 'CSS Age & Attempts Calculator', desc: 'Check FPSC age window and written chances', to: '/css-eligibility-calculator', icon: 'CalendarClock', visible: true, order: 1.1 },
   { id: 'mpt', title: 'CSS MPT', desc: 'Timed MCQ tests and mocks', to: '/mpt', icon: 'ClipboardList', visible: true, order: 2 },
