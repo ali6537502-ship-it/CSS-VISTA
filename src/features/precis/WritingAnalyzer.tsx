@@ -45,7 +45,7 @@ export default function WritingAnalyzer({ original, draft, title, limit }: Snaps
           <h3 className="mt-2 text-xl font-semibold">Check my Précis</h3>
           <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-600">
             Check grammar, punctuation, sentence length and compression. Review how the wording
-            relates to the original passage. No photo or external AI service is needed.
+            relates to the original passage. Work directly with your typed answer; every finding explains what to review.
           </p>
         </div>
         <button type="button" className={primaryStyle} disabled={!draft.trim()} onClick={check}>
