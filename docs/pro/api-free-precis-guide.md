@@ -32,6 +32,18 @@ A learner can replan from 14 to 30 days (or another supported duration). Previou
 
 The complete existing optional 30-day routine is still available as a handbook chapter and in the legacy guided course. This adaptive plan is an additional mode, not a destructive replacement for any previously saved legacy course.
 
+## Original-passage written answer analyser (typed answers only)
+
+This development branch now includes an optional **Check my Précis** panel in the existing full writing workspace and in the daily Guide's end-of-day written practice. The existing six owner-supplied teaching passages supply the source; longer schedules may reuse a passage and the interface says so. Students type a new précis and title in the existing Composer (no photograph or handwriting input), select **Analyse my answer**, and receive grouped, actionable feedback. Students can revise and run the checks again.
+
+The analyser is **fully in-browser**, with no external AI service, network request, secret key, backend model, or new membership charge. It does not send the draft to a grammar-provider API. Existing browser drafts continue to use the established account/attempt-specific draft keys; explicitly saving the writing uses the existing native PHP immutable writing version history. The generated findings are not saved or sold as examination evidence.
+
+Deterministic language checks currently include certain subject–verb agreement forms; verb forms after modals and `does`; common article and preposition mistakes; doubled comparatives; repeated words; common spelling errors; spaces, sentence-ending punctuation, capitalization and brackets; unusually long sentences; multiple paragraphs; and wordy phrases. A limited offline spelling list is explicitly not comprehensive. Review-only source checks include long direct copying; possible omitted contrast, conditions, causal relationships and qualifications; stronger claims not present in a qualified source; and numbers newly introduced into the draft. Exact word-limit compliance is distinguished from a nonbinding one-third teaching benchmark. Title prompts address missing, long and potentially unrepresentative titles.
+
+Every finding presents a quoted excerpt, a reason, a specific suggested action, and the relevant existing handbook chapter. **Detected** marks certain mechanically detectable patterns; **Check in context** flags possibilities. There is no fabricated overall mark, guaranteed plagiarism detection, full semantic equivalence, exhaustive grammar certification, or automatic validation of the central idea. The original model is never leaked through this checker before the existing two-revision owner-protected comparison route.
+
+Test suite: `tests/precisWritingAnalyzer.test.ts` runs through `npm run test:precis`, including grammar, spelling, structure, qualification, copied text, source-linked feedback and no-score controls. Browser verification remains required.
+
 ## Secure storage and migration
 
 - Existing native login, ProfileGate/ProGate pause, owner-scoped `preparation_attempts`, PHP/PDO account checks, idempotent receipts, first-answer history and CSRF remain in control.
