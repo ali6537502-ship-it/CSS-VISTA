@@ -40,6 +40,7 @@ try{
    const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')))
    assert.ok(state.completed['c1-s1-1'])
    assert.ok(state.drafts['c1-s1-1'])
+   await page.locator('[data-view="course"]').last().click()
    assert.ok(await page.locator('.day-lesson.done').count()===1)
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)
    assert.ok(overflow<=2,'unwanted horizontal scroll at '+width+': '+overflow)
