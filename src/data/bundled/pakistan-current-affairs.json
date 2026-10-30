@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 255,
+  "count": 260,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1784,6 +1784,41 @@
     {
       "id": "pakistan-current-affairs-20261029-pak-turkiye-makkah-diplomacy",
       "text": "Pakistan's prime minister reaffirmed the Makkah Joint Defence Agreement with Türkiye and Saudi Arabia on 29 October 2026; the accord was signed on 7 August.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-fiscal-surplus",
+      "text": "Pakistan's fiscal surplus in the opening months of FY2026–27 was reported at 0.8% of GDP.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-smeconnect-launch",
+      "text": "SBP announced its SMEConnect financing-application portal on 29 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-kp-pti-notification",
+      "text": "PTI reaffirmed Sohail Afridi as its choice for KP chief minister on 29 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261030-pak-singapore-talks",
+      "text": "Pakistan and Singapore discussed the possible resumption of direct flights on 30 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261030-pak-sbp-omo",
+      "text": "SBP injected approximately Rs1.076 trillion through conventional and Islamic OMOs on 30 October 2026.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
