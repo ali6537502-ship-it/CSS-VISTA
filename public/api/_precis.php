@@ -74,7 +74,7 @@ function cssv_precis_mutation(PDO $pdo,string $user,array $body): array {
   cssv_learning_owner_lock($pdo,$user);
   $q=$pdo->prepare('SELECT payload_hash,result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);
   if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This request identity was already used for different work.');$pdo->commit();return json_decode($prior['result'],true,32,JSON_THROW_ON_ERROR);}
-  cssv_pro_require_active($pdo,$user);
+  cssv_pro_require_active($pdo,$user,'precis');
   if($action==='guide_setup'||$action==='guide_mark'){
    $attempt=cssv_pro_id($body['attempt_id'] ?? null);cssv_learning_attempt($pdo,$attempt,$user);
    $expected=$body['expected_version'] ?? null;
