@@ -39,10 +39,10 @@ test('preserves qualification and contrast as review prompts rather than invente
 
 test('checks explicit word limit and title without inventing an official score', () => {
   const result = check('Cities need adequate planning and public services to support development.', '', 4)
-  assert.equal(result.draftWords, 11)
+  assert.equal(result.draftWords, 10)
   assert.ok(codes(result).includes('explicit-length'))
   assert.ok(codes(result).includes('no-title'))
-  assert.ok(result.findings.find((f)=>f.id==='explicit-length')!.advice.includes('7 words'))
+  assert.ok(result.findings.find((f)=>f.id==='explicit-length')!.advice.includes('6 words'))
   assert.equal(Object.hasOwn(result,'score'),false)
 })
 
