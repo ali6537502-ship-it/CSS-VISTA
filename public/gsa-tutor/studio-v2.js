@@ -125,6 +125,12 @@ function lesson(s,c){
  }
  return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button><span class="muted tiny"> / '+safe(c.part)+' / Chapter '+c.id+' / Lesson '+safe(s.number)+'</span></div><p class="eyebrow">Original source · '+s.words+' words · General Science Part I</p><h1 class="lesson-title">'+safe(s.title)+'</h1><div class="progress-meta"><span>'+current+' of '+total+' learning steps</span><span>'+Math.round(current/total*100)+'%</span></div><div class="track"><div class="fill" style="width:'+(current/total*100)+'%"></div></div>'+content+'<div class="flex"><button class="btn small" data-action="fullsource">Complete reference</button><button class="btn small" data-action="bookmark">'+(saved.bookmarks?.[s.id]?'Remove bookmark':'Bookmark')+'</button><button class="btn small" data-action="markreview">Add to revision</button></div><p class="tiny muted">Content is drawn from the CSS VISTA General Science manuscript. Questions and source statements remain subject to editorial review.</p></section>';
 }
+function finishedView(){
+ const index=lessons.findIndex(s=>s.id===ui.id),next=lessons.slice(index+1).find(s=>!isDone(s.id))||lessons.slice(0,index+1).find(s=>!isDone(s.id));
+ const rating=saved.completed?.[ui.id]?.selfRating||'';
+ const status=rating==='gotit'?'Lesson completed':'Lesson recorded for revision';
+ return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button></div><div class="panel accent" style="margin-top:30px"><p class="eyebrow">Session saved</p><h1>'+status+'</h1><p class="subtitle">'+safe(byId.get(ui.id)?.title||'')+'</p><p class="muted">'+(rating==='gotit'?'You marked this concept as understood. Test your recall again later.':'It remains in your revision notebook, ready for another attempt.')+'</p><div class="stat-row" style="margin:25px 0">'+pillProgress()+'</div><div class="flex">'+(next?'<button class="btn primary" data-lesson="'+safe(next.id)+'">Continue: '+safe(next.title)+' →</button>':'<button class="btn primary" data-view="review">Review completed lessons</button>')+'<button class="btn" data-view="course">My timetable</button></div></div></section>';
+}
 function chapterOverview(c){
  const completed=c.sections.filter(s=>isDone(s.id)).length;
  return '<section class="page"><div class="breadcrumb"><button data-view="library">← All chapters</button></div><p class="eyebrow">'+safe(c.part)+' · Chapter '+c.id+'</p><h1>'+safe(c.title)+'</h1><p class="subtitle">Study the complete explanations in order, or return to a specific topic. Each lesson includes source reading, an understanding check where questions are available, and a written recall activity.</p><div class="panel accent"><div class="spread"><div><strong>'+completed+' of '+c.sections.length+' lessons completed</strong><div class="track" style="width:220px"><div class="fill" style="width:'+(completed/c.sections.length*100)+'%"></div></div></div><button class="btn primary" data-practice="'+c.id+'">Chapter practice · '+c.questions.length+' MCQs</button></div></div><div class="panel"><h2>Lessons in this chapter</h2>'+c.sections.map(sec=>'<div class="list-row"><div><p class="eyebrow">Lesson '+safe(sec.number)+'</p><h3>'+safe(sec.title)+'</h3><p>'+nwords(sec.text)+' source words · '+(isDone(sec.id)?'Completed':'Not yet completed')+'</p></div><button class="btn small" data-lesson="'+safe(sec.id)+'">'+(isDone(sec.id)?'Repeat':'Study')+'</button></div>').join('')+'</div></section>';
@@ -156,7 +162,7 @@ function chooseGrade(g){
  const id=ui.id;const at=new Date().toISOString();
  saved.completed[id]={at,selfRating:g};
  if(g==='gotit')delete saved.revisit[id];else saved.revisit[id]={at,kind:'lesson'};
- ui.grade=g;notify();ui.view='course';draw();
+ ui.grade=g;notify();ui.view='finished';draw();
 }
 function saveQuizAnswer(value){const c=chapterCache.get(ui.chapter);const q=c?.questions?.[ui.qindex];if(!q||ui.selected)return;ui.selected=value;saved.quizHistory??={};saved.quizHistory[q.id]={at:new Date().toISOString(),selected:value,correct:value===q.answer};if(value!==q.answer){const id=c.sections[0]?.id;if(id)saved.revisit[id]={at:new Date().toISOString(),kind:'question',questionId:q.id}}notify();draw()}
 function saveBookmark(){const id=ui.id;saved.bookmarks??={};saved.bookmarkRemoved??={};if(saved.bookmarks[id]){delete saved.bookmarks[id];saved.bookmarkRemoved[id]={at:new Date().toISOString()}}else{saved.bookmarks[id]={at:new Date().toISOString()};delete saved.bookmarkRemoved[id]}notify();draw()}
@@ -178,6 +184,7 @@ function draw(){
   const item=byId.get(ui.id),ch=item&&chapterCache.get(item.chapter),s=ch?.sections.find(x=>x.id===ui.id);
   content+=s?lesson({...s,words:item.words},ch):'<div class="spinner">Select a lesson from your course.</div>';
  }
+ if(ui.view==='finished')content+=finishedView();
  if(ui.view==='chapterIndex')content+=chapterOverview(chapterCache.get(ui.chapter));
  if(ui.view==='chapter')content+=chapterPractice(chapterCache.get(ui.chapter));
  if(ui.view==='written'){const c=chapterCache.get(ui.chapter);content+=written(c,c.analytical.find(x=>x.id===ui.opening))}
