@@ -44,6 +44,7 @@ test('every duration retains all 141 unique lessons',async()=>{
    const input=p.document.getElementById('custom-days')
    input.value=String(n)
    p.click('[data-action="saveplan"]')
+   if(p.document.querySelector('[data-action="expandplan"]'))p.click('[data-action="expandplan"]')
    const days=[...p.document.querySelectorAll('.day')]
    assert.equal(days.length,n)
    const ids=[...p.document.querySelectorAll('.day-lesson')].map(el=>el.dataset.lesson)
