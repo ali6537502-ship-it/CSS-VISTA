@@ -53,6 +53,13 @@ test('warns on copied extended sequences but does not treat every shared phrase 
   assert.ok(!codes(short).includes('source-copy'))
 })
 
+test('offers selective offline spelling suggestions without claiming certainty', () => {
+  const result = check('Goverment recieve criticism becuase services is weak.')
+  assert.ok(codes(result).includes('spelling-goverment'))
+  assert.ok(codes(result).includes('spelling-recieve'))
+  assert.equal(result.findings.find((f)=>f.id==='spelling-becuase')?.certainty,'review')
+})
+
 test('avoids overclaim when original contains an identical absolute statement', () => {
   const result = analyzePrecisWriting({
     original:'Governance always requires fair application of rules.',
