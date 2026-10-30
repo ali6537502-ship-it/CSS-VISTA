@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { analyzePrecisWriting } from '../src/features/precis/writingAnalyzer.ts'
 
 const original = 'Rapid urban growth increases pressure on housing, transport, sanitation, schools, hospitals, and employment. When cities expand without adequate planning, congestion, pollution, inequality, and social tension may increase. Urbanization contributes to development only when infrastructure and public services keep pace with population growth.'
@@ -75,4 +76,30 @@ test('empty answer receives an actionable prompt, not a made-up evaluation', () 
   const result = check('  ', '', 10)
   assert.deepEqual(codes(result),['empty-draft'])
   assert.equal(result.draftWords,0)
+})
+
+test('accepted owner-handbook worked models do not trigger false source or length alarms', () => {
+  const imported = readFileSync(new URL('../public/api/_precis_handbook.php', import.meta.url), 'utf8')
+  const embedded = imported.match(/<<<'HANDBOOK'\\n([\\s\\S]*?)\\nHANDBOOK/u)
+  assert.ok(embedded, 'Owner handbook catalogue must remain readable')
+  const handbook = JSON.parse(embedded[1]) as {
+    passages: { id: string; text: string; model: string; model_title: string; limit: number | null }[]
+  }
+  assert.equal(handbook.passages.length, 6)
+  for (const example of handbook.passages) {
+    const result = analyzePrecisWriting({
+      original: example.text,
+      draft: example.model,
+      title: example.model_title,
+      limit: example.limit,
+    })
+    const misleading = result.findings.filter((f) => ['length-review','contrast-review','causal-review'].includes(f.id))
+    assert.deepEqual(misleading, [], 'Spurious review warning for ' + example.id)
+  }
+})
+
+test('substantially uncompressed writing still triggers a cautious length review', () => {
+  const result = check(original, 'Urban Growth and Planning')
+  assert.ok(codes(result).includes('length-review'))
+  assert.equal(result.findings.find((f) => f.id === 'length-review')?.certainty, 'review')
 })
