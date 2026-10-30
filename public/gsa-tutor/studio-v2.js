@@ -125,6 +125,10 @@ function lesson(s,c){
  }
  return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button><span class="muted tiny"> / '+safe(c.part)+' / Chapter '+c.id+' / Lesson '+safe(s.number)+'</span></div><p class="eyebrow">Original source · '+s.words+' words · General Science Part I</p><h1 class="lesson-title">'+safe(s.title)+'</h1><div class="progress-meta"><span>'+current+' of '+total+' learning steps</span><span>'+Math.round(current/total*100)+'%</span></div><div class="track"><div class="fill" style="width:'+(current/total*100)+'%"></div></div>'+content+'<div class="flex"><button class="btn small" data-action="fullsource">Complete reference</button><button class="btn small" data-action="bookmark">'+(saved.bookmarks?.[s.id]?'Remove bookmark':'Bookmark')+'</button><button class="btn small" data-action="markreview">Add to revision</button></div><p class="tiny muted">Content is drawn from the CSS VISTA General Science manuscript. Questions and source statements remain subject to editorial review.</p></section>';
 }
+function chapterOverview(c){
+ const completed=c.sections.filter(s=>isDone(s.id)).length;
+ return '<section class="page"><div class="breadcrumb"><button data-view="library">← All chapters</button></div><p class="eyebrow">'+safe(c.part)+' · Chapter '+c.id+'</p><h1>'+safe(c.title)+'</h1><p class="subtitle">Study the complete explanations in order, or return to a specific topic. Each lesson includes source reading, an understanding check where questions are available, and a written recall activity.</p><div class="panel accent"><div class="spread"><div><strong>'+completed+' of '+c.sections.length+' lessons completed</strong><div class="track" style="width:220px"><div class="fill" style="width:'+(completed/c.sections.length*100)+'%"></div></div></div><button class="btn primary" data-practice="'+c.id+'">Chapter practice · '+c.questions.length+' MCQs</button></div></div><div class="panel"><h2>Lessons in this chapter</h2>'+c.sections.map(sec=>'<div class="list-row"><div><p class="eyebrow">Lesson '+safe(sec.number)+'</p><h3>'+safe(sec.title)+'</h3><p>'+nwords(sec.text)+' source words · '+(isDone(sec.id)?'Completed':'Not yet completed')+'</p></div><button class="btn small" data-lesson="'+safe(sec.id)+'">'+(isDone(sec.id)?'Repeat':'Study')+'</button></div>').join('')+'</div></section>';
+}
 function chapterPractice(c){
  const q=c.questions[ui.qindex],selected=ui.selected;
  const problem=q?'<p class="eyebrow">Question '+(ui.qindex+1)+' of '+c.questions.length+' · '+safe(q.id)+'</p><h2>'+safe(q.prompt)+'</h2><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(selected?(k===q.answer?'correct':k===selected?'wrong':''):'')+'" data-quiz-choice="'+k+'" '+(selected?'disabled':'')+'><b>'+k+'</b>'+safe(v)+'</button>').join('')+'</div>'+(selected?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct':'Check the reasoning')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><span class="muted tiny">'+(Object.keys(saved.quizHistory||{}).filter(id=>id.startsWith('D'+String(c.id).padStart(2,'0')+'-')).length)+' answers recorded in this chapter</span><button class="btn primary" data-action="nextquestion" '+(!selected?'disabled':'')+'>'+(ui.qindex===c.questions.length-1?'View results':'Next question')+' →</button></div>':c.questions.length?'<div class="panel accent"><h2>Chapter practice complete</h2><p class="muted">'+c.questions.filter(q=>saved.quizHistory?.[q.id]?.correct).length+' correct answers in the saved chapter question records out of '+c.questions.length+' questions.</p><button class="btn primary" data-action="restartquestions">Repeat chapter practice</button></div>':'<p>There are no source MCQs for this chapter.</p>';
@@ -142,10 +146,10 @@ async function openLesson(id){
  ui.id=id;ui.view='lesson';ui.stage='learn';ui.beat=0;ui.selected='';ui.grade='';ui.reveal=false;ui.draft=saved.drafts?.[id]||'';
  saved.last=id;notify();ui.busy=false;draw();scrollTo({top:0,behavior:'instant'});
 }
-async function openChapter(id){
+async function openChapter(id,view='chapterIndex'){
  ui.busy=true;ui.error='';draw();
  try{await loadChapter(id)}catch(e){ui.error=e.message;ui.busy=false;draw();return}
- ui.view='chapter';ui.chapter=Number(id);ui.qindex=0;ui.selected='';ui.reveal=false;ui.busy=false;draw();scrollTo({top:0,behavior:'instant'});
+ ui.view=view;ui.chapter=Number(id);ui.qindex=0;ui.selected='';ui.reveal=false;ui.busy=false;draw();scrollTo({top:0,behavior:'instant'});
 }
 function chooseGrade(g){
  if(!['gotit','partial','again'].includes(g))return;
@@ -174,6 +178,7 @@ function draw(){
   const item=byId.get(ui.id),ch=item&&chapterCache.get(item.chapter),s=ch?.sections.find(x=>x.id===ui.id);
   content+=s?lesson({...s,words:item.words},ch):'<div class="spinner">Select a lesson from your course.</div>';
  }
+ if(ui.view==='chapterIndex')content+=chapterOverview(chapterCache.get(ui.chapter));
  if(ui.view==='chapter')content+=chapterPractice(chapterCache.get(ui.chapter));
  if(ui.view==='written'){const c=chapterCache.get(ui.chapter);content+=written(c,c.analytical.find(x=>x.id===ui.opening))}
  root.innerHTML=heading()+content;
@@ -185,7 +190,7 @@ root.addEventListener('click',async e=>{
  if(t.dataset.view){ui.view=t.dataset.view;ui.error='';draw();scrollTo({top:0,behavior:'instant'});return}
  if(t.dataset.lesson){await openLesson(t.dataset.lesson);return}
  if(t.dataset.chapter){await openChapter(t.dataset.chapter);return}
- if(t.dataset.practice){await openChapter(t.dataset.practice);return}
+ if(t.dataset.practice){await openChapter(t.dataset.practice,'chapter');return}
  if(t.dataset.analytical){ui.opening=t.dataset.analytical;ui.view='written';ui.reveal=false;draw();return}
  if(t.dataset.days){ui.setupDays=Number(t.dataset.days);draw();return}
  if(t.dataset.month!==undefined){ui.month=Number(t.dataset.month);draw();return}
