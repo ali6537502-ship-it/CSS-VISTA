@@ -68,7 +68,14 @@ export type Detail = {
   context: Context | null
   model: { text: string; title: string; note: string } | null
 }
+export type GuidePlan = {
+  target_days: number
+  version: number
+  completed_units: string[]
+  handbook_sha: string
+}
 export type Progress = {
+  guide_plan: GuidePlan | null
   version: number
   current_day: number
   current_chapter: number
