@@ -27,22 +27,30 @@ function cssv_precis_guide_plan(PDO $pdo,string $user,string $attempt): ?array {
   'completed_units'=>json_decode($row['completed_units'],true,512,JSON_THROW_ON_ERROR),
   'handbook_sha'=>$row['handbook_sha']];
 }
-/** The imported handbook is authoritative; heading blocks are labels, not checklist entries. */
-function cssv_precis_known_guide_unit(string $id): bool {
- if(!preg_match('/^([1-9][0-9]?):([0-9]{1,3})$/D',$id,$parts))return false;
+/** Identical heading-boundary and three-block grouping to the browser course. */
+function cssv_precis_guide_unit_ids(): array {
+ static $ids=null;if($ids!==null)return $ids;$ids=[];
  foreach(cssv_precis_handbook()['chapters'] as $chapter){
-  if($chapter['id']!==$parts[1])continue;
-  $block=$chapter['blocks'][(int)$parts[2]] ?? null;
-  return is_array($block)&&in_array($block['type'] ?? '',['paragraph','bullet','table'],true);
+  $start=null;$groupSize=0;
+  foreach($chapter['blocks'] as $index=>$block){
+   if(($block['type'] ?? null)==='heading'){
+    if($groupSize>0)$ids[]=$chapter['id'].':'.$start;
+    $start=null;$groupSize=0;continue;
+   }
+   if(!in_array($block['type'] ?? null,['paragraph','bullet','table'],true))continue;
+   if($groupSize===0)$start=$index;
+   $groupSize++;
+   if($groupSize>=3){$ids[]=$chapter['id'].':'.$start;$start=null;$groupSize=0;}
+  }
+  if($groupSize>0)$ids[]=$chapter['id'].':'.$start;
  }
- return false;
+ return $ids;
+}
+function cssv_precis_known_guide_unit(string $id): bool {
+ return in_array($id,cssv_precis_guide_unit_ids(),true);
 }
 function cssv_precis_guide_unit_count(): int {
- $count=0;
- foreach(cssv_precis_handbook()['chapters'] as $chapter)
-  foreach($chapter['blocks'] as $block)
-   if(in_array($block['type'] ?? '',['paragraph','bullet','table'],true))$count++;
- return $count;
+ return count(cssv_precis_guide_unit_ids());
 }
 function cssv_precis_progress(PDO $pdo,string $user,string $attempt): array {
  cssv_learning_attempt($pdo,$attempt,$user);$q=$pdo->prepare('SELECT version,current_day,current_chapter,completed FROM precis_progress WHERE attempt_id=? AND user_id=?');$q->execute([$attempt,$user]);$row=$q->fetch();
