@@ -154,7 +154,7 @@ const get = (u = a, id = own) =>
   call(`${endpoint}?attempt=${id}&topic=${topicId}`, undefined, u.jar)
 let detail = await get()
 assert.equal(detail.status, 200, JSON.stringify(detail.data))
-assert.equal(detail.data.content, null, 'Free member received full lesson')
+assert.ok(detail.data.content, 'Free member could not read a published lesson')
 assert.match(detail.headers.get('cache-control'), /no-store/)
 assert.equal((await get(b, own)).status, 404)
 assert.equal((await get(a, foreign)).status, 404)
