@@ -1,4 +1,5 @@
 name: Publish 30 October approved Current Affairs PDF
+# Source lives outside the catalogue; only dated JSON metadata and PDF enter it.
 
 on:
   push:
