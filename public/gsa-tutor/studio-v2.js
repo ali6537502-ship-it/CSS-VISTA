@@ -177,6 +177,8 @@ function draw(){
  if(ui.view==='chapter')content+=chapterPractice(chapterCache.get(ui.chapter));
  if(ui.view==='written'){const c=chapterCache.get(ui.chapter);content+=written(c,c.analytical.find(x=>x.id===ui.opening))}
  root.innerHTML=heading()+content;
+ // Keep one natural page scrollbar when embedded in My CSS VISTA.
+ if(window.parent!==window)window.requestAnimationFrame(()=>window.parent.postMessage({type:'cssvista:gsa:height',height:Math.ceil(document.documentElement.scrollHeight)+24},location.origin));
 }
 root.addEventListener('click',async e=>{
  const t=e.target.closest('button');if(!t||ui.busy)return;
