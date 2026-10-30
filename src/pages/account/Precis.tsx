@@ -12,6 +12,7 @@ import { panelStyle, primaryStyle, secondaryStyle, inputStyle } from '@/features
 import { pakistanTime } from '@/features/membership/api'
 import { AccountPage } from './shared'
 import Course from '@/features/precis/Course'
+import Guide from '@/features/precis/Guide'
 import Practice, { SkillProfile } from '@/features/precis/Practice'
 import Composer from '@/features/precis/Composer'
 import History from '@/features/precis/History'
@@ -19,7 +20,8 @@ import Feedback, { WritingEvidence } from '@/features/precis/Feedback'
 import type { Detail, Overview, Progress } from '@/features/precis/api'
 const views = [
   ['home', 'Overview'],
-  ['course', 'Guided course'],
+  ['guide', 'Learn with VISTA Guide'],
+  ['course', 'Complete handbook'],
   ['skills', 'Skill practice'],
   ['write', 'Full practice'],
   ['timed', 'Timed practice'],
@@ -239,6 +241,8 @@ function Workspace() {
             </div>
           )}
         </>
+      ) : active && view === 'guide' ? (
+        <Guide data={data} attempt={attempt} progress={progress.data} refresh={progress.refresh} />
       ) : active && view === 'course' ? (
         <Course data={data} attempt={attempt} progress={progress.data} refresh={progress.refresh} />
       ) : active && ['skills', 'review'].includes(view) ? (
@@ -301,9 +305,15 @@ function Workspace() {
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 className={primaryStyle}
+                to={`/account/precis?view=guide${attempt ? `&attempt=${attempt}` : ''}`}
+              >
+                Learn with VISTA Guide
+              </Link>
+              <Link
+                className={secondaryStyle}
                 to={`/account/precis?view=course${attempt ? `&attempt=${attempt}` : ''}`}
               >
-                Continue course
+                Complete handbook
               </Link>
               <Link
                 className={secondaryStyle}
