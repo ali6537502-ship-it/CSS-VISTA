@@ -172,8 +172,11 @@ export default function Guide({
   const units = useMemo(() => handbookUnits(data.catalog?.chapters || []), [data.catalog])
   const storedPlan = progress?.guide_plan
   const savedDays = storedPlan?.target_days
+  const [previewDays, setPreviewDays] = useState<number | null>(null)
+  const [previewCompleted, setPreviewCompleted] = useState<string[]>([])
+  const effectiveDays = savedDays ?? previewDays
   const [paceOverride, setDaysInput] = useState<string | null>(null)
-  const daysInput = paceOverride ?? String(savedDays ?? 14)
+  const daysInput = paceOverride ?? String(effectiveDays ?? 14)
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState('')
   const [changePace, setChangePace] = useState(false)
@@ -187,10 +190,10 @@ export default function Guide({
     [units, chosenDays, validDays],
   )
   const schedule = useMemo(
-    () => (savedDays ? buildStudyDays(units, savedDays) : []),
-    [units, savedDays],
+    () => (effectiveDays ? buildStudyDays(units, effectiveDays) : []),
+    [units, effectiveDays],
   )
-  const completed = storedPlan?.completed_units || []
+  const completed = storedPlan?.completed_units || previewCompleted
   const covered = coveredCount(units, completed)
   const fallbackDay = schedule.length ? firstPendingDay(schedule, completed) : 1
   const dayNumber = safeDay(params.get('day'), schedule.length, fallbackDay)
@@ -212,7 +215,16 @@ export default function Guide({
     nav({ day: String(day), unit_step: '0' })
   }
   async function savePace() {
-    if (!user || !attempt || !validDays || busy) return
+    if (!validDays || busy) return
+    if (!attempt) {
+      setPreviewDays(chosenDays)
+      setPreviewCompleted([])
+      setChangePace(false)
+      setDaysInput(null)
+      nav({ day: '1', unit_step: '0' })
+      return
+    }
+    if (!user) return
     const body = {
       action: 'guide_setup',
       attempt_id: attempt,
@@ -234,7 +246,13 @@ export default function Guide({
     } finally { setBusy(false) }
   }
   async function markRead() {
-    if (!user || !attempt || !storedPlan || !unit || busy) return
+    if (!unit || busy) return
+    if (!attempt) {
+      setPreviewCompleted((previous) => previous.includes(unit.id) ? previous : [...previous, unit.id])
+      nav({ day: String(dayNumber), unit_step: String(step + 1) })
+      return
+    }
+    if (!user || !storedPlan) return
     const body = {
       action: 'guide_mark',
       attempt_id: attempt,
@@ -262,7 +280,7 @@ export default function Guide({
     if (step > 0) nav({ unit_step: String(step - 1) })
     else if (dayNumber > 1) goDay(dayNumber - 1)
   }
-  const choosePace = !storedPlan || changePace
+  const choosePace = !effectiveDays || changePace
 
   if (!data.catalog) return (
     <section className={panelStyle}>Your handbook is currently unavailable. Your saved work remains protected.</section>
@@ -343,10 +361,10 @@ export default function Guide({
           {storedPlan && <p className="mt-4 text-sm leading-6 text-slate-600">
             Changing duration reorganises the schedule, but keeps your {covered} completed reading sections.
           </p>}
-          {!attempt && <p className="mt-4 text-sm text-amber-800">Select a preparation attempt above to save your course.</p>}
+          {!attempt && <p className="mt-4 text-sm text-slate-600">You can read without a preparation attempt. Choose an account attempt above to save progress, completed exercises and writing revisions.</p>}
           <div className="mt-5 flex flex-wrap gap-3">
-            <button type="button" className={primaryStyle} disabled={!attempt || !validDays || busy} onClick={() => void savePace()}>
-              {busy ? 'Saving…' : storedPlan ? 'Update my study plan' : 'Create my study plan'}
+            <button type="button" className={primaryStyle} disabled={!validDays || busy} onClick={() => void savePace()}>
+              {busy ? 'Saving…' : !attempt ? 'Start reading' : storedPlan ? 'Update my study plan' : 'Create my study plan'}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
             {storedPlan && (
@@ -357,7 +375,7 @@ export default function Guide({
         </section>
       )}
 
-      {storedPlan && !changePace && today && (
+      {effectiveDays && !changePace && today && (
         <div className="grid items-start gap-5 lg:grid-cols-[250px_minmax(0,1fr)]">
           <aside className={panelStyle}>
             <div className="flex items-center justify-between gap-2">
@@ -372,7 +390,7 @@ export default function Guide({
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100" aria-hidden="true">
               <div className="h-full rounded-full bg-indigo-600" style={{ width: `${Math.round((covered / Math.max(1, units.length)) * 100)}%` }} />
             </div>
-            <p className="mt-3 text-xs leading-6 text-slate-500">Reading completed is not a score for writing proficiency.</p>
+            <p className="mt-3 text-xs leading-6 text-slate-500">{attempt ? 'Reading completed is not a score for writing proficiency.' : 'This reading session is not saved to your account. Choose a preparation attempt to save progress.'}</p>
             <details className="mt-5" open>
               <summary className="cursor-pointer text-sm font-semibold">Your daily schedule</summary>
               <nav aria-label="Choose a study day" className="mt-3 grid max-h-80 gap-1 overflow-y-auto">
@@ -443,8 +461,8 @@ export default function Guide({
                   <p className="mt-3 text-sm leading-7 text-slate-600">
                     You can revisit any section. This question comes from the existing Précis practice bank.
                   </p>
-                  {dayQuestion ? <DailyCheck key={`${attempt}:${dayNumber}:${dayQuestion.id}`} question={dayQuestion} attempt={attempt} refresh={refresh} /> :
-                    <p className="mt-4 text-sm text-slate-600">No fixed-answer question is available for this section yet. Continue to the writing workspace for independent practice.</p>}
+                  {dayQuestion && attempt ? <DailyCheck key={`${attempt}:${dayNumber}:${dayQuestion.id}`} question={dayQuestion} attempt={attempt} refresh={refresh} /> :
+                    <p className="mt-4 text-sm text-slate-600">{!attempt ? 'Select a preparation attempt above to record answers to practice questions. You can still type and check a written précis below.' : 'No fixed-answer question is available for this section yet. Continue to the writing workspace for independent practice.'}</p>}
                   {writingPassage && (
                     <section className="mt-6 rounded-2xl border border-slate-200 p-4 sm:p-5">
                       <h5 className="font-semibold">Written Précis practice</h5>
