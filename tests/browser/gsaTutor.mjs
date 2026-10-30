@@ -18,6 +18,7 @@ try{
    assert.equal(fetched.filter(x=>x.includes('chapter-')).length,0,'do not download chapters until they are needed')
    await page.locator('[data-days="8"]').click()
    await page.locator('[data-action="saveplan"]').click()
+   await page.locator('[data-action="expandplan"]').click()
    assert.equal(await page.locator('.day').count(),8)
    assert.equal(await page.locator('.day-lesson').count(),141)
    await page.locator('.day-lesson').first().click()
