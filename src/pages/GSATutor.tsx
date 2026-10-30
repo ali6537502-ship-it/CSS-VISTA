@@ -103,6 +103,7 @@ export default function GSATutorPage() {
         </div>
       </div>
       <iframe
+        key={user?.id ?? (loading ? "session-loading" : "guest")}
         ref={iframeRef}
         title="CSS VISTA GSA Tutor interactive lessons and personal course schedule"
         src="/gsa-tutor/studio.html"
