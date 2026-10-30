@@ -37,7 +37,7 @@ const extra: Feature[] = [
     ['tutor', 'Ask VISTA', '/account/ask-vista'], ['essay-builder', 'Essay Themes Builder', '/account/essay-builder'],
     ['argumentation', 'Argumentation Skills Builder', '/account/argumentation'], ['analysis-builder', 'Analytical Skills Builder', '/account/analytical-skills'],
     ['preparation', 'My Preparation', '/account/preparation'], ['ai-usage', 'AI Usage', '/account/ai-usage'],
-  ].map(([id,title,to]) => ({ id,title,to,description: `Open ${title.toLowerCase()}.`, category: 'Preparation', keywords: 'writing practice learning' })),
+  ].map(([id,title,to]) => ({ id,title,to,description: `Open ${title.toLowerCase()}.`, category: 'Preparation', keywords: id === 'precis' ? 'precis précis english composition handbook mentor writing practice learning' : 'writing practice learning' })),
 ]
 export const features: Feature[] = [...extra, ...defaultHomeCards.map(f => ({ id:f.id, title: f.title, description:f.desc, to:f.to, category: /quiz|mcq|gk|mock|writing|timer|challenge|mistake|essay|grammar|test/i.test(f.id) ? 'Practice' : 'Resources', keywords:f.id.replaceAll('-', ' ') }))]
   .filter((f,i,all) => all.findIndex(x => x.to === f.to) === i)
