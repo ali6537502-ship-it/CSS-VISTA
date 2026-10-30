@@ -48,5 +48,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Check existing TypeScript project including lucky draw
         run: npm run typecheck
+      - name: Build the production artifact required by route verification
+        run: npm run build:hostinger:strict
       - name: Verify route integrity
         run: npm run audit:routes

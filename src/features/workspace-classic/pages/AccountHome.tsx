@@ -1,0 +1,291 @@
+import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
+import { Link, useSearchParams } from 'react-router'
+import { ArrowRight, BookOpen, Bookmark, Calculator, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, MessageCircle, Newspaper, PenLine, ScanLine, Sparkles, Target, UserRound } from 'lucide-react'
+import { useAccount } from '@/lib/accountContext'
+import MembershipSummary from '@/features/membership/MembershipSummary'
+import AccountSections, { ProBadge } from '@/features/membership/AccountSections'
+import { getState, getStats } from '@/lib/store'
+import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
+import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
+import { dailyEnglishStatus } from '@/components/DailyEnglishPanel'
+import { essayThemeActivity } from '@/features/essay-themes/progress'
+import { briefingRoot, displayDate, latestRange, overviewSchema, pakistanDate } from '@/features/current-affairs/model'
+import { useBriefing } from '@/features/current-affairs/useBriefing'
+import { AuthenticatedAccountAd } from '@/components/Ads'
+import { DashboardMptCard } from '@/components/mpt/DashboardMptCard'
+import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
+
+function formatMinutes(minutes: number) {
+  if (minutes < 60) return `${minutes}m`
+  const hours = Math.floor(minutes / 60)
+  const remainder = minutes % 60
+  return remainder ? `${hours}h ${remainder}m` : `${hours}h`
+}
+
+function daysRemaining(examDate?: string) {
+  if (!examDate) return null
+  const target = new Date(`${examDate}T12:00:00`)
+  if (Number.isNaN(target.getTime())) return null
+  return Math.max(0, Math.ceil((target.getTime() - Date.now()) / 86_400_000))
+}
+
+/**
+ * One destination. The status line is the only number on the card: it says
+ * where the student stands without turning the page into a metrics wall.
+ *
+ * Motion lives in `.cssv-choice` (src/index.css): the cards rise in with a
+ * stagger, lift on hover and carry a sheen that follows the pointer. The
+ * stylesheet disables all of it under prefers-reduced-motion.
+ */
+function ChoiceCard({ to, icon: Icon, title, status, index, pro = false }: { to: string; icon: ComponentType<{ className?: string }>; title: string; status: string; index: number; pro?: boolean }) {
+  // Hand the sheen the pointer position. Cheap enough to run inline: it only
+  // writes two custom properties and never triggers a React render.
+  function track(event: { currentTarget: HTMLElement; clientX: number; clientY: number }) {
+    const box = event.currentTarget.getBoundingClientRect()
+    event.currentTarget.style.setProperty('--cssv-choice-x', `${event.clientX - box.left}px`)
+    event.currentTarget.style.setProperty('--cssv-choice-y', `${event.clientY - box.top}px`)
+  }
+  return (
+    <Link
+      to={to}
+      onPointerMove={track}
+      style={{ '--cssv-choice-index': String(index) } as CSSProperties}
+      className="cssv-choice flex min-h-[9.5rem] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 hover:border-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 sm:p-6"
+    >
+      <span className="flex items-start justify-between gap-3">
+        <span className="cssv-choice-icon grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
+          <Icon className="h-5 w-5" />
+        </span>
+        {pro && <ProBadge />}
+      </span>
+      <span className="mt-5">
+        <span className="cssv-choice-title block text-lg font-bold text-slate-950">{title}</span>
+        <span className="mt-1 flex items-center gap-1.5 text-sm text-slate-500">
+          {status}
+          <ArrowRight className="cssv-choice-arrow h-4 w-4 shrink-0 text-emerald-700" />
+        </span>
+      </span>
+    </Link>
+  )
+}
+
+export default function AccountHome() {
+  const { user } = useAccount()
+  const [params] = useSearchParams()
+  const paused = useProReleasePaused()
+  const section = !paused && params.get('plan') === 'pro' ? 'pro' : 'free'
+  const [version, setVersion] = useState(0)
+  const [syllabusTotal, setSyllabusTotal] = useState(0)
+
+  useEffect(() => {
+    const refresh = () => setVersion((value) => value + 1)
+    window.addEventListener(PROGRESS_CHANGED_EVENT, refresh)
+    return () => window.removeEventListener(PROGRESS_CHANGED_EVENT, refresh)
+  }, [])
+
+  useEffect(() => {
+    let active = true
+    fetch('/fpsc-syllabus.json')
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error('unavailable')))
+      .then((data: { subjects?: Array<{ sections?: Array<{ items?: string[] }> }> }) => {
+        if (!active) return
+        setSyllabusTotal((data.subjects ?? []).reduce(
+          (total, subject) => total + (subject.sections ?? []).reduce((count, section) => count + (section.items?.length ?? 0), 0),
+          0,
+        ))
+      })
+      .catch(() => { if (active) setSyllabusTotal(0) })
+    return () => { active = false }
+  }, [])
+
+  // The edition card reads the same overview the reading desk uses, so it always
+  // names the edition the student would actually open.
+  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema, section === 'pro')
+
+  const snapshot = useMemo(() => {
+    void version
+    const state = getState()
+    const stats = getStats()
+    const activeTasks = activeStudyTasks(state.studyScheduleTasks ?? [], readTaskArchiveState())
+    const today = localTaskDateKey()
+    const todayTasks = activeTasks.filter((task) => task.date === today)
+    const remaining = dueStudyTasks(activeTasks).today.filter((task) => task.status !== 'completed')
+    const statuses = Object.values(state.syllabusItemStatuses ?? {})
+    const mocks = state.quizResults.filter((result) => result.mockKind === 'gk' || result.mockKind === 'mpt')
+    return {
+      stats,
+      examDate: state.studyPlanner?.examDate,
+      remaining,
+      todayMinutes: todayTasks.reduce((sum, task) => sum + task.minutes, 0),
+      syllabusCompleted: statuses.filter((status) => status === 'completed').length,
+      mocks: mocks.length,
+      saved: (state.bookmarks?.length ?? 0) + (state.savedAnswers?.length ?? 0),
+      english: dailyEnglishStatus(),
+      essayThemes: essayThemeActivity(),
+    }
+  }, [version])
+
+  const name = (user?.display_name || '').trim().split(/\s+/)[0]
+  const hour = Number(new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hourCycle: 'h23', timeZone: 'Asia/Karachi' }).format(new Date()))
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
+  const examDays = daysRemaining(snapshot.examDate)
+  const examYear = snapshot.examDate ? new Date(`${snapshot.examDate}T12:00:00`).getFullYear() : null
+  const syllabusPercent = syllabusTotal ? Math.round((snapshot.syllabusCompleted / syllabusTotal) * 100) : 0
+
+  const summary = briefing.data?.summary
+  const affairsStatus = !summary
+    ? 'Your daily developments, explained'
+    : !summary.published
+      ? 'Your next edition is being prepared'
+      : `${summary.date === pakistanDate() ? 'Today' : displayDate(summary.date)} · ${summary.unread} unread`
+
+  const context = [
+    examYear ? `CSS ${examYear}` : null,
+    examDays === null ? null : `${examDays} days left`,
+    snapshot.stats.streak ? `${snapshot.stats.streak}-day streak` : null,
+  ].filter(Boolean).join(' · ')
+
+  const mptFlowEnabled = useMptFlowEnabled() === true
+  const mptFlow = !MPT_HIBERNATED && mptFlowEnabled
+  const freeChoices = [
+    { to: '/daily-briefing', icon: Newspaper, title: 'Current Affairs Daily', status: 'Read published editions and full analysis, free' },
+    { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'Attempt plan, coverage & saved writing' },
+    { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
+    { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
+    {
+      to: '/account/tasks', icon: CalendarCheck2, title: 'Today’s Plan',
+      status: snapshot.remaining.length
+        ? `${snapshot.remaining.length} task${snapshot.remaining.length === 1 ? '' : 's'} · ${formatMinutes(snapshot.todayMinutes)} planned`
+        : 'Nothing left for today',
+    },
+    {
+      to: '/account/english', icon: Languages, title: 'Daily English',
+      status: snapshot.english.completed >= snapshot.english.total
+        ? 'Completed for today'
+        : `${snapshot.english.completed} of ${snapshot.english.total} parts done`,
+    },
+    { to: '/grammar-course', icon: Languages, title: 'Grammar Course', status: 'Guided lessons, drills & revision' },
+    {
+      to: '/account/progress', icon: Target, title: 'Practice & Mocks',
+      status: snapshot.stats.attempted
+        ? `${snapshot.stats.accuracy}% accuracy · ${snapshot.mocks} mock${snapshot.mocks === 1 ? '' : 's'}`
+        : 'Start your first practice set',
+    },
+    // Official MPT Mocks (docs/mpt). Shown only while the application flow is on,
+    // so the tile never leads to an unavailable page.
+    ...(mptFlow ? [{ to: '/account/mpt', icon: ClipboardCheck, title: 'MPT Mocks', status: '2:00 PM, 6:00 PM & 10:30 PM daily · apply, Roll Number, result card' }] : []),
+    ...(mptFlow ? [{ to: '/account/mpt/question-bank', icon: BookOpen, title: 'Previous MPT Mocks', status: 'All completed official papers · review and practise free' }] : []),
+    {
+      to: '/fpsc-syllabus', icon: BookOpen, title: 'My Syllabus',
+      status: syllabusPercent ? `${syllabusPercent}% complete` : 'Mark your first topic',
+    },
+    {
+      to: '/account/library', icon: Bookmark, title: 'My Library',
+      status: snapshot.saved ? `${snapshot.saved} saved item${snapshot.saved === 1 ? '' : 's'}` : 'Save what is worth revisiting',
+    },
+  ]
+  const proChoices = [
+    { to: '/account/expression?view=studio', icon: PenLine, title: 'Sentence Structure & Improvement', status: 'Guided learning, independent rewrites & saved versions' },
+    { to: '/account/argumentation', icon: ListTree, title: 'Argumentation Skills Builder', status: 'Claims, reasons, evidence, counterarguments & revision' },
+    { to: '/account/analytical-skills', icon: Target, title: 'Analytical Skills Builder', status: 'Mechanisms, alternatives, trade-offs & conclusions' },
+    { to: '/account/essay-builder', icon: BookOpen, title: 'Essay Themes Builder', status: 'Seven guided stages linked to your research roadmap' },
+    { to: briefingRoot, icon: Newspaper, title: 'My Current Affairs Desk', status: affairsStatus },
+    { to: '/account/general-ability', icon: Calculator, title: 'General Ability', status: 'Guided maths, exercises & topic quizzes' },
+    { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
+    {
+      to: '/study-material/essay-themes', icon: ListTree, title: 'Essay Themes 2027',
+      status: snapshot.essayThemes.directionsDone
+        ? `${snapshot.essayThemes.themesStarted} theme${snapshot.essayThemes.themesStarted === 1 ? '' : 's'} started \u00b7 ${snapshot.essayThemes.directionsDone} direction${snapshot.essayThemes.directionsDone === 1 ? '' : 's'} done`
+        : 'Begin the 2027 research roadmap',
+    },
+
+    { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
+    { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
+    { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
+    { to: '/account/handwriting', icon: ScanLine, title: 'Handwritten Paragraph', status: 'Upload, confirm your wording & review feedback' },
+    { to: '/account/ask-vista', icon: MessageCircle, title: 'Ask VISTA', status: 'Study help linked to your preparation' },
+  ]
+
+  const continueReading = briefing.data?.continue_reading?.[0]
+
+  return (
+    <main className="min-h-screen bg-white">
+      <div className="mx-auto max-w-5xl px-4 py-10 sm:py-14">
+        <header className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{greeting}{name ? `, ${name}` : ''}</h1>
+            {context && <p className="mt-2 text-sm text-slate-500">{context}</p>}
+          </div>
+          <Link
+            to="/account/settings"
+            className="inline-flex min-h-11 items-center gap-2.5 rounded-full border border-slate-200 px-4 text-sm font-semibold text-slate-700 hover:border-emerald-700 hover:text-emerald-800"
+          >
+            {user?.photo_complete
+              ? <img src="/api/student/photo-view.php" alt="" className="h-7 w-7 rounded-full object-cover" />
+              : <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-100"><UserRound className="h-4 w-4" /></span>}
+            My profile
+          </Link>
+        </header>
+
+        <AccountSections selected={section} />
+
+        {section === 'pro' && (
+          <section aria-labelledby="pro-features" className="mt-9">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <h2 id="pro-features" className="text-xl font-bold text-slate-950">Pro features</h2>
+              <ProBadge />
+            </div>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Starred features use your Pro membership. Your free tools are included below.</p>
+            <MembershipSummary />
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {proChoices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} pro />)}
+            </div>
+          </section>
+        )}
+
+        <section aria-labelledby="free-features" className="mt-9">
+          <h2 id="free-features" className="text-xl font-bold text-slate-950">{section === 'pro' ? 'Your included free features' : 'Free features'}</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">Study, practise and keep your progress with your free account.</p>
+          {!MPT_HIBERNATED && <DashboardMptCard />}
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {freeChoices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} />)}
+          </div>
+        </section>
+
+        {(continueReading || snapshot.remaining.length > 0) && (
+          <section className="mt-12" aria-label="Pick up where you left off">
+            <h2 className="text-sm font-semibold uppercase tracking-[.14em] text-slate-400">Pick up where you left off</h2>
+            <div className="mt-4 divide-y divide-slate-100 border-y border-slate-100">
+              {section === 'pro' && continueReading && (
+                <Link to={`${briefingRoot}/${continueReading.id}`} className="flex items-center gap-4 py-4 hover:text-emerald-800">
+                  <Newspaper className="h-4 w-4 shrink-0 text-emerald-700" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-semibold text-slate-900">{continueReading.headline}</span>
+                    <span className="mt-0.5 block text-xs text-slate-500">{continueReading.category} · continue reading</span>
+                  </span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-slate-400" />
+                </Link>
+              )}
+              {snapshot.remaining.slice(0, 3).map((task) => (
+                <Link key={task.id} to="/account/tasks" className="flex items-center gap-4 py-4 hover:text-emerald-800">
+                  <CalendarCheck2 className="h-4 w-4 shrink-0 text-emerald-700" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-semibold text-slate-900">{task.topic}</span>
+                    <span className="mt-0.5 block text-xs text-slate-500">{task.subject} · {formatMinutes(task.minutes)}</span>
+                  </span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-slate-400" />
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Signed-in account content. Advertising eligibility is decided by the
+            route registry, not by this page. */}
+        <div className="mt-12"><AuthenticatedAccountAd /></div>
+      </div>
+    </main>
+  )
+}

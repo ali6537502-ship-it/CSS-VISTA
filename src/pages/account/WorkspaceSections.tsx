@@ -1,0 +1,8 @@
+import { PenLine } from 'lucide-react'
+import { Link } from 'react-router'
+import { AccountPage } from './shared'
+import FeatureFinder from '@/features/workspace/FeatureFinder'
+import { sections } from '@/features/workspace/registry'
+export function Practice() { return <AccountPage title="Practice" intro="Choose a focused session, return to your writing or review recorded mistakes."><div className="ws-practice-banner"><div><h2 className="font-bold text-lg">Write with focus</h2><p className="ws-muted my-3">Use the existing answer timer and writing notebook. Your saved answers remain in the notebook.</p><div className="flex flex-wrap gap-3"><Link className="ws-action" to="/answer-timer">Open answer timer</Link><Link className="ws-action" to="/answer-writing">Writing notebook</Link><Link className="min-h-11 p-3 underline" to="/mistakes">Review mistakes</Link></div></div><div className="ws-practice-mark" aria-hidden="true"><PenLine size={55} strokeWidth={1.25}/></div></div><FeatureFinder practice /></AccountPage> }
+export function Directory() { return <AccountPage title="Feature finder" intro="Search preparation tools and resources. Pin useful destinations for your overview."><FeatureFinder /></AccountPage> }
+export function More() { return <AccountPage title="Your workspace" intro="All seven sections, plus the complete feature directory."><div className="ws-card-grid">{sections.map(s => <Link className="ws-panel font-semibold min-h-20" to={s.to} key={s.id}>{s.title}</Link>)}<Link className="ws-panel font-semibold" to="/account/directory">Feature finder</Link></div></AccountPage> }

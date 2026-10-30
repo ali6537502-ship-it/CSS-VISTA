@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { useAccount } from '@/lib/accountContext'
+import { readLocalStudySession, writeLocalStudySession } from '@/lib/localStudySession'
 import {
   ArrowUpRight, BookOpenText, Bookmark, Check, CircleHelp, Database, ExternalLink,
   Globe2, Landmark, Leaf, Newspaper, Search, ShieldCheck, Scale, X,
@@ -8,10 +10,10 @@ import { researchResources, resourceCategories, type ResourceCategory, type Rese
 type CategoryChoice = ResourceCategory | 'All sources'
 const savedKey = 'cssvista:research-bookmarks:v1'
 
-function initialBookmarks(): string[] {
+function initialBookmarks(accountId: string | null): string[] {
   if (typeof window === 'undefined') return []
   try {
-    const value: unknown = JSON.parse(window.localStorage.getItem(savedKey) || '[]')
+    const value: unknown = JSON.parse(readLocalStudySession(savedKey, accountId) || '[]')
     return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
   } catch {
     return []
@@ -57,18 +59,24 @@ function ResourceTile({ item, saved, toggle }: { item: ResearchResource; saved: 
 }
 
 export default function ResearchResources() {
+  const { user, loading } = useAccount()
+  if (loading) return <p role="status" className="p-8 text-center">Loading your saved sources…</p>
+  return <AccountResearchResources key={user?.id ?? 'guest'} accountId={user?.id ?? null} />
+}
+
+function AccountResearchResources({ accountId }: { accountId: string | null }) {
   const [category, setCategory] = useState<CategoryChoice>('All sources')
   const [query, setQuery] = useState('')
-  const [bookmarks, setBookmarks] = useState<string[]>(initialBookmarks)
+  const [bookmarks, setBookmarks] = useState<string[]>(() => initialBookmarks(accountId))
+  const [saveError, setSaveError] = useState('')
   const [savedOnly, setSavedOnly] = useState(false)
   const savedIds = useMemo(() => new Set(bookmarks), [bookmarks])
 
   function toggle(id: string) {
-    setBookmarks((previous) => {
-      const next = previous.includes(id) ? previous.filter((value) => value !== id) : [...previous, id]
-      try { window.localStorage.setItem(savedKey, JSON.stringify(next)) } catch { /* Storage is optional. */ }
-      return next
-    })
+    const current = initialBookmarks(accountId)
+    const next = current.includes(id) ? current.filter(value => value !== id) : [...current, id]
+    if (writeLocalStudySession(savedKey, JSON.stringify(next), accountId)) { setBookmarks(next); setSaveError('') }
+    else setSaveError('This source could not be saved on this device. Please try again.')
   }
 
   const filtered = useMemo(() => {
@@ -152,6 +160,7 @@ export default function ResearchResources() {
               </button>
             </div>
           </div>
+          {saveError && <p role="alert" className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">{saveError}</p>}
           {filtered.length > 0 ? (
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((item) => <ResourceTile key={item.id} item={item} saved={savedIds.has(item.id)} toggle={toggle} />)}

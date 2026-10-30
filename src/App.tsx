@@ -1,5 +1,7 @@
+import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
+import { useWorkspacePreview } from '@/features/workspace-preview/context'
 import { Suspense } from 'react'
-import { Navigate, Routes, Route } from 'react-router'
+import { Navigate, Routes, Route, useLocation } from 'react-router'
 import { ProfileGate } from './components/ProfileGate'
 import Layout from './components/Layout'
 import ProGate, { SelectedStudyGate } from './features/membership/ProGate'
@@ -73,6 +75,17 @@ const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
+const AccountSubjects = lazy(() => import('./pages/account/Subjects'))
+const AccountPractice = lazy(() => import('./pages/account/WorkspaceSections').then(m => ({ default:m.Practice })))
+const AccountDirectory = lazy(() => import('./pages/account/WorkspaceSections').then(m => ({ default:m.Directory })))
+const AccountMore = lazy(() => import('./pages/account/WorkspaceSections').then(m => ({ default:m.More })))
+const ClassicAccount = lazy(() => import('./features/workspace-classic/pages/Account'))
+const ClassicAccountHome = lazy(() => import('./features/workspace-classic/pages/AccountHome'))
+const ClassicStudyPlanner = lazy(() => import('./features/workspace-classic/pages/StudyPlanner'))
+const ClassicFpscSyllabus = lazy(() => import('./features/workspace-classic/pages/FpscSyllabus'))
+const ClassicAccountTasks = lazy(() => import('./features/workspace-classic/pages/account/Tasks'))
+const ClassicAccountProgress = lazy(() => import('./features/workspace-classic/pages/account/Progress'))
+const ClassicAccountLibrary = lazy(() => import('./features/workspace-classic/pages/account/Library'))
 const AccountHome = lazy(() => import('./pages/AccountHome'))
 const AccountTasks = lazy(() => import('./pages/account/Tasks'))
 const AccountProgress = lazy(() => import('./pages/account/Progress'))
@@ -121,6 +134,9 @@ const ContactCssVista = lazy(() => import('./pages/LegalTrust').then((m) => ({ d
 const EditorialPolicy = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.EditorialPolicy })))
 
 function PageLoader() {
+  const { enabled: preview } = useWorkspacePreview()
+  const { pathname } = useLocation()
+  if (preview && pathname.startsWith('/account/')) return <div className="ws-loading-layout" role="status" aria-label="Loading your workspace" data-cssv-ad-state="loading"><span className="sr-only">Loading your workspace…</span><div className="ws-loading-feature"><i/><i/><i/></div><div className="ws-loading-companion"><b/><i/><i/></div><div className="ws-loading-agenda"><i/><i/><i/></div></div>
   return (
     <div className="mx-auto max-w-7xl space-y-4 px-4 py-10" aria-label="Loading page" data-cssv-ad-state="loading">
       <div className="h-8 w-1/3 animate-pulse rounded bg-secondary" />
@@ -194,11 +210,11 @@ export default function App() {
         <Route path="/book-summaries/:slug" element={<S><BookSummaries /></S>} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
-        <Route path="/study-planner" element={<S><StudyPlanner /></S>} />
+        <Route path="/study-planner" element={<S><WorkspaceVariant classic={<ClassicStudyPlanner />}><StudyPlanner /></WorkspaceVariant></S>} />
         <Route path="/answer-evaluation" element={<S><AnswerEvaluation /></S>} />
         <Route path="/past-papers/view/:id" element={<S><PastPaperOpen /></S>} />
         <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
-        <Route path="/fpsc-syllabus" element={<S><FpscSyllabus /></S>} />
+        <Route path="/fpsc-syllabus" element={<S><WorkspaceVariant classic={<ClassicFpscSyllabus />}><FpscSyllabus /></WorkspaceVariant></S>} />
         <Route path="/css-past-paper-analysis" element={<S><CssPastPaperAnalysis /></S>} />
         <Route path="/gk/cat/:slug" element={<SelectedStudyGate><S><GKCategory /></S></SelectedStudyGate>} />
         <Route path="/gk/quiz" element={<SelectedStudyGate><S><GKQuiz /></S></SelectedStudyGate>} />
@@ -215,13 +231,18 @@ export default function App() {
         <Route path="/journal/opinion-the-next-48-hours" element={<S><JournalArchiveArticle articleSlug="opinion-the-next-48-hours" /></S>} />
         <Route path="/journal/opinion-harassers-calculus" element={<S><JournalArchiveArticle articleSlug="opinion-harassers-calculus" /></S>} />
         <Route path="/opinions" element={<Navigate to="/journal" replace />} />
-        <Route path="/account" element={<S><Account /></S>} />
+        <Route path="/account" element={<S><WorkspaceVariant classic={<ClassicAccount />}><Account /></WorkspaceVariant></S>} />
         {/* The account home is the chooser; each declared account route renders
             its own focused page, so a bookmark or a refresh lands where the
             student expects. */}
-        <Route path="/account/dashboard" element={<ProfileGate><S><AccountHome /></S></ProfileGate>} />
-        <Route path="/account/tasks" element={<ProfileGate><S><AccountTasks /></S></ProfileGate>} />
-        <Route path="/account/progress" element={<ProfileGate><S><AccountProgress /></S></ProfileGate>} />
+        <Route path="/account/dashboard" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountHome />}><AccountHome /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/subjects" element={<ProfileGate><S><WorkspaceVariant classic={<Navigate to="/account/dashboard" replace />}><AccountSubjects /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/practice" element={<ProfileGate><S><WorkspaceVariant classic={<Navigate to="/account/dashboard" replace />}><AccountPractice /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/directory" element={<ProfileGate><S><WorkspaceVariant classic={<Navigate to="/account/dashboard" replace />}><AccountDirectory /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/more" element={<ProfileGate><S><WorkspaceVariant classic={<Navigate to="/account/dashboard" replace />}><AccountMore /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/plan" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicStudyPlanner />}><StudyPlanner /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/tasks" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountTasks />}><AccountTasks /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/progress" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountProgress />}><AccountProgress /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
@@ -236,7 +257,7 @@ export default function App() {
         <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
         <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />
         <Route path="/account/membership" element={<ProfileGate><S><AccountMembership /></S></ProfileGate>} />
-        <Route path="/account/library" element={<ProfileGate><S><AccountLibrary /></S></ProfileGate>} />
+        <Route path="/account/library" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountLibrary />}><AccountLibrary /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;
             these routes only render it, and stay inert while the flag is off. */}

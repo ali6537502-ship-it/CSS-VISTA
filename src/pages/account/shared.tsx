@@ -1,14 +1,18 @@
+import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
+import * as Classic from '@/features/workspace-classic/pages/account/shared'
+import { subjectVisual } from '@/features/workspace/Visuals'
+import WorkspaceAvatar from '@/features/workspace/WorkspaceAvatar'
+import { completedSourceTopics, targetDays } from '@/features/workspace/model'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
-import { ArrowLeft, Check, UserRound } from 'lucide-react'
+import { ArrowLeft, Check } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats, updateStudyScheduleTask, type StudyScheduleTask } from '@/lib/store'
 import { getRevisionStats, getStudyAnalytics, recentActivities } from '@/lib/progress'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { AuthenticatedAccountAd } from '@/components/Ads'
-import { ProBadge } from '@/features/membership/AccountSections'
 
 export function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -25,10 +29,8 @@ export function formatStudyTime(seconds: number) {
 }
 
 export function daysRemaining(examDate?: string) {
-  if (!examDate) return null
-  const target = new Date(`${examDate}T12:00:00`)
-  if (Number.isNaN(target.getTime())) return null
-  return Math.max(0, Math.ceil((target.getTime() - Date.now()) / 86_400_000))
+  const days = targetDays(examDate, localTaskDateKey())
+  return days === null || days < 0 ? null : days
 }
 
 /**
@@ -37,6 +39,7 @@ export function daysRemaining(examDate?: string) {
  * app refreshes every one of them.
  */
 export function useAccountSnapshot() {
+  const { user, syncStatus } = useAccount()
   const [version, setVersion] = useState(0)
 
   useEffect(() => {
@@ -47,13 +50,16 @@ export function useAccountSnapshot() {
 
   const snapshot = useMemo(() => {
     void version
+    // Native hydration writes storage without emitting a progress event.
+    // Re-read this presentation snapshot when the account or sync phase changes.
+    void user?.id
+    void syncStatus
     const state = getState()
     const activeTasks = activeStudyTasks(state.studyScheduleTasks ?? [], readTaskArchiveState())
     const due = dueStudyTasks(activeTasks)
     const today = localTaskDateKey()
     const todayTasks = activeTasks.filter((task) => task.date === today)
     const mockResults = state.quizResults.filter((result) => result.mockKind === 'gk' || result.mockKind === 'mpt')
-    const statuses = Object.values(state.syllabusItemStatuses ?? {})
     return {
       state,
       stats: getStats(),
@@ -67,11 +73,11 @@ export function useAccountSnapshot() {
       todayMinutes: todayTasks.reduce((sum, task) => sum + task.minutes, 0),
       mockResults,
       latestMock: mockResults[0] ?? null,
-      syllabusCompleted: statuses.filter((status) => status === 'completed').length,
+      syllabusCompleted: completedSourceTopics(state.syllabusItemStatuses),
       subjectProgress: Object.entries(state.subjectProgress ?? {}).sort((left, right) => right[1] - left[1]).slice(0, 5),
       savedResources: (state.bookmarks?.length ?? 0) + (state.savedAnswers?.length ?? 0),
     }
-  }, [version])
+  }, [version, user?.id, syncStatus])
 
   return { snapshot, refresh: () => setVersion((value) => value + 1) }
 }
@@ -100,15 +106,15 @@ export function useSyllabusTotal() {
  * One page inside the account. Every account page wears the same quiet header
  * so moving between them feels like one product rather than four.
  */
-export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
-  const { user } = useAccount()
+function PreviewAccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
+  const { user, syncStatus } = useAccount()
   return (
-    <main className="min-h-screen bg-white">
+    <main className="ws-account-page min-h-screen bg-white">
       <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <Link to="/account/dashboard" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-800">
           <ArrowLeft className="h-4 w-4" /> My CSS Vista
         </Link>
-        <header className="mt-3 flex flex-wrap items-start justify-between gap-4">
+        <header className="ws-page-heading mt-3 flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{title}</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-500">{intro}</p>
@@ -118,27 +124,14 @@ export function AccountPage({ title, intro, action, children }: { title: string;
               to="/account/settings"
               className="inline-flex min-h-11 items-center gap-2.5 rounded-full border border-slate-200 px-4 text-sm font-semibold text-slate-700 hover:border-emerald-700 hover:text-emerald-800"
             >
-              {user?.photo_complete
-                ? <img src="/api/student/photo-view.php" alt="" className="h-7 w-7 rounded-full object-cover" />
-                : <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-100"><UserRound className="h-4 w-4" /></span>}
+              <span className="ws-inline-avatar"><WorkspaceAvatar user={user}/></span>
               My profile
             </Link>
           )}
         </header>
-        <nav aria-label="Account" className="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold text-slate-600">
-          <Link to="/account/dashboard?plan=free" className="inline-flex min-h-11 items-center hover:text-pine">Free account</Link>
-          <Link to="/account/dashboard?plan=pro" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Pro account <ProBadge /></Link>
-          <Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link>
-          <Link to="/account/preparation" className="inline-flex min-h-11 items-center hover:text-pine">My Preparation</Link>
-          <Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance <ProBadge /></Link>
-          <Link to="/account/general-ability" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">General Ability <ProBadge /></Link>
-          <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Ask VISTA <ProBadge /></Link>
-          <Link to="/account/essay-builder" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Essay Builder <ProBadge /></Link>
-          <Link to="/account/argumentation" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Argumentation <ProBadge /></Link>
-          <Link to="/account/analytical-skills" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Analysis <ProBadge /></Link>
-          <Link to="/account/ai-usage" className="inline-flex min-h-11 items-center hover:text-pine">AI Usage</Link>
-        </nav>
-        <div className="mt-9">{children}</div>
+
+        {syncStatus === 'syncing' && <p role="status" className="ws-muted mt-5">Account progress is syncing. Device records are shown while updates arrive.</p>}
+        <div className="ws-page-body mt-9">{children}</div>
         {/* Signed-in account content. Advertising eligibility is decided by the
             route registry, not by this page. */}
         <div className="mt-12"><AuthenticatedAccountAd /></div>
@@ -147,13 +140,13 @@ export function AccountPage({ title, intro, action, children }: { title: string;
   )
 }
 
-export function SectionTitle({ children }: { children: ReactNode }) {
+function PreviewSectionTitle({ children }: { children: ReactNode }) {
   return <h2 className="text-sm font-semibold uppercase tracking-[.14em] text-slate-400">{children}</h2>
 }
 
-export function Metric({ label, value, detail }: { label: string; value: string | number; detail: string }) {
+function PreviewMetric({ label, value, detail }: { label: string; value: string | number; detail: string }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+    <div className="ws-metric rounded-2xl border border-slate-200 bg-white p-5">
       <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">{label}</p>
       <p className="mt-2 text-2xl font-bold text-slate-950">{value}</p>
       <p className="mt-1 text-xs leading-5 text-slate-500">{detail}</p>
@@ -161,21 +154,27 @@ export function Metric({ label, value, detail }: { label: string; value: string 
   )
 }
 
-export function EmptyNote({ children }: { children: ReactNode }) {
-  return <p className="rounded-2xl border border-dashed border-slate-200 px-4 py-10 text-center text-sm text-slate-500">{children}</p>
+function PreviewEmptyNote({ children }: { children: ReactNode }) {
+  return <p className="ws-empty rounded-2xl border border-dashed border-slate-200 px-4 py-10 text-center text-sm text-slate-500">{children}</p>
 }
 
-export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: () => void }) {
+function PreviewTaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: () => void }) {
   const done = task.status === 'completed'
+  const [error, setError] = useState('')
   return (
-    <div className={`flex items-start gap-3 rounded-xl border px-3.5 py-3 ${done ? 'border-emerald-200 bg-emerald-50' : 'border-slate-200 bg-white'}`}>
+    <div data-subject-tone={subjectVisual(task.subject).tone} className={`ws-agenda-task flex items-start gap-3 rounded-xl border px-3.5 py-3 ${done ? 'border-emerald-200 bg-emerald-50' : 'border-slate-200 bg-white'}`}>
       <button
         type="button"
         onClick={() => {
-          updateStudyScheduleTask(task.id, { status: done ? 'in-progress' : 'completed' })
+          const status = done ? 'in-progress' : 'completed'
+          const current = getState().studyScheduleTasks.find(t => t.id === task.id)
+          if (current?.status === status) return
+          updateStudyScheduleTask(task.id, { status })
+          setError(getState().studyScheduleTasks.find(t => t.id === task.id)?.status === status ? '' : 'Task could not be saved on this device. Try again.')
           refresh()
         }}
         className={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border ${done ? 'border-emerald-700 bg-emerald-700 text-white' : 'border-slate-300 text-slate-500 hover:border-emerald-700 hover:text-emerald-800'}`}
+        aria-pressed={done}
         aria-label={done ? `Mark ${task.topic} incomplete` : `Mark ${task.topic} complete`}
       >
         {done ? <Check className="h-4 w-4" /> : <span className="h-2.5 w-2.5 rounded-full border border-current" />}
@@ -185,9 +184,20 @@ export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: 
         <div className="mt-1 flex flex-wrap gap-2 text-[11px] text-slate-500">
           <span>{task.subject}</span>
           {task.time && <span>{task.time}</span>}
-          <span>{formatMinutes(task.minutes)}</span>
+          <span>{formatMinutes(task.minutes)} estimated</span>
         </div>
+        {error && <p role="alert" className="text-sm text-red-800 mt-2">{error}</p>}
       </div>
     </div>
   )
 }
+
+export function AccountPage(props: Parameters<typeof PreviewAccountPage>[0]) { return <WorkspaceVariant classic={<Classic.AccountPage {...props}/>}><PreviewAccountPage {...props}/></WorkspaceVariant> }
+
+export function SectionTitle(props: Parameters<typeof PreviewSectionTitle>[0]) { return <WorkspaceVariant classic={<Classic.SectionTitle {...props}/>}><PreviewSectionTitle {...props}/></WorkspaceVariant> }
+
+export function Metric(props: Parameters<typeof PreviewMetric>[0]) { return <WorkspaceVariant classic={<Classic.Metric {...props}/>}><PreviewMetric {...props}/></WorkspaceVariant> }
+
+export function EmptyNote(props: Parameters<typeof PreviewEmptyNote>[0]) { return <WorkspaceVariant classic={<Classic.EmptyNote {...props}/>}><PreviewEmptyNote {...props}/></WorkspaceVariant> }
+
+export function TaskItem(props: Parameters<typeof PreviewTaskItem>[0]) { return <WorkspaceVariant classic={<Classic.TaskItem {...props}/>}><PreviewTaskItem {...props}/></WorkspaceVariant> }

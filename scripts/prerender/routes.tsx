@@ -34,6 +34,10 @@ import LanguageGrammar from '@/pages/LanguageGrammar'
 import BookSummaries from '@/pages/BookSummaries'
 import HandwrittenNotes from '@/pages/HandwrittenNotes'
 import FpscSyllabus from '@/pages/FpscSyllabus'
+import type { FpscSyllabusData } from '@/components/FpscSyllabusPlanner'
+// Build-only data injection: render the same public source the browser fetches,
+// without adding the complete syllabus to the initial client bundle.
+import fpscSyllabusData from '../../public/fpsc-syllabus.json'
 import CssPastPaperAnalysis from '@/pages/CssPastPaperAnalysis'
 import Consultation from '@/pages/Consultation'
 import StudyMaterial from '@/pages/StudyMaterial'
@@ -170,7 +174,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/language-grammar', () => <LanguageGrammar />),
   page('/book-summaries', () => <BookSummaries />),
   page('/handwritten-notes', () => <HandwrittenNotes />),
-  page('/fpsc-syllabus', () => <FpscSyllabus />),
+  page('/fpsc-syllabus', () => <FpscSyllabus initialData={fpscSyllabusData as FpscSyllabusData} />),
   page('/css-past-paper-analysis', () => <CssPastPaperAnalysis />),
   page('/books', () => <BooksPage />),
   page('/journal', () => <VistaJournal />),

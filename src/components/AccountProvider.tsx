@@ -4,6 +4,7 @@ import { AccountContext, type AccountContextValue, type AccountUser, type Action
 import { ACCOUNT_EXPIRED_EVENT, PROFILE_UPDATED_EVENT, csrfToken, hostingerRequest, loadAccountSession, logoutHostinger, setHostingerAccountUser } from '@/lib/hostingerApi'
 import { applyProgressSnapshot, captureProgressSnapshot, clearLocalStudentProgress } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
+import { bindLegacyStudySessions } from '@/lib/localStudySession'
 
 const ACCOUNT_CHANGE_KEY = 'cssvista:account-change'
 const PROGRESS_OWNER_KEY = 'cssvista:progress-owner'
@@ -21,6 +22,7 @@ function stashProgress(id: string) {
 }
 function moveProgress(nextId: string | null) {
   const oldId = localStorage.getItem(PROGRESS_OWNER_KEY)
+  bindLegacyStudySessions(oldId)
   if (oldId && oldId !== nextId) { stashProgress(oldId); clearLocalStudentProgress() }
   if (nextId && nextId !== oldId) {
     const saved = localStorage.getItem(`cssvista:account-progress:${nextId}`)

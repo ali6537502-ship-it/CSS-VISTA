@@ -1,0 +1,120 @@
+CSS Vista workspace — validation record (2026-10-25)
+Base 13091aed6355556a5aceae8d4c9efe774cbee6ad
+Branch review/student-workspace
+No remote write or deployment. All database writes were disposable TEST ONLY fixtures.
+
+Environment/install
+- npm ci --no-audit --no-fund: passed; lockfile and dependency versions retained.
+- npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund: passed.
+- Host PHP unavailable. sudo absent; apt-get permission denied.
+- Managed local Docker fallback: php:8.2-cli unit container, then isolated PHP
+  pdo_mysql/mbstring + mysql:8.0 runtime; localhost HTTP/HTTPS only.
+
+Baseline before interface edits
+- npm run lint: passed with existing Introduction.tsx:116 useMemo warning.
+- npm run typecheck: passed.
+- npm run test:all: standard chain completed; 301 Node tests, no reported failures.
+  Source logs: /tmp/cssv-evidence/baseline-*.log.
+
+Executed implementation checks
+- npm run lint: passed with the same pre-existing warning; no lint rule weakened.
+- npm run typecheck: passed; strict build also invokes tsc -b.
+- npm run test:all: passed, including SEO/subject selection, editorial, ads,
+  factbook, pagination, navigation, intelligence, result/eligibility, MPT/release,
+  routes, essays/references/optional notes, grammar, precis, timer and daily PDF.
+  Updated chain includes test:workspace: 307 Node tests, zero failures.
+  /tmp/cssv-evidence/acceptance-tests.log (Python editorial test also passed).
+- npm run test:workspace: 6 focused tests passed: compulsory structure/alternative,
+  both valid optional fixtures, invalid groups, genuine topic IDs/missing details,
+  dates, route/availability/search metadata and all optional-subject destination IDs.
+- npm run build and npm run verify:hostinger:strict were executed during development.
+  Initial normal artifact failed route audit because the new private routes were
+  absent from the route registry. Fixed with five protected/noindex registry entries.
+  Strict rebuild passed. No test was disabled to obtain this result.
+- Final production-equivalent command: node scripts/build-target.mjs hostinger --strict.
+  Same implementation invoked by the npm Hostinger build script; the MPT release
+  gate was also executed separately by the normal npm prebuild.
+  Successful artifacts report 115 registry routes, four redirects, six genuine
+  unknown-route 404s, 1,025 indexable self-canonical sitemap URLs, and 63,953 resolved
+  first-party links across 1,559 generated pages. No new account route carries ads. Final log: /tmp/cssv-evidence/release-review-build.log.
+- npm run audit:routes and npm run audit:links were executed. Early runs before a
+  finished artifact failed because dist/.htaccess was absent/incomplete; the strict
+  production build's final executions passed. These were artifact-ordering issues.
+- npm run test:pro-server, test:planner-server, test:learning-server could not use
+  host PHP. Equivalent real PHP files were then executed successfully in Docker:
+  tests/pro/unit.php, tests/planner/unit.php (225 assertions), tests/learning/unit.php,
+  tests/pro/release-unit.php, tests/reading/unit.php (21 assertions),
+  tests/topics/unit.php (51 assertions).
+- npm run test:answer-timer: all 11 tests passed.
+
+Native security (all exit 0)
+Environment for each Node command:
+  CI=true CSSV_DB_NAME=cssvista_briefing_test
+  CSSV_TEST_PHP_CONTAINER=cssv-workspace-native
+Commands:
+  node tests/pro/security.mjs
+  node tests/pro/paid-access.mjs
+  node tests/planner/security.mjs
+  node tests/learning/security.mjs
+  node tests/reading/security.mjs
+  node tests/pro/release-pause.mjs
+Coverage includes native ownership, profile eligibility, CSRF/account binding,
+free/active/expired access, closed payment collection, saved histories, renewal,
+version/race checks, non-destructive import, timing/date boundaries, release pause,
+free content preservation, private file delivery and zero real AI dispatch.
+Raw results: /tmp/cssv-evidence/native-results.json and corresponding *.log files.
+
+Browsers
+- node tests/browser/workspace.mjs with CSSV_TEST_BROWSER_ORIGIN=https://localhost:3444:
+  passed against compiled React. Sanitized API fixtures only; all off-origin traffic
+  blocked. Eight account destinations at 320,375,390,768,1024,1440 px; screenshots,
+  no overflow, one mobile nav, More→Subjects, sidebar collapse/expand, keyboard focus,
+  task completion after refresh, failed local save without permanent success,
+  alternative subject, search, pins, pause/MPT and a different account.
+  Does not establish native security; those checks are listed separately.
+- node tests/browser/pro-pause.mjs with the native security environment above and
+  CSSV_BROWSER_EXECUTABLE=/usr/bin/chromium: passed. Real native sign-in, active
+  membership under pause, fourteen direct protected routes, responsive reflow,
+  free Grammar/Vistagram retention, unchanged expiry, no page errors.
+- node tests/browser/workspace-native.mjs with the same native environment: passed.
+  Real browser sign-in → subject/settings selection → invalid keyboard combination
+  blocks saving → valid save → subjects → explicit sync → fresh browser context
+  with delayed real progress API → restored selections → active answer timer across
+  workspace navigation and refresh → sign-out.
+- Initial development-mode fixture attempts encountered the existing StrictMode
+  session-init redirect. Compiled-mode checks passed. A first native restoration
+  attempt exposed timing-dependent stale presentation; the shared display hook now
+  refreshes on account/sync phase changes. No persistence protocol was changed.
+- Some interim browser runs encountered an artifact being rebuilt. Final checks
+  use a finished artifact; no failed run is reported as a successful verification.
+
+Evidence and limits
+- Sanitized screenshots/result.json: test-artifacts/workspace/ (ignored local artifacts).
+- Main requirement map, inventory, data flow, metric definitions and rollback:
+  docs/workspace/implementation.md.
+- Official FPSC PDF URLs returned non-PDF responses; no new official-source
+  certification. Underlying syllabus JSON, identifiers and classifications retained.
+- No formal WCAG conformance claim or comparable before/after performance score.
+- Not executed: full active mock examination browser session; complete
+  resource→bookmark→library→resource browser journey; offline reconnect with unsynced
+  work; deliberately late native responses across an actual account switch;
+  real on-screen keyboard and landscape tests. Existing public timer recovery uses
+  device-wide keys outside accountSync; account-switch ownership for those snapshots
+  remains a specific compatibility boundary, not a verified isolation guarantee.
+- Generic Vite large-chunk warnings pre-exist in learning datasets; dashboard metadata
+  does not fetch MCQ bodies. Existing content notices remain documented by the build.
+
+Release and rollback
+- Review locally with git diff BASE..HEAD / git show; do not push main or dispatch.
+- Before any review-branch push, independently verify Hostinger external branch hooks
+  cannot deploy production. This was not established; no push or PR was made.
+- Release requires resolving the outstanding checks, owner approval, a clean build
+  at the reviewed commit (including its fingerprint), and the existing Hostinger flow.
+- Roll back by reverting the interface commit and rebuilding the prior version;
+  do not clear student storage. No schema migration exists. Old code ignores the
+  additive cssvista:workspace:v1:<account-id> preference.
+
+Final exact source checks: release-review-lint.log retains only the baseline warning;
+release-review-build.log passes all strict artifact audits; delivery-route-audit.log
+and delivery-link-audit.log are successful explicit npm reruns. Native final journey
+passes in native-browser-delivery.log, including the running timer.

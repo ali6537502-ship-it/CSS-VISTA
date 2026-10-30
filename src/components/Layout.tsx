@@ -1,5 +1,7 @@
+import { useWorkspacePreview } from '@/features/workspace-preview/context'
 import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { isProDestination } from '@/features/membership/proDestinations'
+import { ProfileGate } from '@/components/ProfileGate'
 import { ProReleaseOutlet } from '@/features/membership/ProRelease'
 import { AvailableStudyLink as Link, AvailableStudyNavLink as NavLink } from '@/features/membership/ProRelease'
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -163,6 +165,7 @@ const mobileQuickLinks = [
 
 const mobileQuickPaths = new Set(mobileQuickLinks.map((item) => item.to))
 
+const StudentWorkspace = lazyWithRecovery(() => import('@/features/workspace/StudentWorkspace'))
 const VistaShortcut = lazyWithRecovery(() => import('@/components/VistaShortcut'))
 const MPT_FOCUS_PATH = /^\/account\/mpt\/(?:exam|entrance)\//
 const StudyActivityTracker = lazyWithRecovery(() => import('@/components/StudyActivityTracker'))
@@ -708,6 +711,7 @@ function fallbackRoute(pathname: string) {
 }
 
 export default function Layout() {
+  const { enabled: preview, pending: previewPending } = useWorkspacePreview()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDrop, setOpenDrop] = useState<string | null>(null)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -942,6 +946,7 @@ export default function Layout() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen, searchOpen])
   useEffect(() => {
+    if (preview && /^\/account(?:\/|$)/.test(location.pathname) && !MPT_FOCUS_PATH.test(location.pathname)) return
     const openSearch = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLocaleLowerCase() === 'k') {
         event.preventDefault()
@@ -959,7 +964,7 @@ export default function Layout() {
       window.removeEventListener('keydown', openSearch)
       window.removeEventListener('cssvista:open-search', openSearchFromPage)
     }
-  }, [])
+  }, [location.pathname, preview])
 
   const goBack = () => {
     if (requestPageBack()) return
@@ -972,6 +977,21 @@ export default function Layout() {
       return
     }
     navigate(fallbackRoute(location.pathname), { replace: true })
+  }
+
+  if ((location.pathname === '/account' || location.pathname.startsWith('/account/')) && previewPending) return <div role="status" className="mx-auto max-w-5xl px-4 py-10">Opening your study space…</div>
+
+  if (preview && location.pathname.startsWith('/account/') && !MPT_FOCUS_PATH.test(location.pathname)) {
+    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><Suspense fallback={<div role="status" className="px-4 py-10">Opening your study space…</div>}><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></Suspense></ProfileGate></>
+  }
+
+  if (preview && location.pathname === '/account') {
+    return <div className="flex min-h-screen flex-col bg-[#faf9f5]">
+      <RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice />
+      <a href="#account-entry" className="sr-only z-50 rounded-lg bg-white p-3 text-pine focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to account</a>
+      <header className="border-b border-[#e1e6dd] bg-white/90"><div className="mx-auto flex min-h-20 max-w-6xl items-center justify-between gap-4 px-4 py-3"><Logo className="h-11 w-auto max-w-[185px] object-contain"/><Link to="/" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-pine"><ArrowLeft size={16}/>Back to website</Link></div></header>
+      <div id="account-entry" tabIndex={-1} className="flex-1 pb-[env(safe-area-inset-bottom)]"><div className="cssv-route-stage"><ProReleaseOutlet /></div></div>
+    </div>
   }
 
   return (
@@ -1153,7 +1173,7 @@ export default function Layout() {
             </section>
           </div>
         )}
-        <BackBar onBack={goBack} />
+        <BackBar onBack={goBack} />{user && <Link to="/account/dashboard" className="block px-4 py-2 text-sm font-semibold text-emerald-900">Return to my preparation workspace</Link>}
       </header>
 
       {shouldShowCss2026ResultAnnouncement(location.pathname) && <Css2026ResultAnnouncement />}

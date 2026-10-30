@@ -1,3 +1,5 @@
+import { lazyWithRecovery } from '@/lib/chunkRecovery'
+import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
 import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router'
@@ -10,6 +12,7 @@ import ConnectedReading from './Reading'
 import TopicWorkspace from '@/features/topics/Workspace'
 import { ProBadge } from '@/features/membership/AccountSections'
 import { PlanHistory, Readiness, Reviews } from './Reports'
+import '@/features/planner/planner.css'
 const views = [
   ['plan', 'Today’s plan'],
   ['coverage', 'Coverage'],
@@ -20,7 +23,7 @@ const views = [
   ['history', 'History'],
   ['settings', 'Settings'],
 ] as const
-export default function PreparationWorkspace({
+function PreviewPreparationWorkspace({
   attempt,
   settings,
 }: {
@@ -38,8 +41,8 @@ export default function PreparationWorkspace({
     setGeneration((v) => v + 1)
   })
   return (
-    <div className="min-w-0 space-y-6 text-slate-900">
-      <header className="flex flex-wrap items-start justify-between gap-3">
+    <div className="planner-workspace prep-workspace min-w-0 space-y-6 text-slate-900">
+      <header className="prep-header flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-indigo-700">
             My CSS Attempt
@@ -63,13 +66,18 @@ export default function PreparationWorkspace({
           Refresh preparation
         </button>
       </header>
-      <nav aria-label="Attempt workspace" className="flex flex-wrap gap-2">
+      <nav aria-label="Attempt workspace" className="pl-view-nav">
         {views.filter(([id]) => !paused || id !== 'topics').map(([id, label]) => (
           <button
             key={id}
             aria-current={view === id ? 'page' : undefined}
             className={`${secondary} ${view === id ? 'border-indigo-600 bg-indigo-50 text-indigo-800' : ''}`}
-            onClick={() => setParams({ attempt: attempt.id, view: id, ...(paused && id === 'reading' ? { kind: 'vistagram' } : {}) })}
+            onClick={() => {
+              const next = new URLSearchParams(params)
+              next.set('attempt', attempt.id); next.set('view', id)
+              if (paused && id === 'reading') next.set('kind', 'vistagram')
+              setParams(next, { preventScrollReset: true })
+            }}
           >
             {label}
             {id === 'topics' && <ProBadge />}
@@ -195,10 +203,13 @@ export default function PreparationWorkspace({
         <Link className={secondary} to={`/grammar-course?view=profile&attempt=${attempt.id}`}>
           Grammar Profile
         </Link>
-        <Link className={secondary} to="/study-planner">
-          Existing study planner
+        <Link className={secondary} to="/account/tasks">
+          My Study Plan
         </Link>
       </div>
     </div>
   )
 }
+
+const ClassicPreparationWorkspace = lazyWithRecovery(() => import('@/features/workspace-classic/features/preparation/Workspace'))
+export default function PreparationWorkspace(props: Parameters<typeof PreviewPreparationWorkspace>[0]) { return <WorkspaceVariant classic={<ClassicPreparationWorkspace {...props}/>}><PreviewPreparationWorkspace {...props}/></WorkspaceVariant> }

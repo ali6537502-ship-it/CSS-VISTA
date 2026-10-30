@@ -27,6 +27,10 @@ import { questionPageForIndex, questionPageRange } from '@/lib/questionPaginatio
 import { remainingSeconds } from '@/hooks/useAccurateCountdown'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
+import { useAccount } from '@/lib/accountContext'
+import { readLocalStudySession, writeLocalStudySession } from '@/lib/localStudySession'
+import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
+import { currentHostingerAccountUser } from '@/lib/hostingerApi'
 
 interface Resolved {
   title: string
@@ -43,16 +47,18 @@ interface Resolved {
  * the exam itself. Every other mode, and the flag-off site, is unchanged.
  */
 export default function GKQuiz({ forceMode }: { forceMode?: string }) {
+  const { user, loading } = useAccount()
   const [sp] = useSearchParams()
   const legacyMpt = !forceMode && sp.get('mode') === 'mpt-mock'
   const applicationFlow = useMptFlowEnabled()
   if (legacyMpt && MPT_HIBERNATED) return <Navigate to="/gk" replace />
+  if (loading) return <p role="status" className="p-8 text-center">Loading your practice…</p>
   if (legacyMpt && applicationFlow === null) return <div className="mx-auto max-w-xl px-4 py-16 text-center text-sm text-muted-foreground" aria-busy="true">Loading…</div>
   if (legacyMpt && applicationFlow) return <Navigate to="/account/mpt" replace />
-  return <LegacyGKQuiz forceMode={forceMode} />
+  return <LegacyGKQuiz key={user?.id ?? 'guest'} accountId={user?.id ?? null} forceMode={forceMode} />
 }
 
-function LegacyGKQuiz({ forceMode }: { forceMode?: string }) {
+function LegacyGKQuiz({ forceMode, accountId }: { forceMode?: string; accountId: string | null }) {
   const [sp] = useSearchParams()
   const mode = forceMode ?? sp.get('mode') ?? 'random'
   const mptSlot = sp.get('slot') === 'afternoon' ? 'afternoon' : 'evening'
@@ -61,7 +67,7 @@ function LegacyGKQuiz({ forceMode }: { forceMode?: string }) {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const scheduledKind: ScheduledMockKind | null = mode === 'mpt-mock' ? (mptSlot === 'afternoon' ? 'mpt-afternoon' : 'mpt') : mode === 'pms-mock' || mode === 'mock' ? 'gk' : null
-  const [studentName, setStudentName] = useState(() => localStorage.getItem('cssvista:mock-student-name') ?? '')
+  const [studentName, setStudentName] = useState(() => readLocalStudySession('cssvista:mock-student-name', accountId) ?? '')
   const [mockRegistered, setMockRegistered] = useState(false)
   const [mockSessionDateKey, setMockSessionDateKey] = useState('')
 
@@ -314,9 +320,25 @@ function LegacyGKQuiz({ forceMode }: { forceMode?: string }) {
       r.qs = [...r.qs, ...adminPool.sort(() => Math.random() - 0.5).slice(0, 25)]
     }
     r.qs = dedupeBankQuestions(filterDisabled(r.qs))
+    // Older daily snapshots may predate deterministic shard collection. Restore
+    // their original question order for this calendar day only, through the same
+    // bank/access loader; never substitute a missing or inaccessible question.
+    if (m === 'daily') {
+      const saved = readQuizSnapshot(m, accountId)
+      if (saved && Number.isFinite(saved.startedAt) && new Date(saved.startedAt).toDateString() === new Date().toDateString()) {
+        const ids = saved.signature.split('|')
+        if (ids.length <= 225 && new Set(ids).size === ids.length) {
+          const restored = new Map(filterDisabled(await getQuestionsByIds(ids)).map(question => [question.id, question]))
+          if (ids.every(id => restored.has(id))) r.qs = ids.map(id => restored.get(id)!)
+        }
+      }
+    }
     if (m === 'mock' || m === 'pms-mock') r.qs = r.qs.slice(0, 100)
     if (m === 'mpt-mock') r.qs = r.qs.slice(0, 200)
     if (m === 'one-paper') r.qs = r.qs.slice(0, 100)
+    // A question response can finish after a native session change. Its old
+    // component may be unmounted, but durable activity writes must also stop.
+    if (currentHostingerAccountUser() !== accountId) return
     setResolved(r)
     setLoading(false)
     if (r.qs.length) {
@@ -377,7 +399,7 @@ function LegacyGKQuiz({ forceMode }: { forceMode?: string }) {
               type="button"
               disabled={!status.available || studentName.trim().length < 2}
               onClick={() => {
-                localStorage.setItem('cssvista:mock-student-name', studentName.trim())
+                writeLocalStudySession('cssvista:mock-student-name', studentName.trim(), accountId)
                 setMockSessionDateKey(status.dateKey)
                 setLoading(true)
                 setMockRegistered(true)
@@ -479,7 +501,7 @@ function LegacyGKQuiz({ forceMode }: { forceMode?: string }) {
     )
   }
 
-  return <QuizRun resolved={resolved} mode={mode} studentName={scheduledKind ? studentName.trim() : ''} sessionDateKey={mockSessionDateKey} scheduledKind={scheduledKind} onRestart={() => { setResolved(null); resolve(mode) }} />
+  return <QuizRun accountId={accountId} resolved={resolved} mode={mode} studentName={scheduledKind ? studentName.trim() : ''} sessionDateKey={mockSessionDateKey} scheduledKind={scheduledKind} onRestart={() => { setResolved(null); resolve(mode) }} />
 }
 
 // ---------------- Runner ----------------
@@ -494,34 +516,36 @@ interface QuizSnapshot {
 
 const QUIZ_SESSION_PREFIX = 'cssvista:quiz-session:'
 
-function readQuizSnapshot(key: string): QuizSnapshot | null {
+function readQuizSnapshot(key: string, accountId: string | null): QuizSnapshot | null {
   try {
-    const raw = localStorage.getItem(QUIZ_SESSION_PREFIX + key)
+    const raw = readLocalStudySession(QUIZ_SESSION_PREFIX + key, accountId)
     if (!raw) return null
     const parsed = JSON.parse(raw) as QuizSnapshot
-    if (!parsed || typeof parsed.signature !== 'string' || typeof parsed.answers !== 'object') return null
+    if (!parsed || typeof parsed.signature !== 'string' || !parsed.answers || typeof parsed.answers !== 'object' || Array.isArray(parsed.answers)) return null
     return parsed
   } catch {
     return null
   }
 }
 
-function writeQuizSnapshot(key: string, snapshot: QuizSnapshot | null) {
-  try {
-    if (snapshot) localStorage.setItem(QUIZ_SESSION_PREFIX + key, JSON.stringify(snapshot))
-    else localStorage.removeItem(QUIZ_SESSION_PREFIX + key)
-  } catch {
-    /* storage full or blocked */
-  }
+function writeQuizSnapshot(key: string, snapshot: QuizSnapshot | null, accountId: string | null) {
+  writeLocalStudySession(QUIZ_SESSION_PREFIX + key, snapshot ? JSON.stringify(snapshot) : null, accountId)
 }
 
-function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; scheduledKind: ScheduledMockKind | null; onRestart: () => void }) {
+function QuizRun({ accountId, resolved, mode, studentName, sessionDateKey, scheduledKind, onRestart }: { accountId: string | null; resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; scheduledKind: ScheduledMockKind | null; onRestart: () => void }) {
+  const { syncStatus } = useAccount()
   const { qs, title, exam, timeSec, blueprint, note } = resolved
   const [page, setPage] = useState(1)
   const [reviewPage, setReviewPage] = useState(1)
   const [answers, setAnswers] = useState<Record<string, number>>({})
   const [revealed, setRevealed] = useState<Record<string, boolean>>({})
-  const [savedMap, setSavedMap] = useState<Record<string, boolean>>({})
+  const [savedMap, setSavedMap] = useState<Record<string, boolean>>(() => Object.fromEntries(savedMcqIds().map(id => [id, true])))
+  useEffect(() => {
+    const refreshSaved = () => setSavedMap(Object.fromEntries(savedMcqIds().map(id => [id, true])))
+    refreshSaved()
+    window.addEventListener(PROGRESS_CHANGED_EVENT, refreshSaved)
+    return () => window.removeEventListener(PROGRESS_CHANGED_EVENT, refreshSaved)
+  }, [syncStatus])
   const [finished, setFinished] = useState(false)
   const [left, setLeft] = useState(timeSec)
   const [resultTimeSeconds, setResultTimeSeconds] = useState(0)
@@ -574,11 +598,11 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
   // rebuilt - which is the case for the mocks and the daily challenge, where
   // losing a part-finished attempt costs the most.
   useEffect(() => {
-    const snapshot = readQuizSnapshot(snapshotKey)
+    const snapshot = readQuizSnapshot(snapshotKey, accountId)
     if (snapshot && snapshot.signature === signature && Object.keys(snapshot.answers).length > 0) {
       setResumeOffer(snapshot)
     }
-  }, [snapshotKey, signature])
+  }, [snapshotKey, signature, accountId])
 
   useEffect(() => {
     if (finished || resumeOffer) return
@@ -590,7 +614,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
       page,
       startedAt: startRef.current,
       deadline: deadlineRef.current,
-    })
+    }, accountId)
     persist()
     document.addEventListener('visibilitychange', persist)
     window.addEventListener('pagehide', persist)
@@ -598,7 +622,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
       document.removeEventListener('visibilitychange', persist)
       window.removeEventListener('pagehide', persist)
     }
-  }, [answers, revealed, page, snapshotKey, signature, finished, resumeOffer])
+  }, [answers, revealed, page, snapshotKey, signature, finished, resumeOffer, accountId])
 
   function acceptResume() {
     const snapshot = resumeOffer
@@ -616,7 +640,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
   }
 
   function discardResume() {
-    writeQuizSnapshot(snapshotKey, null)
+    writeQuizSnapshot(snapshotKey, null, accountId)
     setResumeOffer(null)
   }
 
@@ -640,6 +664,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
   }
 
   function choose(question: BankQuestion, i: number) {
+    if (currentHostingerAccountUser() !== accountId) return
     if (finished) return
     if (answers[question.id] === undefined) {
       const questionStartedAt = questionStartedAtRef.current[question.id]
@@ -667,10 +692,11 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
   }
 
   function finish() {
+    if (currentHostingerAccountUser() !== accountId) return
     if (finishedRef.current) return
     finishedRef.current = true
     deadlineRef.current = null
-    writeQuizSnapshot(snapshotKey, null)
+    writeQuizSnapshot(snapshotKey, null, accountId)
     setFinished(true)
     setReviewPage(1)
     // Event-handler wall-clock access is intentional for total attempt time.
@@ -887,7 +913,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
       {/* Status bar */}
       <div className="no-print sticky top-16 z-20 rounded-lg border bg-white/95 p-3 shadow-sm backdrop-blur">
         <div className="flex items-center justify-between gap-2 text-sm">
-          <span className="font-semibold text-pine">{title}</span>
+          <h1 className="font-semibold text-pine">{title}</h1>
           <div className="flex items-center gap-3">
             {exam && (
               <span className={`flex items-center gap-1 rounded px-2 py-0.5 font-mono text-sm font-bold ${left < 60 ? 'bg-red-100 text-red-700' : 'bg-secondary text-pine'}`}>
@@ -944,7 +970,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, o
                   <span className="shrink-0 text-xs font-bold text-muted-foreground">Question {questionNumber} of {qs.length}</span>
                   {question.paperSection && <span className="truncate rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-800">{question.paperSection}</span>}
                 </div>
-                <button onClick={() => setSavedMap((current) => ({ ...current, [question.id]: toggleSavedMcq(question.id) }))} className="no-print rounded p-1.5 text-muted-foreground hover:bg-secondary" aria-label={`Save question ${questionNumber}`}>
+                <button onClick={() => setSavedMap((current) => ({ ...current, [question.id]: toggleSavedMcq(question.id) }))} className="no-print rounded p-1.5 text-muted-foreground hover:bg-secondary" aria-pressed={Boolean(savedMap[question.id])} aria-label={`${savedMap[question.id] ? 'Unsave' : 'Save'} question ${questionNumber}`}>
                   {savedMap[question.id] ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
                 </button>
               </div>

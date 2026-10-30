@@ -104,9 +104,7 @@ export function displayUpdated(date: string | null): string {
 export function factText(fact: Fact): string {
   return typeof fact === 'string' ? fact : fact.label + ': ' + fact.value
 }
-export function safeReturnTo(value: string | null): string {
-  return value && value.startsWith('/') && !value.startsWith('//') && !value.includes('\\') && !Array.from(value).some((char) => char.charCodeAt(0) <= 32) ? value : '/account/dashboard'
-}
+export { safeReturnTo } from '../../lib/safeReturnTo.ts'
 // The default period for a briefing view. Editions are published in the evening,
 // so the reader is shown the newest edition that actually exists rather than an
 // empty "today" for most of the day.

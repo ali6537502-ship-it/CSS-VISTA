@@ -7,9 +7,10 @@ export default function AttemptContinuation() {
   }>('planner.php?overview=1')
   return (
     <section className="mb-8 rounded-2xl border border-indigo-200 bg-indigo-50/50 p-5">
-      <h2 className="text-lg font-semibold text-slate-950">My CSS Attempts</h2>
+      <h2 className="text-lg font-semibold text-slate-950">Account-linked preparation plans</h2>
       <p className="mt-2 text-sm leading-6 text-slate-600">
-        Open your account-linked daily plan, coverage, revision and evidence reviews.
+        Your preparation attempts include their own daily plans, coverage and review history.
+        Open an attempt to continue; your personal timetable stays available here.
       </p>
       {load.data ? (
         <div className="mt-4 flex flex-wrap gap-2">

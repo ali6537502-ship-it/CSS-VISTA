@@ -19,14 +19,18 @@ function forbid(path, ...needles) {
 }
 
 const profileUi = requireText(
-  'src/components/StudentProfilePanel.tsx',
+  'src/features/account/StudentProfileForm.tsx',
   "const MAX_PROFILE_PHOTO_BYTES = 60 * 1024",
+)
+requireText(
+  'src/features/account/profileForm.ts',
   "'Miss Sadia Zahoor'",
   "'Sir Ali Hassan Sargana'",
   "'Both'",
   "multiOptions: ['Batch', 'Test Series', 'Purchased Notes']",
 )
 if (!profileUi.includes('<fieldset')) failures.push('StudentProfilePanel: service checklist must use a fieldset')
+requireText('src/features/account/ProfileFields.tsx', '<fieldset', 'field.multiOptions')
 
 requireText(
   'public/api/student/profile.php',
@@ -93,6 +97,7 @@ for (const path of [
   'public/api/batch/register.php',
   'public/api/bootstrap-schema.php',
   'src/components/StudentProfilePanel.tsx',
+  'src/features/account/StudentProfileForm.tsx',
   'server/sql/003_profile_photo_15kb.sql',
   'docs/hostinger-native-accounts.md',
   'hosting-migration/MIGRATION_PLAN.md',

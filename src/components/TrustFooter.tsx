@@ -1,3 +1,4 @@
+import { useWorkspacePreview } from '@/features/workspace-preview/context'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import { useLocation, useNavigate } from 'react-router'
@@ -10,6 +11,7 @@ type GoogleFcApi = {
 type GoogleFcWindow = Window & { googlefc?: GoogleFcApi }
 
 export default function TrustFooter() {
+  const { enabled: preview } = useWorkspacePreview()
   const navigate = useNavigate()
   const location = useLocation()
   const reopenPrivacyChoices = () => {
@@ -22,7 +24,7 @@ export default function TrustFooter() {
   }
 
   const isAdmin = location.pathname === '/sadiaali' || location.pathname.startsWith('/sadiaali/')
-  const isFocusedStudy = location.pathname === '/gk/quiz'
+  const isFocusedStudy = (preview && (location.pathname === '/account' || location.pathname.startsWith('/account/'))) || location.pathname === '/gk/quiz'
     || location.pathname === '/five-minute'
     || location.pathname.startsWith('/mpt/bank/')
     || location.pathname.startsWith('/notes/view/')
@@ -33,7 +35,7 @@ export default function TrustFooter() {
     return (
       <>
         <style>{`.cssv-site-footer{display:none!important}`}</style>
-        <footer className="border-t bg-white pb-[calc(76px+env(safe-area-inset-bottom))] md:pb-0" aria-label="CSS Vista legal links">
+        <footer className={`border-t bg-white ${location.pathname === '/account' ? 'pb-[env(safe-area-inset-bottom)]' : 'pb-[calc(76px+env(safe-area-inset-bottom))] md:pb-0'}`} aria-label="CSS Vista legal links">
           <nav className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 py-4 text-xs text-muted-foreground" aria-label="Legal navigation">
             <Link className="hover:text-pine" to="/privacy-policy">Privacy</Link>
             <Link className="hover:text-pine" to="/terms-and-conditions">Terms</Link>
