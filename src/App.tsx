@@ -13,6 +13,7 @@ import { MPT_HIBERNATED } from './lib/featureHibernation'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
+const GSATutor = lazy(() => import('./pages/GSATutor'))
 const CompulsoryList = lazy(() => import('./pages/CompulsoryList'))
 const SubjectDetail = lazy(() => import('./pages/SubjectDetail'))
 const OptionalSubjects = lazy(() => import('./pages/OptionalSubjects'))
@@ -158,6 +159,7 @@ export default function App() {
       <Route element={<AdSenseProvider><ErrorBoundary><><Layout /><TrustFooter /></></ErrorBoundary></AdSenseProvider>}>
         <Route path="/" element={<Home />} />
         <Route path="/start-css" element={<S><StartCSS /></S>} />
+        <Route path="/gsa-tutor" element={<S><GSATutor /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
         <Route path="/subjects/compulsory/:slug" element={<SelectedStudyGate><S><SubjectDetail /></S></SelectedStudyGate>} />
         <Route path="/subjects/optional" element={<S><OptionalSubjects /></S>} />
@@ -243,6 +245,7 @@ export default function App() {
         <Route path="/account/plan" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicStudyPlanner />}><StudyPlanner /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/tasks" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountTasks />}><AccountTasks /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/progress" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountProgress />}><AccountProgress /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/gsa-tutor" element={<ProfileGate><S><GSATutor /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
