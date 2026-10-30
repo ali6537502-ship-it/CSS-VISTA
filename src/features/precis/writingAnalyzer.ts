@@ -156,6 +156,16 @@ const languageRules: PatternRule[] = [
     certainty: 'review',
   },
 ]
+const commonlyMisspelled: Record<string, string> = {
+  recieve:'receive', recieved:'received', seperate:'separate', definately:'definitely',
+  goverment:'government', enviroment:'environment', becuase:'because',
+  accomodate:'accommodate', occurance:'occurrence', occurence:'occurrence',
+  independant:'independent', responsability:'responsibility', arguement:'argument',
+  beleive:'believe', wich:'which', teh:'the', thier:'their',
+  neccessary:'necessary', sucessful:'successful', commitee:'committee',
+  comparision:'comparison', maintanance:'maintenance', priviledge:'privilege',
+  consistant:'consistent', influance:'influence', oppertunity:'opportunity',
+}
 const wordPattern = /[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu
 const stopWords = new Set(['the','and','for','but','with','that','from','this','those','their','there','when','which','only','into','they','have','does','often','about','also','than','then','them','while','where','will','more','were','such','upon','through','because'])
 function tokens(text: string): string[] {
@@ -209,6 +219,22 @@ export function analyzePrecisWriting({ original, draft, title, limit }: AnalyzeI
         start: match.index ?? 0, end: (match.index ?? 0) + match[0].length, handbook: rule.handbook,
       })
     }
+  }
+
+  // Selective spelling suggestions, not a complete dictionary or a proofreader.
+  let spellingHits = 0
+  for (const match of draft.matchAll(wordPattern)) {
+    const suggested = commonlyMisspelled[match[0].toLowerCase()]
+    if (!suggested) continue
+    add({
+      id:'spelling-' + match[0].toLowerCase(), group:'grammar', certainty:'review',
+      label:'Possible spelling mistake', excerpt:match[0],
+      explanation:'This looks like a common misspelling.',
+      advice:'Check whether “' + suggested + '” is the word you intend.',
+      start:match.index ?? 0, end:(match.index ?? 0) + match[0].length,
+      handbook:'Chapter 11 — Grammar and spelling',
+    })
+    if (++spellingHits >= 8) break
   }
 
   const punctuationRules: PatternRule[] = [
