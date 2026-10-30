@@ -52,7 +52,7 @@
     "preview": "vite preview --host 0.0.0.0",
     "validate:artifact": "bash scripts/validate-artifact.sh",
     "split:analysis": "node scripts/split-past-paper-analysis.mjs",
-    "test:routes": "node --test tests/productionRoutes.test.ts tests/vistagramRoutes.test.mjs",
+    "test:routes": "node --test tests/productionRoutes.test.ts tests/vistagramRoutes.test.mjs tests/freeLearning.test.ts",
     "test:essay-themes": "node --test tests/essayThemes.test.ts",
     "test:islamic-references": "node --test tests/islamicReferences.test.ts",
     "test:optional-notes": "node --test tests/optionalNotes.test.ts",

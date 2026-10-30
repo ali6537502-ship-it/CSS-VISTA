@@ -39,7 +39,7 @@ function cssv_precis_mutation(PDO $pdo,string $user,array $body): array {
   cssv_learning_owner_lock($pdo,$user);
   $q=$pdo->prepare('SELECT payload_hash,result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);
   if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This request identity was already used for different work.');$pdo->commit();return json_decode($prior['result'],true,32,JSON_THROW_ON_ERROR);}
-  cssv_pro_require_active($pdo,$user);
+  /* Free account learning; ownership and CSRF remain enforced by the caller. */
   if($action==='writing_save'){
    $attempt=cssv_pro_id($body['attempt_id'] ?? null);cssv_learning_attempt($pdo,$attempt,$user);$id=isset($body['id'])?cssv_pro_id($body['id']):null;$expected=$body['expected_version'] ?? null;
    if(!is_int($expected)||$expected<0||$expected>100000)throw new InvalidArgumentException('Refresh the current writing version.');

@@ -186,11 +186,16 @@ export default function AccountHome() {
       status: snapshot.saved ? `${snapshot.saved} saved item${snapshot.saved === 1 ? '' : 's'}` : 'Save what is worth revisiting',
     },
   ]
-  const proChoices = [
+  freeChoices.push(
     { to: '/account/expression?view=studio', icon: PenLine, title: 'Sentence Structure & Improvement', status: 'Guided learning, independent rewrites & saved versions' },
     { to: '/account/argumentation', icon: ListTree, title: 'Argumentation Skills Builder', status: 'Claims, reasons, evidence, counterarguments & revision' },
     { to: '/account/analytical-skills', icon: Target, title: 'Analytical Skills Builder', status: 'Mechanisms, alternatives, trade-offs & conclusions' },
     { to: '/account/essay-builder', icon: BookOpen, title: 'Essay Themes Builder', status: 'Seven guided stages linked to your research roadmap' },
+    { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Subject Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
+    { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
+    { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
+  )
+  const proChoices = [
     { to: briefingRoot, icon: Newspaper, title: 'My Current Affairs Desk', status: affairsStatus },
     { to: '/account/general-ability', icon: Calculator, title: 'General Ability', status: 'Guided maths, exercises & topic quizzes' },
     { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
@@ -201,9 +206,6 @@ export default function AccountHome() {
         : 'Begin the 2027 research roadmap',
     },
 
-    { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
-    { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
-    { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
     { to: '/account/handwriting', icon: ScanLine, title: 'Handwritten Paragraph', status: 'Upload, confirm your wording & review feedback' },
     { to: '/account/ask-vista', icon: MessageCircle, title: 'Ask VISTA', status: 'Study help linked to your preparation' },
   ]

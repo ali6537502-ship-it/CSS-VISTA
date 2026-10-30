@@ -16,6 +16,6 @@ function cssv_pro_release_require_open(): void {
 }
 
 function cssv_pro_release_student_endpoint(string $script): bool {
-    return in_array(basename($script), ['precis.php','precis-feedback.php','expression.php','skills.php','handwriting.php','handwriting-image.php','tutor.php','topics.php','ability.php','mentor.php','ai-usage.php'], true)
+    return in_array(basename($script), ['precis-feedback.php','handwriting.php','handwriting-image.php','tutor.php','ability.php','mentor.php','ai-usage.php'], true)
         && basename(dirname($script)) === 'student';
 }

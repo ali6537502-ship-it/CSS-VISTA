@@ -448,12 +448,12 @@ assert.equal(
 )
 php('tests/pro/fixture.php', 'expire', a.id)
 detail = await get()
-assert.equal(detail.data.content, null, 'Expired member fetched premium lesson')
-assert.equal((await act(mutation('begin'))).status, 403, 'Expired member began new premium work')
+assert.ok(detail.data.content, 'Membership expiry blocked a free published lesson')
+assert.equal((await act(mutation('begin'))).status, 200, 'Membership expiry blocked free learning')
 assert.equal(
   (await act(mutation('guided_check', { question_id: 'learn-1', choice: 0 }))).status,
-  403,
-  'Expired member submitted guided work',
+  200,
+  'Membership expiry blocked free guided work',
 )
 assert.equal(
   (await call(endpoint + '?request_id=' + guided.request_id, undefined, a.jar)).status,
