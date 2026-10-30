@@ -19,3 +19,7 @@ The owner's final instruction on 30 October narrowed this task to English struct
 - `node tests/browser/expression-guide.mjs`: isolated guide UI with a test account context, real Chromium and browser storage. Requires `npm ci --prefix tests/browser --ignore-scripts` and Chromium (`CSSV_BROWSER_EXECUTABLE` overrides `/usr/bin/chromium`). It exercises lesson navigation, feedback, drafts, revisions, save/reload, self-review, account separation, stale-tab protection, unreadable/blocked storage, download, 320/390/768/1440px layouts, accessibility and absence of fetch/API requests. Temporary harness files are removed on completion. This is not a claim of a live native sign-in flow.
 
 Local verification passed: three content/state tests, TypeScript, targeted lint, and the isolated Chromium scenario above. A Vite production build passed; it reports existing large-chunk and third-party annotation warnings. The browser check recorded zero fetch/API requests from the guide and no serious/critical axe accessibility findings. This has not been deployed.
+
+## Production release authorization
+
+The owner explicitly instructed on 30 October: ‘Push these things and deploy.’ This authorizes deployment of the prepared free-learning access and introductory English/Précis guides. The deferred planner/dashboard redesign is excluded; payment collection and external AI remain held. Release verification must record the exact deployed commit.
