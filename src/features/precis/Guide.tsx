@@ -273,10 +273,10 @@ export default function Guide({
       <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
         <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-indigo-700">
           <BookOpen className="h-4 w-4" aria-hidden="true" />
-          VISTA Guide · Master Précis Writing Handbook
+          CSS Vista Preci Mentor · Master Précis Writing Handbook
         </p>
         <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Learn Précis at your own pace
+          Learn Précis with CSS Vista Preci Mentor
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
           Study all 22 chapters and three appendices in the handbook’s original order.
