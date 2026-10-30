@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, BookOpen, Check, ClipboardCheck, RotateCcw } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
@@ -170,14 +170,12 @@ export default function Guide({
   const [params, setParams] = useSearchParams()
   const units = useMemo(() => handbookUnits(data.catalog?.chapters || []), [data.catalog])
   const storedPlan = progress?.guide_plan
-  const [daysInput, setDaysInput] = useState('14')
+  const savedDays = storedPlan?.target_days
+  const [paceOverride, setDaysInput] = useState<string | null>(null)
+  const daysInput = paceOverride ?? String(savedDays ?? 14)
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState('')
   const [changePace, setChangePace] = useState(false)
-
-  useEffect(() => {
-    if (storedPlan) setDaysInput(String(storedPlan.target_days))
-  }, [storedPlan?.target_days])
 
   const chosenDays = Number(daysInput)
   const validDays = Number.isInteger(chosenDays) && chosenDays >= minimumDays &&
@@ -187,8 +185,8 @@ export default function Guide({
     [units, chosenDays, validDays],
   )
   const schedule = useMemo(
-    () => (storedPlan ? buildStudyDays(units, storedPlan.target_days) : []),
-    [units, storedPlan?.target_days],
+    () => (savedDays ? buildStudyDays(units, savedDays) : []),
+    [units, savedDays],
   )
   const completed = storedPlan?.completed_units || []
   const covered = coveredCount(units, completed)
@@ -226,6 +224,7 @@ export default function Guide({
       receipt.done()
       refresh()
       setChangePace(false)
+      setDaysInput(null)
       nav({ day: '1', unit_step: '0' })
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'Could not save your course duration.')
@@ -349,7 +348,7 @@ export default function Guide({
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
             {storedPlan && (
-              <button type="button" className={secondaryStyle} onClick={() => setChangePace(false)}>Keep current plan</button>
+              <button type="button" className={secondaryStyle} onClick={() => { setDaysInput(null); setChangePace(false) }}>Keep current plan</button>
             )}
           </div>
           {notice && <p role="alert" className="mt-4 text-sm text-red-700">{notice}</p>}
