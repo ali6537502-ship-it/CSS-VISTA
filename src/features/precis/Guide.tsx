@@ -76,7 +76,7 @@ function WorkingNote({ storageKey }: { storageKey: string }) {
         placeholder="Write your understanding here, or continue reading."
       />
       <p className="mt-2 text-xs leading-5 text-slate-500">
-        This personal note stays in this browser tab. It is not automatically assessed or synced.
+        Your note stays in this browser tab. To save a complete draft to your account, use the writing workspace.
       </p>
       {warning && <p role="alert" className="mt-1 text-xs text-red-700">Storage unavailable. Your note remains visible on this screen.</p>}
     </section>
@@ -149,7 +149,7 @@ function DailyCheck({
         </div>
       )}
       <p className="mt-4 text-xs leading-6 text-slate-500">
-        This checks one authored multiple-choice exercise. It does not score your own Précis writing.
+        This question checks your choice. It does not mark a written précis.
       </p>
     </section>
   )
@@ -276,9 +276,8 @@ export default function Guide({
           Learn Précis at your own pace
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
-          Your complete handbook, in its original order: 22 chapters and three appendices.
-          Choose how many days you want to study. Each day contains the original material,
-          a short practice step and a clear place to continue.
+          Study all 22 chapters and three appendices in the handbook’s original order.
+          Choose your course duration and follow your daily reading and practice.
         </p>
       </section>
 
@@ -288,8 +287,8 @@ export default function Guide({
             {storedPlan ? 'Change your learning duration' : 'How many days do you want to learn Précis?'}
           </h3>
           <p className="mt-2 text-sm leading-7 text-slate-600">
-            The complete handbook stays the same. A shorter course has more reading each day;
-            a longer course gives you smaller daily lessons.
+            All chapters remain in the course. Fewer days mean more reading each day;
+            more days mean shorter sessions.
           </p>
           <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
             {paceChoices.filter((value) => value <= units.length).map((value) => (
@@ -439,8 +438,7 @@ export default function Guide({
                     <h4 className="text-xl font-semibold">Today's practice</h4>
                   </div>
                   <p className="mt-3 text-sm leading-7 text-slate-600">
-                    Return to an earlier section whenever you need to. The question below comes from
-                    the existing reviewed handbook practice bank.
+                    You can revisit any section. This question comes from the existing Précis practice bank.
                   </p>
                   {dayQuestion ? <DailyCheck key={`${attempt}:${dayNumber}:${dayQuestion.id}`} question={dayQuestion} attempt={attempt} refresh={refresh} /> :
                     <p className="mt-4 text-sm text-slate-600">No fixed-answer question is available for this section yet. Continue to the writing workspace for independent practice.</p>}
