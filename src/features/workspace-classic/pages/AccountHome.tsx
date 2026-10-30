@@ -202,7 +202,7 @@ export default function AccountHome() {
     },
 
     { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
-    { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
+    { to: '/account/precis', icon: BookOpen, title: 'CSS Vista Preci Mentor', status: 'Free guided reading, writing practice and corrections' },
     { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
     { to: '/account/handwriting', icon: ScanLine, title: 'Handwritten Paragraph', status: 'Upload, confirm your wording & review feedback' },
     { to: '/account/ask-vista', icon: MessageCircle, title: 'Ask VISTA', status: 'Study help linked to your preparation' },

@@ -25,7 +25,7 @@ function PrecisCourse() {
 
   if (!data) {
     return <div className={panelStyle} role={overview.error ? 'alert' : 'status'}>
-      <p>{overview.error || 'Opening your Précis course…'}</p>
+      <p>{overview.error || 'Opening CSS Vista Preci Mentor…'}</p>
       {overview.error && <button type="button" className={secondaryStyle} onClick={overview.refresh}>
         <RefreshCw className="h-4 w-4" /> Retry
       </button>}
@@ -37,7 +37,7 @@ function PrecisCourse() {
       <div className="flex items-start gap-3">
         <BookOpen className="mt-1 h-6 w-6 shrink-0 text-indigo-700" aria-hidden="true" />
         <div>
-          <h2 className="text-lg font-semibold">Your Précis course</h2>
+          <h2 className="text-lg font-semibold">CSS Vista Preci Mentor</h2>
           <p className="mt-1 text-sm leading-6 text-slate-600">Choose your duration, work through the original handbook and continue where you left off.</p>
         </div>
       </div>
@@ -54,13 +54,13 @@ function PrecisCourse() {
       <Guide key={attempt} data={data} attempt={attempt} progress={progress.data} refresh={progress.refresh} />
     ) : (
       <section className={panelStyle} role="status">
-        <h2 className="text-lg font-semibold">Course access is currently unavailable</h2>
-        <p className="mt-2 text-sm leading-7 text-slate-600">Your recorded lessons and preparation progress are preserved. Check your access under <Link className="underline" to="/account/membership">Membership</Link>.</p>
+        <h2 className="text-lg font-semibold">Course content is temporarily unavailable</h2>
+        <p className="mt-2 text-sm leading-7 text-slate-600">Your saved lessons and writing are preserved. Please retry opening the course.</p>
       </section>
     )}
   </div>
 }
 export default function PrecisPage() {
   const { user } = useAccount()
-  return <AccountPage title="Précis Course" intro="A handbook-based course with a duration you choose, guided lessons and practice."><PrecisCourse key={user?.id}/></AccountPage>
+  return <AccountPage title="CSS Vista Preci Mentor" intro="Study the original handbook at your own pace, practise writing and review corrections."><PrecisCourse key={user?.id}/></AccountPage>
 }

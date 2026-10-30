@@ -41,8 +41,12 @@ try {
     await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
     assert.equal(await page.locator('main textarea, main input[type=file]').count(),0)
   }
+  await page.goto(base+'/account/precis?view=guide')
+  await page.getByRole('heading',{name:'Learn Précis with CSS Vista Preci Mentor'}).waitFor()
+  await page.getByRole('button',{name:'Start reading'}).click()
+  await page.getByText('Day 1 of 14',{exact:true}).waitFor()
   await page.goto(base+'/account/precis?view=guide&attempt='+attempt)
-  await page.getByRole('heading',{name:'Learn Précis at your own pace'}).waitFor()
+  await page.getByRole('heading',{name:'Learn Précis with CSS Vista Preci Mentor'}).waitFor()
   assert.equal(await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).count(),0)
   await page.goto(base+'/account/preparation?attempt='+attempt)
   await page.getByRole('button',{name:'Reading & revision',exact:true}).click()

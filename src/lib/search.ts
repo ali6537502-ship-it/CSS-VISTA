@@ -134,7 +134,7 @@ const localCorpus: SearchDocument[] = [
     snippet: 'CSS Essay, General Science and Ability, Current Affairs, Pakistan Affairs, Islamic Studies, Political Science, Criminology, European History, Environmental Science and Punjabi.',
     link: '/answer-evaluation',
   },
-  { id: 'precis-course', title: 'Précis Course', category: 'Guided Courses', snippet: 'An adjustable-duration handbook course with interactive lessons and practice.', link: '/account/precis' },
+  { id: 'precis-course', title: 'CSS Vista Preci Mentor', category: 'Guided Courses', snippet: 'An adjustable-duration handbook course with interactive lessons and practice.', link: '/account/precis' },
   ...compulsorySubjects.filter((subject) => subject.slug !== 'precis-composition').flatMap((subject) => [
     {
       id: `sub-${subject.slug}`,

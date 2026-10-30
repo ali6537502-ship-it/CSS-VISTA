@@ -12,7 +12,7 @@ export default function CompulsoryList() {
     <div>
       <PageHeader
         title="Compulsory Subjects"
-        description="Six compulsory papers (600 marks). Browse five subject guides and open the separate Précis course for English writing preparation."
+        description="Six compulsory papers (600 marks). Browse five subject guides and open the free CSS Vista Preci Mentor for English writing preparation."
       />
       <div className="mx-auto max-w-7xl px-4 py-10">
         <div className="grid gap-4 md:grid-cols-2">
@@ -50,7 +50,7 @@ export default function CompulsoryList() {
               </div>
             )
           })}
-          <div className="flex flex-col rounded-lg border border-emerald-200 bg-emerald-50/50 p-5"><div className="flex items-start justify-between gap-3"><h2 className="font-display text-lg font-bold text-pine">Précis Course</h2><span className="text-xs text-muted-foreground">English · 100 marks</span></div><p className="mt-3 text-sm leading-7 text-muted-foreground">Learn from the handbook at a pace you choose, with guided lessons, practice and saved course progress.</p><Link to="/account/precis" className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-emerald-800 hover:underline">Open Précis Course <ArrowRight className="h-4 w-4" /></Link></div>
+          <div className="flex flex-col rounded-lg border border-emerald-200 bg-emerald-50/50 p-5"><div className="flex items-start justify-between gap-3"><h2 className="font-display text-lg font-bold text-pine">CSS Vista Preci Mentor</h2><span className="text-xs text-muted-foreground">English · 100 marks</span></div><p className="mt-3 text-sm leading-7 text-muted-foreground">Learn from the handbook at a pace you choose, with guided lessons, practice and saved course progress.</p><Link to="/account/precis" className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-emerald-800 hover:underline">Open CSS Vista Preci Mentor <ArrowRight className="h-4 w-4" /></Link></div>
         </div>
         <SourceNote source={syllabusSource.name} url={syllabusSource.url} date={syllabusSource.lastUpdated} />
       </div>
