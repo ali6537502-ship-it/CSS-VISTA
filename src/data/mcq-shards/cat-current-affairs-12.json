@@ -1,0 +1,32 @@
+[
+  {
+    "id": "current-affairs-20261030-senate-gas-pricing-bill",
+    "q": "Which provision would the OGRA (Amendment) Bill introduced in Pakistan's Senate on 30 October 2026 insert into the OGRA Ordinance, 2002?",
+    "o": [
+      "Section 6B",
+      "Section 8A",
+      "Section 12C",
+      "Section 19D"
+    ],
+    "a": 1,
+    "e": "The proposed new Section 8A concerns quarterly gas-cost reviews. The bill was introduced, not enacted. Sources: Senate of Pakistan; Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://senate.gov.pk/uploads/documents/1793353102_170.pdf"
+  },
+  {
+    "id": "current-affairs-20261030-global-port-workers-strike",
+    "q": "According to Reuters, coordinated dockworkers' strikes on 30 October 2026 extended to ports in how many countries?",
+    "o": [
+      "14 countries",
+      "18 countries",
+      "22 countries",
+      "29 countries"
+    ],
+    "a": 2,
+    "e": "Reuters reported action across 113 ports in 22 countries, with disruptions including Greek ferry services. Source: Reuters, 30 October 2026.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/world-at-work/dockworkers-strike-in-europe-beyond-against-arms-shipments-war-deaths-2026-10-30/"
+  }
+]

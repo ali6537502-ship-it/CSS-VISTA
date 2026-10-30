@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 649,
+  "count": 651,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4542,6 +4542,20 @@
     {
       "id": "current-affairs-archive-20261030-binance-cyber-investigation",
       "text": "Analysts linked the Binance incident to North Korea-associated TraderTraitor on 30 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261030-senate-gas-pricing-bill",
+      "text": "The OGRA (Amendment) Bill introduced in Pakistan's Senate on 30 October 2026 proposes inserting Section 8A for quarterly gas-cost reviews.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261030-global-port-workers-strike",
+      "text": "Coordinated dockworkers' strikes on 30 October 2026 affected 113 ports in 22 countries, Reuters reported.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

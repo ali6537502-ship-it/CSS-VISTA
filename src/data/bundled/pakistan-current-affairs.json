@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 260,
+  "count": 261,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1819,6 +1819,13 @@
     {
       "id": "pakistan-current-affairs-20261030-pak-sbp-omo",
       "text": "SBP injected approximately Rs1.076 trillion through conventional and Islamic OMOs on 30 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261030-senate-gas-pricing-bill",
+      "text": "The OGRA (Amendment) Bill introduced in Pakistan's Senate on 30 October 2026 proposes inserting Section 8A for quarterly gas-cost reviews.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-10-30",
-  "published_at": "2026-10-30T19:05:40+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Evening Update (00:00–19:05 PKT; preliminary)",
+  "published_at": "2026-10-30T19:28:49+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Evening Update (00:00–19:28 PKT; preliminary)",
   "stories": [
     {
       "id": "ca-2026-10-30-pak-singapore-talks",
@@ -488,6 +488,133 @@
           "publisher": "Reuters",
           "title": "Blockchain analysis firm TRM says North Korea behind Binance crypto theft",
           "url": "https://www.reuters.com/legal/government/blockchain-analysis-firm-trm-says-north-korea-behind-binance-crypto-theft-2026-10-30/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-senate-gas-pricing-bill",
+      "category": "Pakistan — Energy Regulation",
+      "headline": "Senate receives proposal for quarterly natural-gas price reviews",
+      "summary": "On 30 October 2026, a bill was introduced in Pakistan's Senate proposing quarterly review of certain natural-gas price components; the measure had not been enacted.",
+      "what_happened": "Minister of State for Interior Tallal Chaudhry introduced the Oil and Gas Regulatory Authority (Amendment) Bill, 2026. The proposal would insert Section 8A into the OGRA Ordinance, 2002, permitting quarterly assessment of gas licensees' revenue requirements attributable to wellhead gas and imported gas, including RLNG. It also proposes that the federal government advise retail category prices within 30 days of OGRA's advice and that public hearings not be held for revisions under proposed Section 8A. Introduction is not passage or implementation.",
+      "background": "Pakistan's natural-gas tariff framework faces pressure from exchange-rate changes, imported LNG costs and accumulated gas-sector circular debt. The bill's stated objective is faster adjustment to input costs; the proposed absence of public hearings raises a separate question about regulatory transparency.",
+      "why_it_matters": "If adopted, the change could alter the frequency of gas tariff adjustments and the balance between cost recovery and public participation. No quarterly mechanism is yet in force on the basis of this introduction alone.",
+      "pakistan_perspective": "The proposal affects households, industrial gas consumers, gas utilities and energy-sector financing. Parliamentary scrutiny should assess consumer safeguards, procedural transparency and circular-debt implications.",
+      "regional_implications": "Imported LNG prices and regional supply disruptions are important variables in Pakistan's gas costs.",
+      "global_implications": "The proposal illustrates how energy-importing states respond to exchange-rate and global gas-price volatility.",
+      "key_takeaways": [
+        "The OGRA (Amendment) Bill, 2026 was introduced in the Senate on 30 October; it was not enacted at introduction.",
+        "Proposed Section 8A would allow quarterly assessment of specified gas-cost components.",
+        "The proposal would omit public hearings for price revisions under the new section."
+      ],
+      "facts": [
+        "The 30 October 2026 OGRA amendment proposal would insert Section 8A into the OGRA Ordinance, 2002.",
+        "The bill proposes quarterly review of specified natural-gas cost components, not an already-approved price increase."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "OGRA amendment proposal introduced in the Senate, according to Dawn's report and the Senate-hosted bill document."
+        }
+      ],
+      "what_to_watch": [
+        "Whether the Senate refers, amends or passes the bill and whether the no-hearing clause survives scrutiny.",
+        "Any subsequent OGRA and federal government decisions on gas tariffs."
+      ],
+      "question_angles": [
+        "Assess the trade-off between tariff cost recovery and transparency in energy regulation.",
+        "Explain the relationship between LNG import costs and gas-sector circular debt."
+      ],
+      "topics": [
+        "Energy regulation",
+        "OGRA",
+        "Natural gas pricing",
+        "Parliamentary legislation",
+        "Circular debt"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Senate of Pakistan",
+        "Oil and Gas Regulatory Authority"
+      ],
+      "sources": [
+        {
+          "publisher": "Senate of Pakistan",
+          "title": "Oil and Gas Regulatory Authority (Amendment) Bill, 2026 (document hosted by the Senate)",
+          "url": "https://senate.gov.pk/uploads/documents/1793353102_170.pdf"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Bill proposing quarterly gas pricing lands in Senate",
+          "url": "https://www.dawn.com/news/2040979/bill-proposing-quarterly-gas-pricing-lands-in-senate",
+          "published_at": "2026-10-30T18:50:00+05:00"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-global-port-workers-strike",
+      "category": "World — Trade and Maritime Security",
+      "headline": "Dockworkers strike across 113 ports in 22 countries over war-zone shipping",
+      "summary": "Reuters reported on 30 October 2026 that coordinated strikes affected 113 ports across 22 countries, with workers protesting arms shipments and the dangers facing seafarers in conflict zones.",
+      "what_happened": "Dockworkers and seafarers staged coordinated action at ports including Piraeus, Valencia, Le Havre, Genoa, Tangier Med and Nhava Sheva. Reuters reported disruptions to Greek ferry services and cargo operations at Piraeus, where about 3,000 workers joined the walkout. More than 25 unions supported the action, which also demanded better pay, working conditions and medical support for vessels in war zones. Campaigners projected billions of dollars of disrupted freight, but Reuters explicitly said it could not independently verify that impact.",
+      "background": "Maritime workers have raised concerns about attacks on commercial shipping in the Gulf and Black Sea. Unions from several European countries issued an Istanbul Declaration in May 2026 opposing the use of ports to move weapons to war zones.",
+      "why_it_matters": "The action links armed conflict, freedom of navigation, labour rights and supply-chain resilience. The scale of participation should not be confused with independently verified estimates of lost cargo value.",
+      "pakistan_perspective": "Pakistan relies on seaborne energy imports and container trade. International port disruptions can affect shipping schedules, insurance costs and supply chains serving Karachi and Port Qasim.",
+      "regional_implications": "The participation of India's Nhava Sheva and Morocco's Tangier Med shows that maritime labour action extended beyond Europe.",
+      "global_implications": "Cross-border labour coordination can affect shipping logistics, particularly when conflict threatens maritime personnel and transit routes.",
+      "key_takeaways": [
+        "Reuters reported strikes across 113 ports in 22 countries on 30 October 2026.",
+        "More than 25 unions backed the action; Piraeus saw cargo and ferry disruption.",
+        "Projected container and freight losses reported by campaigners were not independently verified by Reuters."
+      ],
+      "facts": [
+        "The 30 October 2026 coordinated dockworkers' action covered 113 ports in 22 countries, according to Reuters.",
+        "Greek ferry services were disrupted during the strike at Piraeus."
+      ],
+      "timeline": [
+        {
+          "date": "2026-05",
+          "text": "Dockworkers' unions issued the Istanbul Declaration against weapons shipments to war zones."
+        },
+        {
+          "date": "2026-10-30",
+          "text": "Coordinated strikes took place at ports in 22 countries."
+        }
+      ],
+      "what_to_watch": [
+        "Independent estimates of actual shipping delays and cargo losses.",
+        "Further union action and policy responses on maritime worker protection."
+      ],
+      "question_angles": [
+        "Explain how conflict risk and labour action affect international maritime trade.",
+        "Discuss maritime security and supply-chain vulnerability for import-dependent economies."
+      ],
+      "topics": [
+        "Maritime security",
+        "International trade",
+        "Labour rights",
+        "Global supply chains",
+        "Freedom of navigation"
+      ],
+      "countries": [
+        "Greece",
+        "India",
+        "Morocco",
+        "Italy",
+        "France",
+        "Spain"
+      ],
+      "organisations": [
+        "Dockworkers' unions"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Dockworkers strike in Europe and beyond against arms shipments, war deaths",
+          "url": "https://www.reuters.com/business/world-at-work/dockworkers-strike-in-europe-beyond-against-arms-shipments-war-deaths-2026-10-30/",
+          "published_at": "2026-10-30T19:16:00+05:00"
         }
       ]
     }
