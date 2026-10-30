@@ -48,7 +48,7 @@ const clean=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').repl
 const storeKey='cssvista:tool:gsa-tutor:v1';
 const legacyKey='cssvista-gsa-studio-v2';
 let saved={completed:{},revisit:{},bookmarks:{},last:'c3-s3-3',plan:null};
-try{const raw=localStorage.getItem(storeKey)||localStorage.getItem(legacyKey);if(raw)saved={...saved,...JSON.parse(raw)}}catch{}
+try{let raw=localStorage.getItem(storeKey);if(!raw){raw=localStorage.getItem(legacyKey);if(raw){localStorage.setItem(storeKey,raw);localStorage.removeItem(legacyKey)}}if(raw)saved={...saved,...JSON.parse(raw)}}catch{}
 function persist(){try{localStorage.setItem(storeKey,JSON.stringify(saved));window.dispatchEvent(new Event('cssvista:progress-changed'));if(window.parent!==window)window.parent.postMessage({type:'cssvista:gsa:changed'},location.origin)}catch{const note=document.querySelector('.floating-note');if(note)note.textContent='Browser storage is unavailable. Your progress cannot be saved.'}}
 const allSections=DATA.chapters.flatMap(c=>c.sections.map(s=>({...s,chapter:c.id,chapterTitle:c.title,part:c.part})));
 const byId=new Map(allSections.map(s=>[s.id,s]));
