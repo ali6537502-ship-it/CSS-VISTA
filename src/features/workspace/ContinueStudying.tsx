@@ -17,7 +17,7 @@ export default function ContinueStudying({ greeting }: { greeting?: string }) {
       <h1>{greeting || 'Make space for your next big idea.'}</h1>
       <p className="ws-hero-description">Your ambitions, one focused session at a time.</p>
       <div className="ws-next-activity"><span className="ws-icon-box">{candidate ? <BookOpen size={19}/> : <CalendarDays size={19}/>}</span><div><small>{candidate ? 'CONTINUE READING' : 'YOUR NEXT STUDY SESSION'}</small><h2>{candidate?.title || task?.topic || 'Let’s give today a clear direction.'}</h2>{task && !candidate && <p>{task.subject} · {task.minutes} min estimated</p>}</div></div>
-      <Link className="ws-action" to={candidate ? `/book-summaries/${candidate.slug}` : '/account/tasks'}>{candidate ? 'Resume reading' : 'Open my study plan'}<ArrowUpRight size={18}/></Link>
+      <Link className="ws-action" to={candidate ? `/book-summaries/${candidate.slug}` : task?.syllabusItemId.startsWith('pms-punjab:') ? '/account/tasks?exam=pms-punjab' : '/account/tasks'}>{candidate ? 'Resume reading' : 'Open my study plan'}<ArrowUpRight size={18}/></Link>
       {candidate && <p className="ws-hero-footnote">Your saved reading position is ready. Reading is separate from assessed progress.</p>}
     </div><StudyArtwork/>
   </section>

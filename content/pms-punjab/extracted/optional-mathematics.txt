@@ -1,0 +1,78 @@
+               PUNJAB PUBLIC SERVICE COMMISSION
+       COMBINED COMPETITIVE EXAMINATION (CCE) SYLLABUS
+
+
+                                  MATHEMATICS
+Total Marks: 100
+
+
+                                            Topics
+
+
+  1.   CALCULUS AND ANALYTICAL MATHEMATICS
+         • Differential calculus: limits, continuity, differentiability, the Mean Value
+           Theorem, maxima and minima.
+         • Integral calculus: indefinite and definite integrals, the Fundamental Theorem
+           of Calculus.
+         • Sequences and Series: convergence, tests for convergence, absolute and
+           conditional convergence, and power series.
+         • Vector calculus: vector-valued functions, vector fields, line integrals,
+           divergence and curl.
+         • Analytic and vector geometry: straight lines, planes, circles, and spheres.
+
+  2.   ANALYSIS, COMPLEX ANALYSIS, AND TOPOLOGY
+         • Real analysis: the real number system, suprema and infima, sequences,
+           subsequences, and Cauchy sequences.
+         • Metric spaces: metric spaces, open and closed sets, convergence,
+           completeness, and continuous mappings.
+         • Topology: topological spaces, bases, open and closed sets and Hausdorff
+           spaces.
+         • Complex analysis: complex numbers, complex functions, limits, continuity,
+           differentiability, analytic functions, and the Cauchy-Riemann equations.
+
+  3.   ALGEBRA AND DISCRETE MATHEMATICS
+         • Linear Algebra: matrices, determinants, systems of linear equations, rank,
+           vector spaces, subspaces, basis, dimension, linear transformations,
+           eigenvalues, eigenvectors.
+         • Abstract algebra: binary operations, groups, subgroups, cyclic groups, cosets,
+           and Lagrange's theorem etc.
+         • Set Theory and discrete mathematics: sets, relations, functions, mathematical
+           logic, and mathematical induction.
+
+  4.   DIFFERENTIAL EQUATIONS AND MATHEMATICAL METHODS
+          • Ordinary differential equations: first-order differential equations including
+            separable, homogeneous, linear, Bernoulli and exact equations.
+          • Partial differential equations: formation of partial differential equations
+            (PDEs), first-order PDEs, and second-order PDEs.
+
+
+                                                                                  Page 1 of 2
+     5.    NUMERICAL MATHEMATICS
+             • Numerical Errors and Approximation.
+             • Bisection, Newton-Raphson, Secant, and fixed-point methods.
+             • Numerical solutions of systems of linear equations.
+             • Gaussian elimination, Jacobi, and Gauss-Seidel methods.
+
+
+Suggested readings:
+
+1.        Calculus and Analytical Mathematics: James Stewart, Calculus
+2.        Algebra and Discrete Mathematics: David C. Lay, Linear Algebra and Its Applications
+3.        Analysis, Complex Analysis and Topology: Stephen Abbott, Understanding Analysis
+4.        Differential Equations and Mathematical Methods: Boyce & DiPrima, Elementary
+          Differential Equations and Boundary Value Problems
+5.        Numerical Mathematics: Burden & Faires, Numerical Analysis
+
+Note:       The above list is only suggestive and not exhaustive. Candidates may consult other
+            standard books and relevant material covering the prescribed syllabus.
+
+
+
+
+                                         End of Document
+
+
+
+
+                                                                                      Page 2 of 2
+

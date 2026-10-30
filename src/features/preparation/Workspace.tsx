@@ -1,7 +1,7 @@
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
 import { useProReleasePaused } from '@/features/membership/proReleaseContext'
-import { useState, type ReactNode } from 'react'
+import { lazy, Suspense, useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useLearning, type Attempt } from '@/features/learning/api'
@@ -13,6 +13,7 @@ import TopicWorkspace from '@/features/topics/Workspace'
 import { ProBadge } from '@/features/membership/AccountSections'
 import { PlanHistory, Readiness, Reviews } from './Reports'
 import '@/features/planner/planner.css'
+const ResetPanel = lazy(() => import('@/features/preparation-reset/ResetPreparationPanel'))
 const views = [
   ['plan', 'Today’s plan'],
   ['coverage', 'Coverage'],
@@ -139,6 +140,7 @@ function PreviewPreparationWorkspace({
       {view === 'settings' ? (
         <div className="space-y-5">
           {settings}
+          <Suspense fallback={<p role="status">Loading reset options…</p>}><ResetPanel attemptId={attempt.id}/></Suspense>
           <p className="text-sm leading-6 text-slate-500">
             Changes to study time and selected subjects produce a proposal for review. Existing
             completed work is preserved.

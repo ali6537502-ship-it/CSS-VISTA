@@ -23,6 +23,7 @@ export function activeSection(path: string) {
 }
 export type Feature = { id: string; title: string; description: string; to: string; category: string; keywords: string }
 const extra: Feature[] = [
+  { id: 'pms-punjab', title: 'PMS Punjab Planner', description: 'Explore the revised PPSC syllabus and build an editable daily topic schedule.', to: '/account/tasks?exam=pms-punjab&view=syllabus', category: 'Study Planning', keywords: 'pms punjab provincial management services ppsc schedule syllabus' },
   { id: 'daily-pdfs', title: 'Current Affairs Daily PDFs', description: 'Browse published daily PDF editions.', to: '/current-affairs-daily', category: 'Current Affairs', keywords: 'news newspaper pdf' },
   { id: 'daily-english', title: 'Daily English', description: 'Your daily language activities.', to: '/account/english', category: 'Grammar', keywords: 'vocabulary english' },
   { id: 'vista-resources', title: 'My Vista Resources', description: 'Your account resource shelves, free books and downloads.', to: '/account/resources', category: 'Resources', keywords: 'books downloads library' },
@@ -48,4 +49,9 @@ export function featureState(feature: Feature, paused: boolean): 'paused' | 'pro
 export function searchFeatures(query: string) {
   const words = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().split(/\s+/)
   return features.filter(f => words.every(w => `${f.title} ${f.description} ${f.category} ${f.keywords}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(w)))
+}
+
+/** Paused tools do not appear in discovery; route/API guards remain authoritative. */
+export function discoverFeatures(query: string, paused: boolean) {
+  return searchFeatures(query).filter(feature => featureState(feature, paused) !== 'paused')
 }

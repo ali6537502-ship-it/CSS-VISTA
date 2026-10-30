@@ -1,3 +1,4 @@
+import { bindPreparationStorage, preparationGeneration, setPreparationGeneration } from './preparationStorage'
 import type { AccountUser } from './accountContext'
 type ApiFailure = { error?: string; message?: string }
 export const PROFILE_UPDATED_EVENT = 'cssvista:profile-updated'
@@ -5,7 +6,9 @@ export const ACCOUNT_EXPIRED_EVENT = 'cssvista:account-expired'
 export const accountServiceConfigured = true
 export const hostingerAccountBackendEnabled = true
 let accountUserId: string | null = null
-export function setHostingerAccountUser(id: string | null) { accountUserId = id }
+export function currentPreparationGeneration() { return preparationGeneration() }
+export function setHostingerPreparationGeneration(owner: string, value: string | null) { if (owner === accountUserId) setPreparationGeneration(owner, value) }
+export function setHostingerAccountUser(id: string | null) { accountUserId = id; bindPreparationStorage(id) }
 export function currentHostingerAccountUser() { return accountUserId }
 export function csrfToken() {
   const match = document.cookie.match(/(?:^|;\s*)cssv_csrf=([^;]+)/)
@@ -22,10 +25,13 @@ export async function hostingerRequest<T>(path: string, init: RequestInit = {}):
   headers.set('Accept', 'application/json')
   if (init.body && !(init.body instanceof FormData)) headers.set('Content-Type', 'application/json')
   if (accountUserId && !headers.has('X-CSSV-User') && (!path.startsWith('auth/') || ['auth/change-password.php', 'auth/logout.php'].includes(path))) headers.set('X-CSSV-User', accountUserId)
+  if (preparationGeneration() && headers.get('X-CSSV-User') === accountUserId) headers.set('X-CSSV-Preparation-Generation', preparationGeneration()!)
   if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) {
     const token = csrfToken()
     if (token) headers.set('X-CSRF-Token', token)
   }
+  const requestOwner = headers.get('X-CSSV-User'), generationAtStart = preparationGeneration()
+  const resetSensitive = /^(?:student\/(?:progress|planner|grammar)\.php|factbook\/|current-affairs\.php)/.test(path)
   const response = await fetch(`/api/${path}`, { ...init, method, headers, credentials: 'same-origin', cache: 'no-store' })
   const data = await response.json().catch(() => ({})) as T & ApiFailure
   if (!response.ok) {
@@ -33,6 +39,8 @@ export async function hostingerRequest<T>(path: string, init: RequestInit = {}):
     if (data.error === 'profile_incomplete') window.dispatchEvent(new CustomEvent(PROFILE_UPDATED_EVENT))
     throw new HostingerApiError(data.message || 'The account service could not complete this request. Please try again.', response.status, data.error)
   }
+  if (requestOwner && requestOwner !== accountUserId) throw new HostingerApiError('Your account changed. Reopen the current account.', 409, 'account_changed')
+  if (resetSensitive && generationAtStart !== preparationGeneration()) throw new HostingerApiError('Preparation was reset while this request was loading. Open the current records again.', 409, 'preparation_reset_required')
   return data
 }
 export type AccountSession = { ok: boolean; authenticated: boolean; provider: 'hostinger'; user?: AccountUser }
@@ -50,7 +58,7 @@ export async function logoutHostinger() {
   await hostingerRequest<{ ok: boolean }>('auth/logout.php', { method: 'POST', body: '{}' })
 }
 export function loadHostingerProgress(userId: string) {
-  return hostingerRequest<{ payload: Record<string, unknown> }>('student/progress.php', { headers: { 'X-CSSV-User': userId } })
+  return hostingerRequest<{ payload: Record<string, unknown>; reset_control?: import('@/features/preparation-reset/model').ResetControl | null }>('student/progress.php', { headers: { 'X-CSSV-User': userId } })
 }
 export function saveHostingerProgress(payload: Record<string, unknown>, userId: string) {
   return hostingerRequest<{ ok: boolean; updated_at: string }>('student/progress.php', { method: 'PUT', headers: { 'X-CSSV-User': userId }, body: JSON.stringify({ payload }) })

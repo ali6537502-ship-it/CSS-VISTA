@@ -1,3 +1,4 @@
+import { preparationDeviceKey } from '../../lib/preparationStorage.ts'
 import { normalizePractice, type LabRound, type LabResult, type Review } from './practice.ts'
 
 /** Device-local course state. Account keys never adopt unowned browser history. */
@@ -36,7 +37,7 @@ export interface DayDefinition {
   examples: unknown[]
   checklist: unknown[]
 }
-export function courseKey(userId?: string, attemptId?: string) { return `cssvista:grammar-course:v4:${userId ? `account:${userId}${attemptId ? `:attempt:${attemptId}` : ''}` : 'guest'}` }
+export function courseKey(userId?: string, attemptId?: string) { const key = `cssvista:grammar-course:v4:${userId ? `account:${userId}${attemptId ? `:attempt:${attemptId}` : ''}` : 'guest'}`; return userId ? preparationDeviceKey(key, userId) : key }
 export function emptySession(): Session { return { step: 0, position: {}, warmUp: {}, drill: {}, first: {}, drafts: {}, writing: '', checks: [], revealed: [], recorded: false } }
 function record(value: unknown): Record<string, unknown> { return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {} }
 function integer(value: unknown, min: number, max: number): value is number { return typeof value === 'number' && Number.isInteger(value) && value >= min && value <= max }

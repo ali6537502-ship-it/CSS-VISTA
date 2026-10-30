@@ -92,3 +92,15 @@ test('a literal null string is preserved separately from an intentional discard'
   writeLocalStudySession('cssvista:mock-student-name', null, 'A')
   assert.equal(readLocalStudySession('cssvista:mock-student-name', 'A'), null)
 })
+
+test('a full preparation reset prevents stale callbacks and legacy session recovery', () => {
+  const { storage } = storageFixture()
+  bindLegacyStudySessions('A')
+  writeLocalStudySession(timer,'A before reset','A',null)
+  storage.setItem('cssvista:study-reset:v1:A','reset-one')
+  assert.equal(readLocalStudySession(timer,'A'),null)
+  assert.equal(writeLocalStudySession(timer,'stale callback','A',null),false)
+  assert.equal(writeLocalStudySession(timer,'new session','A','reset-one'),true)
+  assert.equal(readLocalStudySession(timer,'A'),'new session')
+  assert.equal(readLocalStudySession(timer,'B'),null)
+})

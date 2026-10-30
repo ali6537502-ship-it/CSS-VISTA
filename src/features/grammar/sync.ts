@@ -1,7 +1,8 @@
+import { preparationDeviceKey } from '../../lib/preparationStorage.ts'
 import type { CourseState } from './state.ts'
 export type PendingSave = { request_id: string; attempt_id: string; expected_version: number; state: CourseState; import_browser: boolean }
 export type SyncEnvelope = { version: number; state: CourseState; dirty: boolean; importBrowser: boolean; pending?: PendingSave }
-export function syncKey(userId: string, attemptId: string) { return `cssvista:grammar-sync:v1:${userId}:${attemptId}` }
+export function syncKey(userId: string, attemptId: string) { return preparationDeviceKey(`cssvista:grammar-sync:v1:${userId}:${attemptId}`, userId) }
 export function attemptChoiceKey(userId: string) { return `cssvista:grammar-attempt-choice:v1:${userId}` }
 export function readAttemptChoice(storage: Pick<Storage, 'getItem'>, userId?: string): string | undefined {
   if (!userId) return

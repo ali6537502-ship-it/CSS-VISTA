@@ -1,3 +1,5 @@
+import { preparationDeviceKey, preparationWriteCurrent } from '@/lib/preparationStorage'
+import { currentHostingerAccountUser } from '@/lib/hostingerApi'
 import { type HostingerDataClient, getHostingerDataClient, factbookAction, factbookMediaUrl } from '@/lib/hostingerData'
 import { createEmptyContent } from './entryTypes'
 import { safeWebUrl, sanitizePlainText, sanitizeRichText } from './safety'
@@ -531,10 +533,11 @@ export async function restoreEntryRevision(userId: string, entryId: string, revi
 }
 
 export function factbookDraftKey(userId: string, entryId = 'new') {
-  return `cssvista:factbook:draft:${userId}:${entryId}`
+  return preparationDeviceKey(`cssvista:factbook:draft:${userId}:${entryId}`, userId)
 }
 
 export function saveLocalFactbookDraft(userId: string, draft: FactbookEntryDraft) {
+  if (currentHostingerAccountUser() !== userId || !preparationWriteCurrent()) return
   try { localStorage.setItem(factbookDraftKey(userId, draft.id), JSON.stringify({ draft, savedAt: new Date().toISOString() })) } catch { /* Browser storage is a best-effort safety net. */ }
 }
 

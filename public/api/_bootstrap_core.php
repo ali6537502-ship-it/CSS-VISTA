@@ -298,6 +298,8 @@ function cssv_require_user(PDO $pdo, bool $requireCompleteProfile = true): array
         require_once __DIR__ . '/_profile.php';
         if (!cssv_profile_status(cssv_profile_for_user($pdo, (string)$session['user_id']))['complete']) cssv_fail('Complete all 12 profile checks to unlock your account services.', 403, 'profile_incomplete');
     }
+    require_once __DIR__ . '/_preparation_reset_state.php';
+    cssv_preparation_guard($pdo, (string)$session['user_id']);
     return $session;
 }
 

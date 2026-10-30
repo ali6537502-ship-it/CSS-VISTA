@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/_bootstrap.php';
+require_once dirname(__DIR__) . '/_preparation_reset_state.php';
 cssv_require_method('GET', 'PUT', 'DELETE');
 
 $pdo = cssv_db();
@@ -13,8 +14,11 @@ if ($method === 'GET') {
     $stmt->execute([$userId]);
     $row = $stmt->fetch();
     $payload = $row ? json_decode((string)$row['payload'], true) : [];
+    $control = cssv_reset_control(is_array($payload) ? $payload : []);
+    if (is_array($payload)) unset($payload[CSSV_RESET_CONTROL_KEY]);
     cssv_json([
         'ok' => true,
+        'reset_control' => $control['generation'] === null ? null : $control,
         'payload' => is_array($payload) ? $payload : [],
         'client_updated_at' => $row['client_updated_at'] ?? null,
         'updated_at' => $row['updated_at'] ?? null,
@@ -25,9 +29,13 @@ cssv_require_csrf($session);
 if ($method === 'DELETE') {
     $pdo->beginTransaction();
     try {
-        foreach (['question_attempts', 'quiz_attempts', 'student_activity', 'student_progress'] as $table) {
+        foreach (['question_attempts', 'quiz_attempts', 'student_activity'] as $table) {
             $pdo->prepare('DELETE FROM ' . $table . ' WHERE user_id=?')->execute([$userId]);
         }
+        $existingQuery = $pdo->prepare('SELECT payload FROM student_progress WHERE user_id=?'); $existingQuery->execute([$userId]); $previousPayload = json_decode((string)($existingQuery->fetchColumn() ?: '{}'), true); $previousControl = cssv_reset_control(is_array($previousPayload) ? $previousPayload : []);
+        $event = ['scope'=>'preparation','keep_settings'=>false,'id'=>cssv_uuid_v4(),'at'=>gmdate('Y-m-d\TH:i:s\Z')];
+        $payload = [CSSV_RESET_CONTROL_KEY=>['revision'=>(int)($previousControl['revision']??0)+1,'generation'=>$event['id'],'events'=>[$event],'full_reset'=>$event['id']]];
+        $pdo->prepare('INSERT INTO student_progress(user_id,payload,client_updated_at) VALUES(?,?,NOW(6)) ON DUPLICATE KEY UPDATE payload=VALUES(payload),client_updated_at=VALUES(client_updated_at)')->execute([$userId,json_encode($payload,JSON_THROW_ON_ERROR)]);
         $pdo->commit();
     } catch (Throwable $error) {
         $pdo->rollBack();
@@ -42,6 +50,13 @@ $payload = $body['payload'] ?? null;
 if (!is_array($payload) || ($payload !== [] && array_is_list($payload))) {
     cssv_fail('Progress data is invalid.', 422, 'invalid_progress');
 }
+// Reset history is server-owned and cannot be removed or forged by a progress snapshot.
+unset($payload[CSSV_RESET_CONTROL_KEY]);
+$previous = $pdo->prepare('SELECT payload FROM student_progress WHERE user_id=?');
+$previous->execute([$userId]); $raw = $previous->fetchColumn();
+$stored = $raw ? json_decode($raw, true) : [];
+$control = cssv_reset_control(is_array($stored) ? $stored : []);
+if ($control['generation'] !== null) $payload[CSSV_RESET_CONTROL_KEY] = $control;
 $encoded = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 if (!is_string($encoded) || strlen($encoded) > 3 * 1024 * 1024) {
     cssv_fail('Progress data is too large.', 413, 'progress_too_large');

@@ -26,11 +26,12 @@ const selected=await create(), other=await create()
 try {
   php('tests/workspace-preview/fixture.php','select',selected.email)
   assert.equal((await call('auth/workspace-preview.php')).response.status,401)
+  assert.deepEqual((await call('workspace-release.php')).data,{enabled:true})
   const allowed=await call('auth/workspace-preview.php',selected)
   assert.equal(allowed.response.status,200); assert.deepEqual(allowed.data,{enabled:true,user_id:selected.id})
   assert.match(allowed.response.headers.get('cache-control'),/no-store/)
   assert.match(allowed.response.headers.get('vary'),/Cookie/)
-  assert.deepEqual((await call('auth/workspace-preview.php',other)).data,{enabled:false,user_id:other.id})
+  assert.deepEqual((await call('auth/workspace-preview.php',other)).data,{enabled:true,user_id:other.id})
   assert.equal((await call('auth/workspace-preview.php',{...selected,id:other.id})).response.status,409)
   assert.equal((await call('auth/workspace-preview.php',selected,'POST',{})).response.status,405)
   assert.equal((await call('_workspace_preview.php',selected)).response.status,404)
@@ -41,5 +42,5 @@ try {
   assert.equal((await call('auth/workspace-preview.php',selected)).data.enabled,true,'The pilot must follow the existing confirmation-optional native sign-in policy')
   php('tests/current-affairs/setup.php','expire',selected.id)
   assert.equal((await call('auth/workspace-preview.php',selected)).response.status,401)
-  console.log('PASS native preview selector: selected/other/guest/expired and existing confirmation-optional sign-in, owner binding, GET-only, no-store, private helper denial, kill switch; no entitlement mutation.')
-} finally { php('tests/workspace-preview/fixture.php','off') }
+  console.log('PASS native public rollout selector: both accounts/guest/expired and existing confirmation-optional sign-in, owner binding, GET-only, no-store, private helper denial, kill switch; no entitlement mutation.')
+} finally { php('tests/workspace-preview/fixture.php','select',other.email) }

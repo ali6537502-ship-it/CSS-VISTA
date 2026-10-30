@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { RESET_CHANGED_EVENT } from '@/features/preparation-reset/model'
 import { useCallback, useState } from 'react'
 import { useAccount } from '@/lib/accountContext'
 import { HostingerApiError } from '@/lib/hostingerApi'
@@ -128,6 +130,11 @@ export function usePreparationAction(attempt: string, onSaved: () => void, endpo
     setPending(null)
     setUnaccepted(false)
   }, [key])
+  useEffect(() => {
+    const reset = (event: Event) => { if ((event as CustomEvent<{ owner: string }>).detail?.owner === id) { clear(); setMessage('This schedule was reset. Review the current plan before saving more work.'); setError('') } }
+    window.addEventListener(RESET_CHANGED_EVENT, reset)
+    return () => window.removeEventListener(RESET_CHANGED_EVENT, reset)
+  }, [id, clear])
   const accepted = () => {
     clear()
     setMessage('Saved to this preparation attempt.')

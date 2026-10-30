@@ -1,3 +1,4 @@
+import PmsPerformance from '@/features/planner/PmsPerformance'
 import PerformanceVisual from '@/features/workspace/PerformanceVisual'
 import { SubjectOverview } from './Subjects'
 import AttemptContinuation from '@/features/preparation/Continuation'
@@ -26,13 +27,14 @@ export default function AccountProgress() {
       }
     >
       <PerformanceVisual />
+      <PmsPerformance/>
       <div className="ws-panel mb-6"><div className="flex flex-wrap gap-4 text-sm font-semibold"><a className="underline min-h-11 inline-flex items-center" href="#attempts">All recorded attempts</a><Link className="underline min-h-11 inline-flex items-center" to="/mistakes">Recorded errors & revision</Link><Link className="underline min-h-11 inline-flex items-center" to="/account/subjects">Selected subject coverage</Link></div></div>
       <AttemptContinuation />
       <SectionTitle>Where you stand</SectionTitle>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Metric label="Target exam" value={examYear ? `CSS ${examYear}` : 'Not set'} detail={examYear ? 'From your planner date' : 'Set an exam date in Planner'} />
         <Metric label="Days remaining" value={examDays ?? '—'} detail={examDays === null ? 'Set your exam date first' : 'Based on your planner date'} />
-        <Metric label="Syllabus progress" value={snapshot.syllabusCompleted} detail="Manually completed tracked items; not assessed mastery" />
+        <Metric label="CSS syllabus progress" value={snapshot.syllabusCompleted} detail="Manually completed tracked items; not assessed mastery" />
         <Metric label="Visit streak" value={`${snapshot.stats.streak}d`} detail={snapshot.stats.attempted ? `${snapshot.stats.accuracy}% overall MCQ accuracy` : 'No recorded MCQ attempts'} />
         <Metric label="MCQs attempted" value={snapshot.stats.attempted.toLocaleString()} detail={snapshot.stats.attempted ? `${snapshot.stats.accuracy}% accuracy` : 'No recorded MCQ attempts'} />
         <Metric label="Saved resources" value={snapshot.savedResources} detail="Bookmarks and saved answers" />

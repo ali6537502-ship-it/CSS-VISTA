@@ -1,3 +1,6 @@
+import { useAccount } from '@/lib/accountContext'
+import { currentHostingerAccountUser } from '@/lib/hostingerApi'
+import { localStudySessionEpoch } from '@/lib/localStudySession'
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router'
 import { saveStudySession, type StudySession } from '@/lib/progress'
@@ -50,6 +53,8 @@ function createSession(pathname: string): StudySession {
 
 export default function StudyActivityTracker() {
   const { pathname } = useLocation()
+  const { user } = useAccount()
+  const owner = user?.id ?? null
   const lastInteractionRef = useRef(0)
 
   useEffect(() => {
@@ -62,13 +67,14 @@ export default function StudyActivityTracker() {
   useEffect(() => {
     if (!shouldTrack(pathname)) return
 
+    const epoch = localStudySessionEpoch(owner)
     let session = createSession(pathname)
     let lastTickAt = Date.now()
     let lastSavedSeconds = 0
     let lastSaveAt = Date.now()
 
     const flush = () => {
-      if (session.seconds <= lastSavedSeconds) return
+      if (currentHostingerAccountUser() !== owner || localStudySessionEpoch(owner) !== epoch || session.seconds <= lastSavedSeconds) return
       saveStudySession(session)
       lastSavedSeconds = session.seconds
       lastSaveAt = Date.now()
@@ -115,7 +121,7 @@ export default function StudyActivityTracker() {
       tick()
       flush()
     }
-  }, [pathname])
+  }, [pathname, owner])
 
   return null
 }

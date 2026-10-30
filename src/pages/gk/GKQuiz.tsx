@@ -28,7 +28,7 @@ import { remainingSeconds } from '@/hooks/useAccurateCountdown'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import { useAccount } from '@/lib/accountContext'
-import { readLocalStudySession, writeLocalStudySession } from '@/lib/localStudySession'
+import { readLocalStudySession, writeLocalStudySession, localStudySessionEpoch } from '@/lib/localStudySession'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { currentHostingerAccountUser } from '@/lib/hostingerApi'
 
@@ -59,6 +59,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
 }
 
 function LegacyGKQuiz({ forceMode, accountId }: { forceMode?: string; accountId: string | null }) {
+  const [recoveryEpoch] = useState(() => localStudySessionEpoch(accountId))
   const [sp] = useSearchParams()
   const mode = forceMode ?? sp.get('mode') ?? 'random'
   const mptSlot = sp.get('slot') === 'afternoon' ? 'afternoon' : 'evening'
@@ -338,7 +339,7 @@ function LegacyGKQuiz({ forceMode, accountId }: { forceMode?: string; accountId:
     if (m === 'one-paper') r.qs = r.qs.slice(0, 100)
     // A question response can finish after a native session change. Its old
     // component may be unmounted, but durable activity writes must also stop.
-    if (currentHostingerAccountUser() !== accountId) return
+    if (currentHostingerAccountUser() !== accountId || localStudySessionEpoch(accountId) !== recoveryEpoch) return
     setResolved(r)
     setLoading(false)
     if (r.qs.length) {
@@ -528,11 +529,12 @@ function readQuizSnapshot(key: string, accountId: string | null): QuizSnapshot |
   }
 }
 
-function writeQuizSnapshot(key: string, snapshot: QuizSnapshot | null, accountId: string | null) {
-  writeLocalStudySession(QUIZ_SESSION_PREFIX + key, snapshot ? JSON.stringify(snapshot) : null, accountId)
+function writeQuizSnapshot(key: string, snapshot: QuizSnapshot | null, accountId: string | null, epoch: string | null) {
+  writeLocalStudySession(QUIZ_SESSION_PREFIX + key, snapshot ? JSON.stringify(snapshot) : null, accountId, epoch)
 }
 
 function QuizRun({ accountId, resolved, mode, studentName, sessionDateKey, scheduledKind, onRestart }: { accountId: string | null; resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; scheduledKind: ScheduledMockKind | null; onRestart: () => void }) {
+  const [recoveryEpoch] = useState(() => localStudySessionEpoch(accountId))
   const { syncStatus } = useAccount()
   const { qs, title, exam, timeSec, blueprint, note } = resolved
   const [page, setPage] = useState(1)
@@ -614,7 +616,7 @@ function QuizRun({ accountId, resolved, mode, studentName, sessionDateKey, sched
       page,
       startedAt: startRef.current,
       deadline: deadlineRef.current,
-    }, accountId)
+    }, accountId, recoveryEpoch)
     persist()
     document.addEventListener('visibilitychange', persist)
     window.addEventListener('pagehide', persist)
@@ -622,7 +624,7 @@ function QuizRun({ accountId, resolved, mode, studentName, sessionDateKey, sched
       document.removeEventListener('visibilitychange', persist)
       window.removeEventListener('pagehide', persist)
     }
-  }, [answers, revealed, page, snapshotKey, signature, finished, resumeOffer, accountId])
+  }, [answers, revealed, page, snapshotKey, signature, finished, resumeOffer, accountId, recoveryEpoch])
 
   function acceptResume() {
     const snapshot = resumeOffer
@@ -640,7 +642,7 @@ function QuizRun({ accountId, resolved, mode, studentName, sessionDateKey, sched
   }
 
   function discardResume() {
-    writeQuizSnapshot(snapshotKey, null, accountId)
+    writeQuizSnapshot(snapshotKey, null, accountId, recoveryEpoch)
     setResumeOffer(null)
   }
 
@@ -664,7 +666,7 @@ function QuizRun({ accountId, resolved, mode, studentName, sessionDateKey, sched
   }
 
   function choose(question: BankQuestion, i: number) {
-    if (currentHostingerAccountUser() !== accountId) return
+    if (currentHostingerAccountUser() !== accountId || localStudySessionEpoch(accountId) !== recoveryEpoch) return
     if (finished) return
     if (answers[question.id] === undefined) {
       const questionStartedAt = questionStartedAtRef.current[question.id]
@@ -692,11 +694,11 @@ function QuizRun({ accountId, resolved, mode, studentName, sessionDateKey, sched
   }
 
   function finish() {
-    if (currentHostingerAccountUser() !== accountId) return
+    if (currentHostingerAccountUser() !== accountId || localStudySessionEpoch(accountId) !== recoveryEpoch) return
     if (finishedRef.current) return
     finishedRef.current = true
     deadlineRef.current = null
-    writeQuizSnapshot(snapshotKey, null, accountId)
+    writeQuizSnapshot(snapshotKey, null, accountId, recoveryEpoch)
     setFinished(true)
     setReviewPage(1)
     // Event-handler wall-clock access is intentional for total attempt time.
