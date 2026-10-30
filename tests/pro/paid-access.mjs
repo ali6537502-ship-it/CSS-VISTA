@@ -42,7 +42,7 @@ assert.equal((await call('/api/current-affairs.php?view=preferences', jar)).stat
 const attemptResponse = await call('/api/student/learning.php', jar, { action: 'attempt_save', request_id: randomUUID(), expected_version: 0, target_year: 2027, target_date: null, daily_minutes: 60, stage: 'starting', optional_subject_ids: [] })
 assert.equal(attemptResponse.status, 200)
 const draft = { action: 'writing_save', request_id: randomUUID(), expected_version: 0, attempt_id: attemptResponse.json().attempt_id, kind: 'precis', title: 'TEST ONLY Précis', text: 'TEST ONLY private practice draft.' }
-assert.equal((await call('/api/student/learning.php', jar, draft)).status, 403, 'Generic paid writing scope unexpectedly became free; free Mentor uses its own authenticated endpoint')
+assert.equal((await call('/api/student/learning.php', jar, draft)).status, 200, 'Free account could not save its own Précis writing')
 assert.equal((await call('/api/student/premium-content.php?file=../config.php', jar)).status, 404)
 assert.equal((await call('/api/_premium_files/current-affairs-issues.json', jar)).status, 404)
 php('tests/precis/fixture.php', 'activate', id)
