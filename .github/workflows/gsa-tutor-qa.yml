@@ -10,6 +10,7 @@ on:
       - 'src/lib/accountSync.ts'
       - 'tests/gsaTutorPlan.test.mjs'
       - 'tests/gsaTutorSync.test.mjs'
+      - 'tests/browser/gsaTutor.mjs'
       - 'src/lib/accountSync.ts'
       - 'package.json'
       - 'package-lock.json'
@@ -35,3 +36,23 @@ jobs:
         run: npm run build:hostinger
       - name: Check lesson route and public content
         run: npm run audit:routes
+      - name: Install browser test tooling
+        run: |
+          npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
+          npm exec --prefix tests/browser -- playwright-core install chromium
+      - name: Exercise GSA lesson flow at mobile, tablet and desktop widths
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run dev -- --host 127.0.0.1 --port 5173 > /tmp/gsa-vite.log 2>&1 &
+          node -e "const go=async()=>{for(let i=0;i<40;i++){try{const r=await fetch('http://127.0.0.1:5173/gsa-tutor/studio.html');if(r.ok)return}catch{}await new Promise(x=>setTimeout(x,500))}process.exit(1)};go()"
+          browser_path="$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")"
+          CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/gsaTutor.mjs
+      - name: Preserve GSA visual checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gsa-tutor-responsive-checks
+          path: test-artifacts/gsa-tutor/
+          if-no-files-found: ignore
+          retention-days: 7

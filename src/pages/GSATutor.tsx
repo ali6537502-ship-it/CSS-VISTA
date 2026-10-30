@@ -35,6 +35,7 @@ export default function GSATutorPage() {
   const isAccount = pathname.startsWith('/account/')
   const iframeRef = useRef<HTMLIFrameElement | null>(null)
   const [loaded, setLoaded] = useState(false)
+  const [frameHeight, setFrameHeight] = useState(880)
   const [progress, setProgress] = useState<GsaProgress>(() => readProgress())
   const [manualSync, setManualSync] = useState('')
   const result = snapshot(progress)
@@ -43,7 +44,13 @@ export default function GSATutorPage() {
     function changed(event: Event) {
       if (event.type === 'message') {
         const incoming = event as MessageEvent
-        if (incoming.origin !== window.location.origin || incoming.source !== iframeRef.current?.contentWindow || incoming.data?.type !== 'cssvista:gsa:changed') return
+        if (incoming.origin !== window.location.origin || incoming.source !== iframeRef.current?.contentWindow) return
+        if (incoming.data?.type === 'cssvista:gsa:height') {
+          const nextHeight = Number(incoming.data.height)
+          if (Number.isFinite(nextHeight) && nextHeight >= 400 && nextHeight <= 20000) setFrameHeight((previous) => Math.abs(previous - nextHeight) > 8 ? nextHeight : previous)
+          return
+        }
+        if (incoming.data?.type !== 'cssvista:gsa:changed') return
         // The iframe uses the same-origin progress key as the account snapshot.
         notifyProgressChanged()
       }
@@ -108,7 +115,7 @@ export default function GSATutorPage() {
         title="CSS VISTA GSA Tutor interactive lessons and personal course schedule"
         src="/gsa-tutor/studio.html"
         className="block w-full border-0 bg-white"
-        style={{ height: 'max(740px, calc(100vh - 150px))' }}
+        style={{ height: frameHeight }}
         onLoad={() => {
           // Account switches remount the iframe; hydrate every new instance,
           // not only when the parent state changes for the first time.
