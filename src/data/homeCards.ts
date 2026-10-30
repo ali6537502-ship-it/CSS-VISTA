@@ -90,7 +90,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'study-tools', title: 'Study Tools', desc: 'Planners, timers and trackers', to: '/study-tools', icon: 'Wrench', visible: true, order: 17 },
   { id: 'photo-compressor', title: 'Photo Size Reducer', desc: 'Compress photos to any size from 10 KB to 60 KB', to: '/photo-compressor', icon: 'Wrench', visible: true, order: 17.1 },
   { id: 'factbook', title: 'My Factbook', desc: 'Build a private, searchable CSS knowledge library', to: '/factbook', icon: 'BookMarked', visible: true, order: 17.25 },
-  { id: 'fpsc-syllabus', title: 'FPSC Syllabus & Topic Planner', desc: 'Official paper-wise checklists', to: '/fpsc-syllabus', icon: 'ListChecks', visible: true, order: 17.5 },
+  { id: 'fpsc-syllabus', title: 'FPSC Syllabus Topics', desc: 'Browse topics and schedule them for study', to: '/study-planner?view=syllabus', icon: 'ListChecks', visible: true, order: 17.5 },
   { id: 'dates', title: 'CSS 2027 Important Dates', desc: 'Official, tentative and unannounced dates', to: '/fpsc-updates?tab=dates', icon: 'CalendarClock', visible: true, order: 18 },
   { id: 'fpsc', title: 'FPSC Notifications', desc: 'Official CSS 2027 notices', to: '/fpsc-updates', icon: 'Bell', visible: true, order: 19 },
   { id: 'checklists', title: 'Application Checklists', desc: 'MPT and written application steps', to: '/checklists', icon: 'ListChecks', visible: true, order: 20 },
@@ -110,5 +110,5 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'answer-writing', title: 'Answer-Writing Practice', desc: 'Plan, structure and improve answers', to: '/answer-writing', icon: 'FilePenLine', visible: true, order: 32 },
   { id: 'subject-selector', title: 'Subject Selection Tool', desc: 'Compare optional subjects smartly', to: '/subjects/selector', icon: 'SlidersHorizontal', visible: true, order: 35 },
   { id: 'dashboard', title: 'Performance Dashboard', desc: 'Study time, accuracy and improvement', to: '/dashboard', icon: 'ChartNoAxesCombined', visible: true, order: 36 },
-  { id: 'study-planner', title: 'My Study Dashboard', desc: 'Today, overdue, completed and upcoming tasks with editable schedule controls', to: '/study-planner', icon: 'CalendarRange', visible: true, order: 0 },
+  { id: 'study-planner', title: 'Interactive Study Planner', desc: 'Choose topics, schedule sessions and track your daily work', to: '/study-planner', icon: 'CalendarRange', visible: true, order: 0 },
 ]

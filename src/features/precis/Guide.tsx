@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, BookOpen, Check, ClipboardCheck, RotateCcw } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { learningRequest, saveIdentity } from '@/features/learning/api'
@@ -479,21 +479,10 @@ export default function Guide({
                   attempt={attempt}
                   source={writingPassage}
                   timed={false}
-                  onSaved={(writing, version) => setParams({ writing, version })}
+                  onSaved={() => { setShowWriting(false); setNotice('Your practice was saved to your account. Continue with the course.')}}
                 />
               </div>
             )}
-            <div className="flex flex-wrap gap-3">
-              <Link to={`/account/precis?view=course&attempt=${encodeURIComponent(attempt)}&chapter=${unit?.chapterId || today.chapters[0]}`} className={secondaryStyle}>
-                Read full handbook chapter
-              </Link>
-              <Link to={`/account/precis?view=write&attempt=${encodeURIComponent(attempt)}`} className={secondaryStyle}>
-                Open Précis writing practice
-              </Link>
-              <Link to={`/account/precis?view=review&attempt=${encodeURIComponent(attempt)}`} className={secondaryStyle}>
-                Revise my recorded errors
-              </Link>
-            </div>
           </div>
         </div>
       )}

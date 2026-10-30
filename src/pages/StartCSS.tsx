@@ -39,7 +39,7 @@ const plans = [
     name: 'Six-month plan',
     rows: [
       ['Month 1', 'Syllabus mapping, subject selection, grammar repair, daily newspaper habit'],
-      ['Month 2', 'Compulsory subjects: Pakistan Affairs + Islamic Studies foundations; precis daily'],
+      ['Month 2', 'Compulsory subjects: Pakistan Affairs + Islamic Studies foundations; English revision'],
       ['Month 3', 'Current Affairs issue files; optional subjects block 1; weekly essay begins'],
       ['Month 4', 'Optional subjects block 2; GSA drills; first full past paper per compulsory subject'],
       ['Month 5', 'Mock cycle: one full paper every 2–3 days; answer-writing feedback; revision notes'],

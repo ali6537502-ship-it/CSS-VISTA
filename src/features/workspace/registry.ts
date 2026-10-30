@@ -31,7 +31,7 @@ const extra: Feature[] = [
   ...allOptionalSubjects.map(name => ({ id:'subject-'+name, title:name, description:'Open the subject syllabus and linked planning resources.', to:'/fpsc-syllabus?subject='+({'History of Pakistan & India':'history-pakistan-india','History of USA':'history-usa'}[name] || name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')), category:'Subjects', keywords:name })),
   ...sections.map(s => ({ id: s.id, title: s.title, description: s.id === 'plan' ? 'Manage daily tasks, weekly scheduling, syllabus planning, revision, study goals and settings.' : `Open ${s.title.toLowerCase()}.`, to: s.to, category: 'Workspace', keywords: s.id === 'plan' ? 'study planner timetable calendar schedule revision personal goals notes optional subjects settings import archive' : s.title })),
   ...[
-    ['precis', 'Précis Mastery Lab', '/account/precis'], ['ability', 'General Ability', '/account/general-ability'],
+    ['precis', 'Précis Course', '/account/precis'], ['ability', 'General Ability', '/account/general-ability'],
     ['answers', 'My Answer Performance', '/account/answer-performance'], ['affairs-desk', 'My Current Affairs Desk', '/account/current-affairs'],
     ['expression', 'English Expression Lab', '/account/expression'], ['handwriting', 'Handwritten Paragraph', '/account/handwriting'],
     ['tutor', 'Ask VISTA', '/account/ask-vista'], ['essay-builder', 'Essay Themes Builder', '/account/essay-builder'],

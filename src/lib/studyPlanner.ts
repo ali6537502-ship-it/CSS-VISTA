@@ -11,7 +11,6 @@ export interface PlanTask {
 
 const compulsoryPlannerSubjects = [
   { name: 'English Essay', slug: 'essay' },
-  { name: 'English (Precis & Composition)', slug: 'precis-composition' },
   { name: 'General Science & Ability', slug: 'general-science-ability' },
   { name: 'Current Affairs', slug: 'current-affairs' },
   { name: 'Pakistan Affairs', slug: 'pakistan-affairs' },

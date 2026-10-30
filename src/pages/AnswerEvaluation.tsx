@@ -16,7 +16,6 @@ import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
 
 const compulsorySubjects = [
   'English Essay',
-  'English (Precis & Composition)',
   'General Science & Ability',
   'Current Affairs',
   'Pakistan Affairs',

@@ -40,12 +40,12 @@ function relatedPastPapers(paper: Paper, allPapers: Paper[]) {
 export default function PastPaperOpen() {
   const { id } = useParams()
   const paper = useMemo(
-    () => mergedPastPapers(seedPapers).find((item) => item.id === id),
+    () => mergedPastPapers(seedPapers).find((item) => item.id === id && !/pr[ée]cis/i.test(item.subject)),
     [id],
   )
   const [pdfAvailable, setPdfAvailable] = useState<boolean | null>(null)
   const pdfUrl = paper?.fileUrl ? versionedPaperUrl(paper.fileUrl) : ''
-  const allPapers = useMemo(() => mergedPastPapers(seedPapers), [])
+  const allPapers = useMemo(() => mergedPastPapers(seedPapers).filter(item => !/pr[ée]cis/i.test(item.subject)), [])
   const related = useMemo(() => (paper ? relatedPastPapers(paper, allPapers) : []), [paper, allPapers])
 
   useEffect(() => {
