@@ -1,6 +1,7 @@
 import { ArrowUpRight, CalendarDays, CheckCheck, Layers3, RotateCcw } from 'lucide-react'
 import { ProgressRing } from '@/features/workspace/Visuals'
 import AccountGSATutorCard from '@/features/gsa-tutor/AccountGSATutorCard'
+import AccountGSATutorCard from '@/features/gsa-tutor/AccountGSATutorCard'
 import ContinueStudying from '@/features/workspace/ContinueStudying'
 import { Link } from 'react-router'
 import { useAccount } from '@/lib/accountContext'
@@ -27,6 +28,7 @@ export default function AccountHome() {
   return <div className="ws-overview"><AccountPage title={`${greeting}${user?.display_name ? `, ${user.display_name.split(/\s+/)[0]}` : ''}`} intro="A clear plan for today. Steady progress towards your examination.">
     {days !== null && <p className="ws-muted mb-5">Your chosen target: {snapshot.state.studyPlanner?.examDate} · {days < 0 ? 'Target date has passed — review your schedule' : days === 0 ? 'Today' : `${days} days remaining`}</p>}
     {syncError && <p role="alert" className="ws-panel mb-5">{syncError} <Link to="/account/settings" className="underline">Review account sync</Link></p>}
+    <div className="mb-5"><AccountGSATutorCard /></div>
     <div className="mb-5"><AccountGSATutorCard /></div>
     <div className="ws-dashboard-grid"><div className="ws-focus-area">
       <ContinueStudying greeting={`${greeting}${user?.display_name ? `, ${user.display_name.split(/\s+/)[0]}` : ''}.`} />
