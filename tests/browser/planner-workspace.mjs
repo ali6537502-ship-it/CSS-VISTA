@@ -15,6 +15,7 @@ await context.route('**/*', async route => {
     if (failSyllabus) return route.fulfill({ status:503, body:'Unavailable' })
   }
   if (!url.pathname.startsWith('/api/')) return route.continue()
+  if (url.pathname === '/api/auth/workspace-preview.php') return route.fulfill({ json: { enabled: true, user_id: 'planner-fixture' } })
   if (url.pathname === '/api/auth/session.php') return route.fulfill({ json:{ok:true,authenticated:true,provider:'hostinger',user:{id:'planner-fixture',email:'planner@example.invalid',display_name:'Ayesha',profile_complete:true,user_metadata:{full_name:'Ayesha'}}} })
   if (url.pathname === '/api/pro-release.php') return route.fulfill({ json:{paused:true} })
   if (url.pathname === '/api/student/progress.php') { if (delaySync) await new Promise(resolve=>setTimeout(resolve,700)); return route.fulfill({json:{ok:true,payload:{}}}) }

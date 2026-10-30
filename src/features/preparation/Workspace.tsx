@@ -1,3 +1,5 @@
+import { lazyWithRecovery } from '@/lib/chunkRecovery'
+import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
 import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router'
@@ -21,7 +23,7 @@ const views = [
   ['history', 'History'],
   ['settings', 'Settings'],
 ] as const
-export default function PreparationWorkspace({
+function PreviewPreparationWorkspace({
   attempt,
   settings,
 }: {
@@ -208,3 +210,6 @@ export default function PreparationWorkspace({
     </div>
   )
 }
+
+const ClassicPreparationWorkspace = lazyWithRecovery(() => import('@/features/workspace-classic/features/preparation/Workspace'))
+export default function PreparationWorkspace(props: Parameters<typeof PreviewPreparationWorkspace>[0]) { return <WorkspaceVariant classic={<ClassicPreparationWorkspace {...props}/>}><PreviewPreparationWorkspace {...props}/></WorkspaceVariant> }

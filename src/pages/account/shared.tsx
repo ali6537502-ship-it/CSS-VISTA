@@ -1,3 +1,5 @@
+import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
+import * as Classic from '@/features/workspace-classic/pages/account/shared'
 import { subjectVisual } from '@/features/workspace/Visuals'
 import WorkspaceAvatar from '@/features/workspace/WorkspaceAvatar'
 import { completedSourceTopics, targetDays } from '@/features/workspace/model'
@@ -104,7 +106,7 @@ export function useSyllabusTotal() {
  * One page inside the account. Every account page wears the same quiet header
  * so moving between them feels like one product rather than four.
  */
-export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
+function PreviewAccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
   const { user, syncStatus } = useAccount()
   return (
     <main className="ws-account-page min-h-screen bg-white">
@@ -138,11 +140,11 @@ export function AccountPage({ title, intro, action, children }: { title: string;
   )
 }
 
-export function SectionTitle({ children }: { children: ReactNode }) {
+function PreviewSectionTitle({ children }: { children: ReactNode }) {
   return <h2 className="text-sm font-semibold uppercase tracking-[.14em] text-slate-400">{children}</h2>
 }
 
-export function Metric({ label, value, detail }: { label: string; value: string | number; detail: string }) {
+function PreviewMetric({ label, value, detail }: { label: string; value: string | number; detail: string }) {
   return (
     <div className="ws-metric rounded-2xl border border-slate-200 bg-white p-5">
       <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">{label}</p>
@@ -152,11 +154,11 @@ export function Metric({ label, value, detail }: { label: string; value: string 
   )
 }
 
-export function EmptyNote({ children }: { children: ReactNode }) {
+function PreviewEmptyNote({ children }: { children: ReactNode }) {
   return <p className="ws-empty rounded-2xl border border-dashed border-slate-200 px-4 py-10 text-center text-sm text-slate-500">{children}</p>
 }
 
-export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: () => void }) {
+function PreviewTaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: () => void }) {
   const done = task.status === 'completed'
   const [error, setError] = useState('')
   return (
@@ -189,3 +191,13 @@ export function TaskItem({ task, refresh }: { task: StudyScheduleTask; refresh: 
     </div>
   )
 }
+
+export function AccountPage(props: Parameters<typeof PreviewAccountPage>[0]) { return <WorkspaceVariant classic={<Classic.AccountPage {...props}/>}><PreviewAccountPage {...props}/></WorkspaceVariant> }
+
+export function SectionTitle(props: Parameters<typeof PreviewSectionTitle>[0]) { return <WorkspaceVariant classic={<Classic.SectionTitle {...props}/>}><PreviewSectionTitle {...props}/></WorkspaceVariant> }
+
+export function Metric(props: Parameters<typeof PreviewMetric>[0]) { return <WorkspaceVariant classic={<Classic.Metric {...props}/>}><PreviewMetric {...props}/></WorkspaceVariant> }
+
+export function EmptyNote(props: Parameters<typeof PreviewEmptyNote>[0]) { return <WorkspaceVariant classic={<Classic.EmptyNote {...props}/>}><PreviewEmptyNote {...props}/></WorkspaceVariant> }
+
+export function TaskItem(props: Parameters<typeof PreviewTaskItem>[0]) { return <WorkspaceVariant classic={<Classic.TaskItem {...props}/>}><PreviewTaskItem {...props}/></WorkspaceVariant> }

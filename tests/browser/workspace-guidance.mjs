@@ -1,3 +1,4 @@
+import { selectWorkspacePreview } from './preview-fixture.mjs'
 /** Optional guidance and feature discovery through the existing native account flow. */
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
@@ -10,6 +11,7 @@ const env = { ...process.env }
 for (const key of ['DOCKER_HOST', 'DOCKER_CONTEXT', 'DOCKER_TLS', 'DOCKER_TLS_VERIFY', 'DOCKER_CERT_PATH']) delete env[key]
 const email = `guidance-${Date.now()}@example.invalid`
 execFileSync('docker', ['--host=unix:///var/run/docker.sock', 'exec', process.env.CSSV_TEST_PHP_CONTAINER, 'php', 'tests/current-affairs/setup.php', 'user', email], { env, stdio: 'pipe' })
+selectWorkspacePreview(email)
 const browser = await chromium.launch({ executablePath: '/usr/bin/chromium', headless: true, args: ['--no-sandbox'] })
 const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' })
 await isolateNetwork(context, base)

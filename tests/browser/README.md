@@ -49,6 +49,20 @@ through its own native progress API. It scans all seven loaded workspace section
 at mobile/desktop widths, including the real profile form. Automated scans do not
 certify WCAG conformance or physical-device behavior.
 
+The single-account pilot adds `workspace-preview.mjs` and `classic-profile.mjs`.
+They test the real native selector, both interfaces, account switching, failed
+selection, retained profile records and safe edit retries. Presentation fixtures
+explicitly mock the selector; native workspace fixtures select only their own
+disposable test identity via `preview-fixture.mjs`. Run native suites sequentially
+because only one disposable identity is selected at a time. The actual database
+name and CI mode guard the backend fixture override.
+
+`signup.mjs` remains the complete future **global** single-page-signup journey;
+it is not the guest flow released by this account-only pilot. The pilot browser
+suite instead verifies that guests retain the production signup presentation.
+Do not enable a guest opt-in or weaken the real selector to run the global-flow
+harness. See [the pilot scope and evidence](../../docs/workspace/single-account-preview.md).
+
 For successful recovery, the disposable PHP server additionally needs
 `CSSV_MAIL_TRANSPORT=php-test` and the existing invalid-domain-only capture:
 

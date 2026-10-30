@@ -11,6 +11,7 @@ await context.route('**/*',async route=>{
  if(url.pathname==='/fpsc-syllabus.json'&&fail)return route.fulfill({status:503,body:'Unavailable'})
  if(url.pathname==='/fpsc-syllabus.json'&&slow)await new Promise(r=>setTimeout(r,1500))
  if(!url.pathname.startsWith('/api/'))return route.continue()
+  if (url.pathname === '/api/auth/workspace-preview.php') return route.fulfill({ json: { enabled: true, user_id: 'visual-fixture' } })
  let data={}
  if(url.pathname==='/api/auth/session.php')data={ok:true,authenticated:true,provider:'hostinger',user:{id:'visual-fixture',email:'visual@example.invalid',display_name:'Test Student',profile_complete:true,user_metadata:{full_name:'Test Student'}}}
  else if(url.pathname==='/api/pro-release.php')data={paused:true}

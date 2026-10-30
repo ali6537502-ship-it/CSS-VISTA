@@ -1,3 +1,4 @@
+import { selectWorkspacePreview } from './preview-fixture.mjs'
 import { chromium } from 'playwright-core'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
@@ -13,6 +14,7 @@ const php=(...args)=>process.env.CSSV_TEST_PHP_CONTAINER?execFileSync('docker',[
 const source=await transform(await readFile(root+'/src/features/membership/proDestinations.ts','utf8'),{loader:'ts',format:'esm'})
 const {isProDestination}=await import('data:text/javascript;base64,'+Buffer.from(source.code).toString('base64'))
 const email='pro-pause-browser-'+Date.now()+'@example.invalid',id=php('tests/current-affairs/setup.php','user',email)
+selectWorkspacePreview(email)
 php('tests/precis/fixture.php','activate',id)
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath(),headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,reducedMotion:'reduce',viewport:{width:390,height:1000}})
@@ -52,8 +54,24 @@ try {
   assert.equal(await page.getByRole('heading',{name:'Weekly Current Affairs Magazine',exact:true}).count(),0)
   const after=(await (await context.request.get(base+'/api/student/membership.php')).json()).membership
   assert.deepEqual(after,before,'Pause changed membership/expiry')
+  php('tests/workspace-preview/fixture.php','off')
+  for(const width of [390,1440]) {
+    await page.setViewportSize({width,height:1000})
+    await page.goto(base+'/account/dashboard?plan=pro')
+    await page.getByRole('heading',{name:'Free features',exact:true}).waitFor()
+    assert.equal(await page.locator('.student-workspace').count(),0)
+    assert.equal(await page.getByRole('link',{name:'Pro account',exact:true}).count(),0)
+    const links=await page.locator('a[href]').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href')))
+    assert.deepEqual(links.filter(isProDestination),[],'Classic navigation exposed paused Pro links')
+  }
+  for(const path of ['/account/precis','/account/general-ability','/account/answer-performance']) {
+    await page.goto(base+path)
+    await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
+  }
+  assert.deepEqual((await (await context.request.get(base+'/api/student/membership.php')).json()).membership,before)
+  selectWorkspacePreview(email)
   assert.deepEqual(errors,[])
   mkdirSync(root+'/test-artifacts',{recursive:true})
   await page.screenshot({path:root+'/test-artifacts/pro-paused-home.png'})
-  console.log('PASS: active Pro account remains Free-only while paused; paid links omitted, fourteen direct routes blocked, 320–1440 reflow, free Grammar and Vistagram reading retained, expiry unchanged, no page errors. Disposable database only.')
+  console.log('PASS: active Pro account remains Free-only in selected and classic interfaces while paused; paid links omitted, fourteen direct routes blocked, 320–1440 reflow, free Grammar and Vistagram reading retained, expiry unchanged, no page errors. Disposable database only.')
 } finally { php('tests/pro/release-fixture.php','restore');await browser.close() }

@@ -1,9 +1,11 @@
+import ClassicFpscSyllabus from '@/features/workspace-classic/pages/FpscSyllabus'
+import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
 import { PageHeader } from '@/components/shared'
 import FpscSyllabusPlanner from '@/components/FpscSyllabusPlanner'
 import type { FpscSyllabusData } from '@/components/FpscSyllabusPlanner'
 import { Link } from 'react-router'
 
-export default function FpscSyllabus({ initialData }: { initialData?: FpscSyllabusData }) {
+function PreviewFpscSyllabus({ initialData }: { initialData?: FpscSyllabusData }) {
   return (
     <div>
       <PageHeader
@@ -16,4 +18,8 @@ export default function FpscSyllabus({ initialData }: { initialData?: FpscSyllab
       </main>
     </div>
   )
+}
+
+export default function FpscSyllabus(props: { initialData?: FpscSyllabusData }) {
+  return <WorkspaceVariant classic={<ClassicFpscSyllabus {...props} />}><PreviewFpscSyllabus {...props} /></WorkspaceVariant>
 }

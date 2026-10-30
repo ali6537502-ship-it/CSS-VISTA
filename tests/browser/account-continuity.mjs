@@ -1,3 +1,4 @@
+import { selectWorkspacePreview } from './preview-fixture.mjs'
 /** Remaining workspace preservation checks against disposable native accounts only. */
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
@@ -23,6 +24,7 @@ const output = 'test-artifacts/account-continuity'
 mkdirSync(output, { recursive: true })
 const results = []
 async function login(index) {
+  selectWorkspacePreview(accounts[index])
   if (!/^\/account\/?$/.test(new URL(page.url()).pathname)) await page.goto(base + '/account')
   await page.getByLabel('Email address', { exact: true }).fill(accounts[index])
   await page.getByLabel('Password', { exact: true }).fill('TEST ONLY native fixture password')
@@ -213,6 +215,7 @@ try {
     const oldId = await page.evaluate(() => localStorage.getItem('cssvista:progress-owner'))
     const csrf = (await context.cookies()).find(cookie => cookie.name === 'cssv_csrf').value
     assert.equal((await context.request.post(base + '/api/auth/logout.php', { headers: { 'X-CSRF-Token': decodeURIComponent(csrf), 'X-CSSV-User': oldId }, data: {} })).status(), 200)
+    selectWorkspacePreview(accounts[1])
     const switchedSession = await context.request.post(base + '/api/auth/login.php', { data: { email: accounts[1], password: 'TEST ONLY native fixture password' } })
     assert.equal(switchedSession.status(), 200)
     const nextId = (await switchedSession.json()).user.id

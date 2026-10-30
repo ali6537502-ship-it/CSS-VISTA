@@ -1,3 +1,4 @@
+import { selectWorkspacePreview } from './preview-fixture.mjs'
 /** Keyboard and automated accessibility review of populated, disposable native workspace pages. */
 import assert from 'node:assert/strict'
 import { randomUUID } from 'node:crypto'
@@ -13,6 +14,7 @@ const env = { ...process.env }
 for (const name of ['DOCKER_HOST', 'DOCKER_CONTEXT', 'DOCKER_TLS', 'DOCKER_TLS_VERIFY', 'DOCKER_CERT_PATH']) delete env[name]
 const email = `accessibility-${randomUUID()}@example.invalid`
 execFileSync('docker', ['--host=unix:///var/run/docker.sock', 'exec', process.env.CSSV_TEST_PHP_CONTAINER, 'php', 'tests/current-affairs/setup.php', 'user', email], { env, stdio: 'pipe' })
+selectWorkspacePreview(email)
 const browser = await chromium.launch({ executablePath: process.env.CSSV_BROWSER_EXECUTABLE || '/usr/bin/chromium', args: ['--no-sandbox'], headless: true })
 const context = await browser.newContext({ ignoreHTTPSErrors: true, reducedMotion: 'reduce', hasTouch: true })
 await isolateNetwork(context, base)

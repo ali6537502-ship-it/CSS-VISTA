@@ -1,3 +1,5 @@
+import { lazyWithRecovery } from '@/lib/chunkRecovery'
+import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
 import { useMemo, useState, type FormEvent } from 'react'
 import { CalendarPlus, Copy, FileInput, Plus, Upload } from 'lucide-react'
 import PrintMenu from '@/components/PrintMenu'
@@ -9,7 +11,7 @@ import { readableDay, validDay } from '@/features/planner/model'
 import '@/features/planner/planner.css'
 
 type NewTask = Omit<StudyScheduleTask, 'id' | 'createdAt' | 'status'>
-export default function ScheduledSyllabusBoard({ compact = false, toolsOnly = false }: { compact?: boolean; toolsOnly?: boolean }) {
+function PreviewScheduledSyllabusBoard({ compact = false, toolsOnly = false }: { compact?: boolean; toolsOnly?: boolean }) {
   const { snapshot, refresh } = useAccountSnapshot()
   const [mode, setMode] = useState<'task' | 'import'>('task')
   const [title, setTitle] = useState(''), [subject, setSubject] = useState('')
@@ -74,3 +76,6 @@ export default function ScheduledSyllabusBoard({ compact = false, toolsOnly = fa
     {!toolsOnly && <PlannerDashboard/>}
   </section>
 }
+
+const ClassicScheduledSyllabusBoard = lazyWithRecovery(() => import('@/features/workspace-classic/components/ScheduledSyllabusBoard'))
+export default function ScheduledSyllabusBoard(props: Parameters<typeof PreviewScheduledSyllabusBoard>[0]) { return <WorkspaceVariant classic={<ClassicScheduledSyllabusBoard {...props}/>}><PreviewScheduledSyllabusBoard {...props}/></WorkspaceVariant> }

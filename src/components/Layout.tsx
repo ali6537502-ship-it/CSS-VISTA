@@ -1,6 +1,6 @@
+import { useWorkspacePreview } from '@/features/workspace-preview/context'
 import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { isProDestination } from '@/features/membership/proDestinations'
-import StudentWorkspace from '@/features/workspace/StudentWorkspace'
 import { ProfileGate } from '@/components/ProfileGate'
 import { ProReleaseOutlet } from '@/features/membership/ProRelease'
 import { AvailableStudyLink as Link, AvailableStudyNavLink as NavLink } from '@/features/membership/ProRelease'
@@ -165,6 +165,7 @@ const mobileQuickLinks = [
 
 const mobileQuickPaths = new Set(mobileQuickLinks.map((item) => item.to))
 
+const StudentWorkspace = lazyWithRecovery(() => import('@/features/workspace/StudentWorkspace'))
 const VistaShortcut = lazyWithRecovery(() => import('@/components/VistaShortcut'))
 const MPT_FOCUS_PATH = /^\/account\/mpt\/(?:exam|entrance)\//
 const StudyActivityTracker = lazyWithRecovery(() => import('@/components/StudyActivityTracker'))
@@ -710,6 +711,7 @@ function fallbackRoute(pathname: string) {
 }
 
 export default function Layout() {
+  const { enabled: preview, pending: previewPending } = useWorkspacePreview()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDrop, setOpenDrop] = useState<string | null>(null)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -944,7 +946,7 @@ export default function Layout() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen, searchOpen])
   useEffect(() => {
-    if (/^\/account(?:\/|$)/.test(location.pathname) && !MPT_FOCUS_PATH.test(location.pathname)) return
+    if (preview && /^\/account(?:\/|$)/.test(location.pathname) && !MPT_FOCUS_PATH.test(location.pathname)) return
     const openSearch = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLocaleLowerCase() === 'k') {
         event.preventDefault()
@@ -962,7 +964,7 @@ export default function Layout() {
       window.removeEventListener('keydown', openSearch)
       window.removeEventListener('cssvista:open-search', openSearchFromPage)
     }
-  }, [location.pathname])
+  }, [location.pathname, preview])
 
   const goBack = () => {
     if (requestPageBack()) return
@@ -977,11 +979,13 @@ export default function Layout() {
     navigate(fallbackRoute(location.pathname), { replace: true })
   }
 
-  if (location.pathname.startsWith('/account/') && !MPT_FOCUS_PATH.test(location.pathname)) {
-    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></ProfileGate></>
+  if ((location.pathname === '/account' || location.pathname.startsWith('/account/')) && previewPending) return <div role="status" className="mx-auto max-w-5xl px-4 py-10">Opening your study space…</div>
+
+  if (preview && location.pathname.startsWith('/account/') && !MPT_FOCUS_PATH.test(location.pathname)) {
+    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><Suspense fallback={<div role="status" className="px-4 py-10">Opening your study space…</div>}><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></Suspense></ProfileGate></>
   }
 
-  if (location.pathname === '/account') {
+  if (preview && location.pathname === '/account') {
     return <div className="flex min-h-screen flex-col bg-[#faf9f5]">
       <RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice />
       <a href="#account-entry" className="sr-only z-50 rounded-lg bg-white p-3 text-pine focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to account</a>

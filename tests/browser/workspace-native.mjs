@@ -1,3 +1,4 @@
+import { selectWorkspacePreview } from './preview-fixture.mjs'
 import { chromium } from 'playwright-core'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
@@ -10,6 +11,7 @@ const env={...process.env};for(const k of ['DOCKER_HOST','DOCKER_CONTEXT','DOCKE
 const php=(...args)=>execFileSync('docker',['--host=unix:///var/run/docker.sock','exec',process.env.CSSV_TEST_PHP_CONTAINER,'php',...args],{env,encoding:'utf8'}).trim()
 const email=`workspace-native-${Date.now()}@example.invalid`
 php('tests/current-affairs/setup.php','user',email)
+selectWorkspacePreview(email)
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||'/usr/bin/chromium',headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:390,height:960},reducedMotion:'reduce'})
 await isolateNetwork(context,base)
