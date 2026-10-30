@@ -199,7 +199,7 @@ root.addEventListener('click',async e=>{
   case 'saveplan':{
    const dd=document.getElementById('custom-days'),sd=document.getElementById('start-date'),days=dd?Number(dd.value):ui.setupDays,date=sd?sd.value:ui.setupDate;
    if(!Number.isInteger(days)||days<5||days>120||!/^\d{4}-\d{2}-\d{2}$/.test(date)){ui.error='Choose a duration between 5 and 120 days and a valid start date.';draw();return}
-   saved.plan={days,startDate:date,changedAt:new Date().toISOString()};ui.setupDays=days;ui.setupDate=date;notify();draw();break;
+   saved.plan={days,startDate:date,changedAt:new Date().toISOString()};ui.showAllDays=false;ui.setupDays=days;ui.setupDate=date;notify();draw();break;
   }
   case 'prevbeat':ui.beat=Math.max(0,ui.beat-1);draw();break;
   case 'nextbeat':{
