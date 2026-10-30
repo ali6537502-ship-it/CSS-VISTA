@@ -35,6 +35,7 @@ try {
  await page.getByRole('button', { name: 'Next lesson', exact: true }).click()
  await page.getByRole('heading', { name: 'Join ideas without run-ons', exact: true }).waitFor()
  await page.getByRole('button', { name: 'Previous lesson', exact: true }).click()
+ await page.getByRole('heading', { name: 'Build a complete sentence', exact: true }).waitFor()
  assert.match(await page.getByLabel('Your first draft', { exact: true }).inputValue(), /bus leaves early/)
  await page.reload()
  assert.match(await page.getByLabel('Your revised version and change notes', { exact: true }).inputValue(), /specified the time/)
