@@ -74,3 +74,21 @@ test('hydrating another account replaces rather than leaks old lesson progress',
   assert.equal(Object.keys(dom.window.CSSVistaGSA.getSaved().completed).length, 0)
   dom.window.close()
 })
+
+test('published textbook questions and analytical answers retain a complete source structure', () => {
+  const dom = open()
+  const { DATA } = dom.window.CSSVistaGSA
+  assert.equal(DATA.chapters.length, 28)
+  assert.equal(DATA.questions.length, 250)
+  assert.equal(DATA.analytical.length, 31)
+  assert.equal(new Set(DATA.questions.map(q => q.id)).size, 250)
+  assert.equal(new Set(DATA.questions.map(q => q.prompt.toLowerCase().trim())).size, 250)
+  const chapterIds = new Set(DATA.chapters.map(ch => ch.id))
+  for (const q of DATA.questions) {
+    assert.ok(chapterIds.has(q.chapter), q.id + ': unknown chapter')
+    assert.deepEqual(Object.keys(q.options).sort(), ['A', 'B', 'C', 'D'], q.id)
+    assert.ok(q.options[q.answer]?.trim(), q.id + ': invalid answer')
+    assert.ok(q.explanation.trim().length >= 20, q.id + ': explanation missing')
+  }
+  dom.window.close()
+})
