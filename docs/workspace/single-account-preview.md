@@ -140,3 +140,9 @@ jobs; main pushes are observed by the existing Hostinger fingerprint workflow.
 The release uses that established deployment path, without a database bootstrap
 or changes to private hosting configuration. The final live fingerprint and
 read-only verification outcomes will be recorded in the release evidence.
+
+PR #133 exposed an existing Lucky Draw workflow setup defect: route verification
+ran without producing `dist/.htaccess` and failed with ENOENT (job 124015667404).
+The unchanged main workflow had no build step before its artifact-dependent
+audit. A strict Hostinger build now precedes that audit; no checks were removed
+or relaxed, and the change neither deploys nor changes Lucky Draw behaviour.
