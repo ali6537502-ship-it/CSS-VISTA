@@ -15,3 +15,25 @@
 
 /* Keep embedded syllabus search and secondary actions clear at every width. */
 .planner-workspace .pl-syllabus-subjects label.relative input{padding-left:36px}.pl-mistake-review>.pl-text-button{display:flex;width:fit-content}.pl-day-context h2 small{margin-left:5px}
+
+
+/* The first-use route is deliberately action-first; it never replaces the existing data tools. */
+.pl-start-guide{margin:0 0 28px;padding:24px;border:1px solid #dfe9df;border-radius:22px;background:#f5f8f2}
+.pl-start-guide-head{display:flex;justify-content:space-between;align-items:start;gap:18px;margin-bottom:19px}
+.pl-start-guide-head h2{font-size:23px;line-height:1.2;margin:5px 0 7px}
+.pl-start-guide-head .pl-muted{max-width:640px}
+.pl-guide-status{display:inline-flex;align-items:center;white-space:nowrap;border:1px solid #d6e3d4;background:#fff;padding:8px 12px;border-radius:999px;color:#255d49;font-size:11px;font-weight:700}
+.pl-guide-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pl-guide-step{width:100%;text-align:left;cursor:pointer;display:flex;align-items:flex-start;gap:12px;min-height:158px;padding:19px 15px;border:1px solid #dfe7dc;border-radius:16px;background:white;color:var(--pl-ink);transition:border-color .15s,box-shadow .15s,transform .15s}
+.pl-guide-step:hover{color:var(--pl-ink);border-color:#97b49e;box-shadow:0 7px 18px #264d3215;transform:translateY(-2px)}
+.pl-guide-step.is-current{border-color:#326b52;box-shadow:0 0 0 1px #326b52}
+.pl-guide-number{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;flex:none;background:#e6efe4;color:#235b43;font-size:13px;font-weight:750}
+.pl-guide-step.is-current .pl-guide-number{background:#235b43;color:#fff}
+.pl-guide-copy{display:grid;gap:8px;flex:1}
+.pl-guide-copy strong{font-size:14px;line-height:1.4}
+.pl-guide-copy small{font-size:11px;line-height:1.6;color:#606d63}
+.pl-guide-copy b{margin-top:auto;font-size:11px;font-weight:700;color:#225f46}
+.pl-guide-step>svg:last-child{flex:none;margin-top:5px;color:#6d816f}
+.pl-guide-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:16px;color:#56655a;font-size:12px}
+@media(max-width:960px){.pl-guide-steps{grid-template-columns:1fr}.pl-guide-step{min-height:0}.pl-start-guide-head{flex-wrap:wrap}}
+@media(max-width:540px){.pl-start-guide{padding:16px;border-radius:17px}.pl-guide-step{padding:15px}.pl-guide-bottom .pl-secondary{width:100%}}

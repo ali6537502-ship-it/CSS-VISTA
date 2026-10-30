@@ -164,7 +164,7 @@ export default function Practice({
       <section className={panelStyle}>
         <h2 className="text-xl font-semibold">{review ? 'Error review' : 'Skill practice'}</h2>
         <p className="mt-3 text-sm leading-7 text-slate-500">
-          Handbook-based recognition drills, checked without AI. Work through a hint, try again,
+          Handbook-based recognition drills with reviewed answer keys. Work through a hint, try again,
           then return after three days for a spaced check. Free-text meaning needs separate
           evaluation.
         </p>

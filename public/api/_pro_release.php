@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-// Owner release hold, 12 October 2026. Reopening requires a reviewed release.
+// Owner authorises the Précis Guide release on 30 October 2026.
+// All other Pro capabilities, external evaluation and payment collection remain paused.
 // The sole preview exception is the existing isolated CI database, never a cookie,
 // request header, student role or publicly writable configuration.
 function cssv_pro_release_paused(): bool {

@@ -1,0 +1,105 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import { analyzePrecisWriting } from '../src/features/precis/writingAnalyzer.ts'
+
+const original = 'Rapid urban growth increases pressure on housing, transport, sanitation, schools, hospitals, and employment. When cities expand without adequate planning, congestion, pollution, inequality, and social tension may increase. Urbanization contributes to development only when infrastructure and public services keep pace with population growth.'
+function check(draft: string, title = 'Urban Growth and Planning', limit: number | null = null) {
+  return analyzePrecisWriting({ original, draft, title, limit })
+}
+function codes(input: ReturnType<typeof check>) {
+  return input.findings.map((finding) => finding.id)
+}
+
+test('flags clear repeated words, grammar, prepositions, double comparisons and modals', () => {
+  const result = check('People is very very concerned about planning. They discuss about services. A university can improves roads. This is more better.', 'Urban Services')
+  assert.ok(codes(result).includes('people-is'))
+  assert.ok(codes(result).includes('discuss-about'))
+  assert.ok(codes(result).includes('modal-verb'))
+  assert.ok(codes(result).includes('more-better'))
+  assert.ok(codes(result).includes('really-very'))
+  assert.ok(!codes(result).includes('an-consonant'))
+  const duplicate = check('Cities cities need better services.')
+  assert.ok(codes(duplicate).includes('repeated-word'))
+})
+
+test('checks detectable article, punctuation and agreement errors with an exact excerpt', () => {
+  const result = check('an university ,have  problems.It does improves services')
+  for (const code of ['an-consonant','space-before-punctuation','double-space','missing-space-period','doesnt-base','end-punctuation'])
+    assert.ok(codes(result).includes(code), code)
+  assert.ok(result.findings.some((f)=>f.id==='an-consonant' && f.excerpt==='an university'))
+})
+
+test('preserves qualification and contrast as review prompts rather than invented semantic errors', () => {
+  const result = check('Urbanization always guarantees development.')
+  assert.ok(codes(result).includes('condition-review'))
+  assert.ok(codes(result).includes('overstatement-review'))
+  assert.equal(result.findings.find((finding)=>finding.id==='condition-review')?.certainty,'review')
+  assert.ok(result.findings.every((finding)=>finding.handbook.startsWith('Chapter ')))
+})
+
+test('checks explicit word limit and title without inventing an official score', () => {
+  const result = check('Cities need adequate planning and public services to support development.', '', 4)
+  assert.equal(result.draftWords, 10)
+  assert.ok(codes(result).includes('explicit-length'))
+  assert.ok(codes(result).includes('no-title'))
+  assert.ok(result.findings.find((f)=>f.id==='explicit-length')!.advice.includes('6 words'))
+  assert.equal(Object.hasOwn(result,'score'),false)
+})
+
+test('warns on copied extended sequences but does not treat every shared phrase as plagiarism', () => {
+  const copied = check('Rapid urban growth increases pressure on housing, transport, sanitation, schools, hospitals, and employment.')
+  assert.ok(codes(copied).includes('source-copy'))
+  const short = check('Urban expansion strains public infrastructure and services.')
+  assert.ok(!codes(short).includes('source-copy'))
+})
+
+test('offers selective offline spelling suggestions without claiming certainty', () => {
+  const result = check('Goverment recieve criticism becuase services is weak.')
+  assert.ok(codes(result).includes('spelling-goverment'))
+  assert.ok(codes(result).includes('spelling-recieve'))
+  assert.ok(codes(result).includes('common-plural-verb'))
+  assert.equal(result.findings.find((f)=>f.id==='spelling-becuase')?.certainty,'review')
+})
+
+test('avoids overclaim when original contains an identical absolute statement', () => {
+  const result = analyzePrecisWriting({
+    original:'Governance always requires fair application of rules.',
+    draft:'Fair application of rules always matters in governance.',
+    title:'Fair Governance', limit:null,
+  })
+  assert.ok(!codes(result).includes('overstatement-review'))
+  assert.equal(result.scope.includes('not a complete grammar'),true)
+})
+
+test('empty answer receives an actionable prompt, not a made-up evaluation', () => {
+  const result = check('  ', '', 10)
+  assert.deepEqual(codes(result),['empty-draft'])
+  assert.equal(result.draftWords,0)
+})
+
+test('accepted owner-handbook worked models do not trigger false source or length alarms', () => {
+  const imported = readFileSync(new URL('../public/api/_precis_handbook.php', import.meta.url), 'utf8')
+  const embedded = imported.match(/<<<'HANDBOOK'\n([\s\S]*?)\nHANDBOOK/u)
+  assert.ok(embedded, 'Owner handbook catalogue must remain readable')
+  const handbook = JSON.parse(embedded[1]) as {
+    passages: { id: string; text: string; model: string; model_title: string; limit: number | null }[]
+  }
+  assert.equal(handbook.passages.length, 6)
+  for (const example of handbook.passages) {
+    const result = analyzePrecisWriting({
+      original: example.text,
+      draft: example.model,
+      title: example.model_title,
+      limit: example.limit,
+    })
+    const misleading = result.findings.filter((f) => ['length-review','contrast-review','causal-review'].includes(f.id))
+    assert.deepEqual(misleading, [], 'Spurious review warning for ' + example.id)
+  }
+})
+
+test('substantially uncompressed writing still triggers a cautious length review', () => {
+  const result = check(original, 'Urban Growth and Planning')
+  assert.ok(codes(result).includes('length-review'))
+  assert.equal(result.findings.find((f) => f.id === 'length-review')?.certainty, 'review')
+})

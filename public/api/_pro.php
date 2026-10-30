@@ -50,9 +50,10 @@ function cssv_pro_iso(?string $value): ?string
     return $value ? (new DateTimeImmutable($value,new DateTimeZone('UTC')))->format('Y-m-d\TH:i:s.u\Z') : null;
 }
 
-function cssv_pro_require_active(PDO $pdo, string $userId): void
+function cssv_pro_require_active(PDO $pdo, string $userId, string $scope = ''): void
 {
-    cssv_pro_release_require_open();
+    // Owner-approved, narrowly scoped release: only the self-contained Précis workspace.
+    if ($scope !== 'precis') cssv_pro_release_require_open();
     // Future premium actions call this AFTER cssv_require_user. Owned history
     // does not call it. No existing free feature is gated by this increment.
     cssv_pro_ensure_schema($pdo);

@@ -192,7 +192,7 @@ export default function AccountHome() {
     { to: '/account/analytical-skills', icon: Target, title: 'Analytical Skills Builder', status: 'Mechanisms, alternatives, trade-offs & conclusions' },
     { to: '/account/essay-builder', icon: BookOpen, title: 'Essay Themes Builder', status: 'Seven guided stages linked to your research roadmap' },
     { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Subject Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
-    { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
+    { to: '/account/precis', icon: BookOpen, title: 'CSS Vista Preci Mentor', status: 'Free guided reading, writing practice and corrections' },
     { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
   )
   const proChoices = [

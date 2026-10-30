@@ -131,10 +131,11 @@ const localCorpus: SearchDocument[] = [
     id: 'answer-evaluation-subjects',
     title: 'Answer Evaluation by Miss Sadia Zahoor, PAS',
     category: 'Answer Evaluation',
-    snippet: 'CSS Essay, English Precis and Composition, General Science and Ability, Current Affairs, Pakistan Affairs, Islamic Studies, Political Science, Criminology, European History, Environmental Science and Punjabi.',
+    snippet: 'CSS Essay, General Science and Ability, Current Affairs, Pakistan Affairs, Islamic Studies, Political Science, Criminology, European History, Environmental Science and Punjabi.',
     link: '/answer-evaluation',
   },
-  ...compulsorySubjects.flatMap((subject) => [
+  { id: 'precis-course', title: 'CSS Vista Preci Mentor', category: 'Guided Courses', snippet: 'An adjustable-duration handbook course with interactive lessons and practice.', link: '/account/precis' },
+  ...compulsorySubjects.filter((subject) => subject.slug !== 'precis-composition').flatMap((subject) => [
     {
       id: `sub-${subject.slug}`,
       title: subject.name,
@@ -448,7 +449,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
     }
 
     if (fpscSyllabus) {
-      remote.push(...fpscSyllabus.subjects.filter((subject) => subject.slug !== 'essay').map((subject) => ({
+      remote.push(...fpscSyllabus.subjects.filter((subject) => !['essay', 'precis-composition'].includes(subject.slug)).map((subject) => ({
         id: `fpsc-syllabus-${subject.slug}`,
         title: `${subject.name} — FPSC Syllabus`,
         category: 'FPSC Syllabus & Topic Planner',
@@ -459,7 +460,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
     }
 
     if (pastPaperAnalysis) {
-      pastPaperAnalysis.subjects.forEach((subject) => {
+      pastPaperAnalysis.subjects.filter((subject) => subject.slug !== 'precis-composition').forEach((subject) => {
         remote.push({
           id: `past-paper-analysis-${subject.slug}`,
           title: `${subject.name} — CSS Past Paper Analysis`,

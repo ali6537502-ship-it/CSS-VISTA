@@ -1,112 +1,148 @@
-import type { Block, Chapter, Overview } from './api'
+import type { Block, Chapter, Overview, Question } from './api'
 
-/**
- * Editorial routing only. Chapter text and fixed-answer questions always come
- * from the existing access-controlled, owner-imported handbook catalogue.
- * No model service, external search or generated answer is involved.
- */
-export const guidePaths = [
-  {
-    id: 'start',
-    title: 'Start from the beginning',
-    description: 'What a précis is, the essential rules and how to read a passage.',
-    chapters: ['1', '3', '4', '5'],
-    skill: 'central_idea',
-    prompt: 'Explain the distinction between a topic and the writer\'s controlling idea.',
-  },
-  {
-    id: 'idea',
-    title: 'Find the main argument',
-    description: 'Identify the central idea and map how the passage develops it.',
-    chapters: ['4', '5'],
-    skill: 'central_idea',
-    prompt: 'State the writer\'s controlling claim without adding an opinion.',
-  },
-  {
-    id: 'selection',
-    title: 'Choose what matters',
-    description: 'Separate major claims from illustration and minor detail.',
-    chapters: ['5', '6'],
-    skill: 'selection',
-    prompt: 'Identify what must survive compression, and explain why.',
-  },
-  {
-    id: 'compression',
-    title: 'Compress without distortion',
-    description: 'Generalise carefully, paraphrase and protect the original meaning.',
-    chapters: ['7', '8', '17'],
-    skill: 'compression',
-    prompt: 'Describe how you would shorten an idea without changing its strength.',
-  },
-  {
-    id: 'logic',
-    title: 'Preserve the logic',
-    description: 'Keep causes, contrasts, conditions and links between ideas.',
-    chapters: ['9', '10'],
-    skill: 'qualifications',
-    prompt: 'Which logical relationship in this explanation must not be lost?',
-  },
-  {
-    id: 'writing',
-    title: 'Build and revise a précis',
-    description: 'Work on language, title, length, drafting and checking your work.',
-    chapters: ['10', '11', '12', '13', '14', '16', '19', '22'],
-    skill: 'coherence',
-    prompt: 'Describe one specific revision check you will apply to your own work.',
-  },
-] as const
-
-export type GuidePath = (typeof guidePaths)[number]
-export type GuideCard = { label: string; block: Exclude<Block, { type: 'heading' }> }
-
-export function guidePath(id: string | null): GuidePath {
-  return guidePaths.find((item) => item.id === id) || guidePaths[0]
+export type HandbookUnit = {
+  id: string
+  chapterId: string
+  chapterTitle: string
+  section: string
+  blockIndex: number
+  blocks: { index: number; block: Block }[]
+  weight: number
 }
 
-export function availableGuideChapters(
-  path: GuidePath,
-  chapters: Chapter[],
-): Chapter[] {
-  return path.chapters
-    .map((id) => chapters.find((chapter) => chapter.id === id))
-    .filter((chapter): chapter is Chapter => !!chapter)
+export type StudyDay = {
+  day: number
+  units: HandbookUnit[]
+  title: string
+  chapters: string[]
+  weight: number
 }
 
-/**
- * Display one original content block at a time. Headings become card labels;
- * source paragraphs, lists and tables are never rephrased or synthesized.
+export const paceChoices = [7, 14, 21, 30, 45] as const
+export const minimumDays = 3
+export const maximumDays = 60
+
+/** Every original paragraph/bullet/table appears once, in handbook order.
+ * Adjacent source blocks under the same heading form a readable lesson.
+ * Long unheaded lists are divided into groups of at most three blocks.
  */
-export function guideCards(chapter: Chapter): GuideCard[] {
-  let label = chapter.title
-  const cards: GuideCard[] = []
-  for (const block of chapter.blocks) {
-    if (block.type === 'heading') {
-      label = block.text
-    } else if (block.type === 'table') {
-      if (block.rows.length > 0)
-        cards.push({ label, block })
-    } else if (block.text.trim()) {
-      cards.push({ label, block })
+export function handbookUnits(chapters: Chapter[]): HandbookUnit[] {
+  const units: HandbookUnit[] = []
+  for (const chapter of chapters) {
+    let section = chapter.title.replace(/^\d+\.\s*/, '')
+    let current: { index: number; block: Block }[] = []
+    function flush() {
+      if (!current.length) return
+      const text = current.map(({ block }) =>
+        block.type === 'table' ? block.rows.flat().join(' ') : block.text,
+      ).join(' ')
+      units.push({
+        id: `${chapter.id}:${current[0].index}`,
+        chapterId: chapter.id,
+        chapterTitle: chapter.title,
+        section,
+        blockIndex: current[0].index,
+        blocks: current,
+        weight: Math.max(10, text.match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu)?.length || 0),
+      })
+      current = []
     }
+    chapter.blocks.forEach((block, index) => {
+      if (block.type === 'heading') {
+        flush()
+        section = block.text
+        return
+      }
+      current.push({ index, block })
+      if (current.length >= 3) flush()
+    })
+    flush()
   }
-  return cards
+  return units
 }
 
-/** The answer index stays on the server; the catalogue exposes prompts only. */
-export function guideQuestion(
-  data: Overview,
-  path: GuidePath,
-  chapterId: string,
-) {
-  const questions =
-    data.catalog?.questions.filter((question) => question.skill === path.skill) || []
-  const chapterIndex = path.chapters.indexOf(chapterId as never)
-  return questions.length
-    ? questions[(Math.max(0, chapterIndex)) % questions.length]
-    : undefined
+/**
+ * Greedy contiguous weighted partition with a non-empty remainder invariant.
+ * Balanced by actual handbook text rather than arbitrary chapter counts.
+ * For D days every unit is scheduled once, with no invented repeat lessons.
+ */
+export function buildStudyDays(units: HandbookUnit[], days: number): StudyDay[] {
+  if (!Number.isInteger(days) || days < 1 || days > units.length)
+    throw new RangeError('Choose a valid number of course days.')
+  const result: StudyDay[] = []
+  let offset = 0
+  for (let day = 1; day <= days; day++) {
+    const remainingDays = days - day
+    const lastAllowed = units.length - remainingDays
+    const remainingWeight = units.slice(offset).reduce((sum, unit) => sum + unit.weight, 0)
+    const target = remainingWeight / (remainingDays + 1)
+    let takenWeight = 0
+    let end = offset
+    while (end < lastAllowed) {
+      const weight = units[end].weight
+      if (
+        end > offset &&
+        takenWeight + weight > target &&
+        Math.abs(target - takenWeight) <= Math.abs(target - takenWeight - weight)
+      ) break
+      takenWeight += weight
+      end += 1
+      if (takenWeight >= target) break
+    }
+    const selected = units.slice(offset, end)
+    const chapters = [...new Set(selected.map((unit) => unit.chapterId))]
+    const first = selected[0].chapterTitle
+    const last = selected[selected.length - 1].chapterTitle
+    const title = first === last
+      ? first.replace(/^\d+\.\s*/, '')
+      : `${first.replace(/^\d+\.\s*/, '')} → ${last.replace(/^\d+\.\s*/, '')}`
+    result.push({ day, units: selected, chapters, title, weight: takenWeight })
+    offset = end
+  }
+  return result
 }
 
-export function guideStep(value: string | null, maximum: number): number {
-  const number = value === null ? 0 : Number(value)
-  return Number.isInteger(number) && number >= 0 && number <= maximum ? number : 0
+export function firstPendingDay(plan: StudyDay[], completed: readonly string[]): number {
+  const done = new Set(completed)
+  const next = plan.find((day) => day.units.some((unit) => !done.has(unit.id)))
+  return next?.day || plan.length
+}
+
+export function coveredCount(units: readonly HandbookUnit[], completed: readonly string[]) {
+  const valid = new Set(units.map((unit) => unit.id))
+  return new Set(completed.filter((id) => valid.has(id))).size
+}
+
+export function skillForChapter(chapterId: string): string {
+  const id = Number(chapterId)
+  if ([1, 2, 3, 4, 5, 21, 25].includes(id)) return 'central_idea'
+  if ([6, 15, 20].includes(id)) return 'selection'
+  if ([7, 17, 23].includes(id)) return 'compression'
+  if ([8, 24].includes(id)) return 'paraphrasing'
+  if (id === 9) return 'qualifications'
+  if ([10, 14, 18].includes(id)) return 'coherence'
+  if (id === 11) return 'grammar'
+  if (id === 12) return 'title'
+  if ([13, 16, 19, 22].includes(id)) return 'fidelity'
+  return 'central_idea'
+}
+
+export function questionForDay(data: Overview, day: StudyDay): Question | undefined {
+  const pool = data.catalog?.questions || []
+  const selectedChapter = day.units[day.units.length - 1]?.chapterId
+  const skill = skillForChapter(selectedChapter || '1')
+  const candidates = pool.filter((item) => item.skill === skill)
+  if (!candidates.length) return undefined
+  return candidates[(day.day - 1) % candidates.length]
+}
+
+export function safeDay(value: string | null, max: number, fallback: number): number {
+  if (!value) return fallback
+  const parsed = Number(value)
+  return Number.isInteger(parsed) && parsed >= 1 && parsed <= max ? parsed : fallback
+}
+
+export function safeUnitStep(value: string | null, max: number): number {
+  const parsed = value === null ? 0 : Number(value)
+  return Number.isInteger(parsed) && parsed >= 0 && parsed <= max ? parsed : 0
 }

@@ -80,7 +80,7 @@ function MistakeLog() {
       <h3 className="flex items-center gap-1.5 text-sm font-semibold text-pine"><AlertTriangle className="h-4 w-4" /> Mistake log & weak-topic tracker</h3>
       <div className="mt-2 grid gap-2 sm:grid-cols-3">
         <select value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="h-9 rounded-md border border-input px-2 text-sm">
-          {[...compulsorySubjects.map((s) => s.name), 'Optional subjects', 'MPT'].map((s) => <option key={s}>{s}</option>)}
+          {[...compulsorySubjects.filter(s => s.slug !== 'precis-composition').map((s) => s.name), 'Optional subjects', 'MPT'].map((s) => <option key={s}>{s}</option>)}
         </select>
         <input value={form.mistake} onChange={(e) => setForm({ ...form, mistake: e.target.value })} placeholder="The mistake / weak topic" className="h-9 rounded-md border border-input px-2 text-sm outline-none focus:ring-2 focus:ring-ring" />
         <div className="flex gap-2">
@@ -267,7 +267,7 @@ export default function StudyTools() {
             </div>
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            <SimpleList toolKey="daily-targets" title="Daily targets" placeholder="e.g. 1 precis + 20 MCQs + editorial" addLabel="Add daily target" />
+            <SimpleList toolKey="daily-targets" title="Daily targets" placeholder="e.g. 20 MCQs + one editorial" addLabel="Add daily target" />
             <SimpleList toolKey="weekly-targets" title="Weekly targets" placeholder="e.g. Finish PA notes ch. 4–6 + 1 essay" addLabel="Add weekly target" />
           </div>
           </Section>
@@ -275,7 +275,7 @@ export default function StudyTools() {
           {/* Trackers */}
           <Section title="Syllabus & subject-progress tracker">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {compulsorySubjects.map((s) => {
+            {compulsorySubjects.filter(s => s.slug !== 'precis-composition').map((s) => {
               const pct = state.subjectProgress[s.slug] ?? 0
               return (
                 <div key={s.slug} className="rounded-lg border bg-white p-4">

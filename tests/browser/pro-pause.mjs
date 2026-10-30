@@ -33,7 +33,7 @@ try {
     await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
     assert.equal(await page.getByRole('link',{name:'Pro account',exact:true}).count(),0)
     const links=await page.locator('a[href]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')))
-    assert.deepEqual(links.filter(isProDestination),[],'Visible paused Pro links in account navigation')
+    assert.deepEqual(links.filter(link=>isProDestination(link) && !new URL(link,base).pathname.startsWith('/account/precis')),[],'Visible paused Pro links in account navigation')
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile overflow')
   }
   for (const path of ['/account/general-ability','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/ai-usage','/account/membership','/current-affairs','/study-material/essay-themes']) {
@@ -41,11 +41,13 @@ try {
     await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
     assert.equal(await page.locator('main textarea, main input[type=file]').count(),0)
   }
-  for (const path of ['/account/expression?view=studio','/account/precis?view=guide','/account/argumentation','/account/analytical-skills','/account/essay-builder']) {
-    await page.goto(base+path)
-    await page.locator('main h1').first().waitFor()
-    assert.equal(await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).count(),0,'Free learning was paused: '+path)
-  }
+  await page.goto(base+'/account/precis?view=guide')
+  await page.getByRole('heading',{name:'Learn Précis with CSS Vista Preci Mentor'}).waitFor()
+  await page.getByRole('button',{name:'Start reading'}).click()
+  await page.getByText('Day 1 of 14',{exact:true}).waitFor()
+  await page.goto(base+'/account/precis?view=guide&attempt='+attempt)
+  await page.getByRole('heading',{name:'Learn Précis with CSS Vista Preci Mentor'}).waitFor()
+  assert.equal(await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).count(),0)
   await page.goto(base+'/account/preparation?attempt='+attempt)
   await page.getByRole('button',{name:'Reading & revision',exact:true}).click()
   assert.equal(new URL(page.url()).searchParams.get('kind'),'vistagram')

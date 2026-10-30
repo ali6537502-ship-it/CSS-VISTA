@@ -6,6 +6,7 @@ import { HostingerApiError } from '@/lib/hostingerApi'
 import { readDraft, useAutosavedDraft } from '@/hooks/useAutosavedDraft'
 import { learningRequest, saveIdentity, type SaveResult } from '@/features/learning/api'
 import { inputStyle, panelStyle, primaryStyle, secondaryStyle } from '@/features/handwriting/styles'
+import WritingAnalyzer from './WritingAnalyzer'
 import {
   blankScratch,
   draftKey,
@@ -520,6 +521,7 @@ export default function Composer({
                 <textarea
                   rows={12}
                   maxLength={20000}
+                  spellCheck={true}
                   value={draft.text}
                   onChange={(e) => setDraft((d) => ({ ...d, text: e.target.value }))}
                   className={`${inputStyle} resize-y bg-white text-base leading-8`}
@@ -633,6 +635,14 @@ export default function Composer({
             </div>
           </section>
         </div>
+        {draft.step >= 6 && (
+          <WritingAnalyzer
+            original={original}
+            draft={draft.text}
+            title={draft.title}
+            limit={limit}
+          />
+        )}
       </fieldset>
       <section className={`${panelStyle} space-y-4`}>
         <p role="status" className="text-xs leading-6 text-slate-500">

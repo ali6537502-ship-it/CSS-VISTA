@@ -21,9 +21,16 @@ export function ProPausedNotice() {
   return <main className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold text-slate-950">CSS Vista Pro is temporarily unavailable</h1><p className="mt-4 text-sm leading-7 text-slate-600">We are finalising the Pro learning experience. Your saved work and account records are retained.</p><Link to="/account/dashboard?plan=free" className="mt-6 inline-flex min-h-11 items-center rounded-xl border px-5 text-sm font-semibold">Open Free account</Link></main>
 }
 
+/** The free Précis Mentor is available to every signed-in account; the wider Pro pause remains in place. */
+function releasedPrecis(to: string): boolean {
+  let url: URL
+  try { url = new URL(to, 'https://www.css-vista.com') } catch { return false }
+  return url.origin === 'https://www.css-vista.com' && url.pathname.replace(/\/+$/, '') === '/account/precis'
+}
+
 export function ProReleaseOutlet() {
   const paused = useProReleasePaused(), location = useLocation()
-  const blocked = location.pathname !== '/account/dashboard' && isProDestination(location.pathname + location.search)
+  const blocked = location.pathname !== '/account/dashboard' && isProDestination(location.pathname + location.search) && !releasedPrecis(location.pathname + location.search)
   return paused && blocked ? <ProPausedNotice /> : <Outlet />
 }
 
@@ -32,9 +39,9 @@ function destination(to: LinkProps['to']): string {
 }
 export function AvailableStudyLink(props: LinkProps) {
   const paused = useProReleasePaused()
-  return paused && isProDestination(destination(props.to)) ? null : <Link {...props} />
+  return paused && isProDestination(destination(props.to)) && !releasedPrecis(destination(props.to)) ? null : <Link {...props} />
 }
 export function AvailableStudyNavLink(props: NavLinkProps) {
   const paused = useProReleasePaused()
-  return paused && isProDestination(destination(props.to)) ? null : <NavLink {...props} />
+  return paused && isProDestination(destination(props.to)) && !releasedPrecis(destination(props.to)) ? null : <NavLink {...props} />
 }

@@ -1,51 +1,63 @@
-# VISTA Guide — API-free Précis Learn journey
+# VISTA Guide — Student-paced Master Précis course
 
-Development implementation, not production release. This change is intentionally limited to the existing protected Précis account workspace. The owner release hold in `docs/pro/release-hold.md` remains active; do not merge to auto-deployed `main`, publish Pro, enable payment or turn on any AI feature without a separate final-release instruction.
+**Draft, development-only. Do not merge, deploy or reopen the paused Pro system without the owner's separate explicit release instruction.**
 
-## Source and approved routing
+## Primary source and fidelity
 
-The source is the existing access-controlled `cssv_precis_catalog()` from the owner's imported **Master Précis Writing Handbook**. The catalogue already excludes answer keys from fixed-response questions and full model answers from practice passages. No new passages, answer keys, official past papers or independent scoring rules are introduced. The Guide does not load content from external services.
+The actual authoritative teaching source for this flow is the owner-imported `Master Précis Writing Step-by-Step Handbook`, exposed from protected `cssv_precis_catalog()`. The imported catalogue contains 22 numbered chapters and appendices A–C, i.e. 25 sequential catalogue entries. It has six short practice passages, and 39 editorially authored fixed-answer checks.
 
-`src/features/precis/guideModel.ts` maps learner goals to existing chapter identities:
+**No course chapters, introductory explanations, example passages, glossary entries, tables, or answer keys are fabricated by the Guide.** The course includes every paragraph, bullet and table from the protected handbook catalogue, in chapter/block order. Existing source chapter headings become navigation headings. Chapter 2 explicitly contains the existing unverified official-mark claim warning; do not present such marks as confirmed official rules. Worked model answers remain withheld under the existing deliberate comparison disclosure gate; the guide links to writing practice instead of embedding answer keys.
 
-| Learner goal | Handbook chapters | Existing reviewed drill skill |
-| --- | --- | --- |
-| Start from the beginning | 1, 3, 4, 5 | `central_idea` |
-| Find the main argument | 4, 5 | `central_idea` |
-| Choose what matters | 5, 6 | `selection` |
-| Compress without distortion | 7, 8, 17 | `compression` |
-| Preserve the logic | 9, 10 | `qualifications` |
-| Build and revise a précis | 10, 11, 12, 13, 14, 16, 19, 22 | `coherence` |
+## Student-chosen course duration
 
-These routes deliberately omit chapter 2's unverified official-exam marks, worked-model answer content and answer-key chapters. A chapter is rendered only if the existing **server-returned authorised catalogue** includes it. The route configuration by itself cannot expose handbook content.
+At `/account/precis?view=guide`, a student with an owned preparation attempt chooses a pace:
 
-## Learner experience
+- Presets: 7, 14, 21, 30, or 45 days
+- Custom: any whole number from 3 to 60 days, provided the handbook contains enough teaching units
 
-1. Open `/account/precis?view=guide` through the existing native `ProfileGate` and `ProGate` protection. The Pro release pause still supersedes this route on production.
-2. Choose one of six educational goals; select or continue an existing chapter. A deep link such as `?view=guide&chapter=9&attempt=<owned-attempt-id>` resolves the appropriate guide path.
-3. Read **one original handbook block at a time**. Headings label the screens; source paragraphs, bullet texts and tables remain verbatim, including qualifications. Long table blocks are horizontally scrollable. Progress indicates position in the current chapter, not competence.
-4. Write an optional personal explanation. The note is held in per-account/per-attempt/per-chapter/per-step **sessionStorage**, limited to 1,200 characters, and clearly labelled as local to the tab; it is not presented as evaluated or synced work. Storage failure is visible and does not erase the in-memory note.
-5. At the chapter end, attempt an existing authored recognition question where one exists. The existing `student/precis.php` action `drill_answer` validates ownership, Pro access and CSRF; it grades the answer on the server and returns a reviewed explanation. The answer index is not bundled into the client.
-6. Continue to the next chapter, open focused skill practice, the full handbook chapter or the saved writing workspace.
-7. Optionally use **Save chapter**. This submits the existing `progress_save` action with the current progress version, original completed-days array and chapter identity. It **does not mark any day complete**, claim written mastery, mint awards or change existing writing. A successful save allows chapter resumption across devices. The exact micro-screen stays in the URL rather than being falsely described as synced.
+The preview lists every day, relevant handbook chapter range, and exact reading-section count **before** the student saves their plan. Faster plans contain more reading on each day; slower plans contain fewer sections. The system does **not** claim that merely selecting a shorter pace guarantees learning.
 
-The existing `Course.tsx` contextual "Ask about this method" link now routes into this deterministic guide. Other Ask VISTA functions and external provider settings remain unchanged and must be addressed in a separate API-removal audit.
+`handbookUnits()` takes actual imported content as the only curriculum: adjacent original non-heading blocks (paragraphs, bullets or tables) form coherent reading units of at most three blocks per handbook heading. Each unit has a stable first-block `chapterId:blockIndex` ID; every original block remains present and unchanged. `buildStudyDays()` partitions all units into the chosen number of nonempty, source-ordered, weighted daily schedules. Text length is used only for workload balancing, not to alter the lesson content. Every unit must appear exactly once in the complete schedule; headings provide stable readable section labels. The current imported edition contains 108 grouped reading units comprising 193 original body blocks.
 
-## Security and data
+A learner can replan from 14 to 30 days (or another supported duration). Previously completed **source unit IDs** are preserved; daily groupings change without deleting earlier work. The UI reports exact completed-section coverage and does not claim that reading completion proves written Précis mastery.
 
-- No external AI request, prompt, model key, provider SDK, generated marking or new backend endpoint.
-- The existing account, membership, database, saved précis history and practice ledgers remain the only authorities.
-- Protected handbook content is not copied into a public JS bundle or public route.
-- Existing immutable first-answer records, drill explanations and spaced review remain authoritative.
-- No schema migration, destructive changes or production configuration edits.
-- No new dependency and no change to pricing, access classification or paid-content boundary.
+## Daily learner journey
 
-## Verification required before release
+1. Open the current day: `Day n of targetDays`, title, sections covered today, and daily progress.
+2. Read one coherent group of source paragraphs/bullets/tables verbatim, labelled with its actual handbook chapter and heading. Groups are intentionally small to avoid either scattered micro-flashes or oversized full-chapter dumps.
+3. Optionally write a working explanation in a browser-tab note. This field is clearly private, local, and not automatically evaluated. Browser-storage failure is shown.
+4. Select `I have read this · Continue`. One server-validated, account-owned, version-checked completion record is saved for the exact original book unit.
+5. At the end of the day's reading, attempt one existing authored fixed-answer question when its chapter skill is represented in the reviewed bank. The server alone checks and explains correctness. There is no free-text semantic marking.
+6. Move to the next day, revisit a preceding day, read the full source chapter, open the existing writing workspace or review actual recorded practice errors.
 
-Automated coverage is added to `tests/precisGuide.test.ts` and included in `npm run test:precis`. It checks unique routes and denied chapter identities, source-catalogue filtering, original block preservation, server-authored question selection and URL-step bounds.
+The complete existing optional 30-day routine is still available as a handbook chapter and in the legacy guided course. This adaptive plan is an additional mode, not a destructive replacement for any previously saved legacy course.
 
-**In an environment with repository dependencies, execute:** `npm run typecheck`, `npm run lint`, `npm run test:precis`, `npm run test:precis-server`, `npm run test:precis-security`, `npm run test:routes` and `npm run build:hostinger:strict`.
+## Original-passage written answer analyser (typed answers only)
 
-**Manual integration acceptance:** verify anonymous/Free/expired/active/paused states, refresh/direct links, same-device and cross-device chapter resume, stale-version error recovery, local-note storage failures, recorded first-answer behavior, retakes, keyboard navigation, 320/390/768/1440-pixel widths, and no external model call. An authenticated live production student flow has not been asserted.
+This development branch now includes an optional **Check my Précis** panel in the existing full writing workspace and in the daily Guide's end-of-day written practice. The existing six owner-supplied teaching passages supply the source; longer schedules may reuse a passage and the interface says so. Students type a new précis and title in the existing Composer (no photograph or handwriting input), select **Analyse my answer**, and receive grouped, actionable feedback. Students can revise and run the checks again.
 
-**Release status:** development-only and pending independent test, editorial and owner publication approval.
+The analyser is **fully in-browser**, with no external AI service, network request, secret key, backend model, or new membership charge. It does not send the draft to a grammar-provider API. Existing browser drafts continue to use the established account/attempt-specific draft keys; explicitly saving the writing uses the existing native PHP immutable writing version history. The generated findings are not saved or sold as examination evidence.
+
+Deterministic language checks currently include certain subject–verb agreement forms; verb forms after modals and `does`; common article and preposition mistakes; doubled comparatives; repeated words; common spelling errors; spaces, sentence-ending punctuation, capitalization and brackets; unusually long sentences; multiple paragraphs; and wordy phrases. A limited offline spelling list is explicitly not comprehensive. Review-only source checks include long direct copying; possible omitted contrast, conditions, causal relationships and qualifications; stronger claims not present in a qualified source; and numbers newly introduced into the draft. Exact word-limit compliance is distinguished from a nonbinding one-third teaching benchmark. Title prompts address missing, long and potentially unrepresentative titles.
+
+Every finding presents a quoted excerpt, a reason, a specific suggested action, and the relevant existing handbook chapter. **Detected** marks certain mechanically detectable patterns; **Check in context** flags possibilities. There is no fabricated overall mark, guaranteed plagiarism detection, full semantic equivalence, exhaustive grammar certification, or automatic validation of the central idea. The original model is never leaked through this checker before the existing two-revision owner-protected comparison route.
+
+Test suite: `tests/precisWritingAnalyzer.test.ts` runs through `npm run test:precis`, including grammar, spelling, structure, qualification, copied text, source-linked feedback and no-score controls. Browser verification remains required.
+
+## Secure storage and migration
+
+- Existing native login, ProfileGate/ProGate pause, owner-scoped `preparation_attempts`, PHP/PDO account checks, idempotent receipts, first-answer history and CSRF remain in control.
+- New additive migration `server/sql/027_precis_adaptive_guide.sql` adds `precis_guide_plans` keyed by `attempt_id`: `target_days`, `completed_units`, `version`, and `handbook_sha`. No record is deleted and no existing `precis_progress` or writing version is replaced.
+- `guide_setup` validates 3–60 days and the current version; `guide_mark` validates that a source unit ID actually exists and is a paragraph, bullet or table in the imported book. Both require native owner, CSRF and active membership; source-hash mismatch blocks silent remapping after handbook changes.
+- The new front-end imports no model SDK, sends no provider request, and exposes no complete content or answer-key bundle in public JavaScript. The protected PHP catalogue supplies its original source.
+- Work notes are stored per user/attempt/source unit in browser `sessionStorage`. Those notes are not synced and are not a substitute for the saved writing workspace.
+
+## Tests, release hold and acceptance
+
+`npm run test:precis`: algorithmic coverage (days, all sections exactly once, chapter/block fidelity, answer isolation, resumption when pace changes).
+`npm run test:precis-server`: genuine source IDs and additive migration parity.
+`npm run test:precis-security`: separate accounts, attempt ownership, invalid durations, fake sections, stale version conflicts, idempotent saves, preserving completed units during replanning.
+
+Run project-wide TypeScript, ESLint, server/security, build and browser verification before publication. Check completion on multiple devices, answer-checking without external provider calls, keyboard navigation, narrow mobile layouts, Pro pause, and cross-device plan save. All access and pricing remain unchanged until a separately authorized API-free Pro release.
+
+**This PR is a development implementation. It is not a live or publicly accessible course preview.**
