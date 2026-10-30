@@ -36,7 +36,7 @@ try {
     assert.deepEqual(links.filter(link=>isProDestination(link) && !new URL(link,base).pathname.startsWith('/account/precis')),[],'Visible paused Pro links in account navigation')
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile overflow')
   }
-  for (const path of ['/account/expression','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/general-ability','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/ai-usage','/account/membership','/current-affairs','/study-material/essay-themes','/account/preparation?view=topics']) {
+  for (const path of ['/account/general-ability','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/ai-usage','/account/membership','/current-affairs','/study-material/essay-themes']) {
     await page.goto(base+path)
     await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
     assert.equal(await page.locator('main textarea, main input[type=file]').count(),0)
@@ -51,7 +51,7 @@ try {
   await page.goto(base+'/account/preparation?attempt='+attempt)
   await page.getByRole('button',{name:'Reading & revision',exact:true}).click()
   assert.equal(new URL(page.url()).searchParams.get('kind'),'vistagram')
-  assert.equal(await page.getByRole('button',{name:'Pro topic learning',exact:true}).count(),0)
+  assert.equal(await page.getByRole('button',{name:'Subject learning',exact:true}).count(),1)
   await page.getByRole('heading',{name:'Connect what you read',exact:true}).waitFor()
   assert.equal(await page.locator('option[value=current_affairs]').count(),0)
   await page.goto(base+'/grammar-course')
@@ -71,7 +71,7 @@ try {
     const links=await page.locator('a[href]').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href')))
     assert.deepEqual(links.filter(isProDestination),[],'Classic navigation exposed paused Pro links')
   }
-  for(const path of ['/account/precis','/account/general-ability','/account/answer-performance']) {
+  for(const path of ['/account/general-ability','/account/answer-performance']) {
     await page.goto(base+path)
     await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
   }

@@ -5,6 +5,7 @@ cssv_require_method('GET','POST');
 try {
  $pdo=cssv_db();$session=cssv_require_user($pdo);$user=(string)$session['user_id'];if($_SERVER['REQUEST_METHOD']==='POST')cssv_require_csrf($session);cssv_handwriting_ensure($pdo);
  if($_SERVER['REQUEST_METHOD']==='POST'){
+  cssv_pro_release_require_open(); // AI feedback remains paused; reading and saved writing are free.
   cssv_enforce_rate_limit($pdo,'expression_write',$user,120,3600);cssv_log_security_event($pdo,'expression_write',$user,$user);
   $operation=cssv_expression_reserve($pdo,$user,cssv_request_json(12000));cssv_expression_execute($pdo,$operation);cssv_json(['ok'=>true,'operation'=>cssv_ai_owned_operation($pdo,$operation,$user)]);
  }

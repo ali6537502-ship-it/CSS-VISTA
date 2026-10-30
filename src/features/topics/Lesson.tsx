@@ -10,7 +10,6 @@ import {
   usePreparationAction,
   type PreparationAction,
 } from '@/features/preparation/api'
-import { useMembershipExpired } from '@/features/membership/api'
 import { wordCount } from '@/features/precis/api'
 import {
   stateLabels,
@@ -358,14 +357,13 @@ export default function TopicLesson({
     },
     'topics.php',
   )
-  const expired = useMembershipExpired(load.data?.membership.expires_at)
   function nav(fields: Record<string, string>) {
     const next = new URLSearchParams(params)
     Object.entries(fields).forEach(([k, v]) => next.set(k, v))
     setParams(next)
   }
   const data = load.data,
-    active = !!data?.content && data.available && !expired
+    active = !!data?.content && data.available
   if (!data)
     return (
       <section className={topicPanel} role={load.error ? 'alert' : 'status'}>
@@ -514,18 +512,13 @@ export default function TopicLesson({
         <section className={topicPanel}>
           <LockKeyhole className="h-6 w-6 text-indigo-700" aria-hidden="true" />
           <h3 className="mt-3 text-xl font-semibold">
-            {data.available ? 'Open this lesson with Pro' : 'This lesson is currently unpublished'}
+            {data.available ? 'Lesson content is unavailable' : 'This lesson is currently unpublished'}
           </h3>
           <p className="mt-3 text-sm leading-7 text-slate-600">
             {data.available
-              ? 'Active Pro is required for lesson content and new practice. Your own saved notes, writing and results remain available.'
+              ? 'Please refresh the lesson. Your saved notes, writing and results remain available.'
               : 'Earlier study work remains in your history. New study actions are paused.'}
           </p>
-          {data.available && (
-            <Link className={`${secondary} mt-4`} to="/account/membership">
-              Membership
-            </Link>
-          )}
           {(data.progress.notes || data.progress.draft) && (
             <details className="mt-5 rounded-xl border p-4">
               <summary className="min-h-11 cursor-pointer text-sm font-semibold">

@@ -8,10 +8,10 @@ try {
         if (cssv_pro_release_paused()!==$expected) throw new RuntimeException('Incorrect production/isolated preview posture.');
     }
     putenv('CSSV_PRO_RELEASE_TEST_PAUSED=1');if (!cssv_pro_release_paused()) throw new RuntimeException('Test hold ignored.');
-    foreach (['skills','topics','handwriting-image','mentor','precis-feedback'] as $name) {
+    foreach (['handwriting-image','mentor','precis-feedback'] as $name) {
         if (!cssv_pro_release_student_endpoint('/api/student/'.$name.'.php') || cssv_pro_release_student_endpoint('/api/admin/'.$name.'.php')) throw new RuntimeException('Incorrect endpoint scope.');
     }
-    foreach (['grammar','profile','learning','planner','membership','resources'] as $name) if (cssv_pro_release_student_endpoint('/api/student/'.$name.'.php')) throw new RuntimeException('Free/history endpoint suspended.');
+    foreach (['grammar','profile','learning','planner','membership','resources','precis','skills','topics','expression'] as $name) if (cssv_pro_release_student_endpoint('/api/student/'.$name.'.php')) throw new RuntimeException('Free/history endpoint suspended.');
     echo "PASS: production cannot use preview flags; only isolated CI authoring opens; forced pause and free/admin endpoint exclusions verified.\n";
 } finally {
     foreach (['CI'=>$initialCI,'CSSV_DB_NAME'=>$initialDB,'CSSV_PRO_RELEASE_TEST_PAUSED'=>$initialPause] as $key=>$value) putenv($value===false?$key:$key.'='.$value);

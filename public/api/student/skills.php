@@ -11,7 +11,7 @@ try{
         cssv_json(['ok'=>true,...cssv_skills_mutation($pdo,$user,$body)]);
     }
     cssv_pro_fields($_GET,['feature','workspace_id','version_id','request_id','view','offset']);
-    $membership=cssv_pro_membership($pdo,$user);$active=$membership['status']==='active';
+    $membership=cssv_pro_membership($pdo,$user);$active=true; // Learning catalogues are free for authenticated students.
     if(isset($_GET['request_id'])){
         $request=cssv_pro_id($_GET['request_id']);$q=$pdo->prepare('SELECT result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);$raw=$q->fetchColumn();
         if($raw){$r=json_decode($raw,true,32,JSON_THROW_ON_ERROR);if(!isset($r['skills_receipt']))throw new OutOfBoundsException('Saved skills request not found.');cssv_json(['ok'=>true,...$r]);}
