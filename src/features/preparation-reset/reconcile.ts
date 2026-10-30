@@ -9,6 +9,7 @@ function clearPending(owner: string) {
   for (const key of keys(sessionStorage)) if (key.startsWith(`cssvista:attempt-action:${owner}:`) || key.startsWith(`cssvista:learning-request:${owner}:`)) sessionStorage.removeItem(key)
 }
 function clearFullDeviceRecords(owner: string, epoch: string) {
+  for (const key of keys(sessionStorage)) if (key.startsWith(`cssvista:precis:study-note:v1:${owner}:`)) sessionStorage.removeItem(key)
   const grammarPrefixes = [`cssvista:grammar-course:v4:account:${owner}`, `cssvista:grammar-course:v5:account:${owner}`, `cssvista:grammar-sync:v1:${owner}`]
   for (const key of keys(localStorage)) if (grammarPrefixes.some(prefix => key === prefix || key.startsWith(prefix + ':'))) localStorage.removeItem(key)
   const suffix = `:owner:v1:${encodeURIComponent(owner)}`

@@ -74,7 +74,7 @@ try{
  await page.goto(origin+'/account/dashboard');assert.equal(await page.getByRole('link',{name:'Current Affairs Daily PDFs Free',exact:true}).count(),0)
  await page.getByRole('button',{name:'Dismiss getting started',exact:true}).click()
  await page.reload();await page.getByRole('button',{name:'Reopen getting started',exact:true}).click()
- await page.goto(origin+'/account/precis');await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
+ await page.goto(origin+'/account/precis');await page.getByRole('heading',{name:'CSS Vista Preci Mentor',exact:true}).waitFor();assert.equal(await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).count(),0)
  await page.goto(origin+'/account/mpt');await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
  await page.goto(origin+'/account/progress');await page.getByText('4 / 5',{exact:false}).waitFor()
  currentUser='fixture-b';await page.reload();await page.waitForTimeout(700);await page.evaluate(() => window.dispatchEvent(new Event('focus')));await page.locator('.ws-content').waitFor()

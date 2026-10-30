@@ -31,7 +31,7 @@ export async function hostingerRequest<T>(path: string, init: RequestInit = {}):
     if (token) headers.set('X-CSRF-Token', token)
   }
   const requestOwner = headers.get('X-CSSV-User'), generationAtStart = preparationGeneration()
-  const resetSensitive = /^(?:student\/(?:progress|planner|grammar)\.php|factbook\/|current-affairs\.php)/.test(path)
+  const resetSensitive = /^(?:student\/(?:progress|planner|grammar|precis)\.php|factbook\/|current-affairs\.php)/.test(path)
   const response = await fetch(`/api/${path}`, { ...init, method, headers, credentials: 'same-origin', cache: 'no-store' })
   const data = await response.json().catch(() => ({})) as T & ApiFailure
   if (!response.ok) {

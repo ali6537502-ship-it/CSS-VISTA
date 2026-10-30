@@ -99,3 +99,7 @@ See `docs/current-affairs-daily-validation.md` for actual results, not promises.
 ## Content Credentials in supplied PDFs
 
 The GitHub packager preserves the original 25 October 2026 PDF, including its embedded Content Credentials. Its narrowly recognized C2PA/JUMBF metadata container is bounded and hashed; script/launch attachments, unknown attachment names/types and active/external SVG thumbnail content remain rejected. PDF document/page scripts remain rejected. This verifies container integrity, not cryptographic authorship or the truth of the publication. The complete PDF SHA-256 still matches the supplied original. This exception applies to GitHub validation; the separate server-upload parser remains fail-closed.
+
+## 30 October 2026 publication record
+
+The 30 October 2026 edition (Issue No. 11) has a published GitHub catalogue record at `content/current-affairs-daily/2026/10/2026-10-30.json` and an accompanying validated 15-page PDF at `content/current-affairs-daily/2026/10/daily-2026-10-30-v1.pdf`. The PDF was re-typeset from the approved issue text, not uploaded byte-identically from the original design. Its SHA-256 is `4d4612a52352387db688db1fc8f4fa6fd71776186868c9f5345adfa5743d7d07`. Public visibility remains subject to the production deployment and the daily-PDF API.

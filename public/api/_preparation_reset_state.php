@@ -16,7 +16,7 @@ function cssv_preparation_guard(PDO $pdo,string $user): void {
     $method=strtoupper($_SERVER['REQUEST_METHOD']??'GET');
     if(in_array($method,['GET','HEAD','OPTIONS'],true))return;
     $script=(string)($_SERVER['SCRIPT_FILENAME']??'');$parent=basename(dirname($script));$file=basename($script);
-    $affected=($parent==='student' && in_array($file,['progress.php','planner.php','grammar.php','preparation-reset.php'],true)) || $parent==='factbook' || ($parent==='api' && $file==='current-affairs.php');
+    $affected=($parent==='student' && in_array($file,['progress.php','planner.php','grammar.php','precis.php','preparation-reset.php'],true)) || $parent==='factbook' || ($parent==='api' && $file==='current-affairs.php');
     if(!$affected)return;
     cssv_preparation_lock($pdo,$user);
     if($file==='preparation-reset.php')return;

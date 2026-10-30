@@ -95,6 +95,7 @@ const nav = [
     items: [
       { label: 'Customized Test Series', to: '/test-series', icon: Megaphone },
       { label: 'Study Tools', to: '/study-tools', icon: Wrench },
+      { label: 'GSA Tutor', to: '/gsa-tutor', icon: BookOpen },
       { label: 'CSS Age & Attempts Calculator', to: '/css-eligibility-calculator', icon: Target },
       { label: 'My Factbook', to: '/factbook', icon: BookMarked },
       { label: 'VISTA Exam Intelligence', to: '/exam-intelligence', icon: BrainCircuit },

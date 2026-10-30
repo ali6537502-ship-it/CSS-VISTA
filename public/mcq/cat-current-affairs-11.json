@@ -1978,5 +1978,275 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/business/finance/microsoft-expects-raise-25-billion-us-bond-sale-source-says-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-fiscal-surplus",
+    "q": "What was Pakistan's overall fiscal surplus as a percentage of GDP in the opening period of FY2026–27?",
+    "o": [
+      "0.8%",
+      "1.6%",
+      "2.3%",
+      "3.1%"
+    ],
+    "a": 0,
+    "e": "The Finance Division reported an overall fiscal surplus of 0.8% of GDP. Source: Finance Division.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.finance.gov.pk/economic/Monthly_Economic_Update_and_Outlook_October_2026.pdf"
+  },
+  {
+    "id": "current-affairs-20261029-smeconnect-launch",
+    "q": "What is the name of SBP's digital portal for SME financing applications announced on 29 October 2026?",
+    "o": [
+      "RaastConnect",
+      "SMEConnect",
+      "ZarkhezPay",
+      "Roshan SME"
+    ],
+    "a": 1,
+    "e": "The central bank announced SMEConnect. Source: State Bank of Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.sbp.org.pk/circulars/shsfd-circular-no-08-of-2026"
+  },
+  {
+    "id": "current-affairs-20261029-kp-pti-notification",
+    "q": "Which politician did PTI reaffirm as its choice for KP chief minister on 29 October 2026?",
+    "o": [
+      "Ali Amin Gandapur",
+      "Mehmood Khan",
+      "Sohail Afridi",
+      "Pervez Khattak"
+    ],
+    "a": 2,
+    "e": "PTI's notification backed Sohail Afridi. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2040734"
+  },
+  {
+    "id": "current-affairs-20261029-yemen-taiz",
+    "q": "Which Yemeni governorate was the subject of a 29 October report on severe humanitarian shortages?",
+    "o": [
+      "Taiz",
+      "Aden",
+      "Marib",
+      "Hadramaut"
+    ],
+    "a": 0,
+    "e": "The report concerned Taiz. Source: Associated Press.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/yemen-taiz-houthis-siege-famine-humanitarian-crisis-172666b6c90fc3f0ed8a161f2457be2c"
+  },
+  {
+    "id": "current-affairs-20261029-ecosystem-restoration",
+    "q": "How many hectares did the UN's 29 October 2026 restoration assessment identify as under restoration worldwide?",
+    "o": [
+      "152 million",
+      "202 million",
+      "252 million",
+      "352 million"
+    ],
+    "a": 2,
+    "e": "The UN assessment recorded 252 million hectares. Source: Food and Agriculture Organization.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.fao.org/newsroom/detail/nature-is-making-a-comeback--but-the-world-must-move-faster-to-meet-restoration-targets---un-report/en"
+  },
+  {
+    "id": "current-affairs-20261029-cbd-cop17",
+    "q": "In which city did CBD COP17 negotiations take place in October 2026?",
+    "o": [
+      "Yerevan",
+      "Baku",
+      "Tbilisi",
+      "Astana"
+    ],
+    "a": 0,
+    "e": "COP17 was in Yerevan, Armenia. Source: Earth Negotiations Bulletin.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://enb.iisd.org/un-biodiversity-conference-cbd-cop17-daily-report-29oct2026"
+  },
+  {
+    "id": "current-affairs-20261030-pak-singapore-talks",
+    "q": "Which connectivity proposal did Pakistan and Singapore discuss during their foreign ministers' talks on 30 October?",
+    "o": [
+      "A trans-Himalayan rail link",
+      "Resumption of direct flights",
+      "A shared maritime canal",
+      "A land corridor"
+    ],
+    "a": 1,
+    "e": "The ministers discussed possible direct flights. Source: Press Information Department.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://pid.gov.pk/site/press_detail/34602"
+  },
+  {
+    "id": "current-affairs-20261030-pak-sbp-omo",
+    "q": "Approximately how much liquidity did SBP inject through combined conventional and Islamic OMOs on 30 October 2026?",
+    "o": [
+      "Rs0.48 trillion",
+      "Rs0.76 trillion",
+      "Rs1.08 trillion",
+      "Rs2.15 trillion"
+    ],
+    "a": 2,
+    "e": "Rs886.15 billion plus Rs189.75 billion totalled Rs1,075.90 billion. Source: Mettis Global.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://mettisglobal.news/OMO-Result-SBP-injects-Rs1tr-64690"
+  },
+  {
+    "id": "current-affairs-20261030-qatar-iran-mediation",
+    "q": "To which capital did Qatari mediators return on 30 October to pursue US–Iran talks?",
+    "o": [
+      "Muscat",
+      "Doha",
+      "Baghdad",
+      "Tehran"
+    ],
+    "a": 3,
+    "e": "Reuters reported the mediators returned to Tehran. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/qatari-mediators-return-tehran-push-us-iran-deal-official-says-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-ukraine-oleshky-aid",
+    "q": "In which Ukrainian region did the Oleshky humanitarian operation begin on 30 October 2026?",
+    "o": [
+      "Kherson",
+      "Lviv",
+      "Sumy",
+      "Poltava"
+    ],
+    "a": 0,
+    "e": "Oleshky is in Kherson region. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/aid-convoy-sets-off-russian-held-town-oleshky-ukraine-izvestia-says-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-g20-atlanta-ministerial",
+    "q": "Which US city hosted the G20 foreign ministers' meeting beginning on 30 October 2026?",
+    "o": [
+      "Washington, D.C.",
+      "Atlanta",
+      "Miami",
+      "New York"
+    ],
+    "a": 1,
+    "e": "The meeting was in Atlanta. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/rifts-over-wars-ukraine-middle-east-loom-over-g20-meeting-us-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-china-germany-presidents",
+    "q": "Which German president met Xi Jinping in Beijing on 30 October 2026?",
+    "o": [
+      "Olaf Scholz",
+      "Friedrich Merz",
+      "Frank-Walter Steinmeier",
+      "Joachim Gauck"
+    ],
+    "a": 2,
+    "e": "Frank-Walter Steinmeier met Xi Jinping. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/china-germany-should-uphold-international-order-presidents-say-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-switzerland-north-korea-office",
+    "q": "Which European country formally reopened its Pyongyang diplomatic office in October 2026?",
+    "o": [
+      "Austria",
+      "Switzerland",
+      "Sweden",
+      "Norway"
+    ],
+    "a": 1,
+    "e": "Switzerland reopened its office. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/swiss-foreign-minister-discusses-security-issues-with-north-korea-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-hormuz-oil-market",
+    "q": "As of Reuters' intraday 30 October report, approximately what monthly rise was Brent on course to record?",
+    "o": [
+      "3%",
+      "8%",
+      "13%",
+      "23%"
+    ],
+    "a": 2,
+    "e": "Reuters reported an approximately 13% prospective October rise, not a final figure. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/oil-rises-supply-concerns-houthis-attack-saudi-arabia-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-who-traditional-medicine-report",
+    "q": "Which initiative was identified in WHO's 30 October traditional-medicine update?",
+    "o": [
+      "Beijing Initiative on Medicinal Plant Resources",
+      "Geneva Pandemic Vaccine Accord",
+      "Doha Tobacco Tax Declaration",
+      "Nairobi Ocean Plastics Protocol"
+    ],
+    "a": 0,
+    "e": "WHO named the Beijing Initiative on conservation and sustainable use of medicinal plants. Source: World Health Organization.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.who.int/news/item/30-10-2026-world-conference-on-traditional-medicine-2026-delivers-landmark-outcomes-for-global-health"
+  },
+  {
+    "id": "current-affairs-20261030-india-foreign-reserves",
+    "q": "What was India's reported reserve level for the week ended 23 October 2026, released on 30 October?",
+    "o": [
+      "$619.75 billion",
+      "$689.75 billion",
+      "$719.75 billion",
+      "$785.70 billion"
+    ],
+    "a": 2,
+    "e": "RBI figures reported reserves of $719.75 billion. Source: Business Recorder / Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.brecorder.com/news/40446698/indias-fx-reserves-dip-for-seventh-straight-week-to-hit-over-two-month-low"
+  },
+  {
+    "id": "current-affairs-20261030-ai-capex-market-reaction",
+    "q": "Which two firms' disclosures drove concerns about AI infrastructure costs in Reuters' 30 October market report?",
+    "o": [
+      "Amazon and Intel",
+      "Tesla and IBM",
+      "Netflix and Boeing",
+      "Visa and Pfizer"
+    ],
+    "a": 0,
+    "e": "Amazon's spending plans and Intel's cash-flow warning were cited. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/nasdaq-futures-tumble-amazon-intel-results-deepen-ai-spending-woes-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-binance-cyber-investigation",
+    "q": "Which hacking group did analysts link to the Binance incident in reports on 30 October 2026?",
+    "o": [
+      "Lazarus Rain",
+      "TraderTraitor",
+      "Sandworm",
+      "APT29"
+    ],
+    "a": 1,
+    "e": "TRM Labs attributed the incident to TraderTraitor, an analytical rather than judicial finding. Source: Associated Press.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/550e9b876550f71f07098494fe735beb"
   }
 ]

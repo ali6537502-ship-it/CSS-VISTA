@@ -25,7 +25,9 @@ try {
   php('tests/pro/release-fixture.php','pause')
   const status=await call('pro-release.php',undefined,false)
   assert.equal(status.status,200);assert.equal(status.data.paused,true);assert.match(status.headers.get('cache-control'),/no-store/)
-  for (const endpoint of ['precis','precis-feedback','expression','skills','handwriting','handwriting-image','tutor','topics','ability','mentor','ai-usage']) {
+  const releasedPrecis=await call('student/precis.php');assert.equal(releasedPrecis.status,200,'Existing active members can open the Précis course');assert.ok(releasedPrecis.data.catalog?.chapters?.length>=25);
+  assert.equal((await call('student/precis.php',undefined,false)).status,401);
+  for (const endpoint of ['precis-feedback','expression','skills','handwriting','handwriting-image','tutor','topics','ability','mentor','ai-usage']) {
     const r=await call('student/'+endpoint+'.php');assert.equal(r.status,503,endpoint+JSON.stringify(r.data));assert.equal(r.data.error,'pro_release_paused')
     assert.equal((await call('student/'+endpoint+'.php',undefined,false)).status,401,'Anonymous identity gate changed for '+endpoint)
   }
@@ -38,6 +40,6 @@ try {
   for (const route of ['student/profile.php','student/grammar.php?attempt_id='+attempt.data.attempt_id,'student/learning.php']) assert.equal((await call(route)).status,200,route)
   assert.equal((await call('student/learning.php?attempt_id='+attempt.data.attempt_id)).status,200)
   assert.equal((await call('student/learning.php',{action:'writing_save',request_id:randomUUID(),expected_version:0,attempt_id:attempt.data.attempt_id,kind:'paragraph',title:'TEST ONLY retained free writing',text:'TEST ONLY. This independent saved paragraph remains part of the existing account.'})).status,200)
-  console.log('PASS: Pro pause fails closed for active-member GET/POST, AI/upload/content; anonymous authentication retained; collection disabled; exact membership unchanged; free science/profile/Grammar/preparation/writing still work.')
+  console.log('PASS: active-member Précis Guide is open; other Pro premium endpoints, AI, uploads and payments stay paused; anonymous access denied; membership/history untouched.')
 } finally { php('tests/pro/release-fixture.php','restore') }
 assert.equal((await call('pro-release.php')).data.paused,false,'Isolated authoring preview not restored')

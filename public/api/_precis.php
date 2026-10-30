@@ -19,13 +19,46 @@ function cssv_precis_detail(PDO $pdo,string $user,string $writing,?string $versi
  $q=$pdo->prepare('SELECT context FROM precis_version_context WHERE version_id=?');$q->execute([$v['id']]);$context=$q->fetchColumn();
  return [...$owned,'version'=>$v,'context'=>$context?json_decode($context,true,32,JSON_THROW_ON_ERROR):null];
 }
+function cssv_precis_guide_plan(PDO $pdo,string $user,string $attempt): ?array {
+ $q=$pdo->prepare('SELECT target_days,version,completed_units,handbook_sha FROM precis_guide_plans WHERE attempt_id=? AND user_id=?');
+ $q->execute([$attempt,$user]);$row=$q->fetch();
+ if(!$row)return null;
+ return ['target_days'=>(int)$row['target_days'],'version'=>(int)$row['version'],
+  'completed_units'=>json_decode($row['completed_units'],true,512,JSON_THROW_ON_ERROR),
+  'handbook_sha'=>$row['handbook_sha']];
+}
+/** Identical heading-boundary and three-block grouping to the browser course. */
+function cssv_precis_guide_unit_ids(): array {
+ static $ids=null;if($ids!==null)return $ids;$ids=[];
+ foreach(cssv_precis_handbook()['chapters'] as $chapter){
+  $start=null;$groupSize=0;
+  foreach($chapter['blocks'] as $index=>$block){
+   if(($block['type'] ?? null)==='heading'){
+    if($groupSize>0)$ids[]=$chapter['id'].':'.$start;
+    $start=null;$groupSize=0;continue;
+   }
+   if(!in_array($block['type'] ?? null,['paragraph','bullet','table'],true))continue;
+   if($groupSize===0)$start=$index;
+   $groupSize++;
+   if($groupSize>=3){$ids[]=$chapter['id'].':'.$start;$start=null;$groupSize=0;}
+  }
+  if($groupSize>0)$ids[]=$chapter['id'].':'.$start;
+ }
+ return $ids;
+}
+function cssv_precis_known_guide_unit(string $id): bool {
+ return in_array($id,cssv_precis_guide_unit_ids(),true);
+}
+function cssv_precis_guide_unit_count(): int {
+ return count(cssv_precis_guide_unit_ids());
+}
 function cssv_precis_progress(PDO $pdo,string $user,string $attempt): array {
  cssv_learning_attempt($pdo,$attempt,$user);$q=$pdo->prepare('SELECT version,current_day,current_chapter,completed FROM precis_progress WHERE attempt_id=? AND user_id=?');$q->execute([$attempt,$user]);$row=$q->fetch();
  // Server-authored answers determine the most recent error; retries never
  // erase its three-day review interval. Only first/last rows leave the DB.
  $cases='CASE question_id';foreach(cssv_precis_questions() as $id=>$question)$cases.=' WHEN '.$pdo->quote($id).' THEN '.(int)$question['answer'];$cases.=' ELSE -1 END';
  $q=$pdo->prepare('SELECT question_id,choice,created_at,last_wrong_at FROM (SELECT question_id,choice,created_at,MAX(CASE WHEN choice<>'.$cases.' THEN created_at END) OVER(PARTITION BY question_id) AS last_wrong_at,ROW_NUMBER() OVER(PARTITION BY question_id ORDER BY created_at,id) AS first_row,ROW_NUMBER() OVER(PARTITION BY question_id ORDER BY created_at DESC,id DESC) AS last_row FROM precis_responses WHERE user_id=? AND attempt_id=?) sampled WHERE first_row=1 OR last_row=1 ORDER BY created_at');$q->execute([$user,$attempt]);$rows=$q->fetchAll();
- return ['version'=>(int)($row['version'] ?? 0),'current_day'=>(int)($row['current_day'] ?? 1),'current_chapter'=>(int)($row['current_chapter'] ?? 1),'completed'=>$row?json_decode($row['completed'],true,16,JSON_THROW_ON_ERROR):[],'profile'=>cssv_precis_profile($rows)];
+ return ['version'=>(int)($row['version'] ?? 0),'current_day'=>(int)($row['current_day'] ?? 1),'current_chapter'=>(int)($row['current_chapter'] ?? 1),'completed'=>$row?json_decode($row['completed'],true,16,JSON_THROW_ON_ERROR):[],'guide_plan'=>cssv_precis_guide_plan($pdo,$user,$attempt),'profile'=>cssv_precis_profile($rows)];
 }
 function cssv_precis_mutation(PDO $pdo,string $user,array $body): array {
  $action=$body['action'] ?? '';cssv_pro_fields($body,match($action){
@@ -33,14 +66,46 @@ function cssv_precis_mutation(PDO $pdo,string $user,array $body): array {
   'progress_save'=>['action','request_id','attempt_id','expected_version','current_day','current_chapter','completed'],
   'drill_answer'=>['action','request_id','attempt_id','question_id','choice'],
   'reveal_model'=>['action','request_id','writing_id'],
+  'guide_setup'=>['action','request_id','attempt_id','target_days','expected_version'],
+  'guide_mark'=>['action','request_id','attempt_id','unit_id','expected_version'],
   default=>throw new InvalidArgumentException('Unknown Précis action.')});
  $request=cssv_pro_id($body['request_id'] ?? null);$payload=$body;unset($payload['request_id']);$hash=hash('sha256',json_encode(['precis-v1',$payload],JSON_THROW_ON_ERROR));
  $pdo->beginTransaction();try{
   cssv_learning_owner_lock($pdo,$user);
   $q=$pdo->prepare('SELECT payload_hash,result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);
   if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This request identity was already used for different work.');$pdo->commit();return json_decode($prior['result'],true,32,JSON_THROW_ON_ERROR);}
-  cssv_pro_require_active($pdo,$user);
-  if($action==='writing_save'){
+  // Free Précis Mentor: authenticated owner, CSRF and attempt checks remain mandatory.
+  if($action==='guide_setup'||$action==='guide_mark'){
+   $attempt=cssv_pro_id($body['attempt_id'] ?? null);cssv_learning_attempt($pdo,$attempt,$user);
+   $expected=$body['expected_version'] ?? null;
+   if(!is_int($expected)||$expected<0||$expected>100000)
+    throw new InvalidArgumentException('Refresh your learning plan before continuing.');
+   $current=cssv_precis_guide_plan($pdo,$user,$attempt);
+   if(($current['version'] ?? 0)!==$expected)
+    throw new DomainException('Your plan changed on another device. Refresh before saving.');
+   $sha=cssv_precis_handbook()['source_sha256'];
+   if($current&&$current['handbook_sha']!==$sha)
+    throw new DomainException('The handbook edition has changed. Your previous plan is preserved for review.');
+   if($action==='guide_setup'){
+    $days=$body['target_days'] ?? null;
+    if(!is_int($days)||$days<3||$days>60||$days>cssv_precis_guide_unit_count())
+     throw new InvalidArgumentException('Choose a valid number of learning days (3–60).');
+    $completed=$current['completed_units'] ?? [];
+    $pdo->prepare('INSERT INTO precis_guide_plans(attempt_id,user_id,target_days,version,completed_units,handbook_sha) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE target_days=VALUES(target_days),version=VALUES(version),completed_units=VALUES(completed_units)')
+     ->execute([$attempt,$user,$days,$expected+1,json_encode($completed,JSON_THROW_ON_ERROR),$sha]);
+    $result=['target_days'=>$days,'version'=>$expected+1,'completed_count'=>count($completed)];
+   }else{
+    if(!$current)throw new DomainException('Choose your course duration first.');
+    $unit=$body['unit_id'] ?? null;
+    if(!is_string($unit)||!cssv_precis_known_guide_unit($unit))
+     throw new InvalidArgumentException('Select a genuine handbook lesson.');
+    $completed=$current['completed_units'];
+    if(!in_array($unit,$completed,true))$completed[]=$unit;
+    $pdo->prepare('UPDATE precis_guide_plans SET version=?,completed_units=? WHERE attempt_id=? AND user_id=?')
+     ->execute([$expected+1,json_encode($completed,JSON_THROW_ON_ERROR),$attempt,$user]);
+    $result=['version'=>$expected+1,'completed_count'=>count($completed)];
+   }
+  }elseif($action==='writing_save'){
    $attempt=cssv_pro_id($body['attempt_id'] ?? null);cssv_learning_attempt($pdo,$attempt,$user);$id=isset($body['id'])?cssv_pro_id($body['id']):null;$expected=$body['expected_version'] ?? null;
    if(!is_int($expected)||$expected<0||$expected>100000)throw new InvalidArgumentException('Refresh the current writing version.');
    $context=cssv_precis_context($body);$text=cssv_learning_string($body['text'] ?? null,20000,'your précis');

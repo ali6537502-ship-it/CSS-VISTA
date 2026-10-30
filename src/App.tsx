@@ -13,6 +13,7 @@ import { MPT_HIBERNATED } from './lib/featureHibernation'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
+const GSATutor = lazy(() => import('./pages/GSATutor'))
 const CompulsoryList = lazy(() => import('./pages/CompulsoryList'))
 const SubjectDetail = lazy(() => import('./pages/SubjectDetail'))
 const OptionalSubjects = lazy(() => import('./pages/OptionalSubjects'))
@@ -81,9 +82,7 @@ const AccountDirectory = lazy(() => import('./pages/account/WorkspaceSections').
 const AccountMore = lazy(() => import('./pages/account/WorkspaceSections').then(m => ({ default:m.More })))
 const ClassicAccount = lazy(() => import('./features/workspace-classic/pages/Account'))
 const ClassicAccountHome = lazy(() => import('./features/workspace-classic/pages/AccountHome'))
-const ClassicStudyPlanner = lazy(() => import('./features/workspace-classic/pages/StudyPlanner'))
 const ClassicFpscSyllabus = lazy(() => import('./features/workspace-classic/pages/FpscSyllabus'))
-const ClassicAccountTasks = lazy(() => import('./features/workspace-classic/pages/account/Tasks'))
 const ClassicAccountProgress = lazy(() => import('./features/workspace-classic/pages/account/Progress'))
 const ClassicAccountLibrary = lazy(() => import('./features/workspace-classic/pages/account/Library'))
 const AccountHome = lazy(() => import('./pages/AccountHome'))
@@ -158,7 +157,9 @@ export default function App() {
       <Route element={<AdSenseProvider><ErrorBoundary><><Layout /><TrustFooter /></></ErrorBoundary></AdSenseProvider>}>
         <Route path="/" element={<Home />} />
         <Route path="/start-css" element={<S><StartCSS /></S>} />
+        <Route path="/gsa-tutor" element={<S><GSATutor /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
+        <Route path="/subjects/compulsory/precis-composition" element={<Navigate to="/account/precis" replace />} />
         <Route path="/subjects/compulsory/:slug" element={<SelectedStudyGate><S><SubjectDetail /></S></SelectedStudyGate>} />
         <Route path="/subjects/optional" element={<S><OptionalSubjects /></S>} />
         <Route path="/subjects/selector" element={<S><SubjectSelector /></S>} />
@@ -210,7 +211,7 @@ export default function App() {
         <Route path="/book-summaries/:slug" element={<S><BookSummaries /></S>} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
-        <Route path="/study-planner" element={<S><WorkspaceVariant classic={<ClassicStudyPlanner />}><StudyPlanner /></WorkspaceVariant></S>} />
+        <Route path="/study-planner" element={<S><StudyPlanner /></S>} />
         <Route path="/answer-evaluation" element={<S><AnswerEvaluation /></S>} />
         <Route path="/past-papers/view/:id" element={<S><PastPaperOpen /></S>} />
         <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
@@ -240,13 +241,14 @@ export default function App() {
         <Route path="/account/practice" element={<ProfileGate><S><WorkspaceVariant classic={<Navigate to="/account/dashboard" replace />}><AccountPractice /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/directory" element={<ProfileGate><S><WorkspaceVariant classic={<Navigate to="/account/dashboard" replace />}><AccountDirectory /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/more" element={<ProfileGate><S><WorkspaceVariant classic={<Navigate to="/account/dashboard" replace />}><AccountMore /></WorkspaceVariant></S></ProfileGate>} />
-        <Route path="/account/plan" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicStudyPlanner />}><StudyPlanner /></WorkspaceVariant></S></ProfileGate>} />
-        <Route path="/account/tasks" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountTasks />}><AccountTasks /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/plan" element={<ProfileGate><S><StudyPlanner /></S></ProfileGate>} />
+        <Route path="/account/tasks" element={<ProfileGate><S><AccountTasks /></S></ProfileGate>} />
         <Route path="/account/progress" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountProgress />}><AccountProgress /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/gsa-tutor" element={<ProfileGate><S><GSATutor /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
-        <Route path="/account/precis" element={<ProfileGate><ProGate feature="Précis Mastery Lab"><S><AccountPrecis /></S></ProGate></ProfileGate>} />
+        <Route path="/account/precis" element={<ProfileGate><S><AccountPrecis /></S></ProfileGate>} />
         <Route path="/account/argumentation" element={<ProfileGate><S><AccountSkills feature="argument" /></S></ProfileGate>} />
         <Route path="/account/analytical-skills" element={<ProfileGate><S><AccountSkills feature="analysis" /></S></ProfileGate>} />
         <Route path="/account/essay-builder" element={<ProfileGate><S><AccountSkills feature="essay" /></S></ProfileGate>} />

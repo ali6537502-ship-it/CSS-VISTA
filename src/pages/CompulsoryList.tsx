@@ -12,11 +12,11 @@ export default function CompulsoryList() {
     <div>
       <PageHeader
         title="Compulsory Subjects"
-        description="Six papers, 600 marks. These decide whether you clear the written stage - every subject page includes the syllabus map, preparation sequence, recommended books with reasons, answer-writing guidance and a revision checklist."
+        description="Six compulsory papers (600 marks). Browse five subject guides and open the free CSS Vista Preci Mentor for English writing preparation."
       />
       <div className="mx-auto max-w-7xl px-4 py-10">
         <div className="grid gap-4 md:grid-cols-2">
-          {compulsorySubjects.map((s) => {
+          {compulsorySubjects.filter((s) => s.slug !== 'precis-composition').map((s) => {
             const pct = progress[s.slug] ?? 0
             return (
               <div key={s.slug} className="flex flex-col rounded-lg border bg-white p-5 transition-shadow hover:shadow-md">
@@ -50,6 +50,7 @@ export default function CompulsoryList() {
               </div>
             )
           })}
+          <div className="flex flex-col rounded-lg border border-emerald-200 bg-emerald-50/50 p-5"><div className="flex items-start justify-between gap-3"><h2 className="font-display text-lg font-bold text-pine">CSS Vista Preci Mentor</h2><span className="text-xs text-muted-foreground">English · 100 marks</span></div><p className="mt-3 text-sm leading-7 text-muted-foreground">Learn from the handbook at a pace you choose, with guided lessons, practice and saved course progress.</p><Link to="/account/precis" className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-emerald-800 hover:underline">Open CSS Vista Preci Mentor <ArrowRight className="h-4 w-4" /></Link></div>
         </div>
         <SourceNote source={syllabusSource.name} url={syllabusSource.url} date={syllabusSource.lastUpdated} />
       </div>

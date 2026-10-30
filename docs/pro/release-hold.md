@@ -1,3 +1,13 @@
+# Scoped owner release — 30 October 2026
+
+The owner has clarified the released course is named **CSS Vista Preci Mentor** and it must be **free for all signed-in accounts**, including those without active Pro membership. This is a **narrow exception** to the 12 October pause below. The existing `/account/precis` course, original handbook catalogue, typed browser-only writing checker, saved versions and `/api/student/precis.php` are available without a Pro membership. Student sign-in, individual account/attempt ownership, anti-CSRF and existing limits remain mandatory. Payment collection is not reactivated.
+
+All other paid products, premium routes, image upload, external AI provider evaluation (`precis-feedback.php` included), and membership purchase/renewal collection remain paused. The public `/api/pro-release.php` response still reports `paused:true` because the wider Pro product remains paused. The returned value is **not** the free Preci Mentor availability indicator. Other categories remain protected independently at the backend and client.
+
+Release checks: run typecheck, lint, Précis unit/security tests, Pro-pause isolation tests, browser/mobile regression, exact deployed SHA verification and direct API checks before declaring the site live. The owner approval covers this scoped release only, not an unreviewed opening of the full Pro system. No paid prices, records, purchases or memberships are altered.
+
+---
+
 # Owner release hold — 12 October 2026
 
 The owner instructed that new work must be produced and finalised before publication, and that the current Pro version should be hidden until then. The only production change authorised by this instruction is the reversible Pro pause. Keep subsequent feature/content work on development branches or in private content packages; do not merge it into the auto-deployed `main`, publish lessons, activate AI/payment collection or reopen Pro without the owner's explicit final-release instruction.

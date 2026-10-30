@@ -59,7 +59,7 @@ try {
     const token=decodeURIComponent((await context.cookies()).find(cookie=>cookie.name==='cssv_csrf').value)
     const payload={'cssvista:v1':{studyPlanner:{examDate:'2027-12-01',dailyHours:2,restDay:5,selectedOptionals:['Political Science','Criminology','European History','Punjabi','Environmental Sciences'],configuredAt:now.toISOString()},studyScheduleTasks:[{id:'pilot-task',syllabusItemId:'manual:pilot',subject:'Political Science',topic:'TEST ONLY retained study task',paper:'Paper I',section:'Personal task',date:today,minutes:30,status:'not-started'}],bookmarks:['TEST ONLY retained bookmark'],quizResults:[{id:'pilot-result',type:'quiz',category:'TEST ONLY',score:3,total:5,date:now.toISOString()}]}}
     assert.equal((await context.request.put(base+'/api/student/progress.php',{headers:{'X-CSRF-Token':token},data:{payload}})).status(),200)
-    const routes={dashboard:'Today’s Study Plan',tasks:'My Study Plan',subjects:'My Subjects',practice:'Practice',progress:'My Performance',library:'My Library',settings:'Account & Settings'}
+    const routes={dashboard:'Today’s Study Plan',tasks:'Study Planner',subjects:'My Subjects',practice:'Practice',progress:'My Performance',library:'My Library',settings:'Account & Settings'}
     for(const width of [320,375,390,768,1024,1440]) {
       await page.setViewportSize({width,height:900})
       for(const [route,title] of Object.entries(routes)) {

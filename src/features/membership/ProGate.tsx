@@ -7,9 +7,9 @@ import { ProPausedNotice } from './ProRelease'
 import { useProReleasePaused } from './proReleaseContext'
 
 /** Presentation only: every protected source also checks native membership. */
-export default function ProGate({ children, feature, fallbackAction }: { children: ReactNode; feature: string; fallbackAction?: ReactNode }) {
+export default function ProGate({ children, feature, fallbackAction, allowWhilePaused = false }: { children: ReactNode; feature: string; fallbackAction?: ReactNode; allowWhilePaused?: boolean }) {
   const paused = useProReleasePaused()
-  return paused ? <ProPausedNotice /> : <OpenProGate feature={feature} fallbackAction={fallbackAction}>{children}</OpenProGate>
+  return paused && !allowWhilePaused ? <ProPausedNotice /> : <OpenProGate feature={feature} fallbackAction={fallbackAction}>{children}</OpenProGate>
 }
 
 function OpenProGate({ children, feature, fallbackAction }: { children: ReactNode; feature: string; fallbackAction?: ReactNode }) {

@@ -44,7 +44,7 @@ type ScheduleMode = 'today' | 'tomorrow' | 'specific' | 'this-week' | 'custom-we
 
 const requestedUnit = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('unit')
 
-const hiddenSyllabusSubjects = new Set(['essay'])
+const hiddenSyllabusSubjects = new Set(['essay', 'precis-composition'])
 
 const statusLabel: Record<SyllabusItemStatus, string> = {
   'not-started': 'Not Started',

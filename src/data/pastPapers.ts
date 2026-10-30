@@ -26,7 +26,7 @@ export const paperParts = ['Single Paper', 'Paper One', 'Paper Two', 'Combined P
 export const paperModes = ['Objective', 'Subjective'] as const
 
 export const ppSubjects = [
-  'Essay', 'Precis & Composition', 'General Science & Ability', 'Current Affairs', 'Pakistan Affairs', 'Islamic Studies', 'Comparative Study of Major Religions',
+  'Essay', 'General Science & Ability', 'Current Affairs', 'Pakistan Affairs', 'Islamic Studies', 'Comparative Study of Major Religions',
   'Accounting & Auditing', 'Economics', 'Computer Science', 'Political Science', 'International Relations',
   'Physics', 'Chemistry', 'Applied Mathematics', 'Pure Mathematics', 'Statistics', 'Geology',
   'Business Administration', 'Public Administration', 'Governance & Public Policies', 'Town Planning & Urban Management',

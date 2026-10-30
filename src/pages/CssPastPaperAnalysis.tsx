@@ -75,12 +75,13 @@ export default function CssPastPaperAnalysis() {
   useEffect(() => {
     loadPastPaperAnalysisIndex()
       .then((value) => {
-        setIndex(value)
+        const visible = { ...value, subjects: value.subjects.filter(subject => subject.slug !== 'precis-composition') }
+        setIndex(visible)
         const initialSearch = new URLSearchParams(window.location.search)
         const requestedSubject = initialSearch.get('subject')
-        setSelectedSlug(value.subjects.some((subject) => subject.slug === requestedSubject)
+        setSelectedSlug(visible.subjects.some((subject) => subject.slug === requestedSubject)
           ? requestedSubject!
-          : value.subjects[0]?.slug ?? '')
+          : visible.subjects[0]?.slug ?? '')
         const requestedTopic = initialSearch.get('topic')
         if (requestedTopic) setOpenTopics(new Set([requestedTopic]))
       })

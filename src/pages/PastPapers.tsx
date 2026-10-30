@@ -42,7 +42,7 @@ export default function PastPapers() {
 function PastPaperArchive() {
   const routeParams = useParams<{ exam?: string; year?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
-  const papers = useMemo(() => mergedPastPapers(seedPapers), [])
+  const papers = useMemo(() => mergedPastPapers(seedPapers).filter(paper => !/pr[ée]cis/i.test(paper.subject)), [])
   const routeExam = examinations.find((name) => name.toLowerCase() === routeParams.exam?.toLowerCase()) ?? 'All'
   const routeYear = /^\d{4}$/.test(routeParams.year ?? '') ? routeParams.year! : 'All'
   const [q, setQ] = useState(() => searchParams.get('search') ?? '')
