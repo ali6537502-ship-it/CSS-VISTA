@@ -79,11 +79,30 @@ function blocks(html){
  return result.length?result:['<p>No study text was found for this lesson.</p>'];
 }
 function questionFor(s,c){
- if(!c.questions.length)return null;
- const words=t=>new Set((String(t).toLowerCase().match(/[a-z]{4,}/g)||[]).filter(w=>!/^(their|there|these|those|which|where|would|should|about|because|under|between|during|after|other|while|could|from|have|that|this|with|what|when|into)$/.test(w)));
- const title=words(s.title),body=words(s.text);
- let ranked=c.questions.map(q=>{const qw=words(q.prompt);let score=0;for(const w of qw){if(title.has(w))score+=5;else if(body.has(w))score+=1}return {q,score}}).sort((a,b)=>b.score-a.score);
- return ranked[0]?.score>=3?ranked[0].q:null;
+ // Match each published question to only one suitable lesson in its chapter.
+ // Never repeat the same chapter-wide MCQ across several successive lessons.
+ if(!c._lessonQuestions){
+   const excluded=new Set('their there these those which where would should about because under between during after other while could from have that this with what when into them were they more such known both used always different occur depends process produces often each most than also however using through'.split(' '));
+   const words=t=>new Set((String(t).toLowerCase().match(/[a-z]{4,}/g)||[]).filter(w=>!excluded.has(w)));
+   const ranked=[];
+   for(const q of c.questions){
+     const question=words(q.prompt+' '+q.options[q.answer]);
+     for(const sec of c.sections){
+       const title=words(sec.title),body=words(sec.text);
+       let score=0;
+       for(const w of question){if(title.has(w))score+=6;else if(body.has(w))score+=1}
+       if(score>=4)ranked.push({q,sec,score});
+     }
+   }
+   ranked.sort((a,b)=>b.score-a.score);
+   const assigned={},used=new Set();
+   for(const row of ranked){
+     if(assigned[row.sec.id]||used.has(row.q.id))continue;
+     assigned[row.sec.id]=row.q;used.add(row.q.id);
+   }
+   c._lessonQuestions=assigned;
+ }
+ return c._lessonQuestions[s.id]||null;
 }
 function visual(s){
  if(s.id!=='c3-s3-3'&&s.id!=='c3-s3-4')return '';
