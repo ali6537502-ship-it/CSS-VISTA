@@ -17,14 +17,14 @@ At `/account/precis?view=guide`, a student with an owned preparation attempt cho
 
 The preview lists every day, relevant handbook chapter range, and exact reading-section count **before** the student saves their plan. Faster plans contain more reading on each day; slower plans contain fewer sections. The system does **not** claim that merely selecting a shorter pace guarantees learning.
 
-`handbookUnits()` takes actual imported content as the only curriculum: each original non-heading handbook block (paragraph, bullet, table) becomes a single original-content reading unit with stable `chapterId:blockIndex` ID. `buildStudyDays()` partitions all units into the chosen number of nonempty, source-ordered, weighted daily schedules. Text length is used only for workload balancing, not to alter the lesson content. Every unit must appear exactly once in the complete schedule; headings provide stable readable section labels.
+`handbookUnits()` takes actual imported content as the only curriculum: adjacent original non-heading blocks (paragraphs, bullets or tables) form coherent reading units of at most three blocks per handbook heading. Each unit has a stable first-block `chapterId:blockIndex` ID; every original block remains present and unchanged. `buildStudyDays()` partitions all units into the chosen number of nonempty, source-ordered, weighted daily schedules. Text length is used only for workload balancing, not to alter the lesson content. Every unit must appear exactly once in the complete schedule; headings provide stable readable section labels. The current imported edition contains 108 grouped reading units comprising 193 original body blocks.
 
 A learner can replan from 14 to 30 days (or another supported duration). Previously completed **source unit IDs** are preserved; daily groupings change without deleting earlier work. The UI reports exact completed-section coverage and does not claim that reading completion proves written Précis mastery.
 
 ## Daily learner journey
 
 1. Open the current day: `Day n of targetDays`, title, sections covered today, and daily progress.
-2. Read one source paragraph/bullet/table verbatim, labeled with its real book chapter and heading. This avoids rephrased pseudo-lessons or an oversized unreadable chapter dump.
+2. Read one coherent group of source paragraphs/bullets/tables verbatim, labelled with its actual handbook chapter and heading. Groups are intentionally small to avoid either scattered micro-flashes or oversized full-chapter dumps.
 3. Optionally write a working explanation in a browser-tab note. This field is clearly private, local, and not automatically evaluated. Browser-storage failure is shown.
 4. Select `I have read this · Continue`. One server-validated, account-owned, version-checked completion record is saved for the exact original book unit.
 5. At the end of the day's reading, attempt one existing authored fixed-answer question when its chapter skill is represented in the reviewed bank. The server alone checks and explains correctness. There is no free-text semantic marking.
