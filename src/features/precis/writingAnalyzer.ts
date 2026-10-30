@@ -1,4 +1,4 @@
-import { wordCount } from './api'
+import { wordCount } from './api.ts'
 
 export type WritingFinding = {
   id: string
