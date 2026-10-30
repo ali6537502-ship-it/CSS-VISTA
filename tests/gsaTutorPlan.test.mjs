@@ -68,6 +68,8 @@ test('deep lesson uses full original sections with progressive reading and writt
  while(p.document.querySelector('[data-action="nextbeat"]')&&steps<40){p.click('[data-action="nextbeat"]');steps++}
  assert.ok(steps>=2,'the lesson must have multiple substantive explanations')
  assert.ok(p.document.querySelector('[data-action="torecall"]')||p.document.getElementById('recall'))
+ // When a source MCQ is linked to this lesson, answer it before recall.
+ if(p.document.querySelector('[data-choice]'))p.click('[data-choice]')
  if(p.document.querySelector('[data-action="torecall"]'))p.click('[data-action="torecall"]')
  const textarea=p.document.getElementById('recall')
  assert.ok(textarea,'the learner must write an explanation')
