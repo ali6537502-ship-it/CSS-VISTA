@@ -6,7 +6,7 @@ export type HandbookUnit = {
   chapterTitle: string
   section: string
   blockIndex: number
-  block: Exclude<Block, { type: 'heading' }>
+  blocks: { index: number; block: Block }[]
   weight: number
 }
 
@@ -22,31 +22,41 @@ export const paceChoices = [7, 14, 21, 30, 45] as const
 export const minimumDays = 3
 export const maximumDays = 60
 
-/** Every source paragraph, bullet and table appears once, in handbook order. */
+/** Every original paragraph/bullet/table appears once, in handbook order.
+ * Adjacent source blocks under the same heading form a readable lesson.
+ * Long unheaded lists are divided into groups of at most three blocks.
+ */
 export function handbookUnits(chapters: Chapter[]): HandbookUnit[] {
   const units: HandbookUnit[] = []
   for (const chapter of chapters) {
     let section = chapter.title.replace(/^\d+\.\s*/, '')
-    chapter.blocks.forEach((block, index) => {
-      if (block.type === 'heading') {
-        section = block.text
-        return
-      }
-      const text =
-        block.type === 'table'
-          ? block.rows.flat().join(' ')
-          : block.text
-      const weight = Math.max(10, text.match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu)?.length || 0)
+    let current: { index: number; block: Block }[] = []
+    function flush() {
+      if (!current.length) return
+      const text = current.map(({ block }) =>
+        block.type === 'table' ? block.rows.flat().join(' ') : block.text,
+      ).join(' ')
       units.push({
-        id: `${chapter.id}:${index}`,
+        id: `${chapter.id}:${current[0].index}`,
         chapterId: chapter.id,
         chapterTitle: chapter.title,
         section,
-        blockIndex: index,
-        block,
-        weight,
+        blockIndex: current[0].index,
+        blocks: current,
+        weight: Math.max(10, text.match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu)?.length || 0),
       })
+      current = []
+    }
+    chapter.blocks.forEach((block, index) => {
+      if (block.type === 'heading') {
+        flush()
+        section = block.text
+        return
+      }
+      current.push({ index, block })
+      if (current.length >= 3) flush()
     })
+    flush()
   }
   return units
 }
