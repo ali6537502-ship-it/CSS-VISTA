@@ -60,6 +60,20 @@ const languageRules: PatternRule[] = [
     handbook: 'Chapter 11 — Grammar',
   },
   {
+    id: 'common-plural-verb', regex: /\b(?:institutions|services|citizens|policies|countries|cities|communities|rules|systems|students|workers|resources|technologies|benefits)\s+(?:is|was|has)\b/giu,
+    group: 'grammar', label: 'Plural subject and singular verb',
+    explanation: 'This plural noun is followed by a singular verb.',
+    advice: 'Check whether “are”, “were” or “have” fits the tense and meaning.',
+    handbook: 'Chapter 11 — Grammar',
+  },
+  {
+    id: 'it-plural', regex: /\bit\s+(?:are|were|have)\b/giu,
+    group: 'grammar', label: 'Singular pronoun and plural verb',
+    explanation: 'The singular pronoun “it” normally takes a singular verb.',
+    advice: 'Use “it is”, “it was” or “it has”, as appropriate to the sentence.',
+    handbook: 'Chapter 11 — Grammar',
+  },
+  {
     id: 'he-have', regex: /\b(?:he|she|it)\s+have\b/giu,
     group: 'grammar', label: 'Subject–verb agreement',
     explanation: 'A singular third-person subject normally takes “has” in the present tense.',
