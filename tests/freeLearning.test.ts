@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { isProDestination } from '../src/features/membership/proDestinations.ts'
 
 test('learning workspaces remain visible to free accounts during the Pro pause', () => {
-  for (const path of ['/account/precis?view=guide', '/account/expression', '/account/expression?view=studio', '/account/argumentation', '/account/analytical-skills', '/account/essay-builder', '/account/preparation?view=topics']) {
+  for (const path of ['/account/precis?view=guide', '/subjects/compulsory/precis-composition', '/account/expression', '/account/expression?view=studio', '/account/argumentation', '/account/analytical-skills', '/account/essay-builder', '/account/preparation?view=topics']) {
     assert.equal(isProDestination(path), false, path)
   }
 })

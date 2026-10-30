@@ -37,6 +37,5 @@ export function SelectedStudyGate({ children }: { children: ReactNode }) {
   const categories = (query.get('cats') || '').split(',')
   const ability = params.bankId === 'abilities' || params.bankId === 'reasoning' || params.slug === 'general-ability' || query.get('category') === 'general-ability' || categories.includes('general-ability')
   const affairs = params.bankId === 'current' || params.slug === 'current-affairs' || ['current-affairs-archive', 'pakistan-current-affairs'].includes(query.get('category') || '') || categories.includes('current-affairs')
-  const precis = params.slug === 'precis-composition'
-  return ability || affairs || precis ? <ProGate feature={ability ? 'General Ability' : affairs ? 'Current Affairs' : 'Précis & Composition'}>{children}</ProGate> : <>{children}</>
+  return ability || affairs ? <ProGate feature={ability ? 'General Ability' : 'Current Affairs'}>{children}</ProGate> : <>{children}</>
 }

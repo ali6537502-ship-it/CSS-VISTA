@@ -11,7 +11,6 @@ export function isProDestination(value: string): boolean {
   if (/^\/(?:current-affairs|study-material\/essay-themes)(?:\/|$)/.test(path)) return true
   if (/^\/(?:gk\/cat|one-liner-gk|css-mcqs)\/(?:general-ability|current-affairs|current-affairs-archive|pakistan-current-affairs)(?:\/|$)/.test(path)) return true
   if (/^\/(?:mpt\/bank|mpt\/notes)\/(?:abilities|reasoning|current)(?:\/|$)/.test(path)) return true
-  if (path === '/subjects/compulsory/precis-composition') return true
   const categories = (url.searchParams.get('cats') || '').split(',')
   return ['/gk/quiz','/one-liner-gk','/css-mcqs'].includes(path) && (['general-ability','current-affairs','current-affairs-archive','pakistan-current-affairs'].includes(url.searchParams.get('category') || '') || categories.some(c => ['general-ability','current-affairs'].includes(c)))
 }
