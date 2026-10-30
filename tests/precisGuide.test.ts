@@ -43,15 +43,16 @@ const chapters: Chapter[] = [
 
 test('All original teaching blocks, including tables and bullets, are preserved once', () => {
   const units = handbookUnits(chapters)
-  assert.equal(units.length, 7)
-  assert.deepEqual(units.map((u) => u.id), ['1:0', '1:2', '1:3', '2:0', '2:1', '3:0', '3:1'] )
+  assert.equal(units.length, 4)
+  assert.deepEqual(units.map((u) => u.id), ['1:0', '1:2', '2:0', '3:0'] )
   assert.equal(units[1].section, 'Essential distinction')
-  assert.deepEqual(units[1].block, chapters[0].blocks[2])
+  assert.deepEqual(units[1].blocks[0].block, chapters[0].blocks[2])
+  assert.equal(units.flatMap((unit) => unit.blocks).length, 7)
 })
 
 test('Pace selection partitions the whole source sequentially with no omission or duplication', () => {
   const units = handbookUnits(chapters)
-  for (const days of [1, 2, 3, 4, 5, 6, units.length]) {
+  for (const days of [1, 2, 3, 4, units.length]) {
     const schedule = buildStudyDays(units, days)
     assert.equal(schedule.length, days)
     assert.ok(schedule.every((day) => day.units.length > 0))
@@ -64,7 +65,7 @@ test('Studied sections survive changes in course duration without acquiring fake
   const units = handbookUnits(chapters)
   const completed = [units[0].id, units[1].id]
   const short = buildStudyDays(units, 3)
-  const longer = buildStudyDays(units, 5)
+  const longer = buildStudyDays(units, 4)
   assert.equal(coveredCount(units, completed), 2)
   assert.equal(firstPendingDay(short, completed) >= 1, true)
   assert.equal(firstPendingDay(longer, completed) >= 1, true)
