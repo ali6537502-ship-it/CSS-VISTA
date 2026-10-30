@@ -342,11 +342,11 @@ export function analyzePrecisWriting({ original, draft, title, limit }: AnalyzeI
       advice:'Remove ' + (draftWords - limit) + ' words, preserving the argument and necessary qualifications.',
       handbook:'Chapter 13 — Word count and compression',
     })
-  } else if (limit === null && sourceWords >= 35 && draftWords > Math.ceil(sourceWords * 0.5)) {
+  } else if (limit === null && sourceWords >= 35 && draftWords > Math.ceil(sourceWords * 0.8)) {
     add({
       id:'length-review', group:'length', certainty:'review',
       label:'Compression needs another look', excerpt:draftWords + ' of ' + sourceWords + ' source words',
-      explanation:'The draft keeps more than half the original length. One-third is a learning convention, not an automatic official limit.',
+      explanation:'The draft keeps more than four-fifths of the original. One-third is a learning convention, not an automatic official limit.',
       advice:'Look for repeated examples and clauses to combine without losing essential meaning.',
       handbook:'Chapter 7 — Compression; Chapter 13 — Word count',
     })
@@ -375,7 +375,8 @@ export function analyzePrecisWriting({ original, draft, title, limit }: AnalyzeI
 
   const sourceLower = original.toLowerCase()
   const draftLower = draft.toLowerCase()
-  const sourceContrast = /\b(?:but|however|yet|although|whereas|nevertheless)\b/iu.test(sourceLower)
+  const contrastSource = sourceLower.replace(/\bnot only\b[^.!?]{0,150}\bbut also\b/giu, ' ')
+  const sourceContrast = /\b(?:but|however|yet|although|whereas|nevertheless)\b/iu.test(contrastSource)
   const hasContrast = /\b(?:but|however|yet|although|whereas|nevertheless|despite|while|rather than|instead of|without)\b/iu.test(draftLower)
   if (sourceContrast && !hasContrast) {
     add({
@@ -409,7 +410,7 @@ export function analyzePrecisWriting({ original, draft, title, limit }: AnalyzeI
     handbook:'Chapter 9 — Preserving qualifications',
   })
   const sourceCausal = /\b(?:because|therefore|as a result|leads to|causes?|consequently|hence|thus)\b/iu.test(sourceLower)
-  const draftCausal = /\b(?:because|therefore|as a result|leads to|causes?|consequently|hence|thus|produces?|results? in|through|by)\b/iu.test(draftLower)
+  const draftCausal = /\b(?:because|therefore|as a result|leads to|causes?|consequently|hence|thus|produces?|results? in|through|by|depends? on|requires?|reduces?|erodes?|fosters?|undermines?|weakens?)\b/iu.test(draftLower)
   if (sourceCausal && !draftCausal) add({
     id:'causal-review', group:'source', certainty:'review',
     label:'Check the cause-and-effect link',
