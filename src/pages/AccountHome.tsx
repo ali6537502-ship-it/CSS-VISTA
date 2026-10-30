@@ -1,5 +1,6 @@
 import { ArrowUpRight, CalendarDays, CheckCheck, Layers3, RotateCcw } from 'lucide-react'
 import { ProgressRing } from '@/features/workspace/Visuals'
+import AccountGSATutorCard from '@/features/gsa-tutor/AccountGSATutorCard'
 import ContinueStudying from '@/features/workspace/ContinueStudying'
 import { Link } from 'react-router'
 import { useAccount } from '@/lib/accountContext'
@@ -26,6 +27,7 @@ export default function AccountHome() {
   return <div className="ws-overview"><AccountPage title={`${greeting}${user?.display_name ? `, ${user.display_name.split(/\s+/)[0]}` : ''}`} intro="A clear plan for today. Steady progress towards your examination.">
     {days !== null && <p className="ws-muted mb-5">Your chosen target: {snapshot.state.studyPlanner?.examDate} · {days < 0 ? 'Target date has passed — review your schedule' : days === 0 ? 'Today' : `${days} days remaining`}</p>}
     {syncError && <p role="alert" className="ws-panel mb-5">{syncError} <Link to="/account/settings" className="underline">Review account sync</Link></p>}
+    <div className="mb-5"><AccountGSATutorCard /></div>
     <div className="ws-dashboard-grid"><div className="ws-focus-area">
       <ContinueStudying greeting={`${greeting}${user?.display_name ? `, ${user.display_name.split(/\s+/)[0]}` : ''}.`} />
       </div><section className="ws-panel ws-agenda"><div className="ws-section-head"><h2><CalendarDays size={19}/>Today’s Study Plan</h2><Link to="/account/tasks">View all</Link></div><p className="ws-muted mb-4">{snapshot.todayDone.length} of {snapshot.todayTasks.length} scheduled tasks complete</p><div className="space-y-3">{snapshot.todayTasks.slice(0,4).map(task => <TaskItem key={task.id} task={task} refresh={refresh} />)}</div>{!snapshot.todayTasks.length && <p className="ws-muted">{syncStatus === 'syncing' ? 'Loading saved schedule…' : <>Nothing scheduled today. <Link className="underline" to="/account/plan">Build your schedule</Link>.</>}</p>}{snapshot.due.overdue.length > 0 && <Link className="inline-flex min-h-11 items-center underline text-sm mt-3" to="/account/tasks">Review {snapshot.due.overdue.length} overdue tasks</Link>}</section>

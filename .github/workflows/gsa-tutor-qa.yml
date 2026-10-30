@@ -1,0 +1,37 @@
+name: GSA Tutor learning and account isolation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/gsa-tutor-qa.yml'
+      - 'public/gsa-tutor/**'
+      - 'src/pages/GSATutor.tsx'
+      - 'src/features/gsa-tutor/**'
+      - 'src/components/AccountProvider.tsx'
+      - 'src/lib/accountSync.ts'
+      - 'tests/gsaTutorPlan.test.mjs'
+      - 'tests/gsaTutorSync.test.mjs'
+      - 'src/lib/accountSync.ts'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gsa-tutor-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Verify schedules and learning records
+        run: npm run test:gsa-tutor
+      - name: Verify TypeScript integration
+        run: npm run typecheck
+      - name: Build deployment artifact for route audit
+        run: npm run build:hostinger
+      - name: Check lesson route and public content
+        run: npm run audit:routes
