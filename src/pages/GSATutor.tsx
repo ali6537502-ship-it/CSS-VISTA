@@ -109,7 +109,17 @@ export default function GSATutorPage() {
         src="/gsa-tutor/studio.html"
         className="block w-full border-0 bg-white"
         style={{ height: 'max(740px, calc(100vh - 150px))' }}
-        onLoad={() => setLoaded(true)}
+        onLoad={() => {
+          // Account switches remount the iframe; hydrate every new instance,
+          // not only when the parent state changes for the first time.
+          setLoaded(true)
+          if (!user?.profile_complete || syncStatus === 'synced') {
+            iframeRef.current?.contentWindow?.postMessage(
+              { type: 'cssvista:gsa:hydrate', snapshot: readProgress() },
+              window.location.origin,
+            )
+          }
+        }}
       />
       <div className="mx-auto max-w-screen-2xl px-5 py-6 text-xs leading-6 text-slate-600">
         This preview follows the uploaded General Science textbook. Its source questions and explanations still require complete editorial verification before a final educational release.
