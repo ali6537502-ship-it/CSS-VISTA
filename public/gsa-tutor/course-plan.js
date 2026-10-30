@@ -110,7 +110,7 @@
         const lesson = app.byId.get(id);
         return '<button class="gsa-recall-link" data-open="' + safe(id) + '">↻ Repeat: ' + safe(lesson.title) + '</button>';
       }).join('');
-      return '<details class="gsa-day"' + (day.index === current.index ? ' open' : '') + '><summary><b>Day ' + (day.index + 1) + '</b><span><strong>' + niceDate(day.date) + ' · ' + label + '</strong><small>' + day.done + '/' + day.ids.length + ' complete · ' + day.minutes + ' min estimated · ' + safe(coverage) + '</small></span></summary><div class="gsa-day-lessons">' + lessons + '</div></details>';
+      return '<details class="gsa-day"' + (day.index === current.index ? ' open' : '') + '><summary><b>Day ' + (day.index + 1) + '</b><span><strong>' + niceDate(day.date) + ' · ' + label + '</strong><small>' + day.done + '/' + day.ids.length + ' complete · ' + day.minutes + ' min estimated · ' + safe(coverage) + '</small></span></summary><div class="gsa-day-lessons">' + lessons + (recall ? '<p class="gsa-recall-label">Quick recall from previous days</p>' + recall : '') + '</div></details>';
     }).join('');
     app.modal('My GSA course',
       '<div class="gsa-highlight"><span class="eyebrow">Your study timetable</span><strong>' + plan.days + ' days · ' + niceDate(plan.startDate) + ' – ' + niceDate(plusDays(plan.startDate, plan.days - 1)) + '</strong>' +
