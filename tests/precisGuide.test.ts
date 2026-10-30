@@ -1,91 +1,107 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
-  availableGuideChapters,
-  guideCards,
-  guidePath,
-  guidePaths,
-  guideQuestion,
-  guideStep,
+  buildStudyDays,
+  coveredCount,
+  firstPendingDay,
+  handbookUnits,
+  questionForDay,
+  safeDay,
+  safeUnitStep,
+  skillForChapter,
 } from '../src/features/precis/guideModel.ts'
 import type { Chapter, Overview } from '../src/features/precis/api.ts'
 
-test('VISTA Guide routes are unique, source-bound and exclude the handbook answer-key chapters', () => {
-  assert.equal(new Set(guidePaths.map((p) => p.id)).size, guidePaths.length)
-  const forbidden = new Set(['2', '18', '20', '23', '24'])
-  for (const path of guidePaths) {
-    assert.ok(path.chapters.length)
-    assert.equal(new Set(path.chapters).size, path.chapters.length)
-    assert.ok(path.chapters.every((chapter) => !forbidden.has(chapter)))
-  }
-  assert.equal(guidePath('missing').id, 'start')
-})
-
-test('A guide path can display only chapters present in the approved server catalogue', () => {
-  const source: Chapter[] = [
-    { id: '4', title: 'Central idea', blocks: [{ type: 'paragraph', text: 'Original paragraph.' }] },
-    { id: '7', title: 'Compression', blocks: [] },
-    { id: '18', title: 'Worked examples', blocks: [] },
-  ]
-  assert.deepEqual(
-    availableGuideChapters(guidePath('idea'), source).map((chapter) => chapter.id),
-    ['4'],
-  )
-  assert.deepEqual(
-    availableGuideChapters(guidePath('compression'), source).map((chapter) => chapter.id),
-    ['7'],
-  )
-  assert.equal(availableGuideChapters(guidePath('writing'), source).length, 0)
-})
-
-test('Micro-lessons preserve every source body, table and associated heading unchanged', () => {
-  const source: Chapter = {
-    id: '4',
-    title: 'Source chapter',
+const chapters: Chapter[] = [
+  {
+    id: '1',
+    title: '1. First chapter',
     blocks: [
-      { type: 'heading', text: 'Central idea' },
-      { type: 'paragraph', text: 'The exact chapter wording is retained.' },
-      { type: 'bullet', text: 'Do not change the claim.' },
-      { type: 'table', rows: [['Heading', 'Meaning'], ['Value', 'Exact phrase']] },
-      { type: 'heading', text: 'Empty heading' },
-      { type: 'paragraph', text: 'Second chapter passage.' },
+      { type: 'paragraph', text: 'Opening from the original book.' },
+      { type: 'heading', text: 'Essential distinction' },
+      { type: 'table', rows: [['Topic', 'Claim'], ['Science', 'Science needs ethical safeguards.']] },
+      { type: 'bullet', text: 'Keep the central argument.' },
     ],
-  }
-  const cards = guideCards(source)
-  assert.equal(cards.length, 4)
-  assert.deepEqual(cards.map((c) => c.label), [
-    'Central idea', 'Central idea', 'Central idea', 'Empty heading',
-  ])
-  assert.equal(cards[0].block.type, 'paragraph')
-  assert.equal(cards[1].block.type, 'bullet')
-  assert.deepEqual(cards[2].block, source.blocks[3])
-  assert.deepEqual(cards[3].block, source.blocks[5])
+  },
+  {
+    id: '2',
+    title: '2. Examination framework',
+    blocks: [
+      { type: 'paragraph', text: 'Follow the printed question instructions.' },
+      { type: 'paragraph', text: 'Keep the main meaning.' },
+    ],
+  },
+  {
+    id: '3',
+    title: '3. Rules',
+    blocks: [
+      { type: 'table', rows: [['Preserve meaning', 'Do not distort the writer.']] },
+      { type: 'table', rows: [['Remove repetition', 'Keep essential links.']] },
+    ],
+  },
+]
+
+test('All original teaching blocks, including tables and bullets, are preserved once', () => {
+  const units = handbookUnits(chapters)
+  assert.equal(units.length, 7)
+  assert.deepEqual(units.map((u) => u.id), ['1:0', '1:2', '1:3', '2:0', '2:1', '3:0', '3:1'] )
+  assert.equal(units[1].section, 'Essential distinction')
+  assert.deepEqual(units[1].block, chapters[0].blocks[2])
 })
 
-test('Guide checks use original authored questions without transmitting an answer index', () => {
+test('Pace selection partitions the whole source sequentially with no omission or duplication', () => {
+  const units = handbookUnits(chapters)
+  for (const days of [1, 2, 3, 4, 5, 6, units.length]) {
+    const schedule = buildStudyDays(units, days)
+    assert.equal(schedule.length, days)
+    assert.ok(schedule.every((day) => day.units.length > 0))
+    assert.deepEqual(schedule.flatMap((day) => day.units.map((unit) => unit.id)), units.map((unit) => unit.id))
+    assert.deepEqual(schedule.map(day => day.day), Array.from({ length: days }, (_, i) => i + 1))
+  }
+})
+
+test('Studied sections survive changes in course duration without acquiring fake completion', () => {
+  const units = handbookUnits(chapters)
+  const completed = [units[0].id, units[1].id]
+  const short = buildStudyDays(units, 3)
+  const longer = buildStudyDays(units, 5)
+  assert.equal(coveredCount(units, completed), 2)
+  assert.equal(firstPendingDay(short, completed) >= 1, true)
+  assert.equal(firstPendingDay(longer, completed) >= 1, true)
+  assert.equal(coveredCount(units, [...completed, 'not-real', units[0].id]), 2)
+})
+
+test('Daily question uses existing authored questions with no answer key in browser', () => {
+  const units = handbookUnits(chapters)
+  const day = buildStudyDays(units, 3)[0]
   const data = {
     catalog: {
-      chapters: [],
+      chapters,
       passages: [],
       source_sha256: 'handbook',
       questions: [{
-        id: 'reviewed-q',
-        skill: 'selection',
-        prompt: 'An approved question',
-        options: ['Option one', 'Option two'],
-        hint: 'A reviewed hint',
+        id: 'reviewed-original-q',
+        skill: 'central_idea',
+        prompt: 'An authored exercise',
+        options: ['First option', 'Second option'],
+        hint: 'An authored hint',
       }],
     },
   } as unknown as Overview
-  const result = guideQuestion(data, guidePath('selection'), '6')
-  assert.equal(result?.id, 'reviewed-q')
-  assert.equal(result && Object.hasOwn(result, 'answer'), false)
-  assert.equal(guideQuestion(data, guidePath('logic'), '9'), undefined)
+  const question = questionForDay(data, day)
+  assert.equal(question?.id, 'reviewed-original-q')
+  assert.equal(question && Object.hasOwn(question, 'answer'), false)
+  assert.equal(skillForChapter('12'), 'title')
+  assert.equal(skillForChapter('9'), 'qualifications')
 })
 
-test('Invalid URL steps cannot produce negative, fractional or out-of-range screens', () => {
-  assert.equal(guideStep(null, 8), 0)
-  assert.equal(guideStep('3', 8), 3)
-  for (const input of ['-1', '9', '1.1', 'junk', 'Infinity'])
-    assert.equal(guideStep(input, 8), 0)
+test('Invalid day and section parameters fall back safely', () => {
+  assert.equal(safeDay('11', 30, 1), 11)
+  assert.equal(safeDay('99', 30, 1), 1)
+  assert.equal(safeDay('-3', 30, 1), 1)
+  assert.equal(safeDay('1.2', 30, 1), 1)
+  assert.equal(safeUnitStep('2', 4), 2)
+  assert.equal(safeUnitStep('8', 4), 0)
+  assert.equal(safeUnitStep('invalid', 4), 0)
+  assert.throws(() => buildStudyDays(handbookUnits(chapters), 100))
 })
