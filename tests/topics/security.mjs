@@ -450,6 +450,7 @@ php('tests/pro/fixture.php', 'expire', a.id)
 detail = await get()
 assert.ok(detail.data.content, 'Membership expiry blocked a free published lesson')
 assert.equal((await act(mutation('begin'))).status, 200, 'Membership expiry blocked free learning')
+detail = await get()
 assert.equal(
   (await act(mutation('guided_check', { question_id: 'learn-1', choice: 0 }))).status,
   200,
