@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 254,
+  "count": 255,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1777,6 +1777,13 @@
     {
       "id": "pakistan-current-affairs-20261029-pak-saudi-investment-talks",
       "text": "Pakistan's finance minister and Saudi ambassador discussed investment in agriculture, minerals and mining on 29 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261029-pak-turkiye-makkah-diplomacy",
+      "text": "Pakistan's prime minister reaffirmed the Makkah Joint Defence Agreement with Türkiye and Saudi Arabia on 29 October 2026; the accord was signed on 7 August.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

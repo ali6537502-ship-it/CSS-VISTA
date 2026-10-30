@@ -1903,5 +1903,80 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/business/energy/australias-woodside-supply-qatarenergy-with-louisiana-lng-20-year-deal-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-pak-turkiye-makkah-diplomacy",
+    "q": "Which three states signed the Makkah Joint Defence Agreement reaffirmed by Pakistan's prime minister on 29 October 2026?",
+    "o": [
+      "Pakistan, Türkiye and Saudi Arabia",
+      "Pakistan, Türkiye and Qatar",
+      "Pakistan, Saudi Arabia and Oman",
+      "Türkiye, Saudi Arabia and Egypt"
+    ],
+    "a": 0,
+    "e": "Pakistan, Türkiye and Saudi Arabia signed the accord on 7 August 2026. Source: Press Information Department.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://pid.gov.pk/site/press_detail/33499"
+  },
+  {
+    "id": "current-affairs-20261029-world-ukraine-dnipro-rail-strike",
+    "q": "Which Ukrainian city experienced the deadly 29 October 2026 drone strike on a crowded railway platform?",
+    "o": [
+      "Odesa",
+      "Kharkiv",
+      "Dnipro",
+      "Lviv"
+    ],
+    "a": 2,
+    "e": "Ukrainian officials reported the strike at Dnipro's main station. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/russian-drone-attack-train-station-kills-13-ukraines-dnipro-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-world-gcf-record-board-approvals",
+    "q": "How many projects did the Green Climate Fund's 46th Board meeting approve in October 2026?",
+    "o": [
+      "16",
+      "21",
+      "28",
+      "35"
+    ],
+    "a": 1,
+    "e": "The GCF's official announcement records 21 approved projects. Source: Green Climate Fund.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.greenclimate.fund/about/news-and-updates/gcf-financing-tops-usd-3-billion-consecutive-record-year-reforms-continue-deliver"
+  },
+  {
+    "id": "current-affairs-20261029-world-china-cleantech-emissions-study",
+    "q": "According to the 29 October 2026 CREA analysis, China's 2026 clean-tech exports could help avoid approximately how much CO₂ annually after deployment?",
+    "o": [
+      "150 million tonnes",
+      "300 million tonnes",
+      "450 million tonnes",
+      "700 million tonnes"
+    ],
+    "a": 2,
+    "e": "CREA modelled about 450 million tonnes of annual avoided CO₂, not an observed 2026 reduction. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/china-clean-tech-exports-cut-global-emissions-by-brazil-sized-amount-2026-2026-10-29/"
+  },
+  {
+    "id": "current-affairs-20261029-world-microsoft-ai-bond-offering",
+    "q": "What approximate US bond-offering size was Microsoft reportedly planning on 29 October 2026, subject to final terms?",
+    "o": [
+      "$10 billion",
+      "$15 billion",
+      "$25 billion",
+      "$40 billion"
+    ],
+    "a": 2,
+    "e": "Reuters reported a planned approximately $25 billion offering; the final size was unconfirmed. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/finance/microsoft-expects-raise-25-billion-us-bond-sale-source-says-2026-10-29/"
   }
 ]

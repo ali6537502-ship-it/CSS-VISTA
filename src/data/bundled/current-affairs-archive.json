@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 626,
+  "count": 631,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4381,6 +4381,41 @@
     {
       "id": "current-affairs-archive-20261029-world-qatarenergy-woodside-lng",
       "text": "Woodside announced a 20-year agreement to supply QatarEnergy with up to 3 million tonnes of Louisiana LNG annually on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-pak-turkiye-makkah-diplomacy",
+      "text": "Pakistan, Türkiye and Saudi Arabia signed the Makkah Joint Defence Agreement on 7 August 2026; Pakistan's prime minister reaffirmed it on 29 October.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-ukraine-dnipro-rail-strike",
+      "text": "Ukrainian officials reported a deadly drone strike on Dnipro's main railway platform on 29 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-gcf-record-board-approvals",
+      "text": "The Green Climate Fund's 46th Board meeting approved 21 projects in October 2026; total 2026 approvals reached $3.2 billion.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-china-cleantech-emissions-study",
+      "text": "A 29 October 2026 CREA study estimated that China's 2026 clean-tech exports could avoid 450 million tonnes of CO₂ annually after deployment.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261029-world-microsoft-ai-bond-offering",
+      "text": "Reuters reported on 29 October 2026 that Microsoft was planning an approximately $25 billion US bond offering; the final size was unconfirmed.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
