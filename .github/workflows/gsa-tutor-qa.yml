@@ -9,6 +9,8 @@ on:
       - 'src/components/AccountProvider.tsx'
       - 'src/lib/accountSync.ts'
       - 'tests/gsaTutorPlan.test.mjs'
+      - 'tests/gsaTutorSync.test.mjs'
+      - 'src/lib/accountSync.ts'
       - 'package.json'
       - 'package-lock.json'
   workflow_dispatch:
