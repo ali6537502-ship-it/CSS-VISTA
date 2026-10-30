@@ -29,5 +29,7 @@ jobs:
         run: npm run test:gsa-tutor
       - name: Verify TypeScript integration
         run: npm run typecheck
+      - name: Build deployment artifact for route audit
+        run: npm run build:hostinger
       - name: Check lesson route and public content
         run: npm run audit:routes
