@@ -78,6 +78,7 @@ test('deep lesson uses full original sections with progressive reading and writt
  p.click('[data-action="reveal"]')
  assert.ok(p.document.querySelector('.compare .study-copy').textContent.length>100)
  p.click('[data-grade="gotit"]')
+ p.click('[data-action="finish"]')
  const stored=JSON.parse(p.dom.window.localStorage.getItem(KEY))
  assert.ok(stored.completed[first.id], 'lesson completion must persist')
  assert.ok(stored.drafts[first.id], 'written recall must persist')
