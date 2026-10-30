@@ -124,3 +124,19 @@ remain preserved, but an older client would offer stale legacy recovery instead.
 Returning the presentation to classic via the kill switch avoids that problem.
 Never clear browser storage, reset progress or roll back the database. The UI
 rollback does not reopen paused Pro/MPT or discard work saved through either UI.
+
+## Approved account-only deployment — 30 October 2026
+
+The owner explicitly approved “Deploy for preview” after reviewing the scoped
+single-account implementation. This authorizes deployment of the gated dashboard
+only; it does not authorize a global interface/signup release, Pro/MPT activation,
+payment/AI changes or production student-data changes.
+
+Before the remote write, production and main were both
+`afb47d2c2863fa3fc2f183bd3a1c508086ccbecb`. Its only change since the reviewed
+base was the published 30 October Vistagram batch, which was merged intact.
+Workflow triggers were re-inspected: review branches do not trigger production
+jobs; main pushes are observed by the existing Hostinger fingerprint workflow.
+The release uses that established deployment path, without a database bootstrap
+or changes to private hosting configuration. The final live fingerprint and
+read-only verification outcomes will be recorded in the release evidence.
