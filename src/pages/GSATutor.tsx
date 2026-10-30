@@ -89,7 +89,7 @@ export default function GSATutorPage() {
                 <button type="button" onClick={() => void saveToAccount()} disabled={syncStatus === 'syncing'} className="rounded-xl bg-emerald-900 px-4 py-3 text-xs font-bold text-white disabled:opacity-50">Sync progress</button>
               </>
             ) : (
-              <Link className="rounded-xl border border-emerald-300 bg-white px-4 py-3 text-xs font-bold text-emerald-900" to="/account">Sign in to save across devices</Link>
+              <Link className="rounded-xl border border-emerald-300 bg-white px-4 py-3 text-xs font-bold text-emerald-900" to="/account">{user ? "Complete your profile to sync progress" : "Sign in to save across devices"}</Link>
             )}
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function GSATutorPage() {
           <span><strong className="text-slate-900">{result.days ? result.days + '-day' : 'Not scheduled'}</strong> course</span>
           <span><strong className="text-slate-900">{Math.min(result.completed, 141)}/141</strong> lessons completed</span>
           <span><strong className="text-slate-900">{result.revision}</strong> lessons for revision</span>
-          <span>{loading ? 'Checking account…' : user?.profile_complete ? syncStatus === 'synced' ? 'Account progress synced' : syncStatus === 'syncing' ? 'Account sync in progress' : 'Saved on device; account sync pending' : 'Device progress only until signed in'}</span>
+          <span>{loading ? 'Checking account…' : user?.profile_complete ? syncStatus === 'synced' ? 'Account progress synced' : syncStatus === 'syncing' ? 'Account sync in progress' : 'Saved on device; account sync pending' : user ? 'Complete your profile to enable account sync' : 'Device progress only until signed in'}</span>
           {lastSyncedAt && user?.profile_complete && <span>Last synced {lastSyncedAt.toLocaleTimeString('en-PK')}</span>}
           {(syncError || manualSync) && <span role={syncError ? 'alert' : 'status'}>{syncError || manualSync}</span>}
         </div>
