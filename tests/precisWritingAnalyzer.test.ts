@@ -57,6 +57,7 @@ test('offers selective offline spelling suggestions without claiming certainty',
   const result = check('Goverment recieve criticism becuase services is weak.')
   assert.ok(codes(result).includes('spelling-goverment'))
   assert.ok(codes(result).includes('spelling-recieve'))
+  assert.ok(codes(result).includes('common-plural-verb'))
   assert.equal(result.findings.find((f)=>f.id==='spelling-becuase')?.certainty,'review')
 })
 
