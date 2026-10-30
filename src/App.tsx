@@ -40,6 +40,7 @@ const VistagramArticle = lazy(() => import('./pages/VistagramArticle'))
 const AnswerWriting = lazy(() => import('./pages/AnswerWriting'))
 const TestSeries = lazy(() => import('./pages/TestSeries'))
 const StudyTools = lazy(() => import('./pages/StudyTools'))
+const LuckyDraw = lazy(() => import('./pages/LuckyDraw'))
 const CssEligibilityCalculator = lazy(() => import('./pages/CssEligibilityCalculator'))
 const PhotoCompressor = lazy(() => import('./pages/PhotoCompressor'))
 const Games = lazy(() => import('./pages/Games'))
@@ -177,6 +178,7 @@ export default function App() {
         <Route path="/answer-writing" element={<S><AnswerWriting /></S>} />
         <Route path="/test-series" element={<S><TestSeries /></S>} />
         <Route path="/study-tools" element={<S><StudyTools /></S>} />
+        <Route path="/lucky-draw" element={<S><LuckyDraw /></S>} />
         <Route path="/css-eligibility-calculator" element={<S><CssEligibilityCalculator /></S>} />
         <Route path="/photo-compressor" element={<S><PhotoCompressor /></S>} />
         <Route path="/games" element={<S><Games /></S>} />

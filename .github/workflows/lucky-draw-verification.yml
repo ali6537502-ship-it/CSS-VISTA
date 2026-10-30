@@ -1,0 +1,52 @@
+name: Lucky draw verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/pages/LuckyDraw.tsx'
+      - 'src/pages/admin/LuckyDrawPanel.tsx'
+      - 'src/pages/admin/Admin.tsx'
+      - 'src/components/LuckyDrawDiscovery.tsx'
+      - 'src/pages/Home.tsx'
+      - 'src/App.tsx'
+      - 'src/data/routeRegistry.mjs'
+      - 'public/api/_lucky_draw.php'
+      - 'public/api/lucky-draw.php'
+      - 'public/api/admin/lucky-draw.php'
+      - '.github/workflows/lucky-draw-verification.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/api/*lucky_draw*'
+      - 'public/api/*lucky-draw*'
+      - 'public/api/admin/lucky-draw.php'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-lucky-draw:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo_mysql
+      - name: Validate lucky draw PHP syntax
+        run: |
+          php -l public/api/_lucky_draw.php
+          php -l public/api/lucky-draw.php
+          php -l public/api/admin/lucky-draw.php
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Check existing TypeScript project including lucky draw
+        run: npm run typecheck
+      - name: Verify route integrity
+        run: npm run audit:routes

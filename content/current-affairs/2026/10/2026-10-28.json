@@ -1,0 +1,1129 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "published_at": "2026-10-28T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 28 October 2026 | Final Edition (00:00–23:59 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-10-28-pak-fuel-prices",
+      "category": "Pakistan — Economy and Energy",
+      "headline": "Pakistan revises petrol and diesel prices",
+      "summary": "The government announced a Rs3.19 petrol-price cut and a Rs2.25 diesel-price increase on 27 October, with new rates effective 28 October.",
+      "what_happened": "On Tuesday, 27 October 2026, the government announced that the ex-depot petrol price would fall from Rs379.25 to Rs376.06 per litre and high-speed diesel would rise from Rs395.82 to Rs398.07 per litre. The adjustment was effective Wednesday, 28 October.",
+      "background": "Pakistan's petroleum pricing mechanism reflects international refined-product benchmarks and domestic charges. The date of implementation is distinct from the announcement date.",
+      "why_it_matters": "Fuel price differences affect household travel and freight or agricultural costs in different ways.",
+      "key_takeaways": [
+        "Petrol decreased by Rs3.19 per litre.",
+        "High-speed diesel increased by Rs2.25 per litre.",
+        "New rates were announced on 27 October for 28 October implementation."
+      ],
+      "question_angles": [
+        "Explain why a diesel increase can affect inflation even if petrol prices decline."
+      ],
+      "topics": [
+        "Energy prices",
+        "Inflation",
+        "Oil regulation"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Petroleum Division",
+        "Oil and Gas Regulatory Authority"
+      ],
+      "sources": [
+        {
+          "publisher": "Business Recorder",
+          "title": "Govt cuts petrol price by Rs3.19, hikes diesel by Rs2.25 per litre",
+          "url": "https://www.brecorder.com/news/40446155/govt-cuts-petrol-price-by-rs319-hikes-diesel-by-rs225-per-litre"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Govt cuts petrol price by Rs3.19 per litre, ups diesel rate by Rs2.25",
+          "url": "https://www.dawn.com/news/2040249/govt-cuts-petrol-price-by-rs319-per-litre-ups-high-speed-diesel-rate-by-rs225"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Petrol ex-depot price",
+          "value": "Rs376.06 per litre",
+          "source": "Business Recorder",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "High-speed diesel price",
+          "value": "Rs398.07 per litre",
+          "source": "Business Recorder",
+          "date": "2026-10-28"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-aml-cft",
+      "category": "Pakistan — Law and Financial Regulation",
+      "headline": "AML committee approves regulatory reform proposals",
+      "summary": "On 27 October, the national AML-CFT executive committee approved proposals concerning currency-transaction reporting, maritime law and virtual assets.",
+      "what_happened": "On Tuesday, 27 October 2026, Finance Minister Muhammad Aurangzeb chaired the 19th meeting of the National Executive Committee on Anti-Money Laundering and Countering the Financing of Terrorism. It approved a proposed revision of Currency Transaction Report thresholds, proposed inclusion of Section 28 of the Pakistan Maritime Zones Act, 2023 in Schedule I of the Anti-Money Laundering Act, and proposed adding the Pakistan Virtual Assets Regulatory Authority to Schedule IV.",
+      "background": "The Financial Monitoring Unit and relevant regulators oversee parts of Pakistan's AML-CFT framework. An executive committee's approval of proposed amendments does not by itself establish that all legislative changes have entered into force.",
+      "why_it_matters": "Financial integrity requires effective monitoring, interagency cooperation and legal coverage of emerging payment and virtual-asset risks.",
+      "key_takeaways": [
+        "The meeting was the AML-CFT NEC's 19th.",
+        "Currency Transaction Report thresholds were reviewed.",
+        "Proposals addressed maritime law and a virtual-assets authority."
+      ],
+      "question_angles": [
+        "Distinguish approval of a reform proposal from its enactment into law."
+      ],
+      "topics": [
+        "Money laundering",
+        "Financial regulation",
+        "Virtual assets"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Finance Division",
+        "Financial Monitoring Unit",
+        "Pakistan Virtual Assets Regulatory Authority"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "Finance Minister chairs 19th meeting of NEC on AML-CFT",
+          "url": "https://pid.gov.pk/site/press_detail/34545"
+        },
+        {
+          "publisher": "Business Recorder",
+          "title": "Pakistan reviews AML-CFT framework, approves key regulatory changes",
+          "url": "https://www.brecorder.com/news/40446148/pakistan-reviews-aml-cft-framework-approves-key-regulatory-changes"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-shrimp-farming",
+      "category": "Pakistan — Blue Economy",
+      "headline": "Government sets 120-day shrimp farming roadmap",
+      "summary": "A prime-ministerial subcommittee set a 120-day deadline on 27 October for a roadmap to develop shrimp farming, processing and exports.",
+      "what_happened": "On Tuesday, 27 October 2026, a subcommittee established a 120-day preparation timetable for a national shrimp aquaculture roadmap. Maritime Affairs Minister Muhammad Junaid Anwar Chaudhry chaired the meeting. The proposals cover production, disease control, processing, certification and export markets, with cooperation among federal and provincial authorities.",
+      "background": "Aquaculture requires management of coastal water quality, disease, feed, supply chains and export standards.",
+      "why_it_matters": "The roadmap could contribute to export diversification, subject to feasibility, investment and environmental safeguards. A timetable is not a forecast of revenue.",
+      "key_takeaways": [
+        "The national roadmap deadline is 120 days.",
+        "Proposed action covers farming, processing and exports.",
+        "Reported planning decisions do not guarantee output or employment."
+      ],
+      "question_angles": [
+        "Discuss the economic opportunities and ecological constraints of coastal aquaculture."
+      ],
+      "topics": [
+        "Aquaculture",
+        "Blue economy",
+        "Exports"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Ministry of Maritime Affairs"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "National shrimp aquaculture roadmap",
+          "url": "https://pid.gov.pk/site/press_detail/34535"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Govt sets 120-day deadline for shrimp-farming roadmap",
+          "url": "https://www.dawn.com/news/2040236/in-bid-to-boost-exports-govt-sets-120-day-deadline-for-roadmap-to-expand-shrimp-farming"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-judicial-bench-book",
+      "category": "Pakistan — Law and Governance",
+      "headline": "Judicial bench book targets rape trial practice",
+      "summary": "A ten-chapter judicial guide presented on 27 October addresses the handling of rape trials and evidence.",
+      "what_happened": "On Tuesday, 27 October 2026, a bench book on adjudicating rape cases was launched in Islamabad. Supreme Court Justice Ayesha A. Malik addressed the gathering. The Ministry of Human Rights described ten chapters organised around the trial process and applicable legal and judicial guidance.",
+      "background": "Bench books organise reference material and courtroom practice; they are not themselves newly enacted criminal laws or judgments.",
+      "why_it_matters": "Consistent use could strengthen due process and reduce stereotypes, depending on training, judicial practice and safeguards for all parties.",
+      "key_takeaways": [
+        "The bench book was launched on 27 October.",
+        "It has ten chapters.",
+        "It is guidance, not an amendment of criminal law."
+      ],
+      "question_angles": [
+        "How can judicial practice guides support access to justice while respecting due-process rights?"
+      ],
+      "topics": [
+        "Judicial training",
+        "Gender-based violence",
+        "Access to justice"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Ministry of Human Rights",
+        "Legal Aid Society"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Justice Ayesha Malik challenges assumptions blaming women for inviting rape",
+          "url": "https://www.dawn.com/news/2040251/justice-ayesha-malik-challenges-assumptions-blaming-women-for-inviting-rape"
+        },
+        {
+          "publisher": "APP via UrduPoint",
+          "title": "Bench book launched to strengthen adjudication",
+          "url": "https://www.urdupoint.com/en/pakistan/bench-book-launched-to-strengthen-adjudicatio-2278384.html"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-qatar-hormuz",
+      "category": "World — Middle East Diplomacy",
+      "headline": "Qatar urges Iran to reopen Hormuz for mediation",
+      "summary": "Qatar urged Iran on 27 October to end threats against Gulf neighbours and reopen the Strait of Hormuz as a sign of commitment to mediation.",
+      "what_happened": "On Tuesday, 27 October 2026, Qatar's Foreign Ministry publicly called on Iran to refrain from threats against Gulf Arab states and to reopen the Strait of Hormuz to improve prospects for mediation. Reuters reported the statement by a ministry spokesperson. Earlier diplomatic visits are background to Tuesday's appeal.",
+      "background": "The Strait of Hormuz lies between Iran and Oman and connects the Persian Gulf with the Gulf of Oman and Arabian Sea. It carries international energy shipments.",
+      "why_it_matters": "Maritime restrictions influence shipping, insurance and energy import costs. Mediation needs reciprocal actions and credible signals.",
+      "key_takeaways": [
+        "Qatar's statement was made public on 27 October.",
+        "Doha asked for the Strait of Hormuz to be reopened.",
+        "The statement did not establish an Iranian agreement or a mediated settlement."
+      ],
+      "question_angles": [
+        "Assess how Gulf maritime security affects South Asian energy importers."
+      ],
+      "topics": [
+        "Gulf diplomacy",
+        "Energy security",
+        "Maritime chokepoints"
+      ],
+      "countries": [
+        "Qatar",
+        "Iran"
+      ],
+      "institutions": [
+        "Qatar Ministry of Foreign Affairs"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Qatar says Iran needs to show good intentions for mediation",
+          "url": "https://www.reuters.com/world/asia-pacific/qatar-says-iran-needs-show-good-intentions-mediation-efforts-succeed-2026-10-27/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-sudan-power-strike",
+      "category": "World — Humanitarian Security",
+      "headline": "Sudan drone strike disrupts electricity across two states",
+      "summary": "A Sudanese electricity-sector official said a drone strike damaged a transformer station and interrupted electricity supplies on 27 October.",
+      "what_happened": "On Tuesday, 27 October 2026, an official at Sudan's electricity company told AFP that drones attributed to the Rapid Support Forces struck the Al-Markhiyat transformer station. The official identified power outages affecting areas of Khartoum and Al-Jazira states. This attribution is a reported claim rather than an independently established determination of the attackers.",
+      "background": "Sudan's conflict between its armed forces and Rapid Support Forces began in April 2023. Attacks reported the previous day form background and are not counted as Tuesday's event.",
+      "why_it_matters": "Damage to electricity infrastructure can affect hospitals, water pumps and communications. International humanitarian law requires parties to distinguish civilian objects from military objectives.",
+      "key_takeaways": [
+        "The reported target was the Al-Markhiyat transformer station.",
+        "Outages affected areas of Khartoum and Al-Jazira states.",
+        "The source's attribution of responsibility must remain qualified."
+      ],
+      "question_angles": [
+        "Explain international humanitarian-law protections for civilian infrastructure."
+      ],
+      "topics": [
+        "Sudan",
+        "Civilian protection",
+        "International humanitarian law"
+      ],
+      "countries": [
+        "Sudan"
+      ],
+      "institutions": [
+        "Sudan national electricity company"
+      ],
+      "sources": [
+        {
+          "publisher": "AFP via Dawn",
+          "title": "Sudan drone strikes kill 21, cause mass outages in east",
+          "url": "https://www.dawn.com/news/2040194/sudan-drone-strikes-kill-21-cause-mass-outages-in-east"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-cyclone-arnab",
+      "category": "World — Natural Hazards and Disaster Management",
+      "headline": "Cyclone Arnab makes landfall on India's southeastern coast",
+      "summary": "On 28 October, Cyclone Arnab made landfall in Andhra Pradesh with sustained winds of 115–125 km/h, according to the India Meteorological Department; no deaths were initially reported.",
+      "what_happened": "The India Meteorological Department reported on 28 October that Cyclone Arnab struck Andhra Pradesh as a very severe cyclonic storm, with sustained winds of 115–125 km/h and gusts up to 140 km/h. Authorities had instructed around 50,000 people in Andhra Pradesh and 48,000 in Odisha to move to safety. The chief minister reported no deaths in the initial assessment; the final damage assessment was not yet available.",
+      "background": "Tropical cyclones bring high winds, storm surges and heavy rain; early warning and timely evacuation reduce exposure.",
+      "why_it_matters": "Advance warnings, evacuation and local response illustrate how disaster risk reduction can limit casualties during intense Bay of Bengal cyclones.",
+      "pakistan_perspective": "The Bay of Bengal cyclone hazard has lessons for Pakistan's coastal warning systems and regional disaster preparedness.",
+      "key_takeaways": [
+        "Cyclone Arnab made landfall in Andhra Pradesh on 28 October 2026.",
+        "The IMD reported sustained winds of 115–125 km/h and gusts up to 140 km/h.",
+        "Initial reports indicated no deaths; later damage assessments could revise the picture."
+      ],
+      "what_to_watch": [],
+      "question_angles": [
+        "In which Indian state did Cyclone Arnab make landfall on 28 October 2026?"
+      ],
+      "topics": [
+        "Tropical cyclones",
+        "Disaster management",
+        "Early warning"
+      ],
+      "countries": [
+        "India",
+        "Sri Lanka",
+        "Nepal"
+      ],
+      "organisations": [
+        "India Meteorological Department"
+      ],
+      "quick_gk": [
+        "Cyclone Arnab made landfall in Andhra Pradesh on 28 October 2026, according to the IMD."
+      ],
+      "sources": [
+        {
+          "publisher": "AFP via Dawn",
+          "title": "India orders evacuations as Cyclone Arnab looms",
+          "url": "https://www.dawn.com/news/2040202/india-orders-evacuations-in-andhra-pradesh-odisha-as-cyclone-arnab-looms"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Cyclone Arnab lashes India coast, no deaths reported",
+          "url": "https://www.dawn.com/news/2040415/cyclone-arnab-lashes-india-coast-no-deaths-reported"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-border",
+      "category": "Pakistan — Border Security and Foreign Relations",
+      "headline": "Pakistan and Afghanistan trade accusations after deadly cross-border firing",
+      "summary": "Pakistani authorities reported one civilian killed and five injured in South Waziristan after firing from the Afghan side; Afghan authorities made counter-allegations that Reuters could not independently verify.",
+      "what_happened": "Reuters reported on 28 October that the deputy commissioner of South Waziristan Lower attributed firing at homes and a market to Afghan Taliban positions, reporting one death and five injuries. Afghan Taliban officials alleged Pakistani drone strikes in Paktika and said their forces retaliated. Reuters stated that it could not verify either side's claims.",
+      "background": "Cross-border security incidents and disputes over militant sanctuaries have strained Pakistan–Afghanistan relations and disrupted border trade.",
+      "why_it_matters": "The incident highlights escalation risks, civilian protection and the need for verifiable communication channels and border de-escalation.",
+      "pakistan_perspective": "Civilian safety, border trade and regional counterterrorism diplomacy are directly affected; claims about responsibility must remain attributed until independently established.",
+      "key_takeaways": [
+        "Pakistani officials reported one civilian death and five injuries in South Waziristan.",
+        "Afghan officials issued counter-allegations that Reuters could not independently verify."
+      ],
+      "question_angles": [
+        "Which Pakistani border region was named in the 28 October Reuters report?"
+      ],
+      "topics": [
+        "Pakistan–Afghanistan relations",
+        "Border security",
+        "Conflict de-escalation"
+      ],
+      "countries": [
+        "Pakistan",
+        "Afghanistan"
+      ],
+      "institutions": [
+        "District Administration South Waziristan Lower"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistan says Afghan firing kills one in border district",
+          "url": "https://www.reuters.com/world/asia-pacific/pakistan-says-afghan-firing-kills-one-border-district-2026-10-28/"
+        }
+      ],
+      "quick_gk": [
+        "Pakistani officials reported one civilian death and five injuries in South Waziristan."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-kp-local-polls",
+      "category": "Pakistan — Elections and Constitutional Governance",
+      "headline": "Election Commission orders local polls where KP delimitation is complete",
+      "summary": "The ECP ordered the election programme to be prepared for Khyber Pakhtunkhwa districts with completed delimitations, while excluding districts under special emergency arrangements.",
+      "what_happened": "On 28 October the Election Commission of Pakistan directed its office to submit an election programme for KP districts where local-government delimitation had been completed. The order excluded 12 districts subject to special emergency arrangements and sought delimitation schedules for other eligible districts. The ECP cited Articles 218(3), 140A(2), 219(d), 220 and 222 of the Constitution and relevant Elections Act 2017 provisions.",
+      "background": "KP local bodies' terms expired in phases in March and June 2026; the province has been under emergency measures since 11 October.",
+      "why_it_matters": "The decision raises important questions about constitutional duties to conduct local elections during a security emergency and about the scope of election administration.",
+      "pakistan_perspective": "The order does not itself mean polling has occurred or that a final date has been fixed for all KP districts.",
+      "key_takeaways": [
+        "The ECP ordered programmes for KP districts with completed delimitation.",
+        "Twelve specially designated districts were excluded.",
+        "Article 140A concerns local government."
+      ],
+      "question_angles": [
+        "Which constitutional article concerns local government in Pakistan?"
+      ],
+      "topics": [
+        "Election Commission of Pakistan",
+        "Local government",
+        "Constitutional law"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Election Commission of Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "ECP orders immediate local body polls in KP districts demarcated, sans those under ARDC",
+          "url": "https://www.dawn.com/news/2040445/ecp-orders-immediate-local-body-polls-in-kp-districts-demarcated-sans-those-under-ardc"
+        }
+      ],
+      "quick_gk": [
+        "The ECP ordered programmes for KP districts with completed delimitation."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-justice-kayani",
+      "category": "Pakistan — Judiciary and Constitutional Affairs",
+      "headline": "Lahore High Court Justice Mohsin Akhtar Kayani submits resignation",
+      "summary": "Justice Mohsin Akhtar Kayani resigned on 28 October, citing health concerns and his assessment that recent constitutional changes had undermined high-court independence.",
+      "what_happened": "Dawn reported that Justice Mohsin Akhtar Kayani submitted his resignation to Pakistan's president on 28 October. In his letter, he cited health reasons and concerns about the judiciary, specifically giving his own assessment of the 26th and 27th Constitutional Amendments and executive influence over judicial appointments and transfers. His views are attributed statements, not a court finding.",
+      "background": "Justice Kayani previously served at the Islamabad High Court and transferred to the Lahore High Court in April 2026. Judicial transfers and institutional independence have been contested in recent constitutional litigation.",
+      "why_it_matters": "The resignation places renewed attention on separation of powers, judicial independence and constitutional amendment debates.",
+      "pakistan_perspective": "Whether the resignation is accepted and how the judiciary responds are separate from the concerns expressed in the letter.",
+      "key_takeaways": [
+        "Justice Mohsin Akhtar Kayani submitted his resignation on 28 October 2026.",
+        "He was serving at the Lahore High Court.",
+        "The resignation letter expressed concerns about judicial independence; these remain his assessment."
+      ],
+      "question_angles": [
+        "Which high court was Justice Kayani serving in when he submitted his resignation?"
+      ],
+      "topics": [
+        "Judicial independence",
+        "26th Constitutional Amendment",
+        "27th Constitutional Amendment"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Lahore High Court",
+        "Islamabad High Court"
+      ],
+      "people": [
+        "Justice Mohsin Akhtar Kayani"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "'Conscience does not permit': LHC's Justice Kayani resigns, cites 'executive's growing control' over judiciary",
+          "url": "https://www.dawn.com/news/2040428/conscience-does-not-permit-lhcs-justice-kayani-resigns-cites-executives-growing-control-over-judiciary"
+        }
+      ],
+      "quick_gk": [
+        "Justice Mohsin Akhtar Kayani submitted his resignation on 28 October 2026."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-ai-alibaba",
+      "category": "Pakistan — Digital Economy and Artificial Intelligence",
+      "headline": "Prime minister reviews AI and digitalisation cooperation with Alibaba",
+      "summary": "At an Islamabad meeting on 28 October, Prime Minister Shehbaz Sharif directed agencies to accelerate AI applications in agriculture, public services, cancer detection and trade under cooperation with Alibaba.",
+      "what_happened": "The Prime Minister's Office said a meeting chaired by Shehbaz Sharif on 28 October reviewed collaboration with Alibaba Group. Directions included an AI-assisted cancer early-detection pilot, a proposed 15-day AI training programme for IT graduates through Ignite, petroleum supply-chain analytics and digital tools for agricultural exports. These were plans and directions, not completed nationwide rollouts.",
+      "background": "Digital public services and export facilitation depend on reliable data systems, privacy safeguards, infrastructure and human capacity.",
+      "why_it_matters": "AI implementation in public administration and trade could affect competitiveness, regulatory oversight and health-service delivery, subject to implementation and independent evaluation.",
+      "pakistan_perspective": "The government's announced targets should be assessed against actual deployment, procurement transparency and measurable outcomes.",
+      "key_takeaways": [
+        "The prime minister reviewed cooperation with Alibaba Group on 28 October.",
+        "A 15-day AI training programme was directed through Ignite.",
+        "An AI-assisted cancer detection project was discussed, not declared fully deployed."
+      ],
+      "question_angles": [
+        "Which company is partnering with Pakistan on the reviewed AI initiatives?"
+      ],
+      "topics": [
+        "Artificial intelligence",
+        "Digital government",
+        "Trade facilitation"
+      ],
+      "countries": [
+        "Pakistan",
+        "China"
+      ],
+      "organisations": [
+        "Alibaba Group",
+        "Ignite"
+      ],
+      "institutions": [
+        "Prime Minister's Office",
+        "Oil and Gas Regulatory Authority"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Secret to country's development lies in AI and digitisation, PM Shehbaz stresses",
+          "url": "https://www.dawn.com/news/2040459/secret-to-countrys-development-lies-in-ai-and-digitisation-pm-shehbaz-stresses"
+        }
+      ],
+      "quick_gk": [
+        "The prime minister reviewed cooperation with Alibaba Group on 28 October."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-construction-reform",
+      "category": "Pakistan — Economic Governance and Regulation",
+      "headline": "Government considers construction regulator and three-year defect-liability rule",
+      "summary": "A 28 October policy meeting discussed a proposed construction-sector authority framework and a defect-liability period of at least three years for major public projects.",
+      "what_happened": "Economic Affairs Minister Ahad Cheema chaired consultations on the proposed Construction Industry Development Authority Bill. Officials debated a single authority versus separate regulatory and promotional bodies. The Public Procurement Regulatory Authority was directed to begin work on a defect-liability period of at least three years for major projects; application thresholds remain under discussion.",
+      "background": "Construction procurement and defect-liability arrangements can improve project quality but require transparent dispute resolution and enforceable standards.",
+      "why_it_matters": "The proposal affects public infrastructure governance, contractors' financial exposure and safeguards against construction defects.",
+      "pakistan_perspective": "The measures remain proposals and consultations, not an enacted three-year liability requirement for every project.",
+      "key_takeaways": [
+        "A three-year or longer defect-liability period was discussed for major projects.",
+        "A proposed Construction Industry Development Authority Bill remains under consultation."
+      ],
+      "question_angles": [
+        "What minimum defect-liability period was proposed for major public projects?"
+      ],
+      "topics": [
+        "Public procurement",
+        "Infrastructure governance",
+        "Construction regulation"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Public Procurement Regulatory Authority",
+        "Ministry of Economic Affairs"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Govt considering creation of 2 regulatory authorities for construction industry, 3-year liability period for projects",
+          "url": "https://www.dawn.com/news/2040454/govt-considering-creation-of-2-regulatory-authorities-for-construction-industry-3-year-liability-period-for-projects"
+        }
+      ],
+      "quick_gk": [
+        "A three-year or longer defect-liability period was discussed for major projects."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-wheat-import",
+      "category": "Pakistan — Food Security and Trade",
+      "headline": "Karachi Port receives 51,000-tonne wheat shipment amid supply monitoring",
+      "summary": "Karachi Port Trust reported the arrival of a vessel carrying 51,000 metric tonnes of wheat on 28 October, while officials reviewed national wheat supply and import plans.",
+      "what_happened": "Karachi Port Trust said the MV GOKOVA M arrived at Karachi Port on 28 October carrying a declared manifest of 51,000 metric tonnes of wheat. Separately, Deputy Prime Minister Ishaq Dar chaired a steering-committee meeting on grain availability and import plans. The government said it was monitoring wheat and flour prices and aiming to maintain adequate stocks.",
+      "background": "Strategic grain reserves, imports and domestic production affect staple-food availability, inflation and agricultural incentives.",
+      "why_it_matters": "The shipment illustrates short-term food-security measures and the importance of transparent stock and procurement information.",
+      "pakistan_perspective": "A single shipment does not by itself establish national wheat sufficiency or a future price trend.",
+      "key_takeaways": [
+        "A 51,000-metric-tonne wheat shipment arrived at Karachi Port on 28 October.",
+        "The vessel was MV GOKOVA M.",
+        "Officials reviewed wheat stocks and import plans."
+      ],
+      "question_angles": [
+        "How many metric tonnes of wheat were reported aboard MV GOKOVA M?"
+      ],
+      "topics": [
+        "Wheat imports",
+        "Food security",
+        "Trade logistics"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Karachi Port Trust",
+        "Steering Committee on Wheat"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Consignment of imported wheat arrives at Karachi port",
+          "url": "https://www.dawn.com/news/2040463/consignment-of-imported-wheat-arrives-at-karachi-port"
+        }
+      ],
+      "quick_gk": [
+        "A 51,000-metric-tonne wheat shipment arrived at Karachi Port on 28 October."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-oil-refinery-risk",
+      "category": "World — Energy Markets and Gulf Security",
+      "headline": "Oil rises as Saudi refinery strike claim heightens supply fears",
+      "summary": "Reuters reported Brent near $115 per barrel on 28 October as traders reacted to a Houthi claim of a strike on a major Saudi refinery; Saudi authorities had not immediately confirmed that specific strike.",
+      "what_happened": "At 13:13 GMT on 28 October, Reuters reported Brent crude futures at about $115.02 a barrel, up around 1%, and WTI at $101.61. Yemen's Houthis had claimed to hit a Saudi refinery with capacity of 550,000 barrels per day. Saudi authorities had not immediately confirmed the specific claim. Market participants cited wider conflict and shipping risks as sources of the price premium.",
+      "background": "Saudi crude production and refining are critical to global energy markets. Regional military incidents can influence prices before the extent of physical damage is established.",
+      "why_it_matters": "Oil price volatility affects Pakistan's import bill, inflation and external financing requirements.",
+      "pakistan_perspective": "Pakistan is exposed to higher import costs and petroleum-price pass-through; reported market prices are time-specific, not closing prices.",
+      "key_takeaways": [
+        "Reuters reported Brent near $115.02 per barrel at 13:13 GMT on 28 October.",
+        "The Houthi refinery-strike claim was not immediately confirmed by Saudi authorities.",
+        "The claimed refinery capacity was 550,000 barrels per day."
+      ],
+      "question_angles": [
+        "What refinery capacity was associated with the unconfirmed Houthi strike claim?"
+      ],
+      "topics": [
+        "Oil prices",
+        "Gulf security",
+        "Energy imports"
+      ],
+      "countries": [
+        "Saudi Arabia",
+        "Yemen",
+        "Pakistan"
+      ],
+      "organisations": [
+        "OPEC+"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Oil up 1% as Saudi Arabian refinery attack reignites supply concerns",
+          "url": "https://www.reuters.com/world/asia-pacific/oil-prices-rise-after-attack-saudi-arabian-refinery-reignites-supply-concerns-2026-10-28/"
+        }
+      ],
+      "quick_gk": [
+        "Reuters reported Brent near $115.02 per barrel at 13:13 GMT on 28 October."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-israel-election-count",
+      "category": "World — Elections and Middle East Politics",
+      "headline": "Israel's election count points to coalition deadlock",
+      "summary": "With around 86–88% of votes counted on 28 October, projections gave Netanyahu's bloc 53 seats, the main opposition bloc 48 and Arab-led parties 19, leaving no established 61-seat majority.",
+      "what_happened": "After the 27 October election, counting continued on 28 October. Reuters reported projections of 53 seats for Benjamin Netanyahu's bloc, 48 for Gadi Eisenkot's opposition grouping and 19 for Arab-led parties, out of 120 Knesset seats. Associated Press reported about 88% counted and said final results could come on 29 October. The projections were not final certified results.",
+      "background": "Israel's proportional parliamentary system often requires coalition-building to secure at least 61 seats in the 120-member Knesset.",
+      "why_it_matters": "A coalition requires support of at least 61 members in the 120-seat Knesset. The vote highlights the role of Arab-led parties and the possibility of extended coalition negotiations or a caretaker administration.",
+      "pakistan_perspective": "Pakistan's Middle East diplomacy and positions on Palestinian rights make developments in Israel's coalition formation relevant.",
+      "key_takeaways": [
+        "Projected blocs on 28 October: 53, 48 and 19 seats respectively.",
+        "A Knesset majority requires 61 of 120 seats.",
+        "The count remained preliminary on 28 October."
+      ],
+      "question_angles": [
+        "How many Knesset seats are needed for a majority?"
+      ],
+      "topics": [
+        "Parliamentary elections",
+        "Coalition government",
+        "Middle East"
+      ],
+      "countries": [
+        "Israel",
+        "Palestine"
+      ],
+      "people": [
+        "Benjamin Netanyahu",
+        "Gadi Eisenkot"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Netanyahu set to remain caretaker after inconclusive Israeli election",
+          "url": "https://www.reuters.com/world/middle-east/netanyahu-eisenkot-stake-rival-claims-lead-israel-after-deadlocked-vote-2026-10-28/"
+        },
+        {
+          "publisher": "Associated Press",
+          "title": "Netanyahu and top rival face postelection choices that could redefine Israeli politics",
+          "url": "https://apnews.com/article/d4680e90210c9a8611853fda9d0deb61"
+        }
+      ],
+      "quick_gk": [
+        "Israel's Knesset has 120 seats; a majority requires 61."
+      ],
+      "what_to_watch": [
+        "Final certification of votes including absentee ballots.",
+        "Whether any grouping can negotiate a 61-seat majority."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-satellite-intelligence",
+      "category": "World — Security Technology and Geopolitics",
+      "headline": "AP investigation examines alleged Russian satellite support for Gulf attacks",
+      "summary": "An Associated Press investigation published on 28 October described satellite reconnaissance patterns around 40 strikes in the Gulf; the analysis did not independently establish the transfer of intelligence to armed groups.",
+      "what_happened": "AP reported that Geneva-based AURORAH Geosignal Intelligence analysed 40 attacks between July and October 2026 and found Russian reconnaissance satellites repeatedly positioned near targets before and after strikes. Officials alleged intelligence support to Iranian-aligned groups, but the firm had not intercepted actual intelligence transmissions. Russia had no immediate comment on the specific allegations.",
+      "background": "Satellite imagery and geospatial intelligence are increasingly relevant to conflict, infrastructure protection and attribution of attacks.",
+      "why_it_matters": "The findings raise questions about proxy warfare, intelligence sharing, commercial satellite data and evidence standards in armed conflicts.",
+      "pakistan_perspective": "The allegations concern Saudi energy infrastructure and wider Gulf stability, with indirect implications for Pakistan's energy security and regional relationships.",
+      "key_takeaways": [
+        "AURORAH analysed 40 reported attacks.",
+        "Satellite-position correlations do not by themselves prove intelligence transfers.",
+        "AP reported allegations, not a judicial finding of responsibility."
+      ],
+      "question_angles": [
+        "How many attacks were included in the satellite-pattern analysis reported by AP?"
+      ],
+      "topics": [
+        "Satellite intelligence",
+        "Proxy conflict",
+        "Geospatial surveillance"
+      ],
+      "countries": [
+        "Russia",
+        "Saudi Arabia",
+        "Iran",
+        "Yemen"
+      ],
+      "organisations": [
+        "AURORAH Geosignal Intelligence"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Russian satellites help Iran’s allies strike Saudi Arabia, data and officials say",
+          "url": "https://apnews.com/article/russia-iran-satellite-intelligence-houthis-iraqi-militias-0989403fb38ccd9d7c9ad11a16e28d24"
+        }
+      ],
+      "quick_gk": [
+        "AURORAH analysed 40 reported attacks."
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-cuba-unga-embargo",
+      "category": "World — United Nations and International Law",
+      "headline": "UN General Assembly calls for end to US embargo on Cuba in 130–17 vote",
+      "summary": "On 28 October, the UN General Assembly adopted its annual non-binding call to end the US embargo on Cuba by 130 votes to 17, with 25 abstentions; support was lower than in 2025.",
+      "what_happened": "The General Assembly adopted the Cuba embargo resolution on 28 October 2026 with 130 countries in favour, 17 against and 25 abstaining. The comparable 2025 tally was 165 in favour, seven against and 12 abstaining. Germany and Italy were among countries that abstained in 2026. The General Assembly's resolution is not binding on the United States.",
+      "background": "The General Assembly has repeatedly called for the embargo to end since 1992, except for the pandemic-related interruption in 2020. Ending the US statutory embargo ultimately requires action by the US Congress.",
+      "why_it_matters": "The shift in voting reveals changing diplomatic positions while highlighting the difference between General Assembly recommendations and enforceable domestic sanctions policy.",
+      "pakistan_perspective": "The case is useful for understanding the UN General Assembly's powers and the distinction between political resolutions and binding legal instruments.",
+      "key_takeaways": [
+        "2026 vote: 130 for, 17 against, 25 abstentions.",
+        "2025 vote: 165 for, seven against, 12 abstentions.",
+        "The resolution is non-binding and does not itself repeal US sanctions."
+      ],
+      "question_angles": [
+        "Compare the 2025 and 2026 UN General Assembly votes on the Cuba embargo.",
+        "Why does a General Assembly recommendation not itself repeal US sanctions?"
+      ],
+      "topics": [
+        "United Nations General Assembly",
+        "Sanctions",
+        "International law"
+      ],
+      "countries": [
+        "Cuba",
+        "United States"
+      ],
+      "institutions": [
+        "United Nations General Assembly"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "US sways more countries to oppose UN resolution condemning its Cuba embargo",
+          "url": "https://www.reuters.com/world/americas/us-gets-more-countries-oppose-un-resolution-condemning-its-cuba-embargo-2026-10-28/"
+        },
+        {
+          "publisher": "Associated Press",
+          "title": "UN condemns US economic embargo of Cuba though more nations sit out after Trump administration push",
+          "url": "https://apnews.com/article/52ab17ec75d26cd9d1893915ce18f414"
+        }
+      ],
+      "quick_gk": [
+        "The Cuba embargo resolution is considered by the UN General Assembly."
+      ],
+      "global_implications": "The vote reflects competing assessments of unilateral sanctions, sovereignty, humanitarian effects and US-Cuba relations.",
+      "statistics": [
+        {
+          "label": "Votes in favour of Cuba embargo resolution",
+          "value": "130",
+          "source": "Reuters",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "Votes against Cuba embargo resolution",
+          "value": "17",
+          "source": "Reuters",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "Abstentions on Cuba embargo resolution",
+          "value": "25",
+          "source": "Reuters",
+          "date": "2026-10-28"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-taiwan-overflight",
+      "category": "Pakistan — Foreign Relations and Civil Aviation",
+      "headline": "Pakistan grants overflight permission to two Taiwanese airlines",
+      "summary": "Civil Aviation Authority documents dated 28 October authorised China Airlines and EVA Air flights through Pakistan's airspace until 27 March 2027, following reports of a restriction.",
+      "what_happened": "Pakistan's Civil Aviation Authority issued documents approving passenger and cargo overflights by Taiwan-based China Airlines and EVA Air from 28 October 2026 to 27 March 2027. The documents followed media reports of an earlier restriction linked to Pakistan's One-China policy. They did not explain whether the approval was a reversal.",
+      "background": "Pakistan recognises Beijing and follows a One-China policy. Overflight rights concern civil aviation and should not be confused with diplomatic recognition.",
+      "why_it_matters": "The episode illustrates the intersection of aviation regulation, bilateral ties with China and the commercial consequences of airspace decisions.",
+      "pakistan_perspective": "The approval demonstrates why official aviation documents, rather than preliminary reports alone, are essential when assessing a changing regulatory decision.",
+      "regional_implications": "Asia-Europe air routes and air carriers can be affected by airspace access restrictions.",
+      "key_takeaways": [
+        "China Airlines and EVA Air were approved to use Pakistani airspace.",
+        "The authorisations run from 28 October 2026 through 27 March 2027.",
+        "The approval documents do not establish why a reported earlier restriction was imposed or lifted."
+      ],
+      "question_angles": [
+        "Which two Taiwanese carriers received Pakistani overflight permission on 28 October 2026?"
+      ],
+      "topics": [
+        "Civil aviation",
+        "One-China policy",
+        "Airspace rights",
+        "Pakistan-China relations"
+      ],
+      "countries": [
+        "Pakistan",
+        "China",
+        "Taiwan"
+      ],
+      "institutions": [
+        "Pakistan Civil Aviation Authority"
+      ],
+      "organisations": [
+        "China Airlines",
+        "EVA Air"
+      ],
+      "people": [
+        "Khawaja Muhammad Asif"
+      ],
+      "quick_gk": [
+        "Pakistan approved overflights by China Airlines and EVA Air from 28 October 2026 through 27 March 2027."
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Pakistan approves flights by Taiwanese airlines after reported restrictions",
+          "url": "https://apnews.com/article/7bb2640abcf979880afe06f842522f46"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Pakistan allows Taiwanese airlines to use airspace till March 2027",
+          "url": "https://www.dawn.com/news/2040438/pakistan-bars-taiwanese-airlines-from-its-airspace-in-line-with-one-china-policy-report"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-pak-kp-constitutional-debate",
+      "category": "Pakistan — Constitutional Affairs",
+      "headline": "National Assembly debate renews scrutiny of emergency and governor's rule in KP",
+      "summary": "On 28 October, JUI-F leader Maulana Fazlur Rehman challenged the constitutional use of emergency and governor's rule in Khyber Pakhtunkhwa; a federal minister defended the measures.",
+      "what_happened": "During National Assembly proceedings on 28 October, Maulana Fazlur Rehman accused the federal government of misusing the Constitution by imposing emergency and governor's rule in KP. Parliamentary Affairs Minister Dr Tariq Fazal Chaudhary defended the measures and described their duration and territorial application. The exchange was a parliamentary disagreement, not a judicial ruling.",
+      "background": "The federal government announced emergency and governor's rule in KP on 11 October under Articles 232 and 234. A joint parliamentary sitting endorsed the proclamations on 15 October. Their legality and political consequences remained contested.",
+      "why_it_matters": "The dispute raises questions about federalism, constitutional safeguards, provincial autonomy and parliamentary oversight of emergency powers.",
+      "pakistan_perspective": "It is essential to distinguish a political allegation of constitutional misuse from an authoritative judicial finding.",
+      "key_takeaways": [
+        "The 28 October debate concerned emergency and governor's rule in KP.",
+        "Articles 232 and 234 provide the relevant constitutional frameworks.",
+        "The parliamentary exchange did not itself invalidate the proclamations."
+      ],
+      "question_angles": [
+        "Differentiate Article 232 emergency powers from Article 234 constitutional machinery provisions.",
+        "What safeguards govern federal intervention in provincial affairs?"
+      ],
+      "topics": [
+        "Constitution of Pakistan",
+        "Federalism",
+        "Emergency powers",
+        "Provincial autonomy"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "National Assembly of Pakistan"
+      ],
+      "people": [
+        "Maulana Fazlur Rehman",
+        "Tariq Fazal Chaudhary"
+      ],
+      "quick_gk": [
+        "Articles 232 and 234 of Pakistan's Constitution were cited in the October 2026 emergency and governor's rule measures in KP."
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Fazl accuses govt of 'misusing' Constitution when imposing emergency, governor's rule in KP",
+          "url": "https://www.dawn.com/news/2040486"
+        },
+        {
+          "publisher": "Radio Pakistan",
+          "title": "'President promulgates emergency, governor’s rule in KP'",
+          "url": "https://radio.gov.pk/11-10-2026/president-promulgates-emergency-governors-rule-in-kp"
+        },
+        {
+          "publisher": "Business Recorder",
+          "title": "Joint session ratifies Emergency, Governor’s rule in KP",
+          "url": "https://www.brecorder.com/news/40444485"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-lancet-climate-health",
+      "category": "World — Climate and Public Health",
+      "headline": "WHO highlights 2026 Lancet Countdown findings on climate-related health harms",
+      "summary": "On 28 October, WHO highlighted a Lancet Countdown assessment tracking 54 climate-health indicators, reporting a nearly 36% rise in average annual heat-related deaths after the Paris Agreement compared with the preceding decade.",
+      "what_happened": "WHO's 28 October update on the 2026 Lancet Countdown described accelerating health risks from heat, drought and hydrological extremes. It reported that heat was linked to an estimated 710,000 deaths worldwide in 2023, with more than 70% of that burden attributed to human-caused climate change. The study tracks 54 indicators.",
+      "background": "The Lancet Countdown is a research collaboration led by University College London, developed in strategic collaboration with WHO. Attribution-based estimates are not individual death-certificate counts.",
+      "why_it_matters": "Climate impacts affect health systems, labour productivity, food security and emergency preparedness, making adaptation and emissions reduction important public-health policies.",
+      "pakistan_perspective": "Pakistan's heatwaves, flood exposure and disease risks underscore the value of heat-health action plans and early warning systems.",
+      "global_implications": "The report strengthens the evidence base for integrating health into climate policy ahead of COP31.",
+      "key_takeaways": [
+        "The 2026 Lancet Countdown tracks 54 climate-health indicators.",
+        "WHO reported an estimated 710,000 heat-related deaths globally in 2023.",
+        "The WHO summary attributed over 70% of that 2023 heat-related burden to human-caused climate change."
+      ],
+      "question_angles": [
+        "Which report tracks 54 climate-and-health indicators in 2026?",
+        "Why is climate adaptation a public-health intervention?"
+      ],
+      "topics": [
+        "Climate change",
+        "Public health",
+        "Heat mortality",
+        "COP31"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "World Health Organization",
+        "University College London"
+      ],
+      "reports": [
+        "2026 Lancet Countdown on Health and Climate Change"
+      ],
+      "statistics": [
+        {
+          "label": "Climate and health indicators",
+          "value": "54",
+          "source": "World Health Organization",
+          "date": "2026-10-28"
+        },
+        {
+          "label": "Estimated heat-related deaths in 2023",
+          "value": "710,000 worldwide",
+          "source": "World Health Organization",
+          "year": "2023"
+        }
+      ],
+      "quick_gk": [
+        "WHO's 28 October 2026 Lancet Countdown update described 54 indicators linking climate change and health."
+      ],
+      "sources": [
+        {
+          "publisher": "World Health Organization",
+          "title": "Climate change is a growing health emergency, Lancet Countdown warns",
+          "url": "https://www.who.int/news/item/28-10-2026-climate-change-is-a-growing-health-emergency--lancet-countdown-warns"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-who-tb-injectables",
+      "category": "World — Global Health and Medical Innovation",
+      "headline": "WHO outlines targets for future long-acting injectable TB regimens",
+      "summary": "On 28 October, WHO announced target regimen profiles for long-acting tuberculosis medicines, including a single-injection preventive target and a treatment target of no more than four months.",
+      "what_happened": "WHO released an update explaining its target regimen profiles for long-acting injectable tuberculosis prevention and treatment. The preventive target is a complete course in one injection at one encounter; the disease-treatment target is no longer than four months and requires three or fewer dosing encounters. These are development goals, not an announcement of approved replacement medicines.",
+      "background": "Tuberculosis treatment commonly involves lengthy oral regimens, and researchers are exploring injections that could reduce treatment burden while preserving efficacy, safety and patient choice.",
+      "why_it_matters": "The profiles can guide developers and health systems toward practical, equitable and easier-to-complete treatment regimens.",
+      "pakistan_perspective": "Pakistan's TB programmes could benefit from future validated treatment innovations, but any adoption requires clinical evidence, regulatory review and affordability.",
+      "key_takeaways": [
+        "The WHO preventive profile targets one injection in one encounter.",
+        "The TB disease-treatment profile targets no more than four months.",
+        "The WHO profiles guide research; they are not approvals of a new treatment."
+      ],
+      "question_angles": [
+        "What is the maximum duration targeted for a long-acting injectable TB disease regimen in WHO's 2026 profiles?"
+      ],
+      "topics": [
+        "Tuberculosis",
+        "WHO guidance",
+        "Medical research",
+        "Treatment adherence"
+      ],
+      "institutions": [
+        "World Health Organization"
+      ],
+      "reports": [
+        "Target regimen profiles for long-acting injectables for tuberculosis prevention and treatment"
+      ],
+      "quick_gk": [
+        "WHO's 2026 target profile for long-acting injectable TB disease treatment specifies no more than four months and three or fewer dosing encounters."
+      ],
+      "sources": [
+        {
+          "publisher": "World Health Organization",
+          "title": "WHO releases target regimen profiles for long-acting injectables for TB",
+          "url": "https://www.who.int/japan/news/detail-global/28-10-2026-who-releases-target-regimen-profiles-for-long-acting-injectables-for-tb"
+        },
+        {
+          "publisher": "World Health Organization",
+          "title": "Target regimen profiles for long-acting injectables for tuberculosis prevention and treatment",
+          "url": "https://www.who.int/publications/i/item/9789240125506"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-spain-rail-safety",
+      "category": "World — Infrastructure and Public Safety",
+      "headline": "Spain investigates deadly high-speed rail collision near Toledo",
+      "summary": "Two high-speed trains collided near Urda in Toledo province on 28 October, killing at least 68 people according to Reuters' updated reporting; authorities began investigating signalling and traffic-control decisions.",
+      "what_happened": "A Renfe high-speed train struck a stationary Iryo service near Urda on 28 October. Reuters reported at least 68 deaths and 80 injuries in an updated account. Officials said a signalling or computer communications failure had stopped traffic before a decision authorised the Renfe train to proceed. The exact causal sequence remained under investigation.",
+      "background": "Spain has an extensive high-speed railway network. An earlier fatal rail collision in January 2026 had already intensified discussion of infrastructure maintenance and safety systems.",
+      "why_it_matters": "The incident highlights the need for independent investigations, robust fail-safe signalling, maintenance and emergency response.",
+      "global_implications": "Rail operators elsewhere may review operating procedures for degraded signalling conditions and control-centre authorisations.",
+      "key_takeaways": [
+        "The 28 October collision occurred near Urda in Toledo province.",
+        "The trains involved were operated by Renfe and Iryo.",
+        "The cause remained under investigation; early explanations should not be treated as final findings."
+      ],
+      "question_angles": [
+        "In which Spanish province did the October 2026 high-speed rail collision occur?"
+      ],
+      "topics": [
+        "Transport safety",
+        "Infrastructure resilience",
+        "Rail regulation"
+      ],
+      "countries": [
+        "Spain"
+      ],
+      "institutions": [
+        "Spanish Ministry of Transport"
+      ],
+      "organisations": [
+        "Renfe",
+        "Iryo"
+      ],
+      "quick_gk": [
+        "Two high-speed trains operated by Renfe and Iryo collided near Urda in Spain's Toledo province on 28 October 2026."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "At least 68 people dead in Spain's second major train crash this year",
+          "url": "https://www.reuters.com/world/two-high-speed-trains-rear-end-spain-rail-operator-says-2026-10-28/"
+        },
+        {
+          "publisher": "Al Jazeera",
+          "title": "Train crash in Spain kills at least 68 people",
+          "url": "https://www.aljazeera.com/news/2026/10/28/injuries-reported-after-two-trains-collide-in-spain"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-ukraine-talks-timing",
+      "category": "World — Conflict and Diplomacy",
+      "headline": "Kremlin aide says timing of further Ukraine talks remains uncertain",
+      "summary": "Comments made on 28 October by Kremlin foreign policy aide Yuri Ushakov cast doubt on near-term trilateral talks, while Ukraine's president suggested an Abu Dhabi meeting in early November.",
+      "what_happened": "Reuters reported that Yuri Ushakov said the timing of renewed Russia-Ukraine-US consultations depended on battlefield and wider Middle East developments. Ukrainian President Volodymyr Zelenskiy said he hoped for a meeting in Abu Dhabi between 6 and 10 November. Moscow had not proposed a firm date, and no new meeting was confirmed.",
+      "background": "US-mediated discussions have sought to find a path toward a settlement of the war in Ukraine. European governments have pressed to participate, while the Kremlin described the existing format as three-sided.",
+      "why_it_matters": "Diplomatic timing, representation and security conditions remain major obstacles to conflict resolution.",
+      "regional_implications": "The Middle East conflict can affect international diplomatic priorities and the feasibility of other peace talks.",
+      "pakistan_perspective": "The case illustrates how simultaneous regional crises complicate mediation and foreign-policy coordination.",
+      "key_takeaways": [
+        "The proposed meeting venue was Abu Dhabi.",
+        "Zelenskiy mentioned 6–10 November as a hoped-for window, not a confirmed schedule.",
+        "The described consultation format involved Russia, Ukraine and the United States."
+      ],
+      "question_angles": [
+        "Which city was mentioned as a possible venue for renewed Ukraine talks in November 2026?"
+      ],
+      "topics": [
+        "Russia-Ukraine war",
+        "Peace diplomacy",
+        "Middle East security"
+      ],
+      "countries": [
+        "Russia",
+        "Ukraine",
+        "United States",
+        "United Arab Emirates"
+      ],
+      "people": [
+        "Yuri Ushakov",
+        "Volodymyr Zelenskiy"
+      ],
+      "quick_gk": [
+        "On 28 October 2026, Ukraine's president suggested Abu Dhabi for possible renewed talks with Russia and the US in early November; no meeting date was confirmed."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Next round of Ukraine talks depends on Middle East, other factors, Kremlin aide says",
+          "url": "https://www.reuters.com/world/next-round-ukraine-talks-depends-middle-east-other-factors-kremlin-aide-says-2026-10-28/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-28-world-wb-commodity-outlook",
+      "category": "World — Economy and Commodity Markets",
+      "headline": "World Bank forecasts a 23% increase in global commodity prices in 2026",
+      "summary": "The World Bank's Commodity Markets Outlook, released on 28 October, forecast a 23% rise in global commodity prices in 2026 amid energy disruption and food-supply risks.",
+      "what_happened": "The World Bank forecast that energy prices would rise 32% in 2026, food prices about 10% in 2026 and 7% in 2027, and Brent crude would average $91 per barrel in 2026. Its baseline projects overall commodity prices falling 7% in 2027. These are projections, not realized outcomes.",
+      "background": "The October 2026 Commodity Markets Outlook covers energy, agriculture, metals and related global commodity markets. Its baseline assumes that supply-related conflicts do not intensify substantially.",
+      "why_it_matters": "Higher oil, fertilizer and food import costs threaten inflation, external balances and food security. Conflict, grain-shipping disruption and El Niño could magnify the risks.",
+      "pakistan_perspective": "Pakistan's dependence on imported energy makes global price forecasts relevant to inflation, the current account and agricultural costs. The figures are global projections, not Pakistan-specific price increases.",
+      "regional_implications": "South Asian energy importers are particularly vulnerable to disruption in Gulf shipping.",
+      "global_implications": "The World Bank warns that commodity markets could remain exposed to shocks even if prices moderate in 2027.",
+      "key_takeaways": [
+        "The World Bank forecast global commodity prices up 23% in 2026 and down 7% in 2027.",
+        "Energy prices are projected to rise 32% in 2026.",
+        "The report was published on 28 October 2026; all figures are forecasts."
+      ],
+      "facts": [
+        "The World Bank's October 2026 Commodity Markets Outlook forecast a 23% rise in global commodity prices during 2026."
+      ],
+      "statistics": [
+        {
+          "label": "Forecast global commodity-price change",
+          "value": "+23%",
+          "source": "World Bank",
+          "year": "2026"
+        },
+        {
+          "label": "Forecast energy-price change",
+          "value": "+32%",
+          "source": "World Bank",
+          "year": "2026"
+        },
+        {
+          "label": "Forecast Brent average",
+          "value": "US$91 per barrel",
+          "source": "World Bank",
+          "year": "2026"
+        }
+      ],
+      "what_to_watch": [
+        "Future World Bank revisions and energy-supply developments."
+      ],
+      "question_angles": [
+        "How would higher energy and food commodity prices affect Pakistan's balance of payments and inflation?"
+      ],
+      "topics": [
+        "Commodity Markets Outlook",
+        "Energy security",
+        "Food security",
+        "Inflation"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "World Bank"
+      ],
+      "reports": [
+        "Commodity Markets Outlook — October 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "World Bank",
+          "title": "Commodity Prices Set to Increase by 23% in 2026 as Global Shocks Mount",
+          "url": "https://www.worldbank.org/en/news/press-release/2026/10/28/commodity-markets-outlook-october-2026"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "World Bank sees commodity prices up 23% in 2026 due to Middle East war, other shocks",
+          "url": "https://www.reuters.com/business/world-bank-sees-commodity-prices-up-23-2026-due-middle-east-war-other-shocks-2026-10-28/"
+        }
+      ]
+    }
+  ]
+}
