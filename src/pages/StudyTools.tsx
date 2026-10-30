@@ -267,7 +267,7 @@ export default function StudyTools() {
             </div>
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            <SimpleList toolKey="daily-targets" title="Daily targets" placeholder="e.g. 1 precis + 20 MCQs + editorial" addLabel="Add daily target" />
+            <SimpleList toolKey="daily-targets" title="Daily targets" placeholder="e.g. 20 MCQs + one editorial" addLabel="Add daily target" />
             <SimpleList toolKey="weekly-targets" title="Weekly targets" placeholder="e.g. Finish PA notes ch. 4–6 + 1 essay" addLabel="Add weekly target" />
           </div>
           </Section>
