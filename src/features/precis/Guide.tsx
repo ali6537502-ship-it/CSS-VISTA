@@ -17,6 +17,7 @@ import {
   safeUnitStep,
 } from './guideModel'
 import type { Overview, Progress, Question } from './api'
+import Composer from './Composer'
 
 function OriginalBlock({ block }: { block: ReturnType<typeof handbookUnits>[number]['blocks'][number]['block'] }) {
   if (block.type === 'table') {
@@ -176,6 +177,7 @@ export default function Guide({
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState('')
   const [changePace, setChangePace] = useState(false)
+  const [showWriting, setShowWriting] = useState(false)
 
   const chosenDays = Number(daysInput)
   const validDays = Number.isInteger(chosenDays) && chosenDays >= minimumDays &&
@@ -197,6 +199,7 @@ export default function Guide({
   const unit = today?.units[step]
   const dayCompleted = today?.units.filter((item) => completed.includes(item.id)).length || 0
   const dayQuestion = today ? questionForDay(data, today) : undefined
+  const writingPassage = data.catalog?.passages.length ? data.catalog.passages[(dayNumber - 1) % data.catalog.passages.length] : undefined
 
   function nav(fields: Record<string, string>) {
     const next = new URLSearchParams(params)
@@ -442,6 +445,20 @@ export default function Guide({
                   </p>
                   {dayQuestion ? <DailyCheck key={`${attempt}:${dayNumber}:${dayQuestion.id}`} question={dayQuestion} attempt={attempt} refresh={refresh} /> :
                     <p className="mt-4 text-sm text-slate-600">No fixed-answer question is available for this section yet. Continue to the writing workspace for independent practice.</p>}
+                  {writingPassage && (
+                    <section className="mt-6 rounded-2xl border border-slate-200 p-4 sm:p-5">
+                      <h5 className="font-semibold">Written Précis practice</h5>
+                      <p className="mt-2 text-sm leading-7 text-slate-600">
+                        Type a précis of an original handbook practice passage, check your writing
+                        and save your revision. Only the six supplied practice passages are used;
+                        a passage may recur in longer courses.
+                      </p>
+                      <p className="mt-3 text-sm font-medium">Practice passage: {writingPassage.label}</p>
+                      <button type="button" className={secondaryStyle} aria-expanded={showWriting} onClick={() => setShowWriting((open) => !open)}>
+                        {showWriting ? 'Close writing practice' : 'Open writing practice and checker'}
+                      </button>
+                    </section>
+                  )}
                   <div className="mt-6 flex flex-wrap gap-3">
                     <button type="button" className={secondaryStyle} onClick={previous}>
                       <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Review today
@@ -454,6 +471,18 @@ export default function Guide({
                 </div>
               )}
             </section>
+            {showWriting && !unit && writingPassage && (
+              <div id="vista-guide-writing" className="space-y-4">
+                <Composer
+                  key={`${attempt}:${writingPassage.id || 'custom'}`}
+                  data={data}
+                  attempt={attempt}
+                  source={writingPassage}
+                  timed={false}
+                  onSaved={(writing, version) => setParams({ writing, version })}
+                />
+              </div>
+            )}
             <div className="flex flex-wrap gap-3">
               <Link to={`/account/precis?view=course&attempt=${encodeURIComponent(attempt)}&chapter=${unit?.chapterId || today.chapters[0]}`} className={secondaryStyle}>
                 Read full handbook chapter
