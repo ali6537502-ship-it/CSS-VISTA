@@ -89,7 +89,7 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
     merged.plan = cloudPlan ?? localPlan
   }
   // Keep the latest graded attempt and revisit decision for each lesson.
-  for (const field of ['completed', 'revisit'] as const) {
+  for (const field of ['completed', 'revisit', 'bookmarks', 'bookmarkRemoved'] as const) {
     const cloudRecords = isRecord(cloud[field]) ? cloud[field] : {}
     const localRecords = isRecord(local[field]) ? local[field] : {}
     const records: Record<string, unknown> = { ...cloudRecords, ...localRecords }
