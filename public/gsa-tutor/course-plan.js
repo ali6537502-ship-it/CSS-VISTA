@@ -29,13 +29,25 @@
       }
       used += load;
     }
-    return result.map((ids, i) => ({
+    const planned = result.map((ids, i) => ({
       index: i,
       date: plusDays(plan.startDate, i),
       ids,
       minutes: ids.reduce((sum, id) => sum + lessonWeight(app.byId.get(id)), 0),
-      done: ids.filter((id) => !!app.getSaved().completed[id]).length
+      done: ids.filter((id) => !!app.getSaved().completed[id]).length,
+      recall: []
     }));
+    planned.forEach((day) => {
+      const intervals = plan.days >= 30 ? [1, 3, 7] : plan.days >= 14 ? [1, 3] : [1];
+      const repeat = new Set();
+      intervals.forEach((offset) => {
+        const earlier = planned[day.index - offset];
+        if (earlier) earlier.ids.slice(-2).forEach((id) => repeat.add(id));
+      });
+      day.recall = [...repeat].slice(0, 4);
+      day.minutes += day.recall.length * 3;
+    });
+    return planned;
   }
   function summary(plan) {
     const days = schedule(plan);
@@ -94,6 +106,10 @@
         const lesson = app.byId.get(id), done = !!app.getSaved().completed[id];
         return '<button class="gsa-day-lesson' + (done ? ' done' : '') + '" data-open="' + safe(id) + '"><span>' + (done ? '✓ ' : '○ ') + safe(lesson.number) + ' · ' + safe(lesson.title) + '</span><small>' + lessonWeight(lesson) + ' min</small></button>';
       }).join('');
+      const recall = day.recall.map((id) => {
+        const lesson = app.byId.get(id);
+        return '<button class="gsa-recall-link" data-open="' + safe(id) + '">↻ Repeat: ' + safe(lesson.title) + '</button>';
+      }).join('');
       return '<details class="gsa-day"' + (day.index === current.index ? ' open' : '') + '><summary><b>Day ' + (day.index + 1) + '</b><span><strong>' + niceDate(day.date) + ' · ' + label + '</strong><small>' + day.done + '/' + day.ids.length + ' complete · ' + day.minutes + ' min estimated · ' + safe(coverage) + '</small></span></summary><div class="gsa-day-lessons">' + lessons + '</div></details>';
     }).join('');
     app.modal('My GSA course',
@@ -142,6 +158,8 @@
     '.gsa-day summary>span{flex:1;min-width:0}.gsa-day summary strong{display:block;font-size:13px;color:#345341}.gsa-day summary small{display:block;font-size:11px;color:#809086;line-height:1.5}',
     '.gsa-day-lessons{padding:0 12px 12px 12px;display:grid;gap:6px}.gsa-day-lesson{width:100%;background:#f8faf6;border:1px solid #edf0ea;border-radius:9px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;cursor:pointer;color:#3c5e44;font-size:12px}',
     '.gsa-day-lesson.done{opacity:.6}.gsa-day-lesson small{white-space:nowrap;color:#728c7b}.gsa-day-lesson:hover{border-color:#9bbca2}',
+    '.gsa-recall-label{margin:7px 0 1px!important;font-size:10px!important;color:#6e8770!important;text-transform:uppercase;letter-spacing:.08em;font-weight:800}',
+    '.gsa-recall-link{width:100%;text-align:left;border:1px solid #d7e8d7;background:#f2f8ee;color:#285f42;border-radius:8px;padding:9px 11px;font-size:12px;cursor:pointer}',
     '.course-shortcut{width:100%;border:1px solid #bcd3bb;color:#246042;border-radius:11px;background:#edf5e8;padding:11px;font-weight:750;cursor:pointer;margin-top:12px}',
     '@media(max-width:520px){.gsa-durations{grid-template-columns:repeat(2,minmax(0,1fr))}.gsa-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}'
   ].join('\n');
