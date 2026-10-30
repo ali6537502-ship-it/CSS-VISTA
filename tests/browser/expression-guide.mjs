@@ -1,0 +1,79 @@
+// Isolated UI verification: authored guide + browser storage, no PHP, account backend or external API.
+import assert from 'node:assert/strict'
+import { spawn } from 'node:child_process'
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { chromium } from 'playwright-core'
+const root = new URL('../../', import.meta.url).pathname
+const html = root + 'expression-guide-test.html', entry = root + 'expression-guide-test.tsx'
+if (existsSync(html) || existsSync(entry)) throw Error('Temporary guide harness already exists; refusing to overwrite it.')
+writeFileSync(html, '<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Isolated English guide test</title></head><body><div id="root"></div><script type="module" src="/expression-guide-test.tsx"></script></body></html>')
+writeFileSync(entry, `import React from 'react';import{createRoot}from'react-dom/client';import{BrowserRouter}from'react-router';import{AccountContext,type AccountContextValue}from'./src/lib/accountContext';import Guide from'./src/features/expression-guide/Guide';import'./src/index.css';const account={user:{id:new URLSearchParams(location.search).get('user')||'guide-test-a'}}as AccountContextValue;createRoot(document.getElementById('root')!).render(<AccountContext value={account}><BrowserRouter><main style={{padding:20,maxWidth:1280,margin:'auto'}}><h1 className="sr-only">English Expression</h1><Guide/></main></BrowserRouter></AccountContext>);`)
+const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', '--host', '127.0.0.1', '--port', '5174', '--strictPort'], { cwd: root, stdio: 'ignore' })
+const base = 'http://127.0.0.1:5174', url = base + '/expression-guide-test.html'
+let browser, diagnosticPage
+try {
+ for (let n = 0; n < 40; n++) { try { if ((await fetch(url)).ok) break } catch {} if (n === 39) throw Error('Guide test server did not start'); await new Promise(resolve => setTimeout(resolve, 250)) }
+ browser = await chromium.launch({ executablePath: process.env.CSSV_BROWSER_EXECUTABLE || (existsSync('/usr/bin/chromium') ? '/usr/bin/chromium' : chromium.executablePath()), headless: true, args: ['--no-sandbox'] })
+ const context = await browser.newContext({ viewport: { width: 390, height: 900 }, acceptDownloads: true })
+ await context.route('**/*', route => new URL(route.request().url()).origin === base ? route.continue() : route.abort())
+ const page = await context.newPage(), errors = [], api = []
+ diagnosticPage = page
+ page.on('pageerror', error => { errors.push(error.message); console.error('Page error:', error.message) })
+ context.on('request', request => { if (new URL(request.url()).pathname.startsWith('/api/') || ['fetch','xhr'].includes(request.resourceType())) api.push(request.url()) })
+ await page.goto(url)
+ await page.getByRole('heading', { name: 'Build a complete sentence', exact: true }).waitFor()
+ assert.equal(await page.getByRole('navigation', { name: 'English guide lessons' }).getByRole('button').count(), 8)
+ await page.getByLabel('The school added an afternoon session.', { exact: true }).check()
+ await page.getByRole('button', { name: 'Check answer', exact: true }).click()
+ await page.getByText('Correct for this question.', { exact: true }).waitFor()
+ await page.getByLabel('Your first draft', { exact: true }).fill('Because the bus leaves early, I study before lunch.')
+ await page.getByLabel('Your revised version and change notes', { exact: true }).fill('Because the bus leaves at noon, I study in the morning. I specified the time.')
+ await page.getByLabel('Each sentence has a main clause.', { exact: true }).check()
+ await page.getByLabel('Every reason clause is attached to a complete claim.', { exact: true }).check()
+ await page.getByRole('button', { name: 'Mark as self-reviewed', exact: true }).click()
+ await page.getByText('Lesson marked as self-reviewed and saved on this device.', { exact: true }).waitFor()
+ await page.getByRole('button', { name: 'Next lesson', exact: true }).click()
+ await page.getByRole('heading', { name: 'Join ideas without run-ons', exact: true }).waitFor()
+ await page.getByRole('button', { name: 'Previous lesson', exact: true }).click()
+ assert.match(await page.getByLabel('Your first draft', { exact: true }).inputValue(), /bus leaves early/)
+ await page.reload()
+ assert.match(await page.getByLabel('Your revised version and change notes', { exact: true }).inputValue(), /specified the time/)
+ const key = 'cssvista:english-guide:v1:guide-test-a'
+ await page.evaluate(key => { const data = JSON.parse(localStorage.getItem(key)); data['complete-thought'].draft = 'A change from another tab.'; localStorage.setItem(key, JSON.stringify(data)) }, key)
+ await page.getByLabel('Your first draft', { exact: true }).fill('My unsaved wording is retained.')
+ await page.getByRole('button', { name: 'Save my work', exact: true }).click()
+ await page.getByRole('alert').filter({ hasText: 'saved in another tab' }).waitFor()
+ assert.equal(await page.getByLabel('Your first draft', { exact: true }).inputValue(), 'My unsaved wording is retained.')
+ assert.equal(await page.evaluate(key => JSON.parse(localStorage.getItem(key))['complete-thought'].draft, key), 'A change from another tab.')
+ const download = page.waitForEvent('download')
+ await page.getByRole('button', { name: 'Download my writing', exact: true }).click()
+ assert.equal((await download).suggestedFilename(), 'my-english-expression-practice.txt')
+ page.on('dialog', dialog => dialog.accept())
+ await page.goto(url + '?user=guide-test-b')
+ assert.equal(await page.getByLabel('Your first draft', { exact: true }).inputValue(), '')
+ await page.evaluate(() => localStorage.setItem('cssvista:english-guide:v1:guide-test-b', '{broken'))
+ await page.reload()
+ await page.getByRole('alert').filter({ hasText: 'could not be read' }).waitFor()
+ await page.getByLabel('Your first draft', { exact: true }).fill('A draft despite corrupt storage.')
+ await page.getByRole('button', { name: 'Save my work', exact: true }).click()
+ assert.equal(await page.evaluate(() => localStorage.getItem('cssvista:english-guide:v1:guide-test-b')), '{broken')
+ await page.goto(url + '?user=guide-test-c')
+ await page.evaluate(() => { Storage.prototype.setItem = () => { throw new DOMException('Storage blocked', 'QuotaExceededError') } })
+ await page.getByLabel('Your first draft', { exact: true }).fill('A draft when storage is blocked.')
+ await page.getByRole('button', { name: 'Save my work', exact: true }).click()
+ await page.getByRole('alert').filter({ hasText: 'Storage blocked' }).waitFor()
+ assert.equal(await page.getByLabel('Your first draft', { exact: true }).inputValue(), 'A draft when storage is blocked.')
+ for (const width of [320, 390, 768, 1440]) { await page.setViewportSize({ width, height: 1000 }); assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Horizontal overflow at ' + width) }
+ await page.addScriptTag({ content: readFileSync(root + 'tests/browser/node_modules/axe-core/axe.min.js', 'utf8') })
+ const violations = await page.evaluate(async () => (await axe.run(document.querySelector('main'))).violations.filter(issue => ['serious', 'critical'].includes(issue.impact)))
+ assert.deepEqual(violations.map(issue => ({ id: issue.id, nodes: issue.nodes.map(node => ({ target: node.target, summary: node.failureSummary })) })), [])
+ assert.deepEqual(errors, [])
+ assert.deepEqual(api, [], 'The guide made a fetch/API request')
+ await page.goto(url + '?user=guide-test-screenshot')
+ await page.getByRole('heading', { name: 'Build a complete sentence', exact: true }).waitFor()
+ mkdirSync(root + 'test-artifacts', { recursive: true })
+ await page.screenshot({ path: root + 'test-artifacts/english-guide-desktop.png', fullPage: true })
+ await page.setViewportSize({ width: 390, height: 1000 })
+ await page.screenshot({ path: root + 'test-artifacts/english-guide-mobile.png', fullPage: true })
+ console.log('PASS: 8 lessons; fixed-answer feedback; draft/revision/save/reload; self-review; account isolation; stale-tab conflict; corrupt/blocked storage; download; 320–1440px; no serious accessibility issues; zero fetch/API calls. Isolated guide UI only, not native sign-in.')
+} catch (error) { if (diagnosticPage) { console.error('Guide page:', diagnosticPage.url()); console.error((await diagnosticPage.locator('body').innerText()).slice(0, 3000)); } throw error } finally { await browser?.close(); server.kill(); rmSync(html, { force: true }); rmSync(entry, { force: true }) }

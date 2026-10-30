@@ -86,6 +86,7 @@
     "test:mpt-release": "node --test tests/mptRelease.test.mjs",
     "test:handwriting-server": "php tests/handwriting/unit.php",
     "test:handwriting-security": "node tests/handwriting/security.mjs",
+    "test:expression-guide": "node --test tests/expressionGuide.test.ts",
     "test:expression-server": "php tests/expression/unit.php",
     "test:expression-security": "node tests/expression/security.mjs",
     "test:grammar": "node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts && node tests/pro/grammar-preservation.mjs && node scripts/grammar/export-catalog.mjs --check",
