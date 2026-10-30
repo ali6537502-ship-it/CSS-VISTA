@@ -118,6 +118,7 @@
       '<div class="gsa-buttons"><button class="gsa-primary" id="gsa-continue">Continue my course</button><button class="gsa-secondary" id="gsa-change">Change duration</button></div>' +
       '<p class="gsa-small">You can catch up, move ahead or repeat a lesson. Adjusting the duration does not delete completed lessons, bookmarks or revision records.</p>' +
       '<div class="gsa-day-grid">' + list + '</div>');
+    $('modal-body').scrollTop = 0;
     $('gsa-change').addEventListener('click', showSetup);
     $('gsa-continue').addEventListener('click', () => {
       const next = stats.days.flatMap((d) => d.ids).find((id) => !app.getSaved().completed[id]) || stats.days[0].ids[0];
