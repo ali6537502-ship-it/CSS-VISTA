@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 264,
+  "count": 268,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1847,6 +1847,34 @@
     {
       "id": "pakistan-current-affairs-20261030-gb-solar-project",
       "text": "On 30 October 2026, Pakistan's prime minister urged completion of a 100 MW solar-power project in Gilgit-Baltistan.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-10-31-cyber-council-proposal",
+      "text": "The proposed National Cybersecurity and Social Media Awareness Council was announced by Information Minister Attaullah Tarar at a PTA event on 31 October 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-10-31-daanish-ai-education",
+      "text": "The 31 October 2026 Daanish Schools review directed AI- and IT-based teaching methodologies for students.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-10-31-green-innovation-fund",
+      "text": "At a 31 October 2026 conference, Pakistan's climate minister cited a $10 million green-innovation start-up fund.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-10-31-kp-emergency-governance",
+      "text": "On 31 October 2026 Shehbaz Sharif defended previously imposed emergency and governor's rule in Khyber Pakhtunkhwa; he did not announce a new imposition that day.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
