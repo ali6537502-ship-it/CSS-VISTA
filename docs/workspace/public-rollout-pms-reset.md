@@ -74,6 +74,7 @@ After integration:
 | Build-integrated route/link audits | 118 routes, four redirects, six genuine invalid-route 404s, 1,025 sitemap URLs and 66,934 internal links passed; frozen MPT export unchanged. |
 | `node tests/pro/paid-access.mjs`, `node tests/pro/release-pause.mjs` | Anonymous/free/entitled/expired and paused access passed; current free courses retained, paid/AI/payment features held. |
 | `node tests/preparation-reset/security.mjs` | Populated native records, identity/membership/writing/MPT retention, owned deletion, concurrent/idempotent retry, stale device and server marker checks passed. |
+| `php tests/resource-access.php` | Real resource/profile gate, private exact-byte downloads, ownership, missing/corrupt file and traversal checks passed after including the real reset helper in its temporary fixture. |
 | `node tests/reading/security.mjs` | Isolated rerun passed with exit zero, including owned reading/bookmarks, revision, expiry/renewal and publication windows. |
 | `node tests/browser/workspace-preview.mjs` | Seven sections at 320/375/390/768/1024/1440, task persistence, public signup entry, direct routes, recovery and late-response/account isolation passed. |
 | `node tests/browser/pms-reset.mjs` | Nine native journeys passed: 40 PDFs, Punjabi/RTL, independent choices/fresh-context sync, editable sessions, revision/coverage, six widths, source failure/retry, interrupted accepted reset response/receipt recovery, course compatibility and full reset/isolation. |
@@ -83,6 +84,8 @@ After integration:
 | `node tests/browser/answer-timer.mjs` | Isolated rerun passed signed overtime, pause/resume, paper timing, corrupt recovery, redistribution and mobile width. One combined run timed out scrolling a tab into view; no timer logic was changed to force a pass. Native signed-in continuity also passed. |
 | `node tests/browser/expression-guide.mjs` | Eight lessons, save/reload, stale-tab/account/reset isolation, corrupt/blocked storage, downloads and narrow layouts passed; no external/API calls. |
 | `node tests/browser/gsaTutor.mjs` | Passed at 375/768/1440 on isolated loopback native static serving; 141 lessons, incremental chapter loading, schedule and recorded recall flow. |
+
+The first CI run also found that the isolated resource-gate fixture copied the authentication function without its newly required reset helper. The fixture now copies the real helper, and the exact resource-access test passes locally; no gate was removed or stubbed to bypass it.
 
 The global signup test caught an actual pre-release defect: registering changed the authenticated owner and remounted the public form before profile saving. Public entry presentation now stays stable through that transition; protected workspace selection remains independently owner-bound. The expanded signup regression deliberately fails the presentation lookup and verifies the fields/photo survive. The dashboard keeps the daily action ahead of the course card and names Daily Briefing distinctly from Daily PDFs without rewriting saved pin IDs. The shared planner reuses `dayWorkload` over all active timetable records for time conflicts and over-allocation warnings. Track cards retain their own counts; the combined estimate explicitly includes completed tasks and uses the availability saved in the current view. This is planned time, not measured study time.
 

@@ -14,6 +14,7 @@ mkdir($dir . '/_resource_files', 0700, true);
 copy($root . '/public/api/student/resources.php', $dir . '/student/resources.php');
 copy($root . '/public/api/student/resources-public-key.php', $dir . '/student/resources-public-key.php');
 copy($root . '/public/api/_resources.php', $dir . '/_resources.php');
+copy($root . '/public/api/_preparation_reset_state.php', $dir . '/_preparation_reset_state.php');
 $profileSource = file_get_contents($root . '/public/api/_profile.php');
 $profileStatus = substr($profileSource, strpos($profileSource, 'function cssv_profile_status('));
 $profileStatus = substr($profileStatus, 0, strpos($profileStatus, 'function cssv_profile_for_user('));
