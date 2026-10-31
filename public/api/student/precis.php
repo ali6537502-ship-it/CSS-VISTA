@@ -5,6 +5,11 @@ cssv_require_method('GET','POST');
 try{
  $pdo=cssv_db();$session=cssv_require_user($pdo);$user=(string)$session['user_id'];if($_SERVER['REQUEST_METHOD']==='POST')cssv_require_csrf($session);cssv_precis_feedback_ensure($pdo);
  if($_SERVER['REQUEST_METHOD']==='POST'){cssv_enforce_rate_limit($pdo,'precis_write',$user,240,3600);cssv_log_security_event($pdo,'precis_write',$user,$user);cssv_json(['ok'=>true,...cssv_precis_mutation($pdo,$user,cssv_request_json(120000))]);}
+ if(isset($_GET['book_examples'])){
+  if($_GET['book_examples']!=='1')throw new InvalidArgumentException('Choose a valid handbook examples view.');
+  $examples=array_values(array_filter(cssv_precis_handbook()['passages'],fn($p)=>in_array($p['id'],['example-1','example-2','example-3','example-4','example-5'],true)));
+  cssv_json(['ok'=>true,'examples'=>$examples]);
+ }
  if(isset($_GET['writing_id']))cssv_json(['ok'=>true,...cssv_precis_detail($pdo,$user,cssv_pro_id($_GET['writing_id']),isset($_GET['version_id'])?cssv_pro_id($_GET['version_id']):null)]);
  if(isset($_GET['attempt_id']))cssv_json(['ok'=>true,...cssv_precis_progress($pdo,$user,cssv_pro_id($_GET['attempt_id']))]);
  $membership=cssv_pro_membership($pdo,$user);
