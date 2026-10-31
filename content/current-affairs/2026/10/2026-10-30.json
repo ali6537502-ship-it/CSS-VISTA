@@ -183,24 +183,26 @@
     {
       "id": "ca-2026-10-30-g20-atlanta-ministerial",
       "category": "World — International Institutions",
-      "headline": "G20 foreign ministers convene in Atlanta amid geopolitical divisions",
-      "summary": "The G20 foreign ministers' meeting opened in Atlanta on 30 October, with wars and critical-mineral supply chains dominating discussion of its agenda.",
-      "what_happened": "The United States, holding the rotating G20 presidency, emphasised trade imbalances, energy and supply chains. Reuters reported that divisions over Ukraine and the Middle East made collective statements uncertain. The meeting was scheduled for 30–31 October; no later agreement is assumed.",
+      "headline": "G20 foreign ministers meet in Atlanta as Russia dispute cancels group photo",
+      "summary": "The G20 foreign ministers opened talks in Atlanta on 30 October amid divisions over Ukraine and the Middle East. Organisers cancelled the traditional group photograph after objections to appearing with Russia's foreign minister.",
+      "what_happened": "The United States, chairing the G20, prioritised trade, energy and supply chains. Reuters reported at 15:44 UTC on 30 October (20:44 PKT) that the State Department removed the customary group photograph after delegations objected to appearing with Russian Foreign Minister Sergei Lavrov. A diplomat said roughly one-third of participants opposed a shared photo. The meeting continued; the photo cancellation was not a G20 resolution or final communiqué.",
       "background": "The G20 is a forum for coordination among major economies, but conflicting national positions complicate consensus.",
-      "why_it_matters": "The agenda connects geopolitics with energy, artificial intelligence and global supply chains.",
+      "why_it_matters": "The dispute shows how geopolitical divisions complicate economic diplomacy and consensus in international institutions.",
       "pakistan_perspective": "Pakistan is not a G20 member but remains exposed to the group's decisions on global trade and financial conditions.",
       "key_takeaways": [
-        "The G20 foreign ministers' meeting opened in Atlanta on 30 October, with wars and critical-mineral supply chains dominating discussion of its agenda.",
-        "The agenda connects geopolitics with energy, artificial intelligence and global supply chains."
+        "G20 foreign ministers convened in Atlanta on 30–31 October 2026.",
+        "The group photo was cancelled after objections to posing alongside Sergei Lavrov.",
+        "No final joint declaration is assumed."
       ],
       "facts": [
-        "The G20 foreign ministers' meeting was scheduled for 30–31 October 2026 in Atlanta, Georgia."
+        "The G20 foreign ministers' meeting was scheduled for 30–31 October 2026 in Atlanta, Georgia.",
+        "The traditional G20 foreign ministers' group photo was cancelled on 30 October 2026 amid objections to Russian Foreign Minister Sergei Lavrov."
       ],
       "what_to_watch": [
-        "Verify subsequent official developments and revisions after the evening cutoff."
+        "Official statements or chair's summary after the 31 October meeting."
       ],
       "question_angles": [
-        "Evaluate the institutional, policy and international implications of this development."
+        "Analyse how geopolitical disputes influence G20 coordination."
       ],
       "topics": [
         "G20",
@@ -208,14 +210,28 @@
         "Global governance"
       ],
       "countries": [
-        "United States"
+        "United States",
+        "Russia",
+        "Germany",
+        "Australia",
+        "Canada"
       ],
       "sources": [
         {
           "publisher": "Reuters",
           "title": "Rifts over wars in Ukraine, Middle East loom over G20 meeting in US",
           "url": "https://www.reuters.com/world/china/rifts-over-wars-ukraine-middle-east-loom-over-g20-meeting-us-2026-10-30/"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "G20 foreign ministers skip photo-op amid objections over Russia",
+          "url": "https://www.reuters.com/world/g20-foreign-ministers-skip-photo-op-amid-objections-over-russia-2026-10-30/",
+          "published_at": "2026-10-30T20:44:00+05:00"
         }
+      ],
+      "people": [
+        "Sergei Lavrov",
+        "Marco Rubio"
       ]
     },
     {
@@ -805,6 +821,121 @@
           "publisher": "Reuters",
           "title": "UAE says oil leak from tanker has been stopped, pollution eases",
           "url": "https://www.reuters.com/world/middle-east/uae-says-oil-leak-tanker-has-been-stopped-pollution-eases-2026-10-30/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-polio-campaign",
+      "category": "Pakistan — Public Health",
+      "headline": "Pakistan announces November polio drive targeting 24 million children in 97 districts",
+      "summary": "On 30 October, Health Minister Mustafa Kamal announced a sub-national polio vaccination round scheduled for 2–8 November 2026 in 97 selected districts, targeting approximately 24 million children under five.",
+      "what_happened": "At an Islamabad launch event, the minister outlined the planned campaign, urged parents to cooperate with vaccinators and stated an ambition to make Pakistan polio-free by June 2027. The vaccination figures are planned targets, not verified completed coverage. The elimination ambition is a policy goal, not a confirmed epidemiological forecast. The campaign had not yet started on 30 October.",
+      "background": "Repeated vaccination rounds and reliable surveillance are central to interrupting wild poliovirus transmission. Sub-national rounds target selected districts rather than the entire country.",
+      "why_it_matters": "The campaign creates measurable public-health objectives concerning vaccination access, delivery capacity, missed children and disease surveillance.",
+      "pakistan_perspective": "Success will depend on safe access for health workers, parental cooperation, routine immunisation and independent follow-up on reported coverage.",
+      "global_implications": "Polio control in Pakistan contributes to the international effort to prevent further spread of wild poliovirus.",
+      "key_takeaways": [
+        "Campaign scheduled for 2–8 November 2026.",
+        "Approximately 24 million under-five children in 97 districts are targeted.",
+        "June 2027 polio-free status is an ambition, not an established result."
+      ],
+      "facts": [
+        "Pakistan's announced 2–8 November 2026 polio campaign targets 97 districts.",
+        "The announced target population is approximately 24 million children under five."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Health minister announced the campaign in Islamabad."
+        },
+        {
+          "date": "2026-11-02 to 2026-11-08",
+          "text": "Scheduled campaign dates; implementation results are not yet known."
+        }
+      ],
+      "what_to_watch": [
+        "Actual vaccinations, missed households and poliovirus surveillance reports."
+      ],
+      "question_angles": [
+        "Differentiate vaccination targets from verified coverage.",
+        "Discuss polio eradication barriers in Pakistan."
+      ],
+      "topics": [
+        "Polio",
+        "Public health",
+        "Vaccination"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Ministry of National Health Services"
+      ],
+      "people": [
+        "Mustafa Kamal"
+      ],
+      "sources": [
+        {
+          "publisher": "Radio Pakistan",
+          "title": "Health Minister pledges to make Pakistan polio-free by June next year",
+          "url": "https://radio.gov.pk/30-10-2026/health-minister-vows-to-make-pakistan-polio-free-by-june-next-year",
+          "published_at": "2026-10-30T17:15:49+05:00"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-gb-solar-project",
+      "category": "Pakistan — Energy and Regional Development",
+      "headline": "Prime minister urges faster completion of Gilgit-Baltistan's 100 MW solar project",
+      "summary": "At an Islamabad development review on 30 October, Prime Minister Shehbaz Sharif called for faster completion of a federally initiated 100-megawatt solar project in Gilgit-Baltistan.",
+      "what_happened": "The prime minister and Gilgit-Baltistan Chief Minister Amjad Hussain reviewed energy, infrastructure and digital-connectivity projects. The prime minister called for timely funding and removal of obstacles to the 100 MW solar scheme and the Naltar Power Project. The instruction did not announce commissioning or actual electricity generation.",
+      "background": "Remote mountainous regions face energy-access and infrastructure constraints. Solar power may complement hydropower, subject to grid integration and operational readiness.",
+      "why_it_matters": "The announcement connects renewable-energy investment with federal-regional coordination and the practical delivery of public projects.",
+      "pakistan_perspective": "Improved power supply could support public services, tourism and commerce in Gilgit-Baltistan. The 100 MW figure is project capacity, not measured output.",
+      "regional_implications": "Potential local reliability benefits depend on construction, commissioning and maintenance.",
+      "key_takeaways": [
+        "Gilgit-Baltistan projects were reviewed on 30 October.",
+        "The solar scheme has a stated capacity of 100 MW.",
+        "Faster completion was directed; commissioning was not announced."
+      ],
+      "facts": [
+        "The solar project discussed in Gilgit-Baltistan on 30 October 2026 has a stated capacity of 100 MW."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Prime minister reviewed Gilgit-Baltistan projects in Islamabad."
+        }
+      ],
+      "what_to_watch": [
+        "Verified completion, grid integration and electricity delivery."
+      ],
+      "question_angles": [
+        "Assess regional energy infrastructure challenges.",
+        "Explain the difference between installed capacity and electricity generation."
+      ],
+      "topics": [
+        "Gilgit-Baltistan",
+        "Solar energy",
+        "Regional development"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Government of Pakistan",
+        "Government of Gilgit-Baltistan"
+      ],
+      "people": [
+        "Shehbaz Sharif",
+        "Amjad Hussain"
+      ],
+      "sources": [
+        {
+          "publisher": "Radio Pakistan",
+          "title": "PM directs acceleration of development projects in GB",
+          "url": "https://radio.gov.pk/30-10-2026/pm-directs-acceleration-of-development-projects-in-gb",
+          "published_at": "2026-10-30T22:20:35+05:00"
         }
       ]
     }
