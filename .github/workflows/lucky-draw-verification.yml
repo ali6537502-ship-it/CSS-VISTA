@@ -41,7 +41,7 @@ jobs:
           php -l public/api/_lucky_draw.php
           php -l public/api/lucky-draw.php
           php -l public/api/admin/lucky-draw.php
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
