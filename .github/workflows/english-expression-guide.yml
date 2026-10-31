@@ -25,7 +25,7 @@ jobs:
       - run: npm ci --prefix tests/browser --ignore-scripts
       - run: node tests/browser/node_modules/playwright-core/cli.js install --with-deps chromium
       - run: node tests/browser/expression-guide.mjs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: english-guide-review
