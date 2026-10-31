@@ -2,7 +2,8 @@
 (() => {
 'use strict';
 const KEY='cssvista:tool:gsa-tutor:v1';
-let storageKey=KEY,binding=null;const embedded=window.parent!==window;
+let storageKey=KEY,binding=null,accountChanged=false;const embedded=window.parent!==window;
+if(!embedded){try{const owner=localStorage.getItem('cssvista:progress-owner')||null,generation=owner?localStorage.getItem('cssvista:sync-generation:v1:'+owner):null;binding={owner,generation};if(owner&&generation)storageKey=`cssvista:reset-data:v1:${encodeURIComponent(owner)}:${generation}:${encodeURIComponent(KEY)}`}catch{/* Saving reports unavailable storage. */}}
 const root=document.getElementById('app');
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const now=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -14,8 +15,8 @@ let saved=embedded?defaults():read(),catalog=null,lessons=[],byId=new Map(),chap
 let ui={view:'course',id:saved.last,stage:'learn',beat:0,selected:'',draft:'',reveal:false,grade:'',chapter:1,qindex:0,phase:0,month:0,setupDays:20,setupDate:now(),search:'',opening:'',showAllDays:false,busy:false,error:''};
 let hasCourse=false;
 function canSave(){
- if(!embedded)return true;
  if(!binding)return false;
+ if((localStorage.getItem('cssvista:progress-owner')||null)!==binding.owner){if(!embedded)accountChanged=true;return false}
  if(!binding.owner)return !localStorage.getItem('cssvista:progress-owner');
  const lease=JSON.parse(localStorage.getItem('cssvista:reset-write:v1:'+binding.owner)||'null');
  return !(lease?.at&&Math.abs(Date.now()-lease.at)<30000)&&localStorage.getItem('cssvista:progress-owner')===binding.owner&&localStorage.getItem('cssvista:sync-generation:v1:'+binding.owner)===binding.generation;
@@ -180,6 +181,7 @@ function fullSource(){
  if(!s)return;const dialog=document.getElementById('reference');dialog.querySelector('h2').textContent=s.number+' · '+s.title;dialog.querySelector('.ref-source').innerHTML=s.html;dialog.showModal();
 }
 function draw(){
+ if(accountChanged){root.innerHTML='<section class="panel" role="alert"><h2>Study account changed</h2><p>Reload this course to open the current account’s records.</p><button type="button" class="btn" data-action="reloadaccount">Reload course</button></section>';return}
  if(!catalog){root.innerHTML='<div class="spinner">Loading your course…</div>';return}
  let content='';
  if(ui.error)content='<p class="notice warn" role="alert">'+safe(ui.error)+'</p>';
@@ -201,7 +203,7 @@ function draw(){
  if(window.parent!==window)window.requestAnimationFrame(()=>window.parent.postMessage({type:'cssvista:gsa:height',height:Math.ceil(document.documentElement.scrollHeight)+24},location.origin));
 }
 root.addEventListener('click',async e=>{
- const t=e.target.closest('button');if(!t||ui.busy)return;
+ const t=e.target.closest('button');if(!t)return;if(accountChanged){if(t.dataset.action==='reloadaccount')location.reload();return}if(ui.busy)return;
  if(t.dataset.view){ui.view=t.dataset.view;ui.error='';draw();scrollTo({top:0,behavior:'instant'});return}
  if(t.dataset.lesson){await openLesson(t.dataset.lesson);return}
  if(t.dataset.chapter){await openChapter(t.dataset.chapter);return}
@@ -251,6 +253,11 @@ root.addEventListener('change',e=>{
 root.addEventListener('input',e=>{
  if(e.target.id==='search'){ui.search=e.target.value;const selectionStart=e.target.selectionStart;draw();let input=document.getElementById('search');if(input){input.focus();input.setSelectionRange(selectionStart,selectionStart)}}
  if(e.target.id==='recall'){ui.draft=e.target.value;const b=root.querySelector('[data-action="reveal"]');if(b)b.disabled=nwords(ui.draft)<8}
+});
+window.addEventListener('storage',e=>{
+ if(embedded||e.key!==null&&e.key!=='cssvista:progress-owner')return;
+ try{if((localStorage.getItem('cssvista:progress-owner')||null)===(binding?.owner||null))return}catch{/* Hide the previous account when ownership cannot be read. */}
+ accountChanged=true;draw();
 });
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==window.parent||e.data?.type!=='cssvista:gsa:hydrate')return;

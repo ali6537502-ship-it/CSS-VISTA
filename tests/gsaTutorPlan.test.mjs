@@ -9,9 +9,9 @@ const catalog=JSON.parse(fs.readFileSync('public/gsa-tutor/content/catalog.json'
 const chapter=id=>JSON.parse(fs.readFileSync('public/gsa-tutor/content/chapter-'+String(id).padStart(2,'0')+'.json','utf8'))
 const KEY='cssvista:tool:gsa-tutor:v1'
 const wait=ms=>new Promise(r=>setTimeout(r,ms))
-async function open(saved){
+async function open(saved,storage={}){
  const requests=[]
- const dom=new JSDOM(html,{url:'https://www.css-vista.com/gsa-tutor/studio.html',runScripts:'outside-only',pretendToBeVisual:true,beforeParse(window){if(saved)window.localStorage.setItem(KEY,JSON.stringify(saved))}})
+ const dom=new JSDOM(html,{url:'https://www.css-vista.com/gsa-tutor/studio.html',runScripts:'outside-only',pretendToBeVisual:true,beforeParse(window){if(saved)window.localStorage.setItem(KEY,JSON.stringify(saved));for(const [key,value]of Object.entries(storage))window.localStorage.setItem(key,typeof value==='string'?value:JSON.stringify(value))}})
  dom.window.scrollTo=()=>{}
  dom.window.fetch=async url=>{
    requests.push(String(url))
@@ -112,6 +112,47 @@ test('another account hydration does not leak previous account study history',as
  assert.equal(p.document.querySelectorAll('.day').length,0)
  assert.ok(p.document.querySelector('.duration'))
  p.dom.window.close()
+})
+test('standalone stale course cannot write into a different account',async()=>{
+ const p=await open({plan:{days:8,startDate:'2026-10-30'},completed:{'c1-s1-1':{at:'2026-10-30'}}},{'cssvista:progress-owner':'fixture-a'})
+ p.click('.day-lesson');await wait(35)
+ const other={plan:null,completed:{},drafts:{}}
+ p.dom.window.localStorage.setItem('cssvista:progress-owner','fixture-b')
+ p.dom.window.localStorage.setItem(KEY,JSON.stringify(other))
+ p.click('[data-action="bookmark"]')
+ assert.deepEqual(JSON.parse(p.dom.window.localStorage.getItem(KEY)),other)
+ assert.match(p.document.getElementById('app').textContent,/Study account changed/)
+ assert.equal(p.document.querySelectorAll('.lesson-card').length,0)
+ p.dom.window.close()
+})
+test('standalone storage ownership change hides the previous course before another action',async()=>{
+ const p=await open({plan:{days:8,startDate:'2026-10-30'},completed:{'c1-s1-1':{at:'2026-10-30'}}},{'cssvista:progress-owner':'fixture-a'})
+ p.dom.window.localStorage.setItem('cssvista:progress-owner','fixture-b')
+ p.dom.window.dispatchEvent(new p.dom.window.StorageEvent('storage',{key:'cssvista:progress-owner',oldValue:'fixture-a',newValue:'fixture-b'}))
+ assert.match(p.document.getElementById('app').textContent,/Study account changed/)
+ assert.equal(p.document.querySelectorAll('.day-lesson').length,0)
+ assert.ok(p.document.querySelector('[data-action="reloadaccount"]'))
+ p.dom.window.close()
+})
+test('standalone uses reset partitions and rejects a stale generation without overwriting legacy data',async()=>{
+ const physical=epoch=>`cssvista:reset-data:v1:fixture-a:${epoch}:${encodeURIComponent(KEY)}`
+ const legacy={plan:{days:5,startDate:'2026-10-30'},drafts:{private:'Legacy work stays retained'}}
+ const p=await open(legacy,{'cssvista:progress-owner':'fixture-a','cssvista:sync-generation:v1:fixture-a':'one',[physical('one')]:{plan:{days:8,startDate:'2026-10-30'},completed:{'c1-s1-1':{at:'2026-10-30'}}}})
+ assert.equal(p.document.querySelectorAll('.day-lesson.done').length,1)
+ p.click('[data-action="editplan"]');p.document.getElementById('custom-days').value='60';p.click('[data-action="saveplan"]')
+ assert.equal(JSON.parse(p.dom.window.localStorage.getItem(physical('one'))).plan.days,60)
+ assert.deepEqual(JSON.parse(p.dom.window.localStorage.getItem(KEY)),legacy)
+ p.dom.window.localStorage.setItem('cssvista:sync-generation:v1:fixture-a','two')
+ p.click('[data-action="editplan"]');p.document.getElementById('custom-days').value='30';p.click('[data-action="saveplan"]')
+ assert.equal(p.dom.window.localStorage.getItem(physical('two')),null)
+ assert.equal(JSON.parse(p.dom.window.localStorage.getItem(physical('one'))).plan.days,60)
+ assert.match(p.document.querySelector('[role="alert"]').textContent,/could not be saved/)
+ const q=await open(legacy,{'cssvista:progress-owner':'fixture-a','cssvista:sync-generation:v1:fixture-a':'two'})
+ assert.ok(q.document.querySelector('.duration'),'Reset course must not recover the retired root')
+ q.click('[data-days="8"]');q.click('[data-action="saveplan"]')
+ assert.equal(JSON.parse(q.dom.window.localStorage.getItem(physical('two'))).plan.days,8)
+ assert.deepEqual(JSON.parse(q.dom.window.localStorage.getItem(KEY)),legacy)
+ p.dom.window.close();q.dom.window.close()
 })
 test('chapter inventories preserve every source question and model answer without invention',()=>{
  let totalLessons=0,totalQuestions=0,totalAnalytical=0;const ids=new Set();const prompts=new Set()

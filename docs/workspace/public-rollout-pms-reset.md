@@ -53,7 +53,7 @@ Identity, password, profile/photo, memberships, payments, security/usage ledgers
 
 The reset endpoint is the only writer of reserved `__cssv_reset_v1` metadata in the existing progress blob. It returns generation/revision separately; normal progress GET payloads retain their old logical shape, and normal PUT cannot remove/forge the marker. Owned preparation mutations serialize with the reset and require the current generation **only after an explicit reset**. Unreset accounts retain legacy compatibility.
 
-After a confirmed reset, existing logical progress keys map to an account/generation-scoped physical device partition. This narrowly necessary adapter prevents old tabs and legacy stashes from resurrecting removed records. No schema migration or second task database is introduced. Full resets advance timer/draft/course recovery epochs; partial schedule resets preserve them. Workspace display preferences and shortcuts remain account preferences. The shared GSA page remounts its whole study view when the authenticated owner changes, including on its public URL. The browser test holds the next account’s cloud request and verifies that the previous student’s course summary is absent, then restores the first account’s actual records. Whole-view unmounting is reserved for the intentional full reset. Failure to update a device produces an account error and retains its old copy for recovery.
+After a confirmed reset, existing logical progress keys map to an account/generation-scoped physical device partition. This narrowly necessary adapter prevents old tabs and legacy stashes from resurrecting removed records. No schema migration or second task database is introduced. Full resets advance timer/draft/course recovery epochs; partial schedule resets preserve them. Workspace display preferences and shortcuts remain account preferences. The shared GSA page remounts its whole study view when the authenticated owner changes, including on its public URL. The browser test holds the next account’s cloud request and verifies that the previous student’s course summary is absent, then restores the first account’s actual records. The standalone GSA HTML page also captures the current owner and reset generation, reads the matching device partition, rejects stale writes and immediately hides the old course on a cross-tab account change. Its explicit Reload course action opens the current account; a reset-generation change blocks the stale save without discarding unsaved text. Whole-view unmounting is reserved for the intentional full reset. Failure to update a device produces an account error and retains its old copy for recovery.
 
 ## Verification record
 
@@ -65,6 +65,7 @@ After integration:
 
 | Executed command | Outcome |
 |---|---|
+| `npm run test:gsa-tutor` and standalone GSA browser | 13 unit checks passed; browser passed 375/768/1440 px lesson journeys, actual cross-tab ownership redaction, reload recovery and reset-partition persistence. |
 | `npm run test:all` | 369 Node and five Python tests passed; no failures/skips. Includes current free-learning rules. |
 | `npm run test:workspace` | 41 passed after final registry changes. |
 | `npm run test:expression-guide` | Three passed. |
@@ -117,4 +118,4 @@ Review-branch pushes/PRs run validation. Existing production release is attached
 
 A UI rollback must retain the reset endpoint, generation enforcement and device adapters. The existing classic presentation fallback can restore the preceding interface while retaining new records. **Do not revert the entire application to a pre-reset client/server after students have reset:** old clients lack the generation barrier. Never clear storage or restore broad account snapshots as a UI rollback.
 
-Deployment status: not yet deployed by this branch; final release evidence pending.
+All 12 PR workflows passed at `3e280a8e42724270b51e8cf507b2ff9c750d0a79`. The final standalone GSA isolation extension has passed its local unit/browser checks and requires its own current-head CI before rollout. Deployment status: not yet deployed by this branch; final release evidence pending.
