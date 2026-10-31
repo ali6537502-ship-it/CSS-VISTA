@@ -1,0 +1,914 @@
+{
+  "observedAt": "2026-10-31T15:20:21.323Z",
+  "method": "Read-only ordinary and crawler HTTP plus desktop/mobile Chromium; real advertising and third parties blocked.",
+  "pages": [
+    {
+      "path": "/",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 4508,
+      "renderedCharacters": 5932,
+      "initialRenderedSimilarity": 0.7105575326215896,
+      "title": "CSS Vista | Free CSS, PMS & One-Paper Preparation Platform",
+      "h1": [
+        "Everything you need to prepare. One platform. Completely free."
+      ],
+      "canonical": "https://www.css-vista.com/",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 4508,
+      "renderedCharacters": 5932,
+      "initialRenderedSimilarity": 0.7105575326215896,
+      "title": "CSS Vista | Free CSS, PMS & One-Paper Preparation Platform",
+      "h1": [
+        "Everything you need to prepare. One platform. Completely free."
+      ],
+      "canonical": "https://www.css-vista.com/",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/subjects/compulsory/current-affairs",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 2147,
+      "renderedCharacters": 155,
+      "initialRenderedSimilarity": 0,
+      "title": "CSS Current Affairs Compulsory Subject | CSS Vista",
+      "h1": [
+        "CSS Vista Pro is temporarily unavailable"
+      ],
+      "canonical": "https://www.css-vista.com/subjects/compulsory/current-affairs",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/subjects/compulsory/current-affairs",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 2147,
+      "renderedCharacters": 155,
+      "initialRenderedSimilarity": 0,
+      "title": "CSS Current Affairs Compulsory Subject | CSS Vista",
+      "h1": [
+        "CSS Vista Pro is temporarily unavailable"
+      ],
+      "canonical": "https://www.css-vista.com/subjects/compulsory/current-affairs",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/subjects/optional",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 13023,
+      "renderedCharacters": 13023,
+      "initialRenderedSimilarity": 1,
+      "title": "CSS Optional Subjects | CSS Vista",
+      "h1": [
+        "Optional Subjects Directory"
+      ],
+      "canonical": "https://www.css-vista.com/subjects/optional",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/subjects/optional",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 13023,
+      "renderedCharacters": 13023,
+      "initialRenderedSimilarity": 1,
+      "title": "CSS Optional Subjects | CSS Vista",
+      "h1": [
+        "Optional Subjects Directory"
+      ],
+      "canonical": "https://www.css-vista.com/subjects/optional",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/vistagram",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 30410,
+      "renderedCharacters": 30410,
+      "initialRenderedSimilarity": 1,
+      "title": "CSS Vistagram - Concepts, Articles and Explainers | CSS Vista",
+      "h1": [
+        "Read something worth remembering."
+      ],
+      "canonical": "https://www.css-vista.com/vistagram",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/vistagram",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 30410,
+      "renderedCharacters": 30410,
+      "initialRenderedSimilarity": 1,
+      "title": "CSS Vistagram - Concepts, Articles and Explainers | CSS Vista",
+      "h1": [
+        "Read something worth remembering."
+      ],
+      "canonical": "https://www.css-vista.com/vistagram",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/vistagram/pakistan-financial-inclusion-digital-finance",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 4608,
+      "renderedCharacters": 4608,
+      "initialRenderedSimilarity": 1,
+      "title": "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth | CSS Vistagram",
+      "h1": [
+        "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth"
+      ],
+      "canonical": "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/vistagram/pakistan-financial-inclusion-digital-finance",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 4608,
+      "renderedCharacters": 4608,
+      "initialRenderedSimilarity": 1,
+      "title": "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth | CSS Vistagram",
+      "h1": [
+        "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth"
+      ],
+      "canonical": "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/current-affairs-daily",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 144,
+      "renderedCharacters": 3165,
+      "initialRenderedSimilarity": 0,
+      "title": "Current Affairs Daily PDFs | CSS VISTA | CSS Vista",
+      "h1": [
+        "CURRENT AFFAIRS DAILY"
+      ],
+      "canonical": "https://www.css-vista.com/current-affairs-daily",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/current-affairs-daily",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 144,
+      "renderedCharacters": 3165,
+      "initialRenderedSimilarity": 0,
+      "title": "Current Affairs Daily PDFs | CSS VISTA | CSS Vista",
+      "h1": [
+        "CURRENT AFFAIRS DAILY"
+      ],
+      "canonical": "https://www.css-vista.com/current-affairs-daily",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/current-affairs-daily/2026-10-30",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 144,
+      "renderedCharacters": 405,
+      "initialRenderedSimilarity": 0,
+      "title": "Current Affairs Daily Edition | CSS VISTA | CSS Vista",
+      "h1": [
+        "CSS VISTA Current Affairs Daily \u2014 30 October 2026 | Issue No. 11"
+      ],
+      "canonical": "https://www.css-vista.com/current-affairs-daily/2026-10-30",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/current-affairs-daily/2026-10-30",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 144,
+      "renderedCharacters": 405,
+      "initialRenderedSimilarity": 0,
+      "title": "Current Affairs Daily Edition | CSS VISTA | CSS Vista",
+      "h1": [
+        "CSS VISTA Current Affairs Daily \u2014 30 October 2026 | Issue No. 11"
+      ],
+      "canonical": "https://www.css-vista.com/current-affairs-daily/2026-10-30",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/journal",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 6223,
+      "renderedCharacters": 6322,
+      "initialRenderedSimilarity": 0.9761658031088083,
+      "title": "VISTA Journal - Articles, Analysis and Perspectives | CSS Vista",
+      "h1": [
+        "VISTA Journal"
+      ],
+      "canonical": "https://www.css-vista.com/journal",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/journal",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 6223,
+      "renderedCharacters": 6322,
+      "initialRenderedSimilarity": 0.9761658031088083,
+      "title": "VISTA Journal - Articles, Analysis and Perspectives | CSS Vista",
+      "h1": [
+        "VISTA Journal"
+      ],
+      "canonical": "https://www.css-vista.com/journal",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/journal/opinion-ali-hassan",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 8631,
+      "renderedCharacters": 8631,
+      "initialRenderedSimilarity": 1,
+      "title": "When the Pacific Breathes Fire, Pakistan Burns | CSS Vista",
+      "h1": [
+        "When the Pacific Breathes Fire, Pakistan Burns"
+      ],
+      "canonical": "https://www.css-vista.com/journal/opinion-ali-hassan",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/journal/opinion-ali-hassan",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 8631,
+      "renderedCharacters": 0,
+      "initialRenderedSimilarity": 0,
+      "title": "When the Pacific Breathes Fire, Pakistan Burns | CSS Vista",
+      "h1": [],
+      "canonical": "https://www.css-vista.com/journal/opinion-ali-hassan",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/book-summaries",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 45899,
+      "renderedCharacters": 45899,
+      "initialRenderedSimilarity": 1,
+      "title": "100 Book Summaries for CSS Aspirants | CSS Vista",
+      "h1": [
+        "Book Summaries"
+      ],
+      "canonical": "https://www.css-vista.com/book-summaries",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/book-summaries",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 45899,
+      "renderedCharacters": 45899,
+      "initialRenderedSimilarity": 1,
+      "title": "100 Book Summaries for CSS Aspirants | CSS Vista",
+      "h1": [
+        "Book Summaries"
+      ],
+      "canonical": "https://www.css-vista.com/book-summaries",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/book-summaries/why-nations-fail",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 3347,
+      "renderedCharacters": 0,
+      "initialRenderedSimilarity": 0,
+      "title": "Why Nations Fail by Daron Acemoglu and James A. Robinson \u2014 Book Summary | CSS Vista",
+      "h1": [],
+      "canonical": "https://www.css-vista.com/book-summaries/why-nations-fail",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/book-summaries/why-nations-fail",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 3347,
+      "renderedCharacters": 45899,
+      "initialRenderedSimilarity": 0.005697194131890044,
+      "title": "Why Nations Fail by Daron Acemoglu and James A. Robinson - Book Summary | CSS Vista",
+      "h1": [
+        "Book Summaries",
+        "Why Nations Fail"
+      ],
+      "canonical": "https://www.css-vista.com/book-summaries/why-nations-fail",
+      "robots": "index, follow, max-image-preview:large",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/past-papers",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 12364,
+      "renderedCharacters": 12784,
+      "initialRenderedSimilarity": 0.8587064676616916,
+      "title": "CSS, PMS, PPSC & MPT Past Papers | CSS Vista",
+      "h1": [
+        "Past Papers"
+      ],
+      "canonical": "https://www.css-vista.com/past-papers",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/past-papers",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 12364,
+      "renderedCharacters": 12784,
+      "initialRenderedSimilarity": 0.8587064676616916,
+      "title": "CSS, PMS, PPSC & MPT Past Papers | CSS Vista",
+      "h1": [
+        "Past Papers"
+      ],
+      "canonical": "https://www.css-vista.com/past-papers",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/past-papers/ppsc/2024",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 5812,
+      "renderedCharacters": 14813,
+      "initialRenderedSimilarity": 0.03767123287671233,
+      "title": "PPSC 2024 Past Papers - All Subjects | CSS Vista",
+      "h1": [
+        "PPSC 2024 Past Papers"
+      ],
+      "canonical": "https://www.css-vista.com/past-papers/ppsc/2024",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/past-papers/ppsc/2024",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 5812,
+      "renderedCharacters": 14813,
+      "initialRenderedSimilarity": 0.03767123287671233,
+      "title": "PPSC 2024 Past Papers - All Subjects | CSS Vista",
+      "h1": [
+        "PPSC 2024 Past Papers"
+      ],
+      "canonical": "https://www.css-vista.com/past-papers/ppsc/2024",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/css-mcqs",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 442,
+      "renderedCharacters": 718,
+      "initialRenderedSimilarity": 0.4411764705882353,
+      "title": "CSS Subject MCQs | CSS Vista",
+      "h1": [
+        "All CSS Subject MCQs"
+      ],
+      "canonical": "https://www.css-vista.com/css-mcqs",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/css-mcqs",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 442,
+      "renderedCharacters": 718,
+      "initialRenderedSimilarity": 0.4411764705882353,
+      "title": "CSS Subject MCQs | CSS Vista",
+      "h1": [
+        "All CSS Subject MCQs"
+      ],
+      "canonical": "https://www.css-vista.com/css-mcqs",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/notes",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 6639,
+      "renderedCharacters": 6639,
+      "initialRenderedSimilarity": 1,
+      "title": "Free CSS Notes (PDF) by Sir Ali Hassan Sargana | CSS Vista",
+      "h1": [
+        "CSS Notes by Sir Ali Hassan Sargana"
+      ],
+      "canonical": "https://www.css-vista.com/notes",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/notes",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 6639,
+      "renderedCharacters": 6639,
+      "initialRenderedSimilarity": 1,
+      "title": "Free CSS Notes (PDF) by Sir Ali Hassan Sargana | CSS Vista",
+      "h1": [
+        "CSS Notes by Sir Ali Hassan Sargana"
+      ],
+      "canonical": "https://www.css-vista.com/notes",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/study-material",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 1320,
+      "renderedCharacters": 1320,
+      "initialRenderedSimilarity": 1,
+      "title": "CSS Study Material - Notes, References and Essay Roadmap | CSS Vista",
+      "h1": [
+        "CSS Study Material"
+      ],
+      "canonical": "https://www.css-vista.com/study-material",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/study-material",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 1320,
+      "renderedCharacters": 1320,
+      "initialRenderedSimilarity": 1,
+      "title": "CSS Study Material - Notes, References and Essay Roadmap | CSS Vista",
+      "h1": [
+        "CSS Study Material"
+      ],
+      "canonical": "https://www.css-vista.com/study-material",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": true,
+      "errors": []
+    },
+    {
+      "path": "/grammar-course",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 5694,
+      "renderedCharacters": 5694,
+      "initialRenderedSimilarity": 1,
+      "title": "English Grammar Master Course | CSS Vista",
+      "h1": [
+        "English Grammar Master Course"
+      ],
+      "canonical": "https://www.css-vista.com/grammar-course",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/grammar-course",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 5694,
+      "renderedCharacters": 5694,
+      "initialRenderedSimilarity": 1,
+      "title": "English Grammar Master Course | CSS Vista",
+      "h1": [
+        "English Grammar Master Course"
+      ],
+      "canonical": "https://www.css-vista.com/grammar-course",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/study-tools",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 151,
+      "renderedCharacters": 4237,
+      "initialRenderedSimilarity": 0,
+      "title": "CSS Study Tools | CSS Vista",
+      "h1": [
+        "Study Tools"
+      ],
+      "canonical": "https://www.css-vista.com/study-tools",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/study-tools",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 151,
+      "renderedCharacters": 0,
+      "initialRenderedSimilarity": 0,
+      "title": "CSS Study Tools | CSS Vista",
+      "h1": [],
+      "canonical": "https://www.css-vista.com/study-tools",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/about",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 1319,
+      "renderedCharacters": 1319,
+      "initialRenderedSimilarity": 1,
+      "title": "About CSS Vista",
+      "h1": [
+        "About CSS Vista"
+      ],
+      "canonical": "https://www.css-vista.com/about",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/about",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 1319,
+      "renderedCharacters": 1319,
+      "initialRenderedSimilarity": 1,
+      "title": "About CSS Vista",
+      "h1": [
+        "About CSS Vista"
+      ],
+      "canonical": "https://www.css-vista.com/about",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 898,
+      "renderedCharacters": 898,
+      "initialRenderedSimilarity": 1,
+      "title": "Contact CSS Vista",
+      "h1": [
+        "Contact CSS Vista"
+      ],
+      "canonical": "https://www.css-vista.com/contact",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 898,
+      "renderedCharacters": 898,
+      "initialRenderedSimilarity": 1,
+      "title": "Contact CSS Vista",
+      "h1": [
+        "Contact CSS Vista"
+      ],
+      "canonical": "https://www.css-vista.com/contact",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/editorial-policy",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 1962,
+      "renderedCharacters": 1962,
+      "initialRenderedSimilarity": 1,
+      "title": "Editorial & Corrections Policy | CSS Vista",
+      "h1": [
+        "Editorial & Corrections Policy"
+      ],
+      "canonical": "https://www.css-vista.com/editorial-policy",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/editorial-policy",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 1962,
+      "renderedCharacters": 1962,
+      "initialRenderedSimilarity": 1,
+      "title": "Editorial & Corrections Policy | CSS Vista",
+      "h1": [
+        "Editorial & Corrections Policy"
+      ],
+      "canonical": "https://www.css-vista.com/editorial-policy",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/privacy-policy",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 7499,
+      "renderedCharacters": 7499,
+      "initialRenderedSimilarity": 1,
+      "title": "Privacy Policy | CSS Vista",
+      "h1": [
+        "Privacy Policy"
+      ],
+      "canonical": "https://www.css-vista.com/privacy-policy",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/privacy-policy",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 7499,
+      "renderedCharacters": 7499,
+      "initialRenderedSimilarity": 1,
+      "title": "Privacy Policy | CSS Vista",
+      "h1": [
+        "Privacy Policy"
+      ],
+      "canonical": "https://www.css-vista.com/privacy-policy",
+      "robots": "index, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/account",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 66,
+      "renderedCharacters": 564,
+      "initialRenderedSimilarity": 0,
+      "title": "CSS Vista Account | CSS Vista",
+      "h1": [
+        "Welcome back."
+      ],
+      "canonical": "https://www.css-vista.com/account",
+      "robots": "noindex, nofollow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/account",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 66,
+      "renderedCharacters": 564,
+      "initialRenderedSimilarity": 0,
+      "title": "CSS Vista Account | CSS Vista",
+      "h1": [
+        "Welcome back."
+      ],
+      "canonical": "https://www.css-vista.com/account",
+      "robots": "noindex, nofollow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/answer-timer",
+      "width": 390,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 114,
+      "renderedCharacters": 27417,
+      "initialRenderedSimilarity": 0,
+      "title": "Answer Timer | CSS Vista",
+      "h1": [
+        "Handwritten Answer Timer"
+      ],
+      "canonical": "https://www.css-vista.com/answer-timer",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    },
+    {
+      "path": "/answer-timer",
+      "width": 1366,
+      "status": 200,
+      "crawlerStatus": 200,
+      "crawlerEquivalent": true,
+      "initialCharacters": 114,
+      "renderedCharacters": 27417,
+      "initialRenderedSimilarity": 0,
+      "title": "Answer Timer | CSS Vista",
+      "h1": [
+        "Handwritten Answer Timer"
+      ],
+      "canonical": "https://www.css-vista.com/answer-timer",
+      "robots": "noindex, follow",
+      "overflow": false,
+      "adLoader": false,
+      "errors": []
+    }
+  ],
+  "limitations": "Some states were captured during loading; similarity is diagnostic, not an automatic finding. Current Affairs pause independently reproduced at both widths and traced to access-gate mismatch."
+}
