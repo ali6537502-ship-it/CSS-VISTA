@@ -2,7 +2,7 @@
 
 The owner requested the redesigned workspace for everyone, complete hiding of paused Pro discovery, account/preparation reset controls that retain identity, and a topic-based PMS Punjab planner alongside CSS. No student account was reset on production during implementation.
 
-Initial base: `cb92f6aa308c9c93638133a410177b090b69b661`. The isolated branch `feature/workspace-public-reset` integrates `c7733bd475757dc9c570f7adb6e2f912a39ba84e`, preserving free Preci Mentor, English Expression/skills/published subject learning, GSA Tutor, the guided CSS planner and approved publication releases. The free-course exceptions in current route/API enforcement take precedence over older documentation describing Précis as Pro. No paid entitlement, Pro pause, MPT hibernation, grading algorithm, payment collection or AI-provider setting is opened by this change.
+Initial base: `cb92f6aa308c9c93638133a410177b090b69b661`. The isolated branch `feature/workspace-public-reset` integrates `c7733bd475757dc9c570f7adb6e2f912a39ba84e`, preserving free Preci Mentor, English Expression/skills/published subject learning, GSA Tutor, the guided CSS planner and approved publication releases. The later content-only main commits through `450867854440a39afe36e783b78b18ebf7f148b0` were also merged without changing workspace logic; the final CI candidate must include those approved Current Affairs/GK updates. The free-course exceptions in current route/API enforcement take precedence over older documentation describing Précis as Pro. No paid entitlement, Pro pause, MPT hibernation, grading algorithm, payment collection or AI-provider setting is opened by this change.
 
 ## Requirement and evidence map
 

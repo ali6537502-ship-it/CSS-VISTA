@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 651,
+  "count": 656,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4492,7 +4492,7 @@
     },
     {
       "id": "current-affairs-archive-20261030-g20-atlanta-ministerial",
-      "text": "The G20 foreign ministers' meeting began in Atlanta on 30 October 2026.",
+      "text": "G20 foreign ministers met in Atlanta on 30 October 2026; the group photo was cancelled amid objections to Russian Foreign Minister Sergei Lavrov.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
@@ -4556,6 +4556,41 @@
     {
       "id": "current-affairs-archive-20261030-global-port-workers-strike",
       "text": "Coordinated dockworkers' strikes on 30 October 2026 affected 113 ports in 22 countries, Reuters reported.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261030-pak-iran-us-mediation-briefing",
+      "text": "On 30 October 2026, ISPR spokesman Lt Gen Ahmed Sharif Chaudhry described Pakistan's Iran–US mediation as cautiously optimistic.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261030-germany-inflation-q3-gdp",
+      "text": "Germany's provisional October 2026 CPI inflation was 2.8% year-on-year, according to Destatis.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261030-uae-gem-no2-spill",
+      "text": "The UAE reported on 30 October 2026 that the GEM NO. 2 tanker leak had stopped; the main slick was off Umm Al Quwain.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261030-polio-campaign",
+      "text": "On 30 October 2026, Pakistan announced a polio campaign for 2–8 November targeting about 24 million under-five children in 97 districts.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-20261030-gb-solar-project",
+      "text": "On 30 October 2026, Pakistan's prime minister urged completion of a 100 MW solar-power project in Gilgit-Baltistan.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

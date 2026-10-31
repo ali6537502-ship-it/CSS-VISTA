@@ -28,5 +28,95 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/business/world-at-work/dockworkers-strike-in-europe-beyond-against-arms-shipments-war-deaths-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-pak-iran-us-mediation-briefing",
+    "q": "Which Pakistani military spokesman described Iran–US mediation as cautiously optimistic in a Reuters interview published on 30 October 2026?",
+    "o": [
+      "Lt Gen Ahmed Sharif Chaudhry",
+      "Lt Gen Nigar Johar",
+      "Air Chief Marshal Zaheer Ahmed Baber Sidhu",
+      "Admiral Naveed Ashraf"
+    ],
+    "a": 0,
+    "e": "ISPR director-general Lieutenant General Ahmed Sharif Chaudhry used the description; he did not announce a peace settlement.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/pakistan-military-cautiously-optimistic-iran-us-mediation-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-germany-inflation-q3-gdp",
+    "q": "What provisional annual headline CPI inflation rate did Destatis report for Germany in October 2026?",
+    "o": [
+      "2.8%",
+      "3.3%",
+      "2.1%",
+      "3.9%"
+    ],
+    "a": 0,
+    "e": "Germany's Federal Statistical Office estimated October CPI inflation at 2.8% year-on-year; 3.3% was September's rate and 2.1% October's core inflation.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.destatis.de/EN/Press/2026/10/PE26_382_611.html"
+  },
+  {
+    "id": "current-affairs-20261030-uae-gem-no2-spill",
+    "q": "Off which UAE emirate was the main GEM NO. 2 oil slick concentrated in the 30 October 2026 official update?",
+    "o": [
+      "Umm Al Quwain",
+      "Dubai",
+      "Fujairah",
+      "Abu Dhabi"
+    ],
+    "a": 0,
+    "e": "The UAE's official statement located the principal slick off Umm Al Quwain, with some pollution extending toward neighbouring northern emirates.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.wam.ae/en/article/c3051mm-oil-spill-from-gem-no-tanker-contained"
+  },
+  {
+    "id": "current-affairs-20261030-polio-campaign",
+    "q": "How many districts were selected for Pakistan's polio vaccination campaign scheduled for 2–8 November 2026?",
+    "o": [
+      "77",
+      "87",
+      "97",
+      "107"
+    ],
+    "a": 2,
+    "e": "On 30 October, the health minister announced a campaign in 97 selected districts, targeting about 24 million children under five. These were targets, not completed results. Source: Radio Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://radio.gov.pk/30-10-2026/health-minister-vows-to-make-pakistan-polio-free-by-june-next-year"
+  },
+  {
+    "id": "current-affairs-20261030-gb-solar-project",
+    "q": "What capacity was specified for the Gilgit-Baltistan solar project reviewed by Pakistan's prime minister on 30 October 2026?",
+    "o": [
+      "50 MW",
+      "75 MW",
+      "100 MW",
+      "250 MW"
+    ],
+    "a": 2,
+    "e": "The prime minister directed faster completion of a 100 MW solar project. The plant was not announced as commissioned. Source: Radio Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://radio.gov.pk/30-10-2026/pm-directs-acceleration-of-development-projects-in-gb"
+  },
+  {
+    "id": "current-affairs-20261030-g20-photo",
+    "q": "Objections to appearing alongside which foreign minister caused cancellation of the G20 group photo in Atlanta on 30 October 2026?",
+    "o": [
+      "Sergei Lavrov",
+      "Wang Yi",
+      "Hakan Fidan",
+      "Jean-Noël Barrot"
+    ],
+    "a": 0,
+    "e": "Delegations objected to appearing with Russian Foreign Minister Sergei Lavrov, and the traditional photo was cancelled. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/g20-foreign-ministers-skip-photo-op-amid-objections-over-russia-2026-10-30/"
   }
 ]

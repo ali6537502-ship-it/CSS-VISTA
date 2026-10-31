@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-10-30",
   "published_at": "2026-10-30T19:28:49+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Evening Update (00:00–19:28 PKT; preliminary)",
+  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Finalized Coverage (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-10-30-pak-singapore-talks",
@@ -183,24 +183,26 @@
     {
       "id": "ca-2026-10-30-g20-atlanta-ministerial",
       "category": "World — International Institutions",
-      "headline": "G20 foreign ministers convene in Atlanta amid geopolitical divisions",
-      "summary": "The G20 foreign ministers' meeting opened in Atlanta on 30 October, with wars and critical-mineral supply chains dominating discussion of its agenda.",
-      "what_happened": "The United States, holding the rotating G20 presidency, emphasised trade imbalances, energy and supply chains. Reuters reported that divisions over Ukraine and the Middle East made collective statements uncertain. The meeting was scheduled for 30–31 October; no later agreement is assumed.",
+      "headline": "G20 foreign ministers meet in Atlanta as Russia dispute cancels group photo",
+      "summary": "The G20 foreign ministers opened talks in Atlanta on 30 October amid divisions over Ukraine and the Middle East. Organisers cancelled the traditional group photograph after objections to appearing with Russia's foreign minister.",
+      "what_happened": "The United States, chairing the G20, prioritised trade, energy and supply chains. Reuters reported at 15:44 UTC on 30 October (20:44 PKT) that the State Department removed the customary group photograph after delegations objected to appearing with Russian Foreign Minister Sergei Lavrov. A diplomat said roughly one-third of participants opposed a shared photo. The meeting continued; the photo cancellation was not a G20 resolution or final communiqué.",
       "background": "The G20 is a forum for coordination among major economies, but conflicting national positions complicate consensus.",
-      "why_it_matters": "The agenda connects geopolitics with energy, artificial intelligence and global supply chains.",
+      "why_it_matters": "The dispute shows how geopolitical divisions complicate economic diplomacy and consensus in international institutions.",
       "pakistan_perspective": "Pakistan is not a G20 member but remains exposed to the group's decisions on global trade and financial conditions.",
       "key_takeaways": [
-        "The G20 foreign ministers' meeting opened in Atlanta on 30 October, with wars and critical-mineral supply chains dominating discussion of its agenda.",
-        "The agenda connects geopolitics with energy, artificial intelligence and global supply chains."
+        "G20 foreign ministers convened in Atlanta on 30–31 October 2026.",
+        "The group photo was cancelled after objections to posing alongside Sergei Lavrov.",
+        "No final joint declaration is assumed."
       ],
       "facts": [
-        "The G20 foreign ministers' meeting was scheduled for 30–31 October 2026 in Atlanta, Georgia."
+        "The G20 foreign ministers' meeting was scheduled for 30–31 October 2026 in Atlanta, Georgia.",
+        "The traditional G20 foreign ministers' group photo was cancelled on 30 October 2026 amid objections to Russian Foreign Minister Sergei Lavrov."
       ],
       "what_to_watch": [
-        "Verify subsequent official developments and revisions after the evening cutoff."
+        "Official statements or chair's summary after the 31 October meeting."
       ],
       "question_angles": [
-        "Evaluate the institutional, policy and international implications of this development."
+        "Analyse how geopolitical disputes influence G20 coordination."
       ],
       "topics": [
         "G20",
@@ -208,14 +210,28 @@
         "Global governance"
       ],
       "countries": [
-        "United States"
+        "United States",
+        "Russia",
+        "Germany",
+        "Australia",
+        "Canada"
       ],
       "sources": [
         {
           "publisher": "Reuters",
           "title": "Rifts over wars in Ukraine, Middle East loom over G20 meeting in US",
           "url": "https://www.reuters.com/world/china/rifts-over-wars-ukraine-middle-east-loom-over-g20-meeting-us-2026-10-30/"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "G20 foreign ministers skip photo-op amid objections over Russia",
+          "url": "https://www.reuters.com/world/g20-foreign-ministers-skip-photo-op-amid-objections-over-russia-2026-10-30/",
+          "published_at": "2026-10-30T20:44:00+05:00"
         }
+      ],
+      "people": [
+        "Sergei Lavrov",
+        "Marco Rubio"
       ]
     },
     {
@@ -615,6 +631,311 @@
           "title": "Dockworkers strike in Europe and beyond against arms shipments, war deaths",
           "url": "https://www.reuters.com/business/world-at-work/dockworkers-strike-in-europe-beyond-against-arms-shipments-war-deaths-2026-10-30/",
           "published_at": "2026-10-30T19:16:00+05:00"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-pak-iran-us-mediation-briefing",
+      "category": "Pakistan — Regional Diplomacy",
+      "headline": "Military spokesman expresses cautious optimism over Pakistan's Iran–US mediation",
+      "summary": "In an interview published on 30 October, Pakistan's military spokesman Lieutenant General Ahmed Sharif Chaudhry described the country's Iran–US mediation as cautiously optimistic, without announcing a settlement.",
+      "what_happened": "The ISPR director-general said Army Chief Field Marshal Asim Munir had visited Tehran twice in October, most recently with Saudi and Turkish officials. He said the Pakistan–Saudi Arabia–Türkiye defence pact did not bar additional members in principle, but expansion required political decisions by signatories. He said Pakistan was not part of Yemen's internal conflict and did not disclose the substance of the Tehran negotiations or confirm Washington's endorsement of the latest visit.",
+      "background": "Regional hostilities have heightened Gulf security and energy risks. Diplomatic visits and expressions of optimism are not proof of a ceasefire or new treaty membership.",
+      "why_it_matters": "The statement highlights Pakistan's mediation, collective-defence commitments and the distinction between military remarks and binding diplomatic decisions.",
+      "pakistan_perspective": "Pakistan must balance relations with Iran, Saudi Arabia and Türkiye while protecting energy imports, overseas workers and regional stability.",
+      "regional_implications": "No Iranian accession to the trilateral defence pact was announced.",
+      "global_implications": "The interview did not establish agreed terms for Iran–US de-escalation.",
+      "key_takeaways": [
+        "ISPR spokesman Ahmed Sharif Chaudhry described Pakistan's Iran–US mediation as cautiously optimistic on 30 October 2026.",
+        "He said expansion of the trilateral defence pact would be a political decision.",
+        "No ceasefire, Iranian accession or new military deployment was announced."
+      ],
+      "facts": [
+        "Lieutenant General Ahmed Sharif Chaudhry was the ISPR spokesman interviewed by Reuters on 30 October 2026."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Reuters published the ISPR spokesman's interview about Pakistan's regional mediation."
+        }
+      ],
+      "what_to_watch": [
+        "Official agreements, ceasefire terms or changes to defence-pact membership."
+      ],
+      "question_angles": [
+        "Assess Pakistan's Gulf diplomacy and collective-defence commitments."
+      ],
+      "topics": [
+        "Pakistan foreign policy",
+        "Iran–US diplomacy",
+        "Collective defence"
+      ],
+      "countries": [
+        "Pakistan",
+        "Iran",
+        "United States",
+        "Saudi Arabia",
+        "Türkiye"
+      ],
+      "institutions": [
+        "Inter-Services Public Relations"
+      ],
+      "people": [
+        "Ahmed Sharif Chaudhry",
+        "Asim Munir"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistan military 'cautiously optimistic' on Iran-US mediation",
+          "url": "https://www.reuters.com/world/asia-pacific/pakistan-military-cautiously-optimistic-iran-us-mediation-2026-10-30/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-germany-inflation-q3-gdp",
+      "category": "World — European Economy",
+      "headline": "Germany reports provisional October inflation of 2.8% and third-quarter GDP growth of 0.2%",
+      "summary": "Germany's Federal Statistical Office reported on 30 October that provisional annual consumer-price inflation eased to 2.8% in October and seasonally adjusted GDP grew 0.2% quarter-on-quarter in the third quarter.",
+      "what_happened": "Destatis estimated October CPI inflation at 2.8% year-on-year, compared with 3.3% in September, and core inflation at 2.1%. A separate flash release placed third-quarter real GDP growth at 0.2% from the preceding quarter, after seasonal and calendar adjustment. Both releases are preliminary; final October inflation data are scheduled for 11 November.",
+      "background": "Germany is the euro area's largest economy, where energy costs, infrastructure spending and investment influence activity.",
+      "why_it_matters": "The releases show slower price increases alongside modest expansion. CPI and GDP use different reference periods and methods.",
+      "pakistan_perspective": "Germany's import demand and European monetary conditions affect Pakistan's export opportunities.",
+      "regional_implications": "German national CPI is not the same as euro-area aggregate inflation.",
+      "global_implications": "The data illustrate how energy shocks and government expenditure influence inflation and output.",
+      "key_takeaways": [
+        "Provisional October 2026 headline CPI inflation was 2.8%, down from September's 3.3%.",
+        "Core inflation was provisionally 2.1%.",
+        "Flash Q3 GDP rose 0.2% quarter-on-quarter after seasonal and calendar adjustment."
+      ],
+      "facts": [
+        "Destatis estimated Germany's October 2026 CPI inflation at 2.8% year-on-year.",
+        "Destatis estimated Q3 2026 real GDP growth at 0.2% quarter-on-quarter."
+      ],
+      "statistics": [
+        {
+          "label": "October 2026 German provisional headline CPI inflation",
+          "value": "2.8% year-on-year",
+          "source": "Federal Statistical Office of Germany",
+          "date": "2026-10-30"
+        },
+        {
+          "label": "Q3 2026 German flash real GDP growth",
+          "value": "0.2% quarter-on-quarter (seasonally and calendar adjusted)",
+          "source": "Federal Statistical Office of Germany",
+          "date": "2026-10-30"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Destatis released provisional CPI and flash GDP statistics."
+        }
+      ],
+      "what_to_watch": [
+        "Final October CPI data scheduled for 11 November 2026."
+      ],
+      "question_angles": [
+        "Distinguish headline and core CPI inflation from quarter-on-quarter GDP growth."
+      ],
+      "topics": [
+        "Inflation",
+        "GDP",
+        "European economy"
+      ],
+      "countries": [
+        "Germany"
+      ],
+      "institutions": [
+        "Federal Statistical Office of Germany"
+      ],
+      "sources": [
+        {
+          "publisher": "Federal Statistical Office of Germany",
+          "title": "Inflation rate of +2.8% expected in October 2026",
+          "url": "https://www.destatis.de/EN/Press/2026/10/PE26_382_611.html"
+        },
+        {
+          "publisher": "Federal Statistical Office of Germany",
+          "title": "Gross domestic product in the 3rd quarter of 2026 up 0.2% on the previous quarter",
+          "url": "https://www.destatis.de/EN/Press/2026/10/PE26_381_811.html"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "German inflation cools on fuel tax cut, economy grows more than expected in Q3",
+          "url": "https://www.reuters.com/world/europe/german-economy-grows-by-02-q3-preliminary-data-shows-2026-10-30/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-uae-gem-no2-spill",
+      "category": "World — Environment and Maritime Security",
+      "headline": "UAE reports GEM NO. 2 tanker leak stopped while marine-pollution cleanup continues",
+      "summary": "UAE authorities reported on 30 October that no new oil was leaking from the GEM NO. 2 tanker and that pollution had declined, while cleanup and monitoring continued.",
+      "what_happened": "The UAE's energy and environment ministries reported repairs and ongoing structural assessments of the tanker. The principal slick was off Umm Al Quwain, with pollution extending toward parts of Ras Al Khaimah, Ajman and Sharjah. Some coastal areas were closed as a precaution. Officials had not confirmed the cause; Reuters cited shipping sources who said a projectile had struck the vessel on 9 October.",
+      "background": "Marine spills threaten coastal ecosystems, fisheries, port operations and desalination infrastructure.",
+      "why_it_matters": "Containment of the leak does not mean remediation is complete. The case illustrates environmental risks associated with maritime insecurity.",
+      "pakistan_perspective": "Pakistan's Arabian Sea ports, coastal fisheries and marine ecosystems face comparable oil-spill preparedness challenges.",
+      "regional_implications": "Gulf desalination facilities and maritime trade require monitoring when spills occur.",
+      "global_implications": "The incident links shipping security, pollution control and coastal infrastructure resilience.",
+      "key_takeaways": [
+        "On 30 October 2026, the UAE said no new oil was leaking from GEM NO. 2.",
+        "The main slick was off Umm Al Quwain, extending toward other northern emirates.",
+        "The spill's cause was not officially established, and cleanup continued."
+      ],
+      "facts": [
+        "On 30 October 2026, UAE authorities located the main GEM NO. 2 oil slick off Umm Al Quwain."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "UAE authorities reported the leak stopped and coastal remediation continuing."
+        }
+      ],
+      "what_to_watch": [
+        "Official assessments of ecological effects and the cause of the incident."
+      ],
+      "question_angles": [
+        "Explain marine-pollution and desalination risks in Gulf maritime security."
+      ],
+      "topics": [
+        "Marine pollution",
+        "Oil spills",
+        "Desalination",
+        "Maritime security"
+      ],
+      "countries": [
+        "United Arab Emirates"
+      ],
+      "institutions": [
+        "UAE Ministry of Energy and Infrastructure",
+        "UAE Ministry of Climate Change and Environment"
+      ],
+      "sources": [
+        {
+          "publisher": "Emirates News Agency",
+          "title": "Oil Spill from GEM NO. 2 tanker contained; environmental remediation continues along affected UAE coastlines",
+          "url": "https://www.wam.ae/en/article/c3051mm-oil-spill-from-gem-no-tanker-contained"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "UAE says oil leak from tanker has been stopped, pollution eases",
+          "url": "https://www.reuters.com/world/middle-east/uae-says-oil-leak-tanker-has-been-stopped-pollution-eases-2026-10-30/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-polio-campaign",
+      "category": "Pakistan — Public Health",
+      "headline": "Pakistan announces November polio drive targeting 24 million children in 97 districts",
+      "summary": "On 30 October, Health Minister Mustafa Kamal announced a sub-national polio vaccination round scheduled for 2–8 November 2026 in 97 selected districts, targeting approximately 24 million children under five.",
+      "what_happened": "At an Islamabad launch event, the minister outlined the planned campaign, urged parents to cooperate with vaccinators and stated an ambition to make Pakistan polio-free by June 2027. The vaccination figures are planned targets, not verified completed coverage. The elimination ambition is a policy goal, not a confirmed epidemiological forecast. The campaign had not yet started on 30 October.",
+      "background": "Repeated vaccination rounds and reliable surveillance are central to interrupting wild poliovirus transmission. Sub-national rounds target selected districts rather than the entire country.",
+      "why_it_matters": "The campaign creates measurable public-health objectives concerning vaccination access, delivery capacity, missed children and disease surveillance.",
+      "pakistan_perspective": "Success will depend on safe access for health workers, parental cooperation, routine immunisation and independent follow-up on reported coverage.",
+      "global_implications": "Polio control in Pakistan contributes to the international effort to prevent further spread of wild poliovirus.",
+      "key_takeaways": [
+        "Campaign scheduled for 2–8 November 2026.",
+        "Approximately 24 million under-five children in 97 districts are targeted.",
+        "June 2027 polio-free status is an ambition, not an established result."
+      ],
+      "facts": [
+        "Pakistan's announced 2–8 November 2026 polio campaign targets 97 districts.",
+        "The announced target population is approximately 24 million children under five."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Health minister announced the campaign in Islamabad."
+        },
+        {
+          "date": "2026-11-02 to 2026-11-08",
+          "text": "Scheduled campaign dates; implementation results are not yet known."
+        }
+      ],
+      "what_to_watch": [
+        "Actual vaccinations, missed households and poliovirus surveillance reports."
+      ],
+      "question_angles": [
+        "Differentiate vaccination targets from verified coverage.",
+        "Discuss polio eradication barriers in Pakistan."
+      ],
+      "topics": [
+        "Polio",
+        "Public health",
+        "Vaccination"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Ministry of National Health Services"
+      ],
+      "people": [
+        "Mustafa Kamal"
+      ],
+      "sources": [
+        {
+          "publisher": "Radio Pakistan",
+          "title": "Health Minister pledges to make Pakistan polio-free by June next year",
+          "url": "https://radio.gov.pk/30-10-2026/health-minister-vows-to-make-pakistan-polio-free-by-june-next-year",
+          "published_at": "2026-10-30T17:15:49+05:00"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-gb-solar-project",
+      "category": "Pakistan — Energy and Regional Development",
+      "headline": "Prime minister urges faster completion of Gilgit-Baltistan's 100 MW solar project",
+      "summary": "At an Islamabad development review on 30 October, Prime Minister Shehbaz Sharif called for faster completion of a federally initiated 100-megawatt solar project in Gilgit-Baltistan.",
+      "what_happened": "The prime minister and Gilgit-Baltistan Chief Minister Amjad Hussain reviewed energy, infrastructure and digital-connectivity projects. The prime minister called for timely funding and removal of obstacles to the 100 MW solar scheme and the Naltar Power Project. The instruction did not announce commissioning or actual electricity generation.",
+      "background": "Remote mountainous regions face energy-access and infrastructure constraints. Solar power may complement hydropower, subject to grid integration and operational readiness.",
+      "why_it_matters": "The announcement connects renewable-energy investment with federal-regional coordination and the practical delivery of public projects.",
+      "pakistan_perspective": "Improved power supply could support public services, tourism and commerce in Gilgit-Baltistan. The 100 MW figure is project capacity, not measured output.",
+      "regional_implications": "Potential local reliability benefits depend on construction, commissioning and maintenance.",
+      "key_takeaways": [
+        "Gilgit-Baltistan projects were reviewed on 30 October.",
+        "The solar scheme has a stated capacity of 100 MW.",
+        "Faster completion was directed; commissioning was not announced."
+      ],
+      "facts": [
+        "The solar project discussed in Gilgit-Baltistan on 30 October 2026 has a stated capacity of 100 MW."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Prime minister reviewed Gilgit-Baltistan projects in Islamabad."
+        }
+      ],
+      "what_to_watch": [
+        "Verified completion, grid integration and electricity delivery."
+      ],
+      "question_angles": [
+        "Assess regional energy infrastructure challenges.",
+        "Explain the difference between installed capacity and electricity generation."
+      ],
+      "topics": [
+        "Gilgit-Baltistan",
+        "Solar energy",
+        "Regional development"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Government of Pakistan",
+        "Government of Gilgit-Baltistan"
+      ],
+      "people": [
+        "Shehbaz Sharif",
+        "Amjad Hussain"
+      ],
+      "sources": [
+        {
+          "publisher": "Radio Pakistan",
+          "title": "PM directs acceleration of development projects in GB",
+          "url": "https://radio.gov.pk/30-10-2026/pm-directs-acceleration-of-development-projects-in-gb",
+          "published_at": "2026-10-30T22:20:35+05:00"
         }
       ]
     }

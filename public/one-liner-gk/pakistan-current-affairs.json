@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 261,
+  "count": 264,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1826,6 +1826,27 @@
     {
       "id": "pakistan-current-affairs-20261030-senate-gas-pricing-bill",
       "text": "The OGRA (Amendment) Bill introduced in Pakistan's Senate on 30 October 2026 proposes inserting Section 8A for quarterly gas-cost reviews.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261030-pak-iran-us-mediation-briefing",
+      "text": "On 30 October 2026, ISPR spokesman Lt Gen Ahmed Sharif Chaudhry described Pakistan's Iran–US mediation as cautiously optimistic.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261030-polio-campaign",
+      "text": "On 30 October 2026, Pakistan announced a polio campaign for 2–8 November targeting about 24 million under-five children in 97 districts.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261030-gb-solar-project",
+      "text": "On 30 October 2026, Pakistan's prime minister urged completion of a 100 MW solar-power project in Gilgit-Baltistan.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
