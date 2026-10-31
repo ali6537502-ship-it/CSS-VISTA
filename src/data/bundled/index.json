@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-10-31",
-  "total": 30940,
+  "total": 30955,
   "sourcePagesProcessed": 207,
   "excludedPages": "208-244 (Urdu and English grammar material, outside One-Liner GK scope)",
   "categories": [
@@ -371,8 +371,8 @@
     {
       "slug": "current-affairs-archive",
       "name": "Current Affairs Archive",
-      "count": 656,
-      "timeSensitiveCount": 656,
+      "count": 667,
+      "timeSensitiveCount": 667,
       "subcategories": [
         {
           "name": "Current Affairs",
@@ -384,7 +384,7 @@
         },
         {
           "name": "Current Affairs 2026",
-          "count": 306
+          "count": 317
         },
         {
           "name": "International Relations",
@@ -407,8 +407,8 @@
     {
       "slug": "pakistan-current-affairs",
       "name": "Pakistan Current Affairs Archive",
-      "count": 264,
-      "timeSensitiveCount": 264,
+      "count": 268,
+      "timeSensitiveCount": 268,
       "subcategories": [
         {
           "name": "Foreign Relations",
@@ -420,7 +420,7 @@
         },
         {
           "name": "Pakistan Current Affairs 2026",
-          "count": 143
+          "count": 147
         }
       ]
     },

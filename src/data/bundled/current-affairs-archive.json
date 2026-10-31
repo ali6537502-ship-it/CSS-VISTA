@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 656,
+  "count": 667,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4591,6 +4591,83 @@
     {
       "id": "current-affairs-archive-20261030-gb-solar-project",
       "text": "On 30 October 2026, Pakistan's prime minister urged completion of a 100 MW solar-power project in Gilgit-Baltistan.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-cyber-council-proposal",
+      "text": "The proposed National Cybersecurity and Social Media Awareness Council was announced by Information Minister Attaullah Tarar at a PTA event on 31 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-daanish-ai-education",
+      "text": "The 31 October 2026 Daanish Schools review directed AI- and IT-based teaching methodologies for students.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-green-innovation-fund",
+      "text": "At a 31 October 2026 conference, Pakistan's climate minister cited a $10 million green-innovation start-up fund.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-kp-emergency-governance",
+      "text": "On 31 October 2026 Shehbaz Sharif defended previously imposed emergency and governor's rule in Khyber Pakhtunkhwa; he did not announce a new imposition that day.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-india-cotton-duty",
+      "text": "India extended its cotton import duty waiver, previously 11%, until 31 December 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-egypt-iran-war-warning",
+      "text": "Egyptian Foreign Minister Badr Abdelatty delivered his 31 October 2026 warning at the IISS Manama Dialogue in Bahrain.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-poland-constitutional-tribunal",
+      "text": "The court at the centre of Poland's 31 October 2026 constitutional dispute is the Constitutional Tribunal.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-bangladesh-dengue-update",
+      "text": "Bangladesh reported 173 dengue deaths in October 2026 through the 30 October reporting cutoff, according to Reuters on 31 October.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-france-protests-security",
+      "text": "France reported deployment of about 70,000 police personnel for protests on 31 October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-quad-ministerial-plans",
+      "text": "The Quad consists of Australia, India, Japan and the United States; its 31 October 2026 ministerial meeting was scheduled in Atlanta.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-10-31-us-patriot-sale-ukraine",
+      "text": "The proposed US Patriot PAC-3 sale approved late 30 October UTC / early 31 October PKT covers 500 interceptors valued at about $2.1 billion.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

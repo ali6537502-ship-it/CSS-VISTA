@@ -118,5 +118,170 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/g20-foreign-ministers-skip-photo-op-amid-objections-over-russia-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261031-cyber-council-proposal",
+    "q": "Which institution organised the 31 October 2026 event where Pakistan's information minister proposed a national cybersecurity awareness council?",
+    "o": [
+      "National Disaster Management Authority",
+      "Pakistan Telecommunication Authority",
+      "Higher Education Commission",
+      "National Information Technology Board"
+    ],
+    "a": 1,
+    "e": "PTA organised Cyber Security Awareness Week in Islamabad; the council remains a proposal. Source: Radio Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.radio.gov.pk/31-10-2026/attaullah-proposes-establishment-of-national-cybersecurity-social-media-awareness-council"
+  },
+  {
+    "id": "current-affairs-20261031-daanish-ai-education",
+    "q": "Which teaching approaches did Pakistan's prime minister direct Daanish Schools to integrate on 31 October 2026?",
+    "o": [
+      "AI- and IT-based methodologies",
+      "Compulsory foreign-language immersion only",
+      "Exclusively paper-based correspondence lessons",
+      "Military cadet training across all grades"
+    ],
+    "a": 0,
+    "e": "The directive concerned AI and IT teaching methods, not a completed implementation. Source: Radio Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.radio.gov.pk/31-10-2026/pm-vows-to-maintain-highest-educational-standards-at-daanish-schools"
+  },
+  {
+    "id": "current-affairs-20261031-green-innovation-fund",
+    "q": "What was the value of the green-innovation start-up fund cited by Pakistan's climate minister on 31 October 2026?",
+    "o": [
+      "US$2 million",
+      "US$5 million",
+      "US$10 million",
+      "US$50 million"
+    ],
+    "a": 2,
+    "e": "Musadik Malik referred to a $10 million fund; this is not a verified amount disbursed. Source: Radio Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.radio.gov.pk/31-10-2026/musadik-stresses-preparedness-to-tackle-climate-change"
+  },
+  {
+    "id": "current-affairs-20261031-kp-emergency-governance",
+    "q": "Which province's previously imposed emergency and governor's rule did Prime Minister Shehbaz Sharif defend on 31 October 2026?",
+    "o": [
+      "Punjab",
+      "Sindh",
+      "Balochistan",
+      "Khyber Pakhtunkhwa"
+    ],
+    "a": 3,
+    "e": "The prime minister defended existing measures in KP; he did not announce a new imposition that day. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2041178/very-little-if-anything-done-for-kp-pm-shehbaz-rails-against-ptis-governance-in-province"
+  },
+  {
+    "id": "current-affairs-20261031-india-cotton-duty",
+    "q": "Until what date did India extend its duty-free cotton import window in the announcement reported on 31 October 2026?",
+    "o": [
+      "30 November 2026",
+      "31 December 2026",
+      "31 January 2027",
+      "31 March 2027"
+    ],
+    "a": 1,
+    "e": "India extended the cotton import duty waiver for two months through the end of December 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/india/india-extends-duty-free-cotton-imports-by-two-months-ease-domestic-prices-2026-10-31/"
+  },
+  {
+    "id": "current-affairs-20261031-egypt-iran-war-warning",
+    "q": "At which security forum did Egypt's foreign minister warn against renewed US–Iran escalation on 31 October 2026?",
+    "o": [
+      "Munich Security Conference",
+      "Shangri-La Dialogue",
+      "IISS Manama Dialogue",
+      "Doha Forum"
+    ],
+    "a": 2,
+    "e": "Badr Abdelatty spoke at the IISS Manama Dialogue in Bahrain. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/egypt-fears-escalation-iran-war-would-be-more-destructive-foreign-minister-says-2026-10-31/"
+  },
+  {
+    "id": "current-affairs-20261031-poland-constitutional-tribunal",
+    "q": "Which Polish institution was at the centre of the leadership dispute reported on 31 October 2026?",
+    "o": [
+      "Constitutional Tribunal",
+      "Supreme Audit Office",
+      "National Electoral Commission",
+      "Senate of Poland"
+    ],
+    "a": 0,
+    "e": "The suspension of the Constitutional Tribunal's president prompted competing claims by Poland's president and prime minister. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/polands-president-accuses-tusk-forced-takeover-countrys-top-court-2026-10-31/"
+  },
+  {
+    "id": "current-affairs-20261031-bangladesh-dengue-update",
+    "q": "How many dengue deaths were reported for October 2026 in Bangladesh through the 30 October data cutoff?",
+    "o": [
+      "118",
+      "148",
+      "173",
+      "218"
+    ],
+    "a": 2,
+    "e": "Reuters reported 173 October deaths, exceeding September's 148; the surveillance figures were provisional. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/healthcare-pharmaceuticals/bangladesh-death-toll-dengue-rises-unlikely-ease-before-december-2026-10-31/"
+  },
+  {
+    "id": "current-affairs-20261031-france-protests-security",
+    "q": "Approximately how many police personnel did France deploy amid protests on 31 October 2026?",
+    "o": [
+      "20,000",
+      "45,000",
+      "70,000",
+      "110,000"
+    ],
+    "a": 2,
+    "e": "Reuters reported a deployment of approximately 70,000 police personnel. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/france-braces-fresh-unrest-government-vows-tough-response-2026-10-31/"
+  },
+  {
+    "id": "current-affairs-20261031-quad-ministerial-plans",
+    "q": "Which city was named as the location of the Quad foreign ministers' meeting scheduled for 31 October 2026?",
+    "o": [
+      "Manila",
+      "Atlanta",
+      "Tokyo",
+      "Canberra"
+    ],
+    "a": 1,
+    "e": "Reuters reported the Quad ministerial meeting was scheduled in Atlanta; the later leaders' summit was planned for Manila. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/rubio-host-meeting-indo-pacific-quad-wrap-up-g20-gathering-2026-10-31/"
+  },
+  {
+    "id": "current-affairs-20261031-us-patriot-sale-ukraine",
+    "q": "How many Patriot PAC-3 interceptors were covered by the US sale approval announced late 30 October UTC (early 31 October PKT)?",
+    "o": [
+      "200",
+      "350",
+      "500",
+      "750"
+    ],
+    "a": 2,
+    "e": "The approved proposed sale covered 500 PAC-3 interceptors valued at about $2.1 billion; delivery had not occurred. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/aerospace-defense/us-approves-21-billion-patriot-missile-sale-ukraine-2026-10-30/"
   }
 ]
