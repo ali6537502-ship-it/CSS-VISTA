@@ -40,7 +40,7 @@ const paths = [
   '/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review',
   '/css-2026-written-result',
   '/past-papers/ppsc/2024', '/past-papers/css/2025',
-  '/subjects/selector', '/css-eligibility-calculator', '/grammar-course',
+  '/subjects/compulsory/current-affairs', '/subjects/selector', '/css-eligibility-calculator', '/grammar-course',
   '/vistagram/pakistan-financial-inclusion-digital-finance',
   '/vistagram/seo-audit-deliberately-missing-20261014',
   '/seo-audit-deliberately-missing-20261014',
@@ -97,6 +97,12 @@ try {
     } else {
       assert.deepEqual(state.canonical, [`https://www.css-vista.com${path === '/' ? '/' : path}`], `${path}: canonical after rendering`)
       assert.ok(state.h1.length, `${path}: meaningful heading`)
+    }
+    if (path === '/subjects/compulsory/current-affairs') {
+      assert.ok(rawHTML.includes('CSS Vista Pro is temporarily unavailable'), 'Initial HTML preserves the runtime pause')
+      assert.ok(state.h1.includes('CSS Vista Pro is temporarily unavailable'), 'Browser preserves the runtime pause')
+      assert.ok(state.robots.every(value => /noindex/.test(value)), 'Paused subject is not indexable')
+      assert.equal(state.adLoaders, 0, 'Paused subject is ad-free')
     }
     if (/^\/past-papers\/(?:css|ppsc)\/\d{4}$/.test(path)) {
       assert.equal(new URL(page.url()).search, '', `${path}: defaults stay in the pathname`)
