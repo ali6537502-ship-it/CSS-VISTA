@@ -100,7 +100,7 @@ jobs:
           if [ -f test-artifacts/auth-service.log ]; then tail -n 30 test-artifacts/auth-service.log; fi
       - name: Preserve diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: current-affairs-diagnostics
           path: |
