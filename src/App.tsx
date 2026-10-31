@@ -232,7 +232,7 @@ export default function App() {
         <Route path="/journal/opinion-the-next-48-hours" element={<S><JournalArchiveArticle articleSlug="opinion-the-next-48-hours" /></S>} />
         <Route path="/journal/opinion-harassers-calculus" element={<S><JournalArchiveArticle articleSlug="opinion-harassers-calculus" /></S>} />
         <Route path="/opinions" element={<Navigate to="/journal" replace />} />
-        <Route path="/account" element={<S><WorkspaceVariant classic={<ClassicAccount />}><Account /></WorkspaceVariant></S>} />
+        <Route path="/account" element={<S><WorkspaceVariant entry classic={<ClassicAccount />}><Account /></WorkspaceVariant></S>} />
         {/* The account home is the chooser; each declared account route renders
             its own focused page, so a bookmark or a refresh lands where the
             student expects. */}

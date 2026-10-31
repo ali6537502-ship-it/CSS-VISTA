@@ -25,7 +25,7 @@ try{
  await page.waitForURL('**/account/dashboard')
  await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
  await page.goto(base+'/account/plan')
- await page.getByRole('heading',{name:'My Study Plan',exact:true}).waitFor()
+ await page.getByRole('heading',{name:'Study Planner',exact:true}).waitFor()
  assert.equal(await page.getByLabel('Target examination date',{exact:false}).inputValue(),'')
  await page.getByLabel('Target examination date',{exact:false}).fill('2027-12-01')
  const sample=['Political Science','Criminology','European History','Punjabi','Environmental Sciences']
@@ -38,7 +38,7 @@ try{
  assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:v1')).studyPlanner.selectedOptionals.slice().sort()),sample.slice().sort())
  // Save a real personal timetable task and goal through the restructured views.
  await page.goto(base+'/account/tasks')
- await page.getByRole('button',{name:'Add or import tasks',exact:true}).click()
+ await page.getByRole('button',{name:'Add a study session',exact:true}).click()
  const composer=page.getByRole('region',{name:'Create and import study tasks',exact:true})
  await composer.getByLabel('What will you study?',{exact:true}).fill('Independent study session')
  await composer.getByLabel('Subject (optional)',{exact:true}).fill('Political Science')
@@ -69,7 +69,7 @@ try{
  const other=await second.newPage()
  await other.goto(base+'/account/subjects')
  for(const name of sample)await other.getByRole('heading',{name,exact:true}).waitFor()
- for (const [route,title] of [['progress','My Performance'],['tasks','My Study Plan'],['library','My Library']]) {
+ for (const [route,title] of [['progress','My Performance'],['tasks','Study Planner'],['library','My Library']]) {
   await other.goto(base+'/account/'+route);await other.getByRole('heading',{name:title,exact:true}).waitFor();if(route==='tasks')await other.getByRole('button',{name:'Mark Independent study session incomplete',exact:true}).waitFor();if(route==='progress'){await other.getByText('No recorded MCQ attempts',{exact:true}).first().waitFor();const glyph=await other.getByRole('img',{name:'Recorded MCQ accuracy percentage: no records',exact:true}).locator('span svg').boundingBox();assert.ok(glyph&&glyph.width<=32&&glyph.height<=32,'Empty-state symbol stays within its intended size')}await other.waitForTimeout(250);await other.screenshot({path:`test-artifacts/visual-after/native-${route}-1440.png`,fullPage:true})
  }
  await other.goto(base+'/account/tasks?view=goals')

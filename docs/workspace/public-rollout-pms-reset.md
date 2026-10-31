@@ -2,28 +2,28 @@
 
 The owner requested the redesigned workspace for everyone, complete hiding of paused Pro discovery, account/preparation reset controls that retain identity, and a topic-based PMS Punjab planner alongside CSS. No student account was reset on production during implementation.
 
-Initial base: `cb92f6aa308c9c93638133a410177b090b69b661`. The isolated branch `feature/workspace-public-reset` integrates `b4948603c2521ec1048e40fd6c6672df5dfa2b43`, preserving the newer free Preci Mentor, GSA Tutor, guided CSS planner and approved publication releases. The free-course exceptions in current route/API enforcement take precedence over older documentation describing Précis as Pro. No paid entitlement, Pro pause, MPT hibernation, grading algorithm, payment collection or AI-provider setting is opened by this change.
+Initial base: `cb92f6aa308c9c93638133a410177b090b69b661`. The isolated branch `feature/workspace-public-reset` integrates `c7733bd475757dc9c570f7adb6e2f912a39ba84e`, preserving free Preci Mentor, English Expression/skills/published subject learning, GSA Tutor, the guided CSS planner and approved publication releases. The free-course exceptions in current route/API enforcement take precedence over older documentation describing Précis as Pro. No paid entitlement, Pro pause, MPT hibernation, grading algorithm, payment collection or AI-provider setting is opened by this change.
 
 ## Requirement and evidence map
 
 | ID | Requirement / implementation | Verification | Status |
 |---|---|---|---|
-| W01 | Global workspace and single-window signup: `_workspace_preview.php`, `workspace-release.php`, `WorkspacePreviewProvider.tsx` | Native selector ownership, guest/authenticated release, expired session, kill-switch and failed-selector fallback; seven-section browser matrix | Verified before final upstream integration; final integrated browser run pending |
-| W02 | Hide paused discovery: workspace `registry.ts`, `FeatureFinder.tsx`; retain current free-course exceptions | Native anonymous/free/active/expired content access and release-pause checks; directory/navigation browser checks | Native checks verified; final integrated browser run pending |
+| W01 | Global workspace and single-window signup: `_workspace_preview.php`, `workspace-release.php`, `WorkspacePreviewProvider.tsx` | Native selector ownership, guest/authenticated release, expired session, kill-switch and failed-selector fallback; seven-section browser matrix | Verified locally |
+| W02 | Hide paused discovery: workspace `registry.ts`, `FeatureFinder.tsx`; retain current free-course exceptions | Native anonymous/free/active/expired content access and release-pause checks; directory/navigation browser checks | Verified locally |
 | W03 | Official PMS downloads: `public/pms-punjab/`, `content/pms-punjab/source-manifest.json` | 40 PDF signatures and SHA-256 values; individual source download; ZIP originals | Verified |
 | W04 | Source-linked outline adapter: `scripts/pms/import-syllabus.py`, `catalogue.json` | Nonempty source-linked units for all 40 documents; unique versioned IDs; source page links; rendered Punjabi/Urdu source review | Verified for imported outline; not certification of the examination scheme |
-| W05 | CSS/PMS switch and independent preferences: `PlannerWorkspace.tsx`, `pmsModel.ts`, `PlannerPms.tsx`, Subjects | Native save/sync/refresh, explicit Ethics alternative, no CSS selection replacement; all widths | Verified before final upstream integration; final integrated browser run pending |
-| W06 | Topic distribution and editable sessions: `pmsModel.ts`, existing `store.ts` and `PlannerTask.tsx` | Existing shared workload, rest days, target fit, round-robin subjects, preview edits, duplicate prevention, stable IDs; 3,000-task limit retains existing records | Verified |
+| W05 | CSS/PMS switch and independent preferences: `PlannerWorkspace.tsx`, `pmsModel.ts`, `PlannerPms.tsx`, Subjects | Native save/sync/refresh, explicit Ethics alternative, no CSS selection replacement; all widths | Verified locally |
+| W06 | Topic distribution and editable sessions: `pmsModel.ts`, existing `store.ts` and `PlannerTask.tsx` | Existing shared workload, cross-track time conflicts/over-allocation, rest days, target fit, round-robin subjects, preview edits, duplicate prevention, stable IDs; 3,000-task limit retains existing records | Verified |
 | W07 | Revision and performance: `PmsPerformance.tsx`, task activity adapter | Revision sessions do not change prior topic coverage; source outline checks separate from session counts and assessment scores | Verified |
-| W08 | Scoped resets: `student/preparation-reset.php`, `_preparation_reset*.php`, `ResetPreparationPanel.tsx` | Signed read-only preview, current password, typed confirmation, CSRF/owner checks, stale preview, exact retry, concurrent retry, date/subject filters, populated native records | Verified natively; final integrated UI run pending |
+| W08 | Scoped resets: `student/preparation-reset.php`, `_preparation_reset*.php`, `ResetPreparationPanel.tsx` | Signed read-only preview, current password, typed confirmation, CSRF/owner checks, stale preview, exact retry, concurrent retry, date/subject filters, populated native records | Verified locally |
 | W09 | Reset sync barriers: `accountSync.ts`, `hostingerSync.ts`, `preparationStorage.ts`, `reconcile.ts` | Old-generation writes rejected; reserved metadata cannot be forged by a normal snapshot; retired root/stash cannot return; other account unchanged | Verified |
-| W10 | Timers, grammar, drafts and course compatibility | Full-reset epoch namespaces; partial reset retains sessions; current GSA merge rules retained; iframe storage binding; free Précis course progress reset, writing retained | Unit/native checks verified; integrated GSA browser check pending |
+| W10 | Timers, grammar, drafts and course compatibility | Full-reset epoch namespaces; partial reset retains sessions; current GSA merge rules retained; iframe storage binding; free Précis course progress reset, writing retained | Verified locally |
 | W11 | Identity and protected history | Before/after hashes of semantic profile/identity, membership, native attempts, writing and native MPT records in disposable fixtures | Verified |
-| W12 | Build, accessibility, mobile, routes and regressions | TypeScript, lint, production build, route/link audits, focused/full suites, native and browser checks below | Final integrated verification pending |
+| W12 | Build, accessibility, mobile, routes and regressions | TypeScript, lint, production build, route/link audits, focused/full suites, native and browser checks below | Verified locally; applicable environment limits below |
 
 ## PMS source treatment
 
-The two official PPSC pages were fetched on **30 October 2026**:
+The two official PPSC pages were fetched on **30 October 2026**, then rechecked on **31 October**; all 40 downloads still had identical SHA-256 values:
 
 - <https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx>
 - <https://www.ppsc.gop.pk/PMSOptionalPapers.aspx>
@@ -53,7 +53,7 @@ Identity, password, profile/photo, memberships, payments, security/usage ledgers
 
 The reset endpoint is the only writer of reserved `__cssv_reset_v1` metadata in the existing progress blob. It returns generation/revision separately; normal progress GET payloads retain their old logical shape, and normal PUT cannot remove/forge the marker. Owned preparation mutations serialize with the reset and require the current generation **only after an explicit reset**. Unreset accounts retain legacy compatibility.
 
-After a confirmed reset, existing logical progress keys map to an account/generation-scoped physical device partition. This narrowly necessary adapter prevents old tabs and legacy stashes from resurrecting removed records. No schema migration or second task database is introduced. Full resets advance timer/draft/course recovery epochs; partial schedule resets preserve them. Whole-view unmounting is reserved for the intentional full reset. Failure to update a device produces an account error and retains its old copy for recovery.
+After a confirmed reset, existing logical progress keys map to an account/generation-scoped physical device partition. This narrowly necessary adapter prevents old tabs and legacy stashes from resurrecting removed records. No schema migration or second task database is introduced. Full resets advance timer/draft/course recovery epochs; partial schedule resets preserve them. Workspace display preferences and shortcuts remain account preferences. The shared GSA page remounts its whole study view when the authenticated owner changes, including on its public URL. The browser test holds the next account’s cloud request and verifies that the previous student’s course summary is absent, then restores the first account’s actual records. Whole-view unmounting is reserved for the intentional full reset. Failure to update a device produces an account error and retains its old copy for recovery.
 
 ## Verification record
 
@@ -61,9 +61,48 @@ Use only the isolated `cssvista_briefing_test` native environment and `@example.
 
 Executed before final integration: full `npm run test:all`, strict production build, native planner/reading, seven sections at 320/375/390/768/1024/1440, single-window signup entry, task refresh, owner switching, failed-selector/classic fallback, PMS preview/edit/completion/revision, partial/full reset, API failures and keyboard dialog focus. The PMS scan had zero applicable automated axe violations; that alone is not a WCAG conformance claim.
 
-After integration: native paid-access and release-pause tests pass with **free Preci Mentor preserved**, and populated reset fixtures pass including the new Précis course table. GSA timestamp/tombstone merge tests pass. Final integrated build, full suite and browser evidence will be recorded here before release.
+After integration:
 
-Local artifacts: `test-artifacts/public-release/`, `test-artifacts/workspace-preview/`, `test-artifacts/pms-reset/`. The managed execution environment restarted during work; earlier `/tmp` logs were lost, while these workspace artifacts and their results survived. An early reading test completed its assertions but Node 24 then hit an Undici shutdown assertion; an isolated rerun is required. The disposable PHP image lacks GD, blocking the unchanged handwriting image unit check; paused upload enforcement was independently exercised.
+| Executed command | Outcome |
+|---|---|
+| `npm run test:all` | 369 Node and five Python tests passed; no failures/skips. Includes current free-learning rules. |
+| `npm run test:workspace` | 41 passed after final registry changes. |
+| `npm run test:expression-guide` | Three passed. |
+| `npm run typecheck` | Passed, including the registration transition fix. |
+| `npm run lint` and focused ESLint on changed files | Zero errors; one existing `Introduction.tsx:116` dependency warning in the full run. |
+| `npm run verify:hostinger:strict` | Passed. Subsequent frontend iterations also passed `node scripts/build-target.mjs hostinger --strict`. |
+| Build-integrated route/link audits | 118 routes, four redirects, six genuine invalid-route 404s, 1,025 sitemap URLs and 66,934 internal links passed; frozen MPT export unchanged. |
+| `node tests/pro/paid-access.mjs`, `node tests/pro/release-pause.mjs` | Anonymous/free/entitled/expired and paused access passed; current free courses retained, paid/AI/payment features held. |
+| `node tests/preparation-reset/security.mjs` | Populated native records, identity/membership/writing/MPT retention, owned deletion, concurrent/idempotent retry, stale device and server marker checks passed. |
+| `node tests/reading/security.mjs` | Isolated rerun passed with exit zero, including owned reading/bookmarks, revision, expiry/renewal and publication windows. |
+| `node tests/browser/workspace-preview.mjs` | Seven sections at 320/375/390/768/1024/1440, task persistence, public signup entry, direct routes, recovery and late-response/account isolation passed. |
+| `node tests/browser/pms-reset.mjs` | Nine native journeys passed: 40 PDFs, Punjabi/RTL, independent choices/fresh-context sync, editable sessions, revision/coverage, six widths, source failure/retry, interrupted accepted reset response/receipt recovery, course compatibility and full reset/isolation. |
+| `node tests/browser/signup.mjs` | Single-window form, duplicate-submit prevention, failed profile/photo writes, deliberately failed owner-presentation check, private photo, 12-check gate, URL/hash return, profile conflicts, malformed imported lists and held-write account switch passed. |
+| `node tests/browser/workspace-native.mjs`, `node tests/browser/planner-native.mjs` | CSS selection → tasks/goals → sync/fresh-context restore, real timer navigation/refresh, native attempt creation/partial work and seven native attempt views passed. |
+| `node tests/browser/pro-pause.mjs`, `node tests/browser/classic-profile.mjs` | Paused discovery/direct access, free courses, classic fallback, genuine profile edits/conflicts/failure recovery passed. |
+| `node tests/browser/answer-timer.mjs` | Isolated rerun passed signed overtime, pause/resume, paper timing, corrupt recovery, redistribution and mobile width. One combined run timed out scrolling a tab into view; no timer logic was changed to force a pass. Native signed-in continuity also passed. |
+| `node tests/browser/expression-guide.mjs` | Eight lessons, save/reload, stale-tab/account/reset isolation, corrupt/blocked storage, downloads and narrow layouts passed; no external/API calls. |
+| `node tests/browser/gsaTutor.mjs` | Passed at 375/768/1440 on isolated loopback native static serving; 141 lessons, incremental chapter loading, schedule and recorded recall flow. |
+
+The global signup test caught an actual pre-release defect: registering changed the authenticated owner and remounted the public form before profile saving. Public entry presentation now stays stable through that transition; protected workspace selection remains independently owner-bound. The expanded signup regression deliberately fails the presentation lookup and verifies the fields/photo survive. The dashboard keeps the daily action ahead of the course card and names Daily Briefing distinctly from Daily PDFs without rewriting saved pin IDs. The shared planner reuses `dayWorkload` over all active timetable records for time conflicts and over-allocation warnings. Track cards retain their own counts; the combined estimate explicitly includes completed tasks and uses the availability saved in the current view. This is planned time, not measured study time.
+
+Rendered desktop/mobile review includes the daily dashboard, planner/settings, source cards, Punjabi text and reset confirmation. The mobile source action now wraps beneath long subject descriptions without splitting its label. The seven-section matrix checks all required widths; screenshot fixtures are sanitized. PMS and reset-dialog automated accessibility scans recorded zero applicable violations; English-guide scans recorded no serious/critical issues. These are limited automated checks, not a formal WCAG conformance claim. Public preparation reset was never exercised on a live account.
+
+Local artifacts: `test-artifacts/public-release/`, `test-artifacts/workspace-preview/`, `test-artifacts/pms-reset/`. The managed execution environment restarted during work; earlier `/tmp` logs were lost, while these workspace artifacts and their results survived. An early reading test hit a Node 24 Undici shutdown assertion after its assertions; the isolated rerun completed successfully. The local disposable PHP image lacks GD, blocking the unchanged handwriting image unit check; paused upload enforcement was independently exercised. CI provisions GD and must pass its existing handwriting checks before rollout.
+
+## Comparable local performance
+
+`CSSV_PERFORMANCE_BEFORE=/workspace/cssv-performance-before/dist node tests/browser/workspace-performance.mjs` passed three alternating cold-context runs per version, using the same sanitized account/API records, 390×844 viewport, 4× CPU slowdown, 100 ms latency and 400 KiB/s download. Assets are uncompressed loopback responses, not production transfer figures. The earlier artifact is `13091aed6355556a5aceae8d4c9efe774cbee6ad`.
+
+| Median | Earlier interface | Candidate |
+|---|---:|---:|
+| Useful dashboard heading | 5,708 ms | 4,968 ms |
+| Largest contentful paint | 2,024 ms | 1,804 ms |
+| Cumulative layout shift | 0.0095 | 0.0194 |
+| Initial JS/CSS body bytes | 966,071 | 975,610 (+1.0%) |
+| Initial code requests | 25 | 33 |
+
+The first comparison exposed a 0.149 shift caused by the legal footer appearing below a short loading boundary and moving as the workspace loaded. Reserving viewport height in that boundary reduced it to 0.0194 on the repeated comparison. The residual small shift includes topic-coverage loading. No whole PMS/MCQ bank or protected document is fetched to render dashboard links. These measurements are lab evidence; production field Core Web Vitals remain a separate check.
 
 ## Routes, release and rollback
 

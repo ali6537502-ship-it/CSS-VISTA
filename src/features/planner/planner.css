@@ -59,3 +59,6 @@
 .pl-guide-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:16px;color:#56655a;font-size:12px}
 @media(max-width:960px){.pl-guide-steps{grid-template-columns:1fr}.pl-guide-step{min-height:0}.pl-start-guide-head{flex-wrap:wrap}}
 @media(max-width:540px){.pl-start-guide{padding:16px;border-radius:17px}.pl-guide-step{padding:15px}.pl-guide-bottom .pl-secondary{width:100%}}
+
+/* Keep the source document action readable beside long subject descriptions. */
+.pms-topic-panel>.pl-section-heading{align-items:flex-start;flex-wrap:wrap}.pms-topic-panel>.pl-section-heading>div{flex:1 1 220px;min-width:0}.pms-topic-panel>.pl-section-heading>.pl-secondary{flex-shrink:0;white-space:nowrap}

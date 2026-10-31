@@ -31,16 +31,17 @@ export default function PlannerDashboard({ view = 'today', onCreate, exam }: { v
   const tasks = [...activeTasks].sort(taskOrder)
   const overlaps = useMemo(() => {
     const grouped = new Map<string, StudyScheduleTask[]>()
-    for (const task of activeTasks) {
+    for (const task of snapshot.activeTasks) {
       const rows = grouped.get(task.date) || []
       rows.push(task); grouped.set(task.date, rows)
     }
     const ids = new Set<string>()
     for (const [date, rows] of grouped) for (const id of dayWorkload(rows, date).overlaps) ids.add(id)
     return ids
-  }, [activeTasks])
+  }, [snapshot.activeTasks])
   const day = view === 'week' ? selectedDay : today
   const workload = dayWorkload(tasks, day, dailyHours)
+  const combinedWorkload = dayWorkload(snapshot.activeTasks, day, dailyHours)
   const subjects = [...new Set(tasks.map(task => task.subject))].sort()
   const filtered = tasks.filter(task => (subject === 'all' || task.subject === subject) && (status === 'all' || task.status === status))
   const selectedTasks = filtered.filter(task => task.date === day)
@@ -86,8 +87,9 @@ export default function PlannerDashboard({ view = 'today', onCreate, exam }: { v
       <div className="pl-context-art" aria-hidden="true"><CalendarDays size={35}/><span/><i/><b/></div><p className="pl-kicker">{day === today ? 'TODAY’S STUDY SPACE' : readableDay(day, true)}</p><h2>{formatMinutes(workload.minutes)}<small> planned</small></h2><p className="pl-muted">Scheduled duration, including completed tasks. Actual study time is recorded separately.</p>
       <dl><div><dt><CheckCheck size={16}/>Completed</dt><dd>{workload.rows.filter(task => task.status === 'completed').length} / {workload.rows.length}</dd></div><div><dt><Clock3 size={16}/>Daily availability</dt><dd>{workload.capacity === null ? 'Not set' : formatMinutes(workload.capacity)}</dd></div></dl>
       {exam !== 'pms-punjab' && snapshot.state.studyPlanner && new Date(`${day}T12:00:00`).getDay() === snapshot.state.studyPlanner.restDay && <p className="pl-note">Your chosen light-study day. Keep the workload comfortable.</p>}
-      {workload.overBy > 0 && <p className="pl-warning" role="status">{formatMinutes(workload.overBy)} above your saved daily availability. Edit a task to adjust the load.</p>}
-      {workload.overlaps.size > 0 && <p className="pl-warning">{workload.overlaps.size} unfinished tasks have overlapping times.</p>}
+      {exam && combinedWorkload.minutes !== workload.minutes && <p className="pl-note">Across CSS and PMS: {formatMinutes(combinedWorkload.minutes)} scheduled, including completed tasks.</p>}
+      {combinedWorkload.overBy > 0 && <p className="pl-warning" role="status">{formatMinutes(combinedWorkload.overBy)} above the daily availability in these settings across your timetables. Edit a task to adjust the load.</p>}
+      {combinedWorkload.overlaps.size > 0 && <p className="pl-warning">{combinedWorkload.overlaps.size} unfinished tasks have overlapping times across your timetables.</p>}
       <Link className="pl-text-button" to={plannerHref(pathname, params, 'settings', hash)}>Adjust study availability <ArrowRight size={15}/></Link>
     </aside>
   </div>

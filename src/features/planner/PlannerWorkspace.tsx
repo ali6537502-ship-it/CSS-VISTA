@@ -52,8 +52,14 @@ export default function PlannerWorkspace() {
   function linkTo(nextView: PlannerView) {
     return plannerHref(pathname, params, nextView, hash)
   }
+  function createSession() {
+    if (exam === 'css') { openTools(); return }
+    const next = new URLSearchParams(params)
+    next.set('view', 'syllabus')
+    setParams(next, { preventScrollReset: true })
+  }
   return <main className="planner-workspace pl-root" data-planner-view={view}>
-    <header className="pl-page-header"><div><p className="pl-kicker">YOUR PREPARATION, PURPOSEFULLY PLANNED</p><h1 ref={heading} tabIndex={-1}>Study Planner</h1><p>A clear place for today’s work, the week ahead and everything you’re building towards.</p></div><button ref={addButton} type="button" className="pl-primary" aria-expanded={toolsOpen} aria-controls="pl-task-composer" onClick={() => { if (exam === 'pms-punjab') { const next = new URLSearchParams(params); next.set('view', 'syllabus'); setParams(next, { preventScrollReset: true }) } else openTools() }}><Plus size={18}/>{exam === 'pms-punjab' ? 'Plan PMS topics' : 'Add a study session'}</button></header>
+    <header className="pl-page-header"><div><p className="pl-kicker">YOUR PREPARATION, PURPOSEFULLY PLANNED</p><h1 ref={heading} tabIndex={-1}>Study Planner</h1><p>A clear place for today’s work, the week ahead and everything you’re building towards.</p></div><button ref={addButton} type="button" className="pl-primary" aria-expanded={exam === 'css' ? toolsOpen : undefined} aria-controls={exam === 'css' ? 'pl-task-composer' : undefined} onClick={createSession}><Plus size={18}/>{exam === 'pms-punjab' ? 'Plan PMS topics' : 'Add a study session'}</button></header>
     <div className="pl-exam-switch" role="group" aria-label="Preparation examination">{(['css', 'pms-punjab'] as const).map(id => <button key={id} type="button" aria-pressed={exam === id} onClick={() => { const next = new URLSearchParams(params); next.set('exam', id); if (next.get('view') === 'pms') next.set('view', 'syllabus'); setParams(next, { preventScrollReset: true }) }}><BookOpen size={17}/>{id === 'css' ? 'CSS preparation' : 'PMS Punjab'}</button>)}</div>
     <nav className="pl-view-nav" aria-label="Study planner sections">{plannerViews.filter(id => id !== 'pms' && (exam === 'css' || !['revision', 'goals'].includes(id))).map(id => {
       const Icon = icons[id]
@@ -81,8 +87,8 @@ export default function PlannerWorkspace() {
       <div className="pl-guide-bottom"><span>Prefer to enter a task yourself?</span><button type="button" className="pl-secondary" onClick={openTools}><Plus size={15}/>Add manually or import a schedule</button></div>
     </section>}
     <div className="pl-panels"><Suspense fallback={<div className="pl-panel-loading" role="status"><span/><span/><span/>Loading planner tools…</div>}>
-      {(visited.has('today') || view === 'today') && <section id="pl-today-agenda" hidden={view !== 'today'} aria-label="Today planner"><PlannerDashboard key={exam} exam={exam} view="today" onCreate={() => { if (exam === 'css') openTools(); else { const next = new URLSearchParams(params); next.set('view', 'syllabus'); setParams(next) } }}/>{exam === 'css' && <Suggestions/>}</section>}
-      {(visited.has('week') || view === 'week') && <section hidden={view !== 'week'} aria-label="Weekly planner"><PlannerDashboard key={exam} exam={exam} view="week" onCreate={openTools}/></section>}
+      {(visited.has('today') || view === 'today') && <section id="pl-today-agenda" hidden={view !== 'today'} aria-label="Today planner"><PlannerDashboard key={exam} exam={exam} view="today" onCreate={createSession}/>{exam === 'css' && <Suggestions/>}</section>}
+      {(visited.has('week') || view === 'week') && <section hidden={view !== 'week'} aria-label="Weekly planner"><PlannerDashboard key={exam} exam={exam} view="week" onCreate={createSession}/></section>}
       {(visited.has('syllabus') || view === 'syllabus') && <section hidden={view !== 'syllabus'} aria-label="Syllabus planner">{exam === 'pms-punjab' ? <Pms/> : <Syllabus embedded showScheduleBoard={false}/>}</section>}
       {(visited.has('revision') || view === 'revision') && <section hidden={view !== 'revision'} aria-label="Revision planner"><Revision/></section>}
       {(visited.has('goals') || view === 'goals') && <section hidden={view !== 'goals'} aria-label="Goals planner"><Goals/></section>}

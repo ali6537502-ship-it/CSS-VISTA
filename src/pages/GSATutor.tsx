@@ -32,6 +32,12 @@ function snapshot(progress: GsaProgress) {
   }
 }
 export default function GSATutorPage() {
+  const { user, loading } = useAccount()
+  if (loading) return <main className="p-8" role="status">Loading your GSA study space…</main>
+  return <GSATutorWorkspace key={user?.id ?? 'guest'} />
+}
+
+function GSATutorWorkspace() {
   const { pathname } = useLocation()
   const { user, loading, syncStatus, syncError, syncNow, lastSyncedAt } = useAccount()
   const isAccount = pathname.startsWith('/account/')

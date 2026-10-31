@@ -8,7 +8,7 @@ permissions:
 jobs:
   payment-invariants:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     services:
       mysql:
         image: mysql:8.0
@@ -116,8 +116,20 @@ jobs:
           node tests/browser/pro-pause.mjs
           php tests/workspace-preview/fixture.php paused
           node tests/browser/workspace-preview.mjs
+          node tests/browser/signup.mjs
           node tests/browser/pms-reset.mjs
           node tests/browser/classic-profile.mjs
       - name: Service diagnostics on failure
         if: failure()
         run: tail -n 80 test-artifacts/pro-php.log
+      - name: Preserve sanitized workspace and PMS review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-pms-reset-journeys
+          path: |
+            test-artifacts/workspace-preview/
+            test-artifacts/pms-reset/
+            test-artifacts/signup/single-window/
+          if-no-files-found: ignore
+          retention-days: 7

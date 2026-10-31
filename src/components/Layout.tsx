@@ -712,7 +712,7 @@ function fallbackRoute(pathname: string) {
 }
 
 export default function Layout() {
-  const { enabled: preview, pending: previewPending } = useWorkspacePreview()
+  const { enabled: preview, pending: previewPending, entryEnabled, entryPending } = useWorkspacePreview()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDrop, setOpenDrop] = useState<string | null>(null)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -980,13 +980,13 @@ export default function Layout() {
     navigate(fallbackRoute(location.pathname), { replace: true })
   }
 
-  if ((location.pathname === '/account' || location.pathname.startsWith('/account/')) && previewPending) return <div role="status" className="mx-auto max-w-5xl px-4 py-10">Opening your study space…</div>
+  if ((location.pathname === '/account' ? entryPending : location.pathname.startsWith('/account/') && previewPending)) return <div role="status" className="mx-auto min-h-screen max-w-5xl px-4 py-10">Opening your study space…</div>
 
   if (preview && location.pathname.startsWith('/account/') && !MPT_FOCUS_PATH.test(location.pathname)) {
-    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><Suspense fallback={<div role="status" className="px-4 py-10">Opening your study space…</div>}><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></Suspense></ProfileGate></>
+    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><Suspense fallback={<div role="status" className="min-h-screen px-4 py-10">Opening your study space…</div>}><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></Suspense></ProfileGate></>
   }
 
-  if (preview && location.pathname === '/account') {
+  if (entryEnabled && location.pathname === '/account') {
     return <div className="flex min-h-screen flex-col bg-[#faf9f5]">
       <RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice />
       <a href="#account-entry" className="sr-only z-50 rounded-lg bg-white p-3 text-pine focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to account</a>

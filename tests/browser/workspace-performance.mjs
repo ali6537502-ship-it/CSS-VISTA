@@ -26,7 +26,8 @@ try {
   if (url.pathname === '/api/auth/workspace-preview.php') return route.fulfill({ json: { enabled: true, user_id: 'performance-fixture' } })
         apiRequests.push(`${route.request().method()} ${url.pathname}`)
         let data
-        if (url.pathname === '/api/auth/session.php') data = { ok: true, authenticated: true, provider: 'hostinger', user: { id: 'performance-fixture', email: 'benchmark@example.invalid', display_name: 'TEST ONLY Student', profile_complete: true, photo_complete: false, user_metadata: { full_name: 'TEST ONLY Student' } } }
+        if (url.pathname === '/api/workspace-release.php') data = { enabled: true }
+        else if (url.pathname === '/api/auth/session.php') data = { ok: true, authenticated: true, provider: 'hostinger', user: { id: 'performance-fixture', email: 'benchmark@example.invalid', display_name: 'TEST ONLY Student', profile_complete: true, photo_complete: false, user_metadata: { full_name: 'TEST ONLY Student' } } }
         else if (url.pathname === '/api/pro-release.php') data = { paused: true }
         else if (url.pathname === '/api/student/progress.php') data = route.request().method() === 'GET' ? { payload: {} } : { ok: true, updated_at: '2026-10-26T12:00:00Z' }
         else if (url.pathname === '/api/student/membership.php') data = { membership: { status: 'free', starts_at: null, expires_at: null }, product: { name: 'Pro', collection_enabled: false }, orders: [] }

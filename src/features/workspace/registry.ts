@@ -25,6 +25,7 @@ export type Feature = { id: string; title: string; description: string; to: stri
 const extra: Feature[] = [
   { id: 'pms-punjab', title: 'PMS Punjab Planner', description: 'Explore the revised PPSC syllabus and build an editable daily topic schedule.', to: '/account/tasks?exam=pms-punjab&view=syllabus', category: 'Study Planning', keywords: 'pms punjab provincial management services ppsc schedule syllabus' },
   { id: 'daily-pdfs', title: 'Current Affairs Daily PDFs', description: 'Browse published daily PDF editions.', to: '/current-affairs-daily', category: 'Current Affairs', keywords: 'news newspaper pdf' },
+  { id: 'current-affairs', title: 'Daily Briefing', description: 'Read published news, explanations and original sources.', to: '/daily-briefing', category: 'Current Affairs', keywords: 'daily briefing news current affairs explanations sources' },
   { id: 'daily-english', title: 'Daily English', description: 'Your daily language activities.', to: '/account/english', category: 'Grammar', keywords: 'vocabulary english' },
   { id: 'vista-resources', title: 'My Vista Resources', description: 'Your account resource shelves, free books and downloads.', to: '/account/resources', category: 'Resources', keywords: 'books downloads library' },
   { id: 'membership', title: 'Membership & Payments', description: 'Review your existing membership and account orders.', to: '/account/membership', category: 'Workspace', keywords: 'pro subscription membership orders' },
@@ -34,7 +35,7 @@ const extra: Feature[] = [
   ...[
     ['precis', 'CSS Vista Preci Mentor', '/account/precis'], ['ability', 'General Ability', '/account/general-ability'],
     ['answers', 'My Answer Performance', '/account/answer-performance'], ['affairs-desk', 'My Current Affairs Desk', '/account/current-affairs'],
-    ['expression', 'English Expression Lab', '/account/expression'], ['handwriting', 'Handwritten Paragraph', '/account/handwriting'],
+    ['expression', 'English Expression Guide', '/account/expression'], ['handwriting', 'Handwritten Paragraph', '/account/handwriting'],
     ['tutor', 'Ask VISTA', '/account/ask-vista'], ['essay-builder', 'Essay Themes Builder', '/account/essay-builder'],
     ['argumentation', 'Argumentation Skills Builder', '/account/argumentation'], ['analysis-builder', 'Analytical Skills Builder', '/account/analytical-skills'],
     ['preparation', 'My Preparation', '/account/preparation'], ['ai-usage', 'AI Usage', '/account/ai-usage'],

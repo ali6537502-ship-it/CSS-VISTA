@@ -15,7 +15,7 @@ if (process.env.CSSV_TEST_PHP_CONTAINER) {
 }
 const output = 'test-artifacts/signup/single-window'
 mkdirSync(output, { recursive: true })
-const browser = await chromium.launch({ executablePath: '/usr/bin/chromium', headless: true, args: ['--no-sandbox'] })
+const browser = await chromium.launch({ executablePath: process.env.CSSV_BROWSER_EXECUTABLE || chromium.executablePath(), headless: true, args: ['--no-sandbox'] })
 const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 390, height: 844 }, hasTouch: true, reducedMotion: 'reduce' })
 await isolateNetwork(context, base)
 const page = await context.newPage(); page.setDefaultTimeout(20000)
@@ -109,9 +109,18 @@ try {
     if (route.request().method() === 'POST' && failUpload) { failUpload = false; return route.fulfill({ status: 503, json: { message: 'TEST ONLY photo save unavailable' } }) }
     return route.continue()
   })
+  let failNewOwnerPresentation = true
+  await page.route('**/api/auth/workspace-preview.php', route => {
+    if (registers > 0 && failNewOwnerPresentation) {
+      failNewOwnerPresentation = false
+      return route.fulfill({ status: 503, json: { message: 'TEST ONLY presentation check unavailable' } })
+    }
+    return route.continue()
+  })
   await page.locator('.ac-single form').evaluate(form => { form.requestSubmit(); form.requestSubmit() })
   await page.getByText(/TEST ONLY save unavailable. Retry your retained entries./).waitFor()
   assert.equal(registers, 1); assert.equal(saves, 1); assert.equal(uploads, 0)
+  assert.equal(failNewOwnerPresentation, false, 'Registration exercised the new-owner presentation check')
   assert.equal(await field('City').inputValue(), 'TEST ONLY Draft')
   await page.getByAltText('Your profile photo preview', { exact: true }).waitFor()
   assert.equal((await context.request.get(base + '/api/student/progress.php')).status(), 403)

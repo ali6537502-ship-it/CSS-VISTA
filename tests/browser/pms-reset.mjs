@@ -12,9 +12,9 @@ if(!['localhost','127.0.0.1'].includes(new URL(base).hostname))throw Error('Loop
 const env={...process.env};for(const k of ['DOCKER_HOST','DOCKER_CONTEXT','DOCKER_TLS','DOCKER_TLS_VERIFY','DOCKER_CERT_PATH'])delete env[k]
 const php=(...args)=>(process.env.CSSV_TEST_PHP_CONTAINER?execFileSync('docker',['--host=unix:///var/run/docker.sock','exec',process.env.CSSV_TEST_PHP_CONTAINER,'php',...args],{env,encoding:'utf8'}):execFileSync('php',args,{env,encoding:'utf8'})).trim()
 const email=`pms-browser-${randomUUID()}@example.invalid`,owner=php('tests/current-affairs/setup.php','user',email)
-const otherEmail=`pms-other-${randomUUID()}@example.invalid`;php('tests/current-affairs/setup.php','user',otherEmail)
+const otherEmail=`pms-other-${randomUUID()}@example.invalid`,otherOwner=php('tests/current-affairs/setup.php','user',otherEmail)
 selectWorkspacePreview(email);php('tests/workspace-preview/fixture.php','paused')
-const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||'/usr/bin/chromium',headless:true,args:['--no-sandbox']})
+const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath(),headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:1440,height:1000},reducedMotion:'reduce',hasTouch:true})
 await isolateNetwork(context,base)
 const page=await context.newPage(),errors=[],checks=[],scans=[];page.setDefaultTimeout(25000);page.on('pageerror',e=>errors.push(e.message))
@@ -26,14 +26,17 @@ const ready=()=>page.locator('.student-workspace').waitFor()
 async function go(path){await page.goto(base+path);await ready()}
 async function sync(){await go('/account/settings');const saved=page.waitForResponse(r=>r.url().endsWith('/api/student/progress.php')&&r.request().method()==='PUT'&&r.status()===200);await page.getByRole('button',{name:'Sync progress now',exact:true}).click();await saved}
 async function check(name,run){console.log('CHECK',name);try{await run();checks.push({name,status:'passed'});console.log('PASS',name)}catch(e){checks.push({name,status:'failed',error:e.message});await page.screenshot({path:out+'/failure.png',fullPage:true}).catch(()=>{});throw e}finally{writeFileSync(out+'/results.json',JSON.stringify({checks,errors,scans},null,2))}}
-async function scan(name){await page.addScriptTag({content:readFileSync('tests/browser/node_modules/axe-core/axe.min.js','utf8')});const violations=await page.evaluate(async()=> (await window.axe.run(document.querySelector('.planner-workspace')||document.querySelector('[role=dialog]'),{runOnly:['wcag2a','wcag2aa','wcag21aa','wcag22aa']})).violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)})));scans.push({name,violations});assert.deepEqual(violations,[],JSON.stringify(violations))}
-const payload={'cssvista:v1':{studyPlanner:{examDate:'2027-12-01',dailyHours:2,restDay:5,selectedOptionals:['Political Science','Criminology','European History','Punjabi','Environmental Sciences'],configuredAt:new Date().toISOString()},studyScheduleTasks:[{id:'css-retained',syllabusItemId:'manual:css-retained',subject:'English Essay',paper:'CSS',section:'Personal task',topic:'TEST ONLY retained CSS session',date:'2026-11-02',minutes:30,status:'not-started',createdAt:new Date().toISOString()}],bookmarks:['TEST ONLY retained bookmark'],savedAnswers:[{id:'retained-writing',text:'TEST ONLY private draft'}],quizResults:[]},'cssvista:tool:gsa-tutor:v1':{plan:{days:20,startDate:'2026-11-01'},completed:{'c1-s1-1':{at:'2026-10-30T10:00:00Z',selfRating:'gotit'}},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},quizHistory:{},last:'c1-s1-1'}}
+async function scan(name){await page.addScriptTag({content:readFileSync('tests/browser/node_modules/axe-core/axe.min.js','utf8')});const violations=await page.evaluate(async()=> (await window.axe.run(document.querySelector('[role=dialog]')||document.querySelector('.planner-workspace'),{runOnly:['wcag2a','wcag2aa','wcag21aa','wcag22aa']})).violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)})));scans.push({name,violations});assert.deepEqual(violations,[],JSON.stringify(violations))}
+const payload={'cssvista:v1':{studyPlanner:{examDate:'2027-12-01',dailyHours:2,restDay:5,selectedOptionals:['Political Science','Criminology','European History','Punjabi','Environmental Sciences'],configuredAt:new Date().toISOString()},studyScheduleTasks:[{id:'css-retained',syllabusItemId:'manual:css-retained',subject:'English Essay',paper:'CSS',section:'Personal task',topic:'TEST ONLY retained CSS session',date:'2026-11-04',time:'10:00',minutes:80,status:'not-started',createdAt:new Date().toISOString()}],bookmarks:['TEST ONLY retained bookmark'],savedAnswers:[{id:'retained-writing',text:'TEST ONLY private draft'}],quizResults:[]},'cssvista:tool:gsa-tutor:v1':{plan:{days:20,startDate:'2026-11-01'},completed:{'c1-s1-1':{at:'2026-10-30T10:00:00Z',selfRating:'gotit'}},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},quizHistory:{},last:'c1-s1-1'}}
 let savedIds=[],chosenTitle=''
 try{
  await login(email)
  assert.equal((await context.request.put(base+'/api/student/progress.php',{headers:{'X-CSRF-Token':await token()},data:{payload}})).status(),200)
  await check('fresh PMS state and complete official PDF directory',async()=>{
-  await go('/account/tasks?exam=pms-punjab&view=syllabus')
+  await go('/account/tasks?exam=pms-punjab&view=week')
+  await page.getByRole('button',{name:'Plan PMS topics',exact:true}).click()
+  assert.equal(new URL(page.url()).searchParams.get('exam'),'pms-punjab')
+  assert.equal(new URL(page.url()).searchParams.get('view'),'syllabus')
   await page.getByRole('heading',{name:'A new path. A clear plan.',exact:true}).waitFor()
   assert.equal(await page.locator('.pms-subject').count(),9);assert.equal((await state()).studyScheduleTasks.length,1)
   await page.getByRole('button',{name:'All 40 PDFs',exact:true}).click();assert.equal(await page.locator('.pms-subject').count(),40)
@@ -42,6 +45,17 @@ try{
   assert.equal(await page.getByRole('link',{name:'Download all 40 syllabi · ZIP',exact:true}).getAttribute('href'),'/pms-punjab/ppsc-syllabi-2026-10-30.zip')
   await page.getByRole('button',{name:'My subjects',exact:true}).click()
   await page.screenshot({path:out+'/fresh-pms-1440.png',fullPage:true})
+ })
+ await check('Punjabi source topics render with readable mixed-direction text',async()=>{
+  await page.getByRole('button',{name:'All 40 PDFs',exact:true}).click()
+  await page.locator('.pms-subject-title').filter({hasText:/^Punjabi$/}).click()
+  const panel=page.locator('.pms-topic-panel');await panel.getByRole('heading',{name:'Punjabi',exact:true}).waitFor()
+  assert.match(await panel.locator('h4').first().innerText(),/[\u0600-\u06ff]/)
+  assert.equal(await panel.locator('h4').first().getAttribute('dir'),'auto')
+  await panel.locator('summary').first().click();await page.setViewportSize({width:390,height:844})
+  await panel.evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1))
+  await page.screenshot({path:out+'/punjabi-topics-390.png'})
+  await page.setViewportSize({width:1440,height:1000});await page.getByRole('button',{name:'My subjects',exact:true}).click()
  })
  await check('independent subject choices, alternative and settings survive sync',async()=>{
   await page.getByRole('button',{name:'Subjects & availability',exact:true}).click()
@@ -70,7 +84,7 @@ try{
   await draft.getByRole('button',{name:'Save 3 sessions',exact:true}).click();await page.getByText('3 PMS sessions saved.',{exact:false}).waitFor()
   const tasks=(await state()).studyScheduleTasks;assert.equal(tasks.length,4);assert.ok(tasks.some(t=>t.id==='css-retained'));savedIds=tasks.filter(t=>t.paper==='PMS Punjab').map(t=>t.id);assert.equal(savedIds.length,3)
   await sync();await go('/account/tasks?exam=pms-punjab&view=week&date=2026-11-04')
-  const task=page.locator(`[data-task-id="${savedIds[0]}"]`).first();await task.waitFor();await task.getByRole('button',{name:`Edit ${chosenTitle}`,exact:true}).click();await task.getByLabel('Estimated minutes',{exact:true}).fill('35');await task.getByRole('button',{name:'Save changes',exact:true}).click();await task.getByRole('button',{name:`Mark ${chosenTitle} complete`,exact:true}).click()
+  const task=page.locator(`[data-task-id="${savedIds[0]}"]`).first();await task.waitFor();await task.getByRole('button',{name:`Edit ${chosenTitle}`,exact:true}).click();await task.getByLabel('Estimated minutes',{exact:true}).fill('35');await task.getByLabel('Time (optional)',{exact:true}).fill('10:15');await task.getByRole('button',{name:'Save changes',exact:true}).click();await task.getByText('This time overlaps another unfinished task.',{exact:true}).waitFor();await page.getByText(/above the daily availability in these settings across your timetables/).waitFor();await task.getByRole('button',{name:`Mark ${chosenTitle} complete`,exact:true}).click()
   assert.equal((await state()).studyScheduleTasks.find(t=>t.id===savedIds[0]).minutes,35);assert.equal((await state()).studyScheduleTasks.find(t=>t.id===savedIds[0]).status,'completed')
   await page.getByRole('button',{name:'CSS preparation',exact:true}).click();assert.equal(await page.locator(`[data-task-id="${savedIds[0]}"]`).count(),0)
   await go('/account/progress');await page.getByRole('region',{name:'PMS Punjab preparation progress',exact:true}).waitFor();assert.match(await page.getByRole('region',{name:'PMS Punjab preparation progress'}).innerText(),/1\s*\/\s*3/)
@@ -101,10 +115,24 @@ try{
  })
  await check('password-confirmed partial reset persists and outdated root data cannot return',async()=>{
   await sync();await go('/account/tasks?view=settings')
+  await page.evaluate(id=>localStorage.setItem(`cssvista:single-answer-timer:owner:v1:${id}`,JSON.stringify({minutes:35,remaining:900,running:false,savedAt:Date.now(),question:'TEST ONLY retained timer'})),owner)
+  let loseResetResponse=true
+  const loseResponse=async route=>{
+   const body=route.request().postDataJSON()
+   if(loseResetResponse&&body?.action==='reset'&&body.current_password==='TEST ONLY native fixture password'){
+    loseResetResponse=false;const response=await route.fetch();assert.equal(response.status(),200,await response.text());return route.abort('failed')
+   }
+   return route.continue()
+  }
+  await page.route('**/api/student/preparation-reset.php',loseResponse)
   await page.getByRole('button',{name:'Review reset options',exact:true}).click();const dialog=page.getByRole('dialog')
   await dialog.getByLabel('Subject',{exact:false}).and(dialog.locator('select')).selectOption('Political Science');await dialog.getByLabel('From date (optional)',{exact:true}).fill('2026-11-04');await dialog.getByLabel('Through date (optional)',{exact:true}).fill('2026-11-04');await dialog.getByRole('button',{name:'Review affected records',exact:true}).click()
+  await page.setViewportSize({width:390,height:844});await scan('reset-review-dialog');await page.screenshot({path:out+'/reset-review-390.png'})
   await dialog.getByLabel('Current password',{exact:true}).fill('wrong');await dialog.getByLabel('Type RESET to confirm',{exact:true}).fill('RESET');await dialog.getByRole('button',{name:'Confirm reset',exact:true}).click();await dialog.getByRole('alert').waitFor();assert.equal((await state()).studyScheduleTasks.length,5)
   await dialog.getByLabel('Current password',{exact:true}).fill('TEST ONLY native fixture password');await dialog.getByRole('button',{name:'Confirm reset',exact:true}).click();await dialog.waitFor({state:'hidden'})
+  assert.equal(loseResetResponse,false,'The accepted reset response was interrupted and recovered through its receipt')
+  await page.unroute('**/api/student/preparation-reset.php',loseResponse)
+  assert.match(await page.evaluate(id=>localStorage.getItem(`cssvista:single-answer-timer:owner:v1:${id}`),owner),/TEST ONLY retained timer/,'A timetable reset cleared the active session recovery record')
   assert.ok(!(await state()).studyScheduleTasks.some(t=>t.id===savedIds[0]));assert.ok((await state()).studyScheduleTasks.some(t=>t.id==='css-retained'));assert.deepEqual((await state()).bookmarks,['TEST ONLY retained bookmark'])
   await page.evaluate(old=>localStorage.setItem('cssvista:v1',JSON.stringify(old)),payload['cssvista:v1']);await page.reload();await ready();await page.getByRole('heading',{name:'Schedule settings',exact:true}).waitFor();assert.ok(!(await state()).studyScheduleTasks.some(t=>t.id===savedIds[0]))
   await page.getByRole('button',{name:'Review reset options',exact:true}).click();await page.getByRole('dialog').waitFor();await page.getByRole('dialog').getByRole('button',{name:'Close',exact:true}).click();await page.getByRole('button',{name:'Review reset options',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Review reset options',exact:true}).evaluate(el=>el===document.activeElement),true)
@@ -117,14 +145,23 @@ try{
   await course.locator('[data-action="bookmark"]').click()
   await page.waitForFunction(()=>{const id=localStorage.getItem('cssvista:progress-owner'),gen=localStorage.getItem('cssvista:sync-generation:v1:'+id),key=`cssvista:reset-data:v1:${encodeURIComponent(id)}:${gen}:${encodeURIComponent('cssvista:tool:gsa-tutor:v1')}`;return Object.keys(JSON.parse(localStorage.getItem(key)||'{}').bookmarks||{}).length===1})
   assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1')),null,'Iframe wrote the retired shared key')
+  await page.goto(base+'/gsa-tutor');await page.getByRole('heading',{name:'GSA Tutor',exact:true}).waitFor();await page.getByText('1/141',{exact:true}).waitFor()
+  let releaseCloud;const heldCloud=new Promise(resolve=>{releaseCloud=resolve})
+  const slowOther=async route=>{if(route.request().method()==='GET'&&route.request().headers()['x-cssv-user']===otherOwner)await heldCloud;return route.continue()}
+  await page.route('**/api/student/progress.php',slowOther)
+  assert.equal((await context.request.post(base+'/api/auth/logout.php',{headers:{'X-CSRF-Token':await token()},data:{}})).status(),200);await login(otherEmail);await page.evaluate(()=>window.dispatchEvent(new Event('focus')))
+  await page.getByText('0/141',{exact:true}).waitFor();assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:progress-owner')),otherOwner,'Public course retained the previous owner')
+  releaseCloud();await page.unroute('**/api/student/progress.php',slowOther);await page.getByText('Account progress synced',{exact:true}).waitFor();assert.equal(await page.getByText('1/141',{exact:true}).count(),0)
+  assert.equal((await context.request.post(base+'/api/auth/logout.php',{headers:{'X-CSRF-Token':await token()},data:{}})).status(),200);await login(email);await page.evaluate(()=>window.dispatchEvent(new Event('focus')));await page.getByText('1/141',{exact:true}).waitFor()
   await go('/account/tasks?view=settings')
  })
  await check('full reset keeps identity/settings, clears preparation and isolates another account',async()=>{
   const before=(await(await context.request.get(base+'/api/student/profile.php')).json()).profile
-  await page.evaluate(id=>{localStorage.setItem(`cssvista:single-answer-timer:owner:v1:${id}`,JSON.stringify(JSON.stringify({minutes:35,remaining:900,running:false,savedAt:Date.now(),question:'TEST ONLY private timer'})));localStorage.setItem(`cssvista:grammar-course:v5:account:${id}`,JSON.stringify({dirty:true,notes:{a:'TEST ONLY old grammar'}}))},owner)
+  await page.evaluate(id=>{localStorage.setItem(`cssvista:single-answer-timer:owner:v1:${id}`,JSON.stringify(JSON.stringify({minutes:35,remaining:900,running:false,savedAt:Date.now(),question:'TEST ONLY private timer'})));localStorage.setItem(`cssvista:grammar-course:v5:account:${id}`,JSON.stringify({dirty:true,notes:{a:'TEST ONLY old grammar'}}));localStorage.setItem(`cssvista:english-guide:v1:${id}`,JSON.stringify({'complete-thought':{draft:'TEST ONLY earlier guide draft'}}))},owner)
   await page.getByRole('button',{name:'Review reset options',exact:true}).click();const dialog=page.getByRole('dialog');await dialog.getByLabel('What would you like to reset?',{exact:false}).selectOption('preparation');await dialog.getByRole('button',{name:'Review affected records',exact:true}).click();await dialog.getByLabel('Current password',{exact:true}).fill('TEST ONLY native fixture password');await dialog.getByLabel('Type RESET to confirm',{exact:true}).fill('RESET');await dialog.getByRole('button',{name:'Confirm reset',exact:true}).click();await page.getByText('Preparation reset applied. Your login, profile and membership are retained.',{exact:true}).waitFor()
   await page.reload();await ready();await page.getByRole('heading',{name:'Schedule settings',exact:true}).waitFor();const fresh=await state();assert.equal((fresh.studyScheduleTasks||[]).length,0);assert.equal((fresh.bookmarks||[]).length,0);assert.deepEqual(fresh.studyPlanner.selectedOptionals,payload['cssvista:v1'].studyPlanner.selectedOptionals)
   assert.ok(await page.evaluate(id=>localStorage.getItem(`cssvista:study-reset:v1:${id}`),owner));
+  assert.equal(await page.evaluate(id=>localStorage.getItem(`cssvista:english-guide:v1:${id}`),owner),null,'Full reset retained owned English guide drafts')
   assert.equal(await page.evaluate(id=>{const g=localStorage.getItem('cssvista:sync-generation:v1:'+id);return localStorage.getItem(`cssvista:reset-data:v1:${encodeURIComponent(id)}:${g}:${encodeURIComponent('cssvista:tool:gsa-tutor:v1')}`)},owner),null,'Full reset retained GSA course records');assert.equal(await page.evaluate(id=>localStorage.getItem(`cssvista:single-answer-timer:owner:v1:${id}`),owner),null)
   const after=(await(await context.request.get(base+'/api/student/profile.php')).json()).profile;for(const key of ['display_name','email','phone','education','profile_photo_path'])assert.equal(after[key],before[key])
   assert.equal((await context.request.post(base+'/api/auth/logout.php',{headers:{'X-CSRF-Token':await token()},data:{}})).status(),200);await login(otherEmail);await go('/account/dashboard');await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor();assert.equal(((await state()).studyScheduleTasks||[]).length,0);assert.ok(!JSON.stringify(await state()).includes('retained-writing'))
