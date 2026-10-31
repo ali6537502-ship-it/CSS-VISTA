@@ -2,7 +2,7 @@ import { findRouteDefinition } from '../src/data/routeRegistry.mjs'
 
 const expectedRecord = 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0'
 const origin = (process.env.ADSENSE_SITE_ORIGIN || 'https://www.css-vista.com').replace(/\/$/, '')
-const routes = ['/', '/current-affairs', '/consultation', '/fpsc-syllabus', '/gk', '/past-papers', '/legal', '/privacy-policy']
+const routes = ['/', '/current-affairs', '/consultation', '/fpsc-syllabus', '/gk', '/past-papers', '/legal', '/privacy-policy', '/subjects/compulsory/current-affairs']
 const userAgent = 'AdsBot-Google (+http://www.google.com/adsbot.html)'
 const adsTxtUserAgent = 'Mediapartners-Google'
 let failed = false
@@ -25,7 +25,7 @@ function escapeHtml(value) {
 
 async function fetchText(url, options = {}) {
   const headers = { 'user-agent': userAgent, ...(options.headers || {}) }
-  const response = await fetch(url, { ...options, headers })
+  const response = await fetch(url, { signal: AbortSignal.timeout(30000), ...options, headers })
   return { response, body: await response.text() }
 }
 
@@ -149,6 +149,7 @@ for (const path of routes) {
       && !/Use .* as the main entry point/.test(body)
       && !body.includes('What you can do here')
       && !body.includes('__SITE_ORIGIN__')
+      && (path !== '/subjects/compulsory/current-affairs' || (body.includes('CSS Vista Pro is temporarily unavailable') && !body.includes('Topic-wise syllabus breakdown')))
     result(
       valid,
       `initial HTML ${path}`,

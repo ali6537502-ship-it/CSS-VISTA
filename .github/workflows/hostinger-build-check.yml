@@ -59,7 +59,7 @@ jobs:
         run: npm run build
 
       - name: Verify production direct-route refreshes
-        run: npm run test:routes
+        run: npm run test:routes && node --test tests/pausedSubjectSeo.test.mjs
 
       - name: Install isolated browser verification tools
         run: |
