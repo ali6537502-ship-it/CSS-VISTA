@@ -13,8 +13,15 @@ function read(){try{const o=JSON.parse(localStorage.getItem(storageKey)||'null')
 let saved=embedded?defaults():read(),catalog=null,lessons=[],byId=new Map(),chapterCache=new Map();
 let ui={view:'course',id:saved.last,stage:'learn',beat:0,selected:'',draft:'',reveal:false,grade:'',chapter:1,qindex:0,phase:0,month:0,setupDays:20,setupDate:now(),search:'',opening:'',showAllDays:false,busy:false,error:''};
 let hasCourse=false;
+function canSave(){
+ if(!embedded)return true;
+ if(!binding)return false;
+ if(!binding.owner)return !localStorage.getItem('cssvista:progress-owner');
+ const lease=JSON.parse(localStorage.getItem('cssvista:reset-write:v1:'+binding.owner)||'null');
+ return !(lease?.at&&Math.abs(Date.now()-lease.at)<30000)&&localStorage.getItem('cssvista:progress-owner')===binding.owner&&localStorage.getItem('cssvista:sync-generation:v1:'+binding.owner)===binding.generation;
+}
 function notify(){
- try{if(embedded&&(!binding||binding.owner&&(localStorage.getItem('cssvista:progress-owner')!==binding.owner||localStorage.getItem('cssvista:sync-generation:v1:'+binding.owner)!==binding.generation)||!binding.owner&&localStorage.getItem('cssvista:progress-owner')))throw Error('Study account changed');localStorage.setItem(storageKey,JSON.stringify(saved));window.dispatchEvent(new Event('cssvista:progress-changed'));if(window.parent!==window)window.parent.postMessage({type:'cssvista:gsa:changed'},location.origin)}catch{ui.error='Browser storage is unavailable. Course records cannot be saved.';draw()}
+ try{if(!canSave())throw Error('Study account changed');localStorage.setItem(storageKey,JSON.stringify(saved));window.dispatchEvent(new Event('cssvista:progress-changed'));if(embedded)window.parent.postMessage({type:'cssvista:gsa:changed'},location.origin)}catch{ui.error='Course records could not be saved. Check account synchronization and retry your change.';draw()}
 }
 const isDone=id=>!!saved.completed?.[id];
 const countDone=()=>lessons.filter(x=>isDone(x.id)).length;
@@ -248,8 +255,9 @@ root.addEventListener('input',e=>{
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==window.parent||e.data?.type!=='cssvista:gsa:hydrate')return;
  const incoming=e.data.snapshot;if(!incoming||typeof incoming!=='object')return;
+ const previousOwner=binding?.owner;const previouslyBound=binding!==null;
  const metadata=e.data.storage;if(metadata&&typeof metadata.key==='string'&&(metadata.key===KEY||metadata.key.startsWith('cssvista:reset-data:v1:')&&metadata.key.endsWith(encodeURIComponent(KEY)))){storageKey=metadata.key;binding={owner:metadata.owner||null,generation:metadata.generation||null}}else{storageKey=KEY;binding={owner:localStorage.getItem('cssvista:progress-owner'),generation:null}}
- if(e.data.preserveView){saved={...defaults(),...incoming};draw();return}
+ if(e.data.preserveView&&previouslyBound&&previousOwner===binding.owner){saved={...defaults(),...incoming};draw();return}
  saved={...defaults(),...incoming};ui.id=byId.has(saved.last)?saved.last:lessons[0]?.id;ui.view='course';ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();draw();
 });
 document.getElementById('close-reference').addEventListener('click',()=>document.getElementById('reference').close());

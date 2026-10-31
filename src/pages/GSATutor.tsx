@@ -72,7 +72,7 @@ export default function GSATutorPage() {
     if (user?.profile_complete && syncStatus !== 'synced') return
     setProgress(readProgress())
     iframeRef.current?.contentWindow?.postMessage(
-      { type: 'cssvista:gsa:hydrate', snapshot: readProgress(), storage: { key: preparationPhysicalKey(STORAGE_KEY), owner: user?.id || null, generation: preparationGeneration() } }, window.location.origin,
+      { type: 'cssvista:gsa:hydrate', snapshot: readProgress(), preserveView: true, storage: { key: preparationPhysicalKey(STORAGE_KEY), owner: user?.id || null, generation: preparationGeneration() } }, window.location.origin,
     )
   }, [loaded, syncStatus, user?.id, user?.profile_complete])
 
@@ -127,7 +127,7 @@ export default function GSATutorPage() {
         key={user?.id ?? (loading ? "session-loading" : "guest")}
         ref={iframeRef}
         title="CSS VISTA GSA Tutor interactive lessons and personal course schedule"
-        src="/gsa-tutor/studio.html"
+        src="/gsa-tutor/studio.html?v=workspace-reset-1"
         className="block w-full border-0 bg-white"
         style={{ height: frameHeight }}
         onLoad={() => {
