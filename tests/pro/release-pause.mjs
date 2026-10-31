@@ -27,11 +27,11 @@ try {
   assert.equal(status.status,200);assert.equal(status.data.paused,true);assert.match(status.headers.get('cache-control'),/no-store/)
   const releasedPrecis=await call('student/precis.php');assert.equal(releasedPrecis.status,200,'Existing active members can open the Précis course');assert.ok(releasedPrecis.data.catalog?.chapters?.length>=25);
   assert.equal((await call('student/precis.php',undefined,false)).status,401);
-  for (const endpoint of ['precis-feedback','expression','skills','handwriting','handwriting-image','tutor','topics','ability','mentor','ai-usage']) {
+  for (const endpoint of ['precis-feedback','handwriting','handwriting-image','tutor','ability','mentor','ai-usage']) {
     const r=await call('student/'+endpoint+'.php');assert.equal(r.status,503,endpoint+JSON.stringify(r.data));assert.equal(r.data.error,'pro_release_paused')
     assert.equal((await call('student/'+endpoint+'.php',undefined,false)).status,401,'Anonymous identity gate changed for '+endpoint)
   }
-  assert.equal((await call('student/skills.php',{action:'create',feature:'argument',request_id:randomUUID()})).status,503)
+  for (const endpoint of ['skills','topics','expression']) { assert.equal((await call('student/'+endpoint+'.php')).status,200); assert.equal((await call('student/'+endpoint+'.php',undefined,false)).status,401) }
   const membership=await call('student/membership.php');assert.equal(membership.status,200);assert.deepEqual(membership.data.membership,before);assert.equal(membership.data.product.collection_enabled,false);assert.equal(membership.data.product.receiver_number,null)
   assert.equal((await call('student/membership.php',{action:'create',request_id:randomUUID(),return_to:'/account/dashboard',terms_version:'test-only-v1',product_revision:'test-only'})).status,503)
   assert.equal((await call('student/premium-content.php?file=study-material%2Fessay-themes.json')).status,503)

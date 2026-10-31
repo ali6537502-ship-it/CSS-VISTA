@@ -51,7 +51,7 @@ function cssv_topic_detail(PDO $pdo,string $user,string $attempt,string $topic):
     // Teaching retries must not push the most recent complete check out of a history page.
     $latest=[];$q=$pdo->prepare('SELECT id,topic_version_id,mode,result,created_at FROM attempt_topic_checks WHERE user_id=? AND attempt_id=? AND topic_version_id=? AND mode=? ORDER BY created_at DESC,id DESC LIMIT 1');
     foreach(['learn','revision'] as $mode){$q->execute([$user,$attempt,$row['version_id'],$mode]);if($check=$q->fetch()){$check['topic_id']=$topic;$check['result']=json_decode($check['result'],true,64,JSON_THROW_ON_ERROR);$check['created_at']=cssv_pro_iso($check['created_at']);$latest[]=$check;}}
-    return ['membership'=>$membership,'today'=>cssv_topic_today(),'available'=>$available,'topic'=>array_intersect_key($row,array_flip(['id','title','summary','category','version_id','content_hash'])),'content'=>$available&&$membership['status']==='active'?cssv_topic_client_content($row['definition']):null,'progress'=>$progress,'older_versions'=>$older,'guided_checks'=>$guided,'latest_checks'=>$latest];
+    return ['membership'=>$membership,'today'=>cssv_topic_today(),'available'=>$available,'topic'=>array_intersect_key($row,array_flip(['id','title','summary','category','version_id','content_hash'])),'content'=>$available?cssv_topic_client_content($row['definition']):null,'progress'=>$progress,'older_versions'=>$older,'guided_checks'=>$guided,'latest_checks'=>$latest];
 }
 function cssv_topic_history(PDO $pdo,string $user,string $attempt,?string $topic,int $offset): array {
     cssv_learning_attempt($pdo,$attempt,$user);$where='p.user_id=? AND p.attempt_id=?';$args=[$user,$attempt];if($topic){$where.=' AND p.topic_id=?';$args[]=$topic;}
@@ -70,7 +70,7 @@ function cssv_topic_mutation(PDO $pdo,string $user,array $body): array {
         cssv_learning_owner_lock($pdo,$user);cssv_learning_attempt($pdo,$attempt,$user);
         $q=$pdo->prepare('SELECT payload_hash,result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);
         if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This request was already used for different work.');$pdo->commit();return json_decode($prior['result'],true,64,JSON_THROW_ON_ERROR);}
-        cssv_pro_require_active($pdo,$user);$row=cssv_topic_published($pdo,$topic,true);
+        /* Free account learning; ownership and CSRF remain enforced by the caller. */$row=cssv_topic_published($pdo,$topic,true);
         if($row['version_id']!==$version||!is_string($body['content_hash']??null)||!hash_equals($row['content_hash'],$body['content_hash']))throw new DomainException('This lesson changed. Earlier work is preserved; open the current edition before continuing.');
         $definition=$row['definition'];$r=cssv_topic_progress($pdo,$user,$attempt,$version);
         if($r['version']!==$expected)throw new DomainException('This topic was updated on another device. Keep your draft and refresh its saved version.');

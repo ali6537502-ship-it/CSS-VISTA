@@ -7,13 +7,11 @@ import {
   CheckCircle2,
   Clock3,
   History as HistoryIcon,
-  LockKeyhole,
   Search,
 } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { useLearning } from '@/features/learning/api'
 import { field, secondary } from '@/features/preparation/api'
-import { useMembershipExpired } from '@/features/membership/api'
 import TopicLesson from './Lesson'
 import { topicPanel } from './styles'
 import { categories, checkLabels, stateLabels, type Catalog, type History } from './types'
@@ -42,7 +40,7 @@ function TopicHistory({ attempt }: { attempt: string }) {
         </button>
       </div>
       <p className="text-sm leading-6 text-slate-600">
-        Your notes, independent writing and earned check results remain readable after Pro expires.
+        Your notes, independent writing and earned check results stay in your free account.
         Earlier lesson editions keep their own progress.
       </p>
       {!load.data.records.length && (
@@ -149,8 +147,6 @@ export default function TopicWorkspace({
   const load = useLearning<Catalog>(
     `topics.php?offset=${offset}&category=${encodeURIComponent(category)}&search=${encodeURIComponent(search)}${attempt ? `&attempt=${attempt}` : ''}`,
   )
-  const expired = useMembershipExpired(load.data?.membership.expires_at),
-    active = load.data?.membership.status === 'active' && !expired
   function nav(fields: Record<string, string | null>) {
     const next = new URLSearchParams(params)
     next.set('view', 'topics')
@@ -259,18 +255,6 @@ export default function TopicWorkspace({
             </div>
           ) : (
             <>
-              {!active && (
-                <aside className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-indigo-200 bg-indigo-50 p-5">
-                  <p className="flex items-start gap-3 text-sm leading-6 text-indigo-950">
-                    <LockKeyhole className="mt-1 h-5 w-5 shrink-0" aria-hidden="true" />
-                    Active Pro opens these lessons and their practice. Your own saved work remains
-                    available in topic history.
-                  </p>
-                  <Link className={secondary} to="/account/membership">
-                    Explore Pro
-                  </Link>
-                </aside>
-              )}
               {attempt && (
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                   {[

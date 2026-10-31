@@ -26,16 +26,19 @@ const a = await user('active'), b = await user('other'), free = await user('free
 php('tests/precis/fixture.php', 'activate', a.id); php('tests/precis/fixture.php', 'activate', b.id)
 php('tests/skills/fixture.php','config','off')
 assert.equal((await call(endpoint)).status, 401)
-assert.equal((await call(endpoint, free.jar)).data.catalog.length, 0)
+assert.ok((await call(endpoint, free.jar)).data.catalog.length > 0)
 assert.equal((await call(endpoint, a.jar, undefined, { 'X-CSSV-User': b.id })).status, 409)
 const attempt = await call('student/learning.php', a.jar, { action: 'attempt_save', request_id: randomUUID(), expected_version: 0, target_year: 2027, target_date: null, optional_subject_ids: [], daily_minutes: 60, stage: 'starting' })
 assert.equal(attempt.status, 200)
+const freeAttempt = await call('student/learning.php', free.jar, { action: 'attempt_save', request_id: randomUUID(), expected_version: 0, target_year: 2027, target_date: null, optional_subject_ids: [], daily_minutes: 60, stage: 'starting' })
+assert.equal(freeAttempt.status, 200)
 const raw = JSON.parse(readFileSync(new URL('../../public/api/_premium_files/skills-curriculum.json', import.meta.url)))
 const roadmap = JSON.parse(readFileSync(new URL('../../public/study-material/essay-themes.json', import.meta.url)))
 const body = fields => ({ request_id: randomUUID(), ...fields })
 const run = async (feature, chosen, level = chosen.level) => {
   const start = body({ action: 'start', feature, lesson: chosen.id, level, attempt_id: attempt.data.attempt_id, statement: 'A hypothetical library access policy needs a limited trial.' })
-  assert.equal((await call(endpoint, free.jar, start)).status, 403)
+  assert.equal((await call(endpoint, free.jar, start)).status, 404)
+  assert.equal((await call(endpoint, free.jar, { ...start, request_id: randomUUID(), attempt_id: freeAttempt.data.attempt_id })).status, 200, 'Free student could not start an owned lesson')
   assert.equal((await call(endpoint, a.jar, start, { 'X-CSRF-Token': 'bad' })).status, 403)
   const created = await call(endpoint, a.jar, start); assert.equal(created.status, 200, JSON.stringify(created.data))
   const id = created.data.workspace_id
@@ -130,9 +133,9 @@ assert.equal((await call('student/ai-usage.php',a.jar)).data.operations.length,0
 assert.equal((await call(endpoint,a.jar,body({action:'evaluate',workspace_id:parent.id,version_id:adopted.data.version_id,policy_version:'not-configured',policy_hash:'0'.repeat(64),accepted:true}))).status,503)
 php('tests/pro/fixture.php','expire',a.id)
 const expired=(await call(endpoint+'?workspace_id='+parent.id,a.jar)).data
-assert.equal(expired.workspace.source.explanation,undefined)
+assert.ok(expired.workspace.source.explanation)
 assert.equal(expired.saved.text,changed.saved.text)
-assert.equal((await call(endpoint,a.jar,body({action:'save',workspace_id:parent.id,expected_version:changed.workspace.version,stage:'thesis',response:'This new paid attempt is not allowed after expiry.'}))).status,403)
+assert.equal((await call(endpoint,a.jar,body({action:'save',workspace_id:parent.id,expected_version:changed.workspace.version,stage:'thesis',response:'This independent practice remains free after membership expiry.'}))).status,200)
 
 assert.equal((await call(endpoint+'?request_id='+parent.lastRequest.request_id,a.jar)).data.version_id,parent.last.version_id)
 assert.equal((await call(endpoint,a.jar,parent.lastRequest)).data.version_id,parent.last.version_id)

@@ -1,0 +1,33 @@
+name: English Expression Guide
+on:
+  pull_request:
+    paths:
+      - 'src/features/expression-guide/**'
+      - 'src/pages/account/Expression.tsx'
+      - 'tests/expressionGuide.test.ts'
+      - 'tests/browser/expression-guide.mjs'
+      - '.github/workflows/english-expression-guide.yml'
+permissions:
+  contents: read
+jobs:
+  guide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run install:ci
+      - run: npm run test:expression-guide
+      - run: npm run typecheck
+      - run: npx --no-install eslint src/features/expression-guide src/pages/account/Expression.tsx tests/browser/expression-guide.mjs
+      - run: npm ci --prefix tests/browser --ignore-scripts
+      - run: node tests/browser/node_modules/playwright-core/cli.js install --with-deps chromium
+      - run: node tests/browser/expression-guide.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: english-guide-review
+          path: test-artifacts/english-guide-*.png
+          if-no-files-found: ignore

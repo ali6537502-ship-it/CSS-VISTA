@@ -7,7 +7,7 @@ function cssv_skills_ensure(PDO $pdo): void {
     try{foreach(cssv_skills_schema_statements() as $sql)$pdo->exec($sql);$ready=true;}finally{$pdo->query("SELECT RELEASE_LOCK('cssvista-skills-schema-v1')");}
 }
 function cssv_skills_resume(PDO $pdo,string $user,string $attempt): array {
-    if(!cssv_learning_has_guided($pdo)||cssv_pro_membership($pdo,$user)['status']!=='active')return [];
+    if(!cssv_learning_has_guided($pdo))return [];
     $q=$pdo->prepare('SELECT id FROM skills_workspaces WHERE user_id=? AND attempt_id=? AND version>0 ORDER BY updated_at DESC,id DESC LIMIT 6');$q->execute([$user,$attempt]);$rows=[];
     foreach($q->fetchAll(PDO::FETCH_COLUMN) as $id){
         $w=cssv_skills_workspace($pdo,$user,$id);$v=cssv_skills_version($pdo,$user,$w);$stage=$w['source']['stages'][$v['evidence']['next']];
@@ -57,7 +57,7 @@ function cssv_skills_mutation(PDO $pdo,string $user,array $body): array {
         cssv_learning_owner_lock($pdo,$user);
         $q=$pdo->prepare('SELECT payload_hash,result FROM learning_requests WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);
         if($r=$q->fetch()){if(!hash_equals($r['payload_hash'],$hash))throw new DomainException('This request identity was used for different work.');$pdo->commit();return json_decode($r['result'],true,32,JSON_THROW_ON_ERROR);}
-        cssv_pro_require_active($pdo,$user);
+        /* Free account learning; ownership and CSRF remain enforced by the caller. */
         if($action==='start'||$action==='transfer'){
             $feature=cssv_skills_feature($body['feature']??null);$level=$body['level']??'';$source=cssv_skills_source($feature,$body['lesson']??null,$level);
             if($action==='transfer'){

@@ -10,7 +10,6 @@ import PreparationPlan from './Plan'
 import Coverage from './Coverage'
 import ConnectedReading from './Reading'
 import TopicWorkspace from '@/features/topics/Workspace'
-import { ProBadge } from '@/features/membership/AccountSections'
 import { PlanHistory, Readiness, Reviews } from './Reports'
 import '@/features/planner/planner.css'
 const ResetPanel = lazy(() => import('@/features/preparation-reset/ResetPreparationPanel'))
@@ -18,7 +17,7 @@ const views = [
   ['plan', 'Today’s plan'],
   ['coverage', 'Coverage'],
   ['reading', 'Reading & revision'],
-  ['topics', 'Pro topic learning'],
+  ['topics', 'Subject learning'],
   ['readiness', 'Preparation evidence'],
   ['reviews', 'Reviews'],
   ['history', 'History'],
@@ -68,7 +67,7 @@ function PreviewPreparationWorkspace({
         </button>
       </header>
       <nav aria-label="Attempt workspace" className="pl-view-nav">
-        {views.filter(([id]) => !paused || id !== 'topics').map(([id, label]) => (
+        {views.map(([id, label]) => (
           <button
             key={id}
             aria-current={view === id ? 'page' : undefined}
@@ -81,7 +80,6 @@ function PreviewPreparationWorkspace({
             }}
           >
             {label}
-            {id === 'topics' && <ProBadge />}
           </button>
         ))}
       </nav>

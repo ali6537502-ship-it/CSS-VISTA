@@ -4,6 +4,7 @@ import { useAccount } from '@/lib/accountContext'
 import { AccountPage } from './shared'
 import { lazy, Suspense } from 'react'
 const Studio = lazy(() => import('@/features/skills/Studio'))
+const ExpressionGuide = lazy(() => import('@/features/expression-guide/Guide'))
 import { useLearning } from '@/features/learning/api'
 import { panelStyle, primaryStyle, secondaryStyle } from '@/features/handwriting/styles'
 import { pakistanTime } from '@/features/membership/api'
@@ -28,4 +29,19 @@ function Workspace() {
   <div className="flex flex-wrap gap-4 border-t border-slate-200 pt-5 text-sm"><Link to="/account/preparation" className="inline-flex min-h-11 items-center font-semibold text-indigo-700 hover:underline">My preparation and all writing</Link><Link to="/account/handwriting" className="inline-flex min-h-11 items-center font-semibold text-indigo-700 hover:underline">Handwritten paragraph</Link><Link to="/account/ai-usage" className="inline-flex min-h-11 items-center font-semibold text-indigo-700 hover:underline">AI usage and earlier results</Link></div>
  </div>
 }
-export default function ExpressionPage() { const { user } = useAccount(); const [params] = useSearchParams(); return <AccountPage title="English Expression Lab" intro="Write, understand and revise through your own wording."><nav aria-label="Expression modes" className="mb-6 flex flex-wrap gap-4 text-sm font-semibold"><Link className="inline-flex min-h-11 items-center underline" to="/account/expression?view=studio">Sentence Structure &amp; Improvement ★ Pro</Link><Link className="inline-flex min-h-11 items-center underline" to="/account/expression">Independent Expression Lab</Link></nav>{params.get('view') === 'studio' ? <Suspense fallback={<p role="status">Opening guided sentence practice…</p>}><Studio key={`${user?.id}:sentence`} feature="sentence" /></Suspense> : <Workspace key={user?.id} />}</AccountPage> }
+export default function ExpressionPage() {
+ const { user } = useAccount()
+ const [params] = useSearchParams()
+ // Preserve bookmarks to existing saved writing while making the free guide the starting point.
+ const view = params.get('view') === 'studio' ? 'studio' : params.get('view') === 'lab' || params.has('writing') || params.has('new') || params.has('offset') ? 'lab' : 'guide'
+ return <AccountPage title="English Expression" intro="Understand sentence structure, practise clear expression and revise with purpose.">
+  <nav aria-label="Expression modes" className="mb-6 flex flex-wrap gap-3 text-sm font-semibold">
+   {[['guide', 'English Expression Guide', '/account/expression?view=guide'], ['studio', 'Sentence practice', '/account/expression?view=studio'], ['lab', 'My saved writing', '/account/expression?view=lab']].map(([id, label, to]) => <Link key={id} aria-current={view === id ? 'page' : undefined} className={`inline-flex min-h-11 items-center rounded-xl border px-4 ${view === id ? 'border-emerald-800 bg-emerald-50 text-emerald-900' : 'border-slate-200'}`} to={to}>{label}</Link>)}
+  </nav>
+  <Suspense fallback={<p role="status">Opening English learning…</p>}>
+   <div hidden={view !== 'guide'}><ExpressionGuide key={user?.id || 'guest'} /></div>
+   {view === 'studio' && <Studio key={`${user?.id}:sentence`} feature="sentence" />}
+   {view === 'lab' && <Workspace key={user?.id} />}
+  </Suspense>
+ </AccountPage>
+}

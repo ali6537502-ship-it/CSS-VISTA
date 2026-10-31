@@ -9,7 +9,6 @@ import {
   primaryStyle,
   secondaryStyle,
 } from "@/features/handwriting/styles";
-import { ProBadge } from "@/features/membership/AccountSections";
 import { grammarLink } from "@/features/expression/api";
 import { useStudioSave } from "./useStudioSave";
 import {
@@ -597,7 +596,6 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
         disabled={
           !field ||
           !lesson ||
-          detail.membership.status !== "active" ||
           save.busy ||
           !!save.pending
         }
@@ -652,8 +650,7 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
                 disabled={
                   save.busy ||
                   !!save.pending ||
-                  !child.version_id ||
-                  detail.membership.status !== "active"
+                  !child.version_id
                 }
                 onClick={() => setReview(child.id)}
               >
@@ -744,7 +741,7 @@ function Session({
       ? `skills.php?workspace_id=${w.id}&version_id=${compare}`
       : undefined,
   );
-  const active = detail.membership.status === "active";
+  const active = true; // Authenticated learning is free.
   const old = !!saved && Number(saved.version) !== w.version;
   const stage = w.source.stages[Math.min(position, w.source.stages.length - 1)];
   return (
@@ -752,7 +749,7 @@ function Session({
       <section className={`${panelStyle} space-y-4`}>
         <div className="flex flex-wrap gap-3">
           <h2 className="text-2xl font-semibold">{w.source.title}</h2>
-          <ProBadge />
+          <span className="text-xs font-semibold text-emerald-800">Free</span>
         </div>
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
           {w.level} · {w.version} saved versions
@@ -835,15 +832,6 @@ function Session({
             Defensible answer: {saved.evidence.check_feedback.answer}
           </p>
         </section>
-      )}
-      {!active && (
-        <p role="status" className="rounded-xl border p-5 text-sm leading-7">
-          Your saved versions and feedback remain here.{" "}
-          <Link className="font-semibold underline" to="/account/membership">
-            Renew Pro
-          </Link>{" "}
-          to open lessons and record new paid practice.
-        </p>
       )}
       {old && (
         <p className="text-sm leading-7">
@@ -1033,7 +1021,7 @@ export default function Studio({ feature }: { feature: Feature }) {
       <header className="space-y-3">
         <div className="flex flex-wrap items-center gap-3">
           <h2 className="text-2xl font-semibold">{feature === "sentence" ? names[feature] : "Your learning workspace"}</h2>
-          <ProBadge />
+          <span className="text-xs font-semibold text-emerald-800">Free</span>
         </div>
         <p className="text-sm leading-7 text-slate-600">
           Learn an idea, attempt one activity, review your own work and save an
@@ -1090,26 +1078,7 @@ export default function Studio({ feature }: { feature: Feature }) {
         overview.data && (
           <>
             <Availability config={overview.data.configuration} />
-            {overview.data.membership.status === "active" ? (
-              <Start
-                key={feature}
-                feature={feature}
-                data={overview.data}
-                save={save}
-                selected={params.get("theme") || undefined}
-              />
-            ) : (
-              <p className={`${panelStyle} text-sm leading-7`}>
-                An active Pro membership is required for new lessons and paid
-                practice. Your own earlier work remains in the list below.{" "}
-                <Link
-                  className="font-semibold underline"
-                  to="/account/membership"
-                >
-                  View membership
-                </Link>
-              </p>
-            )}
+            <Start key={feature} feature={feature} data={overview.data} save={save} selected={params.get("theme") || undefined} />
             <section className={`${panelStyle} space-y-4`}>
               <h3 className="text-xl font-semibold">Continue saved work</h3>
               {overview.data.history.length ? (

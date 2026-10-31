@@ -73,7 +73,7 @@ try{
  assert.equal(await page.getByLabel('Select a passage (optional)',{exact:false}).inputValue(),improved+original.slice(selected.length))
  mkdirSync(root+'/test-artifacts',{recursive:true});await page.screenshot({path:root+'/test-artifacts/skills-mobile.png',fullPage:true})
  await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:root+'/test-artifacts/skills-desktop.png',fullPage:true})
- php('tests/pro/fixture.php','expire',id);await page.reload();await page.getByText('Your saved versions and feedback remain here.',{exact:false}).waitFor();assert.equal(await page.locator('form textarea').count(),0)
+ php('tests/pro/fixture.php','expire',id);await page.reload();await page.getByRole('heading',{name:'Saved work and earlier versions',exact:true}).waitFor();await page.getByRole('button',{name:'Save independent response',exact:true}).waitFor();assert.ok(await page.locator('form textarea').count()>0,'Membership expiry blocked free writing practice')
  assert.deepEqual(errors,[])
- console.log('PASS actual built browser: four skills entry journeys, save/resume, owned Ask VISTA, 320–1440 widths, lost response receipt recovery, immutable comparison, selected-passage linked revision and return, independent signed-in device and expired read-only history; no real provider calls')
+ console.log('PASS actual built browser: four skills entry journeys, save/resume, owned Ask VISTA, 320–1440 widths, lost response receipt recovery, immutable comparison, selected-passage linked revision and return, independent signed-in device and free writing practice after membership expiry; no real provider calls')
 }catch(e){console.log('Browser failed at',new URL(page.url()).pathname);throw e}finally{await browser.close()}
