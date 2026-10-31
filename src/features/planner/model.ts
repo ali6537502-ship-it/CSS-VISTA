@@ -1,7 +1,7 @@
 import type { StudyScheduleTask } from '../../lib/store.ts'
 import type { ReviewSchedule } from '../../lib/progress.ts'
 
-export const plannerViews = ['today', 'week', 'syllabus', 'revision', 'goals', 'settings'] as const
+export const plannerViews = ['today', 'week', 'syllabus', 'revision', 'goals', 'pms', 'settings'] as const
 export type PlannerView = typeof plannerViews[number]
 export function plannerHref(path: string, params: URLSearchParams, view: PlannerView, hash = '') {
   const destination = ['/account/tasks', '/account/plan', '/study-planner'].includes(path) ? path : '/study-planner'

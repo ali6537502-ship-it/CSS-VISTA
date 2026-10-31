@@ -16,6 +16,7 @@ if ($action==='select') {
     $config['CSSV_WORKSPACE_PREVIEW_TEST_EMAIL_SHA256']=hash('sha256',$email);
     $config['CSSV_WORKSPACE_PREVIEW_ENABLED']='1';
 } elseif ($action==='off') $config['CSSV_WORKSPACE_PREVIEW_ENABLED']='0';
+elseif ($action==='unpaused') $config['CSSV_PRO_RELEASE_TEST_PAUSED']='0';
 elseif ($action==='paused') $config['CSSV_PRO_RELEASE_TEST_PAUSED']='1';
 elseif ($action==='unverify') {
     $email=strtolower($argv[2] ?? ''); if (!str_ends_with($email,'@example.invalid')) exit(1);

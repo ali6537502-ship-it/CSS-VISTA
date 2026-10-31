@@ -13,6 +13,8 @@ const email=`classic-profile-${randomUUID()}@example.invalid`
 const setup=['tests/current-affairs/setup.php','user',email]
 if(process.env.CSSV_TEST_PHP_CONTAINER)execFileSync('docker',['--host=unix:///var/run/docker.sock','exec',process.env.CSSV_TEST_PHP_CONTAINER,'php',...setup],{env,stdio:'pipe'})
 else execFileSync('php',setup,{env,stdio:'pipe'})
+const fixture=(...args)=>process.env.CSSV_TEST_PHP_CONTAINER?execFileSync('docker',['--host=unix:///var/run/docker.sock','exec',process.env.CSSV_TEST_PHP_CONTAINER,'php','tests/workspace-preview/fixture.php',...args],{env,stdio:'pipe'}):execFileSync('php',['tests/workspace-preview/fixture.php',...args],{env,stdio:'pipe'})
+fixture('off')
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath(),headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:390,height:844}})
 await isolateNetwork(context,base)
@@ -56,4 +58,4 @@ try {
   await page.reload();assert.equal(await city.inputValue(),'TEST ONLY pending city')
   stored=await read();assert.deepEqual(JSON.parse(stored.optional_subjects),subjects);assert.equal(stored.previous_css_vista_details,'TEST ONLY retained history')
   console.log('PASS classic profile: genuine edits, independent field merge, imported subject commas/history retained, failed-save draft retained, conflict review/retry and refresh.')
-} finally {await browser.close()}
+} finally {await browser.close(); fixture('select',email)}

@@ -1,0 +1,263 @@
+                   PUNJAB PUBLIC SERVICE COMMISSION
+        COMBINED COMPETITIVE EXAMINATION (CCE) SYLLABUS
+
+
+             ENGINEERING FUNDAMENTALS AND ENGINEERING
+                           MANAGEMENT
+Total Marks: 100
+
+                     PART A:        ENGINEERING FUNDAMENTALS
+1.   APPLIED PHYSICS:
+     A. Measurement and mathematical description: SI units, dimensions and dimensional
+     consistency; scalars and vectors; significant figures; measurement uncertainty and
+     interpretation of graphs and experimental data.
+     B. Classical mechanics and waves: Density; gravity; position, velocity and
+     acceleration; mass, momentum, force and energy; angular momentum and torque; work
+     and power; conservation laws, oscillations and engineering applications.
+     C. Quantum mechanics and particle physics: Planck’s constant, quanta and
+     quantization; matrix and wave mechanics at an introductory level; quantum harmonic
+     oscillator; quantum numbers and spin; wave function; wave-particle duality; zero-point
+     energy; Pauli’s exclusion principle and Heisenberg’s uncertainty principle; fundamental
+     forces; elementary particles, antimatter, quantum gravity and vacuum energy at
+     conceptual level.
+     D. Relativity: Principle of relativity; inertial frames and invariance; speed of light;
+     length contraction and time dilation; rest mass and rest energy; gravity, general relativity
+     and stress-energy tensor at conceptual level.
+     E. Optics: Ray and wave optics; reflection, refraction and scattering; lenses, mirrors and
+     prisms; diffraction, dispersion and polarization; aberrations, optical resolution and
+     optical instruments.
+     F. Solid-state physics: Amorphous and crystalline solids; crystal structures; free-
+     electron model; valence and conduction bands, band gap, electron and hole excitation;
+     superconductivity and crystal optics.
+
+     Suggested readings:
+        1. Hugh D. Young and Roger A. Freedman, Sears and Zemansky's University
+           Physics with Modern Physics.
+        2. Karl F. Kuhn, Basic Physics.
+        3. David Halliday, Robert Resnick and Jearl Walker, Fundamentals of Physics.
+        4. Douglas C. Giancoli, Physics for Scientists and Engineers with Modern Physics.
+2.    APPLIED CHEMISTRY:
+      A. Chemical foundations: Atomic structure, periodic trends, chemical bonding,
+      stoichiometry and concentration calculations; acids, bases, pH and buffers.
+      B. Gases, liquids and solutions: Boyle's law and Charles's law; gas constant; Dalton's
+      partial-pressure law; Graham's diffusion law; kinetic theory and heat capacity of gases;
+      vapour pressure and boiling point; surface tension, viscosity, refractive index,
+      polarimetry, intermolecular and intramolecular forces; ideal and non-ideal solutions,
+      Raoult's law and Henry's law, solubility curves and heat of solution.
+      C. Solid state and X-rays: Crystalline structure and properties; production of X-rays and
+      crystal-structure applications; heat capacities of solids.
+      D. Electrochemistry: Electrolysis; electrolytic conductance and migration of ions;
+      galvanic, reversible and irreversible cells; standard electrode potentials; electrochemical
+      series, buffer solutions and engineering applications.
+      E. Thermochemistry and kinetics: Heat of reaction, basic chemical equilibrium and
+      factors affecting reaction rate.
+      F. Industrial chemistry: Corrosion mechanisms and control; water hardness and
+      treatment; fuels and combustion; lubricants; cement chemistry; environmental chemistry,
+      chemical hazards and safety.
+      G. Basic analytical methods: Titrimetry, spectrophotometry and chromatography:
+      principles and interpretation at introductory level.
+
+     Suggested readings:
+
+       1.   P. C. Jain and Monica Jain, Engineering Chemistry.
+       2.   Shashi Chawla, A Textbook of Engineering Chemistry.
+       3.   S. S. Dara and S. S. Umare, A Textbook of Engineering Chemistry.
+       4.   B. K. Sharma, Engineering Chemistry.
+
+
+3.    APPLIED ELECTRICITY AND ELECTRONICS:
+      A. Circuit fundamentals: Electrical potential; resistance, conductance, conductivity and
+      impedance; Ohm's law; series and parallel circuits; practical resistors; work, power,
+      energy and Joule's law; capacitance and capacitors in series/parallel; AC quantities.
+      Network solution methods: Kirchhoff's laws; nodal and mesh analysis; source
+      transformation; Thevenin, Norton and maximum-power-transfer theorems.
+      B. Electricity and magnetism: Electric-field intensity and Gauss's theorem; capacitors,
+      capacitance; capacitors in series and parallel; force on a current-carrying conductor;
+      electric and magnetic circuits and leakage flux; Faraday's and Lenz's laws; induced
+      emf/current; self and mutual inductance and series/parallel combinations; hysteresis;
+      magnetic-field energy; generation of alternating voltage/current.
+      C. Machines and transformers: DC shunt, series, and compound motors; speed-torque
+      relations; single- and three-phase induction and synchronous motors; generators;
+      transformers; principle, construction, ratios, connections, losses, performance and
+      efficiency.
+     D. Electronics and digital systems: n- and p-type materials; PN junctions and diodes;
+     transistor types and basic circuit calculations; Class A/B and feedback amplifiers; RC
+     oscillators; op-amps, timers, flip-flops, converters and filters.
+     Digital logic and embedded systems: Number systems, Boolean logic,
+     combinational/sequential circuits, microcontrollers and embedded-system concepts.
+     E. Communication, signals and control: EM theory, antennas, gain, free-space loss
+     and fading; AM, FM, PM, PWM, delta modulation, FSK, ASK and PSK; error
+     correction, demodulation, detectors, transmitters and receivers; filters, Z-transform, S-
+     domain, transfer functions, Nyquist criterion and stability.
+     F. Computing: Computer evolution; CPU, storage, input/output and multimedia;
+     operating systems and programming languages; networks and internet; systems analysis
+     and design; MIS and e-commerce; security, privacy and professional ethics.
+     G. Power systems: Network analysis; polyphase circuits; transients; transmission lines
+     and losses.
+     Protection, measurement and modern power: Electrical measurements, sensors and
+     transducers; protection and earthing; electrical safety; power factor; introductory power
+     electronics, renewable-energy integration and smart grids.
+
+     Suggested readings:
+
+         1. B. L. Theraja and A. K. Theraja, A Textbook of Electrical Technology.
+         2. B. P. Lathi and Zhi Ding, Modern Digital and Analog Communication Systems.
+         3. William Stallings, Wireless Communications and Networks.
+         4. Charles K. Alexander and Matthew N. O. Sadiku, Fundamentals of Electric
+            Circuits.
+         5. Stephen J. Chapman, Electric Machinery Fundamentals.
+         6. Thomas L. Floyd, Electronic Devices.
+         7. M. Morris Mano and Michael D. Ciletti, Digital Design.
+
+
+4.   MECHANICAL ENGINEERING FUNDAMENTALS:
+      A. Engineering mechanics and strength of materials: Force systems, equilibrium,
+      friction, centroid and geometric properties; motion, work and energy; stress and strain;
+      engineering and true stress/strain; elastic and plastic deformation; tensile testing and
+      stress-strain curve; yield and ultimate strength; elongation, toughness, resilience,
+      ductility and malleability; shear, bending, torsion, bending moment and principal
+      stresses; Brinell and Rockwell hardness.
+      B. Fluid mechanics and machines: Fluid properties; statics and dynamics; laminar
+      and turbulent flow and Reynolds number; continuity, momentum and energy
+      concepts; head loss; power transmission by fluids; pumps and turbines.
+      C. Thermodynamics and heat transfer: Properties of fluids and steam; first and
+      second laws; enthalpy, entropy and heat capacity; Carnot cycle; Gibbs free energy and
+      equilibrium; PV diagrams; heat engines; two and four-stroke heat engines; steam
+      turbines and power plants; refrigeration and air conditioning; conduction, convection
+      and radiation; evaporators and condensers.
+        D. Manufacturing: Casting, forging, rolling, extrusion, wire drawing, welding,
+        machining, turning, milling, shaping, gear cutting, drilling and fitting.
+        E. Machine and production practices: Basic machine elements and design
+        considerations; metrology, limits, fits, tolerances and surface finish; engineering
+        drawing and CAD/CAM, CNC and additive manufacturing concepts; instrumentation,
+        condition monitoring, maintenance and workshop safety.
+     Suggested readings:
+     1. J. L. Meriam and L. G. Kraige, Engineering Mechanics: Statics.
+     2. William A. Nash, Schaum's Outline of Strength of Materials.
+     3. Serope Kalpakjian and Steven R. Schmid, Manufacturing Engineering and
+        Technology.
+     4. R. C. Hibbeler, Mechanics of Materials.
+     5. Yunus A. Cengel and Michael A. Boles, Thermodynamics: An Engineering
+        Approach.
+     6. Yunus A. Cengel and John M. Cimbala, Fluid Mechanics: Fundamentals and
+        Applications.
+     7. R. S. Khurmi and J. K. Gupta, A Textbook of Machine Design.
+
+5.   MATERIALS ENGINEERING :
+     A. Structure of materials: Classification of materials; atomic structure and metallic
+     bonding; crystal structures and geometry.
+     Crystal defects and diffusion: Point, line and surface defects; diffusion mechanisms and
+     their engineering significance.
+     B. Metallic materials: Mechanical properties of metals and alloys; ferrous and non-
+     ferrous metals and alloys; industrial applications.
+     Phase relations and heat treatment: Binary phase diagrams; iron-carbon system; phase
+     transformations; annealing, normalizing, hardening and tempering.
+     C. Polymers, ceramics and glasses: Polymerization; general-purpose and engineering
+     thermoplastics, thermosets and rubbers; traditional and engineering ceramics; ceramic
+     processing and electrical, mechanical and thermal properties; glasses.
+     D. Composites and advanced materials: Particle-, fibre-, and laminate-reinforced
+     composites; introductory nanomaterials, biomaterials and functional materials.
+     E. Behaviour, testing and selection: Tensile, hardness, impact and fatigue concepts;
+     fracture, creep, corrosion and wear; introductory optical and electron microscopy, and X-
+     ray characterization; material selection based on performance, cost, safety and
+     sustainability.
+     Suggested readings:
+     1. William F. Smith and Javad Hashemi, Foundations of Materials Science and
+        Engineering.
+     2. Sidney H. Avner, Introduction to Physical Metallurgy.
+     3. William D. Callister Jr. and David G. Rethwisch, Materials Science and
+        Engineering: An Introduction.
+     4. Michael F. Ashby, Materials Selection in Mechanical Design.
+     5. D. R. H. Jones and Michael F. Ashby, Engineering Materials
+6.   CIVIL ENGINEERING FUNDAMENTALS:
+      A. Structures: Stress, strain, shearing force and bending moment; simply supported and
+     cantilever beams; columns and footings; basic structural behaviour; pulleys and gears as
+     elementary mechanics applications.
+      B. Civil engineering materials and construction: Properties and uses of cement,
+     aggregates, concrete, steel, bitumen and masonry; basic construction methods, estimation
+     and quality control.
+      C. Surveying and geomatics: Distance, angle and level measurement; traversing,
+     contours and setting out; introductory total station, GNSS and GIS concepts.
+       D. Geotechnical engineering: Soil classification, compaction, consolidation,
+     permeability, shear strength, bearing capacity, settlement, soil improvement, and slope
+     stability and its mitigation at an introductory level.
+     E. Transportation engineering: Highway administration and scheme preparation; traffic
+     and environmental appraisal; highway geometry, drainage, lighting, signing,
+     communications and safety; urban roads and traffic; pavement materials and basics;
+     maintenance and low-cost roads in developing countries.
+     F. Environmental engineering: Environmental impacts of water-resource and
+     transportation projects; water supply and distribution; wastewater treatment and
+     management.
+     Solid waste, pollution, and assessment: Municipal solid-waste management; air, noise
+     and smog pollution basics; environmental-impact assessment and mitigation.
+     G. Hydraulics and water-resources engineering: Fluid properties; pressure- and flow-
+     measuring devices; pipeline losses; open channels; barrages and dams.
+     Hydrology and resilience: Hydrologic cycle, rainfall-runoff and flood concepts; climate-
+     resilient infrastructure, disaster-risk awareness and occupational safety.
+
+     Suggested readings:
+        1. A. M. Neville, Properties of Concrete.
+        2. T. P. Kanetkar, Surveying and Levelling.
+        3. E. John Finnemore and Joseph B. Franzini, Fluid Mechanics with Engineering
+           Applications.
+        4. M. S. Shetty, Concrete Technology: Theory and Practice.
+        5. B. C. Punmia, Ashok Kumar Jain and Arun Kumar Jain, Surveying.
+        6. K. R. Arora, Soil Mechanics and Foundation Engineering.
+        7. L. R. Kadiyali, Traffic Engineering and Transport Planning.
+        8. S. K. Garg, Water Supply Engineering; and Sewage Disposal and Air Pollution
+           Engineering.
+                PART B: ENGINEERING MANAGEMENT
+1.   ENGINEERING MANAGEMENT:
+
+     Engineering Economy, Cost and Financial Management
+     Cost classification and estimation; time value of money; simple and compound interest;
+     cash-flow diagrams; present and future worth; Net Present Value (NPV)and Net Future
+     Value (NFV); annual worth; internal rate of return; benefit-cost ratio; break-even
+     analysis; budgeting; basic income statement and balance sheet; depreciation, inflation,
+     replacement, life-cycle costing, financial risk and sensitivity analysis.
+     Project, Risk and Professional Management
+     Project objectives and life cycle; scope and work-breakdown structure; timelines,
+     milestones, dependencies and Gantt charts; CPM and PERT; resource and cost
+     estimation; resource allocation and levelling; progress monitoring; project risk
+     identification, assessment, response and control; procurement, contracts, stakeholders,
+     communication, change control and closure.
+     Professional practices and work ethics: management functions; teamwork and
+     leadership; engineering ethics; public and environmental responsibility; occupational
+     health and safety; technical communication and accountability.
+     Quality, reliability, and testing: Quality planning, assurance, control and improvement;
+     Deming, Juran and Crosby principles; quality circles; management responsibility;
+     purchasing and design validation; test plans, execution, records and reports; destructive
+     and non-destructive testing; inspection, sampling, acceptance criteria, calibration and
+     measurement uncertainty; quality audit and corrective and preventive action.
+     Reliability and improvement tools: PDCA; basic control charts and process capability;
+     root-cause analysis; ISO 9001 concepts; failure modes; reliability, availability,
+     maintainability, verification, validation and traceability.
+     Operations, Production, Inventory and Decision Tools:
+     Production and operations management; manufacturing systems; process selection and
+     optimization; time analysis and work study; resource and raw-material planning;
+     capacity, scheduling and production control; inventory identification and systems; FIFO
+     and LIFO as issue and valuation methods; problem analysis, decision-support systems,
+     decision trees, design of experiments and management tools.
+     Essential operations tools: ABC analysis, EOQ, reorder point, lead time and safety
+     stock; MRP and JIT concepts; method study, process charts, work measurement and
+     standard time; facility layout, productivity, lean principles, 5S, maintenance, safety and
+     waste minimization; SWOT, Pareto and cause-and-effect analysis.
+
+     Suggested readings:
+        1. Dennis Lock, Handbook of Engineering Management.
+        2. O. P. Khanna, Industrial Engineering and Management.
+        3. T. R. Banga and S. C. Sharma, Industrial Engineering and Management Science.
+        4. R. Panneerselvam, Engineering Economics and Management.
+        5. Jay Heizer, Barry Render and Chuck Munson, Operations Management:
+           Sustainability and Supply Chain Management.
+
+
+
+Note:   The above list is only suggestive and not exhaustive. Candidates may consult other
+        standard books and relevant material covering the prescribed syllabus.
+
+
+
+
+                                    End of Document
+

@@ -1,3 +1,4 @@
+import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
 import { useEffect, useMemo, useState } from 'react'
 import { BellRing, Check, Clock3, X } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router'
@@ -14,7 +15,7 @@ type ReminderRecord = Record<string, Partial<Record<ReminderSlot, string>>>
 
 function readReminderRecord(): ReminderRecord {
   try {
-    const parsed = JSON.parse(localStorage.getItem(REMINDER_KEY) || '{}') as unknown
+    const parsed = JSON.parse(localStorage.getItem(preparationPhysicalKey(REMINDER_KEY)) || '{}') as unknown
     return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed as ReminderRecord : {}
   } catch {
     return {}
@@ -30,7 +31,8 @@ function markReminderSeen(slot: ReminderSlot) {
     const cutoffKey = localTaskDateKey(cutoff)
     const cleaned = Object.fromEntries(Object.entries(current).filter(([date]) => date >= cutoffKey)) as ReminderRecord
     cleaned[today] = { ...(cleaned[today] ?? {}), [slot]: new Date().toISOString() }
-    localStorage.setItem(REMINDER_KEY, JSON.stringify(cleaned))
+    if (!preparationWriteCurrent()) throw new Error('Preparation changed. Refresh this page before saving.')
+    localStorage.setItem(preparationPhysicalKey(REMINDER_KEY), JSON.stringify(cleaned))
     notifyProgressChanged()
   } catch {
     // Reminder persistence is helpful but must never block study-task use.

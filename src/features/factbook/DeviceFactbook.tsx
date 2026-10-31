@@ -1,3 +1,5 @@
+import { preparationDeviceKey, preparationWriteCurrent } from '@/lib/preparationStorage'
+import { currentHostingerAccountUser } from '@/lib/hostingerApi'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   BookMarked, Bookmark, Download, Edit3, FileUp, Plus, RefreshCw,
@@ -40,7 +42,7 @@ function makeId() {
 }
 
 function storageKey(userId: string) {
-  return `css-vista-device-factbook:${userId}`
+  return preparationDeviceKey(`css-vista-device-factbook:${userId}`, userId)
 }
 
 function readData(userId: string): DeviceFactbookData {
@@ -176,7 +178,7 @@ export default function DeviceFactbook({ userId, onRetryCloud, retrying }: { use
   const importRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    localStorage.setItem(storageKey(userId), JSON.stringify(data))
+    if (currentHostingerAccountUser() === userId && preparationWriteCurrent()) localStorage.setItem(storageKey(userId), JSON.stringify(data))
   }, [data, userId])
 
   useEffect(() => {

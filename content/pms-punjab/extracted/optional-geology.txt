@@ -1,0 +1,133 @@
+                       PUNJAB PUBLIC SERVICE COMMISSION
+            COMBINED COMPETITIVE EXAMINATION (CCE) SYLLABUS
+
+                                           GEOLOGY
+Total Marks: 100
+
+                                                    Topics
+       1   General Geology: The Earth as a member of the Solar System. Origin, age, composition,
+           and internal structure of the Earth. Major rock-forming minerals. Basic description and
+           classification of igneous, sedimentary, and metamorphic rocks. Geomorphic processes,
+           including internal and external processes. Valley formation and drainage patterns. Glacial
+           processes and landforms.
+       2   Structural Geology: Physical properties of rocks and their mechanical behavior under
+           different tectonic conditions. Stress and strain and their relationship to rock deformation.
+           Deformation through folding and fracturing. Major geological structures, including:
+           Folds, Faults, Joints, Cleavage, Lineations and other linear
+           structures. Structural interpretation in relation to tectonic environments.
+       3   Paleontology: Fundamental principles and techniques of paleontology. Origin and
+           evolution of life through geological time. Fossils and the process of fossilization. Modes
+           of fossil preservation. Classification and identification of fossils. Biostratigraphic
+           applications of fossils. Geological significance and environmental interpretation of
+           fossils.
+       4   Stratigraphy and Sedimentology: Fundamental principles of stratigraphy. Stratigraphic
+           record and its interpretation. Geological Time Scale. Concepts of Sequence stratigraphy
+           and its applications. Origin and sources of sediments. Weathering, erosion,
+           transportation, and deposition of sediments. Sedimentary processes and sedimentary
+           environments. Sedimentary structures and textures.
+           Depositional environments and their interpretation. Importance of Sedimentology in
+           natural resource exploration.
+       5   Mineralogy, Petrology, and Geochemistry: Crystal chemistry and crystal structures.
+           Crystal growth and mineral genesis. Mineral identification and classification. Stability
+           and alteration of minerals. Mineralogical, chemical, textural, and structural characteristics
+           of rocks. Origin, classification, and evolution of Igneous, Sedimentary and Metamorphic
+           rocks. Chemical processes involved in the development and evolution of the Earth.
+           Distribution and abundance of elements in the Earth's crust, atmosphere, and oceans.
+           Stable and volatile elements and their geochemical behavior. Geochemical processes
+           affecting minerals and rocks. Formation and stability of soil minerals.
+
+       6   Earth Resources and Economic Geology: Classification, occurrence, exploration, and
+           utilization of Earth's natural resources. Fossil fuels, including: Coal, Petroleum, Natural
+           gas, Nuclear mineral resources. Uranium and strategic metals. Renewable energy
+           resources. Hydropower resources. Geothermal energy. Water resources: Hydrological
+           cycle Surface water and Groundwater. Construction materials, including: Concrete
+           aggregates, Sand and gravel, Cement-making materials and Building stones.
+           Fundamentals of metallogeny. Mineral deposits and their geological controls. Sustainable
+           management of geological and natural resources.
+                                                     Topics
+
+     7    Fundamentals and scope of engineering geology: Engineering properties of soils and rocks.
+          Principles of excavation in rock and soil. Landslides and their classification in rock and soil.
+          Causes and mechanisms of slope failure. Basic principles of slope stability analysis. Site
+          investigation and geological characterization. Geological considerations in the selection and
+          evaluation of dam sites. Occurrence and movement of groundwater. Aquifers and aquifer
+          properties. Groundwater recharge and discharge.
+     8    Remote Sensing (RS) and Geographic Information Systems (GIS): Principles and
+          applications of remote sensing and GIS. Earth satellite systems and satellite-based observations.
+          Types of remotely sensed data and imagery. Basic principles of image interpretation. GIS data
+          structures and data types. Spatial and attribute data. Methods of spatial data analysis. Data
+          management and visualization. Cartographic modeling. Applications of RS and GIS in
+          geological and environmental studies.
+
+     9    Environmental Geology, Climate, and Climate Change: Introduction to environmental
+          geology. Scientific basis of the climate system and climate change. Geological and
+          environmental evidence of past climate change. Impacts of climate change on different regions
+          of the world. Climate-related geological and environmental hazards. Adaptation and
+          mitigation strategies. Relationship between Earth's geological processes and environmental
+          change.
+     10   Regional Geology and Geology of Pakistan: Geological framework and tectonic evolution
+          of Pakistan. Major geological provinces and tectonic zones of Pakistan. Plate tectonics and its
+          application to the geological evolution of Pakistan. Stratigraphy of the Upper, Middle and
+          Lower Indus Basin. Major Basin of Pakistan. Mineral and energy resources of Pakistan.
+          Metallogeny and mineral deposits of Pakistan. Geological significance of major dams and
+          engineering
+          projects in Pakistan. Major groundwater and surface-water resources of Pakistan.
+     11   Information Technology, Artificial Intelligence, and Digital Applications in Geology:
+          Applications of Information Technology in geological data collection, processing, analysis,
+          and visualization. Introduction to digital geological mapping, databases, GIS, and remote
+          sensing. Fundamentals of Artificial Intelligence (AI), Machine Learning (ML), and Deep
+          Learning (DL). Applications of AI and ML in geological mapping, mineral exploration,
+          geohydrology, engineering geology, and environmental studies. AI-based interpretation of
+          geological, geochemical, geophysical, and remote-sensing data. Applications of drones,
+          LiDAR, 3D geological modelling, and digital mapping.
+
+
+
+
+Suggested readings:
+
+1.        Barnes, J. W., & Lisle, R. J. (2004). Basic Geological Mapping. John Wiley & Sons.
+2.        Bell, F. G. (2004). Engineering Geology and Construction. Spon Press, New York.
+3.        Bender, F. K., & Raza, H. A. (1995). Geology of Pakistan. Gebrüder Borntraeger.
+4.        Best, M. G. (2003). Igneous and Metamorphic Petrology. Blackwell Science.
+
+
+                                                                                                      Page 2 of 3
+5.      Davis, G. H., & Reynolds, S. J. (1996). Structural Geology of Rocks and Regions. John Wiley &
+        Sons.
+6.      Demers, M. N. (2005). Fundamentals of Geographic Information Systems. John Wiley &
+        Sons.
+7.      Emery, D., & Myers, K. J. (1996). Sequence Stratigraphy. Blackwell.
+8.      Hudak, P. F. (2005). Principles of Hydrogeology (3rd ed.). CRC Press.
+9.      Kazmi, A. H., & Abbas, S. G. (2001). Metallogeny and Mineral Deposits of Pakistan.
+        Orient Petroleum Inc.
+10.     Kazmi, A. H., & Jan, M. Q. (1997). Geology and Tectonics of Pakistan. Graphic Publishers.
+11.     Lillesand, T., Kiefer, R. W., & Chipman, J. (2015). Remote Sensing and Image
+        Interpretation. Wiley
+12.     Montgomery, C. W. (2005). Environmental Geology. McGraw-Hill.
+13.     North, F. K. (1985). Petroleum Geology. Allen & Unwin.
+14.     Plummer, C. C., Carlson, D. H., & McGeary, D. Physical Geology. McGraw-Hill.
+15.     Raup, D. M., & Stanley, S. M. (1985). Principles of Paleontology. W. H. Freeman & Co.
+16.     Boggs, S. (1987). Principles of Sedimentology and Stratigraphy.
+17.     Shah, S. I. (1977). Stratigraphy of Pakistan. Geological Survey of Pakistan.
+18.     Solomon, S., Qin, D., & Manning, M. (2007). Climate Change 2007: The Physical Science
+        Basis. Intergovernmental Panel on Climate Change (IPCC).
+19.     Thomas, M. L., & Ralph, W. K. (2003). Remote Sensing and Image
+        Interpretation. John Wiley & Sons.
+20.     William, H. B. (1990). Principles of Mineralogy. Oxford University Press.
+
+
+
+Note:    The above list is only suggestive and not exhaustive. Candidates may consult other standard
+         books and relevant material covering the prescribed syllabus.
+
+
+
+
+                                                End of Document
+
+
+
+
+                                                                                                Page 3 of 3
+

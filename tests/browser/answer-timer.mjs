@@ -4,6 +4,7 @@
 import assert from 'node:assert/strict'
 import { chromium } from 'playwright-core'
 import { resolve } from 'node:path'
+import { mkdirSync } from 'node:fs'
 import { startArtifactPreview } from './artifact-preview.mjs'
 
 const root = new URL('../../', import.meta.url).pathname.replace(/\/$/, '')
@@ -123,6 +124,11 @@ try {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true,
     'Timer setup fits small phones without horizontal scrolling')
   console.log('PASS answer timer: signed overtime, pause, preserved paused paper clocks, corrupted storage, mobile width, no page errors')
+} catch (error) {
+  mkdirSync('test-artifacts/answer-timer', { recursive: true })
+  await page.screenshot({ path: 'test-artifacts/answer-timer/failure.png', fullPage: true }).catch(() => {})
+  console.error(await page.evaluate(() => ({ scroll: scrollY, width: innerWidth, height: innerHeight, buttons: [...document.querySelectorAll('button')].filter(button => button.textContent?.includes('Full Paper:')).map(button => ({ text: button.textContent, box: button.getBoundingClientRect().toJSON() })) })))
+  throw error
 } finally {
   await context.close()
   await browser.close()

@@ -1,3 +1,4 @@
+import { preparationGeneration, preparationOwner, preparationPhysicalKey, preparationKeys, preparationWriteCurrent } from './preparationStorage'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 
 export type ProgressSnapshot = Record<string, unknown>
@@ -47,12 +48,10 @@ function mergeValues(cloud: unknown, local: unknown): unknown {
   return local
 }
 
-export function captureProgressSnapshot(): ProgressSnapshot {
+export function captureProgressSnapshot(owner: string | null = preparationOwner(), epoch: string | null = owner === preparationOwner() ? preparationGeneration() : owner ? localStorage.getItem(`cssvista:sync-generation:v1:${owner}`) : null): ProgressSnapshot {
   const snapshot: ProgressSnapshot = {}
-  for (let index = 0; index < localStorage.length; index += 1) {
-    const key = localStorage.key(index)
-    if (!key || !isStudentProgressKey(key)) continue
-    const raw = localStorage.getItem(key)
+  for (const key of preparationKeys(owner, epoch)) {
+    const raw = localStorage.getItem(preparationPhysicalKey(key, owner, epoch))
     if (raw === null) continue
     try {
       snapshot[key] = JSON.parse(raw)
@@ -130,20 +129,31 @@ export function mergeProgressSnapshots(
   return merged
 }
 
-export function applyProgressSnapshot(snapshot: ProgressSnapshot) {
+export function applyProgressSnapshot(snapshot: ProgressSnapshot, owner: string | null = preparationOwner()) {
+  if (owner === preparationOwner() && !preparationWriteCurrent()) throw new Error('Preparation changed in another tab. Synchronize again before saving.')
   for (const [key, value] of Object.entries(snapshot)) {
     if (!isStudentProgressKey(key)) continue
-    localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value))
+    localStorage.setItem(preparationPhysicalKey(key, owner), typeof value === 'string' ? value : JSON.stringify(value))
   }
 }
 
-export function clearLocalStudentProgress() {
-  const keys: string[] = []
-  for (let index = 0; index < localStorage.length; index += 1) {
-    const key = localStorage.key(index)
-    if (key && isStudentProgressKey(key)) keys.push(key)
+export function clearLocalStudentProgress(owner: string | null = preparationOwner()) {
+  for (const key of preparationKeys(owner)) localStorage.removeItem(preparationPhysicalKey(key, owner))
+  if (owner && localStorage.getItem('cssvista:progress-owner') === owner) {
+    const legacy = Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).filter((key): key is string => !!key && isStudentProgressKey(key))
+    for (const key of legacy) localStorage.removeItem(key)
   }
-  keys.forEach((key) => localStorage.removeItem(key))
   notifyProgressChanged()
 }
 
+export function stashAccountProgress(owner: string) {
+  const epoch = owner === preparationOwner() ? preparationGeneration() : localStorage.getItem(`cssvista:sync-generation:v1:${owner}`)
+  const snapshot = captureProgressSnapshot(owner)
+  localStorage.setItem(`cssvista:account-progress:${owner}`, JSON.stringify(epoch ? { generation: epoch, snapshot } : snapshot))
+}
+export function restoredAccountProgress(owner: string, value: unknown): ProgressSnapshot | null {
+  const epoch = localStorage.getItem(`cssvista:sync-generation:v1:${owner}`)
+  if (!isRecord(value)) return null
+  if (!epoch) return value
+  return value.generation === epoch && isRecord(value.snapshot) ? value.snapshot : null
+}

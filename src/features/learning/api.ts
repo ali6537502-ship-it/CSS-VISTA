@@ -1,7 +1,8 @@
+import { RESET_CHANGED_EVENT } from '@/features/preparation-reset/model'
 import { useCallback, useEffect, useState } from 'react'
 import type { TutorResult } from '@/features/tutor/api'
 import { useAccount } from '@/lib/accountContext'
-import { currentHostingerAccountUser, hostingerRequest } from '@/lib/hostingerApi'
+import { currentHostingerAccountUser, currentPreparationGeneration, hostingerRequest } from '@/lib/hostingerApi'
 export type Attempt = { id: string; target_year: number; target_date: string | null; date_source: 'student_target'; optional_subject_ids: string[]; daily_minutes: number; stage: 'starting' | 'in_progress' | 'revision'; version: number; updated_at: string }
 export type Subject = { slug: string; name: string; marks: number; group: number }
 export type WritingSummary = { id: string; attempt_id: string; kind: 'sentence' | 'paragraph' | 'precis'; title: string; version: number; updated_at: string }
@@ -13,8 +14,10 @@ export type AiUsage = { date: string; live_actions_enabled: boolean; handwriting
 export const featureNames: Record<string, string> = { argumentation: 'Argumentation feedback', analysis: 'Analytical feedback', essay: 'Essay learning feedback', precis: 'Précis feedback', paragraph: 'Paragraph feedback', sentence: 'Sentence checks', tutor: 'Ask VISTA', current_affairs: 'Current Affairs assistance', maths: 'Maths explanations', handwriting: 'Handwritten paragraph feedback', handwriting_extract: 'Handwriting extraction' }
 export async function learningRequest<T>(userId: string, path: string, body?: Record<string, unknown>, signal?: AbortSignal) {
   if (currentHostingerAccountUser() !== userId) throw new Error('Please sign in again to open your preparation records.')
+  const generation = currentPreparationGeneration()
   const data = await hostingerRequest<T>(`student/${path}`, { signal, headers: { 'X-CSSV-User': userId }, ...(body ? { method: 'POST', body: JSON.stringify(body) } : {}) })
   if (currentHostingerAccountUser() !== userId) throw new Error('Your account changed. Reopen your preparation records.')
+  if (generation !== currentPreparationGeneration()) throw new Error('Preparation was reset while this view was loading. Open the current plan again.')
   return data
 }
 export function useLearning<T>(path?: string) {
@@ -33,6 +36,11 @@ export function useLearning<T>(path?: string) {
     })
     return () => controller.abort()
   }, [id, path, version])
+  useEffect(() => {
+    const reset = (event: Event) => { if ((event as CustomEvent<{ owner: string }>).detail?.owner === id) refresh() }
+    window.addEventListener(RESET_CHANGED_EVENT, reset)
+    return () => window.removeEventListener(RESET_CHANGED_EVENT, reset)
+  }, [id, refresh])
   const current = snapshot?.id === id && snapshot?.path === path ? snapshot : undefined
   return { data: current?.data, error: current?.error, refresh }
 }

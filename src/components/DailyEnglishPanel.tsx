@@ -1,3 +1,4 @@
+import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
 import { useEffect, useMemo, useState } from 'react'
 import { Check, ChevronRight, Languages } from 'lucide-react'
 import { Link } from 'react-router'
@@ -98,7 +99,7 @@ function freshState(today: string): DailyEnglishState {
 
 function readState(today: string): DailyEnglishState {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(STORAGE_KEY))
     if (!raw) return freshState(today)
     const parsed = JSON.parse(raw) as {
       version?: number
@@ -138,7 +139,8 @@ function readState(today: string): DailyEnglishState {
 
 function writeState(state: DailyEnglishState) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    if (!preparationWriteCurrent()) throw new Error('Preparation changed. Refresh this page before saving.')
+    localStorage.setItem(preparationPhysicalKey(STORAGE_KEY), JSON.stringify(state))
     window.dispatchEvent(new Event(PROGRESS_CHANGED_EVENT))
   } catch {
     /* account remains usable if storage is blocked */

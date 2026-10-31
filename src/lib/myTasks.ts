@@ -1,3 +1,4 @@
+import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
 import type { StudyScheduleTask } from '@/lib/store'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 
@@ -83,7 +84,7 @@ function validDateKey(value: string) {
 
 export function readTaskArchiveState(): TaskArchiveState {
   try {
-    const parsed = JSON.parse(localStorage.getItem(MY_TASKS_ARCHIVE_KEY) || '{}') as unknown
+    const parsed = JSON.parse(localStorage.getItem(preparationPhysicalKey(MY_TASKS_ARCHIVE_KEY)) || '{}') as unknown
     return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed as TaskArchiveState : {}
   } catch {
     return {}
@@ -105,7 +106,8 @@ export function isTaskArchived(id: string, state = readTaskArchiveState()) {
 
 export function saveTaskArchiveState(state: TaskArchiveState) {
   try {
-    localStorage.setItem(MY_TASKS_ARCHIVE_KEY, JSON.stringify(state))
+    if (!preparationWriteCurrent()) throw new Error('Preparation changed. Refresh this page before saving.')
+    localStorage.setItem(preparationPhysicalKey(MY_TASKS_ARCHIVE_KEY), JSON.stringify(state))
     notifyProgressChanged()
     return true
   } catch {

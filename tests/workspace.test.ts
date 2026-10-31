@@ -45,6 +45,8 @@ test('registry deduplicates routes, searches aliases and preserves pause policy'
   assert.equal(featureState(features.find(f=>f.to==='/account/precis')!,true),'free','Preci Mentor must remain free while other Pro features are paused')
   assert.equal(featureState(features.find(f=>f.to==='/mpt')!,false),'paused')
   assert.equal(featureState(features.find(f=>f.to==='/daily-briefing')!,true),'free')
+  assert.equal(features.find(f=>f.id==='current-affairs')?.title,'Daily Briefing')
+  assert.notEqual(features.find(f=>f.id==='daily-pdfs')?.to,features.find(f=>f.id==='current-affairs')?.to)
   assert.equal(activeSection('/account/plan'),'plan');assert.equal(activeSection('/account/answer-performance'),'performance')
 })
 

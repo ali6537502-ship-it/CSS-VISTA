@@ -1,3 +1,5 @@
+import { preparationPhysicalKey, preparationGeneration } from '@/lib/preparationStorage'
+import { RESET_CHANGED_EVENT } from '@/features/preparation-reset/model'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { useAccount } from '@/lib/accountContext'
@@ -14,7 +16,7 @@ type GsaProgress = {
 
 function readProgress(): GsaProgress {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(STORAGE_KEY))
     const parsed: unknown = raw ? JSON.parse(raw) : null
     return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed as GsaProgress : {}
   } catch {
@@ -30,6 +32,12 @@ function snapshot(progress: GsaProgress) {
   }
 }
 export default function GSATutorPage() {
+  const { user, loading } = useAccount()
+  if (loading) return <main className="p-8" role="status">Loading your GSA study space…</main>
+  return <GSATutorWorkspace key={user?.id ?? 'guest'} />
+}
+
+function GSATutorWorkspace() {
   const { pathname } = useLocation()
   const { user, loading, syncStatus, syncError, syncNow, lastSyncedAt } = useAccount()
   const isAccount = pathname.startsWith('/account/')
@@ -70,9 +78,20 @@ export default function GSATutorPage() {
     if (user?.profile_complete && syncStatus !== 'synced') return
     setProgress(readProgress())
     iframeRef.current?.contentWindow?.postMessage(
-      { type: 'cssvista:gsa:hydrate', snapshot: readProgress() }, window.location.origin,
+      { type: 'cssvista:gsa:hydrate', snapshot: readProgress(), preserveView: true, storage: { key: preparationPhysicalKey(STORAGE_KEY), owner: user?.id || null, generation: preparationGeneration() } }, window.location.origin,
     )
   }, [loaded, syncStatus, user?.id, user?.profile_complete])
+
+  useEffect(() => {
+    const reset = (event: Event) => {
+      const detail = (event as CustomEvent<{ owner: string; full: boolean }>).detail
+      if (detail?.owner !== user?.id) return
+      setProgress(readProgress())
+      iframeRef.current?.contentWindow?.postMessage({ type: 'cssvista:gsa:hydrate', snapshot: readProgress(), preserveView: !detail.full, storage: { key: preparationPhysicalKey(STORAGE_KEY), owner: user.id, generation: preparationGeneration() } }, window.location.origin)
+    }
+    window.addEventListener(RESET_CHANGED_EVENT, reset)
+    return () => window.removeEventListener(RESET_CHANGED_EVENT, reset)
+  }, [user?.id])
 
   async function saveToAccount() {
     setManualSync('')
@@ -80,6 +99,7 @@ export default function GSATutorPage() {
     setManualSync(result.error || 'Your account sync completed.')
   }
 
+  if (loading) return <main className="p-8" role="status">Loading your GSA study space…</main>
   return (
     <main className="bg-[#f7f8f5] text-slate-900">
       <div className="mx-auto max-w-screen-2xl px-3 pb-4 pt-5 sm:px-6">
@@ -113,7 +133,7 @@ export default function GSATutorPage() {
         key={user?.id ?? (loading ? "session-loading" : "guest")}
         ref={iframeRef}
         title="CSS VISTA GSA Tutor interactive lessons and personal course schedule"
-        src="/gsa-tutor/studio.html"
+        src="/gsa-tutor/studio.html?v=workspace-reset-1"
         className="block w-full border-0 bg-white"
         style={{ height: frameHeight }}
         onLoad={() => {
@@ -122,7 +142,7 @@ export default function GSATutorPage() {
           setLoaded(true)
           if (!user?.profile_complete || syncStatus === 'synced') {
             iframeRef.current?.contentWindow?.postMessage(
-              { type: 'cssvista:gsa:hydrate', snapshot: readProgress() },
+              { type: 'cssvista:gsa:hydrate', snapshot: readProgress(), storage: { key: preparationPhysicalKey(STORAGE_KEY), owner: user?.id || null, generation: preparationGeneration() } },
               window.location.origin,
             )
           }

@@ -1,3 +1,4 @@
+import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
 import { useSyncExternalStore } from 'react'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 
@@ -52,7 +53,7 @@ function normalize(value: unknown): VistagramMemberState {
 
 export function getVistagramMemberState(): VistagramMemberState {
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(KEY))
     if (raw === cachedRaw) return cachedState
     cachedRaw = raw
     cachedState = raw ? normalize(JSON.parse(raw)) : empty
@@ -66,7 +67,8 @@ export function getVistagramMemberState(): VistagramMemberState {
 
 function write(next: VistagramMemberState) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(next))
+    if (!preparationWriteCurrent()) throw new Error('Preparation changed. Refresh this page before saving.')
+    localStorage.setItem(preparationPhysicalKey(KEY), JSON.stringify(next))
     cachedRaw = undefined
     cachedState = next
     window.dispatchEvent(new Event(EVENT))
@@ -84,7 +86,7 @@ export function updateVistagramMemberState(mutator: (state: VistagramMemberState
 }
 
 function subscribe(listener: () => void) {
-  const onStorage = (event: StorageEvent) => { if (event.key === KEY) listener() }
+  const onStorage = (event: StorageEvent) => { if (event.key === preparationPhysicalKey(KEY)) listener() }
   window.addEventListener(EVENT, listener)
   window.addEventListener('storage', onStorage)
   return () => {

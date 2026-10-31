@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { mkdir } from 'node:fs/promises'
 
 const origin=process.env.CSSV_GSA_BROWSER_ORIGIN||'http://127.0.0.1:5173'
+if(!['localhost','127.0.0.1'].includes(new URL(origin).hostname))throw Error('Loopback fixtures only')
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']})
 const problems=[]
 await mkdir('test-artifacts/gsa-tutor',{recursive:true})
@@ -45,7 +46,29 @@ try{
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)
    assert.ok(overflow<=2,'unwanted horizontal scroll at '+width+': '+overflow)
    await page.screenshot({path:'test-artifacts/gsa-tutor/learning-'+width+'.png',fullPage:true})
+   if(width===375){
+     await page.locator('.day-lesson').first().click();await page.locator('.lesson-card').waitFor()
+     const empty={plan:null,completed:{},drafts:{}}
+     await page.evaluate(empty=>{localStorage.setItem('cssvista:progress-owner','standalone-fixture-b');localStorage.setItem('cssvista:tool:gsa-tutor:v1',JSON.stringify(empty))},empty)
+     await page.locator('[data-action="bookmark"]').click()
+     await page.getByRole('heading',{name:'Study account changed',exact:true}).waitFor()
+     assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1'))),empty,'Stale standalone page overwrote another account')
+     await page.getByRole('button',{name:'Reload course',exact:true}).click();await page.getByRole('heading',{name:'Choose how much time you have.',exact:true}).waitFor()
+     await page.locator('[data-days="8"]').click();await page.locator('[data-action="saveplan"]').click()
+     await context.route(origin+'/gsa-isolation-helper.html',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><title>Disposable storage-event fixture</title>'}))
+     const second=await context.newPage();await second.goto(origin+'/gsa-isolation-helper.html')
+     await second.evaluate(empty=>{localStorage.setItem('cssvista:tool:gsa-tutor:v1',JSON.stringify(empty));localStorage.setItem('cssvista:progress-owner','standalone-fixture-c')},empty)
+     await page.getByRole('heading',{name:'Study account changed',exact:true}).waitFor();assert.equal(await page.locator('.day-lesson').count(),0)
+     await page.getByRole('button',{name:'Reload course',exact:true}).click();await page.getByRole('heading',{name:'Choose how much time you have.',exact:true}).waitFor();await second.close()
+     await page.locator('[data-days="8"]').click();await page.locator('[data-action="saveplan"]').click();await page.locator('.day-lesson').first().click();await page.locator('.lesson-card').waitFor()
+     await page.evaluate(()=>{localStorage.setItem('cssvista:sync-generation:v1:standalone-fixture-c','fixture-reset');localStorage.removeItem('cssvista:tool:gsa-tutor:v1')})
+     await page.locator('[data-action="bookmark"]').click();await page.getByRole('alert').filter({hasText:'could not be saved'}).waitFor();assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1')),null)
+     await page.reload();await page.getByRole('heading',{name:'Choose how much time you have.',exact:true}).waitFor();await page.locator('[data-days="8"]').click();await page.locator('[data-action="saveplan"]').click()
+     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem(`cssvista:reset-data:v1:standalone-fixture-c:fixture-reset:${encodeURIComponent('cssvista:tool:gsa-tutor:v1')}`)).plan.days),8)
+     assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1')),null)
+   }
    await context.close()
  }
  assert.deepEqual(problems,[],problems.join('; '))
+ console.log('PASS standalone GSA: three responsive lesson journeys, stale writer/account-switch redaction, real reload recovery and reset-generation isolation.')
 }finally{await browser.close()}

@@ -2,13 +2,13 @@ name: Pro membership foundations
 on:
   pull_request:
     branches: [main]
-    paths: ['public/api/_workspace_preview.php', 'public/api/auth/workspace-preview.php', 'src/features/workspace-preview/**', 'src/features/workspace-classic/**', 'tests/workspace-preview/**', 'tests/browser/**', 'server/bin/pro-topic-package-check.php', 'public/api/_skills*.php', 'public/api/student/skills.php', 'src/features/skills/**', 'src/pages/account/Skills.tsx', 'scripts/skills/**', 'tests/skills/**', 'server/sql/025_integrated_skills.sql', 'public/api/_ability*.php', 'public/api/student/ability.php', 'server/sql/024_general_ability.sql', 'src/features/ability/**', 'scripts/ability/**', 'tests/ability/**', 'public/api/_topics*.php', 'public/api/student/topics.php', 'public/api/admin/topics.php', 'server/sql/022_native_pro_topics.sql', 'server/sql/023_topic_guided_results.sql', 'tests/topics/**', 'src/features/topics/**', 'src/pages/admin/TopicsPanel.tsx', 'src/pages/admin/Admin.tsx', 'src/pages/AccountHome.tsx', 'public/api/_planner*.php', 'public/api/student/planner.php', 'server/sql/020_attempt_planner.sql', 'server/sql/021_connected_reading.sql', 'tests/reading/**', 'src/features/preparation/**', 'src/pages/account/Learning.tsx', 'src/pages/account/Progress.tsx', 'src/pages/account/Tasks.tsx', 'src/components/FpscSyllabusPlanner.tsx', 'tests/planner/**', 'public/api/_tutor*.php', 'public/api/student/tutor.php', 'server/sql/019_scoped_tutor.sql', 'src/features/tutor/**', 'src/pages/account/Tutor.tsx', 'scripts/tutor/**', 'tests/tutor/**', 'public/api/_mentor*.php', 'public/api/student/mentor.php', 'server/sql/018_mentor_records.sql', 'src/features/mentor/**', 'src/pages/account/AnswerPerformance.tsx', 'tests/mentor/**', 'public/api/_precis*.php', 'public/api/student/precis.php', 'public/api/student/precis-feedback.php', 'server/sql/017_precis_evaluations.sql', 'server/sql/016_precis_lab.sql', 'src/features/precis/**', 'src/pages/account/Precis.tsx', 'scripts/precis/**', 'tests/precis/**', 'tests/precis.test.ts', 'public/api/_grammar*.php', 'public/api/student/grammar.php', 'server/sql/015_grammar_progress.sql', 'scripts/grammar/**', 'tests/grammar/**', 'tests/grammarSync.test.ts', 'src/features/grammar/**', 'src/pages/LanguageGrammar.tsx', 'tests/grammarState.test.ts', 'tests/grammarPractice.test.ts', 'public/api/_expression*.php', 'public/api/student/expression.php', 'tests/expression/**', 'src/features/expression/**', 'src/pages/account/Expression.tsx', 'src/pages/GrammarCourse.tsx', 'public/api/_handwriting*.php', 'public/api/student/handwriting*.php', 'server/sql/014_handwriting_workflow.sql', 'server/bin/handwriting-maintenance.php', 'tests/handwriting/**', 'src/features/handwriting/**', 'src/pages/account/Handwriting.tsx', 'public/api/_premium*.php', 'public/api/student/premium-content.php', 'public/api/_premium_files/**', 'scripts/package-premium-content.mjs', 'public/api/_pro*.php', 'public/api/_learning*.php', 'public/api/_ai*.php', 'public/api/student/learning.php', 'public/api/student/ai-usage.php', 'public/api/admin/ai-usage.php', 'server/sql/013_learning_foundations.sql', 'tests/learning/**', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
+    paths: ['public/api/_preparation_reset*.php', 'public/api/student/preparation-reset.php', 'public/api/student/progress.php', 'public/api/workspace-release.php', 'src/features/preparation-reset/**', 'src/lib/preparationStorage.ts', 'tests/preparation-reset/**', 'public/api/_workspace_preview.php', 'public/api/auth/workspace-preview.php', 'src/features/workspace-preview/**', 'src/features/workspace-classic/**', 'tests/workspace-preview/**', 'tests/browser/**', 'server/bin/pro-topic-package-check.php', 'public/api/_skills*.php', 'public/api/student/skills.php', 'src/features/skills/**', 'src/pages/account/Skills.tsx', 'scripts/skills/**', 'tests/skills/**', 'server/sql/025_integrated_skills.sql', 'public/api/_ability*.php', 'public/api/student/ability.php', 'server/sql/024_general_ability.sql', 'src/features/ability/**', 'scripts/ability/**', 'tests/ability/**', 'public/api/_topics*.php', 'public/api/student/topics.php', 'public/api/admin/topics.php', 'server/sql/022_native_pro_topics.sql', 'server/sql/023_topic_guided_results.sql', 'tests/topics/**', 'src/features/topics/**', 'src/pages/admin/TopicsPanel.tsx', 'src/pages/admin/Admin.tsx', 'src/pages/AccountHome.tsx', 'public/api/_planner*.php', 'public/api/student/planner.php', 'server/sql/020_attempt_planner.sql', 'server/sql/021_connected_reading.sql', 'tests/reading/**', 'src/features/preparation/**', 'src/pages/account/Learning.tsx', 'src/pages/account/Progress.tsx', 'src/pages/account/Tasks.tsx', 'src/components/FpscSyllabusPlanner.tsx', 'tests/planner/**', 'public/api/_tutor*.php', 'public/api/student/tutor.php', 'server/sql/019_scoped_tutor.sql', 'src/features/tutor/**', 'src/pages/account/Tutor.tsx', 'scripts/tutor/**', 'tests/tutor/**', 'public/api/_mentor*.php', 'public/api/student/mentor.php', 'server/sql/018_mentor_records.sql', 'src/features/mentor/**', 'src/pages/account/AnswerPerformance.tsx', 'tests/mentor/**', 'public/api/_precis*.php', 'public/api/student/precis.php', 'public/api/student/precis-feedback.php', 'server/sql/017_precis_evaluations.sql', 'server/sql/016_precis_lab.sql', 'src/features/precis/**', 'src/pages/account/Precis.tsx', 'scripts/precis/**', 'tests/precis/**', 'tests/precis.test.ts', 'public/api/_grammar*.php', 'public/api/student/grammar.php', 'server/sql/015_grammar_progress.sql', 'scripts/grammar/**', 'tests/grammar/**', 'tests/grammarSync.test.ts', 'src/features/grammar/**', 'src/pages/LanguageGrammar.tsx', 'tests/grammarState.test.ts', 'tests/grammarPractice.test.ts', 'public/api/_expression*.php', 'public/api/student/expression.php', 'tests/expression/**', 'src/features/expression/**', 'src/pages/account/Expression.tsx', 'src/pages/GrammarCourse.tsx', 'public/api/_handwriting*.php', 'public/api/student/handwriting*.php', 'server/sql/014_handwriting_workflow.sql', 'server/bin/handwriting-maintenance.php', 'tests/handwriting/**', 'src/features/handwriting/**', 'src/pages/account/Handwriting.tsx', 'public/api/_premium*.php', 'public/api/student/premium-content.php', 'public/api/_premium_files/**', 'scripts/package-premium-content.mjs', 'public/api/_pro*.php', 'public/api/_learning*.php', 'public/api/_ai*.php', 'public/api/student/learning.php', 'public/api/student/ai-usage.php', 'public/api/admin/ai-usage.php', 'server/sql/013_learning_foundations.sql', 'tests/learning/**', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
 permissions:
   contents: read
 jobs:
   payment-invariants:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     services:
       mysql:
         image: mysql:8.0
@@ -48,6 +48,7 @@ jobs:
           php -l public/api/_workspace_preview.php
           php -l public/api/auth/workspace-preview.php
           php tests/workspace-preview/unit.php
+          php tests/preparation-reset/unit.php
           php tests/skills/unit.php
           python3 scripts/skills/author-curriculum.py --check
           php tests/ability/unit.php
@@ -99,6 +100,7 @@ jobs:
           node tests/precis/security.mjs
           node tests/precis/feedback-security.mjs
           node tests/workspace-preview/security.mjs
+          node tests/preparation-reset/security.mjs
       - name: Install isolated browser test dependencies
         run: |
           npm ci --prefix tests/browser --ignore-scripts
@@ -114,7 +116,20 @@ jobs:
           node tests/browser/pro-pause.mjs
           php tests/workspace-preview/fixture.php paused
           node tests/browser/workspace-preview.mjs
+          node tests/browser/signup.mjs
+          node tests/browser/pms-reset.mjs
           node tests/browser/classic-profile.mjs
       - name: Service diagnostics on failure
         if: failure()
         run: tail -n 80 test-artifacts/pro-php.log
+      - name: Preserve sanitized workspace and PMS review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-pms-reset-journeys
+          path: |
+            test-artifacts/workspace-preview/
+            test-artifacts/pms-reset/
+            test-artifacts/signup/single-window/
+          if-no-files-found: ignore
+          retention-days: 7

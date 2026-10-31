@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { RESET_CHANGED_EVENT, RESET_PHASE_EVENT, RESET_FAILED_EVENT } from '@/features/preparation-reset/model'
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import { AccountContext, type AccountContextValue, type AccountUser, type ActionResult, type SyncStatus } from '@/lib/accountContext'
 import { ACCOUNT_EXPIRED_EVENT, PROFILE_UPDATED_EVENT, csrfToken, hostingerRequest, loadAccountSession, logoutHostinger, setHostingerAccountUser } from '@/lib/hostingerApi'
-import { applyProgressSnapshot, captureProgressSnapshot, clearLocalStudentProgress } from '@/lib/accountSync'
+import { applyProgressSnapshot, clearLocalStudentProgress, stashAccountProgress, restoredAccountProgress } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { bindLegacyStudySessions } from '@/lib/localStudySession'
 
@@ -18,15 +19,15 @@ function validAccountUser(value: unknown): value is AccountUser {
     && typeof candidate.display_name === 'string'
 }
 function stashProgress(id: string) {
-  try { localStorage.setItem(`cssvista:account-progress:${id}`, JSON.stringify(captureProgressSnapshot())) } catch { /* The server retains previously synced progress. */ }
+  try { stashAccountProgress(id) } catch { /* The server retains previously synced progress. */ }
 }
 function moveProgress(nextId: string | null) {
   const oldId = localStorage.getItem(PROGRESS_OWNER_KEY)
   bindLegacyStudySessions(oldId)
-  if (oldId && oldId !== nextId) { stashProgress(oldId); clearLocalStudentProgress() }
+  if (oldId && oldId !== nextId) { stashProgress(oldId); clearLocalStudentProgress(oldId) }
   if (nextId && nextId !== oldId) {
     const saved = localStorage.getItem(`cssvista:account-progress:${nextId}`)
-    if (saved) { try { applyProgressSnapshot(JSON.parse(saved)) } catch { /* Ignore a malformed device cache. */ } }
+    if (saved) { try { const restored = restoredAccountProgress(nextId, JSON.parse(saved)); if (restored) applyProgressSnapshot(restored, nextId) } catch { /* Ignore a malformed device cache. */ } }
   }
   if (nextId) localStorage.setItem(PROGRESS_OWNER_KEY, nextId)
   else localStorage.removeItem(PROGRESS_OWNER_KEY)
@@ -36,6 +37,9 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<AccountUser | null>(null)
   const [passwordRecovery, setPasswordRecovery] = useState(new URLSearchParams(window.location.search).get('reset') === '1')
+  const [applyingReset, setApplyingReset] = useState(false)
+  const [resetRevision, setResetRevision] = useState(0)
+  const [preparationResetNotice, setPreparationResetNotice] = useState('')
   const [syncStatus, setSyncStatus] = useState<SyncStatus>('idle')
   const [syncError, setSyncError] = useState('')
   const [lastSyncedAt, setLastSyncedAt] = useState<Date | null>(null)
@@ -44,10 +48,11 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const authVersion = useRef(0)
   const authTransition = useRef(false)
   const hydrated = useRef(false)
-  const syncInFlight = useRef<string | null>(null)
+  const syncInFlight = useRef<{ id: string; promise: Promise<ActionResult> } | null>(null)
   const applyUser = useCallback((next: AccountUser | null) => {
     if (userRef.current?.id !== next?.id || !next) {
       try { moveProgress(next?.id ?? null) } catch { /* Browsers may disable local storage. */ }
+      setPreparationResetNotice(''); setApplyingReset(false)
       setSyncStatus('idle'); setSyncError(''); setLastSyncedAt(null)
     }
     userRef.current = next
@@ -88,26 +93,30 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     const id = userRef.current?.id
     if (!id) return { error: 'Sign in to sync progress.' }
     if (!userRef.current?.profile_complete) return { error: 'Complete all 12 profile checks to unlock account sync.' }
-    if (syncInFlight.current === id) return {}
-    syncInFlight.current = id
-    setSyncStatus('syncing'); setSyncError('')
-    try {
-      const { syncStudentProgressToHostinger } = await import('@/lib/hostingerSync')
-      await syncStudentProgressToHostinger(id)
-      if (userRef.current?.id === id) { setSyncStatus('synced'); setLastSyncedAt(new Date()) }
-      return {}
-    } catch (error) {
-      const message = errorMessage(error)
-      if (userRef.current?.id === id) { setSyncStatus('error'); setSyncError(message) }
-      return { error: message }
-    } finally { if (syncInFlight.current === id) syncInFlight.current = null }
+    if (syncInFlight.current?.id === id) return syncInFlight.current.promise
+    const run = async (): Promise<ActionResult> => {
+      setSyncStatus('syncing'); setSyncError('')
+      try {
+        const { syncStudentProgressToHostinger } = await import('@/lib/hostingerSync')
+        await syncStudentProgressToHostinger(id)
+        if (userRef.current?.id === id) { setSyncStatus('synced'); setLastSyncedAt(new Date()) }
+        return {}
+      } catch (error) {
+        const message = errorMessage(error)
+        if (userRef.current?.id === id) { setSyncStatus('error'); setSyncError(message) }
+        return { error: message }
+      }
+    }
+    const promise = run()
+    syncInFlight.current = { id, promise }
+    try { return await promise } finally { if (syncInFlight.current?.promise === promise) syncInFlight.current = null }
   }, [])
   const userId = user?.profile_complete ? user.id : undefined
   useEffect(() => { if (userId) void syncNow() }, [userId, syncNow])
   useEffect(() => {
     if (!userId) return
     let timer: ReturnType<typeof setTimeout> | undefined
-    const schedule = () => { if (syncInFlight.current === userId) return; clearTimeout(timer); timer = setTimeout(() => void syncNow(), SYNC_DELAY) }
+    const schedule = () => { if (syncInFlight.current?.id === userId) return; clearTimeout(timer); timer = setTimeout(() => void syncNow(), SYNC_DELAY) }
     const flush = () => { clearTimeout(timer); void syncNow() }
     const visibility = () => { if (document.visibilityState === 'hidden') flush() }
     window.addEventListener(PROGRESS_CHANGED_EVENT, schedule)
@@ -115,9 +124,33 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     document.addEventListener('visibilitychange', visibility)
     return () => { clearTimeout(timer); window.removeEventListener(PROGRESS_CHANGED_EVENT, schedule); window.removeEventListener('online', flush); document.removeEventListener('visibilitychange', visibility) }
   }, [userId, syncNow])
+  useEffect(() => {
+    const applied = (event: Event) => {
+      const detail = (event as CustomEvent<{ owner: string; full: boolean }>).detail
+      if (detail?.owner !== userRef.current?.id) return
+      setPreparationResetNotice('Preparation reset applied. Your login, profile and membership are retained.')
+      if (detail.full) setResetRevision(value => value + 1)
+    }
+    const phase = (event: Event) => { const detail = (event as CustomEvent<{ owner: string; active: boolean }>).detail; if (detail?.owner === userRef.current?.id) setApplyingReset(detail.active) }
+    const failed = (event: Event) => { const detail = (event as CustomEvent<{ owner: string; message: string }>).detail; if (detail?.owner === userRef.current?.id) { setSyncError(detail.message); setSyncStatus('error') } }
+    window.addEventListener(RESET_FAILED_EVENT, failed)
+    window.addEventListener(RESET_PHASE_EVENT, phase)
+    window.addEventListener(RESET_CHANGED_EVENT, applied)
+    return () => { window.removeEventListener(RESET_FAILED_EVENT, failed); window.removeEventListener(RESET_CHANGED_EVENT, applied); window.removeEventListener(RESET_PHASE_EVENT, phase) }
+  }, [])
+  useEffect(() => {
+    const resetInAnotherTab = (event: StorageEvent) => {
+      const id = userRef.current?.id
+      if (!id || event.key !== `cssvista:sync-generation:v1:${id}` || !event.newValue) return
+      const wasSyncing = syncInFlight.current?.id === id
+      void syncNow().then(() => { if (wasSyncing && userRef.current?.id === id) void syncNow() })
+    }
+    window.addEventListener('storage', resetInAnotherTab)
+    return () => window.removeEventListener('storage', resetInAnotherTab)
+  }, [syncNow])
   const broadcast = () => { try { localStorage.setItem(ACCOUNT_CHANGE_KEY, String(Date.now())) } catch { /* Focus checks also refresh the session. */ } }
   const value = useMemo<AccountContextValue>(() => ({
-    configured: true, loading, user, passwordRecovery, syncStatus, syncBackend: user ? 'hostinger' : null, syncError, lastSyncedAt,
+    configured: true, loading, user, passwordRecovery, preparationResetNotice, dismissPreparationResetNotice: () => setPreparationResetNotice(''), syncStatus, syncBackend: user ? 'hostinger' : null, syncError, lastSyncedAt,
     async signIn(email, password) {
       authTransition.current = true
       sessionRequest.current?.abort(); const version = ++authVersion.current
@@ -177,6 +210,6 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         return {}
       } catch (error) { return { error: errorMessage(error) } }
     },
-  }), [applyUser, lastSyncedAt, loading, passwordRecovery, syncError, syncNow, syncStatus, user])
-  return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
+  }), [applyUser, lastSyncedAt, loading, passwordRecovery, preparationResetNotice, syncError, syncNow, syncStatus, user])
+  return <AccountContext.Provider value={value}><Fragment key={resetRevision}>{applyingReset ? <div role="status" className="p-8 text-center">Applying your preparation reset…</div> : children}</Fragment></AccountContext.Provider>
 }

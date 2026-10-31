@@ -9,7 +9,7 @@ import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
 import { useAccount } from '@/lib/accountContext'
-import { readLocalStudySession, writeLocalStudySession } from '@/lib/localStudySession'
+import { readLocalStudySession, writeLocalStudySession, localStudySessionEpoch } from '@/lib/localStudySession'
 import { PAPER_MCQ_SECONDS, PAPER_QUESTION_SECONDS, PAPER_TOTAL_SECONDS, allocatedAnswerSeconds, paperQuestionTargetSeconds, SINGLE_RESUME_KEY, PAPER_RESUME_KEY,
   parseSingleSnapshot, parsePaperSnapshot, restoredSingleSeconds, restoredPaperClocks,
   type SingleTimerSnapshot, type PaperSnapshot } from '@/lib/answerTimerRecovery'
@@ -23,8 +23,8 @@ function readSingleSnapshot(accountId: string | null): SingleTimerSnapshot | nul
   }
 }
 
-function writeSingleSnapshot(snapshot: SingleTimerSnapshot, accountId: string | null) {
-  writeLocalStudySession(SINGLE_RESUME_KEY, JSON.stringify(snapshot), accountId)
+function writeSingleSnapshot(snapshot: SingleTimerSnapshot, accountId: string | null, epoch: string | null) {
+  writeLocalStudySession(SINGLE_RESUME_KEY, JSON.stringify(snapshot), accountId, epoch)
 }
 
 export default function AnswerTimer() {
@@ -109,6 +109,7 @@ function usePaperTitles() {
 
 function SingleTimer({ accountId, alertMode, notificationsEnabled, keepAwake }: { accountId: string | null; alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const paperTitles = usePaperTitles()
+  const [recoveryEpoch] = useState(() => localStudySessionEpoch(accountId))
   const saved = useMemo(() => readSingleSnapshot(accountId), [accountId])
   const [question, setQuestion] = useState(saved?.question ?? '')
   const [customMin, setCustomMin] = useState(saved?.minutes ?? 35)
@@ -144,8 +145,8 @@ function SingleTimer({ accountId, alertMode, notificationsEnabled, keepAwake }: 
       remaining: getRemaining(),
       running,
       savedAt: Date.now(),
-    }, accountId)
-  }, [accountId, customMin, question, running, getRemaining])
+    }, accountId, recoveryEpoch)
+  }, [accountId, recoveryEpoch, customMin, question, running, getRemaining])
 
   useEffect(() => {
     if (skipFirstSave.current) { skipFirstSave.current = false; return }
@@ -346,6 +347,7 @@ function readPaperSnapshot(accountId: string | null): PaperSnapshot | null {
 }
 
 function PaperTimer({ accountId, alertMode, notificationsEnabled, keepAwake }: { accountId: string | null; alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
+  const [recoveryEpoch] = useState(() => localStudySessionEpoch(accountId))
   const [questions, setQuestions] = useState<string[]>(['', '', '', ''])
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
   const [current, setCurrent] = useState(-1)
@@ -372,8 +374,8 @@ function PaperTimer({ accountId, alertMode, notificationsEnabled, keepAwake }: {
   }, [accountId])
 
   const persistPaper = useCallback((snapshot: PaperSnapshot | null) => {
-    writeLocalStudySession(PAPER_RESUME_KEY, snapshot ? JSON.stringify(snapshot) : null, accountId)
-  }, [accountId])
+    writeLocalStudySession(PAPER_RESUME_KEY, snapshot ? JSON.stringify(snapshot) : null, accountId, recoveryEpoch)
+  }, [accountId, recoveryEpoch])
 
   const snapshotNow = useCallback((): PaperSnapshot => ({
     questions,

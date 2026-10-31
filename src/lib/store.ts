@@ -1,3 +1,4 @@
+import { preparationPhysicalKey, preparationWriteCurrent } from './preparationStorage'
 // Local-first persistence for CSS Vista. Signed-in students can sync this state.
 import { notifyProgressChanged, notifyStorageFailed } from '@/lib/progressEvents'
 
@@ -60,6 +61,8 @@ export type SyllabusItemStatus = 'not-started' | 'in-progress' | 'completed'
 export interface StudyScheduleTask {
   id: string
   syllabusItemId: string
+  /** Optional activity metadata for PMS revision; older tasks remain unchanged. */
+  activity?: 'revision'
   subject: string
   paper: string
   section: string
@@ -172,12 +175,13 @@ function pruneLegacyFields() {
   if (legacyPruned) return
   legacyPruned = true
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(KEY))
     if (!raw) return
     const parsed = JSON.parse(raw) as Record<string, unknown>
     if (!legacyReviewKeys.some((key) => key in parsed)) return
     for (const key of legacyReviewKeys) delete parsed[key]
-    localStorage.setItem(KEY, JSON.stringify(parsed))
+    if (!preparationWriteCurrent()) return
+    localStorage.setItem(preparationPhysicalKey(KEY), JSON.stringify(parsed))
     invalidateReadCache()
   } catch {
     /* no storage, or unreadable - hydrateState still ignores the field */
@@ -207,7 +211,7 @@ function hydrateState(saved: Partial<VistaState>): VistaState {
 export function getState(): VistaState {
   pruneLegacyFields()
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(KEY))
     if (!raw) return { ...empty }
     return hydrateState(JSON.parse(raw) as Partial<VistaState>)
   } catch {
@@ -224,7 +228,7 @@ let cachedReadState: VistaState | null = null
 function getCachedReadState(): VistaState {
   pruneLegacyFields()
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(KEY))
     if (raw === cachedReadRaw && cachedReadState) return cachedReadState
     const state = raw ? hydrateState(JSON.parse(raw) as Partial<VistaState>) : { ...empty }
     cachedReadRaw = raw
@@ -244,7 +248,8 @@ function invalidateReadCache() {
 
 function save(s: VistaState) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(s))
+    if (!preparationWriteCurrent()) { notifyStorageFailed(); return }
+    localStorage.setItem(preparationPhysicalKey(KEY), JSON.stringify(s))
     invalidateReadCache()
     notifyProgressChanged()
   } catch {
@@ -622,7 +627,7 @@ export function setSyllabusItemStatus(id: string, status: SyllabusItemStatus) {
   const state = getState()
   state.syllabusItemStatuses = { ...(state.syllabusItemStatuses ?? {}), [id]: status }
   state.studyScheduleTasks = (state.studyScheduleTasks ?? []).map((task) => (
-    task.syllabusItemId === id ? { ...task, status } : task
+    task.syllabusItemId === id && task.activity !== 'revision' ? { ...task, status } : task
   ))
   save(state)
 }
@@ -631,16 +636,17 @@ export function addStudyScheduleTasks(tasks: Array<Omit<StudyScheduleTask, 'id' 
   const state = getState()
   const existing = new Set((state.studyScheduleTasks ?? []).map((task) => `${task.syllabusItemId}|${task.date}`))
   const additions: StudyScheduleTask[] = tasks
-    .filter((task) => !existing.has(`${task.syllabusItemId}|${task.date}`))
+    .filter((task) => { const key = `${task.syllabusItemId}|${task.date}`; if (existing.has(key)) return false; existing.add(key); return true })
     .map((task) => ({
       ...task,
       id: `syllabus-task-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       createdAt: new Date().toISOString(),
-      status: state.syllabusItemStatuses?.[task.syllabusItemId] === 'completed' ? 'completed' : 'in-progress',
+      status: task.activity === 'revision' ? 'in-progress' : state.syllabusItemStatuses?.[task.syllabusItemId] === 'completed' ? 'completed' : 'in-progress',
     }))
-  state.studyScheduleTasks = [...(state.studyScheduleTasks ?? []), ...additions].slice(-3000)
+  if ((state.studyScheduleTasks?.length ?? 0) + additions.length > 3000) { notifyStorageFailed(); return [] }
+  state.studyScheduleTasks = [...(state.studyScheduleTasks ?? []), ...additions]
   additions.forEach((task) => {
-    if (state.syllabusItemStatuses?.[task.syllabusItemId] !== 'completed') {
+    if (task.activity !== 'revision' && state.syllabusItemStatuses?.[task.syllabusItemId] !== 'completed') {
       state.syllabusItemStatuses = { ...(state.syllabusItemStatuses ?? {}), [task.syllabusItemId]: 'in-progress' }
     }
   })
@@ -653,7 +659,7 @@ export function updateStudyScheduleTask(id: string, patch: Partial<Pick<StudySch
   let syllabusItemId = ''
   state.studyScheduleTasks = (state.studyScheduleTasks ?? []).map((task) => {
     if (task.id !== id) return task
-    syllabusItemId = task.syllabusItemId
+    if (task.activity !== 'revision') syllabusItemId = task.syllabusItemId
     return { ...task, ...patch }
   })
   if (syllabusItemId && patch.status) {
@@ -767,7 +773,8 @@ export function importData(json: string): boolean {
 }
 
 export function resetData() {
-  localStorage.removeItem(KEY)
+  if (!preparationWriteCurrent()) { notifyStorageFailed(); return }
+  localStorage.removeItem(preparationPhysicalKey(KEY))
   invalidateReadCache()
   notifyProgressChanged()
 }

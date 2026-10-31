@@ -17,8 +17,12 @@ function legacyOwnerTag() {
   // ownership of an old unscoped timer. Fail closed until binding succeeds.
   return localStorage.getItem(LEGACY_OWNER) ?? (localStorage.getItem('cssvista:progress-owner') ? 'unbound' : GUEST)
 }
+export function localStudySessionEpoch(accountId: string | null): string | null {
+  try { return accountId ? localStorage.getItem(`cssvista:study-reset:v1:${accountId}`) : null } catch { return null }
+}
 function scopedKey(key: string, accountId: string | null) {
-  return `${key}:owner:v1:${accountId ? encodeURIComponent(accountId) : GUEST}`
+  const epoch = localStudySessionEpoch(accountId)
+  return epoch ? `${key}:owner:v2:${encodeURIComponent(accountId!)}:${epoch}` : `${key}:owner:v1:${accountId ? encodeURIComponent(accountId) : GUEST}`
 }
 
 export function readLocalStudySession(key: string, accountId: string | null): string | null {
@@ -30,15 +34,16 @@ export function readLocalStudySession(key: string, accountId: string | null): st
       const value: unknown = JSON.parse(scoped)
       return typeof value === 'string' ? value : null
     }
-    if (legacyOwnerTag() === ownerTag(accountId)) {
+    if (!localStudySessionEpoch(accountId) && legacyOwnerTag() === ownerTag(accountId)) {
       return localStorage.getItem(key)
     }
   } catch { /* Read failures are handled as unavailable recovery. */ }
   return null
 }
 
-export function writeLocalStudySession(key: string, value: string | null, accountId: string | null): boolean {
+export function writeLocalStudySession(key: string, value: string | null, accountId: string | null, expectedEpoch?: string | null): boolean {
   try {
+    if (expectedEpoch !== undefined && expectedEpoch !== localStudySessionEpoch(accountId)) return false
     // Captured account IDs keep late timer/quiz callbacks in their original partition.
     // Leave original authenticated recovery records intact for compatibility/rollback.
     const target = accountId === null && legacyOwnerTag() === GUEST

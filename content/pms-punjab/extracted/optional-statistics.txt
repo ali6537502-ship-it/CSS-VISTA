@@ -1,0 +1,141 @@
+                        PUNJAB PUBLIC SERVICE COMMISSION
+              COMBINED COMPETITIVE EXAMINATION (CCE) SYLLABUS
+
+                                           STATISTICS
+Total Marks: 100
+
+                                                 Topics
+                                               Section- A
+ 1.   Descriptive Statistics:
+      Meaning of Statistics, its characteristics, uses and misuses of statistics, observations and
+      variables, types of variables, data and its types according to nature (qualitative and
+      quantitative), w.r.t. source (primary and secondary), measurement scales (nominal, ordinal,
+      interval and ratio), population and sample, descriptive and inferential statistics, description of
+      qualitative and quantitative data using frequency tables and graphs (simple bar chart,
+      histogram, pie chart, stem and leaf plot), measures of central tendency and their types.
+      Ungrouped and Grouped Data: arithmetic mean, median and mode, empirical relationship
+      among mean, median and mode, properties of arithmetic mean (proof not required), weighted
+      mean and its application.
+      Ungrouped Data: Geometric mean and harmonic mean, Quantiles (quartiles, deciles and
+      percentiles), relative merits and demerits of all above averages, measure of dispersion,
+      absolute and relative measure of dispersion: Range, semi-interquartile range, variance and
+      standard deviation, properties of variance and standard deviation (proof not required),
+      coefficient of quartile deviation, coefficient of variation, Box and whisker plot, standardized
+      variables.
+ 2.   Concept of probability and Random variables:
+      Random experiment, sample space and events, counting principles, including the
+      multiplication principle, combinations, and permutations, introduction to probability and
+      axioms of probability, basic laws of probability, addition and multiplication laws of
+      probability for two events, conditional probabilities, Bayes’ theorem (proof not required) and
+      its application, discrete random variable, probability mass function and cumulative
+      distribution function, joint distribution of two discrete random variables, marginal and
+      conditional distribution, continuous random variable, probability density function and
+      cumulative distribution function, joint distribution of two continuous random variables,
+      marginal and conditional distribution, mathematical expectations and its properties, mean,
+      variance, covariance and correlation of two discrete and continuous random variables.
+ 3.   Probability Distributions:
+      Discrete Binomial, hypergeometric, Poisson distribution, application and fitting to real life
+      data, concept of negative binomial and geometric distribution, continuous exponential and
+      normal distributions, applications and fitting to real-life data, properties of normal distribution.
+
+
+
+                                                                                                      Page 1 of 4
+4.   Regression and Correlation Analysis:
+     Concept of regression and correlation analysis, scatter diagram and its uses, estimation of
+     simple linear regression, properties of the least-squares regression line, standard error of
+     estimate, coefficient of determination, linear correlation, coefficient of correlation and its
+     properties. Spearman’s rank correlation (with and without tied observations), partial and
+     multiple correlations up to three variables.
+5.   Index Numbers and Basics of Time series:
+     Construction and application of wholesale price index numbers, fixed and chain base methods,
+     weighted      index     numbers        (Laspeyres’,   Paasche’s,     Fisher’s    ideal    and
+     Marshall-Edgeworth indices), tests for the consistency of Index Numbers, construction of
+     consumer price index numbers, sensitive price indicator, components of a time series, analysis
+     of time series, measurement of secular trend and seasonal variations by various methods,
+     deseasonalization of data.
+                                                Topics
+                                               Section-B
+6    Sampling and Sampling Distribution:
+     Concept of sampling, advantages and scope of sampling, probability and non probability
+     sampling, sampling and non sampling error, sampling design and sampling frame, sampling
+     design of simple random sampling, stratified, systematic and cluster sampling, judgment and
+     quota sampling, sampling distributions of sample means, proportions and variances under
+     simple random sampling, sampling distributions of mean of stratified random sampling,
+     sampling distributions of difference between two sample means and the sample proportions,
+     and their properties, concept of central limit theorem, concepts of t-, 𝜒 2 -, F-distributions.
+7    Estimation and Testing of Hypothesis:
+     Estimates and estimators, point estimator and its properties: Unbiasedness, consistency,
+     efficiency and sufficiency, interval estimation and its interpretations, interval estimation of the
+     single population mean or proportion with known and unknown variances, differences
+     between two mean/proportions with known and unknown variances, determination of sample
+     size, interval estimation of population variance and ratio of two population variances, null and
+     alternative hypothesis, simple and composite hypothesis, concept of Type-I and Type-II error,
+     level of significance, concept of p-value, acceptance and rejection regions, one sided and two
+     sided test, testing of hypothesis for single mean/proportion, difference between two
+     means/proportions, testing of hypothesis (based on small sample and unknown population
+     variance) for single mean, difference between two means, paired and independent
+     observations, testing of hypothesis about the variances and equality of two variances, concept
+     of association, contingency tables, chi-square test for independence of attributes.
+8    Analysis of variance and Experimental Design:
+     Definition, importance and assumptions of analysis of variance, partitioning of sums of
+     squares and degrees of freedom in one and two way classification, testing the equality of
+     means for one and two way classification, multiple comparison tests: least significant
+     difference test, Duncan’s multiple range test, principles of experimental design, completely
+     randomized, randomized complete block and Latin square design, description of the layout,
+                                                                                                    Page 2 of 4
+            and statistical analysis, advantages and disadvantages of each design.
+      9     Non-Parametric Tests:
+            Parametric vs Non-parametric tests, when to use non-parametric procedures, testing
+            procedures and applications one-sample tests: Wilcoxon Signed Rank Test, Run test, testing
+            procedures and applications two related-sample tests: Wilcoxon Signed Rank Test, testing
+            procedures and applications for two independent samples: Mann-Whitney U test, run test,
+            testing procedures and application two or more independent samples: Kruskal Wallis H test.
+      10    Vital Statistics and Official Statistics:
+            Vital events, uses and shortcomings of vital statistics, sources of demographic; data gender
+            and child woman ratio, vital index, crude, specific and standardised death and birth rates,
+            general fertility rate, gross and net reproduction rate, introduction to official statistics, sources
+            of official statistics, use of official statistics in administration and planning, concepts and
+            evaluation of GDP, GNP, NNP, registration systems of births and deaths in Pakistan.
+
+Suggested readings:
+
+ 1)        Anderson, D. R., Sweeney, D. J., Williams, T. A., Camm, J. D., Cochran, J. J., Fry, M. J., et al. (2014).
+           Statistics for Business and Economics.
+ 2)        Beg, M. A., & Mirza, M. D. (2006). Statistics: Theory and Methods, Vol. I. Carvan Book House,
+           Lahore.
+ 3)        Beg, M. A., & Mirza, M. D. (2006). Statistics: Theory and Methods, Vol. II. Carvan Book House,
+           Lahore.
+ 4)        Bluman, A. G. (2011). Elementary Statistics, 8th ed. McGraw-Hill, New York.
+ 5)        Chatfield, C. (2003). The Analysis of Time Series: An Introduction, 6th ed. Chapman & Hall, London.
+ 6)        Chaudhry, S. M., & Kamal, S. (2009). Introduction to Statistical Theory, Part II. Ilmi Kitab Khana,
+           Lahore.
+ 7)        Chaudhry, S. M., & Kamal, S. (2012). Introduction to Statistical Theory, Part I. Ilmi Kitab Khana,
+           Lahore.
+ 8)        Cochran, W. G. (1977). Sampling Techniques, 3rd ed. John Wiley & Sons, New York.
+ 9)        Gupta, S. C., & Kapoor, V. K. (2020). Fundamentals of Mathematical Statistics. Sultan Chand & Sons.
+ 10) Hirai, A. S. (2012). A Course in Mathematical Statistics. Ilmi Kitab Khana, Lahore.
+ 11) Hirai, A. S. (2012). Estimation of Statistical Parameters. Ilmi Kitab Khana, Lahore.
+ 12) Montgomery, D. C. (2012). Design and Analysis of Experiments. John Wiley & Sons, New York.
+ 13) Mood, A. M., Graybill, F. A., & Boes, D. C. (2007). Introduction to the Theory of Statistics. McGraw-
+           Hill, New York.
+ 14) Raj, D. (1971). Sampling Theory. McGraw-Hill Book Company, New York.
+ 15) Sharma, J. K. (2010). Fundamentals of Business Statistics. Vikas Publishing House.
+                                                                                                             Page 3 of 4
+        16) Steel, R. G. D., Torrie, J. H., & Dickey, D. A. (2008). Principles and Procedures of Statistics: A
+             Biometrical Approach. McGraw-Hill.
+        17) Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (1993). Probability and Statistics for Engineers
+             and Scientists. New York.
+
+Note:     The above list is only suggestive and not exhaustive. Candidates may consult other standard books
+          and relevant material covering the prescribed syllabus.
+
+
+
+                                                  End of Document
+
+
+
+
+                                                                                                           Page 4 of 4
+

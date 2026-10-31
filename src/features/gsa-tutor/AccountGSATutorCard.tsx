@@ -1,3 +1,4 @@
+import { preparationPhysicalKey } from '@/lib/preparationStorage'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
@@ -11,7 +12,7 @@ type CourseSnapshot = {
 
 function readCourse() {
   let raw: CourseSnapshot = {}
-  try { raw = JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1') || '{}') as CourseSnapshot } catch { /* Corrupt local records do not block the dashboard. */ }
+  try { raw = JSON.parse(localStorage.getItem(preparationPhysicalKey('cssvista:tool:gsa-tutor:v1')) || '{}') as CourseSnapshot } catch { /* Corrupt local records do not block the dashboard. */ }
   return {
     days: typeof raw.plan?.days === 'number' && raw.plan.days >= 5 && raw.plan.days <= 120 ? raw.plan.days : null,
     completed: Object.keys(raw.completed || {}).length,

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, BookOpen, Check, CheckCircle2, Download, PenLine, Save } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
+import { currentHostingerAccountUser } from '@/lib/hostingerApi'
+import { preparationDeviceKey } from '@/lib/preparationStorage'
 import { canReview, emptyWork, findLesson, lessons, readGuideWork, type GuideWork, type Lesson, type LessonWork } from './lessons'
 import './guide.css'
 
@@ -23,7 +25,9 @@ export default function ExpressionGuide() {
   const [params, setParams] = useSearchParams()
   const lesson = findLesson(params.get('lesson'))
   const index = lessons.indexOf(lesson)
-  const storageKey = `cssvista:english-guide:v1:${user?.id || 'guest'}`
+  const baseStorageKey = `cssvista:english-guide:v1:${user?.id || 'guest'}`
+  const [storageKey] = useState(() => user ? preparationDeviceKey(baseStorageKey, user.id) : baseStorageKey)
+  const accountAtMount = useRef(currentHostingerAccountUser())
   const [initial] = useState(() => {
     try { return { work: readGuideWork(localStorage.getItem(storageKey)), error: '' } }
     catch { return { work: {} as GuideWork, error: 'Saved guide work could not be read. You can practise here and download your writing. Existing browser data will not be overwritten.' } }
@@ -51,6 +55,9 @@ export default function ExpressionGuide() {
     if (!user) { setError('Sign in to save guide work on this device.'); return }
     const nextWork = { ...current, reviewed: markReviewed ? canReview(current) : current.reviewed }
     try {
+      if (currentHostingerAccountUser() !== accountAtMount.current || storageKey !== preparationDeviceKey(baseStorageKey, user.id)) {
+        throw Error('Your account or preparation records changed. Download this writing before reopening the current lesson.')
+      }
       const latest = readGuideWork(localStorage.getItem(storageKey))
       if (JSON.stringify(latest[lesson.id] || emptyWork()) !== JSON.stringify(baseline.current[lesson.id] || emptyWork())) {
         throw Error('This lesson was saved in another tab. Download your writing before reloading to compare the saved version.')

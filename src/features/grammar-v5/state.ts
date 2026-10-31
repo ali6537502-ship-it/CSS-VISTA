@@ -1,3 +1,4 @@
+import { preparationDeviceKey } from '../../lib/preparationStorage.ts'
 import { CURRICULUM_VERSION, type Catalog, type QuestionIndex } from './types.ts'
 import { scheduleReview, type Review } from '../grammar/practice.ts'
 
@@ -8,7 +9,7 @@ export interface StudyState {
   revealed: string[]; notes: Record<string, string>; bookmarks: string[]; reviews: Record<string, Review>
   cursor: { day: number; section: string; item: string }; checks: Record<string, number[]>
 }
-export function stateKey(user?: string, attempt?: string) { return `cssvista:grammar-course:v5:${user ? `account:${user}${attempt ? `:attempt:${attempt}` : ''}` : 'guest'}` }
+export function stateKey(user?: string, attempt?: string) { const key = `cssvista:grammar-course:v5:${user ? `account:${user}${attempt ? `:attempt:${attempt}` : ''}` : 'guest'}`; return user ? preparationDeviceKey(key, user) : key }
 export const blankState = (): StudyState => ({ curriculumVersion: CURRICULUM_VERSION, completed: [], studied: [], answers: {}, drafts: {}, selfReviews: {}, revealed: [], notes: {}, bookmarks: [], reviews: {}, cursor: { day: 1, section: 'orientation', item: '' }, checks: {} })
 const record = (x: unknown): Record<string, unknown> => x && typeof x === 'object' && !Array.isArray(x) ? x as Record<string, unknown> : {}
 const list = (x: unknown): unknown[] => Array.isArray(x) ? x : []

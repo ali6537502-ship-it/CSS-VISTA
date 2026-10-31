@@ -1,0 +1,158 @@
+                       PUNJAB PUBLIC SERVICE COMMISSION
+             COMBINED COMPETITIVE EXAMINATION (CCE) SYLLABUS
+
+                                             ECONOMICS
+     Total Marks: 100
+
+                                             PART-I
+                                         MICROECONOMICS
+
+                                                  Topics
+
+1.    Microeconomics: Meaning of microeconomics. Choice, scarcity and opportunity cost.
+      Production Possibility Frontier. Goals of microeconomic policy: efficiency and equity.
+2.    Market economy: Demand, Supply and Price determination. Individual and market
+      demand. Changes in demand. Individual and market supply. Changes in supply. Market
+      equilibrium and impact of changes in demand and supply on market equilibrium. Elasticity
+      of Supply and Demand. Point and Arc elasticity. Price, income and cross elasticities.
+      Application of the concept of elasticity.
+3.    The Theory of Consumer Behaviour: Concept of utility and derivation of Demand
+      curve. Cardinal and ordinal Utility. Consumer’s Surplus. Indifference Curves and their
+      shapes. Marginal rate of substitution and convexity of Indifference Curves. The budget
+      constraint and the equilibrium of the consumer. Income-Consumption and the Engel’s
+      Curve. Price- consumption and Demand curve. Income and Substitution effects of a price
+      change, the Hicksian method and the Slutsky method. Identification of normal goods,
+      inferior goods and Giffen goods.
+4.    The Theory of Production: The concepts of production cost and profit. Production
+      function. The law of variable proportions. Cost curves in the short run and in the long run.
+      Choice of input mix. The principle of Substitution. Isoquants, iso-cost line and the condition
+      for cost minimization. The expansion path and returns to scale. Economies of scale. The very
+      long run and the endogenous technical change.
+5.    Market Structures and Behaviour of firms.
+
+      Perfectly competitive markets. Assumptions of the model. The supply curve of a firm and an
+      industry in the short run. Short run and the long run equilibrium of the firm and industry.
+      The shape of the long run industry supply curve and the effects of changing technology. The
+      allocative efficiency of perfect competition.
+
+
+
+                                                                                            Page 1 of 4
+      Monopoly: Shape of the demand curve under monopoly. Elasticity of the demand curve and
+      its implication for a monopolist. Short run and long run equilibrium. Price discrimination
+      and its consequences. Analysis of price discrimination between markets. Dumping. Cartels
+      as monopolies. The allocative inefficiency of monopoly. Comparison between perfect
+      competition and monopoly.
+      Imperfectly competitive market structures: Monopolistic competition. The concept of
+      industry and group. Short run and long run equilibrium of a firm. Excess capacity.
+      Comparison with perfect competition and monopoly.
+      Oligopoly and its basic dilemma. Duopoly. Models of Non-collusive oligopoly: Cournot’s
+      duopoly model, Chamberlain’s oligopoly model, Sweezy’s kinked-demand model.
+      Collusive Oligopoly. Cartels: Joint profit maximization and market sharing cartels. Price
+      leadership models. Mergers.
+      The Theory of Factor Pricing: Demand and Supply of inputs. Input demand in the short
+ 6.   run and in the long run. The firms demand curve. The firm‟s demand curve for a single
+      variable input. The industry‟s demand curve for an input. Elasticity of demand for inputs.
+      The supply of inputs. Determination of price, quantity and income of an input. Monopsony.
+
+
+Suggested readings:
+
+      1.   Lipsey and Chrystal, Economics. Oxford University Press.
+      2.   Koutsoyiannis, A., Modern Microeconomics, London, Macmillan.
+      3.   Miller, E. and Maddala, G.S., Microeconomics Theory and Applications, McGraw Hill
+           International.
+      4.   Mankiw, N.G., Principles of Microeconomics.
+
+
+                                            PART-II
+                                        MACROECONOMICS
+                                                 Topics
+ 1.   What is Macroeconomics?: Major macroeconomic issues. Economic models. Stocks and
+      flows, National income accounting, circular flow of income, real versus nominal GDP, the
+      GDP deflator, the consumer price index, economic growth, actual versus potential output,
+      business cycles and their phases, definition of full employment, unemployment, GDP gap,
+      Inflation.
+ 2.   Classical Macroeconomics: The classical revolution, production, employment, labour
+      demand and labour supply. Equilibrium output and employment. The quantity theory of
+
+
+
+                                                                                            Page 2 of 4
+     money. The Cambridge approach to the Quantity theory. Aggregate Demand and Aggregate
+     Supply in the classical system. The classical theory of rate of interest. Complete classical
+     model and classical dichotomy.
+3.   The Keynesian Macroeconomics: Aggregate expenditure and its components. Consumption
+     function and Savings function. Investment and the real rate of interest. The equilibrium GDP
+     in a closed economy simple multiplier. Government spending and taxes. Tax multiplier. GDP
+     in an open economy. The net export function and the foreign trade multiplier. The augmented
+     saving-investment approach. Fiscal and monetary policies.
+4.   Investment and its Determinants: Marginal efficiency of capital and optimal capital stock,
+     the marginal efficiency of investment. The stock market and Tobin‟s q-theory. Inventory
+     investment and the accelerator model. The interaction of multiplier and accelerator. The
+     derivation of IS curve and its slope. Factors that shift the IS curve.
+5.   The Money Market and LM-curve. Keynes Theory of Liquidity preference. Supply of
+     money. Monetary equilibrium and the rate of interest. Derivation of LM-curve and its slope.
+     Factors that shift the LM curve. Keynes liquidity trap. Interaction of IS-LM curves.
+     Adjustment to equilibrium in the IS-LM curve model. The algebra of the IS-LM model.
+6.   Aggregate Demand and Aggregate Supply: Macroeconomic equilibrium in the short run.
+     The effect of aggregate demand and aggregate supply shocks on the price level and GDP.
+     Long run consequences of aggregate demand shocks. Long run aggregate supply curve.
+     Inflationary and recessionary gaps. The theory of fiscal stabilization and its effectiveness.
+     Transmission mechanism. Comparison of the Classical and Keynesian models and policy
+     conclusions.
+7.   Inflation and Unemployment: Types of inflation, Supply shock and demand shock. Inflation
+     as a monetary phenomenon. Stagflation. The theory of Phillips curve. The short run and the
+     long run Phillips curve. The expectations augmented Phillips curve. Adaptive expectations.
+     Unemployment. Frictional, structural and cyclical unemployment. Okun’s law. Hysteresis and
+     the natural rate hypotheses.
+8.   Consumption Theories and Their Implications: Keynesian absolute income hypothesis,
+     Simon Kuznets findings, Duesenbury‟s hypothesis, Permanent income hypothesis, life cycle
+     hypothesis, Robert Hall and the random-walk hypothesis.
+
+
+
+
+                                                                                          Page 3 of 4
+Suggested readings:
+      1.   Lipsey & Chrystal, Economics, Oxford University Press.
+      2.   Mankiw, G.N., Macroeconomics, Worth Publishers, New York.
+      3.   Froyen, R.T., Macroeconomics, Theories and Policies, Pearson education.
+      4.   Glahe, F.R., Macroeconomics, Theory and Policy, Harcourt Brace Jovanovich Inc.
+
+
+                                         PART-III
+                                  MATHEMATICAL ECONOMICS
+                                           Topics
+
+ 1.    Equations: Equation vs Identities. Solution of linear, Quadratic and simultaneous equations.
+       Equilibrium analysis in Economics. Partial market equilibrium. Equilibrium in National
+       Income.
+ 2.    Derivatives: The concept of derivatives. Slope vs elasticity of a function. Rules of
+       differentiation. The derivation of marginal quantities in Economics.
+ 3.    Maxima and Minima of Functions: Criteria for relative maxima and minima. Point of
+       inflection. First order and second order condition. Problems of optimization in Economics.
+       Profit, utility and revenue maximization. Cost minimization.
+
+
+Suggested readings:
+
+      1. Dowling, E.T. “Introduction to Mathematical Economics” Schuam’s Outline Series.
+      2. Chiang, A.C., Fundamental Methods of Mathematical Economics, McGrawHill
+
+
+
+
+      Note:   The above list is only suggestive and not exhaustive. Candidates may consult other
+              standard books and relevant material covering the prescribed syllabus.
+
+
+
+
+                                            End of Document
+
+
+
+
+                                                                                           Page 4 of 4
+

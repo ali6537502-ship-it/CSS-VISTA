@@ -36,6 +36,8 @@ export interface AccountContextValue {
   clearPasswordRecovery(): void
   signOut(): Promise<ActionResult>
   syncNow(): Promise<ActionResult>
+  preparationResetNotice?: string
+  dismissPreparationResetNotice?: () => void
   resetProgress(): Promise<ActionResult>
 }
 

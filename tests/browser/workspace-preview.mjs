@@ -1,4 +1,4 @@
-/** One-account rollout contract against the real native auth/data/selector services. */
+/** Global workspace rollout against the real native auth/data/release services. */
 import assert from 'node:assert/strict'
 import { randomUUID } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
@@ -16,6 +16,7 @@ php('tests/pro/fixture.php','reset-rate')
 const emails=['selected','other'].map(label=>`preview-${label}-${randomUUID()}@example.invalid`)
 for (const email of emails) php('tests/current-affairs/setup.php','user',email)
 selectWorkspacePreview(emails[0])
+php('tests/workspace-preview/fixture.php','paused')
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath(),headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:390,height:844},reducedMotion:'reduce',hasTouch:true})
 await isolateNetwork(context,base)
@@ -42,18 +43,15 @@ async function check(name,run) {
   finally {writeFileSync(`${output}/results.json`,JSON.stringify({results,errors},null,2))}
 }
 try {
-  await check('guest-cannot-opt-in',async()=>{
+  await check('guest-single-window-signup',async()=>{
     const guest=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:390,height:844}})
     await isolateNetwork(guest,base)
     const guestPage=await guest.newPage()
-    await guestPage.goto(base+'/account?workspace=new')
-    await guestPage.getByRole('button',{name:'Create account',exact:true}).waitFor()
-    await guestPage.evaluate(()=>localStorage.setItem('cssvista:workspace-preview','true'))
-    await guestPage.reload()
-    await guestPage.getByRole('button',{name:'Create account',exact:true}).click()
-    await guestPage.getByRole('button',{name:'Create my free account',exact:true}).waitFor()
+    await guestPage.goto(base+'/account?mode=create')
+    await guestPage.getByRole('heading',{name:'Account details',exact:true}).waitFor()
+    for(const title of ['Personal information','Your studies','Your connection with CSS Vista','Your profile photo']) await guestPage.getByRole('heading',{name:title,exact:true}).waitFor()
     assert.equal(await guestPage.locator('.student-workspace').count(),0)
-    await guestPage.screenshot({path:`${output}/classic-guest-signup-390.png`,fullPage:true})
+    await guestPage.screenshot({path:`${output}/global-guest-signup-390.png`,fullPage:true})
     await guest.close()
   })
   const owner=await login(0)
@@ -69,6 +67,7 @@ try {
         await page.goto(base+'/account/'+route)
         await page.getByRole('heading',{name:title,exact:true}).waitFor()
         await page.locator('.student-workspace').waitFor()
+        assert.equal(await page.locator('.ws-feature').filter({hasText:/Pro · membership required|Membership & Payments|Précis Lab|My Answer Performance/}).count(),0)
         if(route==='subjects') await page.getByRole('heading',{name:'Political Science',exact:true}).waitFor()
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${route} overflow at ${width}`)
         assert.equal(await page.getByRole('navigation',{name:'Primary mobile navigation',exact:true}).count(),0)
@@ -100,24 +99,18 @@ try {
     await page.unroute('**/api/auth/workspace-preview.php',failure)
     await page.reload();await page.locator('.student-workspace').waitFor()
   })
-  await check('other-account-remains-classic-and-isolated',async()=>{
+  await check('other-account-modern-and-isolated',async()=>{
     await logout();await login(1)
-    await page.goto(base+'/account/dashboard');await classic()
+    await page.goto(base+'/account/dashboard');await page.locator('.student-workspace').waitFor()
     const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:v1')||'{}'))
     assert.ok(!(state.studyScheduleTasks||[]).some(task=>task.id==='pilot-task'))
     assert.ok(!(state.quizResults||[]).some(result=>result.id==='pilot-result'))
     assert.ok(!(state.bookmarks||[]).includes('TEST ONLY retained bookmark'))
-    for(const route of ['subjects','practice','directory','more']) {
-      await page.goto(base+'/account/'+route);await page.waitForURL('**/account/dashboard');await classic()
+    for(const route of ['subjects','practice','directory','more','tasks','progress','library','settings','plan']) {
+      await page.goto(base+'/account/'+route);await page.locator('.student-workspace').waitFor()
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`global ${route} overflow`)
     }
-    for(const route of ['tasks','progress','library','settings','plan']) {
-      await page.goto(base+'/account/'+route)
-      await page.getByRole('heading').first().waitFor()
-      assert.equal(await page.locator('.student-workspace').count(),0)
-      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`classic ${route} overflow`)
-    }
-    await page.goto(base+'/account/dashboard');await classic()
-    await page.screenshot({path:`${output}/classic-other-1440.png`,fullPage:true})
+    await page.screenshot({path:`${output}/modern-other-1440.png`,fullPage:true})
   })
   await check('late-selected-response-cannot-enable-next-account',async()=>{
     await logout();await login(0)
@@ -135,8 +128,8 @@ try {
     await logout();const other=await login(1)
     await page.evaluate(()=>window.dispatchEvent(new Event('cssvista:profile-updated')))
     await page.waitForFunction(id=>localStorage.getItem('cssvista:progress-owner')===id,other)
-    release();await finished;await classic()
-    assert.equal(await page.locator('.student-workspace').count(),0)
+    release();await finished;await page.locator('.student-workspace').waitFor()
+    assert.equal(await page.getByText('TEST ONLY retained study task',{exact:true}).count(),0)
     await page.unroute('**/api/auth/workspace-preview.php',handler)
     assert.notEqual(other,owner)
   })
@@ -157,5 +150,5 @@ try {
     assert.ok(await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:v1')).bookmarks.includes('TEST ONLY retained bookmark')))
   })
   assert.deepEqual(errors,[])
-  console.log('PASS one-account browser rollout: all seven sections at six widths, task persistence, rollback/failure fallback, classic routes, guest opt-in rejection and late-response/account isolation.')
+  console.log('PASS global browser rollout: all seven sections at six widths, task persistence, rollback/failure fallback, modern accounts, single-window guest signup and late-response/account isolation.')
 } finally {writeFileSync(`${output}/results.json`,JSON.stringify({results,errors},null,2));await browser.close()}

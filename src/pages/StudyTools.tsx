@@ -1,3 +1,4 @@
+import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -34,14 +35,15 @@ function useList<T extends { id: string }>(key: string, seed: T[] = []) {
   const fullKey = `cssvista:tool:${key}`
   const [items, setItems] = useState<T[]>(() => {
     try {
-      const raw = localStorage.getItem(fullKey)
+      const raw = localStorage.getItem(preparationPhysicalKey(fullKey))
       return raw ? JSON.parse(raw) : seed
     } catch { return seed }
   })
   function save(next: T[]) {
     setItems(next)
     try {
-      localStorage.setItem(fullKey, JSON.stringify(next))
+      if (!preparationWriteCurrent()) throw new Error('Preparation changed. Refresh this page before saving.')
+      localStorage.setItem(preparationPhysicalKey(fullKey), JSON.stringify(next))
       notifyProgressChanged()
     } catch { /* ignore */ }
   }

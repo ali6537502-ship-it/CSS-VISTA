@@ -1,3 +1,4 @@
+import { preparationPhysicalKey, preparationWriteCurrent } from './preparationStorage'
 // Student progress - saved locally for guests and synced for signed-in students.
 // Covers: attempted MCQs, saved MCQs, mistake notebook, recent activity,
 // checklist progress, timer sessions, active study time, question response time
@@ -193,10 +194,10 @@ const empty: ProgressState = {
 
 export function getProgress(): ProgressState {
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(KEY))
     if (!raw) return JSON.parse(JSON.stringify(empty))
     const cleaned = raw.replaceAll('\u2014', '-')
-    if (cleaned !== raw) localStorage.setItem(KEY, cleaned)
+    if (cleaned !== raw && preparationWriteCurrent()) localStorage.setItem(preparationPhysicalKey(KEY), cleaned)
     return { ...JSON.parse(JSON.stringify(empty)), ...JSON.parse(cleaned) }
   } catch {
     return JSON.parse(JSON.stringify(empty))
@@ -214,7 +215,7 @@ let cachedReadState: ProgressState | null = null
 
 function getProgressCached(): ProgressState {
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(preparationPhysicalKey(KEY))
     if (raw === cachedReadRaw && cachedReadState) return cachedReadState
     const state = getProgress()
     cachedReadRaw = raw
@@ -234,7 +235,8 @@ function invalidateReadCache() {
 
 function save(s: ProgressState) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(s))
+    if (!preparationWriteCurrent()) { notifyStorageFailed(); return }
+    localStorage.setItem(preparationPhysicalKey(KEY), JSON.stringify(s))
     invalidateReadCache()
     notifyProgressChanged()
   } catch {

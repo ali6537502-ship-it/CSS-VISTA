@@ -1,0 +1,69 @@
+                    PUNJAB PUBLIC SERVICE COMMISSION
+          COMBINED COMPETITIVE EXAMINATION (CCE) SYLLABUS
+
+                                             PHYSICS
+    Total Marks: 100
+                                                Topics
+1   Mechanics and Special Relativity
+    Scalars and vectors; Newton’s laws of motion; conservation of energy, linear momentum, and
+    angular momentum; circular and rotational motion; gravitation and satellite motion; Basic
+    concepts of special relativity, Lorentz transformations, time dilation, length contraction and
+    mass–energy equivalence.
+2   Fluid Mechanics, Oscillations, Waves and Optics
+    Surface tension, viscosity, and Bernoulli’s theorem; simple harmonic motion and forced
+    oscillations; travelling and standing waves; Basic wave phenomena, including
+    diffraction and polarization; electromagnetic waves; lasers and their applications.
+3   Heat, Thermodynamics and Statistical Mechanics
+    Ideal gases and the van der Waals equation; laws of thermodynamics; entropy and basic
+    thermodynamic potentials; kinetic theory of gases and Maxwell’s velocity distribution; heat
+    transfer; introductory concepts of Maxwell–Boltzmann, Bose–Einstein, and Fermi–Dirac
+    statistics.
+4   Electricity and Magnetism
+    Electric field, electric potential, and Gauss’s law; capacitance and dielectrics; magnetic fields
+    and Ampère’s law; magnetic properties of matter; electromagnetic induction; Alternating-
+    current circuits and resonance; Maxwell’s equations and the basic properties of
+    electromagnetic waves.
+5   Electronics and Digital Systems
+    Semiconductor basics; p-type and n-type semiconductors; p–n junction diodes and rectification;
+    transistors and their basic applications; operational amplifiers and elementary applications;
+    number systems, Boolean algebra and basic logic gates.
+6   Atomic Physics and Quantum Mechanics
+    Bohr’s atomic model; quantum numbers, electron spin, and Pauli’s exclusion principle;
+    photoelectric effect and Compton scattering; de Broglie hypothesis and Heisenberg’s
+    uncertainty principle; basic Schrödinger wave equation and its applications; Zeeman effect.
+7   Nuclear and Particle Physics
+    Nuclear structure, mass defect and binding energy; radioactive decay and half-life; alpha, beta,
+    and gamma radiation; detection of nuclear radiation; nuclear reactions, fission and fusion;
+    Basic principles of nuclear reactors; elementary particles and their
+    fundamental properties.
+8   Solid State Physics
+    Crystal structures and lattice concepts; energy-band theory; conductors, insulators and
+    semiconductors; Basic magnetic properties of solids; superconductivity and its applications.
+Suggested readings:
+
+   1    University Physics, Vol. 1–3, Jeff Sanny, Samuel Ling, and William Moebs, OpenStax,
+        2016.
+   2    Fundamentals of Physics, 12th Edition, David Halliday, Robert Resnick, Jearl Walker, John
+        Wiley & Sons, 2021.
+   3    Introduction to Electromagnetic Fields and Waves, Dale Corson and Paul Lorrain, Literary
+        Licensing, LLC, 2013.
+   4    Thermal Physics, Charles Kittel and Herbert Kroemer, Macmillan, 1980.
+   5    Electronic Devices and Circuit Theory, Robert L. Boylestad and Louis Nashelsky, Pearson,
+        2011.
+   6    Concepts of Modern Physics, Arthur Beiser, 2009.
+   7    Introduction to Solid State Physics, Charles Kittel and Paul McEuen, New York: Wiley,
+        1976.
+   8    College Physics 2e, Paul Urone, Roger Hinrichs, Kim Dirks, Manjula Sharma, Kenneth
+        Podolak, and Henry Smith, OpenStax, 2026.
+   9    Introductory Nuclear Physics, 2nd Edition, Samuel S. M. Wong, Wiley-VCH, 2024.
+
+
+
+Note:    The above list is only suggestive and not exhaustive. Candidates may consult other
+         standard books and relevant material covering the prescribed syllabus.
+
+
+
+
+                                        End of Document
+

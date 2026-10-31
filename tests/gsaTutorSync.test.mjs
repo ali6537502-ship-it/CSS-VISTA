@@ -10,6 +10,7 @@ const js = ts.transpileModule(source, {
 }).outputText
 const exports = {}
 new Function('exports', 'require', js)(exports, (path) => {
+  if (path === './preparationStorage') return {} // Merge selectors do not read or mutate device storage.
   if (path === '@/lib/progressEvents') return { notifyProgressChanged: () => {} }
   throw new Error('Unexpected dependency ' + path)
 })

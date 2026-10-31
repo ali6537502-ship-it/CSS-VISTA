@@ -1,0 +1,690 @@
+{
+  "publisher": "Punjab Public Service Commission",
+  "retrievedOn": "2026-10-30",
+  "sourcePages": [
+    "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+    "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx"
+  ],
+  "documents": [
+    {
+      "id": "compulsory-general-knowledge",
+      "designation": "compulsory",
+      "title": "General Knowledge",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/1%20General%20Knowledge.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-general-knowledge.pdf",
+      "sourceCells": [
+        "1",
+        "General Knowledge",
+        "Download"
+      ],
+      "bytes": 485645,
+      "sha256": "1a011c506d6bdab94371c6c018a6e45d4e2352ec8ed64cc2480d832e007af292",
+      "lastModified": "Fri, 30 Oct 2026 04:59:55 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-english-essay",
+      "designation": "compulsory",
+      "title": "English Essay",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/2%20English%20Essay.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-english-essay.pdf",
+      "sourceCells": [
+        "2",
+        "English Essay",
+        "Download"
+      ],
+      "bytes": 110119,
+      "sha256": "707113ad76973a9efa3848524192ae85ef31d6716c20b9ffe173b905dce199fb",
+      "lastModified": "Fri, 30 Oct 2026 05:00:05 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-english-precis-comprehension-grammar-and-translation-etc",
+      "designation": "compulsory",
+      "title": "English (Precis, Comprehension, Grammar, and Translation etc.)",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/3%20English%20(Precis%2C%20Comprehension%2C%20Grammar%2C%20and%20Translation%20etc.).pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-english-precis-comprehension-grammar-and-translation-etc.pdf",
+      "sourceCells": [
+        "3",
+        "English (Precis, Comprehension, Grammar, and Translation etc.)",
+        "Download"
+      ],
+      "bytes": 26118,
+      "sha256": "367a9181031c2f3cef0e6962792e9e17052e25b4932e462cf0295758d36818b1",
+      "lastModified": "Fri, 30 Oct 2026 05:00:20 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-urdu-essay-precis-comprehension-grammar-and-translation-etc",
+      "designation": "compulsory",
+      "title": "Urdu (Essay, Precis, Comprehension, Grammar and Translation etc.)",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/4%20Urdu%20(Essay%2C%20Precis%2C%20Comprehension%2C%20Grammar%20and%20Translation%20etc.).pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-urdu-essay-precis-comprehension-grammar-and-translation-etc.pdf",
+      "sourceCells": [
+        "4",
+        "Urdu (Essay, Precis, Comprehension, Grammar and Translation etc.)",
+        "Download"
+      ],
+      "bytes": 201542,
+      "sha256": "bffb9187fd0897df60f1107188f2a22573c550c1aabfec130d57029c241e8fb6",
+      "lastModified": "Fri, 30 Oct 2026 05:00:34 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-islamic-studies",
+      "designation": "compulsory",
+      "title": "Islamic Studies",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/5%20Islamic%20Studies.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-islamic-studies.pdf",
+      "sourceCells": [
+        "5",
+        "Islamic Studies",
+        "Download"
+      ],
+      "bytes": 272181,
+      "sha256": "098f61de13209162675dd22cb540be76b68083697db9c2ffb6ef6840958686d8",
+      "lastModified": "Fri, 30 Oct 2026 05:00:47 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-ethics-for-non-muslim-candidates",
+      "designation": "compulsory",
+      "title": "Ethics for Non-Muslim Candidates",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/6%20Ethics%20for%20Non-Muslims%20Candidates.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-ethics-for-non-muslim-candidates.pdf",
+      "sourceCells": [
+        "6",
+        "Ethics for Non-Muslim Candidates",
+        "Download"
+      ],
+      "bytes": 156564,
+      "sha256": "4bd7bccc581d8573ef7df4e36270085cab319982b8b27a5a9381495d035950c9",
+      "lastModified": "Fri, 30 Oct 2026 11:07:28 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-pakistan-studies-i",
+      "designation": "compulsory",
+      "title": "Pakistan Studies-I",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/7%20Pakistan%20Studies-I.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-pakistan-studies-i.pdf",
+      "sourceCells": [
+        "7",
+        "Pakistan Studies-I",
+        "Download"
+      ],
+      "bytes": 605841,
+      "sha256": "3ad88744d99bb04a0ae9006661acf680f2f9e20a547cd0e24e86af27f7277caa",
+      "lastModified": "Fri, 30 Oct 2026 05:04:42 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-pakistan-studies-ii",
+      "designation": "compulsory",
+      "title": "Pakistan Studies-II",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/8%20Pakistan%20Studies-II.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-pakistan-studies-ii.pdf",
+      "sourceCells": [
+        "8",
+        "Pakistan Studies-II",
+        "Download"
+      ],
+      "bytes": 655877,
+      "sha256": "6849da8abe1cc5ea6a31a1e9d7dd9bb0718555825e0fff69b6b2558d4a11df6d",
+      "lastModified": "Fri, 30 Oct 2026 05:01:37 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-international-affairs",
+      "designation": "compulsory",
+      "title": "International Affairs",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/9%20International%20Affairs.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-international-affairs.pdf",
+      "sourceCells": [
+        "9",
+        "International Affairs",
+        "Download"
+      ],
+      "bytes": 274258,
+      "sha256": "16e23f7307ca0b66a6b20c7039173f49d4cf66b22821e1b52b293e88de537c5f",
+      "lastModified": "Fri, 30 Oct 2026 05:01:58 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "compulsory-economy-and-development",
+      "designation": "compulsory",
+      "title": "Economy and Development",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/C/10%20Economy%20and%20Development.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSCompulsoryPapers.aspx",
+      "file": "/pms-punjab/syllabus/compulsory-economy-and-development.pdf",
+      "sourceCells": [
+        "10",
+        "Economy and Development",
+        "Download"
+      ],
+      "bytes": 625404,
+      "sha256": "4d2c3b9a5e28151625a2afa74da7a54db6d6645ebd8ab0d0e5f63e417cb7a8bb",
+      "lastModified": "Fri, 30 Oct 2026 05:02:10 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-agriculture",
+      "designation": "optional",
+      "title": "Agriculture",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/1%20Agriculture.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-agriculture.pdf",
+      "sourceCells": [
+        "1",
+        "Agriculture",
+        "Download"
+      ],
+      "bytes": 481881,
+      "sha256": "c4ad4b26ae7fdbae07ce20626ba753ad79168bf2235f4a9090da8eecd31029da",
+      "lastModified": "Thu, 29 Oct 2026 07:26:15 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-arabic",
+      "designation": "optional",
+      "title": "Arabic",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/2%20Arabic.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-arabic.pdf",
+      "sourceCells": [
+        "2",
+        "Arabic",
+        "Download"
+      ],
+      "bytes": 826575,
+      "sha256": "aa33e197a5bcd4ce00a33be431c5487fbfd440b9ad4f7aab14a51c1f4f51ec54",
+      "lastModified": "Thu, 29 Oct 2026 08:04:34 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-botany",
+      "designation": "optional",
+      "title": "Botany",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/3%20Botany.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-botany.pdf",
+      "sourceCells": [
+        "3",
+        "Botany",
+        "Download"
+      ],
+      "bytes": 183413,
+      "sha256": "5482f1a1a6e80d2ab27653a77b146ccac9df2a2d3c04cc8365c6df976916d320",
+      "lastModified": "Thu, 29 Oct 2026 07:25:20 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-business-administration",
+      "designation": "optional",
+      "title": "Business Administration",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/4%20Business%20Administration.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-business-administration.pdf",
+      "sourceCells": [
+        "4",
+        "Business Administration",
+        "Download"
+      ],
+      "bytes": 485289,
+      "sha256": "d8aff9fe9354c1a9fde5457766f31a550571c79bf729a0014b393deaf2c7d36f",
+      "lastModified": "Thu, 29 Oct 2026 07:25:35 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-chemistry",
+      "designation": "optional",
+      "title": "Chemistry",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/5%20Chemistry.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-chemistry.pdf",
+      "sourceCells": [
+        "5",
+        "Chemistry",
+        "Download"
+      ],
+      "bytes": 461621,
+      "sha256": "d785a2847853f9e037450d2027cb1f0a7746e16c4de33cc50a0838f64893c512",
+      "lastModified": "Thu, 29 Oct 2026 07:30:43 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-commerce",
+      "designation": "optional",
+      "title": "Commerce",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/6%20Commerce.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-commerce.pdf",
+      "sourceCells": [
+        "6",
+        "Commerce",
+        "Download"
+      ],
+      "bytes": 571821,
+      "sha256": "5a791312eaa9f40ebf4e9080918e9d4a9f7bf2d9a67707c15c7dbda5cac384cc",
+      "lastModified": "Fri, 30 Oct 2026 05:45:31 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-compuer-science",
+      "designation": "optional",
+      "title": "Compuer Science",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/7%20Compuer%20Science.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-compuer-science.pdf",
+      "sourceCells": [
+        "7",
+        "Compuer Science",
+        "Download"
+      ],
+      "bytes": 309893,
+      "sha256": "b4ef25d417ee7e21f425d1eef10a7f3dbdfb6e957ef305eae911aa7e1cbd1c44",
+      "lastModified": "Thu, 29 Oct 2026 07:30:56 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-economics",
+      "designation": "optional",
+      "title": "Economics",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/8%20Economics.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-economics.pdf",
+      "sourceCells": [
+        "8",
+        "Economics",
+        "Download"
+      ],
+      "bytes": 449311,
+      "sha256": "2adc00d338371374b1aabbb48bdfddd5b79ef97b63aa19032e44507189810f94",
+      "lastModified": "Thu, 29 Oct 2026 07:21:42 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-education",
+      "designation": "optional",
+      "title": "Education",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/9%20Education.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-education.pdf",
+      "sourceCells": [
+        "9",
+        "Education",
+        "Download"
+      ],
+      "bytes": 298735,
+      "sha256": "3733d05cf23cd3b08d9331e08ec54324b7d8ea3c1440fe46a43da462fe269b7b",
+      "lastModified": "Thu, 29 Oct 2026 07:22:31 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-engineering-fundamentals-and-engineering-managemnet",
+      "designation": "optional",
+      "title": "Engineering Fundamentals and Engineering Managemnet",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/10%20Engineering%20Fundamentals%20and%20Engineering%20Managemnet.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-engineering-fundamentals-and-engineering-managemnet.pdf",
+      "sourceCells": [
+        "10",
+        "Engineering Fundamentals and Engineering Managemnet",
+        "Download"
+      ],
+      "bytes": 318243,
+      "sha256": "e4f83ab348e6ab72294a47d35d23a1ed1e9f124e4d25f74e52cd6d9ef3aa6406",
+      "lastModified": "Thu, 29 Oct 2026 07:30:30 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-english-literature",
+      "designation": "optional",
+      "title": "English Literature",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/11%20English%20Literature.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-english-literature.pdf",
+      "sourceCells": [
+        "11",
+        "English Literature",
+        "Download"
+      ],
+      "bytes": 152618,
+      "sha256": "8dcb6d9aa56ff166c9fc681cceb97d949b1112eaba3bb05d6e53f383eb6ded5e",
+      "lastModified": "Thu, 29 Oct 2026 07:22:42 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-geography",
+      "designation": "optional",
+      "title": "Geography",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/12%20Geography.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-geography.pdf",
+      "sourceCells": [
+        "12",
+        "Geography",
+        "Download"
+      ],
+      "bytes": 173505,
+      "sha256": "4f03fc86bf27cfb13495fa3c48a015f319a916f22217bcd2378ad10e35c25854",
+      "lastModified": "Thu, 29 Oct 2026 07:23:03 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-geology",
+      "designation": "optional",
+      "title": "Geology",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/13%20Geology.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-geology.pdf",
+      "sourceCells": [
+        "13",
+        "Geology",
+        "Download"
+      ],
+      "bytes": 67099,
+      "sha256": "9c885b3a1bc1208cfea05fe369cd1a3c048ecfe1a28538c4c633680e3038f765",
+      "lastModified": "Thu, 29 Oct 2026 07:24:19 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-history",
+      "designation": "optional",
+      "title": "History",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/14%20History.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-history.pdf",
+      "sourceCells": [
+        "14",
+        "History",
+        "Download"
+      ],
+      "bytes": 439022,
+      "sha256": "ca8b94e314fc1e5e1d07b352e004ad813e24e4825111612618a1fb95241e6bef",
+      "lastModified": "Fri, 30 Oct 2026 04:57:59 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-law",
+      "designation": "optional",
+      "title": "Law",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/15%20Law.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-law.pdf",
+      "sourceCells": [
+        "15",
+        "Law",
+        "Download"
+      ],
+      "bytes": 30532,
+      "sha256": "64f6606a831954857d9cf13e40f6916aba691fafc333c24a12e3e53d9e5b9b57",
+      "lastModified": "Thu, 29 Oct 2026 07:31:06 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-mass-communication",
+      "designation": "optional",
+      "title": "Mass Communication",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/16%20Mass%20Communication.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-mass-communication.pdf",
+      "sourceCells": [
+        "16",
+        "Mass Communication",
+        "Download"
+      ],
+      "bytes": 594428,
+      "sha256": "d87ce18e9aa178ef055ae1838c6cc1e85de3f4534434805426826563b1fc2c1f",
+      "lastModified": "Fri, 30 Oct 2026 04:58:11 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-mathematics",
+      "designation": "optional",
+      "title": "Mathematics",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/17%20Mathematics.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-mathematics.pdf",
+      "sourceCells": [
+        "17",
+        "Mathematics",
+        "Download"
+      ],
+      "bytes": 67572,
+      "sha256": "8cec25e766634ce5887b05dfdae3b6c69b50018499c97840321c35c5b81fa352",
+      "lastModified": "Thu, 29 Oct 2026 07:30:11 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-philosophy",
+      "designation": "optional",
+      "title": "Philosophy",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/18%20Philosophy.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-philosophy.pdf",
+      "sourceCells": [
+        "18",
+        "Philosophy",
+        "Download"
+      ],
+      "bytes": 174739,
+      "sha256": "56808038f32b69ce1b9cd0031a046dea3793bb1add1400c83c9106700df7ec0a",
+      "lastModified": "Thu, 29 Oct 2026 07:23:16 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-physics",
+      "designation": "optional",
+      "title": "Physics",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/19%20Physics.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-physics.pdf",
+      "sourceCells": [
+        "19",
+        "Physics",
+        "Download"
+      ],
+      "bytes": 145263,
+      "sha256": "07b0596804553660d2207a5738a7a8dd713f4140d2283a948d1e044204b7c351",
+      "lastModified": "Thu, 29 Oct 2026 07:24:56 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-political-science",
+      "designation": "optional",
+      "title": "Political Science",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/20%20Political%20Science.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-political-science.pdf",
+      "sourceCells": [
+        "20",
+        "Political Science",
+        "Download"
+      ],
+      "bytes": 142789,
+      "sha256": "6ee432dd87e3a0042035c1e4906de669a1c247da09b55661cfb34223de8bfc93",
+      "lastModified": "Thu, 29 Oct 2026 07:22:52 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-psychology",
+      "designation": "optional",
+      "title": "Psychology",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/21%20Psychology.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-psychology.pdf",
+      "sourceCells": [
+        "21",
+        "Psychology",
+        "Download"
+      ],
+      "bytes": 315456,
+      "sha256": "65523ce7ea9d23ac3fa38df0411d42389f1487c61a57dada3a9dcac1dafd6fe4",
+      "lastModified": "Thu, 29 Oct 2026 07:28:38 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-persian",
+      "designation": "optional",
+      "title": "Persian",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/22%20Persian.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-persian.pdf",
+      "sourceCells": [
+        "22",
+        "Persian",
+        "Download"
+      ],
+      "bytes": 894983,
+      "sha256": "867f46e22347c1bb336418b0d8b39851d3352271cb0ad72b454dd52834971ce1",
+      "lastModified": "Thu, 29 Oct 2026 08:04:45 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-public-administration",
+      "designation": "optional",
+      "title": "Public Administration",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/23%20Public%20Administration.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-public-administration.pdf",
+      "sourceCells": [
+        "23",
+        "Public Administration",
+        "Download"
+      ],
+      "bytes": 207780,
+      "sha256": "7d5027c01fdd3a7cf55ab63b2a284cced43f759d744ee84f7fcb404790d46718",
+      "lastModified": "Thu, 29 Oct 2026 07:23:39 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-punjabi",
+      "designation": "optional",
+      "title": "Punjabi",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/24%20Punjabi.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-punjabi.pdf",
+      "sourceCells": [
+        "24",
+        "Punjabi",
+        "Download"
+      ],
+      "bytes": 332076,
+      "sha256": "031949c3833990a58008bbd730eeed8daf626ec2c873273c3c0d507253618c76",
+      "lastModified": "Tue, 27 Oct 2026 11:37:38 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-social-work",
+      "designation": "optional",
+      "title": "Social Work",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/25%20Social%20Work.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-social-work.pdf",
+      "sourceCells": [
+        "25",
+        "Social Work",
+        "Download"
+      ],
+      "bytes": 190448,
+      "sha256": "9b158b60208ea4a7210765538216ff87aa23a6614889474dc593f213153b39b0",
+      "lastModified": "Fri, 30 Oct 2026 07:13:57 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-sociology",
+      "designation": "optional",
+      "title": "Sociology",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/26%20Sociology.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-sociology.pdf",
+      "sourceCells": [
+        "26",
+        "Sociology",
+        "Download"
+      ],
+      "bytes": 200328,
+      "sha256": "30c433d7a5508180b1046261474876bfa597fda2712fa9a2743beeef75bc4bc6",
+      "lastModified": "Thu, 29 Oct 2026 07:27:05 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-statistics",
+      "designation": "optional",
+      "title": "Statistics",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/27%20Statistics.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-statistics.pdf",
+      "sourceCells": [
+        "27",
+        "Statistics",
+        "Download"
+      ],
+      "bytes": 639053,
+      "sha256": "dc76c7eb3def5ea4bdb80b48b32b04e520444bb688d695ce0d190aff28c73776",
+      "lastModified": "Thu, 29 Oct 2026 07:28:19 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-urdu",
+      "designation": "optional",
+      "title": "Urdu",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/28%20Urdu.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-urdu.pdf",
+      "sourceCells": [
+        "28",
+        "Urdu",
+        "Download"
+      ],
+      "bytes": 340943,
+      "sha256": "f44599291f981c242952aa5bf84280371252492d7915e552eacd16c344561020",
+      "lastModified": "Tue, 27 Oct 2026 11:38:02 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-veterinary-science",
+      "designation": "optional",
+      "title": "Veterinary Science",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/29%20Veterinary%20Science.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-veterinary-science.pdf",
+      "sourceCells": [
+        "29",
+        "Veterinary Science",
+        "Download"
+      ],
+      "bytes": 569101,
+      "sha256": "97a94c934240e41d83effec2d363a6085cd93cf72630263b2227cc305673baa8",
+      "lastModified": "Thu, 29 Oct 2026 07:27:42 GMT",
+      "contentType": "application/pdf"
+    },
+    {
+      "id": "optional-zoology",
+      "designation": "optional",
+      "title": "Zoology",
+      "sourceUrl": "https://www.ppsc.gop.pk/Forms/PMS/O/30%20Zoology.pdf",
+      "sourcePage": "https://www.ppsc.gop.pk/PMSOptionalPapers.aspx",
+      "file": "/pms-punjab/syllabus/optional-zoology.pdf",
+      "sourceCells": [
+        "30",
+        "Zoology",
+        "Download"
+      ],
+      "bytes": 449202,
+      "sha256": "58ddbe9ff97882b8942db1a7c98f9107fd339418148aad718691f7d2197ee0fe",
+      "lastModified": "Thu, 29 Oct 2026 07:25:08 GMT",
+      "contentType": "application/pdf"
+    }
+  ]
+}

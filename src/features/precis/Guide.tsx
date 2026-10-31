@@ -1,3 +1,4 @@
+import { preparationDeviceKey } from '@/lib/preparationStorage'
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, BookOpen, Check, ClipboardCheck, RotateCcw } from 'lucide-react'
@@ -440,7 +441,7 @@ export default function Guide({
                     Follow the current question instructions.
                   </p>}
                   <WorkingNote key={`${user?.id}:${attempt}:${unit.id}`}
-                    storageKey={`cssvista:precis:study-note:v1:${user?.id}:${attempt}:${unit.id}`} />
+                    storageKey={user ? preparationDeviceKey(`cssvista:precis:study-note:v1:${user.id}:${attempt}:${unit.id}`, user.id) : `cssvista:precis:study-note:v1:guest:${attempt}:${unit.id}`} />
                   <div className="mt-6 flex flex-wrap items-center gap-3">
                     <button type="button" className={secondaryStyle} disabled={step === 0 && dayNumber === 1} onClick={previous}>
                       <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Previous

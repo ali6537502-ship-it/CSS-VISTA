@@ -1,0 +1,374 @@
+                      PUNJAB PUBLIC SERVICE COMMISSION
+               COMBINED COMPETITIVE EXAMINATION (CCE) SYLLABUS
+                                       COMPUTER SCIENCE
+Total Marks: 100
+                                            SECTION -A
+                                  ICT / Introduction to Computing
+
+1.    Computers and Computing: History and evolution of computing, stages of computing, basic
+      machine structure, the Von Neumann model, types of computers (supercomputer, mainframe,
+      mini and microcomputers), and Computer Based Information Systems (CBIS).
+
+2.    Number Systems and Logic: Representation of numbers, binary arithmetic, data representations,
+      number base conversions, Boolean algebra, and basic operations at machine level.
+
+3.    Hardware, I/O and Storage: Processor structure and memory structures (difference between
+      primary and secondary memory, RAM and cache memory), input devices (keyboard, pointing
+      devices, data acquisition devices), output devices (monitor, printer, plotter), storage media (hard
+      disk drives, optical drives, flash drives, RAID arrays), and computer security and virus protection.
+
+4.    System Software and Operating Systems: Differences between system software and application
+      software, functions of the operating system, architecture of personal, server, and mobile operating
+      systems, command line interface (Linux command line interface, file management and
+      redirection), and utilities.
+
+5.    Office Automation: Microsoft Office package functionalities (formatting in Word, formulas in
+      Excel, presentation slides in PowerPoint, database in Access), and office automation through
+      Google Workspace, OneDrive, Dropbox and note-taking applications.
+
+6.    Data Communication and Computer Networking: Data communication model, analog and
+      digital data communication, modems, transmission media, network topologies (star, bus, ring),
+      LANs/WANs, network protocols, evolution of the Internet, browsers and search engines.
+
+7.    ICT Applications and Emerging Technologies: ICT applications in learning (LMS, online
+      learning), health and well-being (telemedicine, wearable devices), personal finance management
+      (electronic wallet, e-commerce), and artificial intelligence in brief, and software engineering.
+
+8.    ICT Citizenship and Ethics: Issues of intellectual property and copyright, preventing plagiarism,
+      data integrity, managing misinformation and fake news, and social aspects of computing.
+
+Suggested readings:
+1.    Livesley, Robert Kenneth. An introduction to automatic digital computers. Cambridge University Press,
+      2017.
+2.    Zawacki-Richter, Olaf, and Colin Latchem. "Exploring four decades of research in Computers &
+      Education." Computers & Education 122 (2018): 136-152.
+3.    Sinha, Pradeep K., and PritiSinha. Computer fundamentals. BPB publications, 2010.
+4.    Goel, Anita. Computer fundamentals. Pearson Education India, 2010.
+5.    “Discovering Computers” by Vermaat, Shaffer, and Freund.
+6.    Deborah Morley and Charles S. Parker, Understanding Computers: Today and Tomorrow, 16th edition,
+      Cengage Learning, 2016, ISBN-13: 978-1337251853
+7.    “Computing Essentials” by Morley and Parker.
+8.    “GO! With Microsoft Office” Series by Gaskin, Vargas, and McLellan.
+9.    “Exploring Microsoft Office” Series by Grauer and Poatsy.
+10.   “Technology in Action” by Evans, Martin and Poatsy.
+11.   Joan Lambert, Curtis Frye, Microsoft Office 2019 Step by Step, First Edition. ISBN: 978-1-50-930597-1.
+12.   LaBerta, C., &Neibauer, A. R. (2011). Computers are your future (12th ed.). Pearson.
+13.   Brookshear, J. G., &Brylow, D. (2018). Computer science: An overview (13th ed.). Pearson.
+
+
+
+
+                               Computer Communications & Networks
+
+1.    Introduction to Networking and Network Architectures: Concepts in networking, network
+      topologies, protocol architecture and network system architecture (OSI and TCP/IP reference
+      model) with considerations that apply.
+2.    The Physical Layer and Transmission Concepts: Analog and digital transmissions,
+      transmission mediums, noise considerations, encoding schemes, multiplexing and asynchronous
+      and synchronous transmissions.
+3.    The Data Link Layer and Local Area Networks: Error Control, Flow Control, Data Link
+      Protocols (HDLC, PPP), MAC addressing, access schemes and Local Area Network
+      Technologies (Ethernet, Token Ring).
+4.    The Network Layer and Internetworking: Circuit Switching and Packet Switching, Bridging,
+      Internetworking and Routing, IP addresses (IPv4 and IPv6), Subnetting and CIDR, and routing
+      protocols.
+5.    The Transport Layer: Transport layer protocols (TCP, UDP), Ports and sockets, connection
+      setup and teardown, and Flow and congestion control.
+6.    The Application Layer and Current Issues: Application layer protocols (HTTP, DNS, SMTP,
+      FTP) and current issues in software defined networks and Computer Networks.
+7.    Network Security and Programming Exercises: Network security issues, cryptography basics,
+      firewall concepts, and programming assignments dealing with networking, routing, switching and
+      protocols implementation.
+
+
+Suggested readings:
+1.    James F. Kurose and Keith W. Ross, Computer Networking: A Top-Down Approach Featuring the Internet,
+      6th Edition, Pearson, 2012, ISBN: 0132856204.
+2.    T. Lammle, CCNA Cisco Certified Network Associate Deluxe Study Guide, 6thEdition, Sybex, 2011,
+      ISBN: 978-0-470-90108-3.
+3.    William Stallings, Data and Computer Communications, 10th Edition, Pearson, 2013, ISBN: 0133506487.
+4.    Behrouz A. Forouzan, Data Communication and Computer Networks, 5th Edition,McGraw- Hill, 2012,
+      ISBN: 0073376221.
+5.    R. Perlman, Interconnections: Bridges, Routers, Switches, and Internetworking Protocols, 2nd Edition,
+      Addison-Wesley, 1999, ISBN: 0201634481.
+6.    Tanenbaum, A. S., & Wetherall, D. J. (2021). Computer networks (6th ed.). Pearson.
+7.    Stevens, W. R., Fenner, B., &Rudoff, A. M. (2003). Unix Network Programming, Volume 1: The sockets
+      networking API (3rd ed.). Addison-Wesley Professional.
+8.    Peterson, L., & Davie, B. (2021). Computer Networks: A Systems Approach (6th ed.). Morgan Kaufmann.
+9.    Shankar, P. M. (2002). Introduction to Wireless Systems. John Wiley & Sons.
+                                             Problem Solving
+
+1.    Introduction and Architecture: Fundamentals of problem solving, algorithms, pseudo code,
+      flowcharting, and Von Neumann computer architecture.
+
+2.    Language Fundamentals and I/O: Compilation and linking of programs; data types; variables;
+      type casting; memory concepts; and input output constructs.
+
+3.    Operators and Expressions: Arithmetic operators, relational operators, logical operators,
+      equality operators, precedence of operators, and integer division.
+
+4.    Control Structures: Selection constructs (if, else, switch), Structured Programming Theorem,
+      and repetition constructs (while, do while, for).
+
+5.     Modular Programming: Functions; scope rules; passing arguments by value and by reference;
+      stack frame creation and destruction; recursion; and random numbers.
+
+6.    Data Structures (Arrays and Lists): One-dimensional arrays/lists; multidimensional arrays/lists;
+      memory organization; searching and sorting; and strings and string manipulations.
+
+7.    Advanced Data Types: Structures, typedef, unions; pointers; pointer arithmetic; function
+      pointers; and references.
+
+8.    Memory and File Management: Static and dynamic memory allocation (new / delete); file
+      streams (input/ output); sequential and random file access; and preprocessor directives.
+
+Suggested readings:
+1.    Starting out with Programming Logic & Design, 4th Edition, Tony Gaddis,
+2.    The C Programming Language, 2nd Edition by Brian W. Kernighan, Dennis M. Ritchie
+3.    Object Oriented Programming in C++ by Robert Lafore
+4.    C How to Program, 7th Edition by Paul Deitel& Harvey Deitel
+5.    Problem Solving and Program Design in C++, 7th Edition by Jeri R. Hanly& Elliot B. Koffman
+6.    Java: How to Program, 9th Edition by Paul Deitel
+7.    Beginning Java 2, 7th Edition by Ivor Horton
+8.    An Introduction to Object Oriented Programming with Java, 5th Edition by C. Thomas Wu
+9.    Starting Out with C++ from Control Structures to Objects, 10th Edition, Pearson, 2024, Tony Gaddis
+10.   Savitch, W. (2020). Java: An introduction to problem solving and programming (8th ed.). Pearson.
+11.   Deitel, P., & Deitel, H. (2016). C++ how to program (10th ed.). Pearson.
+12.   Keogh, J. (2002). C++ programmer's notebook (2nd ed.). McGraw-Hill Osborne Media.
+
+
+
+
+                                              SECTION –B
+                                             Data Structures
+
+1.    Introduction and Complexity Analysis: The roles of data structures and algorithms, abstract
+      data type (ADT), OOP, and asymptotic complexity, including Big-O notation and the analysis of
+      best, average and worst-case scenarios.
+
+2.    Linear Data Structures: Arrays, linear lists, singly and doubly and circular linked lists, sorted
+      lists, stacks, queues, deques and priority queue, and their practical applications such as bracket
+      checking, expression conversion, and scheduling.
+3.     Recursion and Sorting Algorithms: Direct recursion and recursive tracing and divide and
+       conquer approaches, along with the discussion on different sorting algorithms like bubble sort,
+       selection sort, insertion sort, merge sort, quick sort, heap sort, shell sort, radix sort and bucket
+       sort.
+
+4.     Searching and Hashing: Linear and binary search, hash functions, hash collision resolution,
+       open addressing, chaining and indexing.
+
+5.     Advanced Trees: Binary tree, tree traversal, binary search tree (BST), balanced tree (AVL trees,
+       M-way trees) and heaps.
+
+6.     Graph and Advanced Applications: Graph representations (Adjacency matrix and adjacency
+       list), BFS, DFS, shortest path, minimum spanning trees, topological sort, cycle detection, graph
+       coloring and data compression using Huffman coding.
+
+Suggested readings:
+1.    Data Structures and Abstractions with Java by Frank M. Carrano & Timothy M. Henry
+2.    Data Structures and Algorithms in C++ by Adam Drozdek
+3.    Data Structures and Algorithm Analysis in C++ by Mark Allen Weiss
+4.    Classic Data Structures by Debasis Samanta
+5.    C++ Plus Data Structures by Nell Dale
+6.    Weiss, M. A. (2013). Data structures and algorithm analysis in C++ (4th ed.). Pearson.
+7.    Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2022). Introduction to algorithms (4th
+      ed.). MIT Press / McGraw-Hill.
+
+
+                                          Operating Systems
+
+1.     Introduction to Operating Systems and System Structures: History and Evolution,
+       Classification of Operating Systems, System Components, System Services, Dual Mode
+       Operation, Protection from Hardware/ Memory/ I/O, System Call Interface and Virtual Machines.
+2.     Processes and Threads: Concept of Processes, Process Control Block, States of Process, Process
+       Scheduling, Process Creation and Process Termination (fork(), wait(), exec()), Multi-Threading
+       Models, Threading Issues and Thread Libraries (Pthreads).
+3.     CPU Scheduling: Criteria for Scheduling, Pre-Emptive and Non-Pre-Emptive Algorithms
+       (FCFS, SJF, SRTF, Priority, Round Robin, MLQ, MLFQ), Thread Scheduling, Multiprocessor
+       Scheduling.
+4.     Process Synchronization and Concurrency: Race Condition, Critical Section Problem,
+       Software & Hardware Solutions to critical section problem (Peterson’s Solution and Test-and-Set
+       lock), Mutex Locks, Semaphores, Classical Problems in Synchronization (Producer – Consumer
+       Problem, Dining Philosophers Problem, Reader – Writer Problem) Monitors.
+5.     Deadlock: System Model, Deadlock Characteristics, Four Necessary Conditions of Deadlock,
+       Resource Allocation Graphs, Deadlock Prevention & Avoidance (Banker’s Algorithm), Deadlock
+       Detection & Recovery.
+6.     Memory Management: Address Binding, Logical Addresses vs Physical Addresses, Contiguous
+       Memory Allocation (Text Segment, Data Segment, Heap Segment, MFT, MVT; Fragmentation),
+       Paging, Page Tables and Hierarchical Inverted Page Tables, Segmentation and Paged
+       Segmentation.
+7.    Virtual Memory: Demand Paging, Performance of Virtual Memory, Page Replacement
+      Algorithms (FIFO, OPTIMAL, LRU, LFU), Frame Allocation, Thrashing, Working Set Model,
+      Memory Mapped Files.
+8.    Storage Management, File Systems and Security: File Concept, Access Methods, Directory
+      Structure and Disk Structure, Free-Space Management, Disk Scheduling Algorithms, RAIDs, File
+      System Reliability and Protection, Security of Operating System.
+
+Suggested readings:
+1.    A. Silberschatz, P. B. Galvin, G. Gagne, Operating Systems Concepts, 10th Edition, Wiley,2018.
+2.    Andrew S. Tanenbaum, Herbert Bos, Modern Operating Systems, 4th Edition, Pearson, 2014, ISBN:
+      013359162X.
+3.    William Stallings, Operating Systems: Internals and Design Principles, 9th Edition,Pearson, 2017, ISBN:
+      0134670957.
+
+                                       Digital Logic Design (DLD)
+
+1.    Number Systems and Binary Arithmetic: Numerical representation, number system
+      conversions, data representations, Radix and Diminished Radix Complements and Binary
+      Subtraction.
+2.    Boolean Algebra and Reduction of Boolean Functions: Basic theorems and properties of
+      Boolean algebra, Boolean functions, standard forms (canonical forms) (minterms and maxterms),
+      reduction of Boolean functions (K-maps and QuineMcCluskey method).
+3.    Combinational Logic Circuits: Design and analysis techniques, design of combinational circuits
+      (using gates), adders, subtractors, converters, magnitude comparators, decoders, encoders,
+      multiplexers and demultiplexers.
+4.    Sequential Logic Circuits: Latches, Flip-Flops (SR, D, JK, T), Analysis of clocked sequential
+      circuits, State reduction and assignment, registers and Shift Registers.
+5.    Synchronous and Asynchronous State Machines: Ripple and synchronous counters, timing
+      sequences, Mealy and Moore Finite State Machines.
+6.    Memory Units and Programmable Logic Devices: Random Access Memory (RAM), Read
+      Only Memory (ROM), Programmable Logic Arrays (PLA’s), CPLDs, FPGAs, logic families
+      and digital integrated circuits.
+7.    Hardware Description Languages and Circuit Simulations: Overview of hardware description
+      language (Verilog HDL/VHDL) and electronic design automation tools for digital logic
+      simulation (MultiSim, SPICE or similar).
+Suggested readings:
+1.    Fundamentals of Digital Logic with Verilog Design, Stephen Brown
+2.    M. Morris Mano, Digital Logic and Computer Design, 1st Edition, Pearson, 1979, ISBN:0132145103.
+3.    Thomas L. Floyd, Digital Fundamentals, 10th Edition, Prentice Hall, 2008, ISBN:0132359235.
+4.    Mano, M. M., & Ciletti, M. D. (2017). Digital design: With an introduction to the Verilog HDL, VHDL,
+      and SystemVerilog (6th ed.). Pearson.
+5.    Yarbrough, J. M. (1996). Digital logic applications and design. Thomson Learning / Cengage.
+6.    Tocci, R. J., Widmer, N. S., & Moss, G. L. (2019). Digital systems: Principles and applications (12th ed.).
+      Pearson.
+7.    Wakerly, J. F. (2007). Digital design: Principles & practices (4th ed.). Pearson.
+8.    Ciletti, M. D. (2010). Advanced digital design with the Verilog HDL (2nd ed.). Pearson.
+9.    Ercegovac, M. D., Lang, T., & Moreno, J. (1999). Introduction to digital systems. Wiley.
+                                           SECTION -C
+                                       Software Engineering
+1.    Introduction and Process Models: The nature of software engineering, the motivations behind
+      software engineering, and professional software engineering. Traditional process models (Linear
+      sequential, Prototyping, RAD, Incremental, Spiral) as well as Agile software development process
+      frameworks are covered.
+
+2.    Requirements Engineering: Concepts of requirements elicitation and analysis, functional
+      and non-functional requirements, and different perspectives on modeling such as context,
+      interaction, structure and behavior as well as requirement tracing.
+
+3.    Analysis and Modeling (structured and object-oriented): Structured analysis (Data Flow
+      Diagrams, State Transition Diagrams), UML modeling (Use Cases modeling, Activity Diagrams,
+      Interaction Diagrams, Domain Modeling).
+
+4.    Architectural and Component Level Design: Architectural design patterns, Data design,
+      component level design, User Interface Design and GRASP (Cohesion, Coupling,
+      Information Expert, Creator, Controller, Polymorphism).
+
+5.    Software Verification, Validation and Testing: Software verification and validation
+      approaches, criteria for measuring software correctness, efficiency and performance as well as
+      technical reviews and the basics of software testing and test planning.
+
+6.    Project Management and Evolution: Software evolution, project planning and management,
+      configuration management, software process improvement and software reliability and
+      performance standards.
+
+Suggested readings:
+1.    Software Engineering, A Practitioner’s Approach, Pressman R. S.& Maxim B. R., 8th Edition, McGraw-
+      Hill, 2015.
+2.    Ian Sommerville, Software Engineering, 10th Edition, Pearson, 2015, ISBN-13: 978-0133943030.
+3.    Carlo Ghezzi, Mehdi Jazayeri, Dino Mandrioli, Fundamentals of Software Engineering, 2nd Edition,
+      Pearson, 2002, ISBN-13: 978-0133056990.
+
+
+                              Database Management Systems (DBMS)
+
+1.    Introduction and File Systems: Comparison of file systems vs database systems, data
+      redundancy, structural data dependency, database environment, three-schema architecture, and
+      data independence.
+2.    Data Models and E-R Modeling: Survey of data models (Hierarchical, Network, Relational,
+      Object-oriented) and ER modeling.
+3.    Relational Model and Relational Algebra: Concepts related to relations, attributes, tuples,
+      domains, keys, integrity constraints, and relational algebra operations (Selection, Projection,
+      Cartesian product and Joins).
+4.    SQL: Data Definition Language (DDL), Data Manipulation Language (DML), complex queries,
+      subqueries, grouping and aggregation, views and security/authorization mechanisms.
+5.    Database Design and Normalization: Functional dependencies, inference rules and normal
+      forms (1NF, 2NF, 3NF, BCNF) within relational design.
+6.     Physical Storage and Indexing: Storage structure, file organization, indexed files, hashed files,
+      B-tree structure, dense and sparse indices, and database tuning.
+7.    Transactions, Concurrency Control, and Database Recovery: Atomicity, consistency,
+      isolation and durability, transaction processing, concurrency control using locking, two phase
+      locking, timestamps and optimistic concurrency control, deadlock and database recovery
+      mechanisms.
+8.    Advanced and Emerging Databases: Distributed databases, data warehousing, data mining, and
+      NoSQL.
+
+Suggested readings:
+1.    Database Systems: The Complete Book, 2nd Edition by Hector Garcia-Molina, Jeffrey D. Ullman, Jennifer
+      Widom
+2.    Database System Concepts, 6th Edition by Abraham Silberschatz, Henry F. Korth and S. Sudarshan.
+3.    Database Management Systems, 3rd Edition by Raghu Ramakrishnan, Johannes Gehrke
+4.    Carlos Coronel, Steven Morris, Database Systems: Design, Implementation & Management, 13thEdition,
+      Cengage Learning, 2017. ISBN-10: 1337627909.
+5.    Introduction to Oracle 9i: SQL By Oracle Press
+6.    Jeffrey A. Hoffer, Ramesh Venkataraman, HeikkiTopi, Modern Database Management, 12th Edition,
+      Pearson, 2015. ISBN-10: 0133544613.
+7.    Thomas Connolly, Carolyn Begg, Database Systems: A Practical Approach to Design, Implementation and
+      Management, 6th Edition, Pearson, 2015. ISBN-10: 1292061189.
+8.    Ramez Elmasri, Shamkant B. Navathe, Fundamentals of Database Systems, 7th Edition, Pearson, 2016.
+      ISBN-10: 1292097612.
+
+
+                                      Artificial Intelligence (AI)
+
+1.    Introduction and Intelligent Agents: The definition of artificial intelligence, Turing test,
+      rationality, PEAS, agent architectures, and some classical AI systems (General Problem Solver,
+      ELIZA, OPS-5, Common Lisp)
+2.    Search Strategies and Adversarial Search: Uninformed search (Breadth-first search, Depth-
+      limited search, Depth-first search, Iterative Deepening Search); Informed search (Greedy Best-
+      first, A*), Local Search (Hill climbing, Simulated Annealing), Game Theory, Minimax
+      Algorithm, Alpha-Beta Pruning
+3.    Knowledge Representation and Logic: Propositional and Predicate Logic, Rule-Based Systems,
+      Semantic Networks, Frames, Objects, Scripts, Forward and Backward Chaining, Resolution,
+      Unification, Logic Programming (Prolog)
+4.    Symbolic Mathematics and Probabilistic Reasoning: Symbolic mathematics problem solvers
+      (Macsyma, PRESS); Management of Uncertainty, Bayes' Rule, Naive Bayes models, Fuzzy sets,
+      Genetic Algorithms.
+5.    Foundations of Machine Learning: Types of learning, Learning from Examples, Decision
+      Trees, Linear Regression, Classification, Clustering, Evaluation Techniques.
+6.    Neural Networks and Deep Learning: Perceptron, Multilayer Perceptron (MLP),
+      Backpropagation, and shift from classic architecture to deep learning and neural networks.
+7.    Generative AI, Large Language Models, and Natural Language Processing (NLP): NLP,
+      Transformer Architecture (self-attention), Tokenization, Pre-training, Fine-Tuning, RAG
+      (Retrieval-Augmented Generation), Vector Databases, Prompt Engineering (few-shot learning
+      and chain-of-thought).
+8.    AI Ethics, Safety and Future Trends: Bias in models, Deepfakes, AI Privacy, Professional
+      Ethics, Safety Alignment, Agentic Workflows (AutoGPT, considerations towards AGI).
+Suggested readings:
+1.      Norvig, P., “Paradigms of Artificial Intelligence Programming: Case studies in Common Lisp”, Morgan
+        Kaufman Publishers, Inc., 1992.
+2.      Luger, G.F. and Stubblefield, W.A., “AI algorithms, data structures, and idioms in Prolog, Lisp, and Java”,
+        Pearson Addison-Wesley. 2009.
+3.      Severance, C.R., 2016. “Python for everybody: Exploring data using Python 3.” Create Space Independent
+        Publ Platform.
+4.      Miller, B.N., Ranum, D.L. and Anderson, J., 2019. “Python programming in context.” Jones & Bartlett
+        Pub.
+5.      Joshi, P., 2017. “Artificial intelligence with python.” Packt Publishing Ltd
+6.      Artificial Intelligence: A Modern Approach by Stuart Russell & Peter Norvig, (4th Edition, Global
+        Education, 2020); ISBN-13: 978-0134610993.
+7.      Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (3rd Ed. 2022) by Aurélien Géron.
+8.      Generative Deep Learning: Teaching Machines to Paint, Write, Compose, and Play (2nd Ed. 2023) by
+        David Foster
+9.      Deep learning, Ian Goodfellow, Yoshua Bengio, Aaron Courville, the MIT press, (2018).
+10.     Artificial Intelligence-Structures &S trategies for Complex Problem Solving by George F. Luger, 5th
+        Edition, Pearson Education (2008); ISBN-13: 978- 0321545893.
+11.     Luger, G. F. (2008). Artificial intelligence: Structures and strategies for complex problem solving (6th ed.).
+        Pearson.
+
+
+Note:     The above list is only suggestive and not exhaustive. Candidates may consult other
+          standard books and relevant material covering the prescribed syllabus.
+
+
+
+                                                End of Document
+
