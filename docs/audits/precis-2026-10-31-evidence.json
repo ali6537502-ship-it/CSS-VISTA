@@ -1,0 +1,253 @@
+{
+  "title": "MASTER PRÉCIS WRITING STEP-BY-STEP HANDBOOK",
+  "raw_source_sha256": "e1b36b54b25edc343a460eb73fec43e63d68210f5044e70727a72fbe1c071561",
+  "chapters": 25,
+  "numbered_chapters": 22,
+  "heading_blocks": 63,
+  "body_blocks": 193,
+  "units": 108,
+  "passages": [
+    {
+      "id": "example-1",
+      "source": "Owner-supplied handbook, chapter 18, example 1",
+      "words": 43,
+      "explicit_limit": null
+    },
+    {
+      "id": "example-2",
+      "source": "Owner-supplied handbook, chapter 18, example 2",
+      "words": 42,
+      "explicit_limit": null
+    },
+    {
+      "id": "example-3",
+      "source": "Owner-supplied handbook, chapter 18, example 3",
+      "words": 40,
+      "explicit_limit": null
+    },
+    {
+      "id": "example-4",
+      "source": "Owner-supplied handbook, chapter 18, example 4",
+      "words": 53,
+      "explicit_limit": null
+    },
+    {
+      "id": "example-5",
+      "source": "Owner-supplied handbook, chapter 18, example 5",
+      "words": 81,
+      "explicit_limit": null
+    },
+    {
+      "id": "drill-d",
+      "source": "Owner-supplied handbook, chapter 20, Drill D",
+      "words": 45,
+      "explicit_limit": null
+    }
+  ],
+  "worked_examples_chapter": {
+    "id": "18",
+    "title": "18. Worked Examples: Beginner to Advanced",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Open a worked passage in Full Practice. Identify its argument, write independently, then save a revision before choosing to compare with the handbook model. Models illustrate a method; they are not the only valid answers."
+      }
+    ]
+  },
+  "fourteen_day_plan": [
+    {
+      "day": 1,
+      "chapters": [
+        "1",
+        "2"
+      ],
+      "units": 5,
+      "weight": 290,
+      "last_chapter_skill": "central_idea",
+      "rotating_passage": "example-1"
+    },
+    {
+      "day": 2,
+      "chapters": [
+        "3",
+        "4"
+      ],
+      "units": 7,
+      "weight": 260,
+      "last_chapter_skill": "central_idea",
+      "rotating_passage": "example-2"
+    },
+    {
+      "day": 3,
+      "chapters": [
+        "4",
+        "5"
+      ],
+      "units": 7,
+      "weight": 282,
+      "last_chapter_skill": "central_idea",
+      "rotating_passage": "example-3"
+    },
+    {
+      "day": 4,
+      "chapters": [
+        "6",
+        "7"
+      ],
+      "units": 6,
+      "weight": 279,
+      "last_chapter_skill": "compression",
+      "rotating_passage": "example-4"
+    },
+    {
+      "day": 5,
+      "chapters": [
+        "7",
+        "8",
+        "9"
+      ],
+      "units": 9,
+      "weight": 292,
+      "last_chapter_skill": "qualifications",
+      "rotating_passage": "example-5"
+    },
+    {
+      "day": 6,
+      "chapters": [
+        "9",
+        "10",
+        "11"
+      ],
+      "units": 8,
+      "weight": 277,
+      "last_chapter_skill": "grammar",
+      "rotating_passage": "drill-d"
+    },
+    {
+      "day": 7,
+      "chapters": [
+        "11",
+        "12"
+      ],
+      "units": 8,
+      "weight": 303,
+      "last_chapter_skill": "title",
+      "rotating_passage": "example-1"
+    },
+    {
+      "day": 8,
+      "chapters": [
+        "13",
+        "14"
+      ],
+      "units": 14,
+      "weight": 284,
+      "last_chapter_skill": "coherence",
+      "rotating_passage": "example-2"
+    },
+    {
+      "day": 9,
+      "chapters": [
+        "14",
+        "15",
+        "16"
+      ],
+      "units": 14,
+      "weight": 311,
+      "last_chapter_skill": "fidelity",
+      "rotating_passage": "example-3"
+    },
+    {
+      "day": 10,
+      "chapters": [
+        "17",
+        "18",
+        "19"
+      ],
+      "units": 13,
+      "weight": 367,
+      "last_chapter_skill": "fidelity",
+      "rotating_passage": "example-4"
+    },
+    {
+      "day": 11,
+      "chapters": [
+        "20"
+      ],
+      "units": 8,
+      "weight": 233,
+      "last_chapter_skill": "selection",
+      "rotating_passage": "example-5"
+    },
+    {
+      "day": 12,
+      "chapters": [
+        "21",
+        "22"
+      ],
+      "units": 5,
+      "weight": 292,
+      "last_chapter_skill": "fidelity",
+      "rotating_passage": "drill-d"
+    },
+    {
+      "day": 13,
+      "chapters": [
+        "22",
+        "23"
+      ],
+      "units": 2,
+      "weight": 192,
+      "last_chapter_skill": "compression",
+      "rotating_passage": "example-1"
+    },
+    {
+      "day": 14,
+      "chapters": [
+        "24",
+        "25"
+      ],
+      "units": 2,
+      "weight": 357,
+      "last_chapter_skill": "central_idea",
+      "rotating_passage": "example-2"
+    }
+  ],
+  "checker_cases": [
+    {
+      "draft": "If it were possible, the school would offer evening classes.",
+      "findings": [
+        {
+          "id": "it-plural",
+          "certainty": "detected",
+          "label": "Singular pronoun and plural verb",
+          "excerpt": "it were",
+          "advice": "Use “it is”, “it was” or “it has”, as appropriate to the sentence."
+        }
+      ]
+    },
+    {
+      "draft": "It is essential that he have access to the library.",
+      "findings": [
+        {
+          "id": "he-have",
+          "certainty": "detected",
+          "label": "Subject–verb agreement",
+          "excerpt": "he have",
+          "advice": "Change “have” to “has” where it is the main present-tense verb."
+        }
+      ]
+    },
+    {
+      "draft": "People are more productive when they can use reliable services.",
+      "findings": []
+    }
+  ],
+  "edition_tracking": {
+    "unit_id_before": "1:0",
+    "unit_id_after": "1:0",
+    "content_changed": true,
+    "source_hash_before": "e1b36b54b25edc343a460eb73fec43e63d68210f5044e70727a72fbe1c071561",
+    "source_hash_after": "e1b36b54b25edc343a460eb73fec43e63d68210f5044e70727a72fbe1c071561"
+  }
+}
