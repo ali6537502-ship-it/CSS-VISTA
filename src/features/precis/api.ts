@@ -11,6 +11,7 @@ export type Passage = {
   limit: number | null
   hint?: string
 }
+export type WorkedExample = Passage & { model: string; model_title: string }
 export type Question = {
   id: string
   skill: string

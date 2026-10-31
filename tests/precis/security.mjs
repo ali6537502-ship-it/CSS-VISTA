@@ -13,6 +13,14 @@ const attempt=await make(a),other=await make(a),bAttempt=await make(b),fAttempt=
 assert.equal((await call(endpoint)).status,401);assert.equal((await call(endpoint,undefined,a.jar,{'X-CSSV-User':b.id})).status,409)
 php('tests/pro/fixture.php','incomplete',incomplete.id);assert.equal((await call(endpoint,undefined,incomplete.jar)).status,403)
 const freeOverview=(await call(endpoint,undefined,free.jar)).data;assert.equal(freeOverview.catalog.chapters.length,25,'Free student cannot read the handbook');assert.equal(freeOverview.catalog.questions.length,39);assert.equal(freeOverview.evaluation_enabled,false,'External AI feedback must remain paused')
+const workedEndpoint=endpoint+'?book_examples=1'
+assert.equal((await call(workedEndpoint)).status,401,'Worked examples bypassed authentication')
+assert.equal((await call(workedEndpoint,undefined,incomplete.jar)).status,403,'Worked examples bypassed complete profile')
+assert.equal((await call(workedEndpoint,undefined,a.jar,{'X-CSSV-User':b.id})).status,409,'Worked examples ignored the current account')
+const worked=(await call(workedEndpoint,undefined,free.jar));assert.equal(worked.status,200);assert.equal(worked.data.examples.length,5)
+assert.deepEqual(worked.data.examples.map(p=>p.id),['example-1','example-2','example-3','example-4','example-5'])
+assert.ok(worked.data.examples.every(p=>typeof p.model==='string'&&p.model.length>0&&typeof p.model_title==='string'))
+assert.equal((await call(endpoint+'?book_examples=invalid',undefined,free.jar)).status,422)
 php('tests/precis/fixture.php','activate',a.id);php('tests/precis/fixture.php','activate',b.id)
 const overview=(await call(endpoint,undefined,a.jar)).data;assert.equal(overview.catalog.chapters.length,25);assert.equal(overview.catalog.questions.length,39);assert.equal(overview.evaluation_enabled,false)
 for(const p of overview.catalog.passages){assert.equal(p.model,undefined);assert.equal(p.model_title,undefined)}for(const q of overview.catalog.questions){assert.equal(q.answer,undefined);assert.equal(q.explanation,undefined)}
