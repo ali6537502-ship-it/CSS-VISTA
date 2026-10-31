@@ -28,5 +28,50 @@
     "s": "Current Affairs - October 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/business/world-at-work/dockworkers-strike-in-europe-beyond-against-arms-shipments-war-deaths-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-pak-iran-us-mediation-briefing",
+    "q": "Which Pakistani military spokesman described Iran–US mediation as cautiously optimistic in a Reuters interview published on 30 October 2026?",
+    "o": [
+      "Lt Gen Ahmed Sharif Chaudhry",
+      "Lt Gen Nigar Johar",
+      "Air Chief Marshal Zaheer Ahmed Baber Sidhu",
+      "Admiral Naveed Ashraf"
+    ],
+    "a": 0,
+    "e": "ISPR director-general Lieutenant General Ahmed Sharif Chaudhry used the description; he did not announce a peace settlement.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/pakistan-military-cautiously-optimistic-iran-us-mediation-2026-10-30/"
+  },
+  {
+    "id": "current-affairs-20261030-germany-inflation-q3-gdp",
+    "q": "What provisional annual headline CPI inflation rate did Destatis report for Germany in October 2026?",
+    "o": [
+      "2.8%",
+      "3.3%",
+      "2.1%",
+      "3.9%"
+    ],
+    "a": 0,
+    "e": "Germany's Federal Statistical Office estimated October CPI inflation at 2.8% year-on-year; 3.3% was September's rate and 2.1% October's core inflation.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.destatis.de/EN/Press/2026/10/PE26_382_611.html"
+  },
+  {
+    "id": "current-affairs-20261030-uae-gem-no2-spill",
+    "q": "Off which UAE emirate was the main GEM NO. 2 oil slick concentrated in the 30 October 2026 official update?",
+    "o": [
+      "Umm Al Quwain",
+      "Dubai",
+      "Fujairah",
+      "Abu Dhabi"
+    ],
+    "a": 0,
+    "e": "The UAE's official statement located the principal slick off Umm Al Quwain, with some pollution extending toward neighbouring northern emirates.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.wam.ae/en/article/c3051mm-oil-spill-from-gem-no-tanker-contained"
   }
 ]

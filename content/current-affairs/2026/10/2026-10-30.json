@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-10-30",
   "published_at": "2026-10-30T19:28:49+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Evening Update (00:00–19:28 PKT; preliminary)",
+  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Finalized Coverage (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-10-30-pak-singapore-talks",
@@ -615,6 +615,196 @@
           "title": "Dockworkers strike in Europe and beyond against arms shipments, war deaths",
           "url": "https://www.reuters.com/business/world-at-work/dockworkers-strike-in-europe-beyond-against-arms-shipments-war-deaths-2026-10-30/",
           "published_at": "2026-10-30T19:16:00+05:00"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-pak-iran-us-mediation-briefing",
+      "category": "Pakistan — Regional Diplomacy",
+      "headline": "Military spokesman expresses cautious optimism over Pakistan's Iran–US mediation",
+      "summary": "In an interview published on 30 October, Pakistan's military spokesman Lieutenant General Ahmed Sharif Chaudhry described the country's Iran–US mediation as cautiously optimistic, without announcing a settlement.",
+      "what_happened": "The ISPR director-general said Army Chief Field Marshal Asim Munir had visited Tehran twice in October, most recently with Saudi and Turkish officials. He said the Pakistan–Saudi Arabia–Türkiye defence pact did not bar additional members in principle, but expansion required political decisions by signatories. He said Pakistan was not part of Yemen's internal conflict and did not disclose the substance of the Tehran negotiations or confirm Washington's endorsement of the latest visit.",
+      "background": "Regional hostilities have heightened Gulf security and energy risks. Diplomatic visits and expressions of optimism are not proof of a ceasefire or new treaty membership.",
+      "why_it_matters": "The statement highlights Pakistan's mediation, collective-defence commitments and the distinction between military remarks and binding diplomatic decisions.",
+      "pakistan_perspective": "Pakistan must balance relations with Iran, Saudi Arabia and Türkiye while protecting energy imports, overseas workers and regional stability.",
+      "regional_implications": "No Iranian accession to the trilateral defence pact was announced.",
+      "global_implications": "The interview did not establish agreed terms for Iran–US de-escalation.",
+      "key_takeaways": [
+        "ISPR spokesman Ahmed Sharif Chaudhry described Pakistan's Iran–US mediation as cautiously optimistic on 30 October 2026.",
+        "He said expansion of the trilateral defence pact would be a political decision.",
+        "No ceasefire, Iranian accession or new military deployment was announced."
+      ],
+      "facts": [
+        "Lieutenant General Ahmed Sharif Chaudhry was the ISPR spokesman interviewed by Reuters on 30 October 2026."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Reuters published the ISPR spokesman's interview about Pakistan's regional mediation."
+        }
+      ],
+      "what_to_watch": [
+        "Official agreements, ceasefire terms or changes to defence-pact membership."
+      ],
+      "question_angles": [
+        "Assess Pakistan's Gulf diplomacy and collective-defence commitments."
+      ],
+      "topics": [
+        "Pakistan foreign policy",
+        "Iran–US diplomacy",
+        "Collective defence"
+      ],
+      "countries": [
+        "Pakistan",
+        "Iran",
+        "United States",
+        "Saudi Arabia",
+        "Türkiye"
+      ],
+      "institutions": [
+        "Inter-Services Public Relations"
+      ],
+      "people": [
+        "Ahmed Sharif Chaudhry",
+        "Asim Munir"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistan military 'cautiously optimistic' on Iran-US mediation",
+          "url": "https://www.reuters.com/world/asia-pacific/pakistan-military-cautiously-optimistic-iran-us-mediation-2026-10-30/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-germany-inflation-q3-gdp",
+      "category": "World — European Economy",
+      "headline": "Germany reports provisional October inflation of 2.8% and third-quarter GDP growth of 0.2%",
+      "summary": "Germany's Federal Statistical Office reported on 30 October that provisional annual consumer-price inflation eased to 2.8% in October and seasonally adjusted GDP grew 0.2% quarter-on-quarter in the third quarter.",
+      "what_happened": "Destatis estimated October CPI inflation at 2.8% year-on-year, compared with 3.3% in September, and core inflation at 2.1%. A separate flash release placed third-quarter real GDP growth at 0.2% from the preceding quarter, after seasonal and calendar adjustment. Both releases are preliminary; final October inflation data are scheduled for 11 November.",
+      "background": "Germany is the euro area's largest economy, where energy costs, infrastructure spending and investment influence activity.",
+      "why_it_matters": "The releases show slower price increases alongside modest expansion. CPI and GDP use different reference periods and methods.",
+      "pakistan_perspective": "Germany's import demand and European monetary conditions affect Pakistan's export opportunities.",
+      "regional_implications": "German national CPI is not the same as euro-area aggregate inflation.",
+      "global_implications": "The data illustrate how energy shocks and government expenditure influence inflation and output.",
+      "key_takeaways": [
+        "Provisional October 2026 headline CPI inflation was 2.8%, down from September's 3.3%.",
+        "Core inflation was provisionally 2.1%.",
+        "Flash Q3 GDP rose 0.2% quarter-on-quarter after seasonal and calendar adjustment."
+      ],
+      "facts": [
+        "Destatis estimated Germany's October 2026 CPI inflation at 2.8% year-on-year.",
+        "Destatis estimated Q3 2026 real GDP growth at 0.2% quarter-on-quarter."
+      ],
+      "statistics": [
+        {
+          "label": "October 2026 German provisional headline CPI inflation",
+          "value": "2.8% year-on-year",
+          "source": "Federal Statistical Office of Germany",
+          "date": "2026-10-30"
+        },
+        {
+          "label": "Q3 2026 German flash real GDP growth",
+          "value": "0.2% quarter-on-quarter (seasonally and calendar adjusted)",
+          "source": "Federal Statistical Office of Germany",
+          "date": "2026-10-30"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "Destatis released provisional CPI and flash GDP statistics."
+        }
+      ],
+      "what_to_watch": [
+        "Final October CPI data scheduled for 11 November 2026."
+      ],
+      "question_angles": [
+        "Distinguish headline and core CPI inflation from quarter-on-quarter GDP growth."
+      ],
+      "topics": [
+        "Inflation",
+        "GDP",
+        "European economy"
+      ],
+      "countries": [
+        "Germany"
+      ],
+      "institutions": [
+        "Federal Statistical Office of Germany"
+      ],
+      "sources": [
+        {
+          "publisher": "Federal Statistical Office of Germany",
+          "title": "Inflation rate of +2.8% expected in October 2026",
+          "url": "https://www.destatis.de/EN/Press/2026/10/PE26_382_611.html"
+        },
+        {
+          "publisher": "Federal Statistical Office of Germany",
+          "title": "Gross domestic product in the 3rd quarter of 2026 up 0.2% on the previous quarter",
+          "url": "https://www.destatis.de/EN/Press/2026/10/PE26_381_811.html"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "German inflation cools on fuel tax cut, economy grows more than expected in Q3",
+          "url": "https://www.reuters.com/world/europe/german-economy-grows-by-02-q3-preliminary-data-shows-2026-10-30/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-uae-gem-no2-spill",
+      "category": "World — Environment and Maritime Security",
+      "headline": "UAE reports GEM NO. 2 tanker leak stopped while marine-pollution cleanup continues",
+      "summary": "UAE authorities reported on 30 October that no new oil was leaking from the GEM NO. 2 tanker and that pollution had declined, while cleanup and monitoring continued.",
+      "what_happened": "The UAE's energy and environment ministries reported repairs and ongoing structural assessments of the tanker. The principal slick was off Umm Al Quwain, with pollution extending toward parts of Ras Al Khaimah, Ajman and Sharjah. Some coastal areas were closed as a precaution. Officials had not confirmed the cause; Reuters cited shipping sources who said a projectile had struck the vessel on 9 October.",
+      "background": "Marine spills threaten coastal ecosystems, fisheries, port operations and desalination infrastructure.",
+      "why_it_matters": "Containment of the leak does not mean remediation is complete. The case illustrates environmental risks associated with maritime insecurity.",
+      "pakistan_perspective": "Pakistan's Arabian Sea ports, coastal fisheries and marine ecosystems face comparable oil-spill preparedness challenges.",
+      "regional_implications": "Gulf desalination facilities and maritime trade require monitoring when spills occur.",
+      "global_implications": "The incident links shipping security, pollution control and coastal infrastructure resilience.",
+      "key_takeaways": [
+        "On 30 October 2026, the UAE said no new oil was leaking from GEM NO. 2.",
+        "The main slick was off Umm Al Quwain, extending toward other northern emirates.",
+        "The spill's cause was not officially established, and cleanup continued."
+      ],
+      "facts": [
+        "On 30 October 2026, UAE authorities located the main GEM NO. 2 oil slick off Umm Al Quwain."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-30",
+          "text": "UAE authorities reported the leak stopped and coastal remediation continuing."
+        }
+      ],
+      "what_to_watch": [
+        "Official assessments of ecological effects and the cause of the incident."
+      ],
+      "question_angles": [
+        "Explain marine-pollution and desalination risks in Gulf maritime security."
+      ],
+      "topics": [
+        "Marine pollution",
+        "Oil spills",
+        "Desalination",
+        "Maritime security"
+      ],
+      "countries": [
+        "United Arab Emirates"
+      ],
+      "institutions": [
+        "UAE Ministry of Energy and Infrastructure",
+        "UAE Ministry of Climate Change and Environment"
+      ],
+      "sources": [
+        {
+          "publisher": "Emirates News Agency",
+          "title": "Oil Spill from GEM NO. 2 tanker contained; environmental remediation continues along affected UAE coastlines",
+          "url": "https://www.wam.ae/en/article/c3051mm-oil-spill-from-gem-no-tanker-contained"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "UAE says oil leak from tanker has been stopped, pollution eases",
+          "url": "https://www.reuters.com/world/middle-east/uae-says-oil-leak-tanker-has-been-stopped-pollution-eases-2026-10-30/"
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 261,
+  "count": 262,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1826,6 +1826,13 @@
     {
       "id": "pakistan-current-affairs-20261030-senate-gas-pricing-bill",
       "text": "The OGRA (Amendment) Bill introduced in Pakistan's Senate on 30 October 2026 proposes inserting Section 8A for quarterly gas-cost reviews.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-20261030-pak-iran-us-mediation-briefing",
+      "text": "On 30 October 2026, ISPR spokesman Lt Gen Ahmed Sharif Chaudhry described Pakistan's Iran–US mediation as cautiously optimistic.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
