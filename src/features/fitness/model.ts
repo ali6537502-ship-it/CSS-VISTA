@@ -120,7 +120,8 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
   const mainDishIds=['pk-pulao','pk-biryani','pk-haleem']
   const plannedEnergy=calculateEnergy(profile).targetCalories
   const initialCalorieEstimate=mealRules.reduce((sum,rule)=>sum+rule.groups.reduce((groupSum,options)=>{
-    const matched=options.find(([id])=>eligible.has(id))
+    const choices=options.filter(([id])=>eligible.has(id))
+    const matched=choices.length?choices[Math.abs(dayIndex)%choices.length]:undefined
     return groupSum+(matched?eligible.get(matched[0])!.kcal*matched[1]:0)
   },0),0)
   const portionFactor=plannedEnergy && initialCalorieEstimate>0?Math.max(.65,Math.min(1.3,plannedEnergy/initialCalorieEstimate)):1
@@ -139,7 +140,8 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
       const veg=['vegetables','cucumber','spinach'].map(id=>eligible.get(id)).find((item):item is Food=>!!item)
       if(veg)items.push({food:veg,amount:1,kcal:veg.kcal,protein:veg.protein})
     }else for(const options of rule.groups){
-      const matched=options.find(([id])=>eligible.has(id))
+      const choices=options.filter(([id])=>eligible.has(id))
+    const matched=choices.length?choices[Math.abs(dayIndex)%choices.length]:undefined
       if(matched){
         const food=eligible.get(matched[0])!
         const rawAmount=matched[1]*portionFactor
