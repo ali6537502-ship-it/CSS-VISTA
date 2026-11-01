@@ -153,7 +153,7 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
     sourceWarning:meals.some(meal=>meal.items.some(item=>item.food.historicalRecipe))}
   
 }
-export type Exercise={id:string;name:string;instruction:string;kind:'stand'|'squat'|'push'|'floor'|'lunge';seconds:number}
+export type Exercise={id:string;name:string;instruction:string;kind:'stand'|'squat'|'push'|'floor'|'lunge';seconds:number;techniqueUrl?:string}
 const routines:Record<string,Exercise[]> = {
   A:[
     {id:'march',name:'March in place',instruction:'Move at a comfortable pace and breathe normally.',kind:'stand',seconds:45},
@@ -170,6 +170,15 @@ const routines:Record<string,Exercise[]> = {
     {id:'plank',name:'Modified plank',instruction:'Hold a braced position on knees or forearms while breathing normally.',kind:'floor',seconds:30},
   ]
 }
+/** Public technique pages; do not hotlink or rehost their proprietary media. */
+const EXERCISE_TECHNIQUE:Record<string,string>={
+  squat:'https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/',
+  wallpush:'https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/',
+  bridge:'https://www.nth.nhs.uk/resources/lower-limb-exercise-and-education/',
+  bird:'https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/',
+  calf:'https://www.nth.nhs.uk/resources/lower-limb-exercise-and-education/',
+  push:'https://www.nhs.uk/live-well/exercise/how-to-improve-strength-flexibility/',
+}
 export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Goal){
   const strengthDay=[0,2,4].includes(((dayIndex%7)+7)%7)
   const exerciseList=strengthDay?routines[dayIndex%2===0?'A':'B']:[
@@ -179,7 +188,7 @@ export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Go
   ]
   const totalSets=strengthDay?(minutes<=10?1:minutes<=20?2:3):1
   const workBoost=Math.min(10,Math.max(0,week-1)*2)
-  return {exercises:exerciseList.map(e=>({...e,seconds:e.seconds+(strengthDay?workBoost:0)+(strengthDay&&goal==='lose'&&e.kind==='stand'?10:0)})),sets:totalSets,restSeconds:30,strengthDay}
+  return {exercises:exerciseList.map(e=>({...e,techniqueUrl:EXERCISE_TECHNIQUE[e.id],seconds:e.seconds+(strengthDay?workBoost:0)+(strengthDay&&goal==='lose'&&e.kind==='stand'?10:0)})),sets:totalSets,restSeconds:30,strengthDay}
 }
 export function validateProfile(profile:FitnessProfile):string|null {
   if(!Number.isInteger(profile.age)||profile.age<18||profile.age>80) return 'This version is for adults aged 18–80.'
