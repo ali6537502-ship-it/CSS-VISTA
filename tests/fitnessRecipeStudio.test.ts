@@ -79,3 +79,9 @@ test('7-day plan rotates available breakfast ingredients, not only meal labels',
   const second=buildMeals(profile,{},1)
   assert.notDeepEqual(first.meals[0].items.map(i=>i.food.id),second.meals[0].items.map(i=>i.food.id))
 })
+
+test('empty menus cannot be incorrectly labelled affordable',()=>{
+  const result=estimateDailyFoodCost([{id:'breakfast',name:'Breakfast',items:[],kcal:0,protein:0}],{},500)
+  assert.equal(result.complete,false)
+  assert.equal(result.underBudget,null)
+})
