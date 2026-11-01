@@ -3,10 +3,12 @@
  * Approximate ingredient composition: USDA FoodData Central (fdc.nal.usda.gov);
  * activity and energy estimates: Mifflin-St Jeor (1990), with heuristic activity factors.
  */
+import { PAKISTANI_DISHES, PAKISTAN_FOOD_SOURCE } from './pakistanFoods'
+
 export type Sex = 'male' | 'female'
 export type Goal = 'gain' | 'lose' | 'muscle' | 'fitness'
 export type Activity = 'sitting' | 'light' | 'moderate' | 'active'
-export type Food = { id:string; label:string; portion:string; kcal:number; protein:number; group:string }
+export type Food = { id:string; label:string; portion:string; kcal:number; protein:number; group:string; source?:string; sourceUrl?:string; historicalRecipe?:boolean }
 export type FitnessProfile = {
   sex:Sex; age:number; height:number; weight:number; target:number; weeks:number;
   goal:Goal; activity:Activity; minutes:number; available:string[];
@@ -15,9 +17,11 @@ export type FitnessProfile = {
 export type FitnessRecord = {
   profile:FitnessProfile; updatedAt:string;
   weights:Array<{date:string;weight:number}>; workouts:Record<string,string>;
-  meals:Record<string,Record<string,boolean>>
+  meals:Record<string,Record<string,boolean>>;
+  /** Each day can override typical home availability without changing the baseline. */
+  dailyAvailability?:Record<string,Record<string,boolean>>
 }
-export const FOOD_REFERENCE = 'Approximate reference portions based on ingredient composition (USDA FoodData Central). The oil, flour, meat cut, recipe and cooked yield change actual values.'
+export const FOOD_REFERENCE = 'Ingredient entries are approximate USDA FoodData Central reference servings. Traditional prepared dishes use Pakistan’s 2001 food composition table per 100 g of a documented recipe. They are not universal restaurant or home-cooking values; oil, ingredients, serving mass and preparation change nutrition.'
 export const FOODS:Food[] = [
   {id:'roti',label:'Plain homemade roti',portion:'1 (40 g dry atta, no oil)',kcal:136,protein:5,group:'Bread'},
   {id:'naan',label:'Plain naan',portion:'100 g',kcal:270,protein:9,group:'Bread'},
@@ -46,6 +50,12 @@ export const FOODS:Food[] = [
   {id:'peanuts',label:'Peanuts',portion:'15 g',kcal:85,protein:3.8,group:'Extras'},
   {id:'almonds',label:'Almonds',portion:'15 g',kcal:87,protein:3.2,group:'Extras'},
   {id:'oil',label:'Cooking oil (added to dish)',portion:'1 teaspoon (5 g)',kcal:45,protein:0,group:'Extras'},
+  ...PAKISTANI_DISHES.map(d=>({
+    id:d.id,label:d.label,portion:'100 g prepared food',kcal:d.kcalPer100g,
+    protein:d.proteinPer100g,group:d.group,
+    source:'Pakistan Food Composition Table (2001), recipe '+d.recipeNumber,
+    sourceUrl:PAKISTAN_FOOD_SOURCE.url,historicalRecipe:true,
+  })),
 ]
 export const DEFAULT_FOODS = ['roti','rice','eggs','chicken','daal','chana','milk','yogurt','banana','vegetables','oil','apple','peanuts']
 export const AVOID_OPTIONS = [
@@ -65,9 +75,16 @@ export function addWeeks(iso:string,weeks:number) {
   date.setUTCDate(date.getUTCDate()+weeks*7)
   return date.toISOString().slice(0,10)
 }
-export function availableFoods(profile:FitnessProfile) {
+export function availableFoods(profile:FitnessProfile,overrides:Record<string,boolean>={}) {
   const excludes=new Set(AVOID_OPTIONS.filter(option=>profile.avoids.includes(option.id)).flatMap(option=>option.exclude))
-  return FOODS.filter(food=>profile.available.includes(food.id) && !excludes.has(food.id))
+  return FOODS.filter(food=>{
+    const selected=overrides[food.id] ?? profile.available.includes(food.id)
+    if(!selected || excludes.has(food.id)) return false
+    // Composite recipes have not been screened for every named allergen.
+    // Unknown ingredient combinations are never silently assumed safe.
+    if(profile.avoids.length && food.historicalRecipe) return false
+    return true
+  })
 }
 export function calculateEnergy(profile:FitnessProfile) {
   const bmi=profile.weight/Math.pow(profile.height/100,2)
@@ -95,8 +112,10 @@ const mealRules = [
   {id:'snack',name:'Snack',groups:[[['yogurt',2],['milk',1],['chana',1]], [['banana',1],['apple',1],['orange',1],['guava',1],['dates',1]], [['peanuts',1],['almonds',1]]]},
   {id:'dinner',name:'Dinner',groups:[[['daal',2],['chana',2],['chicken',1.5],['fish',1.5],['beef',1.2],['eggs',2],['lobia',2],['paneer',.8]], [['roti',2],['rice',2],['naan',1],['potato',2]], [['vegetables',1.5],['spinach',1.5],['cucumber',1]], [['oil',1]]]},
 ] as const
-export function buildMeals(profile:FitnessProfile) {
-  const eligible=new Map(availableFoods(profile).map(food=>[food.id,food]))
+export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boolean>={},dayIndex=0) {
+  const eligible=new Map(availableFoods(profile,dayOverrides).map(food=>[food.id,food]))
+  const prepared=[...eligible.values()].filter(food=>food.group==='Cooked dishes')
+  const mainDishIds=['pk-pulao','pk-biryani','pk-haleem']
   const plannedEnergy=calculateEnergy(profile).targetCalories
   const initialCalorieEstimate=mealRules.reduce((sum,rule)=>sum+rule.groups.reduce((groupSum,options)=>{
     const matched=options.find(([id])=>eligible.has(id))
@@ -105,7 +124,19 @@ export function buildMeals(profile:FitnessProfile) {
   const portionFactor=plannedEnergy && initialCalorieEstimate>0?Math.max(.65,Math.min(1.3,plannedEnergy/initialCalorieEstimate)):1
   const meals:PlannedMeal[]=mealRules.map(rule=>{
     const items:PlannedEntry[]=[]
-    for(const options of rule.groups){
+    const preparedDish=(rule.id==='lunch'||rule.id==='dinner')&&prepared.length
+      ? prepared[(Math.abs(dayIndex)+(rule.id==='dinner'?1:0))%prepared.length] : null
+    if(preparedDish){
+      const quantity=2.5
+      items.push({food:preparedDish,amount:quantity,kcal:Math.round(preparedDish.kcal*quantity),protein:Math.round(preparedDish.protein*quantity*10)/10})
+      // One-plate rice dishes already include a cooked starch and oil.
+      if(!mainDishIds.includes(preparedDish.id)){
+        const starch=['roti','rice','potato'].map(id=>eligible.get(id)).find((item):item is Food=>!!item)
+        if(starch)items.push({food:starch,amount:1.5,kcal:Math.round(starch.kcal*1.5),protein:Math.round(starch.protein*1.5*10)/10})
+      }
+      const veg=['vegetables','cucumber','spinach'].map(id=>eligible.get(id)).find((item):item is Food=>!!item)
+      if(veg)items.push({food:veg,amount:1,kcal:veg.kcal,protein:veg.protein})
+    }else for(const options of rule.groups){
       const matched=options.find(([id])=>eligible.has(id))
       if(matched){
         const food=eligible.get(matched[0])!
@@ -118,7 +149,9 @@ export function buildMeals(profile:FitnessProfile) {
   })
   return {meals,totalCalories:meals.reduce((s,m)=>s+m.kcal,0),
     totalProtein:meals.reduce((s,m)=>s+m.protein,0),
-    varietyWarning:meals.some(meal=>meal.items.length<2)}
+    varietyWarning:meals.some(meal=>meal.items.length<2),
+    sourceWarning:meals.some(meal=>meal.items.some(item=>item.food.historicalRecipe))}
+  
 }
 export type Exercise={id:string;name:string;instruction:string;kind:'stand'|'squat'|'push'|'floor'|'lunge';seconds:number}
 const routines:Record<string,Exercise[]> = {
