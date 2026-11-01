@@ -113,3 +113,18 @@ test('weekly review requires enough elapsed time and never guarantees a target d
   assert.match(weightTrendGuidance({...base,goal:'lose',target:57},[{date:'2026-11-01',weight:60},{date:'2026-11-15',weight:58.8}]),/gradual weight reduction/)
   assert.match(weightTrendGuidance({...base,goal:'muscle'},[{date:'2026-11-01',weight:60},{date:'2026-11-15',weight:60.5}]),/Weight alone cannot/)
 })
+
+test('very low intake from reference equations is not issued as an unsupervised target',()=>{
+  const p={...base,sex:'female' as const,age:80,height:125,weight:35,target:36,weeks:8,activity:'sitting' as const}
+  const energy=calculateEnergy(p)
+  assert.equal(energy.lowIntake,true)
+  assert.equal(energy.targetCalories,null)
+  assert.equal(energy.needsReview,true)
+})
+test('home workout prioritises user-selected focus without removing full body activity',()=>{
+  const chest=workoutForDay(1,0,20,'muscle','chest-shoulders')
+  const legs=workoutForDay(1,0,20,'gain','legs')
+  assert.equal(chest.exercises[1].kind,'push')
+  assert.equal(legs.exercises[1].kind,'squat')
+  assert.equal(chest.exercises.length,legs.exercises.length)
+})
