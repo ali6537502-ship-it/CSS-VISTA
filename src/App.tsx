@@ -14,6 +14,7 @@ import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
 const GSATutor = lazy(() => import('./pages/GSATutor'))
+const FitnessCoach = lazy(() => import('./pages/FitnessCoach'))
 const CompulsoryList = lazy(() => import('./pages/CompulsoryList'))
 const SubjectDetail = lazy(() => import('./pages/SubjectDetail'))
 const OptionalSubjects = lazy(() => import('./pages/OptionalSubjects'))
@@ -245,6 +246,7 @@ export default function App() {
         <Route path="/account/tasks" element={<ProfileGate><S><AccountTasks /></S></ProfileGate>} />
         <Route path="/account/progress" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountProgress />}><AccountProgress /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/gsa-tutor" element={<ProfileGate><S><GSATutor /></S></ProfileGate>} />
+        <Route path="/account/fitness-coach" element={<ProfileGate><S><FitnessCoach /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
