@@ -99,6 +99,8 @@ try {
       ),
       false,
     );
+    // The fixture contains October editions; set the calendar month explicitly.
+    await page.getByLabel("Month and year").fill("2026-10");
     assert.equal(await page.locator(".dp-days a").count(), 7);
     await page.getByLabel("Search metadata").fill("22 October 2026");
     await page.waitForFunction(
