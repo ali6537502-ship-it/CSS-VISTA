@@ -101,7 +101,7 @@ export default function FitnessCoach(){
       return state
     }),1000)
     return ()=>window.clearInterval(interval)
-  },[session?.running,workout?.restSeconds,workout?.sets,workout?.exercises])
+  },[session?.running,workout])
   function createPlan(){
     const problem=validateProfile(draft)
     if(problem){setError(problem);return}
