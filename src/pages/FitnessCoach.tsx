@@ -5,6 +5,8 @@ import { useAccount } from '@/lib/accountContext'
 import { preparationPhysicalKey } from '@/lib/preparationStorage'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 import { AVOID_OPTIONS, buildMeals, calculateEnergy, DEFAULT_FOODS, FITNESS_KEY, FOOD_REFERENCE, FOODS, type FitnessProfile, type FitnessRecord, type Goal, type Sex, todayPK, addWeeks, validateProfile, workoutForDay, weightTrendGuidance } from '@/features/fitness/model'
+import { recipeFoods, estimateDailyFoodCost, type HomeRecipe } from '@/features/fitness/recipeEngine'
+import { HomeFoodStudio } from '@/features/fitness/HomeFoodStudio'
 
 type View = 'diet' | 'workout' | 'progress'
 type Session = { index:number; round:number; mode:'work'|'rest'|'done'; remaining:number; running:boolean }
@@ -75,7 +77,15 @@ export default function FitnessCoach(){
   const lastWeight=record?.weights.at(-1)?.weight ?? profile?.weight ?? 65
   const daysRemaining=profile?Math.max(1,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(todayPK()+'T12:00:00Z').getTime())/86400000)):0
   const energy=profile?calculateEnergy({...profile,weight:lastWeight,weeks:Math.max(1,Math.ceil(daysRemaining/7))}):null
-  const meals=profile?buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[today]??{},Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)):null
+  const homeFoods=profile?recipeFoods(record?.homeRecipes??[],profile):[]
+  const elapsed=profile?Math.max(0,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)):0
+  const meals=profile?buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[today]??{},elapsed,homeFoods):null
+  const budget=meals?estimateDailyFoodCost(meals.meals,record?.foodPrices??{},profile?.budgetPkr):null
+  const weekMenu=profile?Array.from({length:7},(_,i)=>{
+    const at=new Date(today+'T12:00:00Z');at.setUTCDate(at.getUTCDate()+i)
+    const date=at.toISOString().slice(0,10)
+    return {date,plan:buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[date]??{},elapsed+i,homeFoods)}
+  }):[]
   const week=profile?buildWeek(profile):1
   const workout=useMemo(()=>profile?workoutForDay(week,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal):null,[profile,week,today])
   const goalLabels:Record<Goal,string>={gain:'Gain healthy weight',lose:'Reduce excess fat',muscle:'Build muscle',fitness:'Stay active and fit'}
@@ -117,7 +127,7 @@ export default function FitnessCoach(){
     if(problem){setError(problem);return}
     const changedGoal=!!record&&(record.profile.goal!==draft.goal||record.profile.target!==draft.target||record.profile.weeks!==draft.weeks)
     const updated={...draft,startDate:changedGoal?today:record?.profile.startDate||today}
-    const next:FitnessRecord={ownerId:user.id,profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{},dailyAvailability:record?.dailyAvailability||{}}
+    const next:FitnessRecord={ownerId:user.id,profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{},dailyAvailability:record?.dailyAvailability||{},homeRecipes:record?.homeRecipes||[],foodPrices:record?.foodPrices||{}}
     save(next);setError('');setEditing(false);setTab('diet')
   }
   function changeFood(id:string){
@@ -126,6 +136,18 @@ export default function FitnessCoach(){
       const currently=todaySelections[id]??r.profile.available.includes(id)
       return {...r,dailyAvailability:{...r.dailyAvailability,[today]:{...todaySelections,[id]:!currently}},meals:{...r.meals,[today]:{}}}
     })
+  }
+  function saveHomeRecipe(recipe:HomeRecipe){
+    edit(r=>({...r,homeRecipes:[...(r.homeRecipes??[]),recipe],
+      profile:{...r.profile,available:[...r.profile.available,recipe.id]},meals:{...r.meals,[today]:{}}}))
+  }
+  function deleteHomeRecipe(id:string){
+    edit(r=>({...r,homeRecipes:(r.homeRecipes??[]).filter(recipe=>recipe.id!==id),
+      profile:{...r.profile,available:r.profile.available.filter(x=>x!==id)},meals:{...r.meals,[today]:{}}}))
+  }
+  function setFoodPrice(id:string,price?:number){
+    if(price!==undefined&&(!Number.isFinite(price)||price<0||price>100000))return
+    edit(r=>{const prices={...r.foodPrices};if(price===undefined)delete prices[id];else prices[id]=price;return {...r,foodPrices:prices}})
   }
   function markMeal(id:string){
     edit(r=>({...r,meals:{...r.meals,[today]:{...(r.meals[today]||{}),[id]:!r.meals[today]?.[id]}}}))
@@ -171,6 +193,7 @@ export default function FitnessCoach(){
           <div className="grid max-h-80 grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2">{FOODS.filter(f=>(f.label+' '+f.group).toLowerCase().includes(foodQuery.toLowerCase())).map(food=><label key={food.id} className="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 p-3 text-sm"><input type="checkbox" className="mt-1 accent-emerald-800" checked={draft.available.includes(food.id)} onChange={e=>setDraft({...draft,available:e.target.checked?[...draft.available,food.id]:draft.available.filter(x=>x!==food.id)})}/><span><strong>{food.label}</strong><small className="mt-0.5 block text-slate-500">{food.portion}{food.historicalRecipe?' · historical reference recipe':''}</small></span></label>)}</div>
           <p className="text-xs text-slate-500">{draft.available.length} foods selected · Pakistani prepared dishes are labelled as 2001 reference recipes</p>
           <Field label="Restrictions or allergies">{<div className="grid grid-cols-2 gap-2">{AVOID_OPTIONS.map(o=><label key={o.id} className="flex min-h-11 items-center gap-2 rounded-xl border px-3 text-sm"><input type="checkbox" checked={draft.avoids.includes(o.id)} onChange={e=>setDraft({...draft,avoids:e.target.checked?[...draft.avoids,o.id]:draft.avoids.filter(x=>x!==o.id)})}/>{o.name}</label>)}</div>}</Field>
+          <Field label="Daily food budget in PKR (optional)"><input className={fieldClass} type="number" min="0" max="100000" step="1" placeholder="Your actual daily budget" value={draft.budgetPkr??''} onChange={e=>setDraft({...draft,budgetPkr:e.target.value===''?undefined:Number(e.target.value)})}/></Field>
           <Field label="Other foods or cooking details (optional)"><textarea className={fieldClass+' min-h-20 py-2'} maxLength={300} value={draft.foodNotes} onChange={e=>setDraft({...draft,foodNotes:e.target.value})} placeholder="e.g. Homemade chicken salan, Bannu pulao, oily food, food budget"/></Field>
           <p className="text-xs text-slate-600">Named homemade dishes need a measured recipe before accurate calories can be calculated. Allergies must always be checked against actual ingredients.</p>
         </div>}
@@ -198,7 +221,16 @@ export default function FitnessCoach(){
         {tab==='diet' && <section className="space-y-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-xl font-bold">Today's meals</h2><p className="text-sm text-slate-600">Built from foods you selected as available.</p></div><span className="text-sm font-semibold text-emerald-900">{meals.totalCalories} kcal · {meals.totalProtein} g protein</span></div>
           {meals.meals.map(meal=><article key={meal.id} className="rounded-2xl border bg-white p-4"><div className="mb-2 flex items-center justify-between gap-3"><h3 className="font-bold">{meal.name}</h3><label className="flex items-center gap-2 text-xs font-medium text-emerald-900"><input type="checkbox" checked={!!record.meals[today]?.[meal.id]} onChange={()=>markMeal(meal.id)} className="accent-emerald-800"/> Eaten</label></div>{meal.items.length?<div className="space-y-2">{meal.items.map(item=><div key={item.food.id} className="flex justify-between gap-3 text-sm"><span>{item.food.label} <span className="text-slate-500">× {item.amount} ({item.food.portion})</span>{item.food.sourceUrl&&<a className="ml-2 text-xs text-emerald-900 underline" href={item.food.sourceUrl} target="_blank" rel="noopener noreferrer">Source</a>}</span><span className="shrink-0 text-slate-600">{item.kcal} kcal</span></div>)}</div>:<p className="text-sm text-amber-800">Add available foods to complete this meal.</p>}<p className="mt-3 border-t pt-2 text-xs text-slate-600">{meal.kcal} kcal · ~{meal.protein} g protein</p></article>)}
           {(meals.varietyWarning || (energy.targetCalories!==null && Math.abs(meals.totalCalories-energy.targetCalories)>250)) && <p role="status" className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">This sample menu {meals.varietyWarning?'has limited variety':'does not fully match your estimated energy target'}. Add suitable available foods or adjust portions with qualified advice; it is not a complete prescribed diet.</p>}
-          <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Change what's available today</summary><p className="mt-2 text-xs text-slate-600">Today's changes do not change your usual home food preferences.</p><div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">{FOODS.map(food=><label className="flex min-h-11 items-center gap-2 rounded-lg border p-2 text-sm" key={food.id}><input type="checkbox" checked={record.dailyAvailability?.[today]?.[food.id]??profile.available.includes(food.id)} onChange={()=>changeFood(food.id)} className="accent-emerald-800"/>{food.label}</label>)}</div></details>
+          <div className="rounded-2xl border bg-white p-4"><h3 className="font-bold">Your goal-based nutrition check</h3>
+            <p className="mt-2 text-sm text-slate-600">{energy.targetCalories===null?'Personalised calorie target is on hold until your goal is reviewed.':'Today’s sample menu: '+meals.totalCalories+' kcal versus an estimated '+energy.targetCalories+' kcal target.'} {meals.totalProtein} g protein versus a reference range of {energy.proteinRange[0]}–{energy.proteinRange[1]} g. Differences do not imply an exact weight change.</p>
+            {profile.budgetPkr!==undefined&&<p className="mt-2 text-sm text-slate-600">Budget: PKR {profile.budgetPkr}/day. {budget?.complete?'Priced portions total approximately PKR '+budget.costPkr+(budget.underBudget?' within your limit.':' above your limit.'):'Prices are missing for '+(budget?.missing.length??0)+' chosen foods. Enter local prices to check affordability.'}</p>}
+          </div>
+          <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Next 7 days: planned meals</summary>
+            <p className="my-3 text-xs text-slate-600">Varied options from your home foods and measured recipes. Portion adequacy and available foods require review. No purchases are assumed.</p>
+            <div className="space-y-3">{weekMenu.map(({date,plan})=><div key={date} className="rounded-xl bg-slate-50 p-3"><p className="font-semibold text-sm">{date} · {plan.totalCalories} kcal · {plan.totalProtein} g protein</p><p className="mt-1 text-xs leading-5 text-slate-600">{plan.meals.map(m=>m.name+': '+(m.items.map(i=>i.food.label).join(', ')||'needs foods')).join(' · ')}</p></div>)}</div>
+          </details>
+          <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Pakistani food library and my recipes</summary><div className="mt-4"><HomeFoodStudio profile={profile} recipes={record.homeRecipes??[]} prices={record.foodPrices??{}} onSave={saveHomeRecipe} onRemove={deleteHomeRecipe} onPriceUpdate={setFoodPrice}/></div></details>
+          <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Change what's available today</summary><p className="mt-2 text-xs text-slate-600">Today's changes do not change your usual home food preferences.</p><div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">{[...FOODS,...homeFoods].map(food=><label className="flex min-h-11 items-center gap-2 rounded-lg border p-2 text-sm" key={food.id}><input type="checkbox" checked={record.dailyAvailability?.[today]?.[food.id]??profile.available.includes(food.id)} onChange={()=>changeFood(food.id)} className="accent-emerald-800"/>{food.label}</label>)}</div></details>
           <p className="text-xs leading-5 text-slate-500">{FOOD_REFERENCE} Composite recipes are excluded from automatic planning when an allergy/restriction is selected until their ingredients are verified. A selected food is not automatically suitable for a stated allergy: always check ingredients, cross-contact and individual advice. Meals marked “Eaten” reflect your own log, not automatically measured consumption.</p>
         </section>}
         {tab==='workout' && <section className="space-y-4"><div><h2 className="text-xl font-bold">Today's home workout</h2><p className="text-sm text-slate-600">{workout.strengthDay?'Strength training':'Active recovery'} · {workout.exercises.length} movements · {workout.sets} round{workout.sets!==1?'s':''} · rest between movements · no equipment</p></div>
