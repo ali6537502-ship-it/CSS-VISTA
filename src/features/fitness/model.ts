@@ -56,7 +56,9 @@ export const AVOID_OPTIONS = [
 ]
 export const FITNESS_KEY = 'cssvista:tool:fitness-coach:v1'
 export function todayPK(date=new Date()) {
-  return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).format(date)
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date)
+  const piece=(type:string)=>parts.find(p=>p.type===type)?.value||''
+  return `${piece('year')}-${piece('month')}-${piece('day')}`
 }
 export function addWeeks(iso:string,weeks:number) {
   const date=new Date(iso+'T12:00:00Z')
@@ -75,7 +77,7 @@ export function calculateEnergy(profile:FitnessProfile) {
   const rate=Math.abs(profile.target-profile.weight)/profile.weeks
   const direction=profile.goal==='lose' ? profile.target<profile.weight : profile.goal==='gain' ? profile.target>profile.weight : true
   const underweightLoss=profile.goal==='lose' && (bmi<18.5 || profile.target/Math.pow(profile.height/100,2)<18.5)
-  const fast=(profile.goal==='lose'&&rate>0.75)||(profile.goal==='gain'&&rate>0.35)
+  const fast=(profile.goal==='lose'&&rate>0.75)||(profile.goal==='gain'&&rate>0.5)
   const needsReview=profile.conditionReview || !direction || underweightLoss || fast
   // These small initial adjustments are illustrative, not predictions of rate of change.
   const adjustment=profile.goal==='gain'?200:profile.goal==='lose'&&!underweightLoss?-Math.min(250,Math.round(maintenance*.12)):profile.goal==='muscle'?100:0
@@ -95,13 +97,20 @@ const mealRules = [
 ] as const
 export function buildMeals(profile:FitnessProfile) {
   const eligible=new Map(availableFoods(profile).map(food=>[food.id,food]))
+  const plannedEnergy=calculateEnergy(profile).targetCalories
+  const initialCalorieEstimate=mealRules.reduce((sum,rule)=>sum+rule.groups.reduce((groupSum,options)=>{
+    const matched=options.find(([id])=>eligible.has(id))
+    return groupSum+(matched?eligible.get(matched[0])!.kcal*matched[1]:0)
+  },0),0)
+  const portionFactor=plannedEnergy && initialCalorieEstimate>0?Math.max(.65,Math.min(1.3,plannedEnergy/initialCalorieEstimate)):1
   const meals:PlannedMeal[]=mealRules.map(rule=>{
     const items:PlannedEntry[]=[]
     for(const options of rule.groups){
       const matched=options.find(([id])=>eligible.has(id))
       if(matched){
         const food=eligible.get(matched[0])!
-        const amount=matched[1]
+        const rawAmount=matched[1]*portionFactor
+        const amount=food.id==='eggs'?Math.max(1,Math.round(rawAmount)):Math.max(.25,Math.round(rawAmount*4)/4)
         items.push({food,amount,kcal:Math.round(food.kcal*amount),protein:Math.round(food.protein*amount*10)/10})
       }
     }
@@ -129,10 +138,15 @@ const routines:Record<string,Exercise[]> = {
   ]
 }
 export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Goal){
-  const exerciseList=routines[dayIndex%2===0?'A':'B']
-  const totalSets=minutes<=10?1:minutes<=20?2:3
+  const strengthDay=[0,2,4].includes(((dayIndex%7)+7)%7)
+  const exerciseList=strengthDay?routines[dayIndex%2===0?'A':'B']:[
+    {id:'recovery-walk',name:'Gentle marching or walking',instruction:'Walk at a comfortable pace; stop or slow down if you feel unwell.',kind:'stand' as const,seconds:60},
+    {id:'recovery-mobility',name:'Standing mobility',instruction:'Move shoulders and hips slowly through a comfortable, pain-free range.',kind:'stand' as const,seconds:40},
+    {id:'recovery-calf',name:'Supported calf raises',instruction:'Hold a stable surface; lift heels gently, then lower slowly.',kind:'stand' as const,seconds:40},
+  ]
+  const totalSets=strengthDay?(minutes<=10?1:minutes<=20?2:3):1
   const workBoost=Math.min(10,Math.max(0,week-1)*2)
-  return {exercises:exerciseList.map(e=>({...e,seconds:e.seconds+workBoost+(goal==='lose'&&e.kind==='stand'?10:0)})),sets:totalSets,restSeconds:30}
+  return {exercises:exerciseList.map(e=>({...e,seconds:e.seconds+(strengthDay?workBoost:0)+(strengthDay&&goal==='lose'&&e.kind==='stand'?10:0)})),sets:totalSets,restSeconds:30,strengthDay}
 }
 export function validateProfile(profile:FitnessProfile):string|null {
   if(!Number.isInteger(profile.age)||profile.age<18||profile.age>80) return 'This version is for adults aged 18–80.'
