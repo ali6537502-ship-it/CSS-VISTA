@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { addWeeks, availableFoods, buildMeals, calculateEnergy, DEFAULT_FOODS, type FitnessProfile, validateProfile, workoutForDay } from '../src/features/fitness/model.ts'
+import { addWeeks, availableFoods, buildMeals, calculateEnergy, DEFAULT_FOODS, FOODS, type FitnessProfile, validateProfile, workoutForDay } from '../src/features/fitness/model.ts'
+import { PAKISTAN_FOOD_SOURCE, PAKISTANI_DISHES } from '../src/features/fitness/pakistanFoods.ts'
 
 const base:FitnessProfile={sex:'male',age:25,height:170,weight:60,target:65,weeks:8,goal:'gain',activity:'sitting',minutes:20,available:DEFAULT_FOODS,avoids:[],foodNotes:'',conditionReview:false,startDate:'2026-11-01'}
 
@@ -60,4 +61,47 @@ test('the workout provides basic movements and scales volume with time',()=>{
   assert.equal(workoutForDay(2,1,30,'muscle').sets,1)
   assert.ok(longer.exercises.length>=4)
   assert.ok(longer.exercises.every(e=>e.seconds>0&&e.instruction.length>20))
+})
+
+test('Pakistan food composition source contains exactly the 17 historically measured dishes',()=>{
+  assert.equal(PAKISTANI_DISHES.length,17)
+  assert.ok(PAKISTAN_FOOD_SOURCE.url.startsWith('https://www.fao.org/'))
+  const biryani=PAKISTANI_DISHES.find(f=>f.id==='pk-biryani')
+  assert.equal(biryani?.kcalPer100g,197)
+  assert.equal(biryani?.proteinPer100g,9.1)
+  const daal=PAKISTANI_DISHES.find(f=>f.id==='pk-masoor-curry')
+  assert.equal(daal?.kcalPer100g,96)
+  assert.equal(daal?.proteinPer100g,5.2)
+  assert.equal(PAKISTANI_DISHES.find(f=>f.id==='pk-pulao')?.kcalPer100g,179)
+  const ids=FOODS.map(f=>f.id)
+  assert.equal(new Set(ids).size,ids.length)
+  assert.ok(FOODS.some(f=>f.id==='pk-kheer'&&f.historicalRecipe&&f.sourceUrl))
+})
+
+test('daily meal override does not require changing permanent home foods',()=>{
+  const p={...base,target:62,available:['eggs','roti','daal','banana']}
+  const normal=buildMeals(p)
+  assert.ok(normal.meals.flatMap(m=>m.items).some(item=>item.food.id==='eggs'))
+  const switched=buildMeals(p,{eggs:false,chicken:true})
+  assert.equal(switched.meals.flatMap(m=>m.items).some(item=>item.food.id==='eggs'),false)
+  assert.ok(switched.meals.flatMap(m=>m.items).some(item=>item.food.id==='chicken'))
+  assert.ok(p.available.includes('eggs'))
+  assert.equal(p.available.includes('chicken'),false)
+})
+
+test('traditional one-plate dishes do not double-count added rice or cooking oil',()=>{
+  const p={...base,target:62,available:['roti','rice','pk-biryani','vegetables']}
+  const lunch=buildMeals(p,{},0).meals.find(m=>m.id==='lunch')
+  assert.ok(lunch?.items.some(i=>i.food.id==='pk-biryani'))
+  assert.equal(lunch?.items.some(i=>i.food.id==='rice'),false)
+  assert.equal(lunch?.items.some(i=>i.food.id==='oil'),false)
+})
+
+test('prepared meals are suppressed when ingredient allergens have not been checked',()=>{
+  const p={...base,avoids:['wheat'],available:['pk-biryani','pk-chicken-curry','rice','eggs']}
+  const foods=availableFoods(p)
+  assert.equal(foods.some(f=>f.historicalRecipe),false)
+  assert.ok(foods.some(f=>f.id==='rice'))
+  const menu=buildMeals(p)
+  assert.equal(menu.meals.flatMap(m=>m.items).some(i=>i.food.historicalRecipe),false)
 })
