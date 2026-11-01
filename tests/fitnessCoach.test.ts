@@ -2,13 +2,13 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { addWeeks, availableFoods, buildMeals, calculateEnergy, DEFAULT_FOODS, type FitnessProfile, validateProfile, workoutForDay } from '../src/features/fitness/model.ts'
 
-const base:FitnessProfile={sex:'male',age:25,height:170,weight:60,target:63,weeks:8,goal:'gain',activity:'sitting',minutes:20,available:DEFAULT_FOODS,avoids:[],foodNotes:'',conditionReview:false,startDate:'2026-11-01'}
+const base:FitnessProfile={sex:'male',age:25,height:170,weight:60,target:65,weeks:8,goal:'gain',activity:'sitting',minutes:20,available:DEFAULT_FOODS,avoids:[],foodNotes:'',conditionReview:false,startDate:'2026-11-01'}
 
 test('two-month target uses 8 weeks and returns conservative adult energy estimate',()=>{
   const energy=calculateEnergy(base)
   assert.ok(energy.resting>1300 && energy.resting<1900)
-  assert.equal(energy.rate,0.38)
-  // 3 kg in 8 weeks is above the conservative automatic gain pace.
+  assert.equal(energy.rate,0.63)
+  // 5 kg in 8 weeks is above the conservative automatic gain pace.
   assert.equal(energy.targetCalories,null)
   assert.equal(energy.needsReview,true)
   assert.equal(addWeeks(base.startDate,8),'2026-12-27')
