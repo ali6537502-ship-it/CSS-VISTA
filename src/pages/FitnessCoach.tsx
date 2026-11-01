@@ -12,12 +12,13 @@ const initial = ():FitnessProfile => ({
   sex:'male',age:25,height:170,weight:65,target:70,weeks:8,goal:'gain',activity:'sitting',
   minutes:20,available:DEFAULT_FOODS,avoids:[],foodNotes:'',conditionReview:false,startDate:todayPK()
 })
-function readRecord():FitnessRecord|null {
+function readRecord(ownerId:string|null|undefined):FitnessRecord|null {
+  if(!ownerId)return null
   try{
     const parsed:unknown=JSON.parse(localStorage.getItem(preparationPhysicalKey(FITNESS_KEY))||'null')
     if(!parsed || typeof parsed!=='object'||!('profile' in parsed)) return null
     const result=parsed as FitnessRecord
-    if(!result.profile || !Array.isArray(result.profile.available) || validateProfile(result.profile)) return null
+    if(result.ownerId!==ownerId || !result.profile || !Array.isArray(result.profile.available) || validateProfile(result.profile)) return null
     return result
   }catch{return null}
 }
@@ -51,9 +52,9 @@ function buildWeek(profile:FitnessProfile){
 }
 export default function FitnessCoach(){
   const {user,syncStatus}=useAccount()
-  const [record,setRecord]=useState<FitnessRecord|null>(()=>readRecord())
+  const [record,setRecord]=useState<FitnessRecord|null>(()=>readRecord(user?.id))
   const [editing,setEditing]=useState(false)
-  const [draft,setDraft]=useState<FitnessProfile>(()=>readRecord()?.profile||initial())
+  const [draft,setDraft]=useState<FitnessProfile>(()=>readRecord(user?.id)?.profile||initial())
   const [step,setStep]=useState(0)
   const [error,setError]=useState('')
   const [tab,setTab]=useState<View>('diet')
@@ -61,12 +62,19 @@ export default function FitnessCoach(){
   const [weightInput,setWeightInput]=useState('')
   const [session,setSession]=useState<Session|null>(null)
   const [saveError,setSaveError]=useState('')
+  useEffect(()=>{
+    const owned=readRecord(user?.id)
+    setRecord(owned)
+    setDraft(owned?.profile||initial())
+    setEditing(false)
+    setSession(null)
+  },[user?.id])
   const profile=record?.profile
   const today=todayPK()
   const lastWeight=record?.weights.at(-1)?.weight ?? profile?.weight ?? 65
   const daysRemaining=profile?Math.max(1,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(todayPK()+'T12:00:00Z').getTime())/86400000)):0
   const energy=profile?calculateEnergy({...profile,weight:lastWeight,weeks:Math.max(1,Math.ceil(daysRemaining/7))}):null
-  const meals=profile?buildMeals(profile):null
+  const meals=profile?buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[today]??{},Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)):null
   const week=profile?buildWeek(profile):1
   const workout=useMemo(()=>profile?workoutForDay(week,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal):null,[profile,week,today])
   const goalLabels:Record<Goal,string>={gain:'Gain healthy weight',lose:'Reduce excess fat',muscle:'Build muscle',fitness:'Stay active and fit'}
@@ -83,7 +91,7 @@ export default function FitnessCoach(){
   }
   useEffect(()=>{
     if(syncStatus!=='synced')return
-    const incoming=readRecord()
+    const incoming=readRecord(user?.id)
     if(incoming) setRecord(current=>(!current || Date.parse(incoming.updatedAt||'')>Date.parse(current.updatedAt||''))?incoming:current)
   },[syncStatus,user?.id])
   useEffect(()=>{
@@ -103,18 +111,19 @@ export default function FitnessCoach(){
     return ()=>window.clearInterval(interval)
   },[session?.running,workout])
   function createPlan(){
+    if(!user?.id){setError('Sign in to create a personal fitness plan.');return}
     const problem=validateProfile(draft)
     if(problem){setError(problem);return}
     const changedGoal=!!record&&(record.profile.goal!==draft.goal||record.profile.target!==draft.target||record.profile.weeks!==draft.weeks)
     const updated={...draft,startDate:changedGoal?today:record?.profile.startDate||today}
-    const next:FitnessRecord={profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{}}
+    const next:FitnessRecord={ownerId:user.id,profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{},dailyAvailability:record?.dailyAvailability||{}}
     save(next);setError('');setEditing(false);setTab('diet')
   }
   function changeFood(id:string){
     edit(r=>{
-      const selected=r.profile.available.includes(id)?r.profile.available.filter(x=>x!==id):[...r.profile.available,id]
-      if(selected.length===0)return r
-      return {...r,profile:{...r.profile,available:selected}}
+      const todaySelections=r.dailyAvailability?.[today]||{}
+      const currently=todaySelections[id]??r.profile.available.includes(id)
+      return {...r,dailyAvailability:{...r.dailyAvailability,[today]:{...todaySelections,[id]:!currently}}}
     })
   }
   function markMeal(id:string){
@@ -159,7 +168,7 @@ export default function FitnessCoach(){
         {step===2 && <div className="space-y-4"><h2 className="text-xl font-bold">What can you eat at home?</h2><p className="text-sm text-slate-600">Select everyday foods. The plan will use your choices, not require expensive ingredients.</p>
           <input className={fieldClass} value={foodQuery} onChange={e=>setFoodQuery(e.target.value)} type="search" placeholder="Find roti, daal, eggs, fruit…"/>
           <div className="grid max-h-80 grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2">{FOODS.filter(f=>(f.label+' '+f.group).toLowerCase().includes(foodQuery.toLowerCase())).map(food=><label key={food.id} className="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 p-3 text-sm"><input type="checkbox" className="mt-1 accent-emerald-800" checked={draft.available.includes(food.id)} onChange={e=>setDraft({...draft,available:e.target.checked?[...draft.available,food.id]:draft.available.filter(x=>x!==food.id)})}/><span><strong>{food.label}</strong><small className="mt-0.5 block text-slate-500">{food.portion}</small></span></label>)}</div>
-          <p className="text-xs text-slate-500">{draft.available.length} foods selected</p>
+          <p className="text-xs text-slate-500">{draft.available.length} foods selected · Pakistani prepared dishes are labelled as 2001 reference recipes</p>
           <Field label="Restrictions or allergies">{<div className="grid grid-cols-2 gap-2">{AVOID_OPTIONS.map(o=><label key={o.id} className="flex min-h-11 items-center gap-2 rounded-xl border px-3 text-sm"><input type="checkbox" checked={draft.avoids.includes(o.id)} onChange={e=>setDraft({...draft,avoids:e.target.checked?[...draft.avoids,o.id]:draft.avoids.filter(x=>x!==o.id)})}/>{o.name}</label>)}</div>}</Field>
           <Field label="Other foods or cooking details (optional)"><textarea className={fieldClass+' min-h-20 py-2'} maxLength={300} value={draft.foodNotes} onChange={e=>setDraft({...draft,foodNotes:e.target.value})} placeholder="e.g. Homemade chicken salan, Bannu pulao, oily food, food budget"/></Field>
           <p className="text-xs text-slate-600">Named homemade dishes need a measured recipe before accurate calories can be calculated. Allergies must always be checked against actual ingredients.</p>
@@ -188,8 +197,8 @@ export default function FitnessCoach(){
         {tab==='diet' && <section className="space-y-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-xl font-bold">Today's meals</h2><p className="text-sm text-slate-600">Built from foods you selected as available.</p></div><span className="text-sm font-semibold text-emerald-900">{meals.totalCalories} kcal · {meals.totalProtein} g protein</span></div>
           {meals.meals.map(meal=><article key={meal.id} className="rounded-2xl border bg-white p-4"><div className="mb-2 flex items-center justify-between gap-3"><h3 className="font-bold">{meal.name}</h3><label className="flex items-center gap-2 text-xs font-medium text-emerald-900"><input type="checkbox" checked={!!record.meals[today]?.[meal.id]} onChange={()=>markMeal(meal.id)} className="accent-emerald-800"/> Eaten</label></div>{meal.items.length?<div className="space-y-2">{meal.items.map(item=><div key={item.food.id} className="flex justify-between gap-3 text-sm"><span>{item.food.label} <span className="text-slate-500">× {item.amount}</span></span><span className="shrink-0 text-slate-600">{item.kcal} kcal</span></div>)}</div>:<p className="text-sm text-amber-800">Add available foods to complete this meal.</p>}<p className="mt-3 border-t pt-2 text-xs text-slate-600">{meal.kcal} kcal · ~{meal.protein} g protein</p></article>)}
           {(meals.varietyWarning || (energy.targetCalories!==null && Math.abs(meals.totalCalories-energy.targetCalories)>250)) && <p role="status" className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">This sample menu {meals.varietyWarning?'has limited variety':'does not fully match your estimated energy target'}. Add suitable available foods or adjust portions with qualified advice; it is not a complete prescribed diet.</p>}
-          <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Change what's available today</summary><div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">{FOODS.map(food=><label className="flex min-h-11 items-center gap-2 rounded-lg border p-2 text-sm" key={food.id}><input type="checkbox" checked={profile.available.includes(food.id)} onChange={()=>changeFood(food.id)} className="accent-emerald-800"/>{food.label}</label>)}</div></details>
-          <p className="text-xs leading-5 text-slate-500">{FOOD_REFERENCE} A selected food is not automatically suitable for a stated allergy: always check ingredients, cross-contact and individual advice. Meals marked “Eaten” reflect your own log, not automatically measured consumption.</p>
+          <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Change what's available today</summary><p className="mt-2 text-xs text-slate-600">Today's changes do not change your usual home food preferences.</p><div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">{FOODS.map(food=><label className="flex min-h-11 items-center gap-2 rounded-lg border p-2 text-sm" key={food.id}><input type="checkbox" checked={record.dailyAvailability?.[today]?.[food.id]??profile.available.includes(food.id)} onChange={()=>changeFood(food.id)} className="accent-emerald-800"/>{food.label}</label>)}</div></details>
+          <p className="text-xs leading-5 text-slate-500">{FOOD_REFERENCE} Composite recipes are excluded from automatic planning when an allergy/restriction is selected until their ingredients are verified. A selected food is not automatically suitable for a stated allergy: always check ingredients, cross-contact and individual advice. Meals marked “Eaten” reflect your own log, not automatically measured consumption.</p>
         </section>}
         {tab==='workout' && <section className="space-y-4"><div><h2 className="text-xl font-bold">Today's home workout</h2><p className="text-sm text-slate-600">{workout.strengthDay?'Strength training':'Active recovery'} · {workout.exercises.length} movements · {workout.sets} round{workout.sets!==1?'s':''} · rest between movements · no equipment</p></div>
           {record.workouts[today]&&<p className="flex items-center gap-2 rounded-xl bg-emerald-50 p-3 text-sm font-semibold text-emerald-900"><Check size={18}/> Workout completed today</p>}
@@ -198,7 +207,7 @@ export default function FitnessCoach(){
             session?.mode==='done' ? <div className="space-y-3 text-center"><Check className="mx-auto text-emerald-800" size={40}/><h3 className="text-xl font-bold">Session finished</h3><p className="text-sm text-slate-600">Save your completed workout for today's progress record.</p><button className="min-h-12 rounded-xl bg-emerald-900 px-6 font-semibold text-white" onClick={finishWorkout}>Save completed workout</button></div>:
             <><MotionFigure kind="squat"/><p className="mt-3 text-sm text-slate-600">Follow each animated illustration with the written movement instructions. These simplified animations do not assess technique.</p><button onClick={startWorkout} disabled={profile.conditionReview} className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-emerald-900 font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"><Play size={18}/> {profile.conditionReview?'Seek clearance before starting':'Start guided workout'}</button></>}
           </div>
-          <div className="rounded-2xl border bg-white p-4"><h3 className="mb-3 font-bold">Session movements</h3><div className="space-y-3">{workout.exercises.map((exercise,i)=><div key={exercise.id} className="flex gap-3 border-b pb-3 last:border-0"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-xs font-bold text-emerald-900">{i+1}</span><div><p className="font-semibold">{exercise.name} <span className="text-xs font-normal text-slate-500">({exercise.seconds}s)</span></p><p className="text-xs leading-5 text-slate-600">{exercise.instruction}</p></div></div>)}</div></div>
+          <div className="rounded-2xl border bg-white p-4"><h3 className="mb-3 font-bold">Session movements</h3><a href="https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/" target="_blank" rel="noopener noreferrer" className="mb-3 inline-block text-sm font-semibold text-emerald-900 underline">NHS technique videos (warm-up, squat, standing press-up)</a><div className="space-y-3">{workout.exercises.map((exercise,i)=><div key={exercise.id} className="flex gap-3 border-b pb-3 last:border-0"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-xs font-bold text-emerald-900">{i+1}</span><div><p className="font-semibold">{exercise.name} <span className="text-xs font-normal text-slate-500">({exercise.seconds}s)</span></p><p className="text-xs leading-5 text-slate-600">{exercise.instruction}</p></div></div>)}</div></div>
         </section>}
         {tab==='progress' && <section className="space-y-4"><h2 className="text-xl font-bold">Your progress</h2><div className="grid grid-cols-2 gap-3"><Metric label="Starting weight" value={profile.weight+' kg'}/><Metric label="Latest recorded" value={(record.weights.at(-1)?.weight??profile.weight)+' kg'}/><Metric label="Workouts logged" value={String(Object.keys(record.workouts).length)}/><Metric label="Deadline" value={addWeeks(profile.startDate,profile.weeks)}/></div>
           <div className="rounded-2xl border bg-white p-4"><h3 className="font-bold">Weekly weight check-in</h3><p className="my-2 text-xs text-slate-600">Use the same scale, ideally at a similar time of day. Daily fluctuations are normal.</p><div className="flex gap-2"><input className={fieldClass} type="number" step=".1" min="35" max="250" placeholder="Weight in kg" value={weightInput} onChange={e=>setWeightInput(e.target.value)}/><button onClick={logWeight} className="min-h-12 shrink-0 rounded-xl bg-emerald-900 px-4 text-sm font-bold text-white">Save</button></div>{error&&<p role="alert" className="mt-2 text-sm text-red-700">{error}</p>}</div>
