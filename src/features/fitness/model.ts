@@ -15,7 +15,7 @@ export type FitnessProfile = {
   avoids:string[]; foodNotes:string; conditionReview:boolean; startDate:string
 }
 export type FitnessRecord = {
-  profile:FitnessProfile; updatedAt:string;
+  ownerId:string; profile:FitnessProfile; updatedAt:string;
   weights:Array<{date:string;weight:number}>; workouts:Record<string,string>;
   meals:Record<string,Record<string,boolean>>;
   /** Each day can override typical home availability without changing the baseline. */
