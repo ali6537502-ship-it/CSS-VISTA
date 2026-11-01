@@ -87,7 +87,7 @@ export default function FitnessCoach(){
     return {date,plan:buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[date]??{},elapsed+i,homeFoods)}
   }):[]
   const week=profile?buildWeek(profile):1
-  const workout=useMemo(()=>profile?workoutForDay(week,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal):null,[profile,week,today])
+  const workout=useMemo(()=>profile?workoutForDay(week,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal,profile.focusArea):null,[profile,week,today])
   const goalLabels:Record<Goal,string>={gain:'Gain healthy weight',lose:'Reduce excess fat',muscle:'Build muscle',fitness:'Stay active and fit'}
   const daysLeft=profile?Math.max(0,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(today+'T12:00:00Z').getTime())/86400000)):0
   function save(next:FitnessRecord){
@@ -198,6 +198,7 @@ export default function FitnessCoach(){
           <p className="text-xs text-slate-600">Named homemade dishes need a measured recipe before accurate calories can be calculated. Allergies must always be checked against actual ingredients.</p>
         </div>}
         {step===3 && <div className="space-y-4"><h2 className="text-xl font-bold">Your home workout</h2><p className="text-sm text-slate-600">No gym or equipment required. Exercises begin at an approachable level.</p>
+          <Field label="Main area to strengthen"><select className={fieldClass} value={draft.focusArea??"full-body"} onChange={e=>setDraft({...draft,focusArea:e.target.value as FitnessProfile["focusArea"]})}><option value="full-body">Whole body</option><option value="chest-shoulders">Chest and shoulders</option><option value="legs">Legs</option><option value="core">Core and posture</option></select></Field>
           <Field label="Time available per session"><select className={fieldClass} value={draft.minutes} onChange={e=>setDraft({...draft,minutes:Number(e.target.value)})}><option value="10">10 minutes</option><option value="20">20 minutes</option><option value="30">30 minutes</option></select></Field>
           <label className="flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm"><input type="checkbox" checked={draft.conditionReview} onChange={e=>setDraft({...draft,conditionReview:e.target.checked})} className="mt-1 accent-emerald-800"/><span>I have a medical condition, significant injury, pregnancy/breastfeeding consideration, or another reason to get professional advice before a personalised diet or exercise plan.</span></label>
           <p className="text-xs leading-5 text-slate-600">The plan is for adults. Stop activity if you experience chest pain, faintness or unusual symptoms. For conditions requiring medical assessment, personalised targets will be held for review.</p>
