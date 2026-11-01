@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { addWeeks, availableFoods, buildMeals, calculateEnergy, DEFAULT_FOODS, FOODS, type FitnessProfile, validateProfile, workoutForDay } from '../src/features/fitness/model.ts'
+import { addWeeks, availableFoods, buildMeals, calculateEnergy, DEFAULT_FOODS, FOODS, type FitnessProfile, validateProfile, workoutForDay, weightTrendGuidance } from '../src/features/fitness/model.ts'
 import { PAKISTAN_FOOD_SOURCE, PAKISTANI_DISHES } from '../src/features/fitness/pakistanFoods.ts'
 
 const base:FitnessProfile={sex:'male',age:25,height:170,weight:60,target:65,weeks:8,goal:'gain',activity:'sitting',minutes:20,available:DEFAULT_FOODS,avoids:[],foodNotes:'',conditionReview:false,startDate:'2026-11-01'}
@@ -104,4 +104,12 @@ test('prepared meals are suppressed when ingredient allergens have not been chec
   assert.ok(foods.some(f=>f.id==='rice'))
   const menu=buildMeals(p)
   assert.equal(menu.meals.flatMap(m=>m.items).some(i=>i.food.historicalRecipe),false)
+})
+
+test('weekly review requires enough elapsed time and never guarantees a target date',()=>{
+  assert.match(weightTrendGuidance(base,[{date:'2026-11-01',weight:60}]),/Log your weight/)
+  assert.match(weightTrendGuidance(base,[{date:'2026-11-01',weight:60},{date:'2026-11-03',weight:60.5}]),/less than a week/)
+  assert.match(weightTrendGuidance(base,[{date:'2026-11-01',weight:60},{date:'2026-11-15',weight:60.4}]),/gradual weight gain/)
+  assert.match(weightTrendGuidance({...base,goal:'lose',target:57},[{date:'2026-11-01',weight:60},{date:'2026-11-15',weight:58.8}]),/gradual weight reduction/)
+  assert.match(weightTrendGuidance({...base,goal:'muscle'},[{date:'2026-11-01',weight:60},{date:'2026-11-15',weight:60.5}]),/Weight alone cannot/)
 })
