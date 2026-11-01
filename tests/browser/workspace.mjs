@@ -51,10 +51,19 @@ try{
    if ([390,1440].includes(width)) { await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0)}); await page.screenshot({path:`test-artifacts/workspace/${route}-${width}-viewport.png`}) }
   }
   if (width < 1024) {
-    await page.getByRole('navigation',{name:'Student mobile navigation'}).getByRole('link',{name:'More',exact:true}).click()
-    await page.getByRole('heading',{name:'Your workspace',exact:true}).waitFor()
-    await page.getByRole('link',{name:'Subjects',exact:true}).click()
+    const nav=page.getByRole('navigation',{name:'Student mobile navigation'})
+    await nav.getByRole('button',{name:'Open all account features'}).click()
+    const drawer=page.getByRole('dialog',{name:'My CSS Vista account menu'})
+    await drawer.waitFor()
+    await drawer.getByRole('link',{name:'My Fitness Coach'}).waitFor()
+    await drawer.getByRole('link',{name:'Account & Settings'}).waitFor()
+    await page.keyboard.press('Escape')
+    await drawer.waitFor({state:'detached'})
+    await page.getByRole('button',{name:'Open account menu'}).click()
+    await drawer.getByRole('link',{name:'Subjects',exact:true}).click()
     await page.getByRole('heading',{name:'My Subjects',exact:true}).waitFor()
+    assert.equal(await page.getByRole('dialog',{name:'My CSS Vista account menu'}).count(),0)
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'drawer must not cause horizontal overflow')
   } else {
     await page.getByRole('button',{name:'Collapse sidebar',exact:true}).click()
     await page.getByRole('button',{name:'Expand sidebar',exact:true}).click()
