@@ -11,7 +11,7 @@ export type Activity = 'sitting' | 'light' | 'moderate' | 'active'
 export type Food = { id:string; label:string; portion:string; kcal:number; protein:number; group:string; source?:string; sourceUrl?:string; historicalRecipe?:boolean; customRecipe?:boolean; includesStarch?:boolean; costPkr?:number }
 export type FitnessProfile = {
   sex:Sex; age:number; height:number; weight:number; target:number; weeks:number;
-  goal:Goal; activity:Activity; minutes:number; available:string[]; budgetPkr?:number;
+  goal:Goal; activity:Activity; minutes:number; available:string[]; budgetPkr?:number; focusArea?:'full-body'|'chest-shoulders'|'legs'|'core';
   avoids:string[]; foodNotes:string; conditionReview:boolean; startDate:string
 }
 export type FitnessRecord = {
@@ -194,16 +194,25 @@ const EXERCISE_TECHNIQUE:Record<string,string>={
   calf:'https://www.nth.nhs.uk/resources/lower-limb-exercise-and-education/',
   push:'https://www.nhs.uk/live-well/exercise/how-to-improve-strength-flexibility/',
 }
-export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Goal){
+export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Goal,focusArea:FitnessProfile['focusArea']='full-body'){ 
   const strengthDay=[0,2,4].includes(((dayIndex%7)+7)%7)
   const exerciseList=strengthDay?routines[dayIndex%2===0?'A':'B']:[
     {id:'recovery-walk',name:'Gentle marching or walking',instruction:'Walk at a comfortable pace; stop or slow down if you feel unwell.',kind:'stand' as const,seconds:60},
     {id:'recovery-mobility',name:'Standing mobility',instruction:'Move shoulders and hips slowly through a comfortable, pain-free range.',kind:'stand' as const,seconds:40},
     {id:'recovery-calf',name:'Supported calf raises',instruction:'Hold a stable surface; lift heels gently, then lower slowly.',kind:'stand' as const,seconds:40},
   ]
+  const sorted=strengthDay&&focusArea&&focusArea!=='full-body'
+    ?[exerciseList[0],...exerciseList.slice(1).sort((a,b)=>{
+      const score=(e:Exercise)=>{
+        if(focusArea==='chest-shoulders')return e.kind==='push'?3:0
+        if(focusArea==='legs')return e.kind==='squat'||e.kind==='lunge'?3:e.id==='calf'?2:0
+        return e.id==='bird'||e.id==='plank'?3:e.kind==='floor'?2:0
+      }
+      return score(b)-score(a)
+    })]:exerciseList
   const totalSets=strengthDay?(minutes<=10?1:minutes<=20?2:3):1
   const workBoost=Math.min(10,Math.max(0,week-1)*2)
-  return {exercises:exerciseList.map(e=>({...e,techniqueUrl:EXERCISE_TECHNIQUE[e.id],seconds:e.seconds+(strengthDay?workBoost:0)+(strengthDay&&goal==='lose'&&e.kind==='stand'?10:0)})),sets:totalSets,restSeconds:30,strengthDay}
+  return {exercises:sorted.map(e=>({...e,techniqueUrl:EXERCISE_TECHNIQUE[e.id],seconds:e.seconds+(strengthDay?workBoost:0)+(strengthDay&&goal==='lose'&&e.kind==='stand'?10:0)})),sets:totalSets,restSeconds:30,strengthDay,focusArea}
 }
 export function validateProfile(profile:FitnessProfile):string|null {
   if(!Number.isInteger(profile.age)||profile.age<18||profile.age>80) return 'This version is for adults aged 18–80.'
