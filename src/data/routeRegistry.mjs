@@ -187,6 +187,7 @@ export const ROUTE_REGISTRY = [
   publicPage('/daily-briefing', 'CSS Vista Current Affairs', 'Read public daily CSS Vista Current Affairs editions, with original sources, background, analysis and revision facts. No account is required.', 'Understand the day. Remember what matters.', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/daily-briefing/:storyId', 'CSS Vista Daily Development', 'Read an individual published current affairs development, its explanations, implications, facts and original sources.', 'Daily Current Affairs Analysis', { contentQuality: 'utility', adMode: 'disabled', match: 'pattern', schemaType: 'Article' }),
   protectedPage('/account/gsa-tutor', 'My GSA Tutor', 'Private GSA course timetable, lesson history, bookmarks and revision progress.', { robots: 'noindex, nofollow', adMode: 'disabled' }),
+  protectedPage('/account/fitness-coach', 'Personal Fitness Coach', 'Private fitness targets, home-food meal planning, guided bodyweight exercise and progress.', { robots: 'noindex, nofollow', adMode: 'disabled' }),
   protectedPage('/account/dashboard', 'My CSS Vista', 'Your simple personal preparation home for tasks, Daily English, Current Affairs and progress.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/subjects', 'My Subjects', 'Your compulsory papers and saved optional subjects.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/practice', 'Practice', 'Available preparation and writing tools.', { robots: 'noindex, nofollow' }),
