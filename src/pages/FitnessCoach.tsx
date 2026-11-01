@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { ArrowLeft, ArrowRight, Check, ChevronLeft, Dumbbell, HeartPulse, Pause, Play, RotateCcw, Utensils, Activity } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
@@ -24,7 +24,7 @@ function readRecord():FitnessRecord|null {
 function Metric({label,value,detail}:{label:string;value:string;detail?:string}){
   return <div className="rounded-2xl border border-emerald-900/10 bg-white p-4"><p className="text-xs font-medium text-slate-500">{label}</p><p className="mt-1 text-xl font-bold text-emerald-950">{value}</p>{detail&&<p className="mt-1 text-xs text-slate-500">{detail}</p>}</div>
 }
-function Field({label,children}:{label:string;children:React.ReactNode}){
+function Field({label,children}:{label:string;children:ReactNode}){
   return <label className="block space-y-1.5"><span className="text-sm font-semibold text-slate-800">{label}</span>{children}</label>
 }
 const fieldClass='w-full min-h-12 rounded-xl border border-slate-200 bg-white px-3 text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600'
@@ -62,13 +62,13 @@ export default function FitnessCoach(){
   const [session,setSession]=useState<Session|null>(null)
   const [saveError,setSaveError]=useState('')
   const profile=record?.profile
+  const today=todayPK()
   const lastWeight=record?.weights.at(-1)?.weight ?? profile?.weight ?? 65
   const daysRemaining=profile?Math.max(1,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(todayPK()+'T12:00:00Z').getTime())/86400000)):0
   const energy=profile?calculateEnergy({...profile,weight:lastWeight,weeks:Math.max(1,Math.ceil(daysRemaining/7))}):null
   const meals=profile?buildMeals(profile):null
   const week=profile?buildWeek(profile):1
-  const workout=profile?workoutForDay(week,Math.floor((new Date(todayPK()+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal):null
-  const today=todayPK()
+  const workout=useMemo(()=>profile?workoutForDay(week,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal):null,[profile,week,today])
   const goalLabels:Record<Goal,string>={gain:'Gain healthy weight',lose:'Reduce excess fat',muscle:'Build muscle',fitness:'Stay active and fit'}
   const daysLeft=profile?Math.max(0,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(today+'T12:00:00Z').getTime())/86400000)):0
   function save(next:FitnessRecord){
