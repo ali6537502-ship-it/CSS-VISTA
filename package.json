@@ -36,7 +36,7 @@
     "test:answer-timer": "node --test tests/accurateCountdown.test.ts tests/answerTimerRecovery.test.ts",
     "test:factbook": "node --test tests/factbook.test.ts tests/factbookSanitizer.test.mjs",
     "test:pagination": "node --test tests/questionPagination.test.ts",
-    "test:workspace": "node --test tests/workspace.test.ts tests/plannerWorkspace.test.ts tests/localStudySession.test.ts tests/quizRecovery.test.mjs tests/accountSetup.test.ts tests/pmsPlanner.test.ts tests/preparationReset.test.ts tests/pmsStore.test.mjs",
+    "test:workspace": "node --test tests/workspace.test.ts tests/plannerWorkspace.test.ts tests/localStudySession.test.ts tests/quizRecovery.test.mjs tests/accountSetup.test.ts tests/pmsPlanner.test.ts tests/preparationReset.test.ts tests/pmsStore.test.mjs tests/fitnessCoach.test.ts",
     "test:navigation": "node --test tests/navigationState.test.ts",
     "test:intelligence": "node --test tests/examIntelligence.test.ts",
     "test:css-2026-result": "node --test tests/css2026Result.test.ts",
