@@ -105,13 +105,16 @@ export function calculateEnergy(profile:FitnessProfile) {
   const direction=profile.goal==='lose' ? profile.target<profile.weight : profile.goal==='gain' ? profile.target>profile.weight : true
   const underweightLoss=profile.goal==='lose' && (bmi<18.5 || profile.target/Math.pow(profile.height/100,2)<18.5)
   const fast=(profile.goal==='lose'&&rate>0.75)||(profile.goal==='gain'&&rate>0.5)
-  const needsReview=profile.conditionReview || !direction || underweightLoss || fast
   // These small initial adjustments are illustrative, not predictions of rate of change.
   const adjustment=profile.goal==='gain'?200:profile.goal==='lose'&&!underweightLoss?-Math.min(250,Math.round(maintenance*.12)):profile.goal==='muscle'?100:0
-  const targetCalories=needsReview?null:maintenance+adjustment
+  const proposedCalories=maintenance+adjustment
+  // Public self-help version does not offer low-energy diets that NICE reserves for supervised programmes.
+  const lowIntake=proposedCalories<1200
+  const needsReview=profile.conditionReview || !direction || underweightLoss || fast || lowIntake
+  const targetCalories=needsReview?null:proposedCalories
   const proteinRange:[number,number]=profile.goal==='fitness'?[.8*profile.weight,1.2*profile.weight]:[1.4*profile.weight,2*profile.weight]
   return {bmi:Number(bmi.toFixed(1)),resting:Math.round(resting),maintenance,targetCalories,rate:Number(rate.toFixed(2)),
-    direction,underweightLoss,fast,needsReview,
+    direction,underweightLoss,fast,lowIntake,needsReview,
     proteinRange:proteinRange.map(n=>Math.round(n)) as [number,number]}
 }
 export type PlannedEntry = {food:Food; amount:number; kcal:number; protein:number}
