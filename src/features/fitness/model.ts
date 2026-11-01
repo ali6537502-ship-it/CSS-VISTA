@@ -199,3 +199,26 @@ export function validateProfile(profile:FitnessProfile):string|null {
   if(!availableFoods(profile).length) return 'Choose at least one food you can eat.'
   return null
 }
+
+/** A conservative coaching reflection on logged weight, not a prediction. */
+export function weightTrendGuidance(profile:FitnessProfile,weights:Array<{date:string;weight:number}>):string {
+  const valid=weights.filter(w=>/^\d{4}-\d{2}-\d{2}$/.test(w.date)&&Number.isFinite(w.weight)&&w.weight>=35&&w.weight<=250).sort((a,b)=>a.date.localeCompare(b.date))
+  if(valid.length<2) return 'Log your weight about once a week, under similar conditions, to see a meaningful trend.'
+  const first=valid[0],last=valid[valid.length-1]
+  const weeks=(Date.parse(last.date+'T12:00:00Z')-Date.parse(first.date+'T12:00:00Z'))/604800000
+  if(weeks<1) return 'Two measurements less than a week apart cannot reliably show progress. Continue consistent check-ins.'
+  if(profile.goal==='fitness'||profile.goal==='muscle')
+    return 'Weight alone cannot measure strength or muscle growth. Also review your workout consistency and how movements feel.'
+  if(profile.goal==='gain'&&last.weight>=profile.target) return 'Your recorded weight has reached or exceeded the requested target. Review maintenance and avoid continuing a surplus automatically.'
+  if(profile.goal==='lose'&&last.weight<=profile.target) return 'Your recorded weight has reached or passed the requested target. Review maintenance rather than automatically continuing a deficit.'
+  const delta=last.weight-first.weight
+  const rate=Math.abs(delta/weeks)
+  if(profile.goal==='gain'){
+    if(delta<=0) return 'Your recorded weight has not increased over this period. Recheck actual portions, meal consistency and workout recovery before adjusting the plan.'
+    if(rate>0.5) return 'Your recorded weight is increasing relatively quickly. The change is not necessarily all muscle; consider a slower pace and professional guidance if needed.'
+    return 'Your check-ins show gradual weight gain. Continue recording meals and strength progress; weekly fluctuations are normal.'
+  }
+  if(delta>=0) return 'Your recorded weight has not decreased over this period. Review measured portions, activity and overall consistency before changing the plan.'
+  if(rate>0.75) return 'Your recorded weight is decreasing relatively quickly. Check adequacy of intake and seek individualized advice if symptoms or concerns arise.'
+  return 'Your check-ins show gradual weight reduction. Continue strength activity and an adequate, balanced diet; progress varies.'
+}
