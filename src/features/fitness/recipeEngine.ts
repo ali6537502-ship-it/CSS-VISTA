@@ -81,6 +81,8 @@ export function estimateDailyFoodCost(meals:PlannedMeal[],prices:Record<string,n
       if(!seen.has(item.food.id)){missing.push(item.food.label);seen.add(item.food.id)}
     }else cost+=price*item.amount
   }
-  const complete=missing.length===0
+  const hasFood=meals.some(meal=>meal.items.length>0)
+  if(!hasFood)missing.push('No meals available')
+  const complete=hasFood&&missing.length===0
   return {costPkr:Math.round(cost),missing,complete,underBudget:complete&&Number.isFinite(budgetPkr)&&budgetPkr!==undefined?cost<=budgetPkr!:null}
 }
