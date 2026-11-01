@@ -52,6 +52,14 @@ export const FOODS:Food[] = [
   {id:'peanuts',label:'Peanuts',portion:'15 g',kcal:85,protein:3.8,group:'Extras'},
   {id:'almonds',label:'Almonds',portion:'15 g',kcal:87,protein:3.2,group:'Extras'},
   {id:'oil',label:'Cooking oil (added to dish)',portion:'1 teaspoon (5 g)',kcal:45,protein:0,group:'Extras'},
+  // USDA SR Legacy per-100 g raw reference ingredients. IDs verified against FDC mirrors.
+  {id:'onion-raw',label:'Onion, raw',portion:'100 g raw',kcal:40,protein:1.1,group:'Vegetables',source:'USDA SR Legacy FDC 170000',sourceUrl:'https://fdc.nal.usda.gov/food-details/170000/nutrients'},
+  {id:'tomato-raw',label:'Tomato, raw',portion:'100 g raw',kcal:18,protein:.88,group:'Vegetables',source:'USDA SR Legacy FDC 170457',sourceUrl:'https://fdc.nal.usda.gov/food-details/170457/nutrients'},
+  {id:'garlic-raw',label:'Garlic, raw',portion:'100 g raw',kcal:149,protein:6.36,group:'Vegetables',source:'USDA SR Legacy FDC 169230',sourceUrl:'https://fdc.nal.usda.gov/food-details/169230/nutrients'},
+  {id:'ginger-raw',label:'Ginger root, raw',portion:'100 g raw',kcal:80,protein:1.82,group:'Vegetables',source:'USDA SR Legacy',sourceUrl:'https://fdc.nal.usda.gov/'},
+  {id:'green-chili-raw',label:'Green chilli, raw',portion:'100 g raw',kcal:40,protein:2,group:'Vegetables',source:'USDA SR Legacy FDC 170497',sourceUrl:'https://fdc.nal.usda.gov/food-details/170497/nutrients'},
+  {id:'carrot-raw',label:'Carrot, raw',portion:'100 g raw',kcal:41,protein:.93,group:'Vegetables',source:'USDA SR Legacy FDC 170393',sourceUrl:'https://fdc.nal.usda.gov/food-details/170393/nutrients'},
+  {id:'chicken-raw',label:'Chicken breast, raw skinless',portion:'100 g raw',kcal:120,protein:22.5,group:'Protein',source:'USDA SR Legacy FDC 171077',sourceUrl:'https://fdc.nal.usda.gov/food-details/171077/nutrients'},
   ...PAKISTANI_DISHES.map(d=>({
     id:d.id,label:d.label,portion:'100 g prepared food',kcal:d.kcalPer100g,
     protein:d.proteinPer100g,group:d.group,
