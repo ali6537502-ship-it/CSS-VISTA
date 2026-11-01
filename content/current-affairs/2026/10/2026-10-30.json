@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-10-30",
   "published_at": "2026-10-30T19:28:49+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Finalized Coverage (00:00–23:59 PKT)",
+  "edition": "CSS VISTA — Daily Current Affairs | 30 October 2026 | Finalized Coverage (00:00–23:59 PKT; verified late addition)",
   "stories": [
     {
       "id": "ca-2026-10-30-pak-singapore-talks",
@@ -936,6 +936,75 @@
           "title": "PM directs acceleration of development projects in GB",
           "url": "https://radio.gov.pk/30-10-2026/pm-directs-acceleration-of-development-projects-in-gb",
           "published_at": "2026-10-30T22:20:35+05:00"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-30-eu-canada-alliance-future",
+      "category": "World — Trade and International Relations",
+      "headline": "EU and Canada launch Alliance for the Future at Montreal summit",
+      "summary": "At their 21st summit in Montreal on 29–30 October 2026, European Union and Canadian leaders issued a joint statement launching an Alliance for the Future to deepen economic security, trade, technology and defence cooperation.",
+      "what_happened": "The European Council's 30 October summit report confirms that António Costa and Ursula von der Leyen represented the EU and Mark Carney represented Canada. Their Alliance for the Future spans six areas: trade and regulation; digital and research technologies; critical resources and energy; financial services; security and preparedness; and people-to-people ties. Leaders also agreed to define by their 2027 summit a closer association for Canada with the EU, explicitly short of full membership.",
+      "explanation": "The agreement sets a cooperation agenda rather than creating EU membership for Canada. Negotiations on a digital-trade agreement were substantially concluded, but the announced framework does not itself enact every proposed sectoral measure.",
+      "background": "The EU and Canada already cooperate under the Comprehensive Economic and Trade Agreement (CETA), their Strategic Partnership Agreement and a security and defence partnership. The new framework responds to pressures on supply chains and the international trading system.",
+      "why_it_matters": "The summit illustrates how partners are diversifying critical-mineral, technology and energy supply chains while building institutional alternatives to dependence on single markets.",
+      "pakistan_perspective": "Pakistan's exporters and policymakers should follow emerging EU-Canada standards for digital trade, critical minerals, AI governance and supply-chain security, which may influence wider international commercial rules.",
+      "regional_implications": "Transatlantic regulatory alignment could affect third-country suppliers in energy, critical minerals and digital services.",
+      "global_implications": "The partnership reflects a broader shift toward economic-security alliances, rules-based trade and technology cooperation amid geopolitical fragmentation.",
+      "key_takeaways": [
+        "The 21st EU-Canada summit took place in Montreal on 29–30 October 2026.",
+        "The leaders launched an Alliance for the Future with six cooperation pillars.",
+        "Closer Canadian association with the EU is to be explored by 2027, short of full membership."
+      ],
+      "facts": [
+        "The 21st EU-Canada summit was held in Montreal on 29–30 October 2026.",
+        "The Alliance for the Future covers six areas of cooperation and does not grant Canada EU membership."
+      ],
+      "timeline": [
+        {
+          "date": "2026-10-29",
+          "text": "The 21st EU-Canada summit opened in Montreal."
+        },
+        {
+          "date": "2026-10-30",
+          "text": "Leaders issued the joint statement launching the Alliance for the Future."
+        }
+      ],
+      "question_angles": [
+        "Which partnership framework did the EU and Canada launch at their 21st summit in Montreal?",
+        "Assess how critical-mineral and digital-trade partnerships reshape international economic security."
+      ],
+      "topics": [
+        "EU-Canada relations",
+        "CETA",
+        "Digital trade",
+        "Critical minerals",
+        "Economic security"
+      ],
+      "countries": [
+        "Canada",
+        "European Union"
+      ],
+      "institutions": [
+        "European Council",
+        "European Commission"
+      ],
+      "organisations": [
+        "European Union"
+      ],
+      "people": [
+        "António Costa",
+        "Ursula von der Leyen",
+        "Mark Carney"
+      ],
+      "what_to_watch": [
+        "Progress on digital-trade implementation and the proposed closer association by the 2027 summit."
+      ],
+      "sources": [
+        {
+          "publisher": "European Council",
+          "title": "EU-Canada summit, 29-30 October 2026: main results",
+          "url": "https://www.consilium.europa.eu/en/meetings/international-summit/2026/10/29-30/"
         }
       ]
     }
