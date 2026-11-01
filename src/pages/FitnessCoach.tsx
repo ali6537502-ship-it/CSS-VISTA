@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { ArrowLeft, ArrowRight, Check, ChevronLeft, Dumbbell, HeartPulse, Pause, Play, RotateCcw, Utensils, Activity, Plus, Minus } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, ChevronLeft, Dumbbell, HeartPulse, Pause, Play, RotateCcw, Utensils, Activity } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { preparationPhysicalKey } from '@/lib/preparationStorage'
 import { notifyProgressChanged } from '@/lib/progressEvents'
@@ -52,6 +52,7 @@ function buildWeek(profile:FitnessProfile){
 export default function FitnessCoach(){
   const {user,syncStatus}=useAccount()
   const [record,setRecord]=useState<FitnessRecord|null>(()=>readRecord())
+  const [editing,setEditing]=useState(false)
   const [draft,setDraft]=useState<FitnessProfile>(()=>readRecord()?.profile||initial())
   const [step,setStep]=useState(0)
   const [error,setError]=useState('')
@@ -61,10 +62,12 @@ export default function FitnessCoach(){
   const [session,setSession]=useState<Session|null>(null)
   const [saveError,setSaveError]=useState('')
   const profile=record?.profile
-  const energy=profile?calculateEnergy(profile):null
+  const lastWeight=record?.weights.at(-1)?.weight ?? profile?.weight ?? 65
+  const daysRemaining=profile?Math.max(1,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(todayPK()+'T12:00:00Z').getTime())/86400000)):0
+  const energy=profile?calculateEnergy({...profile,weight:lastWeight,weeks:Math.max(1,Math.ceil(daysRemaining/7))}):null
   const meals=profile?buildMeals(profile):null
   const week=profile?buildWeek(profile):1
-  const workout=profile?workoutForDay(week,Math.floor((new Date(todayPK()+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%2,profile.minutes,profile.goal):null
+  const workout=profile?workoutForDay(week,Math.floor((new Date(todayPK()+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal):null
   const today=todayPK()
   const goalLabels:Record<Goal,string>={gain:'Gain healthy weight',lose:'Reduce excess fat',muscle:'Build muscle',fitness:'Stay active and fit'}
   const daysLeft=profile?Math.max(0,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(today+'T12:00:00Z').getTime())/86400000)):0
@@ -102,12 +105,17 @@ export default function FitnessCoach(){
   function createPlan(){
     const problem=validateProfile(draft)
     if(problem){setError(problem);return}
-    const updated={...draft,startDate:today}
-    const next:FitnessRecord={profile:updated,updatedAt:new Date().toISOString(),weights:[{date:today,weight:updated.weight}],workouts:{},meals:{}}
-    save(next);setError('');setTab('diet')
+    const changedGoal=!!record&&(record.profile.goal!==draft.goal||record.profile.target!==draft.target||record.profile.weeks!==draft.weeks)
+    const updated={...draft,startDate:changedGoal?today:record?.profile.startDate||today}
+    const next:FitnessRecord={profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{}}
+    save(next);setError('');setEditing(false);setTab('diet')
   }
   function changeFood(id:string){
-    edit(r=>({...r,profile:{...r.profile,available:r.profile.available.includes(id)?r.profile.available.filter(x=>x!==id):[...r.profile.available,id]}}))
+    edit(r=>{
+      const selected=r.profile.available.includes(id)?r.profile.available.filter(x=>x!==id):[...r.profile.available,id]
+      if(selected.length===0)return r
+      return {...r,profile:{...r.profile,available:selected}}
+    })
   }
   function markMeal(id:string){
     edit(r=>({...r,meals:{...r.meals,[today]:{...(r.meals[today]||{}),[id]:!r.meals[today]?.[id]}}}))
@@ -134,7 +142,7 @@ export default function FitnessCoach(){
         <div><p className="text-[11px] font-bold uppercase tracking-[.18em] text-emerald-800">CSS VISTA · MY HEALTH</p><h1 className="mt-1 text-2xl font-bold text-emerald-950 sm:text-3xl">Personal Fitness Coach</h1><p className="mt-1 max-w-xl text-sm text-slate-600">Your meals. Your home workouts. Your personal target.</p></div>
         <Link to="/account/dashboard" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-emerald-900"><ArrowLeft size={17}/> My account</Link>
       </header>
-      {!record ? <section className="rounded-3xl border border-emerald-900/10 bg-white p-4 shadow-sm sm:p-7">
+      {(!record || editing) ? <section className="rounded-3xl border border-emerald-900/10 bg-white p-4 shadow-sm sm:p-7">
         <div className="mb-5"><p className="text-xs font-semibold text-emerald-800">YOUR FITNESS PROFILE · STEP {step+1} OF 4</p><div className="mt-2 flex gap-2">{[0,1,2,3].map(i=><span key={i} className={'h-1.5 flex-1 rounded-full '+(i<=step?'bg-emerald-800':'bg-slate-200')}/>)}</div></div>
         {step===0 && <div className="space-y-4"><h2 className="text-xl font-bold">Tell us about yourself</h2><p className="text-sm text-slate-600">These details help estimate your energy needs. The male profile is selected by default.</p>
           <Field label="Calorie calculation profile"><select className={fieldClass} value={draft.sex} onChange={e=>setDraft({...draft,sex:e.target.value as Sex})}><option value="male">Male</option><option value="female">Female</option></select></Field>
@@ -162,11 +170,11 @@ export default function FitnessCoach(){
           <p className="text-xs leading-5 text-slate-600">The plan is for adults. Stop activity if you experience chest pain, faintness or unusual symptoms. For conditions requiring medical assessment, personalised targets will be held for review.</p>
         </div>}
         {error&&<p role="alert" className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-800">{error}</p>}
-        <div className="mt-7 flex justify-between gap-3">{step>0?<button type="button" onClick={()=>{setStep(step-1);setError('')}} className="inline-flex min-h-12 items-center gap-2 rounded-xl border px-5 font-semibold"><ChevronLeft size={17}/> Back</button>:<span/>}
+        <div className="mt-7 flex justify-between gap-3">{editing?<button type="button" onClick={()=>{setEditing(false);setError('')}} className="min-h-12 rounded-xl border px-4 text-sm font-semibold">Cancel</button>:null}{step>0?<button type="button" onClick={()=>{setStep(step-1);setError('')}} className="inline-flex min-h-12 items-center gap-2 rounded-xl border px-5 font-semibold"><ChevronLeft size={17}/> Back</button>:<span/>}
           <button type="button" onClick={()=>{setError('');if(step===3){createPlan();return}if(step===0&&(draft.age<18||draft.age>80||draft.height<125||draft.weight<35)){setError('Please enter a valid adult age, height and weight.');return}setStep(step+1)}} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-emerald-900 px-5 font-semibold text-white">{step===3?'Create my plan':'Continue'}<ArrowRight size={17}/></button></div>
       </section>: profile && energy && meals && workout && <div className="space-y-5">
         <div className="rounded-3xl bg-emerald-950 p-5 text-white sm:p-7">
-          <div className="flex flex-wrap items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-wider text-emerald-200">{profile.sex==='male'?'Male':'Female'} profile · Week {week} of {profile.weeks}</p><h2 className="mt-2 text-2xl font-bold">{goalLabels[profile.goal]}</h2><p className="mt-2 text-sm text-emerald-100">Starting {profile.weight} kg · Requested target {profile.target} kg · {daysLeft} days left</p></div><button onClick={()=>{setDraft(profile);setStep(0);setRecord(null);setSession(null)}} className="min-h-11 rounded-xl border border-emerald-300/40 px-3 text-xs font-semibold">Edit profile</button></div>
+          <div className="flex flex-wrap items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-wider text-emerald-200">{profile.sex==='male'?'Male':'Female'} profile · Week {week} of {profile.weeks}</p><h2 className="mt-2 text-2xl font-bold">{goalLabels[profile.goal]}</h2><p className="mt-2 text-sm text-emerald-100">Starting {profile.weight} kg · Requested target {profile.target} kg · {daysLeft} days left</p></div><button onClick={()=>{setDraft(profile);setStep(0);setEditing(true);setSession(null)}} className="min-h-11 rounded-xl border border-emerald-300/40 px-3 text-xs font-semibold">Edit profile</button></div>
         </div>
         {energy.needsReview && <div role="alert" className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950"><strong>Target needs review.</strong> {profile.conditionReview?'Get appropriate professional advice before following personalised exercise or nutrition targets.':!energy.direction?'Your requested weight does not match the selected goal.':energy.underweightLoss?'Weight loss is not recommended by this automatic planner at the estimated BMI.':'The requested rate is relatively fast. Consider a longer deadline or a smaller target.'} An automatic calorie target has been withheld; your profile can be edited.</div>}
         {saveError&&<p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-800">{saveError}</p>}
@@ -183,7 +191,7 @@ export default function FitnessCoach(){
           <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Change what's available today</summary><div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">{FOODS.map(food=><label className="flex min-h-11 items-center gap-2 rounded-lg border p-2 text-sm" key={food.id}><input type="checkbox" checked={profile.available.includes(food.id)} onChange={()=>changeFood(food.id)} className="accent-emerald-800"/>{food.label}</label>)}</div></details>
           <p className="text-xs leading-5 text-slate-500">{FOOD_REFERENCE} A selected food is not automatically suitable for a stated allergy: always check ingredients, cross-contact and individual advice. Meals marked “Eaten” reflect your own log, not automatically measured consumption.</p>
         </section>}
-        {tab==='workout' && <section className="space-y-4"><div><h2 className="text-xl font-bold">Today's home workout</h2><p className="text-sm text-slate-600">{workout.exercises.length} movements · {workout.sets} round{workout.sets!==1?'s':''} · rest between movements · no equipment</p></div>
+        {tab==='workout' && <section className="space-y-4"><div><h2 className="text-xl font-bold">Today's home workout</h2><p className="text-sm text-slate-600">{workout.strengthDay?'Strength training':'Active recovery'} · {workout.exercises.length} movements · {workout.sets} round{workout.sets!==1?'s':''} · rest between movements · no equipment</p></div>
           {record.workouts[today]&&<p className="flex items-center gap-2 rounded-xl bg-emerald-50 p-3 text-sm font-semibold text-emerald-900"><Check size={18}/> Workout completed today</p>}
           <div className="rounded-2xl border bg-white p-4 sm:p-6">
             {session && session.mode!=='done' ? <><MotionFigure kind={workout.exercises[session.index].kind}/><p className="mt-4 text-xs font-semibold text-emerald-800">{session.mode==='work'?'EXERCISE':'REST'} · ROUND {session.round}/{workout.sets}</p><h3 className="mt-1 text-xl font-bold">{workout.exercises[session.index].name}</h3><p className="mt-2 text-sm text-slate-600">{workout.exercises[session.index].instruction}</p><p aria-live="off" className="my-5 text-center text-5xl font-bold tabular-nums text-emerald-950">{session.remaining}<span className="text-lg"> s</span></p><div className="flex flex-wrap justify-center gap-2"><button onClick={()=>setSession(s=>s?{...s,running:!s.running}:s)} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-emerald-900 px-5 font-semibold text-white">{session.running?<Pause size={18}/>:<Play size={18}/>} {session.running?'Pause':'Resume'}</button><button className="min-h-11 rounded-xl border px-4 font-semibold" onClick={()=>setSession(s=>s?{...s,mode:'rest',remaining:workout.restSeconds}:s)}>Skip movement</button><button className="min-h-11 rounded-xl border px-4 text-sm" onClick={()=>setSession(null)}>End session</button></div></>:
@@ -197,7 +205,7 @@ export default function FitnessCoach(){
           <div className="rounded-2xl border bg-white p-4"><h3 className="font-bold">Weight history</h3><div className="mt-3 space-y-2">{record.weights.slice(-10).map(w=><div key={w.date} className="flex justify-between border-b py-2 text-sm"><time>{w.date}</time><strong>{w.weight} kg</strong></div>)}</div></div>
           <p className="text-xs text-slate-500">Weekly changes help guide future adjustments. The app cannot guarantee that weight gained is muscle or that weight lost is exclusively fat.</p>
         </section>}
-        <footer className="flex flex-wrap items-center justify-between gap-2 border-t pt-4 text-xs text-slate-500"><span><HeartPulse className="mr-1 inline" size={14}/> Private account feature · {syncStatus==='synced'?'Account progress synchronized':'Saved on this device; sync may be pending'}</span><button className="inline-flex min-h-10 items-center gap-1 underline" onClick={()=>{setDraft(profile);setStep(0);setRecord(null)}}><RotateCcw size={14}/> Revise plan</button></footer>
+        <footer className="flex flex-wrap items-center justify-between gap-2 border-t pt-4 text-xs text-slate-500"><span><HeartPulse className="mr-1 inline" size={14}/> Private account feature · {syncStatus==='synced'?'Account progress synchronized':'Saved on this device; sync may be pending'}</span><button className="inline-flex min-h-10 items-center gap-1 underline" onClick={()=>{setDraft(profile);setStep(0);setEditing(true)}}><RotateCcw size={14}/> Revise plan</button></footer>
       </div>}
       <p className="mt-7 text-xs leading-5 text-slate-500">For adults 18–80. Estimates are educational and not medical advice. The simplified movement figures are coaching aids, not live posture correction. The app does not replace a registered dietitian, physician or qualified trainer.</p>
     </div>
