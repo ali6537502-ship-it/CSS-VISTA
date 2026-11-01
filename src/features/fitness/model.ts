@@ -3,7 +3,7 @@
  * Approximate ingredient composition: USDA FoodData Central (fdc.nal.usda.gov);
  * activity and energy estimates: Mifflin-St Jeor (1990), with heuristic activity factors.
  */
-import { PAKISTANI_DISHES, PAKISTAN_FOOD_SOURCE } from './pakistanFoods'
+import { PAKISTANI_DISHES, PAKISTAN_FOOD_SOURCE } from './pakistanFoods.ts'
 
 export type Sex = 'male' | 'female'
 export type Goal = 'gain' | 'lose' | 'muscle' | 'fitness'
