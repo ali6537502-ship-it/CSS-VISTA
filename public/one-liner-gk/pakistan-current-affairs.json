@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 268,
+  "count": 272,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1875,6 +1875,34 @@
     {
       "id": "pakistan-current-affairs-2026-10-31-kp-emergency-governance",
       "text": "On 31 October 2026 Shehbaz Sharif defended previously imposed emergency and governor's rule in Khyber Pakhtunkhwa; he did not announce a new imposition that day.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-01-pakistan-g24-chair",
+      "text": "Pakistan assumed the G-24 chairmanship on 1 November 2026; Finance Minister Muhammad Aurangzeb outlined three priorities for developing economies.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-01-pia-first-dreamliner-arrival",
+      "text": "PIA's first leased Boeing 787-9 Dreamliner arrived in Islamabad on 1 November 2026 as flight PK786 from London.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-01-bannu-polio-drive-security",
+      "text": "Bannu's anti-polio drive inaugurated on 1 November 2026 targeted 228,000 under-five children across 57 union councils.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-01-secp-inactive-companies-disclosure",
+      "text": "A 1 November 2026 report said SECP had marked 39,704 firms 'inactive by registrar' after four years of missing filings.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
