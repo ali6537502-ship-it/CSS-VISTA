@@ -1,5 +1,5 @@
-import type { Food, FitnessProfile, PlannedMeal } from './model'
-import { FOODS, AVOID_OPTIONS } from './model'
+import type { Food, FitnessProfile, PlannedMeal } from './model.ts'
+import { FOODS, AVOID_OPTIONS } from './model.ts'
 
 /**
  * Recipes created from recorded, measurable ingredients.
