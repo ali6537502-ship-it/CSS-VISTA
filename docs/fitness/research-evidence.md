@@ -8,7 +8,7 @@ The authoritative Pakistan-specific source is **Food Composition Table for Pakis
 
 - Full scanned source: https://www.fao.org/fileadmin/templates/food_composition/documents/regional/Book_Food_Composition_Table_for_Pakistan_.pdf
 - FAO country listing: https://www.fao.org/infoods/infoods/tables-and-databases/pakistan/en/
-- Nutrient measures appear as **kcal and grams of protein per 100 g cooked, edible portion of a particular documented recipe**, in the traditional food section, printed pp. 48–52 (PDF pages 54–58 in zero-based screenshots). Every historical recipe has a recipe number and preparation appendix.
+- Nutrient measures appear as **kcal and grams of protein per 100 g cooked, edible portion of a particular documented recipe**, in the traditional food section, printed pp. 48–52 (PDF pages 53–57 in zero-based screenshots). Every historical recipe has a recipe number and preparation appendix.
 - The app records the 17 entries verbatim as numerical values; it does **not** call these universal calories for contemporary homemade or restaurant dishes. Chapati in the source is 282 kcal/100 g for its documented cooked reference recipe, whereas a different small roti made from 40g dry flour has a different weight and estimated value. Never conflate the two. Beef pulao is not automatically "Bannu pulao".
 - All 17 verified entries are in `pakistanFoods.ts` with source URL, recipe number, quantity basis and historical-recipe flag.
 
@@ -32,6 +32,8 @@ The authoritative Pakistan-specific source is **Food Composition Table for Pakis
 | Kheer | 125 | 3.6 |
 | Gajar halwa | 410 | 5.1 |
 
+The Pakistan Dietary Guidelines for Better Nutrition (FAO / Government of Pakistan, 2019) are available at https://pc.gov.pk/uploads/report/Pakistan_Dietary_Nutrition_2019.pdf . These provide the dietary-balance context, not universal calorie values for individual restaurant dishes.
+
 **Ingredient estimates** for eggs, milk, rice, nuts, bananas, etc. use common rounded reference quantities linked at the catalog level to USDA FoodData Central. Not every US reference serving has an individually pinned FDC food identifier yet; these are labelled as estimates rather than falsely verified Pakistan recipes. Primary catalog: https://fdc.nal.usda.gov/ ; data types and limitations https://fdc.nal.usda.gov/data-documentation/ ; download https://fdc.nal.usda.gov/download-datasets/ .
 
 **Further release work:** map every generic ingredient to exact source IDs/edible weights, validate cooking yields, prepare a household recipe builder for variations (oil, spices, rice-to-meat ratio), verify allergen ingredient content, and check Pakistani regional dish measurements separately. No guessed calorie number for unnamed dishes.
@@ -49,7 +51,7 @@ The authoritative Pakistan-specific source is **Food Composition Table for Pakis
 
 - WHO activity guidance https://www.who.int/europe/news-room/fact-sheets/item/physical-activity : adults 150–300 minutes moderate aerobic weekly, or 75–150 vigorous; strength training major muscles on 2+ days. More sitting should be replaced with activity.
 - NHS strength guidance https://www.nhs.uk/live-well/exercise/how-to-improve-strength-flexibility/ : bodyweight squats/pushups count as strengthening, begin gradually, use comfortable form.
-- NHS technique videos https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/ : reviewed examples of warm-up, squat and standing press-up. Link to the NHS page; do not reproduce or embed copyrighted media without licensed permission.
+- NHS technique videos https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/ : reviewed examples of warm-up, squat and standing press-up. ACE exercise library https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/ : public bird-dog instructions. Link to the NHS page; do not reproduce or embed copyrighted media without licensed permission.
 - The current animations are original *schematic movement previews*, not validated 3D biomechanics, not measured repetition counters and not camera-based posture analysis. Professional motion-form validation and accessible animation upgrade are required for a full-quality launch.
 - Users with injuries, pregnancy/postpartum considerations, medical concerns or unusual symptoms should receive appropriate screening and professional guidance; avoid exercises causing pain.
 
