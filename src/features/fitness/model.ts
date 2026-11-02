@@ -21,7 +21,8 @@ export type FitnessRecord = {
   /** Each day can override typical home availability without changing the baseline. */
   dailyAvailability?:Record<string,Record<string,boolean>>;
   homeRecipes?:Array<{id:string;name:string;ingredients:Array<{foodId:string;portions:number}>;cookedYieldGrams:number;servingGrams:number;batchCostPkr?:number;createdAt:string;foodCategory?:string}>;
-  foodPrices?:Record<string,number>
+  foodPrices?:Record<string,number>;
+  mealOffsets?:Record<string,Record<string,number>>
 }
 export const FOOD_REFERENCE = 'Ingredient entries are approximate USDA FoodData Central reference servings. Traditional prepared dishes use Pakistan’s 2001 food composition table per 100 g of a documented recipe. They are not universal restaurant or home-cooking values; oil, ingredients, serving mass and preparation change nutrition.'
 export const FOODS:Food[] = [
@@ -125,7 +126,7 @@ const mealRules = [
   {id:'snack',name:'Snack',groups:[[['yogurt',2],['milk',1],['chana',1]], [['banana',1],['apple',1],['orange',1],['guava',1],['dates',1]], [['peanuts',1],['almonds',1]]]},
   {id:'dinner',name:'Dinner',groups:[[['daal',2],['chana',2],['chicken',1.5],['fish',1.5],['beef',1.2],['eggs',2],['lobia',2],['paneer',.8]], [['roti',2],['rice',2],['naan',1],['potato',2]], [['vegetables',1.5],['spinach',1.5],['cucumber',1]], [['oil',1]]]},
 ] as const
-export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boolean>={},dayIndex=0,homeFoods:Food[]=[]){
+export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boolean>={},dayIndex=0,homeFoods:Food[]=[],mealOffsets:Record<string,number>={}){
   const eligible=new Map([...availableFoods(profile,dayOverrides),...homeFoods.filter(food=>(dayOverrides[food.id]??profile.available.includes(food.id)))].map(food=>[food.id,food]))
   const prepared=[...eligible.values()].filter(food=>food.group==='Cooked dishes')
   const mainDishIds=['pk-pulao','pk-biryani','pk-haleem']
@@ -138,8 +139,9 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
   const portionFactor=plannedEnergy && initialCalorieEstimate>0?Math.max(.65,Math.min(1.3,plannedEnergy/initialCalorieEstimate)):1
   const meals:PlannedMeal[]=mealRules.map(rule=>{
     const items:PlannedEntry[]=[]
+    const offset=Math.max(0,Math.min(50,Math.trunc(mealOffsets[rule.id]||0)))
     const preparedDish=(rule.id==='lunch'||rule.id==='dinner')&&prepared.length
-      ? prepared[(Math.abs(dayIndex)+(rule.id==='dinner'?1:0))%prepared.length] : null
+      ? prepared[(Math.abs(dayIndex)+offset+(rule.id==='dinner'?1:0))%prepared.length] : null
     if(preparedDish){
       const quantity=preparedDish.customRecipe?1:2.5
       items.push({food:preparedDish,amount:quantity,kcal:Math.round(preparedDish.kcal*quantity),protein:Math.round(preparedDish.protein*quantity*10)/10})
@@ -152,7 +154,7 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
       if(veg)items.push({food:veg,amount:1,kcal:veg.kcal,protein:veg.protein})
     }else for(const options of rule.groups){
       const choices=options.filter(([id])=>eligible.has(id))
-    const matched=choices.length?choices[Math.abs(dayIndex)%choices.length]:undefined
+      const matched=choices.length?choices[(Math.abs(dayIndex)+offset)%choices.length]:undefined
       if(matched){
         const food=eligible.get(matched[0])!
         const rawAmount=matched[1]*portionFactor
@@ -222,7 +224,7 @@ export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Go
   const workBoost=strengthDay?Math.min(6,Math.max(0,Math.floor((week-1)/2))*2):0
   const exercises=order.map(id=>({...MOVES[id],seconds:workDuration+workBoost+(level==='regular'&&strengthDay?3:0)}))
   const plan={exercises,sets,restSeconds,strengthDay,focusArea,warmupSeconds,cooldownSeconds,level,dayNumber:day+1,
-    title:strengthDay?['Full-body strength A','Full-body strength B','Full-body strength C'][strengthIndex]:'Gentle recovery / mobility',durationMinutes:0}
+    title:strengthDay?['Full-body strength A','Full-body strength B','Full-body strength C'][strengthIndex]:(goal==='lose'?'Low-impact walking and mobility':'Gentle recovery / mobility'),durationMinutes:0}
   return {...plan,durationMinutes:Math.round(planDurationSeconds(plan)/60)}
 }
 export function validateProfile(profile:FitnessProfile):string|null {
