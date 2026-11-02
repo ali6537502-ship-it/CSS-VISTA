@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Check, Clock3, Pause, Play, RotateCcw, SkipForward, StopCircle, ExternalLink } from 'lucide-react'
+import { Check, Clock3, Pause, Play, SkipForward, StopCircle, ExternalLink } from 'lucide-react'
 import type { WorkoutPlan } from './model'
 import { initialWorkoutSession, pauseWorkout, progressWorkout, restoreWorkoutSession, resumeWorkout, sessionPlanId, skipWorkoutStep, workoutSteps, type WorkoutSession } from './workoutSession'
 import { ExerciseFigure } from './ExerciseFigure'
