@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { ArrowLeft, ArrowRight, Check, ChevronLeft, Dumbbell, HeartPulse, RotateCcw, Utensils, Activity } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
-import { preparationPhysicalKey } from '@/lib/preparationStorage'
+import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 import { AVOID_OPTIONS, buildMeals, calculateEnergy, DEFAULT_FOODS, FITNESS_KEY, FOOD_REFERENCE, FOODS, type FitnessProfile, type FitnessRecord, type Goal, type Sex, todayPK, addWeeks, validateProfile, workoutForDay, weightTrendGuidance } from '@/features/fitness/model'
 import { recipeFoods, estimateDailyFoodCost, type HomeRecipe } from '@/features/fitness/recipeEngine'
@@ -20,7 +20,7 @@ function readRecord(ownerId:string|null|undefined):FitnessRecord|null {
     const parsed:unknown=JSON.parse(localStorage.getItem(preparationPhysicalKey(FITNESS_KEY))||'null')
     if(!parsed || typeof parsed!=='object'||!('profile' in parsed)) return null
     const result=parsed as FitnessRecord
-    if(result.ownerId!==ownerId || !result.profile || !Array.isArray(result.profile.available) || validateProfile(result.profile)) return null
+    if(result.ownerId!==ownerId || !result.profile || !Array.isArray(result.profile.available) || !Array.isArray(result.weights) || !result.workouts || !result.meals) return null
     return result
   }catch{return null}
 }
@@ -55,7 +55,7 @@ export default function FitnessCoach(){
   },[user?.id])
   const profile=record?.profile
   const today=todayPK()
-  const lastWeight=record?.weights.at(-1)?.weight ?? profile?.weight ?? 65
+  const lastWeight=record?.weights?.at(-1)?.weight ?? profile?.weight ?? 65
   const daysRemaining=profile?Math.max(1,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(todayPK()+'T12:00:00Z').getTime())/86400000)):0
   const energy=profile?calculateEnergy({...profile,weight:lastWeight,weeks:Math.max(1,Math.ceil(daysRemaining/7))}):null
   const homeFoods=profile?recipeFoods(record?.homeRecipes??[],profile):[]
@@ -71,11 +71,14 @@ export default function FitnessCoach(){
   const workout=useMemo(()=>profile?workoutForDay(week,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal,profile.focusArea,profile.fitnessLevel||'beginner'):null,[profile,week,today])
   const goalLabels:Record<Goal,string>={gain:'Gain healthy weight',lose:'Reduce excess fat',muscle:'Build muscle',fitness:'Stay active and fit'}
   const daysLeft=profile?Math.max(0,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(today+'T12:00:00Z').getTime())/86400000)):0
-  function save(next:FitnessRecord){
+  function save(next:FitnessRecord):boolean{
+    if(!preparationWriteCurrent()){setSaveError('Your account progress is being reset or synchronized. Please reload before saving.');return false}
+    if(user?.id!==next.ownerId){setSaveError('Your account changed. Sign in again before saving.');return false}
     try{
       localStorage.setItem(preparationPhysicalKey(FITNESS_KEY),JSON.stringify(next))
       setRecord(next);setSaveError('');notifyProgressChanged()
-    }catch{setSaveError('Your browser could not save the plan. Check available storage.')}
+      return true
+    }catch{setSaveError('Your browser could not save the plan. Check available storage.');return false}
   }
   function edit(update:(r:FitnessRecord)=>FitnessRecord){
     if(!record)return
@@ -93,7 +96,7 @@ export default function FitnessCoach(){
     const changedGoal=!!record&&(record.profile.goal!==draft.goal||record.profile.target!==draft.target||record.profile.weeks!==draft.weeks)
     const updated={...draft,startDate:changedGoal?today:record?.profile.startDate||today}
     const next:FitnessRecord={ownerId:user.id,profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{},dailyAvailability:record?.dailyAvailability||{},homeRecipes:record?.homeRecipes||[],foodPrices:record?.foodPrices||{}}
-    save(next);setError('');setEditing(false);setTab('diet')
+    if(save(next)){setError('');setEditing(false);setTab('diet')}
   }
   function changeFood(id:string){
     edit(r=>{
@@ -166,6 +169,7 @@ export default function FitnessCoach(){
         <div className="rounded-3xl bg-emerald-950 p-5 text-white sm:p-7">
           <div className="flex flex-wrap items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-wider text-emerald-200">{profile.sex==='male'?'Male':'Female'} profile · Week {week} of {profile.weeks}</p><h2 className="mt-2 text-2xl font-bold">{goalLabels[profile.goal]}</h2><p className="mt-2 text-sm text-emerald-100">Starting {profile.weight} kg · Requested target {profile.target} kg · {daysLeft} days left</p></div><button onClick={()=>{setDraft(profile);setStep(0);setEditing(true)}} className="min-h-11 rounded-xl border border-emerald-300/40 px-3 text-xs font-semibold">Edit profile</button></div>
         </div>
+        {validateProfile(profile) && <div role="alert" className="rounded-2xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">Your saved profile needs attention: {validateProfile(profile)}. Use Edit profile to update it; existing records have not been discarded.</div>}
         {energy.needsReview && <div role="alert" className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950"><strong>Target needs review.</strong> {profile.conditionReview?'Get appropriate professional advice before following personalised exercise or nutrition targets.':!energy.direction?'Your requested weight does not match the selected goal.':energy.underweightLoss?'Weight loss is not recommended by this automatic planner at the estimated BMI.':energy.lowIntake?'The estimated intake would be too low for an unsupervised programme. Seek qualified guidance.':'The requested rate is relatively fast. Consider a longer deadline or a smaller target.'} An automatic calorie target has been withheld; your profile can be edited.</div>}
         {saveError&&<p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-800">{saveError}</p>}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
