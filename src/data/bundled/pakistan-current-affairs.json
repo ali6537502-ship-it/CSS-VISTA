@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 280,
+  "count": 281,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1962,6 +1962,13 @@
       "sourcePage": 0,
       "timeSensitive": true,
       "subcategory": "Pakistan Current Affairs 2026"
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-02-pakistan-bangladesh-industrial-talks",
+      "text": "On 2 November 2026, Pakistan and Bangladesh discussed possible battery and electric-vehicle manufacturing cooperation, with Pakistan citing its New Energy Vehicle Policy.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
     }
   ]
 }
