@@ -8,16 +8,19 @@ export function WorkoutPlayer({plan,day,ownerId,completed,onComplete,disabled}:{
   const steps=useMemo(()=>workoutSteps(plan),[plan])
   const storeKey='cssvista:fitness:active-session:'+encodeURIComponent(ownerId)+':'+day
   const [session,setSession]=useState<WorkoutSession|null>(null)
+  const [hydratedFor,setHydratedFor]=useState('')
   useEffect(()=>{
     try {setSession(restoreWorkoutSession(sessionStorage.getItem(storeKey),day,plan))}
     catch {setSession(null)}
+    setHydratedFor(storeKey)
   },[storeKey,day,plan])
   useEffect(()=>{
+    if(hydratedFor!==storeKey)return
     try{
       if(session && session.planId===sessionPlanId(day,plan))sessionStorage.setItem(storeKey,JSON.stringify({...session,running:false}))
       else sessionStorage.removeItem(storeKey)
     }catch{/* Session resume is optional; recording remains separate. */}
-  },[session,storeKey,day,plan])
+  },[session,storeKey,day,plan,hydratedFor])
   useEffect(()=>{
     if(!session?.running)return
     const id=window.setInterval(()=>setSession(current=>current?progressWorkout(current,plan,Date.now()):null),250)
