@@ -9,7 +9,8 @@ const context=await browser.newContext({reducedMotion:'reduce',ignoreHTTPSErrors
 let currentUser='fixture-a'
 await context.route('**/*',async route=>{
  const url=new URL(route.request().url())
- if(url.origin!==origin) return route.abort()
+ if(url.origin!==origin){ console.log('Browser fixture blocked origin:',url.origin);return route.abort()}
+ if(url.pathname.startsWith('/api/'))console.log('Browser fixture API',route.request().method(),url.pathname)
  if(!url.pathname.startsWith('/api/')) return route.continue()
   if (url.pathname === '/api/auth/workspace-preview.php') return route.fulfill({ json: { enabled: true, user_id: currentUser } })
  if (url.pathname === '/api/workspace-release.php') return route.fulfill({json:{enabled:true}})
@@ -27,7 +28,7 @@ mkdirSync('test-artifacts/workspace',{recursive:true})
 try{
  await page.goto(origin+'/account/dashboard')
  await page.waitForTimeout(700);await page.evaluate(() => window.dispatchEvent(new Event('focus')))
- await page.waitForTimeout(300);await page.goto(origin+'/account/dashboard');await page.waitForTimeout(700);await page.evaluate(() => window.dispatchEvent(new Event('focus')));await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
+ await page.waitForTimeout(300);await page.goto(origin+'/account/dashboard');await page.waitForTimeout(700);await page.evaluate(() => window.dispatchEvent(new Event('focus')));console.log('Auth fixture current page:',page.url());await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor({timeout:12000})
  assert.ok(await page.getByText('Nothing scheduled today.',{exact:false}).count())
  const today=await page.evaluate(()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`})
  await page.evaluate(today=>{const state=(JSON.parse(localStorage.getItem('cssvista:v1')) || {});state.studyPlanner={examDate:'2027-02-01',dailyHours:4,restDay:5,selectedOptionals:['Political Science','Criminology','European History','Punjabi','Environmental Sciences'],configuredAt:new Date().toISOString()};state.studyScheduleTasks=[{id:'fixture-task',syllabusItemId:'political-science:0:0',subject:'Political Science',topic:'Review political theory',paper:'Paper I',section:'Introduction',date:today,minutes:30,status:'not-started'}];state.bookmarks=['fixture-mcq'];state.quizResults=[{id:'fixture-result',type:'quiz',category:'Science',score:4,total:5,date:new Date().toISOString()}];localStorage.setItem('cssvista:v1',JSON.stringify(state))},today)
