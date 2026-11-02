@@ -14,8 +14,8 @@
       "why_it_matters": "A chairmanship can help coordinate regional financing discussions but does not itself approve investment.",
       "explanation": "A chairmanship can help coordinate regional financing discussions but does not itself approve investment.",
       "pakistan_perspective": "Pakistan can pursue cross-border financial links while assessing the commercial viability of proposals.",
-      "regional_implications": "A chairmanship can help coordinate regional financing discussions but does not itself approve investment.",
-      "global_implications": "A chairmanship can help coordinate regional financing discussions but does not itself approve investment.",
+      "regional_implications": "The consortium can coordinate financing discussions across SCO economies, although project-level decisions remain with lenders.",
+      "global_implications": "Regional financial forums may diversify channels for development finance without replacing multilateral institutions.",
       "key_takeaways": [
         "HBL chairman Sultan Ali Allana assumed the SCO Interbank Consortium chairmanship for 2026–27.",
         "A chairmanship can help coordinate regional financing discussions but does not itself approve investment."
@@ -30,15 +30,23 @@
         "Who took over the SCO Interbank Consortium chairmanship for 2026–27?"
       ],
       "topics": [
-        "Regional Economic Cooperation"
+        "SCO",
+        "interbank cooperation",
+        "development finance"
       ],
       "countries": [
         "Pakistan"
       ],
-      "institutions": [],
-      "people": [],
+      "institutions": [
+        "SCO Interbank Consortium",
+        "Habib Bank Limited",
+        "Ministry of Finance"
+      ],
+      "people": [
+        "Sultan Ali Allana"
+      ],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Follow any separately approved cross-border financing arrangements."
       ],
       "sources": [
         {
@@ -58,8 +66,8 @@
       "why_it_matters": "The start of operations is distinct from the earlier announcement; actual coverage requires later reporting.",
       "explanation": "The start of operations is distinct from the earlier announcement; actual coverage requires later reporting.",
       "pakistan_perspective": "Pakistan needs to reach vulnerable children and ensure safety for vaccination teams.",
-      "regional_implications": "The start of operations is distinct from the earlier announcement; actual coverage requires later reporting.",
-      "global_implications": "The start of operations is distinct from the earlier announcement; actual coverage requires later reporting.",
+      "regional_implications": "Cross-border movement with Afghanistan makes coordinated surveillance and vaccination access important.",
+      "global_implications": "Polio eradication requires sustained vaccination until transmission is interrupted and independently confirmed.",
       "key_takeaways": [
         "Pakistan's sub-national polio campaign began on 2 November 2026 in 97 districts and was scheduled for one week.",
         "The start of operations is distinct from the earlier announcement; actual coverage requires later reporting."
@@ -74,15 +82,19 @@
         "What duration was announced for the sub-national polio drive starting 2 November 2026?"
       ],
       "topics": [
-        "Public Health"
+        "polio eradication",
+        "vaccination",
+        "public health"
       ],
       "countries": [
         "Pakistan"
       ],
-      "institutions": [],
+      "institutions": [
+        "Pakistan Polio Eradication Programme"
+      ],
       "people": [],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Check post-campaign coverage, missed-child and surveillance data."
       ],
       "sources": [
         {
@@ -102,8 +114,8 @@
       "why_it_matters": "The proposal raises questions of investor protection, sovereign-debt management and cybersecurity.",
       "explanation": "The proposal raises questions of investor protection, sovereign-debt management and cybersecurity.",
       "pakistan_perspective": "Any implementation must follow appropriate supervision and transparent fiscal-risk assessment.",
-      "regional_implications": "The proposal raises questions of investor protection, sovereign-debt management and cybersecurity.",
-      "global_implications": "The proposal raises questions of investor protection, sovereign-debt management and cybersecurity.",
+      "regional_implications": "Financial regulators across the region face similar challenges around tokenised claims and investor safeguards.",
+      "global_implications": "Sovereign debt tokenisation would require reliable settlement, ownership and regulatory arrangements.",
       "key_takeaways": [
         "On 2 November 2026, Pakistan's finance minister said existing Eurobond debt was under review for tokenisation.",
         "The proposal raises questions of investor protection, sovereign-debt management and cybersecurity."
@@ -118,15 +130,22 @@
         "Which debt instrument did the finance minister identify for possible tokenisation on 2 November?"
       ],
       "topics": [
-        "Financial Regulation"
+        "digital assets",
+        "sovereign debt",
+        "financial regulation"
       ],
       "countries": [
         "Pakistan"
       ],
-      "institutions": [],
-      "people": [],
+      "institutions": [
+        "Ministry of Finance",
+        "Pakistan Banks' Association"
+      ],
+      "people": [
+        "Muhammad Aurangzeb"
+      ],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Check cabinet approval and any formal request for bids before describing a transaction as approved."
       ],
       "sources": [
         {
@@ -146,8 +165,8 @@
       "why_it_matters": "Multilateral financing requires accountable implementation and measurable public-service outcomes.",
       "explanation": "Multilateral financing requires accountable implementation and measurable public-service outcomes.",
       "pakistan_perspective": "Sindh's development priorities include irrigation, water supply and health-service delivery.",
-      "regional_implications": "Multilateral financing requires accountable implementation and measurable public-service outcomes.",
-      "global_implications": "Multilateral financing requires accountable implementation and measurable public-service outcomes.",
+      "regional_implications": "Irrigation and water projects affect resilience and resource management in the Indus basin.",
+      "global_implications": "Project portfolio figures should be distinguished from verified disbursement and completion totals.",
       "key_takeaways": [
         "On 2 November 2026, Sindh and the World Bank reviewed 12 projects valued at $3.85 billion.",
         "Multilateral financing requires accountable implementation and measurable public-service outcomes."
@@ -162,21 +181,43 @@
         "How many World Bank-funded projects did Sindh officials review on 2 November 2026?"
       ],
       "topics": [
-        "Development Finance"
+        "World Bank",
+        "development finance",
+        "provincial governance"
       ],
       "countries": [
         "Pakistan"
       ],
-      "institutions": [],
-      "people": [],
+      "institutions": [
+        "World Bank",
+        "Government of Sindh"
+      ],
+      "people": [
+        "Murad Ali Shah",
+        "Bolormaa Amgaabazar"
+      ],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Monitor project-specific disbursement and completion reports."
       ],
       "sources": [
         {
           "publisher": "Radio Pakistan",
           "title": "Sindh Govt, WB reaffirm commitment to completing development projects on time",
           "url": "https://www.radio.gov.pk/02-11-2026/sindh-govt-wb-reaffirm-commitment-to-completing-development-projects-on-time"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Projects reviewed",
+          "value": "12",
+          "source": "Radio Pakistan",
+          "date": "2026-11-02"
+        },
+        {
+          "label": "Reported portfolio value",
+          "value": "USD 3.85 billion",
+          "source": "Radio Pakistan",
+          "date": "2026-11-02"
         }
       ]
     },
@@ -190,8 +231,8 @@
       "why_it_matters": "The episode highlights urban pollution monitoring, emissions control and public-health preparedness.",
       "explanation": "The episode highlights urban pollution monitoring, emissions control and public-health preparedness.",
       "pakistan_perspective": "Coordinated responses across Punjab's airshed are necessary during severe smog episodes.",
-      "regional_implications": "The episode highlights urban pollution monitoring, emissions control and public-health preparedness.",
-      "global_implications": "The episode highlights urban pollution monitoring, emissions control and public-health preparedness.",
+      "regional_implications": "Particulate pollution can be affected by sources and weather across Punjab's wider airshed.",
+      "global_implications": "Time-specific AQI readings should not be confused with annual exposure averages or PM2.5 concentration units.",
       "key_takeaways": [
         "IQAir reported Lahore AQI 535 and PM2.5 near 343 µg/m³ at about 8 a.m. on 2 November 2026.",
         "The episode highlights urban pollution monitoring, emissions control and public-health preparedness."
@@ -206,21 +247,40 @@
         "What PM2.5 concentration accompanied Lahore's reported AQI of 535 on 2 November?"
       ],
       "topics": [
-        "Environment and Health"
+        "PM2.5",
+        "air pollution",
+        "AQI",
+        "public health"
       ],
       "countries": [
         "Pakistan"
       ],
-      "institutions": [],
+      "institutions": [
+        "IQAir"
+      ],
       "people": [],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Compare subsequent monitoring readings and official public-health advisories."
       ],
       "sources": [
         {
           "publisher": "Dawn",
           "title": "Lahore's air quality index crosses 530 as pollution reaches hazardous levels",
           "url": "https://www.dawn.com/news/2041584/lahores-air-quality-index-crosses-530-as-pollution-reaches-hazardous-levels"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "IQAir Lahore AQI around 8 a.m.",
+          "value": "535",
+          "source": "Dawn",
+          "date": "2026-11-02"
+        },
+        {
+          "label": "PM2.5 concentration at that time",
+          "value": "343 µg/m³",
+          "source": "Dawn",
+          "date": "2026-11-02"
         }
       ]
     },
@@ -234,8 +294,8 @@
       "why_it_matters": "Gas-demand assumptions, tariff structures and take-or-pay obligations determine the project's feasibility.",
       "explanation": "Gas-demand assumptions, tariff structures and take-or-pay obligations determine the project's feasibility.",
       "pakistan_perspective": "Pakistan must balance energy-security benefits against fiscal and imported-fuel risks.",
-      "regional_implications": "Gas-demand assumptions, tariff structures and take-or-pay obligations determine the project's feasibility.",
-      "global_implications": "Gas-demand assumptions, tariff structures and take-or-pay obligations determine the project's feasibility.",
+      "regional_implications": "The proposed terminal and pipeline could alter Pakistan's gas logistics if approved and constructed.",
+      "global_implications": "Long-term LNG commitments depend on global gas pricing, freight and contractual risk allocation.",
       "key_takeaways": [
         "A proposed LNG terminal at Port Qasim was part of an integrated scheme valued at up to $4.4 billion in a 2 November report.",
         "Gas-demand assumptions, tariff structures and take-or-pay obligations determine the project's feasibility."
@@ -250,21 +310,40 @@
         "At which Pakistani port was the proposed LNG storage terminal located?"
       ],
       "topics": [
-        "Energy and Investment"
+        "LNG",
+        "energy security",
+        "foreign investment"
       ],
       "countries": [
         "Pakistan"
       ],
-      "institutions": [],
+      "institutions": [
+        "Port Qasim",
+        "Global Vision Energy Partners"
+      ],
       "people": [],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Check regulatory approvals, final tariffs, signed contracts and financial close."
       ],
       "sources": [
         {
           "publisher": "Dawn",
           "title": "US-backed consortium proposes $4.4bn LNG project",
           "url": "https://www.dawn.com/news/2041543/us-backed-consortium-proposes-44bn-lng-project"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Proposed integrated project cost ceiling",
+          "value": "USD 4.4 billion",
+          "source": "Dawn",
+          "date": "2026-11-02"
+        },
+        {
+          "label": "Proposed static storage capacity",
+          "value": "560,000 cubic metres",
+          "source": "Dawn",
+          "date": "2026-11-02"
         }
       ]
     },
@@ -278,8 +357,8 @@
       "why_it_matters": "Gulf maritime security affects oil prices, freight and international trade.",
       "explanation": "Gulf maritime security affects oil prices, freight and international trade.",
       "pakistan_perspective": "Pakistan is vulnerable to Gulf energy-import and shipping disruptions.",
-      "regional_implications": "Gulf maritime security affects oil prices, freight and international trade.",
-      "global_implications": "Gulf maritime security affects oil prices, freight and international trade.",
+      "regional_implications": "Oman's diplomacy and China's engagement may provide channels for Gulf de-escalation but do not establish an agreement.",
+      "global_implications": "Safe passage through Hormuz matters to international oil, gas and shipping markets.",
       "key_takeaways": [
         "China and Oman issued a 20-point joint statement on 2 November 2026 addressing safe Hormuz navigation.",
         "Gulf maritime security affects oil prices, freight and international trade."
@@ -294,19 +373,38 @@
         "How many points were in the China–Oman statement issued during Sultan Haitham's Beijing visit?"
       ],
       "topics": [
-        "Middle East Diplomacy"
+        "China–Oman relations",
+        "Strait of Hormuz",
+        "Gulf diplomacy"
       ],
-      "countries": [],
-      "institutions": [],
-      "people": [],
+      "countries": [
+        "China",
+        "Oman",
+        "Iran"
+      ],
+      "institutions": [
+        "Foreign Ministry of China"
+      ],
+      "people": [
+        "Xi Jinping",
+        "Haitham bin Tariq"
+      ],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Track the announced Chinese Middle East envoy visit and independently confirmed diplomatic outcomes."
       ],
       "sources": [
         {
           "publisher": "Reuters",
           "title": "China's Xi says Middle East should not become battleground for great power rivalry",
           "url": "https://www.reuters.com/world/china/deeper-china-oman-ties-strategic-both-sides-xi-says-2026-11-02/"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Points in joint statement",
+          "value": "20",
+          "source": "Reuters",
+          "date": "2026-11-02"
         }
       ]
     },
@@ -320,8 +418,8 @@
       "why_it_matters": "The estimate links regional conflict with global energy-supply resilience.",
       "explanation": "The estimate links regional conflict with global energy-supply resilience.",
       "pakistan_perspective": "Pakistan's import bill and inflation outlook are sensitive to oil prices and freight costs.",
-      "regional_implications": "The estimate links regional conflict with global energy-supply resilience.",
-      "global_implications": "The estimate links regional conflict with global energy-supply resilience.",
+      "regional_implications": "Gulf exporters and importers face transport and insurance costs when maritime routes are disrupted.",
+      "global_implications": "Depleted buffers can magnify market reactions to new production or shipping shocks.",
       "key_takeaways": [
         "ADNOC's chief executive estimated on 2 November 2026 that nearly one billion oil barrels had been drawn from global inventories.",
         "The estimate links regional conflict with global energy-supply resilience."
@@ -336,13 +434,20 @@
         "How much oil did ADNOC's chief executive estimate had been drawn from inventories?"
       ],
       "topics": [
-        "Energy Security"
+        "oil inventories",
+        "energy markets",
+        "Strait of Hormuz"
       ],
-      "countries": [],
-      "institutions": [],
+      "countries": [
+        "United Arab Emirates",
+        "Iran"
+      ],
+      "institutions": [
+        "Abu Dhabi National Oil Company"
+      ],
       "people": [],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Seek independently compiled inventory statistics to assess the executive's estimate."
       ],
       "sources": [
         {
@@ -362,8 +467,8 @@
       "why_it_matters": "The estimates contextualise a changing naval-industrial market and maritime-security competition.",
       "explanation": "The estimates contextualise a changing naval-industrial market and maritime-security competition.",
       "pakistan_perspective": "Pakistan's maritime planning depends on sea-lane security and the regional naval balance.",
-      "regional_implications": "The estimates contextualise a changing naval-industrial market and maritime-security competition.",
-      "global_implications": "The estimates contextualise a changing naval-industrial market and maritime-security competition.",
+      "regional_implications": "Naval modernisation affects strategic competition in European and Asian waters.",
+      "global_implications": "The reported change is in production value, not necessarily ship counts or government defence budgets.",
       "key_takeaways": [
         "Naval Group cited a $122 billion naval-production estimate for 2024–25 at Euronaval on 2 November 2026.",
         "The estimates contextualise a changing naval-industrial market and maritime-security competition."
@@ -378,19 +483,42 @@
         "At which exhibition did Naval Group cite the $122 billion naval-production estimate?"
       ],
       "topics": [
-        "Defence and Maritime Security"
+        "naval industry",
+        "maritime security",
+        "defence economics"
       ],
-      "countries": [],
-      "institutions": [],
+      "countries": [
+        "France",
+        "China",
+        "United States"
+      ],
+      "institutions": [
+        "Naval Group",
+        "Euronaval"
+      ],
       "people": [],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Examine the Euronaval study's scope before comparing country totals."
       ],
       "sources": [
         {
           "publisher": "Reuters",
           "title": "Military production for navies up 50% in past two years, Naval Group says",
           "url": "https://www.reuters.com/world/china/military-production-navies-up-50-past-two-years-naval-group-says-2026-11-02/"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Estimated naval military production value, 2024–25",
+          "value": "USD 122 billion",
+          "source": "Reuters",
+          "year": "2024–2025"
+        },
+        {
+          "label": "Earlier two-year comparison",
+          "value": "USD 82 billion",
+          "source": "Reuters",
+          "year": "2022–2023"
         }
       ]
     },
@@ -404,8 +532,8 @@
       "why_it_matters": "The warning connects AI investment valuations to broader financial-market vulnerabilities.",
       "explanation": "The warning connects AI investment valuations to broader financial-market vulnerabilities.",
       "pakistan_perspective": "Pakistani regulators can draw lessons about non-bank supervision and concentrated market exposures.",
-      "regional_implications": "The warning connects AI investment valuations to broader financial-market vulnerabilities.",
-      "global_implications": "The warning connects AI investment valuations to broader financial-market vulnerabilities.",
+      "regional_implications": "European market stress can affect bank funding and investment conditions beyond the euro area.",
+      "global_implications": "Valuation shocks and non-bank leverage may transmit stress across financial markets.",
       "key_takeaways": [
         "On 2 November 2026, ECB Vice-President Boris Vujcic highlighted AI valuations, bond stress and non-bank losses.",
         "The warning connects AI investment valuations to broader financial-market vulnerabilities."
@@ -420,13 +548,21 @@
         "Which central bank's vice-president raised these financial-stability concerns on 2 November?"
       ],
       "topics": [
-        "Financial Stability"
+        "financial stability",
+        "AI valuations",
+        "non-bank finance"
       ],
-      "countries": [],
-      "institutions": [],
-      "people": [],
+      "countries": [
+        "European Union"
+      ],
+      "institutions": [
+        "European Central Bank"
+      ],
+      "people": [
+        "Boris Vujcic"
+      ],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Read the ECB Financial Stability Review when it is published on the scheduled 18 November date."
       ],
       "sources": [
         {
@@ -446,8 +582,8 @@
       "why_it_matters": "False alerts can undermine public trust and increase confusion during active conflict.",
       "explanation": "False alerts can undermine public trust and increase confusion during active conflict.",
       "pakistan_perspective": "Pakistan's disaster-management communication systems face comparable cyber-resilience challenges.",
-      "regional_implications": "False alerts can undermine public trust and increase confusion during active conflict.",
-      "global_implications": "False alerts can undermine public trust and increase confusion during active conflict.",
+      "regional_implications": "Digital disruptions to civilian alerts can heighten confusion during military operations.",
+      "global_implications": "Emergency-warning services need secure authentication, redundant channels and transparent incident reporting.",
       "key_takeaways": [
         "Ukraine and Russia reported false alerts from compromised emergency-warning mobile apps on 2 November 2026.",
         "False alerts can undermine public trust and increase confusion during active conflict."
@@ -462,13 +598,20 @@
         "Which public-facing systems were reported compromised in both Ukraine and Russia?"
       ],
       "topics": [
-        "Cybersecurity and Civilian Protection"
+        "cybersecurity",
+        "emergency communications",
+        "disinformation"
       ],
-      "countries": [],
-      "institutions": [],
+      "countries": [
+        "Ukraine",
+        "Russia"
+      ],
+      "institutions": [
+        "Russian Emergency Situations Ministry"
+      ],
       "people": [],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Avoid attributing the attacks to any actor without independent technical evidence."
       ],
       "sources": [
         {
@@ -488,8 +631,8 @@
       "why_it_matters": "The role concerns agenda coordination and procedural management, not unilateral authority over Council decisions.",
       "explanation": "The role concerns agenda coordination and procedural management, not unilateral authority over Council decisions.",
       "pakistan_perspective": "Pakistan follows Council deliberations on international peace, security and international law.",
-      "regional_implications": "The role concerns agenda coordination and procedural management, not unilateral authority over Council decisions.",
-      "global_implications": "The role concerns agenda coordination and procedural management, not unilateral authority over Council decisions.",
+      "regional_implications": "The presidency helps coordinate Council meetings on international peace and security.",
+      "global_implications": "The monthly chair's procedural role does not change the Council's voting rules or permanent-member veto powers.",
       "key_takeaways": [
         "Latvia held the rotating presidency of the UN Security Council for November 2026.",
         "The role concerns agenda coordination and procedural management, not unilateral authority over Council decisions."
@@ -504,13 +647,21 @@
         "Which country held the rotating UN Security Council presidency in November 2026?"
       ],
       "topics": [
-        "United Nations"
+        "United Nations",
+        "Security Council",
+        "multilateral governance"
       ],
-      "countries": [],
-      "institutions": [],
-      "people": [],
+      "countries": [
+        "Latvia"
+      ],
+      "institutions": [
+        "UN Security Council"
+      ],
+      "people": [
+        "Sanita Pavļuta-Deslandes"
+      ],
       "what_to_watch": [
-        "Monitor independently verified follow-up developments."
+        "Follow the published November Council programme and adopted decisions."
       ],
       "sources": [
         {
