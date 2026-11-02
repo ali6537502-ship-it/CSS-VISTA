@@ -123,9 +123,11 @@ const FITNESS_PROGRESS_KEY = 'cssvista:tool:fitness-coach:v1'
  * profile/recipe/food edit. A mismatched account owner is never mixed into the
  * currently loaded private fitness progress. */
 function mergeFitnessProgress(cloud:unknown,local:unknown):unknown {
-  if(!isRecord(cloud))return local
-  if(!isRecord(local))return cloud
-  if(typeof cloud.ownerId!=='string'||typeof local.ownerId!=='string'||cloud.ownerId!==local.ownerId) return cloud
+  const owner=preparationOwner()
+  // The active account is the only permissible owner of a private fitness record.
+  const safe=(item:unknown):item is Record<string,unknown>=>isRecord(item)&&typeof item.ownerId==='string'&&item.ownerId===owner
+  if(!safe(cloud))return safe(local)?local:undefined
+  if(!safe(local))return cloud
   const cloudStamp=Date.parse(String(cloud.updatedAt||''))||0
   const localStamp=Date.parse(String(local.updatedAt||''))||0
   const newer=localStamp>=cloudStamp?local:cloud
@@ -160,7 +162,9 @@ export function mergeProgressSnapshots(
     merged[GSA_PROGRESS_KEY] = mergeGsaProgress(cloud[GSA_PROGRESS_KEY], local[GSA_PROGRESS_KEY])
   }
   if (FITNESS_PROGRESS_KEY in cloud || FITNESS_PROGRESS_KEY in local) {
-    merged[FITNESS_PROGRESS_KEY] = mergeFitnessProgress(cloud[FITNESS_PROGRESS_KEY],local[FITNESS_PROGRESS_KEY])
+    const safeFitness=mergeFitnessProgress(cloud[FITNESS_PROGRESS_KEY],local[FITNESS_PROGRESS_KEY])
+    if(safeFitness!==undefined)merged[FITNESS_PROGRESS_KEY]=safeFitness
+    else delete merged[FITNESS_PROGRESS_KEY]
   }
   return merged
 }
