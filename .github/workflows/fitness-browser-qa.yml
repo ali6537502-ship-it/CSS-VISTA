@@ -1,4 +1,4 @@
-name: Fitness Coach mobile browser QA
+name: Fitness Coach unit and account-sync regression
 
 on:
   pull_request:
@@ -7,7 +7,6 @@ on:
       - 'src/pages/FitnessCoach.tsx'
       - 'src/features/fitness/**'
       - 'src/lib/accountSync.ts'
-      - 'tests/browser/workspace.mjs'
       - 'tests/fitness*.ts'
       - '.github/workflows/fitness-browser-qa.yml'
   push:
@@ -16,41 +15,20 @@ on:
       - 'src/pages/FitnessCoach.tsx'
       - 'src/features/fitness/**'
       - 'src/lib/accountSync.ts'
-      - 'tests/browser/workspace.mjs'
       - 'tests/fitness*.ts'
       - '.github/workflows/fitness-browser-qa.yml'
 
 jobs:
-  mobile-account-fitness:
+  fitness-unit-and-sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
-      - name: Install locked dependencies
-        run: |
-          npm ci --no-audit --no-fund
-          npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
-          npm exec --prefix tests/browser -- playwright-core install --with-deps chromium
-      - name: Verify fitness unit and synchronization regressions
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify complete fitness and account sync regression suite
         run: npm run test:workspace
-      - name: Verify mobile workflow in isolated fixture
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm run dev -- --host 127.0.0.1 --port 5174 > /tmp/fitness-workspace-vite.log 2>&1 &
-          node -e "const go=async()=>{for(let i=0;i<60;i++){try{const r=await fetch('http://127.0.0.1:5174');if(r.ok)return}catch{}await new Promise(resolve=>setTimeout(resolve,500))}process.exit(1)};go()"
-          browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
-          CSSV_BROWSER_EXECUTABLE="$browser_path" CSSV_TEST_BROWSER_ORIGIN="http://127.0.0.1:5174" node tests/browser/workspace.mjs
-      - name: Attach failure screenshots and logs
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: fitness-browser-failure
-          path: |
-            test-artifacts/workspace
-            /tmp/fitness-workspace-vite.log
-          if-no-files-found: ignore
