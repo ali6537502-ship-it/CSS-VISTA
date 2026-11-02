@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 274,
+  "count": 280,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1920,6 +1920,48 @@
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-02-sco-interbank-chair",
+      "text": "HBL chairman Sultan Ali Allana assumed the SCO Interbank Consortium chairmanship for 2026–27.",
+      "sourcePage": 0,
+      "timeSensitive": true,
+      "subcategory": "Pakistan Current Affairs 2026"
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-02-polio-drive-start",
+      "text": "Pakistan's sub-national polio campaign began on 2 November 2026 in 97 districts and was scheduled for one week.",
+      "sourcePage": 0,
+      "timeSensitive": true,
+      "subcategory": "Pakistan Current Affairs 2026"
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-02-digital-assets-eurobond",
+      "text": "On 2 November 2026, Pakistan's finance minister said existing Eurobond debt was under review for tokenisation.",
+      "sourcePage": 0,
+      "timeSensitive": true,
+      "subcategory": "Pakistan Current Affairs 2026"
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-02-sindh-world-bank-portfolio",
+      "text": "On 2 November 2026, Sindh and the World Bank reviewed 12 projects valued at $3.85 billion.",
+      "sourcePage": 0,
+      "timeSensitive": true,
+      "subcategory": "Pakistan Current Affairs 2026"
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-02-lahore-hazardous-smog",
+      "text": "IQAir reported Lahore AQI 535 and PM2.5 near 343 µg/m³ at about 8 a.m. on 2 November 2026.",
+      "sourcePage": 0,
+      "timeSensitive": true,
+      "subcategory": "Pakistan Current Affairs 2026"
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-02-lng-port-qasim-proposal",
+      "text": "A proposed LNG terminal at Port Qasim was part of an integrated scheme valued at up to $4.4 billion in a 2 November report.",
+      "sourcePage": 0,
+      "timeSensitive": true,
+      "subcategory": "Pakistan Current Affairs 2026"
     }
   ]
 }
