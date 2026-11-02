@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
-import { ArrowLeft, ArrowRight, Check, ChevronLeft, Dumbbell, HeartPulse, RotateCcw, Utensils, Activity } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronLeft, Dumbbell, HeartPulse, RotateCcw, Utensils, Activity } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
 import { notifyProgressChanged } from '@/lib/progressEvents'
