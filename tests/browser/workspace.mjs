@@ -12,6 +12,7 @@ await context.route('**/*',async route=>{
  if(url.origin!==origin) return route.abort()
  if(!url.pathname.startsWith('/api/')) return route.continue()
   if (url.pathname === '/api/auth/workspace-preview.php') return route.fulfill({ json: { enabled: true, user_id: currentUser } })
+ if (url.pathname === '/api/workspace-release.php') return route.fulfill({json:{enabled:true}})
  let data={}
  if(url.pathname==='/api/auth/session.php') data={ok:true,authenticated:true,provider:'hostinger',user:{id:currentUser,email:currentUser+'@example.invalid',display_name:'Test Student',profile_complete:true,user_metadata:{full_name:'Test Student'}}}
  else if(url.pathname==='/api/pro-release.php') data={paused:true}
