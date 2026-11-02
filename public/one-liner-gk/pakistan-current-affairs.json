@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 272,
+  "count": 274,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1903,6 +1903,20 @@
     {
       "id": "pakistan-current-affairs-2026-11-01-secp-inactive-companies-disclosure",
       "text": "A 1 November 2026 report said SECP had marked 39,704 firms 'inactive by registrar' after four years of missing filings.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-01-pakistan-polio-eighth-case-khyber",
+      "text": "Pakistan confirmed its eighth polio case of 2026 on 1 November, from Khyber district in Khyber Pakhtunkhwa.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-01-pakistan-afghan-border-lower-south-waziristan",
+      "text": "The Lower South Waziristan district administration reported Pakistan–Afghanistan border firing on 1 November 2026; its battlefield claims were not independently verified.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
