@@ -85,3 +85,13 @@ test('empty menus cannot be incorrectly labelled affordable',()=>{
   assert.equal(result.complete,false)
   assert.equal(result.underBudget,null)
 })
+
+test('switching just lunch does not silently alter breakfast or dinner',()=>{
+ const profile={...base,available:['eggs','yogurt','daal','chana','rice','roti','chicken','banana','milk','vegetables']}
+ const today=buildMeals(profile,{},0)
+ const changed=buildMeals(profile,{},0,[],{lunch:1})
+ const ids=(meal:typeof today.meals[number])=>meal.items.map(i=>i.food.id).join(',')
+ assert.notEqual(ids(today.meals[1]),ids(changed.meals[1]))
+ assert.equal(ids(today.meals[0]),ids(changed.meals[0]))
+ assert.equal(ids(today.meals[3]),ids(changed.meals[3]))
+})
