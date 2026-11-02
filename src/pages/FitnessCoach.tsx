@@ -111,8 +111,8 @@ export default function FitnessCoach(){
     })
   }
   function saveHomeRecipe(recipe:HomeRecipe){
-    edit(r=>({...r,homeRecipes:[...(r.homeRecipes??[]),recipe],
-      profile:{...r.profile,available:[...r.profile.available,recipe.id]},meals:{...r.meals,[today]:{}}}))
+    edit(r=>({...r,homeRecipes:[...(r.homeRecipes??[]).filter(existing=>existing.id!==recipe.id),recipe],
+      profile:{...r.profile,available:Array.from(new Set([...r.profile.available,recipe.id]))},meals:{...r.meals,[today]:{}}}))
   }
   function deleteHomeRecipe(id:string){
     edit(r=>({...r,homeRecipes:(r.homeRecipes??[]).filter(recipe=>recipe.id!==id),
