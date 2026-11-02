@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { mkdirSync, writeFileSync } from 'node:fs'
 const origin=process.env.CSSV_TEST_BROWSER_ORIGIN || 'http://localhost:5174'
 if (!['localhost','127.0.0.1'].includes(new URL(origin).hostname)) throw Error('Loopback only')
-const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']})
+const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE || '/usr/bin/chromium',headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({reducedMotion:'reduce',ignoreHTTPSErrors:true})
 let currentUser='fixture-a'
 await context.route('**/*',async route=>{
