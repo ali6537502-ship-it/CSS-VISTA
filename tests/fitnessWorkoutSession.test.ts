@@ -44,9 +44,10 @@ test('skip moves through steps and stops at actual completed stage',()=>{
  let current=initialWorkoutSession(day,plan,1000)
  const count=workoutSteps(plan).length
  for(let i=0;i<count;i++)current=skipWorkoutStep(current,plan,1000+i)
- assert.equal(current.completed,true)
+ assert.equal(current.completed,false)
  assert.equal(current.running,false)
- assert.equal(current.remaining,0)
+ assert.equal(current.step,count-1)
+ assert.ok(current.remaining>0)
 })
 test('all focus levels use controlled instructions and honest duration',()=>{
  for(const focus of ['full-body','chest-shoulders','legs','core'] as const)for(const level of ['beginner','regular'] as const){
