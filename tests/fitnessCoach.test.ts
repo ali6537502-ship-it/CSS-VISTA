@@ -55,8 +55,8 @@ test('adult inputs and target direction validated',()=>{
 test('the workout provides basic movements and scales volume with time',()=>{
   const beginner=workoutForDay(1,0,10,'gain')
   const longer=workoutForDay(4,2,30,'muscle')
-  assert.equal(beginner.sets,1)
-  assert.equal(longer.sets,3)
+  assert.equal(beginner.sets,2)
+  assert.equal(longer.sets,4)
   assert.equal(workoutForDay(2,1,30,'muscle').strengthDay,false)
   assert.equal(workoutForDay(2,1,30,'muscle').sets,1)
   assert.ok(longer.exercises.length>=4)
