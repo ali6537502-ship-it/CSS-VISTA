@@ -733,5 +733,35 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://webtv.un.org/en/asset/k1t/k1tt59wk6k"
+  },
+  {
+    "id": "current-affairs-20261102-iran-two-day-proposal",
+    "q": "What change did Iran announce on 2 November 2026 to the implementation timetable for its conditional Hormuz proposal?",
+    "o": [
+      "From seven days to two days",
+      "From two days to seven days",
+      "From thirty days to fourteen days",
+      "From fourteen days to thirty days"
+    ],
+    "a": 0,
+    "e": "Iran said its seven-step proposal could be condensed for implementation within two days if its conditions were met; no deal was confirmed.",
+    "s": "Current Affairs - November 2026",
+    "d": "Advanced",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/iranians-have-left-doha-talks-draft-proposal-us-deal-being-circulated-official-2026-11-02/"
+  },
+  {
+    "id": "current-affairs-20261102-pakistan-bangladesh-industrial-talks",
+    "q": "Which Pakistani policy was cited during the 2 November 2026 industrial cooperation talks with Bangladesh?",
+    "o": [
+      "National Water Policy",
+      "National Climate Change Policy",
+      "New Energy Vehicle Policy",
+      "National Food Security Policy"
+    ],
+    "a": 2,
+    "e": "Pakistan's industry adviser briefed the Bangladeshi delegation on the New Energy Vehicle Policy and potential battery and EV manufacturing collaboration.",
+    "s": "Current Affairs - November 2026",
+    "d": "Advanced",
+    "sourceUrl": "https://www.nation.com.pk/02-Nov-2026/pakistan-bangladesh-explore-new-avenue-industrial-cooperation-economic-partnership"
   }
 ]

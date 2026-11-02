@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-02",
-  "published_at": "2026-11-02T19:07:54+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 2 November 2026 | Evening Coverage (00:00–19:02 PKT)",
+  "published_at": "2026-11-02T20:25:08+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 2 November 2026 | Evening Coverage (00:00–20:25 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-02-sco-interbank-chair",
@@ -668,6 +668,123 @@
           "publisher": "United Nations Web TV",
           "title": "Press Conference: Latvia's presidency of the UN Security Council in November 2026",
           "url": "https://webtv.un.org/en/asset/k1t/k1tt59wk6k"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-02-iran-two-day-proposal",
+      "category": "Global — Middle East Diplomacy and Energy Security",
+      "headline": "Iran says conditional Hormuz proposal could be implemented within two days",
+      "summary": "On 2 November, Iran said it had shortened the proposed implementation timetable for its seven-step plan to end its war with the United States from seven days to two days, provided Washington met Tehran's conditions. Qatar-mediated contacts continued without a breakthrough.",
+      "what_happened": "Iranian Foreign Ministry spokesperson Esmaeil Baghaei said the underlying demands had not changed. Reuters reported that Iranian negotiators had left Doha after consultations with Qatari mediators and a draft proposal was circulating. Neither an accepted agreement nor a confirmed reopening of the Strait of Hormuz was announced.",
+      "explanation": "Iran's proposal links ending the US blockade of Iranian ports, reopening Hormuz, relief for Iranian oil exports and sanctions, and subsequent talks. The proposed two-day timetable is conditional and is not evidence of an imminent reopening or an agreed ceasefire.",
+      "background": "The conflict and shipping restrictions in the Gulf have disrupted global energy supply and maritime trade. Qatar and Oman have engaged in regional diplomacy.",
+      "why_it_matters": "Energy-importing economies and maritime insurers remain exposed to Gulf shipping disruptions. Negotiating proposals must be distinguished from binding commitments and verified implementation.",
+      "pakistan_perspective": "Pakistan faces potential energy-import and freight-cost effects. Policymakers must assess actual shipping conditions rather than assume a diplomatic announcement has ended supply risks.",
+      "regional_implications": "Gulf economies remain vulnerable to military escalation, tanker disruption and delayed de-escalation.",
+      "global_implications": "Oil prices, supply chains and inflation expectations are sensitive to verified maritime security and energy flows.",
+      "key_takeaways": [
+        "Iran said on 2 November 2026 that its seven-step proposal could be implemented within two days if its conditions were met; no US–Iran agreement had been reached.",
+        "Reuters and AP reported continuing mediation, not a concluded peace settlement."
+      ],
+      "facts": [
+        "Iran said on 2 November 2026 that its seven-step proposal could be implemented within two days if its conditions were met; no US–Iran agreement had been reached."
+      ],
+      "quick_gk": [
+        "Iran said on 2 November 2026 that its seven-step proposal could be implemented within two days if its conditions were met; no US–Iran agreement had been reached."
+      ],
+      "question_angles": [
+        "How did Iran change its conditional proposal's implementation timetable on 2 November 2026?"
+      ],
+      "topics": [
+        "Strait of Hormuz",
+        "US–Iran diplomacy",
+        "Qatar mediation",
+        "energy security"
+      ],
+      "countries": [
+        "Iran",
+        "United States",
+        "Qatar",
+        "Oman",
+        "Pakistan"
+      ],
+      "institutions": [
+        "Iranian Ministry of Foreign Affairs"
+      ],
+      "people": [
+        "Abbas Araqchi",
+        "Esmaeil Baghaei"
+      ],
+      "what_to_watch": [
+        "Verify any formal US acceptance, ceasefire and independently confirmed reopening of the strait."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Iran says contacts over ending war continue after talks finish with no breakthrough",
+          "url": "https://www.reuters.com/world/middle-east/iranians-have-left-doha-talks-draft-proposal-us-deal-being-circulated-official-2026-11-02/",
+          "published_at": "2026-11-02T09:33:00Z"
+        },
+        {
+          "publisher": "Associated Press",
+          "title": "Iran has a 2-day plan to reopen strait, resume nuclear talks with US, and other Mideast news",
+          "url": "https://apnews.com/article/mideast-news-november-2-2026-8722c8b5a9deb228e7a188d4760ea8ed"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-02-pakistan-bangladesh-industrial-talks",
+      "category": "Pakistan — Foreign Relations and Industrial Policy",
+      "headline": "Pakistan and Bangladesh discuss industrial partnerships in batteries and electric vehicles",
+      "summary": "Pakistan's industry adviser Haroon Akhtar Khan met Bangladesh's finance and planning minister Rashid Al Mahmud Titumir on 2 November to discuss industrial cooperation, investment, clean-energy manufacturing and technology transfer. No binding project agreement was announced.",
+      "what_happened": "Pakistan outlined its New Energy Vehicle Policy and work on a Battery Energy Storage System policy supporting local lithium-ion and sodium-ion battery production. The two sides identified solar technology, electric vehicles, battery manufacturing and industrial value addition as potential areas for collaboration.",
+      "explanation": "The discussions concerned prospective joint ventures and technology transfer, not completed investments, contracts or production milestones.",
+      "background": "Pakistan and Bangladesh have pursued greater commercial engagement through official meetings and bilateral trade contacts.",
+      "why_it_matters": "Manufacturing links could strengthen regional supply chains and export capacity if commercial arrangements are subsequently agreed and implemented.",
+      "pakistan_perspective": "Pakistan could benefit from manufacturing investment and technology transfer, but competitiveness, regulatory clarity and financing will determine outcomes.",
+      "regional_implications": "Expanded industrial engagement could diversify South Asian supply chains, subject to tariffs and transport links.",
+      "global_implications": "The talks reflect regional interest in clean-energy manufacturing, without establishing immediate output gains.",
+      "key_takeaways": [
+        "On 2 November 2026, Pakistan and Bangladesh discussed possible battery and electric-vehicle manufacturing cooperation, with Pakistan citing its New Energy Vehicle Policy.",
+        "The meeting explored cooperation; it did not announce a signed investment agreement."
+      ],
+      "facts": [
+        "On 2 November 2026, Pakistan and Bangladesh discussed possible battery and electric-vehicle manufacturing cooperation, with Pakistan citing its New Energy Vehicle Policy."
+      ],
+      "quick_gk": [
+        "On 2 November 2026, Pakistan and Bangladesh discussed possible battery and electric-vehicle manufacturing cooperation, with Pakistan citing its New Energy Vehicle Policy."
+      ],
+      "question_angles": [
+        "Which policy did Pakistan cite during industrial cooperation talks with Bangladesh on 2 November?"
+      ],
+      "topics": [
+        "Pakistan–Bangladesh relations",
+        "New Energy Vehicle Policy",
+        "battery manufacturing",
+        "technology transfer"
+      ],
+      "countries": [
+        "Pakistan",
+        "Bangladesh"
+      ],
+      "institutions": [
+        "Ministry of Industries and Production",
+        "Bangladesh Ministry of Finance and Planning"
+      ],
+      "people": [
+        "Haroon Akhtar Khan",
+        "Rashid Al Mahmud Titumir"
+      ],
+      "what_to_watch": [
+        "Check signed agreements and actual investment or production milestones."
+      ],
+      "sources": [
+        {
+          "publisher": "The Nation (APP)",
+          "title": "Pakistan, Bangladesh explore new avenue for industrial cooperation, economic partnership",
+          "url": "https://www.nation.com.pk/02-Nov-2026/pakistan-bangladesh-explore-new-avenue-industrial-cooperation-economic-partnership",
+          "published_at": "2026-11-02T17:22:00+05:00"
         }
       ]
     }
