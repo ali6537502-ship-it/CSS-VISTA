@@ -47,6 +47,7 @@ export default function FitnessCoach(){
   const [foodQuery,setFoodQuery]=useState('')
   const [weightInput,setWeightInput]=useState('')
   const [saveError,setSaveError]=useState('')
+  const [mealNotice,setMealNotice]=useState('')
   useEffect(()=>{
     const owned=readRecord(user?.id)
     setRecord(owned)
@@ -60,17 +61,21 @@ export default function FitnessCoach(){
   const energy=profile?calculateEnergy({...profile,weight:lastWeight,weeks:Math.max(1,Math.ceil(daysRemaining/7))}):null
   const homeFoods=profile?recipeFoods(record?.homeRecipes??[],profile):[]
   const elapsed=profile?Math.max(0,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)):0
-  const meals=profile?buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[today]??{},elapsed,homeFoods):null
+  const meals=profile?buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[today]??{},elapsed,homeFoods,record?.mealOffsets?.[today]??{}):null
   const budget=meals?estimateDailyFoodCost(meals.meals,record?.foodPrices??{},profile?.budgetPkr):null
   const weekMenu=profile?Array.from({length:7},(_,i)=>{
     const at=new Date(today+'T12:00:00Z');at.setUTCDate(at.getUTCDate()+i)
     const date=at.toISOString().slice(0,10)
-    return {date,plan:buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[date]??{},elapsed+i,homeFoods)}
+    return {date,plan:buildMeals({...profile,weight:lastWeight},record?.dailyAvailability?.[date]??{},elapsed+i,homeFoods,record?.mealOffsets?.[date]??{})}
   }):[]
   const week=profile?buildWeek(profile):1
   const workout=useMemo(()=>profile?workoutForDay(week,Math.floor((new Date(today+'T12:00:00Z').getTime()-new Date(profile.startDate+'T12:00:00Z').getTime())/86400000)%7,profile.minutes,profile.goal,profile.focusArea,profile.fitnessLevel||'beginner'):null,[profile,week,today])
   const goalLabels:Record<Goal,string>={gain:'Gain healthy weight',lose:'Reduce excess fat',muscle:'Build muscle',fitness:'Stay active and fit'}
   const daysLeft=profile?Math.max(0,Math.ceil((new Date(addWeeks(profile.startDate,profile.weeks)+'T12:00:00Z').getTime()-new Date(today+'T12:00:00Z').getTime())/86400000)):0
+  const latestWeight=record?.weights?.at(-1)?.weight??profile?.weight??0
+  const overallChange=profile?profile.target-profile.weight:0
+  const goalProgress=profile&&Math.abs(overallChange)>.01?(latestWeight-profile.weight)/overallChange*100:0
+  const goalProgressPct=Math.max(0,Math.min(100,Math.round(goalProgress)))
   function save(next:FitnessRecord):boolean{
     if(!preparationWriteCurrent()){setSaveError('Your account progress is being reset or synchronized. Please reload before saving.');return false}
     if(user?.id!==next.ownerId){setSaveError('Your account changed. Sign in again before saving.');return false}
@@ -95,7 +100,7 @@ export default function FitnessCoach(){
     if(problem){setError(problem);return}
     const changedGoal=!!record&&(record.profile.goal!==draft.goal||record.profile.target!==draft.target||record.profile.weeks!==draft.weeks)
     const updated={...draft,startDate:changedGoal?today:record?.profile.startDate||today}
-    const next:FitnessRecord={ownerId:user.id,profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{},dailyAvailability:record?.dailyAvailability||{},homeRecipes:record?.homeRecipes||[],foodPrices:record?.foodPrices||{}}
+    const next:FitnessRecord={ownerId:user.id,profile:updated,updatedAt:new Date().toISOString(),weights:record?.weights.length?record.weights:[{date:today,weight:updated.weight}],workouts:record?.workouts||{},meals:record?.meals||{},dailyAvailability:record?.dailyAvailability||{},homeRecipes:record?.homeRecipes||[],foodPrices:record?.foodPrices||{},mealOffsets:record?.mealOffsets||{}}
     if(save(next)){setError('');setEditing(false);setTab('diet')}
   }
   function changeFood(id:string){
@@ -116,6 +121,19 @@ export default function FitnessCoach(){
   function setFoodPrice(id:string,price?:number){
     if(price!==undefined&&(!Number.isFinite(price)||price<0||price>100000))return
     edit(r=>{const prices={...r.foodPrices};if(price===undefined)delete prices[id];else prices[id]=price;return {...r,foodPrices:prices}})
+  }
+  function swapMeal(id:string){
+    if(!record||!profile||!meals)return
+    const current=record.mealOffsets?.[today]?.[id]||0
+    const prior=meals.meals.find(m=>m.id===id)?.items.map(i=>i.food.id).join('|')
+    const nextOffset=(current+1)%51
+    const updatedOffsets={...(record.mealOffsets?.[today]||{}),[id]:nextOffset}
+    const upcoming=buildMeals({...profile,weight:lastWeight},record.dailyAvailability?.[today]||{},elapsed,homeFoods,updatedOffsets)
+    const replacement=upcoming.meals.find(m=>m.id===id)?.items.map(i=>i.food.id).join('|')
+    if(!replacement||replacement===prior){setMealNotice('No other suitable food combination is available for '+id+'. Change your available foods to see more choices.');return}
+    edit(r=>({...r,mealOffsets:{...r.mealOffsets,[today]:updatedOffsets},
+      meals:{...r.meals,[today]:{...r.meals[today],[id]:false}}}))
+    setMealNotice('Updated '+id+' using foods available at home.')
   }
   function markMeal(id:string){
     edit(r=>({...r,meals:{...r.meals,[today]:{...(r.meals[today]||{}),[id]:!r.meals[today]?.[id]}}}))
@@ -180,7 +198,7 @@ export default function FitnessCoach(){
         </div>
         <nav aria-label="Fitness dashboard" className="grid grid-cols-3 gap-2 rounded-2xl border bg-white p-2">{([{id:'diet',name:'My Diet',icon:Utensils},{id:'workout',name:'Workout',icon:Dumbbell},{id:'progress',name:'Progress',icon:Activity}] as const).map(item=><button key={item.id} type="button" onClick={()=>setTab(item.id)} aria-current={tab===item.id?'page':undefined} className={'flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl px-2 text-xs font-semibold sm:flex-row sm:text-sm '+(tab===item.id?'bg-emerald-900 text-white':'text-slate-700 hover:bg-emerald-50')}><item.icon size={18}/>{item.name}</button>)}</nav>
         {tab==='diet' && <section className="space-y-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-xl font-bold">Today's meals</h2><p className="text-sm text-slate-600">Built from foods you selected as available.</p></div><span className="text-sm font-semibold text-emerald-900">{meals.totalCalories} kcal · {meals.totalProtein} g protein</span></div>
-          {meals.meals.map(meal=><article key={meal.id} className="rounded-2xl border bg-white p-4"><div className="mb-2 flex items-center justify-between gap-3"><h3 className="font-bold">{meal.name}</h3><label className="flex items-center gap-2 text-xs font-medium text-emerald-900"><input type="checkbox" checked={!!record.meals[today]?.[meal.id]} onChange={()=>markMeal(meal.id)} className="accent-emerald-800"/> Eaten</label></div>{meal.items.length?<div className="space-y-2">{meal.items.map(item=><div key={item.food.id} className="flex justify-between gap-3 text-sm"><span>{item.food.label} <span className="text-slate-500">× {item.amount} ({item.food.portion})</span>{item.food.sourceUrl&&<a className="ml-2 text-xs text-emerald-900 underline" href={item.food.sourceUrl} target="_blank" rel="noopener noreferrer">Source</a>}</span><span className="shrink-0 text-slate-600">{item.kcal} kcal</span></div>)}</div>:<p className="text-sm text-amber-800">Add available foods to complete this meal.</p>}<p className="mt-3 border-t pt-2 text-xs text-slate-600">{meal.kcal} kcal · ~{meal.protein} g protein</p></article>)}
+          {mealNotice&&<p role="status" className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-900">{mealNotice}</p>}{meals.meals.map(meal=><article key={meal.id} className="rounded-2xl border bg-white p-4"><div className="mb-2 flex items-center justify-between gap-3"><h3 className="font-bold">{meal.name}</h3><div className="flex items-center gap-3"><button type="button" onClick={()=>swapMeal(meal.id)} className="min-h-11 rounded-lg border px-3 text-xs font-semibold text-emerald-900">Other option</button><label className="flex items-center gap-2 text-xs font-medium text-emerald-900"><input type="checkbox" checked={!!record.meals[today]?.[meal.id]} onChange={()=>markMeal(meal.id)} className="accent-emerald-800"/> Eaten</label></div></div>{meal.items.length?<div className="space-y-2">{meal.items.map(item=><div key={item.food.id} className="flex justify-between gap-3 text-sm"><span>{item.food.label} <span className="text-slate-500">× {item.amount} ({item.food.portion})</span>{item.food.sourceUrl&&<a className="ml-2 text-xs text-emerald-900 underline" href={item.food.sourceUrl} target="_blank" rel="noopener noreferrer">Source</a>}</span><span className="shrink-0 text-slate-600">{item.kcal} kcal</span></div>)}</div>:<p className="text-sm text-amber-800">Add available foods to complete this meal.</p>}<p className="mt-3 border-t pt-2 text-xs text-slate-600">{meal.kcal} kcal · ~{meal.protein} g protein</p></article>)}
           {(meals.varietyWarning || (energy.targetCalories!==null && Math.abs(meals.totalCalories-energy.targetCalories)>250)) && <p role="status" className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">This sample menu {meals.varietyWarning?'has limited variety':'does not fully match your estimated energy target'}. Add suitable available foods or adjust portions with qualified advice; it is not a complete prescribed diet.</p>}
           <div className="rounded-2xl border bg-white p-4"><h3 className="font-bold">Your goal-based nutrition check</h3>
             <p className="mt-2 text-sm text-slate-600">{energy.targetCalories===null?'Personalised calorie target is on hold until your goal is reviewed.':'Today’s sample menu: '+meals.totalCalories+' kcal versus an estimated '+energy.targetCalories+' kcal target.'} {meals.totalProtein} g protein versus a reference range of {energy.proteinRange[0]}–{energy.proteinRange[1]} g. Differences do not imply an exact weight change.</p>
@@ -205,7 +223,7 @@ export default function FitnessCoach(){
           </div>
           <p className="text-xs leading-5 text-slate-500">Home exercise guidance is educational. Pause when your phone locks; time is never counted as completed exercise while the workout player is hidden. Stop if you experience chest pain, dizziness, or unusual discomfort.</p>
         </section>}
-        {tab==='progress' && <section className="space-y-4"><h2 className="text-xl font-bold">Your progress</h2><div className="grid grid-cols-2 gap-3"><Metric label="Starting weight" value={profile.weight+' kg'}/><Metric label="Latest recorded" value={(record.weights.at(-1)?.weight??profile.weight)+' kg'}/><Metric label="Workouts logged" value={String(Object.keys(record.workouts).length)}/><Metric label="Deadline" value={addWeeks(profile.startDate,profile.weeks)}/></div>
+        {tab==='progress' && <section className="space-y-4"><h2 className="text-xl font-bold">Your progress</h2>{(profile.goal==='gain'||profile.goal==='lose') && <div className="rounded-2xl border bg-white p-4"><div className="flex items-center justify-between"><strong className="text-sm text-slate-900">Progress toward your weight target</strong><span className="font-bold text-emerald-900">{goalProgressPct}%</span></div><div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-emerald-800" style={{width:goalProgressPct+'%'}}/></div><p className="mt-2 text-xs text-slate-600">{latestWeight} kg recorded · {profile.target} kg requested · target progress is not a guarantee of muscle or fat change.</p></div>}<div className="grid grid-cols-2 gap-3"><Metric label="Starting weight" value={profile.weight+' kg'}/><Metric label="Latest recorded" value={(record.weights.at(-1)?.weight??profile.weight)+' kg'}/><Metric label="Workouts logged" value={String(Object.keys(record.workouts).length)}/><Metric label="Deadline" value={addWeeks(profile.startDate,profile.weeks)}/></div>
           <div className="rounded-2xl border bg-white p-4"><h3 className="font-bold">Weekly weight check-in</h3><p className="my-2 text-xs text-slate-600">Use the same scale, ideally at a similar time of day. Daily fluctuations are normal.</p><div className="flex gap-2"><input className={fieldClass} type="number" step=".1" min="35" max="250" placeholder="Weight in kg" value={weightInput} onChange={e=>setWeightInput(e.target.value)}/><button onClick={logWeight} className="min-h-12 shrink-0 rounded-xl bg-emerald-900 px-4 text-sm font-bold text-white">Save</button></div>{error&&<p role="alert" className="mt-2 text-sm text-red-700">{error}</p>}</div>
           <div className="rounded-2xl border border-emerald-900/10 bg-emerald-50 p-4"><h3 className="font-bold text-emerald-950">Your weekly review</h3><p className="mt-2 text-sm leading-6 text-slate-700">{weightTrendGuidance(profile,record.weights)}</p></div><div className="rounded-2xl border bg-white p-4"><h3 className="font-bold">Weight history</h3><div className="mt-3 space-y-2">{record.weights.slice(-10).map(w=><div key={w.date} className="flex justify-between border-b py-2 text-sm"><time>{w.date}</time><strong>{w.weight} kg</strong></div>)}</div></div>
           <p className="text-xs text-slate-500">Weekly changes help guide future adjustments. The app cannot guarantee that weight gained is muscle or that weight lost is exclusively fat.</p>
