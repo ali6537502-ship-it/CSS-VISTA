@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 697,
+  "count": 699,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4881,6 +4881,20 @@
       "sourcePage": 0,
       "timeSensitive": true,
       "subcategory": "Current Affairs 2026"
+    },
+    {
+      "id": "current-affairs-archive-2026-11-02-iran-two-day-proposal",
+      "text": "Iran said on 2 November 2026 that its seven-step proposal could be implemented within two days if its conditions were met; no US–Iran agreement had been reached.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-02-pakistan-bangladesh-industrial-talks",
+      "text": "On 2 November 2026, Pakistan and Bangladesh discussed possible battery and electric-vehicle manufacturing cooperation, with Pakistan citing its New Energy Vehicle Policy.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
     }
   ]
 }
