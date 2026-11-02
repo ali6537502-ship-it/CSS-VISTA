@@ -1,0 +1,34 @@
+{
+  "observedOn": "2026-11-02",
+  "pages": [
+    {
+      "path": "/api/health.php",
+      "status": 200,
+      "state": {
+        "ok": true
+      }
+    },
+    {
+      "path": "/api/pro-release.php",
+      "status": 200,
+      "state": {
+        "paused": true
+      }
+    },
+    {
+      "path": "/subjects/compulsory/current-affairs",
+      "status": 200,
+      "robots": [
+        "noindex, follow"
+      ],
+      "pauseNotice": true,
+      "adLoader": false
+    },
+    {
+      "path": "/sitemap-core.xml",
+      "status": 200,
+      "urls": 593,
+      "pausedSubjectListed": false
+    }
+  ]
+}

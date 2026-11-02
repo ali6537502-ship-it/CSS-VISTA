@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/book-summaries/why-nations-fail",
+    "width": 390,
+    "visibleDialog": true,
+    "readerCharacters": 2888,
+    "fullBodyContainsExpectedSourceText": true
+  },
+  {
+    "path": "/book-summaries/why-nations-fail",
+    "width": 1366,
+    "visibleDialog": true,
+    "readerCharacters": 2888,
+    "fullBodyContainsExpectedSourceText": true
+  }
+]
