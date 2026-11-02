@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-11-01",
   "published_at": "2026-11-01T19:02:07+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 1 November 2026 | Evening Update (00:00–19:02 PKT)",
+  "edition": "CSS VISTA — Daily Current Affairs | 1 November 2026 | Finalized Coverage (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-01-pakistan-g24-chair",
@@ -26,9 +26,6 @@
       ],
       "question_angles": [
         "Which country assumed the chairmanship of the Group of Twenty-Four (G-24) on 1 November 2026?"
-      ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
       ],
       "topics": [
         "G-24",
@@ -77,9 +74,6 @@
       "question_angles": [
         "Which aircraft model arrived in Islamabad on 1 November 2026 as PIA's first Dreamliner?"
       ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
-      ],
       "topics": [
         "Civil aviation",
         "PIA",
@@ -127,9 +121,6 @@
       "question_angles": [
         "How many children under five did Bannu's anti-polio campaign launched on 1 November 2026 aim to vaccinate?"
       ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
-      ],
       "topics": [
         "Polio eradication",
         "District administration",
@@ -173,9 +164,6 @@
       ],
       "question_angles": [
         "According to the SECP classification reported on 1 November 2026, how many years of missing statutory filings could trigger 'inactive by registrar' status?"
-      ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
       ],
       "topics": [
         "SECP",
@@ -222,9 +210,6 @@
       ],
       "question_angles": [
         "What did seven core OPEC+ producers decide at their online meeting on 1 November 2026?"
-      ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
       ],
       "topics": [
         "OPEC+",
@@ -276,9 +261,6 @@
       "question_angles": [
         "Which country mediated the Iran–US discussions continuing in Doha on 1 November 2026?"
       ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
-      ],
       "topics": [
         "Iran-US relations",
         "Mediation",
@@ -324,9 +306,6 @@
       ],
       "question_angles": [
         "What does 'SIR' stand for in India's contested 2026 electoral-roll revision?"
-      ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
       ],
       "topics": [
         "Electoral rolls",
@@ -374,9 +353,6 @@
       "question_angles": [
         "What approximate share of the $6.3 billion in stolen tokens did Binance say it had covered before resuming withdrawals on 1 November 2026?"
       ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
-      ],
       "topics": [
         "Cybersecurity",
         "Cryptocurrency",
@@ -423,9 +399,6 @@
       "question_angles": [
         "How many Ukrainian regions did President Zelenskiy say suffered power-infrastructure strikes on 1 November 2026?"
       ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
-      ],
       "topics": [
         "Russia-Ukraine war",
         "Energy infrastructure",
@@ -471,9 +444,6 @@
       "question_angles": [
         "Which Ukrainian town was the focus of the local humanitarian ceasefire cited by Pope Leo on 1 November 2026?"
       ],
-      "what_to_watch": [
-        "Review authoritative updates after the 19:02 PKT evening cutoff; this is a partial-day edition."
-      ],
       "topics": [
         "Humanitarian diplomacy",
         "Russia-Ukraine war",
@@ -494,6 +464,254 @@
           "publisher": "Reuters",
           "title": "Pope Leo says he hopes Oleshky truce could spur Ukraine-Russia peace efforts",
           "url": "https://www.reuters.com/world/europe/pope-leo-says-he-hopes-oleshky-truce-could-spur-ukraine-russia-peace-efforts-2026-11-01/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-01-pakistan-polio-eighth-case-khyber",
+      "category": "Pakistan — Public Health",
+      "headline": "Pakistan confirms eighth polio case of 2026 in Khyber district",
+      "summary": "Pakistan's National Emergency Operations Centre for Polio Eradication confirmed the eighth polio case reported in 2026 on 1 November. The affected child is a 13-month-old girl from Janbaz-B union council in Bara tehsil of Khyber district, Khyber Pakhtunkhwa.",
+      "what_happened": "The Pakistan Polio Eradication Programme identified the case as Khyber district's second and Khyber Pakhtunkhwa's sixth of 2026. The programme called for vaccination of children under five during the 2–8 November subnational campaign. The newly confirmed case is distinct from the previously announced vaccination target of approximately 24 million children in 97 districts.",
+      "explanation": "A confirmed case is evidence of continued wild-poliovirus transmission; it is not a measure of how many children will be vaccinated. Environmental detections in the Peshawar Block have also signalled ongoing circulation, according to the programme.",
+      "background": "Pakistan's eradication programme combines vaccination, surveillance, outbreak response and coordination with Afghanistan. Repeated campaigns are needed because missed children and virus circulation can sustain transmission.",
+      "why_it_matters": "The additional case underscores continuing challenges for immunisation coverage, surveillance and access to children in high-risk districts.",
+      "pakistan_perspective": "The case tally is a cumulative count reported as of 1 November, not a projection for the full year. Campaign targets should not be confused with achieved vaccination coverage.",
+      "regional_implications": "Cross-border coordination with Afghanistan is important because poliovirus transmission and population movement cross administrative borders.",
+      "global_implications": "Persistent poliovirus transmission remains relevant to the international objective of eradicating wild poliovirus.",
+      "key_takeaways": [
+        "The NEOC confirmed Pakistan's eighth polio case of 2026 on 1 November; the case was detected in Khyber district, KP.",
+        "The child was 13 months old, and the report identified the case as the sixth in KP during 2026.",
+        "A new campaign was scheduled for 2–8 November; its announced target is not a verified result."
+      ],
+      "facts": [
+        "On 1 November 2026, Pakistan reported its eighth polio case of the year, from Khyber district, Khyber Pakhtunkhwa."
+      ],
+      "quick_gk": [
+        "On 1 November 2026, Pakistan reported its eighth polio case of the year, from Khyber district, Khyber Pakhtunkhwa."
+      ],
+      "statistics": [
+        {
+          "label": "Cumulative confirmed polio cases reported in Pakistan during 2026 as of 1 November",
+          "value": "8",
+          "source": "Dawn",
+          "date": "2026-11-01"
+        }
+      ],
+      "question_angles": [
+        "Which district reported Pakistan's eighth confirmed polio case of 2026 on 1 November?"
+      ],
+      "topics": [
+        "Polio eradication",
+        "Infectious disease surveillance",
+        "Vaccination campaigns"
+      ],
+      "countries": [
+        "Pakistan",
+        "Afghanistan"
+      ],
+      "institutions": [
+        "National Emergency Operations Centre for Polio Eradication",
+        "Pakistan Polio Eradication Programme"
+      ],
+      "organisations": [],
+      "people": [],
+      "what_to_watch": [
+        "Verified case investigations, vaccination coverage and further laboratory-confirmed cases after 1 November."
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Polio case from KP's Khyber takes nationwide tally for 2026 to eight",
+          "url": "https://www.dawn.com/news/2041402/polio-case-from-kps-khyber-takes-nationwide-tally-for-2026-to-eight"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-01-pakistan-afghan-border-lower-south-waziristan",
+      "category": "Pakistan — Border Security and Foreign Relations",
+      "headline": "Lower South Waziristan official reports renewed Pakistan–Afghanistan border firing",
+      "summary": "On 1 November, the deputy commissioner's office in Lower South Waziristan said Pakistani checkpoints had come under fire from Afghan border positions and that Pakistani forces had responded. The reported battlefield details were official claims, not independently verified findings.",
+      "what_happened": "According to the district administration's statement cited by Dawn, Pakistani forces fired on several Afghan positions. The administration reported no Pakistani-side casualties at the time of its statement. The military's Inter-Services Public Relations had not issued its own confirmation when the report was published.",
+      "explanation": "The reported exchange followed earlier clashes near the frontier. Assertions about which side initiated firing, the destruction of posts and troop movements require independent corroboration; this edition does not treat them as established outcomes.",
+      "background": "Security incidents along the Pakistan–Afghanistan border have affected bilateral diplomacy, border trade and civilian movement. Claims by either side should be distinguished from independently established facts.",
+      "why_it_matters": "Cross-border incidents increase risks of escalation and can affect local communities, transport routes and regional counterterrorism cooperation.",
+      "pakistan_perspective": "Lower South Waziristan is a district of Khyber Pakhtunkhwa. The district administration's statement is attributable evidence of what officials reported, not proof of every battlefield claim.",
+      "regional_implications": "Further escalation could complicate Pakistan–Afghanistan relations and efforts to protect trade and border communities.",
+      "global_implications": "The incident illustrates how unsettled border security can affect regional stability and humanitarian access.",
+      "key_takeaways": [
+        "The Lower South Waziristan deputy commissioner's office reported border firing on 1 November 2026.",
+        "The reported Pakistani response and claims about Afghan positions were not independently confirmed.",
+        "No Pakistani-side casualties were reported by the district administration at publication time."
+      ],
+      "facts": [
+        "On 1 November 2026, the deputy commissioner of Lower South Waziristan reported a Pakistan–Afghanistan border exchange of fire."
+      ],
+      "quick_gk": [
+        "On 1 November 2026, the deputy commissioner of Lower South Waziristan reported a Pakistan–Afghanistan border exchange of fire."
+      ],
+      "question_angles": [
+        "Which district's deputy commissioner reported renewed firing along the Pakistan–Afghanistan border on 1 November 2026?"
+      ],
+      "topics": [
+        "Pakistan–Afghanistan relations",
+        "Border security",
+        "Regional stability"
+      ],
+      "countries": [
+        "Pakistan",
+        "Afghanistan"
+      ],
+      "institutions": [
+        "Lower South Waziristan district administration",
+        "Inter-Services Public Relations"
+      ],
+      "organisations": [],
+      "people": [],
+      "what_to_watch": [
+        "Statements from both governments, independent casualty confirmation and any de-escalation arrangements."
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Pakistan responds to unprovoked firing from Afghan posts along border in Lower South Waziristan: DC",
+          "url": "https://www.dawn.com/news/2041405/pakistan-responds-to-unprovoked-firing-from-afghan-posts-along-border-in-lower-south-waziristan-dc"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-01-minurso-western-sahara-winddown",
+      "category": "World — United Nations and Peacekeeping",
+      "headline": "UN begins winding down Western Sahara mission after MINURSO mandate expires",
+      "summary": "The United Nations said on 1 November that its peacekeeping mission in Western Sahara, MINURSO, would begin winding down after the Security Council failed to renew its mandate, which expired on 31 October 2026.",
+      "what_happened": "A Russian veto blocked a United States-backed renewal draft at the Security Council on 30 October, while a competing Russian draft also failed. UN Secretary-General António Guterres confirmed the wind-down on 1 November. The mission had operated since 1991, when it was created to support a ceasefire and a referendum on the territory's future.",
+      "explanation": "The mandate's legal expiry occurred on 31 October; the UN announcement and beginning of withdrawal were reported on 1 November. The closure does not settle competing claims over Western Sahara's sovereignty or guarantee that hostilities will end.",
+      "background": "Morocco administers most of Western Sahara and proposes autonomy under Moroccan sovereignty. The Polisario Front seeks Sahrawi self-determination and is supported by Algeria. Disagreements over voter eligibility prevented the envisaged referendum.",
+      "why_it_matters": "The end of a long-running UN mission raises questions about ceasefire monitoring, Security Council vetoes, peacekeeping mandates and the self-determination principle.",
+      "pakistan_perspective": "Pakistan's membership of the Security Council makes the episode relevant to the operation of the Council, the veto and the protection of negotiated peace arrangements.",
+      "regional_implications": "The wind-down could heighten tensions involving Morocco, Algeria and the Polisario Front, though renewed conflict is not a predetermined outcome.",
+      "global_implications": "The episode illustrates the institutional consequences of Security Council deadlock for UN field operations.",
+      "key_takeaways": [
+        "MINURSO's mandate expired on 31 October 2026, and the UN announced its wind-down on 1 November.",
+        "The mission was established in 1991 to support a ceasefire and a referendum in Western Sahara.",
+        "The Security Council failed to adopt competing US- and Russian-backed renewal proposals."
+      ],
+      "facts": [
+        "The UN Mission for the Referendum in Western Sahara (MINURSO) began winding down on 1 November 2026 after its mandate expired on 31 October."
+      ],
+      "quick_gk": [
+        "The UN Mission for the Referendum in Western Sahara (MINURSO) began winding down on 1 November 2026 after its mandate expired on 31 October."
+      ],
+      "statistics": [
+        {
+          "label": "Year MINURSO was established",
+          "value": "1991",
+          "source": "Reuters",
+          "date": "2026-11-01"
+        }
+      ],
+      "question_angles": [
+        "Which UN peacekeeping mission began winding down in November 2026 after its Security Council mandate was not renewed?"
+      ],
+      "topics": [
+        "United Nations Security Council",
+        "Peacekeeping",
+        "Western Sahara",
+        "Self-determination"
+      ],
+      "countries": [
+        "Morocco",
+        "Algeria",
+        "Russia",
+        "United States"
+      ],
+      "institutions": [
+        "United Nations Security Council",
+        "MINURSO"
+      ],
+      "organisations": [
+        "Polisario Front"
+      ],
+      "people": [
+        "António Guterres"
+      ],
+      "what_to_watch": [
+        "UN withdrawal arrangements, Security Council diplomacy and the security situation in Western Sahara."
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "UN peacekeeping mission in Western Sahara ends after 35 years, UN chief says",
+          "url": "https://www.reuters.com/world/africa/un-peacekeeping-mission-western-sahara-ends-after-35-years-un-chief-says-2026-11-01/"
+        },
+        {
+          "publisher": "United Nations",
+          "title": "Security Council resolution 2797 (2025) [on extension of the mandate of the UN Mission for the Referendum in Western Sahara (MINURSO) until 31 Oct. 2026]",
+          "url": "https://mandates.un.org/mandate/S/RES/2797%282025%29"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-01-manama-dialogue-gcc-security",
+      "category": "World — Gulf Security and Diplomacy",
+      "headline": "UAE urges diplomacy and renewed Gulf security cooperation at Manama Dialogue",
+      "summary": "At the concluding day of the IISS Manama Dialogue in Bahrain on 1 November, UAE presidential diplomatic adviser Anwar Gargash urged a diplomatic solution to the Iran crisis and called for stronger confidence in Gulf collective security.",
+      "what_happened": "Gargash said the UAE wanted to avoid another round of military confrontation, while remaining prepared to defend itself. He argued that recent conflict had exposed weaknesses in regional security coordination. Bahrain's foreign minister Abdullatif Al Zayani also discussed a regional security framework based on sovereignty and freedom of navigation.",
+      "explanation": "The statements were diplomatic positions voiced at a security conference; no new binding Gulf security treaty or concluded US–Iran settlement was announced in this report.",
+      "background": "The 22nd IISS Manama Dialogue ran from 30 October to 1 November 2026 in Bahrain. The conference brings together senior government, defence and foreign-policy officials.",
+      "why_it_matters": "Gulf stability, maritime trade and freedom of navigation have consequences for international energy markets and the security of regional supply chains.",
+      "pakistan_perspective": "Pakistan has significant trade, energy and diaspora links with Gulf states; renewed escalation would create economic and diplomatic risks.",
+      "regional_implications": "The remarks point to debate over Gulf Cooperation Council security coordination and the role of diplomacy alongside deterrence.",
+      "global_implications": "Energy and shipping disruptions around the Strait of Hormuz can affect importing economies far beyond the Gulf.",
+      "key_takeaways": [
+        "UAE adviser Anwar Gargash spoke at the IISS Manama Dialogue in Bahrain on 1 November 2026.",
+        "He favoured a diplomatic resolution of the Iran crisis and called for rebuilding Gulf collective-security confidence.",
+        "The remarks did not constitute a concluded ceasefire or new defence pact."
+      ],
+      "facts": [
+        "On 1 November 2026, UAE diplomatic adviser Anwar Gargash urged diplomacy at the IISS Manama Dialogue in Bahrain."
+      ],
+      "quick_gk": [
+        "On 1 November 2026, UAE diplomatic adviser Anwar Gargash urged diplomacy at the IISS Manama Dialogue in Bahrain."
+      ],
+      "question_angles": [
+        "At which regional security conference did UAE presidential adviser Anwar Gargash address Gulf security on 1 November 2026?"
+      ],
+      "topics": [
+        "Gulf Cooperation Council",
+        "Iran–Gulf relations",
+        "Regional security",
+        "Strait of Hormuz"
+      ],
+      "countries": [
+        "United Arab Emirates",
+        "Bahrain",
+        "Iran",
+        "Qatar",
+        "Pakistan"
+      ],
+      "institutions": [
+        "International Institute for Strategic Studies",
+        "Gulf Cooperation Council"
+      ],
+      "organisations": [],
+      "people": [
+        "Anwar Gargash",
+        "Abdullatif Al Zayani"
+      ],
+      "what_to_watch": [
+        "Results of mediation, maritime-security arrangements and any formal GCC security commitments."
+      ],
+      "sources": [
+        {
+          "publisher": "The National",
+          "title": "UAE does not want new round of conflict but is 'braced for worst', says Dr Gargash",
+          "url": "https://www.thenationalnews.com/news/gulf/2026/11/01/uae-does-not-want-new-round-of-conflict-but-is-braced-for-worst-says-dr-gargash/"
+        },
+        {
+          "publisher": "International Institute for Strategic Studies",
+          "title": "IISS Manama Dialogue 2026 | Speaker Agenda",
+          "url": "https://www.iiss.org/events/manama-dialogue/manama-dialogue-2026/speaker-agenda/"
         }
       ]
     }
