@@ -9,8 +9,7 @@ const context=await browser.newContext({reducedMotion:'reduce',ignoreHTTPSErrors
 let currentUser='fixture-a'
 await context.route('**/*',async route=>{
  const url=new URL(route.request().url())
- if(url.origin!==origin){ console.log('Browser fixture blocked origin:',url.origin);return route.abort()}
- if(url.pathname.startsWith('/api/'))console.log('Browser fixture API',route.request().method(),url.pathname)
+ if(url.origin!==origin) return route.abort()
  if(!url.pathname.startsWith('/api/')) return route.continue()
   if (url.pathname === '/api/auth/workspace-preview.php') return route.fulfill({ json: { enabled: true, user_id: currentUser } })
  if (url.pathname === '/api/workspace-release.php') return route.fulfill({json:{enabled:true}})
