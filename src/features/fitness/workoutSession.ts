@@ -43,7 +43,8 @@ export function resumeWorkout(session:WorkoutSession,now=Date.now()):WorkoutSess
 export function skipWorkoutStep(session:WorkoutSession,plan:WorkoutPlan,now=Date.now()):WorkoutSession{
   const steps=workoutSteps(plan)
   const next=session.step+1
-  if(next>=steps.length)return {...session,step:steps.length,remaining:0,completed:true,running:false,lastTick:now}
+  // Skipping the last cooldown is not evidence the workout was completed.
+  if(next>=steps.length)return {...session,step:steps.length-1,remaining:steps.at(-1)!.seconds,running:false,completed:false,lastTick:now}
   return {...session,step:next,remaining:steps[next].seconds,lastTick:now}
 }
 export function restoreWorkoutSession(raw:string|null,day:string,plan:WorkoutPlan):WorkoutSession|null{
