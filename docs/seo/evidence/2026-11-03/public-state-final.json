@@ -1,0 +1,8 @@
+{
+  "/api/health.php": {
+    "ok": true
+  },
+  "/api/pro-release.php": {
+    "paused": true
+  }
+}
