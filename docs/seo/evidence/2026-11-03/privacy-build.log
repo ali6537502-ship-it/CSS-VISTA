@@ -59,10 +59,10 @@ Module "src/data/studyMaterialMeta.mjs" tried to import "src/data/bundled/option
 Module "src/data/studyMaterialMeta.mjs" tried to import "src/data/bundled/islamic-references-index.json" with "type": "json" attributes, but it was already imported elsewhere with no attributes. Please ensure that import attributes for the same module are always consistent.
 ✓ 2341 modules transformed.
 rendering chunks...
-[plugin vite:reporter] 
+[plugin vite:reporter]
 (!) /workspace/css-audit/src/features/factbook/media.ts is dynamically imported by /workspace/css-audit/src/features/factbook/service.ts but also statically imported by /workspace/css-audit/src/pages/Factbook.tsx, dynamic import will not move module into another chunk.
 
-[plugin vite:reporter] 
+[plugin vite:reporter]
 (!) /workspace/css-audit/src/features/daily-pdf/Library.tsx is dynamically imported by /workspace/css-audit/src/App.tsx but also statically imported by /workspace/css-audit/src/pages/Home.tsx, dynamic import will not move module into another chunk.
 
 computing gzip size...
