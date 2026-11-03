@@ -1,0 +1,26 @@
+[
+  {
+    "url": "http://css-vista.com/ads.txt",
+    "status": 200,
+    "final": "https://www.css-vista.com/ads.txt",
+    "sellerRecordMatches": true
+  },
+  {
+    "url": "http://www.css-vista.com/ads.txt",
+    "status": 200,
+    "final": "https://www.css-vista.com/ads.txt",
+    "sellerRecordMatches": true
+  },
+  {
+    "url": "https://css-vista.com/ads.txt",
+    "status": 200,
+    "final": "https://www.css-vista.com/ads.txt",
+    "sellerRecordMatches": true
+  },
+  {
+    "url": "http://css-vista.com/current-affairs",
+    "status": 200,
+    "final": "https://www.css-vista.com/current-affairs",
+    "sellerRecordMatches": null
+  }
+]
