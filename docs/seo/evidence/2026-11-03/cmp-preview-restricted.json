@@ -1,0 +1,159 @@
+{
+  "mode": "Google documented fc=alwaysshow&fctype=gdpr preview in an ephemeral unsigned browser. Advertising endpoints blocked; only official loader, CMP and static resources allowed. No production account settings changed.",
+  "requests": [
+    {
+      "host": "www.css-vista.com",
+      "path": "/"
+    },
+    {
+      "host": "pagead2.googlesyndication.com",
+      "path": "/pagead/js/adsbygoogle.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/fonts/inter-latin-variable.woff2"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/index-BShPyLJg.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/index-DgBSMBo8.css"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/images/logo.webp"
+    },
+    {
+      "host": "pagead2.googlesyndication.com",
+      "path": "/pagead/managed/js/adsense/m202610290101/show_ads_impl.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/HomePreview-6JTLcRd7.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/api-C_byrN0_.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/book-open-text-DnZg2ta9.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/daily-pdf.php"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/lucky-draw.php"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/pro-release.php"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/workspace-release.php"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/mpt/flow.php"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/StudyActivityTracker-OzEC07Cy.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/notifications.php"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/admin-D4hmaait.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/VistaShortcut-DuA4L-F4.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/myTasks-BdjQ2OQn.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/square-check-C2eL4FVs.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/clock-3-B6HDhlI0.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/settings-2-Cf-MeaT2.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/plus-BhwaKUb9.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/trash-2-D2Q3ASJn.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/assets/rotate-ccw-DYskKoEy.js"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/favicon.png"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/vistagram-content/index.json"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/content.php"
+    },
+    {
+      "host": "www.css-vista.com",
+      "path": "/api/notifications.php"
+    }
+  ],
+  "blocked": [
+    {
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/html/r20261102/r20190131/zrt_lookup.html",
+      "method": "GET"
+    },
+    {
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/ads",
+      "method": "GET"
+    },
+    {
+      "host": "ep1.adtrafficquality.google",
+      "path": "/getconfig/sodar",
+      "method": "GET"
+    }
+  ],
+  "errors": [],
+  "state": {
+    "googlefcReady": false,
+    "tcfApi": false,
+    "iframes": [
+      {
+        "title": "Advertisement",
+        "src": "https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-6131271603014611&output=html&adk=1812271804&adf=3025194257&abgtt=6&lmt=1793634111&plat=3%3A16%2C4%3A16%2C9%3A32776%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A1081344%2C32%3A32%2C41%3A32%2C42%3A32%2C43%3A32%2C44%3A32&format=0x0&url=https%3A%2F%2Fwww.css-vista.com%2F%3Ffc%3Dalwaysshow%26fctype%3Dgdpr&pra=5&aiof=14&asro=0&aimartd=4&aieuf=1&aicrs=1&uach=WyJMaW51eCIsIiIsIng4NiIsIiIsIjE1NC4wLjgwMzcuNTciLG51bGwsMCxudWxsLCI2NCIsW1siTm90IEEoQnJhbmQiLCI5OS4wLjAuMCJdLFsiQ2hyb21pdW0iLCIxNTQuMC44MDM3LjU3Il1dLDBd&dt=1793685753116&bpp=42&bdt=1435&idt=1619&shv=r20261102&mjsv=m202610290101&ptt=9&saldr=aa&abxe=1&cookie_enabled=1&eoidce=1&nras=1&correlator=520482242303&frm=20&pv=2&u_tz=0&u_his=2&u_h=900&u_w=1366&u_ah=900&u_aw=1366&u_cd=24&u_sd=1&dmc=8&adx=-12245933&ady=-12245933&biw=1366&bih=900&scr_x=0&scr_y=0&eid=95401822%2C95404665%2C95405932%2C95407882%2C95408709&oid=2&pvsid=7789333082752333&tmod=645550276&uas=0&nvt=1&fsapi=1&fc=1920&brdim=10%2C10%2C10%2C10%2C1366%2C0%2C1366%2C900%2C1366%2C900&vis=1&rsz=%7C%7Cs%7C&abl=NS&fu=32768&bc=31&bz=1&pgls=CAk.&ifi=1&uci=a!1&fsb=1&dtd=1693"
+      },
+      {
+        "title": "",
+        "src": "https://googleads.g.doubleclick.net/pagead/html/r20261102/r20190131/zrt_lookup.html"
+      }
+    ],
+    "dialogs": []
+  },
+  "frames": []
+}

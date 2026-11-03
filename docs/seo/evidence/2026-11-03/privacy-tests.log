@@ -1,0 +1,43 @@
+
+> css-vista@1.0.0 test:ads
+> node --test tests/adPolicy.test.ts tests/privacyChoices.test.ts
+
+✔ publisher ID is the verified CSS Vista publisher (1.09231ms)
+✔ the official AdSense loader is present once in the initial document head (5.066275ms)
+✔ homepage allows Auto Ads below its protected top while manual units stay disabled (0.459361ms)
+✔ homepage exposes a stable Auto Ads excluded-area boundary around search and hero (1.142054ms)
+✔ advertising is independent of indexability while thin surfaces fail closed (0.753918ms)
+✔ account management, personal navigation and practice stay ad-free with their existing noindex policy (0.782751ms)
+✔ hibernated MPT overview and all assessment routes remain ad-free (0.248899ms)
+✔ only substantial publisher content can opt into advertising (0.316569ms)
+✔ authentication transactions, admin, assessments and viewers stay ad-free (0.489356ms)
+✔ transaction, error and loading states suppress ads on an otherwise eligible route (0.354326ms)
+✔ substantial public content is Auto Ads eligible and manual units stay off until audited (0.24248ms)
+✔ the unfinished lecture route is noindex and out of the sitemap but remains usable (0.110123ms)
+✔ the mixed current-affairs page stays ad-free because it contains an active MCQ state (0.225244ms)
+✔ vignettes are blocked for protected destinations and sensitive controls (0.301117ms)
+✔ signing in never makes account management or personal records into advertising inventory (0.342308ms)
+✔ legacy artificial timing and page-count state is absent (3.965602ms)
+✔ the advertising layer never derives eligibility from indexability (0.709583ms)
+✔ privacy and policy pages are discoverable from the global header navigation (1.351395ms)
+✔ indexable routes have unique crawlable metadata and unknown paths fail closed (0.368106ms)
+✔ unreviewed utility and interactive routes fail closed while the public grammar course stays ad-free (0.847157ms)
+✔ Auto Ads never load over a sign-in, registration or password form (0.457219ms)
+✔ the provider supplies the page state, so suppression is not inert (2.570623ms)
+✔ rendered loading and failures suppress public ads while account utilities remain excluded (0.41116ms)
+✔ actual loading, fatal-error and unavailable-topic views publish runtime advertising state (3.019849ms)
+✔ an executed ad library leaves the document before entering an ad-free screen (0.253997ms)
+✔ initial, loading and same-route views cannot create an advertising refresh loop (0.094109ms)
+✔ waits for documented readiness and uses the current API object only once (1.231006ms)
+✔ already-ready Google queue executes synchronously (0.169602ms)
+✔ unavailable service times out and cannot revoke consent later (0.653019ms)
+✔ unmounted control cancels a queued user request (0.166867ms)
+✔ API errors produce an unavailable result without pretending consent changed (0.228949ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 193.710572

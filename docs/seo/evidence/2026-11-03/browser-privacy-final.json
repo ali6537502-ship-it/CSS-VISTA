@@ -1,0 +1,18 @@
+[
+  {
+    "width": 390,
+    "delayedReady": true,
+    "timeoutFallback": true,
+    "lateCallbackCancelled": true,
+    "navigationCancelled": true,
+    "noAdLoader": true
+  },
+  {
+    "width": 1366,
+    "delayedReady": true,
+    "timeoutFallback": true,
+    "lateCallbackCancelled": true,
+    "navigationCancelled": true,
+    "noAdLoader": true
+  }
+]

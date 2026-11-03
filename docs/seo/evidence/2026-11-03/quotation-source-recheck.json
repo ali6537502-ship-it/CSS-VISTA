@@ -1,0 +1,697 @@
+{
+  "observedOn": "2026-11-03",
+  "scope": "47 still-unverified entries; existing identity/quotation source candidates, no ownership inference or automatic promotion",
+  "books": [
+    {
+      "slug": "the-narrow-corridor",
+      "title": "The Narrow Corridor",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780735224407",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouseretail.com/book/?isbn=9780735224407",
+          "hash": "352049d0fdfc6e7afb44252d7b38bfb19cad2429cb1e9a064ccbe91a3289c143",
+          "phraseMatch": false,
+          "phraseWords": 20
+        }
+      ]
+    },
+    {
+      "slug": "guns-germs-and-steel",
+      "title": "Guns, Germs, and Steel",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+          "status": 200,
+          "finalUrl": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+          "hash": "41aef166b3efa311a1ed9744194207cf77cef3479784a584e115d7a2097df9bd",
+          "phraseMatch": false,
+          "phraseWords": 21
+        }
+      ]
+    },
+    {
+      "slug": "the-lessons-of-history",
+      "title": "The Lessons of History",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.simonandschuster.com/books/The-Lessons-of-History/Will-Durant/9781439149959",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 12
+        }
+      ]
+    },
+    {
+      "slug": "a-short-history-of-nearly-everything",
+      "title": "A Short History of Nearly Everything",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780767908184",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouseretail.com/book/?isbn=9780767908184",
+          "hash": "8fac613d83125ded0455707ccf23ac292092464705a61f1bc3a2239646ba7058",
+          "phraseMatch": false,
+          "phraseWords": 16
+        }
+      ]
+    },
+    {
+      "slug": "factfulness",
+      "title": "Factfulness",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.gapminder.org/factfulness/single/",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 15
+        },
+        {
+          "url": "https://us.macmillan.com/books/9781250107817/factfulness/",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 15
+        }
+      ]
+    },
+    {
+      "slug": "thinking-fast-and-slow",
+      "title": "Thinking, Fast and Slow",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://us.macmillan.com/books/9780374533557/thinkingfastandslow/",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 17
+        }
+      ]
+    },
+    {
+      "slug": "capital-in-the-twenty-first-century",
+      "title": "Capital in the Twenty-First Century",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.jstor.org/stable/j.ctt6wpqbc",
+          "status": 200,
+          "finalUrl": "https://www.jstor.org/stable/j.ctt6wpqbc",
+          "hash": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea",
+          "phraseMatch": false,
+          "phraseWords": 16
+        }
+      ]
+    },
+    {
+      "slug": "prisoners-of-geography",
+      "title": "Prisoners of Geography",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.simonandschuster.com/books/Prisoners-of-Geography/Tim-Marshall/Politics-of-Place/9781501121463",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 6
+        }
+      ]
+    },
+    {
+      "slug": "the-revenge-of-geography",
+      "title": "The Revenge of Geography",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780812982220",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouseretail.com/book/?isbn=9780812982220",
+          "hash": "c9abf7d169ec9b13db981f94f34454bb8d5029c20fde9399a550bf7b5373f956",
+          "phraseMatch": false,
+          "phraseWords": 8
+        }
+      ]
+    },
+    {
+      "slug": "the-silk-roads",
+      "title": "The Silk Roads",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.peterfrankopan.com/the-silk-roads.html",
+          "status": 200,
+          "finalUrl": "https://www.peterfrankopan.com/the-silk-roads.html",
+          "hash": "080647bc676fdc049e404ccddab81ffd308351d0c70da295717a7cf897865c4d",
+          "phraseMatch": true,
+          "phraseWords": 11
+        }
+      ]
+    },
+    {
+      "slug": "the-sixth-extinction",
+      "title": "The Sixth Extinction",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://us.macmillan.com/books/9780805099799/thesixthextinction/",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 17
+        }
+      ]
+    },
+    {
+      "slug": "the-origins-of-totalitarianism",
+      "title": "The Origins of Totalitarianism",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9781598538069",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouseretail.com/book/?isbn=9781598538069",
+          "hash": "4b20e99b906c2a84a0d1cf865ae79d73aaac89188518f665aa580dc10458769f",
+          "phraseMatch": false,
+          "phraseWords": 13
+        }
+      ]
+    },
+    {
+      "slug": "justice-what-s-the-right-thing-to-do",
+      "title": "Justice: What\u2019s the Right Thing to Do?",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://us.macmillan.com/books/9780374532505/justice/",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 8
+        }
+      ]
+    },
+    {
+      "slug": "the-dictator-s-handbook",
+      "title": "The Dictator\u2019s Handbook",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/bruce-bueno-de-mesquita-2/the-dictators-handbook/9781541701366/",
+          "status": 200,
+          "finalUrl": "https://www.hachettebookgroup.com/titles/bruce-bueno-de-mesquita-2/the-dictators-handbook/9781541701366/",
+          "hash": "ec1b156b524d6b50192e4357bb3202b15f270371348a00bac2083648a8549b28",
+          "phraseMatch": false,
+          "phraseWords": 14
+        }
+      ]
+    },
+    {
+      "slug": "world-order",
+      "title": "World Order",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguin.co.uk/books/266993/world-order-by-henry-kissinger/9780241004272",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 11
+        }
+      ]
+    },
+    {
+      "slug": "the-tragedy-of-great-power-politics",
+      "title": "The Tragedy of Great Power Politics",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.mearsheimer.com/publications/",
+          "status": 200,
+          "finalUrl": "https://www.mearsheimer.com/publications/",
+          "hash": "ac3098a886234b9a7bc511fc0f877e38dc9e78baf84f60f660f9b05dcb22e562",
+          "phraseMatch": false,
+          "phraseWords": 15
+        }
+      ]
+    },
+    {
+      "slug": "the-rise-and-fall-of-the-great-powers",
+      "title": "The Rise and Fall of the Great Powers",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/91615/the-rise-and-fall-of-the-great-powers-by-paul-kennedy/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/91615/the-rise-and-fall-of-the-great-powers-by-paul-kennedy/",
+          "hash": "6bfd09bfe03be8c0479134d52796c5290b6190ae0b4f44ed5553569eb6029e1f",
+          "phraseMatch": false,
+          "phraseWords": 16
+        }
+      ]
+    },
+    {
+      "slug": "the-end-of-history-and-the-last-man",
+      "title": "The End of History and the Last Man",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.simonandschuster.com/books/The-End-of-History-and-the-Last-Man/Francis-Fukuyama/9780743284554",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 8
+        }
+      ]
+    },
+    {
+      "slug": "the-grand-chessboard",
+      "title": "The Grand Chessboard",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/zbigniew-brzezinski/the-grand-chessboard/9780465094356/",
+          "status": 200,
+          "finalUrl": "https://www.hachettebookgroup.com/titles/zbigniew-brzezinski/the-grand-chessboard/9780465094356/",
+          "hash": "e3148412f9f98e5ed3ff0dffd3968abe082bf14fc416d7f377161f6530753855",
+          "phraseMatch": false,
+          "phraseWords": 9
+        }
+      ]
+    },
+    {
+      "slug": "the-twenty-years-crisis-1919-1939",
+      "title": "The Twenty Years\u2019 Crisis, 1919\u20131939",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://link.springer.com/book/10.1057/978-1-349-95076-8",
+          "status": 200,
+          "finalUrl": "https://link.springer.com/book/10.1057/978-1-349-95076-8?error=cookies_not_supported&code=de7e916f-b4de-41ba-9ae6-97a82649ed99",
+          "hash": "dc752a88e5113adddd86839e1ab5102f48dfc15a139d504c8851ebb6c1a3dba4",
+          "phraseMatch": false,
+          "phraseWords": 8
+        }
+      ]
+    },
+    {
+      "slug": "the-anarchical-society",
+      "title": "The Anarchical Society",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://cup.columbia.edu/book/the-anarchical-society/9780231161282/",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 19
+        }
+      ]
+    },
+    {
+      "slug": "the-strategy-of-conflict",
+      "title": "The Strategy of Conflict",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.hks.harvard.edu/tom-schelling-game-theory-pioneer-dies-95",
+          "status": 200,
+          "finalUrl": "https://www.hks.harvard.edu/tom-schelling-game-theory-pioneer-dies-95",
+          "hash": "0f704e0048c151910aa66684b6642fdb21af0cb012e440036c1a4e0ca6993e4f",
+          "phraseMatch": false,
+          "phraseWords": 6
+        }
+      ]
+    },
+    {
+      "slug": "the-guns-of-august",
+      "title": "The Guns of August",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+          "hash": "62c6c8a50933a9bb49f861a046f46e2df8524615c885d24d0140082f820b83b0",
+          "phraseMatch": false,
+          "phraseWords": 13
+        }
+      ]
+    },
+    {
+      "slug": "postwar-a-history-of-europe-since-1945",
+      "title": "Postwar: A History of Europe Since 1945",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+          "hash": "c0f60a8a06fb5f5af942e160ee543218bc281a78cf830f6c471efa4685cbfb71",
+          "phraseMatch": false,
+          "phraseWords": 6
+        }
+      ]
+    },
+    {
+      "slug": "the-cold-war-a-world-history",
+      "title": "The Cold War: A World History",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+          "status": 200,
+          "finalUrl": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+          "hash": "fc850005f5df43f1bfbc879e1f028578ef5adcd2028531bc73c42dbc5322a803",
+          "phraseMatch": false,
+          "phraseWords": 13
+        }
+      ]
+    },
+    {
+      "slug": "the-great-transformation",
+      "title": "The Great Transformation",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+          "hash": "e29ac10c5600ed3ab83f4ee4798807710f717986377833fd6f3372797e428653",
+          "phraseMatch": false,
+          "phraseWords": 16
+        }
+      ]
+    },
+    {
+      "slug": "poor-economics",
+      "title": "Poor Economics",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/abhijit-v-banerjee/poor-economics/9781541706194/",
+          "status": 200,
+          "finalUrl": "https://www.hachettebookgroup.com/titles/abhijit-v-banerjee/poor-economics/9781541706194/",
+          "hash": "0ff244ac1da8e9171a81978971f2605d0e8568efc61d0d28484c481106f2776d",
+          "phraseMatch": false,
+          "phraseWords": 9
+        }
+      ]
+    },
+    {
+      "slug": "good-economics-for-hard-times",
+      "title": "Good Economics for Hard Times",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.minneapolisfed.org/article/2021/esther-duflo-interview-deciding-how-to-share",
+          "status": 200,
+          "finalUrl": "https://www.minneapolisfed.org/article/2021/esther-duflo-interview-deciding-how-to-share",
+          "hash": "a6fa1db1ce39e904f440d98bbeb65d6e678f1ecb26a4bb10ce8851c19fe04346",
+          "phraseMatch": true,
+          "phraseWords": 9
+        },
+        {
+          "url": "https://bfi.uchicago.edu/wp-content/uploads/Can-Economics-Save-the-World_UneditedTranscript.pdf",
+          "status": 200,
+          "finalUrl": "https://bfi.uchicago.edu/wp-content/uploads/Can-Economics-Save-the-World_UneditedTranscript.pdf",
+          "hash": "f55e3e7ad6130031d14bb773269bbfbb0f20076173dd800b568fdccc0b70f0d7",
+          "phraseMatch": false,
+          "phraseWords": 9
+        }
+      ]
+    },
+    {
+      "slug": "the-bottom-billion",
+      "title": "The Bottom Billion",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.oup.com.au/books/higher-education/politics/9780195373387",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 12
+        }
+      ]
+    },
+    {
+      "slug": "the-future-of-capitalism",
+      "title": "The Future of Capitalism",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguin.co.uk/books/307625/the-future-of-capitalism-by-collier-paul/9780241382295",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 14
+        }
+      ]
+    },
+    {
+      "slug": "doughnut-economics",
+      "title": "Doughnut Economics",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.kateraworth.com/doughnut/",
+          "status": 200,
+          "finalUrl": "https://www.kateraworth.com/doughnut/",
+          "hash": "1d97e5623be55a63bdbfe5784931effdf2b36ccd87ee4a5e82b0b0a5245212bd",
+          "phraseMatch": true,
+          "phraseWords": 18
+        }
+      ]
+    },
+    {
+      "slug": "the-entrepreneurial-state",
+      "title": "The Entrepreneurial State",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+          "hash": "60fc7a9b55bf3eee7a9f6de276125027b6ca05f23fac98d35ecb84863eb135b7",
+          "phraseMatch": false,
+          "phraseWords": 13
+        }
+      ]
+    },
+    {
+      "slug": "nudge",
+      "title": "Nudge",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+          "hash": "4bc9133e1fabd845d322e4e8ed5fcc183cbae78ef8acc92c9fc67224e14b5e71",
+          "phraseMatch": false,
+          "phraseWords": 14
+        }
+      ]
+    },
+    {
+      "slug": "behave",
+      "title": "Behave",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780143110910",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouseretail.com/book/?isbn=9780143110910",
+          "hash": "cf300a5ee515c9a7e55abe202efc2b39af6863c174c0651324610af620540bb5",
+          "phraseMatch": false,
+          "phraseWords": 16
+        }
+      ]
+    },
+    {
+      "slug": "bowling-alone",
+      "title": "Bowling Alone",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.simonandschuster.com/books/Bowling-Alone-Revised-and-Updated/Robert-D-Putnam/9781982130848",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 14
+        }
+      ]
+    },
+    {
+      "slug": "the-second-sex",
+      "title": "The Second Sex",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+          "hash": "81ecc67a3ac70c7cd90f9ebb47a6ea22c38ff5c05c9168b8d4ef546f0887a012",
+          "phraseMatch": false,
+          "phraseWords": 9
+        }
+      ]
+    },
+    {
+      "slug": "the-wretched-of-the-earth",
+      "title": "The Wretched of the Earth",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+          "status": 200,
+          "finalUrl": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+          "hash": "7c74e49225befffa68b97f71feb3f00b76fdf670fca3e26701169e211b46308d",
+          "phraseMatch": false,
+          "phraseWords": 17
+        }
+      ]
+    },
+    {
+      "slug": "amusing-ourselves-to-death",
+      "title": "Amusing Ourselves to Death",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/297276/amusing-ourselves-to-death-by-neil-postman/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/297276/amusing-ourselves-to-death-by-neil-postman/",
+          "hash": "e25d301574f8e3aa2283ed28a344bb95ac3b85b9214d31f1cde469af791264e2",
+          "phraseMatch": false,
+          "phraseWords": 13
+        }
+      ]
+    },
+    {
+      "slug": "the-shallows",
+      "title": "The Shallows",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://wwnorton.co.uk/books/9780393072228-the-shallows",
+          "status": 200,
+          "finalUrl": "https://wwnorton.co.uk/books/9780393072228-the-shallows",
+          "hash": "5d21d2492a05082292777fa6da34b04956613f2bcfab9eb17ac30792fe265496",
+          "phraseMatch": false,
+          "phraseWords": 11
+        }
+      ]
+    },
+    {
+      "slug": "the-struggle-for-pakistan",
+      "title": "The Struggle for Pakistan",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+          "status": 200,
+          "finalUrl": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+          "hash": "68e5f0140c4be1a75b167985a7db91d36514c4cb7b51f76157e5841c63be1543",
+          "phraseMatch": false,
+          "phraseWords": 8
+        }
+      ]
+    },
+    {
+      "slug": "the-great-partition",
+      "title": "The Great Partition",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://yalebooks.yale.edu/book/9780300230321/the-great-partition/",
+          "status": 200,
+          "finalUrl": "https://yalebooks.yale.edu/book/9780300230321/the-great-partition/",
+          "hash": "f25d9375ab038fbf89fae7c8d1583c74adc947b40724ef2a1369e5c21bb7a4dd",
+          "phraseMatch": false,
+          "phraseWords": 8
+        }
+      ]
+    },
+    {
+      "slug": "the-plague",
+      "title": "The Plague",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/23472/the-plague-by-albert-camus/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/23472/the-plague-by-albert-camus/",
+          "hash": "e59d78cc6c1f1b04ee1b2dced6bb00f2c8fa2035d9227111b3ee0d8afb720325",
+          "phraseMatch": false,
+          "phraseWords": 10
+        }
+      ]
+    },
+    {
+      "slug": "to-kill-a-mockingbird",
+      "title": "To Kill a Mockingbird",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguin.co.uk/books/410048/to-kill-a-mockingbird-by-lee-harper/9780099466734",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 15
+        }
+      ]
+    },
+    {
+      "slug": "the-handmaid-s-tale",
+      "title": "The Handmaid\u2019s Tale",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+          "hash": "c6a559e4e41d995ae7f2453eafd829c62ff7d193cadda65e7216b33413523250",
+          "phraseMatch": false,
+          "phraseWords": 4
+        }
+      ]
+    },
+    {
+      "slug": "the-reluctant-fundamentalist",
+      "title": "The Reluctant Fundamentalist",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+          "status": 200,
+          "finalUrl": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+          "hash": "d44b3121d2a9e43cd49c51a4a1d2b85f0430e0e834236efee3016c8c4178e40c",
+          "phraseMatch": false,
+          "phraseWords": 16
+        }
+      ]
+    },
+    {
+      "slug": "man-s-search-for-meaning",
+      "title": "Man\u2019s Search for Meaning",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.viktorfrankl.org/assets/pdf/Covey_Intro_to_Pattakos_Prisoners.pdf",
+          "status": 200,
+          "finalUrl": "https://www.viktorfrankl.org/assets/pdf/Covey_Intro_to_Pattakos_Prisoners.pdf",
+          "hash": "2967161ed412827d837af4c2e6240574ce5001da4cead3fdc1ccfcd76b669af9",
+          "phraseMatch": false,
+          "phraseWords": 17
+        }
+      ]
+    },
+    {
+      "slug": "long-walk-to-freedom",
+      "title": "Long Walk to Freedom",
+      "status": "not-promoted",
+      "probes": [
+        {
+          "url": "https://www.nelsonmandela.org/news/entry/nelson-mandela-annual-lecture-2018-obamas-full-speech",
+          "error": "HTTP Error 403: Forbidden",
+          "phraseMatch": false,
+          "phraseWords": 20
+        }
+      ]
+    }
+  ]
+}
