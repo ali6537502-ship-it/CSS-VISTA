@@ -33,12 +33,13 @@ try {
   assert.equal(await page.getByRole('link', { name: 'Open homepage', exact: true }).getAttribute('href'), '/')
   await page.evaluate(() => { window.googlefc.showRevocationMessage = () => { window.privacyCalls++ }; window.googlefc.callbackQueue[0].CONSENT_API_READY() })
   assert.equal(await page.evaluate(() => window.privacyCalls), 0, 'Expired request cannot open a late consent message')
+  // Resume real-time scheduling before checking React's navigation commit.
+  await page.clock.resume()
   // Navigation remounts the control and cancels its outstanding callback.
   await page.evaluate(() => { window.googlefc = {} })
   await button.click()
   await page.getByRole('link', { name: 'Cookie help', exact: true }).click()
   await page.waitForURL('**/cookie-policy#managing-cookies')
-  await page.clock.runFor(50)
   await page.waitForFunction(() => [...document.querySelectorAll('button')].some(button => button.textContent === 'Privacy & Cookie Settings' && !button.disabled))
   assert.ok(await button.isEnabled())
   await page.evaluate(() => { window.googlefc.showRevocationMessage = () => { window.privacyCalls++ }; window.googlefc.callbackQueue[0].CONSENT_API_READY() })
