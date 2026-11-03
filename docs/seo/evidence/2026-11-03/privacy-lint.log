@@ -1,0 +1,9 @@
+
+> css-vista@1.0.0 lint
+> eslint .
+
+
+/workspace/css-audit/src/features/current-affairs/Introduction.tsx
+  116:9  warning  The 'stories' logical expression could make the dependencies of useMemo Hook (at line 117) change on every render. To fix this, wrap the initialization of 'stories' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+✖ 1 problem (0 errors, 1 warning)

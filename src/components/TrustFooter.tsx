@@ -1,27 +1,13 @@
 import { useWorkspacePreview } from '@/features/workspace-preview/context'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation } from 'react-router'
 import { site } from '@/data/site'
-
-type GoogleFcApi = {
-  showRevocationMessage?: () => void
-}
-
-type GoogleFcWindow = Window & { googlefc?: GoogleFcApi }
+import PrivacyChoicesButton from './PrivacyChoicesButton'
 
 export default function TrustFooter() {
   const { enabled: preview } = useWorkspacePreview()
-  const navigate = useNavigate()
   const location = useLocation()
-  const reopenPrivacyChoices = () => {
-    const googlefc = (window as GoogleFcWindow).googlefc
-    if (typeof googlefc?.showRevocationMessage === 'function') {
-      googlefc.showRevocationMessage()
-      return
-    }
-    navigate('/cookie-policy#managing-cookies')
-  }
 
   const isAdmin = location.pathname === '/sadiaali' || location.pathname.startsWith('/sadiaali/')
   const isFocusedStudy = (preview && (location.pathname === '/account' || location.pathname.startsWith('/account/'))) || location.pathname === '/gk/quiz'
@@ -40,7 +26,7 @@ export default function TrustFooter() {
             <Link className="hover:text-pine" to="/privacy-policy">Privacy</Link>
             <Link className="hover:text-pine" to="/terms-and-conditions">Terms</Link>
             <Link className="hover:text-pine" to="/contact">Contact</Link>
-            <button type="button" onClick={reopenPrivacyChoices} className="hover:text-pine">Privacy & Cookie Settings</button>
+            <PrivacyChoicesButton key={location.key} className="hover:text-pine" />
           </nav>
         </footer>
       </>
@@ -89,7 +75,7 @@ export default function TrustFooter() {
               <li><Link className="hover:text-pine" to="/disclaimer">Disclaimer</Link></li>
               <li><Link className="hover:text-pine" to="/copyright">Copyright</Link></li>
               <li><Link className="hover:text-pine" to="/legal">Legal & Trust Centre</Link></li>
-              <li><button type="button" onClick={reopenPrivacyChoices} className="text-left underline-offset-2 hover:text-pine hover:underline">Privacy & Cookie Settings</button></li>
+              <li><PrivacyChoicesButton key={location.key} className="text-left underline-offset-2 hover:text-pine hover:underline" /></li>
             </ul>
           </section>
         </div>

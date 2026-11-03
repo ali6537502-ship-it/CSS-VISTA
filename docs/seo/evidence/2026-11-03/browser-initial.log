@@ -1,0 +1,24 @@
+
+> css-vista@1.0.0 audit:browser:seo
+> node tests/browser/seo-readiness.mjs && node tests/browser/ad-state.mjs && node tests/browser/privacy-choices.mjs
+
+PASS: 48 public artifact routes; canonical/schema hydration, genuine 404, ad exclusions, mobile reflow, learning tools, sourced quotations/notes, result citation and six accessible Journal texts with clarifications.
+PASS runtime ad gate: public loading/error states stay ad-free, ready public content loads once, account utilities remain excluded, and navigation from an executed library gets a clean ad-free document. Stub Google responses only; no backend writes.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(await button.isEnabled())
+
+    at file:///workspace/css-audit/tests/browser/privacy-choices.mjs:41:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
