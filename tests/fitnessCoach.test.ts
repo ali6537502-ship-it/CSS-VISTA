@@ -55,8 +55,8 @@ test('adult inputs and target direction validated',()=>{
 test('the workout provides basic movements and scales volume with time',()=>{
   const beginner=workoutForDay(1,0,10,'gain')
   const longer=workoutForDay(4,2,30,'muscle')
-  assert.equal(beginner.sets,1)
-  assert.equal(longer.sets,3)
+  assert.equal(beginner.sets,2)
+  assert.equal(longer.sets,4)
   assert.equal(workoutForDay(2,1,30,'muscle').strengthDay,false)
   assert.equal(workoutForDay(2,1,30,'muscle').sets,1)
   assert.ok(longer.exercises.length>=4)
@@ -121,10 +121,27 @@ test('very low intake from reference equations is not issued as an unsupervised 
   assert.equal(energy.targetCalories,null)
   assert.equal(energy.needsReview,true)
 })
-test('home workout prioritises user-selected focus without removing full body activity',()=>{
+test('home workout prioritises focus but preserves whole-body sessions',()=>{
   const chest=workoutForDay(1,0,20,'muscle','chest-shoulders')
   const legs=workoutForDay(1,0,20,'gain','legs')
-  assert.equal(chest.exercises[1].kind,'push')
-  assert.equal(legs.exercises[1].kind,'squat')
+  assert.equal(chest.exercises[0].kind,'push')
+  assert.equal(legs.exercises[0].kind,'squat')
   assert.equal(chest.exercises.length,legs.exercises.length)
+})
+
+test('three distinct strength days use different movements rather than repeating one loop',()=>{
+  const a=workoutForDay(1,0,20,'muscle'),b=workoutForDay(1,2,20,'muscle'),c=workoutForDay(1,4,20,'muscle')
+  const ids=(p:ReturnType<typeof workoutForDay>)=>p.exercises.map(e=>e.id).join(',')
+  assert.equal(new Set([ids(a),ids(b),ids(c)]).size,3)
+  assert.equal([a,b,c].every(p=>p.strengthDay),true)
+  assert.equal(workoutForDay(1,1,20,'muscle').strengthDay,false)
+})
+test('10, 20 and 30 minute sessions have truthful durations, with warmup and cooldown',()=>{
+  for(const minutes of [10,20,30]){
+    const plan=workoutForDay(1,0,minutes,'gain')
+    assert.ok(Math.abs(plan.durationMinutes-minutes)<=1,plan.durationMinutes+' versus '+minutes)
+    assert.ok(plan.warmupSeconds>=60&&plan.cooldownSeconds>=60)
+    assert.ok(plan.exercises.every(e=>e.easier&&e.instruction.length>25))
+  }
+  assert.ok(workoutForDay(1,1,30,'fitness').durationMinutes<15,'recovery day has its own honest duration')
 })
