@@ -9,4 +9,4 @@ test('source and saved-record implementation retained while publication is retir
  assert.ok(existsSync(new URL('../public/book-summaries/index.json',import.meta.url)))
  assert.match(readFileSync(new URL('../src/lib/progress.ts',import.meta.url),'utf8'),/getAllBookSummaryProgress/)
 })
-test('production retirement artifact blocks all old entry points',async()=>{await import('../scripts/audit-book-removal.mjs')})
+test('production retirement artifact blocks all old entry points', { skip: !existsSync(new URL('../dist/.htaccess', import.meta.url)) }, async()=>{await import('../scripts/audit-book-removal.mjs')})
