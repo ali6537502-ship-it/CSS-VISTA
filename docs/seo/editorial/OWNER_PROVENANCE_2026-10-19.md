@@ -27,3 +27,16 @@ The owner explicitly stated:
 Record **Ali Hassan Sargana as the owner-confirmed writer of the CSS Vista book-summary collection**. This supersedes the earlier authorship uncertainty for that collection at the level of owner-provided evidence. The named authors of the underlying books remain their original authors; summary authorship is a separate attribution.
 
 The statement does not describe AI/editorial assistance or source use, establish the rights basis for covers, images or third-party passages, or identify the writer of the optional-subject notes. Those questions remain open. No independent draft/contributor document accompanied this clarification, and no permission status or quotation-verification status is promoted by this entry.
+
+## Further owner clarification — 4 November 2026
+
+When asked whether the book summaries were written entirely by Ali Hassan Sargana or with AI assistance/adapted third-party text, the owner answered **“him”**. Record the owner's confirmation that the summaries were written entirely by him; no independent production-process audit is implied.
+
+When separately asked who wrote the optional-subject notes, the owner answered **“ali hassan sargana”**. Record **Ali Hassan Sargana as the owner-confirmed writer of the optional-subject-note collection**, superseding that specific uncertainty above. This answer establishes the reported writer, not the notes' assistance/source process.
+
+Current authorship record:
+
+- Book summaries: Ali Hassan Sargana; owner reports they were written entirely by him.
+- Optional-subject notes: Ali Hassan Sargana; owner-confirmed writer.
+
+Image/cover permissions or another applicable rights basis, source/quotation verification, and the current authenticated Google account checks remain separate outstanding items. No third-party rights, credentials, editorial-review certification or AdSense readiness is inferred from these confirmations.
