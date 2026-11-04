@@ -70,7 +70,8 @@ jobs:
           php tests/precis/feedback-unit.php
           node scripts/grammar/export-catalog.mjs --check
           node tests/pro/grammar-preservation.mjs
-          node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts tests/precis.test.ts
+          node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts
+          npm run test:precis
       - name: Create isolated database and HTTP runtime
         run: |
           mkdir -p /tmp/cssv-pro-private test-artifacts
