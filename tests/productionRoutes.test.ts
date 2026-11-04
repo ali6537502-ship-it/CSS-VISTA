@@ -78,7 +78,7 @@ const INDEXABLE = [
   '/handwritten-notes', '/books', '/journal', '/consultation',
   '/about', '/privacy-policy', '/terms-and-conditions', '/cookie-policy',
   '/copyright', '/editorial-policy', '/contact', '/disclaimer',
-  '/book-summaries', '/css-eligibility-calculator', '/grammar-course',
+  '/css-eligibility-calculator', '/grammar-course',
 ]
 
 /** Routes deliberately kept out of search that must still be fully served. */
@@ -113,18 +113,6 @@ test('indexable routes are served with real content, self-canonical and indexabl
     assert.equal(/Use .* as the main entry point/.test(body), false, `${path} contains retired template copy`)
     assert.equal(/What you can do here/.test(body), false, `${path} contains retired template copy`)
     assert.equal(/\b(Loading|under construction|coming soon)\b/i.test(body), false, `${path} shows a placeholder state`)
-  }
-})
-
-test('the book-summary hub lists its real catalogue, not a loading shell', { skip: !built }, () => {
-  const html = served('/book-summaries')
-  const body = text(html)
-  assert.ok(body.split(/\s+/).length > 2000, 'the hub should render the whole shelf')
-  const links = new Set([...html.matchAll(/href="\/book-summaries\/([a-z0-9-]+)"/g)].map((m) => m[1]))
-  assert.ok(links.size >= 100, `expected every book linked from the hub, found ${links.size}`)
-  // Every book it links to must itself be a served, indexable page.
-  for (const slug of [...links].slice(0, 10)) {
-    assert.match(metaRobots(served(`/book-summaries/${slug}`)), /^index, follow/, slug)
   }
 })
 
@@ -170,12 +158,11 @@ test('past-paper pages are served, and indexed only when real questions exist', 
   }
 })
 
-test('year archives, GK categories and book summaries resolve on direct navigation', { skip: !built }, async () => {
+test('year archives and GK categories resolve on direct navigation', { skip: !built }, async () => {
   const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper: { fileUrl?: string }) => paper.fileUrl)
   const families = [
     [...sitemapUrls].filter((url) => /\/past-papers\/(css|pms|ppsc|mpt)\/\d{4}$/.test(url)),
     [...sitemapUrls].filter((url) => url.includes('/gk/cat/')),
-    [...sitemapUrls].filter((url) => /\/book-summaries\/[^/]+$/.test(url)),
   ]
   for (const family of families) {
     assert.ok(family.length > 0, 'expected URLs in this family')
@@ -222,7 +209,6 @@ test('a nonexistent URL returns a genuine 404 and never a homepage soft 404', { 
     '/deeply/nested/made/up/url',
     '/subjects/compulsory/not-a-real-subject',
     '/past-papers/view/not-a-real-paper',
-    '/book-summaries/not-a-real-book',
   ]) {
     const result = request(path)
     assert.equal(result.status, 404, path)
@@ -239,7 +225,7 @@ test('advertising state matches route policy across all nine page categories', {
     ['/', true],                     // 1. indexed public content
     ['/notes', true],
     ['/gk', false],                  // 2. noindex public utility
-    ['/book-summaries', true],
+    ['/book-summaries', false], // removed owner resource
     ['/account/dashboard', false],   // 3. authenticated content
     ['/factbook', false],
     ['/account/settings', false],    // 4. authentication / sensitive transaction
@@ -258,7 +244,7 @@ test('advertising state matches route policy across all nine page categories', {
 
 test('generated HTML keeps the loader only on substantial ad-eligible pages', { skip: !built }, () => {
   const loader = 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6131271603014611'
-  for (const path of ['/', '/notes', '/book-summaries']) {
+  for (const path of ['/', '/notes']) {
     assert.equal(served(path).includes(loader), true, path)
   }
   for (const path of ['/gk', '/one-liner-gk', '/account', '/account/mpt', '/factbook', '/legal', '/privacy-policy']) {

@@ -98,17 +98,8 @@ jobs:
           test -s dist/deployment-fingerprint.json
           jq -e --arg sha "$GITHUB_SHA" '.schemaVersion == 1 and .gitSha == $sha and .source == "git-rev-parse-head" and .buildTarget == "hostinger"' dist/deployment-fingerprint.json >/dev/null
 
-      - name: Verify Book Summaries build artifact
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -s dist/book-summaries/index.json
-          jq -e '.total > 0 and (.books | length) == .total' dist/book-summaries/index.json >/dev/null
-          jq -e '.books[] | select(.slug == "why-nations-fail" and .title == "Why Nations Fail")' dist/book-summaries/index.json >/dev/null
-          test -s dist/seo/book-summaries/why-nations-fail.html
-          grep -Fq 'Why Nations Fail Summary' dist/seo/book-summaries/why-nations-fail.html
-          grep -Fq 'The authors argue that the main difference lies in institutions' dist/seo/book-summaries/why-nations-fail.html
-          grep -Fq 'RewriteRule ^book-summaries/' dist/.htaccess
+      - name: Verify owner-requested Book Summaries removal
+        run: node scripts/audit-book-removal.mjs
 
       - name: Lint Hostinger PHP backend
         run: |
@@ -158,17 +149,8 @@ jobs:
           test -s dist/deployment-fingerprint.json
           jq -e --arg sha "$GITHUB_SHA" '.schemaVersion == 1 and .gitSha == $sha and .source == "git-rev-parse-head" and .buildTarget == "hostinger"' dist/deployment-fingerprint.json >/dev/null
 
-      - name: Verify Book Summaries build artifact
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -s dist/book-summaries/index.json
-          jq -e '.total > 0 and (.books | length) == .total' dist/book-summaries/index.json >/dev/null
-          jq -e '.books[] | select(.slug == "why-nations-fail" and .title == "Why Nations Fail")' dist/book-summaries/index.json >/dev/null
-          test -s dist/seo/book-summaries/why-nations-fail.html
-          grep -Fq 'Why Nations Fail Summary' dist/seo/book-summaries/why-nations-fail.html
-          grep -Fq 'The authors argue that the main difference lies in institutions' dist/seo/book-summaries/why-nations-fail.html
-          grep -Fq 'RewriteRule ^book-summaries/' dist/.htaccess
+      - name: Verify owner-requested Book Summaries removal
+        run: node scripts/audit-book-removal.mjs
 
       - name: Lint Hostinger PHP backend
         run: |
@@ -244,55 +226,20 @@ jobs:
           echo "::warning::The live Hostinger backend health endpoint could not be verified after retries."
           exit 0
 
-  live-book-summaries-readiness:
-    name: Live Book Summaries readiness
+  live-book-removal-readiness:
+    name: Live Book Summaries removal
     if: github.event_name == 'push'
     needs:
       - live-deployment-fingerprint
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Verify current Book Summaries library and full stable reader
-        shell: bash
-        run: |
-          set -euo pipefail
-          expected="$(mktemp)"
-          jq -S . public/book-summaries/index.json > "$expected"
-          expected_hash="$(sha256sum "$expected" | awk '{print $1}')"
-
-          for attempt in $(seq 1 20); do
-            echo "Book Summaries production probe attempt ${attempt}"
-            library="$(mktemp)"
-            page="$(mktemp)"
-            library_code="$(curl -sS --connect-timeout 10 --max-time 20 -H 'Cache-Control: no-cache' -o "$library" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/index.json?build=${GITHUB_SHA}&ts=$(date +%s)")" || library_code=000
-            if [ "$library_code" = "200" ] && jq -e '.total > 0 and (.books | length) == .total' "$library" >/dev/null 2>&1; then
-              normalized="$(mktemp)"
-              jq -S . "$library" > "$normalized"
-              live_hash="$(sha256sum "$normalized" | awk '{print $1}')"
-              rm -f "$normalized"
-              if [ "$live_hash" = "$expected_hash" ]; then
-                page_code="$(curl -sS --connect-timeout 10 --max-time 20 -L -H 'Cache-Control: no-cache' -o "$page" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/why-nations-fail?build=${GITHUB_SHA}&ts=$(date +%s)")" || page_code=000
-                if [ "$page_code" = "200" ] && grep -Fq 'Why Nations Fail Summary' "$page" && grep -Fq 'The authors argue that the main difference lies in institutions' "$page"; then
-                  echo "::notice::Why Nations Fail stable reader is live with the correct full-summary content."
-                  rm -f "$library" "$page" "$expected"
-                  exit 0
-                fi
-                echo "Why Nations Fail reader: HTTP ${page_code}; full expected summary not yet visible."
-              else
-                echo "Book Summaries index is live but does not match this repository revision."
-              fi
-            else
-              echo "Book Summaries index: HTTP ${library_code} or invalid JSON."
-            fi
-            rm -f "$library" "$page"
-            if [ "$attempt" -lt 20 ]; then sleep 15; fi
-          done
-          rm -f "$expected"
-          echo "::error::Hostinger did not expose the current Book Summaries library and full Why Nations Fail reader within the verification window."
-          exit 1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify retired URLs and public assets return Gone
+        run: node scripts/check-book-removal-production.mjs
 
   live-adsense-readiness:
     name: Live AdSense and crawler readiness

@@ -7,7 +7,7 @@
  * check and still 404 in production.
  *
  * It models the subset of mod_rewrite the site uses: RewriteBase /, RewriteRule
- * with [L], [R=301], [R=404], [F], and the `-f`/`-d` RewriteCond pair.
+ * with [L], [R=301], [R=404], [F], [G], and the `-f`/`-d` RewriteCond pair.
  */
 import { existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
@@ -101,6 +101,8 @@ export function resolveRequest(rules, docRoot, requestPath, depth = 0) {
     const match = regex.exec(path)
     if (!match) continue
     if (!conditionsPass(rule.conditions, docRoot, path)) continue
+
+    if (rule.flags.includes('G')) return { status: 410, file: '410.html', redirect: null }
 
     if (rule.flags.includes('F')) return { status: 403, file: null, redirect: null }
 

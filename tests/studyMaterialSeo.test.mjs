@@ -174,16 +174,16 @@ test('RouteSeo retains study-material schema on hydration and replaces it on nav
     await metadataSettled()
     assert.equal(globalThis.document.querySelector('link[rel="canonical"]').attributes.href, `https://www.css-vista.com${paths[3]}`)
     assert.equal(globalThis.document.querySelector('meta[property="og:url"]').attributes.content, `https://www.css-vista.com${paths[3]}`)
-    globalThis.__cssvSeoLocation = { pathname: '/book-summaries/unknown-book', search: '' }
+    globalThis.__cssvSeoLocation = { pathname: '/vistagram/unknown-article', search: '' }
     RouteSeo()
     assert.equal(globalThis.document.getElementById('cssv-route-structured-data'), null, 'a dynamic reader must not retain the previous topic schema while it loads or rejects an ID')
-    assert.equal(globalThis.document.querySelector('link[rel="canonical"]').attributes.href, 'https://www.css-vista.com/book-summaries/unknown-book')
+    assert.equal(globalThis.document.querySelector('link[rel="canonical"]').attributes.href, 'https://www.css-vista.com/vistagram/unknown-article')
     // Metadata owned by a real detail component must survive the layout effect.
     const detailSchema = node()
     detailSchema.id = 'cssv-route-structured-data'
-    detailSchema.textContent = JSON.stringify({ '@type': 'Article', url: 'https://www.css-vista.com/book-summaries/why-nations-fail' })
+    detailSchema.textContent = JSON.stringify({ '@type': 'Article', url: 'https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance' })
     nodes.add(detailSchema)
-    globalThis.__cssvSeoLocation = { pathname: '/book-summaries/why-nations-fail', search: '' }
+    globalThis.__cssvSeoLocation = { pathname: '/vistagram/pakistan-financial-inclusion-digital-finance', search: '' }
     RouteSeo()
     assert.equal(globalThis.document.getElementById('cssv-route-structured-data'), detailSchema)
     globalThis.__cssvSeoLocation = { pathname: '/', search: '' }
@@ -203,7 +203,7 @@ test('non-study routes do not request the study metadata indexes', async () => {
   let importCalls = 0
   const fixture = await routeSeoFixture({ waitForStudyMetadata: () => { importCalls++ } })
   try {
-    for (const path of ['/', '/grammar-course', '/study-material/optional', '/study-material/islamic-studies', '/book-summaries/why-nations-fail']) {
+    for (const path of ['/', '/grammar-course', '/study-material/optional', '/study-material/islamic-studies', '/vistagram/pakistan-financial-inclusion-digital-finance']) {
       fixture.navigate(path)
       await metadataSettled()
     }

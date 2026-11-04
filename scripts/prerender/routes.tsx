@@ -31,7 +31,6 @@ import type { Catalog as GrammarCatalog } from '@/features/grammar-v5/types'
 import GKWorld from '@/pages/gk/GKWorld'
 import OneLinerGK from '@/pages/OneLinerGK'
 import LanguageGrammar from '@/pages/LanguageGrammar'
-import BookSummaries from '@/pages/BookSummaries'
 import HandwrittenNotes from '@/pages/HandwrittenNotes'
 import FpscSyllabus from '@/pages/FpscSyllabus'
 import type { FpscSyllabusData } from '@/components/FpscSyllabusPlanner'
@@ -172,7 +171,6 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/gk', () => <GKWorld />),
   page('/one-liner-gk', () => <OneLinerGK />),
   page('/language-grammar', () => <LanguageGrammar />),
-  page('/book-summaries', () => <BookSummaries />),
   page('/handwritten-notes', () => <HandwrittenNotes />),
   page('/fpsc-syllabus', () => <FpscSyllabus initialData={fpscSyllabusData as FpscSyllabusData} />),
   page('/css-past-paper-analysis', () => <CssPastPaperAnalysis />),
