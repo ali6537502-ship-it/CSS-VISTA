@@ -1,0 +1,20 @@
+{
+  "/deployment-fingerprint.json": {
+    "schemaVersion": 1,
+    "gitSha": "6e6b2b387f19ae08bf32d25a00258af081d97286",
+    "source": "git-rev-parse-head",
+    "buildTarget": "hostinger",
+    "builtAt": "2026-11-03T16:08:06.593Z"
+  },
+  "/api/health.php": {
+    "ok": true
+  },
+  "/api/pro-release.php": {
+    "paused": true
+  },
+  "/cookie-policy": {
+    "status": 200,
+    "privacyControlPresent": true,
+    "adLoader": false
+  }
+}
