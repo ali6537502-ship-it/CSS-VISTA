@@ -17,3 +17,13 @@ Remaining owner-held evidence:
 - The applicable licence, permission or other rights basis for third-party covers, images and reproduced material, including any publication agreements for Journal assets.
 
 Unknown answers must stay unknown. Providing material is not itself a licence or proof of authorship. No private document has been requested for public publication.
+
+## Owner clarification — 4 November 2026
+
+The owner explicitly stated:
+
+> book summaries are written by sir ali hassan sargana
+
+Record **Ali Hassan Sargana as the owner-confirmed writer of the CSS Vista book-summary collection**. This supersedes the earlier authorship uncertainty for that collection at the level of owner-provided evidence. The named authors of the underlying books remain their original authors; summary authorship is a separate attribution.
+
+The statement does not describe AI/editorial assistance or source use, establish the rights basis for covers, images or third-party passages, or identify the writer of the optional-subject notes. Those questions remain open. No independent draft/contributor document accompanied this clarification, and no permission status or quotation-verification status is promoted by this entry.
