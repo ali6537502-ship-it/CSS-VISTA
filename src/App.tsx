@@ -73,7 +73,6 @@ const Account = lazy(() => import('./pages/Account'))
 const OneLinerGK = lazy(() => import('./pages/OneLinerGK'))
 const LanguageGrammar = lazy(() => import('./pages/LanguageGrammar'))
 const GrammarCourse = lazy(() => import('./features/grammar-v5/Course'))
-const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
@@ -206,10 +205,6 @@ export default function App() {
         <Route path="/one-liner-gk" element={<SelectedStudyGate><S><OneLinerGK /></S></SelectedStudyGate>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
         <Route path="/grammar-course" element={<S><GrammarCourse /></S>} />
-        <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
-        {/* The summary page reads :slug itself, so the canonical URL renders the
-            summary directly instead of bouncing to a query-string variant. */}
-        <Route path="/book-summaries/:slug" element={<S><BookSummaries /></S>} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
         <Route path="/study-planner" element={<S><StudyPlanner /></S>} />

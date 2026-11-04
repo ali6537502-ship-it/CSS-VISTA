@@ -150,11 +150,6 @@ for (const key of [...collections].slice(0, 20)) {
   await check(`/past-papers/${key}`, { canonical: `${CANONICAL_ORIGIN}/past-papers/${key}`, indexable: true })
 }
 
-const books = JSON.parse(await readFile(join(root, 'public', 'book-summaries', 'index.json'), 'utf8'))
-for (const book of (books.books ?? []).slice(0, 20)) {
-  await check(`/book-summaries/${book.slug}`, { canonical: `${CANONICAL_ORIGIN}/book-summaries/${book.slug}`, indexable: true })
-}
-
 // --- Redirects -------------------------------------------------------------
 // One hop to the final canonical URL, never a chain and never a loop.
 for (const redirect of ROUTE_REDIRECTS) {
@@ -180,7 +175,6 @@ const fakeUrls = [
   '/subjects/compulsory/not-a-real-subject',
   '/deeply/nested/made/up/url',
   '/past-papers/view/not-a-real-paper',
-  '/book-summaries/not-a-real-book',
   '/gk/cat/not-a-real-category',
 ]
 for (const url of fakeUrls) {

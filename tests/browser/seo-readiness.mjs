@@ -9,7 +9,6 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { startArtifactPreview } from './artifact-preview.mjs'
 import journalTranscripts from '../../src/data/journalTranscripts.generated.json' with { type: 'json' }
-import bookLibrary from '../../public/book-summaries/index.json' with { type: 'json' }
 
 const root = new URL('../../', import.meta.url).pathname.replace(/\/$/, '')
 const docRoot = resolve(root, process.env.CSSV_SEO_ARTIFACT || 'dist')
@@ -21,21 +20,17 @@ const paths = [
   '/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks',
   '/study-material/optional/business-administration/management', '/fpsc-updates',
   '/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence',
-  '/book-summaries/why-nations-fail',
-  '/book-summaries/guns-germs-and-steel',
-  '/book-summaries/seo-audit-deliberately-missing-20261018',
-  '/book-summaries/the-art-of-war', '/book-summaries/on-war', '/journal',
+
+
+  '/journal',
   ...journalTranscripts.articles.map(article => `/journal/${article.slug}`),
   '/journal/seo-audit-deliberately-missing-20261018',
-  '/book-summaries/capitalism-and-freedom', '/book-summaries/the-road-to-serfdom',
-  '/book-summaries/the-price-of-inequality', '/book-summaries/invisible-women',
-  '/book-summaries/manufacturing-consent', '/book-summaries/the-prize-the-epic-quest-for-oil-money-and-power',
-  '/book-summaries/the-clash-of-civilizations-and-the-remaking-of-world-order',
-  '/book-summaries/doughnut-economics', '/book-summaries/good-economics-for-hard-times',
-  '/book-summaries/sapiens-a-brief-history-of-humankind', '/book-summaries/orientalism', '/book-summaries/the-ascent-of-money',
-  '/book-summaries/the-better-angels-of-our-nature', '/book-summaries/brave-new-world',
-  '/book-summaries/capital-in-the-twenty-first-century', '/book-summaries/pakistan-beyond-the-crisis-state',
-  '/book-summaries/development-as-freedom', '/book-summaries/the-open-society-and-its-enemies',
+
+
+
+
+
+
   '/study-material/optional/constitutional-law/constitutional-history-of-pakistan',
   '/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review',
   '/css-2026-written-result',
@@ -160,70 +155,6 @@ try {
       assert.ok(schemaTypes(state.schemas).includes('Article'), 'Vistagram preserves article schema')
       assert.ok(await page.getByRole('heading', { name: 'What financial inclusion means', exact: true }).count(), 'Full Vistagram article body is present')
     }
-    if (path.startsWith('/book-summaries/') && missing) {
-      const documentIdentity = await page.evaluate(() => performance.timeOrigin)
-      await page.getByRole('link', { name: 'Open summary of Why Nations Fail', exact: true }).click()
-      await page.waitForURL(origin + '/book-summaries/why-nations-fail')
-      await page.locator('.book-summary-reading-copy').getByRole('region', { name: 'Sources and quotation notes' }).waitFor()
-      assert.equal(await page.evaluate(() => performance.timeOrigin), documentIdentity, 'Missing-book recovery uses ordinary SPA navigation')
-      assert.deepEqual(await page.locator('link[rel="canonical"]').evaluateAll(nodes => nodes.map(node => node.href)), ['https://www.css-vista.com/book-summaries/why-nations-fail'])
-      assert.ok((await page.title()).includes('Why Nations Fail'), 'A real reader recovers its own title')
-      assert.equal(await page.locator('meta[property="og:type"]').getAttribute('content'), 'article')
-      assert.ok(!(await page.locator('meta[name="robots"]').getAttribute('content')).includes('noindex'), 'The 404 document does not noindex a real reader reached through navigation')
-      await page.goBack()
-      await page.waitForURL(origin + path)
-      await page.getByText('This book summary is not available.', { exact: false }).waitFor()
-      await page.waitForFunction(() => !document.querySelector('link[rel="canonical"]'))
-      assert.ok((await page.locator('meta[name="robots"]').getAttribute('content')).includes('noindex'))
-      assert.equal(await page.locator('#cssv-route-structured-data').count(), 0, 'Returning to a missing book removes stale article metadata')
-    }
-    if (path.startsWith('/book-summaries/') && !missing) {
-      const reader = page.locator('.book-summary-reading-copy')
-      await reader.getByRole('region', { name: 'Sources and quotation notes' }).waitFor()
-      const text = await reader.innerText()
-      const book = bookLibrary.books.find(book => path.endsWith('/' + book.slug))
-      const expectedNumbers = [...book.body.matchAll(/^(\d+)\.\s+/gm)].map(match => Number(match[1]))
-      const staticNumbers = await page.evaluate(html => [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('[aria-label="Complete book summary"] ol')].flatMap(ol => [...ol.children].map((li, index) => li.hasAttribute('value') ? li.value : ol.start + index)), rawHTML)
-      assert.deepEqual(staticNumbers, expectedNumbers, 'Initial HTML preserves every source list number, including separated items')
-      record.quotationSourceLinks = await reader.locator('a[href^="https://"]').count()
-      if (path.endsWith('/guns-germs-and-steel')) {
-        assert.ok(rawHTML.includes('Study-note wording (edition unverified)'), 'Unverified quotation is qualified in HTTP HTML')
-        assert.ok(text.includes('have not yet been verified'), 'The real reader preserves the quotation qualification')
-      } else if (path.endsWith('/why-nations-fail')) {
-        assert.ok(rawHTML.includes('physical PDF page 409') && text.includes('physical PDF page 409'), 'The exact sentence exposes its actual electronic-edition locator in both readers')
-        assert.ok(text.includes('eISBN 9780307719232') && await reader.locator('a[href*="vle.pce.edu.bt"]').count(), 'The original ebook passage has a normal source link')
-      } else if (path.endsWith('/the-art-of-war')) {
-        assert.ok(rawHTML.includes('Lionel Giles') && text.includes('Lionel Giles'), 'Both renderings identify the actual translation')
-        assert.ok(await reader.locator('a[href*="gutenberg.org"]').count(), 'Original text citation is a usable HTML link')
-      } else if (path.endsWith('/on-war')) {
-        assert.ok(rawHTML.includes('War is a mere continuation of policy by other means.'), 'Static page uses the attributed Graham wording')
-        assert.ok(text.includes('War is a mere continuation of policy by other means.') && text.includes('Graham translation'), 'Real reader uses the same explicit translation')
-      } else if (path.endsWith('/capitalism-and-freedom')) {
-        assert.ok(rawHTML.includes('press.uchicago.edu'), 'The newly verified publisher record is in the HTTP response')
-        assert.ok(await reader.locator('a[href*="press.uchicago.edu"]').count(), 'The real reader exposes the publisher record')
-        assert.ok(rawHTML.includes('Quotation excerpt') && text.includes('Quotation excerpt'), 'The newly located clause is labelled as an excerpt in both readers')
-        assert.ok(rawHTML.includes('wisc.pb.unizin.org') && await reader.locator('a[href*="wisc.pb.unizin.org"]').count(), 'The actual named-book selection is linked separately from its bibliographic record')
-      } else if (['/the-price-of-inequality', '/invisible-women', '/manufacturing-consent', '/the-prize-the-epic-quest-for-oil-money-and-power', '/the-clash-of-civilizations-and-the-remaking-of-world-order', '/sapiens-a-brief-history-of-humankind', '/orientalism', '/the-ascent-of-money'].some(suffix => path.endsWith(suffix))) {
-        assert.ok(rawHTML.includes('Quotation excerpt') && text.includes('Quotation excerpt'), 'Newly traced clauses retain their excerpt labels in initial HTML and React')
-        assert.ok(text.includes('Surrounding explanation is study commentary'), 'Quotation verification does not certify study commentary')
-        assert.ok(record.quotationSourceLinks > 0, 'The source passage remains reachable through an ordinary link')
-      } else if (['/doughnut-economics', '/good-economics-for-hard-times'].some(suffix => path.endsWith(suffix))) {
-        assert.ok(rawHTML.includes('Study-note wording (edition unverified)') && text.includes('have not yet been verified'), 'An author web page or spoken reading does not certify a printed book edition')
-        assert.ok(text.includes('does not establish that the wording appears in this book'), 'Readers can see the related source limitation')
-      } else if (['/the-better-angels-of-our-nature', '/brave-new-world', '/development-as-freedom', '/the-open-society-and-its-enemies'].some((suffix) => path.endsWith(suffix))) {
-        const locator = path.endsWith('/brave-new-world') ? 'Chapter III' : path.endsWith('/the-open-society-and-its-enemies') ? 'preface' : 'Introduction'
-        assert.ok(rawHTML.includes('Quotation excerpt') && text.includes('Quotation excerpt'), 'Static and real readers identify excerpt wording')
-        assert.ok(rawHTML.toLowerCase().includes(locator.toLowerCase()) && text.toLowerCase().includes(locator.toLowerCase()), 'The actual book-text locator survives hydration')
-        assert.ok(record.quotationSourceLinks > 0, 'The book passage has a discoverable source link')
-      } else if (path.endsWith('/capital-in-the-twenty-first-century')) {
-        assert.ok(rawHTML.includes('jstor.org') && await reader.locator('a[href*="jstor.org"]').count(), 'Publisher-provided metadata citation is available in both readers')
-        assert.ok(text.includes('have not yet been verified'), 'Bibliographic metadata does not certify the book quotation')
-      } else {
-        assert.ok(rawHTML.includes('Sources and quotation notes'), 'A book without a quotation can still have a real bibliography')
-        assert.ok(record.quotationSourceLinks > 0, 'Previously verified title/author sources are discoverable in the reader')
-        assert.equal(await page.getByRole('button', { name: 'Key quote', exact: true }).count(), 0, 'No quotation or copy action is invented for a source without one')
-      }
-    }
     if (path === '/journal') {
       assert.equal(await page.locator('#archive-text details').count(), 6, 'All six archive entry points remain available')
       await page.locator('#opinion-ali-hassan-text > summary').click()
@@ -325,55 +256,6 @@ try {
     }
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${path}: no mobile overflow after interaction`)
     await context.close()
-  }
-  // Exercise the real full-screen reader with an unavailable public body,
-  // then a user-triggered retry. Only an isolated guest's local progress is used.
-  {
-    const context = await browser.newContext({ viewport: { width: 320, height: 844 }, reducedMotion: 'reduce' })
-    let failDownload = true, bodyRequests = 0
-    await context.route('**/*', route => {
-      const request = route.request(), url = new URL(request.url())
-      if (request.method() !== 'GET' || url.origin !== origin || url.pathname.startsWith('/api/')) return route.abort('blockedbyclient')
-      if (url.pathname === '/book-summaries/index.json') {
-        bodyRequests++
-        if (failDownload) return route.fulfill({ status: 503, contentType: 'application/json', body: '{}' })
-      }
-      return route.continue()
-    })
-    try {
-      const page = await context.newPage()
-      await page.goto(origin + '/book-summaries/why-nations-fail', { waitUntil: 'networkidle' })
-      const dialog = page.locator('.book-summary-backdrop')
-      await dialog.getByRole('alert').waitFor()
-      assert.equal(await dialog.getByRole('status', { name: 'Opening the full summary', exact: true }).count(), 0, 'A failed body does not remain a loading skeleton')
-      assert.ok(await dialog.getByRole('button', { name: 'Mark complete', exact: true }).isDisabled())
-      assert.ok(await dialog.getByRole('button', { name: 'Print', exact: true }).isDisabled(), 'An incomplete summary cannot be printed as a complete one')
-      await dialog.locator('.book-summary-scroll-area').evaluate(node => node.dispatchEvent(new Event('scroll')))
-      const progress = await page.evaluate(() => JSON.parse(localStorage.getItem('cssvista:progress:v1') || '{}').bookSummaries?.['why-nations-fail'])
-      assert.equal(progress?.progress ?? 0, 0, 'Scrolling a placeholder must not record reading progress')
-      assert.equal(progress?.completed ?? false, false)
-      const settledRequests = bodyRequests
-      await page.waitForTimeout(400)
-      assert.equal(bodyRequests, settledRequests, 'Failure does not retry without user action')
-      failDownload = false
-      await dialog.getByRole('button', { name: 'Try again', exact: true }).click()
-      await dialog.locator('.book-summary-reading-copy').getByRole('region', { name: 'Sources and quotation notes' }).waitFor()
-      assert.ok((await dialog.locator('.book-summary-reading-copy').innerText()).includes('The authors argue that the main difference lies in institutions'))
-      assert.equal(await dialog.getByRole('alert').count(), 0)
-      assert.ok(await dialog.getByRole('button', { name: 'Print', exact: true }).isEnabled())
-      assert.ok(await dialog.getByRole('button', { name: 'Mark complete', exact: true }).isEnabled())
-      assert.ok(bodyRequests > settledRequests, 'Retry downloads the actual body')
-      await dialog.getByRole('button', { name: 'Mark complete', exact: true }).click()
-      assert.ok(await dialog.getByRole('button', { name: 'Completed', exact: true }).isDisabled(), 'Completion remains available after a successful download')
-      await page.goto(origin + '/book-summaries?search=reader-fixture-no-such-book-20261018', { waitUntil: 'networkidle' })
-      await page.getByRole('heading', { name: 'No summaries match this search', exact: true }).waitFor()
-      assert.equal(await page.locator('[data-cssv-ad-state="empty"]').count(), 1)
-      await page.getByRole('textbox', { name: 'Search book summaries', exact: true }).fill('')
-      await page.getByRole('link', { name: 'Open summary of Why Nations Fail', exact: true }).waitFor()
-      assert.equal(await page.locator('[data-cssv-ad-state="empty"]').count(), 0, 'Normal results clear the empty state')
-      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, 'Reader and empty results fit 320px')
-      report.bookDownloadRecovery = { passed: true, bodyRequests, retryInsideReader: true, incompleteProgressProtected: true, completedAfterRetry: true, emptyResultsMarked: true }
-    } finally { await context.close() }
   }
   // A failed notes request must settle on its error screen, rather than
   // automatically retrying and moving adjacent-topic links on every render.
