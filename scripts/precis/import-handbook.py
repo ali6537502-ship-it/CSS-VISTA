@@ -45,12 +45,17 @@ def block_for(node):
     if node.tag == W + 'tbl':
         if node.findall('.//w:tbl', NS):
             raise ValueError('Nested tables need a source-preservation mapping before import.')
+        direct_paragraphs = [p for row in node.findall('w:tr', NS)
+                             for cell in row.findall('w:tc', NS) for p in cell.findall('w:p', NS)]
+        retained_text = {id(t) for p in direct_paragraphs for t in p.findall('.//w:t', NS)}
+        if retained_text != {id(t) for t in node.findall('.//w:t', NS)}:
+            raise ValueError('Unsupported table text container; review it before importing.')
         # Paragraphs within a cell must not be concatenated into one word.
         return {'type': 'table', 'rows': [
             ['\n'.join(paragraph_text(p) for p in cell.findall('w:p', NS))
              for cell in row.findall('w:tc', NS)]
             for row in node.findall('w:tr', NS)]}
-    if node.findall('.//w:t', NS):
+    if node.tag != W + 'sectPr':
         raise ValueError('Unsupported text container in DOCX body; review it before importing.')
     return None
 

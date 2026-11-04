@@ -134,6 +134,13 @@ class ImportHandbookTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Unsupported text container'):
             handbook.import_handbook(self.source)
         root = fixture(self.source)
+        cell = root.find('.//w:tc', handbook.NS)
+        paragraph(ET.SubElement(cell, W + 'sdt'), 'TEST ONLY table content control')
+        with ZipFile(self.source, 'w') as archive:
+            archive.writestr('word/document.xml', ET.tostring(root))
+        with self.assertRaisesRegex(ValueError, 'Unsupported table text container'):
+            handbook.import_handbook(self.source)
+        root = fixture(self.source)
         paragraphs = root.findall('w:body/w:p', handbook.NS)
         next(p for p in paragraphs if handbook.paragraph_text(p).startswith('2. ')).find('.//w:t', handbook.NS).text = '3. Wrong order'
         with ZipFile(self.source, 'w') as archive:
