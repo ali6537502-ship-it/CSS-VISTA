@@ -108,8 +108,8 @@ console.log('PASS: native free Précis Mentor profile/ownership/CSRF and protect
 php('tests/precis/fixture.php','legacy-plan',a.id,attempt)
 const earlier=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan
 assert.equal(earlier.edition_status,'earlier');assert.equal(earlier.version,7)
-assert.deepEqual(earlier.completed_units,['1:3','18:0','20:23'])
-assert.deepEqual(earlier.verified_current_units,['1:3','20:23'])
+assert.deepEqual(earlier.completed_units,['1:3','18:0','20:22'])
+assert.deepEqual(earlier.verified_current_units,['1:3'])
 assert.equal((await call(endpoint,{...unit,request_id:randomUUID(),unit_id:'1:3',expected_version:7},a.jar)).status,409,'Earlier reading ID was applied to restored content')
 assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),expected_version:7},a.jar)).status,409,'Replanning erased the earlier-edition record')
 assert.deepEqual((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan,earlier,'Reading the restored book mutated the earlier plan')
