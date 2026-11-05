@@ -256,7 +256,16 @@ root.addEventListener('click',async e=>{
  if(t.dataset.days){ui.setupDays=Number(t.dataset.days);draw();return}
  if(t.dataset.month!==undefined){ui.month=Number(t.dataset.month);draw();return}
  if(t.dataset.phase!==undefined){ui.phase=Number(t.dataset.phase);draw();return}
- if(t.dataset.choice){ui.selected=t.dataset.choice;const item=byId.get(ui.id),c=chapterCache.get(item.chapter),q=questionFor(c.sections.find(x=>x.id===ui.id),c);if(q&&ui.selected!==q.answer){saved.revisit[ui.id]={at:new Date().toISOString(),kind:'question',questionId:q.id};notify()}draw();return}
+ if(t.dataset.choice){
+   const item=byId.get(ui.id),c=chapterCache.get(item.chapter),q=questionFor(c.sections.find(x=>x.id===ui.id),c);
+   if(!q||!Object.prototype.hasOwnProperty.call(q.options,t.dataset.choice)||ui.selected)return;
+   ui.selected=t.dataset.choice;const at=new Date().toISOString(),correct=ui.selected===q.answer;
+   saved.questionReview??={};saved.questionReview[q.id]={at,chapter:item.chapter,unresolved:!correct};
+   if(!correct)saved.revisit[ui.id]={at,kind:'question',questionId:q.id};
+   else if(saved.revisit?.[ui.id]?.kind==='question')delete saved.revisit[ui.id];
+   if(correct)ui.error='';
+   notify();draw();return;
+ }
  if(t.dataset.quizChoice){saveQuizAnswer(t.dataset.quizChoice);return}
  if(t.dataset.grade){ui.grade=t.dataset.grade;draw();return}
  switch(t.dataset.action){
