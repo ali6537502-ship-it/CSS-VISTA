@@ -188,7 +188,13 @@ function beginQuizAttempt(chapter){
 }
 function chooseGrade(g){
  if(!['gotit','partial','again'].includes(g))return;
- const id=ui.id;const at=new Date().toISOString();
+ const id=ui.id;
+ if(g==='gotit'&&saved.revisit?.[id]?.kind==='question'){
+   ui.stage='question';ui.selected='';ui.reveal=false;ui.grade='';
+   ui.error='You missed the concept check. Answer it correctly before marking this lesson clear.';
+   draw();return;
+ }
+ const at=new Date().toISOString();
  saved.completed[id]={at,selfRating:g};
  if(g==='gotit')delete saved.revisit[id];else saved.revisit[id]={at,kind:'lesson'};
  ui.grade=g;notify();ui.view='finished';draw();
