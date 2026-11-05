@@ -59,8 +59,18 @@ test('unrelated study records remain untouched by GSA merge policy', () => {
 })
 
 test('cross-device review resolution wins over older incorrect answers', () => {
- const cloud = { [key]: { questionReview: {'Q-1':{at:t0,chapter:6,unresolved:true}}, quizAttempts:{'first':{at:t0,chapter:6,responses:{'Q-1':{correct:false,selected:'A',at:t0}}}} } } }
- const local = { [key]: { questionReview: {'Q-1':{at:t2,chapter:6,unresolved:false}}, quizAttempts:{'second':{at:t2,chapter:6,responses:{'Q-1':{correct:true,selected:'D',at:t2}}}} } } }
+ const cloud = {
+   [key]: {
+     questionReview: {'Q-1': {at: t0, chapter: 6, unresolved: true}},
+     quizAttempts: {first: {at: t0, chapter: 6, responses: {'Q-1': {correct: false, selected: 'A', at: t0}}}}
+   }
+ };
+ const local = {
+   [key]: {
+     questionReview: {'Q-1': {at: t2, chapter: 6, unresolved: false}},
+     quizAttempts: {second: {at: t2, chapter: 6, responses: {'Q-1': {correct: true, selected: 'D', at: t2}}}}
+   }
+ };
  for (const merged of [merge(cloud,local)[key],merge(local,cloud)[key]]) {
    assert.equal(merged.questionReview['Q-1'].unresolved,false);
    assert.deepEqual(Object.keys(merged.quizAttempts).sort(),['first','second']);
