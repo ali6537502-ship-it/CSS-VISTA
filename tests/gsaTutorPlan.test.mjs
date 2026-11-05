@@ -190,6 +190,8 @@ test('chapter practice records the actual missed question and preserves every re
  p.click('[data-action="nextquestion"]');
  assert.match(p.document.querySelector('.panel.accent').textContent,/0 correct out of 1 questions answered in this attempt/);
  p.click('[data-action="restartquestions"]');
+ assert.match(p.document.getElementById('app').textContent,/Previous practice attempts/);
+ assert.match(p.document.getElementById('app').textContent,/0 \/ 1 correct/);
  p.click('[data-quiz-choice="'+q.answer+'"]');
  state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
  assert.equal(state.questionReview[q.id].unresolved,false,'A later successful retest resolves the missed question');
