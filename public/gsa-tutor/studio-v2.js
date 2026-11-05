@@ -187,7 +187,19 @@ function chooseGrade(g){
  if(g==='gotit')delete saved.revisit[id];else saved.revisit[id]={at,kind:'lesson'};
  ui.grade=g;notify();ui.view='finished';draw();
 }
-function saveQuizAnswer(value){const c=chapterCache.get(ui.chapter);const q=c?.questions?.[ui.qindex];if(!q||ui.selected)return;ui.selected=value;saved.quizHistory??={};saved.quizHistory[q.id]={at:new Date().toISOString(),selected:value,correct:value===q.answer};if(value!==q.answer){const id=c.sections[0]?.id;if(id)saved.revisit[id]={at:new Date().toISOString(),kind:'question',questionId:q.id}}notify();draw()}
+function saveQuizAnswer(value){
+ const c=chapterCache.get(ui.chapter),q=c?.questions?.[ui.qindex];
+ if(!q||ui.selected||!Object.prototype.hasOwnProperty.call(q.options,value))return;
+ const at=new Date().toISOString(),correct=value===q.answer;
+ ui.selected=value;
+ saved.quizHistory??={};saved.quizHistory[q.id]={at,selected:value,correct};
+ saved.questionReview??={};saved.questionReview[q.id]={at,chapter:c.id,unresolved:!correct};
+ if(!saved.quizAttempts?.[ui.attemptId])beginQuizAttempt(c.id);
+ const attempt=saved.quizAttempts[ui.attemptId];
+ attempt.responses[q.id]={at,selected:value,correct};
+ attempt.at=at;
+ notify();draw();
+}
 function saveBookmark(){const id=ui.id;saved.bookmarks??={};saved.bookmarkRemoved??={};if(saved.bookmarks[id]){delete saved.bookmarks[id];saved.bookmarkRemoved[id]={at:new Date().toISOString()}}else{saved.bookmarks[id]={at:new Date().toISOString()};delete saved.bookmarkRemoved[id]}notify();draw()}
 function saveDraft(id,value){saved.drafts??={};saved.drafts[id]=value;notify()}
 function fullSource(){
