@@ -236,6 +236,12 @@ root.addEventListener('click',async e=>{
  const t=e.target.closest('button');if(!t)return;if(accountChanged){if(t.dataset.action==='reloadaccount')location.reload();return}if(ui.busy)return;
  if(t.dataset.view){ui.view=t.dataset.view;ui.error='';draw();scrollTo({top:0,behavior:'instant'});return}
  if(t.dataset.lesson){await openLesson(t.dataset.lesson);return}
+ if(t.dataset.reviewQuestion){
+   await openChapter(Number(t.dataset.reviewChapter),'chapter');
+   const ch=chapterCache.get(ui.chapter),index=ch?.questions.findIndex(q=>q.id===t.dataset.reviewQuestion)??-1;
+   if(index>=0){ui.qindex=index;ui.reviewSingle=true;draw()}
+   return;
+ }
  if(t.dataset.chapter){await openChapter(t.dataset.chapter);return}
  if(t.dataset.practice){await openChapter(t.dataset.practice,'chapter');return}
  if(t.dataset.analytical){ui.opening=t.dataset.analytical;ui.view='written';ui.reveal=false;draw();return}
@@ -268,8 +274,17 @@ root.addEventListener('click',async e=>{
   case 'bookmark':saveBookmark();break;
   case 'markreview':saved.revisit[ui.id]={at:new Date().toISOString(),kind:'manual'};notify();draw();break;
   case 'fullsource':fullSource();break;
-  case 'nextquestion':ui.qindex+=1;ui.selected='';draw();break;
-  case 'restartquestions':ui.qindex=0;ui.selected='';draw();break;
+  case 'nextquestion':{
+   ui.qindex+=1;ui.selected='';
+   if(ui.qindex>=chapterCache.get(ui.chapter).questions.length&&saved.quizAttempts?.[ui.attemptId]){
+     saved.quizAttempts[ui.attemptId].finishedAt=new Date().toISOString();
+     saved.quizAttempts[ui.attemptId].at=new Date().toISOString();
+     notify();
+   }
+   draw();break;
+  }
+  case 'restartquestions':ui.qindex=0;ui.selected='';ui.reviewSingle=false;beginQuizAttempt(ui.chapter);draw();break;
+  case 'returnreview':ui.reviewSingle=false;ui.view='review';draw();break;
   case 'savewriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');break;
   case 'revealwriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');ui.reveal=true;draw();break;
  }
