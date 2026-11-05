@@ -10,6 +10,7 @@ type GsaProgress = {
   plan?: { days: number; startDate: string } | null
   completed?: Record<string, { at?: string; selfRating?: string }>
   revisit?: Record<string, unknown>
+  questionReview?: Record<string, { unresolved?: boolean }>
   bookmarks?: Record<string, unknown>
   last?: string
 }
@@ -28,7 +29,9 @@ function snapshot(progress: GsaProgress) {
   return {
     days: typeof days === 'number' && Number.isInteger(days) && days >= 5 && days <= 120 ? days : null,
     completed: Object.keys(progress.completed ?? {}).length,
+    confident: Object.entries(progress.completed ?? {}).filter(([id, entry]) => entry?.selfRating === 'gotit' && !progress.revisit?.[id]).length,
     revision: Object.keys(progress.revisit ?? {}).length,
+    missed: Object.values(progress.questionReview ?? {}).filter(entry => entry?.unresolved).length,
   }
 }
 export default function GSATutorPage() {
@@ -122,7 +125,9 @@ function GSATutorWorkspace() {
         </div>
         <div className="mb-4 flex flex-wrap items-center gap-x-6 gap-y-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs text-slate-600" aria-live="polite">
           <span><strong className="text-slate-900">{result.days ? result.days + '-day' : 'Not scheduled'}</strong> course</span>
-          <span><strong className="text-slate-900">{Math.min(result.completed, 141)}/141</strong> lessons completed</span>
+          <span><strong className="text-slate-900">{Math.min(result.completed, 141)}/141</strong> lessons studied</span>
+          <span><strong className="text-slate-900">{result.confident}</strong> self-rated clear</span>
+          <span><strong className="text-slate-900">{result.missed}</strong> missed questions</span>
           <span><strong className="text-slate-900">{result.revision}</strong> lessons for revision</span>
           <span>{loading ? 'Checking account…' : user?.profile_complete ? syncStatus === 'synced' ? 'Account progress synced' : syncStatus === 'syncing' ? 'Account sync in progress' : 'Saved on device; account sync pending' : user ? 'Complete your profile to enable account sync' : 'Device progress only until signed in'}</span>
           {lastSyncedAt && user?.profile_complete && <span>Last synced {lastSyncedAt.toLocaleTimeString('en-PK')}</span>}
