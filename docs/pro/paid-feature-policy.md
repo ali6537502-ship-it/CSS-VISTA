@@ -1,4 +1,6 @@
-# Paid feature policy
+# Paid feature policy (historical)
+
+> Superseded on 5 November 2026 by the owner's [free-learning and AI-evaluation retirement decision](free-learning-transition.md). The paid classifications below are historical implementation evidence, not the current product policy. Application migration remains pending; do not describe the current code as already free.
 
 The owner's latest instruction supersedes historical free access for Précis, General Ability, Essay Themes, My Answer Performance and Current Affairs. The Free account list excludes those destinations. Pro includes the same free destinations plus the paid features, each with a star and visible Pro label.
 
