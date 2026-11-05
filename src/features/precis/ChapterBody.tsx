@@ -6,7 +6,9 @@ export default function ChapterBody({ chapter }: { chapter: Chapter }) {
       <h3 id="precis-chapter-title" tabIndex={-1} className="text-xl font-semibold tracking-tight">{chapter.title}</h3>
       <div className="mt-6 space-y-4 text-sm leading-7 text-slate-700">
         {chapter.blocks.map((block, i) =>
-          block.type === 'table' ? (
+          block.type === 'table' && block.rows.length === 1 && block.rows[0].length === 1 ? (
+            <div key={i} className="whitespace-pre-wrap break-words rounded-xl border border-slate-200 bg-slate-50 p-4">{block.rows[0][0]}</div>
+          ) : block.type === 'table' ? (
             <div
               key={i}
               className="overflow-x-auto rounded-xl border border-slate-200"
@@ -25,11 +27,11 @@ export default function ChapterBody({ chapter }: { chapter: Chapter }) {
                     >
                       {row.map((cell, k) =>
                         j === 0 ? (
-                          <th key={k} scope="col" className="min-w-36 p-3">
+                          <th key={k} scope="col" className="min-w-36 whitespace-pre-wrap p-3">
                             {cell}
                           </th>
                         ) : (
-                          <td key={k} className="min-w-36 p-3 align-top">
+                          <td key={k} className="min-w-36 whitespace-pre-wrap p-3 align-top">
                             {cell}
                           </td>
                         ),

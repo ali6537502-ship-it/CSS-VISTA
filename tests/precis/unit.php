@@ -22,4 +22,10 @@ check(cssv_precis_guide_unit_count()>60,'Handbook cannot support student-selecte
 check(cssv_precis_known_guide_unit('1:0'),'Real handbook unit was not recognised');
 check(!cssv_precis_known_guide_unit('4:0'),'Heading incorrectly marked as a completed reading block');
 check(!cssv_precis_known_guide_unit('25:1000'),'Unknown handbook section was accepted');
+check(cssv_precis_content_identity()!==$book['source_sha256'],'Raw source hash reused as restored-content identity');
+$edition=cssv_precis_plan_edition($book['source_sha256'],['1:3','18:0']);check($edition['edition_status']==='earlier'&&$edition['verified_current_units']===['1:3'],'Earlier completion attached to restored text');
+check(cssv_precis_plan_edition(str_repeat('0',64),['1:3'])['verified_current_units']===[],'Unknown edition received completion credit');
+check(cssv_precis_plan_edition(cssv_precis_content_identity(),['1:0'])['edition_status']==='current','Current edition not recognised');
+check(count($catalog['front_matter'])===33,'Front matter missing');
+check(count($book['chapters'][17]['blocks'])===25&&count($book['chapters'][19]['blocks'])===32,'Worked examples or answer key truncated');
 echo "PASS: $count Précis content, answer isolation, qualification, evidence, count, context and schema assertions.\n";

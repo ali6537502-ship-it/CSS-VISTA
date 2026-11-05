@@ -1,29 +1,30 @@
-# Précis book remake — development draft
+# Précis book remake — source restored
 
-The owner requested a remake faithful to the **MASTER PRÉCIS WRITING STEP-BY-STEP HANDBOOK**, with no overlapping courses and the strongest existing features retained. The earlier source audit is recorded in `docs/audits/precis-2026-10-31.md`.
+The owner requested one free, straightforward Précis workspace faithful to **MASTER PRÉCIS WRITING STEP-BY-STEP HANDBOOK**, keeping the strongest existing tools and student records. The source audit is recorded in `docs/audits/precis-2026-10-31.md`; the verified restoration is recorded in `docs/audits/precis-source-restoration-2026-11-05.md`.
 
-## What this draft changes
+## Final behavior
 
-- One active workspace: **Read the handbook**, **Write and revise**, and **My drafts and revisions**. Book chapters open directly, without a duration/setup gate.
-- The existing chapter renderer is reused for whole chapters and tables. The two obsolete course screens are removed; scheduling helpers and existing reading-plan records remain for compatibility.
-- Chapter 18 presents the five retained original passages, extracted teaching notes and handbook responses through the existing authenticated native endpoint. Models are not bundled into public JavaScript. The separate owned-practice comparison gate remains in place.
-- Saving opens the saved record. Revising loads its existing ID and latest version into the existing composer, so a revision creates another version of the same record. Saved-writing and older-version URLs work again. Earlier versions remain readable and comparable.
-- Chapter-position saving uses the existing versioned progress action without marking a day complete. Earlier plan counts and retained tab-local notes remain readable. No schema, source-unit identity or handbook hash changes, no progress migration, and no deletion of student records.
-- The importer no longer replaces chapters 2/18 or appendix C and no longer filters chapter-20 answers. It prepares an explicitly named candidate and preservation manifest, retaining all supported body blocks. Four synthetic regression groups cover preservation, failure without overwriting, output evidence and invalid structure. This repairs future import behavior; it does not restore the absent source. See `docs/pro/precis-source-import.md`.
-- Existing authored recognition checks remain supplementary practice in the same workspace. The limited checker retains word counts and bounded checks; valid irrealis and mandative subjunctives are protected from the two confirmed false corrections. Legacy external feedback comparison is shown only when its existing availability flag permits it; the remake activates no provider.
+- One active workspace: **Read the handbook**, **Write and revise**, and **My drafts and revisions**. All 22 chapters and appendices A–C open directly, without a duration/setup gate. Purpose, cover text and original contents are accessible through the introduction link.
+- Every supported non-empty source block is retained in order: 33 front-matter blocks and 293 chapter blocks. Chapters 2/18/20 and appendix C contain the author’s original text, worked examples, commentary and answer key again. Separate study notes in chapters 2/25 advise following the current examination syllabus and question instructions without rewriting the author’s words.
+- Chapter 18 uses the same chapter renderer as the rest of the book. Its five originals, explanations, models and titles are readable directly. Links open those same passages in the existing composer. There is no parallel worked-example course. The earlier worked-example endpoint remains compatible with old clients.
+- Saving opens the saved record. Revising loads its existing ID/latest version into the composer, creating another immutable version of that record. Saved-writing and older-version URLs work; versions remain comparable. All six writing-source copies are identical to the earlier catalogue, and existing stored sources/versions are not rewritten.
+- Earlier reading records are retained as an earlier edition. A separate content digest prevents the unchanged raw-DOCX hash from silently reusing positional IDs after restoration. Exact-text mapping identifies 94 of 108 earlier units, without modifying their database rows or awarding completion to restored material. Old tab-local notes use their original IDs/section labels; they are not looked up against new unit positions.
+- Chapter-position saving keeps its existing versioned action and does not mark reading complete. No schema migration, deletion or production data write is required for the read-only compatibility treatment.
+- Existing authored recognition checks remain supplementary practice. Their answer keys retain the response contract. The handbook’s own models and answer key are intentionally readable by free authenticated students; the owned two-version comparison tool remains a separate revision aid.
+- The limited local checker retains word counts and bounded checks, including regressions for valid irrealis/mandative subjunctives. No external AI service, payment or subscription is activated.
 
-## Source limitation — not a completed transcription
+## Source and reproducibility
 
-On 4 November the owner supplied a DOCX attachment reference, but its named file is not materialized in the execution workspace. Connected Drive search also returned no copy. The original file bytes remain unavailable for comparison. The importer previously replaced chapter 18 and removed answer-key material; chapter 2 and appendix C contain editorial replacements. This draft does not invent missing material or describe it as restored. Source-review notices identify those gaps.
+The source was successfully received on 5 November 2026 through the new file upload. Its SHA-256 is `e1b36b54b25edc343a460eb73fec43e63d68210f5044e70727a72fbe1c071561`, exactly the raw file hash recorded by the old importer. It is archived outside the web root at `data-archive/precis/master-precis-writing-handbook.docx`.
 
-The served handbook text, edition hash and block identities are deliberately unchanged until the original can be compared. Full re-import and any required progress migration need that source file. Do not merge or deploy this draft as the completed book remake while those gaps remain.
+`python3 scripts/precis/check-handbook.py` reproduces and checks the PHP catalogue, source manifest and compatibility map against the real DOCX and the frozen earlier catalogue. The independent real-source test compares every source text token, including table cells, with the served book in order. This proves structured text preservation, not Word pagination/font/layout reproduction or independent verification of the author’s examination claims.
 
-## Required verification
+## Verification
 
-- `npm run test:precis`: existing count/source/schedule/checker tests plus book routing, valid-subjunctive regressions and the synthetic Python importer checks. These tests are included in native CI.
-- TypeScript and lint on the changed source and browser tests.
-- Native `tests/precis/security.mjs`: worked-example authentication, complete-profile and expected-account checks, free access, exact five-example scope and no answer-key exposure in the ordinary catalogue.
-- Built `tests/browser/precis-book.mjs`: a real free native account reads without setting a course duration, opens an example, creates a draft, reopens it, revises the same record, compares versions, opens a retained handbook model and follows an older-version URL. It checks narrow/wide history/table layouts and absence of evaluation dispatch.
-- Existing Pro-pause browser checks must keep free Précis reading available while paid/AI capabilities stay held.
+- `npm run test:precis`: 22 Node tests, five Python regression groups (including the real uploaded source), and the reproducible source/compatibility check.
+- TypeScript and lint on changed source/browser tests.
+- Native API tests: free source reading, ownership/profile/expected-account checks, existing writing/revision behavior, earlier-edition reads without mutation, stale positional-ID rejection, and unchanged recognition-answer contracts.
+- Native browser: reading without a schedule, front matter, complete example/model, earlier tab-note recovery, earlier completion status, save/reopen/same-record revision, older-version URL, version/model comparison, restored answer key, and 320–1440px history/table/exercise layouts. No evaluation dispatch.
+- Existing Pro-pause journeys remain required. No release or production write is performed by these checks.
 
-Final acceptance still requires comparison of every chapter, example, exercise and answer against the original book. Passing functional tests does not substitute for that comparison.
+The PR remains a development draft for review. Source restoration resolves the missing-file blocker; it does not itself merge or publish the release.

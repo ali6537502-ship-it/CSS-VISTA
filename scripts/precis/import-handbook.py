@@ -104,7 +104,8 @@ def import_handbook(source):
     body = root.find('w:body', NS)
     if body is None:
         raise ValueError('DOCX has no document body.')
-    if not any(paragraph_text(p) == EXPECTED_TITLE for p in body.findall('w:p', NS)):
+    opening = ' '.join(paragraph_text(p) for p in body.findall('w:p', NS)[:6])
+    if opening != EXPECTED_TITLE and not opening.startswith(EXPECTED_TITLE + ' '):
         raise ValueError('The document title does not match the confirmed handbook.')
     chapters, front_matter = [], []
     current = None

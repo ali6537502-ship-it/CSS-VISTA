@@ -19,13 +19,20 @@ function cssv_precis_detail(PDO $pdo,string $user,string $writing,?string $versi
  $q=$pdo->prepare('SELECT context FROM precis_version_context WHERE version_id=?');$q->execute([$v['id']]);$context=$q->fetchColumn();
  return [...$owned,'version'=>$v,'context'=>$context?json_decode($context,true,32,JSON_THROW_ON_ERROR):null];
 }
+function cssv_precis_content_identity(): string { $book=cssv_precis_handbook();return $book['content_sha256'] ?? $book['source_sha256']; }
+function cssv_precis_reading_compatibility(): array { static $compat;return $compat ??= require __DIR__.'/_precis_reading_compat.php'; }
+function cssv_precis_plan_edition(string $sha,array $completed): array {
+ $compat=cssv_precis_reading_compatibility();$status=$sha===cssv_precis_content_identity()?'current':($sha===$compat['legacy_source_sha256']?'earlier':'unknown');
+ $mapped=[];if($status==='current')$mapped=$completed;elseif($status==='earlier')foreach($compat['units'] as $unit)if($unit['matched_unit_id']!==null&&in_array($unit['id'],$completed,true))$mapped[]=$unit['matched_unit_id'];
+ return ['edition_status'=>$status,'verified_current_units'=>array_values(array_unique($mapped))];
+}
 function cssv_precis_guide_plan(PDO $pdo,string $user,string $attempt): ?array {
  $q=$pdo->prepare('SELECT target_days,version,completed_units,handbook_sha FROM precis_guide_plans WHERE attempt_id=? AND user_id=?');
  $q->execute([$attempt,$user]);$row=$q->fetch();
- if(!$row)return null;
+ if(!$row)return null;$completed=json_decode($row['completed_units'],true,512,JSON_THROW_ON_ERROR);
  return ['target_days'=>(int)$row['target_days'],'version'=>(int)$row['version'],
-  'completed_units'=>json_decode($row['completed_units'],true,512,JSON_THROW_ON_ERROR),
-  'handbook_sha'=>$row['handbook_sha']];
+  'completed_units'=>$completed,
+  'handbook_sha'=>$row['handbook_sha'],...cssv_precis_plan_edition($row['handbook_sha'],$completed)];
 }
 /** Identical heading-boundary and three-block grouping to the browser course. */
 function cssv_precis_guide_unit_ids(): array {
@@ -83,7 +90,7 @@ function cssv_precis_mutation(PDO $pdo,string $user,array $body): array {
    $current=cssv_precis_guide_plan($pdo,$user,$attempt);
    if(($current['version'] ?? 0)!==$expected)
     throw new DomainException('Your plan changed on another device. Refresh before saving.');
-   $sha=cssv_precis_handbook()['source_sha256'];
+   $sha=cssv_precis_content_identity();
    if($current&&$current['handbook_sha']!==$sha)
     throw new DomainException('The handbook edition has changed. Your previous plan is preserved for review.');
    if($action==='guide_setup'){
@@ -146,5 +153,5 @@ function cssv_precis_mutation(PDO $pdo,string $user,array $body): array {
 function cssv_precis_catalog(): array {
  $book=cssv_precis_handbook();foreach($book['passages'] as &$p)unset($p['model'],$p['model_title']);unset($p);
  $questions=array_values(cssv_precis_questions());foreach($questions as &$q)unset($q['answer'],$q['explanation']);unset($q);
- return ['chapters'=>$book['chapters'],'passages'=>$book['passages'],'questions'=>$questions,'source_sha256'=>$book['source_sha256']];
+ return ['front_matter'=>$book['front_matter'] ?? [],'content_sha256'=>cssv_precis_content_identity(),'legacy_reading'=>cssv_precis_reading_compatibility(),'chapters'=>$book['chapters'],'passages'=>$book['passages'],'questions'=>$questions,'source_sha256'=>$book['source_sha256']];
 }

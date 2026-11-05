@@ -1,34 +1,38 @@
 # Précis source-preserving import
 
-The earlier importer deliberately replaced chapters 2 and 18 and appendix C and filtered chapter-20 answers. Those transformations are removed. A future import keeps every supported, non-empty body paragraph, heading, bullet and table in source order. Practice sources are additional copies; they do not replace the chapter text, commentary or solutions.
+The earlier importer replaced chapters 2/18 and appendix C and filtered chapter-20 answers. Those transformations are removed. The real DOCX was received on 5 November 2026 and is archived at `data-archive/precis/master-precis-writing-handbook.docx`, outside the web root. The reader now uses its complete structured text.
 
-This is importer preparation, not certification of the uploaded book. On 4 November 2026 the chat supplied the filename `Master_Precis_Writing_Handbook (1).docx`, but the attachment path was absent from the selected workspace. No original source was read or re-imported, and the served handbook catalogue is unchanged. The older audit's missing-content findings remain open.
+## Reproduce the verified edition
 
-## Prepare and review a candidate
+```sh
+python3 scripts/precis/check-handbook.py
+npm run test:precis
+```
 
-Use the actual accessible source file, without renaming unrelated documents or reconstructing missing author text:
+The check reproduces the served PHP catalogue, independent manifest and earlier-unit compatibility map. It fails on any difference. After reviewing an intentional source/parser change, `python3 scripts/precis/check-handbook.py --write` prepares those artifacts; it does not mutate student records or publish a release.
+
+For a separate candidate from an accessible source:
 
 ```sh
 python3 scripts/precis/import-handbook.py /path/to/source.docx \
   --output /tmp/precis-candidate.php \
   --manifest /tmp/precis-import-manifest.json
-python3 tests/precis/test_import_handbook.py
 ```
 
-The output path is mandatory, and source/output/manifest paths must differ. Parsing, title verification, the 22-chapter/appendix A–C sequence, non-empty chapters, six complete practice copies and block accounting are validated before either candidate file is written. Unsupported text containers, nested tables and embedded media/notes fail rather than silently disappear. Files that fail validation leave any previous candidate and manifest intact.
+The output path is mandatory; source/output/manifest paths must differ. Parsing, the joined cover title, 22-chapter/appendix A–C order, non-empty chapters, six complete practice copies and block accounting are validated before outputs are written. Invalid imports preserve existing candidate files. Unsupported body/table text containers, nested tables and embedded media/notes stop the import for explicit mapping.
 
-The importer trims outer paragraph whitespace and ignores empty paragraphs. It preserves internal text, run joins, explicit tabs/line breaks and paragraph boundaries within table cells. It stores the front matter separately from the numbered chapters. This is structured text preservation, not preservation of Word pagination, fonts or layout. Source editions with unsupported structures require an explicit mapping and review before import.
+The importer trims outer paragraph whitespace and ignores empty paragraphs. It preserves internal text, run joins, explicit tabs/line breaks and paragraph boundaries within table cells. Front matter is stored separately and rendered through the introduction link. Word fonts, page layout and pagination are not reproduced.
 
-The generated catalogue includes the original file SHA-256, a separate digest of the actual imported content, and a per-chapter block-count/content-digest manifest. The separate digest is necessary because the old file hash alone did not identify changes made by the importer. The independent manifest repeats this evidence for review.
+The catalogue/manifest include the original file hash, a separate imported-content digest, per-chapter counts and per-chapter digests. The original file hash alone cannot identify changes made by the importer: the restored source has the same raw hash as the earlier transformed catalogue.
 
-## Before replacing the served catalogue
+## Preserve earlier student records
 
-1. Compare every chapter, example, explanation, exercise, table and answer with the real source. Verify the front matter is accessible in the final reader. Keep any editorial examination-rule caveats separate from author text.
-2. Compare the candidate with the current catalogue. Current reading-unit IDs are positional (`chapter:blockIndex`); restoring omitted blocks can reuse an old ID for different text. Existing completion IDs and tab-local notes must not be interpreted against the new content without a reviewed mapping.
-3. Prepare a migration that retains the earlier edition and its notes/completions, transfers only verified identical units, and leaves restored material unread. Raw-DOCX hash equality does not establish unit identity. Bind future progress to the imported-content digest as well.
-4. Preserve owned writing sources, immutable revisions, model-reveal history and student records. They are stored snapshots and must not be rewritten to match a new catalogue.
-5. Rerun native API/browser checks and source-fidelity verification before marking the remake ready for release. Passing the synthetic importer tests alone does not verify the real book or authorize deployment.
+The frozen earlier catalogue and generated compatibility map retain all 108 old reading IDs/labels. Only 94 unique exact matches are identified; changed or ambiguous sections are not assigned completion. Existing plan rows remain unchanged and are shown as an earlier edition. New reading actions bind to the imported-content digest; old/unknown editions cannot apply their positional IDs to different text.
+
+Earlier tab notes use the original keys/labels. Writing sources and immutable revisions are stored snapshots and are not rewritten. See `docs/audits/precis-source-restoration-2026-11-05.md` for the full inventory and compatibility treatment.
+
+For any future edition, compare every source block and regenerate a reviewed compatibility mapping. Preserve prior records/notes; never infer completion from matching numeric positions or raw-DOCX hash alone.
 
 ## Regression scope
 
-`tests/precis/test_import_handbook.py` constructs an explicitly synthetic DOCX. It checks exact block ordering, the formerly removed/replaced chapters and answers, table paragraph boundaries, tabs/line breaks, numbered subsections, manifests and both hashes. It also checks that malformed examples/structure cannot overwrite existing candidate files. These tests prevent the known importer failure from recurring; they cannot supply or certify missing source text.
+Five Python test groups cover synthetic preservation/failure cases and the actual source. The real-source test independently compares the complete ordered source text with the served book, including table cells, and checks the generated artifacts. Native API/browser tests verify account isolation, historical notes/completions, restored models/answers and writing/revision flows. Source-text preservation does not certify the author’s factual claims or replace functional verification.

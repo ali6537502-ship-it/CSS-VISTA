@@ -38,6 +38,9 @@ export type Overview = {
   has_more: boolean
   evaluation_enabled: boolean
   catalog: {
+    front_matter: Block[]
+    content_sha256: string
+    legacy_reading: { legacy_source_sha256: string; units: { id: string; chapter_id: string; section: string; matched_unit_id: string | null }[] }
     chapters: Chapter[]
     passages: Passage[]
     questions: Question[]
@@ -74,6 +77,8 @@ export type GuidePlan = {
   version: number
   completed_units: string[]
   handbook_sha: string
+  edition_status: 'current' | 'earlier' | 'unknown'
+  verified_current_units: string[]
 }
 export type Progress = {
   guide_plan: GuidePlan | null

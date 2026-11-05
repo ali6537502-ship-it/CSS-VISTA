@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -100,6 +101,28 @@ class ImportHandbookTest(unittest.TestCase):
         changed = json.loads(json.dumps(data))
         changed['chapters'][17]['blocks'][0]['text'] = 'changed'
         self.assertNotEqual(data['content_sha256'], handbook.digest({k: changed[k] for k in ['title', 'front_matter', 'chapters']}))
+
+    def test_real_uploaded_book_matches_every_served_word_and_generated_artifact(self):
+        source = REPO / 'data-archive/precis/master-precis-writing-handbook.docx'
+        data = handbook.import_handbook(source)
+        self.assertEqual(data['source_sha256'], 'e1b36b54b25edc343a460eb73fec43e63d68210f5044e70727a72fbe1c071561')
+        with ZipFile(source) as archive:
+            document = ET.fromstring(archive.read('word/document.xml'))
+        # Independently walk all original paragraphs, including table cells.
+        original = ' '.join(''.join(token.text or '' if token.tag == W + 't' else ' '
+                                    for token in p.iter() if token.tag in {W+'t', W+'tab', W+'br', W+'cr'})
+                            for p in document.findall('w:body//w:p', handbook.NS))
+        ordered = list(data['front_matter'])
+        for chapter in data['chapters']:
+            ordered.extend([{'type': 'heading', 'text': chapter['title']}, *chapter['blocks']])
+        imported = ' '.join(' '.join(cell for row in block['rows'] for cell in row) if block['type'] == 'table' else block['text'] for block in ordered)
+        self.assertEqual(re.findall(r'\S+', imported), re.findall(r'\S+', original))
+        self.assertEqual(len(data['front_matter']), 33)
+        self.assertEqual(len(data['chapters'][17]['blocks']), 25)
+        self.assertEqual(len(data['chapters'][19]['blocks']), 32)
+        self.assertIn('Answer key - models, not templates to memorize', [b.get('text') for b in data['chapters'][19]['blocks']])
+        self.assertEqual(data['front_matter'][0]['text'], 'MASTER')
+        subprocess.run([sys.executable, str(REPO / 'scripts/precis/check-handbook.py')], check=True, capture_output=True)
 
     def test_failed_import_leaves_source_and_both_outputs_unchanged(self):
         fixture(self.source, missing_model=True)
