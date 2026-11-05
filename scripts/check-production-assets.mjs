@@ -58,7 +58,7 @@ async function checkInParallel(entries, concurrency = 8) {
 
 const papers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
 const jsonPaths = (await walk(publicDir))
-  .filter((path) => path.toLowerCase().endsWith('.json'))
+  .filter((path) => path.toLowerCase().endsWith('.json') && !relative(publicDir, path).startsWith('book-summaries' + sep))
   .map((path) => `/${relative(publicDir, path).split(sep).join('/')}`)
 
 const entries = [
@@ -87,7 +87,7 @@ const sessionResponse = await fetch(new URL('/api/auth/session.php', origin), { 
 const session = await sessionResponse.json().catch(() => ({}))
 if (!sessionResponse.ok || session.provider !== 'hostinger' || session.authenticated !== false) failures.push('/api/auth/session.php: native Hostinger session service is unavailable')
 
-for (const route of ['/book-summaries', '/books', '/journal', '/language-grammar', '/one-liner-gk', '/opinions', '/past-papers']) {
+for (const route of ['/books', '/journal', '/language-grammar', '/one-liner-gk', '/opinions', '/past-papers']) {
   const response = await fetch(new URL(route, origin), { signal: AbortSignal.timeout(20_000) })
   const contentType = response.headers.get('content-type') || ''
   const body = await response.text()

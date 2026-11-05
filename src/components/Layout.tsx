@@ -87,7 +87,6 @@ const nav = [
       { label: 'CSS Study Material', to: '/study-material', icon: LibraryBig },
       { label: 'Optional Subject Notes', to: '/study-material/optional', icon: LibraryBig },
       { label: 'Islamic Studies Reference Bank', to: '/study-material/islamic-studies', icon: BookMarked },
-      { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
     ],
   },
   {
@@ -1342,7 +1341,6 @@ export default function Layout() {
               <li><Link className="hover:text-pine transition-colors" to="/lectures">Free CSS Vista Lectures</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/past-papers">Past Papers</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/books">Books by Sir Ali</Link></li>
-              <li><Link className="hover:text-pine transition-colors" to="/book-summaries">Book Summaries</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/journal">VISTA Journal</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/test-series">Customized Written Mocks by Ms. Sadia Zahoor</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/dashboard">Performance Dashboard</Link></li>

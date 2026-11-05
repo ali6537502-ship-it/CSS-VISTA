@@ -74,7 +74,6 @@ if (target === 'hostinger') {
   // Thin-content thresholds are enforced on the normal production path. There
   // is no permissive variant: a known content defect must not ship.
   await import('./strengthen-longtail-search-pages.mjs')
-  await import('./expand-book-summary-seo.mjs')
   await import('./expand-islamic-references-seo.mjs')
   await import('./expand-optional-notes-seo.mjs')
   // Restore direct navigation for already-public validated Vistagram posts.
@@ -90,6 +89,8 @@ if (target === 'hostinger') {
   run('scripts/daily-pdf/package.mjs')
   run('scripts/daily-pdf/routes.mjs')
   run('scripts/write-deployment-fingerprint.mjs')
+  run('scripts/retire-book-summaries.mjs')
+  run('scripts/audit-book-removal.mjs')
   await import('./audit-hostinger-build-v2.mjs')
   // Production-integrity gates. These fail the normal build.
   run('scripts/audit-search-readiness.mjs')

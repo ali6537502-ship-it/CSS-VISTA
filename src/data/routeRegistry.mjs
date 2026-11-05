@@ -159,8 +159,6 @@ export const ROUTE_REGISTRY = [
   // Public guest lessons and worked practice are useful main content. The
   // production prerender renders the same course; saved progress stays private.
   publicPage('/grammar-course', 'English Grammar Master Course', 'Study English grammar through a 30-day path with foundational and advanced explanations, a permanent reference library, varied practice and continuing revision.', 'English grammar master course', { contentQuality: 'interactive', indexable: true, adMode: 'disabled', minimumHeight: 0 }),
-  publicPage('/book-summaries', '100 Book Summaries for CSS Aspirants', 'Browse searchable book summaries and reading guidance for CSS and competitive-examination preparation.', 'Book summaries for CSS aspirants', { contentQuality: 'substantial', adMode: 'enabled' }),
-  publicPage('/book-summaries/:slug', 'Book Summary for CSS Aspirants', 'Read a complete exam-focused book summary with key ideas, lessons and quotations for CSS preparation.', 'Book summary for CSS aspirants', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern', schemaType: 'Article' }),
   protectedPage('/lectures', 'Free CSS Lectures', 'The CSS Vista lecture library is still in preparation and is not yet an indexable content resource.'),
   publicPage('/handwritten-notes', 'CSS Handwritten Notes', 'Browse information about CSS handwritten notes and authorised study resources.', 'CSS handwritten notes', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   protectedPage('/study-planner', 'Study Planner', 'Private interactive study planner.'),

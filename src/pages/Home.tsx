@@ -132,7 +132,7 @@ function HomeHero() {
           Everything you need to prepare. <span>One platform. Completely free.</span>
         </h1>
         <p className="cssv-home-hero-description">
-          Your sincere preparation partner for daily Current Affairs, MCQs, past papers, notes, book summaries, mock exams and structured study—all in one place.
+          Your sincere preparation partner for daily Current Affairs, MCQs, past papers, notes, mock exams and structured study—all in one place.
         </p>
       </div>
       <div className="cssv-home-account-column">
@@ -335,12 +335,14 @@ export default function Home() {
         && !card.to.includes('/pakistan-affairs')
         && card.id !== 'trend-analyzer'
         && !card.to.includes('/trend-analyzer')
+        && card.id !== 'book-summaries'
+        && !card.to.startsWith('/book-summaries')
         && card.id !== 'downloads'
         && !card.to.includes('/downloads')
         && card.id !== 'one-liner-gk'
         && (hasPlanner || card.id !== 'study-planner')
       )))
-      .map((card) => card.id === 'book-summaries' ? { ...card, title: '100 Book Summaries' } : card),
+      ,
     [hasPlanner, homeCards],
   )
 

@@ -35,17 +35,7 @@ interface SearchDocument extends SearchResult {
   linkForQuery?: (query: string) => string
 }
 
-interface RemoteBookLibrary {
-  categories: { slug: string; name: string }[]
-  books: {
-    slug: string
-    category: string
-    title: string
-    author: string
-    excerpt: string
-    body: string
-  }[]
-}
+
 
 interface RemoteBankIndex {
   categories: { slug: string; name: string; count: number; mpt: boolean }[]
@@ -338,7 +328,6 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
   remoteCorpusRequest = (async () => {
     const [
       pastPaperModule,
-      bookLibrary,
       bankIndex,
       oneLinerIndex,
       englishGrammar,
@@ -349,7 +338,6 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       recentAffairs,
     ] = await Promise.all([
       import('@/data/pastPapers').catch(() => null),
-      fetchJson<RemoteBookLibrary>('/book-summaries/index.json'),
       fetchJson<RemoteBankIndex>('/mcq/index.json'),
       fetchJson<RemoteOneLinerIndex>('/one-liner-gk/index.json'),
       fetchJson<RemoteGrammarCourse>('/language-grammar/english.json'),
@@ -370,19 +358,6 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         snippet: `${paper.subjectType}, ${paper.paper}, ${paper.mode}${paper.optionalGroup ? `, Group ${paper.optionalGroup}` : ''}`,
         link: paper.fileUrl ? `/past-papers/view/${paper.id}` : '/past-papers',
         keywords: `${paper.subject} ${paper.year} ${paper.examination}`,
-      })))
-    }
-
-    if (bookLibrary) {
-      const categoryNames = new Map(bookLibrary.categories.map((category) => [category.slug, category.name]))
-      remote.push(...bookLibrary.books.map((book) => ({
-        id: `book-summary-${book.slug}`,
-        title: book.title,
-        category: 'Book Summaries',
-        snippet: `${book.author}. ${book.excerpt}`,
-        keywords: `${categoryNames.get(book.category) ?? ''} ${book.body}`,
-        link: '/book-summaries',
-        linkForQuery: (query: string) => `/book-summaries?search=${encodeURIComponent(query)}`,
       })))
     }
 

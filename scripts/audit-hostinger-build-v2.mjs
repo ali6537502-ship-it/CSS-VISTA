@@ -28,8 +28,6 @@ const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper) =>
 // recorded questions are published to search.
 const paperContent = await loadPastPaperContent(root)
 const indexablePapers = paperContent.filter((entry) => entry.indexable)
-const bookLibrary = JSON.parse(await readFile(join(root, 'public', 'book-summaries', 'index.json'), 'utf8'))
-const registeredBooks = Array.isArray(bookLibrary.books) ? bookLibrary.books : []
 
 // The Islamic Studies reference banks publish one page per chapter and one per
 // topic, all server-rendered from the real components.
@@ -85,11 +83,10 @@ await Promise.all([
   access(join(dist, 'googlec96e2248070e0570.html')),
   access(join(dist, 'seo', 'routes', 'notes.html')),
   access(join(dist, 'seo', 'past-papers')),
-  access(join(dist, 'seo', 'book-summaries')),
   access(join(dist, '404.html')),
 ])
 
-const [indexHtml, htaccess, robots, sitemapIndex, adsTxt, verificationFile, notesHtml, paperFiles, bookFiles, ...childXmls] = await Promise.all([
+const [indexHtml, htaccess, robots, sitemapIndex, adsTxt, verificationFile, notesHtml, paperFiles, ...childXmls] = await Promise.all([
   readFile(join(dist, 'index.html'), 'utf8'),
   readFile(join(dist, '.htaccess'), 'utf8'),
   readFile(join(dist, 'robots.txt'), 'utf8'),
@@ -98,7 +95,6 @@ const [indexHtml, htaccess, robots, sitemapIndex, adsTxt, verificationFile, note
   readFile(join(dist, 'googlec96e2248070e0570.html'), 'utf8'),
   readFile(join(dist, 'seo', 'routes', 'notes.html'), 'utf8'),
   readdir(join(dist, 'seo', 'past-papers')),
-  readdir(join(dist, 'seo', 'book-summaries')),
   ...childSitemaps.map((name) => readFile(join(dist, name), 'utf8')),
 ])
 
@@ -113,13 +109,10 @@ const allLocs = [...coreLocs, ...gkLocs, ...collectionLocs, ...paperLocs]
 const uniqueLocs = new Set(allLocs)
 const collectionCount = new Set(registeredPapers.map((paper) => `${paper.examination.toLowerCase()}/${paper.year}`)).size
 
-const expectedCoreCount = INDEXABLE_STATIC_ROUTES.length + registeredBooks.length + indexableIslamicPaths.length + indexableOptionalPaths.length
+const expectedCoreCount = INDEXABLE_STATIC_ROUTES.length + indexableIslamicPaths.length + indexableOptionalPaths.length
 assert(coreLocs.length === expectedCoreCount, `Expected ${expectedCoreCount} core sitemap URLs, found ${coreLocs.length}`)
 for (const route of INDEXABLE_STATIC_ROUTES) {
   assert(coreLocs.includes(`${siteOrigin}${route.path}`), `Core sitemap is missing ${route.path}`)
-}
-for (const book of registeredBooks) {
-  assert(coreLocs.includes(`${siteOrigin}/book-summaries/${book.slug}`), `Core sitemap is missing book summary ${book.slug}`)
 }
 for (const path of indexableIslamicPaths) {
   assert(coreLocs.includes(`${siteOrigin}${path}`), `Core sitemap is missing Islamic reference page ${path}`)
@@ -199,13 +192,12 @@ assert(htaccess.includes('sitemap(?:-[A-Za-z0-9-]+)?'), 'Crawler-file rules do n
 assert(robots.includes(`${siteOrigin}/sitemap.xml`), 'robots.txt does not advertise the canonical sitemap index')
 
 assert(paperFiles.filter((name) => name.endsWith('.html')).length === registeredPapers.length, `Expected ${registeredPapers.length} direct past-paper SEO pages`)
-assert(bookFiles.filter((name) => name.endsWith('.html')).length === registeredBooks.length, `Expected ${registeredBooks.length} direct book-summary SEO pages`)
 const islamicFiles = await readdir(join(dist, 'seo', 'islamic-studies'))
 assert(islamicFiles.filter((name) => name.endsWith('.html')).length === islamicPaths.length, `Expected ${islamicPaths.length} Islamic Studies reference pages`)
 const optionalFiles = await readdir(join(dist, 'seo', 'optional-notes'))
 assert(optionalFiles.filter((name) => name.endsWith('.html')).length === optionalPaths.length, `Expected ${optionalPaths.length} optional-subject note pages`)
 assert(registeredPapers.length > 0, 'Past-paper registry must not be empty')
-assert(registeredBooks.length > 0, 'Book-summary registry must not be empty')
+assert(!allLocs.some(url => url.includes('/book-summaries')), 'Removed summaries leaked into sitemap')
 
 const optimizedLogo = await stat(join(dist, 'images', 'logo.webp'))
 assert(optimizedLogo.size < 50_000, `Optimized header logo is unexpectedly large: ${optimizedLogo.size} bytes`)
@@ -220,4 +212,4 @@ try {
   await handle.close()
 }
 
-console.log(`Hostinger SEO artifact audit passed: core=${coreLocs.length} (${registeredBooks.length} books, ${indexableIslamicPaths.length} Islamic reference pages, ${indexableOptionalPaths.length} of ${optionalPaths.length} optional-notes pages), gk=${gkLocs.length}, collections=${collectionLocs.length}, papers=${paperLocs.length}; reinforced CSS Vista homepage signals and canonical routing verified.`)
+console.log(`Hostinger SEO artifact audit passed: core=${coreLocs.length} (Book Summaries retired; ${indexableIslamicPaths.length} Islamic reference pages, ${indexableOptionalPaths.length} of ${optionalPaths.length} optional-notes pages), gk=${gkLocs.length}, collections=${collectionLocs.length}, papers=${paperLocs.length}; reinforced CSS Vista homepage signals and canonical routing verified.`)
