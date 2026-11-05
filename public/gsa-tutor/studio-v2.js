@@ -172,7 +172,13 @@ async function openLesson(id){
 async function openChapter(id,view='chapterIndex'){
  ui.busy=true;ui.error='';draw();
  try{await loadChapter(id)}catch(e){ui.error=e.message;ui.busy=false;draw();return}
- ui.view=view;ui.chapter=Number(id);ui.qindex=0;ui.selected='';ui.reveal=false;ui.busy=false;draw();scrollTo({top:0,behavior:'instant'});
+ ui.view=view;ui.chapter=Number(id);ui.qindex=0;ui.selected='';ui.reveal=false;ui.reviewSingle=false;if(view==='chapter')beginQuizAttempt(ui.chapter);ui.busy=false;draw();scrollTo({top:0,behavior:'instant'});
+}
+function beginQuizAttempt(chapter){
+ const id='gsa-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
+ saved.quizAttempts??={};
+ saved.quizAttempts[id]={at:new Date().toISOString(),chapter,responses:{},finishedAt:null};
+ ui.attemptId=id;notify();return id;
 }
 function chooseGrade(g){
  if(!['gotit','partial','again'].includes(g))return;
