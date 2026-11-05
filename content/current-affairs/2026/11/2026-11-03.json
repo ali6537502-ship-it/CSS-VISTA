@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "published_at": "2026-11-03T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 2026-11-03 | Retrospective coverage (00:00–23:59 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-03-pakistan-lpg-price-surge",
+      "category": "Pakistan — Economy and Energy",
+      "headline": "Pakistan's LPG prices rise sharply after Iran-border supply disruptions",
+      "summary": "Reuters reported on 3 November that two closed Iran border crossings disrupted LPG supply to Pakistan; traders said a 12-kg cylinder rose 56% to Rs7,000.",
+      "what_happened": "The closures on 17 October interrupted LPG trade. The Pakistan LPG Association reported that about 7,000 tonnes had previously arrived daily from Iran.",
+      "background": "Imported fuel interruptions can impose disproportionate costs on rickshaw drivers and low-income households.",
+      "why_it_matters": "Imported fuel interruptions can impose disproportionate costs on rickshaw drivers and low-income households.",
+      "pakistan_perspective": "Imported fuel interruptions can impose disproportionate costs on rickshaw drivers and low-income households.",
+      "regional_implications": "Imported fuel interruptions can impose disproportionate costs on rickshaw drivers and low-income households.",
+      "global_implications": "Imported fuel interruptions can impose disproportionate costs on rickshaw drivers and low-income households.",
+      "explanation": "Imported fuel interruptions can impose disproportionate costs on rickshaw drivers and low-income households.",
+      "key_takeaways": [
+        "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures.",
+        "Imported fuel interruptions can impose disproportionate costs on rickshaw drivers and low-income households."
+      ],
+      "facts": [
+        "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures."
+      ],
+      "quick_gk": [
+        "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures."
+      ],
+      "question_angles": [
+        "According to Reuters on 3 November 2026, what was the reported price of a 12-kg LPG cylinder after the border disruptions?"
+      ],
+      "topics": [
+        "Pakistan — Economy and Energy"
+      ],
+      "countries": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "'Fuel of the poor' LPG soars in Pakistan, forcing rickshaw drivers to cut meals",
+          "url": "https://www.reuters.com/world/asia-pacific/fuel-poor-lpg-soars-pakistan-forcing-rickshaw-drivers-cut-meals-2026-11-03/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-03-germany-backup-power-awards",
+      "category": "World — Energy Security",
+      "headline": "Germany awards 5.16 GW of mainly gas-fired backup power contracts",
+      "summary": "Germany awarded contracts valued at around €12 billion for 5.16 GW of dispatchable electricity capacity, Reuters reported on 3 November.",
+      "what_happened": "LEAG secured around 3 GW and RWE approximately 2.12 GW. Subsidised plants are intended to supply power when renewable generation is insufficient.",
+      "background": "The tender illustrates the costs and reliability challenges of replacing coal with intermittent renewables and backup generation.",
+      "why_it_matters": "The tender illustrates the costs and reliability challenges of replacing coal with intermittent renewables and backup generation.",
+      "pakistan_perspective": "The tender illustrates the costs and reliability challenges of replacing coal with intermittent renewables and backup generation.",
+      "regional_implications": "The tender illustrates the costs and reliability challenges of replacing coal with intermittent renewables and backup generation.",
+      "global_implications": "The tender illustrates the costs and reliability challenges of replacing coal with intermittent renewables and backup generation.",
+      "explanation": "The tender illustrates the costs and reliability challenges of replacing coal with intermittent renewables and backup generation.",
+      "key_takeaways": [
+        "Germany's November 2026 backup-power tender awarded approximately 5.16 GW of capacity.",
+        "The tender illustrates the costs and reliability challenges of replacing coal with intermittent renewables and backup generation."
+      ],
+      "facts": [
+        "Germany's November 2026 backup-power tender awarded approximately 5.16 GW of capacity."
+      ],
+      "quick_gk": [
+        "Germany's November 2026 backup-power tender awarded approximately 5.16 GW of capacity."
+      ],
+      "question_angles": [
+        "Germany's first November 2026 backup-power tender awarded approximately how much capacity?"
+      ],
+      "topics": [
+        "World — Energy Security"
+      ],
+      "countries": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Germany awards $13 billion gas plant contracts to utilities including LEAG, RWE",
+          "url": "https://www.reuters.com/business/energy/germany-awards-gas-plant-contracts-utilities-including-rwe-ephs-leag-2026-11-03/"
+        }
+      ]
+    }
+  ]
+}

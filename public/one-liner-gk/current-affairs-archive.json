@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 699,
+  "count": 703,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4892,6 +4892,34 @@
     {
       "id": "current-affairs-archive-2026-11-02-pakistan-bangladesh-industrial-talks",
       "text": "On 2 November 2026, Pakistan and Bangladesh discussed possible battery and electric-vehicle manufacturing cooperation, with Pakistan citing its New Energy Vehicle Policy.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-03-pakistan-lpg-price-surge",
+      "text": "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-03-germany-backup-power-awards",
+      "text": "Germany's November 2026 backup-power tender awarded approximately 5.16 GW of capacity.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-04-unep-adaptation-gap-2026",
+      "text": "UNEP's 2026 Adaptation Gap Report estimates annual developing-country adaptation needs of approximately US$305 billion by 2035.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-04-us-treasury-iran-maritime-sanctions",
+      "text": "On 4 November 2026 the US Treasury cited Executive Order 13902 for sanctions against an alleged Iranian-oil false-flag maritime network.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

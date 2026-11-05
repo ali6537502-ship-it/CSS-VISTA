@@ -763,5 +763,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Advanced",
     "sourceUrl": "https://www.nation.com.pk/02-Nov-2026/pakistan-bangladesh-explore-new-avenue-industrial-cooperation-economic-partnership"
+  },
+  {
+    "id": "current-affairs-20261103-pakistan-lpg-price-surge",
+    "q": "According to Reuters on 3 November 2026, what was the reported price of a 12-kg LPG cylinder after the border disruptions?",
+    "o": [
+      "Rs4,500",
+      "Rs5,500",
+      "Rs7,000",
+      "Rs9,000"
+    ],
+    "a": 2,
+    "e": "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures. Source: Reuters.",
+    "s": "Current Affairs - November 2026",
+    "d": "Advanced",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/fuel-poor-lpg-soars-pakistan-forcing-rickshaw-drivers-cut-meals-2026-11-03/"
+  },
+  {
+    "id": "current-affairs-20261103-germany-backup-power-awards",
+    "q": "Germany's first November 2026 backup-power tender awarded approximately how much capacity?",
+    "o": [
+      "2.16 GW",
+      "5.16 GW",
+      "8.50 GW",
+      "12.16 GW"
+    ],
+    "a": 1,
+    "e": "Germany's November 2026 backup-power tender awarded approximately 5.16 GW of capacity. Source: Reuters.",
+    "s": "Current Affairs - November 2026",
+    "d": "Advanced",
+    "sourceUrl": "https://www.reuters.com/business/energy/germany-awards-gas-plant-contracts-utilities-including-rwe-ephs-leag-2026-11-03/"
+  },
+  {
+    "id": "current-affairs-20261104-unep-adaptation-gap-2026",
+    "q": "According to UNEP's Adaptation Gap Report 2026, annual developing-country adaptation needs by 2035 are estimated at:",
+    "o": [
+      "US$85 billion",
+      "US$120 billion",
+      "US$305 billion",
+      "US$620 billion"
+    ],
+    "a": 2,
+    "e": "UNEP's 2026 Adaptation Gap Report estimates annual developing-country adaptation needs of approximately US$305 billion by 2035. Source: United Nations Environment Programme.",
+    "s": "Current Affairs - November 2026",
+    "d": "Advanced",
+    "sourceUrl": "https://www.unep.org/en/news-and-stories/press-release/world-heads-overshoot-15degc-adaptation-too-slow"
+  },
+  {
+    "id": "current-affairs-20261104-us-treasury-iran-maritime-sanctions",
+    "q": "Which executive order underpinned the US Treasury's 4 November 2026 maritime sanctions designations?",
+    "o": [
+      "Executive Order 13224",
+      "Executive Order 13660",
+      "Executive Order 13902",
+      "Executive Order 14024"
+    ],
+    "a": 2,
+    "e": "On 4 November 2026 the US Treasury cited Executive Order 13902 for sanctions against an alleged Iranian-oil false-flag maritime network. Source: U.S. Department of the Treasury.",
+    "s": "Current Affairs - November 2026",
+    "d": "Advanced",
+    "sourceUrl": "https://home.treasury.gov/news/press-releases/sb0681/"
   }
 ]
