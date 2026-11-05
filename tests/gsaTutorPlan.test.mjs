@@ -173,3 +173,58 @@ test('chapter inventories preserve every source question and model answer withou
  assert.equal(totalQuestions,250)
  assert.equal(totalAnalytical,31)
 })
+
+test('chapter practice records the actual missed question and preserves every retest',async()=>{
+ const p=await open();
+ p.click('[data-view="practice"]');
+ p.click('[data-practice="6"]');
+ await wait(40);
+ const c=chapter(6),q=c.questions[0],wrong=Object.keys(q.options).find(x=>x!==q.answer);
+ assert.ok(p.document.querySelector('[data-quiz-choice="'+wrong+'"]'));
+ p.click('[data-quiz-choice="'+wrong+'"]');
+ let state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.questionReview[q.id].unresolved,true);
+ assert.equal(state.questionReview[q.id].chapter,6);
+ assert.equal(state.revisit[c.sections[0].id],undefined,'A wrong chapter question must not flag the first lesson');
+ assert.equal(Object.keys(state.quizAttempts).length,1);
+ p.click('[data-action="nextquestion"]');
+ assert.match(p.document.querySelector('.panel.accent').textContent,/0 correct out of 1 questions answered in this attempt/);
+ p.click('[data-action="restartquestions"]');
+ p.click('[data-quiz-choice="'+q.answer+'"]');
+ state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.questionReview[q.id].unresolved,false,'A later successful retest resolves the missed question');
+ assert.equal(Object.keys(state.quizAttempts).length,2,'Both attempts must persist');
+ const results=Object.values(state.quizAttempts).map(a=>a.responses[q.id]?.correct);
+ assert.ok(results.includes(true)&&results.includes(false),'Historical incorrect attempt remains available');
+ assert.equal(state.quizHistory[q.id].correct,true,'Compatibility latest-answer record remains available');
+ p.dom.window.close();
+});
+
+test('revision notebook takes the learner directly to the exact missed question',async()=>{
+ const p=await open();
+ const c=chapter(6),q=c.questions[0],wrong=Object.keys(q.options).find(x=>x!==q.answer);
+ p.click('[data-view="practice"]');
+ p.click('[data-practice="6"]');
+ await wait(40);
+ p.click('[data-quiz-choice="'+wrong+'"]');
+ p.click('[data-view="review"]');
+ assert.ok(p.document.querySelector('[data-review-question="'+q.id+'"]'),'Missed question must be visible');
+ p.click('[data-review-question="'+q.id+'"]');
+ await wait(40);
+ assert.match(p.document.querySelector('.panel').textContent,/Targeted revision/);
+ assert.equal(p.document.querySelectorAll('[data-quiz-choice]').length,4);
+ p.click('[data-quiz-choice="'+q.answer+'"]');
+ p.click('[data-action="returnreview"]');
+ assert.equal(p.document.querySelector('[data-review-question="'+q.id+'"]'),null);
+ p.dom.window.close();
+});
+
+test('studied lessons are distinct from self-rated clear lessons',async()=>{
+ const id=catalog.chapters[0].sections[0].id;
+ const p=await open({plan:{days:20,startDate:'2026-11-01'},completed:{[id]:{at:'2026-11-01T09:00:00Z',selfRating:'partial'}},revisit:{[id]:{at:'2026-11-01T09:00:00Z',kind:'lesson'}}});
+ const stats=[...p.document.querySelectorAll('.stat-row strong')].map(el=>el.textContent);
+ assert.equal(stats[0],'1 / 141','Studied counter is retained');
+ assert.equal(stats[1],'0 / 141','Partly clear is never displayed as confident');
+ assert.match(p.document.querySelector('.stat-row').textContent,/Self-rated clear/);
+ p.dom.window.close();
+});
