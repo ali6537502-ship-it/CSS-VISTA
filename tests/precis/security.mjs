@@ -101,10 +101,11 @@ php('tests/pro/fixture.php','expire',a.id);assert.equal((await call(endpoint,und
 assert.equal((await call(endpoint,rewrite,a.jar)).data.version_id,revised.data.version_id,'Expiry broke accepted-save replay');assert.equal((await call(endpoint,{...rewrite,request_id:randomUUID(),expected_version:2},a.jar)).status,200,'Expired membership wrongly blocked free writing')
 assert.equal((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).status,200)
 assert.equal(php('tests/precis/fixture.php','usage',a.id),'0','Ordinary Précis learning made an AI operation')
-for(const file of ['_precis.php','_precis_core.php','_precis_schema.php','_precis_questions.php','_precis_handbook.php'])assert.equal((await fetch('http://localhost:4173/api/'+file)).status,404)
+for(const file of ['_precis.php','_precis_core.php','_precis_schema.php','_precis_questions.php','_precis_handbook.php','_precis_reading_compat.php'])assert.equal((await fetch('http://localhost:4173/api/'+file)).status,404)
 console.log('PASS: native free Précis Mentor profile/ownership/CSRF and protected model answers, immutable original/title/version context, delayed owned model reveal, custom source/explicit limit, replay/concurrency, first-response/spaced evidence, expiry history and zero AI operations.')
 
 // An old raw-DOCX hash must not reassign positional IDs to restored text.
+const writingBeforeRestoration=(await call(url,undefined,a.jar)).data
 php('tests/precis/fixture.php','legacy-plan',a.id,attempt)
 const earlier=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan
 assert.equal(earlier.edition_status,'earlier');assert.equal(earlier.version,7)
@@ -113,5 +114,5 @@ assert.deepEqual(earlier.verified_current_units,['1:3'])
 assert.equal((await call(endpoint,{...unit,request_id:randomUUID(),unit_id:'1:3',expected_version:7},a.jar)).status,409,'Earlier reading ID was applied to restored content')
 assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),expected_version:7},a.jar)).status,409,'Replanning erased the earlier-edition record')
 assert.deepEqual((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan,earlier,'Reading the restored book mutated the earlier plan')
-assert.equal((await call(`${endpoint}?writing_id=${saved.data.writing_id}`,undefined,a.jar)).data.writing.version,2,'Source restoration rewrote a saved writing record')
+assert.deepEqual((await call(url,undefined,a.jar)).data,writingBeforeRestoration,'Reading compatibility changed the saved source, versions or revealed model')
 console.log('PASS: earlier-edition completion IDs retained without reassignment; raw-source hash collision blocked; saved writing preserved.')
