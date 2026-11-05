@@ -823,5 +823,35 @@
     "s": "Current Affairs - November 2026",
     "d": "Advanced",
     "sourceUrl": "https://home.treasury.gov/news/press-releases/sb0681/"
+  },
+  {
+    "id": "current-affairs-20261105-eib-energy-survey",
+    "q": "The eighth Climate Survey released on 5 November 2026 was published by which institution?",
+    "o": [
+      "European Central Bank",
+      "European Investment Bank",
+      "European Environment Agency",
+      "European Commission"
+    ],
+    "a": 1,
+    "e": "The European Investment Bank published its eighth Climate Survey on 5 November 2026, drawing on about 23,000 respondents across 27 EU countries.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.eib.org/en/press/all/2026-370-europeans-want-an-energy-transition-that-cuts-costs-boosts-autonomy-and-slows-climate-change"
+  },
+  {
+    "id": "current-affairs-20261105-france-g7-venue",
+    "q": "France relocated the G7 foreign ministers' meeting scheduled for 9–10 November 2026 from Marseille to which city?",
+    "o": [
+      "Lyon",
+      "Strasbourg",
+      "Paris",
+      "Bordeaux"
+    ],
+    "a": 2,
+    "e": "France's foreign ministry confirmed that the G7 foreign ministers' meeting would be held in Paris instead of Marseille.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/americas/g7-foreign-ministers-meeting-moved-marseille-paris-sources-say-2026-11-05/"
   }
 ]

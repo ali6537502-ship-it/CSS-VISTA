@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 703,
+  "count": 705,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4920,6 +4920,20 @@
     {
       "id": "current-affairs-archive-2026-11-04-us-treasury-iran-maritime-sanctions",
       "text": "On 4 November 2026 the US Treasury cited Executive Order 13902 for sanctions against an alleged Iranian-oil false-flag maritime network.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-eib-energy-survey",
+      "text": "The European Investment Bank's eighth Climate Survey (5 November 2026) covered approximately 23,000 people across 27 EU member states.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-france-g7-venue",
+      "text": "France relocated the 9–10 November 2026 G7 foreign ministers' meeting from Marseille to Paris.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

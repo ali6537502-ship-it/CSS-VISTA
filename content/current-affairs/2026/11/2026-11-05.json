@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "published_at": "2026-11-05T19:00:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 5 November 2026 | Evening preliminary edition (00:00–19:00 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-05-eib-europe-energy-survey",
+      "category": "World — Energy Transition",
+      "headline": "EIB survey finds three-quarters of Europeans regard energy transition as urgent",
+      "summary": "The European Investment Bank released its eighth Climate Survey on 5 November. Across 27 EU member states, 75% of respondents called the energy transition urgent and 87% wanted low-carbon energy prioritised.",
+      "what_happened": "Ipsos surveyed approximately 23,000 people. The EIB reported that 82% expected reduced dependence on imported oil and gas, 79% expected steadier or lower prices, and 76% expected climate benefits. Fifty-five percent preferred building a European clean-technology industry even if deployment took longer.",
+      "background": "Energy-price shocks and reliance on imported fossil fuels have made industrial resilience and energy security central to the European climate-policy debate.",
+      "why_it_matters": "The survey documents public attitudes rather than a binding EU policy decision. Its findings illustrate the relationship between climate policy, energy affordability and strategic autonomy.",
+      "pakistan_perspective": "Pakistan faces analogous challenges involving imported energy, household affordability and domestic renewable-energy supply chains; EU survey responses are not evidence of Pakistani public preferences.",
+      "key_takeaways": [
+        "EIB's eighth Climate Survey covered approximately 23,000 respondents in 27 EU countries.",
+        "Across the EU, 87% favoured prioritising low-carbon energy."
+      ],
+      "facts": [
+        "The European Investment Bank's eighth Climate Survey was published on 5 November 2026."
+      ],
+      "quick_gk": [
+        "The EIB surveyed about 23,000 people across all 27 EU member states."
+      ],
+      "question_angles": [
+        "Which institution published the eighth Climate Survey on 5 November 2026?"
+      ],
+      "topics": [
+        "European Investment Bank",
+        "energy security",
+        "climate policy"
+      ],
+      "countries": [
+        "European Union"
+      ],
+      "institutions": [
+        "European Investment Bank"
+      ],
+      "sources": [
+        {
+          "publisher": "European Investment Bank",
+          "title": "Europeans want an energy transition that cuts costs, boosts autonomy and slows climate change",
+          "url": "https://www.eib.org/en/press/all/2026-370-europeans-want-an-energy-transition-that-cuts-costs-boosts-autonomy-and-slows-climate-change"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-05-france-g7-foreign-ministers-venue",
+      "category": "World — International Diplomacy",
+      "headline": "France moves forthcoming G7 foreign ministers' meeting from Marseille to Paris",
+      "summary": "France confirmed on 5 November that the G7 foreign ministers' meeting scheduled for 9–10 November would take place in Paris rather than Marseille.",
+      "what_happened": "The French foreign ministry attributed the late venue change to logistical and operational pressures associated with coordinating the G7 meeting and the Paris Peace Forum. Reuters also reported nationwide demonstrations and security pressures as background; the government did not identify protests as its official reason.",
+      "background": "France holds the 2026 G7 presidency. The G7 brings together Canada, France, Germany, Italy, Japan, the United Kingdom and the United States, with the European Union also participating.",
+      "why_it_matters": "The change concerns the meeting venue, not its cancellation or the adoption of any diplomatic decision. It highlights operational challenges facing major multilateral gatherings.",
+      "pakistan_perspective": "The G7's discussions can affect international finance, sanctions and trade conditions relevant to Pakistan, but the venue change itself does not constitute a policy decision affecting Pakistan.",
+      "key_takeaways": [
+        "The 9–10 November 2026 G7 foreign ministers' meeting was moved from Marseille to Paris.",
+        "France cited logistical and operational reasons for the venue change."
+      ],
+      "facts": [
+        "Paris replaced Marseille as the venue of the November 2026 G7 foreign ministers' meeting."
+      ],
+      "quick_gk": [
+        "France was the 2026 G7 presidency holder."
+      ],
+      "question_angles": [
+        "To which city was the 9–10 November 2026 G7 foreign ministers' meeting relocated?"
+      ],
+      "topics": [
+        "G7",
+        "France",
+        "multilateral diplomacy"
+      ],
+      "countries": [
+        "France"
+      ],
+      "institutions": [
+        "Group of Seven"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "France makes last-minute G7 ministerial location switch amid protest movement",
+          "url": "https://www.reuters.com/world/americas/g7-foreign-ministers-meeting-moved-marseille-paris-sources-say-2026-11-05/"
+        }
+      ]
+    }
+  ]
+}

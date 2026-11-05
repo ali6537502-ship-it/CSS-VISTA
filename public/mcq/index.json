@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-11-05",
-  "total": 37824,
+  "total": 37826,
   "categories": [
     {
       "slug": "pakistan-geography",
@@ -229,7 +229,7 @@
     {
       "slug": "current-affairs",
       "name": "Current Affairs",
-      "count": 1084,
+      "count": 1086,
       "chunks": 13,
       "mpt": true
     },
