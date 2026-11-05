@@ -235,3 +235,46 @@ test('studied lessons are distinct from self-rated clear lessons',async()=>{
  assert.match(p.document.querySelector('.stat-row').textContent,/Self-rated clear/);
  p.dom.window.close();
 });
+
+test('a wrong concept check cannot be self-rated clear until it is passed',async()=>{
+ const p=await open();
+ p.click('[data-view="library"]');
+ p.click('[data-chapter="17"]');
+ await wait(35);
+ const id=chapter(17).sections[0].id;
+ p.click('[data-lesson="'+id+'"]');
+ await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ assert.ok(p.document.querySelector('[data-choice]'),'This lesson should contain a source understanding check');
+ const prompt=p.document.querySelector('.lesson-card h2').textContent.trim();
+ const q=chapter(17).questions.find(q=>q.prompt===prompt);
+ assert.ok(q,'Source check must map to the published question');
+ const wrong=Object.keys(q.options).find(x=>x!==q.answer);
+ p.click('[data-choice="'+wrong+'"]');
+ p.click('[data-action="torecall"]');
+ let textarea=p.document.getElementById('recall');
+ textarea.value='This explanation covers the scientific process and its components, but I need to review the concept more thoroughly.';
+ textarea.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ p.click('[data-action="reveal"]');
+ p.click('[data-grade="gotit"]');
+ p.click('[data-action="finish"]');
+ let state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.completed[id],undefined,'Uncorrected error cannot be marked clear');
+ assert.ok(state.revisit[id],'Missed concept stays assigned for revision');
+ assert.match(p.document.getElementById('app').textContent,/Answer it correctly before marking this lesson clear/);
+ p.click('[data-choice="'+q.answer+'"]');
+ p.click('[data-action="torecall"]');
+ textarea=p.document.getElementById('recall');
+ if(!textarea.value.trim()){
+   textarea.value='The correct concept is the process explained in the original section and supported by its documented scientific evidence.';
+   textarea.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ }
+ p.click('[data-action="reveal"]');
+ p.click('[data-grade="gotit"]');
+ p.click('[data-action="finish"]');
+ state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.completed[id].selfRating,'gotit');
+ assert.equal(state.revisit[id],undefined);
+ assert.equal(state.questionReview[q.id].unresolved,false);
+ p.dom.window.close();
+});
