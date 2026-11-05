@@ -1,6 +1,7 @@
 import { chromium } from 'playwright-core'
 import assert from 'node:assert/strict'
 import { mkdir } from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 
 const origin=process.env.CSSV_GSA_BROWSER_ORIGIN||'http://127.0.0.1:5173'
 if(!['localhost','127.0.0.1'].includes(new URL(origin).hostname))throw Error('Loopback fixtures only')
@@ -30,7 +31,13 @@ try{
      await page.locator('[data-action="nextbeat"]').click()
      if(++beats>40)throw Error('Lesson sequence is stuck')
    }
-   if(await page.locator('[data-choice]').count())await page.locator('[data-choice]').first().click()
+   if(await page.locator('[data-choice]').count()){
+     const prompt=(await page.locator('.lesson-card h2').innerText()).trim()
+     const questions=JSON.parse(readFileSync('public/gsa-tutor/content/chapter-01.json','utf8')).questions
+     const sourceQuestion=questions.find(q=>q.prompt===prompt)
+     assert.ok(sourceQuestion,'Source question must be traceable to a verified key')
+     await page.locator('[data-choice="'+sourceQuestion.answer+'"]').click()
+   }
    if(await page.locator('[data-action="torecall"]').count())await page.locator('[data-action="torecall"]').click()
    await page.locator('#recall').fill('The observable universe is the region from which signals have reached us. Scientific observations inform models, while the observable boundary is not a physical wall. Light travel time reveals earlier stages of cosmic history.')
    await page.locator('[data-action="reveal"]').click()
