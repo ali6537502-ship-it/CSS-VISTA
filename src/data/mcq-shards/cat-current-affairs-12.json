@@ -853,5 +853,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/americas/g7-foreign-ministers-meeting-moved-marseille-paris-sources-say-2026-11-05/"
+  },
+  {
+    "id": "current-affairs-20261105-australia-west-peron-ccs",
+    "q": "The West Peron offshore area, designated for a proposed carbon-storage project in November 2026, lies near which Australian city?",
+    "o": [
+      "Perth",
+      "Darwin",
+      "Brisbane",
+      "Hobart"
+    ],
+    "a": 1,
+    "e": "Australia designated the West Peron offshore seabed near Darwin for a proposed Inpex carbon storage project; further environmental and licensing approvals are required.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/4ff9200393569d445601aed900cb2640"
+  },
+  {
+    "id": "current-affairs-20261105-france-union-rallies",
+    "q": "Approximately how many rallies did French trade unions plan for their nationwide 5 November 2026 protests?",
+    "o": [
+      "80",
+      "160",
+      "260",
+      "460"
+    ],
+    "a": 2,
+    "e": "Unions planned around 260 demonstrations against living costs and conditions in public services.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.aljazeera.com/gallery/2026/11/5/photos-thousands-rally-in-france-over-rising-costs-and-economic-struggles"
+  },
+  {
+    "id": "current-affairs-20261105-ap-voter-poll-cost-living",
+    "q": "In the Associated Press 2026 US midterm Voter Poll, nearly nine in ten voters regarded which issue as a major or crucial factor?",
+    "o": [
+      "Space exploration",
+      "Cost of living",
+      "Foreign language education",
+      "Term limits"
+    ],
+    "a": 1,
+    "e": "AP's poll of approximately 100,000 voters found that nearly nine in ten identified the cost of living as a major or crucial factor.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/f8dbe8800549340c8a75d956302c126b"
   }
 ]
