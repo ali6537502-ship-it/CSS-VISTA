@@ -141,3 +141,30 @@ test('isolated account and evidence workflow',async t=>{
     assert.equal(totals.trees,2)
     assert.equal(totals.seeds,3)
   })
+
+  await t.test('offline recovery invalidates sessions and old keys',async()=>{
+    let r=await participant('recover',{body:{mobile:profile.mobile,recovery_key:key,new_password:'Updated-Example-Password-2026'}})
+    verify(r,200)
+    assert.notEqual(r.data.recovery_key,key)
+    verify(await participant('mine'),401)
+    verify(await participant('recover',{body:{mobile:profile.mobile,recovery_key:key,new_password:'Repeated-Example-Password-2026'}}),401)
+    r=await participant('login',{body:{mobile:profile.mobile,password:'Updated-Example-Password-2026'}})
+    verify(r,200)
+    csrf=r.data.csrf_token
+    verify(await participant('mine'),200)
+  })
+  await t.test('deletion erases personal evidence and subtracts counters',async()=>{
+    verify(await participant('delete-account',{csrf:'wrong',body:{confirm:'DELETE',password:'Updated-Example-Password-2026'}}),403)
+    verify(await participant('delete-account',{csrf,body:{confirm:'DELETE',password:'incorrect'}}),401)
+    verify(await participant('delete-account',{csrf,body:{confirm:'DELETE',password:'Updated-Example-Password-2026'}}),200)
+    const totals=(await guest('summary')).data
+    assert.equal(totals.trees,0)
+    assert.equal(totals.seeds,0)
+    assert.equal(totals.contributors,0)
+    assert.equal(totals.survival_checks,0)
+    assert.equal(totals.public_gallery.length,0)
+    verify(await guest('photo&kind=proof&id='+first),404)
+    verify(await participant('mine'),401)
+    verify(await participant('login',{body:{mobile:profile.mobile,password:'Updated-Example-Password-2026'}}),401)
+  })
+})
