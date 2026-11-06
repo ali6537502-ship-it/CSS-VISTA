@@ -439,22 +439,24 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }:
       <div className="trees-auth-toggle">
         <button className={mode==='register'?'active':''} type="button" onClick={()=>setMode('register')}>Create account</button>
         <button className={mode==='login'?'active':''} type="button" onClick={()=>setMode('login')}>Sign in</button>
-        <button className={mode==='recover'?'active':''} type="button" onClick={()=>setMode('recover')}>Recover</button>
+        <button className={mode==='recover'||mode.startsWith('email-')?'active':''} type="button" onClick={()=>setMode('email-request')}>Forgot password?</button>
       </div>
-      <h2>{mode==='register'?'Join the movement':mode==='login'?'Welcome back':'Recover your campaign account'}</h2>
-      <p className="trees-muted">{mode==='recover'?'No text-message code is required. Enter the private recovery key saved when you registered.':mode==='register'?'Create a free, dedicated planting account.':'Sign in with your campaign mobile number and password.'}</p>
+      <h2>{mode==='register'?'Join the movement':mode==='login'?'Welcome back':mode==='email-request'?'Reset using your email':mode==='email-reset'?'Choose a new password':mode==='email-verify'?'Confirming your email…':'Recover with your saved key'}</h2>
+      <p className="trees-muted">{mode==='register'?'Create a free planting account. We will email a confirmation link, not an OTP.':mode==='login'?'Sign in using your mobile number and password.':mode==='email-request'?'Enter your registered, confirmed email to receive a single-use password reset link.':mode==='email-reset'?'Your private email link enables one password change. It expires 30 minutes after it was sent.':mode==='email-verify'?'Checking your email confirmation link.':'Use your offline recovery key; no SMS or OTP needed.'}</p>
       {mode==='register'&&<>
         <label>Full name<input required value={name} onChange={e=>setName(e.target.value)} placeholder="Your full name" maxLength={100}/></label>
+        <label>Email address<input required type="email" autoComplete="email" maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} placeholder="Your email for password recovery"/><small>No OTP at registration. Confirm your email through the link we send to enable email recovery.</small></label>
         <label>Your city or town in Punjab<select required value={city} onChange={e=>setCity(e.target.value)}><option value="">Choose city / town</option>{CITIES.map(c=><option value={c[0]} key={c[0]}>{c[0]}</option>)}<option value="custom">Other town or village in Punjab</option></select></label>
         {city==='custom'&&<label>Write your Punjab town or village<input required value={customCity} onChange={e=>setCustomCity(e.target.value)} maxLength={70} placeholder="Full town or village name"/></label>}
         <label>CNIC number<input required value={cnic} onChange={e=>setCnic(e.target.value)} placeholder="13 digits, used only to prevent duplicates" inputMode="numeric" autoComplete="off" pattern="[0-9]{5}-?[0-9]{7}-?[0-9]"/></label>
       </>}
-      <label>Mobile number<input required value={mobile} onChange={e=>setMobile(e.target.value)} inputMode="tel" autoComplete="tel" placeholder="03XX-XXXXXXX"/></label>
+      {(mode==='register'||mode==='login'||mode==='recover')&&<label>Mobile number<input required value={mobile} onChange={e=>setMobile(e.target.value)} inputMode="tel" autoComplete="tel" placeholder="03XX-XXXXXXX"/></label>}
+      {mode==='email-request'&&<label>Registered email<input required type="email" maxLength={254} autoComplete="email" placeholder="name@example.com" value={email} onChange={e=>setEmail(e.target.value)}/>}
       {mode==='recover'&&<label>Saved offline recovery key<input required value={recoveryInput} onChange={e=>setRecoveryInput(e.target.value)} autoComplete="off" placeholder="TREE-..."/></label>}
-      {mode==='login'||mode==='register'?<label>Password<input type="password" required minLength={mode==='register'?12:undefined} maxLength={72} value={password} onChange={e=>setPassword(e.target.value)} autoComplete={mode==='register'?'new-password':'current-password'} placeholder={mode==='register'?'At least 12 characters':'Your password'}/></label>:<>
+      {(mode==='login'||mode==='register')?<label>Password<input type="password" required minLength={mode==='register'?12:undefined} maxLength={72} value={password} onChange={e=>setPassword(e.target.value)} autoComplete={mode==='register'?'new-password':'current-password'} placeholder={mode==='register'?'At least 12 characters':'Your password'}/></label>:(mode==='recover'||mode==='email-reset')?<>
         <label>New password<input required type="password" minLength={12} maxLength={72} autoComplete="new-password" value={newPassword} onChange={e=>setNewPassword(e.target.value)}/></label>
         <label>Repeat new password<input required type="password" minLength={12} maxLength={72} autoComplete="new-password" value={repeatPassword} onChange={e=>setRepeatPassword(e.target.value)}/></label>
-      </>}
+      </>:null}
       {mode==='register'&&<>
         <label className="trees-check"><input type="checkbox" required checked={consent} onChange={e=>setConsent(e.target.checked)}/><span>I consent to my account details being used for security, duplicate prevention and review of planting reports. My CNIC will be converted to a secret-keyed fingerprint, not stored in plain text.</span></label>
         <label className="trees-check"><input type="checkbox" checked={publish} onChange={e=>setPublish(e.target.checked)}/><span>Show my name on the public leaderboard if I have approved saplings.</span></label>
@@ -462,9 +464,10 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }:
       {note&&<p className="trees-success"><CheckCircle2 size={18}/>{note}</p>}
       {recoveryKey&&<RecoveryKeyPanel recoveryKey={recoveryKey} onDismiss={()=>setRecoveryKey('')}/>}
       {error&&<p className="trees-error">{error}</p>}
-      <button disabled={busy} className="trees-btn-main trees-submit" type="submit">{busy?'Processing securely…':mode==='register'?'Create my campaign account':mode==='recover'?'Reset password with offline key':'Sign in'}<ArrowRight size={17}/></button>
+      {mode!=='email-verify'&&<button disabled={busy} className="trees-btn-main trees-submit" type="submit">{busy?'Processing securely…':mode==='register'?'Create my campaign account':mode==='login'?'Sign in':mode==='recover'?'Reset using saved recovery key':mode==='email-request'?'Email a reset link':'Set a new password'}<ArrowRight size={17}/></button>}
+      {(mode==='email-request'||mode==='recover')&&<button type="button" className="trees-btn-outline trees-email-switch" onClick={()=>{setMode(mode==='email-request'?'recover':'email-request');setError('');setNote('')}}>{mode==='email-request'?'Use my saved offline recovery key instead':'Use email to reset my password'}</button>}
       <p className="trees-auth-foot"><ShieldCheck size={14}/> Your mobile and CNIC are not automatically verified. Duplicate records are limited, but true identity must be assessed by human review.</p>
-      {mode==='recover'&&<p className="trees-auth-foot">If you have lost both your password and offline recovery key, contact the campaign administrators for manual ownership review. Never send CNIC photographs in public chat.</p>}
+      {(mode==='email-request'||mode==='recover')&&<p className="trees-auth-foot">Email resets work only with a previously confirmed address. If you lose access to both email and your offline recovery key, contact administrators for manual ownership review. Do not share CNIC photographs in public chats.</p>}
     </form>
   </section>
 }
