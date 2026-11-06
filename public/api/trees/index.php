@@ -315,8 +315,8 @@ function tree_send_email_token(PDO $db,string $id,string $email,string $purpose)
         ->execute([$tokenId,$id,$purpose,tree_email_token_hash($purpose,$token),cssv_hash_secret('tree-email-address:'.strtolower($email)),$expiry]);
     $link=tree_email_link($purpose,$token);
     $message=$purpose==='verify'
-        ? "You created a tree-planting campaign account.\n\nConfirm your email using this private link (expires in 24 hours):\n".$link."\n\nIf you did not register, ignore this email. Your address will not be enabled for account recovery without confirmation.\n\nIsarul Ibaad Foundation × CSS Vista"
-        : "A password reset was requested for your Punjab Trees campaign account.\n\nOpen this single-use link within 30 minutes:\n".$link."\n\nIf you did not request this, ignore this email. We will never email your password or ask for an OTP.\n\nIsarul Ibaad Foundation × CSS Vista";
+        ? "You created a tree-planting campaign account.\n\nConfirm your email using this private link (expires in 24 hours):\n".$link."\n\nIf you did not register, ignore this email. Your address will not be enabled for account recovery without confirmation.\n\nEsar ul Ebad Welfare Foundation × CSS Vista"
+        : "A password reset was requested for your Punjab Trees campaign account.\n\nOpen this single-use link within 30 minutes:\n".$link."\n\nIf you did not request this, ignore this email. We will never email your password or ask for an OTP.\n\nEsar ul Ebad Welfare Foundation × CSS Vista";
     $sent=cssv_send_mail($email,tree_email_subject($purpose),$message);
     if (!$sent) {
         $db->prepare('DELETE FROM tree_campaign_email_tokens WHERE id=?')->execute([$tokenId]);

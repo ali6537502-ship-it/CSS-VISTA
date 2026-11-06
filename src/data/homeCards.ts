@@ -64,7 +64,7 @@ export function sortHomeCardsByPriority<T extends HomeCard>(cards: T[]): T[] {
 }
 
 export const defaultHomeCards: HomeCard[] = [
-  { id: '100-million-trees', title: '100 Million Trees for Punjab', desc: 'Join our collective planting campaign with Isarul Ibaad Foundation', to: '/100-million-trees', icon: 'Globe', visible: true, order: 0.12 },
+  { id: '100-million-trees', title: '100 Million Trees for Punjab', desc: 'Join our collective planting campaign with Esar ul Ebad Welfare Foundation', to: '/100-million-trees', icon: 'Globe', visible: true, order: 0.12 },
   { id: 'exam-intelligence', title: 'VISTA Exam Intelligence', desc: 'Your personal preparation command center', to: '/exam-intelligence', icon: 'ChartNoAxesCombined', visible: true, order: 0.25 },
   { id: 'gsa-tutor', title: 'GSA Tutor', desc: 'General Science interactive lessons and personalised study durations', to: '/gsa-tutor', icon: 'BookOpen', visible: true, order: 1.2 },
   { id: 'start-css', title: 'Start CSS', desc: 'Eligibility, stages and roadmap', to: '/start-css', icon: 'BookOpen', visible: true, order: 1 },
