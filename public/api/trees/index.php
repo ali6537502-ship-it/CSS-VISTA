@@ -51,6 +51,7 @@ function tree_schema(PDO $db): void {
         cnic_last4 CHAR(4) NOT NULL,
         city VARCHAR(70) NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
+        recovery_hash CHAR(64) NULL,
         avatar_path VARCHAR(240) NULL,
         avatar_mime VARCHAR(20) NULL,
         public_name TINYINT(1) NOT NULL DEFAULT 0,
@@ -81,6 +82,9 @@ function tree_schema(PDO $db): void {
         proof_path VARCHAR(240) NOT NULL,
         proof_mime VARCHAR(20) NOT NULL,
         proof_hash CHAR(64) NOT NULL,
+        proof_phash CHAR(16) NULL,
+        duplicate_risk TINYINT(1) NOT NULL DEFAULT 0,
+        field_checked TINYINT(1) NOT NULL DEFAULT 0,
         public_photo TINYINT(1) NOT NULL DEFAULT 0,
         status ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
         reviewer_id CHAR(36) NULL,
@@ -88,6 +92,7 @@ function tree_schema(PDO $db): void {
         review_note VARCHAR(400) NULL,
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         UNIQUE KEY uq_tree_proof (proof_hash),
+        INDEX idx_tree_perceptual (proof_phash),
         INDEX idx_tree_member_status (member_id,status),
         INDEX idx_tree_public_summary (status,method,city),
         INDEX idx_tree_review_queue (status,created_at)
@@ -101,12 +106,37 @@ function tree_schema(PDO $db): void {
         INDEX idx_tree_rate_ip (action,ip_hash,created_at),
         INDEX idx_tree_rate_subject (action,subject_hash,created_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    // Backward-compatible schema changes: this PR has not been deployed,
+    // but staging databases from earlier revisions must also be safe.
+    $changes = [
+        'tree_campaign_members' => [
+            'recovery_hash' => 'ADD COLUMN recovery_hash CHAR(64) NULL',
+        ],
+        'tree_campaign_plantings' => [
+            'proof_phash' => 'ADD COLUMN proof_phash CHAR(16) NULL',
+            'duplicate_risk' => 'ADD COLUMN duplicate_risk TINYINT(1) NOT NULL DEFAULT 0',
+            'field_checked' => 'ADD COLUMN field_checked TINYINT(1) NOT NULL DEFAULT 0',
+        ],
+    ];
+    foreach ($changes as $table => $columns) {
+        foreach ($columns as $column => $ddl) {
+            $check=$db->prepare("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME=? AND COLUMN_NAME=?");
+            $check->execute([$table,$column]);
+            if ((int)$check->fetchColumn() === 0) $db->exec('ALTER TABLE '.$table.' '.$ddl);
+        }
+    }
     $ready = true;
 }
 function tree_origin(): void {
     $origin = rtrim((string)($_SERVER['HTTP_ORIGIN']??''),'/');
     $allowed = rtrim((string)cssv_env('CSSV_SITE_ORIGIN','https://www.css-vista.com'),'/');
     if ($origin !== '' && !hash_equals($origin,$allowed)) cssv_fail('Invalid request origin.',403,'invalid_origin');
+    $fetchSite = strtolower((string)($_SERVER['HTTP_SEC_FETCH_SITE']??''));
+    if ($fetchSite === 'cross-site') cssv_fail('Cross-site requests are not permitted.',403,'invalid_origin');
+    if ($origin === '' && $fetchSite === '') {
+        $referer=(string)($_SERVER['HTTP_REFERER']??'');
+        if ($referer !== '' && !str_starts_with($referer,$allowed.'/')) cssv_fail('Invalid request referrer.',403,'invalid_origin');
+    }
 }
 function tree_rate(PDO $db, string $action, string $subject, int $limit, int $seconds): void {
     $ip=cssv_hash_secret(cssv_ip_prefix());
@@ -147,8 +177,19 @@ function tree_cnic(mixed $raw): string {
     return $value;
 }
 function tree_password(mixed $raw): string {
-    if (!is_string($raw) || strlen($raw)<10 || strlen($raw)>72) cssv_fail('Choose a password of 10–72 characters.',422,'invalid_password');
+    if (!is_string($raw) || strlen($raw)<12 || strlen($raw)>72 || str_contains($raw,"\0")) cssv_fail('Choose a password containing 12–72 characters.',422,'invalid_password');
     return $raw;
+}
+function tree_recovery_new(): string {
+    // Static offline recovery key; not an OTP or an SMS verification service.
+    return 'TREE-' . strtoupper(bin2hex(random_bytes(24)));
+}
+function tree_recovery_hash(string $key): string {
+    return cssv_hash_secret('tree-recovery:' . strtoupper($key));
+}
+function tree_login_json(): array {
+    if (!preg_match('~^application/json(?:\s*;|$)~i',(string)($_SERVER['CONTENT_TYPE']??''))) cssv_fail('Use a JSON request.',415,'invalid_type');
+    return cssv_request_json(12000);
 }
 function tree_issue(PDO $db, string $id): string {
     $token=rtrim(strtr(base64_encode(random_bytes(48)),'+/','-_'),'=');
@@ -292,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
 tree_origin();
 if ($action==='register') {
     if (!preg_match('~^application/json(?:\s*;|$)~i',(string)($_SERVER['CONTENT_TYPE']??''))) cssv_fail('Use a JSON request.',415,'invalid_type');
-    $body=cssv_request_json(12000);
+    $body=tree_login_json();
     $name=tree_string($body['name']??null,'full name',3,100);
     $city=tree_string($body['city']??null,'Punjab city',2,70);
     if (!in_array($city,tree_allowed_cities(),true)) cssv_fail('Choose a listed city in Punjab.',422,'invalid_city');
@@ -301,26 +342,97 @@ if ($action==='register') {
     $password=tree_password($body['password']??null);
     if (($body['consent']??false)!==true) cssv_fail('Consent is required to register.',422,'consent_required');
     tree_rate($db,'register',$phone,5,3600);
+    $recovery=tree_recovery_new();
     try {
         $id=cssv_uuid_v4();
-        $db->prepare('INSERT INTO tree_campaign_members (id,full_name,mobile,cnic_hash,cnic_last4,city,password_hash,public_name) VALUES(?,?,?,?,?,?,?,?)')
-            ->execute([$id,$name,$phone,cssv_hash_secret('tree-cnic:'.$cnic),substr($cnic,-4),$city,password_hash($password,PASSWORD_DEFAULT),!empty($body['public_name'])?1:0]);
+        $db->prepare('INSERT INTO tree_campaign_members (id,full_name,mobile,cnic_hash,cnic_last4,city,password_hash,recovery_hash,public_name) VALUES(?,?,?,?,?,?,?,?,?)')
+            ->execute([$id,$name,$phone,cssv_hash_secret('tree-cnic:'.$cnic),substr($cnic,-4),$city,password_hash($password,PASSWORD_DEFAULT),tree_recovery_hash($recovery),!empty($body['public_name'])?1:0]);
     } catch (PDOException $e) {
         if ((string)$e->getCode()==='23000') cssv_fail('A tree campaign account already exists for this mobile number or CNIC. Please sign in.',409,'account_exists');
         throw $e;
     }
     $csrf=tree_issue($db,$id);
     $q=$db->prepare('SELECT * FROM tree_campaign_members WHERE id=?');$q->execute([$id]);
-    cssv_json(['ok'=>true,'member'=>tree_public_member($q->fetch()),'csrf_token'=>$csrf],201);
+    cssv_json(['ok'=>true,'member'=>tree_public_member($q->fetch()),'csrf_token'=>$csrf,'recovery_key'=>$recovery],201);
 }
 if ($action==='login') {
-    $body=cssv_request_json(4000);
+    $body=tree_login_json();
     $phone=tree_mobile($body['mobile']??null);
     tree_rate($db,'login',$phone,12,3600);
     $q=$db->prepare('SELECT * FROM tree_campaign_members WHERE mobile=? LIMIT 1');$q->execute([$phone]);$row=$q->fetch();
     if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) cssv_fail('Incorrect number or password.',401,'invalid_login');
     $csrf=tree_issue($db,(string)$row['id']);
     cssv_json(['ok'=>true,'member'=>tree_public_member($row),'csrf_token'=>$csrf]);
+}
+if ($action==='recover') {
+    // Offline recovery, not an OTP system: the key is shown once at registration
+    // and is never sent via text message or stored in plain text.
+    $body=tree_login_json();
+    $phone=tree_mobile($body['mobile']??null);
+    $key=strtoupper(trim((string)($body['recovery_key']??'')));
+    if (!preg_match('/^TREE-[A-F0-9]{48}$/D',$key)) cssv_fail('Invalid recovery credentials.',401,'recovery_failed');
+    $newPassword=tree_password($body['new_password']??null);
+    tree_rate($db,'recover',$phone,5,3600);
+    $db->beginTransaction();
+    try {
+        $q=$db->prepare('SELECT id,recovery_hash FROM tree_campaign_members WHERE mobile=? FOR UPDATE');
+        $q->execute([$phone]);$row=$q->fetch();
+        $candidate=tree_recovery_hash($key);
+        $expected=(string)($row['recovery_hash']??str_repeat('0',64));
+        if (!$row || !hash_equals($expected,$candidate)) {
+            $db->rollBack();
+            cssv_fail('Invalid recovery credentials.',401,'recovery_failed');
+        }
+        $replacement=tree_recovery_new();
+        $db->prepare('UPDATE tree_campaign_members SET password_hash=?,recovery_hash=? WHERE id=?')
+            ->execute([password_hash($newPassword,PASSWORD_DEFAULT),tree_recovery_hash($replacement),$row['id']]);
+        $db->prepare('UPDATE tree_campaign_sessions SET revoked_at=NOW(6) WHERE member_id=? AND revoked_at IS NULL')->execute([$row['id']]);
+        $db->commit();
+        cssv_set_cookie(TREE_SESSION,'',time()-3600,true);
+        cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
+        cssv_json(['ok'=>true,'recovery_key'=>$replacement,'message'=>'Password changed. Sign in again and save your new offline recovery key.']);
+    } catch (Throwable $e) {
+        if ($db->inTransaction()) $db->rollBack();
+        throw $e;
+    }
+}
+if ($action==='change-password') {
+    $member=tree_auth($db,true);
+    $body=tree_login_json();
+    $q=$db->prepare('SELECT password_hash FROM tree_campaign_members WHERE id=?');
+    $q->execute([$member['id']]);$row=$q->fetch();
+    if (!$row || !password_verify((string)($body['current_password']??''),(string)$row['password_hash'])) cssv_fail('Current password is incorrect.',401,'password_incorrect');
+    $replacement=tree_recovery_new();
+    $db->beginTransaction();
+    try {
+        $db->prepare('UPDATE tree_campaign_members SET password_hash=?,recovery_hash=? WHERE id=?')
+            ->execute([password_hash(tree_password($body['new_password']??null),PASSWORD_DEFAULT),tree_recovery_hash($replacement),$member['id']]);
+        $db->prepare('UPDATE tree_campaign_sessions SET revoked_at=NOW(6) WHERE member_id=?')->execute([$member['id']]);
+        $db->commit();
+    } catch (Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
+    cssv_set_cookie(TREE_SESSION,'',time()-3600,true);cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
+    cssv_json(['ok'=>true,'recovery_key'=>$replacement,'message'=>'Password updated. All sessions were signed out.']);
+}
+if ($action==='delete-account') {
+    $member=tree_auth($db,true);
+    $body=tree_login_json();
+    if (($body['confirm']??'') !== 'DELETE') cssv_fail('Type DELETE to confirm.',422,'confirmation_required');
+    $q=$db->prepare('SELECT password_hash,avatar_path FROM tree_campaign_members WHERE id=?');
+    $q->execute([$member['id']]);$row=$q->fetch();
+    if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) cssv_fail('Current password is incorrect.',401,'password_incorrect');
+    $q=$db->prepare('SELECT proof_path FROM tree_campaign_plantings WHERE member_id=?');
+    $q->execute([$member['id']]);$paths=$q->fetchAll(PDO::FETCH_COLUMN);
+    $db->beginTransaction();
+    try {
+        $db->prepare('DELETE FROM tree_campaign_plantings WHERE member_id=?')->execute([$member['id']]);
+        $db->prepare('DELETE FROM tree_campaign_sessions WHERE member_id=?')->execute([$member['id']]);
+        $db->prepare('DELETE FROM tree_campaign_members WHERE id=?')->execute([$member['id']]);
+        $db->commit();
+    } catch (Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
+    foreach($paths as $path) cssv_remove_private_file((string)$path);
+    cssv_remove_private_file((string)($row['avatar_path']??''));
+    cssv_set_cookie(TREE_SESSION,'',time()-3600,true);cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
+    cssv_json(['ok'=>true,'message'=>'Campaign account and all its planting records deleted. Public totals update accordingly.']);
 }
 if ($action==='logout') {
     $member=tree_auth($db,true);
