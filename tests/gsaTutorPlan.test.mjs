@@ -70,7 +70,12 @@ test('deep lesson uses full original sections with progressive reading and writt
  assert.ok(steps>=2,'the lesson must have multiple substantive explanations')
  assert.ok(p.document.querySelector('[data-action="torecall"]')||p.document.getElementById('recall'))
  // When a source MCQ is linked to this lesson, answer it before recall.
- if(p.document.querySelector('[data-choice]'))p.click('[data-choice]')
+ if(p.document.querySelector('[data-choice]')){
+  const prompt=p.document.querySelector('.lesson-card h2').textContent.trim();
+  const sourceQuestion=chapter(1).questions.find(q=>q.prompt===prompt);
+  assert.ok(sourceQuestion,'The source question must have a valid answer key');
+  p.click('[data-choice="'+sourceQuestion.answer+'"]');
+ }
  if(p.document.querySelector('[data-action="torecall"]'))p.click('[data-action="torecall"]')
  const textarea=p.document.getElementById('recall')
  assert.ok(textarea,'the learner must write an explanation')
@@ -173,3 +178,192 @@ test('chapter inventories preserve every source question and model answer withou
  assert.equal(totalQuestions,250)
  assert.equal(totalAnalytical,31)
 })
+
+test('chapter practice records the actual missed question and preserves every retest',async()=>{
+ const p=await open();
+ p.click('[data-view="practice"]');
+ p.click('[data-practice="6"]');
+ await wait(40);
+ const c=chapter(6),q=c.questions[0],wrong=Object.keys(q.options).find(x=>x!==q.answer);
+ assert.ok(p.document.querySelector('[data-quiz-choice="'+wrong+'"]'));
+ p.click('[data-quiz-choice="'+wrong+'"]');
+ let state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.questionReview[q.id].unresolved,true);
+ assert.equal(state.questionReview[q.id].chapter,6);
+ assert.equal(state.revisit[c.sections[0].id],undefined,'A wrong chapter question must not flag the first lesson');
+ assert.equal(Object.keys(state.quizAttempts).length,1);
+ p.click('[data-action="nextquestion"]');
+ assert.match(p.document.querySelector('.panel.accent').textContent,/0 correct out of 1 questions answered in this attempt/);
+ p.click('[data-action="restartquestions"]');
+ assert.match(p.document.getElementById('app').textContent,/Previous practice attempts/);
+ assert.match(p.document.getElementById('app').textContent,/0 \/ 1 correct/);
+ p.click('[data-quiz-choice="'+q.answer+'"]');
+ state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.questionReview[q.id].unresolved,false,'A later successful retest resolves the missed question');
+ assert.equal(Object.keys(state.quizAttempts).length,2,'Both attempts must persist');
+ const results=Object.values(state.quizAttempts).map(a=>a.responses[q.id]?.correct);
+ assert.ok(results.includes(true)&&results.includes(false),'Historical incorrect attempt remains available');
+ assert.equal(state.quizHistory[q.id].correct,true,'Compatibility latest-answer record remains available');
+ p.dom.window.close();
+});
+
+test('revision notebook takes the learner directly to the exact missed question',async()=>{
+ const p=await open();
+ const c=chapter(6),q=c.questions[0],wrong=Object.keys(q.options).find(x=>x!==q.answer);
+ p.click('[data-view="practice"]');
+ p.click('[data-practice="6"]');
+ await wait(40);
+ p.click('[data-quiz-choice="'+wrong+'"]');
+ p.click('[data-view="review"]');
+ assert.ok(p.document.querySelector('[data-review-question="'+q.id+'"]'),'Missed question must be visible');
+ p.click('[data-review-question="'+q.id+'"]');
+ await wait(40);
+ assert.match(p.document.querySelector('.panel').textContent,/Targeted revision/);
+ assert.equal(p.document.querySelectorAll('[data-quiz-choice]').length,4);
+ p.click('[data-quiz-choice="'+q.answer+'"]');
+ p.click('[data-action="returnreview"]');
+ assert.equal(p.document.querySelector('[data-review-question="'+q.id+'"]'),null);
+ p.dom.window.close();
+});
+
+test('studied lessons are distinct from self-rated clear lessons',async()=>{
+ const id=catalog.chapters[0].sections[0].id;
+ const p=await open({plan:{days:20,startDate:'2026-11-01'},completed:{[id]:{at:'2026-11-01T09:00:00Z',selfRating:'partial'}},revisit:{[id]:{at:'2026-11-01T09:00:00Z',kind:'lesson'}}});
+ const stats=[...p.document.querySelectorAll('.stat-row strong')].map(el=>el.textContent);
+ assert.equal(stats[0],'1 / 141','Studied counter is retained');
+ assert.equal(stats[1],'0 / 141','Partly clear is never displayed as confident');
+ assert.match(p.document.querySelector('.stat-row').textContent,/Self-rated clear/);
+ p.dom.window.close();
+});
+
+test('a wrong concept check cannot be self-rated clear until it is passed',async()=>{
+ const p=await open();
+ p.click('[data-view="library"]');
+ p.click('[data-chapter="17"]');
+ await wait(35);
+ const id=chapter(17).sections[0].id;
+ p.click('[data-lesson="'+id+'"]');
+ await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ assert.ok(p.document.querySelector('[data-choice]'),'This lesson should contain a source understanding check');
+ const prompt=p.document.querySelector('.lesson-card h2').textContent.trim();
+ const q=chapter(17).questions.find(q=>q.prompt===prompt);
+ assert.ok(q,'Source check must map to the published question');
+ const wrong=Object.keys(q.options).find(x=>x!==q.answer);
+ p.click('[data-choice="'+wrong+'"]');
+ p.click('[data-action="torecall"]');
+ let textarea=p.document.getElementById('recall');
+ textarea.value='This explanation covers the scientific process and its components, but I need to review the concept more thoroughly.';
+ textarea.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ p.click('[data-action="reveal"]');
+ p.click('[data-grade="gotit"]');
+ p.click('[data-action="finish"]');
+ let state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.completed[id],undefined,'Uncorrected error cannot be marked clear');
+ assert.ok(state.revisit[id],'Missed concept stays assigned for revision');
+ assert.match(p.document.getElementById('app').textContent,/Answer it correctly before marking this lesson clear/);
+ p.click('[data-choice="'+q.answer+'"]');
+ p.click('[data-action="torecall"]');
+ textarea=p.document.getElementById('recall');
+ if(!textarea.value.trim()){
+   textarea.value='The correct concept is the process explained in the original section and supported by its documented scientific evidence.';
+   textarea.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ }
+ p.click('[data-action="reveal"]');
+ p.click('[data-grade="gotit"]');
+ p.click('[data-action="finish"]');
+ state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.completed[id].selfRating,'gotit');
+ assert.equal(state.revisit[id],undefined);
+ assert.equal(state.questionReview[q.id].unresolved,false);
+ p.dom.window.close();
+});
+
+test('rest days are excluded without dropping lessons or changing the total number of study sessions',async()=>{
+ const p=await open();
+ p.click('[data-days="8"]');
+ const monday=p.document.querySelector('[data-rest-day="1"]'),friday=p.document.querySelector('[data-rest-day="5"]');
+ for(const cb of [monday,friday]){cb.checked=true;cb.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}))}
+ const minutes=p.document.getElementById('daily-minutes');minutes.value='60';minutes.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}));
+ p.click('[data-action="saveplan"]');
+ const saved=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.deepEqual(saved.plan.restDays,[1,5]);assert.equal(saved.plan.dailyMinutes,60);
+ p.click('[data-action="expandplan"]');
+ const rows=[...p.document.querySelectorAll('.day')];
+ assert.equal(rows.length,8);
+ const dates=rows.map(row=>{const m=row.querySelector('summary strong').textContent.match(/\d{1,2} [A-Za-z]+ \d{4}/);return new Date(m[0]+' 12:00:00 UTC').getUTCDay()});
+ assert.ok(dates.every(day=>day!==1&&day!==5),'No active session may land on an excluded weekday');
+ assert.equal(p.document.querySelectorAll('.day-lesson').length,141);
+ p.click('[data-action="editplan"]');
+ assert.equal(p.document.getElementById('daily-minutes').value,'60');
+ assert.ok(p.document.querySelector('[data-rest-day="1"]').checked);
+ assert.ok(p.document.querySelector('[data-rest-day="5"]').checked);
+ p.dom.window.close();
+});
+
+test('dated recall is explicitly scheduled and retained after plan changes',async()=>{
+ const id=catalog.chapters[0].sections[0].id;
+ const dueDate='2026-01-01',old={at:'2025-12-30T10:00:00Z',date:dueDate,stage:1};
+ const p=await open({plan:{days:20,startDate:'2026-01-01'},completed:{[id]:{at:'2025-12-30T10:00:00Z',selfRating:'gotit'}},reviewDue:{[id]:old},recallAttempts:{}});
+ assert.match(p.document.getElementById('app').textContent,/review due/);
+ p.click('[data-view="review"]');
+ assert.match(p.document.getElementById('app').textContent,/Recall due/);
+ assert.ok(p.document.querySelector('[data-lesson="'+id+'"]'),'Due lesson must be accessible');
+ p.click('[data-view="course"]');
+ p.click('[data-action="editplan"]');
+ p.document.getElementById('custom-days').value='60';
+ p.click('[data-action="saveplan"]');
+ const updated=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(updated.reviewDue[id].date,dueDate);
+ assert.equal(updated.plan.days,60);
+ p.dom.window.close();
+});
+
+test('science models show the correct source-linked concept and respond to the learner',async()=>{
+ const p=await open();
+ const checks=[
+  {chapter:3,id:'c3-s3-4',selector:'[data-eclipse="lunar"]',fragment:'Earth between Sun and Moon'},
+  {chapter:5,id:'c5-s5-2',selector:'[data-seismic="S"]',fragment:'S waves displace material perpendicular'},
+  {chapter:9,id:'c9-s9-3',selector:'[data-osm="hyper"]',fragment:'Net water moves out of the cell'},
+  {chapter:18,id:'c18-s18-1',selector:'[data-water="4"]',fragment:'step 5 highlighted'}
+ ];
+ for(const item of checks){
+   p.click('[data-view="library"]');p.click('[data-chapter="'+item.chapter+'"]');await wait(35);
+   p.click('[data-lesson="'+item.id+'"]');await wait(35);
+   assert.ok(p.document.querySelector(item.selector),'Expected model control for '+item.id);
+   p.click(item.selector);
+   const graphic=p.document.querySelector('.science-graphic svg');
+   assert.ok(graphic,'Expected scientific diagram '+item.id);
+   assert.match(graphic.getAttribute('aria-label'),new RegExp(item.fragment));
+   assert.equal(p.document.querySelector(item.selector).getAttribute('aria-pressed'),'true');
+   const link=p.document.querySelector('.model a[href^="https://"]');
+   assert.ok(link,'Model must retain a primary or academic reference');
+ }
+ p.dom.window.close();
+});
+
+test('corrupt day or impossible all-week-off plans are refused without removing saved work',async()=>{
+ const p=await open({plan:{days:8,startDate:'2026-11-01'},completed:{'c1-s1-1':{at:'2026-11-01T10:00:00Z',selfRating:'gotit'}}});
+ p.click('[data-action="editplan"]');
+ p.document.getElementById('start-date').value='2026-02-30';
+ // HTML date inputs reject nonsensical dates before custom validation.
+ for(let n=0;n<7;n++){const el=p.document.querySelector('[data-rest-day="'+n+'"]');el.checked=true;el.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}))}
+ p.click('[data-action="saveplan"]');
+ assert.match(p.document.getElementById('app').textContent,/at least one active weekday/);
+ const saved=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.ok(saved.completed['c1-s1-1'],'Rescheduling validation must not erase lesson work');
+ p.dom.window.close();
+});
+
+test('short course clearly warns when tentative workload exceeds available time',async()=>{
+ const p=await open();
+ p.click('[data-days="5"]');
+ const input=p.document.getElementById('daily-minutes');
+ input.value='30';input.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}));
+ p.click('[data-action="saveplan"]');
+ assert.match(p.document.getElementById('app').textContent,/estimated workload exceeding your stated time/);
+ const saved=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(saved.plan.dailyMinutes,30);
+ assert.equal(saved.plan.days,5);
+ p.dom.window.close();
+});

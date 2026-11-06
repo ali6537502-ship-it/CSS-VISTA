@@ -1,6 +1,7 @@
 import { chromium } from 'playwright-core'
 import assert from 'node:assert/strict'
 import { mkdir } from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 
 const origin=process.env.CSSV_GSA_BROWSER_ORIGIN||'http://127.0.0.1:5173'
 if(!['localhost','127.0.0.1'].includes(new URL(origin).hostname))throw Error('Loopback fixtures only')
@@ -30,7 +31,13 @@ try{
      await page.locator('[data-action="nextbeat"]').click()
      if(++beats>40)throw Error('Lesson sequence is stuck')
    }
-   if(await page.locator('[data-choice]').count())await page.locator('[data-choice]').first().click()
+   if(await page.locator('[data-choice]').count()){
+     const prompt=(await page.locator('.lesson-card h2').innerText()).trim()
+     const questions=JSON.parse(readFileSync('public/gsa-tutor/content/chapter-01.json','utf8')).questions
+     const sourceQuestion=questions.find(q=>q.prompt===prompt)
+     assert.ok(sourceQuestion,'Source question must be traceable to a verified key')
+     await page.locator('[data-choice="'+sourceQuestion.answer+'"]').click()
+   }
    if(await page.locator('[data-action="torecall"]').count())await page.locator('[data-action="torecall"]').click()
    await page.locator('#recall').fill('The observable universe is the region from which signals have reached us. Scientific observations inform models, while the observable boundary is not a physical wall. Light travel time reveals earlier stages of cosmic history.')
    await page.locator('[data-action="reveal"]').click()
@@ -46,6 +53,19 @@ try{
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)
    assert.ok(overflow<=2,'unwanted horizontal scroll at '+width+': '+overflow)
    await page.screenshot({path:'test-artifacts/gsa-tutor/learning-'+width+'.png',fullPage:true})
+   if(width===768){
+     await page.locator('[data-view="library"]').click()
+     await page.locator('[data-chapter="9"]').click()
+     await page.locator('[data-lesson="c9-s9-3"]').click()
+     await page.locator('[data-osm="hyper"]').click()
+     assert.match(await page.locator('.science-graphic svg').getAttribute('aria-label'),/Net water moves out/)
+     assert.equal(await page.locator('[data-osm="hyper"]').getAttribute('aria-pressed'),'true')
+     await page.locator('[data-view="library"]').click()
+     await page.locator('[data-chapter="18"]').click()
+     await page.locator('[data-lesson="c18-s18-1"]').click()
+     await page.locator('[data-water="4"]').click()
+     assert.match(await page.locator('.science-graphic svg').getAttribute('aria-label'),/step 5 highlighted/)
+   }
    if(width===375){
      await page.locator('.day-lesson').first().click();await page.locator('.lesson-card').waitFor()
      const empty={plan:null,completed:{},drafts:{}}

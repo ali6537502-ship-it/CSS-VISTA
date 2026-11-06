@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/workflows/gsa-tutor-qa.yml'
       - 'public/gsa-tutor/**'
+      - 'scripts/gsa-tutor/**'
       - 'src/pages/GSATutor.tsx'
       - 'src/features/gsa-tutor/**'
       - 'src/components/AccountProvider.tsx'
@@ -30,6 +31,8 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Verify schedules and learning records
         run: npm run test:gsa-tutor
+      - name: Audit GSA source quality and structural readiness
+        run: npm run audit:gsa-content
       - name: Verify TypeScript integration
         run: npm run typecheck
       - name: Build deployment artifact for route audit
