@@ -98,6 +98,19 @@ function tree_schema(PDO $db): void {
         INDEX idx_tree_public_summary (status,method,city),
         INDEX idx_tree_review_queue (status,created_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_member_rollup (
+        member_id CHAR(36) NOT NULL PRIMARY KEY,
+        trees BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        seeds BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+        INDEX idx_tree_rank (trees)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_city_rollup (
+        city VARCHAR(70) NOT NULL PRIMARY KEY,
+        trees BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        seeds BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_reviews (
         id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         planting_id CHAR(36) NOT NULL,
@@ -252,6 +265,24 @@ function tree_admin(PDO $db, bool $csrf=false): array {
     }
     return $admin;
 }
+function tree_rollup_adjust(PDO $db,string $memberId,string $city,string $method,int $quantity,int $direction): void {
+    if (!in_array($direction,[1,-1],true) || !in_array($method,['sapling','seed'],true) || $quantity<1 || $quantity>20) throw new RuntimeException('invalid_rollup_adjustment');
+    $trees=$method==='sapling'?$quantity:0;
+    $seeds=$method==='seed'?$quantity:0;
+    if ($direction===1) {
+        $db->prepare('INSERT INTO tree_campaign_member_rollup(member_id,trees,seeds) VALUES(?,?,?) ON DUPLICATE KEY UPDATE trees=trees+VALUES(trees),seeds=seeds+VALUES(seeds),updated_at=NOW(6)')
+            ->execute([$memberId,$trees,$seeds]);
+        $db->prepare('INSERT INTO tree_campaign_city_rollup(city,trees,seeds) VALUES(?,?,?) ON DUPLICATE KEY UPDATE trees=trees+VALUES(trees),seeds=seeds+VALUES(seeds),updated_at=NOW(6)')
+            ->execute([$city,$trees,$seeds]);
+    } else {
+        $stmt=$db->prepare('UPDATE tree_campaign_member_rollup SET trees=trees-?,seeds=seeds-?,updated_at=NOW(6) WHERE member_id=? AND trees>=? AND seeds>=?');
+        $stmt->execute([$trees,$seeds,$memberId,$trees,$seeds]);
+        if ($stmt->rowCount()!==1) throw new RuntimeException('missing_member_rollup');
+        $stmt=$db->prepare('UPDATE tree_campaign_city_rollup SET trees=trees-?,seeds=seeds-?,updated_at=NOW(6) WHERE city=? AND trees>=? AND seeds>=?');
+        $stmt->execute([$trees,$seeds,$city,$trees,$seeds]);
+        if ($stmt->rowCount()!==1) throw new RuntimeException('missing_city_rollup');
+    }
+}
 function tree_image_phash(string $path): string {
     // 64-bit difference hash for detecting visually similar uploads.
     $source=@imagecreatefromjpeg($path);
@@ -356,18 +387,20 @@ tree_schema($db);
 if ($_SERVER['REQUEST_METHOD']==='GET') {
     if ($action==='catalog') cssv_json(['ok'=>true,'species'=>tree_species()]);
     if ($action==='summary') {
-        $tot=$db->query("SELECT COALESCE(SUM(IF(method='sapling',quantity,0)),0) AS trees, COALESCE(SUM(IF(method='seed',quantity,0)),0) AS seeds, COUNT(DISTINCT member_id) AS contributors,COUNT(DISTINCT city) AS cities FROM tree_campaign_plantings WHERE status='approved'")->fetch();
+        $tot=$db->query("SELECT COALESCE(SUM(trees),0) AS trees,COALESCE(SUM(seeds),0) AS seeds FROM tree_campaign_city_rollup")->fetch();
+        $contributors=(int)$db->query('SELECT COUNT(*) FROM tree_campaign_member_rollup WHERE trees>0 OR seeds>0')->fetchColumn();
+        $cities=(int)$db->query('SELECT COUNT(*) FROM tree_campaign_city_rollup WHERE trees>0 OR seeds>0')->fetchColumn();
         $pending=(int)$db->query("SELECT COUNT(*) FROM tree_campaign_plantings WHERE status='pending'")->fetchColumn();
-        $locations=$db->query("SELECT city, SUM(IF(method='sapling',quantity,0)) AS trees, SUM(IF(method='seed',quantity,0)) AS seeds FROM tree_campaign_plantings WHERE status='approved' GROUP BY city ORDER BY trees DESC LIMIT 80")->fetchAll();
+        $locations=$db->query("SELECT city,trees,seeds FROM tree_campaign_city_rollup WHERE trees>0 OR seeds>0 ORDER BY trees DESC LIMIT 80")->fetchAll();
         $gallery=$db->query("SELECT id,city,species,method,quantity,planted_on FROM tree_campaign_plantings WHERE status='approved' AND public_photo=1 ORDER BY reviewed_at DESC LIMIT 12")->fetchAll();
-        $leaders=$db->query("SELECT m.id,m.full_name,m.city,m.public_name, SUM(p.quantity) AS trees FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status='approved' AND p.method='sapling' GROUP BY m.id,m.full_name,m.city,m.public_name ORDER BY trees DESC,m.id ASC LIMIT 15")->fetchAll();
+        $leaders=$db->query("SELECT m.id,m.full_name,m.city,m.public_name,r.trees FROM tree_campaign_member_rollup r JOIN tree_campaign_members m ON m.id=r.member_id WHERE r.trees>0 ORDER BY r.trees DESC,m.id ASC LIMIT 15")->fetchAll();
         $leaderboard=[];
         foreach ($leaders as $i=>$leader) {
             $name=(string)$leader['full_name'];
             $display=(bool)$leader['public_name']?$name:'Anonymous planter';
             $leaderboard[]=['rank'=>$i+1,'name'=>$display,'city'=>(string)$leader['city'],'trees'=>(int)$leader['trees']];
         }
-        cssv_json(['ok'=>true,'target'=>TREE_TARGET,'trees'=>(int)$tot['trees'],'seeds'=>(int)$tot['seeds'],'contributors'=>(int)$tot['contributors'],'cities'=>(int)$tot['cities'],'pending_reports'=>$pending,'city_totals'=>$locations,'leaderboard'=>$leaderboard,'public_gallery'=>$gallery]);
+        cssv_json(['ok'=>true,'target'=>TREE_TARGET,'trees'=>(int)$tot['trees'],'seeds'=>(int)$tot['seeds'],'contributors'=>$contributors,'cities'=>$cities,'pending_reports'=>$pending,'city_totals'=>$locations,'leaderboard'=>$leaderboard,'public_gallery'=>$gallery]);
     }
     if ($action==='session') {
         $member=tree_member($db);
@@ -501,8 +534,12 @@ if ($action==='delete-account') {
     if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) cssv_fail('Current password is incorrect.',401,'password_incorrect');
     $q=$db->prepare('SELECT proof_path FROM tree_campaign_plantings WHERE member_id=?');
     $q->execute([$member['id']]);$paths=$q->fetchAll(PDO::FETCH_COLUMN);
+    $q=$db->prepare("SELECT city,method,SUM(quantity) AS total FROM tree_campaign_plantings WHERE member_id=? AND status='approved' GROUP BY city,method");
+    $q->execute([$member['id']]);$approvedGroups=$q->fetchAll();
     $db->beginTransaction();
     try {
+        foreach($approvedGroups as $group) tree_rollup_adjust($db,(string)$member['id'],(string)$group['city'],(string)$group['method'],(int)$group['total'],-1);
+        $db->prepare('DELETE FROM tree_campaign_member_rollup WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_plantings WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_sessions WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_members WHERE id=?')->execute([$member['id']]);
@@ -580,7 +617,7 @@ if ($action==='review') {
     $fieldChecked=($body['field_checked']??false)===true;
     $db->beginTransaction();
     try {
-        $q=$db->prepare('SELECT quantity,duplicate_risk,status,planted_on FROM tree_campaign_plantings WHERE id=? FOR UPDATE');
+        $q=$db->prepare('SELECT member_id,city,method,quantity,duplicate_risk,status,planted_on FROM tree_campaign_plantings WHERE id=? FOR UPDATE');
         $q->execute([$id]);$row=$q->fetch();
         if (!$row || ($decision==='revoked' && $row['status']!=='approved') || ($decision!=='revoked' && $row['status']!=='pending')) {
             $db->rollBack();
@@ -604,6 +641,7 @@ if ($action==='review') {
         $expectedStatus=$decision==='revoked'?'approved':'pending';
         $db->prepare("UPDATE tree_campaign_plantings SET status=?,reviewer_id=?,reviewed_at=NOW(6),review_note=?,field_checked=?,field_visit_date=? WHERE id=? AND status=?")
             ->execute([$nextStatus,$admin['admin_id'],$note,$fieldChecked?1:0,$fieldChecked?$siteDate:null,$id,$expectedStatus]);
+        if($decision==='approved' || $decision==='revoked') tree_rollup_adjust($db,(string)$row['member_id'],(string)$row['city'],(string)$row['method'],(int)$row['quantity'],$decision==='approved'?1:-1);
         $db->prepare("INSERT INTO tree_campaign_reviews(planting_id,admin_id,decision,review_note,field_checked,field_visit_date) VALUES(?,?,?,?,?,?)")
             ->execute([$id,$admin['admin_id'],$decision,$note,$fieldChecked?1:0,$fieldChecked?$siteDate:null]);
         $db->commit();
