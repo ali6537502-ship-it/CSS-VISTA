@@ -608,6 +608,8 @@ if ($action==='delete-account') {
         $q->execute([$member['id']]);$groups=$q->fetchAll();
         foreach($groups as $group) tree_rollup_adjust($db,(string)$member['id'],(string)$group['city'],(string)$group['method'],(int)$group['total'],-1);
         $db->prepare('DELETE FROM tree_campaign_member_rollup WHERE member_id=?')->execute([$member['id']]);
+        $db->prepare('DELETE FROM tree_campaign_followup_reviews WHERE followup_id IN (SELECT id FROM tree_campaign_followups WHERE member_id=?)')->execute([$member['id']]);
+        $db->prepare('DELETE FROM tree_campaign_reviews WHERE planting_id IN (SELECT id FROM tree_campaign_plantings WHERE member_id=?)')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_followups WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_plantings WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_sessions WHERE member_id=?')->execute([$member['id']]);
@@ -659,6 +661,9 @@ if ($action==='plant') {
         $lock=$db->prepare('SELECT id FROM tree_campaign_members WHERE id=? FOR UPDATE');
         $lock->execute([$member['id']]);
         if(!$lock->fetchColumn()) throw new RuntimeException('account_no_longer_exists');
+        $valid=$db->prepare('SELECT id FROM tree_campaign_sessions WHERE id=? AND revoked_at IS NULL AND expires_at>NOW(6) FOR UPDATE');
+        $valid->execute([$member['session_id']]);
+        if(!$valid->fetchColumn()) throw new RuntimeException('session_expired_before_submission');
         $daily=$db->prepare("SELECT COUNT(*) FROM tree_campaign_plantings WHERE member_id=? AND created_at>DATE_SUB(NOW(6),INTERVAL 1 DAY)");
         $daily->execute([$member['id']]);
         if((int)$daily->fetchColumn()>=10) {
@@ -713,6 +718,9 @@ if ($action==='followup') {
         $lock=$db->prepare('SELECT id FROM tree_campaign_members WHERE id=? FOR UPDATE');
         $lock->execute([$member['id']]);
         if(!$lock->fetchColumn()) throw new RuntimeException('account_no_longer_exists');
+        $valid=$db->prepare('SELECT id FROM tree_campaign_sessions WHERE id=? AND revoked_at IS NULL AND expires_at>NOW(6) FOR UPDATE');
+        $valid->execute([$member['session_id']]);
+        if(!$valid->fetchColumn()) throw new RuntimeException('session_expired_before_submission');
         $check=$db->prepare("SELECT id FROM tree_campaign_plantings WHERE id=? AND member_id=? AND status='approved' FOR UPDATE");
         $check->execute([$id,$member['id']]);
         if(!$check->fetchColumn()) throw new RuntimeException('planting_status_changed');
