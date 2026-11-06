@@ -163,7 +163,7 @@ ErrorDocument 404 /404.html
 
   # The Punjab tree campaign is an interactive SPA route, not a crawler page.
   # Pin the route explicitly in production so Hostinger does not return a real 404.
-  RewriteRule ^100-million-trees/?$ index.html [L,NC]
+  RewriteRule ^100-million-trees/?$ seo/routes/100-million-trees.html [L,NC]
 
   # CSSV_GENERATED_ROUTE_RULES_START
   # Exact application routes are inserted here by the production build.
