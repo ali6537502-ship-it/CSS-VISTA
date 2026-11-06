@@ -113,7 +113,7 @@ function review(){
  return '<section class="page"><div class="hero"><div><p class="eyebrow">Learn · Test · Return</p><h1>Revision notebook</h1><p class="subtitle">Dated recall sessions, difficult concepts and wrong source questions are tracked independently. Previous attempts remain saved.</p></div></div><div class="panel"><h2>Recall due · '+due.length+'</h2>'+recallRows(due,'Due')+'</div><div class="panel"><h2>Upcoming recall · '+upcoming.length+'</h2>'+recallRows(upcoming,'Scheduled')+'</div><div class="panel"><h2>'+ids.length+' lessons to revisit</h2>'+lessonRows+'</div><div class="panel"><h2>'+missed.length+' missed questions</h2>'+questionRows+'</div><p class="tiny muted">The 3, 7, 14, 30 and 60-day sequence is a fixed revision aid, not a scientifically verified measure of mastery.</p></section>';
 }
 function practice(){
- return '<section class="page"><div class="hero"><div><p class="eyebrow">Examination preparation</p><h1>Practice by chapter.</h1><p class="subtitle">Use the 250 original textbook MCQs and 31 available analytical model answers. Answers are shown with their explanations. No questions are invented to fill gaps.</p></div></div><div class="panel">'+catalog.chapters.map(c=>'<div class="list-row"><div><strong>'+safe(c.title)+'</strong><p>Chapter '+c.id+' · '+c.questionCount+' MCQs · '+c.analyticalCount+' model answers</p></div><button class="btn small" data-practice="'+c.id+'">Practise</button></div>').join('')+'</div></section>';
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">Examination preparation</p><h1>Practice by chapter.</h1><p class="subtitle">Use the 250 original textbook MCQs and 31 available analytical model answers. Answers are shown with their explanations. No questions are invented to fill gaps.</p></div></div><div class="panel">'+catalog.chapters.map(c=>'<div class="list-row"><div><strong>'+safe(c.title)+'</strong><p>Chapter '+c.id+' · '+c.questionCount+' MCQs · '+c.analyticalCount+' model answers</p></div><button class="btn small" data-practice="'+c.id+'">Practise</button></div>').join('')+'</div><p class="tiny muted">Earlier practice and recall attempts remain in your study records. Export a personal backup if you need one.</p><button class="btn small" data-action="exporthistory">Export my learning records</button></section>';
 }
 async function loadChapter(id){
  id=Number(id);if(chapterCache.has(id))return chapterCache.get(id);
@@ -283,6 +283,20 @@ function saveQuizAnswer(value){
 }
 function saveBookmark(){const id=ui.id;saved.bookmarks??={};saved.bookmarkRemoved??={};if(saved.bookmarks[id]){delete saved.bookmarks[id];saved.bookmarkRemoved[id]={at:new Date().toISOString()}}else{saved.bookmarks[id]={at:new Date().toISOString()};delete saved.bookmarkRemoved[id]}notify();draw()}
 function saveDraft(id,value){saved.drafts??={};saved.drafts[id]=value;notify()}
+function exportLearningRecords(){
+ try{
+   const archive={exportedAt:new Date().toISOString(),edition:catalog?.edition||'General Science preview',records:saved};
+   const file=new Blob([JSON.stringify(archive,null,2)],{type:'application/json;charset=utf-8'});
+   const downloadUrl=URL.createObjectURL(file);
+   const link=document.createElement('a');
+   link.href=downloadUrl;link.download='gsa-learning-records-'+now()+'.json';
+   document.body.appendChild(link);link.click();link.remove();
+   setTimeout(()=>URL.revokeObjectURL(downloadUrl),3000);
+ }catch{
+   ui.error='Could not export records in this browser. Your saved study data remains unchanged.';
+   draw();
+ }
+}
 function fullSource(){
  let s=chapterCache.get(byId.get(ui.id).chapter)?.sections.find(s=>s.id===ui.id);
  if(!s)return;const dialog=document.getElementById('reference');dialog.querySelector('h2').textContent=s.number+' · '+s.title;dialog.querySelector('.ref-source').innerHTML=s.html;dialog.showModal();
@@ -374,6 +388,7 @@ root.addEventListener('click',async e=>{
    draw();break;
   }
   case 'restartquestions':ui.qindex=0;ui.selected='';ui.reviewSingle=false;beginQuizAttempt(ui.chapter);draw();break;
+  case 'exporthistory':exportLearningRecords();break;
   case 'returnreview':ui.reviewSingle=false;ui.view='review';draw();break;
   case 'savewriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');break;
   case 'revealwriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');ui.reveal=true;draw();break;
