@@ -124,7 +124,7 @@ jobs:
         run: tail -n 80 test-artifacts/pro-php.log
       - name: Preserve sanitized workspace and PMS review evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: workspace-pms-reset-journeys
           path: |
