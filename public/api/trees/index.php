@@ -179,6 +179,7 @@ function tree_auth(PDO $db, bool $csrf=false): array {
 }
 function tree_public_member(array $row): array {
     return [
+        'id'=>(string)$row['id'],
         'name'=>(string)$row['full_name'],
         'city'=>(string)$row['city'],
         'mobile_masked'=>'****'.substr((string)$row['mobile'],-4),
