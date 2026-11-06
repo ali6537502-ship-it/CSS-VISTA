@@ -42,6 +42,7 @@ import {
 
 const nav = [
   { label: 'Home', to: '/' },
+  { label: '100 Million Trees for Punjab', to: '/100-million-trees' },
   { label: 'GK World', to: '/gk' },
   { label: 'Past Papers', to: '/past-papers' },
   { label: 'Books by Sir Ali', to: '/books' },
