@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 705,
+  "count": 708,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4934,6 +4934,27 @@
     {
       "id": "current-affairs-archive-2026-11-05-france-g7-venue",
       "text": "France relocated the 9–10 November 2026 G7 foreign ministers' meeting from Marseille to Paris.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-west-peron-carbon-storage",
+      "text": "Australia designated the West Peron seabed near Darwin for a proposed Inpex carbon storage project in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-france-national-strikes",
+      "text": "French unions planned approximately 260 rallies during the nationwide 5 November 2026 strikes.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-ap-midterm-voter-poll",
+      "text": "The Associated Press's 2026 US midterm Voter Poll surveyed approximately 100,000 voters.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
