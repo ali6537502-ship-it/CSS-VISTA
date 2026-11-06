@@ -1,4 +1,4 @@
-# Isarul Ibaad Foundation × CSS Vista — Punjab 100 Million Trees
+# Esar ul Ebad Welfare Foundation × CSS Vista — Punjab 100 Million Trees
 
 ## Release classification
 **Private development, not launched.** User data collection (CNIC, mobile and photo evidence) must not be activated until staging security tests, data-protection review and operational sign-off are complete. This is a campaign target of 100,000,000, not an achieved total.
@@ -23,7 +23,7 @@
 3. **Third-party assets.** Botanical thumbnail search results and per-image licensing/attribution should be checked before launch.
 4. **Retained backups.** Operational backup deletion windows must be configured and accurately disclosed; removing active records cannot guarantee immediate deletion from every retained backup.
 5. **Distributed traffic.** HTTP-level rate limits do not replace a WAF, traffic anomaly monitoring or bot controls.
-6. **Foundation identity.** Display branding follows the owner's instruction: Isarul Ibaad Foundation first, CSS Vista second. Confirm the official public legal spelling and authorization of joint campaign materials.
+6. **Foundation identity.** Display branding follows the owner's instruction: Esar ul Ebad Welfare Foundation first, CSS Vista second. Confirm the official public legal spelling and authorization of joint campaign materials.
 7. **Scale.** Database sizes, archival/partitioning plans, public summary availability, CDN performance, recovery/dispute staffing and reviewer throughput require realistic load tests before nationwide promotion.
 
 ## Staging prerequisites
