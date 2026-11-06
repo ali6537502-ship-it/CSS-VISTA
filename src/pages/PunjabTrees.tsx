@@ -425,6 +425,7 @@ function Contribute({ member, csrf, species, onDone, onAccount }: { member: Memb
 function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
   const [rows,setRows]=useState<Report[]>([])
   const [approved,setApproved]=useState<Report[]>([])
+  const [survivalRows,setSurvivalRows]=useState<Followup[]>([])
   const [err,setErr]=useState('')
   const [busy,setBusy]=useState('')
   const [note,setNote]=useState<Record<string,string>>({})
@@ -434,8 +435,8 @@ function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
 
   async function reload() {
     try {
-      const [pending,old]=await Promise.all([getApi('queue'),getApi('approved-reports')])
-      setRows(pending.reports);setApproved(old.reports)
+      const [pending,old,survivals]=await Promise.all([getApi('queue'),getApi('approved-reports'),getApi('followup-queue')])
+      setRows(pending.reports);setApproved(old.reports);setSurvivalRows(survivals.reports)
     } catch(e) {setErr(e instanceof Error?e.message:'Access denied.')}
   }
   useEffect(()=>{void reload()},[])
@@ -454,6 +455,17 @@ function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
       await reload()
       refresh()
     } catch(e){setErr(e instanceof Error?e.message:'Review failed.')}
+    finally{setBusy('')}
+  }
+  async function decisionSurvival(record:Followup,status:'approved'|'rejected') {
+    const text=(note[record.id]||'').trim()
+    if(text.length<10||!confirmed[record.id]){setErr('A written review and evidence confirmation are required.');return}
+    setBusy(record.id);setErr('')
+    try {
+      await postApi('followup-review',{id:record.id,decision:status,note:text},csrf)
+      await reload()
+      refresh()
+    } catch(e){setErr(e instanceof Error?e.message:'Could not review survival observation.')}
     finally{setBusy('')}
   }
   function item(r:Report, isApproved=false) {
@@ -487,6 +499,17 @@ function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
     {err&&<p className="trees-error">{err}</p>}
     <div className="trees-profile-title"><h2>Pending review</h2><span>{rows.length} reports</span></div>
     {rows.length?rows.map(r=>item(r)):<div className="trees-empty compact">No pending reports.</div>}
+    <div className="trees-profile-title"><h2>Survival observations awaiting review</h2><span>{survivalRows.length} submissions</span></div>
+    {survivalRows.length?survivalRows.map(f=><div className="trees-admin-item" key={f.id}>
+      <div className="trees-admin-photo"><img src={API+'photo&kind=followup&id='+encodeURIComponent(f.id)} alt="Private photo of a survival check"/></div>
+      <div className="trees-admin-details"><h3>{f.full_name} · {f.city}</h3>
+        <p>{f.species} · {f.phase}-day observation · {f.surviving} reported surviving out of {f.planted_quantity} approved saplings</p>
+        <small>Original planting: {f.locality}</small>
+        <label className="trees-review-field">Reviewer findings<textarea rows={2} minLength={10} maxLength={400} value={note[f.id]||''} onChange={e=>setNote(old=>({...old,[f.id]:e.target.value}))} placeholder="Describe the evidence and any concern about tree survival..."/></label>
+        <label className="trees-check"><input type="checkbox" checked={!!confirmed[f.id]} onChange={e=>setConfirmed(old=>({...old,[f.id]:e.target.checked}))}/><span>I examined the follow-up photograph and checked it against the original record.</span></label>
+        <div className="trees-admin-buttons"><button disabled={busy===f.id} type="button" onClick={()=>{void decisionSurvival(f,'approved')}}><CheckCircle2 size={16}/> Approve observation</button><button disabled={busy===f.id} type="button" onClick={()=>{void decisionSurvival(f,'rejected')}}><X size={16}/> Reject</button></div>
+      </div>
+    </div>):<div className="trees-empty compact">No survival observations waiting.</div>}
     <div className="trees-profile-title"><h2>Previously approved reports</h2><span>Recent 100</span></div>
     <p className="trees-muted">If subsequent evidence shows a claim is false, revoke it here. This immediately removes the quantity from the public totals.</p>
     {approved.length?approved.map(r=>item(r,true)):<div className="trees-empty compact">No previously approved reports.</div>}
