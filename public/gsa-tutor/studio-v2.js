@@ -222,6 +222,13 @@ function chooseGrade(g){
  const at=new Date().toISOString();
  saved.completed[id]={at,selfRating:g};
  if(g==='gotit')delete saved.revisit[id];else saved.revisit[id]={at,kind:'lesson'};
+ saved.recallAttempts??={};saved.reviewDue??={};
+ const attemptId='recall-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
+ const attempts=Object.values(saved.recallAttempts).filter(x=>x?.lessonId===id).sort((a,b)=>Date.parse(a.at)-Date.parse(b.at));
+ let streak=0;for(let i=attempts.length-1;i>=0&&attempts[i].selfRating==='gotit';i--)streak++;
+ const stage=g==='gotit'?Math.min(5,streak+1):0,interval=stage?[0,3,7,14,30,60][stage]:1;
+ saved.recallAttempts[attemptId]={at,lessonId:id,selfRating:g};
+ saved.reviewDue[id]={at,date:dateAdd(now(),interval),stage};
  ui.grade=g;notify();ui.view='finished';draw();
 }
 function saveQuizAnswer(value){
