@@ -280,6 +280,82 @@ function tree_login_json(): array {
     if (!preg_match('~^application/json(?:\s*;|$)~i',(string)($_SERVER['CONTENT_TYPE']??''))) cssv_fail('Use a JSON request.',415,'invalid_type');
     return cssv_request_json(12000);
 }
+function tree_email_subject(string $purpose): string {
+    return $purpose==='verify'
+        ? 'Confirm your Punjab Trees campaign email'
+        : 'Reset your Punjab Trees campaign password';
+}
+function tree_email_token_hash(string $purpose,string $token): string {
+    return cssv_hash_secret('tree-email-'. $purpose .':'. $token);
+}
+function tree_email_link(string $purpose,string $token): string {
+    // Only the configured site origin may appear in recovery emails. Do not
+    // construct URLs from the attacker-controlled HTTP Host header.
+    $origin=rtrim((string)cssv_env('CSSV_SITE_ORIGIN','https://www.css-vista.com'),'/');
+    if (!preg_match('~^https://[A-Za-z0-9.-]+(?::[0-9]+)?$~D',$origin)
+        && !(cssv_env('CSSV_TREES_TEST')==='yes' && str_starts_with($origin,'http://127.0.0.1:'))) {
+        cssv_fail('Email-link service is not configured.',503,'mail_config_invalid');
+    }
+    // Fragment tokens are not sent in HTTP GET requests, analytics or server
+    // access logs. Frontend clears the fragment before exchanging the token.
+    return $origin.'/100-million-trees#'.($purpose==='verify'?'verify-email=':'reset-email=').$token;
+}
+function tree_send_email_token(PDO $db,string $id,string $email,string $purpose): bool {
+    if (!in_array($purpose,['verify','reset'],true)) throw new InvalidArgumentException('invalid_email_purpose');
+    $token=bin2hex(random_bytes(32));
+    $tokenId=cssv_uuid_v4();
+    $expiry=gmdate('Y-m-d H:i:s',time()+($purpose==='verify'?86400:1800));
+    $db->prepare("UPDATE tree_campaign_email_tokens SET used_at=NOW(6) WHERE member_id=? AND purpose=? AND used_at IS NULL")
+        ->execute([$id,$purpose]);
+    $db->prepare('INSERT INTO tree_campaign_email_tokens(id,member_id,purpose,token_hash,expires_at) VALUES(?,?,?,?,?)')
+        ->execute([$tokenId,$id,$purpose,tree_email_token_hash($purpose,$token),$expiry]);
+    $link=tree_email_link($purpose,$token);
+    $message=$purpose==='verify'
+        ? "You created a tree-planting campaign account.\n\nConfirm your email using this private link (expires in 24 hours):\n".$link."\n\nIf you did not register, ignore this email. Your address will not be enabled for account recovery without confirmation.\n\nIsarul Ibaad Foundation × CSS Vista"
+        : "A password reset was requested for your Punjab Trees campaign account.\n\nOpen this single-use link within 30 minutes:\n".$link."\n\nIf you did not request this, ignore this email. We will never email your password or ask for an OTP.\n\nIsarul Ibaad Foundation × CSS Vista";
+    $sent=cssv_send_mail($email,tree_email_subject($purpose),$message);
+    if (!$sent) {
+        $db->prepare('DELETE FROM tree_campaign_email_tokens WHERE id=?')->execute([$tokenId]);
+        error_log('Punjab Trees email delivery unavailable for '.$purpose.' operation.');
+    }
+    return $sent;
+}
+function tree_consume_email_token(PDO $db,string $purpose,string $token,?string $newPassword=null): ?string {
+    if (!preg_match('/^[a-f0-9]{64}$/D',$token)) cssv_fail('Invalid or expired email link.',422,'invalid_email_link');
+    $hash=tree_email_token_hash($purpose,$token);
+    $db->beginTransaction();
+    try {
+        $q=$db->prepare('SELECT id,member_id FROM tree_campaign_email_tokens WHERE token_hash=? AND purpose=? AND used_at IS NULL AND expires_at>NOW(6) FOR UPDATE');
+        $q->execute([$hash,$purpose]);
+        $tokenRow=$q->fetch();
+        if (!$tokenRow) {
+            $db->rollBack();
+            cssv_fail('This email link has expired or was already used.',410,'expired_email_link');
+        }
+        $memberId=(string)$tokenRow['member_id'];
+        if ($purpose==='verify') {
+            $db->prepare('UPDATE tree_campaign_members SET email_verified_at=NOW(6) WHERE id=?')->execute([$memberId]);
+        } else {
+            $q=$db->prepare('SELECT email_verified_at FROM tree_campaign_members WHERE id=? FOR UPDATE');
+            $q->execute([$memberId]);
+            if (!$q->fetchColumn()) {
+                $db->rollBack();
+                cssv_fail('Email address is not confirmed.',403,'email_unverified');
+            }
+            $replacement=tree_recovery_new();
+            $db->prepare('UPDATE tree_campaign_members SET password_hash=?,recovery_hash=? WHERE id=?')
+                ->execute([password_hash(tree_password($newPassword),PASSWORD_DEFAULT),tree_recovery_hash($replacement),$memberId]);
+            $db->prepare('UPDATE tree_campaign_sessions SET revoked_at=NOW(6) WHERE member_id=? AND revoked_at IS NULL')->execute([$memberId]);
+        }
+        $db->prepare('UPDATE tree_campaign_email_tokens SET used_at=NOW(6) WHERE id=?')->execute([$tokenRow['id']]);
+        $db->prepare('UPDATE tree_campaign_email_tokens SET used_at=NOW(6) WHERE member_id=? AND purpose=? AND used_at IS NULL')->execute([$memberId,$purpose]);
+        $db->commit();
+        return $purpose==='reset'?$replacement:null;
+    } catch(Throwable $e) {
+        if ($db->inTransaction()) $db->rollBack();
+        throw $e;
+    }
+}
 function tree_issue(PDO $db, string $id): string {
     $token=rtrim(strtr(base64_encode(random_bytes(48)),'+/','-_'),'=');
     $csrf=rtrim(strtr(base64_encode(random_bytes(32)),'+/','-_'),'=');
