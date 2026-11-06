@@ -142,6 +142,17 @@ test('isolated account and evidence workflow',async t=>{
     assert.equal(totals.seeds,3)
   })
 
+
+  await t.test('cross-origin requests, fake files and future planting claims are rejected',async()=>{
+    const r=await participant('avatar',{body:evidenceForm(6),csrf,origin:'https://other-origin.invalid'})
+    verify(r,403)
+    const future=new Date(Date.now()+5*86400000).toISOString().slice(0,10)
+    verify(await participant('plant',{body:evidenceForm(6,{species:'neem',method:'sapling',quantity:1,planted_on:future,locality:'Test garden'}),csrf}),422)
+    const fake=new FormData()
+    fake.set('photo',new Blob(['This is not a photograph'.repeat(100)],{type:'text/plain'}),'payload.txt')
+    verify(await participant('avatar',{body:fake,csrf}),422)
+    verify(await guest('photo&kind=proof&id=00000000-0000-4000-8000-000000000000'),404)
+  })
   await t.test('offline recovery invalidates sessions and old keys',async()=>{
     let r=await participant('recover',{body:{mobile:profile.mobile,recovery_key:key,new_password:'Updated-Example-Password-2026'}})
     verify(r,200)
@@ -166,5 +177,19 @@ test('isolated account and evidence workflow',async t=>{
     verify(await guest('photo&kind=proof&id='+first),404)
     verify(await participant('mine'),401)
     verify(await participant('login',{body:{mobile:profile.mobile,password:'Updated-Example-Password-2026'}}),401)
+  })
+  await t.test('simultaneous registrations cannot duplicate a CNIC',async()=>{
+    const a=requestClient(),b=requestClient()
+    const base={name:'Race Registration Test',city:'Lahore',cnic:'3333300000001',password:'Race-Example-Password-2026',consent:true}
+    const pair=await Promise.all([
+      a('register',{body:{...base,mobile:'03000001003'}}),
+      b('register',{body:{...base,mobile:'03000001004'}})
+    ])
+    assert.deepEqual(pair.map(x=>x.status).sort((x,y)=>x-y),[201,409])
+  })
+  await t.test('excessive failed sign-in attempts are throttled',async()=>{
+    const attempts=[]
+    for(let i=0;i<14;i++) attempts.push((await guest('login',{body:{mobile:'03000001044',password:'incorrect'}})).status)
+    assert.ok(attempts.includes(429),'IP-level login throttling must return HTTP 429')
   })
 })
