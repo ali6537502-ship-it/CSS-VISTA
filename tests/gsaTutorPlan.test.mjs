@@ -354,3 +354,16 @@ test('corrupt day or impossible all-week-off plans are refused without removing 
  assert.ok(saved.completed['c1-s1-1'],'Rescheduling validation must not erase lesson work');
  p.dom.window.close();
 });
+
+test('short course clearly warns when tentative workload exceeds available time',async()=>{
+ const p=await open();
+ p.click('[data-days="5"]');
+ const input=p.document.getElementById('daily-minutes');
+ input.value='30';input.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}));
+ p.click('[data-action="saveplan"]');
+ assert.match(p.document.getElementById('app').textContent,/estimated workload exceeding your stated time/);
+ const saved=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(saved.plan.dailyMinutes,30);
+ assert.equal(saved.plan.days,5);
+ p.dom.window.close();
+});
