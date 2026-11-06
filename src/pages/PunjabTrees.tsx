@@ -211,9 +211,9 @@ function Review({ csrf }: { csrf: string }) {
   return <section className="trees-panel"><span className="trees-kicker">PRIVATE MODERATION DESK</span><h1>Review planting submissions</h1><p className="trees-muted">Only administrators with an active two-factor session can view or approve planting evidence.</p>{err&&<p className="trees-error">{err}</p>}{rows.map(r=><div className="trees-admin-item" key={r.id}><img src={API+'photo&kind=proof&id='+encodeURIComponent(r.id)} alt={'Evidence for '+r.city}/><div><h3>{r.full_name} · {r.city}</h3><p>{r.species} · {r.quantity} {typeLabel(r.method)} · {r.locality}</p><small>{r.planted_on}</small><div className="trees-admin-buttons"><button disabled={busy===r.id} type="button" onClick={()=>decision(r.id,'approved')}><CheckCircle2 size={16}/> Approve</button><button disabled={busy===r.id} type="button" onClick={()=>decision(r.id,'rejected')}><X size={16}/> Reject</button></div></div></div>)}{!rows.length&&!err&&<div className="trees-empty compact">No pending reports in the moderation queue.</div>}</section>
 }
 export default function PunjabTrees() {
-  const [tab,setTab]=useState<Tab>('overview'),[summary,setSummary]=useState<Summary>(EMPTY),[species,setSpecies]=useState<Record<string,Species>>({}),[member,setMember]=useState<Member|null>(null),[csrf,setCsrf]=useState(''),[error,setError]=useState(''),[isAdmin,setIsAdmin]=useState(false),[mobileNav,setMobileNav]=useState(false)
+  const [tab,setTab]=useState<Tab>('overview'),[summary,setSummary]=useState<Summary>(EMPTY),[species,setSpecies]=useState<Record<string,Species>>({}),[member,setMember]=useState<Member|null>(null),[csrf,setCsrf]=useState(''),[adminCsrf,setAdminCsrf]=useState(''),[error,setError]=useState(''),[isAdmin,setIsAdmin]=useState(false),[mobileNav,setMobileNav]=useState(false)
   const refresh=()=>getApi('summary').then(d=>setSummary(d)).catch(e=>setError(e instanceof Error?e.message:'Unable to load live progress.'))
-  useEffect(()=>{refresh();getApi('catalog').then(d=>setSpecies(d.species)).catch(()=>{});getApi('session').then(d=>{setMember(d.member);setCsrf(d.csrf_token||'')}).catch(()=>{});fetch('/api/admin-auth/session.php',{credentials:'same-origin'}).then(r=>{if(r.ok)setIsAdmin(true)}).catch(()=>{})},[])
+  useEffect(()=>{refresh();getApi('catalog').then(d=>setSpecies(d.species)).catch(()=>{});getApi('session').then(d=>{setMember(d.member);setCsrf(d.csrf_token||'')}).catch(()=>{});fetch('/api/admin-auth/session.php',{credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(d=>{if(d?.authenticated){setIsAdmin(true);setAdminCsrf(d.csrf_token||'')}}).catch(()=>{})},[])
   const select=(next:Tab)=>{setTab(next);setMobileNav(false);window.scrollTo({top:0,behavior:'smooth'})}
   async function logout(){try{await postApi('logout',{},csrf);setMember(null);setCsrf('');select('overview')}catch(e){setError(e instanceof Error?e.message:'Could not sign out.')}}
   return <main className="trees-root">
@@ -225,7 +225,7 @@ export default function PunjabTrees() {
       {tab==='leaderboard'&&<Leaderboard summary={summary}/>}
       {tab==='account'&&<Account member={member} csrf={csrf} onSigned={(m,token)=>{setMember(m);setCsrf(token)}} onLogout={logout}/>}
       {tab==='contribute'&&<Contribute member={member} csrf={csrf} species={species} onDone={refresh} onAccount={()=>select('account')}/>}
-      {tab==='review'&&<Review csrf={csrf}/>}
+      {tab==='review'&&<Review csrf={adminCsrf}/>}
     </div>
     <footer className="trees-footer"><div className="trees-shell"><div><Brand/><p>Growing a greener Punjab, one verified contribution at a time.</p></div><div><span>Transparency</span><p>Saplings and seeds are counted separately. Approved does not mean independently certified survival.</p></div><div><a href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer">Foundation website <ArrowRight size={13}/></a><Link to="/privacy-policy">CSS Vista Privacy Policy <ArrowRight size={13}/></Link><Link to="/">Return to CSS Vista <ArrowRight size={13}/></Link></div></div></footer>
   </main>
