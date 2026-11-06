@@ -9,10 +9,10 @@ const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'
 const now=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const dateAdd=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
 const dateLabel=s=>new Date(s+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
-const defaults=()=>({completed:{},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},quizHistory:{},quizAttempts:{},questionReview:{},last:null,plan:null});
+const defaults=()=>({completed:{},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},quizHistory:{},quizAttempts:{},questionReview:{},recallAttempts:{},reviewDue:{},last:null,plan:null});
 function read(){try{const o=JSON.parse(localStorage.getItem(storageKey)||'null');return o&&typeof o==='object'&&!Array.isArray(o)?{...defaults(),...o}:defaults()}catch{return defaults()}}
 let saved=embedded?defaults():read(),catalog=null,lessons=[],byId=new Map(),chapterCache=new Map();
-let ui={view:'course',id:saved.last,stage:'learn',beat:0,selected:'',draft:'',reveal:false,grade:'',chapter:1,qindex:0,phase:0,month:0,setupDays:20,setupDate:now(),search:'',opening:'',showAllDays:false,busy:false,error:'',attemptId:null,reviewSingle:false};
+let ui={view:'course',id:saved.last,stage:'learn',beat:0,selected:'',draft:'',reveal:false,grade:'',chapter:1,qindex:0,phase:0,month:0,setupDays:20,setupDate:now(),setupRestDays:[],setupDailyMinutes:90,search:'',opening:'',showAllDays:false,busy:false,error:'',attemptId:null,reviewSingle:false};
 let hasCourse=false;
 function canSave(){
  if(!binding)return false;
@@ -32,7 +32,24 @@ const countMissedQuestions=()=>Object.values(saved.questionReview||{}).filter(v=
 const countReview=()=>Object.keys(saved.revisit||{}).filter(id=>byId.has(id)).length;
 const nwords=s=>String(s||'').trim().split(/\s+/).filter(Boolean).length;
 function weights(s){return Math.max(100,s.words||100)}
-function validPlan(p){return p&&Number.isInteger(p.days)&&p.days>=5&&p.days<=120&&/^\d{4}-\d{2}-\d{2}$/.test(p.startDate||'')}
+function validPlan(p){
+ return !!(p&&Number.isInteger(p.days)&&p.days>=5&&p.days<=120&&/^\d{4}-\d{2}-\d{2}$/.test(p.startDate||'')&&
+ (!p.restDays||Array.isArray(p.restDays)&&p.restDays.length<7&&p.restDays.every(n=>Number.isInteger(n)&&n>=0&&n<=6))&&
+ (p.dailyMinutes===undefined||Number.isInteger(p.dailyMinutes)&&p.dailyMinutes>=15&&p.dailyMinutes<=600));
+}
+function studyDate(plan,index){
+ const rests=new Set(plan.restDays||[]);let date=plan.startDate,passed=0;
+ for(let tries=0;tries<1000;tries++){
+   const weekday=new Date(date+'T12:00:00Z').getUTCDay();
+   if(!rests.has(weekday)){if(passed===index)return date;passed++;}
+   date=dateAdd(date,1);
+ }
+ throw Error('No available study days in the selected course');
+}
+function dueReviews(){
+ return Object.entries(saved.reviewDue||{}).filter(([id,record])=>byId.has(id)&&record?.date&&/^\d{4}-\d{2}-\d{2}$/.test(record.date)).map(([id,record])=>({id,date:record.date,stage:record.stage||1})).sort((a,b)=>a.date.localeCompare(b.date));
+}
+function countDueReviews(){return dueReviews().filter(r=>r.date<=now()).length}
 function schedule(plan){
  const res=Array.from({length:plan.days},()=>[]);const sum=lessons.reduce((n,s)=>n+weights(s),0);
  let cursor=0,used=0;
@@ -42,18 +59,26 @@ function schedule(plan){
    while(cursor<cap&&(res[d].length===0||d===plan.days-1||load+weights(lessons[cursor])/2<=target)){res[d].push(lessons[cursor].id);load+=weights(lessons[cursor]);cursor++}
    used+=load;
  }
- return res.map((ids,i)=>({date:dateAdd(plan.startDate,i),day:i+1,ids,words:ids.reduce((n,id)=>n+weights(byId.get(id)),0),done:ids.filter(isDone).length}));
+ const studyDays=res.map((ids,i)=>({date:studyDate(plan,i),day:i+1,ids,words:ids.reduce((n,id)=>n+weights(byId.get(id)),0),done:ids.filter(isDone).length,reviews:[]}));
+ for(const item of dueReviews()){
+   const slot=studyDays.find(d=>d.date>=item.date)||studyDays[studyDays.length-1];
+   if(slot)slot.reviews.push(item.id);
+ }
+ return studyDays;
 }
 function savedPlan(){return validPlan(saved.plan)?saved.plan:null}
 function todayDay(days){return days.find(d=>d.done<d.ids.length&&d.date<=now())||days.find(d=>d.done<d.ids.length)||days[days.length-1]}
 function chapterName(ch){return catalog.chapters.find(c=>c.id===ch)?.title||''}
 function heading(){return '<header class="top"><div class="brand"><img src="/images/logo.webp" alt="" width="32" height="32"><div>CSS VISTA<small>GENERAL SCIENCE TUTOR</small></div></div><nav class="nav" aria-label="GSA Tutor"><button data-view="course" class="'+(ui.view==='course'?'active':'')+'">My course</button><button data-view="library" class="'+(ui.view==='library'?'active':'')+'">Chapters</button><button data-view="practice" class="'+(ui.view==='practice'?'active':'')+'">Practice</button><button data-view="review" class="'+(ui.view==='review'?'active':'')+'">Revision</button></nav></header>'}
 function pillProgress(){
- return '<div class="stat-row"><div><strong>'+countDone()+' / '+lessons.length+'</strong><span>Lessons studied</span></div><div><strong>'+countConfident()+' / '+lessons.length+'</strong><span>Self-rated clear</span></div><div><strong>'+countReview()+'</strong><span>Lessons to revisit</span></div><div><strong>'+countMissedQuestions()+'</strong><span>Missed questions</span></div><div><strong>'+(savedPlan()?saved.plan.days:'—')+'</strong><span>Course days</span></div></div><div class="track" role="progressbar" aria-label="Lessons self-rated clear" aria-valuemin="0" aria-valuemax="'+lessons.length+'" aria-valuenow="'+countConfident()+'"><div class="fill" style="width:'+(countConfident()/lessons.length*100)+'%"></div></div>';
+ return '<div class="stat-row"><div><strong>'+countDone()+' / '+lessons.length+'</strong><span>Lessons studied</span></div><div><strong>'+countConfident()+' / '+lessons.length+'</strong><span>Self-rated clear</span></div><div><strong>'+countReview()+'</strong><span>Lessons to revisit</span></div><div><strong>'+countMissedQuestions()+'</strong><span>Missed questions</span></div><div><strong>'+countDueReviews()+'</strong><span>Reviews due</span></div><div><strong>'+(savedPlan()?saved.plan.days:'—')+'</strong><span>Course days</span></div></div><div class="track" role="progressbar" aria-label="Lessons self-rated clear" aria-valuemin="0" aria-valuemax="'+lessons.length+'" aria-valuenow="'+countConfident()+'"><div class="fill" style="width:'+(countConfident()/lessons.length*100)+'%"></div></div>';
 }
 function setup(){
- let days=ui.setupDays,date=ui.setupDate;
- return '<section class="page"><div class="hero"><div><p class="eyebrow">Your preparation, your timetable</p><h1>Choose how much time you have.</h1><p class="subtitle">All 28 chapters and 141 lessons remain in the course. Shorter plans assign more study per day; longer plans allow more time for practice and revision.</p></div></div><div class="panel"><p class="eyebrow">Course duration</p><div class="duration-grid">'+[8,14,20,30,45,60].map(n=>'<button class="duration '+(n===days?'active':'')+'" data-days="'+n+'"><strong>'+n+'</strong><span>days</span></button>').join('')+'</div><div class="fields"><label>Other duration (5–120 days)<input type="number" id="custom-days" min="5" max="120" value="'+days+'"></label><label>Start date<input type="date" id="start-date" value="'+safe(date)+'"></label></div><p class="notice">'+(Math.floor(lessons.length/days))+'–'+Math.ceil(lessons.length/days+2)+' lessons on most days. '+Math.round(lessons.reduce((n,s)=>n+weights(s),0)/days).toLocaleString()+' source words per day on average, before practice. This is an approximate workload, not a guaranteed study duration.</p><button class="btn primary" data-action="saveplan">Create my course</button></div></section>';
+ const days=ui.setupDays,date=ui.setupDate,rest=new Set(ui.setupRestDays||[]);
+ const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+ const restControls=dayNames.map((name,i)=>'<label class="rest-toggle"><input type="checkbox" data-rest-day="'+i+'" '+(rest.has(i)?'checked':'')+'><span>'+name+'</span></label>').join('');
+ const totalWords=lessons.reduce((n,s)=>n+weights(s),0);
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">Your preparation, your timetable</p><h1>Choose how much time you have.</h1><p class="subtitle">All 28 chapters and 141 lessons remain in every plan. Choose active study days and days off; revisions are scheduled separately from new reading.</p></div></div><div class="panel"><p class="eyebrow">Active study sessions</p><div class="duration-grid">'+[8,14,20,30,45,60].map(n=>'<button class="duration '+(n===days?'active':'')+'" data-days="'+n+'"><strong>'+n+'</strong><span>days</span></button>').join('')+'</div><div class="fields"><label>Other duration (5–120 study days)<input type="number" id="custom-days" min="5" max="120" value="'+days+'"></label><label>Start date<input type="date" id="start-date" value="'+safe(date)+'"></label><label>Daily time available (minutes)<input type="number" id="daily-minutes" min="15" max="600" step="15" value="'+ui.setupDailyMinutes+'"></label></div><fieldset class="rest-field"><legend>Weekly rest days</legend><div class="rest-options">'+restControls+'</div></fieldset><p class="notice">'+Math.floor(lessons.length/days)+'–'+Math.ceil(lessons.length/days+2)+' lessons on most active days. '+Math.round(totalWords/days).toLocaleString()+' manuscript words per study day on average, excluding tests and recall. Your time budget is a planning preference; course completion time is not scientifically measured.</p><button class="btn primary" data-action="saveplan">Create my course</button></div></section>';
 }
 function course(){
  if(!savedPlan())return setup();
