@@ -32,19 +32,22 @@ const fmt = (n: number) => new Intl.NumberFormat('en-PK').format(n)
 const typeLabel = (method: string) => method === 'seed' ? 'Seed sown' : 'Nursery sapling'
 const COMMONS = 'https://commons.wikimedia.org/w/api.php?'
 const thumbs = new Map<string, string>()
-function SpeciesPhoto({ scientific, name }: { scientific: string, name: string }) {
-  const [url, setUrl] = useState(thumbs.get(scientific) || '')
+function SpeciesPhoto({ scientific, name, method }: { scientific: string, name: string, method: 'sapling'|'seed' }) {
+  const lookup = scientific + ' ' + (method === 'seed' ? 'seeds' : 'tree')
+  const [url, setUrl] = useState(thumbs.get(lookup) || '')
   useEffect(() => {
-    if (url) return
+    const cached = thumbs.get(lookup)
+    if (cached) { setUrl(cached); return }
+    setUrl('')
     let alive = true
-    const query = new URLSearchParams({ action: 'query', generator: 'search', gsrsearch: scientific, gsrnamespace: '6', gsrlimit: '1', prop: 'imageinfo', iiprop: 'url', iiurlwidth: '112', format: 'json', origin: '*' })
+    const query = new URLSearchParams({ action: 'query', generator: 'search', gsrsearch: lookup, gsrnamespace: '6', gsrlimit: '1', prop: 'imageinfo', iiprop: 'url', iiurlwidth: '112', format: 'json', origin: '*' })
     fetch(COMMONS + query.toString()).then(r => r.ok ? r.json() : null).then(data => {
       const pages = Object.values(data?.query?.pages || {}) as { imageinfo?: { thumburl?: string, url?: string }[] }[]
       const src = pages[0]?.imageinfo?.[0]?.thumburl || ''
-      if (src) { thumbs.set(scientific, src); if (alive) setUrl(src) }
+      if (src) { thumbs.set(lookup, src); if (alive) setUrl(src) }
     }).catch(() => {})
     return () => { alive = false }
-  }, [scientific, url])
+  }, [lookup])
   return <span className="trees-species-photo">{url ? <img loading="lazy" src={url} alt={name} /> : <Leaf size={25} aria-hidden="true" />}</span>
 }
 async function getApi(action: string) {
@@ -197,7 +200,7 @@ function Contribute({ member, csrf, species, onDone, onAccount }: { member: Memb
   if(!member.has_photo)return <div className="trees-gate"><div className="trees-gate-icon"><Camera size={42}/></div><h1>One quick step before you plant.</h1><p>Add your profile photograph in My Account. It stays private and is automatically compressed to 40 KB.</p><button className="trees-btn-main" type="button" onClick={onAccount}>Add my profile photo <ArrowRight size={17}/></button></div>
   return <section className="trees-panel trees-plant-panel"><span className="trees-kicker">RECORD YOUR CONTRIBUTION</span><h1>What did you plant?</h1><p className="trees-muted">Choose your species, add location details and upload a real photo of the planting. Only confirmed saplings increase the tree counter.</p>
     <form onSubmit={submit}><div className="trees-method"><button type="button" className={method==='sapling'?'active':''} onClick={()=>setMethod('sapling')}><TreeDeciduous size={25}/><strong>Nursery sapling</strong><small>A living young tree already planted</small></button><button type="button" className={method==='seed'?'active':''} onClick={()=>setMethod('seed')}><Sprout size={25}/><strong>Seed sown</strong><small>A seed planted in soil</small></button></div>
-    <div className="trees-form-caption"><h2>Select a species</h2><span>Locally suitable choices vary by soil and climate</span></div><div className="trees-species-grid">{speciesEntries.map(([id,s])=><button type="button" aria-pressed={selected===id} key={id} className={'trees-species-card'+(selected===id?' active':'')} onClick={()=>setSelected(id)}><SpeciesPhoto scientific={s.scientific} name={s.name}/><span><strong>{s.name}</strong><small>{s.scientific}</small></span>{selected===id&&<CheckCircle2 className="trees-selected-check" size={17}/>}</button>)}</div><div className="trees-photo-source">Botanical thumbnails supplied by Wikimedia Commons where available. For species suitability, consult a local forestry nursery.</div>
+    <div className="trees-form-caption"><h2>Select a species</h2><span>Locally suitable choices vary by soil and climate</span></div><div className="trees-species-grid">{speciesEntries.map(([id,s])=><button type="button" aria-pressed={selected===id} key={id} className={'trees-species-card'+(selected===id?' active':'')} onClick={()=>setSelected(id)}><SpeciesPhoto scientific={s.scientific} name={s.name} method={method}/><span><strong>{s.name}</strong><small>{s.scientific}</small></span>{selected===id&&<CheckCircle2 className="trees-selected-check" size={17}/>}</button>)}</div><div className="trees-photo-source">Botanical thumbnails supplied by Wikimedia Commons where available. For species suitability, consult a local forestry nursery.</div>
     <div className="trees-plant-fields"><label>Number {method==='seed'?'of seeds sown':'of nursery saplings planted'}<input required type="number" min="1" max="20" value={quantity} onChange={e=>setQuantity(Number(e.target.value))}/><small>Maximum 20 per evidence report. Each claim is reviewed.</small></label><label>Date planted<input required type="date" max={new Date().toISOString().slice(0,10)} value={date} onChange={e=>setDate(e.target.value)}/></label><label>City<input readOnly value={member.city}/></label><label>Area or planting location<input required value={locality} maxLength={120} onChange={e=>setLocality(e.target.value)} placeholder="e.g. school courtyard or residential area"/></label></div>
     <div className="trees-evidence"><div className="trees-evidence-head"><div><span className="trees-kicker">PHOTOGRAPHIC PROOF</span><h2>Show us what you've planted.</h2><p>The original image is compressed inside your browser to a maximum of 70 KB before upload. No manual resizing needed.</p></div><CloudUpload size={29}/></div><label className="trees-dropzone"><input type="file" accept="image/jpeg,image/png,image/webp" onChange={choosePhoto} hidden/>{preview?<img src={preview} alt="Selected planting evidence" />:<Camera size={31}/>}<strong>{image?image.name:'Tap to choose your planted tree photo'}</strong><small>{image?'Ready to compress securely on submission':'JPG, PNG or WebP · Max original file size 20 MB'}</small></label><label className="trees-check"><input type="checkbox" checked={publish} onChange={e=>setPublish(e.target.checked)}/><span>Allow this planting photograph to appear in the public campaign gallery after approval.</span></label></div>
     <div className="trees-truth-note"><CircleHelp size={18}/> Do not report unplanted seeds or trees. Photos prove a submission exists, not that a tree has survived. Reviewers may request additional evidence.</div>
