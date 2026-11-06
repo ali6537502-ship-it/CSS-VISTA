@@ -68,6 +68,7 @@ try {
   const page=await mobile.newPage()
   page.on('pageerror',e=>errors.push(e.message))
   await page.goto(origin+'/100-million-trees')
+  await page.getByRole('heading',{name:'One mission. Many ways to make an impact.'}).waitFor()
   assert.equal(await page.locator('.trees-feature-card').count(),3,'All action cards appear on mobile')
   assert.equal(await page.locator('.trees-hero-photograph').count(),1,'Photography is retained on mobile')
   await page.getByRole('button',{name:'I want to contribute'}).click()
