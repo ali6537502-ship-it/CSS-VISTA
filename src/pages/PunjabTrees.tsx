@@ -349,7 +349,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }:
       await postApi('avatar',fd,csrf)
       const data=await getApi('session')
       onSigned(data.member,data.csrf_token)
-      setNote('Your private profile photo was saved. You can submit a planting report.')
+      setNote('Your optional profile photograph was saved privately.')
     } catch(e) {setError(e instanceof Error?e.message:'Could not upload photo.')}
     finally {setAvatarBusy(false);e.target.value=''}
   }
@@ -382,7 +382,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }:
     <div className="trees-account-head">
       <div className="trees-account-identity">
         {member.has_photo&&<img className="trees-account-avatar" src={API+'photo&kind=avatar&id='+encodeURIComponent(member.id)} alt="Your private campaign profile"/>}
-        <div><h1>Welcome, {member.name.split(' ')[0]}.</h1><p className="trees-muted"><MapPin size={14}/> {member.city} · {member.has_photo?'Profile photo saved':'Profile photograph not yet uploaded'}</p></div>
+        <div><h1>Welcome, {member.name.split(' ')[0]}.</h1><p className="trees-muted"><MapPin size={14}/> {member.city} · {member.has_photo?'Optional profile photo saved':'No profile photo required'}</p></div>
       </div>
       <button type="button" className="trees-btn-outline" onClick={onLogout}><LogOut size={16}/> Sign out</button>
     </div>
@@ -400,7 +400,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }:
       <button disabled={busy} className="trees-btn-main" type="submit">Update email address</button>
     </form>}
     {!member.has_photo&&<div className="trees-upload-avatar">
-      <Camera size={26}/><div><strong>Add your profile photograph</strong><p>Required before your first planting report. Automatically compressed to 40 KB, stored privately and never placed on the public leaderboard.</p></div>
+      <Camera size={26}/><div><strong>Optional profile photograph</strong><p>Your account works without a portrait. If you choose to add one, it is compressed to 40 KB, stored privately, and never placed on the public leaderboard.</p></div>
       <label className="trees-upload-btn">{avatarBusy?'Processing…':'Choose photo'}<input disabled={avatarBusy} type="file" accept="image/jpeg,image/png,image/webp" onChange={photo} hidden/></label>
     </div>}
     {note&&<div className="trees-success"><CheckCircle2 size={18}/>{note}</div>}
@@ -433,7 +433,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }:
       <Sprout size={41}/><span className="trees-kicker">YOUR PERSONAL GREEN JOURNEY</span><h1>Your contribution deserves to be counted.</h1><p>One private planting profile. Every approved record contributes to a greener Punjab.</p>
       <div><ShieldCheck size={20}/> Your complete CNIC is never stored in the campaign database.</div>
       <div><Globe2 size={20}/> Separate from your existing study account.</div>
-      <div><Leaf size={20}/> No SMS OTP or payment required.</div>
+      <div><Leaf size={20}/> No OTP, payment, or profile photo required.</div>
     </div>
     <form className="trees-panel trees-auth-form" onSubmit={submit}>
       <div className="trees-auth-toggle">
@@ -481,8 +481,8 @@ function Contribute({ member, csrf, species, onDone, onAccount }: { member: Memb
     try {const compressed=await compressPhoto(image,70);const fd=new FormData();fd.append('species',selected);fd.append('method',method);fd.append('quantity',String(quantity));fd.append('locality',locality);fd.append('planted_on',date);fd.append('public_photo',publish?'yes':'no');fd.append('photo',compressed);await postApi('plant',fd,csrf);setSuccess('Report received for review. It will count only after approval.');setSelected('');setQuantity(1);setImage(null);setPreview('');setLocality('');onDone()}
     catch(e){setError(e instanceof Error?e.message:'Could not submit record.')}finally{setBusy(false)}
   }
-  if(!member)return <div className="trees-gate"><div className="trees-gate-icon"><LogIn size={42}/></div><h1>Begin your green journey.</h1><p>To submit a planting record, first create or sign in to your dedicated campaign account. Registration is free.</p><button className="trees-btn-main" type="button" onClick={onAccount}>Create my campaign account <ArrowRight size={17}/></button></div>
-  if(!member.has_photo)return <div className="trees-gate"><div className="trees-gate-icon"><Camera size={42}/></div><h1>One quick step before you plant.</h1><p>Add your profile photograph in My Account. It stays private and is automatically compressed to 40 KB.</p><button className="trees-btn-main" type="button" onClick={onAccount}>Add my profile photo <ArrowRight size={17}/></button></div>
+  if(!member)return <div className="trees-gate"><div className="trees-gate-icon"><LogIn size={42}/></div><h1>Begin your green journey.</h1><p>To submit a planting record, first create or sign in to your dedicated campaign account. Registration is free, with no OTP or required profile photo.</p><button className="trees-btn-main" type="button" onClick={onAccount}>Create my campaign account <ArrowRight size={17}/></button></div>
+  if(!member.email_verified)return <div className="trees-gate"><div className="trees-gate-icon"><ShieldCheck size={42}/></div><h1>Confirm your email to begin planting.</h1><p>Your free account is ready, with no OTP and no profile photo required. Open the confirmation link emailed to {member.email}, then return to submit your planting evidence.</p><button className="trees-btn-main" type="button" onClick={onAccount}>Verify my email <ArrowRight size={17}/></button></div>
   return <section className="trees-panel trees-plant-panel"><span className="trees-kicker">RECORD YOUR CONTRIBUTION</span><h1>What did you plant?</h1><p className="trees-muted">Choose your species, add location details and upload a real photo of the planting. Only approved sapling records increase the tree counter; their long-term survival is tracked separately.</p>
     <form onSubmit={submit}><div className="trees-method"><button type="button" className={method==='sapling'?'active':''} onClick={()=>setMethod('sapling')}><TreeDeciduous size={25}/><strong>Nursery sapling</strong><small>A living young tree already planted</small></button><button type="button" className={method==='seed'?'active':''} onClick={()=>setMethod('seed')}><Sprout size={25}/><strong>Seed sown</strong><small>A seed planted in soil</small></button></div>
     <div className="trees-form-caption"><h2>Select a species</h2><span>Locally suitable choices vary by soil and climate</span></div><div className="trees-species-grid">{speciesEntries.map(([id,s])=><button type="button" aria-pressed={selected===id} key={id} className={'trees-species-card'+(selected===id?' active':'')} onClick={()=>setSelected(id)}><SpeciesPhoto scientific={s.scientific} name={s.name} method={method}/><span><strong>{s.name}</strong><small>{s.scientific}</small></span>{selected===id&&<CheckCircle2 className="trees-selected-check" size={17}/>}</button>)}</div><div className="trees-photo-source">Botanical thumbnails supplied by Wikimedia Commons where available. For species suitability, consult a local forestry nursery.</div>
