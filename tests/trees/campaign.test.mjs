@@ -1,0 +1,45 @@
+import { readFileSync, existsSync } from 'node:fs'
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+const root=new URL('../../',import.meta.url)
+const api=readFileSync(new URL('public/api/trees/index.php',root),'utf8')
+const ui=readFileSync(new URL('src/pages/PunjabTrees.tsx',root),'utf8')
+const registry=readFileSync(new URL('src/data/routeRegistry.mjs',root),'utf8')
+const policies=readFileSync(new URL('src/pages/LegalTrust.tsx',root),'utf8')
+test('campaign uses a separate session and secure unique duplicate prevention',()=>{
+  assert.match(api,/const TREE_SESSION = 'cssv_tree_session'/)
+  assert.match(api,/UNIQUE KEY uq_tree_mobile \(mobile\)/)
+  assert.match(api,/UNIQUE KEY uq_tree_cnic \(cnic_hash\)/)
+  assert.match(api,/cssv_hash_secret\('tree-cnic:'\.\$cnic\)/)
+  assert.doesNotMatch(api,/cnic_plaintext\s/)
+})
+test('only manually approved saplings count toward the 100-million-tree goal',()=>{
+  assert.match(api,/const TREE_TARGET = 100000000/)
+  assert.match(api,/IF\(method='sapling',quantity,0\)/)
+  assert.match(api,/WHERE status='approved'/)
+  assert.match(api,/status ENUM\('pending','approved','rejected'\) NOT NULL DEFAULT 'pending'/)
+  assert.match(api,/WHERE id=\? AND status='pending'/)
+})
+test('photos are stored privately, restricted, consented and compressed',()=>{
+  assert.match(api,/cssv_private_storage_dir\(\$folder\)/)
+  assert.match(api,/const TREE_MAX_AVATAR = 40960/)
+  assert.match(api,/const TREE_MAX_PROOF = 71680/)
+  assert.match(api,/public_photo=1/)
+  assert.match(ui,/const sanitized = await new Promise<Blob>/)
+  assert.match(ui,/compressPhoto\(file,40\)/)
+  assert.match(ui,/compressPhoto\(image,70\)/)
+})
+test('campaign form includes consent and private account protections',()=>{
+  assert.match(ui,/type="checkbox" required checked=\{consent\}/)
+  assert.match(ui,/onSigned\(data.member,data.csrf_token\)/)
+  assert.match(api,/return \$csrf;/)
+  assert.match(api,/hash_equals\(\$cookie,\$header\)/)
+  assert.match(api,/cssv_require_separate_admin\(\$db\)/)
+})
+test('campaign remains ad-free, staged and disclosed under privacy policy',()=>{
+  assert.match(registry,/publicPage\('\/100-million-trees'/)
+  assert.match(registry,/contentQuality: 'interactive', adMode: 'disabled', indexable: false/)
+  assert.match(policies,/CNIC/)
+  assert.match(policies,/Esar Ul Ebad Welfare Foundation/)
+  assert.ok(existsSync(new URL('public/images/esar-ul-ebad-logo.webp',root)))
+})
