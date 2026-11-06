@@ -85,9 +85,9 @@ async function compressPhoto(file: File, kb: number) {
 }
 function Brand() {
   return <div className="trees-brand">
-    <a className="trees-foundation-brand" href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer" aria-label="Isarul Ibaad Foundation">
-      <img src="/images/esar-ul-ebad-logo.webp" alt="Isarul Ibaad Foundation emblem" className="trees-foundation-logo" />
-      <span><strong>ISARUL IBAAD</strong><br/>FOUNDATION</span>
+    <a className="trees-foundation-brand" href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer" aria-label="Esar ul Ebad Welfare Foundation">
+      <img src="/images/esar-ul-ebad-logo.webp" alt="Esar ul Ebad Welfare Foundation emblem" className="trees-foundation-logo" />
+      <span><strong>ESAR UL EBAD</strong><br/>WELFARE FOUNDATION</span>
     </a>
     <span className="trees-brand-cross" aria-hidden="true">×</span>
     <Link to="/" aria-label="CSS Vista website"><img className="trees-vista-logo" src="/images/logo.webp" alt="CSS Vista" /></Link>
@@ -161,7 +161,7 @@ function Leaderboard({ summary }: { summary: Summary }) {
 function RecoveryKeyPanel({ recoveryKey, onDismiss }: { recoveryKey: string, onDismiss: () => void }) {
   const [copyStatus, setCopyStatus] = useState('')
   function downloadKey() {
-    const payload = 'ISARUL IBAAD FOUNDATION × CSS VISTA\nPunjab Trees Campaign — Offline Account Recovery Key\n\n' + recoveryKey + '\n\nKeep this key private. It is not an OTP and will not be sent by SMS. The key is replaced after password recovery.\n'
+    const payload = 'ESAR UL EBAD WELFARE FOUNDATION × CSS VISTA\nPunjab Trees Campaign — Offline Account Recovery Key\n\n' + recoveryKey + '\n\nKeep this key private. It is not an OTP and will not be sent by SMS. The key is replaced after password recovery.\n'
     const blob = new Blob([payload], { type: 'text/plain;charset=utf-8' })
     const href = URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -602,7 +602,7 @@ export default function PunjabTrees() {
   const select=(next:Tab)=>{setTab(next);setMobileNav(false);if(next==='overview'||next==='leaderboard')void refresh();window.scrollTo({top:0,behavior:'smooth'})}
   async function logout(){try{await postApi('logout',{},csrf);setMember(null);setCsrf('');select('overview')}catch(e){setError(e instanceof Error?e.message:'Could not sign out.')}}
   return <main className="trees-root">
-    <div className="trees-topline"><div className="trees-shell"><span><Leaf size={13}/> 100 MILLION TREES FOR PUNJAB</span><span>ISARUL IBAAD FOUNDATION <span className="trees-topline-x">×</span> CSS VISTA</span></div></div>
+    <div className="trees-topline"><div className="trees-shell"><span><Leaf size={13}/> 100 MILLION TREES FOR PUNJAB</span><span>ESAR UL EBAD WELFARE FOUNDATION <span className="trees-topline-x">×</span> CSS VISTA</span></div></div>
     <div className="trees-sitebar"><div className="trees-shell trees-sitebar-content"><Brand/><button type="button" className="trees-menu-toggle" aria-label="Toggle campaign navigation" onClick={()=>setMobileNav(!mobileNav)}>{mobileNav?<X/>:<Menu/>}</button><nav className={mobileNav?'is-open':''} aria-label="Tree campaign navigation"><button className={tab==='overview'?'active':''} type="button" onClick={()=>select('overview')}>Overview</button><button className={tab==='contribute'?'active':''} type="button" onClick={()=>select('contribute')}>Plant & report</button><button className={tab==='leaderboard'?'active':''} type="button" onClick={()=>select('leaderboard')}>Leaderboard</button><button className={tab==='account'?'active':''} type="button" onClick={()=>select('account')}>{member?'My account':'Join / sign in'}</button>{isAdmin&&<button className={tab==='review'?'active':''} type="button" onClick={()=>select('review')}>Review</button>}</nav><button className="trees-sitebar-cta" type="button" onClick={()=>select('contribute')}><Leaf size={15}/> Contribute <ArrowRight size={14}/></button></div></div>
     <div className="trees-shell trees-main-content">
       {error&&<div className="trees-error trees-page-error">{error}<button onClick={()=>setError('')} type="button"><X size={17}/></button></div>}
