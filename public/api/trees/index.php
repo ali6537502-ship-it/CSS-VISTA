@@ -124,6 +124,17 @@ function tree_string(mixed $raw, string $label, int $min, int $max): string {
     if ($len<$min || $len>$max || preg_match('/[<>{}\x00-\x1f]/u',$value)) cssv_fail('Please enter a valid '.$label.'.',422,'invalid_field');
     return $value;
 }
+function tree_allowed_cities(): array {
+    return [
+        'Lahore','Faisalabad','Rawalpindi','Multan','Gujranwala','Sialkot',
+        'Sargodha','Bahawalpur','Rahim Yar Khan','Dera Ghazi Khan','Sahiwal',
+        'Okara','Jhelum','Kasur','Sheikhupura','Mianwali','Bhakkar','Chakwal',
+        'Jhang','Khanewal','Lodhran','Vehari','Muzaffargarh','Attock','Narowal',
+        'Gujrat','Hafizabad','Toba Tek Singh','Chiniot','Bahawalnagar','Rajanpur',
+        'Layyah','Pakpattan','Nankana Sahib','Khushab','Mandi Bahauddin',
+        'Jampur','Murree','Wah Cantt','Kot Addu','Shakargarh'
+    ];
+}
 function tree_mobile(mixed $raw): string {
     $value=preg_replace('/[\s-]/','',(string)$raw);
     if (preg_match('/^03[0-9]{9}$/D',$value)) return '+92'.substr($value,1);
@@ -139,7 +150,7 @@ function tree_password(mixed $raw): string {
     if (!is_string($raw) || strlen($raw)<10 || strlen($raw)>72) cssv_fail('Choose a password of 10–72 characters.',422,'invalid_password');
     return $raw;
 }
-function tree_issue(PDO $db, string $id): void {
+function tree_issue(PDO $db, string $id): string {
     $token=rtrim(strtr(base64_encode(random_bytes(48)),'+/','-_'),'=');
     $csrf=rtrim(strtr(base64_encode(random_bytes(32)),'+/','-_'),'=');
     $expiry=time()+14*86400;
@@ -147,6 +158,7 @@ function tree_issue(PDO $db, string $id): void {
         ->execute([cssv_uuid_v4(),$id,cssv_hash_secret($token),cssv_hash_secret($csrf),gmdate('Y-m-d H:i:s',$expiry)]);
     cssv_set_cookie(TREE_SESSION,$token,$expiry,true);
     cssv_set_cookie(TREE_CSRF,$csrf,$expiry,false);
+    return $csrf;
 }
 function tree_member(PDO $db): ?array {
     $token=(string)($_COOKIE[TREE_SESSION]??'');
@@ -228,6 +240,7 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
         $tot=$db->query("SELECT COALESCE(SUM(IF(method='sapling',quantity,0)),0) AS trees, COALESCE(SUM(IF(method='seed',quantity,0)),0) AS seeds, COUNT(DISTINCT member_id) AS contributors,COUNT(DISTINCT city) AS cities FROM tree_campaign_plantings WHERE status='approved'")->fetch();
         $pending=(int)$db->query("SELECT COUNT(*) FROM tree_campaign_plantings WHERE status='pending'")->fetchColumn();
         $locations=$db->query("SELECT city, SUM(IF(method='sapling',quantity,0)) AS trees, SUM(IF(method='seed',quantity,0)) AS seeds FROM tree_campaign_plantings WHERE status='approved' GROUP BY city ORDER BY trees DESC LIMIT 80")->fetchAll();
+        $gallery=$db->query("SELECT id,city,species,method,quantity,planted_on FROM tree_campaign_plantings WHERE status='approved' AND public_photo=1 ORDER BY reviewed_at DESC LIMIT 12")->fetchAll();
         $leaders=$db->query("SELECT m.id,m.full_name,m.city,m.public_name, SUM(p.quantity) AS trees FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status='approved' AND p.method='sapling' GROUP BY m.id,m.full_name,m.city,m.public_name ORDER BY trees DESC,m.id ASC LIMIT 15")->fetchAll();
         $leaderboard=[];
         foreach ($leaders as $i=>$leader) {
@@ -235,7 +248,7 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
             $display=(bool)$leader['public_name']?$name:'Anonymous planter';
             $leaderboard[]=['rank'=>$i+1,'name'=>$display,'city'=>(string)$leader['city'],'trees'=>(int)$leader['trees']];
         }
-        cssv_json(['ok'=>true,'target'=>TREE_TARGET,'trees'=>(int)$tot['trees'],'seeds'=>(int)$tot['seeds'],'contributors'=>(int)$tot['contributors'],'cities'=>(int)$tot['cities'],'pending_reports'=>$pending,'city_totals'=>$locations,'leaderboard'=>$leaderboard]);
+        cssv_json(['ok'=>true,'target'=>TREE_TARGET,'trees'=>(int)$tot['trees'],'seeds'=>(int)$tot['seeds'],'contributors'=>(int)$tot['contributors'],'cities'=>(int)$tot['cities'],'pending_reports'=>$pending,'city_totals'=>$locations,'leaderboard'=>$leaderboard,'public_gallery'=>$gallery]);
     }
     if ($action==='session') {
         $member=tree_member($db);
@@ -281,6 +294,7 @@ if ($action==='register') {
     $body=cssv_request_json(12000);
     $name=tree_string($body['name']??null,'full name',3,100);
     $city=tree_string($body['city']??null,'Punjab city',2,70);
+    if (!in_array($city,tree_allowed_cities(),true)) cssv_fail('Choose a listed city in Punjab.',422,'invalid_city');
     $phone=tree_mobile($body['mobile']??null);
     $cnic=tree_cnic($body['cnic']??null);
     $password=tree_password($body['password']??null);
@@ -294,9 +308,9 @@ if ($action==='register') {
         if ((string)$e->getCode()==='23000') cssv_fail('A tree campaign account already exists for this mobile number or CNIC. Please sign in.',409,'account_exists');
         throw $e;
     }
-    tree_issue($db,$id);
+    $csrf=tree_issue($db,$id);
     $q=$db->prepare('SELECT * FROM tree_campaign_members WHERE id=?');$q->execute([$id]);
-    cssv_json(['ok'=>true,'member'=>tree_public_member($q->fetch()),'csrf_token'=>(string)($_COOKIE[TREE_CSRF]??'')],201);
+    cssv_json(['ok'=>true,'member'=>tree_public_member($q->fetch()),'csrf_token'=>$csrf],201);
 }
 if ($action==='login') {
     $body=cssv_request_json(4000);
@@ -304,8 +318,8 @@ if ($action==='login') {
     tree_rate($db,'login',$phone,12,3600);
     $q=$db->prepare('SELECT * FROM tree_campaign_members WHERE mobile=? LIMIT 1');$q->execute([$phone]);$row=$q->fetch();
     if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) cssv_fail('Incorrect number or password.',401,'invalid_login');
-    tree_issue($db,(string)$row['id']);
-    cssv_json(['ok'=>true,'member'=>tree_public_member($row),'csrf_token'=>(string)($_COOKIE[TREE_CSRF]??'')]);
+    $csrf=tree_issue($db,(string)$row['id']);
+    cssv_json(['ok'=>true,'member'=>tree_public_member($row),'csrf_token'=>$csrf]);
 }
 if ($action==='logout') {
     $member=tree_auth($db,true);
