@@ -40,6 +40,6 @@ test('campaign remains ad-free, staged and disclosed under privacy policy',()=>{
   assert.match(registry,/publicPage\('\/100-million-trees'/)
   assert.match(registry,/contentQuality: 'interactive', adMode: 'disabled', indexable: false/)
   assert.match(policies,/CNIC/)
-  assert.match(policies,/Esar Ul Ebad Welfare Foundation/)
+  assert.match(policies,/Isarul Ibaad Foundation/)
   assert.ok(existsSync(new URL('public/images/esar-ul-ebad-logo.webp',root)))
 })
