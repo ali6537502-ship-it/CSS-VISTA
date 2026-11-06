@@ -96,7 +96,8 @@ function tree_schema(PDO $db): void {
         INDEX idx_tree_perceptual (proof_phash),
         INDEX idx_tree_member_status (member_id,status),
         INDEX idx_tree_public_summary (status,method,city),
-        INDEX idx_tree_review_queue (status,created_at)
+        INDEX idx_tree_review_queue (status,created_at),
+        INDEX idx_tree_gallery (status,public_photo,reviewed_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_member_rollup (
         member_id CHAR(36) NOT NULL PRIMARY KEY,
@@ -172,6 +173,11 @@ function tree_rate(PDO $db, string $action, string $subject, int $limit, int $se
     $q->execute([$action,$since,$ip,$target]);
     if ((int)$q->fetchColumn()>=$limit) cssv_fail('Too many attempts. Please try again later.',429,'rate_limited');
     $db->prepare('INSERT INTO tree_campaign_rate_events(ip_hash,subject_hash,action) VALUES(?,?,?)')->execute([$ip,$target,$action]);
+    // Opportunistic bounded cleanup of expired security records keeps the table small.
+    if (random_int(1,128)===1) {
+        $db->exec('DELETE FROM tree_campaign_rate_events WHERE created_at<DATE_SUB(NOW(6),INTERVAL 14 DAY) LIMIT 500');
+        $db->exec('DELETE FROM tree_campaign_sessions WHERE expires_at<DATE_SUB(NOW(6),INTERVAL 30 DAY) LIMIT 250');
+    }
 }
 function tree_string(mixed $raw, string $label, int $min, int $max): string {
     if (!is_string($raw)) cssv_fail('Please enter '.$label.'.',422,'invalid_field');
@@ -266,7 +272,7 @@ function tree_admin(PDO $db, bool $csrf=false): array {
     return $admin;
 }
 function tree_rollup_adjust(PDO $db,string $memberId,string $city,string $method,int $quantity,int $direction): void {
-    if (!in_array($direction,[1,-1],true) || !in_array($method,['sapling','seed'],true) || $quantity<1 || $quantity>20) throw new RuntimeException('invalid_rollup_adjustment');
+    if (!in_array($direction,[1,-1],true) || !in_array($method,['sapling','seed'],true) || $quantity<1 || $quantity>TREE_TARGET) throw new RuntimeException('invalid_rollup_adjustment');
     $trees=$method==='sapling'?$quantity:0;
     $seeds=$method==='seed'?$quantity:0;
     if ($direction===1) {
