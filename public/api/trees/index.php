@@ -573,7 +573,7 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
     if ($action==='queue' || $action==='approved-reports') {
         tree_admin($db);
         $status=$action==='queue'?'pending':'approved';
-        $q=$db->prepare("SELECT p.id,p.member_id,p.species,p.method,p.quantity,p.planted_on,p.city,p.locality,p.created_at,p.duplicate_risk,p.field_checked,p.field_visit_date,m.full_name FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status=? ORDER BY p.duplicate_risk DESC,p.created_at DESC LIMIT 100");
+        $q=$db->prepare("SELECT p.id,p.member_id,p.species,p.method,p.quantity,p.planted_on,p.city,p.locality,p.created_at,p.duplicate_risk,p.field_checked,p.field_visit_date,m.full_name,(m.avatar_path IS NOT NULL) AS has_photo FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status=? ORDER BY p.duplicate_risk DESC,p.created_at DESC LIMIT 100");
         $q->execute([$status]);
         cssv_json(['ok'=>true,'reports'=>$q->fetchAll()]);
     }
