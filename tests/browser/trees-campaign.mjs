@@ -28,7 +28,7 @@ const createContext = async viewport => {
       if(action==='session')return respond({ok:true,member,csrf_token:member?'browser-test-csrf':null})
       if(action==='mine')return respond({ok:true,member,reports:[],followups:[]})
       if(action==='register'){
-        member={id:'11111111-2222-4333-8444-555555555555',name:'Browser Test Volunteer',city:'Multan',has_photo:true,public_name:false,joined_at:'2026-11-06'}
+        member={id:'11111111-2222-4333-8444-555555555555',name:'Browser Test Volunteer',email:'browser@example.invalid',email_verified:false,city:'Multan',has_photo:true,public_name:false,joined_at:'2026-11-06'}
         return respond({ok:true,member,csrf_token:'browser-test-csrf',recovery_key:'TREE-'+'A'.repeat(48)})
       }
       return route.fulfill({status:400,json:{ok:false,message:'Not implemented in visual test fixture'}})
@@ -59,6 +59,7 @@ try {
   await page.getByRole('heading',{name:'Join the movement'}).waitFor()
   assert.equal(await page.locator('input[autocomplete="one-time-code"]').count(),0,'No OTP input is present')
   await page.getByPlaceholder('Your full name').fill('Browser Test Volunteer')
+  await page.getByPlaceholder('Your email for password recovery').fill('browser@example.invalid')
   await page.getByRole('combobox',{name:'Your city or town in Punjab'}).selectOption('Multan')
   await page.getByPlaceholder('13 digits, used only to prevent duplicates').fill('1111100000001')
   await page.getByPlaceholder('03XX-XXXXXXX').fill('03000001010')
