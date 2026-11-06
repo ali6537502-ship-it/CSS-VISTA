@@ -14,6 +14,7 @@ import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
 const GSATutor = lazy(() => import('./pages/GSATutor'))
+const PunjabTrees = lazy(() => import('./pages/PunjabTrees'))
 const FitnessCoach = lazy(() => import('./pages/FitnessCoach'))
 const CompulsoryList = lazy(() => import('./pages/CompulsoryList'))
 const SubjectDetail = lazy(() => import('./pages/SubjectDetail'))
@@ -156,6 +157,7 @@ export default function App() {
     <Routes>
       <Route element={<AdSenseProvider><ErrorBoundary><><Layout /><TrustFooter /></></ErrorBoundary></AdSenseProvider>}>
         <Route path="/" element={<Home />} />
+        <Route path="/100-million-trees" element={<S><PunjabTrees /></S>} />
         <Route path="/start-css" element={<S><StartCSS /></S>} />
         <Route path="/gsa-tutor" element={<S><GSATutor /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
