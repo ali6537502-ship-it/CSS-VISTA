@@ -177,6 +177,12 @@ function visual(s){
  if(s.id==='c18-s18-1')return modelFrame('Follow common drinking-water treatment steps',['Coagulation','Flocculation','Sedimentation','Filtration','Disinfection'].map((x,i)=>'<button data-water="'+i+'" aria-pressed="'+(ui.water===i)+'" class="'+(ui.water===i?'active':'')+'">'+(i+1)+'. '+x+'</button>').join(''),waterSvg(ui.water),'Treatment sequences vary with source-water quality. Each illustrated step is one barrier, not a guarantee of safety in isolation.','https://www.cdc.gov/drinking-water/about/how-water-treatment-works.html');
  return '';
 }
+function sourceChecklist(section){
+ const container=document.createElement('div');container.innerHTML=section.html||'';
+ const found=[...container.querySelectorAll('strong,h3,h4')].map(el=>(el.textContent||'').trim().replace(/[.:]+$/,'')).filter(t=>t.length>=5&&t.length<=80);
+ const headings=[...new Set(found)].slice(0,6);
+ return headings.length?'<div class="recall-checklist"><h3>Check against the manuscript headings</h3><ul>'+headings.map(t=>'<li>'+safe(t)+'</li>').join('')+'</ul><p class="tiny muted">These are source headings for self-review, not automated marks or an independently validated rubric.</p></div>':'';
+}
 function lesson(s,c){
  const pieces=blocks(s.html),beat=Math.max(0,Math.min(ui.beat,pieces.length-1)),q=questionFor(s,c);
  let content='';
@@ -188,8 +194,8 @@ function lesson(s,c){
   const selected=ui.selected, answered=!!selected;
   content='<div class="lesson-card"><p class="segment-note">Apply · Source question '+safe(q.id)+'</p><h2>'+safe(q.prompt)+'</h2><p class="muted">A chapter-level question from the original textbook. It may connect ideas covered in more than one lesson.</p><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(answered?(k===q.answer?'correct':k===selected?'wrong':''):k===selected?'chosen':'')+'" data-choice="'+k+'" '+(answered?'disabled':'')+'><b>'+k+'</b><span>'+safe(v)+'</span></button>').join('')+'</div>'+(answered?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct.':'Review the explanation.')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Review the explanation</button><button class="btn primary" data-action="torecall" '+(!answered?'disabled':'')+'>Explain it yourself →</button></div></div>';
  }else{
-  const draft=ui.draft||saved.drafts?.[s.id]||'',sample=pieces.slice(0,Math.min(pieces.length,3)).join(''),revealed=ui.reveal;
-  content='<div class="lesson-card"><p class="segment-note">Recall · Closed-book explanation</p><h2>Can you explain '+safe(s.title.toLowerCase())+'?</h2><p class="muted">Write the mechanism, evidence, distinction or application in your own words. Include an example where the original lesson provides one. Your response is for self-review; it is not automatically graded.</p><textarea class="textarea" id="recall" placeholder="Explain the idea here, using your own words...">'+safe(draft)+'</textarea>'+(revealed?'<div class="compare"><h3>Compare with the source</h3><div class="study-copy">'+sample+'</div><button class="btn small" data-action="fullsource">Read the complete section</button><p class="muted tiny">Decide what you explained correctly and what needs another reading.</p><div class="score-group"><button class="btn" data-grade="gotit">I understood</button><button class="btn" data-grade="partial">Partly clear</button><button class="btn" data-grade="again">Repeat</button></div></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Read again</button>'+(revealed?'<button class="btn primary" data-action="finish" '+(!ui.grade?'disabled':'')+'>Save & finish →</button>':'<button class="btn primary" data-action="reveal" '+(nwords(draft)<8?'disabled':'')+'>Compare with the book →</button>')+'</div></div>';
+  const draft=ui.draft||saved.drafts?.[s.id]||'',sample=pieces.slice(0,Math.min(pieces.length,3)).join(''),revealed=ui.reveal,checklist=sourceChecklist(s);
+  content='<div class="lesson-card"><p class="segment-note">Recall · Closed-book explanation</p><h2>Can you explain '+safe(s.title.toLowerCase())+'?</h2><p class="muted">Write the mechanism, evidence, distinction or application in your own words. Include an example where the original lesson provides one. Your response is for self-review; it is not automatically graded.</p><textarea class="textarea" id="recall" placeholder="Explain the idea here, using your own words...">'+safe(draft)+'</textarea>'+(revealed?'<div class="compare"><h3>Compare with the source</h3><div class="study-copy">'+sample+'</div>'+checklist+'<button class="btn small" data-action="fullsource">Read the complete section</button><p class="muted tiny">Decide what you explained correctly and what needs another reading.</p><div class="score-group"><button class="btn" data-grade="gotit">I understood</button><button class="btn" data-grade="partial">Partly clear</button><button class="btn" data-grade="again">Repeat</button></div></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Read again</button>'+(revealed?'<button class="btn primary" data-action="finish" '+(!ui.grade?'disabled':'')+'>Save & finish →</button>':'<button class="btn primary" data-action="reveal" '+(nwords(draft)<16?'disabled':'')+'>Compare with the book →</button>')+'</div></div>';
  }
  return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button><span class="muted tiny"> / '+safe(c.part)+' / Chapter '+c.id+' / Lesson '+safe(s.number)+'</span></div><p class="eyebrow">Original source · '+s.words+' words · General Science Part I</p><h1 class="lesson-title">'+safe(s.title)+'</h1><div class="progress-meta"><span>'+current+' of '+total+' learning steps</span><span>'+Math.round(current/total*100)+'%</span></div><div class="track"><div class="fill" style="width:'+(current/total*100)+'%"></div></div>'+content+'<div class="flex"><button class="btn small" data-action="fullsource">Complete reference</button><button class="btn small" data-action="bookmark">'+(saved.bookmarks?.[s.id]?'Remove bookmark':'Bookmark')+'</button><button class="btn small" data-action="markreview">Add to revision</button></div><p class="tiny muted">Content is drawn from the CSS VISTA General Science manuscript. Questions and source statements remain subject to editorial review.</p></section>';
 }
@@ -347,7 +353,7 @@ root.addEventListener('click',async e=>{
   case 'tolearn':ui.stage='learn';ui.beat=0;ui.selected='';draw();break;
   case 'torecall':ui.stage='recall';ui.selected='';draw();break;
   case 'reveal':{
-   const text=document.getElementById('recall')?.value||ui.draft;if(nwords(text)<8)return;ui.draft=text;saveDraft(ui.id,text);ui.reveal=true;draw();break;
+   const text=document.getElementById('recall')?.value||ui.draft;if(nwords(text)<16)return;ui.draft=text;saveDraft(ui.id,text);ui.reveal=true;draw();break;
   }
   case 'finish':if(ui.grade)chooseGrade(ui.grade);break;
   case 'bookmark':saveBookmark();break;
@@ -378,7 +384,7 @@ root.addEventListener('change',e=>{
 });
 root.addEventListener('input',e=>{
  if(e.target.id==='search'){ui.search=e.target.value;const selectionStart=e.target.selectionStart;draw();let input=document.getElementById('search');if(input){input.focus();input.setSelectionRange(selectionStart,selectionStart)}}
- if(e.target.id==='recall'){ui.draft=e.target.value;const b=root.querySelector('[data-action="reveal"]');if(b)b.disabled=nwords(ui.draft)<8}
+ if(e.target.id==='recall'){ui.draft=e.target.value;const b=root.querySelector('[data-action="reveal"]');if(b)b.disabled=nwords(ui.draft)<16}
 });
 window.addEventListener('storage',e=>{
  if(embedded||e.key!==null&&e.key!=='cssvista:progress-owner')return;
