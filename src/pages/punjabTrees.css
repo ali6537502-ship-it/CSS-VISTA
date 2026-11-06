@@ -113,3 +113,6 @@
 @media(prefers-reduced-motion:reduce){
   .trees-feature-card,.trees-feature-visual img,.trees-feature-cta svg{transition:none!important;transform:none!important}
 }
+
+/* Compact 320–390 px viewports retain both authentic partner logos without horizontal overflow. */
+@media(max-width:390px){.trees-sitebar-cta{display:none}.trees-sitebar-content{justify-content:space-between}}
