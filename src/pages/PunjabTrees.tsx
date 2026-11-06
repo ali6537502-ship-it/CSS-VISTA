@@ -6,7 +6,7 @@ import { PUNJAB_MAP, projectPunjab } from '@/data/punjabTreeMap'
 import './punjabTrees.css'
 
 type Species = { name: string, scientific: string, category: string }
-type Member = { id: string, name: string, city: string, has_photo: boolean, public_name: boolean, joined_at: string }
+type Member = { id: string, name: string, email: string, email_verified: boolean, city: string, has_photo: boolean, public_name: boolean, joined_at: string }
 type Followup = { id: string, planting_id: string, phase: number, surviving: number, status: string, review_note: string|null, full_name?: string, species?: string, city?: string, planted_quantity?: number, locality?: string }
 type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string, duplicate_risk?: number, field_checked?: number, field_visit_date?: string }
 type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, survival_checks: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[], public_gallery: { id: string,city: string,species: string,method: string,quantity: number,planted_on: string }[] }
@@ -228,17 +228,24 @@ function SurvivalCheckForm({ reports, followups, csrf, onSaved }: {
     {followups.length>0&&<div className="trees-report-list">{followups.slice(0,15).map(f=><div className="trees-report" key={f.id}><div><strong>{f.phase}-day observation · {f.surviving} surviving</strong><span>Submitted for review</span>{f.review_note&&<small>{f.review_note}</small>}</div><span className={'trees-status trees-status-'+f.status}>{f.status}</span></div>)}</div>}
   </div>
 }
-function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
+function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }: {
   member: Member | null,
   onSigned: (m:Member, csrf:string)=>void,
   onLogout:()=>void,
   onLockedOut:()=>void,
-  csrf:string
+  csrf:string,
+  emailAction: { purpose:'verify'|'reset', token:string } | null
 }) {
-  const [mode,setMode]=useState<'register'|'login'|'recover'>('register')
+  const [mode,setMode]=useState<'register'|'login'|'recover'|'email-request'|'email-reset'|'email-verify'>(
+    emailAction?.purpose==='reset'?'email-reset':emailAction?.purpose==='verify'?'email-verify':'register'
+  )
   const [busy,setBusy]=useState(false)
   const [error,setError]=useState('')
   const [name,setName]=useState('')
+  const [email,setEmail]=useState('')
+  const [editEmail,setEditEmail]=useState(false)
+  const [emailChangePassword,setEmailChangePassword]=useState('')
+  const [newContactEmail,setNewContactEmail]=useState('')
   const [city,setCity]=useState('')
   const [customCity,setCustomCity]=useState('')
   const [cnic,setCnic]=useState('')
@@ -262,22 +269,70 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
 
   const reloadMine=()=>getApi('mine').then(data=>{setReports(data.reports);setFollowups(data.followups||[])}).catch(()=>{})
   useEffect(()=>{if(member)void reloadMine()},[member])
+  useEffect(()=>{
+    if(emailAction?.purpose!=='verify') return
+    let live=true
+    postApi('confirm-email',{token:emailAction.token})
+      .then(async ()=>{
+        if(!live)return
+        const data=await getApi('session')
+        if(!live)return
+        if(data.member)onSigned(data.member,data.csrf_token)
+        setNote('Email address confirmed. You can now reset your password by email.')
+        setMode('login')
+      })
+      .catch(e=>{if(live){setError(e instanceof Error?e.message:'Email confirmation failed.');setMode('login')}})
+    return ()=>{live=false}
+  },[emailAction?.purpose,emailAction?.token])
+  async function resendEmail() {
+    setBusy(true);setError('')
+    try {
+      const data=await postApi('resend-email-verification',{},csrf)
+      setNote(data.message)
+    }catch(e){setError(e instanceof Error?e.message:'Could not send email.')}
+    finally{setBusy(false)}
+  }
+  async function updateEmail(e:FormEvent) {
+    e.preventDefault()
+    setBusy(true);setError('')
+    try {
+      const data=await postApi('change-email',{email:newContactEmail,password:emailChangePassword},csrf)
+      const session=await getApi('session')
+      onSigned(session.member,session.csrf_token)
+      setNote(data.message)
+      setEditEmail(false);setEmailChangePassword('');setNewContactEmail('')
+    }catch(e){setError(e instanceof Error?e.message:'Could not change email address.')}
+    finally{setBusy(false)}
+  }
+
 
   async function submit(e:FormEvent) {
     e.preventDefault()
     setError('');setNote('')
-    if (mode==='recover' && newPassword!==repeatPassword) {setError('New passwords do not match.');return}
+    if ((mode==='recover'||mode==='email-reset') && newPassword!==repeatPassword) {setError('New passwords do not match.');return}
     setBusy(true)
     try {
-      if (mode==='recover') {
+      if (mode==='email-request') {
+        const data=await postApi('request-email-reset',{email})
+        setNote(data.message)
+      } else if (mode==='email-reset') {
+        if (!emailAction || emailAction.purpose!=='reset') throw new Error('This password-reset link is no longer available. Request another email.')
+        const data=await postApi('reset-email-password',{token:emailAction.token,new_password:newPassword})
+        setRecoveryKey(data.recovery_key)
+        setNewPassword('');setRepeatPassword('')
+        setNote('Password reset securely. All prior sessions were signed out. Save your new offline recovery key, then sign in.')
+        onLockedOut()
+        setMode('login')
+      } else if (mode==='recover') {
         const data=await postApi('recover',{mobile,recovery_key:recoveryInput,new_password:newPassword})
         setRecoveryKey(data.recovery_key)
         setRecoveryInput('');setNewPassword('');setRepeatPassword('')
-        setNote('Password reset successfully. Save the NEW recovery key below before signing in again.')
-      } else {
-        const data=await postApi(mode,mode==='register'?{name,city:city==='custom'?customCity:city,cnic,mobile,password,consent,public_name:publish}:{mobile,password})
-        if (data.recovery_key) setRecoveryKey(data.recovery_key)
+        setNote('Password reset. Save your new offline recovery key before signing in.')
+      } else if(mode==='register'||mode==='login') {
+        const data=await postApi(mode,mode==='register'?{name,email,city:city==='custom'?customCity:city,cnic,mobile,password,consent,public_name:publish}:{mobile,password})
+        if(data.recovery_key)setRecoveryKey(data.recovery_key)
         onSigned(data.member,data.csrf_token)
+        if(mode==='register')setNote(data.verification_sent?'Confirmation link sent to your email. Verify it to enable email password recovery; no OTP is needed.':'Account created, but email could not be sent. You can resend from your account. Save your offline recovery key.')
         setPassword('');setCnic('')
       }
     } catch(e) {setError(e instanceof Error?e.message:'Could not continue.')}
@@ -322,7 +377,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
     } catch(e) {setError(e instanceof Error?e.message:'Account deletion failed.')}
     finally {setBusy(false)}
   }
-  if(member) return <section className="trees-panel">
+  if(member && mode!=='email-reset' && mode!=='email-verify') return <section className="trees-panel">
     <span className="trees-kicker">MY TREE CAMPAIGN ACCOUNT</span>
     <div className="trees-account-head">
       <div className="trees-account-identity">
@@ -332,6 +387,18 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
       <button type="button" className="trees-btn-outline" onClick={onLogout}><LogOut size={16}/> Sign out</button>
     </div>
     {recoveryKey&&<RecoveryKeyPanel recoveryKey={recoveryKey} onDismiss={()=>setRecoveryKey('')}/>}
+    <div className="trees-email-status">
+      <div><strong>Email for account recovery</strong><p>{member.email||'No email recorded'} · {member.email_verified?'Confirmed':'Not yet confirmed — email resets are disabled until confirmation'}</p></div>
+      {!member.email_verified&&<button disabled={busy} type="button" onClick={resendEmail} className="trees-btn-outline">Resend confirmation</button>}
+      <button type="button" className="trees-btn-outline" onClick={()=>setEditEmail(v=>!v)}>{editEmail?'Cancel':'Change email'}</button>
+    </div>
+    {editEmail&&<form className="trees-account-subform" onSubmit={updateEmail}>
+      <h3>Update recovery email</h3>
+      <p className="trees-muted">Your new address must be confirmed before it can reset your password. No OTP is required.</p>
+      <label>New email<input required type="email" maxLength={254} autoComplete="email" value={newContactEmail} onChange={e=>setNewContactEmail(e.target.value)}/></label>
+      <label>Current password<input required type="password" autoComplete="current-password" value={emailChangePassword} onChange={e=>setEmailChangePassword(e.target.value)}/></label>
+      <button disabled={busy} className="trees-btn-main" type="submit">Update email address</button>
+    </form>}
     {!member.has_photo&&<div className="trees-upload-avatar">
       <Camera size={26}/><div><strong>Add your profile photograph</strong><p>Required before your first planting report. Automatically compressed to 40 KB, stored privately and never placed on the public leaderboard.</p></div>
       <label className="trees-upload-btn">{avatarBusy?'Processing…':'Choose photo'}<input disabled={avatarBusy} type="file" accept="image/jpeg,image/png,image/webp" onChange={photo} hidden/></label>
