@@ -47,7 +47,7 @@ try {
   await first.goto(origin+'/100-million-trees')
   await first.getByRole('heading',{name:/100 million trees/i}).waitFor()
   const brandImages=await first.locator('.trees-sitebar .trees-brand img').evaluateAll(images=>images.map(img=>img.getAttribute('alt')))
-  assert.deepEqual(brandImages,['Isarul Ibaad Foundation emblem','CSS Vista'])
+  assert.deepEqual(brandImages,['Esar ul Ebad Welfare Foundation emblem','CSS Vista'])
   await first.getByRole('button',{name:'Leaderboard',exact:true}).click()
   await first.getByRole('heading',{name:'Community leaderboard'}).waitFor()
   assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2),true,'Desktop campaign fits viewport')
