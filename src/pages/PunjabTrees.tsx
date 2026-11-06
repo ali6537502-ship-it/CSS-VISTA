@@ -3,6 +3,8 @@ import { Link } from 'react-router'
 import { ArrowRight, BadgeCheck, Camera, CheckCircle2, ChevronRight, CircleHelp, CloudUpload, Globe2, Heart, Leaf, LogIn, LogOut, MapPin, Menu, ShieldCheck, Sprout, TreeDeciduous, Trophy, UserRound, X } from 'lucide-react'
 import { compressImage, MAX_INPUT_BYTES } from '@/lib/photoCompression'
 import { PUNJAB_MAP, projectPunjab } from '@/data/punjabTreeMap'
+import { TREE_CAMPAIGN_IMAGES } from '@/data/treeCampaignMedia'
+import './punjabTreesPremium.css'
 import './punjabTrees.css'
 
 type Species = { name: string, scientific: string, category: string }
@@ -136,9 +138,37 @@ function Overview({ summary, onContribute, onRankings }: { summary: Summary, onC
         <div className="trees-hero-actions"><button type="button" className="trees-btn-main" onClick={onContribute}><Sprout size={19}/> I want to contribute <ArrowRight size={17}/></button><button type="button" className="trees-btn-ghost" onClick={onRankings}>Explore leaderboard <ChevronRight size={16}/></button></div>
         <div className="trees-trust-line"><ShieldCheck size={17}/> Public figures include approved planting reports only</div>
       </div>
-      <div className="trees-hero-art" aria-hidden="true"><div className="trees-art-glow"/><div className="trees-rings"><TreeDeciduous size={184} strokeWidth={0.7}/></div><div className="trees-art-label">ROOTED IN PUNJAB <span>•</span> GROWING TOGETHER</div></div>
+      <div className="trees-hero-art trees-hero-photo" aria-hidden="true">
+        <img className="trees-hero-photo-image" src={TREE_CAMPAIGN_IMAGES.forest} alt="" fetchPriority="high" decoding="async" />
+        <div className="trees-hero-photo-vignette"/>
+        <div className="trees-hero-map-art"><svg viewBox={'0 0 ' + PUNJAB_MAP.width + ' ' + PUNJAB_MAP.height} role="presentation"><path d={PUNJAB_MAP.path} fill="rgba(179,236,174,.10)" stroke="#d7f6cc" strokeWidth="5" fillRule="evenodd"/></svg><span><Leaf size={14}/> PUNJAB, PAKISTAN</span></div>
+        <div className="trees-art-label">ONE PROVINCE <span>•</span> ONE SHARED MISSION</div>
+      </div>
     </section>
-    <section className="trees-progress-section"><div className="trees-progress-copy"><span className="trees-kicker">THE COLLECTIVE MISSION</span><h2>Our progress, transparently tracked.</h2></div><div className="trees-progress-top"><b>{fmt(summary.trees)}</b><span>of {fmt(summary.target)} saplings</span></div><div className="trees-progress-track"><span style={{width: pct + '%'}} /></div><div className="trees-progress-bottom"><span>{pct.toFixed(5)}% of target</span><span>{fmt(Math.max(0,summary.target-summary.trees))} still to plant</span></div>
+    <section className="trees-showcase" aria-labelledby="trees-showcase-title">
+      <div className="trees-showcase-heading"><div><span className="trees-kicker">MAKE YOUR MARK</span><h2 id="trees-showcase-title">A real contribution. A visible impact.</h2><p>Join the mission, monitor reviewed progress, and share evidence of your planting.</p></div><span className="trees-showcase-note"><ShieldCheck size={15}/> Original partner emblems · Real photographs</span></div>
+      <div className="trees-feature-grid">
+        <article className="trees-feature-card trees-feature-join">
+          <img className="trees-feature-photo" src={TREE_CAMPAIGN_IMAGES.sapling} loading="lazy" decoding="async" alt="Real photograph of a young green seedling planted in reddish soil" />
+          <span className="trees-feature-veil" aria-hidden="true"/>
+          <div className="trees-feature-meta"><span className="trees-feature-icon"><Sprout size={21}/></span><span className="trees-feature-index">01 / PARTICIPATE</span></div>
+          <div className="trees-feature-content"><span className="trees-feature-eyebrow">GROW WITH US</span><h3>Join the <em>plantation drive.</em></h3><p>Start your free account, choose a species, and make every planting matter.</p><button type="button" className="trees-feature-button" onClick={onContribute}>Contribute now <ArrowRight size={18}/></button></div>
+        </article>
+        <article className="trees-feature-card trees-feature-progress">
+          <img className="trees-feature-photo" src={TREE_CAMPAIGN_IMAGES.forest} loading="lazy" decoding="async" alt="Real aerial photograph showing a forest canopy" />
+          <span className="trees-feature-veil" aria-hidden="true"/>
+          <div className="trees-feature-meta"><span className="trees-feature-icon"><Globe2 size={21}/></span><span className="trees-feature-index">02 / TRANSPARENCY</span></div>
+          <div className="trees-feature-content"><span className="trees-feature-eyebrow">EVERY SAPLING COUNTS</span><h3>Track <em>live progress.</em></h3><p>Follow approved planting reports and see how Punjab is moving toward its goal.</p><div className="trees-feature-metric"><TreeDeciduous size={21}/><div><strong>{fmt(summary.trees)}</strong><small>approved saplings of {fmt(summary.target)} goal</small></div></div><button type="button" className="trees-feature-button" onClick={()=>document.getElementById('trees-impact-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'})}>View dashboard <ArrowRight size={18}/></button></div>
+        </article>
+        <article className="trees-feature-card trees-feature-report">
+          <img className="trees-feature-photo" src={TREE_CAMPAIGN_IMAGES.growth} loading="lazy" decoding="async" alt="Real photograph of a small growing plant in a natural setting" />
+          <span className="trees-feature-veil" aria-hidden="true"/>
+          <div className="trees-feature-meta"><span className="trees-feature-icon"><Camera size={21}/></span><span className="trees-feature-index">03 / DOCUMENT</span></div>
+          <div className="trees-feature-content"><span className="trees-feature-eyebrow">YOUR CONTRIBUTION</span><h3>Report your <em>plantation.</em></h3><p>Upload real planting evidence. Each report is reviewed before it appears in public totals.</p><button type="button" className="trees-feature-button" onClick={onContribute}>Submit a record <ArrowRight size={18}/></button></div>
+        </article>
+      </div>
+    </section>
+    <section className="trees-progress-section" id="trees-impact-dashboard"><div className="trees-progress-copy"><span className="trees-kicker">THE COLLECTIVE MISSION</span><h2>Our progress, transparently tracked.</h2></div><div className="trees-progress-top"><b>{fmt(summary.trees)}</b><span>of {fmt(summary.target)} saplings</span></div><div className="trees-progress-track"><span style={{width: pct + '%'}} /></div><div className="trees-progress-bottom"><span>{pct.toFixed(5)}% of target</span><span>{fmt(Math.max(0,summary.target-summary.trees))} still to plant</span></div>
       <div className="trees-stat-grid"><div className="trees-stat"><TreeDeciduous/><span>Approved saplings</span><strong>{fmt(summary.trees)}</strong></div><div className="trees-stat"><Sprout/><span>Seeds sown (separate)</span><strong>{fmt(summary.seeds)}</strong></div><div className="trees-stat"><Heart/><span>Contributors</span><strong>{fmt(summary.contributors)}</strong></div><div className="trees-stat"><MapPin/><span>Participating cities</span><strong>{fmt(summary.cities)}</strong></div></div>
     </section>
     <div className="trees-followup-stat"><ShieldCheck size={18}/><span><strong>{fmt(summary.survival_checks)}</strong> follow-up observations approved at 30, 90 or 180 days. These are separate from the planting total and are not independent proof of long-term survival.</span></div>
@@ -147,7 +177,7 @@ function Overview({ summary, onContribute, onRankings }: { summary: Summary, onC
       {summary.public_gallery.length ? <div className="trees-gallery-grid">{summary.public_gallery.map(item=><article className="trees-gallery-card" key={item.id}><img src={API + 'photo&kind=proof&id=' + encodeURIComponent(item.id)} loading="lazy" alt={'Verified planting report in ' + item.city}/><div><strong>{item.city}</strong><span>{item.quantity} {item.method === 'sapling' ? 'saplings' : 'seeds'} · {item.species}</span></div></article>)}</div> : <div className="trees-gallery-empty"><Camera size={25}/><div><strong>Our planting gallery is getting ready.</strong><p>Approved photos will appear here only when participants choose to share them.</p></div></div>}
     </section>
     <section className="trees-how"><div className="trees-section-head"><div><span className="trees-kicker">HOW TO PARTICIPATE</span><h2>Four simple steps. A lasting impact.</h2></div></div><div className="trees-how-grid">
-      {[['01','Create your campaign account','Register with your name, mobile number, CNIC and Punjab city.','user'],['02','Choose a species','Select an appropriate nursery sapling or a seed from the planting catalogue.','leaf'],['03','Plant and upload proof','Share your planting date, location and a photo—compressed automatically.','camera'],['04','Get your record reviewed','Approved saplings appear in approved counts and on the leaderboard.','check']].map(([n,t,d,kind])=><div className="trees-how-card" key={n}><span className="trees-step-n">{n}</span><span className="trees-how-icon">{kind==='user'?<UserRound/>:kind==='leaf'?<Leaf/>:kind==='camera'?<Camera/>:<BadgeCheck/>}</span><h3>{t}</h3><p>{d}</p></div>)}
+      {[['01','Create your free account','Register without an OTP or profile photo, then confirm your email.','user'],['02','Choose a species','Select an appropriate nursery sapling or a seed from the planting catalogue.','leaf'],['03','Plant and upload proof','Share your planting date, location and a photo—compressed automatically.','camera'],['04','Get your record reviewed','Approved saplings appear in approved counts and on the leaderboard.','check']].map(([n,t,d,kind])=><div className="trees-how-card" key={n}><span className="trees-step-n">{n}</span><span className="trees-how-icon">{kind==='user'?<UserRound/>:kind==='leaf'?<Leaf/>:kind==='camera'?<Camera/>:<BadgeCheck/>}</span><h3>{t}</h3><p>{d}</p></div>)}
     </div></section>
   </>
 }
@@ -612,6 +642,6 @@ export default function PunjabTrees() {
       {tab==='contribute'&&<Contribute member={member} csrf={csrf} species={species} onDone={refresh} onAccount={()=>select('account')}/>}
       {tab==='review'&&<Review csrf={adminCsrf} refresh={()=>{void refresh()}}/>}
     </div>
-    <footer className="trees-footer"><div className="trees-shell"><div><Brand/><p>Growing a greener Punjab, one reviewed contribution at a time.</p></div><div><span>Transparency</span><p>Saplings and seeds are counted separately. Approved does not mean independently certified survival.</p></div><div><a href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer">Foundation website <ArrowRight size={13}/></a><Link to="/privacy-policy">CSS Vista Privacy Policy <ArrowRight size={13}/></Link><Link to="/">Return to CSS Vista <ArrowRight size={13}/></Link></div></div></footer>
+    <footer className="trees-footer"><div className="trees-shell"><div><Brand/><p>Growing a greener Punjab, one reviewed contribution at a time.</p></div><div><span>Transparency</span><p>Saplings and seeds are counted separately. Approved does not mean independently certified survival.</p></div><div><a href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer">Foundation website <ArrowRight size={13}/></a><Link to="/privacy-policy">CSS Vista Privacy Policy <ArrowRight size={13}/></Link><Link to="/">Return to CSS Vista <ArrowRight size={13}/></Link><div className="trees-photo-credits"><span>Real photograph credits</span><a href="https://commons.wikimedia.org/wiki/File:The_seedling.jpg" target="_blank" rel="noopener noreferrer">Seedling: Path slopu · CC BY-SA 4.0 <ArrowRight size={12}/></a><a href="https://commons.wikimedia.org/wiki/File:Aerial_view_of_a_forest_(Unsplash).jpg" target="_blank" rel="noopener noreferrer">Forest: Ozark Drones · CC0 <ArrowRight size={12}/></a><a href="https://commons.wikimedia.org/wiki/File:Little_plant_growing.jpg" target="_blank" rel="noopener noreferrer">Growing plant: ゴスロリ · CC0 <ArrowRight size={12}/></a></div></div></div></footer>
   </main>
 }

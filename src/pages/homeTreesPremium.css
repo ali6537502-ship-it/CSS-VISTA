@@ -1,0 +1,57 @@
+
+/* Prominent homepage entry for Isarul Ibaad Foundation × CSS Vista.
+   Uses the unchanged, official partner logo assets and real CC-licensed media. */
+.cssv-trees-home-feature{display:block;position:relative;isolation:isolate;overflow:hidden;min-height:355px;width:100%;border-radius:26px;background:#083b29;color:#fff;border:1px solid #b5d5ae4d;box-shadow:0 22px 50px #103d2626,0 6px 15px #103d2612;transition:transform .3s ease,box-shadow .3s ease;text-decoration:none!important;}
+.cssv-trees-home-feature:hover{transform:translateY(-3px);box-shadow:0 30px 56px #103d2637,0 7px 15px #103d261a;}
+.cssv-trees-home-feature:focus-visible{outline:3px solid #c2eb9f;outline-offset:4px;}
+.cssv-trees-home-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right 48%;z-index:-2;filter:saturate(1.1) contrast(1.05);transition:transform .6s ease;}
+.cssv-trees-home-feature:hover .cssv-trees-home-photo{transform:scale(1.035);}
+.cssv-trees-home-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#042c1efa 0%,#06462fdc 46%,#0d503b9b 70%,#082e249c 100%);}
+.cssv-trees-home-content{position:relative;z-index:2;display:flex;align-items:flex-start;flex-direction:column;max-width:780px;padding:clamp(22px,3.5vw,42px) clamp(22px,4vw,52px);min-height:355px;}
+.cssv-trees-home-partners{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.cssv-trees-home-logo-wrap{width:66px;height:64px;border-radius:15px;background:rgba(255,255,255,.97);display:grid;place-items:center;padding:7px;box-shadow:0 8px 20px #061a1837;}
+.cssv-trees-home-logo-wrap img{display:block;width:100%;height:100%;object-fit:contain;filter:none;transform:none;}
+.cssv-trees-home-partner-x{font-family:Georgia,serif;font-size:29px;color:#cae4b3;}
+.cssv-trees-home-logo-vista{width:175px;padding:7px 13px;}
+.cssv-trees-home-eyebrow{font-size:10px;font-weight:850;letter-spacing:.16em;color:#e5ffcf;display:inline-flex;gap:10px;align-items:center;text-transform:uppercase;}
+.cssv-trees-home-pulse{width:8px;height:8px;background:#92eaa1;border-radius:50%;box-shadow:0 0 0 5px #a4f0a026;flex-shrink:0;}
+.cssv-trees-home-heading{display:block;color:#fff!important;font-size:clamp(32px,4vw,57px);line-height:1.07;letter-spacing:-.055em;font-weight:920;margin-top:15px;}
+.cssv-trees-home-heading em{font-style:normal;color:#ccf3ad;}
+.cssv-trees-home-description{display:block;margin-top:14px;color:#e2efdf;line-height:1.7;font-size:clamp(12px,1.2vw,15px);max-width:525px;}
+.cssv-trees-home-link{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;margin-top:23px;min-height:48px;border-radius:40px;padding:13px 20px;background:#ecf9de;color:#0b472f!important;font-weight:900;font-size:12px;box-shadow:0 8px 24px #05261a66;transition:transform .2s,background .2s;}
+.cssv-trees-home-feature:hover .cssv-trees-home-link{background:#d6f4c6;transform:translateX(3px);}
+.cssv-trees-home-map{position:absolute;right:5%;top:8%;bottom:7%;width:29%;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;filter:drop-shadow(0 4px 10px #09291877);}
+.cssv-trees-home-map svg{max-height:78%;max-width:100%;height:245px;width:190px;}
+.cssv-trees-home-map>span{margin-top:9px;color:#e1f4d8;font-size:9px;letter-spacing:.14em;text-align:center;font-weight:800;}
+@media(max-width:900px){
+ .cssv-trees-home-feature{min-height:360px;}
+ .cssv-trees-home-content{min-height:360px;max-width:620px;padding:30px;}
+ .cssv-trees-home-map{right:2%;width:24%;opacity:.7;}
+ .cssv-trees-home-heading{font-size:clamp(32px,4.4vw,48px);}
+ .cssv-trees-home-shade{background:linear-gradient(90deg,#052e20fa,#0a452fe6 62%,#103c307a);}
+}
+@media(max-width:620px){
+ .cssv-trees-home-feature{min-height:440px;border-radius:20px;}
+ .cssv-trees-home-photo{object-position:60% 25%;}
+ .cssv-trees-home-shade{background:linear-gradient(180deg,#082f1eb3 0%,#062d1bf1 36%,#062b1bfa 100%);}
+ .cssv-trees-home-content{min-height:440px;padding:25px 23px 29px;}
+ .cssv-trees-home-partners{margin-bottom:24px;gap:9px;}
+ .cssv-trees-home-logo-wrap{width:54px;height:53px;border-radius:12px;}
+ .cssv-trees-home-logo-vista{width:145px;}
+ .cssv-trees-home-partner-x{font-size:24px;}
+ .cssv-trees-home-eyebrow{font-size:8px;line-height:1.6;letter-spacing:.11em;}
+ .cssv-trees-home-heading{font-size:clamp(35px,9vw,48px);}
+ .cssv-trees-home-description{font-size:12px;line-height:1.78;}
+ .cssv-trees-home-link{margin-top:22px;width:100%;justify-content:center;font-size:11px;}
+ .cssv-trees-home-map{opacity:.12;right:-14%;width:48%;top:20%;bottom:0;justify-content:flex-end;}
+ .cssv-trees-home-map>span{display:none;}
+}
+@media(max-width:370px){
+ .cssv-trees-home-content{padding:23px 18px;}
+ .cssv-trees-home-logo-wrap{width:48px;height:49px;}
+ .cssv-trees-home-logo-vista{width:122px;}
+ .cssv-trees-home-heading{font-size:33px;}
+}
+@media(prefers-reduced-motion:reduce){
+ .cssv-trees-home-feature,.cssv-trees-home-photo,.cssv-trees-home-link{transition:none!important;transform:none!important;}
+}
