@@ -28,6 +28,11 @@ for($n=1;$n<=6;$n++){
     imagejpeg($image,$folder.'/photo'.$n.'.jpg',65);
     imagedestroy($image);
 }
+// Embed a synthetic EXIF APP1 segment to verify the server strips metadata.
+$raw=file_get_contents($folder.'/photo6.jpg');
+$exif="Exif".chr(0).chr(0)."CI_PRIVATE_LOCATION_SENTINEL";
+$marker=chr(255).chr(225).pack('n',strlen($exif)+2).$exif;
+file_put_contents($folder.'/metadata.jpg',substr($raw,0,2).$marker.substr($raw,2));
 file_put_contents($folder.'/admin-session.json',json_encode([
     'cookie'=>CSSV_ADMIN_SESSION_COOKIE.'='.$token.'; '.CSSV_ADMIN_CSRF_COOKIE.'='.$csrf,
     'csrf'=>$csrf
