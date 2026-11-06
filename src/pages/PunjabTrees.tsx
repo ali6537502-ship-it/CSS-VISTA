@@ -7,7 +7,7 @@ import './punjabTrees.css'
 
 type Species = { name: string, scientific: string, category: string }
 type Member = { id: string, name: string, city: string, has_photo: boolean, public_name: boolean, joined_at: string }
-type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string }
+type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string, duplicate_risk?: number, field_checked?: number, field_visit_date?: string }
 type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[], public_gallery: { id: string,city: string,species: string,method: string,quantity: number,planted_on: string }[] }
 type Tab = 'overview' | 'contribute' | 'leaderboard' | 'account' | 'review'
 const EMPTY: Summary = { trees: 0, seeds: 0, contributors: 0, cities: 0, pending_reports: 0, target: 100000000, city_totals: [], leaderboard: [], public_gallery: [] }
@@ -371,17 +371,82 @@ function Contribute({ member, csrf, species, onDone, onAccount }: { member: Memb
     {error&&<p className="trees-error">{error}</p>}{success&&<p className="trees-success"><CheckCircle2 size={18}/>{success}</p>}<button disabled={busy||!selected} className="trees-btn-main trees-submit" type="submit">{busy?'Compressing and sending…':'Submit planting for review'}<ArrowRight size={18}/></button></form>
   </section>
 }
-function Review({ csrf }: { csrf: string }) {
-  const [rows,setRows]=useState<Report[]>([]),[err,setErr]=useState(''),[busy,setBusy]=useState('')
-  useEffect(()=>{getApi('queue').then(x=>setRows(x.reports)).catch(e=>setErr(e instanceof Error?e.message:'Access denied.'))},[])
-  async function decision(id:string,status:'approved'|'rejected'){setBusy(id);setErr('');try{await postApi('review',{id,decision:status,note:status==='approved'?'Evidence manually reviewed and approved.':'Evidence insufficient or unverifiable.'},csrf);setRows(old=>old.filter(x=>x.id!==id))}catch(e){setErr(e instanceof Error?e.message:'Review failed.')}finally{setBusy('')}}
-  return <section className="trees-panel"><span className="trees-kicker">PRIVATE MODERATION DESK</span><h1>Review planting submissions</h1><p className="trees-muted">Only administrators with an active two-factor session can view or approve planting evidence.</p>{err&&<p className="trees-error">{err}</p>}{rows.map(r=><div className="trees-admin-item" key={r.id}><img src={API+'photo&kind=proof&id='+encodeURIComponent(r.id)} alt={'Evidence for '+r.city}/><div><div className="trees-admin-identity">{r.member_id&&<img src={API+'photo&kind=avatar&id='+encodeURIComponent(r.member_id)} alt="Private registered participant photograph"/>}<h3>{r.full_name} · {r.city}</h3></div><p>{r.species} · {r.quantity} {typeLabel(r.method)} · {r.locality}</p><small>{r.planted_on}</small><div className="trees-admin-buttons"><button disabled={busy===r.id} type="button" onClick={()=>decision(r.id,'approved')}><CheckCircle2 size={16}/> Approve</button><button disabled={busy===r.id} type="button" onClick={()=>decision(r.id,'rejected')}><X size={16}/> Reject</button></div></div></div>)}{!rows.length&&!err&&<div className="trees-empty compact">No pending reports in the moderation queue.</div>}</section>
+function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
+  const [rows,setRows]=useState<Report[]>([])
+  const [approved,setApproved]=useState<Report[]>([])
+  const [err,setErr]=useState('')
+  const [busy,setBusy]=useState('')
+  const [note,setNote]=useState<Record<string,string>>({})
+  const [confirmed,setConfirmed]=useState<Record<string,boolean>>({})
+  const [fieldChecked,setFieldChecked]=useState<Record<string,boolean>>({})
+  const [fieldDate,setFieldDate]=useState<Record<string,string>>({})
+
+  async function reload() {
+    try {
+      const [pending,old]=await Promise.all([getApi('queue'),getApi('approved-reports')])
+      setRows(pending.reports);setApproved(old.reports)
+    } catch(e) {setErr(e instanceof Error?e.message:'Access denied.')}
+  }
+  useEffect(()=>{void reload()},[])
+  async function decision(report:Report, status:'approved'|'rejected'|'revoked') {
+    const text=(note[report.id]||'').trim()
+    if(text.length<10) {setErr('Write a specific review note of at least 10 characters.');return}
+    if(!confirmed[report.id]) {setErr('Confirm that you personally examined the evidence.');return}
+    const highRisk = Number(report.quantity)>5 || Number(report.duplicate_risk)===1
+    if(status==='approved'&&highRisk&&(!fieldChecked[report.id]||!fieldDate[report.id])){
+      setErr('A large or duplicate-looking report needs a documented physical inspection date before approval.')
+      return
+    }
+    setBusy(report.id);setErr('')
+    try {
+      await postApi('review',{id:report.id,decision:status,note:text,field_checked:status==='approved'&&!!fieldChecked[report.id],field_visit_date:fieldDate[report.id]||''},csrf)
+      await reload()
+      refresh()
+    } catch(e){setErr(e instanceof Error?e.message:'Review failed.')}
+    finally{setBusy('')}
+  }
+  function item(r:Report, isApproved=false) {
+    const highRisk=Number(r.quantity)>5||Number(r.duplicate_risk)===1
+    return <div className="trees-admin-item" key={r.id}>
+      <div className="trees-admin-photo"><img src={API+'photo&kind=proof&id='+encodeURIComponent(r.id)} alt={'Private evidence for planting in '+r.city}/></div>
+      <div className="trees-admin-details">
+        <div className="trees-admin-identity">{r.member_id&&<img src={API+'photo&kind=avatar&id='+encodeURIComponent(r.member_id)} alt="Private participant photograph"/>}<h3>{r.full_name} · {r.city}</h3></div>
+        <p>{r.species} · {r.quantity} {typeLabel(r.method)} · {r.locality}</p>
+        <small>Planting date: {r.planted_on}</small>
+        {highRisk&&<div className="trees-admin-risk"><ShieldCheck size={16}/> {Number(r.duplicate_risk)===1?'Possible duplicate photographic evidence. ':''}{r.quantity>5?'Large quantity: site verification required.':''}</div>}
+        {isApproved&&<p className="trees-muted">{Number(r.field_checked)===1?'Site visit recorded on '+r.field_visit_date:'Photograph review only; survival not verified'}</p>}
+        <label className="trees-review-field">Reviewer findings
+          <textarea value={note[r.id]||''} onChange={e=>setNote(old=>({...old,[r.id]:e.target.value}))} maxLength={400} rows={2} placeholder="Describe visible evidence, species, count, and any concern..."/>
+        </label>
+        <label className="trees-check"><input type="checkbox" checked={!!confirmed[r.id]} onChange={e=>setConfirmed(old=>({...old,[r.id]:e.target.checked}))}/><span>I personally examined the submitted photographic evidence and reviewed the claim.</span></label>
+        {!isApproved&&highRisk&&<div className="trees-admin-field-check">
+          <label className="trees-check"><input type="checkbox" checked={!!fieldChecked[r.id]} onChange={e=>setFieldChecked(old=>({...old,[r.id]:e.target.checked}))}/><span>I confirm that an actual visit or independently documented physical inspection of this planting site was completed.</span></label>
+          <label>Physical inspection date<input type="date" max={new Date().toISOString().slice(0,10)} min={r.planted_on} value={fieldDate[r.id]||''} onChange={e=>setFieldDate(old=>({...old,[r.id]:e.target.value}))}/></label>
+        </div>}
+        <div className="trees-admin-buttons">
+          {!isApproved&&<><button disabled={busy===r.id} type="button" onClick={()=>decision(r,'approved')}><CheckCircle2 size={16}/> Approve reviewed claim</button><button disabled={busy===r.id} type="button" onClick={()=>decision(r,'rejected')}><X size={16}/> Reject</button></>}
+          {isApproved&&<button disabled={busy===r.id} className="trees-revoke" type="button" onClick={()=>decision(r,'revoked')}><X size={16}/> Revoke approval if fraudulent</button>}
+        </div>
+      </div>
+    </div>
+  }
+  return <section className="trees-panel">
+    <span className="trees-kicker">PRIVATE MODERATION DESK</span><h1>Review planting submissions</h1>
+    <p className="trees-muted">Protected by the existing administrator's MFA. Every approval, rejection or revocation is recorded in an audit trail. A photo review is not the same as independently verified survival.</p>
+    {err&&<p className="trees-error">{err}</p>}
+    <div className="trees-profile-title"><h2>Pending review</h2><span>{rows.length} reports</span></div>
+    {rows.length?rows.map(r=>item(r)):<div className="trees-empty compact">No pending reports.</div>}
+    <div className="trees-profile-title"><h2>Previously approved reports</h2><span>Recent 100</span></div>
+    <p className="trees-muted">If subsequent evidence shows a claim is false, revoke it here. This immediately removes the quantity from the public totals.</p>
+    {approved.length?approved.map(r=>item(r,true)):<div className="trees-empty compact">No previously approved reports.</div>}
+  </section>
 }
+
 export default function PunjabTrees() {
   const [tab,setTab]=useState<Tab>('overview'),[summary,setSummary]=useState<Summary>(EMPTY),[species,setSpecies]=useState<Record<string,Species>>({}),[member,setMember]=useState<Member|null>(null),[csrf,setCsrf]=useState(''),[adminCsrf,setAdminCsrf]=useState(''),[error,setError]=useState(''),[isAdmin,setIsAdmin]=useState(false),[mobileNav,setMobileNav]=useState(false)
   const refresh=()=>getApi('summary').then(d=>setSummary(d)).catch(e=>setError(e instanceof Error?e.message:'Unable to load live progress.'))
   useEffect(()=>{refresh();getApi('catalog').then(d=>setSpecies(d.species)).catch(()=>{});getApi('session').then(d=>{setMember(d.member);setCsrf(d.csrf_token||'')}).catch(()=>{});fetch('/api/admin-auth/session.php',{credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(d=>{if(d?.authenticated){setIsAdmin(true);setAdminCsrf(d.csrf_token||'')}}).catch(()=>{})},[])
-  const select=(next:Tab)=>{setTab(next);setMobileNav(false);window.scrollTo({top:0,behavior:'smooth'})}
+  const select=(next:Tab)=>{setTab(next);setMobileNav(false);if(next==='overview'||next==='leaderboard')void refresh();window.scrollTo({top:0,behavior:'smooth'})}
   async function logout(){try{await postApi('logout',{},csrf);setMember(null);setCsrf('');select('overview')}catch(e){setError(e instanceof Error?e.message:'Could not sign out.')}}
   return <main className="trees-root">
     <div className="trees-topline"><div className="trees-shell"><span><Leaf size={13}/> 100 MILLION TREES FOR PUNJAB</span><span>ISARUL IBAAD FOUNDATION <span className="trees-topline-x">×</span> CSS VISTA</span></div></div>
@@ -392,7 +457,7 @@ export default function PunjabTrees() {
       {tab==='leaderboard'&&<Leaderboard summary={summary}/>}
       {tab==='account'&&<Account member={member} csrf={csrf} onSigned={(m,token)=>{setMember(m);setCsrf(token)}} onLogout={logout} onLockedOut={()=>{setMember(null);setCsrf('')}}/>}
       {tab==='contribute'&&<Contribute member={member} csrf={csrf} species={species} onDone={refresh} onAccount={()=>select('account')}/>}
-      {tab==='review'&&<Review csrf={adminCsrf}/>}
+      {tab==='review'&&<Review csrf={adminCsrf} refresh={()=>{void refresh()}}/>}
     </div>
     <footer className="trees-footer"><div className="trees-shell"><div><Brand/><p>Growing a greener Punjab, one verified contribution at a time.</p></div><div><span>Transparency</span><p>Saplings and seeds are counted separately. Approved does not mean independently certified survival.</p></div><div><a href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer">Foundation website <ArrowRight size={13}/></a><Link to="/privacy-policy">CSS Vista Privacy Policy <ArrowRight size={13}/></Link><Link to="/">Return to CSS Vista <ArrowRight size={13}/></Link></div></div></footer>
   </main>
