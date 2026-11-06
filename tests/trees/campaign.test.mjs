@@ -99,7 +99,12 @@ test('private data and owner decisions stay separated from public data',()=>{
   assert.match(api,/public_photo=1/)
   assert.match(api,/cssv_require_separate_admin/)
   assert.match(ui,/ISARUL IBAAD FOUNDATION/)
-  assert.match(ui,/No SMS OTP or payment required/)
+  assert.match(ui,/No OTP, payment, or profile photo required/)
+  assert.match(api,/email_verification_required/)
+  assert.doesNotMatch(api,/avatar_required/)
+  assert.match(ui,/Optional profile photograph/)
+  assert.match(ui,/Confirm your email to begin planting/)
+  assert.match(policies,/Profile photographs are optional/)
 })
 
 test('email is unique and recovery links require confirmed address without OTP',()=>{
