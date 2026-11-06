@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight, BadgeCheck, Camera, CheckCircle2, ChevronRight, CircleHelp, CloudUpload, Eye, Globe2, HandHeart, Heart, Leaf, LogIn, LogOut, MapPin, Menu, ShieldCheck, Sprout, TreeDeciduous, Trophy, UserRound, X } from 'lucide-react'
+import { ArrowRight, BadgeCheck, Camera, CheckCircle2, ChevronRight, CircleHelp, CloudUpload, Globe2, Heart, Leaf, LogIn, LogOut, MapPin, Menu, ShieldCheck, Sprout, TreeDeciduous, Trophy, UserRound, X } from 'lucide-react'
 import { compressImage, MAX_INPUT_BYTES } from '@/lib/photoCompression'
 import { PUNJAB_MAP, projectPunjab } from '@/data/punjabTreeMap'
 import './punjabTrees.css'
@@ -8,9 +8,9 @@ import './punjabTrees.css'
 type Species = { name: string, scientific: string, category: string }
 type Member = { name: string, city: string, has_photo: boolean, public_name: boolean, joined_at: string }
 type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string }
-type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[] }
+type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[], public_gallery: { id: string,city: string,species: string,method: string,quantity: number,planted_on: string }[] }
 type Tab = 'overview' | 'contribute' | 'leaderboard' | 'account' | 'review'
-const EMPTY: Summary = { trees: 0, seeds: 0, contributors: 0, cities: 0, pending_reports: 0, target: 100000000, city_totals: [], leaderboard: [] }
+const EMPTY: Summary = { trees: 0, seeds: 0, contributors: 0, cities: 0, pending_reports: 0, target: 100000000, city_totals: [], leaderboard: [], public_gallery: [] }
 const API = '/api/trees/index.php?action='
 const CITIES: [string, number, number][] = [
   ['Lahore', 74.3587, 31.5204], ['Faisalabad', 73.0851, 31.4504], ['Rawalpindi', 73.0479, 33.5651],
@@ -62,7 +62,20 @@ async function postApi(action: string, body: Record<string, unknown> | FormData,
 }
 async function compressPhoto(file: File, kb: number) {
   if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > MAX_INPUT_BYTES) throw new Error('Choose a JPG, PNG, or WebP photo smaller than 20 MB.')
-  const result = await compressImage(file, kb)
+  // Re-encode every image first, including already-small JPEGs, to strip
+  // camera metadata (especially GPS EXIF). The private original never uploads.
+  const bitmap = await createImageBitmap(file)
+  const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height))
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.max(1, Math.round(bitmap.width * scale))
+  canvas.height = Math.max(1, Math.round(bitmap.height * scale))
+  const context = canvas.getContext('2d', { alpha: false })
+  if (!context) { bitmap.close(); throw new Error('Your browser cannot process this photo.') }
+  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height)
+  bitmap.close()
+  const sanitized = await new Promise<Blob>((resolve,reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('Could not process the photo.')), 'image/jpeg', .92))
+  const safeFile = new File([sanitized], 'metadata-free.jpg', { type: 'image/jpeg' })
+  const result = await compressImage(safeFile, kb)
   if (result.blob.size > kb * 1024) throw new Error('Photo is too large after compression.')
   return new File([result.blob], 'planting-photo.jpg', { type: 'image/jpeg' })
 }
@@ -125,6 +138,9 @@ function Overview({ summary, onContribute, onRankings }: { summary: Summary, onC
       <div className="trees-stat-grid"><div className="trees-stat"><TreeDeciduous/><span>Verified saplings</span><strong>{fmt(summary.trees)}</strong></div><div className="trees-stat"><Sprout/><span>Seeds sown (separate)</span><strong>{fmt(summary.seeds)}</strong></div><div className="trees-stat"><Heart/><span>Contributors</span><strong>{fmt(summary.contributors)}</strong></div><div className="trees-stat"><MapPin/><span>Participating cities</span><strong>{fmt(summary.cities)}</strong></div></div>
     </section>
     <PunjabMap summary={summary}/>
+    <section className="trees-gallery-section"><div className="trees-section-head"><div><span className="trees-kicker">FROM OUR COMMUNITY</span><h2>Plantings, documented.</h2></div><span className="trees-light-tag">Shared with participants' consent</span></div>
+      {summary.public_gallery.length ? <div className="trees-gallery-grid">{summary.public_gallery.map(item=><article className="trees-gallery-card" key={item.id}><img src={API + 'photo&kind=proof&id=' + encodeURIComponent(item.id)} loading="lazy" alt={'Verified planting report in ' + item.city}/><div><strong>{item.city}</strong><span>{item.quantity} {item.method === 'sapling' ? 'saplings' : 'seeds'} · {item.species}</span></div></article>)}</div> : <div className="trees-gallery-empty"><Camera size={25}/><div><strong>Our planting gallery is getting ready.</strong><p>Approved photos will appear here only when participants choose to share them.</p></div></div>}
+    </section>
     <section className="trees-how"><div className="trees-section-head"><div><span className="trees-kicker">HOW TO PARTICIPATE</span><h2>Four simple steps. A lasting impact.</h2></div></div><div className="trees-how-grid">
       {[['01','Create your campaign account','Register with your name, mobile number, CNIC and Punjab city.','user'],['02','Choose a species','Select an appropriate nursery sapling or a seed from the planting catalogue.','leaf'],['03','Plant and upload proof','Share your planting date, location and a photo—compressed automatically.','camera'],['04','Get your record reviewed','Approved saplings appear in verified counts and on the leaderboard.','check']].map(([n,t,d,kind])=><div className="trees-how-card" key={n}><span className="trees-step-n">{n}</span><span className="trees-how-icon">{kind==='user'?<UserRound/>:kind==='leaf'?<Leaf/>:kind==='camera'?<Camera/>:<BadgeCheck/>}</span><h3>{t}</h3><p>{d}</p></div>)}
     </div></section>
