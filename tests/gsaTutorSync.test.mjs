@@ -83,3 +83,19 @@ test('newer incorrectly answered question can reopen a prior resolved question',
  assert.equal(merge(older,newer)[key].questionReview['Q-1'].unresolved,true);
  assert.equal(merge(newer,older)[key].questionReview['Q-1'].unresolved,true);
 });
+
+test('later dated recall wins and separate recall attempt histories survive device merges', () => {
+ const cloud = {[key]:{
+   reviewDue:{A:{at:t0,date:'2026-11-10',stage:1}},
+   recallAttempts:{one:{at:t0,lessonId:'A',selfRating:'gotit'}}
+ }};
+ const local = {[key]:{
+   reviewDue:{A:{at:t2,date:'2026-11-17',stage:2}},
+   recallAttempts:{two:{at:t2,lessonId:'A',selfRating:'gotit'}}
+ }};
+ for(const merged of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+   assert.equal(merged.reviewDue.A.date,'2026-11-17');
+   assert.equal(merged.reviewDue.A.stage,2);
+   assert.deepEqual(Object.keys(merged.recallAttempts).sort(),['one','two']);
+ }
+});
