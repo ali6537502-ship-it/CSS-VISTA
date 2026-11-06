@@ -32,6 +32,8 @@ const countMissedQuestions=()=>Object.values(saved.questionReview||{}).filter(v=
 const countReview=()=>Object.keys(saved.revisit||{}).filter(id=>byId.has(id)).length;
 const nwords=s=>String(s||'').trim().split(/\s+/).filter(Boolean).length;
 function weights(s){return Math.max(100,s.words||100)}
+// Planning heuristic, not measured human learning time: manuscript reading at 150 wpm plus 6 minutes per recall/check.
+function estimatedMinutes(s){return Math.ceil(weights(s)/150+6)}
 function validPlan(p){
  const date=typeof p?.startDate==='string'?new Date(p.startDate+'T12:00:00Z'):new Date(NaN);
  return !!(p&&Number.isInteger(p.days)&&p.days>=5&&p.days<=120&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===p.startDate&&
@@ -52,15 +54,15 @@ function dueReviews(){
 }
 function countDueReviews(){return dueReviews().filter(r=>r.date<=now()).length}
 function schedule(plan){
- const res=Array.from({length:plan.days},()=>[]);const sum=lessons.reduce((n,s)=>n+weights(s),0);
+ const res=Array.from({length:plan.days},()=>[]);const sum=lessons.reduce((n,s)=>n+estimatedMinutes(s),0);
  let cursor=0,used=0;
  for(let d=0;d<plan.days;d++){
    const remaining=plan.days-d, target=(sum-used)/remaining, cap=lessons.length-(remaining-1);
    let load=0;
-   while(cursor<cap&&(res[d].length===0||d===plan.days-1||load+weights(lessons[cursor])/2<=target)){res[d].push(lessons[cursor].id);load+=weights(lessons[cursor]);cursor++}
+   while(cursor<cap&&(res[d].length===0||d===plan.days-1||load+estimatedMinutes(lessons[cursor])/2<=target)){res[d].push(lessons[cursor].id);load+=estimatedMinutes(lessons[cursor]);cursor++}
    used+=load;
  }
- const studyDays=res.map((ids,i)=>({date:studyDate(plan,i),day:i+1,ids,words:ids.reduce((n,id)=>n+weights(byId.get(id)),0),done:ids.filter(isDone).length,reviews:[]}));
+ const studyDays=res.map((ids,i)=>({date:studyDate(plan,i),day:i+1,ids,words:ids.reduce((n,id)=>n+weights(byId.get(id)),0),estimatedMinutes:ids.reduce((n,id)=>n+estimatedMinutes(byId.get(id)),0),done:ids.filter(isDone).length,reviews:[]}));
  for(const item of dueReviews()){
    const slot=studyDays.find(d=>d.date>=item.date);
    if(slot)slot.reviews.push(item.id);
@@ -79,7 +81,8 @@ function setup(){
  const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
  const restControls=dayNames.map((name,i)=>'<label class="rest-toggle"><input type="checkbox" data-rest-day="'+i+'" '+(rest.has(i)?'checked':'')+'><span>'+name+'</span></label>').join('');
  const totalWords=lessons.reduce((n,s)=>n+weights(s),0);
- return '<section class="page"><div class="hero"><div><p class="eyebrow">Your preparation, your timetable</p><h1>Choose how much time you have.</h1><p class="subtitle">All 28 chapters and 141 lessons remain in every plan. Choose active study days and days off; revisions are scheduled separately from new reading.</p></div></div><div class="panel"><p class="eyebrow">Active study sessions</p><div class="duration-grid">'+[8,14,20,30,45,60].map(n=>'<button class="duration '+(n===days?'active':'')+'" data-days="'+n+'"><strong>'+n+'</strong><span>days</span></button>').join('')+'</div><div class="fields"><label>Other duration (5–120 study days)<input type="number" id="custom-days" min="5" max="120" value="'+days+'"></label><label>Start date<input type="date" id="start-date" value="'+safe(date)+'"></label><label>Daily time available (minutes)<input type="number" id="daily-minutes" min="15" max="600" step="15" value="'+ui.setupDailyMinutes+'"></label></div><fieldset class="rest-field"><legend>Weekly rest days</legend><div class="rest-options">'+restControls+'</div></fieldset><p class="notice">'+Math.floor(lessons.length/days)+'–'+Math.ceil(lessons.length/days+2)+' lessons on most active days. '+Math.round(totalWords/days).toLocaleString()+' manuscript words per study day on average, excluding tests and recall. Your time budget is a planning preference; course completion time is not scientifically measured.</p><button class="btn primary" data-action="saveplan">Create my course</button></div></section>';
+ const estimate=Math.round(lessons.reduce((n,s)=>n+estimatedMinutes(s),0)/days);
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">Your preparation, your timetable</p><h1>Choose how much time you have.</h1><p class="subtitle">All 28 chapters and 141 lessons remain in every plan. Choose active study days and days off; revisions are scheduled separately from new reading.</p></div></div><div class="panel"><p class="eyebrow">Active study sessions</p><div class="duration-grid">'+[8,14,20,30,45,60].map(n=>'<button class="duration '+(n===days?'active':'')+'" data-days="'+n+'"><strong>'+n+'</strong><span>days</span></button>').join('')+'</div><div class="fields"><label>Other duration (5–120 study days)<input type="number" id="custom-days" min="5" max="120" value="'+days+'"></label><label>Start date<input type="date" id="start-date" value="'+safe(date)+'"></label><label>Daily time available (minutes)<input type="number" id="daily-minutes" min="15" max="600" step="15" value="'+ui.setupDailyMinutes+'"></label></div><fieldset class="rest-field"><legend>Weekly rest days</legend><div class="rest-options">'+restControls+'</div></fieldset><p class="notice">'+Math.floor(lessons.length/days)+'–'+Math.ceil(lessons.length/days+2)+' lessons on most active days. '+Math.round(totalWords/days).toLocaleString()+' manuscript words per study day on average, excluding tests and recall. Provisional workload: about '+estimate+' minutes per study day versus '+ui.setupDailyMinutes+' available, before scheduled reviews. This heuristic is not a measured study duration.</p><button class="btn primary" data-action="saveplan">Create my course</button></div></section>';
 }
 function course(){
  if(!savedPlan())return setup();
@@ -89,11 +92,12 @@ function course(){
  const due=dueReviews().filter(x=>x.date<=now());
  const reviewBanner=due.length?'<div class="panel"><div class="spread"><div><p class="eyebrow">Spaced recall</p><h2>'+due.length+' review'+(due.length===1?'':'s')+' due</h2><p class="muted">Review these topics before proceeding; your earlier work is saved.</p></div><button class="btn primary" data-view="review">Open revision</button></div></div>':'';
  const rest=(saved.plan.restDays||[]).length?['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].filter((_,i)=>saved.plan.restDays.includes(i)).join(', '):'none';
- const paceNote='<p class="tiny muted">Time available: '+(saved.plan.dailyMinutes||90)+' minutes per active study day · Weekly rest: '+rest+'. The time budget is a preference, not a measured promise of completion.</p>';
+ const overBudget=days.filter(d=>d.estimatedMinutes+5*d.reviews.length>(saved.plan.dailyMinutes||90)).length;
+ const paceNote='<p class="tiny muted">Time available: '+(saved.plan.dailyMinutes||90)+' minutes per active study day · Weekly rest: '+rest+'. Planning estimate: source reading at 150 words/minute plus six minutes per lesson and five minutes per scheduled review. Times vary by learner and topic.</p>'+(overBudget?'<p class="notice warn">'+overBudget+' study day(s) have an estimated workload exceeding your stated time. Increase the course duration or daily availability if needed.</p>':'');
  const dayRows=visibleDays.map(d=>{
    const entries=d.ids.map(id=>{const sec=byId.get(id);return '<button class="day-lesson '+(isDone(id)?'done':'')+'" data-lesson="'+safe(id)+'"><span>'+(isDone(id)?'✓':'○')+' '+safe(sec.number)+' · '+safe(sec.title)+'</span><small>'+sec.words+' words</small></button>'}).join('');
    const revisions=d.reviews.length?'<div class="scheduled-review"><strong>Spaced recall</strong>'+d.reviews.map(id=>'<button class="day-lesson" data-lesson="'+safe(id)+'">↻ '+safe(byId.get(id)?.title||'Lesson')+'</button>').join('')+'</div>':'';
-   return '<details class="day" '+(d.day===target.day?'open':'')+'><summary><b>Day '+d.day+'</b><span><strong>'+dateLabel(d.date)+(d.done===d.ids.length?' · Studied':d.date<now()?' · Catch up':d.date===now()?' · Today':'')+'</strong><em>'+d.done+'/'+d.ids.length+' studied · '+d.words.toLocaleString()+' source words · '+d.reviews.length+' recall</em></span></summary><div class="day-lessons">'+entries+revisions+'</div></details>';
+   return '<details class="day" '+(d.day===target.day?'open':'')+'><summary><b>Day '+d.day+'</b><span><strong>'+dateLabel(d.date)+(d.done===d.ids.length?' · Studied':d.date<now()?' · Catch up':d.date===now()?' · Today':'')+'</strong><em>'+d.done+'/'+d.ids.length+' studied · '+d.words.toLocaleString()+' source words · ~'+(d.estimatedMinutes+5*d.reviews.length)+' min · '+d.reviews.length+' recalls</em></span></summary><div class="day-lessons">'+entries+revisions+'</div></details>';
  }).join('');
  return '<section class="page"><div class="hero"><div><p class="eyebrow">General Science · Part I · 60 marks</p><h1>Your '+saved.plan.days+'-study-day programme</h1><p class="subtitle">Work through the explanations, practise source questions, and return to concepts when scheduled. Off-days are excluded from the calendar.</p></div><button class="btn" data-action="editplan">Change plan</button></div><div class="panel accent">'+pillProgress()+'</div>'+reviewBanner+'<div class="panel"><div class="spread"><div><p class="eyebrow">'+(target?.date===now()?'Today’s session':'Continue from here')+'</p><h2>Day '+target.day+' · '+dateLabel(target.date)+'</h2><p class="muted">'+target.done+' of '+target.ids.length+' lessons studied · '+target.words.toLocaleString()+' source words assigned</p></div><button class="btn primary" data-lesson="'+safe(first)+'">Continue learning</button></div></div><div class="spread"><h2 style="margin:10px 0">Daily timetable</h2><small class="muted">Expand a day to see lessons and spaced recall</small></div><div class="plan-grid">'+dayRows+'</div>'+(ui.showAllDays?'<button class="btn" data-action="expandplan">Show current week</button>':days.length>visibleDays.length?'<button class="btn" data-action="expandplan">Show all '+days.length+' study days</button>':'')+paceNote+'<p class="tiny muted">Rescheduling preserves studied lessons and earlier recall records. The manuscript content does not change when the number of days changes.</p></section>';
 }
