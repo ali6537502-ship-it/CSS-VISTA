@@ -7,10 +7,11 @@ import './punjabTrees.css'
 
 type Species = { name: string, scientific: string, category: string }
 type Member = { id: string, name: string, city: string, has_photo: boolean, public_name: boolean, joined_at: string }
+type Followup = { id: string, planting_id: string, phase: number, surviving: number, status: string, review_note: string|null, full_name?: string, species?: string, city?: string, planted_quantity?: number, locality?: string }
 type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string, duplicate_risk?: number, field_checked?: number, field_visit_date?: string }
-type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[], public_gallery: { id: string,city: string,species: string,method: string,quantity: number,planted_on: string }[] }
+type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, survival_checks: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[], public_gallery: { id: string,city: string,species: string,method: string,quantity: number,planted_on: string }[] }
 type Tab = 'overview' | 'contribute' | 'leaderboard' | 'account' | 'review'
-const EMPTY: Summary = { trees: 0, seeds: 0, contributors: 0, cities: 0, pending_reports: 0, target: 100000000, city_totals: [], leaderboard: [], public_gallery: [] }
+const EMPTY: Summary = { trees: 0, seeds: 0, contributors: 0, cities: 0, pending_reports: 0, survival_checks: 0, target: 100000000, city_totals: [], leaderboard: [], public_gallery: [] }
 const API = '/api/trees/index.php?action='
 const CITIES: [string, number, number][] = [
   ['Lahore', 74.3587, 31.5204], ['Faisalabad', 73.0851, 31.4504], ['Rawalpindi', 73.0479, 33.5651],
@@ -140,6 +141,7 @@ function Overview({ summary, onContribute, onRankings }: { summary: Summary, onC
     <section className="trees-progress-section"><div className="trees-progress-copy"><span className="trees-kicker">THE COLLECTIVE MISSION</span><h2>Our progress, transparently tracked.</h2></div><div className="trees-progress-top"><b>{fmt(summary.trees)}</b><span>of {fmt(summary.target)} saplings</span></div><div className="trees-progress-track"><span style={{width: pct + '%'}} /></div><div className="trees-progress-bottom"><span>{pct.toFixed(5)}% of target</span><span>{fmt(Math.max(0,summary.target-summary.trees))} still to plant</span></div>
       <div className="trees-stat-grid"><div className="trees-stat"><TreeDeciduous/><span>Approved saplings</span><strong>{fmt(summary.trees)}</strong></div><div className="trees-stat"><Sprout/><span>Seeds sown (separate)</span><strong>{fmt(summary.seeds)}</strong></div><div className="trees-stat"><Heart/><span>Contributors</span><strong>{fmt(summary.contributors)}</strong></div><div className="trees-stat"><MapPin/><span>Participating cities</span><strong>{fmt(summary.cities)}</strong></div></div>
     </section>
+    <div className="trees-followup-stat"><ShieldCheck size={18}/><span><strong>{fmt(summary.survival_checks)}</strong> follow-up observations approved at 30, 90 or 180 days. These are separate from the planting total and are not independent proof of long-term survival.</span></div>
     <PunjabMap summary={summary}/>
     <section className="trees-gallery-section"><div className="trees-section-head"><div><span className="trees-kicker">FROM OUR COMMUNITY</span><h2>Plantings, documented.</h2></div><span className="trees-light-tag">Shared with participants' consent</span></div>
       {summary.public_gallery.length ? <div className="trees-gallery-grid">{summary.public_gallery.map(item=><article className="trees-gallery-card" key={item.id}><img src={API + 'photo&kind=proof&id=' + encodeURIComponent(item.id)} loading="lazy" alt={'Verified planting report in ' + item.city}/><div><strong>{item.city}</strong><span>{item.quantity} {item.method === 'sapling' ? 'saplings' : 'seeds'} · {item.species}</span></div></article>)}</div> : <div className="trees-gallery-empty"><Camera size={25}/><div><strong>Our planting gallery is getting ready.</strong><p>Approved photos will appear here only when participants choose to share them.</p></div></div>}
@@ -180,6 +182,52 @@ function RecoveryKeyPanel({ recoveryKey, onDismiss }: { recoveryKey: string, onD
     <p className="trees-recovery-hint">Never share this key, even with campaign moderators. Losing both your password and recovery key requires manual account-ownership review.</p>
   </div>
 }
+function SurvivalCheckForm({ reports, followups, csrf, onSaved }: {
+  reports: Report[], followups: Followup[], csrf: string, onSaved: () => void
+}) {
+  const options = reports.filter(r=>r.status==='approved'&&r.method==='sapling').flatMap(r=>
+    [30,90,180].filter(phase=>{
+      const due=new Date(r.planted_on+'T00:00:00Z').getTime()+phase*86400000
+      return due<=Date.now() && !followups.some(f=>f.planting_id===r.id&&Number(f.phase)===phase)
+    }).map(phase=>({value:r.id+':'+phase,label:r.species+' · '+r.city+' · '+phase+'-day check',max:Number(r.quantity)}))
+  )
+  const [selection,setSelection]=useState('')
+  const [count,setCount]=useState(0)
+  const [photo,setPhoto]=useState<File|null>(null)
+  const [busy,setBusy]=useState(false)
+  const [message,setMessage]=useState('')
+  const [error,setError]=useState('')
+  async function submit(e:FormEvent) {
+    e.preventDefault()
+    if(!selection||!photo){setError('Choose an eligible planting and a fresh photograph.');return}
+    const selected=options.find(x=>x.value===selection)
+    if(!selected||count<0||count>selected.max){setError('Surviving quantity exceeds the original approved count.');return}
+    setBusy(true);setError('');setMessage('')
+    try {
+      const compressed=await compressPhoto(photo,70)
+      const [plantingId,phase]=selection.split(':')
+      const fd=new FormData()
+      fd.append('planting_id',plantingId);fd.append('phase',phase)
+      fd.append('surviving',String(count));fd.append('photo',compressed)
+      await postApi('followup',fd,csrf)
+      setMessage('Survival observation submitted. It will appear after moderator review.')
+      setSelection('');setCount(0);setPhoto(null)
+      onSaved()
+    } catch(e){setError(e instanceof Error?e.message:'Could not submit follow-up.')}
+    finally{setBusy(false)}
+  }
+  return <div className="trees-survival-card"><span className="trees-kicker">KEEP YOUR TREES ALIVE</span><h2>30 · 90 · 180-day follow-ups</h2><p className="trees-muted">As your saplings grow, return with a fresh photograph and record how many are still alive. All observations are reviewed separately from planting totals.</p>
+    {options.length?<form onSubmit={submit} className="trees-survival-form">
+      <label>Eligible planting milestone<select required value={selection} onChange={e=>{setSelection(e.target.value);setCount(0)}}><option value="">Select a due follow-up</option>{options.slice(0,80).map(x=><option value={x.value} key={x.value}>{x.label}</option>)}</select></label>
+      <label>Number still alive<input required type="number" min="0" max={options.find(x=>x.value===selection)?.max||0} value={count} onChange={e=>setCount(Number(e.target.value))}/></label>
+      <label>New planting-site photo<input required type="file" accept="image/jpeg,image/png,image/webp" onChange={e=>setPhoto(e.target.files?.[0]||null)}/><small>Automatically compressed to 70 KB, original is not uploaded</small></label>
+      <button disabled={busy||!selection||!photo} className="trees-btn-main" type="submit">{busy?'Compressing…':'Submit survival update'}<ArrowRight size={16}/></button>
+    </form>:<p className="trees-survival-empty">No follow-up milestones are due yet. Milestones open 30, 90 and 180 days after the original planting date.</p>}
+    {message&&<p className="trees-success"><CheckCircle2 size={18}/>{message}</p>}
+    {error&&<p className="trees-error">{error}</p>}
+    {followups.length>0&&<div className="trees-report-list">{followups.slice(0,15).map(f=><div className="trees-report" key={f.id}><div><strong>{f.phase}-day observation · {f.surviving} surviving</strong><span>Submitted for review</span>{f.review_note&&<small>{f.review_note}</small>}</div><span className={'trees-status trees-status-'+f.status}>{f.status}</span></div>)}</div>}
+  </div>
+}
 function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
   member: Member | null,
   onSigned: (m:Member, csrf:string)=>void,
@@ -203,6 +251,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
   const [consent,setConsent]=useState(false)
   const [publish,setPublish]=useState(false)
   const [reports,setReports]=useState<Report[]>([])
+  const [followups,setFollowups]=useState<Followup[]>([])
   const [avatarBusy,setAvatarBusy]=useState(false)
   const [note,setNote]=useState('')
   const [securityOpen,setSecurityOpen]=useState(false)
@@ -211,7 +260,8 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
   const [deletePhrase,setDeletePhrase]=useState('')
   const [deletePassword,setDeletePassword]=useState('')
 
-  useEffect(()=>{if(member) getApi('mine').then(data=>setReports(data.reports)).catch(()=>{})},[member])
+  const reloadMine=()=>getApi('mine').then(data=>{setReports(data.reports);setFollowups(data.followups||[])}).catch(()=>{})
+  useEffect(()=>{if(member)void reloadMine()},[member])
 
   async function submit(e:FormEvent) {
     e.preventDefault()
@@ -290,6 +340,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf }: {
     {error&&<p className="trees-error">{error}</p>}
     <div className="trees-profile-title"><h2>My planting records</h2><span>{reports.length} submissions</span></div>
     {reports.length?<div className="trees-report-list">{reports.map(r=><div className="trees-report" key={r.id}><div><strong>{r.quantity} × {r.species}</strong><span>{typeLabel(r.method)} · {r.locality} · {r.planted_on}</span>{r.review_note&&<small>{r.review_note}</small>}</div><span className={'trees-status trees-status-'+r.status}>{r.status}</span></div>)}</div>:<div className="trees-empty compact"><Sprout size={35}/><p>No planting reports submitted yet.</p></div>}
+    <SurvivalCheckForm reports={reports} followups={followups} csrf={csrf} onSaved={()=>{void reloadMine()}}/>
     <div className="trees-account-security">
       <button type="button" className="trees-btn-outline" onClick={()=>{setSecurityOpen(!securityOpen);setDeleteOpen(false)}}><ShieldCheck size={16}/> {securityOpen?'Close password settings':'Change password'}</button>
       <button type="button" className="trees-btn-outline trees-danger-toggle" onClick={()=>{setDeleteOpen(!deleteOpen);setSecurityOpen(false)}}>{deleteOpen?'Cancel deletion':'Delete my campaign account'}</button>
