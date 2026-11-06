@@ -33,7 +33,8 @@ const countReview=()=>Object.keys(saved.revisit||{}).filter(id=>byId.has(id)).le
 const nwords=s=>String(s||'').trim().split(/\s+/).filter(Boolean).length;
 function weights(s){return Math.max(100,s.words||100)}
 function validPlan(p){
- return !!(p&&Number.isInteger(p.days)&&p.days>=5&&p.days<=120&&/^\d{4}-\d{2}-\d{2}$/.test(p.startDate||'')&&
+ const date=typeof p?.startDate==='string'?new Date(p.startDate+'T12:00:00Z'):new Date(NaN);
+ return !!(p&&Number.isInteger(p.days)&&p.days>=5&&p.days<=120&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===p.startDate&&
  (!p.restDays||Array.isArray(p.restDays)&&p.restDays.length<7&&p.restDays.every(n=>Number.isInteger(n)&&n>=0&&n<=6))&&
  (p.dailyMinutes===undefined||Number.isInteger(p.dailyMinutes)&&p.dailyMinutes>=15&&p.dailyMinutes<=600));
 }
