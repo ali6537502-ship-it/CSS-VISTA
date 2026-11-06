@@ -581,28 +581,37 @@ if ($action==='delete-account') {
     $member=tree_auth($db,true);
     $body=tree_login_json();
     if (($body['confirm']??'') !== 'DELETE') cssv_fail('Type DELETE to confirm.',422,'confirmation_required');
-    $q=$db->prepare('SELECT password_hash,avatar_path FROM tree_campaign_members WHERE id=?');
-    $q->execute([$member['id']]);$row=$q->fetch();
-    if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) cssv_fail('Current password is incorrect.',401,'password_incorrect');
-    $q=$db->prepare('SELECT proof_path FROM tree_campaign_plantings WHERE member_id=?');
-    $q->execute([$member['id']]);$paths=$q->fetchAll(PDO::FETCH_COLUMN);
-    $q=$db->prepare('SELECT proof_path FROM tree_campaign_followups WHERE member_id=?');
-    $q->execute([$member['id']]);$paths=array_merge($paths,$q->fetchAll(PDO::FETCH_COLUMN));
-    $q=$db->prepare("SELECT city,method,SUM(quantity) AS total FROM tree_campaign_plantings WHERE member_id=? AND status='approved' GROUP BY city,method");
-    $q->execute([$member['id']]);$approvedGroups=$q->fetchAll();
+    $paths=[];$avatar='';
     $db->beginTransaction();
     try {
-        foreach($approvedGroups as $group) tree_rollup_adjust($db,(string)$member['id'],(string)$group['city'],(string)$group['method'],(int)$group['total'],-1);
+        // Lock contributor identity before reading reports. All submission and
+        // moderation writes take this same lock to prevent orphan records or
+        // approving a report while its owner is being erased.
+        $q=$db->prepare('SELECT password_hash,avatar_path FROM tree_campaign_members WHERE id=? FOR UPDATE');
+        $q->execute([$member['id']]);$row=$q->fetch();
+        if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) {
+            $db->rollBack();
+            cssv_fail('Current password is incorrect.',401,'password_incorrect');
+        }
+        $avatar=(string)($row['avatar_path']??'');
+        $q=$db->prepare('SELECT proof_path FROM tree_campaign_plantings WHERE member_id=?');
+        $q->execute([$member['id']]);$paths=$q->fetchAll(PDO::FETCH_COLUMN);
+        $q=$db->prepare('SELECT proof_path FROM tree_campaign_followups WHERE member_id=?');
+        $q->execute([$member['id']]);$paths=array_merge($paths,$q->fetchAll(PDO::FETCH_COLUMN));
+        $q=$db->prepare("SELECT city,method,SUM(quantity) AS total FROM tree_campaign_plantings WHERE member_id=? AND status='approved' GROUP BY city,method");
+        $q->execute([$member['id']]);$groups=$q->fetchAll();
+        foreach($groups as $group) tree_rollup_adjust($db,(string)$member['id'],(string)$group['city'],(string)$group['method'],(int)$group['total'],-1);
         $db->prepare('DELETE FROM tree_campaign_member_rollup WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_followups WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_plantings WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_sessions WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_members WHERE id=?')->execute([$member['id']]);
         $db->commit();
-    } catch (Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
-    foreach($paths as $path) cssv_remove_private_file((string)$path);
-    cssv_remove_private_file((string)($row['avatar_path']??''));
-    cssv_set_cookie(TREE_SESSION,'',time()-3600,true);cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
+    } catch(Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
+    foreach($paths as $p) cssv_remove_private_file((string)$p);
+    cssv_remove_private_file($avatar);
+    cssv_set_cookie(TREE_SESSION,'',time()-3600,true);
+    cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
     cssv_json(['ok'=>true,'message'=>'Campaign account and all its planting records deleted. Public totals update accordingly.']);
 }
 if ($action==='logout') {
@@ -639,7 +648,18 @@ if ($action==='plant') {
     if ((int)$q->fetchColumn()>=10) cssv_fail('Daily report limit reached. Please submit again tomorrow.',429,'report_limit');
     tree_rate($db,'plant',(string)$member['id'],16,86400);
     $photo=tree_store_image($_FILES['photo']??[],'evidence',TREE_MAX_PROOF);
+    $db->beginTransaction();
     try {
+        $lock=$db->prepare('SELECT id FROM tree_campaign_members WHERE id=? FOR UPDATE');
+        $lock->execute([$member['id']]);
+        if(!$lock->fetchColumn()) throw new RuntimeException('account_no_longer_exists');
+        $daily=$db->prepare("SELECT COUNT(*) FROM tree_campaign_plantings WHERE member_id=? AND created_at>DATE_SUB(NOW(6),INTERVAL 1 DAY)");
+        $daily->execute([$member['id']]);
+        if((int)$daily->fetchColumn()>=10) {
+            $db->rollBack();
+            cssv_remove_private_file($photo['path']);
+            cssv_fail('Daily report limit reached.',429,'report_limit');
+        }
         // Flag a perceptual match for a human reviewer; do not automatically
         // accuse legitimate contributors who photographed similar plants.
         $q=$db->prepare("SELECT proof_phash FROM tree_campaign_plantings WHERE member_id=? ORDER BY created_at DESC LIMIT 100");
@@ -654,7 +674,9 @@ if ($action==='plant') {
         $id=cssv_uuid_v4();
         $db->prepare("INSERT INTO tree_campaign_plantings(id,member_id,species,method,quantity,planted_on,city,locality,proof_path,proof_mime,proof_hash,proof_phash,duplicate_risk,public_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
             ->execute([$id,$member['id'],$species,$method,$quantity,$day,$member['city'],$locality,$photo['path'],$photo['mime'],$photo['hash'],$photo['phash'],$risk?1:0,($_POST['public_photo']??'')==='yes'?1:0]);
+        $db->commit();
     } catch (Throwable $e) {
+        if($db->inTransaction())$db->rollBack();
         cssv_remove_private_file($photo['path']);
         if ($e instanceof PDOException && (string)$e->getCode()==='23000') cssv_fail('This exact evidence photo has already been submitted.',409,'duplicate_photo');
         throw $e;
@@ -680,11 +702,20 @@ if ($action==='followup') {
         cssv_remove_private_file($photo['path']);
         cssv_fail('Upload a new photo taken for the survival check.',422,'old_photo_reused');
     }
+    $db->beginTransaction();
     try {
+        $lock=$db->prepare('SELECT id FROM tree_campaign_members WHERE id=? FOR UPDATE');
+        $lock->execute([$member['id']]);
+        if(!$lock->fetchColumn()) throw new RuntimeException('account_no_longer_exists');
+        $check=$db->prepare("SELECT id FROM tree_campaign_plantings WHERE id=? AND member_id=? AND status='approved' FOR UPDATE");
+        $check->execute([$id,$member['id']]);
+        if(!$check->fetchColumn()) throw new RuntimeException('planting_status_changed');
         $followupId=cssv_uuid_v4();
         $db->prepare('INSERT INTO tree_campaign_followups(id,planting_id,member_id,phase,surviving,proof_path,proof_mime,proof_hash) VALUES(?,?,?,?,?,?,?,?)')
             ->execute([$followupId,$id,$member['id'],$phase,$surviving,$photo['path'],$photo['mime'],$photo['hash']]);
+        $db->commit();
     } catch(Throwable $e) {
+        if($db->inTransaction())$db->rollBack();
         cssv_remove_private_file($photo['path']);
         if ($e instanceof PDOException && (string)$e->getCode()==='23000') cssv_fail('This milestone or photograph was already submitted.',409,'repeat_followup');
         throw $e;
@@ -720,6 +751,12 @@ if ($action==='review') {
     $fieldChecked=($body['field_checked']??false)===true;
     $db->beginTransaction();
     try {
+        $memberQuery=$db->prepare('SELECT member_id FROM tree_campaign_plantings WHERE id=?');
+        $memberQuery->execute([$id]);$owner=$memberQuery->fetchColumn();
+        if(!$owner) {$db->rollBack();cssv_fail('Report not found.',404,'report_not_found');}
+        $lock=$db->prepare('SELECT id FROM tree_campaign_members WHERE id=? FOR UPDATE');
+        $lock->execute([$owner]);
+        if(!$lock->fetchColumn()) {$db->rollBack();cssv_fail('Participant account no longer exists.',409,'account_deleted');}
         $q=$db->prepare('SELECT member_id,city,method,quantity,duplicate_risk,status,planted_on FROM tree_campaign_plantings WHERE id=? FOR UPDATE');
         $q->execute([$id]);$row=$q->fetch();
         if (!$row || ($decision==='revoked' && $row['status']!=='approved') || ($decision!=='revoked' && $row['status']!=='pending')) {
