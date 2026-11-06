@@ -1,0 +1,21 @@
+name: Punjab Trees campaign quality gate
+on:
+  pull_request:
+    paths:
+      - 'public/api/trees/**'
+      - 'src/pages/PunjabTrees.tsx'
+      - 'src/pages/punjabTrees.css'
+      - 'src/data/punjabTreeMap.ts'
+      - 'src/data/routeRegistry.mjs'
+      - 'tests/trees/**'
+      - '.github/workflows/trees-qa.yml'
+jobs:
+  tree-campaign-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax validation
+        run: php -l public/api/trees/index.php
+      - name: Campaign contract tests
+        run: node --test tests/trees/campaign.test.mjs
