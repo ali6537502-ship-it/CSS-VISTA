@@ -30,7 +30,7 @@ function tree_species(): array {
         'kachnar'=>['name'=>'Kachnar','scientific'=>'Bauhinia variegata','category'=>'flowering'],
         'arjun'=>['name'=>'Arjun','scientific'=>'Terminalia arjuna','category'=>'shade'],
         'lasura'=>['name'=>'Lasura','scientific'=>'Cordia myxa','category'=>'fruit'],
-        'sohanjana'=>['name'=>'Sohanjana','scientific'=>'Moringa concanensis','category'=>'dryland'],
+        'sohanjana'=>['name'=>'Sohanjana','scientific'=>'Moringa oleifera','category'=>'dryland'],
         'dhak'=>['name'=>'Dhak / Palash','scientific'=>'Butea monosperma','category'=>'flowering'],
         'pilkhan'=>['name'=>'Pilkhan','scientific'=>'Ficus virens','category'=>'shade'],
         'semal'=>['name'=>'Semal / Simbal','scientific'=>'Bombax ceiba','category'=>'flowering'],
