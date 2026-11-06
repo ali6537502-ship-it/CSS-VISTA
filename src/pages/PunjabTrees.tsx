@@ -587,7 +587,16 @@ function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
 }
 
 export default function PunjabTrees() {
-  const [tab,setTab]=useState<Tab>('overview'),[summary,setSummary]=useState<Summary>(EMPTY),[species,setSpecies]=useState<Record<string,Species>>({}),[member,setMember]=useState<Member|null>(null),[csrf,setCsrf]=useState(''),[adminCsrf,setAdminCsrf]=useState(''),[error,setError]=useState(''),[isAdmin,setIsAdmin]=useState(false),[mobileNav,setMobileNav]=useState(false)
+  const [emailAction]=useState<{purpose:'verify'|'reset',token:string}|null>(()=>{
+    if(typeof window==='undefined')return null
+    const hash=window.location.hash.slice(1)
+    const match=/^(verify-email|reset-email)=([a-f0-9]{64})$/.exec(hash)
+    if(!match)return null
+    // Remove bearer credentials from browser history before any API request.
+    window.history.replaceState(window.history.state,'',window.location.pathname+window.location.search)
+    return {purpose:match[1]==='verify-email'?'verify':'reset',token:match[2]}
+  })
+  const [tab,setTab]=useState<Tab>(emailAction?'account':'overview'),[summary,setSummary]=useState<Summary>(EMPTY),[species,setSpecies]=useState<Record<string,Species>>({}),[member,setMember]=useState<Member|null>(null),[csrf,setCsrf]=useState(''),[adminCsrf,setAdminCsrf]=useState(''),[error,setError]=useState(''),[isAdmin,setIsAdmin]=useState(false),[mobileNav,setMobileNav]=useState(false)
   const refresh=()=>getApi('summary').then(d=>setSummary(d)).catch(e=>setError(e instanceof Error?e.message:'Unable to load live progress.'))
   useEffect(()=>{refresh();getApi('catalog').then(d=>setSpecies(d.species)).catch(()=>{});getApi('session').then(d=>{setMember(d.member);setCsrf(d.csrf_token||'')}).catch(()=>{});fetch('/api/admin-auth/session.php',{credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(d=>{if(d?.authenticated){setIsAdmin(true);setAdminCsrf(d.csrf_token||'')}}).catch(()=>{})},[])
   const select=(next:Tab)=>{setTab(next);setMobileNav(false);if(next==='overview'||next==='leaderboard')void refresh();window.scrollTo({top:0,behavior:'smooth'})}
@@ -599,7 +608,7 @@ export default function PunjabTrees() {
       {error&&<div className="trees-error trees-page-error">{error}<button onClick={()=>setError('')} type="button"><X size={17}/></button></div>}
       {tab==='overview'&&<Overview summary={summary} onContribute={()=>select('contribute')} onRankings={()=>select('leaderboard')}/>}
       {tab==='leaderboard'&&<Leaderboard summary={summary}/>}
-      {tab==='account'&&<Account member={member} csrf={csrf} onSigned={(m,token)=>{setMember(m);setCsrf(token)}} onLogout={logout} onLockedOut={()=>{setMember(null);setCsrf('')}}/>}
+      {tab==='account'&&<Account member={member} csrf={csrf} onSigned={(m,token)=>{setMember(m);setCsrf(token)}} onLogout={logout} onLockedOut={()=>{setMember(null);setCsrf('')}} emailAction={emailAction}/>}
       {tab==='contribute'&&<Contribute member={member} csrf={csrf} species={species} onDone={refresh} onAccount={()=>select('account')}/>}
       {tab==='review'&&<Review csrf={adminCsrf} refresh={()=>{void refresh()}}/>}
     </div>
