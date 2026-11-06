@@ -8,7 +8,7 @@ import './punjabTrees.css'
 type Species = { name: string, scientific: string, category: string }
 type Member = { id: string, name: string, email: string, email_verified: boolean, city: string, has_photo: boolean, public_name: boolean, joined_at: string }
 type Followup = { id: string, planting_id: string, phase: number, surviving: number, status: string, review_note: string|null, full_name?: string, species?: string, city?: string, planted_quantity?: number, locality?: string }
-type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string, duplicate_risk?: number, field_checked?: number, field_visit_date?: string }
+type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string, duplicate_risk?: number, field_checked?: number, field_visit_date?: string, has_photo?: number }
 type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, survival_checks: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[], public_gallery: { id: string,city: string,species: string,method: string,quantity: number,planted_on: string }[] }
 type Tab = 'overview' | 'contribute' | 'leaderboard' | 'account' | 'review'
 const EMPTY: Summary = { trees: 0, seeds: 0, contributors: 0, cities: 0, pending_reports: 0, survival_checks: 0, target: 100000000, city_totals: [], leaderboard: [], public_gallery: [] }
@@ -543,7 +543,7 @@ function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
     return <div className="trees-admin-item" key={r.id}>
       <div className="trees-admin-photo"><img src={API+'photo&kind=proof&id='+encodeURIComponent(r.id)} alt={'Private evidence for planting in '+r.city}/></div>
       <div className="trees-admin-details">
-        <div className="trees-admin-identity">{r.member_id&&<img src={API+'photo&kind=avatar&id='+encodeURIComponent(r.member_id)} alt="Private participant photograph"/>}<h3>{r.full_name} · {r.city}</h3></div>
+        <div className="trees-admin-identity">{r.member_id&&Number(r.has_photo)===1&&<img src={API+'photo&kind=avatar&id='+encodeURIComponent(r.member_id)} alt="Private participant photograph"/>}<h3>{r.full_name} · {r.city}</h3></div>
         <p>{r.species} · {r.quantity} {typeLabel(r.method)} · {r.locality}</p>
         <small>Planting date: {r.planted_on}</small>
         {highRisk&&<div className="trees-admin-risk"><ShieldCheck size={16}/> {Number(r.duplicate_risk)===1?'Possible duplicate photographic evidence. ':''}{r.quantity>5?'Large quantity: site verification required.':''}</div>}
