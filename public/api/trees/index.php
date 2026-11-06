@@ -46,6 +46,8 @@ function tree_schema(PDO $db): void {
     $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_members (
         id CHAR(36) PRIMARY KEY,
         full_name VARCHAR(100) NOT NULL,
+        email VARCHAR(254) NULL,
+        email_verified_at DATETIME(6) NULL,
         mobile VARCHAR(16) NOT NULL,
         cnic_hash CHAR(64) NOT NULL,
         cnic_last4 CHAR(4) NOT NULL,
@@ -59,7 +61,20 @@ function tree_schema(PDO $db): void {
         consented_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         UNIQUE KEY uq_tree_mobile (mobile),
+        UNIQUE KEY uq_tree_email (email),
         UNIQUE KEY uq_tree_cnic (cnic_hash)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_email_tokens (
+        id CHAR(36) NOT NULL PRIMARY KEY,
+        member_id CHAR(36) NOT NULL,
+        purpose ENUM('verify','reset') NOT NULL,
+        token_hash CHAR(64) NOT NULL,
+        expires_at DATETIME(6) NOT NULL,
+        used_at DATETIME(6) NULL,
+        created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+        UNIQUE KEY uq_tree_email_token (token_hash),
+        INDEX idx_tree_email_member (member_id,purpose,used_at),
+        INDEX idx_tree_email_expiry (expires_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_sessions (
         id CHAR(36) PRIMARY KEY,
@@ -170,6 +185,8 @@ function tree_schema(PDO $db): void {
             'user_agent_hash' => 'ADD COLUMN user_agent_hash CHAR(64) NULL',
         ],
         'tree_campaign_members' => [
+            'email' => 'ADD COLUMN email VARCHAR(254) NULL',
+            'email_verified_at' => 'ADD COLUMN email_verified_at DATETIME(6) NULL',
             'recovery_hash' => 'ADD COLUMN recovery_hash CHAR(64) NULL',
             'consent_version' => "ADD COLUMN consent_version VARCHAR(32) NOT NULL DEFAULT 'trees-privacy-v1'",
             'consented_at' => 'ADD COLUMN consented_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)',
@@ -188,6 +205,8 @@ function tree_schema(PDO $db): void {
             if ((int)$check->fetchColumn() === 0) $db->exec('ALTER TABLE '.$table.' '.$ddl);
         }
     }
+    $emailIndex=$db->query("SELECT COUNT(*) FROM information_schema.STATISTICS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='tree_campaign_members' AND INDEX_NAME='uq_tree_email'")->fetchColumn();
+    if ((int)$emailIndex===0) $db->exec('ALTER TABLE tree_campaign_members ADD UNIQUE KEY uq_tree_email (email)');
     $type=$db->query("SELECT COLUMN_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='tree_campaign_reviews' AND COLUMN_NAME='decision'")->fetchColumn();
     if (is_string($type) && !str_contains($type,'revoked')) $db->exec("ALTER TABLE tree_campaign_reviews MODIFY decision ENUM('approved','rejected','revoked') NOT NULL");
     $ready = true;
@@ -274,7 +293,7 @@ function tree_issue(PDO $db, string $id): string {
 function tree_member(PDO $db): ?array {
     $token=(string)($_COOKIE[TREE_SESSION]??'');
     if ($token==='' || strlen($token)>256) return null;
-    $q=$db->prepare('SELECT s.id AS session_id,s.csrf_hash,s.user_agent_hash,m.id,m.full_name,m.mobile,m.city,m.public_name,m.avatar_path,m.created_at FROM tree_campaign_sessions s JOIN tree_campaign_members m ON m.id=s.member_id WHERE s.token_hash=? AND s.revoked_at IS NULL AND s.expires_at>NOW(6) LIMIT 1');
+    $q=$db->prepare('SELECT s.id AS session_id,s.csrf_hash,s.user_agent_hash,m.id,m.full_name,m.email,m.email_verified_at,m.mobile,m.city,m.public_name,m.avatar_path,m.created_at FROM tree_campaign_sessions s JOIN tree_campaign_members m ON m.id=s.member_id WHERE s.token_hash=? AND s.revoked_at IS NULL AND s.expires_at>NOW(6) LIMIT 1');
     $q->execute([cssv_hash_secret($token)]);
     $row=$q->fetch();
     if (!$row) return null;
@@ -296,6 +315,8 @@ function tree_public_member(array $row): array {
     return [
         'id'=>(string)$row['id'],
         'name'=>(string)$row['full_name'],
+        'email'=>(string)($row['email']??''),
+        'email_verified'=>!empty($row['email_verified_at']),
         'city'=>(string)$row['city'],
         'mobile_masked'=>'****'.substr((string)$row['mobile'],-4),
         'has_photo'=>!empty($row['avatar_path']),
@@ -616,6 +637,7 @@ if ($action==='delete-account') {
         $q->execute([$member['id']]);$groups=$q->fetchAll();
         foreach($groups as $group) tree_rollup_adjust($db,(string)$member['id'],(string)$group['city'],(string)$group['method'],(int)$group['total'],-1);
         $db->prepare('DELETE FROM tree_campaign_member_rollup WHERE member_id=?')->execute([$member['id']]);
+        $db->prepare('DELETE FROM tree_campaign_email_tokens WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_followup_reviews WHERE followup_id IN (SELECT id FROM tree_campaign_followups WHERE member_id=?)')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_reviews WHERE planting_id IN (SELECT id FROM tree_campaign_plantings WHERE member_id=?)')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_followups WHERE member_id=?')->execute([$member['id']]);
