@@ -107,6 +107,22 @@ try {
   assert.equal(await verifiedPage.getByRole('button',{name:/Neem/}).getAttribute('aria-pressed'),'true')
   assert.equal(await verifiedPage.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2),true,'Mobile campaign has no horizontal overflow')
   await mobile.close()
+  for(const width of [320,768]){
+    const responsiveContext=await createContext({width,height:850})
+    const responsive=await responsiveContext.newPage()
+    responsive.on('pageerror',e=>errors.push(e.message))
+    await responsive.goto(origin+'/100-million-trees')
+    await responsive.locator('.trees-feature-card').first().waitFor()
+    const cards=await responsive.locator('.trees-feature-card').evaluateAll(els=>els.map(el=>({x:el.getBoundingClientRect().x,y:el.getBoundingClientRect().y,w:el.getBoundingClientRect().width})))
+    assert.equal(cards.length,3)
+    assert.equal(await responsive.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,width+'px campaign has no horizontal overflow')
+    if(width===320){
+      assert.ok(cards[1].y>cards[0].y && cards[2].y>cards[1].y,'320px cards stack vertically')
+    }else{
+      assert.ok(Math.abs(cards[0].y-cards[1].y)<4 && cards[2].y>cards[1].y,'Tablet uses two-column grid followed by full-width card')
+    }
+    await responsiveContext.close()
+  }
   const resetContext=await createContext({width:390,height:844})
   const resetPage=await resetContext.newPage()
   resetPage.on('pageerror',e=>errors.push(e.message))
