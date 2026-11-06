@@ -5,9 +5,9 @@
 
 ## Implemented protections
 - Independent participant account; mobile and CNIC uniqueness via database constraints, with a secret-keyed CNIC fingerprint rather than retained plaintext.
-- NO SMS OTP or OTP login. Passwords are hashed; a random offline recovery key is displayed once, stored only as an HMAC, rotated on reset and invalidates all sessions. Lost password and lost key require supervised account-ownership review.
+- No SMS OTP or OTP signup. Registration takes an email and does not require an avatar. A confirmation link enables planting, but not registration. Passwords are hashed; an offline recovery key is displayed once. Verified-email 30-minute reset links and offline keys reset passwords, rotate recovery credentials and revoke sessions. Lost key plus unverified/unavailable email requires supervised ownership review.
 - Sign-in throttling; same-origin write protection, secure HttpOnly session cookies and CSRF token verification.
-- Private identity photos (~40 KiB) and planting evidence (~70 KiB). Server independently decodes and re-encodes JPEG output, strips supplied metadata and checks pixel, format and file-size limits.
+- Profile photos are entirely optional (~40 KiB when supplied). Email confirmation—not a profile portrait—is required before a participant may submit planting evidence. New planting and survival evidence photos (~70 KiB) remain mandatory per report. Server independently decodes and re-encodes JPEG output, strips supplied metadata and checks pixel, format and file-size limits.
 - Exact SHA-256 evidence de-duplication; 64-bit perceptual image hashing flags suspiciously similar photos for manual examination.
 - Default pending moderation. Approved nursery saplings count toward the public goal, while seeds have a separate counter.
 - High-quantity claims (more than 5 per photograph) and near-duplicate imagery need administrator-recorded on-site confirmation and a field-visit date.
