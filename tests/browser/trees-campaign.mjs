@@ -1,0 +1,84 @@
+import assert from 'node:assert/strict'
+import { chromium } from 'playwright-core'
+import { resolve } from 'node:path'
+import { startArtifactPreview } from './artifact-preview.mjs'
+
+const root = new URL('../../', import.meta.url).pathname.replace(/\/$/, '')
+const { server, origin } = await startArtifactPreview(resolve(root, 'dist'))
+const browser = await chromium.launch({
+  executablePath: process.env.CSSV_BROWSER_EXECUTABLE || '/usr/bin/chromium',
+  headless: true,
+  args: ['--no-sandbox'],
+})
+const mockSummary = {ok:true,target:100000000,trees:0,seeds:0,contributors:0,cities:0,pending_reports:0,survival_checks:0,city_totals:[],leaderboard:[],public_gallery:[]}
+const mockSpecies = {ok:true,species:{neem:{name:'Neem',scientific:'Azadirachta indica',category:'shade'},jamun:{name:'Jamun',scientific:'Syzygium cumini',category:'fruit'}}}
+const errors = []
+const createContext = async viewport => {
+  const context=await browser.newContext({viewport})
+  let member=null
+  await context.route('**/*',route=>{
+    const url=new URL(route.request().url())
+    if(url.origin!==origin)return route.abort('blockedbyclient')
+    if(url.pathname==='/api/admin-auth/session.php')return route.fulfill({status:401,json:{ok:false}})
+    if(url.pathname==='/api/trees/index.php'){
+      const action=url.searchParams.get('action')
+      const respond=json=>route.fulfill({status:200,json})
+      if(action==='summary')return respond(mockSummary)
+      if(action==='catalog')return respond(mockSpecies)
+      if(action==='session')return respond({ok:true,member,csrf_token:member?'browser-test-csrf':null})
+      if(action==='mine')return respond({ok:true,member,reports:[],followups:[]})
+      if(action==='register'){
+        member={id:'11111111-2222-4333-8444-555555555555',name:'Browser Test Volunteer',city:'Multan',has_photo:true,public_name:false,joined_at:'2026-11-06'}
+        return respond({ok:true,member,csrf_token:'browser-test-csrf',recovery_key:'TREE-'+'A'.repeat(48)})
+      }
+      return route.fulfill({status:400,json:{ok:false,message:'Not implemented in visual test fixture'}})
+    }
+    return route.continue()
+  })
+  return context
+}
+try {
+  const desktop=await createContext({width:1366,height:900})
+  const first=await desktop.newPage()
+  first.on('pageerror',e=>errors.push(e.message))
+  await first.goto(origin+'/100-million-trees')
+  await first.getByRole('heading',{name:/100 million trees/i}).waitFor()
+  const brandImages=await first.locator('.trees-sitebar .trees-brand img').evaluateAll(images=>images.map(img=>img.getAttribute('alt')))
+  assert.deepEqual(brandImages,['Isarul Ibaad Foundation emblem','CSS Vista'])
+  await first.getByRole('button',{name:'Leaderboard'}).click()
+  await first.getByRole('heading',{name:'Community leaderboard'}).waitFor()
+  assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2),true,'Desktop campaign fits viewport')
+  await desktop.close()
+
+  const mobile=await createContext({width:390,height:844})
+  const page=await mobile.newPage()
+  page.on('pageerror',e=>errors.push(e.message))
+  await page.goto(origin+'/100-million-trees')
+  await page.getByRole('button',{name:'I want to contribute'}).click()
+  await page.getByRole('button',{name:'Create my campaign account'}).click()
+  await page.getByRole('heading',{name:'Join the movement'}).waitFor()
+  assert.equal(await page.locator('input[autocomplete="one-time-code"]').count(),0,'No OTP input is present')
+  await page.getByPlaceholder('Your full name').fill('Browser Test Volunteer')
+  await page.getByRole('combobox',{name:'Your city or town in Punjab'}).selectOption('Multan')
+  await page.getByPlaceholder('13 digits, used only to prevent duplicates').fill('1111100000001')
+  await page.getByPlaceholder('03XX-XXXXXXX').fill('03000001010')
+  await page.getByPlaceholder('At least 12 characters').fill('Browser-Test-Passphrase-2026')
+  await page.getByRole('checkbox').first().check()
+  await page.getByRole('button',{name:'Create my campaign account'}).click()
+  await page.getByText('Save your private recovery key now').waitFor()
+  await page.getByRole('button',{name:'Toggle campaign navigation'}).click()
+  await page.getByRole('button',{name:'Plant & report'}).click()
+  await page.getByRole('heading',{name:'What did you plant?'}).waitFor()
+  assert.ok(await page.getByRole('button',{name:/Neem/}).count()>0,'Botanical catalog renders on mobile')
+  await page.getByRole('button',{name:/Seed sown/}).click()
+  await page.getByRole('button',{name:/Neem/}).click()
+  assert.equal(await page.getByRole('button',{name:/Neem/}).getAttribute('aria-pressed'),'true')
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2),true,'Mobile campaign has no horizontal overflow')
+  await mobile.close()
+  assert.deepEqual(errors,[],'No client-side JavaScript errors')
+  console.log('PASS Punjab Trees: desktop, 390px mobile, partner order, account UX, no OTP, catalog, responsive width')
+} finally {
+  await browser.close()
+  server.closeAllConnections()
+  await new Promise(resolve=>server.close(resolve))
+}
