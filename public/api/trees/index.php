@@ -389,6 +389,7 @@ cssv_require_method('GET','POST');
 $action=(string)($_GET['action']??'summary');
 $db=cssv_db();
 tree_schema($db);
+if ($_SERVER['REQUEST_METHOD']==='POST' && cssv_env('CSSV_TREES_MAINTENANCE','0')==='1') cssv_fail('Planting submissions and reviews are temporarily paused for maintenance.',503,'campaign_maintenance');
 
 if ($_SERVER['REQUEST_METHOD']==='GET') {
     if ($action==='catalog') cssv_json(['ok'=>true,'species'=>tree_species()]);
