@@ -318,3 +318,39 @@ test('dated recall is explicitly scheduled and retained after plan changes',asyn
  assert.equal(updated.plan.days,60);
  p.dom.window.close();
 });
+
+test('science models show the correct source-linked concept and respond to the learner',async()=>{
+ const p=await open();
+ const checks=[
+  {chapter:3,id:'c3-s3-4',selector:'[data-eclipse="lunar"]',fragment:'Earth between Sun and Moon'},
+  {chapter:5,id:'c5-s5-2',selector:'[data-seismic="S"]',fragment:'S waves displace material perpendicular'},
+  {chapter:9,id:'c9-s9-3',selector:'[data-osm="hyper"]',fragment:'Net water moves out of the cell'},
+  {chapter:18,id:'c18-s18-1',selector:'[data-water="4"]',fragment:'step 5 highlighted'}
+ ];
+ for(const item of checks){
+   p.click('[data-view="library"]');p.click('[data-chapter="'+item.chapter+'"]');await wait(35);
+   p.click('[data-lesson="'+item.id+'"]');await wait(35);
+   assert.ok(p.document.querySelector(item.selector),'Expected model control for '+item.id);
+   p.click(item.selector);
+   const graphic=p.document.querySelector('.science-graphic svg');
+   assert.ok(graphic,'Expected scientific diagram '+item.id);
+   assert.match(graphic.getAttribute('aria-label'),new RegExp(item.fragment));
+   assert.equal(p.document.querySelector(item.selector).getAttribute('aria-pressed'),'true');
+   const link=p.document.querySelector('.model a[href^="https://"]');
+   assert.ok(link,'Model must retain a primary or academic reference');
+ }
+ p.dom.window.close();
+});
+
+test('corrupt day or impossible all-week-off plans are refused without removing saved work',async()=>{
+ const p=await open({plan:{days:8,startDate:'2026-11-01'},completed:{'c1-s1-1':{at:'2026-11-01T10:00:00Z',selfRating:'gotit'}}});
+ p.click('[data-action="editplan"]');
+ p.document.getElementById('start-date').value='2026-02-30';
+ // HTML date inputs reject nonsensical dates before custom validation.
+ for(let n=0;n<7;n++){const el=p.document.querySelector('[data-rest-day="'+n+'"]');el.checked=true;el.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}))}
+ p.click('[data-action="saveplan"]');
+ assert.match(p.document.getElementById('app').textContent,/at least one active weekday/);
+ const saved=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.ok(saved.completed['c1-s1-1'],'Rescheduling validation must not erase lesson work');
+ p.dom.window.close();
+});
