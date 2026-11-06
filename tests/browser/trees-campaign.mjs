@@ -28,10 +28,10 @@ const createContext = async viewport => {
       if(action==='session')return respond({ok:true,member,csrf_token:member?'browser-test-csrf':null})
       if(action==='mine')return respond({ok:true,member,reports:[],followups:[]})
       if(action==='request-email-reset')return respond({ok:true,message:'If a confirmed campaign account uses this email and mail delivery is available, a reset link will arrive shortly.'})
-      if(action==='confirm-email')return respond({ok:true,message:'Email address confirmed.'})
+      if(action==='confirm-email'){if(member)member={...member,email_verified:true};return respond({ok:true,message:'Email address confirmed.'})}
       if(action==='reset-email-password')return respond({ok:true,message:'Password reset.',recovery_key:'TREE-'+'B'.repeat(48)})
       if(action==='register'){
-        member={id:'11111111-2222-4333-8444-555555555555',name:'Browser Test Volunteer',email:'browser@example.invalid',email_verified:false,city:'Multan',has_photo:true,public_name:false,joined_at:'2026-11-06'}
+        member={id:'11111111-2222-4333-8444-555555555555',name:'Browser Test Volunteer',email:'browser@example.invalid',email_verified:false,city:'Multan',has_photo:false,public_name:false,joined_at:'2026-11-06'}
         return respond({ok:true,member,csrf_token:'browser-test-csrf',recovery_key:'TREE-'+'A'.repeat(48)})
       }
       return route.fulfill({status:400,json:{ok:false,message:'Not implemented in visual test fixture'}})
@@ -72,12 +72,21 @@ try {
   await page.getByText('Save your private recovery key now').waitFor()
   await page.getByRole('button',{name:'Toggle campaign navigation'}).click()
   await page.getByRole('button',{name:'Plant & report'}).click()
-  await page.getByRole('heading',{name:'What did you plant?'}).waitFor()
-  assert.ok(await page.getByRole('button',{name:/Neem/}).count()>0,'Botanical catalog renders on mobile')
-  await page.getByRole('button',{name:/Seed sown/}).click()
-  await page.getByRole('button',{name:/Neem/}).click()
-  assert.equal(await page.getByRole('button',{name:/Neem/}).getAttribute('aria-pressed'),'true')
-  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2),true,'Mobile campaign has no horizontal overflow')
+  await page.getByRole('heading',{name:'Confirm your email to begin planting.'}).waitFor()
+  // Registration succeeds without any portrait; the email link unlocks planting.
+  const verifiedPage=await mobile.newPage()
+  verifiedPage.on('pageerror',e=>errors.push(e.message))
+  await verifiedPage.goto(origin+'/100-million-trees#verify-email='+'d'.repeat(64))
+  await verifiedPage.getByText('Email address confirmed. You can now reset your password by email.').waitFor()
+  assert.equal(new URL(verifiedPage.url()).hash,'','Verification link must be cleared from browser history')
+  await verifiedPage.getByRole('button',{name:'Toggle campaign navigation'}).click()
+  await verifiedPage.getByRole('button',{name:'Plant & report'}).click()
+  await verifiedPage.getByRole('heading',{name:'What did you plant?'}).waitFor()
+  assert.ok(await verifiedPage.getByRole('button',{name:/Neem/}).count()>0,'Botanical catalog renders without an avatar')
+  await verifiedPage.getByRole('button',{name:/Seed sown/}).click()
+  await verifiedPage.getByRole('button',{name:/Neem/}).click()
+  assert.equal(await verifiedPage.getByRole('button',{name:/Neem/}).getAttribute('aria-pressed'),'true')
+  assert.equal(await verifiedPage.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+2),true,'Mobile campaign has no horizontal overflow')
   await mobile.close()
   const resetContext=await createContext({width:390,height:844})
   const resetPage=await resetContext.newPage()
