@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-05",
-  "published_at": "2026-11-05T19:00:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 5 November 2026 | Evening preliminary edition (00:00–19:00 PKT)",
+  "published_at": "2026-11-06T07:00:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 5 November 2026 | Final retrospective edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-05-eib-europe-energy-survey",
@@ -83,6 +83,121 @@
           "publisher": "Reuters",
           "title": "France makes last-minute G7 ministerial location switch amid protest movement",
           "url": "https://www.reuters.com/world/americas/g7-foreign-ministers-meeting-moved-marseille-paris-sources-say-2026-11-05/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-05-australia-west-peron-carbon-storage",
+      "category": "World — Climate and Energy",
+      "headline": "Australia designates West Peron offshore area for proposed carbon storage",
+      "summary": "Australia designated a seabed area near Darwin for a proposed carbon capture and storage project led by Japan's Inpex; the designation is preliminary, not construction approval.",
+      "what_happened": "The West Peron area has a potential storage capacity of up to 443 million metric tonnes of carbon dioxide over 35 years. Environmental assessments and further licences are still required before construction or injection.",
+      "background": "Carbon capture and storage (CCS) is being considered for hard-to-abate industrial emissions, but its environmental impacts and potential to prolong fossil-fuel reliance remain contested.",
+      "why_it_matters": "The decision illustrates how cross-border energy projects and carbon-management policy intersect; the stated capacity is potential, not achieved emissions reduction.",
+      "pakistan_perspective": "Pakistan's energy and climate planners can compare proposed CCS safeguards with renewable-energy deployment, but this Australian decision does not directly authorize a project in Pakistan.",
+      "key_takeaways": [
+        "Australia designated the West Peron seabed area near Darwin for a proposed Inpex carbon-storage project in November 2026.",
+        "The decision illustrates how cross-border energy projects and carbon-management policy intersect; the stated capacity is potential, not achieved emissions reduction."
+      ],
+      "facts": [
+        "Australia designated the West Peron seabed area near Darwin for a proposed Inpex carbon-storage project in November 2026."
+      ],
+      "quick_gk": [
+        "Australia designated the West Peron seabed area near Darwin for a proposed Inpex carbon-storage project in November 2026."
+      ],
+      "question_angles": [
+        "Which Australian offshore area was designated for a proposed Inpex carbon storage project?"
+      ],
+      "topics": [
+        "carbon capture",
+        "climate policy",
+        "energy transition"
+      ],
+      "countries": [
+        "Australia",
+        "Japan"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Australia approves seabed site where a Japanese company will store carbon pollution",
+          "url": "https://apnews.com/article/4ff9200393569d445601aed900cb2640"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-05-france-national-cost-of-living-strikes",
+      "category": "World — European Governance",
+      "headline": "French unions stage nationwide demonstrations over living costs and public services",
+      "summary": "French trade unions held nationwide strikes and demonstrations on 5 November over wages, living costs and public services, disrupting schools and transport.",
+      "what_happened": "Unions planned roughly 260 rallies across France. Paris, Lyon and Marseille were among affected cities. Officials deployed additional security as protests overlapped with broader political unrest.",
+      "background": "French economic pressures, rising household costs and disputes over public spending have driven repeated demonstrations since September.",
+      "why_it_matters": "The strikes reveal pressure on European governments to balance fiscal choices, public services and social cohesion; the union's claims are not independent economic forecasts.",
+      "pakistan_perspective": "Pakistan faces distinct inflation and labour-market challenges; France's demonstrations provide a comparative governance example rather than a direct policy impact.",
+      "key_takeaways": [
+        "French unions planned approximately 260 demonstrations during nationwide strikes on 5 November 2026.",
+        "The strikes reveal pressure on European governments to balance fiscal choices, public services and social cohesion; the union's claims are not independent economic forecasts."
+      ],
+      "facts": [
+        "French unions planned approximately 260 demonstrations during nationwide strikes on 5 November 2026."
+      ],
+      "quick_gk": [
+        "French unions planned approximately 260 demonstrations during nationwide strikes on 5 November 2026."
+      ],
+      "question_angles": [
+        "Approximately how many rallies did French unions plan for their 5 November 2026 national protest?"
+      ],
+      "topics": [
+        "France",
+        "labour relations",
+        "cost of living"
+      ],
+      "countries": [
+        "France"
+      ],
+      "sources": [
+        {
+          "publisher": "Al Jazeera",
+          "title": "Photos: Thousands rally in France over rising costs and economic struggles",
+          "url": "https://www.aljazeera.com/gallery/2026/11/5/photos-thousands-rally-in-france-over-rising-costs-and-economic-struggles"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-05-ap-voter-poll-us-midterms",
+      "category": "World — Elections and Political Economy",
+      "headline": "AP voter survey highlights cost-of-living concerns in US midterm election",
+      "summary": "Associated Press analysis of its 2026 midterm voter poll reported that affordability, inflation and perceptions of presidential economic policy were central to voters' choices.",
+      "what_happened": "The AP Voter Poll surveyed approximately 100,000 midterm voters. About two-thirds said President Trump's policies contributed to inflation, while nearly nine in ten viewed cost of living as a major or crucial voting factor.",
+      "background": "Democrats won control of both chambers of Congress in the 2026 midterm elections; the poll measures voter attitudes, not proof of a specific policy's causal economic impact.",
+      "why_it_matters": "The survey provides a measurable account of how perceived economic performance can affect electoral accountability and legislative power.",
+      "pakistan_perspective": "US congressional changes may affect trade and foreign policy relevant to Pakistan, but the poll does not establish any particular future decision.",
+      "key_takeaways": [
+        "The Associated Press's 2026 US midterm Voter Poll surveyed approximately 100,000 voters.",
+        "The survey provides a measurable account of how perceived economic performance can affect electoral accountability and legislative power."
+      ],
+      "facts": [
+        "The Associated Press's 2026 US midterm Voter Poll surveyed approximately 100,000 voters."
+      ],
+      "quick_gk": [
+        "The Associated Press's 2026 US midterm Voter Poll surveyed approximately 100,000 voters."
+      ],
+      "question_angles": [
+        "Which issue did nearly nine in ten respondents to AP's 2026 US midterm voter poll describe as a major or crucial factor?"
+      ],
+      "topics": [
+        "US midterms",
+        "inflation",
+        "political economy"
+      ],
+      "countries": [
+        "United States"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Republicans were punished in the midterms for Trump's economic policies, The AP Voter Poll shows",
+          "url": "https://apnews.com/article/f8dbe8800549340c8a75d956302c126b"
         }
       ]
     }
