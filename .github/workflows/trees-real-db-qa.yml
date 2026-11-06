@@ -43,6 +43,8 @@ jobs:
       CSSV_PRIVATE_STORAGE_DIR: /tmp/trees-private-ci
       CSSV_SITE_ORIGIN: http://127.0.0.1:18765
       CSSV_TREES_TEST: 'yes'
+      CI: 'true'
+      CSSV_MAIL_TRANSPORT: php-test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -64,7 +66,16 @@ jobs:
         run: |
           mkdir -p /tmp/trees-private-ci
           chmod 700 /tmp/trees-private-ci
-          nohup php -S 127.0.0.1:18765 -t public > /tmp/trees-php-ci.log 2>&1 < /dev/null &
+          cat > /tmp/trees-ci-sendmail <<'EOF'
+          #!/bin/sh
+          cat >> /tmp/trees-ci-outbox.eml
+          printf '\n===END_TREE_MAIL===\n' >> /tmp/trees-ci-outbox.eml
+          exit 0
+          EOF
+          chmod 700 /tmp/trees-ci-sendmail
+          touch /tmp/trees-ci-outbox.eml
+          chmod 600 /tmp/trees-ci-outbox.eml
+          nohup php -d sendmail_path=/tmp/trees-ci-sendmail -S 127.0.0.1:18765 -t public > /tmp/trees-php-ci.log 2>&1 < /dev/null &
           for i in $(seq 1 30); do
             if curl --fail --silent 'http://127.0.0.1:18765/api/trees/index.php?action=summary' > /tmp/trees-first-summary.json; then break; fi
             sleep 2
