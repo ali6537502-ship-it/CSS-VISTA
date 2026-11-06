@@ -42,7 +42,7 @@ function tree_species(): array {
 
 function tree_schema(PDO $db): void {
     static $ready = false;
-    if ($ready) return;
+    if ($ready || cssv_env('CSSV_TREES_SCHEMA_MANAGED','0')==='1') return;
     $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_members (
         id CHAR(36) PRIMARY KEY,
         full_name VARCHAR(100) NOT NULL,
@@ -55,6 +55,8 @@ function tree_schema(PDO $db): void {
         avatar_path VARCHAR(240) NULL,
         avatar_mime VARCHAR(20) NULL,
         public_name TINYINT(1) NOT NULL DEFAULT 0,
+        consent_version VARCHAR(32) NOT NULL DEFAULT 'trees-privacy-v1',
+        consented_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         UNIQUE KEY uq_tree_mobile (mobile),
         UNIQUE KEY uq_tree_cnic (cnic_hash)
@@ -165,6 +167,8 @@ function tree_schema(PDO $db): void {
     $changes = [
         'tree_campaign_members' => [
             'recovery_hash' => 'ADD COLUMN recovery_hash CHAR(64) NULL',
+            'consent_version' => "ADD COLUMN consent_version VARCHAR(32) NOT NULL DEFAULT 'trees-privacy-v1'",
+            'consented_at' => 'ADD COLUMN consented_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)',
         ],
         'tree_campaign_plantings' => [
             'proof_phash' => 'ADD COLUMN proof_phash CHAR(16) NULL',
@@ -180,6 +184,8 @@ function tree_schema(PDO $db): void {
             if ((int)$check->fetchColumn() === 0) $db->exec('ALTER TABLE '.$table.' '.$ddl);
         }
     }
+    $type=$db->query("SELECT COLUMN_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='tree_campaign_reviews' AND COLUMN_NAME='decision'")->fetchColumn();
+    if (is_string($type) && !str_contains($type,'revoked')) $db->exec("ALTER TABLE tree_campaign_reviews MODIFY decision ENUM('approved','rejected','revoked') NOT NULL");
     $ready = true;
 }
 function tree_origin(): void {
@@ -509,8 +515,8 @@ if ($action==='register') {
     $recovery=tree_recovery_new();
     try {
         $id=cssv_uuid_v4();
-        $db->prepare('INSERT INTO tree_campaign_members (id,full_name,mobile,cnic_hash,cnic_last4,city,password_hash,recovery_hash,public_name) VALUES(?,?,?,?,?,?,?,?,?)')
-            ->execute([$id,$name,$phone,cssv_hash_secret('tree-cnic:'.$cnic),substr($cnic,-4),$city,password_hash($password,PASSWORD_DEFAULT),tree_recovery_hash($recovery),!empty($body['public_name'])?1:0]);
+        $db->prepare('INSERT INTO tree_campaign_members (id,full_name,mobile,cnic_hash,cnic_last4,city,password_hash,recovery_hash,public_name,consent_version,consented_at) VALUES(?,?,?,?,?,?,?,?,?, ?,NOW(6))')
+            ->execute([$id,$name,$phone,cssv_hash_secret('tree-cnic:'.$cnic),substr($cnic,-4),$city,password_hash($password,PASSWORD_DEFAULT),tree_recovery_hash($recovery),!empty($body['public_name'])?1:0,'trees-privacy-v1']);
     } catch (PDOException $e) {
         if ((string)$e->getCode()==='23000') cssv_fail('A tree campaign account already exists for this mobile number or CNIC. Please sign in.',409,'account_exists');
         throw $e;
