@@ -295,11 +295,11 @@ root.addEventListener('click',async e=>{
  if(t.dataset.grade){ui.grade=t.dataset.grade;draw();return}
  switch(t.dataset.action){
   case 'expandplan':ui.showAllDays=!ui.showAllDays;draw();break;
-  case 'editplan':ui.setupDays=saved.plan.days;ui.setupDate=saved.plan.startDate;saved.plan=null;ui.view='course';draw();break;
+  case 'editplan':ui.setupDays=saved.plan.days;ui.setupDate=saved.plan.startDate;ui.setupRestDays=[...(saved.plan.restDays||[])];ui.setupDailyMinutes=saved.plan.dailyMinutes||90;saved.plan=null;ui.view='course';draw();break;
   case 'saveplan':{
-   const dd=document.getElementById('custom-days'),sd=document.getElementById('start-date'),days=dd?Number(dd.value):ui.setupDays,date=sd?sd.value:ui.setupDate;
-   if(!Number.isInteger(days)||days<5||days>120||!/^\d{4}-\d{2}-\d{2}$/.test(date)){ui.error='Choose a duration between 5 and 120 days and a valid start date.';draw();return}
-   saved.plan={days,startDate:date,changedAt:new Date().toISOString()};ui.showAllDays=false;ui.setupDays=days;ui.setupDate=date;notify();draw();break;
+   const dd=document.getElementById('custom-days'),sd=document.getElementById('start-date'),dm=document.getElementById('daily-minutes'),days=dd?Number(dd.value):ui.setupDays,date=sd?sd.value:ui.setupDate,dailyMinutes=dm?Number(dm.value):ui.setupDailyMinutes,restDays=[...ui.setupRestDays].sort((a,b)=>a-b);
+   if(!validPlan({days,startDate:date,dailyMinutes,restDays})){ui.error='Choose 5–120 study days, 15–600 minutes daily, a valid start date and at least one active weekday.';draw();return}
+   saved.plan={days,startDate:date,restDays,dailyMinutes,changedAt:new Date().toISOString()};ui.showAllDays=false;ui.setupDays=days;ui.setupDate=date;ui.setupDailyMinutes=dailyMinutes;notify();draw();break;
   }
   case 'prevbeat':ui.beat=Math.max(0,ui.beat-1);draw();break;
   case 'nextbeat':{
@@ -334,6 +334,8 @@ root.addEventListener('click',async e=>{
 root.addEventListener('change',e=>{
  if(e.target.id==='custom-days'){const n=Number(e.target.value);if(n>=5&&n<=120)ui.setupDays=n}
  if(e.target.id==='start-date')ui.setupDate=e.target.value;
+ if(e.target.id==='daily-minutes')ui.setupDailyMinutes=Number(e.target.value);
+ if(e.target.dataset.restDay!==undefined){const d=Number(e.target.dataset.restDay);ui.setupRestDays=e.target.checked?[...new Set([...ui.setupRestDays,d])]:ui.setupRestDays.filter(x=>x!==d)}
  if(e.target.id==='recall'){ui.draft=e.target.value;saveDraft(ui.id,ui.draft)}
  if(e.target.id==='write')saveDraft(ui.opening,e.target.value);
 });
@@ -352,7 +354,7 @@ window.addEventListener('message',e=>{
  const previousOwner=binding?.owner;const previouslyBound=binding!==null;
  const metadata=e.data.storage;if(metadata&&typeof metadata.key==='string'&&(metadata.key===KEY||metadata.key.startsWith('cssvista:reset-data:v1:')&&metadata.key.endsWith(encodeURIComponent(KEY)))){storageKey=metadata.key;binding={owner:metadata.owner||null,generation:metadata.generation||null}}else{storageKey=KEY;binding={owner:localStorage.getItem('cssvista:progress-owner'),generation:null}}
  if(e.data.preserveView&&previouslyBound&&previousOwner===binding.owner){saved={...defaults(),...incoming};draw();return}
- saved={...defaults(),...incoming};ui.id=byId.has(saved.last)?saved.last:lessons[0]?.id;ui.view='course';ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();draw();
+ saved={...defaults(),...incoming};ui.id=byId.has(saved.last)?saved.last:lessons[0]?.id;ui.view='course';ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;draw();
 });
 document.getElementById('close-reference').addEventListener('click',()=>document.getElementById('reference').close());
 function seasonSvg(june){let axis=june?-18:18;let northX=june?237:307;let southX=june?307:237;return `<svg role="img" aria-label="Simplified sunlight and Earth-axis diagram, not to scale" viewBox="0 0 570 246" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="sunGrad"><stop stop-color="#f6d48f"/><stop offset="1" stop-color="#e9ad67"/></radialGradient><linearGradient id="earthGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9d2c4"/><stop offset="1" stop-color="#608d84"/></linearGradient></defs><circle cx="82" cy="113" r="43" fill="url(#sunGrad)"/><circle cx="82" cy="113" r="48" fill="none" stroke="#e4c69a" stroke-width="1.5" stroke-dasharray="4 6"/><text x="82" y="180" text-anchor="middle" fill="#7e8d74" font-size="12" font-family="Arial">SUN</text><g stroke="#d9b879" stroke-width="1.5" stroke-dasharray="6 7"><path d="M133 62 H230"/><path d="M133 94 H225"/><path d="M133 124 H225"/><path d="M133 156 H230"/></g><path d="M219 56h14m-6-6 6 6-6 6" fill="none" stroke="#c8a262" stroke-width="1.5"/><circle cx="272" cy="113" r="67" fill="url(#earthGrad)" stroke="#6a9287" stroke-width="1.5"/><path d="M272 46a67 67 0 0 1 0 134" fill="#1e504b" opacity=".50" transform="translate(0 0)"/><path d="M225 69c12-17 23 1 36 10 12 8 18-5 30 7 4 8-2 12-14 14-14 1-9 23-25 20-20-3-17-13-27-26z" fill="#b3ce9c" opacity=".9"/><path d="M287 124c26-14 36 3 28 18-10 9-1 15-23 25-8-3-12-23-5-43z" fill="#b3ce9c" opacity=".88"/><g transform="rotate(${axis} 272 113)"><path d="M272 17V209" stroke="#214c3a" stroke-width="2" stroke-dasharray="5 5"/><path d="M267 23l5-11 5 11" fill="none" stroke="#214c3a" stroke-width="2"/><circle cx="272" cy="113" r="2.5" fill="#214c3a"/></g><text x="${northX}" y="30" text-anchor="middle" fill="#315844" font-size="11" font-weight="700" font-family="Arial">N</text><text x="${southX}" y="209" text-anchor="middle" fill="#315844" font-size="11" font-weight="700" font-family="Arial">S</text><text x="435" y="75" fill="#60776b" font-size="12" font-family="Arial">Northern</text><text x="435" y="93" fill="#315a42" font-size="14" font-weight="700" font-family="Arial">${june?'Summer':'Winter'}</text><path d="M347 87h70" stroke="#c4d6c4" stroke-width="1.5"/><text x="435" y="142" fill="#60776b" font-size="12" font-family="Arial">Southern</text><text x="435" y="160" fill="#315a42" font-size="14" font-weight="700" font-family="Arial">${june?'Winter':'Summer'}</text><path d="M346 149h70" stroke="#c4d6c4" stroke-width="1.5"/><text x="272" y="235" text-anchor="middle" fill="#819b87" font-size="10" font-family="Arial">Schematic: axis orientation relative to the Sun</text></svg>`}
@@ -367,7 +369,7 @@ function moonSvg(phase){
   const response=await fetch('/gsa-tutor/content/catalog.json',{cache:'force-cache'});if(!response.ok)throw Error('Course catalogue could not be loaded');
   catalog=await response.json();lessons=catalog.chapters.flatMap(c=>c.sections.map(s=>({...s,chapter:c.id,chapterTitle:c.title,part:c.part})));byId=new Map(lessons.map(s=>[s.id,s]));
   if(lessons.length!==141||catalog.chapters.length!==28)throw Error('The course catalogue is incomplete');
-  ui.id=byId.has(saved.last)?saved.last:lessons[0].id;ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();draw();
+  ui.id=byId.has(saved.last)?saved.last:lessons[0].id;ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;draw();
  }catch(e){root.innerHTML='<div class="panel" role="alert"><h2>Course temporarily unavailable</h2><p>'+safe(e.message)+'</p><button class="btn" onclick="location.reload()">Reload course</button></div>'}
 })();
 })();
