@@ -129,7 +129,7 @@ try {
   resetPage.on('pageerror',e=>errors.push(e.message))
   const oneTimeToken='b'.repeat(64)
   await resetPage.goto(origin+'/100-million-trees#reset-email='+oneTimeToken)
-  await resetPage.getByRole('heading',{name:'Choose a new password'}).waitFor()
+  await resetPage.getByRole('heading',{name:'Choose a new password'}).waitFor().catch(async err=>{console.error('Email reset navigation diagnostic:',(await resetPage.locator('body').innerText()).slice(0,1400),'URL path',new URL(resetPage.url()).pathname);throw err})
   assert.equal(new URL(resetPage.url()).hash,'','Email reset token is removed from the URL immediately')
   await resetPage.getByLabel('New password',{exact:true}).fill('Browser-Email-Reset-Password-2026')
   await resetPage.getByLabel('Repeat new password',{exact:true}).fill('Browser-Email-Reset-Password-2026')
