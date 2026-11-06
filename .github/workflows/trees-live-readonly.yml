@@ -52,8 +52,13 @@ jobs:
             echo "Unexpected unauthenticated moderation access status: $code"
             exit 1
           fi
-          if ! curl --silent --show-error --fail --location --max-time 20 'https://www.css-vista.com/100-million-trees' | grep -Eqi 'index|root|<html'; then
+          page_body="$(mktemp)"
+          if ! curl --silent --show-error --fail --location --max-time 20 --output "$page_body" 'https://www.css-vista.com/100-million-trees'; then
             echo 'Campaign application route is not accessible.'
+            exit 1
+          fi
+          if ! grep -Eqi 'index|root|<html' "$page_body"; then
+            echo 'Campaign application response did not contain the expected application markup.'
             exit 1
           fi
           if ! curl --silent --show-error --fail --location --max-time 20 --output /dev/null 'https://www.css-vista.com/images/esar-ul-ebad-logo.webp'; then
