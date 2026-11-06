@@ -136,14 +136,55 @@ function Overview({ summary, onContribute, onRankings }: { summary: Summary, onC
         <div className="trees-hero-actions"><button type="button" className="trees-btn-main" onClick={onContribute}><Sprout size={19}/> I want to contribute <ArrowRight size={17}/></button><button type="button" className="trees-btn-ghost" onClick={onRankings}>Explore leaderboard <ChevronRight size={16}/></button></div>
         <div className="trees-trust-line"><ShieldCheck size={17}/> Public figures include approved planting reports only</div>
       </div>
-      <div className="trees-hero-art" aria-hidden="true"><div className="trees-art-glow"/><div className="trees-rings"><TreeDeciduous size={184} strokeWidth={0.7}/></div><div className="trees-art-label">ROOTED IN PUNJAB <span>•</span> GROWING TOGETHER</div></div>
+      <div className="trees-hero-art" aria-hidden="true">
+        <img className="trees-hero-photograph" src="https://images.unsplash.com/photo-1568309507341-b4cfba3caf92?auto=format&fit=crop&w=1300&q=80" alt="" width="650" height="650" fetchPriority="high"/>
+        <div className="trees-hero-photo-shade"/>
+        <div className="trees-hero-target-seal"><span className="trees-hero-target-icon"><TreeDeciduous size={30} strokeWidth={1.6}/></span><b>100M</b><small>TREES · OUR TARGET</small></div>
+        <div className="trees-art-label">ROOTED IN PUNJAB <span>•</span> GROWING TOGETHER</div>
+      </div>
+    </section>
+    <section className="trees-feature-section" aria-labelledby="trees-ways-heading">
+      <div className="trees-feature-heading"><div><span className="trees-kicker">EXPLORE THE MOVEMENT</span><h2 id="trees-ways-heading">One mission. Many ways to make an impact.</h2><p>Join the planting drive, follow the progress, or see the evidence shared by our community.</p></div><span className="trees-feature-heading-rule" aria-hidden="true"/></div>
+      <div className="trees-feature-grid">
+        <article className="trees-feature-card trees-feature-card-plant">
+          <div className="trees-feature-visual">
+            <img src="https://images.unsplash.com/photo-1767457108672-79c6dd48a165?auto=format&fit=crop&w=980&q=78" loading="lazy" decoding="async" width="960" height="640" alt="Real photograph of a small green seedling emerging from fertile soil"/>
+            <span className="trees-feature-ordinal">01 / PARTICIPATE</span>
+            <span className="trees-feature-symbol" aria-hidden="true"><Sprout size={23}/></span>
+          </div>
+          <div className="trees-feature-content"><span className="trees-feature-overline">PLANT THE FUTURE</span><h3>Start with one tree.</h3><p>Create your free account, choose a species, and document your contribution. No OTP or profile portrait needed.</p>
+            <button className="trees-feature-cta" type="button" onClick={onContribute}>Join the planting drive <ArrowRight size={18}/></button>
+          </div>
+        </article>
+        <article className="trees-feature-card trees-feature-card-progress">
+          <div className="trees-feature-visual">
+            <img src="https://images.unsplash.com/photo-1568309507341-b4cfba3caf92?auto=format&fit=crop&w=980&q=78" loading="lazy" decoding="async" width="960" height="640" alt="Real aerial photograph of a dense green forest canopy"/>
+            <span className="trees-feature-ordinal">02 / DISCOVER</span>
+            <span className="trees-feature-symbol" aria-hidden="true"><TreeDeciduous size={23}/></span>
+          </div>
+          <div className="trees-feature-content"><span className="trees-feature-overline">TRACK THE MISSION</span><h3>See every approved step.</h3><p>Explore the city-level progress and rankings. Only moderator-approved planting records count toward the target.</p>
+            <button className="trees-feature-cta" type="button" onClick={onRankings}>Explore the leaderboard <ArrowRight size={18}/></button>
+          </div>
+        </article>
+        <article className="trees-feature-card trees-feature-card-evidence">
+          <div className="trees-feature-visual">
+            <img src="https://images.pexels.com/photos/7728015/pexels-photo-7728015.jpeg?auto=compress&cs=tinysrgb&w=980" loading="lazy" decoding="async" width="960" height="640" alt="Real photograph of green nursery seedlings growing in rows"/>
+            <span className="trees-feature-ordinal">03 / FOLLOW</span>
+            <span className="trees-feature-symbol" aria-hidden="true"><Camera size={22}/></span>
+          </div>
+          <div className="trees-feature-content"><span className="trees-feature-overline">EVIDENCE & TRANSPARENCY</span><h3>Look beyond the numbers.</h3><p>View consented planting photographs and learn how new saplings are reported and reviewed.</p>
+            <button className="trees-feature-cta" type="button" onClick={()=>document.getElementById('trees-community-gallery')?.scrollIntoView({behavior:'smooth',block:'start'})}>View the planting gallery <ArrowRight size={18}/></button>
+          </div>
+        </article>
+      </div>
+      <p className="trees-feature-photo-note">Nature photographs are illustrative; they are not submitted campaign evidence. Approved community photographs are shown in the gallery below.</p>
     </section>
     <section className="trees-progress-section"><div className="trees-progress-copy"><span className="trees-kicker">THE COLLECTIVE MISSION</span><h2>Our progress, transparently tracked.</h2></div><div className="trees-progress-top"><b>{fmt(summary.trees)}</b><span>of {fmt(summary.target)} saplings</span></div><div className="trees-progress-track"><span style={{width: pct + '%'}} /></div><div className="trees-progress-bottom"><span>{pct.toFixed(5)}% of target</span><span>{fmt(Math.max(0,summary.target-summary.trees))} still to plant</span></div>
       <div className="trees-stat-grid"><div className="trees-stat"><TreeDeciduous/><span>Approved saplings</span><strong>{fmt(summary.trees)}</strong></div><div className="trees-stat"><Sprout/><span>Seeds sown (separate)</span><strong>{fmt(summary.seeds)}</strong></div><div className="trees-stat"><Heart/><span>Contributors</span><strong>{fmt(summary.contributors)}</strong></div><div className="trees-stat"><MapPin/><span>Participating cities</span><strong>{fmt(summary.cities)}</strong></div></div>
     </section>
     <div className="trees-followup-stat"><ShieldCheck size={18}/><span><strong>{fmt(summary.survival_checks)}</strong> follow-up observations approved at 30, 90 or 180 days. These are separate from the planting total and are not independent proof of long-term survival.</span></div>
     <PunjabMap summary={summary}/>
-    <section className="trees-gallery-section"><div className="trees-section-head"><div><span className="trees-kicker">FROM OUR COMMUNITY</span><h2>Plantings, documented.</h2></div><span className="trees-light-tag">Shared with participants' consent</span></div>
+    <section className="trees-gallery-section" id="trees-community-gallery"><div className="trees-section-head"><div><span className="trees-kicker">FROM OUR COMMUNITY</span><h2>Plantings, documented.</h2></div><span className="trees-light-tag">Shared with participants' consent</span></div>
       {summary.public_gallery.length ? <div className="trees-gallery-grid">{summary.public_gallery.map(item=><article className="trees-gallery-card" key={item.id}><img src={API + 'photo&kind=proof&id=' + encodeURIComponent(item.id)} loading="lazy" alt={'Verified planting report in ' + item.city}/><div><strong>{item.city}</strong><span>{item.quantity} {item.method === 'sapling' ? 'saplings' : 'seeds'} · {item.species}</span></div></article>)}</div> : <div className="trees-gallery-empty"><Camera size={25}/><div><strong>Our planting gallery is getting ready.</strong><p>Approved photos will appear here only when participants choose to share them.</p></div></div>}
     </section>
     <section className="trees-how"><div className="trees-section-head"><div><span className="trees-kicker">HOW TO PARTICIPATE</span><h2>Four simple steps. A lasting impact.</h2></div></div><div className="trees-how-grid">
