@@ -613,6 +613,7 @@ if ($action==='register') {
     $city=tree_string($body['city']??null,'Punjab city',2,70);
     if (!preg_match('/^[A-Za-z .-]{2,70}$/D',$city)) cssv_fail('Enter a valid Punjab town or city.',422,'invalid_city');
     $phone=tree_mobile($body['mobile']??null);
+    $email=cssv_normalize_email($body['email']??'');
     $cnic=tree_cnic($body['cnic']??null);
     $password=tree_password($body['password']??null);
     if (($body['consent']??false)!==true) cssv_fail('Consent is required to register.',422,'consent_required');
@@ -620,15 +621,76 @@ if ($action==='register') {
     $recovery=tree_recovery_new();
     try {
         $id=cssv_uuid_v4();
-        $db->prepare('INSERT INTO tree_campaign_members (id,full_name,mobile,cnic_hash,cnic_last4,city,password_hash,recovery_hash,public_name,consent_version,consented_at) VALUES(?,?,?,?,?,?,?,?,?, ?,NOW(6))')
-            ->execute([$id,$name,$phone,cssv_hash_secret('tree-cnic:'.$cnic),substr($cnic,-4),$city,password_hash($password,PASSWORD_DEFAULT),tree_recovery_hash($recovery),!empty($body['public_name'])?1:0,'trees-privacy-v1']);
+        $db->prepare('INSERT INTO tree_campaign_members (id,full_name,email,mobile,cnic_hash,cnic_last4,city,password_hash,recovery_hash,public_name,consent_version,consented_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,NOW(6))')
+            ->execute([$id,$name,$email,$phone,cssv_hash_secret('tree-cnic:'.$cnic),substr($cnic,-4),$city,password_hash($password,PASSWORD_DEFAULT),tree_recovery_hash($recovery),!empty($body['public_name'])?1:0,'trees-privacy-v2']);
     } catch (PDOException $e) {
-        if ((string)$e->getCode()==='23000') cssv_fail('A tree campaign account already exists for this mobile number or CNIC. Please sign in.',409,'account_exists');
+        if ((string)$e->getCode()==='23000') cssv_fail('An account already exists for this mobile number, email, or CNIC. Please sign in.',409,'account_exists');
         throw $e;
     }
     $csrf=tree_issue($db,$id);
+    $sent=tree_send_email_token($db,$id,$email,'verify');
     $q=$db->prepare('SELECT * FROM tree_campaign_members WHERE id=?');$q->execute([$id]);
-    cssv_json(['ok'=>true,'member'=>tree_public_member($q->fetch()),'csrf_token'=>$csrf,'recovery_key'=>$recovery],201);
+    cssv_json(['ok'=>true,'member'=>tree_public_member($q->fetch()),'csrf_token'=>$csrf,'recovery_key'=>$recovery,'verification_sent'=>$sent],201);
+}
+if ($action==='request-email-reset') {
+    $body=tree_login_json();
+    $email=cssv_normalize_email($body['email']??'');
+    tree_rate($db,'email-reset',$email,4,3600);
+    $q=$db->prepare('SELECT id,email FROM tree_campaign_members WHERE email=? AND email_verified_at IS NOT NULL LIMIT 1');
+    $q->execute([$email]);$row=$q->fetch();
+    if ($row) tree_send_email_token($db,(string)$row['id'],(string)$row['email'],'reset');
+    // Always the same public response, regardless of account existence,
+    // verification status or mail delivery, to prevent address enumeration.
+    cssv_json(['ok'=>true,'message'=>'If a confirmed campaign account uses this email and mail delivery is available, a reset link will arrive shortly.']);
+}
+if ($action==='confirm-email') {
+    $body=tree_login_json();
+    tree_rate($db,'email-confirm',cssv_ip_prefix(),20,3600);
+    tree_consume_email_token($db,'verify',(string)($body['token']??''));
+    cssv_json(['ok'=>true,'message'=>'Email address confirmed. You can now recover your password through email.']);
+}
+if ($action==='reset-email-password') {
+    $body=tree_login_json();
+    tree_rate($db,'email-token',cssv_ip_prefix(),12,3600);
+    $password=tree_password($body['new_password']??null);
+    $replacement=tree_consume_email_token($db,'reset',(string)($body['token']??''),$password);
+    cssv_set_cookie(TREE_SESSION,'',time()-3600,true);
+    cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
+    cssv_json(['ok'=>true,'recovery_key'=>$replacement,'message'=>'Password reset. All prior sessions were signed out. Save your new offline recovery key.']);
+}
+if ($action==='resend-email-verification') {
+    $member=tree_auth($db,true);
+    $q=$db->prepare('SELECT email,email_verified_at FROM tree_campaign_members WHERE id=?');
+    $q->execute([$member['id']]);$row=$q->fetch();
+    if (!$row || !$row['email'] || $row['email_verified_at']) cssv_json(['ok'=>true,'verification_sent'=>false,'message'=>'No unconfirmed email needs verification.']);
+    tree_rate($db,'email-verify',(string)$member['id'],3,3600);
+    $sent=tree_send_email_token($db,(string)$member['id'],(string)$row['email'],'verify');
+    cssv_json(['ok'=>true,'verification_sent'=>$sent,'message'=>$sent?'Confirmation link sent to your email.':'Email service unavailable. Your offline recovery key still works.']);
+}
+if ($action==='change-email') {
+    $member=tree_auth($db,true);
+    $body=tree_login_json();
+    $newEmail=cssv_normalize_email($body['email']??'');
+    tree_rate($db,'change-email',(string)$member['id'],3,3600);
+    $q=$db->prepare('SELECT password_hash,email FROM tree_campaign_members WHERE id=?');
+    $q->execute([$member['id']]);$row=$q->fetch();
+    if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) cssv_fail('Current password is incorrect.',401,'password_incorrect');
+    try {
+        $db->beginTransaction();
+        $db->prepare('UPDATE tree_campaign_members SET email=?,email_verified_at=NULL WHERE id=?')->execute([$newEmail,$member['id']]);
+        $db->prepare('DELETE FROM tree_campaign_email_tokens WHERE member_id=?')->execute([$member['id']]);
+        $db->commit();
+    } catch(Throwable $e) {
+        if($db->inTransaction())$db->rollBack();
+        if($e instanceof PDOException && (string)$e->getCode()==='23000') cssv_fail('Email address is already registered.',409,'email_in_use');
+        throw $e;
+    }
+    if((string)$row['email']!==$newEmail && $row['email']) {
+        cssv_send_mail((string)$row['email'],'Punjab Trees email address changed',
+            "The contact email for your Punjab Trees campaign account was changed. If you did not request this, contact CSS Vista immediately. No password or account token is included in this notice.");
+    }
+    $sent=tree_send_email_token($db,(string)$member['id'],$newEmail,'verify');
+    cssv_json(['ok'=>true,'verification_sent'=>$sent,'message'=>$sent?'A confirmation link was sent to your new email.':'Email changed, but the confirmation email could not be sent. Use your offline recovery key until verified.']);
 }
 if ($action==='login') {
     $body=tree_login_json();
