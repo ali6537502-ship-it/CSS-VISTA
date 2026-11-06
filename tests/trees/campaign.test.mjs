@@ -15,7 +15,10 @@ test('campaign uses a separate session and secure unique duplicate prevention',(
 })
 test('only manually approved saplings count toward the 100-million-tree goal',()=>{
   assert.match(api,/const TREE_TARGET = 100000000/)
-  assert.match(api,/IF\(method='sapling',quantity,0\)/)
+  assert.match(api,/function tree_rollup_adjust/)
+  assert.match(api,/tree_campaign_city_rollup/)
+  assert.match(api,/tree_campaign_member_rollup/)
+  assert.match(api,/\$decision==='approved'\?1:-1/)
   assert.match(api,/WHERE status='approved'/)
   assert.match(api,/status ENUM\('pending','approved','rejected'\) NOT NULL DEFAULT 'pending'/)
   assert.match(api,/WHERE id=\? AND status=\?/)
