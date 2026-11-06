@@ -71,6 +71,7 @@ try {
   const page=await mobile.newPage()
   page.on('pageerror',e=>errors.push(e.message))
   await page.goto(origin+'/100-million-trees')
+  await page.locator('.trees-feature-card').first().waitFor()
   const mobileCards=await page.locator('.trees-feature-card').evaluateAll(els=>els.map(el=>({x:el.getBoundingClientRect().x,y:el.getBoundingClientRect().y,w:el.getBoundingClientRect().width})))
   assert.equal(mobileCards.length,3)
   assert.ok(mobileCards.every(b=>Math.abs(b.x-mobileCards[0].x)<5),'Mobile cards stack in one column')
