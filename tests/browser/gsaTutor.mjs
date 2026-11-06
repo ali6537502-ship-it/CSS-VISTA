@@ -53,6 +53,19 @@ try{
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)
    assert.ok(overflow<=2,'unwanted horizontal scroll at '+width+': '+overflow)
    await page.screenshot({path:'test-artifacts/gsa-tutor/learning-'+width+'.png',fullPage:true})
+   if(width===768){
+     await page.locator('[data-view="library"]').click()
+     await page.locator('[data-chapter="9"]').click()
+     await page.locator('[data-lesson="c9-s9-3"]').click()
+     await page.locator('[data-osm="hyper"]').click()
+     assert.match(await page.locator('.science-graphic svg').getAttribute('aria-label'),/Net water moves out/)
+     assert.equal(await page.locator('[data-osm="hyper"]').getAttribute('aria-pressed'),'true')
+     await page.locator('[data-view="library"]').click()
+     await page.locator('[data-chapter="18"]').click()
+     await page.locator('[data-lesson="c18-s18-1"]').click()
+     await page.locator('[data-water="4"]').click()
+     assert.match(await page.locator('.science-graphic svg').getAttribute('aria-label'),/step 5 highlighted/)
+   }
    if(width===375){
      await page.locator('.day-lesson').first().click();await page.locator('.lesson-card').waitFor()
      const empty={plan:null,completed:{},drafts:{}}
