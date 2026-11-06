@@ -66,6 +66,7 @@ function tree_schema(PDO $db): void {
         member_id CHAR(36) NOT NULL,
         token_hash CHAR(64) NOT NULL,
         csrf_hash CHAR(64) NOT NULL,
+        user_agent_hash CHAR(64) NULL,
         expires_at DATETIME(6) NOT NULL,
         revoked_at DATETIME(6) NULL,
         UNIQUE KEY uq_tree_session_token (token_hash),
@@ -165,6 +166,9 @@ function tree_schema(PDO $db): void {
     // Backward-compatible schema changes: this PR has not been deployed,
     // but staging databases from earlier revisions must also be safe.
     $changes = [
+        'tree_campaign_sessions' => [
+            'user_agent_hash' => 'ADD COLUMN user_agent_hash CHAR(64) NULL',
+        ],
         'tree_campaign_members' => [
             'recovery_hash' => 'ADD COLUMN recovery_hash CHAR(64) NULL',
             'consent_version' => "ADD COLUMN consent_version VARCHAR(32) NOT NULL DEFAULT 'trees-privacy-v1'",
@@ -261,8 +265,8 @@ function tree_issue(PDO $db, string $id): string {
     $token=rtrim(strtr(base64_encode(random_bytes(48)),'+/','-_'),'=');
     $csrf=rtrim(strtr(base64_encode(random_bytes(32)),'+/','-_'),'=');
     $expiry=time()+14*86400;
-    $db->prepare('INSERT INTO tree_campaign_sessions (id,member_id,token_hash,csrf_hash,expires_at) VALUES(?,?,?,?,?)')
-        ->execute([cssv_uuid_v4(),$id,cssv_hash_secret($token),cssv_hash_secret($csrf),gmdate('Y-m-d H:i:s',$expiry)]);
+    $db->prepare('INSERT INTO tree_campaign_sessions (id,member_id,token_hash,csrf_hash,user_agent_hash,expires_at) VALUES(?,?,?,?,?,?)')
+        ->execute([cssv_uuid_v4(),$id,cssv_hash_secret($token),cssv_hash_secret($csrf),cssv_user_agent_hash(),gmdate('Y-m-d H:i:s',$expiry)]);
     cssv_set_cookie(TREE_SESSION,$token,$expiry,true);
     cssv_set_cookie(TREE_CSRF,$csrf,$expiry,false);
     return $csrf;
@@ -270,9 +274,13 @@ function tree_issue(PDO $db, string $id): string {
 function tree_member(PDO $db): ?array {
     $token=(string)($_COOKIE[TREE_SESSION]??'');
     if ($token==='' || strlen($token)>256) return null;
-    $q=$db->prepare('SELECT s.id AS session_id,s.csrf_hash,m.id,m.full_name,m.mobile,m.city,m.public_name,m.avatar_path,m.created_at FROM tree_campaign_sessions s JOIN tree_campaign_members m ON m.id=s.member_id WHERE s.token_hash=? AND s.revoked_at IS NULL AND s.expires_at>NOW(6) LIMIT 1');
+    $q=$db->prepare('SELECT s.id AS session_id,s.csrf_hash,s.user_agent_hash,m.id,m.full_name,m.mobile,m.city,m.public_name,m.avatar_path,m.created_at FROM tree_campaign_sessions s JOIN tree_campaign_members m ON m.id=s.member_id WHERE s.token_hash=? AND s.revoked_at IS NULL AND s.expires_at>NOW(6) LIMIT 1');
     $q->execute([cssv_hash_secret($token)]);
-    return $q->fetch() ?: null;
+    $row=$q->fetch();
+    if (!$row) return null;
+    $currentAgent=cssv_user_agent_hash();
+    if (!empty($row['user_agent_hash']) && !hash_equals((string)$row['user_agent_hash'],$currentAgent)) return null;
+    return $row;
 }
 function tree_auth(PDO $db, bool $csrf=false): array {
     $member=tree_member($db);
@@ -649,7 +657,8 @@ if ($action==='plant') {
     if (!is_int($quantity) || $quantity<1 || $quantity>20) cssv_fail('You may submit between 1 and 20 per report.',422,'invalid_quantity');
     $day=(string)($_POST['planted_on']??'');
     $date=DateTimeImmutable::createFromFormat('!Y-m-d',$day,new DateTimeZone('UTC'));
-    if (!$date || $date->format('Y-m-d')!==$day || $date->getTimestamp()>time()+86400 || $date->getTimestamp()<time()-365*86400) cssv_fail('Choose a date within the past year.',422,'invalid_date');
+    $todayPunjab=new DateTimeImmutable('today',new DateTimeZone('Asia/Karachi'));
+    if (!$date || $date->format('Y-m-d')!==$day || $day>$todayPunjab->format('Y-m-d') || $day<$todayPunjab->modify('-365 days')->format('Y-m-d')) cssv_fail('Choose a planting date from the past year, not a future date.',422,'invalid_date');
     $locality=tree_string($_POST['locality']??null,'neighbourhood or planting site',3,120);
     $q=$db->prepare("SELECT COUNT(*) FROM tree_campaign_plantings WHERE member_id=? AND created_at>DATE_SUB(NOW(6),INTERVAL 1 DAY)");
     $q->execute([$member['id']]);
@@ -783,7 +792,7 @@ if ($action==='review') {
                 cssv_fail('High-volume or repeated-image reports require documented on-site confirmation before approval.',422,'field_check_required');
             }
             $date=DateTimeImmutable::createFromFormat('!Y-m-d',$siteDate,new DateTimeZone('UTC'));
-            if (!$date || $date->format('Y-m-d')!==$siteDate || $siteDate<(string)$row['planted_on'] || $date->getTimestamp()>time()+86400) {
+            if (!$date || $date->format('Y-m-d')!==$siteDate || $siteDate<(string)$row['planted_on'] || $siteDate>(new DateTimeImmutable('today',new DateTimeZone('Asia/Karachi')))->format('Y-m-d')) {
                 $db->rollBack();
                 cssv_fail('Enter a valid date of physical verification.',422,'invalid_field_check_date');
             }
