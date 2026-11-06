@@ -123,6 +123,34 @@ function tree_schema(PDO $db): void {
         reviewed_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         INDEX idx_tree_review_audit (planting_id,reviewed_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_followups (
+        id CHAR(36) NOT NULL PRIMARY KEY,
+        planting_id CHAR(36) NOT NULL,
+        member_id CHAR(36) NOT NULL,
+        phase SMALLINT UNSIGNED NOT NULL,
+        surviving SMALLINT UNSIGNED NOT NULL,
+        proof_path VARCHAR(240) NOT NULL,
+        proof_mime VARCHAR(20) NOT NULL,
+        proof_hash CHAR(64) NOT NULL,
+        status ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+        reviewer_id CHAR(36) NULL,
+        reviewed_at DATETIME(6) NULL,
+        review_note VARCHAR(400) NULL,
+        created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+        UNIQUE KEY uq_tree_survival_phase (planting_id,phase),
+        UNIQUE KEY uq_tree_survival_photo (proof_hash),
+        INDEX idx_tree_followup_member (member_id,created_at),
+        INDEX idx_tree_followup_queue (status,created_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_followup_reviews (
+        id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        followup_id CHAR(36) NOT NULL,
+        admin_id CHAR(36) NOT NULL,
+        decision ENUM('approved','rejected') NOT NULL,
+        note VARCHAR(400) NOT NULL,
+        created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+        INDEX idx_tree_followup_audit (followup_id,created_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_rate_events (
         id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         ip_hash CHAR(64) NOT NULL,
@@ -398,6 +426,7 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
         $contributors=(int)$db->query('SELECT COUNT(*) FROM tree_campaign_member_rollup WHERE trees>0 OR seeds>0')->fetchColumn();
         $cities=(int)$db->query('SELECT COUNT(*) FROM tree_campaign_city_rollup WHERE trees>0 OR seeds>0')->fetchColumn();
         $pending=(int)$db->query("SELECT COUNT(*) FROM tree_campaign_plantings WHERE status='pending'")->fetchColumn();
+        $survival=(int)$db->query("SELECT COUNT(*) FROM tree_campaign_followups f JOIN tree_campaign_plantings p ON p.id=f.planting_id WHERE f.status='approved' AND p.status='approved'")->fetchColumn();
         $locations=$db->query("SELECT city,trees,seeds FROM tree_campaign_city_rollup WHERE trees>0 OR seeds>0 ORDER BY trees DESC LIMIT 80")->fetchAll();
         $gallery=$db->query("SELECT id,city,species,method,quantity,planted_on FROM tree_campaign_plantings WHERE status='approved' AND public_photo=1 ORDER BY reviewed_at DESC LIMIT 12")->fetchAll();
         $leaders=$db->query("SELECT m.id,m.full_name,m.city,m.public_name,r.trees FROM tree_campaign_member_rollup r JOIN tree_campaign_members m ON m.id=r.member_id WHERE r.trees>0 ORDER BY r.trees DESC,m.id ASC LIMIT 15")->fetchAll();
@@ -407,7 +436,7 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
             $display=(bool)$leader['public_name']?$name:'Anonymous planter';
             $leaderboard[]=['rank'=>$i+1,'name'=>$display,'city'=>(string)$leader['city'],'trees'=>(int)$leader['trees']];
         }
-        cssv_json(['ok'=>true,'target'=>TREE_TARGET,'trees'=>(int)$tot['trees'],'seeds'=>(int)$tot['seeds'],'contributors'=>$contributors,'cities'=>$cities,'pending_reports'=>$pending,'city_totals'=>$locations,'leaderboard'=>$leaderboard,'public_gallery'=>$gallery]);
+        cssv_json(['ok'=>true,'target'=>TREE_TARGET,'trees'=>(int)$tot['trees'],'seeds'=>(int)$tot['seeds'],'contributors'=>$contributors,'cities'=>$cities,'pending_reports'=>$pending,'survival_checks'=>$survival,'city_totals'=>$locations,'leaderboard'=>$leaderboard,'public_gallery'=>$gallery]);
     }
     if ($action==='session') {
         $member=tree_member($db);
@@ -417,7 +446,10 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
         $member=tree_auth($db);
         $q=$db->prepare('SELECT id,species,method,quantity,planted_on,city,locality,status,review_note,created_at FROM tree_campaign_plantings WHERE member_id=? ORDER BY created_at DESC LIMIT 120');
         $q->execute([$member['id']]);
-        cssv_json(['ok'=>true,'member'=>tree_public_member($member),'reports'=>$q->fetchAll()]);
+        $plantings=$q->fetchAll();
+        $q=$db->prepare('SELECT id,planting_id,phase,surviving,status,review_note,created_at FROM tree_campaign_followups WHERE member_id=? ORDER BY created_at DESC');
+        $q->execute([$member['id']]);
+        cssv_json(['ok'=>true,'member'=>tree_public_member($member),'reports'=>$plantings,'followups'=>$q->fetchAll()]);
     }
     if ($action==='queue' || $action==='approved-reports') {
         tree_admin($db);
@@ -426,10 +458,23 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
         $q->execute([$status]);
         cssv_json(['ok'=>true,'reports'=>$q->fetchAll()]);
     }
+    if ($action==='followup-queue') {
+        tree_admin($db);
+        $list=$db->query("SELECT f.id,f.member_id,f.planting_id,f.phase,f.surviving,f.created_at,p.species,p.city,p.locality,p.quantity AS planted_quantity,m.full_name FROM tree_campaign_followups f JOIN tree_campaign_plantings p ON p.id=f.planting_id JOIN tree_campaign_members m ON m.id=f.member_id WHERE f.status='pending' AND p.status='approved' ORDER BY f.created_at ASC LIMIT 100")->fetchAll();
+        cssv_json(['ok'=>true,'reports'=>$list]);
+    }
     if ($action==='photo') {
         $kind=(string)($_GET['kind']??'proof');
         $id=(string)($_GET['id']??'');
         if (!preg_match('/^[a-f0-9-]{36}$/D',$id)) cssv_fail('Photo unavailable.',404,'photo_not_found');
+        if ($kind==='followup') {
+            $q=$db->prepare('SELECT member_id,proof_path,proof_mime FROM tree_campaign_followups WHERE id=?');
+            $q->execute([$id]);$photo=$q->fetch();
+            if (!$photo) cssv_fail('Photo unavailable.',404,'photo_not_found');
+            $member=tree_member($db);
+            if (!$member || $member['id']!==$photo['member_id']) tree_admin($db);
+            tree_photo_serve($photo['proof_path'],$photo['proof_mime']);
+        }
         if ($kind==='avatar') {
             $q=$db->prepare('SELECT avatar_path,avatar_mime FROM tree_campaign_members WHERE id=?');
             $q->execute([$id]);
@@ -541,12 +586,15 @@ if ($action==='delete-account') {
     if (!$row || !password_verify((string)($body['password']??''),(string)$row['password_hash'])) cssv_fail('Current password is incorrect.',401,'password_incorrect');
     $q=$db->prepare('SELECT proof_path FROM tree_campaign_plantings WHERE member_id=?');
     $q->execute([$member['id']]);$paths=$q->fetchAll(PDO::FETCH_COLUMN);
+    $q=$db->prepare('SELECT proof_path FROM tree_campaign_followups WHERE member_id=?');
+    $q->execute([$member['id']]);$paths=array_merge($paths,$q->fetchAll(PDO::FETCH_COLUMN));
     $q=$db->prepare("SELECT city,method,SUM(quantity) AS total FROM tree_campaign_plantings WHERE member_id=? AND status='approved' GROUP BY city,method");
     $q->execute([$member['id']]);$approvedGroups=$q->fetchAll();
     $db->beginTransaction();
     try {
         foreach($approvedGroups as $group) tree_rollup_adjust($db,(string)$member['id'],(string)$group['city'],(string)$group['method'],(int)$group['total'],-1);
         $db->prepare('DELETE FROM tree_campaign_member_rollup WHERE member_id=?')->execute([$member['id']]);
+        $db->prepare('DELETE FROM tree_campaign_followups WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_plantings WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_sessions WHERE member_id=?')->execute([$member['id']]);
         $db->prepare('DELETE FROM tree_campaign_members WHERE id=?')->execute([$member['id']]);
@@ -612,6 +660,54 @@ if ($action==='plant') {
         throw $e;
     }
     cssv_json(['ok'=>true,'id'=>$id,'status'=>'pending','message'=>'Evidence received. Counts and rankings update only after review.'],201);
+}
+if ($action==='followup') {
+    $member=tree_auth($db,true);
+    $id=(string)($_POST['planting_id']??'');
+    $phase=filter_var($_POST['phase']??null,FILTER_VALIDATE_INT);
+    $surviving=filter_var($_POST['surviving']??null,FILTER_VALIDATE_INT);
+    if (!preg_match('/^[a-f0-9-]{36}$/D',$id) || !is_int($phase) || !in_array($phase,[30,90,180],true)) cssv_fail('Choose a valid survival check.',422,'invalid_phase');
+    $q=$db->prepare("SELECT id,planted_on,quantity,proof_hash FROM tree_campaign_plantings WHERE id=? AND member_id=? AND method='sapling' AND status='approved'");
+    $q->execute([$id,$member['id']]);$plant=$q->fetch();
+    if (!$plant) cssv_fail('This approved planting record is unavailable.',404,'planting_unavailable');
+    $date=DateTimeImmutable::createFromFormat('!Y-m-d',(string)$plant['planted_on'],new DateTimeZone('UTC'));
+    $due=$date? $date->modify('+'.$phase.' days'):null;
+    if (!$due || $due>new DateTimeImmutable('today',new DateTimeZone('UTC'))) cssv_fail('This survival milestone is not yet due.',422,'check_not_due');
+    if (!is_int($surviving) || $surviving<0 || $surviving>(int)$plant['quantity']) cssv_fail('Surviving trees cannot exceed the approved original quantity.',422,'invalid_survival_count');
+    tree_rate($db,'followup',(string)$member['id'],8,86400);
+    $photo=tree_store_image($_FILES['photo']??[],'followups',TREE_MAX_PROOF);
+    if (hash_equals((string)$plant['proof_hash'],$photo['hash'])) {
+        cssv_remove_private_file($photo['path']);
+        cssv_fail('Upload a new photo taken for the survival check.',422,'old_photo_reused');
+    }
+    try {
+        $followupId=cssv_uuid_v4();
+        $db->prepare('INSERT INTO tree_campaign_followups(id,planting_id,member_id,phase,surviving,proof_path,proof_mime,proof_hash) VALUES(?,?,?,?,?,?,?,?)')
+            ->execute([$followupId,$id,$member['id'],$phase,$surviving,$photo['path'],$photo['mime'],$photo['hash']]);
+    } catch(Throwable $e) {
+        cssv_remove_private_file($photo['path']);
+        if ($e instanceof PDOException && (string)$e->getCode()==='23000') cssv_fail('This milestone or photograph was already submitted.',409,'repeat_followup');
+        throw $e;
+    }
+    cssv_json(['ok'=>true,'id'=>$followupId,'status'=>'pending','message'=>'Survival evidence received for human review.'],201);
+}
+if ($action==='followup-review') {
+    $admin=tree_admin($db,true);
+    $body=tree_login_json();
+    $id=(string)($body['id']??'');
+    $decision=(string)($body['decision']??'');
+    if (!preg_match('/^[a-f0-9-]{36}$/D',$id) || !in_array($decision,['approved','rejected'],true)) cssv_fail('Invalid survival-review action.',422,'invalid_review');
+    $note=tree_string((string)($body['note']??''),'survival review note',10,400);
+    $db->beginTransaction();
+    try {
+        $q=$db->prepare("UPDATE tree_campaign_followups SET status=?,reviewer_id=?,reviewed_at=NOW(6),review_note=? WHERE id=? AND status='pending'");
+        $q->execute([$decision,$admin['admin_id'],$note,$id]);
+        if($q->rowCount()!==1) {$db->rollBack();cssv_fail('Follow-up already reviewed.',409,'already_reviewed');}
+        $db->prepare('INSERT INTO tree_campaign_followup_reviews(followup_id,admin_id,decision,note) VALUES(?,?,?,?)')
+            ->execute([$id,$admin['admin_id'],$decision,$note]);
+        $db->commit();
+    } catch(Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
+    cssv_json(['ok'=>true,'status'=>$decision]);
 }
 if ($action==='review') {
     $admin=tree_admin($db,true);
