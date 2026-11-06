@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 708,
+  "count": 710,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4955,6 +4955,20 @@
     {
       "id": "current-affairs-archive-2026-11-05-ap-midterm-voter-poll",
       "text": "The Associated Press's 2026 US midterm Voter Poll surveyed approximately 100,000 voters.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-reko-diq-us-financing",
+      "text": "Reuters reported on 6 November 2026 that US financing for Pakistan's Reko Diq mining project had been approved.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-china-clean-tech-commercial-flows",
+      "text": "Reuters estimated about $132 billion in Chinese clean-technology exports and overseas investment in the preceding year, a commercial measure not directly comparable to official climate finance.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

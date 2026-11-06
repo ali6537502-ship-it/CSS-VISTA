@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "published_at": "2026-11-06T19:00:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 6 November 2026 | Evening preliminary edition (00:00–19:00 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-06-pakistan-us-midterms-diplomacy",
+      "category": "Pakistan — Foreign Relations",
+      "headline": "US midterm outcome raises questions over Pakistan's diplomatic approach to Washington",
+      "summary": "Reuters reported on 6 November that Democratic gains in the US congressional elections may increase scrutiny of Pakistan's recent close engagement with President Donald Trump's administration. The consequences remain prospective rather than enacted policy.",
+      "what_happened": "Reuters described Pakistani officials' concern that congressional scrutiny could affect deals and initiatives linked to the Trump administration, while Pakistanis facing high energy costs hope political changes could bring relief. It noted US financing approval for the Reko Diq project, alongside unresolved requests and proposals. The article presents assessments, not confirmed congressional investigations or new US sanctions.",
+      "background": "Pakistan's relations with the United States encompass trade, security cooperation, investment and diplomacy concerning Iran. US midterm elections can alter congressional oversight without automatically changing executive foreign policy.",
+      "why_it_matters": "Potential changes in congressional oversight may affect diplomatic risk and investment confidence. The outcome does not establish any specific future decision toward Pakistan.",
+      "pakistan_perspective": "The distinction between approved project financing and proposed arrangements is important when evaluating tangible outcomes of bilateral diplomacy.",
+      "key_takeaways": [
+        "Reuters reported that US financing for the Reko Diq mining project had been approved.",
+        "Possible congressional scrutiny is a forecast, not a completed action."
+      ],
+      "facts": [
+        "Reuters reported on 6 November 2026 that US financing for Pakistan's Reko Diq project had been approved."
+      ],
+      "quick_gk": [
+        "Reko Diq is a mining project in Pakistan associated with US financing approval reported in November 2026."
+      ],
+      "question_angles": [
+        "Which Pakistani mining project did Reuters identify as having received US financing approval?"
+      ],
+      "topics": [
+        "Pakistan–US relations",
+        "congressional oversight",
+        "investment diplomacy"
+      ],
+      "countries": [
+        "Pakistan",
+        "United States"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistan's leaders dread US Democrats' win but its households are praying for it",
+          "url": "https://www.reuters.com/world/asia-pacific/pakistans-leaders-dread-us-democrats-win-its-households-are-praying-it-2026-11-06/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-06-china-clean-tech-developing-economies",
+      "category": "World — Climate and Industrial Policy",
+      "headline": "Reuters analysis examines China's growing commercial clean-technology role in developing economies",
+      "summary": "Reuters reported on 6 November that Chinese clean-technology exports and overseas investment are becoming a major channel for solar, battery and electric-vehicle deployment in developing economies; its commercial-flow estimates are not equivalent to official climate-finance pledges.",
+      "what_happened": "Reuters estimated approximately $132 billion in Chinese clean-technology exports and overseas investment in the preceding year, compared with $137 billion in wealthy-country climate finance in 2024. The report explicitly cautioned that the two measures are not directly comparable: the Chinese estimate largely reflects commercial transactions, while official climate finance includes adaptation and disaster recovery.",
+      "background": "China's manufacturing scale has lowered prices for solar panels, batteries and electric vehicles, while international climate finance seeks to support both mitigation and adaptation.",
+      "why_it_matters": "Lower equipment costs can accelerate energy transitions, but trade, industrial dependence, emissions and financing classifications complicate simple comparisons.",
+      "pakistan_perspective": "Pakistan's solar imports and energy-security debate make the difference between commercial equipment flows and concessional climate finance especially relevant.",
+      "key_takeaways": [
+        "Reuters estimated $132 billion in Chinese clean-tech exports and overseas investment in the preceding year.",
+        "Commercial clean-tech flows should not be equated with official climate-finance commitments."
+      ],
+      "facts": [
+        "Reuters estimated China's clean-technology exports and overseas investment at about $132 billion in the preceding year."
+      ],
+      "quick_gk": [
+        "Reuters contrasted Chinese commercial clean-tech flows with official climate-finance commitments, noting that the figures are not directly comparable."
+      ],
+      "question_angles": [
+        "Why are Chinese commercial clean-tech exports not directly comparable to official climate finance?"
+      ],
+      "topics": [
+        "climate finance",
+        "China",
+        "renewable energy",
+        "industrial policy"
+      ],
+      "countries": [
+        "China",
+        "Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "How China's clean-tech machine is reshaping the global climate fight",
+          "url": "https://www.reuters.com/legal/litigation/how-chinas-clean-tech-machine-is-reshaping-global-climate-fight-2026-11-06/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "current-affairs-20261106-pakistan-reko-diq-us-financing",
+    "q": "US financing approval reported by Reuters on 6 November 2026 concerned which Pakistani mining project?",
+    "o": [
+      "Saindak",
+      "Reko Diq",
+      "Thar Block II",
+      "Duddar"
+    ],
+    "a": 1,
+    "e": "Reuters reported US financing approval for the Reko Diq mining project while distinguishing other proposals from completed agreements.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/pakistans-leaders-dread-us-democrats-win-its-households-are-praying-it-2026-11-06/"
+  },
+  {
+    "id": "current-affairs-20261106-china-clean-tech-climate-finance",
+    "q": "Reuters cautioned against directly comparing China's clean-tech commercial flows with which category of international support?",
+    "o": [
+      "Official climate finance",
+      "Bilateral tourism receipts",
+      "Military procurement budgets",
+      "Foreign exchange reserves"
+    ],
+    "a": 0,
+    "e": "Commercial clean-tech exports and investments are not directly comparable to official climate finance, which also includes adaptation and recovery support.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/legal/litigation/how-chinas-clean-tech-machine-is-reshaping-global-climate-fight-2026-11-06/"
+  }
+]
