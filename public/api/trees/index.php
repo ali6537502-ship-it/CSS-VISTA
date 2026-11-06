@@ -85,6 +85,7 @@ function tree_schema(PDO $db): void {
         proof_phash CHAR(16) NULL,
         duplicate_risk TINYINT(1) NOT NULL DEFAULT 0,
         field_checked TINYINT(1) NOT NULL DEFAULT 0,
+        field_visit_date DATE NULL,
         public_photo TINYINT(1) NOT NULL DEFAULT 0,
         status ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
         reviewer_id CHAR(36) NULL,
@@ -96,6 +97,17 @@ function tree_schema(PDO $db): void {
         INDEX idx_tree_member_status (member_id,status),
         INDEX idx_tree_public_summary (status,method,city),
         INDEX idx_tree_review_queue (status,created_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_reviews (
+        id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        planting_id CHAR(36) NOT NULL,
+        admin_id CHAR(36) NOT NULL,
+        decision ENUM('approved','rejected') NOT NULL,
+        review_note VARCHAR(400) NOT NULL,
+        field_checked TINYINT(1) NOT NULL DEFAULT 0,
+        field_visit_date DATE NULL,
+        reviewed_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+        INDEX idx_tree_review_audit (planting_id,reviewed_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     $db->exec("CREATE TABLE IF NOT EXISTS tree_campaign_rate_events (
         id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -116,6 +128,7 @@ function tree_schema(PDO $db): void {
             'proof_phash' => 'ADD COLUMN proof_phash CHAR(16) NULL',
             'duplicate_risk' => 'ADD COLUMN duplicate_risk TINYINT(1) NOT NULL DEFAULT 0',
             'field_checked' => 'ADD COLUMN field_checked TINYINT(1) NOT NULL DEFAULT 0',
+            'field_visit_date' => 'ADD COLUMN field_visit_date DATE NULL',
         ],
     ];
     foreach ($changes as $table => $columns) {
@@ -239,24 +252,88 @@ function tree_admin(PDO $db, bool $csrf=false): array {
     }
     return $admin;
 }
+function tree_image_phash(string $path): string {
+    // 64-bit difference hash for detecting visually similar uploads.
+    $source=@imagecreatefromjpeg($path);
+    if (!$source) cssv_fail('Evidence image cannot be inspected.',422,'image_decode_failed');
+    $thumbnail=imagecreatetruecolor(9,8);
+    imagecopyresampled($thumbnail,$source,0,0,0,0,9,8,imagesx($source),imagesy($source));
+    imagedestroy($source);
+    $bits='';
+    for($y=0;$y<8;$y++) {
+        $values=[];
+        for($x=0;$x<9;$x++) {
+            $rgb=imagecolorat($thumbnail,$x,$y);
+            $r=($rgb>>16)&255; $g=($rgb>>8)&255; $b=$rgb&255;
+            $values[]=($r*299+$g*587+$b*114)/1000;
+        }
+        for($x=0;$x<8;$x++) $bits.=$values[$x]>$values[$x+1]?'1':'0';
+    }
+    imagedestroy($thumbnail);
+    $hex='';
+    for($i=0;$i<64;$i+=4) $hex.=dechex(bindec(substr($bits,$i,4)));
+    return $hex;
+}
+function tree_phash_distance(string $a,string $b): int {
+    if (!preg_match('/^[a-f0-9]{16}$/',$a) || !preg_match('/^[a-f0-9]{16}$/',$b)) return 64;
+    $distance=0;
+    for($i=0;$i<16;$i++) $distance+=substr_count(decbin(hexdec($a[$i]) ^ hexdec($b[$i])),'1');
+    return $distance;
+}
 function tree_store_image(array $file,string $category,int $limit): array {
     if (($file['error']??UPLOAD_ERR_NO_FILE)!==UPLOAD_ERR_OK || !is_uploaded_file((string)($file['tmp_name']??''))) cssv_fail('Attach a valid image.',422,'photo_required');
     $size=(int)($file['size']??0);
-    if ($size<600 || $size>$limit) cssv_fail('The compressed photo is larger than the limit.',422,'photo_size_invalid');
+    if ($size<600 || $size>$limit) cssv_fail('The compressed image must not exceed the upload limit.',422,'photo_size_invalid');
     $tmp=(string)$file['tmp_name'];
     $mime=(string)(new finfo(FILEINFO_MIME_TYPE))->file($tmp);
-    if ($mime!=='image/jpeg' && $mime!=='image/webp') cssv_fail('Use a compressed JPG or WebP photo.',422,'photo_type_invalid');
+    if (!in_array($mime,['image/jpeg','image/webp'],true)) cssv_fail('Use a JPG or WebP image.',422,'photo_type_invalid');
     $dimensions=@getimagesize($tmp);
-    if (!$dimensions || ($dimensions[0]??0)<180 || ($dimensions[1]??0)<180 || ($dimensions[0]*$dimensions[1])>16000000) cssv_fail('Photo dimensions are invalid.',422,'photo_dimensions_invalid');
-    $hash=hash_file('sha256',$tmp);
-    if (!is_string($hash)) cssv_fail('Could not check photo integrity.',422,'photo_invalid');
+    $width=(int)($dimensions[0]??0);$height=(int)($dimensions[1]??0);
+    if (!$dimensions || ($dimensions['mime']??'')!==$mime || $width<180 || $height<180 || $width>2400 || $height>2400 || ($width*$height)>4000000) cssv_fail('Photo dimensions are invalid.',422,'photo_dimensions_invalid');
+    if (!function_exists('imagecreatefromstring') || !function_exists('imagejpeg')) cssv_fail('Secure photo processing is temporarily unavailable.',503,'image_processor_unavailable');
+    $bytes=@file_get_contents($tmp);
+    $source=is_string($bytes)?@imagecreatefromstring($bytes):false;
+    unset($bytes);
+    if (!$source) cssv_fail('The image could not be decoded safely.',422,'photo_decode_failed');
     $folder='tree-campaign/'.$category;
-    $name=bin2hex(random_bytes(24)).($mime==='image/webp'?'.webp':'.jpg');
+    $name=bin2hex(random_bytes(24)).'.jpg';
     $path=cssv_private_storage_dir($folder).DIRECTORY_SEPARATOR.$name;
-    if (!move_uploaded_file($tmp,$path)) cssv_fail('Photo storage is unavailable.',503,'storage_failed');
+    $scale=min(1.0,1200.0/max($width,$height));
+    $encoded=false;
+    // Server-side re-encoding strips all client-supplied EXIF/GPS metadata and
+    // blocks polyglot file content; client-side compression alone is not trusted.
+    for($attempt=0;$attempt<9;$attempt++) {
+        $w=max(180,(int)round($width*$scale));
+        $h=max(180,(int)round($height*$scale));
+        $canvas=imagecreatetruecolor($w,$h);
+        $white=imagecolorallocate($canvas,255,255,255);
+        imagefill($canvas,0,0,$white);
+        imagecopyresampled($canvas,$source,0,0,0,0,$w,$h,$width,$height);
+        foreach([80,73,66,58,50] as $quality) {
+            if (@imagejpeg($canvas,$path,$quality) && is_file($path)) {
+                clearstatcache(true,$path);
+                $outputSize=(int)filesize($path);
+                if ($outputSize>=600 && $outputSize<=$limit) {$encoded=true;break;}
+            }
+        }
+        imagedestroy($canvas);
+        if ($encoded || ($w<=180 && $h<=180)) break;
+        $scale*=.78;
+    }
+    imagedestroy($source);
+    if (!$encoded) {
+        if(is_file($path))@unlink($path);
+        cssv_fail('This photo cannot be safely reduced to the required size.',422,'photo_uncompressible');
+    }
     @chmod($path,0600);
-    return ['path'=>$folder.'/'.$name,'mime'=>$mime,'hash'=>$hash];
+    $hash=hash_file('sha256',$path);
+    if (!is_string($hash)) {
+        @unlink($path);
+        cssv_fail('Photo integrity check failed.',422,'photo_hash_failed');
+    }
+    return ['path'=>$folder.'/'.$name,'mime'=>'image/jpeg','hash'=>$hash,'phash'=>tree_image_phash($path)];
 }
+
 function tree_photo_serve(string $relative,string $mime): never {
     if ($relative==='' || str_contains($relative,'..') || !str_starts_with($relative,'tree-campaign/')) cssv_fail('Photo unavailable.',404,'photo_not_found');
     $root=cssv_env('CSSV_PRIVATE_STORAGE_DIR','');
@@ -304,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
     }
     if ($action==='queue') {
         tree_admin($db);
-        $rows=$db->query("SELECT p.id,p.member_id,p.species,p.method,p.quantity,p.planted_on,p.city,p.locality,p.created_at,m.full_name,m.mobile,m.cnic_last4,m.avatar_path FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status='pending' ORDER BY p.created_at ASC LIMIT 100")->fetchAll();
+        $rows=$db->query("SELECT p.id,p.member_id,p.species,p.method,p.quantity,p.planted_on,p.city,p.locality,p.created_at,p.duplicate_risk,m.full_name FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status='pending' ORDER BY p.duplicate_risk DESC,p.created_at ASC LIMIT 100")->fetchAll();
         cssv_json(['ok'=>true,'reports'=>$rows]);
     }
     if ($action==='photo') {
@@ -469,9 +546,20 @@ if ($action==='plant') {
     tree_rate($db,'plant',(string)$member['id'],16,86400);
     $photo=tree_store_image($_FILES['photo']??[],'evidence',TREE_MAX_PROOF);
     try {
+        // Flag a perceptual match for a human reviewer; do not automatically
+        // accuse legitimate contributors who photographed similar plants.
+        $q=$db->prepare("SELECT proof_phash FROM tree_campaign_plantings WHERE member_id=? ORDER BY created_at DESC LIMIT 100");
+        $q->execute([$member['id']]);
+        $risk=false;
+        foreach($q->fetchAll(PDO::FETCH_COLUMN) as $previous) {
+            if (is_string($previous) && tree_phash_distance($photo['phash'],$previous)<=5) {$risk=true;break;}
+        }
+        $q=$db->prepare('SELECT id FROM tree_campaign_plantings WHERE proof_phash=? LIMIT 1');
+        $q->execute([$photo['phash']]);
+        if($q->fetchColumn())$risk=true;
         $id=cssv_uuid_v4();
-        $db->prepare("INSERT INTO tree_campaign_plantings(id,member_id,species,method,quantity,planted_on,city,locality,proof_path,proof_mime,proof_hash,public_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)")
-            ->execute([$id,$member['id'],$species,$method,$quantity,$day,$member['city'],$locality,$photo['path'],$photo['mime'],$photo['hash'],($_POST['public_photo']??'')==='yes'?1:0]);
+        $db->prepare("INSERT INTO tree_campaign_plantings(id,member_id,species,method,quantity,planted_on,city,locality,proof_path,proof_mime,proof_hash,proof_phash,duplicate_risk,public_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+            ->execute([$id,$member['id'],$species,$method,$quantity,$day,$member['city'],$locality,$photo['path'],$photo['mime'],$photo['hash'],$photo['phash'],$risk?1:0,($_POST['public_photo']??'')==='yes'?1:0]);
     } catch (Throwable $e) {
         cssv_remove_private_file($photo['path']);
         if ($e instanceof PDOException && (string)$e->getCode()==='23000') cssv_fail('This exact evidence photo has already been submitted.',409,'duplicate_photo');
@@ -481,14 +569,42 @@ if ($action==='plant') {
 }
 if ($action==='review') {
     $admin=tree_admin($db,true);
-    $body=cssv_request_json(4000);
+    $body=tree_login_json();
     $id=(string)($body['id']??'');
     $decision=(string)($body['decision']??'');
     if (!preg_match('/^[a-f0-9-]{36}$/D',$id) || !in_array($decision,['approved','rejected'],true)) cssv_fail('Invalid review request.',422,'invalid_review');
-    $note=tree_string((string)($body['note']??'No review note'),'review note',2,400);
-    $q=$db->prepare("UPDATE tree_campaign_plantings SET status=?,reviewer_id=?,reviewed_at=NOW(6),review_note=? WHERE id=? AND status='pending'");
-    $q->execute([$decision,$admin['admin_id'],$note,$id]);
-    if ($q->rowCount()!==1) cssv_fail('This report was already reviewed or cannot be found.',409,'already_reviewed');
+    $note=tree_string((string)($body['note']??''),'review note',10,400);
+    $siteDate=(string)($body['field_visit_date']??'');
+    $fieldChecked=($body['field_checked']??false)===true;
+    $db->beginTransaction();
+    try {
+        $q=$db->prepare('SELECT quantity,duplicate_risk,status,planted_on FROM tree_campaign_plantings WHERE id=? FOR UPDATE');
+        $q->execute([$id]);$row=$q->fetch();
+        if (!$row || $row['status']!=='pending') {
+            $db->rollBack();
+            cssv_fail('This report was already reviewed or cannot be found.',409,'already_reviewed');
+        }
+        if($decision==='approved' && ((int)$row['quantity']>5 || (int)$row['duplicate_risk']===1)) {
+            if (!$fieldChecked) {
+                $db->rollBack();
+                cssv_fail('High-volume or repeated-image reports require documented on-site confirmation before approval.',422,'field_check_required');
+            }
+            $date=DateTimeImmutable::createFromFormat('!Y-m-d',$siteDate,new DateTimeZone('UTC'));
+            if (!$date || $date->format('Y-m-d')!==$siteDate || $siteDate<(string)$row['planted_on'] || $date->getTimestamp()>time()+86400) {
+                $db->rollBack();
+                cssv_fail('Enter a valid date of physical verification.',422,'invalid_field_check_date');
+            }
+        } else {
+            $fieldChecked=false;
+            $siteDate='';
+        }
+        $db->prepare("UPDATE tree_campaign_plantings SET status=?,reviewer_id=?,reviewed_at=NOW(6),review_note=?,field_checked=?,field_visit_date=? WHERE id=? AND status='pending'")
+            ->execute([$decision,$admin['admin_id'],$note,$fieldChecked?1:0,$fieldChecked?$siteDate:null,$id]);
+        $db->prepare("INSERT INTO tree_campaign_reviews(planting_id,admin_id,decision,review_note,field_checked,field_visit_date) VALUES(?,?,?,?,?,?)")
+            ->execute([$id,$admin['admin_id'],$decision,$note,$fieldChecked?1:0,$fieldChecked?$siteDate:null]);
+        $db->commit();
+    } catch(Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
     cssv_json(['ok'=>true,'status'=>$decision]);
 }
+
 cssv_fail('Unknown campaign request.',404,'unknown_action');
