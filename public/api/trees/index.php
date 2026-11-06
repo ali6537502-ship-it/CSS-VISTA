@@ -413,7 +413,7 @@ if ($action==='register') {
     $body=tree_login_json();
     $name=tree_string($body['name']??null,'full name',3,100);
     $city=tree_string($body['city']??null,'Punjab city',2,70);
-    if (!in_array($city,tree_allowed_cities(),true)) cssv_fail('Choose a listed city in Punjab.',422,'invalid_city');
+    if (!preg_match('/^[A-Za-z .-]{2,70}$/D',$city)) cssv_fail('Enter a valid Punjab town or city.',422,'invalid_city');
     $phone=tree_mobile($body['mobile']??null);
     $cnic=tree_cnic($body['cnic']??null);
     $password=tree_password($body['password']??null);
