@@ -19,6 +19,9 @@ import { useAccount } from '@/lib/accountContext'
 import LuckyDrawDiscovery from '@/components/LuckyDrawDiscovery'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
+import { TREE_CAMPAIGN_IMAGES } from '@/data/treeCampaignMedia'
+import { PUNJAB_MAP } from '@/data/punjabTreeMap'
+import './homeTreesPremium.css'
 
 interface LinkCard {
   title: string
@@ -399,9 +402,24 @@ export default function Home() {
           <HomeHero />
         </div>
 
-        <Link to="/100-million-trees" className="group mt-4 flex items-center gap-3 overflow-hidden rounded-2xl border border-emerald-800/20 bg-gradient-to-r from-[#073725] via-[#0c5536] to-[#1f6140] px-4 py-4 text-white shadow-sm transition-transform hover:-translate-y-0.5 sm:gap-5 sm:px-6 sm:py-5">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-emerald-200/30 bg-white/10 sm:h-14 sm:w-14"><Globe2 className="h-6 w-6 text-[#cfedac] sm:h-7 sm:w-7"/></div>
-          <div className="min-w-0 flex-1"><span className="text-[9px] font-extrabold uppercase tracking-[.16em] text-[#c1eaaa]">ISARUL IBAAD FOUNDATION × CSS VISTA</span><h2 className="mt-1 text-[17px] font-extrabold tracking-tight sm:text-[22px]">100 Million Trees for Punjab</h2><p className="mt-1 text-[11px] text-emerald-100/85 sm:text-xs">Be part of the mission. Plant, report and track verified contributions.</p></div><span className="hidden shrink-0 items-center gap-2 rounded-lg bg-[#d0f0b4] px-4 py-3 text-xs font-extrabold text-[#124328] sm:inline-flex">Join the movement <ArrowRight className="h-4 w-4"/></span><ArrowRight className="h-5 w-5 shrink-0 text-[#d0f0b4] sm:hidden"/>
+        <Link to="/100-million-trees" className="cssv-trees-home-feature group mt-5" aria-label="Explore Isarul Ibaad Foundation and CSS Vista's 100 Million Trees for Punjab campaign">
+          <img className="cssv-trees-home-photo" src={TREE_CAMPAIGN_IMAGES.forest} alt="" loading="lazy" decoding="async" />
+          <span className="cssv-trees-home-shade" aria-hidden="true"/>
+          <span className="cssv-trees-home-content">
+            <span className="cssv-trees-home-partners">
+              <span className="cssv-trees-home-logo-wrap"><img src="/images/esar-ul-ebad-logo.webp" alt="Isarul Ibaad Foundation original emblem" loading="lazy" /></span>
+              <span className="cssv-trees-home-partner-x" aria-hidden="true">×</span>
+              <span className="cssv-trees-home-logo-wrap cssv-trees-home-logo-vista"><img src="/images/logo.webp" alt="CSS Vista original logo" loading="lazy" /></span>
+            </span>
+            <span className="cssv-trees-home-eyebrow"><span className="cssv-trees-home-pulse" aria-hidden="true"/> ISARUL IBAAD FOUNDATION × CSS VISTA</span>
+            <strong className="cssv-trees-home-heading">100 Million Trees<br/><em>for Punjab.</em></strong>
+            <span className="cssv-trees-home-description">Join the plantation drive, document your contributions and track approved progress across Punjab.</span>
+            <span className="cssv-trees-home-link">Explore the planting campaign <ArrowRight size={18}/></span>
+          </span>
+          <span className="cssv-trees-home-map" aria-hidden="true">
+            <svg viewBox={'0 0 ' + PUNJAB_MAP.width + ' ' + PUNJAB_MAP.height} role="presentation"><path d={PUNJAB_MAP.path} fill="#daf8ca1e" stroke="#e5fcd0" strokeWidth="4" fillRule="evenodd"/></svg>
+            <span>REAL REPORTS. GROWING IMPACT.</span>
+          </span>
         </Link>
 
         <MptMockStrip className="mt-3" />
