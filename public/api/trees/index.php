@@ -818,7 +818,7 @@ if ($action==='avatar') {
 }
 if ($action==='plant') {
     $member=tree_auth($db,true);
-    if (!$member['avatar_path']) cssv_fail('Add your profile photograph before submitting planting evidence.',422,'avatar_required');
+    if (empty($member['email_verified_at'])) cssv_fail('Confirm your campaign email to submit planting evidence. A profile photograph is optional.',403,'email_verification_required');
     $species=(string)($_POST['species']??'');
     if (!array_key_exists($species,tree_species())) cssv_fail('Choose a listed tree species.',422,'invalid_species');
     $method=(string)($_POST['method']??'');
@@ -875,6 +875,7 @@ if ($action==='plant') {
 }
 if ($action==='followup') {
     $member=tree_auth($db,true);
+    if (empty($member['email_verified_at'])) cssv_fail('Confirm your campaign email to submit survival evidence.',403,'email_verification_required');
     $id=(string)($_POST['planting_id']??'');
     $phase=filter_var($_POST['phase']??null,FILTER_VALIDATE_INT);
     $surviving=filter_var($_POST['surviving']??null,FILTER_VALIDATE_INT);
