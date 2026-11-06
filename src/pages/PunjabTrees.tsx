@@ -451,7 +451,7 @@ function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }:
         <label>CNIC number<input required value={cnic} onChange={e=>setCnic(e.target.value)} placeholder="13 digits, used only to prevent duplicates" inputMode="numeric" autoComplete="off" pattern="[0-9]{5}-?[0-9]{7}-?[0-9]"/></label>
       </>}
       {(mode==='register'||mode==='login'||mode==='recover')&&<label>Mobile number<input required value={mobile} onChange={e=>setMobile(e.target.value)} inputMode="tel" autoComplete="tel" placeholder="03XX-XXXXXXX"/></label>}
-      {mode==='email-request'&&<label>Registered email<input required type="email" maxLength={254} autoComplete="email" placeholder="name@example.com" value={email} onChange={e=>setEmail(e.target.value)}/>}
+      {mode==='email-request'&&<label>Registered email<input required type="email" maxLength={254} autoComplete="email" placeholder="name@example.com" value={email} onChange={e=>setEmail(e.target.value)}/></label>}
       {mode==='recover'&&<label>Saved offline recovery key<input required value={recoveryInput} onChange={e=>setRecoveryInput(e.target.value)} autoComplete="off" placeholder="TREE-..."/></label>}
       {(mode==='login'||mode==='register')?<label>Password<input type="password" required minLength={mode==='register'?12:undefined} maxLength={72} value={password} onChange={e=>setPassword(e.target.value)} autoComplete={mode==='register'?'new-password':'current-password'} placeholder={mode==='register'?'At least 12 characters':'Your password'}/></label>:(mode==='recover'||mode==='email-reset')?<>
         <label>New password<input required type="password" minLength={12} maxLength={72} autoComplete="new-password" value={newPassword} onChange={e=>setNewPassword(e.target.value)}/></label>
