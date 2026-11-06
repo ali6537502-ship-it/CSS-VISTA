@@ -61,7 +61,7 @@ function schedule(plan){
  }
  const studyDays=res.map((ids,i)=>({date:studyDate(plan,i),day:i+1,ids,words:ids.reduce((n,id)=>n+weights(byId.get(id)),0),done:ids.filter(isDone).length,reviews:[]}));
  for(const item of dueReviews()){
-   const slot=studyDays.find(d=>d.date>=item.date)||studyDays[studyDays.length-1];
+   const slot=studyDays.find(d=>d.date>=item.date);
    if(slot)slot.reviews.push(item.id);
  }
  return studyDays;
@@ -103,9 +103,13 @@ function library(){
 function review(){
  const ids=Object.keys(saved.revisit||{}).filter(id=>byId.has(id));
  const missed=Object.entries(saved.questionReview||{}).filter(([,entry])=>entry?.unresolved&&Number.isInteger(entry.chapter)&&catalog.chapters.some(c=>c.id===entry.chapter));
- const lessonRows=ids.length?ids.map(id=>{let s=byId.get(id);return '<div class="list-row"><div><strong>'+safe(s.title)+'</strong><p>Chapter '+s.chapter+' · Lesson '+s.number+'</p></div><button class="btn small" data-lesson="'+safe(id)+'">Repeat</button></div>'}).join(''):'<p class="muted">No lessons currently flagged for revision.</p>';
+ const due=dueReviews().filter(r=>r.date<=now()),upcoming=dueReviews().filter(r=>r.date>now());
+ function recallRows(items,label){
+   return items.length?items.map(item=>{const sec=byId.get(item.id);return '<div class="list-row"><div><strong>'+safe(sec.title)+'</strong><p>Chapter '+sec.chapter+' · '+label+' '+dateLabel(item.date)+'</p></div><button class="btn small" data-lesson="'+safe(item.id)+'">Review</button></div>'}).join(''):'<p class="muted">No '+label.toLowerCase()+' reviews.</p>';
+ }
+ const lessonRows=ids.length?ids.map(id=>{const sec=byId.get(id);return '<div class="list-row"><div><strong>'+safe(sec.title)+'</strong><p>Chapter '+sec.chapter+' · Lesson '+sec.number+'</p></div><button class="btn small" data-lesson="'+safe(id)+'">Repeat</button></div>'}).join(''):'<p class="muted">No lessons currently flagged for revision.</p>';
  const questionRows=missed.length?missed.map(([id,entry])=>'<div class="list-row"><div><strong>Question '+safe(id)+'</strong><p>'+safe(chapterName(entry.chapter))+'</p></div><button class="btn small" data-review-question="'+safe(id)+'" data-review-chapter="'+entry.chapter+'">Review question</button></div>').join(''):'<p class="muted">No missed questions awaiting a new attempt.</p>';
- return '<section class="page"><div class="hero"><div><p class="eyebrow">Learn · Test · Return</p><h1>Revision notebook</h1><p class="subtitle">Flagged lessons and missed chapter questions are tracked separately. Repeating either does not erase earlier attempts.</p></div></div><div class="panel"><h2>'+ids.length+' lessons to revisit</h2>'+lessonRows+'</div><div class="panel"><h2>'+missed.length+' missed questions</h2>'+questionRows+'</div></section>';
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">Learn · Test · Return</p><h1>Revision notebook</h1><p class="subtitle">Dated recall sessions, difficult concepts and wrong source questions are tracked independently. Previous attempts remain saved.</p></div></div><div class="panel"><h2>Recall due · '+due.length+'</h2>'+recallRows(due,'Due')+'</div><div class="panel"><h2>Upcoming recall · '+upcoming.length+'</h2>'+recallRows(upcoming,'Scheduled')+'</div><div class="panel"><h2>'+ids.length+' lessons to revisit</h2>'+lessonRows+'</div><div class="panel"><h2>'+missed.length+' missed questions</h2>'+questionRows+'</div><p class="tiny muted">The 3, 7, 14, 30 and 60-day sequence is a fixed revision aid, not a scientifically verified measure of mastery.</p></section>';
 }
 function practice(){
  return '<section class="page"><div class="hero"><div><p class="eyebrow">Examination preparation</p><h1>Practice by chapter.</h1><p class="subtitle">Use the 250 original textbook MCQs and 31 available analytical model answers. Answers are shown with their explanations. No questions are invented to fill gaps.</p></div></div><div class="panel">'+catalog.chapters.map(c=>'<div class="list-row"><div><strong>'+safe(c.title)+'</strong><p>Chapter '+c.id+' · '+c.questionCount+' MCQs · '+c.analyticalCount+' model answers</p></div><button class="btn small" data-practice="'+c.id+'">Practise</button></div>').join('')+'</div></section>';
