@@ -11,6 +11,7 @@ type GsaProgress = {
   completed?: Record<string, { at?: string; selfRating?: string }>
   revisit?: Record<string, unknown>
   questionReview?: Record<string, { unresolved?: boolean }>
+  reviewDue?: Record<string, { date?: string }>
   bookmarks?: Record<string, unknown>
   last?: string
 }
@@ -32,6 +33,7 @@ function snapshot(progress: GsaProgress) {
     confident: Object.entries(progress.completed ?? {}).filter(([id, entry]) => entry?.selfRating === 'gotit' && !progress.revisit?.[id]).length,
     revision: Object.keys(progress.revisit ?? {}).length,
     missed: Object.values(progress.questionReview ?? {}).filter(entry => entry?.unresolved).length,
+    due: Object.values(progress.reviewDue ?? {}).filter(entry => !!entry?.date && entry.date <= new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Karachi', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())).length,
   }
 }
 export default function GSATutorPage() {
@@ -128,6 +130,7 @@ function GSATutorWorkspace() {
           <span><strong className="text-slate-900">{Math.min(result.completed, 141)}/141</strong> lessons studied</span>
           <span><strong className="text-slate-900">{result.confident}</strong> self-rated clear</span>
           <span><strong className="text-slate-900">{result.missed}</strong> missed questions</span>
+          <span><strong className="text-slate-900">{result.due}</strong> recalls due</span>
           <span><strong className="text-slate-900">{result.revision}</strong> lessons for revision</span>
           <span>{loading ? 'Checking account…' : user?.profile_complete ? syncStatus === 'synced' ? 'Account progress synced' : syncStatus === 'syncing' ? 'Account sync in progress' : 'Saved on device; account sync pending' : user ? 'Complete your profile to enable account sync' : 'Device progress only until signed in'}</span>
           {lastSyncedAt && user?.profile_complete && <span>Last synced {lastSyncedAt.toLocaleTimeString('en-PK')}</span>}
