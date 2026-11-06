@@ -1,0 +1,94 @@
+name: Punjab Trees real database security and E2E
+on:
+  pull_request:
+    paths:
+      - 'public/api/trees/**'
+      - 'tests/trees/**'
+      - 'scripts/trees/**'
+      - '.github/workflows/trees-real-db-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tree-real-db-integration:
+    name: Real HTTP + database campaign test (${{ matrix.db }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        db: ['mysql:8.0', 'mariadb:10.11']
+    services:
+      database:
+        image: ${{ matrix.db }}
+        env:
+          MYSQL_ROOT_PASSWORD: example_root_password
+          MYSQL_DATABASE: trees_ci
+          MYSQL_USER: campaign_ci
+          MYSQL_PASSWORD: example_ci_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pexample_root_password"
+          --health-interval=5s --health-timeout=5s --health-retries=25
+    env:
+      CSSV_DB_HOST: 127.0.0.1
+      CSSV_DB_PORT: 3306
+      CSSV_DB_NAME: trees_ci
+      CSSV_DB_USER: campaign_ci
+      CSSV_DB_PASSWORD: example_ci_password
+      CSSV_APP_SECRET: trees-isolated-nonproduction-automated-test-secret-2026
+      CSSV_PRIVATE_STORAGE_DIR: /tmp/trees-private-ci
+      CSSV_SITE_ORIGIN: http://127.0.0.1:18765
+      CSSV_TREES_TEST: 'yes'
+      CI: 'true'
+      CSSV_MAIL_TRANSPORT: php-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PHP runtime and MySQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq php-cli php-mysql php-gd php-mbstring php-curl php-xml default-mysql-client
+          php -m | grep -Ei 'PDO|pdo_mysql|gd|mbstring|fileinfo'
+      - name: Confirm isolated database is ready
+        run: |
+          for i in $(seq 1 40); do
+            if mysql --protocol=tcp -h 127.0.0.1 -ucampaign_ci -pexample_ci_password trees_ci -e "SELECT 1" >/dev/null 2>&1; then break; fi
+            sleep 2
+          done
+          mysql --protocol=tcp -h 127.0.0.1 -ucampaign_ci -pexample_ci_password trees_ci -e "SELECT VERSION()"
+      - name: Start isolated PHP HTTP server and initialise schema
+        run: |
+          mkdir -p /tmp/trees-private-ci
+          chmod 700 /tmp/trees-private-ci
+          cat > /tmp/trees-ci-sendmail <<'EOF'
+          #!/bin/sh
+          cat >> /tmp/trees-ci-outbox.eml
+          printf '\n===END_TREE_MAIL===\n' >> /tmp/trees-ci-outbox.eml
+          exit 0
+          EOF
+          chmod 700 /tmp/trees-ci-sendmail
+          touch /tmp/trees-ci-outbox.eml
+          chmod 600 /tmp/trees-ci-outbox.eml
+          nohup php -d sendmail_path=/tmp/trees-ci-sendmail -S 127.0.0.1:18765 -t public > /tmp/trees-php-ci.log 2>&1 < /dev/null &
+          for i in $(seq 1 30); do
+            if curl --fail --silent 'http://127.0.0.1:18765/api/trees/index.php?action=summary' > /tmp/trees-first-summary.json; then break; fi
+            sleep 2
+          done
+          node -e "const x=require('/tmp/trees-first-summary.json');if(x.ok!==true||x.trees!==0)process.exit(1)"
+      - name: Create isolated evidence photos and MFA-enabled reviewer
+        run: php tests/trees/ci-fixtures.php
+      - name: Run live HTTP privacy, authorisation and planting lifecycle
+        run: node --test tests/trees/real-database.test.mjs
+      - name: Check rollup rebuild matches approved archives
+        run: |
+          CSSV_TREES_MAINTENANCE=1 php scripts/trees/rebuild-rollups.php
+      - name: Show PHP errors on failure
+        if: failure()
+        run: |
+          if test -f /tmp/trees-php-ci.log; then tail -100 /tmp/trees-php-ci.log; fi

@@ -1,0 +1,617 @@
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from 'react'
+import { Link } from 'react-router'
+import { ArrowRight, BadgeCheck, Camera, CheckCircle2, ChevronRight, CircleHelp, CloudUpload, Globe2, Heart, Leaf, LogIn, LogOut, MapPin, Menu, ShieldCheck, Sprout, TreeDeciduous, Trophy, UserRound, X } from 'lucide-react'
+import { compressImage, MAX_INPUT_BYTES } from '@/lib/photoCompression'
+import { PUNJAB_MAP, projectPunjab } from '@/data/punjabTreeMap'
+import './punjabTrees.css'
+
+type Species = { name: string, scientific: string, category: string }
+type Member = { id: string, name: string, email: string, email_verified: boolean, city: string, has_photo: boolean, public_name: boolean, joined_at: string }
+type Followup = { id: string, planting_id: string, phase: number, surviving: number, status: string, review_note: string|null, full_name?: string, species?: string, city?: string, planted_quantity?: number, locality?: string }
+type Report = { id: string, species: string, method: string, quantity: number, city: string, locality: string, planted_on: string, status: string, review_note: string | null, full_name?: string, member_id?: string, duplicate_risk?: number, field_checked?: number, field_visit_date?: string, has_photo?: number }
+type Summary = { trees: number, seeds: number, contributors: number, cities: number, pending_reports: number, survival_checks: number, target: number, city_totals: { city: string, trees: number, seeds: number }[], leaderboard: { rank: number, name: string, city: string, trees: number }[], public_gallery: { id: string,city: string,species: string,method: string,quantity: number,planted_on: string }[] }
+type Tab = 'overview' | 'contribute' | 'leaderboard' | 'account' | 'review'
+const EMPTY: Summary = { trees: 0, seeds: 0, contributors: 0, cities: 0, pending_reports: 0, survival_checks: 0, target: 100000000, city_totals: [], leaderboard: [], public_gallery: [] }
+const API = '/api/trees/index.php?action='
+const CITIES: [string, number, number][] = [
+  ['Lahore', 74.3587, 31.5204], ['Faisalabad', 73.0851, 31.4504], ['Rawalpindi', 73.0479, 33.5651],
+  ['Multan', 71.5249, 30.1575], ['Gujranwala', 74.1945, 32.1877], ['Sialkot', 74.5313, 32.4945],
+  ['Sargodha', 72.6711, 32.0836], ['Bahawalpur', 71.6833, 29.3956], ['Rahim Yar Khan', 70.3015, 28.4212],
+  ['Dera Ghazi Khan', 70.6403, 30.0489], ['Sahiwal', 73.1068, 30.6682], ['Okara', 73.4532, 30.8081],
+  ['Jhelum', 73.7257, 32.9425], ['Kasur', 74.4467, 31.1167], ['Sheikhupura', 73.9783, 31.7131],
+  ['Mianwali', 71.5264, 32.5849], ['Bhakkar', 71.0657, 31.6269], ['Chakwal', 72.853, 32.9328],
+  ['Jhang', 72.3287, 31.2681], ['Khanewal', 71.9299, 30.3017], ['Lodhran', 71.6336, 29.5391],
+  ['Vehari', 72.3525, 30.0445], ['Muzaffargarh', 71.1933, 30.0736], ['Attock', 72.3594, 33.7731],
+  ['Narowal', 74.8737, 32.1024], ['Gujrat', 74.0789, 32.5731], ['Hafizabad', 73.6855, 32.0709],
+  ['Toba Tek Singh', 72.4827, 30.9709], ['Chiniot', 72.9788, 31.72], ['Bahawalnagar', 73.2536, 29.9984],
+  ['Rajanpur', 70.3255, 29.1041], ['Layyah', 70.9447, 30.9693], ['Pakpattan', 73.3866, 30.3437],
+  ['Nankana Sahib', 73.702, 31.449], ['Khushab', 72.3524, 32.2967], ['Mandi Bahauddin', 73.4849, 32.5861],
+  ['Jampur', 70.5958, 29.6424], ['Murree', 73.3928, 33.906], ['Wah Cantt', 72.7518, 33.7715],
+  ['Kot Addu', 70.9695, 30.469], ['Shakargarh', 75.1605, 32.2635],
+]
+const fmt = (n: number) => new Intl.NumberFormat('en-PK').format(n)
+const typeLabel = (method: string) => method === 'seed' ? 'Seed sown' : 'Nursery sapling'
+const COMMONS = 'https://commons.wikimedia.org/w/api.php?'
+const thumbs = new Map<string, string>()
+function SpeciesPhoto({ scientific, name, method }: { scientific: string, name: string, method: 'sapling'|'seed' }) {
+  const lookup = scientific + ' ' + (method === 'seed' ? 'seeds' : 'tree')
+  const [url, setUrl] = useState(thumbs.get(lookup) || '')
+  useEffect(() => {
+    const cached = thumbs.get(lookup)
+    if (cached) { setUrl(cached); return }
+    setUrl('')
+    let alive = true
+    const query = new URLSearchParams({ action: 'query', generator: 'search', gsrsearch: lookup, gsrnamespace: '6', gsrlimit: '1', prop: 'imageinfo', iiprop: 'url', iiurlwidth: '112', format: 'json', origin: '*' })
+    fetch(COMMONS + query.toString()).then(r => r.ok ? r.json() : null).then(data => {
+      const pages = Object.values(data?.query?.pages || {}) as { imageinfo?: { thumburl?: string, url?: string }[] }[]
+      const src = pages[0]?.imageinfo?.[0]?.thumburl || ''
+      if (src) { thumbs.set(lookup, src); if (alive) setUrl(src) }
+    }).catch(() => {})
+    return () => { alive = false }
+  }, [lookup])
+  return <span className="trees-species-photo">{url ? <img loading="lazy" src={url} alt={name} /> : <Leaf size={25} aria-hidden="true" />}</span>
+}
+async function getApi(action: string) {
+  const r = await fetch(API + action, { credentials: 'same-origin', cache: 'no-store' })
+  const data = await r.json()
+  if (!r.ok || data.ok !== true) throw new Error(data.message || 'Please try again.')
+  return data
+}
+async function postApi(action: string, body: Record<string, unknown> | FormData, csrf?: string) {
+  const isForm = body instanceof FormData
+  const r = await fetch(API + action, { method: 'POST', credentials: 'same-origin', headers: { ...(isForm ? {} : { 'Content-Type': 'application/json' }), ...(csrf ? { 'X-CSRF-Token': csrf } : {}) }, body: isForm ? body : JSON.stringify(body) })
+  const data = await r.json()
+  if (!r.ok || !data.ok) throw new Error(data.message || 'Request failed.')
+  return data
+}
+async function compressPhoto(file: File, kb: number) {
+  if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > MAX_INPUT_BYTES) throw new Error('Choose a JPG, PNG, or WebP photo smaller than 20 MB.')
+  // Re-encode every image first, including already-small JPEGs, to strip
+  // camera metadata (especially GPS EXIF). The private original never uploads.
+  const bitmap = await createImageBitmap(file)
+  const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height))
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.max(1, Math.round(bitmap.width * scale))
+  canvas.height = Math.max(1, Math.round(bitmap.height * scale))
+  const context = canvas.getContext('2d', { alpha: false })
+  if (!context) { bitmap.close(); throw new Error('Your browser cannot process this photo.') }
+  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height)
+  bitmap.close()
+  const sanitized = await new Promise<Blob>((resolve,reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('Could not process the photo.')), 'image/jpeg', .92))
+  const safeFile = new File([sanitized], 'metadata-free.jpg', { type: 'image/jpeg' })
+  const result = await compressImage(safeFile, kb)
+  if (result.blob.size > kb * 1024) throw new Error('Photo is too large after compression.')
+  return new File([result.blob], 'planting-photo.jpg', { type: 'image/jpeg' })
+}
+function Brand() {
+  return <div className="trees-brand">
+    <a className="trees-foundation-brand" href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer" aria-label="Isarul Ibaad Foundation">
+      <img src="/images/esar-ul-ebad-logo.webp" alt="Isarul Ibaad Foundation emblem" className="trees-foundation-logo" />
+      <span><strong>ISARUL IBAAD</strong><br/>FOUNDATION</span>
+    </a>
+    <span className="trees-brand-cross" aria-hidden="true">×</span>
+    <Link to="/" aria-label="CSS Vista website"><img className="trees-vista-logo" src="/images/logo.webp" alt="CSS Vista" /></Link>
+  </div>
+}
+function PunjabMap({ summary }: { summary: Summary }) {
+  const [selected, setSelected] = useState<string | null>(null)
+  const cityPoints = useMemo(() => summary.city_totals.map((c) => {
+    const coords = CITIES.find(v => v[0].toLowerCase() === c.city.toLowerCase())
+    return coords ? { ...c, ...projectPunjab(coords[1], coords[2]) } : null
+  }).filter((c): c is { city: string, trees: number, seeds: number, x: number, y: number } => !!c), [summary.city_totals])
+  const focus = selected ? summary.city_totals.find(c => c.city === selected) : null
+  return <div className="trees-map-panel">
+    <div className="trees-section-head"><div><span className="trees-kicker">PUNJAB IMPACT ATLAS</span><h2>Every city. One greener future.</h2></div><span className="trees-light-tag"><span className="trees-live-dot" /> Approved reports only</span></div>
+    <div className="trees-map-grid">
+      <div className="trees-map-canvas">
+        <svg aria-label="Geographic outline of Punjab with city-level tree planting activity" viewBox={'0 0 ' + PUNJAB_MAP.width + ' ' + PUNJAB_MAP.height} role="img" preserveAspectRatio="xMidYMid meet">
+          <defs><linearGradient id="trees-gradient" x1="0" x2="1" y1="0" y2="1"><stop stopColor="#174d36"/><stop offset="1" stopColor="#073323"/></linearGradient></defs>
+          <path d={PUNJAB_MAP.path} fill="url(#trees-gradient)" stroke="#5fbb82" strokeWidth="2.8" fillRule="evenodd"/>
+          {cityPoints.map(c => <g key={c.city} onClick={() => setSelected(c.city)} className="trees-map-pin" role="presentation">
+            <circle cx={c.x} cy={c.y} r={Math.max(8, Math.min(19, 8 + Math.log10(c.trees + 1) * 3))} fill="#bfffa9" fillOpacity=".18" stroke="#c6eb9c" strokeWidth="1"/>
+            <circle cx={c.x} cy={c.y} r="4.4" fill="#d9ffaf"/>
+            <title>{c.city + ': ' + fmt(c.trees) + ' reviewed saplings'}</title>
+          </g>)}
+        </svg>
+        {cityPoints.length === 0 && <div className="trees-map-empty">The map will light up as planting reports are approved.</div>}
+        <span className="trees-map-credit">Punjab provincial boundary · Open GeoJSON / MIT</span>
+      </div>
+      <div className="trees-city-list"><div className="trees-city-list-title"><MapPin size={17}/> Plantings by city</div>
+        {summary.city_totals.length ? summary.city_totals.slice(0, 7).map((c,i) =>
+          <button type="button" onClick={() => setSelected(c.city)} className={'trees-city-row' + (selected === c.city ? ' selected' : '')} key={c.city}><span className="trees-city-rank">{String(i+1).padStart(2,'0')}</span><span>{c.city}</span><b>{fmt(c.trees)}</b></button>
+        ) : <div className="trees-city-empty">No approved planting reports yet. You can help your city become the first on the map.</div>}
+        {focus && <div className="trees-city-focus"><b>{focus.city}</b><span>{fmt(focus.trees)} saplings · {fmt(focus.seeds)} seeds recorded</span></div>}
+        <p className="trees-city-footnote">Map points represent aggregated city totals, not participants’ private planting addresses.</p>
+      </div>
+    </div>
+  </div>
+}
+function Overview({ summary, onContribute, onRankings }: { summary: Summary, onContribute: () => void, onRankings: () => void }) {
+  const pct = Math.min(100, summary.trees / summary.target * 100)
+  return <>
+    <section className="trees-hero">
+      <div className="trees-hero-copy"><span className="trees-hero-eyebrow"><span className="trees-live-dot"/> A PEOPLE-POWERED ENVIRONMENTAL INITIATIVE</span>
+        <h1>100 million trees.<br/><em>One greener Punjab.</em></h1>
+        <p>From your neighbourhood to the farthest corner of Punjab, every sapling can be part of something bigger. Plant it. Document it. Help it thrive.</p>
+        <div className="trees-hero-actions"><button type="button" className="trees-btn-main" onClick={onContribute}><Sprout size={19}/> I want to contribute <ArrowRight size={17}/></button><button type="button" className="trees-btn-ghost" onClick={onRankings}>Explore leaderboard <ChevronRight size={16}/></button></div>
+        <div className="trees-trust-line"><ShieldCheck size={17}/> Public figures include approved planting reports only</div>
+      </div>
+      <div className="trees-hero-art" aria-hidden="true"><div className="trees-art-glow"/><div className="trees-rings"><TreeDeciduous size={184} strokeWidth={0.7}/></div><div className="trees-art-label">ROOTED IN PUNJAB <span>•</span> GROWING TOGETHER</div></div>
+    </section>
+    <section className="trees-progress-section"><div className="trees-progress-copy"><span className="trees-kicker">THE COLLECTIVE MISSION</span><h2>Our progress, transparently tracked.</h2></div><div className="trees-progress-top"><b>{fmt(summary.trees)}</b><span>of {fmt(summary.target)} saplings</span></div><div className="trees-progress-track"><span style={{width: pct + '%'}} /></div><div className="trees-progress-bottom"><span>{pct.toFixed(5)}% of target</span><span>{fmt(Math.max(0,summary.target-summary.trees))} still to plant</span></div>
+      <div className="trees-stat-grid"><div className="trees-stat"><TreeDeciduous/><span>Approved saplings</span><strong>{fmt(summary.trees)}</strong></div><div className="trees-stat"><Sprout/><span>Seeds sown (separate)</span><strong>{fmt(summary.seeds)}</strong></div><div className="trees-stat"><Heart/><span>Contributors</span><strong>{fmt(summary.contributors)}</strong></div><div className="trees-stat"><MapPin/><span>Participating cities</span><strong>{fmt(summary.cities)}</strong></div></div>
+    </section>
+    <div className="trees-followup-stat"><ShieldCheck size={18}/><span><strong>{fmt(summary.survival_checks)}</strong> follow-up observations approved at 30, 90 or 180 days. These are separate from the planting total and are not independent proof of long-term survival.</span></div>
+    <PunjabMap summary={summary}/>
+    <section className="trees-gallery-section"><div className="trees-section-head"><div><span className="trees-kicker">FROM OUR COMMUNITY</span><h2>Plantings, documented.</h2></div><span className="trees-light-tag">Shared with participants' consent</span></div>
+      {summary.public_gallery.length ? <div className="trees-gallery-grid">{summary.public_gallery.map(item=><article className="trees-gallery-card" key={item.id}><img src={API + 'photo&kind=proof&id=' + encodeURIComponent(item.id)} loading="lazy" alt={'Verified planting report in ' + item.city}/><div><strong>{item.city}</strong><span>{item.quantity} {item.method === 'sapling' ? 'saplings' : 'seeds'} · {item.species}</span></div></article>)}</div> : <div className="trees-gallery-empty"><Camera size={25}/><div><strong>Our planting gallery is getting ready.</strong><p>Approved photos will appear here only when participants choose to share them.</p></div></div>}
+    </section>
+    <section className="trees-how"><div className="trees-section-head"><div><span className="trees-kicker">HOW TO PARTICIPATE</span><h2>Four simple steps. A lasting impact.</h2></div></div><div className="trees-how-grid">
+      {[['01','Create your campaign account','Register with your name, mobile number, CNIC and Punjab city.','user'],['02','Choose a species','Select an appropriate nursery sapling or a seed from the planting catalogue.','leaf'],['03','Plant and upload proof','Share your planting date, location and a photo—compressed automatically.','camera'],['04','Get your record reviewed','Approved saplings appear in approved counts and on the leaderboard.','check']].map(([n,t,d,kind])=><div className="trees-how-card" key={n}><span className="trees-step-n">{n}</span><span className="trees-how-icon">{kind==='user'?<UserRound/>:kind==='leaf'?<Leaf/>:kind==='camera'?<Camera/>:<BadgeCheck/>}</span><h3>{t}</h3><p>{d}</p></div>)}
+    </div></section>
+  </>
+}
+function Leaderboard({ summary }: { summary: Summary }) {
+  return <section className="trees-panel trees-leaders"><span className="trees-kicker">PUNJAB'S GREEN CHAMPIONS</span><h1>Community leaderboard</h1><p className="trees-muted">Ranked by approved nursery saplings. Seed contributions are recorded separately. Names appear only with participant consent.</p>
+    <div className="trees-leader-head"><span>RANK & CONTRIBUTOR</span><span>APPROVED SAPLINGS</span></div>
+    {summary.leaderboard.length ? summary.leaderboard.map(row=><div className="trees-leader-row" key={row.rank}><div><span className={'trees-medal trees-medal-' + row.rank}><Trophy size={18}/></span><div><strong>{row.name}</strong><small><MapPin size={12}/>{row.city}</small></div></div><b>{fmt(row.trees)}</b></div>) : <div className="trees-empty"><Trophy size={44}/><h3>The first green champions are yet to arrive.</h3><p>Approved submissions will determine the rankings. No test or fictional records are displayed.</p></div>}
+    <div className="trees-review-note"><ShieldCheck size={19}/> All public rankings are based on reviewed submissions. Reported quantities may be amended or rejected.</div>
+  </section>
+}
+function RecoveryKeyPanel({ recoveryKey, onDismiss }: { recoveryKey: string, onDismiss: () => void }) {
+  const [copyStatus, setCopyStatus] = useState('')
+  function downloadKey() {
+    const payload = 'ISARUL IBAAD FOUNDATION × CSS VISTA\nPunjab Trees Campaign — Offline Account Recovery Key\n\n' + recoveryKey + '\n\nKeep this key private. It is not an OTP and will not be sent by SMS. The key is replaced after password recovery.\n'
+    const blob = new Blob([payload], { type: 'text/plain;charset=utf-8' })
+    const href = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = href
+    link.download = 'punjab-trees-recovery-key.txt'
+    link.click()
+    setTimeout(() => URL.revokeObjectURL(href), 1000)
+  }
+  async function copyKey() {
+    try { await navigator.clipboard.writeText(recoveryKey); setCopyStatus('Copied securely.') }
+    catch { setCopyStatus('Copy from the box below and store it safely.') }
+  }
+  return <div className="trees-recovery-panel" role="status" aria-live="polite">
+    <div className="trees-recovery-title"><ShieldCheck size={25}/><div><strong>Save your private recovery key now</strong><p>This key is shown once. It replaces text-message OTP and is needed if you forget your password.</p></div></div>
+    <code className="trees-recovery-secret">{recoveryKey}</code>
+    <div className="trees-recovery-actions"><button type="button" onClick={copyKey}>Copy recovery key</button><button type="button" onClick={downloadKey}>Save as text file</button><button type="button" onClick={onDismiss}>I have saved it</button></div>
+    {copyStatus && <p className="trees-muted">{copyStatus}</p>}
+    <p className="trees-recovery-hint">Never share this key, even with campaign moderators. Losing both your password and recovery key requires manual account-ownership review.</p>
+  </div>
+}
+function SurvivalCheckForm({ reports, followups, csrf, onSaved }: {
+  reports: Report[], followups: Followup[], csrf: string, onSaved: () => void
+}) {
+  const options = reports.filter(r=>r.status==='approved'&&r.method==='sapling').flatMap(r=>
+    [30,90,180].filter(phase=>{
+      const due=new Date(r.planted_on+'T00:00:00Z').getTime()+phase*86400000
+      return due<=Date.now() && !followups.some(f=>f.planting_id===r.id&&Number(f.phase)===phase)
+    }).map(phase=>({value:r.id+':'+phase,label:r.species+' · '+r.city+' · '+phase+'-day check',max:Number(r.quantity)}))
+  )
+  const [selection,setSelection]=useState('')
+  const [count,setCount]=useState(0)
+  const [photo,setPhoto]=useState<File|null>(null)
+  const [busy,setBusy]=useState(false)
+  const [message,setMessage]=useState('')
+  const [error,setError]=useState('')
+  async function submit(e:FormEvent) {
+    e.preventDefault()
+    if(!selection||!photo){setError('Choose an eligible planting and a fresh photograph.');return}
+    const selected=options.find(x=>x.value===selection)
+    if(!selected||count<0||count>selected.max){setError('Surviving quantity exceeds the original approved count.');return}
+    setBusy(true);setError('');setMessage('')
+    try {
+      const compressed=await compressPhoto(photo,70)
+      const [plantingId,phase]=selection.split(':')
+      const fd=new FormData()
+      fd.append('planting_id',plantingId);fd.append('phase',phase)
+      fd.append('surviving',String(count));fd.append('photo',compressed)
+      await postApi('followup',fd,csrf)
+      setMessage('Survival observation submitted. It will appear after moderator review.')
+      setSelection('');setCount(0);setPhoto(null)
+      onSaved()
+    } catch(e){setError(e instanceof Error?e.message:'Could not submit follow-up.')}
+    finally{setBusy(false)}
+  }
+  return <div className="trees-survival-card"><span className="trees-kicker">KEEP YOUR TREES ALIVE</span><h2>30 · 90 · 180-day follow-ups</h2><p className="trees-muted">As your saplings grow, return with a fresh photograph and record how many are still alive. All observations are reviewed separately from planting totals.</p>
+    {options.length?<form onSubmit={submit} className="trees-survival-form">
+      <label>Eligible planting milestone<select required value={selection} onChange={e=>{setSelection(e.target.value);setCount(0)}}><option value="">Select a due follow-up</option>{options.slice(0,80).map(x=><option value={x.value} key={x.value}>{x.label}</option>)}</select></label>
+      <label>Number still alive<input required type="number" min="0" max={options.find(x=>x.value===selection)?.max||0} value={count} onChange={e=>setCount(Number(e.target.value))}/></label>
+      <label>New planting-site photo<input required type="file" accept="image/jpeg,image/png,image/webp" onChange={e=>setPhoto(e.target.files?.[0]||null)}/><small>Automatically compressed to 70 KB, original is not uploaded</small></label>
+      <button disabled={busy||!selection||!photo} className="trees-btn-main" type="submit">{busy?'Compressing…':'Submit survival update'}<ArrowRight size={16}/></button>
+    </form>:<p className="trees-survival-empty">No follow-up milestones are due yet. Milestones open 30, 90 and 180 days after the original planting date.</p>}
+    {message&&<p className="trees-success"><CheckCircle2 size={18}/>{message}</p>}
+    {error&&<p className="trees-error">{error}</p>}
+    {followups.length>0&&<div className="trees-report-list">{followups.slice(0,15).map(f=><div className="trees-report" key={f.id}><div><strong>{f.phase}-day observation · {f.surviving} surviving</strong><span>Submitted for review</span>{f.review_note&&<small>{f.review_note}</small>}</div><span className={'trees-status trees-status-'+f.status}>{f.status}</span></div>)}</div>}
+  </div>
+}
+function Account({ member, onSigned, onLogout, onLockedOut, csrf, emailAction }: {
+  member: Member | null,
+  onSigned: (m:Member, csrf:string)=>void,
+  onLogout:()=>void,
+  onLockedOut:()=>void,
+  csrf:string,
+  emailAction: { purpose:'verify'|'reset', token:string } | null
+}) {
+  const [mode,setMode]=useState<'register'|'login'|'recover'|'email-request'|'email-reset'|'email-verify'>(
+    emailAction?.purpose==='reset'?'email-reset':emailAction?.purpose==='verify'?'email-verify':'register'
+  )
+  const [busy,setBusy]=useState(false)
+  const [error,setError]=useState('')
+  const [name,setName]=useState('')
+  const [email,setEmail]=useState('')
+  const [editEmail,setEditEmail]=useState(false)
+  const [emailChangePassword,setEmailChangePassword]=useState('')
+  const [newContactEmail,setNewContactEmail]=useState('')
+  const [city,setCity]=useState('')
+  const [customCity,setCustomCity]=useState('')
+  const [cnic,setCnic]=useState('')
+  const [mobile,setMobile]=useState('')
+  const [password,setPassword]=useState('')
+  const [newPassword,setNewPassword]=useState('')
+  const [repeatPassword,setRepeatPassword]=useState('')
+  const [recoveryInput,setRecoveryInput]=useState('')
+  const [recoveryKey,setRecoveryKey]=useState('')
+  const [consent,setConsent]=useState(false)
+  const [publish,setPublish]=useState(false)
+  const [reports,setReports]=useState<Report[]>([])
+  const [followups,setFollowups]=useState<Followup[]>([])
+  const [avatarBusy,setAvatarBusy]=useState(false)
+  const [note,setNote]=useState('')
+  const [securityOpen,setSecurityOpen]=useState(false)
+  const [deleteOpen,setDeleteOpen]=useState(false)
+  const [currentPassword,setCurrentPassword]=useState('')
+  const [deletePhrase,setDeletePhrase]=useState('')
+  const [deletePassword,setDeletePassword]=useState('')
+
+  const reloadMine=()=>getApi('mine').then(data=>{setReports(data.reports);setFollowups(data.followups||[])}).catch(()=>{})
+  useEffect(()=>{if(member)void reloadMine()},[member])
+  useEffect(()=>{
+    if(emailAction?.purpose!=='verify') return
+    let live=true
+    postApi('confirm-email',{token:emailAction.token})
+      .then(async ()=>{
+        if(!live)return
+        const data=await getApi('session')
+        if(!live)return
+        if(data.member)onSigned(data.member,data.csrf_token)
+        setNote('Email address confirmed. You can now reset your password by email.')
+        setMode('login')
+      })
+      .catch(e=>{if(live){setError(e instanceof Error?e.message:'Email confirmation failed.');setMode('login')}})
+    return ()=>{live=false}
+  },[emailAction?.purpose,emailAction?.token])
+  async function resendEmail() {
+    setBusy(true);setError('')
+    try {
+      const data=await postApi('resend-email-verification',{},csrf)
+      setNote(data.message)
+    }catch(e){setError(e instanceof Error?e.message:'Could not send email.')}
+    finally{setBusy(false)}
+  }
+  async function updateEmail(e:FormEvent) {
+    e.preventDefault()
+    setBusy(true);setError('')
+    try {
+      const data=await postApi('change-email',{email:newContactEmail,password:emailChangePassword},csrf)
+      const session=await getApi('session')
+      onSigned(session.member,session.csrf_token)
+      setNote(data.message)
+      setEditEmail(false);setEmailChangePassword('');setNewContactEmail('')
+    }catch(e){setError(e instanceof Error?e.message:'Could not change email address.')}
+    finally{setBusy(false)}
+  }
+
+
+  async function submit(e:FormEvent) {
+    e.preventDefault()
+    setError('');setNote('')
+    if ((mode==='recover'||mode==='email-reset') && newPassword!==repeatPassword) {setError('New passwords do not match.');return}
+    setBusy(true)
+    try {
+      if (mode==='email-request') {
+        const data=await postApi('request-email-reset',{email})
+        setNote(data.message)
+      } else if (mode==='email-reset') {
+        if (!emailAction || emailAction.purpose!=='reset') throw new Error('This password-reset link is no longer available. Request another email.')
+        const data=await postApi('reset-email-password',{token:emailAction.token,new_password:newPassword})
+        setRecoveryKey(data.recovery_key)
+        setNewPassword('');setRepeatPassword('')
+        setNote('Password reset securely. All prior sessions were signed out. Save your new offline recovery key, then sign in.')
+        onLockedOut()
+        setMode('login')
+      } else if (mode==='recover') {
+        const data=await postApi('recover',{mobile,recovery_key:recoveryInput,new_password:newPassword})
+        setRecoveryKey(data.recovery_key)
+        setRecoveryInput('');setNewPassword('');setRepeatPassword('')
+        setNote('Password reset. Save your new offline recovery key before signing in.')
+      } else if(mode==='register'||mode==='login') {
+        const data=await postApi(mode,mode==='register'?{name,email,city:city==='custom'?customCity:city,cnic,mobile,password,consent,public_name:publish}:{mobile,password})
+        if(data.recovery_key)setRecoveryKey(data.recovery_key)
+        onSigned(data.member,data.csrf_token)
+        if(mode==='register')setNote(data.verification_sent?'Confirmation link sent to your email. Verify it to enable email password recovery; no OTP is needed.':'Account created, but email could not be sent. You can resend from your account. Save your offline recovery key.')
+        setPassword('');setCnic('')
+      }
+    } catch(e) {setError(e instanceof Error?e.message:'Could not continue.')}
+    finally {setBusy(false)}
+  }
+  async function photo(e:ChangeEvent<HTMLInputElement>) {
+    const file=e.target.files?.[0]
+    if(!file)return
+    setAvatarBusy(true);setError('');setNote('')
+    try {
+      const compressed=await compressPhoto(file,40)
+      const fd=new FormData()
+      fd.append('photo',compressed)
+      await postApi('avatar',fd,csrf)
+      const data=await getApi('session')
+      onSigned(data.member,data.csrf_token)
+      setNote('Your optional profile photograph was saved privately.')
+    } catch(e) {setError(e instanceof Error?e.message:'Could not upload photo.')}
+    finally {setAvatarBusy(false);e.target.value=''}
+  }
+  async function updatePassword(e:FormEvent) {
+    e.preventDefault()
+    if(newPassword!==repeatPassword) {setError('New passwords do not match.');return}
+    setBusy(true);setError('')
+    try {
+      const data=await postApi('change-password',{current_password:currentPassword,new_password:newPassword},csrf)
+      setRecoveryKey(data.recovery_key)
+      setNewPassword('');setRepeatPassword('');setCurrentPassword('')
+      setNote('Password changed. All sessions were signed out. Save your new recovery key.')
+      onLockedOut()
+    } catch(e) {setError(e instanceof Error?e.message:'Password update failed.')}
+    finally {setBusy(false)}
+  }
+  async function deleteAccount(e:FormEvent) {
+    e.preventDefault();setBusy(true);setError('')
+    try {
+      await postApi('delete-account',{password:deletePassword,confirm:deletePhrase},csrf)
+      setRecoveryKey('')
+      setDeletePassword('');setDeletePhrase('')
+      setNote('Campaign account deleted. Previous records were removed from public totals.')
+      onLockedOut()
+    } catch(e) {setError(e instanceof Error?e.message:'Account deletion failed.')}
+    finally {setBusy(false)}
+  }
+  if(member && mode!=='email-reset' && mode!=='email-verify') return <section className="trees-panel">
+    <span className="trees-kicker">MY TREE CAMPAIGN ACCOUNT</span>
+    <div className="trees-account-head">
+      <div className="trees-account-identity">
+        {member.has_photo&&<img className="trees-account-avatar" src={API+'photo&kind=avatar&id='+encodeURIComponent(member.id)} alt="Your private campaign profile"/>}
+        <div><h1>Welcome, {member.name.split(' ')[0]}.</h1><p className="trees-muted"><MapPin size={14}/> {member.city} · {member.has_photo?'Optional profile photo saved':'No profile photo required'}</p></div>
+      </div>
+      <button type="button" className="trees-btn-outline" onClick={onLogout}><LogOut size={16}/> Sign out</button>
+    </div>
+    {recoveryKey&&<RecoveryKeyPanel recoveryKey={recoveryKey} onDismiss={()=>setRecoveryKey('')}/>}
+    <div className="trees-email-status">
+      <div><strong>Email for account recovery</strong><p>{member.email||'No email recorded'} · {member.email_verified?'Confirmed':'Not yet confirmed — email resets are disabled until confirmation'}</p></div>
+      {!member.email_verified&&<button disabled={busy} type="button" onClick={resendEmail} className="trees-btn-outline">Resend confirmation</button>}
+      <button type="button" className="trees-btn-outline" onClick={()=>setEditEmail(v=>!v)}>{editEmail?'Cancel':'Change email'}</button>
+    </div>
+    {editEmail&&<form className="trees-account-subform" onSubmit={updateEmail}>
+      <h3>Update recovery email</h3>
+      <p className="trees-muted">Your new address must be confirmed before it can reset your password. No OTP is required.</p>
+      <label>New email<input required type="email" maxLength={254} autoComplete="email" value={newContactEmail} onChange={e=>setNewContactEmail(e.target.value)}/></label>
+      <label>Current password<input required type="password" autoComplete="current-password" value={emailChangePassword} onChange={e=>setEmailChangePassword(e.target.value)}/></label>
+      <button disabled={busy} className="trees-btn-main" type="submit">Update email address</button>
+    </form>}
+    {!member.has_photo&&<div className="trees-upload-avatar">
+      <Camera size={26}/><div><strong>Optional profile photograph</strong><p>Your account works without a portrait. If you choose to add one, it is compressed to 40 KB, stored privately, and never placed on the public leaderboard.</p></div>
+      <label className="trees-upload-btn">{avatarBusy?'Processing…':'Choose photo'}<input disabled={avatarBusy} type="file" accept="image/jpeg,image/png,image/webp" onChange={photo} hidden/></label>
+    </div>}
+    {note&&<div className="trees-success"><CheckCircle2 size={18}/>{note}</div>}
+    {error&&<p className="trees-error">{error}</p>}
+    <div className="trees-profile-title"><h2>My planting records</h2><span>{reports.length} submissions</span></div>
+    {reports.length?<div className="trees-report-list">{reports.map(r=><div className="trees-report" key={r.id}><div><strong>{r.quantity} × {r.species}</strong><span>{typeLabel(r.method)} · {r.locality} · {r.planted_on}</span>{r.review_note&&<small>{r.review_note}</small>}</div><span className={'trees-status trees-status-'+r.status}>{r.status}</span></div>)}</div>:<div className="trees-empty compact"><Sprout size={35}/><p>No planting reports submitted yet.</p></div>}
+    <SurvivalCheckForm reports={reports} followups={followups} csrf={csrf} onSaved={()=>{void reloadMine()}}/>
+    <div className="trees-account-security">
+      <button type="button" className="trees-btn-outline" onClick={()=>{setSecurityOpen(!securityOpen);setDeleteOpen(false)}}><ShieldCheck size={16}/> {securityOpen?'Close password settings':'Change password'}</button>
+      <button type="button" className="trees-btn-outline trees-danger-toggle" onClick={()=>{setDeleteOpen(!deleteOpen);setSecurityOpen(false)}}>{deleteOpen?'Cancel deletion':'Delete my campaign account'}</button>
+      {securityOpen&&<form className="trees-account-subform" onSubmit={updatePassword}>
+        <h3>Change your password</h3>
+        <label>Current password<input required type="password" autoComplete="current-password" value={currentPassword} onChange={e=>setCurrentPassword(e.target.value)}/></label>
+        <label>New password<input required type="password" minLength={12} autoComplete="new-password" value={newPassword} onChange={e=>setNewPassword(e.target.value)}/></label>
+        <label>Repeat new password<input required type="password" minLength={12} autoComplete="new-password" value={repeatPassword} onChange={e=>setRepeatPassword(e.target.value)}/></label>
+        <p className="trees-muted">This signs out all devices and replaces your offline recovery key.</p>
+        <button disabled={busy} type="submit" className="trees-btn-main">Change password securely</button>
+      </form>}
+      {deleteOpen&&<form className="trees-account-subform" onSubmit={deleteAccount}>
+        <h3>Delete campaign account permanently</h3>
+        <p className="trees-muted">This deletes your campaign profile, evidence photos and planting records. Public totals and rankings will be recalculated. It cannot be undone.</p>
+        <label>Current password<input type="password" required value={deletePassword} autoComplete="current-password" onChange={e=>setDeletePassword(e.target.value)}/></label>
+        <label>Type DELETE to confirm<input required value={deletePhrase} onChange={e=>setDeletePhrase(e.target.value)} placeholder="DELETE"/></label>
+        <button disabled={busy||deletePhrase!=='DELETE'} type="submit" className="trees-danger-button">Permanently delete account</button>
+      </form>}
+    </div>
+  </section>
+  return <section className="trees-auth-wrap">
+    <div className="trees-auth-side">
+      <Sprout size={41}/><span className="trees-kicker">YOUR PERSONAL GREEN JOURNEY</span><h1>Your contribution deserves to be counted.</h1><p>One private planting profile. Every approved record contributes to a greener Punjab.</p>
+      <div><ShieldCheck size={20}/> Your complete CNIC is never stored in the campaign database.</div>
+      <div><Globe2 size={20}/> Separate from your existing study account.</div>
+      <div><Leaf size={20}/> No OTP, payment, or profile photo required.</div>
+    </div>
+    <form className="trees-panel trees-auth-form" onSubmit={submit}>
+      <div className="trees-auth-toggle">
+        <button className={mode==='register'?'active':''} type="button" onClick={()=>setMode('register')}>Create account</button>
+        <button className={mode==='login'?'active':''} type="button" onClick={()=>setMode('login')}>Sign in</button>
+        <button className={mode==='recover'||mode.startsWith('email-')?'active':''} type="button" onClick={()=>setMode('email-request')}>Forgot password?</button>
+      </div>
+      <h2>{mode==='register'?'Join the movement':mode==='login'?'Welcome back':mode==='email-request'?'Reset using your email':mode==='email-reset'?'Choose a new password':mode==='email-verify'?'Confirming your email…':'Recover with your saved key'}</h2>
+      <p className="trees-muted">{mode==='register'?'Create a free planting account. We will email a confirmation link, not an OTP.':mode==='login'?'Sign in using your mobile number and password.':mode==='email-request'?'Enter your registered, confirmed email to receive a single-use password reset link.':mode==='email-reset'?'Your private email link enables one password change. It expires 30 minutes after it was sent.':mode==='email-verify'?'Checking your email confirmation link.':'Use your offline recovery key; no SMS or OTP needed.'}</p>
+      {mode==='register'&&<>
+        <label>Full name<input required value={name} onChange={e=>setName(e.target.value)} placeholder="Your full name" maxLength={100}/></label>
+        <label>Email address<input required type="email" autoComplete="email" maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} placeholder="Your email for password recovery"/><small>No OTP at registration. Confirm your email through the link we send to enable email recovery.</small></label>
+        <label>Your city or town in Punjab<select required value={city} onChange={e=>setCity(e.target.value)}><option value="">Choose city / town</option>{CITIES.map(c=><option value={c[0]} key={c[0]}>{c[0]}</option>)}<option value="custom">Other town or village in Punjab</option></select></label>
+        {city==='custom'&&<label>Write your Punjab town or village<input required value={customCity} onChange={e=>setCustomCity(e.target.value)} maxLength={70} placeholder="Full town or village name"/></label>}
+        <label>CNIC number<input required value={cnic} onChange={e=>setCnic(e.target.value)} placeholder="13 digits, used only to prevent duplicates" inputMode="numeric" autoComplete="off" pattern="[0-9]{5}-?[0-9]{7}-?[0-9]"/></label>
+      </>}
+      {(mode==='register'||mode==='login'||mode==='recover')&&<label>Mobile number<input required value={mobile} onChange={e=>setMobile(e.target.value)} inputMode="tel" autoComplete="tel" placeholder="03XX-XXXXXXX"/></label>}
+      {mode==='email-request'&&<label>Registered email<input required type="email" maxLength={254} autoComplete="email" placeholder="name@example.com" value={email} onChange={e=>setEmail(e.target.value)}/></label>}
+      {mode==='recover'&&<label>Saved offline recovery key<input required value={recoveryInput} onChange={e=>setRecoveryInput(e.target.value)} autoComplete="off" placeholder="TREE-..."/></label>}
+      {(mode==='login'||mode==='register')?<label>Password<input type="password" required minLength={mode==='register'?12:undefined} maxLength={72} value={password} onChange={e=>setPassword(e.target.value)} autoComplete={mode==='register'?'new-password':'current-password'} placeholder={mode==='register'?'At least 12 characters':'Your password'}/></label>:(mode==='recover'||mode==='email-reset')?<>
+        <label>New password<input required type="password" minLength={12} maxLength={72} autoComplete="new-password" value={newPassword} onChange={e=>setNewPassword(e.target.value)}/></label>
+        <label>Repeat new password<input required type="password" minLength={12} maxLength={72} autoComplete="new-password" value={repeatPassword} onChange={e=>setRepeatPassword(e.target.value)}/></label>
+      </>:null}
+      {mode==='register'&&<>
+        <label className="trees-check"><input type="checkbox" required checked={consent} onChange={e=>setConsent(e.target.checked)}/><span>I consent to my account details being used for security, duplicate prevention and review of planting reports. My CNIC will be converted to a secret-keyed fingerprint, not stored in plain text.</span></label>
+        <label className="trees-check"><input type="checkbox" checked={publish} onChange={e=>setPublish(e.target.checked)}/><span>Show my name on the public leaderboard if I have approved saplings.</span></label>
+      </>}
+      {note&&<p className="trees-success"><CheckCircle2 size={18}/>{note}</p>}
+      {recoveryKey&&<RecoveryKeyPanel recoveryKey={recoveryKey} onDismiss={()=>setRecoveryKey('')}/>}
+      {error&&<p className="trees-error">{error}</p>}
+      {mode!=='email-verify'&&<button disabled={busy} className="trees-btn-main trees-submit" type="submit">{busy?'Processing securely…':mode==='register'?'Create my campaign account':mode==='login'?'Sign in':mode==='recover'?'Reset using saved recovery key':mode==='email-request'?'Email a reset link':'Set a new password'}<ArrowRight size={17}/></button>}
+      {(mode==='email-request'||mode==='recover')&&<button type="button" className="trees-btn-outline trees-email-switch" onClick={()=>{setMode(mode==='email-request'?'recover':'email-request');setError('');setNote('')}}>{mode==='email-request'?'Use my saved offline recovery key instead':'Use email to reset my password'}</button>}
+      <p className="trees-auth-foot"><ShieldCheck size={14}/> Your mobile and CNIC are not automatically verified. Duplicate records are limited, but true identity must be assessed by human review.</p>
+      {(mode==='email-request'||mode==='recover')&&<p className="trees-auth-foot">Email resets work only with a previously confirmed address. If you lose access to both email and your offline recovery key, contact administrators for manual ownership review. Do not share CNIC photographs in public chats.</p>}
+    </form>
+  </section>
+}
+
+function Contribute({ member, csrf, species, onDone, onAccount }: { member: Member | null, csrf: string, species: Record<string, Species>, onDone: ()=>void, onAccount:()=>void }) {
+  const [method,setMethod]=useState<'sapling'|'seed'>('sapling'),[selected,setSelected]=useState(''),[quantity,setQuantity]=useState(1),[locality,setLocality]=useState(''),[date,setDate]=useState(()=>new Date().toISOString().slice(0,10)),[image,setImage]=useState<File|null>(null),[preview,setPreview]=useState(''),[publish,setPublish]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[success,setSuccess]=useState('')
+  const speciesEntries=Object.entries(species)
+  useEffect(()=>()=>{if(preview)URL.revokeObjectURL(preview)},[preview])
+  function choosePhoto(e:ChangeEvent<HTMLInputElement>) {const file=e.target.files?.[0];if(!file)return;setImage(file);setPreview(URL.createObjectURL(file));setError('')}
+  async function submit(e:FormEvent){e.preventDefault();setError('');setSuccess('');if(!image){setError('Please attach a photograph of the planted saplings or seed site.');return;}setBusy(true)
+    try {const compressed=await compressPhoto(image,70);const fd=new FormData();fd.append('species',selected);fd.append('method',method);fd.append('quantity',String(quantity));fd.append('locality',locality);fd.append('planted_on',date);fd.append('public_photo',publish?'yes':'no');fd.append('photo',compressed);await postApi('plant',fd,csrf);setSuccess('Report received for review. It will count only after approval.');setSelected('');setQuantity(1);setImage(null);setPreview('');setLocality('');onDone()}
+    catch(e){setError(e instanceof Error?e.message:'Could not submit record.')}finally{setBusy(false)}
+  }
+  if(!member)return <div className="trees-gate"><div className="trees-gate-icon"><LogIn size={42}/></div><h1>Begin your green journey.</h1><p>To submit a planting record, first create or sign in to your dedicated campaign account. Registration is free, with no OTP or required profile photo.</p><button className="trees-btn-main" type="button" onClick={onAccount}>Create my campaign account <ArrowRight size={17}/></button></div>
+  if(!member.email_verified)return <div className="trees-gate"><div className="trees-gate-icon"><ShieldCheck size={42}/></div><h1>Confirm your email to begin planting.</h1><p>Your free account is ready, with no OTP and no profile photo required. Open the confirmation link emailed to {member.email}, then return to submit your planting evidence.</p><button className="trees-btn-main" type="button" onClick={onAccount}>Verify my email <ArrowRight size={17}/></button></div>
+  return <section className="trees-panel trees-plant-panel"><span className="trees-kicker">RECORD YOUR CONTRIBUTION</span><h1>What did you plant?</h1><p className="trees-muted">Choose your species, add location details and upload a real photo of the planting. Only approved sapling records increase the tree counter; their long-term survival is tracked separately.</p>
+    <form onSubmit={submit}><div className="trees-method"><button type="button" className={method==='sapling'?'active':''} onClick={()=>setMethod('sapling')}><TreeDeciduous size={25}/><strong>Nursery sapling</strong><small>A living young tree already planted</small></button><button type="button" className={method==='seed'?'active':''} onClick={()=>setMethod('seed')}><Sprout size={25}/><strong>Seed sown</strong><small>A seed planted in soil</small></button></div>
+    <div className="trees-form-caption"><h2>Select a species</h2><span>Locally suitable choices vary by soil and climate</span></div><div className="trees-species-grid">{speciesEntries.map(([id,s])=><button type="button" aria-pressed={selected===id} key={id} className={'trees-species-card'+(selected===id?' active':'')} onClick={()=>setSelected(id)}><SpeciesPhoto scientific={s.scientific} name={s.name} method={method}/><span><strong>{s.name}</strong><small>{s.scientific}</small></span>{selected===id&&<CheckCircle2 className="trees-selected-check" size={17}/>}</button>)}</div><div className="trees-photo-source">Botanical thumbnails supplied by Wikimedia Commons where available. For species suitability, consult a local forestry nursery.</div>
+    <div className="trees-plant-fields"><label>Number {method==='seed'?'of seeds sown':'of nursery saplings planted'}<input required type="number" min="1" max="20" value={quantity} onChange={e=>setQuantity(Number(e.target.value))}/><small>Maximum 20 per evidence report. Each claim is reviewed.</small></label><label>Date planted<input required type="date" max={new Date().toISOString().slice(0,10)} value={date} onChange={e=>setDate(e.target.value)}/></label><label>City<input readOnly value={member.city}/></label><label>Area or planting location<input required value={locality} maxLength={120} onChange={e=>setLocality(e.target.value)} placeholder="e.g. school courtyard or residential area"/></label></div>
+    <div className="trees-evidence"><div className="trees-evidence-head"><div><span className="trees-kicker">PHOTOGRAPHIC PROOF</span><h2>Show us what you've planted.</h2><p>The original image is compressed inside your browser to a maximum of 70 KB before upload. No manual resizing needed.</p></div><CloudUpload size={29}/></div><label className="trees-dropzone"><input type="file" accept="image/jpeg,image/png,image/webp" onChange={choosePhoto} hidden/>{preview?<img src={preview} alt="Selected planting evidence" />:<Camera size={31}/>}<strong>{image?image.name:'Tap to choose your planted tree photo'}</strong><small>{image?'Ready to compress securely on submission':'JPG, PNG or WebP · Max original file size 20 MB'}</small></label><label className="trees-check"><input type="checkbox" checked={publish} onChange={e=>setPublish(e.target.checked)}/><span>Allow this planting photograph to appear in the public campaign gallery after approval.</span></label></div>
+    <div className="trees-truth-note"><CircleHelp size={18}/> Do not report unplanted seeds or trees. Photos prove a submission exists, not that a tree has survived. Reviewers may request additional evidence.</div>
+    {error&&<p className="trees-error">{error}</p>}{success&&<p className="trees-success"><CheckCircle2 size={18}/>{success}</p>}<button disabled={busy||!selected} className="trees-btn-main trees-submit" type="submit">{busy?'Compressing and sending…':'Submit planting for review'}<ArrowRight size={18}/></button></form>
+  </section>
+}
+function Review({ csrf, refresh }: { csrf: string, refresh: () => void }) {
+  const [rows,setRows]=useState<Report[]>([])
+  const [approved,setApproved]=useState<Report[]>([])
+  const [survivalRows,setSurvivalRows]=useState<Followup[]>([])
+  const [err,setErr]=useState('')
+  const [busy,setBusy]=useState('')
+  const [note,setNote]=useState<Record<string,string>>({})
+  const [confirmed,setConfirmed]=useState<Record<string,boolean>>({})
+  const [fieldChecked,setFieldChecked]=useState<Record<string,boolean>>({})
+  const [fieldDate,setFieldDate]=useState<Record<string,string>>({})
+
+  async function reload() {
+    try {
+      const [pending,old,survivals]=await Promise.all([getApi('queue'),getApi('approved-reports'),getApi('followup-queue')])
+      setRows(pending.reports);setApproved(old.reports);setSurvivalRows(survivals.reports)
+    } catch(e) {setErr(e instanceof Error?e.message:'Access denied.')}
+  }
+  useEffect(()=>{void reload()},[])
+  async function decision(report:Report, status:'approved'|'rejected'|'revoked') {
+    const text=(note[report.id]||'').trim()
+    if(text.length<10) {setErr('Write a specific review note of at least 10 characters.');return}
+    if(!confirmed[report.id]) {setErr('Confirm that you personally examined the evidence.');return}
+    const highRisk = Number(report.quantity)>5 || Number(report.duplicate_risk)===1
+    if(status==='approved'&&highRisk&&(!fieldChecked[report.id]||!fieldDate[report.id])){
+      setErr('A large or duplicate-looking report needs a documented physical inspection date before approval.')
+      return
+    }
+    setBusy(report.id);setErr('')
+    try {
+      await postApi('review',{id:report.id,decision:status,note:text,field_checked:status==='approved'&&!!fieldChecked[report.id],field_visit_date:fieldDate[report.id]||''},csrf)
+      await reload()
+      refresh()
+    } catch(e){setErr(e instanceof Error?e.message:'Review failed.')}
+    finally{setBusy('')}
+  }
+  async function decisionSurvival(record:Followup,status:'approved'|'rejected') {
+    const text=(note[record.id]||'').trim()
+    if(text.length<10||!confirmed[record.id]){setErr('A written review and evidence confirmation are required.');return}
+    setBusy(record.id);setErr('')
+    try {
+      await postApi('followup-review',{id:record.id,decision:status,note:text},csrf)
+      await reload()
+      refresh()
+    } catch(e){setErr(e instanceof Error?e.message:'Could not review survival observation.')}
+    finally{setBusy('')}
+  }
+  function item(r:Report, isApproved=false) {
+    const highRisk=Number(r.quantity)>5||Number(r.duplicate_risk)===1
+    return <div className="trees-admin-item" key={r.id}>
+      <div className="trees-admin-photo"><img src={API+'photo&kind=proof&id='+encodeURIComponent(r.id)} alt={'Private evidence for planting in '+r.city}/></div>
+      <div className="trees-admin-details">
+        <div className="trees-admin-identity">{r.member_id&&Number(r.has_photo)===1&&<img src={API+'photo&kind=avatar&id='+encodeURIComponent(r.member_id)} alt="Private participant photograph"/>}<h3>{r.full_name} · {r.city}</h3></div>
+        <p>{r.species} · {r.quantity} {typeLabel(r.method)} · {r.locality}</p>
+        <small>Planting date: {r.planted_on}</small>
+        {highRisk&&<div className="trees-admin-risk"><ShieldCheck size={16}/> {Number(r.duplicate_risk)===1?'Possible duplicate photographic evidence. ':''}{r.quantity>5?'Large quantity: site verification required.':''}</div>}
+        {isApproved&&<p className="trees-muted">{Number(r.field_checked)===1?'Site visit recorded on '+r.field_visit_date:'Photograph review only; survival not verified'}</p>}
+        <label className="trees-review-field">Reviewer findings
+          <textarea value={note[r.id]||''} onChange={e=>setNote(old=>({...old,[r.id]:e.target.value}))} maxLength={400} rows={2} placeholder="Describe visible evidence, species, count, and any concern..."/>
+        </label>
+        <label className="trees-check"><input type="checkbox" checked={!!confirmed[r.id]} onChange={e=>setConfirmed(old=>({...old,[r.id]:e.target.checked}))}/><span>I personally examined the submitted photographic evidence and reviewed the claim.</span></label>
+        {!isApproved&&highRisk&&<div className="trees-admin-field-check">
+          <label className="trees-check"><input type="checkbox" checked={!!fieldChecked[r.id]} onChange={e=>setFieldChecked(old=>({...old,[r.id]:e.target.checked}))}/><span>I confirm that an actual visit or independently documented physical inspection of this planting site was completed.</span></label>
+          <label>Physical inspection date<input type="date" max={new Date().toISOString().slice(0,10)} min={r.planted_on} value={fieldDate[r.id]||''} onChange={e=>setFieldDate(old=>({...old,[r.id]:e.target.value}))}/></label>
+        </div>}
+        <div className="trees-admin-buttons">
+          {!isApproved&&<><button disabled={busy===r.id} type="button" onClick={()=>decision(r,'approved')}><CheckCircle2 size={16}/> Approve reviewed claim</button><button disabled={busy===r.id} type="button" onClick={()=>decision(r,'rejected')}><X size={16}/> Reject</button></>}
+          {isApproved&&<button disabled={busy===r.id} className="trees-revoke" type="button" onClick={()=>decision(r,'revoked')}><X size={16}/> Revoke approval if fraudulent</button>}
+        </div>
+      </div>
+    </div>
+  }
+  return <section className="trees-panel">
+    <span className="trees-kicker">PRIVATE MODERATION DESK</span><h1>Review planting submissions</h1>
+    <p className="trees-muted">Protected by the existing administrator's MFA. Every approval, rejection or revocation is recorded in an audit trail. A photo review is not the same as independently verified survival.</p>
+    {err&&<p className="trees-error">{err}</p>}
+    <div className="trees-profile-title"><h2>Pending review</h2><span>{rows.length} reports</span></div>
+    {rows.length?rows.map(r=>item(r)):<div className="trees-empty compact">No pending reports.</div>}
+    <div className="trees-profile-title"><h2>Survival observations awaiting review</h2><span>{survivalRows.length} submissions</span></div>
+    {survivalRows.length?survivalRows.map(f=><div className="trees-admin-item" key={f.id}>
+      <div className="trees-admin-photo"><img src={API+'photo&kind=followup&id='+encodeURIComponent(f.id)} alt="Private photo of a survival check"/></div>
+      <div className="trees-admin-details"><h3>{f.full_name} · {f.city}</h3>
+        <p>{f.species} · {f.phase}-day observation · {f.surviving} reported surviving out of {f.planted_quantity} approved saplings</p>
+        <small>Original planting: {f.locality}</small>
+        <label className="trees-review-field">Reviewer findings<textarea rows={2} minLength={10} maxLength={400} value={note[f.id]||''} onChange={e=>setNote(old=>({...old,[f.id]:e.target.value}))} placeholder="Describe the evidence and any concern about tree survival..."/></label>
+        <label className="trees-check"><input type="checkbox" checked={!!confirmed[f.id]} onChange={e=>setConfirmed(old=>({...old,[f.id]:e.target.checked}))}/><span>I examined the follow-up photograph and checked it against the original record.</span></label>
+        <div className="trees-admin-buttons"><button disabled={busy===f.id} type="button" onClick={()=>{void decisionSurvival(f,'approved')}}><CheckCircle2 size={16}/> Approve observation</button><button disabled={busy===f.id} type="button" onClick={()=>{void decisionSurvival(f,'rejected')}}><X size={16}/> Reject</button></div>
+      </div>
+    </div>):<div className="trees-empty compact">No survival observations waiting.</div>}
+    <div className="trees-profile-title"><h2>Previously approved reports</h2><span>Recent 100</span></div>
+    <p className="trees-muted">If subsequent evidence shows a claim is false, revoke it here. This immediately removes the quantity from the public totals.</p>
+    {approved.length?approved.map(r=>item(r,true)):<div className="trees-empty compact">No previously approved reports.</div>}
+  </section>
+}
+
+export default function PunjabTrees() {
+  const [emailAction]=useState<{purpose:'verify'|'reset',token:string}|null>(()=>{
+    if(typeof window==='undefined')return null
+    const hash=window.location.hash.slice(1)
+    const match=/^(verify-email|reset-email)=([a-f0-9]{64})$/.exec(hash)
+    if(!match)return null
+    // Remove bearer credentials from browser history before any API request.
+    window.history.replaceState(window.history.state,'',window.location.pathname+window.location.search)
+    return {purpose:match[1]==='verify-email'?'verify':'reset',token:match[2]}
+  })
+  const [tab,setTab]=useState<Tab>(emailAction?'account':'overview'),[summary,setSummary]=useState<Summary>(EMPTY),[species,setSpecies]=useState<Record<string,Species>>({}),[member,setMember]=useState<Member|null>(null),[csrf,setCsrf]=useState(''),[adminCsrf,setAdminCsrf]=useState(''),[error,setError]=useState(''),[isAdmin,setIsAdmin]=useState(false),[mobileNav,setMobileNav]=useState(false)
+  const refresh=()=>getApi('summary').then(d=>setSummary(d)).catch(e=>setError(e instanceof Error?e.message:'Unable to load live progress.'))
+  useEffect(()=>{refresh();getApi('catalog').then(d=>setSpecies(d.species)).catch(()=>{});getApi('session').then(d=>{setMember(d.member);setCsrf(d.csrf_token||'')}).catch(()=>{});fetch('/api/admin-auth/session.php',{credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(d=>{if(d?.authenticated){setIsAdmin(true);setAdminCsrf(d.csrf_token||'')}}).catch(()=>{})},[])
+  const select=(next:Tab)=>{setTab(next);setMobileNav(false);if(next==='overview'||next==='leaderboard')void refresh();window.scrollTo({top:0,behavior:'smooth'})}
+  async function logout(){try{await postApi('logout',{},csrf);setMember(null);setCsrf('');select('overview')}catch(e){setError(e instanceof Error?e.message:'Could not sign out.')}}
+  return <main className="trees-root">
+    <div className="trees-topline"><div className="trees-shell"><span><Leaf size={13}/> 100 MILLION TREES FOR PUNJAB</span><span>ISARUL IBAAD FOUNDATION <span className="trees-topline-x">×</span> CSS VISTA</span></div></div>
+    <div className="trees-sitebar"><div className="trees-shell trees-sitebar-content"><Brand/><button type="button" className="trees-menu-toggle" aria-label="Toggle campaign navigation" onClick={()=>setMobileNav(!mobileNav)}>{mobileNav?<X/>:<Menu/>}</button><nav className={mobileNav?'is-open':''} aria-label="Tree campaign navigation"><button className={tab==='overview'?'active':''} type="button" onClick={()=>select('overview')}>Overview</button><button className={tab==='contribute'?'active':''} type="button" onClick={()=>select('contribute')}>Plant & report</button><button className={tab==='leaderboard'?'active':''} type="button" onClick={()=>select('leaderboard')}>Leaderboard</button><button className={tab==='account'?'active':''} type="button" onClick={()=>select('account')}>{member?'My account':'Join / sign in'}</button>{isAdmin&&<button className={tab==='review'?'active':''} type="button" onClick={()=>select('review')}>Review</button>}</nav><button className="trees-sitebar-cta" type="button" onClick={()=>select('contribute')}><Leaf size={15}/> Contribute <ArrowRight size={14}/></button></div></div>
+    <div className="trees-shell trees-main-content">
+      {error&&<div className="trees-error trees-page-error">{error}<button onClick={()=>setError('')} type="button"><X size={17}/></button></div>}
+      {tab==='overview'&&<Overview summary={summary} onContribute={()=>select('contribute')} onRankings={()=>select('leaderboard')}/>}
+      {tab==='leaderboard'&&<Leaderboard summary={summary}/>}
+      {tab==='account'&&<Account member={member} csrf={csrf} onSigned={(m,token)=>{setMember(m);setCsrf(token)}} onLogout={logout} onLockedOut={()=>{setMember(null);setCsrf('')}} emailAction={emailAction}/>}
+      {tab==='contribute'&&<Contribute member={member} csrf={csrf} species={species} onDone={refresh} onAccount={()=>select('account')}/>}
+      {tab==='review'&&<Review csrf={adminCsrf} refresh={()=>{void refresh()}}/>}
+    </div>
+    <footer className="trees-footer"><div className="trees-shell"><div><Brand/><p>Growing a greener Punjab, one reviewed contribution at a time.</p></div><div><span>Transparency</span><p>Saplings and seeds are counted separately. Approved does not mean independently certified survival.</p></div><div><a href="https://esarulebad.org/" target="_blank" rel="noopener noreferrer">Foundation website <ArrowRight size={13}/></a><Link to="/privacy-policy">CSS Vista Privacy Policy <ArrowRight size={13}/></Link><Link to="/">Return to CSS Vista <ArrowRight size={13}/></Link></div></div></footer>
+  </main>
+}
