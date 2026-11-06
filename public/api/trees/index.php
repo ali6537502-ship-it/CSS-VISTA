@@ -69,6 +69,7 @@ function tree_schema(PDO $db): void {
         member_id CHAR(36) NOT NULL,
         purpose ENUM('verify','reset') NOT NULL,
         token_hash CHAR(64) NOT NULL,
+        email_hash CHAR(64) NULL,
         expires_at DATETIME(6) NOT NULL,
         used_at DATETIME(6) NULL,
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
@@ -181,6 +182,9 @@ function tree_schema(PDO $db): void {
     // Backward-compatible schema changes: this PR has not been deployed,
     // but staging databases from earlier revisions must also be safe.
     $changes = [
+        'tree_campaign_email_tokens' => [
+            'email_hash' => 'ADD COLUMN email_hash CHAR(64) NULL',
+        ],
         'tree_campaign_sessions' => [
             'user_agent_hash' => 'ADD COLUMN user_agent_hash CHAR(64) NULL',
         ],
@@ -307,8 +311,8 @@ function tree_send_email_token(PDO $db,string $id,string $email,string $purpose)
     $expiry=gmdate('Y-m-d H:i:s',time()+($purpose==='verify'?86400:1800));
     $db->prepare("UPDATE tree_campaign_email_tokens SET used_at=NOW(6) WHERE member_id=? AND purpose=? AND used_at IS NULL")
         ->execute([$id,$purpose]);
-    $db->prepare('INSERT INTO tree_campaign_email_tokens(id,member_id,purpose,token_hash,expires_at) VALUES(?,?,?,?,?)')
-        ->execute([$tokenId,$id,$purpose,tree_email_token_hash($purpose,$token),$expiry]);
+    $db->prepare('INSERT INTO tree_campaign_email_tokens(id,member_id,purpose,token_hash,email_hash,expires_at) VALUES(?,?,?,?,?,?)')
+        ->execute([$tokenId,$id,$purpose,tree_email_token_hash($purpose,$token),cssv_hash_secret('tree-email-address:'.strtolower($email)),$expiry]);
     $link=tree_email_link($purpose,$token);
     $message=$purpose==='verify'
         ? "You created a tree-planting campaign account.\n\nConfirm your email using this private link (expires in 24 hours):\n".$link."\n\nIf you did not register, ignore this email. Your address will not be enabled for account recovery without confirmation.\n\nIsarul Ibaad Foundation × CSS Vista"
@@ -325,7 +329,7 @@ function tree_consume_email_token(PDO $db,string $purpose,string $token,?string 
     $hash=tree_email_token_hash($purpose,$token);
     $db->beginTransaction();
     try {
-        $q=$db->prepare('SELECT id,member_id FROM tree_campaign_email_tokens WHERE token_hash=? AND purpose=? AND used_at IS NULL AND expires_at>NOW(6) FOR UPDATE');
+        $q=$db->prepare('SELECT id,member_id,email_hash FROM tree_campaign_email_tokens WHERE token_hash=? AND purpose=? AND used_at IS NULL AND expires_at>NOW(6) FOR UPDATE');
         $q->execute([$hash,$purpose]);
         $tokenRow=$q->fetch();
         if (!$tokenRow) {
@@ -333,12 +337,16 @@ function tree_consume_email_token(PDO $db,string $purpose,string $token,?string 
             cssv_fail('This email link has expired or was already used.',410,'expired_email_link');
         }
         $memberId=(string)$tokenRow['member_id'];
+        $q=$db->prepare('SELECT email,email_verified_at FROM tree_campaign_members WHERE id=? FOR UPDATE');
+        $q->execute([$memberId]);$recipient=$q->fetch();
+        if (!$recipient || !$recipient['email'] || !hash_equals((string)$tokenRow['email_hash'],cssv_hash_secret('tree-email-address:'.strtolower((string)$recipient['email'])))) {
+            $db->rollBack();
+            cssv_fail('This email link is no longer valid for the account.',410,'expired_email_link');
+        }
         if ($purpose==='verify') {
             $db->prepare('UPDATE tree_campaign_members SET email_verified_at=NOW(6) WHERE id=?')->execute([$memberId]);
         } else {
-            $q=$db->prepare('SELECT email_verified_at FROM tree_campaign_members WHERE id=? FOR UPDATE');
-            $q->execute([$memberId]);
-            if (!$q->fetchColumn()) {
+            if (!$recipient['email_verified_at']) {
                 $db->rollBack();
                 cssv_fail('Email address is not confirmed.',403,'email_unverified');
             }
