@@ -278,3 +278,43 @@ test('a wrong concept check cannot be self-rated clear until it is passed',async
  assert.equal(state.questionReview[q.id].unresolved,false);
  p.dom.window.close();
 });
+
+test('rest days are excluded without dropping lessons or changing the total number of study sessions',async()=>{
+ const p=await open();
+ p.click('[data-days="8"]');
+ const monday=p.document.querySelector('[data-rest-day="1"]'),friday=p.document.querySelector('[data-rest-day="5"]');
+ for(const cb of [monday,friday]){cb.checked=true;cb.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}))}
+ const minutes=p.document.getElementById('daily-minutes');minutes.value='60';minutes.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}));
+ p.click('[data-action="saveplan"]');
+ const saved=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.deepEqual(saved.plan.restDays,[1,5]);assert.equal(saved.plan.dailyMinutes,60);
+ p.click('[data-action="expandplan"]');
+ const rows=[...p.document.querySelectorAll('.day')];
+ assert.equal(rows.length,8);
+ const dates=rows.map(row=>{const m=row.querySelector('summary strong').textContent.match(/\d{1,2} [A-Za-z]+ \d{4}/);return new Date(m[0]+' 12:00:00 UTC').getUTCDay()});
+ assert.ok(dates.every(day=>day!==1&&day!==5),'No active session may land on an excluded weekday');
+ assert.equal(p.document.querySelectorAll('.day-lesson').length,141);
+ p.click('[data-action="editplan"]');
+ assert.equal(p.document.getElementById('daily-minutes').value,'60');
+ assert.ok(p.document.querySelector('[data-rest-day="1"]').checked);
+ assert.ok(p.document.querySelector('[data-rest-day="5"]').checked);
+ p.dom.window.close();
+});
+
+test('dated recall is explicitly scheduled and retained after plan changes',async()=>{
+ const id=catalog.chapters[0].sections[0].id;
+ const dueDate='2026-01-01',old={at:'2025-12-30T10:00:00Z',date:dueDate,stage:1};
+ const p=await open({plan:{days:20,startDate:'2026-01-01'},completed:{[id]:{at:'2025-12-30T10:00:00Z',selfRating:'gotit'}},reviewDue:{[id]:old},recallAttempts:{}});
+ assert.match(p.document.getElementById('app').textContent,/review due/);
+ p.click('[data-view="review"]');
+ assert.match(p.document.getElementById('app').textContent,/Recall due/);
+ assert.ok(p.document.querySelector('[data-lesson="'+id+'"]'),'Due lesson must be accessible');
+ p.click('[data-view="course"]');
+ p.click('[data-action="editplan"]');
+ p.document.getElementById('custom-days').value='60';
+ p.click('[data-action="saveplan"]');
+ const updated=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(updated.reviewDue[id].date,dueDate);
+ assert.equal(updated.plan.days,60);
+ p.dom.window.close();
+});
