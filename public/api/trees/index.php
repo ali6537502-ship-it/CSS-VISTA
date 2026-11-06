@@ -724,6 +724,7 @@ if ($action==='recover') {
         $db->prepare('UPDATE tree_campaign_members SET password_hash=?,recovery_hash=? WHERE id=?')
             ->execute([password_hash($newPassword,PASSWORD_DEFAULT),tree_recovery_hash($replacement),$row['id']]);
         $db->prepare('UPDATE tree_campaign_sessions SET revoked_at=NOW(6) WHERE member_id=? AND revoked_at IS NULL')->execute([$row['id']]);
+        $db->prepare("UPDATE tree_campaign_email_tokens SET used_at=NOW(6) WHERE member_id=? AND purpose='reset' AND used_at IS NULL")->execute([$row['id']]);
         $db->commit();
         cssv_set_cookie(TREE_SESSION,'',time()-3600,true);
         cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
@@ -745,6 +746,7 @@ if ($action==='change-password') {
         $db->prepare('UPDATE tree_campaign_members SET password_hash=?,recovery_hash=? WHERE id=?')
             ->execute([password_hash(tree_password($body['new_password']??null),PASSWORD_DEFAULT),tree_recovery_hash($replacement),$member['id']]);
         $db->prepare('UPDATE tree_campaign_sessions SET revoked_at=NOW(6) WHERE member_id=?')->execute([$member['id']]);
+        $db->prepare("UPDATE tree_campaign_email_tokens SET used_at=NOW(6) WHERE member_id=? AND purpose='reset' AND used_at IS NULL")->execute([$member['id']]);
         $db->commit();
     } catch (Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
     cssv_set_cookie(TREE_SESSION,'',time()-3600,true);cssv_set_cookie(TREE_CSRF,'',time()-3600,false);
