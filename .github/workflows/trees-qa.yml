@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: PHP syntax validation
-        run: php -l public/api/trees/index.php
+        run: |
+          php -l public/api/trees/index.php
+          php -l scripts/trees/rebuild-rollups.php
       - name: Campaign contract tests
         run: node --test tests/trees/campaign.test.mjs
