@@ -9,6 +9,7 @@ type CourseSnapshot = {
   completed?: Record<string, { selfRating?: string }>
   revisit?: Record<string, unknown>
   questionReview?: Record<string, { unresolved?: boolean }>
+  reviewDue?: Record<string, { date?: string }>
 }
 
 function readCourse() {
@@ -20,6 +21,7 @@ function readCourse() {
     confident: Object.entries(raw.completed || {}).filter(([id, record]) => record?.selfRating === 'gotit' && !raw.revisit?.[id]).length,
     revision: Object.keys(raw.revisit || {}).length,
     missed: Object.values(raw.questionReview || {}).filter(record => record?.unresolved).length,
+    due: Object.values(raw.reviewDue || {}).filter(record => !!record?.date && record.date <= new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Karachi', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())).length,
   }
 }
 
@@ -52,6 +54,7 @@ export default function AccountGSATutorCard() {
         <div className="rounded-xl bg-slate-50 p-3"><strong className="block text-2xl text-slate-950">{info.confident}</strong><span className="text-xs text-slate-600">Self-rated clear</span></div>
         <div className="rounded-xl bg-slate-50 p-3"><strong className="block text-2xl text-slate-950">{info.revision}</strong><span className="text-xs text-slate-600">Lessons to revisit</span></div>
         <div className="rounded-xl bg-slate-50 p-3"><strong className="block text-2xl text-slate-950">{info.missed}</strong><span className="text-xs text-slate-600">Missed questions</span></div>
+        <div className="rounded-xl bg-slate-50 p-3"><strong className="block text-2xl text-slate-950">{info.due}</strong><span className="text-xs text-slate-600">Reviews due</span></div>
         <div className="col-span-2 rounded-xl bg-slate-50 p-3 sm:col-span-1"><strong className="block text-2xl text-slate-950">{info.days ?? '—'}</strong><span className="text-xs text-slate-600">Planned days</span></div>
       </div>
       <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-emerald-700" style={{width: Math.min(100, info.confident / 141 * 100) + '%'}} /></div>
