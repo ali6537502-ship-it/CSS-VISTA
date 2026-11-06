@@ -42,7 +42,7 @@ function verify(r,expected) {
 test('isolated account and evidence workflow',async t=>{
   const participant=requestClient()
   const guest=requestClient()
-  const profile={name:'Example Planting Volunteer',mobile:'03000001001',city:'Multan',cnic:'1111100000001',password:'Example-Strong-Passphrase-2026',consent:true,public_name:true}
+  const profile={name:'Example Planting Volunteer',mobile:'03000001001',city:'Multan',email:'planting.volunteer@example.invalid',cnic:'1111100000001',password:'Example-Strong-Passphrase-2026',consent:true,public_name:true}
   let csrf='',key='',memberId='',first='',seed='',large='',survival=''
   await t.test('dashboard starts empty and catalogue is available',async()=>{
     const r=await participant('summary')
@@ -60,8 +60,23 @@ test('isolated account and evidence workflow',async t=>{
     memberId=r.data.member.id
     assert.match(key,/^TREE-[A-F0-9]{48}$/)
     assert.equal(r.data.member.city,'Multan')
+    assert.equal(r.data.member.email,profile.email)
+    assert.equal(r.data.member.email_verified,false)
+    assert.equal(r.data.verification_sent,true)
     verify(await guest('register',{body:{...profile,mobile:'03000001002'}}),409)
     verify(await guest('register',{body:{...profile,cnic:'2222200000001'}}),409)
+  })
+  await t.test('registration requires no OTP; confirmation link establishes email ownership',async()=>{
+    const raw=readFileSync('/tmp/trees-ci-outbox.eml','utf8')
+    const matches=[...raw.matchAll(/#verify-email=([a-f0-9]{64})/g)]
+    assert.equal(matches.length,1,'A confirmation email is sent at registration.')
+    const token=matches[0][1]
+    verify(await guest('confirm-email',{body:{token:'0'.repeat(64)}}),410)
+    verify(await participant('confirm-email',{body:{token}}),200)
+    verify(await participant('confirm-email',{body:{token}}),410,'Confirmation link must be single-use')
+    const session=await participant('session')
+    verify(session,200)
+    assert.equal(session.data.member.email_verified,true)
   })
   await t.test('profile images require authentication and CSRF',async()=>{
     verify(await guest('queue'),401)
@@ -164,10 +179,30 @@ test('isolated account and evidence workflow',async t=>{
     csrf=r.data.csrf_token
     verify(await participant('mine'),200)
   })
+  await t.test('verified email supports a single-use password reset without OTP',async()=>{
+    const unknown=await guest('request-email-reset',{body:{email:'unknown@example.invalid'}})
+    verify(unknown,200)
+    const request=await participant('request-email-reset',{body:{email:profile.email}})
+    verify(request,200)
+    assert.deepEqual(request.data,unknown.data,'Unknown and known email responses must be indistinguishable')
+    const body=readFileSync('/tmp/trees-ci-outbox.eml','utf8')
+    const tokens=[...body.matchAll(/#reset-email=([a-f0-9]{64})/g)]
+    assert.equal(tokens.length,1)
+    const token=tokens[0][1]
+    verify(await guest('reset-email-password',{body:{token:'f'.repeat(64),new_password:'Fake-Password-Not-Allowed'}}),410)
+    const reset=await participant('reset-email-password',{body:{token,new_password:'Email-Recovered-Password-2026'}})
+    verify(reset,200)
+    assert.match(reset.data.recovery_key,/^TREE-[A-F0-9]{48}$/)
+    verify(await participant('mine'),401,'Email reset must revoke old signed-in sessions')
+    verify(await participant('reset-email-password',{body:{token,new_password:'Other-Password-2026'}}),410,'Email reset links are single-use')
+    const login=await participant('login',{body:{mobile:profile.mobile,password:'Email-Recovered-Password-2026'}})
+    verify(login,200)
+    csrf=login.data.csrf_token
+  })
   await t.test('deletion erases personal evidence and subtracts counters',async()=>{
-    verify(await participant('delete-account',{csrf:'wrong',body:{confirm:'DELETE',password:'Updated-Example-Password-2026'}}),403)
+    verify(await participant('delete-account',{csrf:'wrong',body:{confirm:'DELETE',password:'Email-Recovered-Password-2026'}}),403)
     verify(await participant('delete-account',{csrf,body:{confirm:'DELETE',password:'incorrect'}}),401)
-    verify(await participant('delete-account',{csrf,body:{confirm:'DELETE',password:'Updated-Example-Password-2026'}}),200)
+    verify(await participant('delete-account',{csrf,body:{confirm:'DELETE',password:'Email-Recovered-Password-2026'}}),200)
     const totals=(await guest('summary')).data
     assert.equal(totals.trees,0)
     assert.equal(totals.seeds,0)
@@ -176,14 +211,14 @@ test('isolated account and evidence workflow',async t=>{
     assert.equal(totals.public_gallery.length,0)
     verify(await guest('photo&kind=proof&id='+first),404)
     verify(await participant('mine'),401)
-    verify(await participant('login',{body:{mobile:profile.mobile,password:'Updated-Example-Password-2026'}}),401)
+    verify(await participant('login',{body:{mobile:profile.mobile,password:'Email-Recovered-Password-2026'}}),401)
   })
   await t.test('simultaneous registrations cannot duplicate a CNIC',async()=>{
     const a=requestClient(),b=requestClient()
-    const base={name:'Race Registration Test',city:'Lahore',cnic:'3333300000001',password:'Race-Example-Password-2026',consent:true}
+    const base={name:'Race Registration Test',city:'Lahore',email:'race-test@example.invalid',cnic:'3333300000001',password:'Race-Example-Password-2026',consent:true}
     const pair=await Promise.all([
-      a('register',{body:{...base,mobile:'03000001003'}}),
-      b('register',{body:{...base,mobile:'03000001004'}})
+      a('register',{body:{...base,mobile:'03000001003',email:'race-one@example.invalid'}}),
+      b('register',{body:{...base,mobile:'03000001004',email:'race-two@example.invalid'}})
     ])
     assert.deepEqual(pair.map(x=>x.status).sort((x,y)=>x-y),[201,409])
   })
