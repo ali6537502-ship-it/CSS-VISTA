@@ -102,7 +102,7 @@ function tree_schema(PDO $db): void {
         id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         planting_id CHAR(36) NOT NULL,
         admin_id CHAR(36) NOT NULL,
-        decision ENUM('approved','rejected') NOT NULL,
+        decision ENUM('approved','rejected','revoked') NOT NULL,
         review_note VARCHAR(400) NOT NULL,
         field_checked TINYINT(1) NOT NULL DEFAULT 0,
         field_visit_date DATE NULL,
@@ -379,10 +379,12 @@ if ($_SERVER['REQUEST_METHOD']==='GET') {
         $q->execute([$member['id']]);
         cssv_json(['ok'=>true,'member'=>tree_public_member($member),'reports'=>$q->fetchAll()]);
     }
-    if ($action==='queue') {
+    if ($action==='queue' || $action==='approved-reports') {
         tree_admin($db);
-        $rows=$db->query("SELECT p.id,p.member_id,p.species,p.method,p.quantity,p.planted_on,p.city,p.locality,p.created_at,p.duplicate_risk,m.full_name FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status='pending' ORDER BY p.duplicate_risk DESC,p.created_at ASC LIMIT 100")->fetchAll();
-        cssv_json(['ok'=>true,'reports'=>$rows]);
+        $status=$action==='queue'?'pending':'approved';
+        $q=$db->prepare("SELECT p.id,p.member_id,p.species,p.method,p.quantity,p.planted_on,p.city,p.locality,p.created_at,p.duplicate_risk,p.field_checked,p.field_visit_date,m.full_name FROM tree_campaign_plantings p JOIN tree_campaign_members m ON m.id=p.member_id WHERE p.status=? ORDER BY p.duplicate_risk DESC,p.created_at DESC LIMIT 100");
+        $q->execute([$status]);
+        cssv_json(['ok'=>true,'reports'=>$q->fetchAll()]);
     }
     if ($action==='photo') {
         $kind=(string)($_GET['kind']??'proof');
@@ -572,7 +574,7 @@ if ($action==='review') {
     $body=tree_login_json();
     $id=(string)($body['id']??'');
     $decision=(string)($body['decision']??'');
-    if (!preg_match('/^[a-f0-9-]{36}$/D',$id) || !in_array($decision,['approved','rejected'],true)) cssv_fail('Invalid review request.',422,'invalid_review');
+    if (!preg_match('/^[a-f0-9-]{36}$/D',$id) || !in_array($decision,['approved','rejected','revoked'],true)) cssv_fail('Invalid review request.',422,'invalid_review');
     $note=tree_string((string)($body['note']??''),'review note',10,400);
     $siteDate=(string)($body['field_visit_date']??'');
     $fieldChecked=($body['field_checked']??false)===true;
@@ -580,9 +582,9 @@ if ($action==='review') {
     try {
         $q=$db->prepare('SELECT quantity,duplicate_risk,status,planted_on FROM tree_campaign_plantings WHERE id=? FOR UPDATE');
         $q->execute([$id]);$row=$q->fetch();
-        if (!$row || $row['status']!=='pending') {
+        if (!$row || ($decision==='revoked' && $row['status']!=='approved') || ($decision!=='revoked' && $row['status']!=='pending')) {
             $db->rollBack();
-            cssv_fail('This report was already reviewed or cannot be found.',409,'already_reviewed');
+            cssv_fail('The report status changed or it cannot be found.',409,'already_reviewed');
         }
         if($decision==='approved' && ((int)$row['quantity']>5 || (int)$row['duplicate_risk']===1)) {
             if (!$fieldChecked) {
@@ -598,13 +600,15 @@ if ($action==='review') {
             $fieldChecked=false;
             $siteDate='';
         }
-        $db->prepare("UPDATE tree_campaign_plantings SET status=?,reviewer_id=?,reviewed_at=NOW(6),review_note=?,field_checked=?,field_visit_date=? WHERE id=? AND status='pending'")
-            ->execute([$decision,$admin['admin_id'],$note,$fieldChecked?1:0,$fieldChecked?$siteDate:null,$id]);
+        $nextStatus=$decision==='revoked'?'rejected':$decision;
+        $expectedStatus=$decision==='revoked'?'approved':'pending';
+        $db->prepare("UPDATE tree_campaign_plantings SET status=?,reviewer_id=?,reviewed_at=NOW(6),review_note=?,field_checked=?,field_visit_date=? WHERE id=? AND status=?")
+            ->execute([$nextStatus,$admin['admin_id'],$note,$fieldChecked?1:0,$fieldChecked?$siteDate:null,$id,$expectedStatus]);
         $db->prepare("INSERT INTO tree_campaign_reviews(planting_id,admin_id,decision,review_note,field_checked,field_visit_date) VALUES(?,?,?,?,?,?)")
             ->execute([$id,$admin['admin_id'],$decision,$note,$fieldChecked?1:0,$fieldChecked?$siteDate:null]);
         $db->commit();
     } catch(Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
-    cssv_json(['ok'=>true,'status'=>$decision]);
+    cssv_json(['ok'=>true,'status'=>$decision==='revoked'?'rejected':$decision]);
 }
 
 cssv_fail('Unknown campaign request.',404,'unknown_action');
