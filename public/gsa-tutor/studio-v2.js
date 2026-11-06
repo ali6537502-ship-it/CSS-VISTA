@@ -270,6 +270,11 @@ function saveQuizAnswer(value){
  ui.selected=value;
  saved.quizHistory??={};saved.quizHistory[q.id]={at,selected:value,correct};
  saved.questionReview??={};saved.questionReview[q.id]={at,chapter:c.id,unresolved:!correct};
+ if(correct){
+   for(const [lessonId,item] of Object.entries(saved.revisit||{})){
+     if(item?.kind==='question'&&item.questionId===q.id)delete saved.revisit[lessonId];
+   }
+ }
  if(!saved.quizAttempts?.[ui.attemptId])beginQuizAttempt(c.id);
  const attempt=saved.quizAttempts[ui.attemptId];
  attempt.responses[q.id]={at,selected:value,correct};
