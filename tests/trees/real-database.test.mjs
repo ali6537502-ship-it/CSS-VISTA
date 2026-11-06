@@ -66,6 +66,14 @@ test('isolated account and evidence workflow',async t=>{
     verify(await guest('register',{body:{...profile,mobile:'03000001002'}}),409)
     verify(await guest('register',{body:{...profile,cnic:'2222200000001'}}),409)
   })
+  await t.test('profile photo not required; email confirmation gates planting evidence',async()=>{
+    const pending=await participant('session')
+    verify(pending,200)
+    assert.equal(pending.data.member.has_photo,false)
+    assert.equal(pending.data.member.email_verified,false)
+    verify(await participant('plant',{csrf,body:evidenceForm(2,{species:'neem',method:'sapling',quantity:1,planted_on:plantedOn,locality:'CI school courtyard'})}),403)
+    assert.equal((await participant('summary')).data.trees,0)
+  })
   await t.test('registration requires no OTP; confirmation link establishes email ownership',async()=>{
     const raw=readFileSync('/tmp/trees-ci-outbox.eml','utf8')
     const matches=[...raw.matchAll(/#verify-email=([a-f0-9]{64})/g)]
@@ -78,6 +86,23 @@ test('isolated account and evidence workflow',async t=>{
     verify(session,200)
     assert.equal(session.data.member.email_verified,true)
   })
+  await t.test('submissions are pending and duplicate photos are refused',async()=>{
+    const a={species:'neem',method:'sapling',quantity:2,planted_on:plantedOn,locality:'Test garden',public_photo:'yes'}
+    const before=await participant('session')
+    verify(before,200)
+    assert.equal(before.data.member.has_photo,false,'Participants must submit planting evidence without adding a profile photo')
+    let r=await participant('plant',{body:evidenceForm(2,a),csrf})
+    verify(r,201)
+    first=r.data.id
+    verify(await participant('plant',{body:evidenceForm(2,a),csrf}),409)
+    r=await participant('plant',{body:evidenceForm(3,{...a,method:'seed',quantity:3,public_photo:'no'}),csrf})
+    verify(r,201)
+    seed=r.data.id
+    assert.equal((await participant('summary')).data.trees,0)
+    verify(await guest('photo&kind=proof&id='+first),401)
+    verify(await participant('mine'),200)
+  })
+
   await t.test('profile images require authentication and CSRF',async()=>{
     verify(await guest('queue'),401)
     verify(await guest('photo&kind=avatar&id='+memberId),401)
@@ -91,20 +116,6 @@ test('isolated account and evidence workflow',async t=>{
     assert.equal(r.headers.get('content-type'),'image/jpeg')
     assert.ok(r.data.byteLength<=40960)
   })
-  await t.test('submissions are pending and duplicate photos are refused',async()=>{
-    const a={species:'neem',method:'sapling',quantity:2,planted_on:plantedOn,locality:'Test garden',public_photo:'yes'}
-    let r=await participant('plant',{body:evidenceForm(2,a),csrf})
-    verify(r,201)
-    first=r.data.id
-    verify(await participant('plant',{body:evidenceForm(2,a),csrf}),409)
-    r=await participant('plant',{body:evidenceForm(3,{...a,method:'seed',quantity:3,public_photo:'no'}),csrf})
-    verify(r,201)
-    seed=r.data.id
-    assert.equal((await participant('summary')).data.trees,0)
-    verify(await guest('photo&kind=proof&id='+first),401)
-    verify(await participant('mine'),200)
-  })
-
   await t.test('moderator approval updates reviewed counts',async()=>{
     const queue=await guest('queue',{isAdmin:true})
     verify(queue,200)
