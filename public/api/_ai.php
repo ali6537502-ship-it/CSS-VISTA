@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__.'/_learning.php';require_once __DIR__.'/_ai_openai.php';require_once __DIR__.'/_profile.php';
+function cssv_ai_retired(string $feature): bool {
+ return in_array($feature,['sentence','paragraph','precis','handwriting','handwriting_extract','argumentation','analysis','essay'],true);
+}
 function cssv_ai_limit(string $feature): int {
  $defaults=cssv_ai_features();if(!isset($defaults[$feature]))throw new InvalidArgumentException('This AI scope is not permitted.');
  $raw=cssv_env('CSSV_AI_LIMIT_'.strtoupper($feature),(string)$defaults[$feature]);
@@ -37,6 +40,7 @@ function cssv_ai_reserve(PDO $pdo,string $userId,string $request,string $feature
 }
 /** Caller holds the account lock in a transaction. */
 function cssv_ai_reserve_usage(PDO $pdo,string $userId,string $request,string $hash,string $feature,?string $versionId,array $config,DateTimeImmutable $now,?string $handwritingId=null): string {
+ if(cssv_ai_retired($feature))throw new LogicException('AI evaluation and picture scanning have been retired. Your saved work remains available.');
  $limit=cssv_ai_limit($feature);
  $bucket=cssv_ai_bucket($now);
  $pdo->prepare('INSERT IGNORE INTO ai_daily_usage(user_id,feature,bucket_date) VALUES(?,?,?)')->execute([$userId,$feature,$bucket]);
@@ -59,7 +63,7 @@ function cssv_ai_release_reservation(PDO $pdo,array $op,int $used): void {
 function cssv_ai_start(PDO $pdo,string $id,bool $dispatchAllowed=true,?callable $transition=null): ?array {
  $pdo->beginTransaction();try {
   $op=cssv_ai_operation_lock($pdo,$id);if($op['state']!=='reserved'){$pdo->commit();return null;}
-  if(!$dispatchAllowed){
+  if(!$dispatchAllowed||cssv_ai_retired($op['feature'])){
    if($transition)$transition($pdo,$op,'failed',null);
    cssv_ai_release_reservation($pdo,$op,0);
    $pdo->prepare("UPDATE ai_operations SET state='failed',accounting='released',error_code='ai_preflight_unavailable',completed_at=NOW(6) WHERE id=?")->execute([$id]);$pdo->commit();return null;

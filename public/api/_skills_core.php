@@ -19,7 +19,7 @@ function cssv_skills_stages(string $feature): array {
     return match($feature){
         'sentence'=>[$check,
             $stage('draft','Write independently','Apply the lesson to a sentence of your own. Keep your meaning; do not copy the worked example.','For an access issue, name the actor and the specific action rather than writing only “Things should improve”.','Write your first sentence.',3),
-            $stage('reflection','Review the wording','Identify the subject, verb and intended logical relationship. Check the relevant Grammar lesson. Optional AI feedback must target the saved wording, not your unsaved rewrite.','A conditional claim should retain its if clause or an equivalent condition.','What do you want the sentence to mean, and what needs checking?',5),
+            $stage('reflection','Review the wording','Identify the subject, verb and intended logical relationship. Check the relevant Grammar lesson. Use the lesson-specific self-review questions before saving your independent revision.','A conditional claim should retain its if clause or an equivalent condition.','What do you want the sentence to mean, and what needs checking?',5),
             $stage('revision','Revise independently','Rewrite using the lesson and any saved feedback. A new version preserves your earlier wording. You may retain wording you can defend; shorter is not automatically better.','Compare who acts, what is claimed, the time frame and any qualification.','Write your revised sentence.',3)],
         'argument'=>[$check,
             $stage('claim','Your claim','What do you think about the practice statement, and why? State a position that could be challenged. A topic name alone is not a claim.','A limited trial may be preferable to a permanent change when demand is uncertain. This is a hypothetical claim.','What is your central claim?',5),
@@ -62,6 +62,19 @@ function cssv_skills_source(string $feature,mixed $id,string $level): array {
     }
     if(!isset($source))throw new OutOfBoundsException('This lesson or theme is unavailable.');
     $source['stages']=cssv_skills_stages($feature);
+    if($feature==='sentence'){
+        $paragraph=($source['writing_kind']??'sentence')==='paragraph';
+        foreach($source['stages'] as &$stage){
+            if($stage['id']==='draft'||$stage['id']==='revision'){
+                $stage['question']=$stage['id']==='draft'?$source['task']:($paragraph?'Write your revised paragraph.':'Write your revised wording.');
+                if($paragraph){$stage['min_words']=$source['practice_min_words']??20;$stage['paragraph']=true;$stage['teach']='Develop one focused paragraph in your own words. Preserve your intended meaning and any conditions. The word minimum records participation, not correctness.';}
+            }
+            if($stage['id']==='reflection'){
+                $stage['question']='What specific change would improve your wording, and why?';
+                $stage['review']=$source['self_review']??['Identify the subject, verb and intended relationship.','Compare your wording with the lesson rule and worked example.','Check whether any edit changes your intended meaning.'];
+            }
+        }unset($stage);
+    }
     if($feature==='essay'){
         $questions=match($level){
             'beginner'=>['understanding'=>'Explain the theme in two simple sentences. Name one issue that belongs within it.','brainstorm'=>'Who is affected, what difficulty might they face, and why does it belong to this theme?','thesis'=>'What do you think about one issue within the theme, and what is your main reason?','argument'=>'Write one claim, explain your reason, and name the evidence you would need.','analysis'=>'What is one possible objection, and when might your proposed answer fail?','outline'=>'Arrange your thesis, two different reasons, an objection and a conclusion into headings.','practice'=>'Write one paragraph from your outline in your own words.'],
@@ -106,7 +119,7 @@ function cssv_skills_public_source(array $source): array {
 }
 /** A legitimate imperative can be one word; length records participation only. */
 function cssv_skills_min_words(string $feature,array $stage): int {
-    return $feature==='sentence'&&in_array($stage['id'],['draft','revision'],true)?1:(int)$stage['min_words'];
+    return $feature==='sentence'&&empty($stage['paragraph'])&&in_array($stage['id'],['draft','revision'],true)?1:(int)$stage['min_words'];
 }
 function cssv_skills_answers(array $answers,array $source): array {
     cssv_pro_fields($answers,array_column($source['stages'],'id'));$out=[];
@@ -145,4 +158,13 @@ function cssv_skills_wording(array $source,array $answers,?string $preferred=nul
         elseif($answers[$stage['id']]!=='')$parts[]=$stage['title']."\n".$answers[$stage['id']];
     }
     $text=implode("\n\n",$parts);if(mb_strlen($text)>($source['feature']==='essay'?40000:20000)||strlen($text)>60000)throw new InvalidArgumentException('Keep the combined saved workspace within its bounded writing limit (40,000 characters for essay work; 20,000 for other skills).');return $text;
+}
+
+/** Free expression learning; other legacy workspaces retain their existing policy during migration. */
+function cssv_skills_access(PDO $pdo,string $user,string $feature): array {
+    return ['allowed'=>$feature==='sentence'||cssv_pro_membership($pdo,$user)['status']==='active','kind'=>$feature==='sentence'?'free':'legacy'];
+}
+function cssv_skills_require_access(PDO $pdo,string $user,string $feature): void {
+    if($feature==='sentence'){cssv_pro_release_require_open();return;}
+    cssv_pro_require_active($pdo,$user);
 }

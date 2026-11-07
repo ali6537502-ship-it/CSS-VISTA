@@ -91,6 +91,19 @@ function Availability({ config }: { config: Configuration }) {
     </p>
   );
 }
+function Chapters({ catalog }: { catalog: Overview["catalog"] }) {
+  const chapters = Array.from(new Set(catalog.map(item => item.chapter).filter((value): value is number => typeof value === "number")));
+  return <section className={`${panelStyle} space-y-5`} aria-label="Expression course chapters">
+    <div><h3 className="text-xl font-semibold">Your expression course</h3><p className="mt-2 text-sm leading-7 text-slate-600">Start with sentence foundations, then develop clear paragraphs. Checks use authored answers; your writing is saved for self-review and independent revision.</p></div>
+    <div className="grid gap-3 sm:grid-cols-2">{chapters.map(number => {
+      const lessons = catalog.filter(item => item.chapter === number);
+      return <details key={number} className="min-w-0 rounded-2xl border border-slate-200 p-4">
+        <summary className="min-h-11 cursor-pointer font-semibold"><span className="mr-2 text-xs text-slate-500">{String(number).padStart(2,"0")}</span>{lessons[0].chapter_title}<span className="mt-1 block text-xs font-normal text-slate-500">{lessons.length} {lessons.length === 1 ? "lesson" : "lessons"}</span></summary>
+        <ul className="mt-3 space-y-2">{lessons.map(lesson => <li key={lesson.id}><Link to={`/account/expression?view=studio&lesson=${encodeURIComponent(lesson.id)}#guided-practice`} className="block min-h-11 rounded-lg px-2 py-3 text-sm underline focus-visible:outline focus-visible:outline-2"><span>{lesson.title}</span><span className="mt-1 block text-xs text-slate-500">{lesson.level} · {lesson.writing_kind === "paragraph" ? "paragraph practice" : "sentence practice"}</span></Link></li>)}</ul>
+      </details>;
+    })}</div>
+  </section>;
+}
 function Start({
   feature,
   data,
@@ -102,7 +115,7 @@ function Start({
   save: Saver;
   selected?: string;
 }) {
-  const [level, setLevel] = useState<Level>("beginner"),
+  const [level, setLevel] = useState<Level>(data.catalog.find(item => item.id === selected)?.level || "beginner"),
     [lesson, setLesson] = useState(selected || ""),
     [attempt, setAttempt] = useState(data.attempts[0]?.id || ""),
     [statement, setStatement] = useState("");
@@ -123,7 +136,7 @@ function Start({
     });
   }
   return (
-    <form className={`${panelStyle} space-y-5`} onSubmit={(e) => void start(e)}>
+    <form id="guided-practice" className={`${panelStyle} scroll-mt-6 space-y-5`} onSubmit={(e) => void start(e)}>
       <h3 className="text-xl font-semibold">Choose your next practice</h3>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-semibold">
@@ -414,22 +427,18 @@ function Exercise({
     </form>
   );
 }
-function FeedbackPanel({ detail, save }: { detail: Detail; save: Saver }) {
-  const [accepted, setAccepted] = useState(false),
-    current = detail.saved;
+function FeedbackPanel({ detail }: { detail: Detail }) {
+  const current = detail.saved;
   const op = detail.operations.find(
     (o) => o.version_id === current?.version_id,
   );
-  const blocked =
-    !!op &&
-    ["reserved", "in_flight", "unknown", "succeeded"].includes(op.state);
   return (
     <section
       className={`${panelStyle} space-y-4`}
       aria-label="Instructional feedback"
     >
       <h3 className="text-xl font-semibold">Review your saved writing</h3>
-      <Availability config={detail.configuration} />
+      <p className="text-sm leading-7 text-slate-600">Use the lesson’s self-review questions, then save your own revision. New AI evaluation is cancelled. Earlier saved feedback remains available as historical feedback.</p>
       {op && (
         <p role="status" className="text-sm leading-7">
           Saved feedback request: {op.state.replaceAll("_", " ")}.{" "}
@@ -483,53 +492,10 @@ function FeedbackPanel({ detail, save }: { detail: Detail; save: Saver }) {
           ))}
         </div>
       )}
-      {!blocked && current && (
-        <>
-          <p className="whitespace-pre-wrap text-sm leading-7">
-            {detail.configuration.processing_notice}
-          </p>
-          <label className="flex min-h-11 items-start gap-3 text-sm leading-7">
-            <input
-              type="checkbox"
-              disabled={
-                !detail.configuration.enabled ||
-                detail.membership.status !== "active"
-              }
-              checked={accepted}
-              onChange={(e) => setAccepted(e.target.checked)}
-              className="mt-1 h-5 w-5 shrink-0"
-            />
-            <span>
-              I reviewed this saved wording and the processing notice.
-            </span>
-          </label>
-          <button
-            disabled={
-              !accepted ||
-              !detail.configuration.enabled ||
-              detail.membership.status !== "active" ||
-              save.busy ||
-              !!save.pending
-            }
-            className={primaryStyle}
-            onClick={() =>
-              void save.save({
-                action: "evaluate",
-                workspace_id: detail.workspace.id,
-                version_id: current.version_id,
-                policy_version: detail.configuration.policy_version,
-                  policy_hash: detail.configuration.policy_hash,
-                accepted: true,
-              })
-            }
-          >
-            Request instructional feedback
-          </button>
-        </>
-      )}
     </section>
   );
 }
+
 function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
   const [params, setParams] = useSearchParams();
   const offset = params.get("children_offset") || "0";
@@ -799,7 +765,7 @@ function Session({
       ? `skills.php?workspace_id=${w.id}&version_id=${compare}`
       : undefined,
   );
-  const active = detail.membership.status === "active";
+  const active = detail.access?.allowed ?? detail.membership.status === "active";
   const old = !!saved && Number(saved.version) !== w.version;
   const stage = w.source.stages[Math.min(position, w.source.stages.length - 1)];
   return (
@@ -807,7 +773,7 @@ function Session({
       <section className={`${panelStyle} space-y-4`}>
         <div className="flex flex-wrap gap-3">
           <h2 className="text-2xl font-semibold">{w.source.title}</h2>
-          <ProBadge />
+          {w.feature === "sentence" ? <span className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold">Free learning</span> : <ProBadge />}
         </div>
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
           {w.level} · {w.version} saved versions
@@ -1037,7 +1003,7 @@ function Session({
           )}
         </section>
       )}
-      {active && stage && (
+      {w.feature !== "sentence" && active && stage && (
         <Link
           className={secondaryStyle}
           to={`/account/ask-vista?context=${encodeURIComponent(`skills:${w.id}:${saved?.version_id || "new"}:${stage.id}`)}&attempt=${w.attempt_id}`}
@@ -1045,8 +1011,9 @@ function Session({
           Ask VISTA about this activity
         </Link>
       )}
-      <FeedbackPanel key={`${detail.saved?.version_id || "new"}:${detail.configuration.policy_hash || "disabled"}`} detail={detail} save={save} />
-      {active && saved && !old && <Transfers key={`${versionParams.get("children_offset") || "0"}:${linkedRefresh}`} detail={detail} save={save} />}
+      {w.feature === "sentence" && saved?.evidence.all_recorded && w.source.next_lesson && <Link className={primaryStyle} to={`/account/expression?view=studio&lesson=${encodeURIComponent(w.source.next_lesson)}#guided-practice`}>Choose the next lesson</Link>}
+      <FeedbackPanel key={`${detail.saved?.version_id || "new"}:${detail.configuration.policy_hash || "disabled"}`} detail={detail} />
+      {w.feature !== "sentence" && active && saved && !old && <Transfers key={`${versionParams.get("children_offset") || "0"}:${linkedRefresh}`} detail={detail} save={save} />}
       <button className={secondaryStyle} onClick={() => { refresh(); setLinkedRefresh(value => value + 1); }}>
         Refresh saved status
       </button>
@@ -1090,7 +1057,7 @@ export default function Studio({ feature }: { feature: Feature }) {
       <header className="space-y-3">
         <div className="flex flex-wrap items-center gap-3">
           <h2 className="text-2xl font-semibold">{feature === "sentence" ? names[feature] : "Your learning workspace"}</h2>
-          <ProBadge />
+          {feature === "sentence" ? <span className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold">Free learning</span> : <ProBadge />}
         </div>
         <p className="text-sm leading-7 text-slate-600">
           Learn an idea, attempt one activity, review your own work and save an
@@ -1100,7 +1067,7 @@ export default function Studio({ feature }: { feature: Feature }) {
           aria-label="Connected skills"
           className="flex flex-wrap gap-4 text-sm"
         >
-          {(Object.keys(names) as Feature[]).map((f) => (
+          {(feature === "sentence" ? ["sentence"] as Feature[] : Object.keys(names) as Feature[]).map((f) => (
             <Link
               key={f}
               className="inline-flex min-h-11 items-center font-semibold underline"
@@ -1146,14 +1113,15 @@ export default function Studio({ feature }: { feature: Feature }) {
       ) : (
         overview.data && (
           <>
-            <Availability config={overview.data.configuration} />
-            {overview.data.membership.status === "active" ? (
+            {feature === "sentence" && <Chapters catalog={overview.data.catalog} />}
+            {feature !== "sentence" && <Availability config={overview.data.configuration} />}
+            {(overview.data.access?.allowed ?? overview.data.membership.status === "active") ? (
               <Start
-                key={feature}
+                key={`${feature}:${params.get("lesson") || ""}`}
                 feature={feature}
                 data={overview.data}
                 save={save}
-                selected={params.get("theme") || undefined}
+                selected={params.get("lesson") || params.get("theme") || undefined}
               />
             ) : (
               <p className={`${panelStyle} text-sm leading-7`}>

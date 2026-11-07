@@ -36,7 +36,7 @@ for(let n=0;n<sources.length;n++){
  php('tests/pro/fixture.php','expire',user.id)
  assert.deepEqual((await call(path,user.jar)).data.saved.evidence.check_feedback,retained,'Expiry changed old feedback')
  assert.equal((await call(freshPath+'&version_id='+first.data.version_id,user.jar)).data.saved.evidence.check_feedback.choice_explanation,newLesson.check.option_feedback[wrong])
- assert.equal((await call(endpoint,user.jar,{action:'save',workspace_id:freshId,expected_version:2,stage:freshDetail.workspace.source.stages[1].id,response:'TEST ONLY this independent new paid response must be rejected after expiry, despite otherwise valid wording.'})).status,403)
+ assert.equal((await call(endpoint,user.jar,{action:'save',workspace_id:freshId,expected_version:2,stage:freshDetail.workspace.source.stages[1].id,response:'TEST ONLY this independent free response remains available after membership expiry.'})).status,200)
  php('tests/precis/fixture.php','activate',user.id)
  assert.equal(php('tests/skills/fixture.php','source-digest',user.id,legacyId),digest,'Existing source hash/bytes were rewritten')
 }

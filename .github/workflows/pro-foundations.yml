@@ -1,4 +1,4 @@
-name: Pro membership foundations
+name: Native learning and preserved account foundations
 on:
   pull_request:
     branches: [main]
@@ -30,7 +30,6 @@ jobs:
       CSSV_PRIVATE_STORAGE_DIR: /tmp/cssv-pro-private
       CSSV_CONFIG_FILE: /tmp/cssv-pro-private/config.php
       PHP_CLI_SERVER_WORKERS: '8'
-      CSSV_TEST_HANDWRITING_TRANSPORT: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -81,13 +80,16 @@ jobs:
           php tests/current-affairs/setup.php
           php -d opcache.enable=0 -S localhost:4173 -t public tests/pro/router.php > test-artifacts/pro-php.log 2>&1 &
           node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
-      - name: Verify payments, learning, handwriting and expression lifecycle
+      # Positive AI-assessment and scanner journeys are superseded by the owner's
+      # 5 November cancellation. Their historical files remain in Git. The free
+      # expression suite verifies cancellation, no dispatch, history and access.
+      - name: Verify free expression and preserved native account lifecycles
         run: |
+          node tests/skills/free-expression.mjs
           node tests/skills/security.mjs
           node tests/skills/quality-security.mjs
           node tests/skills/sentence-quality-security.mjs
           node tests/skills/essay-quality-security.mjs
-          node tests/skills/ai-security.mjs
           node tests/skills/sources-security.mjs
           node tests/ability/security.mjs
           node tests/ability/reasoning-security.mjs
@@ -103,12 +105,8 @@ jobs:
           node tests/pro/release-pause.mjs
           node tests/mentor/security.mjs
           node tests/learning/security.mjs
-          node tests/handwriting/security.mjs
-          node tests/handwriting/privacy-security.mjs
-          node tests/expression/security.mjs
           node tests/grammar/security.mjs
           node tests/precis/security.mjs
-          node tests/precis/feedback-security.mjs
       - name: Install isolated browser test dependencies
         run: |
           npm ci --prefix tests/browser --ignore-scripts
@@ -118,13 +116,10 @@ jobs:
           npm run build:hostinger:strict
           node tests/browser/runtime.mjs > test-artifacts/browser-runtime.log 2>&1 &
           node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
-          node tests/browser/skills.mjs
-          node tests/browser/connected-skills.mjs
+          node tests/browser/free-expression.mjs
           node tests/browser/topic-options.mjs
           node tests/browser/reasoning-quality.mjs
-          node tests/browser/sentence-quality.mjs
           node tests/browser/essay-quality.mjs
-          node tests/browser/handwriting-privacy.mjs
           node tests/browser/ability.mjs
           node tests/browser/learning-continuity.mjs
           node tests/browser/precis.mjs

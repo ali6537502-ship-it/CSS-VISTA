@@ -7,7 +7,7 @@ function cssv_precis_feedback_ensure(PDO $pdo): void {
 function cssv_precis_feedback_configuration(): array {
  $notice=cssv_env('CSSV_PRECIS_PROCESSING_NOTICE','');$policy=cssv_env('CSSV_PRECIS_POLICY_VERSION','');
  $policyValid=is_string($policy)&&preg_match('/^[a-zA-Z0-9._-]{1,80}$/D',$policy)===1;$noticeValid=is_string($notice)&&mb_check_encoding($notice,'UTF-8')&&mb_strlen($notice)>=30&&mb_strlen($notice)<=3000;
- return ['enabled'=>cssv_env('CSSV_PRECIS_ENABLED','0')==='1'&&cssv_ai_configuration()['configured']&&function_exists('curl_init')&&$policyValid&&$noticeValid&&cssv_ai_limit('precis')>0,'policy_version'=>$policyValid?$policy:null,'processing_notice'=>$noticeValid?$notice:null,'max_source_words'=>2000,'max_draft_words'=>700,'max_draft_characters'=>6000];
+ return ['enabled'=>false && cssv_env('CSSV_PRECIS_ENABLED','0')==='1'&&cssv_ai_configuration()['configured']&&function_exists('curl_init')&&$policyValid&&$noticeValid&&cssv_ai_limit('precis')>0,'policy_version'=>$policyValid?$policy:null,'processing_notice'=>$noticeValid?$notice:null,'max_source_words'=>2000,'max_draft_words'=>700,'max_draft_characters'=>6000];
 }
 function cssv_precis_feedback_input(PDO $pdo,string $user,string $version): array {
  $v=cssv_learning_version($pdo,$version,$user);$d=cssv_precis_detail($pdo,$user,$v['writing_id'],$version);if(!$d['context'])throw new InvalidArgumentException('Save a Précis Lab version with its title and source before evaluation.');

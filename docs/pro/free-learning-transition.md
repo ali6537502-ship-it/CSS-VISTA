@@ -45,10 +45,12 @@ These verified locations are starting points, not a complete search of every pay
 
 Test authenticated accounts with no membership, active and expired historical memberships; direct URL/API/file delivery; legitimate profile requirements; and anonymous/foreign-account denial for private records. Exercise actual course learning, fixed checks, independent drafts, cross-device conflicts, revision and saved history. Verify no new Pro order or cancelled AI reservation/provider call can be created, including direct requests and delayed dispatch. Confirm owned historical feedback and human mentor records remain available. Retain negative upload/scanner checks and privacy controls. Run relevant PHP, TypeScript, lint, browser/security suites and the production build in isolation.
 
-## Current status
+## Current status — 7 November 2026
 
-**Owner policy recorded; application conversion not yet implemented or tested.** This repository increment changes instructions/documentation only. Existing application paywalls, sales labels and evaluation code have not been claimed removed.
+The environment is restored. The free Sentence and English Expression Lab now has a development implementation with 16 chapters and 33 guided lessons, existing account-owned writing/revisions, free server access and cancellation guards for new AI evaluation/scanning. See [the implementation and validation report](free-expression-lab.md).
 
-The selected execution environment reports failure, and command execution returns “No usable execution environment is available.” GitHub remains connected, so source inspection and this policy checkpoint are possible. Local/private course artifacts, runtime tests and builds cannot currently be inspected or executed. Their continued availability must be checked when the original workspace is restored; do not claim they are lost or recreate them from scratch.
+This is a focused increment, not completion of every legacy paid gate. The owner's latest scope skips Ask VISTA, My Answer Performance, CA/PA, maths and reasoning exercises in this build. Preserve their histories and unrelated public resources. The wider free-account navigation and access conversion outside the expression lab remains pending; do not represent it as completed.
 
-No deployment, main merge, private-content publication, payment activation, provider call or production mutation was performed for this policy change. Older academic/workflow evidence remains historical and does not certify this migration. Continue implementation after the workspace is restored, under the same release hold.
+The earlier unavailable-environment/policy-only checkpoint is historical. Local builds and focused native/browser tests now exist, but do not certify hosted CI or production. Private CA/PA artifacts were not reopened or republished for this task.
+
+No deployment, main merge, private publication, payment activation, provider call or production mutation was performed. Reconcile later main changes before an eventual owner-authorized release; the release hold remains active.

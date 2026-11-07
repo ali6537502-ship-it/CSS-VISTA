@@ -5,7 +5,7 @@ function cssv_expression_configuration(): array {
  $notice=cssv_env('CSSV_EXPRESSION_PROCESSING_NOTICE','');$policy=cssv_env('CSSV_EXPRESSION_POLICY_VERSION','');
  $policyValid=is_string($policy) && preg_match('/^[a-zA-Z0-9._-]{1,80}$/D',$policy)===1;
  $noticeValid=is_string($notice) && mb_check_encoding($notice,'UTF-8') && mb_strlen($notice)>=30 && mb_strlen($notice)<=3000;
- return ['enabled'=>cssv_env('CSSV_EXPRESSION_ENABLED','0')==='1' && cssv_ai_configuration()['configured'] && function_exists('curl_init') && $policyValid && $noticeValid && (cssv_ai_limit('paragraph')>0 || cssv_ai_limit('sentence')>0),'policy_version'=>$policyValid?$policy:null,'processing_notice'=>$noticeValid?$notice:null,'max_words'=>['paragraph'=>450,'sentence'=>80],'max_characters'=>6000];
+ return ['enabled'=>false && cssv_env('CSSV_EXPRESSION_ENABLED','0')==='1' && cssv_ai_configuration()['configured'] && function_exists('curl_init') && $policyValid && $noticeValid && (cssv_ai_limit('paragraph')>0 || cssv_ai_limit('sentence')>0),'policy_version'=>$policyValid?$policy:null,'processing_notice'=>$noticeValid?$notice:null,'max_words'=>['paragraph'=>450,'sentence'=>80],'max_characters'=>6000];
 }
 function cssv_expression_version(PDO $pdo,string $id,string $user): array {
  $v=cssv_learning_version($pdo,$id,$user);if(!in_array($v['kind'],['sentence','paragraph'],true))throw new InvalidArgumentException('Expression Lab supports sentences and single paragraphs.');
@@ -25,7 +25,7 @@ function cssv_expression_reserve(PDO $pdo,string $user,array $body,?DateTimeImmu
  $request=cssv_pro_id($body['request_id']??null);$id=cssv_pro_id($body['version_id']??null);$v=cssv_expression_version($pdo,$id,$user);$config=cssv_expression_configuration();
  $q=$pdo->prepare('SELECT payload_hash FROM ai_operations WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);$prior=$q->fetchColumn();
  if(!$prior){
-  if(!$config['enabled'] || cssv_ai_limit($v['kind'])===0)throw new LogicException('Expression feedback is not open yet.');
+  if(!$config['enabled'] || cssv_ai_limit($v['kind'])===0)throw new LogicException('New AI evaluation has been cancelled. Your saved writing and historical feedback remain available.');
   if(($body['policy_version']??null)!==$config['policy_version'])throw new DomainException('The processing notice changed. Refresh and review it before continuing.');
   if(mb_strlen($v['text'])>$config['max_characters'] || preg_match('/\n\s*\n/u',$v['text']))throw new InvalidArgumentException('Use one short expression or a single paragraph within the displayed limits.');
  }

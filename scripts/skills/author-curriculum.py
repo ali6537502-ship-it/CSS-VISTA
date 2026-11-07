@@ -86,13 +86,16 @@ A=[
 for id,title,level,rule,example,prompt,right,wrong,reason,task,wrong_feedback in A:
     add('analysis',id,title,level,rule,example,prompt,right,wrong,reason,task,wrong_feedback=wrong_feedback)
 
-package=dict(version='skills-2026-10-v3',attribution='Original bounded CSS Vista skills teaching. Hypothetical examples are not evidence of real events. Grammar rules link to the existing course.',lessons=LESSONS)
+from expression_chapters import extend
+extend(LESSONS,add)
+
+package=dict(version='expression-2026-11-v1',attribution='Original bounded CSS Vista skills teaching. Hypothetical examples are not evidence of real events. Grammar rules link to the existing course.',lessons=LESSONS)
 target=ROOT/'public/api/_premium_files/skills-curriculum.json'
 encoded=json.dumps(package,ensure_ascii=False,indent=2)+'\n'
-assert len(LESSONS)==51 and len({x['id'] for x in LESSONS})==51
+assert len(LESSONS)==63 and len({x['id'] for x in LESSONS})==63
 assert all(len(x['check']['options'])==4 and len(set(x['check']['options']))==4 for x in LESSONS)
 if '--check' in sys.argv:
     assert target.read_text()==encoded,'Curriculum differs from its authored source'
 else:
     target.parent.mkdir(parents=True,exist_ok=True);target.write_text(encoded)
-print('Verified 51 original skills lessons: 21 sentence, 15 argumentation, 15 analysis; unique IDs and four-option fixed checks.')
+print('Verified 63 skills lessons: 33 sentence/expression in 16 chapters; 30 preserved reasoning lessons. Unique IDs and four-option checks.')

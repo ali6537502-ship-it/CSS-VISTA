@@ -37,3 +37,7 @@ Cancel the study-picture scanner/OCR and all new AI evaluation of student work, 
 Do not activate or promote the superseded Pro purchase/coupon offer. Unrelated human services or commercial material are not automatically reclassified by this instruction. Source-bound conceptual explanations are distinct from AI assessment; do not silently restore cancelled assessment through Ask VISTA.
 
 See [the free-learning transition contract](docs/pro/free-learning-transition.md) for the audited dependencies and implementation status. The no-production-release hold remains in force for this transition. Preparing free access does not authorize merging to main, publishing private material, changing provider configuration or making the transition live. Keep existing hibernation and unrelated authorized production behavior intact.
+
+## Current build scope — 5 November 2026
+
+The owner now explicitly skips Ask VISTA, My Answer Performance, Current Affairs, Pakistan Affairs, maths and reasoning exercises in this build. Preserve their existing records and unrelated public routes. Focus on the free Sentence Improvement and English Expression Lab, authoring chapters with fixed understanding checks, independent writing, self-review and saved revisions. All AI evaluation and picture scanning remain cancelled. The release hold remains active.

@@ -184,9 +184,9 @@ export default function AccountHome() {
       to: '/account/library', icon: Bookmark, title: 'My Library',
       status: snapshot.saved ? `${snapshot.saved} saved item${snapshot.saved === 1 ? '' : 's'}` : 'Save what is worth revisiting',
     },
+    ...(!paused ? [{ to: '/account/expression', icon: PenLine, title: 'Sentence & English Expression Lab', status: 'Free chapters, fixed checks, independent writing & saved revisions' }] : []),
   ]
   const proChoices = [
-    { to: '/account/expression?view=studio', icon: PenLine, title: 'Sentence Structure & Improvement', status: 'Guided learning, independent rewrites & saved versions' },
     { to: '/account/argumentation', icon: ListTree, title: 'Argumentation Skills Builder', status: 'Claims, reasons, evidence, counterarguments & revision' },
     { to: '/account/analytical-skills', icon: Target, title: 'Analytical Skills Builder', status: 'Mechanisms, alternatives, trade-offs & conclusions' },
     { to: '/account/essay-builder', icon: BookOpen, title: 'Essay Themes Builder', status: 'Seven guided stages linked to your research roadmap' },
@@ -202,7 +202,6 @@ export default function AccountHome() {
 
     { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
     { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
-    { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
     { to: '/account/handwriting', icon: ScanLine, title: 'Handwritten Paragraph', status: 'Upload, confirm your wording & review feedback' },
     { to: '/account/ask-vista', icon: MessageCircle, title: 'Ask VISTA', status: 'Study help linked to your preparation' },
   ]

@@ -100,7 +100,7 @@ export function useSyllabusTotal() {
  * One page inside the account. Every account page wears the same quiet header
  * so moving between them feels like one product rather than four.
  */
-export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
+export function AccountPage({ title, intro, action, navigation, children }: { title: string; intro: string; action?: ReactNode; navigation?: ReactNode; children: ReactNode }) {
   const { user } = useAccount()
   return (
     <div className="min-h-screen bg-white">
@@ -126,6 +126,7 @@ export function AccountPage({ title, intro, action, children }: { title: string;
           )}
         </header>
         <nav aria-label="Account" className="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold text-slate-600">
+          {navigation ?? <>
           <Link to="/account/dashboard?plan=free" className="inline-flex min-h-11 items-center hover:text-pine">Free account</Link>
           <Link to="/account/dashboard?plan=pro" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Pro account <ProBadge /></Link>
           <Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link>
@@ -137,6 +138,7 @@ export function AccountPage({ title, intro, action, children }: { title: string;
           <Link to="/account/argumentation" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Argumentation <ProBadge /></Link>
           <Link to="/account/analytical-skills" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Analysis <ProBadge /></Link>
           <Link to="/account/ai-usage" className="inline-flex min-h-11 items-center hover:text-pine">AI Usage</Link>
+          </>}
         </nav>
         <div className="mt-9">{children}</div>
         {/* Signed-in account content. Advertising eligibility is decided by the

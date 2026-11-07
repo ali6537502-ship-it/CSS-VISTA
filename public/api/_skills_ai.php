@@ -6,9 +6,9 @@ function cssv_skills_ai_configuration(string $feature): array {
     $policy=cssv_env('CSSV_SKILLS_POLICY_VERSION','');$notice=cssv_env('CSSV_SKILLS_PROCESSING_NOTICE','');
     $valid=is_string($policy)&&preg_match('/^[A-Za-z0-9._-]{1,80}$/D',$policy)&&is_string($notice)&&mb_check_encoding($notice,'UTF-8')&&mb_strlen($notice)>=30&&mb_strlen($notice)<=3000;
     $limit=cssv_ai_limit(cssv_skills_ai_feature($feature));
-    return ['enabled'=>cssv_env('CSSV_SKILLS_AI_ENABLED','0')==='1'&&$valid&&cssv_ai_configuration()['configured']&&function_exists('curl_init')&&$limit>0,
+    return ['enabled'=>false && cssv_env('CSSV_SKILLS_AI_ENABLED','0')==='1'&&$valid&&cssv_ai_configuration()['configured']&&function_exists('curl_init')&&$limit>0,
         'policy_version'=>$valid?$policy:null,'policy_hash'=>$valid?hash('sha256',$notice):null,'processing_notice'=>$valid?$notice:null,'limit'=>$limit,
-        'basis'=>'Instructional feedback, not examination marking. New reasoning/essay allowances stay at zero until configured under an owner-approved policy. Sentence work shares the existing sentence allowance.'];
+        'basis'=>'New AI evaluation is cancelled. Fixed checks, independent writing, self-review and historical feedback remain available.'];
 }
 function cssv_skills_rubric(string $feature): array {
     return match($feature){
@@ -77,7 +77,7 @@ function cssv_skills_ai_reserve(PDO $pdo,string $user,array $body): string {
         $q=$pdo->prepare('SELECT id,payload_hash FROM ai_operations WHERE user_id=? AND request_id=?');$q->execute([$user,$request]);
         if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This AI identity was used for different saved work.');$pdo->commit();return $prior['id'];}
         cssv_pro_require_active($pdo,$user);$config=cssv_skills_ai_configuration($w['feature']);
-        if(!$config['enabled'])throw new LogicException('Instructional AI feedback is unavailable. Saved learning and revision remain available.');
+        if(!$config['enabled'])throw new LogicException('New AI evaluation has been cancelled. Saved learning, historical feedback and revision remain available.');
         if($policy!==$config['policy_version']||!hash_equals($config['policy_hash'],$noticeHash))throw new DomainException('The processing notice changed. Review the current version.');
         $answers=array_filter($v['answers'],fn($key)=>$key!=='check',ARRAY_FILTER_USE_KEY);
         if($w['feature']==='sentence'&&cssv_learning_words($v['text'])>80)throw new InvalidArgumentException('Use one sentence of at most 80 words for this shared sentence-feedback allowance.');
