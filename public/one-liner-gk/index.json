@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-11-06",
-  "total": 31012,
+  "total": 31015,
   "sourcePagesProcessed": 207,
   "excludedPages": "208-244 (Urdu and English grammar material, outside One-Liner GK scope)",
   "categories": [
@@ -371,8 +371,8 @@
     {
       "slug": "current-affairs-archive",
       "name": "Current Affairs Archive",
-      "count": 710,
-      "timeSensitiveCount": 710,
+      "count": 713,
+      "timeSensitiveCount": 713,
       "subcategories": [
         {
           "name": "Current Affairs",
@@ -384,7 +384,7 @@
         },
         {
           "name": "Current Affairs 2026",
-          "count": 360
+          "count": 363
         },
         {
           "name": "International Relations",

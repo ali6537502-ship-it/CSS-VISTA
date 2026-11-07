@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-06",
-  "published_at": "2026-11-06T19:00:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 6 November 2026 | Evening preliminary edition (00:00–19:00 PKT)",
+  "published_at": "2026-11-06T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 6 November 2026 | Final retrospective edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-06-pakistan-us-midterms-diplomacy",
@@ -80,6 +80,129 @@
           "publisher": "Reuters",
           "title": "How China's clean-tech machine is reshaping the global climate fight",
           "url": "https://www.reuters.com/legal/litigation/how-chinas-clean-tech-machine-is-reshaping-global-climate-fight-2026-11-06/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-06-eu-methane-import-reporting-delay",
+      "category": "World — Climate and Energy Governance",
+      "headline": "EU governments back delaying methane reporting for fossil-fuel importers",
+      "summary": "On 6 November, EU governments agreed on a negotiating position to postpone methane-emissions reporting requirements for oil, gas and coal importers until 1 January 2028, citing energy-supply disruption. This was not final EU legislation.",
+      "what_happened": "The Council of the European Union supported a one-year delay to the reporting rules and proposed a mechanism allowing two further one-year postponements if implementation is not ready. The European Parliament favoured a three-year delay; the institutions must negotiate a common final text.",
+      "background": "Methane is a potent short-lived greenhouse gas. EU import reporting rules are designed to improve transparency about emissions associated with fossil fuels entering the European market.",
+      "why_it_matters": "The proposal illustrates the trade-off between immediate energy security and climate accountability. The Council position does not itself amend the final implementation date until the legislative process is completed.",
+      "pakistan_perspective": "Pakistan's import-dependent energy sector faces related energy-price and supply vulnerabilities, but the EU negotiating position does not impose a new rule on Pakistan.",
+      "key_takeaways": [
+        "EU Council negotiating position proposed reporting from 1 January 2028.",
+        "Council and European Parliament still need a final agreement."
+      ],
+      "facts": [
+        "The EU Council's 6 November 2026 position sought a 1 January 2028 start for importer methane reporting."
+      ],
+      "quick_gk": [
+        "The Council of the EU and European Parliament must negotiate the final methane-reporting delay."
+      ],
+      "question_angles": [
+        "Which date did EU governments propose for delayed methane-import reporting?"
+      ],
+      "topics": [
+        "methane emissions",
+        "European Union",
+        "energy security",
+        "climate regulation"
+      ],
+      "countries": [
+        "European Union"
+      ],
+      "institutions": [
+        "Council of the European Union",
+        "European Parliament"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "EU backs one-year delay to methane rules over Iran war disruption",
+          "url": "https://www.reuters.com/world/eu-backs-one-year-delay-methane-rules-over-iran-war-disruption-2026-11-06/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-06-new-zealand-election-mmp-explainer",
+      "category": "World — Elections and Political Systems",
+      "headline": "New Zealand approaches 7 November election under mixed-member proportional representation",
+      "summary": "Reuters explained on 6 November how New Zealand's 7 November general election uses mixed-member proportional representation, combining electorate representatives with party-list seats. The election result was not yet known on the coverage date.",
+      "what_happened": "Advance voting began on 26 October. Reuters described 71 geographical constituency seats and 49 party-list seats, subject to potential overhang seats. Parties may negotiate coalitions or confidence-and-supply agreements if no grouping secures a majority.",
+      "background": "New Zealand's electoral system is designed to align overall parliamentary representation more closely with party votes than a purely first-past-the-post system.",
+      "why_it_matters": "The election provides a contemporary comparative example of coalition formation, electoral proportionality and legislative bargaining.",
+      "pakistan_perspective": "Comparative study of mixed-member proportional representation is useful alongside Pakistan's constituency-based elections and reserved-seat arrangements; the systems are not identical.",
+      "key_takeaways": [
+        "New Zealand's scheduled general-election polling day was 7 November 2026.",
+        "Reuters described 71 constituency and 49 party-list seats, with possible overhang."
+      ],
+      "facts": [
+        "New Zealand uses mixed-member proportional representation for its national parliamentary election."
+      ],
+      "quick_gk": [
+        "New Zealand's mixed-member proportional system combines electorate and party-list seats."
+      ],
+      "question_angles": [
+        "Which electoral system is used for New Zealand's national parliamentary elections?"
+      ],
+      "topics": [
+        "electoral systems",
+        "coalition governments",
+        "New Zealand election"
+      ],
+      "countries": [
+        "New Zealand"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Explainer: What you need to know ahead of New Zealand's election",
+          "url": "https://www.reuters.com/world/asia-pacific/what-you-need-know-ahead-new-zealands-election-2026-11-06/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-06-turkey-national-energy-plan-2040",
+      "category": "World — Climate and Energy Policy",
+      "headline": "Türkiye outlines National Energy Plan 2040 ahead of COP31",
+      "summary": "Ahead of the Antalya COP31 climate summit, Türkiye's energy minister described a National Energy Plan 2040 focused on electrification, renewable energy and energy security. Its targets remain plans, not achieved emissions reductions.",
+      "what_happened": "Associated Press reported a target of a 40% emissions reduction by 2040 and an estimated $500 billion investment requirement, alongside proposals to expand solar, wind and nuclear generation. The minister also emphasised the need to support coal-dependent communities.",
+      "background": "Türkiye remains reliant on coal while seeking to reduce imported-energy dependence and expand domestic clean generation. COP31 is scheduled in Antalya.",
+      "why_it_matters": "The plan highlights the challenge of aligning climate ambition with industrial investment, energy affordability and a just transition for workers.",
+      "pakistan_perspective": "Pakistan's energy transition faces analogous challenges around imported fuels, financing, grid investment and employment in existing energy industries.",
+      "key_takeaways": [
+        "The National Energy Plan 2040 is a proposal, not a completed transition.",
+        "The minister estimated approximately $500 billion in investment needs."
+      ],
+      "facts": [
+        "Türkiye presented National Energy Plan 2040 proposals ahead of COP31 in Antalya."
+      ],
+      "quick_gk": [
+        "Antalya, Türkiye, is the scheduled host city of COP31."
+      ],
+      "question_angles": [
+        "Which city is hosting COP31 in 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "Türkiye",
+        "energy transition",
+        "electrification"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "reports": [
+        "National Energy Plan 2040"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Turkey outlines plans for 'paradigm shift' in energy use ahead of climate summit",
+          "url": "https://apnews.com/article/d61b67380d5bfb00acf580b0f31fe132"
         }
       ]
     }

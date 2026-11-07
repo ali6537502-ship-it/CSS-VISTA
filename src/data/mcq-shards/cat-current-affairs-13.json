@@ -28,5 +28,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/legal/litigation/how-chinas-clean-tech-machine-is-reshaping-global-climate-fight-2026-11-06/"
+  },
+  {
+    "id": "current-affairs-20261106-eu-methane-reporting-2028",
+    "q": "EU governments' 6 November negotiating position proposed starting fossil-fuel importer methane reporting on:",
+    "o": [
+      "1 January 2027",
+      "1 January 2028",
+      "1 January 2029",
+      "1 January 2030"
+    ],
+    "a": 1,
+    "e": "The Council supported a delay to 1 January 2028, subject to negotiations with the European Parliament.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/eu-backs-one-year-delay-methane-rules-over-iran-war-disruption-2026-11-06/"
+  },
+  {
+    "id": "current-affairs-20261106-new-zealand-mmp-system",
+    "q": "New Zealand's 2026 parliamentary election is conducted under which electoral system?",
+    "o": [
+      "Single transferable vote",
+      "Parallel voting",
+      "Mixed-member proportional representation",
+      "Two-round majority system"
+    ],
+    "a": 2,
+    "e": "New Zealand combines geographical electorate members with proportional party-list members through MMP.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/what-you-need-know-ahead-new-zealands-election-2026-11-06/"
+  },
+  {
+    "id": "current-affairs-20261106-cop31-antalya",
+    "q": "The host city identified for the 2026 COP31 climate summit is:",
+    "o": [
+      "Ankara",
+      "Antalya",
+      "Izmir",
+      "Istanbul"
+    ],
+    "a": 1,
+    "e": "The 2026 COP31 summit is scheduled in Antalya, Türkiye.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/d61b67380d5bfb00acf580b0f31fe132"
   }
 ]

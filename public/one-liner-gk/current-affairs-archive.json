@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 710,
+  "count": 713,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4969,6 +4969,27 @@
     {
       "id": "current-affairs-archive-2026-11-06-china-clean-tech-commercial-flows",
       "text": "Reuters estimated about $132 billion in Chinese clean-technology exports and overseas investment in the preceding year, a commercial measure not directly comparable to official climate finance.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-eu-methane-import-reporting",
+      "text": "On 6 November 2026, EU governments proposed postponing fossil-fuel importer methane reporting to 1 January 2028, pending final legislation.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-new-zealand-mmp",
+      "text": "New Zealand's 2026 parliamentary election used mixed-member proportional representation combining constituency and party-list seats.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-cop31-antalya",
+      "text": "Antalya, Türkiye, is the scheduled host city of the 2026 COP31 climate summit.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
