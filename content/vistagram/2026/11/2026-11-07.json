@@ -115,8 +115,12 @@
       ],
       "sources": [
         {
-          "label": "Ministry of Finance, Government of Pakistan",
-          "url": "https://www.finance.gov.pk/"
+          "label": "Government of Pakistan Finance Division — Federal Budget Manual (2020)",
+          "url": "https://www.finance.gov.pk/Budget_Manual_1stEdition_2020.pdf"
+        },
+        {
+          "label": "Finance Division — Medium Term Performance Based Budget 2023–24 to 2025–26",
+          "url": "https://www.finance.gov.pk/budget/Budget_2023_24/Medium_Term_Performance_Based_Budget.pdf"
         }
       ]
     },
@@ -331,8 +335,8 @@
       ],
       "sources": [
         {
-          "label": "UNICEF — Justice for Children",
-          "url": "https://www.unicef.org/justice-for-children"
+          "label": "UNICEF — Child Justice and Child-Friendly Justice Advocacy Briefs",
+          "url": "https://www.unicef.org/eca/reports/advocacy-briefs-child-justice-and-child-friendly-justice"
         }
       ]
     }
