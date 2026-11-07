@@ -70,7 +70,8 @@ jobs:
           php tests/precis/feedback-unit.php
           node scripts/grammar/export-catalog.mjs --check
           node tests/pro/grammar-preservation.mjs
-          node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts tests/precis.test.ts
+          node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts
+          npm run test:precis
       - name: Create isolated database and HTTP runtime
         run: |
           mkdir -p /tmp/cssv-pro-private test-artifacts
@@ -112,6 +113,7 @@ jobs:
           node tests/browser/runtime.mjs > test-artifacts/browser-runtime.log 2>&1 &
           node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
           node tests/browser/skills.mjs
+          node tests/browser/precis-book.mjs
           node tests/browser/ability.mjs
           node tests/browser/pro-pause.mjs
           php tests/workspace-preview/fixture.php paused

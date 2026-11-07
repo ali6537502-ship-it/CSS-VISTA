@@ -67,7 +67,7 @@ const languageRules: PatternRule[] = [
     handbook: 'Chapter 11 — Grammar',
   },
   {
-    id: 'it-plural', regex: /\bit\s+(?:are|were|have)\b/giu,
+    id: 'it-plural', regex: /\bit\s+(?:are|have)\b/giu,
     group: 'grammar', label: 'Singular pronoun and plural verb',
     explanation: 'The singular pronoun “it” normally takes a singular verb.',
     advice: 'Use “it is”, “it was” or “it has”, as appropriate to the sentence.',
@@ -224,6 +224,12 @@ export function analyzePrecisWriting({ original, draft, title, limit }: AnalyzeI
   for (const rule of languageRules) {
     let count = 0
     for (const match of draft.matchAll(rule.regex)) {
+      // Base-form subjunctives are valid after mandative clauses; this selective
+      // checker must not turn them into confident agreement corrections.
+      if (rule.id === 'he-have' || rule.id === 'it-plural' && /have$/iu.test(match[0])) {
+        const prefix = draft.slice(0, match.index).split(/[.!?]/u).at(-1) || ''
+        if (/\b(?:that|lest|if)\s*$/iu.test(prefix) || /\b(?:essential|necessary|important|vital|imperative|crucial|recommend\w*|suggest\w*|demand\w*|insist\w*|request\w*|require\w*)\b/iu.test(prefix)) continue
+      }
       if (++count > 3) break
       add({
         id: rule.id, group: rule.group,

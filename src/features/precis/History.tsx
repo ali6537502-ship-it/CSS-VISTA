@@ -12,6 +12,7 @@ export default function History({
   active,
   refresh,
   onVersion,
+  feedbackAvailable = false,
 }: {
   detail: Detail
   rubric: Record<string, string>
@@ -19,6 +20,7 @@ export default function History({
   active: boolean
   refresh: () => void
   onVersion: (id: string) => void
+  feedbackAvailable?: boolean
 }) {
   const { user } = useAccount(),
     [before, setBefore] = useState(''),
@@ -191,12 +193,12 @@ export default function History({
               </p>
             </div>
           </div>
-          <FeedbackChanges
+          {feedbackAvailable && <FeedbackChanges
             key={`${before}:${detail.version.id}`}
             before={before}
             after={detail.version.id}
             skills={skills}
-          />
+          />}
           <p className="text-sm leading-7 text-slate-500">
             Compare both with the original. Check central idea, conditions, contrasts, retained
             details and language. Record what improved and what still needs work in your next

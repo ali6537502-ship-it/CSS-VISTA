@@ -1,0 +1,162 @@
+{
+  "source_sha256": "e1b36b54b25edc343a460eb73fec43e63d68210f5044e70727a72fbe1c071561",
+  "content_sha256": "607555988d7d2532f615aeaf8ad2fa3dde50180e4344b370b450da526bb5e5c3",
+  "import_manifest": {
+    "parser_version": 2,
+    "source_body_blocks": 351,
+    "front_matter_blocks": 33,
+    "chapter_count": 25,
+    "chapters": [
+      {
+        "id": "1",
+        "title": "1. What a Précis Really Is",
+        "blocks": 10,
+        "sha256": "7fb6922b78e467bc15db3f8cd3ccc9a60ded11a516cea37b8eba0273ec78ec76"
+      },
+      {
+        "id": "2",
+        "title": "2. Official Examination Framework",
+        "blocks": 4,
+        "sha256": "b8f133c1c4c250bbc298c5866148f8364bfd771f6aefba88e87401dc11b3db3c"
+      },
+      {
+        "id": "3",
+        "title": "3. The Non-Negotiable Principles",
+        "blocks": 10,
+        "sha256": "65c3f5af0c7164ed898c85ca2f832791c8c76d4968dbca5e1569eb30f6527f6f"
+      },
+      {
+        "id": "4",
+        "title": "4. Topic, Central Idea, Thesis and Supporting Ideas",
+        "blocks": 10,
+        "sha256": "4ce725635690a734bd0b3d725112d44e405915a7cb6b1379361323181206e934"
+      },
+      {
+        "id": "5",
+        "title": "5. The Reading Method: From Passage to Skeleton",
+        "blocks": 12,
+        "sha256": "49ee6d0916c4cd238c3aec0274be089bba65fcd7979cb51740f3500458681a60"
+      },
+      {
+        "id": "6",
+        "title": "6. What to Keep and What to Remove",
+        "blocks": 6,
+        "sha256": "e44711a25bdc92caed09656481f685bf1cb1bc2d389467f8b97c6de024d89d36"
+      },
+      {
+        "id": "7",
+        "title": "7. Conceptual Compression: The Core Skill",
+        "blocks": 10,
+        "sha256": "9ca435634f7c7e4b5b1f691253fd9ab98c7339a1263bd47081cf97d19e8cac44"
+      },
+      {
+        "id": "8",
+        "title": "8. Paraphrasing Without Distorting Meaning",
+        "blocks": 9,
+        "sha256": "c9cc025aeeaf551e08ff325ce0bafbfb1fc4351b56364517d423edc63992b76b"
+      },
+      {
+        "id": "9",
+        "title": "9. Preserving Logic: Cause, Contrast, Condition and Qualification",
+        "blocks": 17,
+        "sha256": "ed9fdcb5bd95560dd53f52b37fb4719f921d9d21481f0c3647dd766552ae3744"
+      },
+      {
+        "id": "10",
+        "title": "10. Building Coherence in the Précis",
+        "blocks": 7,
+        "sha256": "f37e68af691a799a3817ab6df7fa342029ca4eec2c0f8db6b06864e1aba5eb6e"
+      },
+      {
+        "id": "11",
+        "title": "11. Grammar, Tense, Person, Voice and Pronouns",
+        "blocks": 10,
+        "sha256": "fdee783c96259aeca636d1ca17132a832b771f27da40b00dce77ef4df668dbbd"
+      },
+      {
+        "id": "12",
+        "title": "12. Writing the Title",
+        "blocks": 10,
+        "sha256": "5085238590b7f3eb4483472a2c297f459d4ff156b827fa42effc012e9023d0d9"
+      },
+      {
+        "id": "13",
+        "title": "13. Word Count and Compression Control",
+        "blocks": 10,
+        "sha256": "7602dbfb4cf1ef50aa75b80387dc9cd84553d598f2a31fe6f4343fabf87dccaa"
+      },
+      {
+        "id": "14",
+        "title": "14. The Complete Step-by-Step Method",
+        "blocks": 25,
+        "sha256": "457dc6f7014c57a01eefaae27100d8c2f53ebcbc94363d5d0dfaa5c101c5a96f"
+      },
+      {
+        "id": "15",
+        "title": "15. Rough-Work Templates",
+        "blocks": 17,
+        "sha256": "0cacceb0cbb060288efce1aef3e5fc003fbf59c87ad551384535834e52e13f7c"
+      },
+      {
+        "id": "16",
+        "title": "16. Common Failure Patterns and Their Cure",
+        "blocks": 12,
+        "sha256": "f7a0c19b03b84882caf5eebd352fcf16a889f5e0f82b99f02520d8fc09b7b729"
+      },
+      {
+        "id": "17",
+        "title": "17. Expression Bank for Clear Précis Writing",
+        "blocks": 28,
+        "sha256": "f8896bfd002be0321c8ce6539c6df1b0ee8a3b0ac328438b8fddb61ab16661d0"
+      },
+      {
+        "id": "18",
+        "title": "18. Worked Examples: Beginner to Advanced",
+        "blocks": 25,
+        "sha256": "da68a4821d7a17fc2d0f2cf00e2c5e7008dc0ff9fadf8d5b80b9136ffbc6522b"
+      },
+      {
+        "id": "19",
+        "title": "19. Self-Checking Rubric",
+        "blocks": 3,
+        "sha256": "2b0be0d90a9feb677833cdca8783bb5b4698b0eadeae49e3f304147cfb3fd187"
+      },
+      {
+        "id": "20",
+        "title": "20. Practice Drills and Answer Key",
+        "blocks": 32,
+        "sha256": "d93867fae90e0bce730865b223272ef5076bca8deaeaf666096fbe48506d8fdd"
+      },
+      {
+        "id": "21",
+        "title": "21. 30-Day Mastery Routine",
+        "blocks": 4,
+        "sha256": "3d518774b427b0659e2692432f974ec6ca7e417498dd7c11a24e8585662ba64e"
+      },
+      {
+        "id": "22",
+        "title": "22. Final Examination Checklist",
+        "blocks": 13,
+        "sha256": "069b3c1208c14d1861458c324d22f4fc11c639e80596513183664e760fe8c8c6"
+      },
+      {
+        "id": "23",
+        "title": "Appendix A. Compression Dictionary",
+        "blocks": 2,
+        "sha256": "b50dc938c6d313caa453ea0ba9b69d5f565a8e2c1bc385e4dc8883c0c859d35b"
+      },
+      {
+        "id": "24",
+        "title": "Appendix B. Error-Correction Bank",
+        "blocks": 1,
+        "sha256": "acc8c185a571489634454d063801775ca9bdc39ea392e5485b85f3a7b3421683"
+      },
+      {
+        "id": "25",
+        "title": "Appendix C. Source Note",
+        "blocks": 6,
+        "sha256": "74e7344711b296b5ac7aff6ce5276d354cd3667a30ea73b6829cbdef33c3ea0d"
+      }
+    ]
+  }
+}
