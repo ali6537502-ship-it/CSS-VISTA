@@ -73,5 +73,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://apnews.com/article/d61b67380d5bfb00acf580b0f31fe132"
+  },
+  {
+    "id": "current-affairs-20261107-kyiv-northern-bridge-river",
+    "q": "Kyiv's Northern Bridge, reported damaged during the 7 November strikes, crosses which river?",
+    "o": [
+      "Dniester",
+      "Dnipro",
+      "Danube",
+      "Don"
+    ],
+    "a": 1,
+    "e": "Reuters identified Kyiv's Northern Bridge as crossing the Dnipro River.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/russian-forces-launch-missile-attack-ukrainian-capital-kyiv-mayor-says-2026-11-07/"
+  },
+  {
+    "id": "current-affairs-20261107-cambodia-ai-wildfire",
+    "q": "AI-supported wildfire alerts cited in Reuters' conservation report were being used in:",
+    "o": [
+      "Laos",
+      "Nepal",
+      "Cambodia",
+      "Mongolia"
+    ],
+    "a": 2,
+    "e": "Conservation International's satellite analysis was used for wildfire alerts in Cambodia.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/environmental-groups-embrace-ai-even-they-warn-data-center-impacts-2026-11-07/"
+  },
+  {
+    "id": "current-affairs-20261107-cop31-host-country",
+    "q": "The country hosting the COP31 climate conference in 2026 is:",
+    "o": [
+      "Brazil",
+      "Türkiye",
+      "Azerbaijan",
+      "United Arab Emirates"
+    ],
+    "a": 1,
+    "e": "The 2026 COP31 conference is hosted by Türkiye.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/e5ae99093b025f6fdd44c425602b93d1"
   }
 ]

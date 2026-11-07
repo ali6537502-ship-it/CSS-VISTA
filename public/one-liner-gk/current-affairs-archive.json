@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 713,
+  "count": 716,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4990,6 +4990,27 @@
     {
       "id": "current-affairs-archive-2026-11-06-cop31-antalya",
       "text": "Antalya, Türkiye, is the scheduled host city of the 2026 COP31 climate summit.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-kyiv-dnipro-bridge",
+      "text": "Kyiv's Northern Bridge crosses the Dnipro River.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-cambodia-ai-wildfire",
+      "text": "Conservation International was cited for AI-assisted wildfire monitoring in Cambodia.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-cop31-turkiye",
+      "text": "Türkiye is hosting COP31 in 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
