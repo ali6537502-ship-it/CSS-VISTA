@@ -42,10 +42,17 @@ export function HomeFoodStudio({profile,recipes,onSave,onRemove,onPriceUpdate,pr
     const nutrition=estimateHomeRecipe(recipe)
     if(!nutrition){setError('Enter a recipe name, measurable ingredients, cooked batch weight and serving size. Check all quantities.');return}
     if(conflicts.length){setError('This recipe conflicts with selected restrictions: '+conflicts.join(', ')+'.');return}
-    if(recipes.length>=80){setError('The current version supports up to 80 saved household recipes.');return}
+    if(recipes.length>=80&&!recipes.some(r=>r.id===recipe.id)){setError('The current version supports up to 80 saved household recipes.');return}
     onSave(recipe)
     setMessage(recipe.name+' saved for your home-food choices. Nutrients are estimated, not laboratory measured.')
     setError('');setDraft(blank());setCost('')
+  }
+  function editRecipe(recipe:HomeRecipe){
+    setDraft({...recipe,ingredients:recipe.ingredients.map(i=>({...i}))})
+    setCost(recipe.batchCostPkr===undefined?'':String(recipe.batchCostPkr))
+    setError('')
+    setMessage('Editing '+recipe.name+'. Recheck cooked weight and ingredient quantities.')
+    document.getElementById('home-fitness-recipe-editor')?.scrollIntoView({behavior:'smooth',block:'start'})
   }
   return <section className="space-y-4">
     <div className="rounded-2xl border bg-white p-4 sm:p-5">
@@ -55,7 +62,7 @@ export function HomeFoodStudio({profile,recipes,onSave,onRemove,onPriceUpdate,pr
       <div className="mt-3 grid max-h-80 grid-cols-1 gap-2 overflow-y-auto sm:grid-cols-2">{results.map(dish=><button key={dish.id} type="button" className="flex min-h-11 items-center justify-between gap-2 rounded-xl border border-slate-200 px-3 py-2 text-left text-sm hover:bg-emerald-50" onClick={()=>{setDraft(v=>({...v,name:dish.name}));setError('');setMessage('Add the actual ingredients your household uses.')}}><span>{dish.name}<span className="block text-[11px] text-slate-500">{dish.group}</span></span><ChevronRight size={15} className="text-emerald-800"/></button>)}</div>
       <p className="mt-2 text-xs text-slate-500">Dish-name reference: <a className="underline text-emerald-900" href="https://pakistani.recipes/recipes/" target="_blank" rel="noopener noreferrer">Pakistani Recipes directory</a>. No copyrighted recipe instructions are reproduced.</p>
     </div>
-    <form onSubmit={saveRecipe} className="space-y-4 rounded-2xl border bg-white p-4 sm:p-5">
+    <form id="home-fitness-recipe-editor" onSubmit={saveRecipe} className="space-y-4 rounded-2xl border bg-white p-4 sm:p-5">
       <div className="flex items-center gap-2"><Calculator size={22} className="text-emerald-800"/><h3 className="font-bold">Calculate my home-cooked dish</h3></div>
       <label className="block text-sm font-semibold">Dish name<input required maxLength={120} className={inputClass+' mt-1'} placeholder="e.g. Our chicken karahi" value={draft.name} onChange={e=>setDraft({...draft,name:e.target.value})}/></label>
       <p className="text-xs text-slate-600">Record each ingredient you used. Reference quantities appear in the selector. Remember cooking oil, toppings and dairy.</p>
@@ -74,11 +81,11 @@ export function HomeFoodStudio({profile,recipes,onSave,onRemove,onPriceUpdate,pr
       {conflicts.length>0&&<p role="alert" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">Ingredient restriction conflict: {conflicts.join(', ')}. Check ingredients and cross-contact.</p>}
       {error&&<p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-800">{error}</p>}
       {message&&<p role="status" className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-900">{message}</p>}
-      <button type="submit" className="min-h-12 w-full rounded-xl bg-emerald-900 px-4 font-semibold text-white">Save my household recipe</button>
+      <button type="submit" className="min-h-12 w-full rounded-xl bg-emerald-900 px-4 font-semibold text-white">{recipes.some(r=>r.id===draft.id)?'Save recipe changes':'Save my household recipe'}</button>
       <p className="text-xs leading-5 text-slate-500">Estimates depend on accurate ingredient reference portions and cooked yield. Water, absorbed oil, discarded cooking liquid, raw versus cooked weights and missing ingredients change nutrition. Do not use this as a clinical nutrition assessment.</p>
     </form>
     {recipes.length>0&&<div className="rounded-2xl border bg-white p-4"><h3 className="font-bold">My saved household recipes ({recipes.length})</h3>
-      <div className="mt-3 space-y-2">{recipes.map(recipe=>{const e=estimateHomeRecipe(recipe);return <div className="flex items-center justify-between gap-2 rounded-xl border p-3" key={recipe.id}><div><p className="text-sm font-semibold">{recipe.name}</p><p className="text-xs text-slate-500">{e?e.caloriesPerServing+' kcal, '+e.proteinPerServing+' g protein · '+recipe.servingGrams+' g serving':'Needs recipe review'}</p></div><button type="button" aria-label={'Delete '+recipe.name} onClick={()=>onRemove(recipe.id)} className="min-h-11 min-w-11 rounded-lg border text-red-700"><Trash2 size={16} className="mx-auto"/></button></div>})}</div>
+      <div className="mt-3 space-y-2">{recipes.map(recipe=>{const e=estimateHomeRecipe(recipe);return <div className="flex items-center justify-between gap-2 rounded-xl border p-3" key={recipe.id}><div><p className="text-sm font-semibold">{recipe.name}</p><p className="text-xs text-slate-500">{e?e.caloriesPerServing+' kcal, '+e.proteinPerServing+' g protein · '+recipe.servingGrams+' g serving':'Needs recipe review'}</p></div><button type="button" aria-label={'Edit '+recipe.name} onClick={()=>editRecipe(recipe)} className="min-h-11 rounded-lg border px-3 text-xs font-semibold text-emerald-800">Edit</button><button type="button" aria-label={'Delete '+recipe.name} onClick={()=>{if(window.confirm('Delete this saved recipe?'))onRemove(recipe.id)}} className="min-h-11 min-w-11 rounded-lg border text-red-700"><Trash2 size={16} className="mx-auto"/></button></div>})}</div>
     </div>}
     <details className="rounded-2xl border bg-white p-4"><summary className="cursor-pointer font-bold">Enter my local food prices</summary>
       <p className="mt-2 text-sm text-slate-600">Enter only prices you know, for the stated reference portion. Costs vary by household and season.</p>

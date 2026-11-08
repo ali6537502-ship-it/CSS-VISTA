@@ -161,6 +161,10 @@ ErrorDocument 404 /404.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule \.(?:js|mjs|css|json|map|woff2?|ttf|png|jpe?g|gif|svg|webp|ico)$ - [R=404,L,NC]
 
+  # The Punjab tree campaign is an interactive SPA route, not a crawler page.
+  # Pin the route explicitly in production so Hostinger does not return a real 404.
+  RewriteRule ^100-million-trees/?$ seo/routes/100-million-trees.html [L,NC]
+
   # CSSV_GENERATED_ROUTE_RULES_START
   # Exact application routes are inserted here by the production build.
   # CSSV_GENERATED_ROUTE_RULES_END

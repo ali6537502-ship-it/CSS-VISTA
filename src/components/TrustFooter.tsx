@@ -15,6 +15,8 @@ export default function TrustFooter() {
     || location.pathname.startsWith('/mpt/bank/')
     || location.pathname.startsWith('/notes/view/')
 
+  if (location.pathname === '/100-million-trees') return null
+
   if (isAdmin) return <style>{`.cssv-site-footer{display:none!important}`}</style>
 
   if (isFocusedStudy) {

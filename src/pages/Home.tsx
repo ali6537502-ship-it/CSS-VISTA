@@ -399,6 +399,25 @@ export default function Home() {
           <HomeHero />
         </div>
 
+        <Link to="/100-million-trees" className="group relative isolate mt-4 block overflow-hidden rounded-[26px] border border-[#96c69b]/40 bg-[#092f23] text-white shadow-[0_18px_48px_rgba(5,47,29,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_25px_55px_rgba(5,47,29,0.24)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-emerald-500" aria-label="Explore the Esar ul Ebad Welfare Foundation and CSS Vista 100 Million Trees for Punjab campaign">
+          <img src="https://images.unsplash.com/photo-1568309507341-b4cfba3caf92?auto=format&fit=crop&w=1400&q=78" width="1400" height="700" loading="lazy" decoding="async" alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-70 transition-transform duration-700 group-hover:scale-[1.035]"/>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#06291f] via-[#073a2b]/95 to-[#06291e]/55" aria-hidden="true"/>
+          <div className="pointer-events-none absolute -right-8 -top-16 h-52 w-52 rounded-full border border-emerald-100/20 sm:h-72 sm:w-72" aria-hidden="true"/>
+          <div className="relative flex min-h-[178px] flex-col justify-between gap-4 p-5 sm:min-h-[194px] sm:flex-row sm:items-center sm:gap-8 sm:p-7">
+            <div className="min-w-0 flex-1">
+              <div className="mb-3 flex w-fit max-w-full items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-2.5 py-1.5 shadow-sm backdrop-blur-md sm:gap-3 sm:px-3">
+                <img src="/images/esar-ul-ebad-logo.webp" width="43" height="43" loading="lazy" alt="Original Esar ul Ebad Welfare Foundation logo" className="h-9 w-9 shrink-0 rounded-full bg-white object-contain p-0.5 sm:h-11 sm:w-11"/>
+                <span className="text-lg font-light text-[#daf6bc]" aria-hidden="true">×</span>
+                <span className="flex h-10 items-center rounded-lg bg-white px-2 sm:h-11 sm:px-3"><img src="/images/logo.webp" width="130" height="44" loading="lazy" alt="Original CSS Vista logo" className="h-8 w-[100px] object-contain sm:h-9 sm:w-[130px]"/></span>
+              </div>
+              <span className="block text-[9px] font-extrabold uppercase tracking-[.13em] text-[#d9f3bd] sm:text-[10px]">ESAR UL EBAD WELFARE FOUNDATION × CSS VISTA</span>
+              <h2 className="mt-1.5 max-w-[690px] font-[Georgia,serif] text-[26px] font-semibold leading-[1.12] tracking-tight sm:text-[35px]">100 Million Trees for Punjab</h2>
+              <p className="mt-2 max-w-xl text-[11px] leading-relaxed text-[#e5f5e3] sm:text-[13px]">Plant a sapling. Share its story. Track approved community contributions towards a greener Punjab.</p>
+            </div>
+            <span className="inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-[#d9f4b6] px-4 py-3 text-[12px] font-extrabold text-[#16492f] shadow-[0_10px_28px_rgba(0,0,0,0.2)] transition-transform group-hover:translate-x-1 sm:mt-12">Explore the campaign <ArrowRight className="h-4 w-4"/></span>
+          </div>
+        </Link>
+
         <MptMockStrip className="mt-3" />
 
         <DailyWidget />

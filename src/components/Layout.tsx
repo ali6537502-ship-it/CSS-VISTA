@@ -40,6 +40,7 @@ import {
 
 const nav = [
   { label: 'Home', to: '/' },
+  { label: '100 Million Trees for Punjab', to: '/100-million-trees' },
   { label: 'GK World', to: '/gk' },
   { label: 'Past Papers', to: '/past-papers' },
   { label: 'Books by Sir Ali', to: '/books' },
@@ -990,6 +991,9 @@ export default function Layout() {
       <div id="account-entry" tabIndex={-1} className="flex-1 pb-[env(safe-area-inset-bottom)]"><div className="cssv-route-stage"><Outlet /></div></div>
     </div>
   }
+
+  // The joint tree initiative has its own complete two-partner navigation and footer.
+  if (location.pathname === '/100-million-trees') return <><RouteSeo /><ProReleaseOutlet /></>
 
   return (
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">

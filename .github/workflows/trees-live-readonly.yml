@@ -1,0 +1,68 @@
+name: Punjab Trees production read-only health checks
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/api/trees/**'
+      - 'src/pages/PunjabTrees.tsx'
+      - 'src/pages/punjabTrees.css'
+      - 'src/App.tsx'
+      - '.github/workflows/trees-live-readonly.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  campaign-live-readonly:
+    name: Verify production tree portal without creating personal records
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check live application after Hostinger deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://www.css-vista.com/api/trees/index.php?action=summary'
+          body="$(mktemp)"
+          headers="$(mktemp)"
+          ready=0
+          for i in $(seq 1 30); do
+            response=$(curl --silent --show-error --location --max-time 20 --output "$body" --dump-header "$headers" --write-out '%{http_code}' "$endpoint" || true)
+            if test "$response" = '200' && grep -q '"target":100000000' "$body" && grep -Eqi 'content-type: *application/json' "$headers"; then
+              ready=1
+              break
+            fi
+            echo "Attempt $i: campaign API not yet deployed; HTTP ${response:-unavailable}."
+            sleep 12
+          done
+          if test "$ready" != 1; then
+            echo 'Production campaign backend is unavailable or is not serving JSON.'
+            head -c 250 "$body" | tr '\n' ' '
+            exit 1
+          fi
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const input=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));
+            if(input.target!==100000000 || !Number.isSafeInteger(input.trees) || !Number.isSafeInteger(input.seeds) || !Array.isArray(input.public_gallery) || !Array.isArray(input.leaderboard)) process.exit(1);
+            console.log("Live campaign summary:",{trees:input.trees,seeds:input.seeds,contributors:input.contributors});
+          ' "$body"
+          code=$(curl --silent --show-error --location --max-time 20 --output "$body" --write-out '%{http_code}' 'https://www.css-vista.com/api/trees/index.php?action=queue')
+          if test "$code" != 401 && test "$code" != 403; then
+            echo "Unexpected unauthenticated moderation access status: $code"
+            exit 1
+          fi
+          page_body="$(mktemp)"
+          if ! curl --silent --show-error --fail --location --max-time 20 --output "$page_body" 'https://www.css-vista.com/100-million-trees'; then
+            echo 'Campaign application route is not accessible.'
+            exit 1
+          fi
+          if ! grep -Eqi 'index|root|<html' "$page_body"; then
+            echo 'Campaign application response did not contain the expected application markup.'
+            exit 1
+          fi
+          if ! curl --silent --show-error --fail --location --max-time 20 --output /dev/null 'https://www.css-vista.com/images/esar-ul-ebad-logo.webp'; then
+            echo 'Foundation emblem is missing in production.'
+            exit 1
+          fi
+          echo 'PASS: Live campaign route, partner asset, JSON summary, and private moderation controls.'

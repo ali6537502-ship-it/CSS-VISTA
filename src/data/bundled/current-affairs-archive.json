@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 699,
+  "count": 710,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4892,6 +4892,83 @@
     {
       "id": "current-affairs-archive-2026-11-02-pakistan-bangladesh-industrial-talks",
       "text": "On 2 November 2026, Pakistan and Bangladesh discussed possible battery and electric-vehicle manufacturing cooperation, with Pakistan citing its New Energy Vehicle Policy.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-03-pakistan-lpg-price-surge",
+      "text": "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-03-germany-backup-power-awards",
+      "text": "Germany's November 2026 backup-power tender awarded approximately 5.16 GW of capacity.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-04-unep-adaptation-gap-2026",
+      "text": "UNEP's 2026 Adaptation Gap Report estimates annual developing-country adaptation needs of approximately US$305 billion by 2035.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-04-us-treasury-iran-maritime-sanctions",
+      "text": "On 4 November 2026 the US Treasury cited Executive Order 13902 for sanctions against an alleged Iranian-oil false-flag maritime network.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-eib-energy-survey",
+      "text": "The European Investment Bank's eighth Climate Survey (5 November 2026) covered approximately 23,000 people across 27 EU member states.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-france-g7-venue",
+      "text": "France relocated the 9–10 November 2026 G7 foreign ministers' meeting from Marseille to Paris.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-west-peron-carbon-storage",
+      "text": "Australia designated the West Peron seabed near Darwin for a proposed Inpex carbon storage project in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-france-national-strikes",
+      "text": "French unions planned approximately 260 rallies during the nationwide 5 November 2026 strikes.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-05-ap-midterm-voter-poll",
+      "text": "The Associated Press's 2026 US midterm Voter Poll surveyed approximately 100,000 voters.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-reko-diq-us-financing",
+      "text": "Reuters reported on 6 November 2026 that US financing for Pakistan's Reko Diq mining project had been approved.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-china-clean-tech-commercial-flows",
+      "text": "Reuters estimated about $132 billion in Chinese clean-technology exports and overseas investment in the preceding year, a commercial measure not directly comparable to official climate finance.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-07",
+  "published_at": "2026-11-07T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 7 November 2026 | Retrospective edition (00:00–23:59 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-07-ukraine-russia-energy-infrastructure-strikes",
+      "category": "World — Conflict and Energy Security",
+      "headline": "Russian strikes damage Ukraine's power infrastructure and Kyiv bridge",
+      "summary": "Reuters reported on 7 November 2026 that Russian missile and drone strikes damaged electricity infrastructure across Ukraine, disrupting power and heating, while Kyiv's Northern Bridge was also damaged.",
+      "what_happened": "Ukraine reported a large overnight missile-and-drone assault. Reuters said energy transmission systems linked to two nuclear plants were seriously damaged, and substations in five other regions were hit. Ukrainian officials reported at least two deaths. Russia said it targeted military-industrial, energy and transport infrastructure.",
+      "background": "Attacks on electricity transmission infrastructure can interrupt civilian services and complicate nuclear plant grid operations even when reactors are not directly struck.",
+      "why_it_matters": "The attacks underline the humanitarian and energy-security dimensions of the Russia–Ukraine war ahead of proposed diplomatic talks.",
+      "pakistan_perspective": "The case illustrates why power-grid resilience and protection of critical infrastructure matter for national security.",
+      "key_takeaways": [
+        "Ukraine reported damage to transmission systems linked to two nuclear power plants.",
+        "The Northern Bridge over the Dnipro in Kyiv was damaged."
+      ],
+      "quick_gk": [
+        "Kyiv's Northern Bridge crosses the Dnipro River."
+      ],
+      "question_angles": [
+        "Which river does Kyiv's Northern Bridge cross?"
+      ],
+      "topics": [
+        "Russia–Ukraine war",
+        "critical infrastructure",
+        "energy security"
+      ],
+      "countries": [
+        "Ukraine",
+        "Russia"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Russia pounds power facilities around Kyiv, damages major bridge",
+          "url": "https://www.reuters.com/world/russian-forces-launch-missile-attack-ukrainian-capital-kyiv-mayor-says-2026-11-07/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-07-ai-conservation-data-centre-environment",
+      "category": "World — Science, Technology and Environment",
+      "headline": "Environmental organisations weigh AI conservation gains against data-centre costs",
+      "summary": "A Reuters report dated 7 November examined how conservation groups are deploying artificial intelligence for wildlife and forest protection while raising concerns about the energy and water demands of data centres.",
+      "what_happened": "Reuters interviewed 15 environmental organisations. It reported AI-supported satellite wildfire monitoring in Cambodia, faster analysis of wildlife surveys and digitisation of long-running chimpanzee research. Groups also highlighted data-centre electricity, water and emissions costs.",
+      "background": "Machine-learning systems can process large remote-sensing and ecological datasets, but computing infrastructure has environmental impacts that must be accounted for.",
+      "why_it_matters": "Environmental policy increasingly requires assessment of both AI's practical conservation benefits and the resources needed to operate it.",
+      "pakistan_perspective": "Pakistan can evaluate remote-sensing tools for forest monitoring and flood preparedness alongside their costs and data-governance requirements.",
+      "key_takeaways": [
+        "Reuters interviewed 15 environmental groups about AI use and environmental costs.",
+        "Conservation International uses satellite analysis for wildfire risk alerts in Cambodia."
+      ],
+      "quick_gk": [
+        "Conservation International was cited for AI-assisted wildfire monitoring in Cambodia."
+      ],
+      "question_angles": [
+        "Which country was cited in Reuters' example of Conservation International's AI-supported wildfire alerts?"
+      ],
+      "topics": [
+        "artificial intelligence",
+        "conservation",
+        "data centres",
+        "environmental governance"
+      ],
+      "countries": [
+        "Cambodia"
+      ],
+      "organisations": [
+        "Conservation International"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Environmental groups embrace AI, even as they warn of data center impacts",
+          "url": "https://www.reuters.com/sustainability/cop/environmental-groups-embrace-ai-even-they-warn-data-center-impacts-2026-11-07/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-07-cop31-un-climate-warning",
+      "category": "World — Climate Diplomacy",
+      "headline": "UN secretary-general urges stronger climate action ahead of COP31 in Türkiye",
+      "summary": "In an Associated Press interview published 7 November, UN Secretary-General António Guterres warned that delayed emissions cuts were increasing climate risks ahead of COP31 in Türkiye.",
+      "what_happened": "Guterres called for faster reductions in greenhouse-gas emissions and argued that climate impacts were intensifying. He highlighted growth in wind and solar power but warned that current political responses were inadequate. COP31 was scheduled to open on 9 November, not 7 November.",
+      "background": "The annual UN climate Conference of the Parties reviews implementation of the UN climate convention and the Paris Agreement, including mitigation, adaptation and climate finance.",
+      "why_it_matters": "The remarks frame the diplomatic stakes of COP31 and the gap between climate commitments and implementation.",
+      "pakistan_perspective": "Pakistan's exposure to floods and heat makes adaptation finance and loss-and-damage arrangements central to its climate diplomacy.",
+      "key_takeaways": [
+        "COP31 is being held in Türkiye in 2026.",
+        "António Guterres called for faster emissions reductions in an interview published 7 November."
+      ],
+      "quick_gk": [
+        "Türkiye is hosting COP31 in 2026."
+      ],
+      "question_angles": [
+        "Which country hosts COP31 in 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "UN climate negotiations",
+        "Paris Agreement"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "institutions": [
+        "United Nations"
+      ],
+      "people": [
+        "António Guterres"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "AP Exclusive: Departing UN chief calls this 'a moment of truth' in fight to curb global warming",
+          "url": "https://apnews.com/article/e5ae99093b025f6fdd44c425602b93d1"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-07-pakistan-petrol-price-effective",
+      "category": "Pakistan — Economy and Energy",
+      "headline": "Revised Pakistan petrol and diesel prices take effect on 7 November",
+      "summary": "Prices announced on 6 November took effect on 7 November: petrol Rs346 and high-speed diesel Rs378 per litre.",
+      "what_happened": "Dawn reported a Rs6.59-per-litre reduction in petrol and Rs4.25 in diesel, with rates effective 7–10 November. The announcement was made on 6 November, not 7 November.",
+      "background": "Petroleum prices influence transport costs and inflation expectations in Pakistan's import-dependent economy.",
+      "why_it_matters": "The revised rates matter to households and transport operators, but do not by themselves establish lower overall inflation.",
+      "pakistan_perspective": "Pricing revisions highlight Pakistan's exposure to global oil markets.",
+      "key_takeaways": [
+        "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre."
+      ],
+      "facts": [
+        "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre."
+      ],
+      "quick_gk": [
+        "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre."
+      ],
+      "question_angles": [
+        "What was Pakistan's petrol price effective 7 November 2026?"
+      ],
+      "topics": [
+        "petroleum prices",
+        "energy security"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Petrol price down by Rs6.59 per litre, high-speed diesel by Rs4.25 in fifth straight reduction",
+          "url": "https://www.dawn.com/news/2042635/petrol-price-down-by-rs659-per-litre-high-speed-diesel-by-rs425-in-fifth-straight-reduction"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-07-turkiye-seymen-methane",
+      "category": "World — Climate and Environment",
+      "headline": "Satellite findings reveal major methane plumes at Turkish landfill",
+      "summary": "Reuters reported 7 November that satellite observations detected substantial methane emissions at the Seymen landfill near Istanbul.",
+      "what_happened": "Researchers using Carbon Mapper satellite observations reported an average of roughly 7.4 metric tonnes of methane per hour during observations at Seymen. The environment ministry and landfill operator disputed treating intermittent measurements as representative of annual emissions.",
+      "background": "Decomposing organic waste produces methane; gas capture can reduce emissions but leaks remain possible.",
+      "why_it_matters": "Satellite monitoring can identify emissions hotspots, but observed plumes must not be confused with annual inventories.",
+      "pakistan_perspective": "Pakistan's landfill operators could use similar monitoring and gas-capture approaches.",
+      "key_takeaways": [
+        "The Seymen landfill highlighted in Reuters' November 2026 methane investigation is near Istanbul."
+      ],
+      "facts": [
+        "The Seymen landfill highlighted in Reuters' November 2026 methane investigation is near Istanbul."
+      ],
+      "quick_gk": [
+        "The Seymen landfill highlighted in Reuters' November 2026 methane investigation is near Istanbul."
+      ],
+      "question_angles": [
+        "Which city is near the Seymen landfill discussed in Reuters' investigation?"
+      ],
+      "topics": [
+        "methane",
+        "waste management",
+        "COP31"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "As COP31 comes to Turkey, satellites reveal a landfill methane problem",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-comes-turkey-satellites-reveal-landfill-methane-problem-2026-11-07/"
+        }
+      ]
+    }
+  ]
+}

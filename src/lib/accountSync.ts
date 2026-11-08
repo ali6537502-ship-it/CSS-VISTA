@@ -118,6 +118,41 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
   return merged
 }
 
+const FITNESS_PROGRESS_KEY = 'cssvista:tool:fitness-coach:v1'
+/** Preserve different-device weigh-ins and workouts while using the latest explicit
+ * profile/recipe/food edit. A mismatched account owner is never mixed into the
+ * currently loaded private fitness progress. */
+function mergeFitnessProgress(cloud:unknown,local:unknown):unknown {
+  const owner=preparationOwner()
+  // The active account is the only permissible owner of a private fitness record.
+  const safe=(item:unknown):item is Record<string,unknown>=>isRecord(item)&&typeof item.ownerId==='string'&&item.ownerId===owner
+  if(!safe(cloud))return safe(local)?local:undefined
+  if(!safe(local))return cloud
+  const cloudStamp=Date.parse(String(cloud.updatedAt||''))||0
+  const localStamp=Date.parse(String(local.updatedAt||''))||0
+  const newer=localStamp>=cloudStamp?local:cloud
+  const older=localStamp>=cloudStamp?cloud:local
+  const byDate=new Map<string,unknown>()
+  for(const entry of [older.weights,newer.weights]){
+    if(!Array.isArray(entry))continue
+    for(const weight of entry){if(isRecord(weight)&&typeof weight.date==='string')byDate.set(weight.date,weight)}
+  }
+  const workouts={...(isRecord(older.workouts)?older.workouts:{}),...(isRecord(newer.workouts)?newer.workouts:{})}
+  // Completion timestamps are ISO strings; choose the later completion when both exist.
+  if(isRecord(older.workouts)&&isRecord(newer.workouts))for(const date of Object.keys(workouts)){
+    const a=older.workouts[date],b=newer.workouts[date]
+    if(typeof a==='string'&&typeof b==='string')workouts[date]=Date.parse(a)>Date.parse(b)?a:b
+  }
+  return {...newer,
+    weights:[...byDate.values()].sort((a,b)=>String((a as Record<string,unknown>).date).localeCompare(String((b as Record<string,unknown>).date))),
+    workouts,
+    // Food changes and completed-meal toggles must not be resurrected from an older device.
+    meals:{...(isRecord(older.meals)?older.meals:{}),...(isRecord(newer.meals)?newer.meals:{})},
+    dailyAvailability:{...(isRecord(older.dailyAvailability)?older.dailyAvailability:{}),...(isRecord(newer.dailyAvailability)?newer.dailyAvailability:{})},
+    mealOffsets:{...(isRecord(older.mealOffsets)?older.mealOffsets:{}),...(isRecord(newer.mealOffsets)?newer.mealOffsets:{})},
+  }
+}
+
 export function mergeProgressSnapshots(
   cloud: ProgressSnapshot,
   local: ProgressSnapshot,
@@ -125,6 +160,11 @@ export function mergeProgressSnapshots(
   const merged = mergeValues(cloud, local) as ProgressSnapshot
   if (GSA_PROGRESS_KEY in cloud || GSA_PROGRESS_KEY in local) {
     merged[GSA_PROGRESS_KEY] = mergeGsaProgress(cloud[GSA_PROGRESS_KEY], local[GSA_PROGRESS_KEY])
+  }
+  if (FITNESS_PROGRESS_KEY in cloud || FITNESS_PROGRESS_KEY in local) {
+    const safeFitness=mergeFitnessProgress(cloud[FITNESS_PROGRESS_KEY],local[FITNESS_PROGRESS_KEY])
+    if(safeFitness!==undefined)merged[FITNESS_PROGRESS_KEY]=safeFitness
+    else delete merged[FITNESS_PROGRESS_KEY]
   }
   return merged
 }
