@@ -149,7 +149,7 @@ for (const path of routes) {
       && !/Use .* as the main entry point/.test(body)
       && !body.includes('What you can do here')
       && !body.includes('__SITE_ORIGIN__')
-      && (path !== '/subjects/compulsory/current-affairs' || (body.includes('CSS Vista Pro is temporarily unavailable') && !body.includes('Topic-wise syllabus breakdown')))
+      && (path !== '/subjects/compulsory/current-affairs' || (body.includes('Topic-wise syllabus breakdown') && !body.includes('CSS Vista Pro is temporarily unavailable')))
     result(
       valid,
       `initial HTML ${path}`,

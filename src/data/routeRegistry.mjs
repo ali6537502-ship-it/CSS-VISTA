@@ -105,9 +105,8 @@ export const ROUTE_REGISTRY = [
   publicPage('/subjects/compulsory/essay', 'CSS English Essay', 'Study the CSS English Essay syllabus, preparation approach and relevant learning resources.', 'CSS English Essay', { contentQuality: 'substantial', adMode: 'enabled' }),
   protectedPage('/subjects/compulsory/precis-composition', 'CSS Vista Preci Mentor', 'Free handbook-based Précis learning with writing practice.'),
   publicPage('/subjects/compulsory/general-science-ability', 'CSS General Science and Ability', 'Study the CSS General Science and Ability syllabus, topics and preparation resources.', 'CSS General Science and Ability', { contentQuality: 'substantial', adMode: 'enabled' }),
-  // Live Chromium audit 2026-10-31: SelectedStudyGate shows the paused Pro notice.
-  // Preserve that restriction; do not advertise or index the unavailable guide.
-  publicPage('/subjects/compulsory/current-affairs', 'CSS Current Affairs — Temporarily Unavailable', 'This Current Affairs preparation view is temporarily unavailable while CSS Vista Pro remains paused. Saved work and account records are retained.', 'CSS Vista Pro is temporarily unavailable', { contentQuality: 'incomplete', indexable: false, sitemap: false, adMode: 'disabled' }),
+  // Free subject guide; retain the existing search and advertising exclusions.
+  publicPage('/subjects/compulsory/current-affairs', 'CSS Current Affairs', 'Study the CSS Current Affairs syllabus, paper structure and preparation resources for free.', 'Current Affairs', { contentQuality: 'substantial', indexable: false, sitemap: false, adMode: 'disabled' }),
   publicPage('/subjects/compulsory/pakistan-affairs', 'CSS Pakistan Affairs', 'Study the CSS Pakistan Affairs syllabus, historical themes and contemporary issues.', 'CSS Pakistan Affairs', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/subjects/compulsory/islamic-studies', 'CSS Islamic Studies', 'Study the CSS Islamic Studies syllabus, core themes and preparation resources.', 'CSS Islamic Studies', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/subjects/optional', 'CSS Optional Subjects', 'Browse CSS optional subjects and subject-selection information organised by FPSC groups.', 'CSS optional subjects', { contentQuality: 'substantial', adMode: 'enabled' }),
@@ -203,12 +202,12 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/ask-vista', 'Ask VISTA', 'Private source-bound conceptual help and owned learning conversations.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/answer-performance', 'My Answer Performance', 'Private student-entered human mentor marks, writing history and revision evidence.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/preparation', 'My Preparation', 'Your account-owned preparation attempts and saved writing.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/ai-usage', 'AI Usage', 'Your private usage and operation history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/membership', 'Membership & Payments', 'Your CSS Vista membership and private payment history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/ai-usage', 'My Progress', 'Continue to your learning progress.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/membership', 'Account Settings', 'Continue to your free account settings.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/argumentation', 'Argumentation Skills Builder', 'Your private guided claim, reasoning, evidence and revision workspace.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/analytical-skills', 'Analytical Skills Builder', 'Private guided mechanisms, alternatives, evidence and conclusions.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/essay-builder', 'Essay Themes Builder', 'Private theme-bound brainstorming, thesis, arguments, outline and independent writing.', { robots: 'noindex, nofollow' }),
-  protectedPage('/account/general-ability', 'General Ability — Pro', 'Guided maths lessons, worked examples, exercises and topic quizzes for CSS Vista Pro members.', { h1: 'General Ability', robots: 'noindex, nofollow' }),
+  protectedPage('/account/general-ability', 'Practice', 'Continue to free subject practice.', { h1: 'Practice', robots: 'noindex, nofollow' }),
   protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { robots: 'noindex, nofollow' }),
