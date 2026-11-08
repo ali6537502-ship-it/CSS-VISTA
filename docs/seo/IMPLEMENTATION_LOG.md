@@ -1,5 +1,9 @@
 # Implementation log
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
 The continuation adds `tests/browser/runtime-routing.mjs` and `isolated-network.mjs`, repairs `runtime.mjs`, applies isolation to skills/ability/pro-pause fixtures, and runs the HTTPS routing regression in the existing membership workflow. `PastPapers.tsx` omits redundant route defaults from synchronized query filters; `seo-readiness.mjs` tests two archive families plus actual filtering. Current account evidence and scoped JSON/CSV inventory updates preserve all historical fields. [Full evidence and limitations](ACCOUNT_RECOVERY_2026-10-17.md). The 274-file table below is the earlier handoff inventory, not the final continuation count.

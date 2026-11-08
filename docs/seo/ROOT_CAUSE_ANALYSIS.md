@@ -1,5 +1,9 @@
 # CSS VISTA root cause investigation
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
 Google's 17 October live test established a public archive rendered-noindex blocker that raw-HTML samples missed: redundant pathname defaults become query filters after React mounts. The old indexed snapshot is distinct. The account also confirms Low-value content; this does not prove that this technical defect caused the AdSense decision. See [dated diagnosis and limitations](ACCOUNT_RECOVERY_2026-10-17.md).

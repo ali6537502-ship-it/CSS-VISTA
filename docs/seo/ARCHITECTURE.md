@@ -1,5 +1,9 @@
 # Production architecture and build provenance
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
 The architecture remains React/Vite, the existing prerender generators, Apache resolution and native PHP. The authenticated browser harness now resolves generated documents with the existing `.htaccess` resolver rather than a homepage fallback. Archive filter synchronization must not convert pathname defaults into a noindex query. Later scoped SEO authorization in AGENTS.md controls this release; older blanket-hold prose below does not cancel it.

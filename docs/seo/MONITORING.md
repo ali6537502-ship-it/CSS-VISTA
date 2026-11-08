@@ -1,8 +1,12 @@
 # Release and monitoring runbook
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
-Use the [17 October account baseline](evidence/google-current-account-evidence-2026-10-17.json) for future comparisons. Start 7/14/28-day release windows only after the exact merged SHA is verified live. A 17 October release would yield 24 October, 31 October and 14 November; these dates are conditional until deployment. The existing Friday public workflow is weekly sampling, not a substitute for those account checkpoints or evidence that scheduled account checks were created.
+Use the [17 October account baseline](evidence/google-current-account-evidence-2026-10-17.json) for future comparisons. Start 7/14/28-day release windows only after the exact merged SHA is verified live. The release is verified and tasks were created for 24 October, 31 October and 14 November, around 12:57 PKT. These tasks check public/GitHub technical health and remind the owner to compare authenticated Google reports; they do not fetch authenticated Google data automatically. The existing Friday public workflow is weekly sampling, not a substitute for those account checkpoints or evidence that scheduled account checks were created.
 
 The scoped SEO release is owner-authorized; actual deployment evidence and time are recorded in [verification](VERIFICATION.md). Monitoring intervals are relative to that verified release. No Google submission or indexing/approval outcome is implied by a passing public monitor.
 
