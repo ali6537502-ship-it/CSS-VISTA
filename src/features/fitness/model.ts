@@ -11,7 +11,7 @@ export type Activity = 'sitting' | 'light' | 'moderate' | 'active'
 export type Food = { id:string; label:string; portion:string; kcal:number; protein:number; group:string; source?:string; sourceUrl?:string; historicalRecipe?:boolean; customRecipe?:boolean; includesStarch?:boolean; costPkr?:number }
 export type FitnessProfile = {
   sex:Sex; age:number; height:number; weight:number; target:number; weeks:number;
-  goal:Goal; activity:Activity; minutes:number; available:string[]; budgetPkr?:number; focusArea?:'full-body'|'chest-shoulders'|'legs'|'core';
+  goal:Goal; activity:Activity; minutes:number; available:string[]; budgetPkr?:number; focusArea?:'full-body'|'chest-shoulders'|'legs'|'core'; fitnessLevel?:'beginner'|'regular';
   avoids:string[]; foodNotes:string; conditionReview:boolean; startDate:string
 }
 export type FitnessRecord = {
@@ -21,7 +21,8 @@ export type FitnessRecord = {
   /** Each day can override typical home availability without changing the baseline. */
   dailyAvailability?:Record<string,Record<string,boolean>>;
   homeRecipes?:Array<{id:string;name:string;ingredients:Array<{foodId:string;portions:number}>;cookedYieldGrams:number;servingGrams:number;batchCostPkr?:number;createdAt:string;foodCategory?:string}>;
-  foodPrices?:Record<string,number>
+  foodPrices?:Record<string,number>;
+  mealOffsets?:Record<string,Record<string,number>>
 }
 export const FOOD_REFERENCE = 'Ingredient entries are approximate USDA FoodData Central reference servings. Traditional prepared dishes use Pakistan’s 2001 food composition table per 100 g of a documented recipe. They are not universal restaurant or home-cooking values; oil, ingredients, serving mass and preparation change nutrition.'
 export const FOODS:Food[] = [
@@ -125,7 +126,7 @@ const mealRules = [
   {id:'snack',name:'Snack',groups:[[['yogurt',2],['milk',1],['chana',1]], [['banana',1],['apple',1],['orange',1],['guava',1],['dates',1]], [['peanuts',1],['almonds',1]]]},
   {id:'dinner',name:'Dinner',groups:[[['daal',2],['chana',2],['chicken',1.5],['fish',1.5],['beef',1.2],['eggs',2],['lobia',2],['paneer',.8]], [['roti',2],['rice',2],['naan',1],['potato',2]], [['vegetables',1.5],['spinach',1.5],['cucumber',1]], [['oil',1]]]},
 ] as const
-export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boolean>={},dayIndex=0,homeFoods:Food[]=[]){
+export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boolean>={},dayIndex=0,homeFoods:Food[]=[],mealOffsets:Record<string,number>={}){
   const eligible=new Map([...availableFoods(profile,dayOverrides),...homeFoods.filter(food=>(dayOverrides[food.id]??profile.available.includes(food.id)))].map(food=>[food.id,food]))
   const prepared=[...eligible.values()].filter(food=>food.group==='Cooked dishes')
   const mainDishIds=['pk-pulao','pk-biryani','pk-haleem']
@@ -138,8 +139,9 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
   const portionFactor=plannedEnergy && initialCalorieEstimate>0?Math.max(.65,Math.min(1.3,plannedEnergy/initialCalorieEstimate)):1
   const meals:PlannedMeal[]=mealRules.map(rule=>{
     const items:PlannedEntry[]=[]
+    const offset=Math.max(0,Math.min(50,Math.trunc(mealOffsets[rule.id]||0)))
     const preparedDish=(rule.id==='lunch'||rule.id==='dinner')&&prepared.length
-      ? prepared[(Math.abs(dayIndex)+(rule.id==='dinner'?1:0))%prepared.length] : null
+      ? prepared[(Math.abs(dayIndex)+offset+(rule.id==='dinner'?1:0))%prepared.length] : null
     if(preparedDish){
       const quantity=preparedDish.customRecipe?1:2.5
       items.push({food:preparedDish,amount:quantity,kcal:Math.round(preparedDish.kcal*quantity),protein:Math.round(preparedDish.protein*quantity*10)/10})
@@ -152,7 +154,7 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
       if(veg)items.push({food:veg,amount:1,kcal:veg.kcal,protein:veg.protein})
     }else for(const options of rule.groups){
       const choices=options.filter(([id])=>eligible.has(id))
-    const matched=choices.length?choices[Math.abs(dayIndex)%choices.length]:undefined
+      const matched=choices.length?choices[(Math.abs(dayIndex)+offset)%choices.length]:undefined
       if(matched){
         const food=eligible.get(matched[0])!
         const rawAmount=matched[1]*portionFactor
@@ -168,51 +170,62 @@ export function buildMeals(profile:FitnessProfile,dayOverrides:Record<string,boo
     sourceWarning:meals.some(meal=>meal.items.some(item=>item.food.historicalRecipe))}
   
 }
-export type Exercise={id:string;name:string;instruction:string;kind:'stand'|'squat'|'push'|'floor'|'lunge';seconds:number;techniqueUrl?:string}
-const routines:Record<string,Exercise[]> = {
-  A:[
-    {id:'march',name:'March in place',instruction:'Move at a comfortable pace and breathe normally.',kind:'stand',seconds:45},
-    {id:'squat',name:'Chair-supported squats',instruction:'Sit back toward a stable chair. Keep your feet planted and move through a comfortable range.',kind:'squat',seconds:40},
-    {id:'wallpush',name:'Wall push-ups',instruction:'Keep your body in a straight line; bend your elbows toward the wall, then push away.',kind:'push',seconds:40},
-    {id:'bridge',name:'Glute bridges',instruction:'Lie on your back with knees bent. Raise hips gently, without arching the lower back.',kind:'floor',seconds:40},
-    {id:'bird',name:'Bird dog',instruction:'From hands and knees, extend opposite arm and leg with control, then switch.',kind:'floor',seconds:40},
-  ],
-  B:[
-    {id:'walk',name:'March in place',instruction:'Start slowly and gradually increase pace if comfortable.',kind:'stand',seconds:45},
-    {id:'lunge',name:'Supported reverse lunges',instruction:'Hold a stable surface for balance; step back and bend knees only as far as comfortable.',kind:'lunge',seconds:40},
-    {id:'push',name:'Incline or knee push-ups',instruction:'Use a stable raised support or knees. Keep shoulders controlled and avoid sagging.',kind:'push',seconds:40},
-    {id:'calf',name:'Calf raises',instruction:'Raise onto toes and lower slowly. Hold stable support if needed.',kind:'stand',seconds:40},
-    {id:'plank',name:'Modified plank',instruction:'Hold a braced position on knees or forearms while breathing normally.',kind:'floor',seconds:30},
-  ]
+export type Exercise={id:string;name:string;instruction:string;kind:'stand'|'squat'|'push'|'floor'|'lunge';seconds:number;techniqueUrl?:string;reps?:string;easier?:string;harder?:string}
+export type WorkoutPlan={exercises:Exercise[];sets:number;restSeconds:number;strengthDay:boolean;focusArea:FitnessProfile['focusArea'];warmupSeconds:number;cooldownSeconds:number;durationMinutes:number;title:string;level:'beginner'|'regular';dayNumber:number}
+/** Movements prioritize controlled technique, not repeated fast repetitions. */
+const MOVES:Record<string,Omit<Exercise,'seconds'>>={
+  squat:{id:'squat',name:'Chair-supported squat',kind:'squat',reps:'8–12',instruction:'Stand in front of a stable chair. Lower slowly toward the seat and stand tall. Keep feet planted and breathe naturally.',easier:'Sit down fully, then stand with help as needed.',harder:'Pause before standing.',techniqueUrl:'https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/'},
+  wallpush:{id:'wallpush',name:'Wall press-up',kind:'push',reps:'8–12',instruction:'Place hands on a solid wall at chest height. Bend elbows slowly and push away, keeping body straight.',easier:'Stand closer to the wall.',harder:'Step farther back, if comfortable.',techniqueUrl:'https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/'},
+  bridge:{id:'bridge',name:'Glute bridge',kind:'floor',reps:'8–12',instruction:'Lie on your back with knees bent and feet flat. Squeeze glutes and raise hips comfortably without arching your back.',easier:'Lift only a short distance.',harder:'Pause for two seconds at the top.'},
+  bird:{id:'bird',name:'Bird dog',kind:'floor',reps:'6–8 per side',instruction:'On hands and knees, reach opposite arm and leg away slowly without twisting; alternate sides.',easier:'Move one limb at a time.',harder:'Hold for three seconds.'},
+  lunge:{id:'lunge',name:'Supported reverse step',kind:'lunge',reps:'6–10 per side',instruction:'Hold a stable chair or railing. Take a small step backward, bend the front knee slightly and return.',easier:'Make the step smaller.',harder:'Use less hand support only when stable.'},
+  push:{id:'push',name:'Incline press-up',kind:'push',reps:'6–12',instruction:'Use a stable, immovable countertop or wall. Lower your chest gently toward the support, then press away.',easier:'Choose the wall rather than a lower support.',harder:'Move to a lower, stable surface.'},
+  calf:{id:'calf',name:'Calf raise',kind:'stand',reps:'10–15',instruction:'Hold a stable surface. Raise heels with control, pause, then lower.',easier:'Keep both hands on support.',harder:'Slow the lowering phase.'},
+  hinge:{id:'hinge',name:'Hip hinge',kind:'stand',reps:'8–12',instruction:'With knees slightly soft and spine neutral, push hips backward, then stand upright.',easier:'Keep hands against hips to guide movement.',harder:'Slow the lowering phase.'},
+  side:{id:'side',name:'Side-lying leg raise',kind:'floor',reps:'8–12 per side',instruction:'Lie on your side, raise the top leg slightly and lower with control. Keep pelvis steady.',easier:'Reduce range of motion.',harder:'Pause at the top.'},
+  plank:{id:'plank',name:'Knee plank',kind:'floor',reps:'15–30 s hold',instruction:'Support yourself on forearms and knees, brace your abdomen and breathe steadily. Stop if shoulders or back hurt.',easier:'Hold for 10 seconds and rest.',harder:'Increase hold gradually, never holding breath.'},
+  march:{id:'march',name:'March in place',kind:'stand',reps:'Comfortable pace',instruction:'March comfortably, swinging arms gently. You should still be able to talk.',easier:'Slow the pace or march seated.',harder:'Raise knees slightly if comfortable.'},
+  reach:{id:'reach',name:'Standing shoulder reach',kind:'stand',reps:'8–12',instruction:'Raise arms forward only as far as comfortable, lower slowly, and keep shoulders relaxed.',easier:'Raise one arm at a time.',harder:'Pause briefly overhead if pain-free.'},
 }
-/** Public technique pages; do not hotlink or rehost their proprietary media. */
-const EXERCISE_TECHNIQUE:Record<string,string>={
-  squat:'https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/',
-  wallpush:'https://www.nhs.uk/live-well/exercise/strength-and-flex-exercise-plan-how-to-videos/',
-  bridge:'https://www.nth.nhs.uk/resources/lower-limb-exercise-and-education/',
-  bird:'https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/',
-  calf:'https://www.nth.nhs.uk/resources/lower-limb-exercise-and-education/',
-  push:'https://www.nhs.uk/live-well/exercise/how-to-improve-strength-flexibility/',
+const TRAINING_DAY_IDS=[
+ ['march','squat','wallpush','bridge','bird'],
+ ['march','lunge','push','hinge','plank'],
+ ['march','squat','wallpush','side','reach'],
+]
+const RECOVERY_IDS=['march','reach','calf']
+const FOCUS:Record<NonNullable<FitnessProfile['focusArea']>,string[]>={
+  'full-body':[], 'chest-shoulders':['wallpush','push','reach'],
+  'legs':['squat','lunge','hinge','calf','side'],
+  'core':['bird','plank','bridge']
 }
-export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Goal,focusArea:FitnessProfile['focusArea']='full-body'){ 
-  const strengthDay=[0,2,4].includes(((dayIndex%7)+7)%7)
-  const exerciseList=strengthDay?routines[dayIndex%2===0?'A':'B']:[
-    {id:'recovery-walk',name:'Gentle marching or walking',instruction:'Walk at a comfortable pace; stop or slow down if you feel unwell.',kind:'stand' as const,seconds:60},
-    {id:'recovery-mobility',name:'Standing mobility',instruction:'Move shoulders and hips slowly through a comfortable, pain-free range.',kind:'stand' as const,seconds:40},
-    {id:'recovery-calf',name:'Supported calf raises',instruction:'Hold a stable surface; lift heels gently, then lower slowly.',kind:'stand' as const,seconds:40},
-  ]
-  const sorted=strengthDay&&focusArea&&focusArea!=='full-body'
-    ?[exerciseList[0],...exerciseList.slice(1).sort((a,b)=>{
-      const score=(e:Exercise)=>{
-        if(focusArea==='chest-shoulders')return e.kind==='push'?3:0
-        if(focusArea==='legs')return e.kind==='squat'||e.kind==='lunge'?3:e.id==='calf'?2:0
-        return e.id==='bird'||e.id==='plank'?3:e.kind==='floor'?2:0
-      }
-      return score(b)-score(a)
-    })]:exerciseList
-  const totalSets=strengthDay?(minutes<=10?1:minutes<=20?2:3):1
-  const workBoost=Math.min(10,Math.max(0,week-1)*2)
-  return {exercises:sorted.map(e=>({...e,techniqueUrl:EXERCISE_TECHNIQUE[e.id],seconds:e.seconds+(strengthDay?workBoost:0)+(strengthDay&&goal==='lose'&&e.kind==='stand'?10:0)})),sets:totalSets,restSeconds:30,strengthDay,focusArea}
+function planDurationSeconds(plan:Pick<WorkoutPlan,'exercises'|'sets'|'restSeconds'|'warmupSeconds'|'cooldownSeconds'>):number {
+  const movements=plan.exercises.length*plan.sets
+  return plan.warmupSeconds+plan.cooldownSeconds+plan.exercises.reduce((sum,e)=>sum+e.seconds,0)*plan.sets+Math.max(0,movements-1)*plan.restSeconds
+}
+export function workoutDurationSeconds(plan:WorkoutPlan):number{return planDurationSeconds(plan)}
+export function workoutForDay(week:number,dayIndex:number,minutes:number,goal:Goal,focusArea:FitnessProfile['focusArea']='full-body',level:'beginner'|'regular'='beginner'):WorkoutPlan {
+  const day=((Math.trunc(dayIndex)%7)+7)%7
+  const strengthIndex=[0,2,4].indexOf(day)
+  const strengthDay=strengthIndex!==-1
+  const roundCount=minutes<=10?2:minutes<=20?3:4
+  const sets=strengthDay?roundCount:1
+  const workIds=strengthDay?TRAINING_DAY_IDS[strengthIndex]:RECOVERY_IDS
+  const order=workIds.slice()
+  const prioritized=FOCUS[focusArea||'full-body']
+  if(strengthDay&&prioritized?.length)order.sort((a,b)=>Number(prioritized.includes(b))-Number(prioritized.includes(a)))
+  const count=order.length
+  const warmupSeconds=strengthDay?(minutes<=10?90:minutes<=20?150:180):90
+  const cooldownSeconds=strengthDay?(minutes<=10?60:minutes<=20?120:150):60
+  const restSeconds=strengthDay?(minutes<=10?20:minutes<=20?25:30):20
+  // A recovery day is intentionally shorter than a strength day.
+  const targetSeconds=strengthDay?([10,20,30].includes(minutes)?minutes:20)*60:8*60
+  const workSeconds=Math.round((targetSeconds-warmupSeconds-cooldownSeconds-(count*sets-1)*restSeconds)/(count*sets))
+  const workDuration=Math.max(strengthDay?25:55,Math.min(75,workSeconds))
+  const workBoost=strengthDay?Math.min(6,Math.max(0,Math.floor((week-1)/2))*2):0
+  const exercises=order.map(id=>({...MOVES[id],seconds:workDuration+workBoost+(level==='regular'&&strengthDay?3:0)}))
+  const plan={exercises,sets,restSeconds,strengthDay,focusArea,warmupSeconds,cooldownSeconds,level,dayNumber:day+1,
+    title:strengthDay?['Full-body strength A','Full-body strength B','Full-body strength C'][strengthIndex]:(goal==='lose'?'Low-impact walking and mobility':'Gentle recovery / mobility'),durationMinutes:0}
+  return {...plan,durationMinutes:Math.round(planDurationSeconds(plan)/60)}
 }
 export function validateProfile(profile:FitnessProfile):string|null {
   if(!Number.isInteger(profile.age)||profile.age<18||profile.age>80) return 'This version is for adults aged 18–80.'

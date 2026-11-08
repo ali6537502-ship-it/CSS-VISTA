@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { mkdirSync, writeFileSync } from 'node:fs'
 const origin=process.env.CSSV_TEST_BROWSER_ORIGIN || 'http://localhost:5174'
 if (!['localhost','127.0.0.1'].includes(new URL(origin).hostname)) throw Error('Loopback only')
-const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']})
+const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE || '/usr/bin/chromium',headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({reducedMotion:'reduce',ignoreHTTPSErrors:true})
 let currentUser='fixture-a'
 await context.route('**/*',async route=>{
@@ -12,6 +12,7 @@ await context.route('**/*',async route=>{
  if(url.origin!==origin) return route.abort()
  if(!url.pathname.startsWith('/api/')) return route.continue()
   if (url.pathname === '/api/auth/workspace-preview.php') return route.fulfill({ json: { enabled: true, user_id: currentUser } })
+ if (url.pathname === '/api/workspace-release.php') return route.fulfill({json:{enabled:true}})
  let data={}
  if(url.pathname==='/api/auth/session.php') data={ok:true,authenticated:true,provider:'hostinger',user:{id:currentUser,email:currentUser+'@example.invalid',display_name:'Test Student',profile_complete:true,user_metadata:{full_name:'Test Student'}}}
  else if(url.pathname==='/api/pro-release.php') data={paused:true}
@@ -25,8 +26,7 @@ page.setDefaultTimeout(30000)
 mkdirSync('test-artifacts/workspace',{recursive:true})
 try{
  await page.goto(origin+'/account/dashboard')
- await page.waitForTimeout(700);await page.evaluate(() => window.dispatchEvent(new Event('focus')))
- await page.waitForTimeout(300);await page.goto(origin+'/account/dashboard');await page.waitForTimeout(700);await page.evaluate(() => window.dispatchEvent(new Event('focus')));await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
+ await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor({timeout:15000})
  assert.ok(await page.getByText('Nothing scheduled today.',{exact:false}).count())
  const today=await page.evaluate(()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`})
  await page.evaluate(today=>{const state=(JSON.parse(localStorage.getItem('cssvista:v1')) || {});state.studyPlanner={examDate:'2027-02-01',dailyHours:4,restDay:5,selectedOptionals:['Political Science','Criminology','European History','Punjabi','Environmental Sciences'],configuredAt:new Date().toISOString()};state.studyScheduleTasks=[{id:'fixture-task',syllabusItemId:'political-science:0:0',subject:'Political Science',topic:'Review political theory',paper:'Paper I',section:'Introduction',date:today,minutes:30,status:'not-started'}];state.bookmarks=['fixture-mcq'];state.quizResults=[{id:'fixture-result',type:'quiz',category:'Science',score:4,total:5,date:new Date().toISOString()}];localStorage.setItem('cssvista:v1',JSON.stringify(state))},today)
@@ -74,6 +74,34 @@ try{
   await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0)});await page.waitForTimeout(200)
   await page.screenshot({path:`test-artifacts/workspace/dashboard-${width}.png`,fullPage:true})
  }
+ await page.setViewportSize({width:390,height:844})
+ await page.goto(origin+'/account/fitness-coach')
+ await page.getByRole('heading',{name:'Personal Fitness Coach'}).waitFor()
+ if(await page.getByRole('button',{name:'Create my plan'}).count()===0 && await page.getByRole('button',{name:'Continue'}).count()){
+  for(let i=0;i<3;i++)await page.getByRole('button',{name:'Continue'}).click()
+ }
+ if(await page.getByRole('button',{name:'Create my plan'}).count())await page.getByRole('button',{name:'Create my plan'}).click()
+ await page.getByRole('navigation',{name:'Fitness dashboard'}).waitFor()
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'fitness dashboard must fit 390px screen')
+ await page.getByRole('button',{name:'Workout',exact:true}).click()
+ await page.getByRole('heading',{name:"Today's home training"}).waitFor()
+ await page.getByRole('button',{name:'Start guided session'}).click()
+ await page.getByRole('button',{name:'Pause',exact:true}).click()
+ await page.getByRole('button',{name:'Resume',exact:true}).waitFor()
+ await page.getByRole('button',{name:'My Diet',exact:true}).click()
+ await page.getByRole('button',{name:'Other option'}).first().click()
+ await page.getByRole('button',{name:'Workout',exact:true}).click()
+ await page.getByRole('button',{name:'Resume',exact:true}).waitFor()
+ await page.getByRole('button',{name:'Progress',exact:true}).click()
+ await page.getByPlaceholder('Weight in kg').fill('65.2')
+ await page.getByRole('button',{name:'Save',exact:true}).click()
+ await page.getByText('65.2 kg',{exact:true}).first().waitFor()
+ await page.reload()
+ await page.getByRole('navigation',{name:'Fitness dashboard'}).waitFor()
+ await page.getByRole('button',{name:'Progress',exact:true}).click()
+ await page.getByText('65.2 kg',{exact:true}).first().waitFor()
+ await page.screenshot({path:'test-artifacts/workspace/fitness-mobile-390.png'})
+
  await page.goto(origin+'/account/subjects');await page.getByRole('combobox').selectOption('comparative')
  await page.getByRole('heading',{name:'Comparative Study of Major Religions (For Non-Muslims)',exact:true}).waitFor()
  assert.equal(await page.getByRole('heading',{name:'Islamic Studies',exact:true}).count(),0)
