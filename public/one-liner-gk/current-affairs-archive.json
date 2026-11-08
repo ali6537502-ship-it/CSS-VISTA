@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 716,
+  "count": 718,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5011,6 +5011,20 @@
     {
       "id": "current-affairs-archive-2026-11-07-cop31-turkiye",
       "text": "Türkiye is hosting COP31 in 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-petrol",
+      "text": "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-seymen",
+      "text": "Seymen landfill, highlighted in a November 2026 methane investigation, is near Istanbul.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

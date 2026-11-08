@@ -118,5 +118,35 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://apnews.com/article/e5ae99093b025f6fdd44c425602b93d1"
+  },
+  {
+    "id": "current-affairs-20261107-pakistan-petrol-price-effective",
+    "q": "Pakistan's petrol price effective 7 November 2026 was:",
+    "o": [
+      "Rs338 per litre",
+      "Rs346 per litre",
+      "Rs378 per litre",
+      "Rs352 per litre"
+    ],
+    "a": 1,
+    "e": "Dawn reported Rs346 per litre effective 7 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2042635/petrol-price-down-by-rs659-per-litre-high-speed-diesel-by-rs425-in-fifth-straight-reduction"
+  },
+  {
+    "id": "current-affairs-20261107-seymen-landfill-city",
+    "q": "Seymen landfill, highlighted in satellite methane reporting, is near:",
+    "o": [
+      "Ankara",
+      "Izmir",
+      "Istanbul",
+      "Antalya"
+    ],
+    "a": 2,
+    "e": "Reuters located the Seymen landfill west of Istanbul.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-comes-turkey-satellites-reveal-landfill-methane-problem-2026-11-07/"
   }
 ]

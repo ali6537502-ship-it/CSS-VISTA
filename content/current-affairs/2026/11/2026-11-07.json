@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-07",
-  "published_at": "2026-11-07T19:00:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 7 November 2026 | Evening preliminary edition (00:00–19:00 PKT)",
+  "published_at": "2026-11-07T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 7 November 2026 | Retrospective edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-07-ukraine-russia-energy-infrastructure-strikes",
@@ -82,9 +82,9 @@
     {
       "id": "ca-2026-11-07-cop31-un-climate-warning",
       "category": "World — Climate Diplomacy",
-      "headline": "UN secretary-general urges stronger climate action as COP31 begins in Türkiye",
-      "summary": "In an Associated Press interview published 7 November, UN Secretary-General António Guterres warned that delayed emissions cuts were increasing climate risks as COP31 began in Türkiye.",
-      "what_happened": "Guterres called for faster reductions in greenhouse-gas emissions and argued that climate impacts were intensifying. He highlighted growth in wind and solar power but warned that current political responses were inadequate.",
+      "headline": "UN secretary-general urges stronger climate action ahead of COP31 in Türkiye",
+      "summary": "In an Associated Press interview published 7 November, UN Secretary-General António Guterres warned that delayed emissions cuts were increasing climate risks ahead of COP31 in Türkiye.",
+      "what_happened": "Guterres called for faster reductions in greenhouse-gas emissions and argued that climate impacts were intensifying. He highlighted growth in wind and solar power but warned that current political responses were inadequate. COP31 was scheduled to open on 9 November, not 7 November.",
       "background": "The annual UN climate Conference of the Parties reviews implementation of the UN climate convention and the Paris Agreement, including mitigation, adaptation and climate finance.",
       "why_it_matters": "The remarks frame the diplomatic stakes of COP31 and the gap between climate commitments and implementation.",
       "pakistan_perspective": "Pakistan's exposure to floods and heat makes adaptation finance and loss-and-damage arrangements central to its climate diplomacy.",
@@ -117,6 +117,79 @@
           "publisher": "Associated Press",
           "title": "AP Exclusive: Departing UN chief calls this 'a moment of truth' in fight to curb global warming",
           "url": "https://apnews.com/article/e5ae99093b025f6fdd44c425602b93d1"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-07-pakistan-petrol-price-effective",
+      "category": "Pakistan — Economy and Energy",
+      "headline": "Revised Pakistan petrol and diesel prices take effect on 7 November",
+      "summary": "Prices announced on 6 November took effect on 7 November: petrol Rs346 and high-speed diesel Rs378 per litre.",
+      "what_happened": "Dawn reported a Rs6.59-per-litre reduction in petrol and Rs4.25 in diesel, with rates effective 7–10 November. The announcement was made on 6 November, not 7 November.",
+      "background": "Petroleum prices influence transport costs and inflation expectations in Pakistan's import-dependent economy.",
+      "why_it_matters": "The revised rates matter to households and transport operators, but do not by themselves establish lower overall inflation.",
+      "pakistan_perspective": "Pricing revisions highlight Pakistan's exposure to global oil markets.",
+      "key_takeaways": [
+        "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre."
+      ],
+      "facts": [
+        "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre."
+      ],
+      "quick_gk": [
+        "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre."
+      ],
+      "question_angles": [
+        "What was Pakistan's petrol price effective 7 November 2026?"
+      ],
+      "topics": [
+        "petroleum prices",
+        "energy security"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Petrol price down by Rs6.59 per litre, high-speed diesel by Rs4.25 in fifth straight reduction",
+          "url": "https://www.dawn.com/news/2042635/petrol-price-down-by-rs659-per-litre-high-speed-diesel-by-rs425-in-fifth-straight-reduction"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-07-turkiye-seymen-methane",
+      "category": "World — Climate and Environment",
+      "headline": "Satellite findings reveal major methane plumes at Turkish landfill",
+      "summary": "Reuters reported 7 November that satellite observations detected substantial methane emissions at the Seymen landfill near Istanbul.",
+      "what_happened": "Researchers using Carbon Mapper satellite observations reported an average of roughly 7.4 metric tonnes of methane per hour during observations at Seymen. The environment ministry and landfill operator disputed treating intermittent measurements as representative of annual emissions.",
+      "background": "Decomposing organic waste produces methane; gas capture can reduce emissions but leaks remain possible.",
+      "why_it_matters": "Satellite monitoring can identify emissions hotspots, but observed plumes must not be confused with annual inventories.",
+      "pakistan_perspective": "Pakistan's landfill operators could use similar monitoring and gas-capture approaches.",
+      "key_takeaways": [
+        "The Seymen landfill highlighted in Reuters' November 2026 methane investigation is near Istanbul."
+      ],
+      "facts": [
+        "The Seymen landfill highlighted in Reuters' November 2026 methane investigation is near Istanbul."
+      ],
+      "quick_gk": [
+        "The Seymen landfill highlighted in Reuters' November 2026 methane investigation is near Istanbul."
+      ],
+      "question_angles": [
+        "Which city is near the Seymen landfill discussed in Reuters' investigation?"
+      ],
+      "topics": [
+        "methane",
+        "waste management",
+        "COP31"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "As COP31 comes to Turkey, satellites reveal a landfill methane problem",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-comes-turkey-satellites-reveal-landfill-methane-problem-2026-11-07/"
         }
       ]
     }

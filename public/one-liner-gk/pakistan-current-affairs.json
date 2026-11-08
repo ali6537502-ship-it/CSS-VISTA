@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 282,
+  "count": 283,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1973,6 +1973,13 @@
     {
       "id": "pakistan-current-affairs-2026-11-03-pakistan-lpg-price-surge",
       "text": "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-07-petrol",
+      "text": "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
