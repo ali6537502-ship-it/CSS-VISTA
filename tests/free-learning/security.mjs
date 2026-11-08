@@ -20,6 +20,12 @@ for(const endpoint of ['student/precis.php','student/skills.php?feature=argument
  const opened=await call(endpoint,a.jar);assert.equal(opened.status,200,endpoint+' '+JSON.stringify(opened.data))
  assert.equal((await call(endpoint,a.jar,undefined,{'X-CSSV-User':b.id})).status,409,endpoint)
 }
+const attemptResponse=await call('student/learning.php',a.jar,{action:'attempt_save',request_id:randomUUID(),expected_version:0,target_year:2027,target_date:null,daily_minutes:60,stage:'starting',optional_subject_ids:[]})
+assert.equal(attemptResponse.status,200)
+const attempt=attemptResponse.data.attempt_id
+const planner=await call('student/planner.php?attempt='+attempt,a.jar)
+assert.equal(planner.status,200);assert.equal(planner.data.active,true,'Free account still receives a subscription-limited planner')
+assert.equal((await call('student/planner.php?attempt='+attempt,b.jar)).status,404,'Free planner bypassed attempt ownership')
 const order=php('tests/free-learning/fixture.php','legacy-order',a.id)
 php('tests/precis/fixture.php','activate',a.id)
 php('tests/pro/fixture.php','expire',a.id)
