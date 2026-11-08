@@ -1,10 +1,12 @@
+> Historical implementation note: the source-transforming import and model-removal behavior described below is superseded by the source-preserving importer in [precis-source-import.md](precis-source-import.md). The served catalogue has not been re-imported yet.
+
 # Phase 5A — handbook course and independent Précis practice
 
 Implemented in draft PR #78. Not merged, deployed or commercially launched. This documents the first complete Précis increment. The subsequent [Phase 5B](phase-5-precis-feedback.md) implements source-bound personal evaluation with live AI still disabled; the historical boundaries below describe Phase 5A itself.
 
 ## Source and pedagogy
 
-The actual owner-supplied `Master_Precis_Writing_Handbook(1).docx` is the primary source. `scripts/precis/import-handbook.py <docx>` imports native paragraph, heading, bullet and table blocks; the generated private PHP catalogue records its SHA-256. All 22 chapters and appendices A–C are mapped into the account course. Five chapter-18 worked passages and chapter-20 Drill D become six practice sources. Full models are excluded from the ordinary catalogue and lesson blocks; chapter 18 directs students into practice, and chapter 20's answer key is handled through drills / the delayed comparison path.
+The actual owner-supplied `Master_Precis_Writing_Handbook(1).docx` is the primary source. `scripts/precis/import-handbook.py <docx> --output <candidate.php>` imports native paragraph, heading, bullet and table blocks; the generated private PHP catalogue records its SHA-256. All 22 chapters and appendices A–C are mapped into the account course. Five chapter-18 worked passages and chapter-20 Drill D become six practice sources. Full models are excluded from the ordinary catalogue and lesson blocks; chapter 18 directs students into practice, and chapter 20's answer key is handled through drills / the delayed comparison path.
 
 The optional 30-day sequence follows chapter 21: Days 1–5 central idea, 6–10 selection, 11–15 compression, 16–20 connected drafts, 21–25 mixed arguments, 26–28 timed work, 29–30 error review. The supplied worked passages are **short instructional examples**, not authenticated past questions, fresh daily papers or full exam-length simulations. The handbook's suggested volume of five short passages per day and 100–180-word paragraph work remains a practice recommendation; this increment does not claim a bank of 150 fresh passages. Students may add an attributed private passage and its actual explicit word limit.
 

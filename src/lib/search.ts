@@ -268,7 +268,7 @@ const localCorpus: SearchDocument[] = [
     id: `ca-${issue.slug}`,
     title: issue.title,
     category: 'Current Affairs',
-    snippet: 'CSS Vista Pro Current Affairs issue file.',
+    snippet: 'CSS Vista Current Affairs issue file.',
     link: `/current-affairs#${issue.slug}`,
     date: issue.lastUpdated,
   })),

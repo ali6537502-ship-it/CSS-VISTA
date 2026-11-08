@@ -8,7 +8,6 @@ import { SiteContentProvider } from './components/SiteContentProvider.tsx'
 import { installChunkRecovery } from './lib/chunkRecovery.ts'
 import { useAccount } from './lib/accountContext.ts'
 import WorkspacePreviewProvider from './features/workspace-preview/WorkspacePreviewProvider.tsx'
-import { ProReleaseProvider } from './features/membership/ProRelease.tsx'
 
 installChunkRecovery()
 
@@ -25,7 +24,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <AccountProvider>
         <WorkspacePreviewProvider><SiteContentProvider>
-          <ProReleaseProvider><App /></ProReleaseProvider>
+          <App />
           <SignedInTaskReminderOverlay />
         </SiteContentProvider></WorkspacePreviewProvider>
       </AccountProvider>

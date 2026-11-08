@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAccount } from '@/lib/accountContext'
 import { learningRequest, saveIdentity, useLearning } from '@/features/learning/api'
-import { pakistanTime } from '@/features/membership/api'
+import { pakistanTime } from '@/lib/pakistanTime'
 import { panelStyle, primaryStyle, secondaryStyle, inputStyle } from '@/features/handwriting/styles'
 import { lengthInfo, type Detail } from './api'
 import { FeedbackChanges } from './Feedback'
@@ -191,12 +191,12 @@ export default function History({
               </p>
             </div>
           </div>
-          <FeedbackChanges
+          {<FeedbackChanges
             key={`${before}:${detail.version.id}`}
             before={before}
             after={detail.version.id}
             skills={skills}
-          />
+          />}
           <p className="text-sm leading-7 text-slate-500">
             Compare both with the original. Check central idea, conditions, contrasts, retained
             details and language. Record what improved and what still needs work in your next

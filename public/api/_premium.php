@@ -24,13 +24,10 @@ function cssv_premium_file(string $file): ?string {
     return null;
 }
 
+/** Protected files require an owned, complete account, never a subscription. */
 function cssv_premium_active(PDO $pdo): bool {
-    if (cssv_pro_release_paused()) return false;
     $session=cssv_current_session($pdo);
-    if (!$session) return false;
-    cssv_pro_ensure_schema($pdo);
-    return cssv_pro_membership($pdo,(string)$session['user_id'])['status']==='active'
-        && cssv_profile_status(cssv_profile_for_user($pdo,(string)$session['user_id']))['complete'];
+    return $session!==null && cssv_profile_status(cssv_profile_for_user($pdo,(string)$session['user_id']))['complete'];
 }
 
 function cssv_premium_public_content(PDO $pdo, object $content): object {

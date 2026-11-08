@@ -1,0 +1,26 @@
+✔ Précis counts preserve the native Unicode word convention (2.701777ms)
+✔ Explicit length is measured separately from guidance (0.936618ms)
+✔ Draft keys separate users, attempts, sources and immutable versions (0.198042ms)
+✔ All original teaching blocks, including tables and bullets, are preserved once (6.835047ms)
+✔ Pace selection partitions the whole source sequentially with no omission or duplication (0.812747ms)
+✔ Studied sections survive changes in course duration without acquiring fake completion (1.255569ms)
+✔ Daily question uses existing authored questions with no answer key in browser (0.675412ms)
+✔ Invalid day and section parameters fall back safely (0.485297ms)
+✔ flags clear repeated words, grammar, prepositions, double comparisons and modals (14.560073ms)
+✔ checks detectable article, punctuation and agreement errors with an exact excerpt (0.658752ms)
+✔ preserves qualification and contrast as review prompts rather than invented semantic errors (0.38418ms)
+✔ checks explicit word limit and title without inventing an official score (0.486087ms)
+✔ warns on copied extended sequences but does not treat every shared phrase as plagiarism (0.349208ms)
+✔ offers selective offline spelling suggestions without claiming certainty (0.358756ms)
+✔ avoids overclaim when original contains an identical absolute statement (0.419783ms)
+✔ empty answer receives an actionable prompt, not a made-up evaluation (1.083348ms)
+✔ accepted owner-handbook worked models do not trigger false source or length alarms (2.780398ms)
+✔ substantially uncompressed writing still triggers a cautious length review (0.580518ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 741.164576

@@ -5,6 +5,7 @@ cssv_require_method('GET','POST');
 try{
  $pdo=cssv_db();$session=cssv_require_user($pdo);$user=(string)$session['user_id'];if($_SERVER['REQUEST_METHOD']==='POST')cssv_require_csrf($session);cssv_precis_feedback_ensure($pdo);
  if($_SERVER['REQUEST_METHOD']==='POST'){
+  cssv_external_processing_retired();
   cssv_enforce_rate_limit($pdo,'precis_feedback',$user,120,3600);cssv_log_security_event($pdo,'precis_feedback',$user,$user);
   $id=cssv_precis_feedback_reserve($pdo,$user,cssv_request_json(12000));cssv_precis_feedback_execute($pdo,$id);cssv_json(['ok'=>true,'operation'=>cssv_ai_owned_operation($pdo,$id,$user)]);
  }

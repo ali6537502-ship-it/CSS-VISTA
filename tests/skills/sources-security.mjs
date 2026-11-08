@@ -24,15 +24,7 @@ async function user(label) {
 
 
 const a=await user('source'),free=await user('source-free');php('tests/precis/fixture.php','activate',a.id)
-const raw=JSON.parse(readFileSync(new URL('../../public/api/_premium_files/general-ability-course.json',import.meta.url)))
-for(const unit of raw.units){const lesson=unit.lessons[0],id='ability:'+unit.id+':'+lesson.id
- const selected=await call('student/tutor.php?context='+encodeURIComponent(id),a.jar)
- assert.equal(selected.status,200,JSON.stringify(selected.data));assert.ok(selected.data.context.text.includes(lesson.idea));assert.ok(!selected.data.context.text.includes(JSON.stringify(lesson.exercise.proof)))
- assert.equal(selected.data.context.feature,unit.stage==='Logical reasoning'?'tutor':'maths')
- assert.equal((await call('student/tutor.php?context='+encodeURIComponent(id),free.jar)).status,403)
-}
-assert.equal((await call('student/tutor.php?category=ability',a.jar)).data.contexts.length,50)
-assert.equal((await call('student/tutor.php?category=ability&offset=50',a.jar)).data.contexts.length,25)
+assert.equal((await call('student/tutor.php?category=ability',free.jar)).status,410)
 const reviewer=JSON.parse(php('tests/pro/fixture.php','reviewer')),owner=new Map([['cssv_owner_session',reviewer.token],['cssv_owner_csrf',reviewer.csrf]])
 const topic=JSON.parse(php('tests/topics/fixture.php','definition','test-only-skills-source-'+randomUUID()))
 const imported=await call('admin/topics.php',owner,{action:'import',request_id:randomUUID(),expected_revision:0,topic})
@@ -43,8 +35,8 @@ const publication=await call('admin/topics.php',owner,{action:'publish',request_
 assert.equal(publication.status,200,JSON.stringify(publication.data))
 php('tests/skills/fixture.php','normalize-topic',imported.data.version_id)
 const source=await call(path,a.jar);assert.equal(source.status,200,JSON.stringify(source.data));assert.ok(source.data.context.text.includes(topic.sections[0].blocks[0]));assert.equal(source.data.context.sources.length,topic.sections[0].reference_ids.length)
-assert.equal((await call(path,free.jar)).status,403)
+assert.equal((await call(path,free.jar)).status,200)
 const removed=await call('admin/topics.php',owner,{action:'unpublish',request_id:randomUUID(),expected_revision:publication.data.revision,topic_id:topic.id});assert.equal(removed.status,200)
 assert.equal((await call(path,a.jar)).status,404,'Withdrawn teaching source exposed')
 assert.equal((await call('student/ai-usage.php',a.jar)).data.operations.length,0)
-console.log('PASS scoped source integration: 25 Ability unit contexts, pagination, deterministic key withholding, Free denial, draft/reviewed/withdrawn topic lifecycle, one-section references and zero model calls')
+console.log('PASS scoped source integration: retired Ability context, free published topics, draft/reviewed/withdrawn topic lifecycle, one-section references and zero model calls')

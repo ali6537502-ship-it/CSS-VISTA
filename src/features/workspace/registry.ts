@@ -1,6 +1,5 @@
 import { allOptionalSubjects } from '../../lib/studyPlanner.ts'
 import { defaultHomeCards } from '../../data/homeCards.ts'
-import { isProDestination } from '../membership/proDestinations.ts'
 import { MPT_HIBERNATED } from '../../lib/featureHibernation.ts'
 
 export const sections = [
@@ -29,24 +28,23 @@ const extra: Feature[] = [
   { id: 'daily-english', title: 'Daily English', description: 'Your daily language activities.', to: '/account/english', category: 'Grammar', keywords: 'vocabulary english' },
   { id: 'fitness-coach', title: 'Personal Fitness Coach', description: 'Plan weight goals, home-food meals and guided equipment-free workouts.', to: '/account/fitness-coach', category: 'Wellbeing', keywords: 'fitness coach health home workouts nutrition diet male female calories weight gain loss muscle exercise target' },
   { id: 'vista-resources', title: 'My Vista Resources',  description: 'Your account resource shelves, free books and downloads.', to: '/account/resources', category: 'Resources', keywords: 'books downloads library' },
-  { id: 'membership', title: 'Membership & Payments', description: 'Review your existing membership and account orders.', to: '/account/membership', category: 'Workspace', keywords: 'pro subscription membership orders' },
   { id: 'vistagram', title: 'Vistagram', description: 'Concepts, articles and explainers.', to: '/account/vistagram', category: 'Resources', keywords: 'reading' },
   ...allOptionalSubjects.map(name => ({ id:'subject-'+name, title:name, description:'Open the subject syllabus and linked planning resources.', to:'/fpsc-syllabus?subject='+({'History of Pakistan & India':'history-pakistan-india','History of USA':'history-usa'}[name] || name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')), category:'Subjects', keywords:name })),
   ...sections.map(s => ({ id: s.id, title: s.title, description: s.id === 'plan' ? 'Manage daily tasks, weekly scheduling, syllabus planning, revision, study goals and settings.' : `Open ${s.title.toLowerCase()}.`, to: s.to, category: 'Workspace', keywords: s.id === 'plan' ? 'study planner timetable calendar schedule revision personal goals notes optional subjects settings import archive' : s.title })),
   ...[
-    ['precis', 'CSS Vista Preci Mentor', '/account/precis'], ['ability', 'General Ability', '/account/general-ability'],
+    ['precis', 'CSS Vista Preci Mentor', '/account/precis'],
     ['answers', 'My Answer Performance', '/account/answer-performance'], ['affairs-desk', 'My Current Affairs Desk', '/account/current-affairs'],
-    ['expression', 'English Expression Guide', '/account/expression'], ['handwriting', 'Handwritten Paragraph', '/account/handwriting'],
-    ['tutor', 'Ask VISTA', '/account/ask-vista'], ['essay-builder', 'Essay Themes Builder', '/account/essay-builder'],
+    ['expression', 'English Expression Guide', '/account/expression'], ['handwriting', 'Earlier handwritten work', '/account/handwriting'],
+    ['tutor', 'Earlier tutoring responses', '/account/ask-vista'], ['essay-builder', 'Essay Themes Builder', '/account/essay-builder'],
     ['argumentation', 'Argumentation Skills Builder', '/account/argumentation'], ['analysis-builder', 'Analytical Skills Builder', '/account/analytical-skills'],
-    ['preparation', 'My Preparation', '/account/preparation'], ['ai-usage', 'AI Usage', '/account/ai-usage'],
+    ['preparation', 'My Preparation', '/account/preparation'],
   ].map(([id,title,to]) => ({ id,title,to,description: `Open ${title.toLowerCase()}.`, category: 'Preparation', keywords: id === 'precis' ? 'precis précis english composition handbook mentor writing practice learning' : 'writing practice learning' })),
 ]
 export const features: Feature[] = [...extra, ...defaultHomeCards.map(f => ({ id:f.id, title: f.title, description:f.desc, to:f.to, category: /quiz|mcq|gk|mock|writing|timer|challenge|mistake|essay|grammar|test/i.test(f.id) ? 'Practice' : 'Resources', keywords:f.id.replaceAll('-', ' ') }))]
   .filter((f,i,all) => all.findIndex(x => x.to === f.to) === i)
-export function featureState(feature: Feature, paused: boolean): 'paused' | 'pro' | 'free' {
+export function featureState(feature: Feature): 'paused' | 'free' {
   if (MPT_HIBERNATED && /^\/mpt(?:\/|$)/.test(feature.to)) return 'paused'
-  return isProDestination(feature.to) ? paused ? 'paused' : 'pro' : 'free'
+  return 'free'
 }
 export function searchFeatures(query: string) {
   const words = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().split(/\s+/)
@@ -54,6 +52,6 @@ export function searchFeatures(query: string) {
 }
 
 /** Paused tools do not appear in discovery; route/API guards remain authoritative. */
-export function discoverFeatures(query: string, paused: boolean) {
-  return searchFeatures(query).filter(feature => featureState(feature, paused) !== 'paused')
+export function discoverFeatures(query: string) {
+  return searchFeatures(query).filter(feature => featureState(feature) !== 'paused')
 }

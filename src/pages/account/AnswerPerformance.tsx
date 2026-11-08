@@ -11,7 +11,7 @@ import {
   type Overview,
 } from '@/features/learning/api'
 import { inputStyle, panelStyle, primaryStyle, secondaryStyle } from '@/features/handwriting/styles'
-import { pakistanTime } from '@/features/membership/api'
+import { pakistanTime } from '@/lib/pakistanTime'
 import {
   pakistanToday,
   provenanceNames,

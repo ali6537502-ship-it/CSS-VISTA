@@ -1,9 +1,7 @@
 import { useWorkspacePreview } from '@/features/workspace-preview/context'
-import { useProReleasePaused } from '@/features/membership/proReleaseContext'
-import { isProDestination } from '@/features/membership/proDestinations'
 import { ProfileGate } from '@/components/ProfileGate'
-import { ProReleaseOutlet } from '@/features/membership/ProRelease'
-import { AvailableStudyLink as Link, AvailableStudyNavLink as NavLink } from '@/features/membership/ProRelease'
+import { Outlet } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useNavigationType } from 'react-router'
 import {
@@ -516,8 +514,7 @@ function SearchBox({ onSelect, autoFocus = false }: { onSelect?: () => void; aut
   const [q, setQ] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
-  const paused = useProReleasePaused()
-  const visibleResults = paused ? results.filter(result => !isProDestination(result.link)) : results
+  const visibleResults = results.filter(result => !/^\/account\/(?:general-ability|membership|ai-usage)(?:[/?]|$)/.test(result.link))
   const ref = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
@@ -983,7 +980,7 @@ export default function Layout() {
   if ((location.pathname === '/account' ? entryPending : location.pathname.startsWith('/account/') && previewPending)) return <div role="status" className="mx-auto min-h-screen max-w-5xl px-4 py-10">Opening your study space…</div>
 
   if (preview && location.pathname.startsWith('/account/') && !MPT_FOCUS_PATH.test(location.pathname)) {
-    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><Suspense fallback={<div role="status" className="min-h-screen px-4 py-10">Opening your study space…</div>}><StudentWorkspace key={user?.id}><ProReleaseOutlet /></StudentWorkspace></Suspense></ProfileGate></>
+    return <><RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice /><ProfileGate><Suspense fallback={<div role="status" className="min-h-screen px-4 py-10">Opening your study space…</div>}><StudentWorkspace key={user?.id}><Outlet /></StudentWorkspace></Suspense></ProfileGate></>
   }
 
   if (entryEnabled && location.pathname === '/account') {
@@ -991,12 +988,12 @@ export default function Layout() {
       <RouteSeo /><PrintBranding /><DeferredStudyActivityTracker /><StorageFailureNotice />
       <a href="#account-entry" className="sr-only z-50 rounded-lg bg-white p-3 text-pine focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to account</a>
       <header className="border-b border-[#e1e6dd] bg-white/90"><div className="mx-auto flex min-h-20 max-w-6xl items-center justify-between gap-4 px-4 py-3"><Logo className="h-11 w-auto max-w-[185px] object-contain"/><Link to="/" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-pine"><ArrowLeft size={16}/>Back to website</Link></div></header>
-      <div id="account-entry" tabIndex={-1} className="flex-1 pb-[env(safe-area-inset-bottom)]"><div className="cssv-route-stage"><ProReleaseOutlet /></div></div>
+      <div id="account-entry" tabIndex={-1} className="flex-1 pb-[env(safe-area-inset-bottom)]"><div className="cssv-route-stage"><Outlet /></div></div>
     </div>
   }
 
   // The joint tree initiative has its own complete two-partner navigation and footer.
-  if (location.pathname === '/100-million-trees') return <><RouteSeo /><ProReleaseOutlet /></>
+  if (location.pathname === '/100-million-trees') return <><RouteSeo /><Outlet /></>
 
   return (
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">
@@ -1288,7 +1285,7 @@ export default function Layout() {
           className={`cssv-route-stage route-transition-${routeTransition}`}
           style={renderRestoreMinHeight ? { minHeight: `${renderRestoreMinHeight}px` } : undefined}
         >
-          <ProReleaseOutlet />
+          <Outlet />
         </div>
       </main>
 

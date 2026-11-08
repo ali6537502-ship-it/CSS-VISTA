@@ -3,7 +3,7 @@ import * as Classic from '@/features/workspace-classic/pages/account/shared'
 import { subjectVisual } from '@/features/workspace/Visuals'
 import WorkspaceAvatar from '@/features/workspace/WorkspaceAvatar'
 import { completedSourceTopics, targetDays } from '@/features/workspace/model'
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
 import { ArrowLeft, Check } from 'lucide-react'

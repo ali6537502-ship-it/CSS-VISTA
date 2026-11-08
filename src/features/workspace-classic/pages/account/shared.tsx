@@ -1,4 +1,4 @@
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
 import { ArrowLeft, Check, UserRound } from 'lucide-react'
@@ -8,7 +8,7 @@ import { getRevisionStats, getStudyAnalytics, recentActivities } from '@/lib/pro
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { AuthenticatedAccountAd } from '@/components/Ads'
-import { ProBadge } from '@/features/membership/AccountSections'
+
 
 export function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -127,16 +127,16 @@ export function AccountPage({ title, intro, action, children }: { title: string;
         </header>
         <nav aria-label="Account" className="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold text-slate-600">
           <Link to="/account/dashboard?plan=free" className="inline-flex min-h-11 items-center hover:text-pine">Free account</Link>
-          <Link to="/account/dashboard?plan=pro" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Pro account <ProBadge /></Link>
-          <Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link>
+          <></>
+          <></>
           <Link to="/account/preparation" className="inline-flex min-h-11 items-center hover:text-pine">My Preparation</Link>
-          <Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance <ProBadge /></Link>
-          <Link to="/account/general-ability" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">General Ability <ProBadge /></Link>
-          <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Ask VISTA <ProBadge /></Link>
-          <Link to="/account/essay-builder" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Essay Builder <ProBadge /></Link>
-          <Link to="/account/argumentation" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Argumentation <ProBadge /></Link>
-          <Link to="/account/analytical-skills" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Analysis <ProBadge /></Link>
-          <Link to="/account/ai-usage" className="inline-flex min-h-11 items-center hover:text-pine">AI Usage</Link>
+          <Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance </Link>
+          <></>
+          <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Earlier tutoring responses </Link>
+          <Link to="/account/essay-builder" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Essay Builder </Link>
+          <Link to="/account/argumentation" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Argumentation </Link>
+          <Link to="/account/analytical-skills" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Analysis </Link>
+          <></>
         </nav>
         <div className="mt-9">{children}</div>
         {/* Signed-in account content. Advertising eligibility is decided by the

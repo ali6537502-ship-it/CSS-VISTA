@@ -12,7 +12,15 @@ const make=async u=>(await call('student/learning.php',{...settings,request_id:r
 const attempt=await make(a),other=await make(a),bAttempt=await make(b),fAttempt=await make(free)
 assert.equal((await call(endpoint)).status,401);assert.equal((await call(endpoint,undefined,a.jar,{'X-CSSV-User':b.id})).status,409)
 php('tests/pro/fixture.php','incomplete',incomplete.id);assert.equal((await call(endpoint,undefined,incomplete.jar)).status,403)
-const freeOverview=(await call(endpoint,undefined,free.jar)).data;assert.equal(freeOverview.catalog.chapters.length,25,'Free student cannot read the handbook');assert.equal(freeOverview.catalog.questions.length,39);assert.equal(freeOverview.evaluation_enabled,false,'External AI feedback must remain paused')
+const freeOverview=(await call(endpoint,undefined,free.jar)).data;assert.equal(freeOverview.catalog.chapters.length,25,'Free student cannot read the handbook');assert.equal(freeOverview.catalog.questions.length,39);assert.equal(freeOverview.evaluation_enabled,false,'External AI feedback must remain paused');assert.equal(freeOverview.catalog.front_matter.length,33);assert.equal(freeOverview.catalog.chapters[17].blocks.length,25);assert.ok(freeOverview.catalog.chapters[19].blocks.some(b=>b.text?.startsWith('Drill D model:')),'Free reader cannot open the source answer key')
+const workedEndpoint=endpoint+'?book_examples=1'
+assert.equal((await call(workedEndpoint)).status,401,'Worked examples bypassed authentication')
+assert.equal((await call(workedEndpoint,undefined,incomplete.jar)).status,403,'Worked examples bypassed complete profile')
+assert.equal((await call(workedEndpoint,undefined,a.jar,{'X-CSSV-User':b.id})).status,409,'Worked examples ignored the current account')
+const worked=(await call(workedEndpoint,undefined,free.jar));assert.equal(worked.status,200);assert.equal(worked.data.examples.length,5)
+assert.deepEqual(worked.data.examples.map(p=>p.id),['example-1','example-2','example-3','example-4','example-5'])
+assert.ok(worked.data.examples.every(p=>typeof p.model==='string'&&p.model.length>0&&typeof p.model_title==='string'))
+assert.equal((await call(endpoint+'?book_examples=invalid',undefined,free.jar)).status,422)
 php('tests/precis/fixture.php','activate',a.id);php('tests/precis/fixture.php','activate',b.id)
 const overview=(await call(endpoint,undefined,a.jar)).data;assert.equal(overview.catalog.chapters.length,25);assert.equal(overview.catalog.questions.length,39);assert.equal(overview.evaluation_enabled,false)
 for(const p of overview.catalog.passages){assert.equal(p.model,undefined);assert.equal(p.model_title,undefined)}for(const q of overview.catalog.questions){assert.equal(q.answer,undefined);assert.equal(q.explanation,undefined)}
@@ -93,5 +101,18 @@ php('tests/pro/fixture.php','expire',a.id);assert.equal((await call(endpoint,und
 assert.equal((await call(endpoint,rewrite,a.jar)).data.version_id,revised.data.version_id,'Expiry broke accepted-save replay');assert.equal((await call(endpoint,{...rewrite,request_id:randomUUID(),expected_version:2},a.jar)).status,200,'Expired membership wrongly blocked free writing')
 assert.equal((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).status,200)
 assert.equal(php('tests/precis/fixture.php','usage',a.id),'0','Ordinary Précis learning made an AI operation')
-for(const file of ['_precis.php','_precis_core.php','_precis_schema.php','_precis_questions.php','_precis_handbook.php'])assert.equal((await fetch('http://localhost:4173/api/'+file)).status,404)
+for(const file of ['_precis.php','_precis_core.php','_precis_schema.php','_precis_questions.php','_precis_handbook.php','_precis_reading_compat.php'])assert.equal((await fetch('http://localhost:4173/api/'+file)).status,404)
 console.log('PASS: native free Précis Mentor profile/ownership/CSRF and protected model answers, immutable original/title/version context, delayed owned model reveal, custom source/explicit limit, replay/concurrency, first-response/spaced evidence, expiry history and zero AI operations.')
+
+// An old raw-DOCX hash must not reassign positional IDs to restored text.
+const writingBeforeRestoration=(await call(url,undefined,a.jar)).data
+php('tests/precis/fixture.php','legacy-plan',a.id,attempt)
+const earlier=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan
+assert.equal(earlier.edition_status,'earlier');assert.equal(earlier.version,7)
+assert.deepEqual(earlier.completed_units,['1:3','18:0','20:22'])
+assert.deepEqual(earlier.verified_current_units,['1:3'])
+assert.equal((await call(endpoint,{...unit,request_id:randomUUID(),unit_id:'1:3',expected_version:7},a.jar)).status,409,'Earlier reading ID was applied to restored content')
+assert.equal((await call(endpoint,{...guideBase,request_id:randomUUID(),expected_version:7},a.jar)).status,409,'Replanning erased the earlier-edition record')
+assert.deepEqual((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.guide_plan,earlier,'Reading the restored book mutated the earlier plan')
+assert.deepEqual((await call(url,undefined,a.jar)).data,writingBeforeRestoration,'Reading compatibility changed the saved source, versions or revealed model')
+console.log('PASS: earlier-edition completion IDs retained without reassignment; raw-source hash collision blocked; saved writing preserved.')

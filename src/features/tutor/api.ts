@@ -6,8 +6,7 @@ export const helpModes = {
   check_understanding: 'Check my understanding',
 } as const
 export const areas = {
-  ability: 'General Ability lessons',
-  topic: 'Published Pro topic lessons',
+  topic: 'Published subject lessons',
   skills: 'My guided writing and reasoning',
   grammar: 'English & Grammar',
   precis: 'Précis methods',

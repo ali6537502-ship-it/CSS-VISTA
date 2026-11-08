@@ -1,0 +1,1 @@
+export function pakistanTime(value: string | null) { return value ? new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Karachi', dateStyle: 'medium', timeStyle: 'medium' }).format(new Date(value)) + ' PKT' : '—' }

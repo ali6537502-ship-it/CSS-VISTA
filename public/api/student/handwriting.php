@@ -5,6 +5,7 @@ cssv_require_method('GET','POST');
 try{
  $pdo=cssv_db();$session=cssv_require_user($pdo);$user=(string)$session['user_id'];if($_SERVER['REQUEST_METHOD']==='POST')cssv_require_csrf($session);cssv_handwriting_ensure($pdo);
  if($_SERVER['REQUEST_METHOD']==='POST'){
+  cssv_external_processing_retired();
   cssv_enforce_rate_limit($pdo,'handwriting_write',$user,60,3600);cssv_log_security_event($pdo,'handwriting_write',$user,$user);
   $multipart=str_starts_with(strtolower((string)($_SERVER['CONTENT_TYPE']??'')),'multipart/form-data');
   if($multipart){

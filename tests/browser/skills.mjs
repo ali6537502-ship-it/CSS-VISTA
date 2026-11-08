@@ -35,7 +35,6 @@ try{
   await page.getByRole('button',{name:'Save independent response',exact:true}).click()
   await page.getByText(new RegExp('beginner · '+(feature==='essay'?1:2)+' saved versions')).waitFor()
   await page.getByRole('heading',{name:'Saved work and earlier versions',exact:true}).waitFor()
-  const link=page.getByRole('link',{name:'Ask VISTA about this activity',exact:true});await link.click();await page.getByText('Selected learning context',{exact:true}).waitFor();await page.getByText('Read the source context',{exact:true}).click();await page.getByText('Student response (unverified assertions; not an authoritative factual source)',{exact:false}).waitFor();await overflow()
  }
  await page.goto(base+'/account/essay-builder');await page.getByRole('link',{name:/beginner · 1 saved versions/}).first().click()
  const url=page.url()
@@ -75,5 +74,5 @@ try{
  await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:root+'/test-artifacts/skills-desktop.png',fullPage:true})
  php('tests/pro/fixture.php','expire',id);await page.reload();await page.getByRole('heading',{name:'Saved work and earlier versions',exact:true}).waitFor();await page.getByRole('button',{name:'Save independent response',exact:true}).waitFor();assert.ok(await page.locator('form textarea').count()>0,'Membership expiry blocked free writing practice')
  assert.deepEqual(errors,[])
- console.log('PASS actual built browser: four skills entry journeys, save/resume, owned Ask VISTA, 320–1440 widths, lost response receipt recovery, immutable comparison, selected-passage linked revision and return, independent signed-in device and free writing practice after membership expiry; no real provider calls')
+ console.log('PASS actual built browser: four skills entry journeys, save/resume, 320–1440 widths, lost response receipt recovery, immutable comparison, selected-passage linked revision and return, independent signed-in device and free writing practice after membership expiry; no real provider calls')
 }catch(e){console.log('Browser failed at',new URL(page.url()).pathname);throw e}finally{await browser.close()}

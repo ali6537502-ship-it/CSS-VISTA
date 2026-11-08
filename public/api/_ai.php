@@ -1,11 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__.'/_learning.php';require_once __DIR__.'/_ai_openai.php';require_once __DIR__.'/_profile.php';
-function cssv_ai_limit(string $feature): int {
- $defaults=cssv_ai_features();if(!isset($defaults[$feature]))throw new InvalidArgumentException('This AI scope is not permitted.');
- $raw=cssv_env('CSSV_AI_LIMIT_'.strtoupper($feature),(string)$defaults[$feature]);
- return is_string($raw) && preg_match('/^(?:0|[1-9][0-9]{0,2})$/D',$raw) ? (int)$raw : 0;
-}
+function cssv_ai_limit(string $feature): int { if(!array_key_exists($feature,cssv_ai_features()))throw new InvalidArgumentException('This AI scope is not permitted.');return 0; }
 function cssv_ai_owned_operation(PDO $pdo,string $id,string $userId): array {
  $q=$pdo->prepare('SELECT id,feature,version_id,bucket_date,state,accounting,result,error_code,created_at,completed_at FROM ai_operations WHERE id=? AND user_id=?');$q->execute([$id,$userId]);$op=$q->fetch();if(!$op)throw new OutOfBoundsException('AI operation not found.');
  if(cssv_learning_has_guided($pdo)){ $q=$pdo->prepare('SELECT w.id,w.feature FROM skills_ai_inputs s JOIN skills_workspaces w ON w.id=s.workspace_id WHERE s.operation_id=? AND w.user_id=?');$q->execute([$id,$userId]);$op['guided_workspace']=$q->fetch()?:null; }

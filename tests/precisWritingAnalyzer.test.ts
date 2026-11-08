@@ -103,3 +103,20 @@ test('substantially uncompressed writing still triggers a cautious length review
   assert.ok(codes(result).includes('length-review'))
   assert.equal(result.findings.find((f) => f.id === 'length-review')?.certainty, 'review')
 })
+
+
+test('valid irrealis and mandative subjunctives are not agreement errors', () => {
+  for (const draft of [
+    'If it were possible, the school would offer evening classes.',
+    'The council works, as it were, in isolation.',
+    'It is essential that he have access to the library.',
+    'It is necessary she have access to the library.',
+    'They recommend that it have a separate entrance.',
+  ]) {
+    const result = check(draft)
+    assert.ok(!codes(result).includes('it-plural'), draft)
+    assert.ok(!codes(result).includes('he-have'), draft)
+  }
+  assert.ok(codes(check('He have limited resources.')).includes('he-have'))
+  assert.ok(codes(check('It are a difficult problem.')).includes('it-plural'))
+})

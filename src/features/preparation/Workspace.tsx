@@ -1,9 +1,8 @@
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import WorkspaceVariant from '@/features/workspace-preview/WorkspaceVariant'
-import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { lazy, Suspense, useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router'
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 import { useLearning, type Attempt } from '@/features/learning/api'
 import { secondary, usePreparationAction, type PlanData } from './api'
 import PreparationPlan from './Plan'
@@ -30,7 +29,6 @@ function PreviewPreparationWorkspace({
   attempt: Attempt
   settings: ReactNode
 }) {
-  const paused = useProReleasePaused()
   const [params, setParams] = useSearchParams(),
     [generation, setGeneration] = useState(0)
   const requested = params.get('view'),
@@ -75,7 +73,6 @@ function PreviewPreparationWorkspace({
             onClick={() => {
               const next = new URLSearchParams(params)
               next.set('attempt', attempt.id); next.set('view', id)
-              if (paused && id === 'reading') next.set('kind', 'vistagram')
               setParams(next, { preventScrollReset: true })
             }}
           >
@@ -198,7 +195,7 @@ function PreviewPreparationWorkspace({
       )}
       <div className="flex flex-wrap gap-3 border-t pt-5">
         <Link className={secondary} to={`/account/ask-vista?attempt=${attempt.id}`}>
-          Ask VISTA
+          Earlier tutoring responses
         </Link>
         <Link className={secondary} to={`/grammar-course?view=profile&attempt=${attempt.id}`}>
           Grammar Profile

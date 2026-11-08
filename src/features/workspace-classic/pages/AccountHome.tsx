@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
-import { Link, useSearchParams } from 'react-router'
-import { ArrowRight, BookOpen, Bookmark, Calculator, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, MessageCircle, Newspaper, PenLine, ScanLine, Sparkles, Target, UserRound } from 'lucide-react'
+import { Link } from 'react-router'
+import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, MessageCircle, Newspaper, PenLine, ScanLine, Sparkles, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
-import MembershipSummary from '@/features/membership/MembershipSummary'
-import AccountSections, { ProBadge } from '@/features/membership/AccountSections'
+
+
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
@@ -15,7 +15,6 @@ import { AuthenticatedAccountAd } from '@/components/Ads'
 import { DashboardMptCard } from '@/components/mpt/DashboardMptCard'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
-import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 
 function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -39,7 +38,7 @@ function daysRemaining(examDate?: string) {
  * stagger, lift on hover and carry a sheen that follows the pointer. The
  * stylesheet disables all of it under prefers-reduced-motion.
  */
-function ChoiceCard({ to, icon: Icon, title, status, index, pro = false }: { to: string; icon: ComponentType<{ className?: string }>; title: string; status: string; index: number; pro?: boolean }) {
+function ChoiceCard({ to, icon: Icon, title, status, index }: { to: string; icon: ComponentType<{ className?: string }>; title: string; status: string; index: number }) {
   // Hand the sheen the pointer position. Cheap enough to run inline: it only
   // writes two custom properties and never triggers a React render.
   function track(event: { currentTarget: HTMLElement; clientX: number; clientY: number }) {
@@ -58,7 +57,7 @@ function ChoiceCard({ to, icon: Icon, title, status, index, pro = false }: { to:
         <span className="cssv-choice-icon grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
           <Icon className="h-5 w-5" />
         </span>
-        {pro && <ProBadge />}
+
       </span>
       <span className="mt-5">
         <span className="cssv-choice-title block text-lg font-bold text-slate-950">{title}</span>
@@ -73,9 +72,6 @@ function ChoiceCard({ to, icon: Icon, title, status, index, pro = false }: { to:
 
 export default function AccountHome() {
   const { user } = useAccount()
-  const [params] = useSearchParams()
-  const paused = useProReleasePaused()
-  const section = !paused && params.get('plan') === 'pro' ? 'pro' : 'free'
   const [version, setVersion] = useState(0)
   const [syllabusTotal, setSyllabusTotal] = useState(0)
 
@@ -102,7 +98,7 @@ export default function AccountHome() {
 
   // The edition card reads the same overview the reading desk uses, so it always
   // names the edition the student would actually open.
-  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema, section === 'pro')
+  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema, true)
 
   const snapshot = useMemo(() => {
     void version
@@ -195,9 +191,8 @@ export default function AccountHome() {
     { to: '/account/precis', icon: BookOpen, title: 'CSS Vista Preci Mentor', status: 'Free guided reading, writing practice and corrections' },
     { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
   )
-  const proChoices = [
+  const extraChoices = [
     { to: briefingRoot, icon: Newspaper, title: 'My Current Affairs Desk', status: affairsStatus },
-    { to: '/account/general-ability', icon: Calculator, title: 'General Ability', status: 'Guided maths, exercises & topic quizzes' },
     { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
     {
       to: '/study-material/essay-themes', icon: ListTree, title: 'Essay Themes 2027',
@@ -206,9 +201,11 @@ export default function AccountHome() {
         : 'Begin the 2027 research roadmap',
     },
 
-    { to: '/account/handwriting', icon: ScanLine, title: 'Handwritten Paragraph', status: 'Upload, confirm your wording & review feedback' },
-    { to: '/account/ask-vista', icon: MessageCircle, title: 'Ask VISTA', status: 'Study help linked to your preparation' },
+    { to: '/account/handwriting', icon: ScanLine, title: 'Earlier handwritten work', status: 'Read retained pages, transcriptions and feedback' },
+    { to: '/account/ask-vista', icon: MessageCircle, title: 'Earlier tutoring responses', status: 'Read your retained questions and responses' },
   ]
+
+  freeChoices.push(...extraChoices)
 
   const continueReading = briefing.data?.continue_reading?.[0]
 
@@ -231,24 +228,10 @@ export default function AccountHome() {
           </Link>
         </header>
 
-        <AccountSections selected={section} />
 
-        {section === 'pro' && (
-          <section aria-labelledby="pro-features" className="mt-9">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h2 id="pro-features" className="text-xl font-bold text-slate-950">Pro features</h2>
-              <ProBadge />
-            </div>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Starred features use your Pro membership. Your free tools are included below.</p>
-            <MembershipSummary />
-            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {proChoices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} pro />)}
-            </div>
-          </section>
-        )}
 
         <section aria-labelledby="free-features" className="mt-9">
-          <h2 id="free-features" className="text-xl font-bold text-slate-950">{section === 'pro' ? 'Your included free features' : 'Free features'}</h2>
+          <h2 id="free-features" className="text-xl font-bold text-slate-950">Your learning tools</h2>
           <p className="mt-2 text-sm leading-6 text-slate-600">Study, practise and keep your progress with your free account.</p>
           {!MPT_HIBERNATED && <DashboardMptCard />}
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -260,7 +243,7 @@ export default function AccountHome() {
           <section className="mt-12" aria-label="Pick up where you left off">
             <h2 className="text-sm font-semibold uppercase tracking-[.14em] text-slate-400">Pick up where you left off</h2>
             <div className="mt-4 divide-y divide-slate-100 border-y border-slate-100">
-              {section === 'pro' && continueReading && (
+              {continueReading && (
                 <Link to={`${briefingRoot}/${continueReading.id}`} className="flex items-center gap-4 py-4 hover:text-emerald-800">
                   <Newspaper className="h-4 w-4 shrink-0 text-emerald-700" />
                   <span className="min-w-0 flex-1">

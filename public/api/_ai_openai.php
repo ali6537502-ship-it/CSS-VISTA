@@ -5,7 +5,7 @@ final class CssvAiUnknown extends RuntimeException {}
 final class CssvAiRejected extends RuntimeException {}
 function cssv_ai_configuration(): array {
  $model=cssv_env('CSSV_AI_MODEL','gpt-6-luna');$key=cssv_env('CSSV_OPENAI_API_KEY','');
- return ['provider'=>'openai','model'=>$model,'prompt_version'=>'writing-feedback-v1','configured'=>cssv_env('CSSV_AI_ENABLED','0')==='1' && cssv_env('CSSV_AI_APPROVED','0')==='1' && cssv_env('CSSV_AI_MODEL_VERIFIED','0')==='1' && is_string($key) && strlen($key)>=16 && preg_match('/^[a-zA-Z0-9._-]{1,120}$/D',(string)$model)===1];
+ return ['provider'=>'openai','model'=>$model,'prompt_version'=>'writing-feedback-v1','configured'=>false && cssv_env('CSSV_AI_ENABLED','0')==='1' && cssv_env('CSSV_AI_APPROVED','0')==='1' && cssv_env('CSSV_AI_MODEL_VERIFIED','0')==='1' && is_string($key) && strlen($key)>=16 && preg_match('/^[a-zA-Z0-9._-]{1,120}$/D',(string)$model)===1];
 }
 function cssv_ai_result_schema(): array {
  $string=['type'=>'string'];
