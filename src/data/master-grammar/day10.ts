@@ -1,0 +1,286 @@
+import type { GrammarDay } from './types'
+import { stageOf } from './types'
+
+export const day10: GrammarDay = {
+  day: 10,
+  ...stageOf(10),
+  title: 'Pronouns',
+  whatYouWillLearn:
+    'You will learn the main types of pronouns — subject, object, possessive, reflexive, demonstrative, relative, and indefinite — and how to use each one correctly and clearly.',
+  simpleExplanation: [
+    'A pronoun is a word that stands in for a noun so we do not have to keep repeating it. You already met this idea on Day 1. Today you will look at all the different kinds of pronouns and the small mistakes that happen with each one.',
+    'Pronouns change their form depending on the job they do in a sentence — whether they are doing the action, receiving it, showing ownership, or pointing something out. Two more things matter with every pronoun: it must match its noun in number, and it must clearly point to one obvious noun, so the reader never has to guess who or what it means.',
+  ],
+  rules: [
+    {
+      rule: 'Subject pronouns (I, you, he, she, it, we, they) do the action; object pronouns (me, you, him, her, it, us, them) receive it.',
+      explanation: 'Use the subject form before the verb, and the object form after the verb or after a preposition.',
+      correct: 'She invited him to the party.',
+      wrong: 'Her invited he to the party.',
+      correction: 'The subject form “She” is needed before the verb, and the object form “him” is needed after the verb.',
+    },
+    {
+      rule: 'Possessive adjectives (my, your, his, her, its, our, their) go directly before a noun; possessive pronouns (mine, yours, his, hers, its, ours, theirs) stand alone.',
+      explanation: 'A possessive pronoun replaces a noun completely, so nothing follows it.',
+      correct: 'This is my bag. That bag is mine.',
+      wrong: 'This is mine bag.',
+      correction: '“Mine” cannot go directly before a noun; the possessive adjective “my” is needed instead.',
+    },
+    {
+      rule: 'Reflexive pronouns (myself, yourself, himself, herself, itself, ourselves, yourselves, themselves) are used when the subject and object of the verb are the same, or for emphasis.',
+      explanation: 'They show that the action comes back to the same person or thing that did it.',
+      correct: 'She taught herself to cook.',
+    },
+    {
+      rule: 'Demonstrative pronouns (this, that, these, those) point to something specific and must match it in number.',
+      explanation: '“This” and “that” refer to one thing; “these” and “those” refer to more than one.',
+      correct: 'This shirt is new, but those shoes are old.',
+      wrong: 'This shoes are new.',
+      correction: '“Shoes” is plural, so it needs the plural demonstrative “these”, not “this”.',
+    },
+    {
+      rule: 'Relative pronouns (who, whom, which, that) introduce a clause that gives more information about a noun.',
+      explanation: '“Who” and “whom” refer to people; “which” refers to things; “that” can refer to either in an informal, defining clause.',
+      correct: 'The man who called is my uncle.',
+    },
+    {
+      rule: 'In formal writing, “who” is the subject form and “whom” is the object form of the same relative pronoun.',
+      explanation: 'A simple test: if you can answer the implied question with “he”, use “who”; if the natural answer is “him”, use “whom”. In everyday speech, “who” is now often used for both, but formal writing still keeps the distinction.',
+      correct: 'Who called you? (He called.) To whom did you send the letter? (I sent it to him.)',
+    },
+    {
+      rule: 'A pronoun must agree in number with the noun it replaces.',
+      explanation: 'A singular noun needs a singular pronoun, and a plural noun needs a plural pronoun. Indefinite pronouns such as everyone, everybody, and each are grammatically singular, even though they often refer to a group of people.',
+      correct: 'Everyone has brought his or her own lunch.',
+      wrong: 'Everyone have brought their lunch.',
+      correction: '“Everyone” is singular, so it needs “has”, not “have”.',
+    },
+    {
+      rule: 'A pronoun should refer clearly to one obvious noun — avoid using “it”, “he”, “she”, or “they” when the reader cannot tell which noun it points to.',
+      explanation: 'If a pronoun could reasonably point to more than one noun in the sentence, rewrite the sentence to remove the confusion.',
+      correct: 'When Ali met Ahmed, Ahmed was carrying a heavy bag.',
+      wrong: 'When Ali met Ahmed, he was carrying a heavy bag.',
+      correction: '“He” could refer to either Ali or Ahmed; naming the person removes the ambiguity.',
+    },
+  ],
+  easyExamples: [
+    'He gave her the keys.',
+    'This is my phone; that one is yours.',
+    'She hurt herself while cooking.',
+    'Everybody knows the answer.',
+  ],
+  practicalExamples: [
+    'The manager who signed the contract has resigned.',
+    'Each employee must submit his or her leave application by Friday.',
+    'The team celebrated among themselves after the win.',
+    'Anyone with a valid ticket may enter the hall.',
+  ],
+  examExamples: [
+    'The witness who testified yesterday later withdrew his statement.',
+    'Neither of the candidates has submitted his nomination papers on time.',
+    'Those who arrive late will not be permitted to sit the examination.',
+  ],
+  commonMistakes: [
+    {
+      wrong: 'This is mine book.',
+      right: 'This is my book.',
+      why: '“Mine” is a possessive pronoun and cannot go directly before a noun; the possessive adjective “my” is needed.',
+    },
+    {
+      wrong: 'Her is my sister.',
+      right: 'She is my sister.',
+      why: 'A subject pronoun is needed before the verb “is”.',
+    },
+    {
+      wrong: 'Everyone have finished the test.',
+      right: 'Everyone has finished the test.',
+      why: 'Indefinite pronouns like “everyone” are treated as singular and take a singular verb.',
+    },
+    {
+      wrong: 'Each of the boys have his own bag.',
+      right: 'Each of the boys has his own bag.',
+      why: '“Each” is singular and takes a singular verb.',
+    },
+    {
+      wrong: 'Myself will handle the issue.',
+      right: 'I will handle the issue.',
+      why: 'A reflexive pronoun cannot be used as the subject of a sentence; the subject pronoun “I” is needed.',
+    },
+    {
+      wrong: 'This shoes are too tight.',
+      right: 'These shoes are too tight.',
+      why: '“Shoes” is plural, so it needs the plural demonstrative “these”, not “this”.',
+    },
+  ],
+  memoryTip:
+    'For who/whom, try the he/him test: if the answer to the implied question is “he”, use “who”; if it is “him”, use “whom”. (“Who called?” — He called. “Whom did you call?” — I called him.)',
+  practice: [
+    {
+      stage: 'Recognise it',
+      prompt: 'In “They invited us to the wedding,” what kind of pronoun is “us”?',
+      answer: 'Object pronoun',
+      reason: 'It receives the action of the verb “invited”.',
+    },
+    {
+      stage: 'Recognise it',
+      prompt: 'In “This is mine,” what kind of pronoun is “mine”?',
+      answer: 'Possessive pronoun',
+      reason: 'It stands alone, replacing a noun and a possessive adjective together, with no noun following it.',
+    },
+    {
+      stage: 'Recognise it',
+      prompt: 'In “The man who called is my uncle,” what kind of pronoun is “who”?',
+      answer: 'Relative pronoun',
+      reason: 'It introduces a clause that gives more information about “the man”.',
+    },
+    {
+      stage: 'Fill in the blank',
+      prompt: '____ own the blue car parked outside. (subject pronoun for “I and my brother”)',
+      answer: 'We',
+      reason: 'A subject pronoun is needed before the verb “own”.',
+    },
+    {
+      stage: 'Fill in the blank',
+      prompt: 'Give the file to ____. (he / him)',
+      answer: 'him',
+      reason: 'An object pronoun is needed after the preposition “to”.',
+    },
+    {
+      stage: 'Fill in the blank',
+      prompt: 'Everybody ____ (is / are) welcome to join the club.',
+      answer: 'is',
+      reason: '“Everybody” is an indefinite pronoun and is treated as singular.',
+    },
+    {
+      stage: 'Choose the correct form',
+      prompt: '(Whom / Who) is knocking at the door?',
+      answer: 'Who',
+      reason: '“Who” is the subject form, needed because it is the subject of “is knocking”.',
+    },
+    {
+      stage: 'Choose the correct form',
+      prompt: 'The keys on the table are (her / hers).',
+      answer: 'hers',
+      reason: 'A possessive pronoun is needed because it stands alone, with no noun after it.',
+    },
+    {
+      stage: 'Choose the correct form',
+      prompt: 'The children entertained (them / themselves) at the party.',
+      answer: 'themselves',
+      reason: 'A reflexive pronoun is needed because the subject and the object refer to the same people.',
+    },
+    {
+      stage: 'Correct the sentence',
+      prompt: 'Each of the students have brought his own laptop.',
+      answer: 'Each of the students has brought his own laptop.',
+      reason: '“Each” is grammatically singular and needs the singular verb “has”.',
+    },
+    {
+      stage: 'Correct the sentence',
+      prompt: 'Ali hurt him while playing football.',
+      answer: 'Ali hurt himself while playing football.',
+      reason: 'The reflexive pronoun “himself” is needed because the subject and the object of “hurt” are the same person.',
+    },
+    {
+      stage: 'Correct the sentence',
+      prompt: 'Neither of the girls have submitted her assignment.',
+      answer: 'Neither of the girls has submitted her assignment.',
+      reason: '“Neither” is singular and needs the singular verb “has”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: 'When Ali met Ahmed, he was carrying a heavy bag.',
+      answer: 'When Ali met Ahmed, Ahmed was carrying a heavy bag.',
+      reason: '“He” could refer to either Ali or Ahmed; naming the person removes the unclear reference.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: 'Whom is responsible for this decision?',
+      answer: 'Who is responsible for this decision?',
+      reason: '“Who” is needed as the subject of the verb “is” — “he is responsible”, not “him is responsible”.',
+    },
+  ],
+  quiz: [
+    {
+      question: 'Choose the sentence with the correct object pronoun.',
+      options: ['Give the ball to they.', 'Give the ball to them.', 'Give the ball to their.', 'Give the ball to theirs.'],
+      correct: 1,
+      explanation: 'An object pronoun is needed after the preposition “to”; “them” is the object form of “they”.',
+    },
+    {
+      question: 'Which sentence uses a possessive pronoun correctly?',
+      options: ['This pen is mine.', 'This pen is my.', 'This is mine pen.', 'This pen is I.'],
+      correct: 0,
+      explanation: '“Mine” stands alone, without a following noun, as a possessive pronoun.',
+    },
+    {
+      question: 'Choose the correct sentence.',
+      options: ['He blamed him for the mistake.', 'He blamed himself for the mistake.', 'He blamed he for the mistake.', 'He blamed his for the mistake.'],
+      correct: 1,
+      explanation: 'The subject and the object refer to the same person, so the reflexive pronoun “himself” is needed.',
+    },
+    {
+      question: 'Which sentence correctly matches a demonstrative pronoun to a plural noun?',
+      options: ['This books are useful.', 'These books are useful.', 'That books are useful.', 'This book are useful.'],
+      correct: 1,
+      explanation: '“Books” is plural, so it needs the plural demonstrative “these”, not “this”.',
+    },
+    {
+      question: 'Choose the sentence that correctly uses “who” as a subject.',
+      options: ['Whom is calling you?', 'Who is calling you?', 'Who you are calling?', 'Whom calling you?'],
+      correct: 1,
+      explanation: '“Who” is needed because it is the subject of “is calling” (“he is calling”, not “him is calling”).',
+    },
+    {
+      question: 'Which sentence agrees correctly in number?',
+      options: ['Everyone have submitted their form.', 'Everyone has submitted their form.', 'Everyone are submitting their form.', 'Everyone submit their form.'],
+      correct: 1,
+      explanation: '“Everyone” is an indefinite pronoun that takes the singular verb “has”.',
+    },
+    {
+      question: 'Choose the correct sentence.',
+      options: ['Each of the workers have his own tools.', 'Each of the workers has his own tools.', 'Each of the worker has his own tools.', 'Each of the workers having his own tools.'],
+      correct: 1,
+      explanation: '“Each” is singular, so it takes the singular verb “has”.',
+    },
+    {
+      question: 'Which sentence avoids an unclear pronoun reference?',
+      options: ['Ali told Ahmed that he had won the prize.', 'Ali told Ahmed, “You have won the prize.”', 'Ali and Ahmed, he won the prize.', 'Ali told he had won the prize.'],
+      correct: 1,
+      explanation: 'Direct speech removes the ambiguity of “he”, which in the first option could refer to either Ali or Ahmed.',
+    },
+    {
+      question: 'Which sentence uses a reflexive pronoun correctly, for emphasis?',
+      options: ['I will do it myself.', 'I will do it me.', 'I will do it my.', 'I will do it mine.'],
+      correct: 0,
+      explanation: '“Myself” is used here for emphasis, showing that no one else will help.',
+    },
+    {
+      question: 'Choose the correct sentence.',
+      options: ['Neither of the answers are correct.', 'Neither of the answers is correct.', 'Neither of the answer is correct.', 'Neither of the answers were correct.'],
+      correct: 1,
+      explanation: '“Neither” is singular and takes the singular verb “is”.',
+    },
+    {
+      question: 'Which sentence correctly uses a possessive adjective before a noun?',
+      options: ['This is mine bag.', 'This is my bag.', 'This is mine’s bag.', 'This bag is my.'],
+      correct: 1,
+      explanation: '“My” is a possessive adjective and goes directly before a noun; “mine” never does.',
+    },
+    {
+      question: 'In formal writing, which sentence correctly uses “whom”?',
+      options: ['Whom is your teacher?', 'To whom did you give the letter?', 'Whom called you yesterday?', 'Whom is coming to the party?'],
+      correct: 1,
+      explanation: '“Whom” is the object form, correctly used here after the preposition “to” (“I gave the letter to him”).',
+    },
+  ],
+  quickRevision: [
+    'Subject pronouns (I, he, she, they) do the action; object pronouns (me, him, her, them) receive it.',
+    'Possessive adjectives (my, her, their) go before a noun; possessive pronouns (mine, hers, theirs) stand alone.',
+    'Reflexive pronouns (myself, himself, themselves) are used when the subject and object are the same, or for emphasis.',
+    'Demonstrative pronouns must match number: this/that for singular, these/those for plural.',
+    'Indefinite pronouns like everyone, everybody, and each are grammatically singular and take a singular verb.',
+    'Test for who/whom: if “he” fits the answer, use who; if “him” fits, use whom.',
+    'Make sure every pronoun clearly points to one obvious noun — rewrite the sentence if it could mean more than one thing.',
+  ],
+}
