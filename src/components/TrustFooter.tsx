@@ -1,5 +1,5 @@
 import { useWorkspacePreview } from '@/features/workspace-preview/context'
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import { useLocation } from 'react-router'
 import { site } from '@/data/site'

@@ -15,7 +15,7 @@ function cssv_tutor_configuration(): array {
 function cssv_tutor_meta(PDO $pdo,string $user): array {
  $now=new DateTimeImmutable('now',new DateTimeZone('Asia/Karachi'));$date=$now->format('Y-m-d');$q=$pdo->prepare("SELECT feature,used,reserved,accepted FROM ai_daily_usage WHERE user_id=? AND bucket_date=? AND feature IN ('tutor','maths','current_affairs')");$q->execute([$user,$date]);$rows=array_column($q->fetchAll(),null,'feature');$usage=[];
  foreach(['tutor','maths','current_affairs'] as $feature){$r=$rows[$feature]??[];$usage[$feature]=['limit'=>cssv_ai_limit($feature),'used'=>(int)($r['used']??0),'reserved'=>(int)($r['reserved']??0),'accepted'=>(int)($r['accepted']??0)];}
- return ['configuration'=>cssv_tutor_configuration(),'active'=>cssv_pro_membership($pdo,$user)['status']==='active','date'=>$date,'reset_at'=>$now->modify('tomorrow')->setTime(0,0)->format(DateTimeInterface::ATOM),'usage'=>$usage];
+ return ['configuration'=>cssv_tutor_configuration(),'active'=>true,'date'=>$date,'reset_at'=>$now->modify('tomorrow')->setTime(0,0)->format(DateTimeInterface::ATOM),'usage'=>$usage];
 }
 function cssv_tutor_snapshot(PDO $pdo,array $op): array {
  if(!in_array($op['feature'],['tutor','maths','current_affairs'],true))throw new InvalidArgumentException('Choose an Ask VISTA operation.');

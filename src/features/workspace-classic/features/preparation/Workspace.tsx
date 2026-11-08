@@ -1,20 +1,19 @@
-import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router'
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 import { useLearning, type Attempt } from '@/features/learning/api'
 import { secondary, usePreparationAction, type PlanData } from '@/features/preparation/api'
 import PreparationPlan from '@/features/workspace-classic/features/preparation/Plan.tsx'
 import Coverage from '@/features/preparation/Coverage'
 import ConnectedReading from '@/features/preparation/Reading'
 import TopicWorkspace from '@/features/topics/Workspace'
-import { ProBadge } from '@/features/membership/AccountSections'
+
 import { PlanHistory, Readiness, Reviews } from '@/features/preparation/Reports'
 const views = [
   ['plan', 'Today’s plan'],
   ['coverage', 'Coverage'],
   ['reading', 'Reading & revision'],
-  ['topics', 'Pro topic learning'],
+  ['topics', 'Subject learning'],
   ['readiness', 'Preparation evidence'],
   ['reviews', 'Reviews'],
   ['history', 'History'],
@@ -27,7 +26,6 @@ export default function PreparationWorkspace({
   attempt: Attempt
   settings: ReactNode
 }) {
-  const paused = useProReleasePaused()
   const [params, setParams] = useSearchParams(),
     [generation, setGeneration] = useState(0)
   const requested = params.get('view'),
@@ -64,15 +62,15 @@ export default function PreparationWorkspace({
         </button>
       </header>
       <nav aria-label="Attempt workspace" className="flex flex-wrap gap-2">
-        {views.filter(([id]) => !paused || id !== 'topics').map(([id, label]) => (
+        {views.map(([id, label]) => (
           <button
             key={id}
             aria-current={view === id ? 'page' : undefined}
             className={`${secondary} ${view === id ? 'border-indigo-600 bg-indigo-50 text-indigo-800' : ''}`}
-            onClick={() => setParams({ attempt: attempt.id, view: id, ...(paused && id === 'reading' ? { kind: 'vistagram' } : {}) })}
+            onClick={() => setParams({ attempt: attempt.id, view: id })}
           >
             {label}
-            {id === 'topics' && <ProBadge />}
+
           </button>
         ))}
       </nav>
@@ -190,7 +188,7 @@ export default function PreparationWorkspace({
       )}
       <div className="flex flex-wrap gap-3 border-t pt-5">
         <Link className={secondary} to={`/account/ask-vista?attempt=${attempt.id}`}>
-          Ask VISTA
+          Earlier tutoring responses
         </Link>
         <Link className={secondary} to={`/grammar-course?view=profile&attempt=${attempt.id}`}>
           Grammar Profile

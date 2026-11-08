@@ -23,7 +23,7 @@ try {
     }
     if (!$admin) {
         $session=cssv_require_user($pdo);
-        cssv_pro_require_active($pdo,(string)$session['user_id']);
+        // Free for the authenticated complete account returned above.
     }
     if ($file==='current-affairs-topics') {
         $row=$pdo->query("SELECT content FROM site_content WHERE id='published'")->fetchColumn();

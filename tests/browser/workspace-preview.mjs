@@ -33,7 +33,7 @@ async function logout() {
   assert.equal((await context.request.post(base+'/api/auth/logout.php',{headers:{'X-CSRF-Token':decodeURIComponent(token)},data:{}})).status(),200)
 }
 async function classic() {
-  await page.getByRole('heading',{name:'Free features',exact:true}).waitFor()
+  await page.getByRole('heading',{name:'Your learning tools',exact:true}).waitFor()
   assert.equal(await page.locator('.student-workspace').count(),0)
 }
 async function check(name,run) {
@@ -67,7 +67,7 @@ try {
         await page.goto(base+'/account/'+route)
         await page.getByRole('heading',{name:title,exact:true}).waitFor()
         await page.locator('.student-workspace').waitFor()
-        assert.equal(await page.locator('.ws-feature').filter({hasText:/Pro · membership required|Membership & Payments|Précis Lab|My Answer Performance/}).count(),0)
+        assert.equal(await page.locator('.ws-feature').filter({hasText:/Pro · membership required|Membership & Payments|General Ability/}).count(),0)
         if(route==='subjects') await page.getByRole('heading',{name:'Political Science',exact:true}).waitFor()
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${route} overflow at ${width}`)
         assert.equal(await page.getByRole('navigation',{name:'Primary mobile navigation',exact:true}).count(),0)

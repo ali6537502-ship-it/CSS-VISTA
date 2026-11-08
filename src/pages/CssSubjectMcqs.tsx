@@ -1,6 +1,5 @@
-import ProGate from '@/features/membership/ProGate'
-import { ProBadge } from '@/features/membership/AccountSections'
-import { useMembership, useMembershipExpired, type Overview } from '@/features/membership/api'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import {
   ArrowLeft, ArrowRight, BookOpenCheck, CheckCircle2, Layers3, Loader2,
@@ -58,9 +57,6 @@ const comparableName = (value: string) => value
 
 export default function CssSubjectMcqs() {
   const [index, setIndex] = useState<CssSubjectMcqIndex | null>(null)
-  const membership = useMembership<Overview>()
-  const expired = useMembershipExpired(membership.data?.membership.expires_at)
-  const paidAccess = membership.data?.membership.status === 'active' && !expired && !membership.error
   const [selected, setSelected] = useState<CssSubjectMcqSummary | null>(null)
   const [rawBank, setRawBank] = useState<CssSubjectQuestion[]>([])
   const [bank, setBank] = useState<BankQuestion[]>([])
@@ -98,7 +94,7 @@ export default function CssSubjectMcqs() {
       if (live) { setRawBank(questions); setBank(questions.map(toBankQuestion)); setError('') }
     }).catch(() => { if (live) setError('This subject practice could not be loaded. Please retry.') }).finally(() => { if (live) setLoading(false) })
     return () => { live = false }
-  }, [selected, paidAccess])
+  }, [selected])
 
   const banksByName = useMemo(() => new Map(
     (index?.subjects ?? []).map((subject) => [comparableName(subject.name), subject]),
@@ -190,7 +186,6 @@ export default function CssSubjectMcqs() {
   if (selected) {
     const content = (
       <div>
-        {selected?.slug === 'general-science-and-ability' && <p className="mx-auto max-w-5xl px-4 py-4 text-sm text-slate-600"><ProBadge /> General Ability practice is included in Pro. General Science questions remain free.</p>}
       <PageHeader
           title={selected.name}
           description="Focused CSS subject practice from the complete structurally validated owner-supplied bank. Every answer, save, response time and mistake connects to the existing progress system."
@@ -280,7 +275,7 @@ export default function CssSubjectMcqs() {
         </main>
       </div>
     )
-    return selected.slug === 'current-affairs' ? <ProGate feature="Current Affairs MCQs">{content}</ProGate> : content
+    return content
   }
 
   return (

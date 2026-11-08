@@ -14,7 +14,6 @@ import { useStudioSave } from "./useStudioSave";
 import {
   names,
   skillsLink,
-  type Configuration,
   type Detail,
   type Feature,
   type Level,
@@ -77,15 +76,13 @@ function Recovery({ save }: { save: Saver }) {
     </>
   );
 }
-function Availability({ config }: { config: Configuration }) {
+function Availability() {
   return (
     <p
       role="status"
       className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-7"
     >
-      {config.enabled
-        ? "Instructional AI feedback is available on your saved writing. It uses the displayed daily allowance."
-        : "Personal AI feedback is unavailable. Lessons, fixed checks, independent writing and saved revisions remain available."}
+      Free lessons, fixed checks, independent writing and saved revisions are available to every account.
     </p>
   );
 }
@@ -405,122 +402,11 @@ function Exercise({
     </form>
   );
 }
-function FeedbackPanel({ detail, save }: { detail: Detail; save: Saver }) {
-  const [accepted, setAccepted] = useState(false),
-    current = detail.saved;
-  const op = detail.operations.find(
-    (o) => o.version_id === current?.version_id,
-  );
-  const blocked =
-    !!op &&
-    ["reserved", "in_flight", "unknown", "succeeded"].includes(op.state);
-  return (
-    <section
-      className={`${panelStyle} space-y-4`}
-      aria-label="Instructional feedback"
-    >
-      <h3 className="text-xl font-semibold">Review your saved writing</h3>
-      <Availability config={detail.configuration} />
-      {op && (
-        <p role="status" className="text-sm leading-7">
-          Saved feedback request: {op.state.replaceAll("_", " ")}.{" "}
-          {op.state === "unknown"
-            ? "The provider outcome is unresolved. Refresh saved status; do not send another request for this version."
-            : ""}
-        </p>
-      )}
-      {op?.result && (
-        <div className="space-y-4">
-          <p className="text-sm leading-7">{op.result.assessment}</p>
-          <p className="whitespace-pre-wrap leading-8">{op.result.summary}</p>
-          {op.result.criteria.map((c) => (
-            <article key={c.code} className="space-y-2 rounded-xl border p-4">
-              <h4 className="font-semibold">
-                {c.label} · {c.status.replaceAll("_", " ")}
-              </h4>
-              <blockquote className="whitespace-pre-wrap break-words border-l-2 pl-3 text-sm leading-7">
-                {c.excerpt}
-              </blockquote>
-              <p className="text-sm leading-7">{c.explanation}</p>
-              <p className="text-sm leading-7">
-                <strong>Try:</strong> {c.hint}
-              </p>
-            </article>
-          ))}
-          {op.result.evidence_flags.map((flag, i) => (
-            <p
-              key={i}
-              className="break-words rounded-xl bg-amber-50 p-4 text-sm leading-7"
-            >
-              <strong>{flag.status.replaceAll("_", " ")}:</strong> “
-              {flag.excerpt}” — {flag.explanation}
-            </p>
-          ))}
-          <p className="rounded-xl bg-slate-50 p-4 leading-7">
-            <strong>Next question:</strong> {op.result.next_question}
-          </p>
-          {op.result.findings.map((f, i) => (
-            <article key={i} className="space-y-2 text-sm leading-7">
-              <blockquote>{f.excerpt}</blockquote>
-              <p>{f.explanation}</p>
-              <p>{f.hint}</p>
-              <Link
-                className="font-semibold underline"
-                to={`/grammar-course?view=lab&attempt=${detail.workspace.attempt_id}`}
-              >
-                Open Grammar Error Lab
-              </Link>
-            </article>
-          ))}
-        </div>
-      )}
-      {!blocked && current && (
-        <>
-          <p className="whitespace-pre-wrap text-sm leading-7">
-            {detail.configuration.processing_notice}
-          </p>
-          <label className="flex min-h-11 items-start gap-3 text-sm leading-7">
-            <input
-              type="checkbox"
-              disabled={
-                !detail.configuration.enabled ||
-                detail.membership.status !== "active"
-              }
-              checked={accepted}
-              onChange={(e) => setAccepted(e.target.checked)}
-              className="mt-1 h-5 w-5 shrink-0"
-            />
-            <span>
-              I reviewed this saved wording and the processing notice.
-            </span>
-          </label>
-          <button
-            disabled={
-              !accepted ||
-              !detail.configuration.enabled ||
-              detail.membership.status !== "active" ||
-              save.busy ||
-              !!save.pending
-            }
-            className={primaryStyle}
-            onClick={() =>
-              void save.save({
-                action: "evaluate",
-                workspace_id: detail.workspace.id,
-                version_id: current.version_id,
-                policy_version: detail.configuration.policy_version,
-                  policy_hash: detail.configuration.policy_hash,
-                accepted: true,
-              })
-            }
-          >
-            Request instructional feedback
-          </button>
-        </>
-      )}
-    </section>
-  );
+function FeedbackPanel({ detail }: { detail: Detail; save: Saver }) {
+  const earlier = detail.operations.filter(operation => operation.result)
+  return <section className={panelStyle}><h3 className="font-semibold">Review your reasoning</h3><p className="mt-3 text-sm leading-7">Use the lesson criteria and your independent response to check clarity, support and meaning. Save a revision when you can explain the improvement.</p>{earlier.length > 0 && <details className="mt-4"><summary className="min-h-11 cursor-pointer font-semibold">Earlier saved feedback</summary>{earlier.map(operation => <p key={operation.id} className="mt-3 whitespace-pre-wrap text-sm leading-7">{operation.result?.summary}</p>)}</details>}</section>
 }
+
 function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
   const [range, setRange] = useState<{start:number;end:number} | null>(null);
   const [field, setField] = useState(""),
@@ -976,7 +862,7 @@ function Session({
           className={secondaryStyle}
           to={`/account/ask-vista?context=${encodeURIComponent(`skills:${w.id}:${saved?.version_id || "new"}:${stage.id}`)}&attempt=${w.attempt_id}`}
         >
-          Ask VISTA about this activity
+          Read earlier tutoring responses
         </Link>
       )}
       <FeedbackPanel key={`${detail.saved?.version_id || "new"}:${detail.configuration.policy_hash || "disabled"}`} detail={detail} save={save} />
@@ -1077,7 +963,7 @@ export default function Studio({ feature }: { feature: Feature }) {
       ) : (
         overview.data && (
           <>
-            <Availability config={overview.data.configuration} />
+            <Availability />
             <Start key={feature} feature={feature} data={overview.data} save={save} selected={params.get("theme") || undefined} />
             <section className={`${panelStyle} space-y-4`}>
               <h3 className="text-xl font-semibold">Continue saved work</h3>

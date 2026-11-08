@@ -7,7 +7,7 @@ try{
     if($_SERVER['REQUEST_METHOD']==='POST')cssv_require_csrf($session);cssv_skills_ensure($pdo);
     if($_SERVER['REQUEST_METHOD']==='POST'){
         cssv_enforce_rate_limit($pdo,'skills_write',$user,240,3600);cssv_log_security_event($pdo,'skills_write',$user,$user);$body=cssv_request_json(50000);
-        if(($body['action']??null)==='evaluate'){$id=cssv_skills_ai_reserve($pdo,$user,$body);cssv_skills_ai_execute($pdo,$id);cssv_json(['ok'=>true,'skills_receipt'=>true,'operation'=>cssv_ai_owned_operation($pdo,$id,$user)]);}
+        if(($body['action']??null)==='evaluate'){cssv_external_processing_retired();$id=cssv_skills_ai_reserve($pdo,$user,$body);cssv_skills_ai_execute($pdo,$id);cssv_json(['ok'=>true,'skills_receipt'=>true,'operation'=>cssv_ai_owned_operation($pdo,$id,$user)]);}
         cssv_json(['ok'=>true,...cssv_skills_mutation($pdo,$user,$body)]);
     }
     cssv_pro_fields($_GET,['feature','workspace_id','version_id','request_id','view','offset']);

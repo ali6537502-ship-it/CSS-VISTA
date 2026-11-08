@@ -58,7 +58,7 @@ assert.equal((await mutate(body(item,'read'))).status,200);assert.equal((await c
 const vista=(await get('&kind=vistagram')).data.items[0];assert.ok(vista?.sources.length,'Missing published Vistagram references');assert.equal((await mutate(body(vista,'read'))).status,200)
 assert.equal((await call(`${endpoint}?attempt=${attempt}&view=readiness`,undefined,a.jar)).data.dimensions.reading.vistagram_readings,1)
 const receipt=await call(endpoint+'?request_id='+read.request_id,undefined,a.jar);assert.equal(receipt.status,200);assert.equal((await call(endpoint+'?request_id='+read.request_id,undefined,b.jar)).status,404)
-php('tests/precis/fixture.php','activate',a.id);php('tests/pro/fixture.php','expire',a.id);assert.equal((await get('&filter=read')).status,403,'Expired Pro received paid Current Affairs study')
+php('tests/precis/fixture.php','activate',a.id);php('tests/pro/fixture.php','expire',a.id);assert.equal((await get('&filter=read')).status,200,'Old membership expiry blocked free Current Affairs study')
 assert.equal((await get('&kind=vistagram')).status,200,'Expiry removed free Vistagram study')
 php('tests/precis/fixture.php','activate',a.id);assert.equal((await get('&filter=read')).status,200,'Renewal lost Current Affairs records')
 item=(await detail('current_affairs',source)).data.items[0];assert.equal((await mutate(body(item,'unsave'))).status,200,'Renewal lost reading organisation')

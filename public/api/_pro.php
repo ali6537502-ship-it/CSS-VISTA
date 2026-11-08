@@ -17,32 +17,15 @@ function cssv_pro_ensure_schema(PDO $pdo): void
     finally { $pdo->query("SELECT RELEASE_LOCK('cssvista-pro-schema-v1')"); }
 }
 
-function cssv_pro_product(): array
-{
-    $price = cssv_env('CSSV_PRO_PRICE_MINOR','195000');
-    $number = cssv_env('CSSV_PRO_RECEIVER_NUMBER','03055199994');
-    $title = cssv_env('CSSV_PRO_RECEIVER_TITLE','Ali Hassan');
-    $terms = cssv_env('CSSV_PRO_TERMS_TEXT','');
-    $version = cssv_env('CSSV_PRO_TERMS_VERSION','');
-    $validPrice = is_string($price) && preg_match('/^[1-9][0-9]{0,8}$/D',$price);
-    $ready = !cssv_pro_release_paused() && cssv_env('CSSV_PRO_COLLECTION_ENABLED','0') === '1'
-        && cssv_env('CSSV_PRO_COLLECTION_APPROVED','0') === '1'
-        && $validPrice && preg_match('/^0[0-9]{10}$/D',(string)$number)
-        && mb_strlen((string)$title) > 0 && mb_strlen((string)$title) <= 120
-        && mb_strlen((string)$terms) > 0 && mb_strlen((string)$terms) <= 10000
-        && preg_match('/^[A-Za-z0-9._-]{1,80}$/D',(string)$version);
-    return ['name'=>'Pro — 30 Days','amount_minor'=>$validPrice ? (int)$price : null,'currency'=>'PKR','duration_days'=>30,
-        'collection_enabled'=>(bool)$ready,'receiver_number'=>$ready ? $number : null,'receiver_title'=>$ready ? $title : null,
-        'terms_version'=>$ready ? $version : null,'terms_text'=>$ready ? $terms : null,
-        'product_revision'=>$ready ? hash('sha256',json_encode([$price,$number,$title,$version,$terms,30],JSON_THROW_ON_ERROR)) : null];
+function cssv_pro_product(): array {
+    return ['name'=>'Free learning','amount_minor'=>0,'currency'=>'PKR','duration_days'=>null,
+        'collection_enabled'=>false,'receiver_number'=>null,'receiver_title'=>null,
+        'terms_version'=>null,'terms_text'=>null,'product_revision'=>null,'retired'=>true];
 }
 
-function cssv_pro_membership(PDO $pdo, string $userId): array
-{
-    $q=$pdo->prepare('SELECT starts_at,expires_at FROM pro_memberships WHERE user_id=?'); $q->execute([$userId]);
-    $row=$q->fetch() ?: null;
-    return ['status'=>cssv_pro_status($row,new DateTimeImmutable('now',new DateTimeZone('UTC'))),
-        'starts_at'=>cssv_pro_iso($row['starts_at'] ?? null),'expires_at'=>cssv_pro_iso($row['expires_at'] ?? null)];
+/** Legacy DTO only: old grants remain in storage, but never determine access. */
+function cssv_pro_membership(PDO $pdo, string $userId): array {
+    return ['status'=>'free','starts_at'=>null,'expires_at'=>null];
 }
 
 function cssv_pro_iso(?string $value): ?string
@@ -50,14 +33,9 @@ function cssv_pro_iso(?string $value): ?string
     return $value ? (new DateTimeImmutable($value,new DateTimeZone('UTC')))->format('Y-m-d\TH:i:s.u\Z') : null;
 }
 
-function cssv_pro_require_active(PDO $pdo, string $userId, string $scope = ''): void
-{
-    // Owner-approved, narrowly scoped release: only the self-contained Précis workspace.
-    if ($scope !== 'precis') cssv_pro_release_require_open();
-    // Future premium actions call this AFTER cssv_require_user. Owned history
-    // does not call it. No existing free feature is gated by this increment.
-    cssv_pro_ensure_schema($pdo);
-    if (cssv_pro_membership($pdo,$userId)['status'] !== 'active') cssv_fail('Active Pro access is required for this action.',403,'pro_required');
+/** Retired paid-action compatibility entry; ordinary learning never calls it. */
+function cssv_pro_require_active(PDO $pdo, string $userId, string $scope = ''): void {
+    cssv_paid_memberships_retired();
 }
 
 function cssv_pro_order(PDO $pdo, string $id, ?string $userId): array

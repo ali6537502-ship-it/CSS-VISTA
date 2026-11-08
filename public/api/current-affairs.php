@@ -15,7 +15,7 @@ try {
     if ($_SERVER['REQUEST_METHOD']==='POST') cssv_require_csrf($session);
     $requestBody=$_SERVER['REQUEST_METHOD']==='POST' ? ca_request_json() : null;
     $personalPreferences=$_SERVER['REQUEST_METHOD']==='GET' ? ($_GET['view']??'')==='preferences' : ($requestBody['action']??'')==='preferences';
-    if(!$personalPreferences)cssv_pro_require_active($pdo,$userId);
+    // Current Affairs reading and personal actions are free.
     ca_ensure_schema($pdo);
     if(!$personalPreferences)ca_sync_git_release($pdo);
     if ($_SERVER['REQUEST_METHOD']==='POST') {

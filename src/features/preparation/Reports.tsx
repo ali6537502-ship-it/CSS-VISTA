@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { pakistanTime } from '@/features/membership/api'
+import { pakistanTime } from '@/lib/pakistanTime'
 import { useLearning } from '@/features/learning/api'
 import { field, secondary, type Plan, type PreparationAction, type Capacity } from './api'
 import { SavedPlan } from './Plan'

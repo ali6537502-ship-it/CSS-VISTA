@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { Navigate, Routes, Route, useLocation } from 'react-router'
 import { ProfileGate } from './components/ProfileGate'
 import Layout from './components/Layout'
-import ProGate, { SelectedStudyGate } from './features/membership/ProGate'
+
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
 import TrustFooter from './components/TrustFooter'
@@ -95,11 +95,8 @@ const AccountPrecis = lazy(() => import('./pages/account/Precis'))
 const AccountHandwriting = lazy(() => import('./pages/account/Handwriting'))
 const AccountTutor = lazy(() => import('./pages/account/Tutor'))
 const AccountSkills = lazy(() => import('./pages/account/Skills'))
-const AccountGeneralAbility = lazy(() => import('./features/ability/Course'))
 const AccountAnswerPerformance = lazy(() => import('./pages/account/AnswerPerformance'))
 const AccountLearning = lazy(() => import('./pages/account/Learning'))
-const AccountAiUsage = lazy(() => import('./pages/account/AiUsage'))
-const AccountMembership = lazy(() => import('./pages/account/Membership'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
 const MptArea = lazy(() => import('./pages/mpt/MptArea'))
@@ -160,7 +157,7 @@ export default function App() {
         <Route path="/gsa-tutor" element={<S><GSATutor /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
         <Route path="/subjects/compulsory/precis-composition" element={<Navigate to="/account/precis" replace />} />
-        <Route path="/subjects/compulsory/:slug" element={<SelectedStudyGate><S><SubjectDetail /></S></SelectedStudyGate>} />
+        <Route path="/subjects/compulsory/:slug" element={<S><SubjectDetail /></S>} />
         <Route path="/subjects/optional" element={<S><OptionalSubjects /></S>} />
         <Route path="/subjects/selector" element={<S><SubjectSelector /></S>} />
         <Route path="/notes" element={<S><NotesLibrary /></S>} />
@@ -171,8 +168,8 @@ export default function App() {
         <Route path="/essay" element={<S><EssayModule /></S>} />
         <Route path="/study-material" element={<S><StudyMaterial /></S>} />
         <Route path="/resources" element={<S><ResearchResources /></S>} />
-        <Route path="/study-material/essay-themes" element={<ProfileGate><ProGate feature="Essay Themes"><S><EssayThemes /></S></ProGate></ProfileGate>} />
-        <Route path="/study-material/essay-themes/:slug" element={<ProfileGate><ProGate feature="Essay Themes"><S><EssayThemeDetail /></S></ProGate></ProfileGate>} />
+        <Route path="/study-material/essay-themes" element={<ProfileGate><S><EssayThemes /></S></ProfileGate>} />
+        <Route path="/study-material/essay-themes/:slug" element={<ProfileGate><S><EssayThemeDetail /></S></ProfileGate>} />
         <Route path="/study-material/islamic-studies" element={<S><IslamicReferences /></S>} />
         <Route path="/study-material/islamic-studies/:chapter" element={<S><IslamicReferenceChapter /></S>} />
         <Route path="/study-material/islamic-studies/:chapter/:topic" element={<S><IslamicReferenceTopic /></S>} />
@@ -180,8 +177,8 @@ export default function App() {
         <Route path="/study-material/optional/:subject" element={<S><OptionalSubjectNotes /></S>} />
         <Route path="/study-material/optional/:subject/:topic" element={<S><OptionalTopicNotes /></S>} />
         <Route path="/mpt" element={MPT_HIBERNATED ? <Navigate to="/" replace /> : <S><MPTPrep /></S>} />
-        <Route path="/mpt/bank/:bankId" element={MPT_HIBERNATED ? <Navigate to="/" replace /> : <SelectedStudyGate><S><MPTQuestionBank /></S></SelectedStudyGate>} />
-        <Route path="/current-affairs" element={<ProfileGate><ProGate feature="Current Affairs"><S><CurrentAffairs /></S></ProGate></ProfileGate>} />
+        <Route path="/mpt/bank/:bankId" element={MPT_HIBERNATED ? <Navigate to="/" replace /> : <S><MPTQuestionBank /></S>} />
+        <Route path="/current-affairs" element={<ProfileGate><S><CurrentAffairs /></S></ProfileGate>} />
         <Route path="/current-affairs-daily" element={<S><DailyPdfLibrary /></S>} />
         <Route path="/current-affairs-daily/:date" element={<S><DailyPdfReader /></S>} />
         <Route path="/vistagram" element={<S><Vistagram /></S>} />
@@ -202,7 +199,7 @@ export default function App() {
         <Route path="/dashboard" element={<ProfileGate><S><Dashboard /></S></ProfileGate>} />
         <Route path="/daily-challenge" element={<S><GrammarVocab /></S>} />
         <Route path="/gk" element={<S><GKWorld /></S>} />
-        <Route path="/one-liner-gk" element={<SelectedStudyGate><S><OneLinerGK /></S></SelectedStudyGate>} />
+        <Route path="/one-liner-gk" element={<S><OneLinerGK /></S>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
         <Route path="/grammar-course" element={<S><GrammarCourse /></S>} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
@@ -213,8 +210,8 @@ export default function App() {
         <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
         <Route path="/fpsc-syllabus" element={<S><WorkspaceVariant classic={<ClassicFpscSyllabus />}><FpscSyllabus /></WorkspaceVariant></S>} />
         <Route path="/css-past-paper-analysis" element={<S><CssPastPaperAnalysis /></S>} />
-        <Route path="/gk/cat/:slug" element={<SelectedStudyGate><S><GKCategory /></S></SelectedStudyGate>} />
-        <Route path="/gk/quiz" element={<SelectedStudyGate><S><GKQuiz /></S></SelectedStudyGate>} />
+        <Route path="/gk/cat/:slug" element={<S><GKCategory /></S>} />
+        <Route path="/gk/quiz" element={<S><GKQuiz /></S>} />
         <Route path="/five-minute" element={<S><GKQuiz forceMode="five-minute" /></S>} />
         <Route path="/mistakes" element={<S><Mistakes /></S>} />
         <Route path="/answer-timer" element={<S><AnswerTimer /></S>} />
@@ -249,13 +246,13 @@ export default function App() {
         <Route path="/account/argumentation" element={<ProfileGate><S><AccountSkills feature="argument" /></S></ProfileGate>} />
         <Route path="/account/analytical-skills" element={<ProfileGate><S><AccountSkills feature="analysis" /></S></ProfileGate>} />
         <Route path="/account/essay-builder" element={<ProfileGate><S><AccountSkills feature="essay" /></S></ProfileGate>} />
-        <Route path="/account/general-ability" element={<ProfileGate><ProGate feature="General Ability"><S><AccountGeneralAbility /></S></ProGate></ProfileGate>} />
         <Route path="/account/handwriting" element={<ProfileGate><S><AccountHandwriting /></S></ProfileGate>} />
         <Route path="/account/ask-vista" element={<ProfileGate><S><AccountTutor /></S></ProfileGate>} />
-        <Route path="/account/answer-performance" element={<ProfileGate><ProGate feature="My Answer Performance"><S><AccountAnswerPerformance /></S></ProGate></ProfileGate>} />
+        <Route path="/account/answer-performance" element={<ProfileGate><S><AccountAnswerPerformance /></S></ProfileGate>} />
         <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
-        <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />
-        <Route path="/account/membership" element={<ProfileGate><S><AccountMembership /></S></ProfileGate>} />
+        <Route path="/account/general-ability/*" element={<Navigate to="/account/practice" replace />} />
+        <Route path="/account/membership/*" element={<Navigate to="/account/settings" replace />} />
+        <Route path="/account/ai-usage/*" element={<Navigate to="/account/progress" replace />} />
         <Route path="/account/library" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountLibrary />}><AccountLibrary /></WorkspaceVariant></S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;

@@ -1,10 +1,9 @@
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 
 import { Archive, ArrowRight, Bookmark, Newspaper, Search, Sparkles } from 'lucide-react'
 import { briefingRoot, latestRange, overviewSchema } from '@/features/current-affairs/model'
 import { useBriefing } from '@/features/current-affairs/useBriefing'
-import { ProBadge } from '@/features/membership/AccountSections'
-import { useMembership, useMembershipExpired, type Overview } from '@/features/membership/api'
+
 import RecallDeck from '@/features/current-affairs/RecallDeck'
 import { AccountPage, SectionTitle, useAccountSnapshot } from '@/features/workspace-classic/pages/account/shared.tsx'
 
@@ -17,11 +16,8 @@ const destinations = [
 
 export default function AccountLibrary() {
   const { snapshot } = useAccountSnapshot()
-  const membership = useMembership<Overview>()
-  const expired = useMembershipExpired(membership.data?.membership.expires_at)
-  const active = membership.data?.membership.status === 'active' && !expired && !membership.error
   // Revision cards are built from the facts in the latest published edition.
-  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema, active)
+  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema, true)
   const facts = (briefing.data?.facts ?? [])
     .flatMap((story) => story.facts.map((fact) => ({ fact, story })))
     .slice(0, 10)
@@ -32,7 +28,7 @@ export default function AccountLibrary() {
       intro="Your saved reading, revision facts and every past edition, kept in one place."
       action={
         <Link to={briefingRoot} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-800">
-          <Newspaper className="h-4 w-4" /> Current Affairs <ProBadge />
+          <Newspaper className="h-4 w-4" /> Current Affairs
         </Link>
       }
     >
@@ -64,7 +60,7 @@ export default function AccountLibrary() {
               </span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center gap-1.5 font-bold text-slate-950">
-                  {title} <ProBadge />
+                  {title}
                   <ArrowRight className="h-4 w-4 text-emerald-700 opacity-0 transition-opacity group-hover:opacity-100" />
                 </span>
                 <span className="mt-1 block text-sm text-slate-500">{detail}</span>

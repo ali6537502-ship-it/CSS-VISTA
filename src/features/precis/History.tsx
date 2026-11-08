@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAccount } from '@/lib/accountContext'
 import { learningRequest, saveIdentity, useLearning } from '@/features/learning/api'
-import { pakistanTime } from '@/features/membership/api'
+import { pakistanTime } from '@/lib/pakistanTime'
 import { panelStyle, primaryStyle, secondaryStyle, inputStyle } from '@/features/handwriting/styles'
 import { lengthInfo, type Detail } from './api'
 import { FeedbackChanges } from './Feedback'
@@ -12,7 +12,6 @@ export default function History({
   active,
   refresh,
   onVersion,
-  feedbackAvailable = false,
 }: {
   detail: Detail
   rubric: Record<string, string>
@@ -20,7 +19,6 @@ export default function History({
   active: boolean
   refresh: () => void
   onVersion: (id: string) => void
-  feedbackAvailable?: boolean
 }) {
   const { user } = useAccount(),
     [before, setBefore] = useState(''),
@@ -193,7 +191,7 @@ export default function History({
               </p>
             </div>
           </div>
-          {feedbackAvailable && <FeedbackChanges
+          {<FeedbackChanges
             key={`${before}:${detail.version.id}`}
             before={before}
             after={detail.version.id}

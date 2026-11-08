@@ -1,4 +1,4 @@
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import {

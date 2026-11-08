@@ -11,11 +11,7 @@ try {
         if ($cookie === '' || $token === '' || !hash_equals($cookie,$token) || !hash_equals($admin['csrf_hash'],cssv_hash_secret($token))) cssv_fail('Refresh your admin session before reviewing a payment.',403,'invalid_csrf');
     }
     cssv_pro_ensure_schema($pdo);
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id=cssv_pro_review($pdo,$admin,cssv_request_json(4096));
-        $order=cssv_pro_order($pdo,$id,null);
-        cssv_json(['ok'=>true,'order'=>$order,'membership'=>cssv_pro_membership($pdo,$order['user_id'])]);
-    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') cssv_paid_memberships_retired();
     if (isset($_GET['order_id'])) {
         $order=cssv_pro_order($pdo,cssv_pro_id($_GET['order_id']),null);
         cssv_json(['ok'=>true,'order'=>$order,'membership'=>cssv_pro_membership($pdo,$order['user_id'])]);

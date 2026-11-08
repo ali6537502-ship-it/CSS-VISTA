@@ -1,14 +1,16 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { isProDestination } from '../src/features/membership/proDestinations.ts'
+import { featureState, features } from '../src/features/workspace/registry.ts'
 
-test('learning workspaces remain visible to free accounts during the Pro pause', () => {
-  for (const path of ['/account/precis?view=guide', '/subjects/compulsory/precis-composition', '/account/expression', '/account/expression?view=studio', '/account/argumentation', '/account/analytical-skills', '/account/essay-builder', '/account/preparation?view=topics']) {
-    assert.equal(isProDestination(path), false, path)
+test('every discoverable learning feature is free apart from the independent MPT hibernation', () => {
+  for (const feature of features) {
+    if (/^\/mpt(?:\/|$)/.test(feature.to)) continue
+    assert.equal(featureState(feature), 'free', feature.to)
   }
 })
-test('free learning does not reopen payments, AI or unrelated held features', () => {
-  for (const path of ['/account/membership', '/account/ask-vista', '/account/handwriting', '/account/general-ability', '/account/ai-usage']) {
-    assert.equal(isProDestination(path), true, path)
+test('retired General Ability, payment and usage pages are absent from feature discovery', () => {
+  assert.deepEqual(features.filter(feature => /^\/account\/(?:general-ability|membership|ai-usage)(?:[/?]|$)/.test(feature.to)), [])
+  for (const to of ['/account/precis','/account/expression','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/answer-performance']) {
+    assert.ok(features.some(feature => feature.to === to), to)
   }
 })

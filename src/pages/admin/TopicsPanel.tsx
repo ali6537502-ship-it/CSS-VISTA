@@ -503,7 +503,7 @@ export default function TopicsPanel() {
   return (
     <main className="mx-auto max-w-6xl space-y-6 px-4 py-8">
       <header>
-        <h1 className="text-2xl font-semibold">Pro Topic Learning</h1>
+        <h1 className="text-2xl font-semibold">Subject Learning</h1>
         <p className="mt-3 text-sm leading-7 text-slate-600">
           Native source-based lessons, fixed practice and retained student progress.
         </p>

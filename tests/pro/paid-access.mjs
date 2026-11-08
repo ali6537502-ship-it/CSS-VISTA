@@ -27,14 +27,13 @@ paths.push('/api/current-affairs.php', '/api/student/mentor.php', '/api/student/
 for (const path of paths) {
   assert.equal((await call(path)).status, 401, 'Anonymous access: ' + path)
   const locked = await call(path, jar)
-  assert.equal(locked.status, 403, 'Free account access: ' + path)
-  assert.equal(locked.json().error, 'pro_required')
+  assert.equal(locked.status, 200, 'Free account access: ' + path)
   assert.match(locked.headers.get('cache-control'), /no-store/)
 }
 const shared = '/api/student/premium-content.php?file=css-subject-mcqs/general-science-and-ability.json'
 const freeScience = (await call(shared, jar)).json()
 assert.ok(freeScience.length > 0)
-assert.ok(freeScience.every(q => !['Basic arithmetic', 'Number patterns', 'Numerical ability', 'Arithmetic and percentages'].includes(q.topic)))
+assert.ok(freeScience.some(q => ['Basic arithmetic', 'Number patterns', 'Numerical ability', 'Arithmetic and percentages'].includes(q.topic)), 'Free account still receives a paywall-filtered subject bank')
 const precise = await call('/api/student/precis.php', jar)
 assert.equal(precise.status, 200)
 assert.equal(precise.json().catalog.chapters.length,25,'Free account cannot open CSS Vista Preci Mentor')
@@ -55,11 +54,11 @@ for (const path of paths) {
 }
 const full = (await call(shared, jar)).json()
 assert.equal(full.length, JSON.parse(readFileSync('public/css-subject-mcqs/general-science-and-ability.json', 'utf8')).length)
-assert.ok(full.length > freeScience.length)
+assert.equal(full.length, freeScience.length)
 const overview = await call('/api/student/mentor.php', jar)
 php('tests/pro/fixture.php', 'expire', id)
-for (const path of paths) assert.equal((await call(path, jar)).status, 403, 'Expired Pro access: ' + path)
+for (const path of paths) assert.equal((await call(path, jar)).status, 200, 'Old membership expiry blocked free access: ' + path)
 assert.deepEqual((await call(shared, jar)).json(), freeScience, 'Expiry exposed Ability or removed free Science')
 php('tests/precis/fixture.php', 'activate', id)
 assert.deepEqual((await call('/api/student/mentor.php', jar)).json(), overview.json(), 'Membership expiry altered saved answer records')
-console.log('PASS: anonymous/free/active/expired access for direct files and native APIs; private no-store JSON/PDF delivery; free Preci Mentor catalogue with other premium resources protected; free Science preservation; helper/path protection and renewal continuity.')
+console.log('PASS: anonymous/free/active/expired access for direct files and native APIs; private no-store JSON/PDF delivery; all learning resources free to complete accounts; retained subject content; helper/path protection and renewal continuity.')

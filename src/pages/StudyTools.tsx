@@ -1,5 +1,5 @@
 import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { Link } from 'react-router'
 import { useEffect, useMemo, useState } from 'react'
 
 import {
