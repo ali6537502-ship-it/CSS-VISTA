@@ -1265,12 +1265,12 @@ export default function Layout() {
       </aside>
 
       <main className={`flex-1 pb-[calc(200px+env(safe-area-inset-bottom))] md:pb-0 ${location.pathname.startsWith('/account') ? 'account-canvas' : ''}`}>
+        <StudyRail />
         <div
           key={location.pathname}
           className={`cssv-route-stage route-transition-${routeTransition}`}
           style={renderRestoreMinHeight ? { minHeight: `${renderRestoreMinHeight}px` } : undefined}
         >
-          <StudyRail />
           <ProReleaseOutlet />
         </div>
       </main>

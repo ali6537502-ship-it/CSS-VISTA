@@ -19,7 +19,7 @@ function cssv_workspace_filters(array $input): array {
     $offset=filter_var($input['offset']??0,FILTER_VALIDATE_INT,['options'=>['min_range'=>0,'max_range'=>10000]]);
     if($offset===false)throw new InvalidArgumentException('Choose a valid results page.');
     $out=['q'=>trim($q),'type'=>$type,'view'=>$view,'offset'=>$offset];
-    foreach(['state','course','source','from','to','collection','subject'] as $key){
+    foreach(['state','course','source','from','to','collection','subject','catalog_id'] as $key){
         $value=$input[$key]??'';
         if(!is_string($value)||strlen($value)>140)throw new InvalidArgumentException('Check your library filters.');
         $out[$key]=$value;
@@ -31,6 +31,7 @@ function cssv_workspace_filters(array $input): array {
     if($out['collection']!==''&&!preg_match('/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/Di',$out['collection']))throw new InvalidArgumentException('Choose a valid personal collection.');
     if($out['subject']!==''&&($view!=='catalog'||!isset(cssv_workspace_subjects()[$out['subject']])))throw new InvalidArgumentException('Choose a supported catalog subject.');
     if($view==='catalog')foreach(['state','course','source','from','to','collection'] as $key)if($out[$key]!=='')throw new InvalidArgumentException('Use course search and subject filters in Learn.');
+    if($out['catalog_id']!==''&&($view!=='catalog'||!preg_match('/^[a-z0-9][a-z0-9-]{0,95}$/D',$out['catalog_id'])))throw new InvalidArgumentException('Choose a valid catalog course.');
     return $out;
 }
 /** Filters apply only to already authorized projections, before counts and paging. */

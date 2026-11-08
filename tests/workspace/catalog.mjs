@@ -16,6 +16,7 @@ const first=(await get(query)).data,second=(await get(query+'&offset=20')).data
 assert.equal(first.catalog.length,20);assert.equal(first.has_more,true);assert.equal(second.catalog.length,5);assert.equal(second.has_more,false)
 assert.deepEqual([...first.catalog,...second.catalog].map(r=>r.id),seeded.ids);assert.deepEqual(first.items,[])
 for(const row of first.catalog){assert.ok(row.subjectIds.every(v=>['pakistan-affairs','current-affairs'].includes(v)));assert.match(row.canonicalDestination,/^\/account\/preparation\?view=topics&topic=test-only-catalog-/);assert.equal(row.editionId,seeded.versions[seeded.ids.indexOf(row.id)])}
+const exact=(await get('&catalog_id='+seeded.ids[24])).data;assert.equal(exact.catalog.length,1);assert.equal(exact.catalog[0].id,seeded.ids[24]);assert.equal((await get('&catalog_id=../../admin')).status,422);
 const encoded=JSON.stringify(first);for(const secret of ['questions','blocks','owner-source','content_hash','answer','created_by'])assert.ok(!encoded.includes(secret),secret+' leaked')
 const filtered=(await get(query+'&subject=pakistan-affairs')).data;assert.equal(filtered.catalog.length,13);assert.equal(filtered.catalog_subjects.find(v=>v.id==='current-affairs').count,13);assert.ok(filtered.catalog.every(v=>v.subjectIds.includes('pakistan-affairs')))
 assert.equal((await get('&q=%25_')).data.catalog.length,0,'Wildcards must be literal text')

@@ -105,13 +105,14 @@ export function useSyllabusTotal() {
 export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
   const { user } = useAccount()
   return (
-    <div className="account-canvas min-h-screen bg-[#F6F8F7] text-[#17251F] [&_.text-slate-500]:text-[#47564D]">
+    <div className="account-canvas account-workspace min-h-screen bg-[#F6F8F7] text-[#17251F] [&_.text-slate-500]:text-[#47564D]">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
         <Link to="/account/dashboard" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-800">
           <ArrowLeft className="h-4 w-4" /> My CSS Vista
         </Link>
-        <header className="mt-3 flex flex-wrap items-start justify-between gap-4">
+        <header className="account-hero mt-3 flex flex-wrap items-start justify-between gap-4">
           <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[.16em] text-[#476453]">Your study workspace</p>
             <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{title}</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-500">{intro}</p>
           </div>
@@ -128,15 +129,15 @@ export function AccountPage({ title, intro, action, children }: { title: string;
           )}
         </header>
         <div className="mt-6 grid min-w-0 gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
-          <aside><WorkspaceNavigation /><nav aria-label="Account utilities" className="mt-3 flex flex-wrap gap-3 text-sm lg:flex-col">
+          <aside className="account-sidebar"><WorkspaceNavigation /><details open className="account-utilities"><summary className="min-h-11 cursor-pointer px-3 py-3 text-sm font-semibold text-[#14543D]">Account tools</summary><nav aria-label="Account utilities" className="mt-3 flex flex-wrap gap-3 text-sm lg:flex-col">
             <Link to="/account/library/search" className="inline-flex min-h-11 items-center text-[#14543D] underline">Search</Link>
             <Link to="/account/preparation" className="inline-flex min-h-11 items-center text-[#14543D] underline">Preparation attempts</Link>
             <Link to="/account/membership" className="inline-flex min-h-11 items-center text-[#14543D] underline">Membership</Link>
             <Link to="/account/settings" className="inline-flex min-h-11 items-center text-[#14543D] underline">Profile</Link>
             <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center text-[#14543D] underline">Ask VISTA</Link>
             <Link to="/contact" className="inline-flex min-h-11 items-center text-[#14543D] underline">Help</Link>
-          </nav></aside>
-          <div className="min-w-0"><WorkspaceBreadcrumbs title={title} />{children}</div>
+          </nav></details></aside>
+          <div className="account-content min-w-0"><WorkspaceBreadcrumbs title={title} />{children}</div>
         </div>
         {/* Signed-in account content. Advertising eligibility is decided by the
             route registry, not by this page. */}

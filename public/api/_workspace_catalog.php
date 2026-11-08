@@ -5,8 +5,9 @@ function cssv_workspace_subjects(): array {
     return ['english'=>'English','writing'=>'Writing','reasoning'=>'Reasoning','pakistan-affairs'=>'Pakistan Affairs','current-affairs'=>'Current Affairs','international-relations'=>'International Relations','political-science'=>'Political Science','environmental-science'=>'Environmental Science','english-essay'=>'English Essay'];
 }
 function cssv_workspace_catalog_page(PDO $pdo,bool $premium,array $tables,array $f): array {
-    $subjects=cssv_workspace_subjects();$base=cssv_workspace_catalog($premium);$query=$f['q'];$subject=$f['subject']??'';
+    $subjects=cssv_workspace_subjects();$base=cssv_workspace_catalog($premium);$query=$f['q'];$subject=$f['subject']??'';$exact=$f['catalog_id']??'';
     $base=array_values(array_filter($base,fn($row)=>$query===''||mb_stripos($row['title'].' '.$row['summary'].' '.$row['id'],$query)!==false));
+    if($exact!=='')$base=array_values(array_filter($base,fn($row)=>$row['id']===$exact));
     $counts=array_fill_keys(array_keys($subjects),0);
     foreach($base as $row)foreach($row['subjectIds'] as $id)if(isset($counts[$id]))$counts[$id]++;
     $base=array_values(array_filter($base,fn($row)=>$subject===''||in_array($subject,$row['subjectIds'],true)));
@@ -16,6 +17,7 @@ function cssv_workspace_catalog_page(PDO $pdo,bool $premium,array $tables,array 
         // answer key, section text or private source descriptor enters the catalog.
         $from=' FROM pro_topics t JOIN pro_topic_versions v ON v.id=t.published_version_id AND v.topic_id=t.id';
         $where=' WHERE t.published_version_id IS NOT NULL AND (LOCATE(?,t.title)>0 OR LOCATE(?,t.summary)>0 OR LOCATE(?,t.id)>0)';$args=[$query,$query,$query];
+        if($exact!==''){$where.=' AND t.id=?';$args[]=$exact;}
         $expressions=[];foreach(array_keys($subjects) as $id)$expressions[]="COALESCE(SUM(JSON_CONTAINS(JSON_EXTRACT(v.content,'$.subjects'),JSON_QUOTE(?))),0)";
         $q=$pdo->prepare('SELECT '.implode(',',$expressions).$from.$where);$q->execute([...array_keys($subjects),...$args]);$row=$q->fetch(PDO::FETCH_NUM);
         foreach(array_keys($subjects) as $index=>$id)$counts[$id]+=(int)$row[$index];

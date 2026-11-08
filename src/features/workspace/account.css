@@ -10,3 +10,29 @@
 @media (prefers-reduced-motion: no-preference) {
  .account-canvas a, .account-canvas button { transition: background-color .15s, border-color .15s; }
 }
+/* Shared student workspace surfaces. Native editors, feedback and save controls retain their own semantics. */
+.account-workspace { background: transparent; }
+.account-hero { padding: clamp(1.25rem,3vw,2.25rem); border: 1px solid #d7e0da; border-radius: 1.5rem; background: linear-gradient(125deg,#fff,#edf5ef); }
+.account-sidebar > nav { padding: .65rem; border-radius: 1.25rem; box-shadow: 0 8px 24px rgb(23 37 31 / 4%); }
+.account-sidebar > nav a { border-radius: .8rem; }
+.account-utilities { margin-top: .75rem; border: 1px solid #d7e0da; border-radius: 1.1rem; background: white; }
+.account-utilities nav { padding: 0 .8rem .75rem; }
+.account-content { --account-panel-padding: clamp(1rem,2.5vw,1.6rem); }
+.account-content > section,
+.account-content > div.space-y-5 > section,
+.account-content > div.space-y-6 > section,
+.account-content > div.space-y-8 > section { padding: var(--account-panel-padding); border: 1px solid #d7e0da; border-radius: 1.25rem; background: #fff; }
+.account-content :is(input:not([type=checkbox]):not([type=radio]):not([type=hidden]),select,button) { min-height: 2.75rem; }
+.account-content :is(input,select,textarea) { max-width: 100%; }
+.account-content :is(h1,h2,h3,p,label,dd) { overflow-wrap: anywhere; }
+.account-content :is(button,a) { scroll-margin-block: 6rem; }
+.account-content [role=alert] { scroll-margin-block: 6rem; }
+.account-tool-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit,minmax(min(100%,18rem),1fr)); }
+.account-tool-card { min-width: 0; padding: 1.25rem; border: 1px solid #d7e0da; border-radius: 1.1rem; background: #fff; box-shadow: 0 3px 14px rgb(23 37 31 / 3%); }
+.account-tool-card a { text-underline-offset: .25em; }
+@media (min-width: 1024px) { .account-sidebar { position: sticky; top: 6rem; align-self: start; max-height: calc(100vh - 7rem); overflow-y: auto; } }
+@media print { .account-sidebar, .account-hero > a { display: none; } .account-content > section { box-shadow: none; } }
+.account-canvas .vista-card { border-color: #d7e0da; border-radius: 1.25rem; box-shadow: 0 3px 14px rgb(23 37 31 / 3%); }
+.account-canvas :is(select,button,input:not([type=checkbox]):not([type=radio]):not([type=hidden])) { min-height: 2.75rem; }
+.account-canvas textarea { padding: .85rem; line-height: 1.7; }
+.account-content h2 + p { margin-top: .6rem; }

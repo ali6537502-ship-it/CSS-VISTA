@@ -1,6 +1,7 @@
+import { AccountPage } from './shared'
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
-import { Bookmark, BookOpenText, Clock3, FolderPlus, Search, Sparkles, Tags, X } from 'lucide-react'
+import { Bookmark, BookOpenText, Clock3, FolderPlus, Search, Tags, X } from 'lucide-react'
 import { loadVistagramIndex } from '@/features/vistagram/api'
 import {
   createVistagramCollection,
@@ -100,24 +101,9 @@ export default function AccountVistagram() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50/60">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:py-11">
-        <header className="rounded-3xl border border-emerald-900/10 bg-gradient-to-br from-emerald-950 to-emerald-800 p-6 text-white shadow-sm sm:p-8">
-          <div className="flex flex-wrap items-start justify-between gap-5">
-            <div>
-              <p className="flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[.18em] text-amber-300"><Sparkles className="h-4 w-4" /> Personal learning space</p>
-              <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">My CSS Vistagram</h1>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-emerald-50/80">Discover the public Vistagram feed, then keep your saves, reading history, followed topics, collections and private notes organised in your account.</p>
-            </div>
-            <Link to="/vistagram" className="inline-flex min-h-10 items-center rounded-full border border-white/20 bg-white/10 px-4 text-xs font-bold text-white hover:bg-white/15">Open public Vistagram</Link>
-          </div>
-          <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold">
-            <span className="rounded-full bg-white/10 px-3 py-1.5">{newCount} new since last visit</span>
-            <span className="rounded-full bg-white/10 px-3 py-1.5">{member.saved.length} saved</span>
-            <span className="rounded-full bg-white/10 px-3 py-1.5">{member.followedTopics.length} followed topics</span>
-            <span className="rounded-full bg-white/10 px-3 py-1.5">{member.collections.length} collections</span>
-          </div>
-        </header>
+    <AccountPage title="My CSS Vistagram" intro="Your saved posts, private notes, followed topics and reading history." action={<Link to="/vistagram" className="inline-flex min-h-11 items-center rounded-xl border bg-white px-4 text-sm font-semibold text-[#14543D]">Open public Vistagram</Link>}>
+      <div className="space-y-5">
+        <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">{[[newCount,'New since last visit'],[member.saved.length,'Saved posts'],[member.followedTopics.length,'Followed topics'],[member.collections.length,'Collections']].map(([value,label]) => <div key={label} className="account-tool-card"><dt className="text-sm text-[#47564D]">{label}</dt><dd className="mt-2 text-2xl font-semibold text-[#14543D]">{value}</dd></div>)}</dl>
 
         <nav className="mt-5 flex gap-2 overflow-x-auto pb-1" aria-label="My Vistagram sections">
           {tabs.map((item) => <button key={item.id} type="button" onClick={() => setParam('tab', item.id)} className={`shrink-0 rounded-full px-4 py-2.5 text-xs font-bold ${tab === item.id ? 'bg-slate-950 text-white' : 'border bg-white text-slate-600 hover:text-emerald-800'}`}>{item.label}</button>)}
@@ -162,6 +148,6 @@ export default function AccountVistagram() {
           </section>
         )}
       </div>
-    </main>
+    </AccountPage>
   )
 }
