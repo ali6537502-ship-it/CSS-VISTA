@@ -137,6 +137,7 @@ jobs:
           node tests/browser/factbook-backup.mjs
           node tests/browser/catalog.mjs
           node tests/browser/study-flow.mjs
+          node tests/browser/account-reform.mjs
           node tests/browser/skills.mjs
           node tests/browser/connected-skills.mjs
           node tests/browser/topic-options.mjs

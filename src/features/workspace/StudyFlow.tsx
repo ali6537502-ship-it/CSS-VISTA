@@ -5,10 +5,11 @@ import { useWorkspace, type CatalogItem } from './api'
 import { useStudySession, saveStudySession, endStudySession } from './useStudySession'
 import { stageMinutes, studyLesson, studyLink, studyMinutes, studyStages } from './study'
 
-function destinations(course: CatalogItem, premium: boolean) {
+function destinations(course: CatalogItem, premium: boolean, lesson?: string) {
   const writing = premium ? ({ ability: '/account/analytical-skills', precis: '/account/precis', essay: '/account/essay-builder', argument: '/account/argumentation', analysis: '/account/analytical-skills', sentence: '/account/expression?view=studio' }[course.id] || '/account/expression') : '/account/preparation?new=writing'
   const topic = course.canonicalDestination.startsWith('/account/preparation?view=topics&topic=')
-  return [course.canonicalDestination, topic ? course.canonicalDestination+'&topicMode=write' : writing, topic ? course.canonicalDestination+'&topicMode=check' : premium ? writing : '/grammar-course?view=lab', '/account/review?course='+encodeURIComponent(course.id)]
+  const topicLink = (mode: string) => { const url = new URL(lesson || course.canonicalDestination, 'https://www.css-vista.com'); url.searchParams.set('topicMode', mode); return url.pathname + url.search }
+  return [course.canonicalDestination, topic ? topicLink('write') : writing, topic ? topicLink('check') : premium ? writing : '/grammar-course?view=lab', '/account/review?course='+encodeURIComponent(course.id)]
 }
 export default function StudyFlow({ compact = false }: { compact?: boolean }) {
   const { user } = useAccount(), [params] = useSearchParams(), location = useLocation()
@@ -45,7 +46,7 @@ export default function StudyFlow({ compact = false }: { compact?: boolean }) {
     {!load.data && !load.error && <p role="status" className="mt-4">Finding available lessons…</p>}
     {course && <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{studyStages.map((title,index) => <li key={title} className={`min-w-0 rounded-2xl border p-4 ${active && current === index ? 'border-[#14543D] bg-[#EDF5EF]' : 'border-[#D7E0DA]'}`}>
       <p className="text-xs text-[#47564D]">Step {index+1} · about {timings[index]} min</p>
-      <Link aria-current={active && current===index ? 'step' : undefined} className="mt-2 inline-flex min-h-11 items-center text-lg font-semibold text-[#14543D] underline" to={studyLink(index === 0 ? lesson || retainedLesson || course.canonicalDestination : destinations(course, Boolean(load.data?.premium_available))[index], course.id, budget, index)}>{title}</Link>
+      <Link aria-current={active && current===index ? 'step' : undefined} className="mt-2 inline-flex min-h-11 items-center text-lg font-semibold text-[#14543D] underline" to={studyLink(index === 0 ? lesson || retainedLesson || course.canonicalDestination : destinations(course, Boolean(load.data?.premium_available), lesson || retainedLesson)[index], course.id, budget, index)}>{title}</Link>
       {!compact && <p className="text-sm leading-6 text-[#47564D]">{['Read the lesson and work through an example.','Apply the idea in an independent response.','Inspect the tool’s available checks or feedback; revise your response.','Open scheduled recall and recorded mistakes for this course.'][index]}</p>}
     </li>)}</ol>}
     {active && <Link onClick={() => endStudySession(user.id)} to="/account/dashboard" className="mt-4 inline-flex min-h-11 items-center text-sm text-[#14543D] underline">Choose a different session</Link>}
