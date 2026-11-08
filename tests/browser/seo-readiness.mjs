@@ -94,10 +94,11 @@ try {
       assert.ok(state.h1.length, `${path}: meaningful heading`)
     }
     if (path === '/subjects/compulsory/current-affairs') {
-      assert.ok(rawHTML.includes('CSS Vista Pro is temporarily unavailable'), 'Initial HTML preserves the runtime pause')
-      assert.ok(state.h1.includes('CSS Vista Pro is temporarily unavailable'), 'Browser preserves the runtime pause')
-      assert.ok(state.robots.every(value => /noindex/.test(value)), 'Paused subject is not indexable')
-      assert.equal(state.adLoaders, 0, 'Paused subject is ad-free')
+      assert.ok(rawHTML.includes('Topic-wise syllabus breakdown'), 'Initial HTML contains the free subject guide')
+      assert.ok(state.h1.includes('Current Affairs'), 'Browser opens the free subject guide')
+      assert.ok(!rawHTML.includes('CSS Vista Pro is temporarily unavailable'), 'Retired Pro notice is absent')
+      assert.ok(state.robots.every(value => /noindex/.test(value)), 'Subject retains its noindex policy')
+      assert.equal(state.adLoaders, 0, 'Subject retains its ad-free policy')
     }
     if (/^\/past-papers\/(?:css|ppsc)\/\d{4}$/.test(path)) {
       assert.equal(new URL(page.url()).search, '', `${path}: defaults stay in the pathname`)
