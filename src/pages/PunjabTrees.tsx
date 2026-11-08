@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState, type ChangeEvent, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import { ArrowRight, BadgeCheck, Camera, CheckCircle2, ChevronRight, CircleHelp, CloudUpload, Globe2, Heart, Leaf, LogIn, LogOut, MapPin, Menu, ShieldCheck, Sprout, TreeDeciduous, Trophy, UserRound, X } from 'lucide-react'
 import { compressImage, MAX_INPUT_BYTES } from '@/lib/photoCompression'
@@ -633,10 +633,18 @@ export default function PunjabTrees() {
     const hash=window.location.hash.slice(1)
     const match=/^(verify-email|reset-email)=([a-f0-9]{64})$/.exec(hash)
     if(!match)return null
-    // Remove bearer credentials from browser history before any API request.
-    window.history.replaceState(window.history.state,'',window.location.pathname+window.location.search)
     return {purpose:match[1]==='verify-email'?'verify':'reset',token:match[2]}
   })
+  useLayoutEffect(()=>{
+    if(!emailAction)return
+    // Clear the fragment after React has committed, but before passive effects
+    // exchange the token or issue other API requests. Render must stay pure:
+    // a discarded/repeated render must not consume the confirmation link.
+    const hash=window.location.hash.slice(1)
+    if(/^(verify-email|reset-email)=[a-f0-9]{64}$/.test(hash)){
+      window.history.replaceState(window.history.state,'',window.location.pathname+window.location.search)
+    }
+  },[emailAction])
   const [tab,setTab]=useState<Tab>(emailAction?'account':'overview'),[summary,setSummary]=useState<Summary>(EMPTY),[species,setSpecies]=useState<Record<string,Species>>({}),[member,setMember]=useState<Member|null>(null),[csrf,setCsrf]=useState(''),[adminCsrf,setAdminCsrf]=useState(''),[error,setError]=useState(''),[isAdmin,setIsAdmin]=useState(false),[mobileNav,setMobileNav]=useState(false)
   const refresh=()=>getApi('summary').then(d=>setSummary(d)).catch(e=>setError(e instanceof Error?e.message:'Unable to load live progress.'))
   useEffect(()=>{refresh();getApi('catalog').then(d=>setSpecies(d.species)).catch(()=>{});getApi('session').then(d=>{setMember(d.member);setCsrf(d.csrf_token||'')}).catch(()=>{});fetch('/api/admin-auth/session.php',{credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(d=>{if(d?.authenticated){setIsAdmin(true);setAdminCsrf(d.csrf_token||'')}}).catch(()=>{})},[])
