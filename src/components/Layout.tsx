@@ -993,7 +993,7 @@ export default function Layout() {
   }
 
   // The joint tree initiative has its own complete two-partner navigation and footer.
-  if (location.pathname === '/100-million-trees') return <><RouteSeo /><ProReleaseOutlet /></>
+  if (location.pathname === '/100-million-trees') return <><RouteSeo /><Outlet /></>
 
   return (
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">

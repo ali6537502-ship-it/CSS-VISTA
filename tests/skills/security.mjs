@@ -130,7 +130,7 @@ changed=(await call(endpoint+'?workspace_id='+parent.id,a.jar)).data
 assert.equal(changed.saved.answers.practice,'🌿 Introductory context. '+partDetail.saved.answers.revision+' Closing qualification.')
 assert.equal((await call(endpoint,a.jar,body({action:'adopt',workspace_id:parent.id,expected_version:changed.workspace.version,child_id:partDetail.workspace.id,child_version_id:partDetail.saved.version_id}))).status,409,'Replaced a changed original selection')
 assert.equal((await call('student/ai-usage.php',a.jar)).data.operations.length,0,'Fixed learning consumed AI')
-assert.equal((await call(endpoint,a.jar,body({action:'evaluate',workspace_id:parent.id,version_id:adopted.data.version_id,policy_version:'not-configured',policy_hash:'0'.repeat(64),accepted:true}))).status,503)
+assert.equal((await call(endpoint,a.jar,body({action:'evaluate',workspace_id:parent.id,version_id:adopted.data.version_id,policy_version:'not-configured',policy_hash:'0'.repeat(64),accepted:true}))).status,410)
 php('tests/pro/fixture.php','expire',a.id)
 const expired=(await call(endpoint+'?workspace_id='+parent.id,a.jar)).data
 assert.ok(expired.workspace.source.explanation)
