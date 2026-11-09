@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 719,
+  "count": 721,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5032,6 +5032,20 @@
     {
       "id": "current-affairs-archive-2026-11-08-cop31-negotiations",
       "text": "Australia leads formal COP31 negotiations in 2026 while Türkiye chairs the conference.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-cop31-opened",
+      "text": "COP31 opened in Antalya, Türkiye, on 9 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-wmo-147",
+      "text": "WMO reported January–September 2026 global mean temperature approximately 1.47°C above the pre-industrial average.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

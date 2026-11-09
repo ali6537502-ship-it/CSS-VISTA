@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "published_at": "2026-11-09T19:12:28+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 9 November 2026 | Evening update (00:00–19:12 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-09-cop31-opens-antalya",
+      "category": "World — Climate Diplomacy",
+      "headline": "COP31 opens in Antalya with calls for faster implementation of climate commitments",
+      "summary": "The UN climate conference opened in Antalya, Türkiye, on 9 November 2026. Leaders urged faster climate action as countries discussed adaptation, mitigation and implementation amid competing economic and security pressures.",
+      "what_happened": "The two-week COP31 meeting began on 9 November. The Turkish presidency hosted the conference and Australia led formal negotiations under the agreed leadership arrangement. Opening remarks emphasised the urgency of implementation; they were not a negotiated final agreement.",
+      "background": "The UN Framework Convention on Climate Change convenes annual Conferences of the Parties. The Paris Agreement provides the framework for collective mitigation, adaptation and climate-finance efforts.",
+      "why_it_matters": "Negotiations affect the implementation of national climate plans and international support for vulnerable countries.",
+      "pakistan_perspective": "Pakistan has a direct interest in adaptation finance, flood resilience and access to climate-related support.",
+      "key_takeaways": [
+        "COP31 opened in Antalya, Türkiye, on 9 November 2026.",
+        "Australia leads formal negotiations; Türkiye chairs the conference.",
+        "Opening statements are not final COP decisions."
+      ],
+      "quick_gk": [
+        "COP31 opened in Antalya, Türkiye, on 9 November 2026."
+      ],
+      "question_angles": [
+        "Where did COP31 open on 9 November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "climate finance",
+        "Paris Agreement"
+      ],
+      "countries": [
+        "Türkiye",
+        "Australia",
+        "Pakistan"
+      ],
+      "institutions": [
+        "UNFCCC"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "COP31 summit leaders urge world to move faster on climate",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-open-turkey-with-climate-goals-under-pressure-war-ai-2026-11-09/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-09-wmo-2026-state-climate",
+      "category": "World — Climate Science",
+      "headline": "WMO climate assessment places 2026 among four warmest years on record",
+      "summary": "Reporting on a World Meteorological Organization assessment released on 9 November said 2026 was on track to rank among the four warmest years observed, with January–September temperatures about 1.47°C above the pre-industrial reference.",
+      "what_happened": "The WMO assessment, discussed as COP31 began, reported January–September 2026 global average temperature around 1.47°C above the pre-industrial average. It assessed 2026 as likely among the four warmest years, rather than declaring a final annual ranking.",
+      "background": "The WMO synthesises multiple global temperature datasets. Partial-year temperature anomalies and forecasts must not be confused with final full-year observations.",
+      "why_it_matters": "Observed warming informs adaptation planning, disaster-risk policy and the assessment of international climate goals.",
+      "pakistan_perspective": "The findings are relevant to Pakistan's heat, water-security and flood-resilience planning; global temperature anomalies do not predict any single local disaster.",
+      "key_takeaways": [
+        "WMO reported about 1.47°C warming for January–September 2026 relative to pre-industrial levels.",
+        "The annual 2026 ranking was provisional as of 9 November.",
+        "WMO synthesised nine datasets in the cited assessment."
+      ],
+      "quick_gk": [
+        "WMO assessed January–September 2026 global temperatures at approximately 1.47°C above the pre-industrial average."
+      ],
+      "question_angles": [
+        "What was the WMO's January–September 2026 temperature anomaly?"
+      ],
+      "topics": [
+        "global warming",
+        "WMO",
+        "climate monitoring"
+      ],
+      "institutions": [
+        "World Meteorological Organization"
+      ],
+      "reports": [
+        "State of the Climate"
+      ],
+      "sources": [
+        {
+          "publisher": "The Financial Express",
+          "title": "This year set to be one of four hottest on record, UN report says",
+          "url": "https://thefinancialexpress.com.bd/environment/this-year-set-to-be-one-of-four-hottest-on-record-un-report-says"
+        }
+      ]
+    }
+  ]
+}

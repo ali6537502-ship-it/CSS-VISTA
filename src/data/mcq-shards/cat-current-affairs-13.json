@@ -163,5 +163,35 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.lemonde.fr/en/environment/article/2026/11/08/cop31-memo-schedule-organization-and-key-issues-at-the-antalya-climate-conference_6775210_114.html"
+  },
+  {
+    "id": "current-affairs-20261109-cop31-opening-city",
+    "q": "The COP31 climate conference opened on 9 November 2026 in which city?",
+    "o": [
+      "Istanbul",
+      "Ankara",
+      "Antalya",
+      "Izmir"
+    ],
+    "a": 2,
+    "e": "COP31 opened in Antalya, Türkiye, on 9 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-open-turkey-with-climate-goals-under-pressure-war-ai-2026-11-09/"
+  },
+  {
+    "id": "current-affairs-20261109-wmo-jan-sep-anomaly",
+    "q": "According to the WMO assessment released in November 2026, the January–September 2026 global temperature anomaly relative to pre-industrial levels was approximately:",
+    "o": [
+      "0.97°C",
+      "1.47°C",
+      "1.97°C",
+      "2.47°C"
+    ],
+    "a": 1,
+    "e": "The WMO assessment put January–September 2026 at about 1.47°C above the pre-industrial average.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://thefinancialexpress.com.bd/environment/this-year-set-to-be-one-of-four-hottest-on-record-un-report-says"
   }
 ]

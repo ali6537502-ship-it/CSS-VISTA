@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 710,
+  "count": 712,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4969,6 +4969,20 @@
     {
       "id": "current-affairs-archive-2026-11-06-china-clean-tech-commercial-flows",
       "text": "Reuters estimated about $132 billion in Chinese clean-technology exports and overseas investment in the preceding year, a commercial measure not directly comparable to official climate finance.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-cop31-opened",
+      "text": "COP31 opened in Antalya, Türkiye, on 9 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-wmo-147",
+      "text": "WMO reported January–September 2026 global mean temperature approximately 1.47°C above the pre-industrial average.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
