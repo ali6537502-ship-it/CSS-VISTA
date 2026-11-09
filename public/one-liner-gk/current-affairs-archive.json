@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 718,
+  "count": 719,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5025,6 +5025,13 @@
     {
       "id": "current-affairs-archive-2026-11-07-seymen",
       "text": "Seymen landfill, highlighted in a November 2026 methane investigation, is near Istanbul.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-08-cop31-negotiations",
+      "text": "Australia leads formal COP31 negotiations in 2026 while Türkiye chairs the conference.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

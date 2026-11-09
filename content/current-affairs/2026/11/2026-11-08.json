@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "published_at": "2026-11-08T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 8 November 2026 | Retrospective edition (00:00–23:59 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-08-cop31-antalya-australia-negotiations",
+      "category": "World — Climate Diplomacy",
+      "headline": "COP31 preparations confirm Türkiye–Australia division of responsibilities ahead of Antalya summit",
+      "summary": "Reporting on 8 November 2026 outlined arrangements for COP31, scheduled for 9–20 November in Antalya, Türkiye. Türkiye will preside over the conference, while Australia leads formal negotiations; adaptation finance and fossil-fuel transition remain prominent issues.",
+      "what_happened": "Ahead of the 9 November opening, coverage detailed the unusual division of leadership between Türkiye as conference president and Australia as president of negotiations. The summit had not yet opened on the 8 November coverage date. Delegates were preparing to debate emissions reductions, adaptation funding, loss and damage, and implementation of the Paris Agreement.",
+      "background": "The annual Conference of the Parties to the UN Framework Convention on Climate Change coordinates international climate negotiations. The Paris Agreement establishes a collective framework for limiting warming and strengthening adaptation and finance.",
+      "why_it_matters": "A divided presidency creates a distinctive negotiating arrangement at a time of tensions over fossil-fuel transition and financing for vulnerable states.",
+      "pakistan_perspective": "For Pakistan, adaptation financing and support for climate-related loss and damage are directly relevant to flood resilience and climate diplomacy.",
+      "key_takeaways": [
+        "COP31 was scheduled for 9–20 November 2026 in Antalya, Türkiye.",
+        "Türkiye chairs the summit while Australia leads formal negotiations.",
+        "The 8 November coverage describes preparations, not a completed summit outcome."
+      ],
+      "quick_gk": [
+        "Australia leads formal negotiations at COP31, while Türkiye chairs the conference."
+      ],
+      "question_angles": [
+        "Which country is responsible for leading formal COP31 negotiations under the Türkiye–Australia arrangement?"
+      ],
+      "topics": [
+        "COP31",
+        "climate finance",
+        "adaptation",
+        "Paris Agreement"
+      ],
+      "countries": [
+        "Türkiye",
+        "Australia",
+        "Pakistan"
+      ],
+      "institutions": [
+        "UNFCCC"
+      ],
+      "sources": [
+        {
+          "publisher": "Le Monde",
+          "title": "COP31 memo: Schedule, organization and key issues at the Antalya climate conference",
+          "url": "https://www.lemonde.fr/en/environment/article/2026/11/08/cop31-memo-schedule-organization-and-key-issues-at-the-antalya-climate-conference_6775210_114.html"
+        },
+        {
+          "publisher": "The Guardian",
+          "title": "COP31: what is at stake at the UN climate summit and what can it achieve?",
+          "url": "https://www.theguardian.com/environment/2026/nov/08/cop31-what-is-at-stake-at-the-un-climate-summit-and-what-can-it-achieve"
+        }
+      ]
+    }
+  ]
+}

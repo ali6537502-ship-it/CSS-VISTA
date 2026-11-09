@@ -148,5 +148,20 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-comes-turkey-satellites-reveal-landfill-methane-problem-2026-11-07/"
+  },
+  {
+    "id": "current-affairs-20261108-cop31-australia-negotiations",
+    "q": "Formal negotiations at COP31 in Antalya are led by:",
+    "o": [
+      "Türkiye",
+      "Australia",
+      "Brazil",
+      "Azerbaijan"
+    ],
+    "a": 1,
+    "e": "The 2026 COP31 leadership arrangement assigns the conference presidency to Türkiye and the negotiations presidency to Australia.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.lemonde.fr/en/environment/article/2026/11/08/cop31-memo-schedule-organization-and-key-issues-at-the-antalya-climate-conference_6775210_114.html"
   }
 ]
