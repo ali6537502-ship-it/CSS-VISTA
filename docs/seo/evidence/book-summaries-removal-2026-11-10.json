@@ -1,0 +1,161 @@
+{
+  "checkedAt": "2026-11-10T10:05:21.516215+00:00",
+  "origin": "https://www.css-vista.com",
+  "fingerprint": {
+    "schemaVersion": 1,
+    "gitSha": "1d5a29e00b878bc29341ecadb977399163a97fe1",
+    "source": "git-rev-parse-head",
+    "buildTarget": "hostinger",
+    "builtAt": "2026-11-10T07:17:48.934Z"
+  },
+  "retired": [
+    {
+      "path": "/book-summaries",
+      "ordinaryStatus": 410,
+      "googlebotStatus": 410,
+      "equivalentHtml": true,
+      "noindex": true,
+      "adFree": true,
+      "bodySha256": "ad43a2ab7f1b7c62ff54849525e6e374b1ac029605773eb3e4c4b8fa16fb4aa0"
+    },
+    {
+      "path": "/book-summaries/why-nations-fail",
+      "ordinaryStatus": 410,
+      "googlebotStatus": 410,
+      "equivalentHtml": true,
+      "noindex": true,
+      "adFree": true,
+      "bodySha256": "ad43a2ab7f1b7c62ff54849525e6e374b1ac029605773eb3e4c4b8fa16fb4aa0"
+    },
+    {
+      "path": "/book-summaries/index.json",
+      "ordinaryStatus": 410,
+      "googlebotStatus": 410,
+      "equivalentHtml": true,
+      "noindex": true,
+      "adFree": true,
+      "bodySha256": "ad43a2ab7f1b7c62ff54849525e6e374b1ac029605773eb3e4c4b8fa16fb4aa0"
+    },
+    {
+      "path": "/book-summaries/covers/why-nations-fail.webp",
+      "ordinaryStatus": 410,
+      "googlebotStatus": 410,
+      "equivalentHtml": true,
+      "noindex": true,
+      "adFree": true,
+      "bodySha256": "ad43a2ab7f1b7c62ff54849525e6e374b1ac029605773eb3e4c4b8fa16fb4aa0"
+    },
+    {
+      "path": "/seo/book-summaries/why-nations-fail.html",
+      "ordinaryStatus": 410,
+      "googlebotStatus": 410,
+      "equivalentHtml": true,
+      "noindex": true,
+      "adFree": true,
+      "bodySha256": "ad43a2ab7f1b7c62ff54849525e6e374b1ac029605773eb3e4c4b8fa16fb4aa0"
+    },
+    {
+      "path": "/seo/routes/book-summaries.html",
+      "ordinaryStatus": 410,
+      "googlebotStatus": 410,
+      "equivalentHtml": true,
+      "noindex": true,
+      "adFree": true,
+      "bodySha256": "ad43a2ab7f1b7c62ff54849525e6e374b1ac029605773eb3e4c4b8fa16fb4aa0"
+    },
+    {
+      "path": "/assets/BookSummaries-stale.js",
+      "ordinaryStatus": 410,
+      "googlebotStatus": 410,
+      "equivalentHtml": true,
+      "noindex": true,
+      "adFree": true,
+      "bodySha256": "ad43a2ab7f1b7c62ff54849525e6e374b1ac029605773eb3e4c4b8fa16fb4aa0"
+    }
+  ],
+  "preservedRoutes": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/books",
+      "status": 200
+    },
+    {
+      "path": "/notes",
+      "status": 200
+    },
+    {
+      "path": "/journal",
+      "status": 200
+    },
+    {
+      "path": "/past-papers",
+      "status": 200
+    },
+    {
+      "path": "/privacy-policy",
+      "status": 200
+    }
+  ],
+  "backendChecks": [
+    {
+      "path": "/api/health.php",
+      "status": 200,
+      "publicResponse": {
+        "ok": true
+      }
+    },
+    {
+      "path": "/api/pro-release.php",
+      "status": 200,
+      "publicResponse": {
+        "paused": false,
+        "free": true,
+        "pro_retired": true
+      }
+    }
+  ],
+  "sitemaps": [
+    {
+      "path": "/sitemap-core.xml",
+      "status": 200,
+      "retiredUrlsAbsent": true
+    },
+    {
+      "path": "/sitemap-gk.xml",
+      "status": 200,
+      "retiredUrlsAbsent": true
+    },
+    {
+      "path": "/sitemap-past-paper-collections.xml",
+      "status": 200,
+      "retiredUrlsAbsent": true
+    },
+    {
+      "path": "/sitemap-past-papers.xml",
+      "status": 200,
+      "retiredUrlsAbsent": true
+    }
+  ],
+  "browser": {
+    "widths": [
+      390,
+      1366
+    ],
+    "result": "pass",
+    "checks": [
+      "no summary discovery links",
+      "original books discoverable",
+      "410 noindex notice without ads",
+      "Notes sample disclosure and links work"
+    ],
+    "network": "GET-only; backend and third-party requests blocked"
+  },
+  "workflow": {
+    "runId": 42773742370,
+    "conclusion": "success",
+    "url": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/42773742370"
+  }
+}
