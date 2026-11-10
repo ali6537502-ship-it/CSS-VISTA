@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 721,
+  "count": 725,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5046,6 +5046,34 @@
     {
       "id": "current-affairs-archive-2026-11-09-wmo-147",
       "text": "WMO reported January–September 2026 global mean temperature approximately 1.47°C above the pre-industrial average.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-ttap",
+      "text": "TTAP stands for Tehreek Tahafuz-i-Ayeen Pakistan, an opposition alliance.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-hasina-india",
+      "text": "Sheikh Hasina requested new identity and travel documents while staying in India in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-ukraine-imf-167",
+      "text": "The IMF's November 2026 Ukraine review could unlock about $1.67 billion, subject to approval.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-09-hormuz-103",
+      "text": "Reuters reported October 2026 oil exports through the Strait of Hormuz at about 10.3 million barrels per day.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
