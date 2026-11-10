@@ -21,3 +21,7 @@ This scoped release does not reactivate Pro, MPT, payments or AI, publish privat
 ## Free learning conversion — 7 November 2026
 
 The owner instructed in this thread: **“delete ability and pro system and make it free”**. Retire the standalone General Ability feature, paid-account/checkout system and subscription-dependent learning restrictions. Preserve the compulsory GSA subject, separate free GSA Tutor, accounts and all historical learning/billing records. External AI processing and payment creation/review are retired, not reopened. The one-account free-learning policy supersedes the older Pro launch restrictions for these remaining learning tools; the independent MPT and unpublished-content restrictions remain. See `docs/free-learning/retire-pro-and-ability.md`.
+
+## Sentence and expression release authorization — 8 November 2026
+
+The owner explicitly instructed **“deploy and check”** after reviewing the 16-chapter/33-lesson free lab. Port that tested course onto current main, preserving the newer free-account conversion, Expression Guide, GSA Tutor and account histories, and release it through the established Hostinger Git workflow. Do not merge the older broad draft wholesale. No payment/provider activation, private CA/PA publication, MPT reopening or domain changes are authorized. Verify the actual deployed fingerprint and report the limits of live account testing.

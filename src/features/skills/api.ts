@@ -29,7 +29,7 @@ export type Stage = {
   teach?: string;
   example?: string;
   question?: string;
-  min_words: number;
+  min_words: number; review?: string[];
 };
 export type Source = {
   id: string;
@@ -42,6 +42,10 @@ export type Source = {
   transfer_range?: { start: number; end: number };
   grammar_day?: number;
   attribution?: string;
+  next_lesson?: string;
+  chapter?: number;
+  chapter_title?: string;
+  writing_kind?: "sentence" | "paragraph";
   stages: Stage[];
   check?: { id: string; prompt: string; options: string[] };
   roadmap?: {
@@ -69,6 +73,7 @@ export type Evidence = {
     chosen: string;
     answer: string;
     explanation: string;
+    choice_explanation?: string;
   } | null;
   basis: string;
 };
@@ -106,6 +111,7 @@ export type Operation = {
   result: Feedback | null;
 };
 export type Overview = {
+  access?: { allowed: boolean; kind: string };
   membership: { status: string };
   configuration: Configuration;
   catalog: {
@@ -113,6 +119,10 @@ export type Overview = {
     title: string;
     level: Level | null;
     summary: string;
+    chapter?: number;
+    chapter_title?: string;
+    lesson_order?: number;
+    writing_kind?: "sentence" | "paragraph";
   }[];
   attempts: { id: string; target_year: number }[];
   history: {
@@ -126,6 +136,7 @@ export type Overview = {
   has_more: boolean;
 };
 export type Detail = {
+  access?: { allowed: boolean; kind: string };
   membership: { status: string };
   configuration: Configuration;
   workspace: {
@@ -151,6 +162,8 @@ export type Detail = {
     created_at: string;
   }[];
   operations: Operation[];
+  children_offset: number;
+  has_more_children: boolean;
   children: {
     id: string;
     feature: Feature;

@@ -78,6 +78,7 @@ jobs:
       - name: Verify free learning, retired actions and retained histories
         run: |
           node tests/free-learning/security.mjs
+          node tests/skills/free-expression.mjs
           node tests/skills/security.mjs
           node tests/skills/sources-security.mjs
           node tests/topics/security.mjs
@@ -101,6 +102,7 @@ jobs:
           node tests/browser/runtime.mjs > test-artifacts/browser-runtime.log 2>&1 &
           node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
           node tests/browser/free-learning.mjs
+          node tests/browser/free-expression.mjs
           node tests/browser/skills.mjs
           node tests/browser/precis-book.mjs
           php tests/workspace-preview/fixture.php paused
