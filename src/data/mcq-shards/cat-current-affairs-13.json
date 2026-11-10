@@ -193,5 +193,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://thefinancialexpress.com.bd/environment/this-year-set-to-be-one-of-four-hottest-on-record-un-report-says"
+  },
+  {
+    "id": "current-affairs-20261110-lahore-smog",
+    "q": "Which Pakistani city topped a live major-city pollution ranking in Reuters reporting on 10 November 2026?",
+    "o": [
+      "Lahore",
+      "Karachi",
+      "Peshawar",
+      "Quetta"
+    ],
+    "a": 0,
+    "e": "Lahore topped a live major-city pollution ranking reported by Reuters on 10 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/environment/pakistan-blames-indias-diwali-fireworks-lahores-toxic-air-2026-11-10/"
+  },
+  {
+    "id": "current-affairs-20261110-pakistan-cop31-finance",
+    "q": "At which international conference did Pakistan's foreign ministry say its prime minister would seek greater climate finance in November 2026?",
+    "o": [
+      "COP30",
+      "COP31",
+      "G20 Summit",
+      "World Economic Forum"
+    ],
+    "a": 1,
+    "e": "Pakistan's foreign ministry said the prime minister planned to press for climate finance at COP31 on 11 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.arabnews.pk/pakistan/pakistan-pm-to-seek-greater-climate-finance-at-cop31-summit-in-t%C3%BCrkiye-3006626"
+  },
+  {
+    "id": "current-affairs-20261110-hormuz-lng",
+    "q": "According to S&P Global Energy data cited by Reuters on 10 November, how many laden LNG tankers exited Hormuz in October 2026?",
+    "o": [
+      "23",
+      "27",
+      "31",
+      "42"
+    ],
+    "a": 2,
+    "e": "S&P Global Energy counted 31 laden LNG tankers exiting Hormuz in October 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/hormuz-lng-traffic-hits-highest-october-since-iran-war-began-2026-11-10/"
+  },
+  {
+    "id": "current-affairs-20261110-cop31-electrification",
+    "q": "What global electricity share by 2035 was proposed by COP31 host Türkiye in November 2026?",
+    "o": [
+      "25%",
+      "30%",
+      "35%",
+      "50%"
+    ],
+    "a": 2,
+    "e": "Türkiye promoted a proposed 35% global electricity share by 2035 at COP31.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-host-turkey-push-global-electrification-goal-will-it-be-green-2026-11-10/"
   }
 ]

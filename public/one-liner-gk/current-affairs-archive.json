@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 721,
+  "count": 725,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5046,6 +5046,34 @@
     {
       "id": "current-affairs-archive-2026-11-09-wmo-147",
       "text": "WMO reported January–September 2026 global mean temperature approximately 1.47°C above the pre-industrial average.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-lahore-smog",
+      "text": "Lahore topped a live major-city pollution ranking reported by Reuters on 10 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-pakistan-cop31-finance",
+      "text": "Pakistan's foreign ministry said the prime minister planned to press for climate finance at COP31 on 11 November.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-hormuz-lng",
+      "text": "S&P Global Energy counted 31 laden LNG tankers exiting Hormuz in October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-cop31-electrification",
+      "text": "Türkiye promoted a proposed 35% global electricity share by 2035 at COP31.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
