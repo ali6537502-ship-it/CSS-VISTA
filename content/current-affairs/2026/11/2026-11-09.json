@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-09",
-  "published_at": "2026-11-09T19:12:28+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 9 November 2026 | Evening update (00:00–19:12 PKT)",
+  "published_at": "2026-11-09T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 9 November 2026 | Final edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-09-cop31-opens-antalya",
@@ -81,6 +81,164 @@
           "publisher": "The Financial Express",
           "title": "This year set to be one of four hottest on record, UN report says",
           "url": "https://thefinancialexpress.com.bd/environment/this-year-set-to-be-one-of-four-hottest-on-record-un-report-says"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-09-pakistan-ttap-opposition",
+      "category": "Pakistan — Politics and Governance",
+      "headline": "Opposition alliance signals possible campaign against Pakistan government",
+      "summary": "On 9 November, the Tehreek Tahafuz-i-Ayeen Pakistan (TTAP) signalled that it might launch a political movement against the government and expressed hope that JUI-F chief Maulana Fazlur Rehman would lead it. This was a stated intention, not a confirmed launch.",
+      "what_happened": "The opposition alliance discussed stronger coordination with Jamiat Ulema-i-Islam-Fazl following meetings in the preceding week. The reported campaign remained prospective.",
+      "background": "Coalition-building and parliamentary coordination are important features of Pakistan's multiparty politics.",
+      "why_it_matters": "Potential opposition cooperation could influence parliamentary debate, political mobilisation and government-opposition relations.",
+      "pakistan_perspective": "The development concerns political coordination and constitutional opposition activity, not a change of government.",
+      "key_takeaways": [
+        "TTAP stands for Tehreek Tahafuz-i-Ayeen Pakistan.",
+        "Maulana Fazlur Rehman leads JUI-F.",
+        "A proposed movement must not be reported as an accomplished launch."
+      ],
+      "quick_gk": [
+        "TTAP is the Tehreek Tahafuz-i-Ayeen Pakistan opposition alliance."
+      ],
+      "question_angles": [
+        "What does TTAP stand for in Pakistan's opposition politics?"
+      ],
+      "topics": [
+        "Pakistan politics",
+        "opposition alliances",
+        "parliamentary politics"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "people": [
+        "Maulana Fazlur Rehman"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Opposition alliance hints at movement against govt, hopes JUI-F chief will lead the effort",
+          "url": "https://www.dawn.com/news/2043274"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-09-bangladesh-hasina-passport",
+      "category": "South Asia — Politics",
+      "headline": "Sheikh Hasina seeks new passport and identity document amid stated plans to return to Bangladesh",
+      "summary": "Reuters reported on 9 November that former Bangladesh prime minister Sheikh Hasina had requested a new passport and identity card while in India. The request did not establish that she had returned.",
+      "what_happened": "A letter reviewed by Reuters documented Hasina's request for travel and identity documentation. She has been outside Bangladesh since 2024.",
+      "background": "Hasina's departure followed the 2024 uprising, and her possible return carries political and legal implications.",
+      "why_it_matters": "The development may affect Bangladesh's domestic political tensions and relations with India.",
+      "regional_implications": "The issue intersects with Bangladesh–India relations and regional political stability.",
+      "pakistan_perspective": "Pakistan follows political stability and diplomatic developments in Bangladesh as part of its South Asian regional affairs.",
+      "key_takeaways": [
+        "Hasina sought documentation while in India.",
+        "The request was reported on 9 November 2026.",
+        "The request does not mean a return has occurred."
+      ],
+      "quick_gk": [
+        "Former Bangladesh prime minister Sheikh Hasina sought a new passport and identity card while in India in November 2026."
+      ],
+      "question_angles": [
+        "In which country was Sheikh Hasina staying when her November 2026 document request was reported?"
+      ],
+      "topics": [
+        "Bangladesh",
+        "South Asia",
+        "political transition"
+      ],
+      "countries": [
+        "Bangladesh",
+        "India"
+      ],
+      "people": [
+        "Sheikh Hasina"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters via The Economic Times",
+          "title": "Sheikh Hasina seeks new passport in clearest sign of Bangladesh return",
+          "url": "https://m.economictimes.com/news/international/world-news/sheikh-hasina-seeks-new-passport-in-clearest-sign-of-bangladesh-return/articleshow/135669822.cms"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-09-imf-ukraine-review",
+      "category": "World — Economy and Conflict",
+      "headline": "IMF begins combined review of Ukraine programme that could unlock $1.67 billion",
+      "summary": "On 9 November, the IMF began a review combining the second and third assessments of Ukraine's four-year lending programme. A successful review could unlock about $1.67 billion; disbursement had not yet been approved.",
+      "what_happened": "The talks cover fiscal policy, structural reforms, the budget and external financing amid the continuing war.",
+      "background": "IMF reviews assess compliance with programme conditions before proposed disbursements can be approved.",
+      "why_it_matters": "Ukraine's fiscal capacity and external aid needs are central to economic resilience during the conflict.",
+      "global_implications": "The process illustrates the interaction between multilateral lending, wartime financing and conditional reform.",
+      "pakistan_perspective": "Pakistan can examine the IMF review as a comparative case of conditional lending and external financing.",
+      "key_takeaways": [
+        "The IMF combined Ukraine's second and third programme reviews.",
+        "Approximately $1.67 billion could be unlocked subject to approval.",
+        "A review launch is not the same as an approved disbursement."
+      ],
+      "quick_gk": [
+        "The IMF's November 2026 review of Ukraine's programme could unlock approximately $1.67 billion, subject to approval."
+      ],
+      "question_angles": [
+        "How much financing could the IMF's November 2026 Ukraine review unlock?"
+      ],
+      "topics": [
+        "IMF",
+        "Ukraine economy",
+        "international finance"
+      ],
+      "countries": [
+        "Ukraine"
+      ],
+      "institutions": [
+        "International Monetary Fund"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "IMF launches Ukraine loan review that could unlock $1.67 billion",
+          "url": "https://www.reuters.com/business/imf-launches-ukraine-loan-review-that-could-unlock-167-billion-2026-11-09/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-09-oil-hormuz-exports",
+      "category": "World — Energy and Geopolitics",
+      "headline": "Oil markets assess potential oversupply as Middle Eastern exports recover",
+      "summary": "Reuters analysis published 9 November reported that October oil exports through the Strait of Hormuz reached about 10.3 million barrels per day amid recovery in regional shipments. Analysts discussed a possible post-conflict glut rather than a certain outcome.",
+      "what_happened": "Recovery of Gulf oil exports, supply from producers outside the region and weak demand were cited as factors contributing to downward pressure on prices.",
+      "background": "The Strait of Hormuz is a major shipping passage for energy exports from the Persian Gulf.",
+      "why_it_matters": "Energy-price volatility affects inflation, fiscal policy and trade balances worldwide.",
+      "pakistan_perspective": "As an energy importer, Pakistan is exposed to changes in global crude prices, freight costs and fuel supply security.",
+      "regional_implications": "Changes in Gulf export flows and maritime risk affect importers across South Asia.",
+      "key_takeaways": [
+        "Reuters reported October exports through Hormuz at about 10.3 million barrels per day.",
+        "A possible glut was an analysis, not a confirmed forecast.",
+        "Oil market changes can influence Pakistan's import bill."
+      ],
+      "quick_gk": [
+        "Reuters reported that October 2026 oil exports through the Strait of Hormuz reached about 10.3 million barrels per day."
+      ],
+      "question_angles": [
+        "What was the approximate October 2026 oil export flow through Hormuz cited in the November Reuters analysis?"
+      ],
+      "topics": [
+        "Strait of Hormuz",
+        "oil markets",
+        "energy security"
+      ],
+      "countries": [
+        "Pakistan",
+        "Saudi Arabia"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Middle East oil price war heralds post-conflict glut",
+          "url": "https://www.reuters.com/commentary/reuters-open-interest/middle-east-oil-price-war-heralds-post-conflict-glut-2026-11-09/"
         }
       ]
     }
