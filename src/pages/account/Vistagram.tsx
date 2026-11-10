@@ -102,7 +102,7 @@ export default function AccountVistagram() {
 
   return (
     <AccountPage title="My CSS Vistagram" intro="Your saved posts, private notes, followed topics and reading history." action={<Link to="/vistagram" className="inline-flex min-h-11 items-center rounded-xl border bg-white px-4 text-sm font-semibold text-[#14543D]">Open public Vistagram</Link>}>
-      <div className="space-y-5">
+      <div className="account-vistagram space-y-5">
         <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">{[[newCount,'New since last visit'],[member.saved.length,'Saved posts'],[member.followedTopics.length,'Followed topics'],[member.collections.length,'Collections']].map(([value,label]) => <div key={label} className="account-tool-card"><dt className="text-sm text-[#47564D]">{label}</dt><dd className="mt-2 text-2xl font-semibold text-[#14543D]">{value}</dd></div>)}</dl>
 
         <nav className="mt-5 flex gap-2 overflow-x-auto pb-1" aria-label="My Vistagram sections">

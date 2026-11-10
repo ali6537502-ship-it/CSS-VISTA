@@ -36,3 +36,5 @@
 .account-canvas :is(select,button,input:not([type=checkbox]):not([type=radio]):not([type=hidden])) { min-height: 2.75rem; }
 .account-canvas textarea { padding: .85rem; line-height: 1.7; }
 .account-content h2 + p { margin-top: .6rem; }
+
+.account-vistagram .text-slate-400 { color: #47564d; }
