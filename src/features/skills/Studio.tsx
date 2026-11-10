@@ -1003,6 +1003,7 @@ function Session({
         </section>
       )}
       {w.feature === "sentence" && saved?.evidence.all_recorded && w.source.next_lesson && <Link className={primaryStyle} to={`/account/expression?view=studio&lesson=${encodeURIComponent(w.source.next_lesson)}#guided-practice`}>Choose the next lesson</Link>}
+      {w.feature === "sentence" && w.parent_id && w.parent_feature && <Link className={secondaryStyle} to={skillsLink(w.parent_feature, w.parent_id)}>Return to the original workspace</Link>}
       <FeedbackPanel key={`${detail.saved?.version_id || "new"}:${detail.configuration.policy_hash || "disabled"}`} detail={detail} />
       {w.feature !== "sentence" && active && saved && !old && <Transfers key={`${versionParams.get("children_offset") || "0"}:${linkedRefresh}`} detail={detail} save={save} />}
       <button className={secondaryStyle} onClick={() => { refresh(); setLinkedRefresh(value => value + 1); }}>
