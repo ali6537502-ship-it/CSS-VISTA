@@ -193,5 +193,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://thefinancialexpress.com.bd/environment/this-year-set-to-be-one-of-four-hottest-on-record-un-report-says"
+  },
+  {
+    "id": "current-affairs-20261109-ttap-expansion",
+    "q": "In Pakistan's opposition politics, the abbreviation TTAP stands for:",
+    "o": [
+      "Tehreek Tahafuz-i-Ayeen Pakistan",
+      "Tehreek Taraqqi Awam Pakistan",
+      "Tehreek Tameer-e-Aman Pakistan",
+      "Tehreek Tahafuz-e-Adalat Pakistan"
+    ],
+    "a": 0,
+    "e": "TTAP denotes Tehreek Tahafuz-i-Ayeen Pakistan, an opposition alliance.",
+    "sourceUrl": "https://www.dawn.com/news/2043274",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate"
+  },
+  {
+    "id": "current-affairs-20261109-hasina-exile-country",
+    "q": "Sheikh Hasina's request for a new passport, reported on 9 November 2026, was made while she was staying in which country?",
+    "o": [
+      "Nepal",
+      "India",
+      "Thailand",
+      "Malaysia"
+    ],
+    "a": 1,
+    "e": "Reuters reported that the former Bangladesh prime minister was in India when she sought new documents.",
+    "sourceUrl": "https://m.economictimes.com/news/international/world-news/sheikh-hasina-seeks-new-passport-in-clearest-sign-of-bangladesh-return/articleshow/135669822.cms",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate"
+  },
+  {
+    "id": "current-affairs-20261109-imf-ukraine-amount",
+    "q": "The IMF review of Ukraine's programme launched on 9 November 2026 could unlock approximately how much funding, subject to approval?",
+    "o": [
+      "$670 million",
+      "$1.17 billion",
+      "$1.67 billion",
+      "$2.67 billion"
+    ],
+    "a": 2,
+    "e": "Reuters reported that the combined review could unlock around $1.67 billion, contingent on approval.",
+    "sourceUrl": "https://www.reuters.com/business/imf-launches-ukraine-loan-review-that-could-unlock-167-billion-2026-11-09/",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate"
+  },
+  {
+    "id": "current-affairs-20261109-hormuz-october-flow",
+    "q": "According to Reuters analysis published 9 November 2026, October oil exports through the Strait of Hormuz reached approximately:",
+    "o": [
+      "4.3 million barrels per day",
+      "7.3 million barrels per day",
+      "13.3 million barrels per day",
+      "10.3 million barrels per day"
+    ],
+    "a": 3,
+    "e": "Reuters cited October exports through Hormuz of approximately 10.3 million barrels per day.",
+    "sourceUrl": "https://www.reuters.com/commentary/reuters-open-interest/middle-east-oil-price-war-heralds-post-conflict-glut-2026-11-09/",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate"
   }
 ]
