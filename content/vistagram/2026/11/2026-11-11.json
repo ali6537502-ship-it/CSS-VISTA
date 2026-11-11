@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "profile": "daily-six",
+  "date": "2026-11-11",
+  "published_at": "2026-11-11T12:00:22+05:00",
+  "edition": "Daily Vistagram Six — 11 November 2026",
+  "editorial_safety": {
+    "neutral_factual": true,
+    "non_partisan": true,
+    "no_personal_attacks": true,
+    "respectful_of_state_and_religion": true,
+    "no_defamation_or_inflammatory_framing": true
+  },
+  "posts": [
+    {
+      "id": "pakistans-federal-tax-system-direct-taxes-indirect-taxes-and-tax-incidence",
+      "slug": "pakistans-federal-tax-system-direct-taxes-indirect-taxes-and-tax-incidence",
+      "dedupeKey": "pakistans-federal-tax-system-direct-taxes-indirect-taxes-and-tax-incidence",
+      "scope": "Pakistan",
+      "title": "Pakistan's Federal Tax System: Direct Taxes, Indirect Taxes and Tax Incidence",
+      "excerpt": "Public revenue is necessary for public services, infrastructure, administration and other lawful government functions. Pakistan's federal tax system draws on several distinct instruments, including income tax, sales tax, federal excise duty and custo",
+      "type": "Explainer",
+      "category": "Economics",
+      "topic": "Public Financing — Sources of Government Revenue and Incidence of Taxes",
+      "tags": [
+        "Economics",
+        "Pakistan",
+        "Taxation",
+        "Tax Incidence",
+        "Fiscal Policy"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Why the tax mix matters",
+          "paragraphs": [
+            "Public revenue is necessary for public services, infrastructure, administration and other lawful government functions. Pakistan's federal tax system draws on several distinct instruments, including income tax, sales tax, federal excise duty and customs duty. The Federal Board of Revenue reports these streams separately because they operate through different legal and economic mechanisms. A tax collection figure should never be mistaken for the amount of economic activity generated or the final welfare effect of a tax. The important analytical question is not only how much is collected, but who initially pays, who ultimately bears the cost and how the structure interacts with economic incentives."
+          ]
+        },
+        {
+          "heading": "Direct and indirect taxes",
+          "paragraphs": [
+            "Income tax is generally classified as a direct tax because it is imposed on taxable income under the applicable law. Sales tax and excise duties are usually treated as indirect taxes associated with transactions or specified goods and services. Customs duties apply to goods crossing the customs frontier according to the relevant tariff framework. The legal taxpayer and the person bearing the economic burden can differ. A business may remit sales tax while part of the cost is reflected in the prices faced by consumers. Yet complete shifting is not automatic: competition, demand sensitivity, supply conditions and exemptions can change the outcome."
+          ]
+        },
+        {
+          "heading": "Tax incidence and elasticity",
+          "paragraphs": [
+            "Tax incidence studies how a tax burden is distributed after market adjustments. Consider a product for which buyers have few immediate substitutes. If demand is relatively inelastic, sellers may pass a larger share of a tax into the final price. Where buyers can easily switch products, sellers may absorb more of the burden through reduced margins or other adjustments. This is a conceptual relationship, not a claim that any particular Pakistani tax is fully passed on. A fair analysis also separates statutory tax rates from effective rates, which may be affected by exemptions, thresholds, enforcement and compliance costs."
+          ]
+        },
+        {
+          "heading": "Reading Pakistani fiscal evidence",
+          "paragraphs": [
+            "The Federal Board of Revenue publishes tax collection data and has a dedicated revenue-analysis function. These institutional records allow comparisons between income tax, sales tax, excise and customs collections, but readers must identify the fiscal year, whether figures are provisional and whether collections are gross or net of refunds. Revenue growth alone cannot prove improved equity or administrative efficiency. A sound policy discussion also examines the breadth of the tax base, administrative capacity, predictability for businesses and the distribution of burdens across households. In an examination answer, first classify the taxes, then explain incidence with elasticity, and finally connect the framework to verified Pakistani fiscal records."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the central concept, distinguish its major mechanisms, explain practical implications and evaluate evidence and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "Federal Board of Revenue — Revenue Analysis",
+          "url": "https://fbr.gov.pk/introduction-sprs/142253/131273"
+        },
+        {
+          "label": "Federal Board of Revenue — FY 2023–24 revenue composition",
+          "url": "https://www.fbr.gov.pk/fbr-comfortably-achieves-target-for-the-fy-202324/174097"
+        }
+      ]
+    },
+    {
+      "id": "taxilas-archaeological-cities-urban-evolution-and-cultural-exchange",
+      "slug": "taxilas-archaeological-cities-urban-evolution-and-cultural-exchange",
+      "dedupeKey": "taxilas-archaeological-cities-urban-evolution-and-cultural-exchange",
+      "scope": "Pakistan",
+      "title": "Taxila's Archaeological Cities: Urban Evolution and Cultural Exchange",
+      "excerpt": "Taxila is best understood as an archaeological landscape containing evidence of settlements, religious institutions and changing patterns of urban life. UNESCO identifies it as a World Heritage property in Pakistan and describes several settlement si",
+      "type": "Explainer",
+      "category": "Pakistan Affairs",
+      "topic": "Land and People of Pakistan — Geography, Society and Cultural Heritage",
+      "tags": [
+        "Pakistan Affairs",
+        "Pakistan",
+        "Taxila",
+        "Archaeology",
+        "Cultural Heritage"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "A landscape rather than one monument",
+          "paragraphs": [
+            "Taxila is best understood as an archaeological landscape containing evidence of settlements, religious institutions and changing patterns of urban life. UNESCO identifies it as a World Heritage property in Pakistan and describes several settlement sites that illuminate long-term urban development. It should not be reduced to a single city founded in one year. Different archaeological layers and locations belong to different periods. This distinction matters because historians use settlement plans, construction materials, artifacts and religious buildings to reconstruct change over time. Taxila's value lies in the combination of sites and the relationships among them."
+          ]
+        },
+        {
+          "heading": "The settlement sequence",
+          "paragraphs": [
+            "The UNESCO description highlights Saraikala, Bhir, Sirkap and Sirsukh as important stages in the wider archaeological sequence. Saraikala preserves evidence of earlier occupation, while Bhir reflects an early historic urban setting. Sirkap is associated with a planned layout influenced by Hellenistic traditions, and Sirsukh reflects another phase of urban development. These locations should not be treated as four interchangeable names for the same urban plan. Their differences allow scholars to compare street patterns, fortification styles and the organization of public and private spaces. Archaeological interpretations rely on excavated evidence and may be refined as research progresses."
+          ]
+        },
+        {
+          "heading": "Exchange, learning and plural heritage",
+          "paragraphs": [
+            "Taxila's location helped connect different cultural and commercial worlds. UNESCO identifies Persian, Greek and Central Asian influences in the site's historical development and records important Buddhist monasteries and stupas in the wider valley. The resulting heritage demonstrates that the region's past cannot be explained by a single political dynasty or cultural influence. Architecture, routes and religious institutions provide evidence of interaction across communities and time. A careful discussion recognizes these historical layers without turning archaeology into an argument for modern political positions. Cultural exchange is an empirical historical process rather than proof that every institution or tradition was identical."
+          ]
+        },
+        {
+          "heading": "Conservation and examination use",
+          "paragraphs": [
+            "The UNESCO World Heritage listing dates to 1980. Its conservation discussion identifies pressures such as weathering, vegetation, nearby development and unauthorized excavation. Preservation therefore involves more than repairing visible walls; it also requires protecting archaeological context, managing visitors and maintaining documentation of discoveries. Tourism and education can support appreciation of heritage when accompanied by responsible site management. For a Pakistan Affairs answer, organize the material under chronology, urban design, cultural exchange and conservation. Cite the World Heritage record for the inscription and avoid unsupported claims about exact populations, university enrolments or the age of every structure."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the central concept, distinguish its major mechanisms, explain practical implications and evaluate evidence and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "UNESCO World Heritage Centre — Taxila",
+          "url": "https://whc.unesco.org/en/list/139"
+        }
+      ]
+    },
+    {
+      "id": "porphyry-copper-geology-in-pakistan-from-mineralization-to-resource-assessment",
+      "slug": "porphyry-copper-geology-in-pakistan-from-mineralization-to-resource-assessment",
+      "dedupeKey": "porphyry-copper-geology-in-pakistan-from-mineralization-to-resource-assessment",
+      "scope": "Pakistan",
+      "title": "Porphyry Copper Geology in Pakistan: From Mineralization to Resource Assessment",
+      "excerpt": "Porphyry copper deposits are large geological systems associated with magmatic and hydrothermal processes. They commonly contain copper-bearing minerals distributed through extensive volumes of altered and fractured rock rather than a single narrow v",
+      "type": "Explainer",
+      "category": "Geology",
+      "topic": "Economic and Applied Geology — Metallic Mineral Resources of Pakistan",
+      "tags": [
+        "Geology",
+        "Pakistan",
+        "Copper",
+        "Mineral Exploration",
+        "Resource Assessment"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "What makes a porphyry deposit",
+          "paragraphs": [
+            "Porphyry copper deposits are large geological systems associated with magmatic and hydrothermal processes. They commonly contain copper-bearing minerals distributed through extensive volumes of altered and fractured rock rather than a single narrow vein. The U.S. Geological Survey identifies porphyry deposits as a major global source of copper and discusses their relationship with tectonic settings. For Pakistan, the correct starting point is geological classification: an occurrence, an exploration prospect, an estimated resource and a mine in production are not equivalent terms. Treating them as interchangeable can exaggerate the maturity or commercial certainty of a project."
+          ]
+        },
+        {
+          "heading": "Tectonic setting and exploration clues",
+          "paragraphs": [
+            "Porphyry systems are frequently associated with magmatic arcs and the geological histories of convergent plate margins. Exploration geologists look for suitable intrusive rocks, alteration patterns, mineral assemblages, structural pathways and geochemical anomalies. No single surface clue establishes the size or economic value of a deposit. Geological maps help identify prospective areas, while field sampling, geophysics and drilling test hypotheses about subsurface continuity. A regional geological model can guide investigation, but it does not replace measured evidence. Pakistan appears within the geographic scope of a USGS regional assessment of porphyry copper potential across parts of Asia."
+          ]
+        },
+        {
+          "heading": "Resources are not the same as reserves",
+          "paragraphs": [
+            "An exploration result may identify mineralization without establishing that extraction would be technically or economically feasible. Resource estimation requires geological information, sample quality controls and assumptions about continuity and grade. Reserve classification introduces additional modifying considerations, such as mining method, metallurgy, costs, infrastructure, environmental requirements and other feasibility factors. A large rock volume can contain valuable metal but still face substantial practical constraints. Therefore, any reported tonnage or metal grade should be tied to a specific report, reporting standard and effective date. This article deliberately avoids quoting project-specific reserve estimates that have not been independently verified."
+          ]
+        },
+        {
+          "heading": "Development and geological stewardship",
+          "paragraphs": [
+            "Mineral development can involve employment, processing, transport and public revenue, but the geological opportunity must be assessed alongside water use, waste-rock handling, tailings management and rehabilitation. Baseline studies and monitoring are essential to understand environmental conditions before operations begin. Geological knowledge also improves land-use planning and the management of hazards associated with excavation. An effective examination response explains ore genesis, the exploration sequence, resource-versus-reserve distinctions and the importance of transparent technical evidence. It should describe Pakistan's potential constructively while distinguishing verified geological information from investment forecasts or promotional claims."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the central concept, distinguish its major mechanisms, explain practical implications and evaluate evidence and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "USGS — Global porphyry copper deposits and prospects",
+          "url": "https://www.usgs.gov/data/a-global-database-porphyry-copper-deposits-and-prospects"
+        },
+        {
+          "label": "USGS — Porphyry copper assessment including Pakistan",
+          "url": "https://www.usgs.gov/publications/porphyry-copper-assessment-central-asian-orogenic-belt-and-eastern-tethysides-china"
+        }
+      ]
+    },
+    {
+      "id": "john-stuart-mills-utilitarianism-higher-pleasures-and-moral-evaluation",
+      "slug": "john-stuart-mills-utilitarianism-higher-pleasures-and-moral-evaluation",
+      "dedupeKey": "john-stuart-mills-utilitarianism-higher-pleasures-and-moral-evaluation",
+      "scope": "Global",
+      "title": "John Stuart Mill's Utilitarianism: Higher Pleasures and Moral Evaluation",
+      "excerpt": "John Stuart Mill develops a moral theory that assesses actions and institutions in relation to human happiness and suffering. The central claim of utilitarianism is that consequences matter for moral judgment, but this does not mean that whatever ben",
+      "type": "Explainer",
+      "category": "Philosophy",
+      "topic": "Ethics — Utilitarianism (J. S. Mill)",
+      "tags": [
+        "Philosophy",
+        "Global",
+        "Ethics",
+        "Utilitarianism",
+        "Mill"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "The principle of utility",
+          "paragraphs": [
+            "John Stuart Mill develops a moral theory that assesses actions and institutions in relation to human happiness and suffering. The central claim of utilitarianism is that consequences matter for moral judgment, but this does not mean that whatever benefits one individual is automatically right. The relevant standpoint is impartial: the interests of affected persons must be considered rather than giving one person's welfare an arbitrary priority. Mill's moral philosophy is closely connected to debates about justice, individual liberty and the reasons for following moral rules. An examination answer should begin by distinguishing ethical utilitarianism from everyday self-interest or political expediency."
+          ]
+        },
+        {
+          "heading": "Higher and lower pleasures",
+          "paragraphs": [
+            "Mill is especially associated with a qualitative distinction among pleasures. His argument challenges the idea that every pleasurable experience can be ranked only by its intensity or duration. Intellectual, imaginative and moral activities can have forms of value not captured by a simple numerical comparison of sensations. This is often summarized as the contrast between higher and lower pleasures, but the terminology should not be used to dismiss ordinary enjoyment or to claim that people have identical preferences. The philosophical issue is whether the quality of an experience can affect its contribution to a good human life. Critics ask how such qualitative judgments can be justified without circular reasoning."
+          ]
+        },
+        {
+          "heading": "Rules, consequences and moral reasoning",
+          "paragraphs": [
+            "Utilitarianism is sometimes presented as a requirement to calculate the consequences of every small action. Mill's account is more nuanced. His writings recognize the practical importance of established moral principles, such as honesty and fairness, which can guide conduct without a fresh calculation on every occasion. Philosophers debate whether Mill is best interpreted as an act utilitarian, a rule utilitarian or a thinker whose position cannot be captured by that simple division. This interpretive dispute matters because rules may protect long-term welfare even when breaking one appears advantageous in an isolated case. The theory is therefore more demanding than the slogan that the ends justify the means."
+          ]
+        },
+        {
+          "heading": "Strengths and objections",
+          "paragraphs": [
+            "A major strength of utilitarian reasoning is its attention to consequences for everyone affected, including people who may otherwise be ignored. It offers a framework for examining trade-offs in public policy and personal decisions. Objections concern the measurement of happiness, uncertainty about future effects, demanding duties and possible conflicts with individual rights. A sophisticated answer does not simply praise or reject the theory. It explains Mill's principle, examines the higher-pleasures argument, distinguishes the roles of moral rules and direct calculation, and tests the theory against justice and rights. The Stanford Encyclopedia of Philosophy provides a detailed account of these contested interpretations."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the central concept, distinguish its major mechanisms, explain practical implications and evaluate evidence and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "Stanford Encyclopedia of Philosophy — Mill's Moral and Political Philosophy",
+          "url": "https://plato.stanford.edu/entries/mill-moral-political/"
+        }
+      ]
+    },
+    {
+      "id": "stratified-and-cluster-sampling-two-different-ways-to-design-a-survey",
+      "slug": "stratified-and-cluster-sampling-two-different-ways-to-design-a-survey",
+      "dedupeKey": "stratified-and-cluster-sampling-two-different-ways-to-design-a-survey",
+      "scope": "Global",
+      "title": "Stratified and Cluster Sampling: Two Different Ways to Design a Survey",
+      "excerpt": "A survey often seeks information about a population that is too large or dispersed for every member to be observed. Probability sampling uses a selection mechanism that gives population units known, nonzero selection probabilities. The resulting desi",
+      "type": "Explainer",
+      "category": "Statistics",
+      "topic": "Sampling and Sampling Distributions — Probability Sampling Designs",
+      "tags": [
+        "Statistics",
+        "Global",
+        "Survey Methods",
+        "Stratification",
+        "Cluster Sampling"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "The sampling problem",
+          "paragraphs": [
+            "A survey often seeks information about a population that is too large or dispersed for every member to be observed. Probability sampling uses a selection mechanism that gives population units known, nonzero selection probabilities. The resulting design can support statistical inference when the sampling frame, selection probabilities and nonresponse are properly handled. Stratified and cluster sampling both divide a population into groups, but their logic is fundamentally different. Confusing the two can lead to mistaken claims about precision, cost and representation. Statistics Canada's educational guide sets out these distinctions with practical examples."
+          ]
+        },
+        {
+          "heading": "How stratification works",
+          "paragraphs": [
+            "In stratified sampling, the researcher divides the population into mutually exclusive strata, often using characteristics such as region or organization size. A sample is then drawn independently within each stratum. The design can ensure coverage of important subgroups and may improve precision when units within a stratum are similar for the variable of interest. The number selected from each stratum need not be proportional to its population share. If selection rates differ, estimation must account for the design weights. Stratification does not guarantee freedom from bias: a poor frame, systematic nonresponse or inaccurate measurement can still undermine the findings."
+          ]
+        },
+        {
+          "heading": "How clustering works",
+          "paragraphs": [
+            "Cluster sampling selects groups of units, such as schools, villages or geographic blocks, to make fieldwork more manageable. In a one-stage design, all eligible units within sampled clusters may be studied; in multistage designs, a further sample is drawn inside selected clusters. This can substantially reduce travel and listing costs. However, individuals within the same cluster often resemble one another, which can increase sampling variance compared with a simple random sample of the same nominal size. Researchers therefore consider the number of clusters, cluster sizes and the intracluster correlation when planning precision. Selecting a few large clusters is not automatically equivalent to sampling widely across a population."
+          ]
+        },
+        {
+          "heading": "Comparison and inference",
+          "paragraphs": [
+            "The simplest distinction is that stratification usually samples from every stratum, while cluster sampling samples some clusters and may omit others entirely. Both methods can be combined: for example, schools may first be stratified by region and then sampled as clusters within each region. A proper analysis should respect the survey design when calculating estimates, standard errors and confidence intervals. A common examination mistake is to calculate uncertainty as though every observation were independently selected by simple random sampling. A strong answer defines each design, provides a hypothetical example, compares efficiency and cost, and explains why weights and design effects matter for defensible inference."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the central concept, distinguish its major mechanisms, explain practical implications and evaluate evidence and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "Statistics Canada — Probability Sampling",
+          "url": "https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm"
+        }
+      ]
+    },
+    {
+      "id": "plate-boundaries-divergence-convergence-and-transform-motion",
+      "slug": "plate-boundaries-divergence-convergence-and-transform-motion",
+      "dedupeKey": "plate-boundaries-divergence-convergence-and-transform-motion",
+      "scope": "Global",
+      "title": "Plate Boundaries: Divergence, Convergence and Transform Motion",
+      "excerpt": "Plate tectonics describes the movement of relatively rigid pieces of Earth's outer shell over geological time. The theory integrates observations from ocean-floor geology, earthquakes, volcanic activity and the geometry of major mountain belts. It do",
+      "type": "Explainer",
+      "category": "Geology",
+      "topic": "Structural Geology and Tectonics — Plate Motion and Geological Structures",
+      "tags": [
+        "Geology",
+        "Global",
+        "Plate Tectonics",
+        "Structural Geology",
+        "Faults"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "The moving lithosphere",
+          "paragraphs": [
+            "Plate tectonics describes the movement of relatively rigid pieces of Earth's outer shell over geological time. The theory integrates observations from ocean-floor geology, earthquakes, volcanic activity and the geometry of major mountain belts. It does not imply that continents float independently on a liquid ocean of magma. Plates include oceanic and continental lithosphere, and their boundaries are zones of deformation rather than perfectly drawn lines. The U.S. Geological Survey's educational account explains how the theory transformed modern geology. A useful first step is to separate the evidence for movement from the different processes operating at boundaries."
+          ]
+        },
+        {
+          "heading": "Divergent boundaries",
+          "paragraphs": [
+            "At divergent boundaries, adjacent plates move apart. New oceanic crust commonly forms at spreading ridges as magma rises and cools. Geological evidence includes ridge topography, patterns of seafloor magnetic anomalies and the age distribution of oceanic crust. Divergence can also begin within continental lithosphere as rifting, faulting and subsidence create new basins. It is incorrect to assume that every rift will eventually become an ocean; geological evolution depends on the continuation of extension and other regional conditions. An examination answer can connect divergence with normal faulting and crustal formation without claiming that every divergent setting behaves identically."
+          ]
+        },
+        {
+          "heading": "Convergent boundaries",
+          "paragraphs": [
+            "Convergence occurs where plates move toward one another. In some settings, denser oceanic lithosphere descends beneath another plate in a process called subduction. This can produce deep earthquakes, volcanic arcs and ocean trenches. Where continental crust collides, shortening and thickening can build large mountain belts, although real collision zones have complicated histories. The terms convergent boundary, subduction zone and continental collision are related but not interchangeable. Geological consequences depend on the types of lithosphere involved, their motion and the history of the region. These differences explain why some convergent margins have prominent volcanoes while others are better known for crustal thickening."
+          ]
+        },
+        {
+          "heading": "Transform boundaries and interpretation",
+          "paragraphs": [
+            "At transform boundaries, plates move predominantly sideways relative to one another. Strike-slip faults accommodate horizontal displacement and can generate damaging earthquakes. Unlike a spreading ridge, a transform boundary does not ordinarily create extensive new crust; unlike a subduction zone, it does not require one plate to descend beneath another. Real plate margins may combine different types of motion, and faults can be oblique rather than purely horizontal or vertical. The most effective examination diagram labels relative motion arrows, the dominant structures and likely hazards for each boundary type. This framework connects physical geology with seismology and disaster understanding without suggesting that exact earthquake timing can be predicted."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the central concept, distinguish its major mechanisms, explain practical implications and evaluate evidence and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "USGS — This Dynamic Earth: The Story of Plate Tectonics",
+          "url": "https://www.usgs.gov/publications/dynamic-earth-story-plate-tectonics"
+        },
+        {
+          "label": "USGS — Plate Tectonics Map",
+          "url": "https://www.usgs.gov/media/images/platetectonicsgif"
+        }
+      ]
+    }
+  ]
+}
