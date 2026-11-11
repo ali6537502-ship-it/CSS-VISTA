@@ -298,5 +298,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://apnews.com/article/1a76dbefe56039c8841e9aeb49468048"
+  },
+  {
+    "id": "current-affairs-20261111-pakistan-cop31-leaders",
+    "q": "Which city hosted the COP31 leaders' summit in November 2026?",
+    "o": [
+      "Istanbul",
+      "Ankara",
+      "Antalya",
+      "Izmir"
+    ],
+    "a": 2,
+    "e": "COP31 was held in Antalya, Türkiye.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2043746"
+  },
+  {
+    "id": "current-affairs-20261111-un-chief-cop31",
+    "q": "Which UN Secretary-General urged faster climate action at the COP31 leaders' summit on 11 November 2026?",
+    "o": [
+      "Ban Ki-moon",
+      "António Guterres",
+      "Kofi Annan",
+      "Boutros Boutros-Ghali"
+    ],
+    "a": 1,
+    "e": "António Guterres addressed the COP31 leaders' summit.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.marketscreener.com/news/world-leaders-to-address-cop31-as-turkey-pushes-for-new-climate-deal-ce785edbd889f523"
+  },
+  {
+    "id": "current-affairs-20261111-climate-finance-plans",
+    "q": "What annual climate-finance goal for developing countries was agreed at COP29 for 2035?",
+    "o": [
+      "$100 billion",
+      "$200 billion",
+      "$300 billion",
+      "$500 billion"
+    ],
+    "a": 2,
+    "e": "The COP29 goal is at least $300 billion annually by 2035; it is a goal, not an amount already disbursed.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.theguardian.com/environment/2026/nov/11/developing-countries-climate-finance-delay"
   }
 ]

@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 285,
+  "count": 286,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1994,6 +1994,13 @@
     {
       "id": "pakistan-current-affairs-2026-11-10-pakistan-cop31-finance",
       "text": "Pakistan's foreign ministry said the prime minister planned to press for climate finance at COP31 on 11 November.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-11-cop31-leaders",
+      "text": "COP31's November 2026 leaders' summit took place in Antalya, Türkiye.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

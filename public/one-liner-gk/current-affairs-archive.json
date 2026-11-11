@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 728,
+  "count": 731,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5095,6 +5095,27 @@
     {
       "id": "current-affairs-archive-2026-11-10-brazil-transition-roadmap",
       "text": "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-pakistan-cop31-leaders",
+      "text": "COP31's November 2026 leaders' summit took place in Antalya, Türkiye.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-un-chief-cop31",
+      "text": "The UN Secretary-General addressing the COP31 leaders' summit on 11 November 2026 was António Guterres.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-climate-finance-plans",
+      "text": "The COP29 climate-finance goal calls for at least $300 billion annually for developing countries by 2035.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

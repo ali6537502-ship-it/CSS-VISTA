@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-11",
+  "published_at": "2026-11-11T18:56:43+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 11 November 2026 | Evening update (00:00–18:56 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-11-pakistan-cop31-leaders",
+      "category": "Pakistan — Climate Diplomacy",
+      "headline": "Pakistan's prime minister scheduled to outline national climate priorities at COP31 leaders' summit",
+      "summary": "Reporting on 11 November said Prime Minister Shehbaz Sharif was set to outline Pakistan's climate priorities at the COP31 Leaders' Summit in Antalya. This is a scheduled appearance; the source did not establish that the address had already been delivered.",
+      "what_happened": "Pakistan's prime minister was expected to join the leaders' summit on 11 November, according to Reuters reporting carried by Dawn.",
+      "background": "COP31 is being held in Antalya, Türkiye, from 9 to 20 November. The negotiations address emissions reductions, adaptation and finance.",
+      "why_it_matters": "Pakistan's exposure to floods, heat and water insecurity makes accessible adaptation finance and resilience investment major policy concerns.",
+      "pakistan_perspective": "A climate-finance appeal needs to be assessed against actual commitments, grant versus loan terms, and mechanisms for delivery; a planned speech is not a negotiated funding outcome.",
+      "regional_implications": "South Asian climate vulnerability makes finance and adaptation commitments relevant beyond Pakistan.",
+      "global_implications": "The conference tests whether international climate finance commitments become practical funding.",
+      "key_takeaways": [
+        "On 11 November 2026, Pakistan's prime minister was scheduled to address the COP31 leaders' summit in Antalya."
+      ],
+      "quick_gk": [
+        "COP31's November 2026 leaders' summit took place in Antalya, Türkiye."
+      ],
+      "question_angles": [
+        "Which Turkish city hosted the COP31 leaders' summit attended by world leaders in November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "Pakistan climate diplomacy",
+        "climate finance"
+      ],
+      "countries": [
+        "Pakistan",
+        "Türkiye"
+      ],
+      "people": [
+        "Shehbaz Sharif"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn / Reuters",
+          "title": "PM Shehbaz to join other world leaders at COP31 today, will outline Pakistan’s climate priorities",
+          "url": "https://www.dawn.com/news/2043746",
+          "published_at": "2026-11-11"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-11-un-chief-cop31",
+      "category": "World — Climate Governance",
+      "headline": "UN secretary-general urges stronger climate action at COP31 leaders' summit",
+      "summary": "UN Secretary-General António Guterres urged world leaders in Antalya on 11 November to accelerate climate action, citing rising emissions and worsening climate-related disasters. His remarks were an appeal for action, not a new binding COP agreement.",
+      "what_happened": "Guterres addressed leaders at COP31 and warned that current climate responses are inadequate.",
+      "background": "The Paris Agreement's temperature goals frame negotiations over emissions, finance and adaptation.",
+      "why_it_matters": "Climate diplomacy must distinguish leaders' statements from negotiated commitments, funding mechanisms and implemented policies.",
+      "pakistan_perspective": "Pakistan has a direct interest in adaptation funding, disaster preparedness and predictable international climate finance.",
+      "global_implications": "Countries face pressure to align energy transitions and climate finance with implementation.",
+      "key_takeaways": [
+        "António Guterres addressed COP31 leaders in Antalya on 11 November 2026."
+      ],
+      "quick_gk": [
+        "The UN Secretary-General addressing the COP31 leaders' summit on 11 November 2026 was António Guterres."
+      ],
+      "question_angles": [
+        "Who was the UN Secretary-General urging stronger climate action at COP31 on 11 November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "United Nations",
+        "climate governance"
+      ],
+      "people": [
+        "António Guterres"
+      ],
+      "institutions": [
+        "United Nations"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Climate crisis is 'outrunning us', UN chief warns COP31",
+          "url": "https://www.marketscreener.com/news/world-leaders-to-address-cop31-as-turkey-pushes-for-new-climate-deal-ce785edbd889f523"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-11-climate-finance-plans",
+      "category": "World — Climate Finance",
+      "headline": "Uncertainty over future climate-finance plans complicates developing countries' budgeting",
+      "summary": "Reporting on 11 November highlighted uncertainty for developing countries because several wealthy governments had not publicly announced new climate-finance plans beyond 2026. Estimates and targets should not be mistaken for disbursed funds.",
+      "what_happened": "Analysis reported by The Guardian described the planning difficulties caused by gaps in future donor commitments.",
+      "background": "COP29 negotiations established a goal of at least $300 billion annually for developing countries by 2035, with broader mobilisation ambitions; announced targets do not establish actual transfers.",
+      "why_it_matters": "Predictable multiyear finance supports adaptation planning, investment decisions and resilience projects.",
+      "pakistan_perspective": "Pakistan's flood protection, agricultural adaptation and infrastructure resilience require credible funding arrangements, including clarity on loans and grants.",
+      "global_implications": "The difference between pledges and disbursements remains central to trust between developed and developing countries.",
+      "key_takeaways": [
+        "COP29's climate-finance goal was at least $300 billion annually by 2035."
+      ],
+      "quick_gk": [
+        "The COP29 climate-finance goal calls for at least $300 billion annually for developing countries by 2035."
+      ],
+      "question_angles": [
+        "What annual climate-finance goal for developing countries was agreed at COP29 for 2035?"
+      ],
+      "topics": [
+        "climate finance",
+        "COP29",
+        "COP31"
+      ],
+      "sources": [
+        {
+          "publisher": "The Guardian",
+          "title": "Developing countries in limbo as rich nations delay new climate finance plans",
+          "url": "https://www.theguardian.com/environment/2026/nov/11/developing-countries-climate-finance-delay",
+          "published_at": "2026-11-11"
+        }
+      ]
+    }
+  ]
+}
