@@ -22,6 +22,7 @@ export function activeSection(path: string) {
 }
 export type Feature = { id: string; title: string; description: string; to: string; category: string; keywords: string }
 const extra: Feature[] = [
+  { id:'daily-study',title:'Daily study session',description:'Connect a lesson, independent writing, feedback and review in the time you have.',to:'/account/dashboard#daily-study',category:'Preparation',keywords:'daily study learn writing feedback review session time' },
   { id: 'pms-punjab', title: 'PMS Punjab Planner', description: 'Explore the revised PPSC syllabus and build an editable daily topic schedule.', to: '/account/tasks?exam=pms-punjab&view=syllabus', category: 'Study Planning', keywords: 'pms punjab provincial management services ppsc schedule syllabus' },
   { id: 'daily-pdfs', title: 'Current Affairs Daily PDFs', description: 'Browse published daily PDF editions.', to: '/current-affairs-daily', category: 'Current Affairs', keywords: 'news newspaper pdf' },
   { id: 'current-affairs', title: 'Daily Briefing', description: 'Read published news, explanations and original sources.', to: '/daily-briefing', category: 'Current Affairs', keywords: 'daily briefing news current affairs explanations sources' },
