@@ -2,7 +2,7 @@
 
 The student overview now offers a focused 15, 30 or 60 minute session connecting **Learn → Write → Feedback → Review**. The session follows students through the existing modern student workspace and public Grammar course. All seven workspace sections and the existing account rollback remain intact.
 
-This change is based on current main `1d5a29e00b878bc29341ecadb977399163a97fe1`, including the 7 November free-learning conversion. It does not incorporate the superseded Pro integration from draft PR #109.
+This change includes current main `6f7c68b444e1af9773cb34fe150986783eab63e1`, including the free-learning conversion and the 16-chapter free Sentence and Expression course. It does not incorporate the superseded Pro integration from draft PR #109.
 
 ## Native learning and continuity
 
@@ -20,4 +20,4 @@ This change is based on current main `1d5a29e00b878bc29341ecadb977399163a97fe1`,
 
 The existing free-learning security/browser suites and Grammar preservation check remain required. Automated Chromium checks do not certify physical-device behavior, manual assistive-technology testing or academic content approval. No production release is included; the repository release hold remains in effect.
 
-Verified on 11 November 2026 with PHP 8.2, MariaDB 11.4 and isolated Chromium: five state tests, native daily-study security, existing free-learning security and browser suites, the new eighteen-route browser suite, three axe scans, TypeScript, scoped ESLint, PHP syntax and unchanged Grammar checksums all passed. The strict Hostinger build passed its content, search, routing, internal-link and duplicate-content gates. The build used the reviewed working tree over the base above; its embedded Git fingerprint names that base and is not evidence of a deployed commit.
+Verified on 11 November 2026 with PHP 8.2, MariaDB 11.4 and isolated Chromium: five state tests, native daily-study security, existing free-learning security and browser suites, the new eighteen-route browser suite, three axe scans, TypeScript, scoped ESLint, PHP syntax and unchanged Grammar checksums all passed. The strict Hostinger build passed its content, search, routing, internal-link and duplicate-content gates. No local build or embedded fingerprint is evidence of a production deployment.

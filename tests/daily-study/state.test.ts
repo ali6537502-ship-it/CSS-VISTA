@@ -42,4 +42,6 @@ test('writing and feedback retain the owned workspace, immutable version and ori
  const precis={...skill,id:'precis',canonicalDestination:'/account/precis'}
  const p=new URL(studyDestinations(precis,undefined,'/account/precis?writing=owned&version=immutable')[2],'https://example.invalid').searchParams
  assert.equal(p.get('writing'),'owned');assert.equal(p.get('version'),'immutable');assert.equal(p.get('view'),'history')
+ const guide={...skill,id:'expression-guide',canonicalDestination:'/account/expression?view=guide'}
+ assert.deepEqual(studyDestinations(guide,guide.canonicalDestination),[guide.canonicalDestination,'/account/expression?view=studio','/account/expression?view=studio','/account/expression?view=studio'])
 })
