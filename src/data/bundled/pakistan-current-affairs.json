@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 282,
+  "count": 285,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -1973,6 +1973,27 @@
     {
       "id": "pakistan-current-affairs-2026-11-03-pakistan-lpg-price-surge",
       "text": "Reuters reported a 56% increase to Rs7,000 for a 12-kg LPG cylinder following Iran border closures.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-07-petrol",
+      "text": "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-10-lahore-smog",
+      "text": "Lahore topped a live major-city pollution ranking reported by Reuters on 10 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-10-pakistan-cop31-finance",
+      "text": "Pakistan's foreign ministry said the prime minister planned to press for climate finance at COP31 on 11 November.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

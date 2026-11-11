@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 712,
+  "count": 728,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -4974,6 +4974,69 @@
       "timeSensitive": true
     },
     {
+      "id": "current-affairs-archive-2026-11-06-eu-methane-import-reporting",
+      "text": "On 6 November 2026, EU governments proposed postponing fossil-fuel importer methane reporting to 1 January 2028, pending final legislation.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-new-zealand-mmp",
+      "text": "New Zealand's 2026 parliamentary election used mixed-member proportional representation combining constituency and party-list seats.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-06-cop31-antalya",
+      "text": "Antalya, Türkiye, is the scheduled host city of the 2026 COP31 climate summit.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-kyiv-dnipro-bridge",
+      "text": "Kyiv's Northern Bridge crosses the Dnipro River.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-cambodia-ai-wildfire",
+      "text": "Conservation International was cited for AI-assisted wildfire monitoring in Cambodia.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-cop31-turkiye",
+      "text": "Türkiye is hosting COP31 in 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-petrol",
+      "text": "Pakistan's petrol price effective 7 November 2026 was Rs346 per litre.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-07-seymen",
+      "text": "Seymen landfill, highlighted in a November 2026 methane investigation, is near Istanbul.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-08-cop31-negotiations",
+      "text": "Australia leads formal COP31 negotiations in 2026 while Türkiye chairs the conference.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
       "id": "current-affairs-archive-2026-11-09-cop31-opened",
       "text": "COP31 opened in Antalya, Türkiye, on 9 November 2026.",
       "subcategory": "Current Affairs 2026",
@@ -4983,6 +5046,55 @@
     {
       "id": "current-affairs-archive-2026-11-09-wmo-147",
       "text": "WMO reported January–September 2026 global mean temperature approximately 1.47°C above the pre-industrial average.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-lahore-smog",
+      "text": "Lahore topped a live major-city pollution ranking reported by Reuters on 10 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-pakistan-cop31-finance",
+      "text": "Pakistan's foreign ministry said the prime minister planned to press for climate finance at COP31 on 11 November.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-hormuz-lng",
+      "text": "S&P Global Energy counted 31 laden LNG tankers exiting Hormuz in October 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-cop31-electrification",
+      "text": "Türkiye promoted a proposed 35% global electricity share by 2035 at COP31.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-abu-dhabi-talks",
+      "text": "Abu Dhabi hosted Russia–Ukraine–US talks on 10 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-black-sea-hub",
+      "text": "The EU pledged €50 million for a Bulgaria–Romania Black Sea maritime security hub in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-brazil-transition-roadmap",
+      "text": "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-10",
+  "published_at": "2026-11-10T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 10 November 2026 | Final edition (00:00–23:59 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-10-lahore-smog",
+      "category": "Pakistan — Environment and Public Health",
+      "headline": "Lahore records severe smog as officials dispute sources of cross-border pollution",
+      "summary": "Reuters reported on 10 November that Lahore ranked as the world's most polluted major city in a live air-quality ranking. Pakistani officials attributed part of the pollution to fireworks across the border after Diwali; this attribution is a claim, not proof that a single source caused the episode.",
+      "what_happened": "Reuters reported on 10 November that Lahore ranked as the world's most polluted major city in a live air-quality ranking. Pakistani officials attributed part of the pollution to fireworks across the border after Diwali; this attribution is a claim, not proof that a single source caused the episode.",
+      "background": "The report highlights severe particulate pollution in Lahore and New Delhi after Diwali. Weather, local emissions and transboundary transport can all affect pollution levels; a live ranking is time-specific.",
+      "why_it_matters": "Pakistan faces urgent health, air-quality monitoring and emissions-control challenges. Source attribution requires measurements and meteorological evidence.",
+      "pakistan_perspective": "Pakistan faces urgent health, air-quality monitoring and emissions-control challenges. Source attribution requires measurements and meteorological evidence.",
+      "key_takeaways": [
+        "Lahore topped a live major-city pollution ranking reported by Reuters on 10 November 2026."
+      ],
+      "quick_gk": [
+        "Lahore topped a live major-city pollution ranking reported by Reuters on 10 November 2026."
+      ],
+      "question_angles": [
+        "Which Pakistani city topped a live major-city pollution ranking in Reuters reporting on 10 November 2026?"
+      ],
+      "topics": [
+        "Pakistan",
+        "environment"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistan blames India's Diwali fireworks for Lahore's toxic air",
+          "url": "https://www.reuters.com/business/environment/pakistan-blames-indias-diwali-fireworks-lahores-toxic-air-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-pakistan-cop31-finance",
+      "category": "Pakistan — Climate Diplomacy",
+      "headline": "Pakistan signals push for greater climate finance at COP31",
+      "summary": "Pakistan's foreign ministry said Prime Minister Shehbaz Sharif would seek increased climate financing for developing countries at COP31 in Türkiye, according to reporting on 10 November. The planned address was scheduled for 11 November and must not be described as already delivered.",
+      "what_happened": "Pakistan's foreign ministry said Prime Minister Shehbaz Sharif would seek increased climate financing for developing countries at COP31 in Türkiye, according to reporting on 10 November. The planned address was scheduled for 11 November and must not be described as already delivered.",
+      "background": "Climate finance includes mitigation, adaptation and resilience support. Announced intentions are not negotiated funding commitments.",
+      "why_it_matters": "Pakistan's climate vulnerability makes access to predictable adaptation finance a major diplomatic priority.",
+      "pakistan_perspective": "Pakistan's climate vulnerability makes access to predictable adaptation finance a major diplomatic priority.",
+      "key_takeaways": [
+        "Pakistan's foreign ministry said the prime minister planned to press for climate finance at COP31 on 11 November."
+      ],
+      "quick_gk": [
+        "Pakistan's foreign ministry said the prime minister planned to press for climate finance at COP31 on 11 November."
+      ],
+      "question_angles": [
+        "At which international conference did Pakistan's foreign ministry say its prime minister would seek greater climate finance in November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "climate policy"
+      ],
+      "sources": [
+        {
+          "publisher": "Arab News Pakistan",
+          "title": "Pakistan PM to seek greater climate finance at COP31 summit in Türkiye",
+          "url": "https://www.arabnews.pk/pakistan/pakistan-pm-to-seek-greater-climate-finance-at-cop31-summit-in-t%C3%BCrkiye-3006626"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-hormuz-lng",
+      "category": "World — Energy Security",
+      "headline": "Hormuz LNG tanker exits reach post-conflict monthly high in October",
+      "summary": "Reuters reported on 10 November that 31 laden LNG tankers exited the Strait of Hormuz during October 2026, the highest monthly tally since the conflict disrupted traffic in February. S&P Global Energy data identified 23 tankers from Qatar's Ras Laffan and eight from the UAE's Das Island.",
+      "what_happened": "Reuters reported on 10 November that 31 laden LNG tankers exited the Strait of Hormuz during October 2026, the highest monthly tally since the conflict disrupted traffic in February. S&P Global Energy data identified 23 tankers from Qatar's Ras Laffan and eight from the UAE's Das Island.",
+      "background": "The October count exceeded September's 23 laden exits. Vessel counts do not directly equal LNG cargo volume, and traffic recovery does not establish full restoration of pre-conflict flows.",
+      "why_it_matters": "Pakistan's imported LNG exposure makes Gulf shipping conditions relevant to energy costs, supply reliability and the external account.",
+      "pakistan_perspective": "Pakistan's imported LNG exposure makes Gulf shipping conditions relevant to energy costs, supply reliability and the external account.",
+      "key_takeaways": [
+        "S&P Global Energy counted 31 laden LNG tankers exiting Hormuz in October 2026."
+      ],
+      "quick_gk": [
+        "S&P Global Energy counted 31 laden LNG tankers exiting Hormuz in October 2026."
+      ],
+      "question_angles": [
+        "According to S&P Global Energy data cited by Reuters on 10 November, how many laden LNG tankers exited Hormuz in October 2026?"
+      ],
+      "topics": [
+        "LNG",
+        "Strait of Hormuz"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Hormuz LNG traffic hits highest in October since Iran war began",
+          "url": "https://www.reuters.com/business/energy/hormuz-lng-traffic-hits-highest-october-since-iran-war-began-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-cop31-electrification",
+      "category": "World — Climate and Energy",
+      "headline": "COP31 host Türkiye proposes global electrification target for 2035",
+      "summary": "At COP31 in Antalya, Türkiye proposed increasing electricity's share of global final energy use to 35% by 2035, compared with approximately one-fifth currently. Reuters reported concerns that electrification alone will not guarantee lower emissions unless power generation becomes cleaner.",
+      "what_happened": "At COP31 in Antalya, Türkiye proposed increasing electricity's share of global final energy use to 35% by 2035, compared with approximately one-fifth currently. Reuters reported concerns that electrification alone will not guarantee lower emissions unless power generation becomes cleaner.",
+      "background": "The proposal remained under discussion on 10 November, not an adopted final COP agreement. Electrification can lower fossil-fuel use in transport and heating, but emissions benefits depend on the electricity mix.",
+      "why_it_matters": "Pakistan can assess electrification alongside grid reliability, renewable generation, investment and affordability.",
+      "pakistan_perspective": "Pakistan can assess electrification alongside grid reliability, renewable generation, investment and affordability.",
+      "key_takeaways": [
+        "Türkiye promoted a proposed 35% global electricity share by 2035 at COP31."
+      ],
+      "quick_gk": [
+        "Türkiye promoted a proposed 35% global electricity share by 2035 at COP31."
+      ],
+      "question_angles": [
+        "What global electricity share by 2035 was proposed by COP31 host Türkiye in November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "climate policy"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "COP31 host Turkey to push 'age of electricity', but will it be green?",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-host-turkey-push-global-electrification-goal-will-it-be-green-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-abu-dhabi-talks",
+      "category": "World — International Affairs",
+      "headline": "Russia, Ukraine and US begin talks in Abu Dhabi amid grid attacks",
+      "summary": "Trilateral talks involving Russia, Ukraine and the United States began in Abu Dhabi on 10 November 2026, alongside renewed Russian attacks on Ukrainian electricity infrastructure. No ceasefire agreement was announced.",
+      "what_happened": "Trilateral talks involving Russia, Ukraine and the United States began in Abu Dhabi on 10 November 2026, alongside renewed Russian attacks on Ukrainian electricity infrastructure. No ceasefire agreement was announced.",
+      "background": "The talks concern a possible settlement and security guarantees, while infrastructure attacks increase humanitarian and energy-security risks.",
+      "why_it_matters": "The talks concern a possible settlement and security guarantees, while infrastructure attacks increase humanitarian and energy-security risks.",
+      "pakistan_perspective": "Relevant to Pakistan's diplomacy, energy security and international policy analysis.",
+      "key_takeaways": [
+        "Abu Dhabi hosted Russia–Ukraine–US talks on 10 November 2026."
+      ],
+      "quick_gk": [
+        "Abu Dhabi hosted Russia–Ukraine–US talks on 10 November 2026."
+      ],
+      "question_angles": [
+        "Where did Russian, Ukrainian and US negotiators meet on 10 November 2026?"
+      ],
+      "topics": [
+        "Current Affairs 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Russia pounds Ukraine's power grid as talks open in Abu Dhabi",
+          "url": "https://www.reuters.com/world/russia-pounds-ukraines-power-grid-talks-open-abu-dhabi-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-black-sea-hub",
+      "category": "World — International Affairs",
+      "headline": "EU pledges €50 million to accelerate Bulgaria–Romania maritime security hub",
+      "summary": "European Commission President Ursula von der Leyen pledged €50 million on 10 November 2026 to accelerate a Black Sea maritime security hub involving Bulgaria and Romania following attacks on commercial shipping.",
+      "what_happened": "European Commission President Ursula von der Leyen pledged €50 million on 10 November 2026 to accelerate a Black Sea maritime security hub involving Bulgaria and Romania following attacks on commercial shipping.",
+      "background": "Maritime awareness and information-sharing are central to shipping security; attribution of specific attacks remains contested.",
+      "why_it_matters": "Maritime awareness and information-sharing are central to shipping security; attribution of specific attacks remains contested.",
+      "pakistan_perspective": "Relevant to Pakistan's diplomacy, energy security and international policy analysis.",
+      "key_takeaways": [
+        "The EU pledged €50 million for a Bulgaria–Romania Black Sea maritime security hub in November 2026."
+      ],
+      "quick_gk": [
+        "The EU pledged €50 million for a Bulgaria–Romania Black Sea maritime security hub in November 2026."
+      ],
+      "question_angles": [
+        "Which two countries are developing the EU-backed Black Sea maritime security hub?"
+      ],
+      "topics": [
+        "Current Affairs 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "EU's von der Leyen pledges €50 million to speed up security hub in the Black Sea",
+          "url": "https://www.reuters.com/world/eus-von-der-leyen-pledges-50-million-speed-up-security-hub-black-sea-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-brazil-transition-roadmap",
+      "category": "World — International Affairs",
+      "headline": "Brazil proposes fossil-fuel transition roadmap at COP31",
+      "summary": "Brazil presented a proposed roadmap at COP31 in Antalya on 10 November 2026 to help countries move away from fossil fuels toward renewable energy. The proposal is not an adopted binding agreement.",
+      "what_happened": "Brazil presented a proposed roadmap at COP31 in Antalya on 10 November 2026 to help countries move away from fossil fuels toward renewable energy. The proposal is not an adopted binding agreement.",
+      "background": "The roadmap aims to turn broad climate commitments into practical policy options, while questions of finance, affordability and national circumstances remain unresolved.",
+      "why_it_matters": "The roadmap aims to turn broad climate commitments into practical policy options, while questions of finance, affordability and national circumstances remain unresolved.",
+      "pakistan_perspective": "Relevant to Pakistan's diplomacy, energy security and international policy analysis.",
+      "key_takeaways": [
+        "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026."
+      ],
+      "quick_gk": [
+        "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026."
+      ],
+      "question_angles": [
+        "Which country presented a fossil-fuel transition roadmap at COP31 in November 2026?"
+      ],
+      "topics": [
+        "Current Affairs 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Brazil presents road map away from fossil fuels and toward renewable energies at UN climate talks",
+          "url": "https://apnews.com/article/1a76dbefe56039c8841e9aeb49468048"
+        }
+      ]
+    }
+  ]
+}

@@ -113,7 +113,7 @@ export default function LanguageGrammar() {
   if (['expression', 'precis', 'lab'].includes(searchParams.get('from') || '')) {
     back.set('from', searchParams.get('from')!)
     if (['expression', 'precis'].includes(searchParams.get('origin') || '')) back.set('origin', searchParams.get('origin')!)
-    for (const key of ['writing', 'version']) {
+    for (const key of ['writing', 'version', 'workspace']) {
       const value = searchParams.get(key)
       if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value)
     }
