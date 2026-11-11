@@ -5,7 +5,7 @@ function check(bool $ok,string $why): void {if(!$ok)throw new RuntimeException($
 function rejects(callable $call): void {try{$call();}catch(InvalidArgumentException|OutOfBoundsException){return;}throw new RuntimeException('Unsafe input accepted.');}
 check(cssv_skills_hash(['b'=>['y'=>2,'x'=>1],'a'=>0])===cssv_skills_hash(['a'=>0,'b'=>['x'=>1,'y'=>2]]),'MySQL object key order invalidated saved context.');
 check(cssv_skills_hash(['a'=>['one','two']])!==cssv_skills_hash(['a'=>['two','one']]),'List ordering must remain significant.');
-$package=cssv_skills_package();check(count($package['lessons'])===51,'Curriculum scope changed.');$ids=[];$counts=[];
+$package=cssv_skills_package();check(count($package['lessons'])===63,'Curriculum scope changed.');$ids=[];$counts=[];
 foreach($package['lessons'] as $lesson){
  check(!isset($ids[$lesson['id']]),'Repeated identity.');$ids[$lesson['id']]=true;$counts[$lesson['feature']]=($counts[$lesson['feature']]??0)+1;
  $source=cssv_skills_source($lesson['feature'],$lesson['id'],$lesson['level']);
@@ -16,7 +16,7 @@ foreach($package['lessons'] as $lesson){
  check(!cssv_skills_evidence($source,['check'=>($source['check']['answer']+1)%4])['all_recorded'],'Wrong fixed check passed.');
  rejects(fn()=>cssv_skills_answers(['mastery'=>100],$source));rejects(fn()=>cssv_skills_answers(['check'=>'0'],$source));
 }
-check($counts===['sentence'=>21,'argument'=>15,'analysis'=>15],'Feature coverage mismatch.');
+check($counts===['sentence'=>33,'argument'=>15,'analysis'=>15],'Feature coverage mismatch.');
 $roadmap=json_decode(file_get_contents(__DIR__.'/../../public/study-material/essay-themes.json'),true,64,JSON_THROW_ON_ERROR);
 foreach($roadmap['themes'] as $theme)foreach(['beginner','intermediate','advanced'] as $level){
  $source=cssv_skills_source('essay',$theme['slug'],$level);check(count($source['stages'])===7,'Missing essay stage.');check($source['roadmap']['sections']===$theme['sections'],'Research directions altered.');
