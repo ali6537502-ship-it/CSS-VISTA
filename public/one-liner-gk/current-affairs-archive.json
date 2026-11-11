@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 725,
+  "count": 728,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5074,6 +5074,27 @@
     {
       "id": "current-affairs-archive-2026-11-10-cop31-electrification",
       "text": "Türkiye promoted a proposed 35% global electricity share by 2035 at COP31.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-abu-dhabi-talks",
+      "text": "Abu Dhabi hosted Russia–Ukraine–US talks on 10 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-black-sea-hub",
+      "text": "The EU pledged €50 million for a Bulgaria–Romania Black Sea maritime security hub in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-10-brazil-transition-roadmap",
+      "text": "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

@@ -253,5 +253,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-host-turkey-push-global-electrification-goal-will-it-be-green-2026-11-10/"
+  },
+  {
+    "id": "current-affairs-20261110-abu-dhabi-talks",
+    "q": "Where did Russian, Ukrainian and US negotiators meet on 10 November 2026?",
+    "o": [
+      "Geneva",
+      "Abu Dhabi",
+      "Istanbul",
+      "Vienna"
+    ],
+    "a": 1,
+    "e": "Abu Dhabi hosted Russia–Ukraine–US talks on 10 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/russia-pounds-ukraines-power-grid-talks-open-abu-dhabi-2026-11-10/"
+  },
+  {
+    "id": "current-affairs-20261110-black-sea-hub",
+    "q": "Which two countries are developing the EU-backed Black Sea maritime security hub?",
+    "o": [
+      "Bulgaria and Romania",
+      "Poland and Lithuania",
+      "Greece and Cyprus",
+      "Croatia and Slovenia"
+    ],
+    "a": 0,
+    "e": "The EU pledged €50 million for a Bulgaria–Romania Black Sea maritime security hub in November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/eus-von-der-leyen-pledges-50-million-speed-up-security-hub-black-sea-2026-11-10/"
+  },
+  {
+    "id": "current-affairs-20261110-brazil-transition-roadmap",
+    "q": "Which country presented a fossil-fuel transition roadmap at COP31 in November 2026?",
+    "o": [
+      "Türkiye",
+      "Australia",
+      "Brazil",
+      "Germany"
+    ],
+    "a": 2,
+    "e": "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/1a76dbefe56039c8841e9aeb49468048"
   }
 ]

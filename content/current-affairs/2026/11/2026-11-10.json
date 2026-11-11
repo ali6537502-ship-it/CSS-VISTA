@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-10",
-  "published_at": "2026-11-10T19:04:42+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 10 November 2026 | Evening update (00:00–19:04 PKT)",
+  "published_at": "2026-11-10T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 10 November 2026 | Final edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-10-lahore-smog",
@@ -121,6 +121,93 @@
           "publisher": "Reuters",
           "title": "COP31 host Turkey to push 'age of electricity', but will it be green?",
           "url": "https://www.reuters.com/sustainability/cop/cop31-host-turkey-push-global-electrification-goal-will-it-be-green-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-abu-dhabi-talks",
+      "category": "World — International Affairs",
+      "headline": "Russia, Ukraine and US begin talks in Abu Dhabi amid grid attacks",
+      "summary": "Trilateral talks involving Russia, Ukraine and the United States began in Abu Dhabi on 10 November 2026, alongside renewed Russian attacks on Ukrainian electricity infrastructure. No ceasefire agreement was announced.",
+      "what_happened": "Trilateral talks involving Russia, Ukraine and the United States began in Abu Dhabi on 10 November 2026, alongside renewed Russian attacks on Ukrainian electricity infrastructure. No ceasefire agreement was announced.",
+      "background": "The talks concern a possible settlement and security guarantees, while infrastructure attacks increase humanitarian and energy-security risks.",
+      "why_it_matters": "The talks concern a possible settlement and security guarantees, while infrastructure attacks increase humanitarian and energy-security risks.",
+      "pakistan_perspective": "Relevant to Pakistan's diplomacy, energy security and international policy analysis.",
+      "key_takeaways": [
+        "Abu Dhabi hosted Russia–Ukraine–US talks on 10 November 2026."
+      ],
+      "quick_gk": [
+        "Abu Dhabi hosted Russia–Ukraine–US talks on 10 November 2026."
+      ],
+      "question_angles": [
+        "Where did Russian, Ukrainian and US negotiators meet on 10 November 2026?"
+      ],
+      "topics": [
+        "Current Affairs 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Russia pounds Ukraine's power grid as talks open in Abu Dhabi",
+          "url": "https://www.reuters.com/world/russia-pounds-ukraines-power-grid-talks-open-abu-dhabi-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-black-sea-hub",
+      "category": "World — International Affairs",
+      "headline": "EU pledges €50 million to accelerate Bulgaria–Romania maritime security hub",
+      "summary": "European Commission President Ursula von der Leyen pledged €50 million on 10 November 2026 to accelerate a Black Sea maritime security hub involving Bulgaria and Romania following attacks on commercial shipping.",
+      "what_happened": "European Commission President Ursula von der Leyen pledged €50 million on 10 November 2026 to accelerate a Black Sea maritime security hub involving Bulgaria and Romania following attacks on commercial shipping.",
+      "background": "Maritime awareness and information-sharing are central to shipping security; attribution of specific attacks remains contested.",
+      "why_it_matters": "Maritime awareness and information-sharing are central to shipping security; attribution of specific attacks remains contested.",
+      "pakistan_perspective": "Relevant to Pakistan's diplomacy, energy security and international policy analysis.",
+      "key_takeaways": [
+        "The EU pledged €50 million for a Bulgaria–Romania Black Sea maritime security hub in November 2026."
+      ],
+      "quick_gk": [
+        "The EU pledged €50 million for a Bulgaria–Romania Black Sea maritime security hub in November 2026."
+      ],
+      "question_angles": [
+        "Which two countries are developing the EU-backed Black Sea maritime security hub?"
+      ],
+      "topics": [
+        "Current Affairs 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "EU's von der Leyen pledges €50 million to speed up security hub in the Black Sea",
+          "url": "https://www.reuters.com/world/eus-von-der-leyen-pledges-50-million-speed-up-security-hub-black-sea-2026-11-10/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-10-brazil-transition-roadmap",
+      "category": "World — International Affairs",
+      "headline": "Brazil proposes fossil-fuel transition roadmap at COP31",
+      "summary": "Brazil presented a proposed roadmap at COP31 in Antalya on 10 November 2026 to help countries move away from fossil fuels toward renewable energy. The proposal is not an adopted binding agreement.",
+      "what_happened": "Brazil presented a proposed roadmap at COP31 in Antalya on 10 November 2026 to help countries move away from fossil fuels toward renewable energy. The proposal is not an adopted binding agreement.",
+      "background": "The roadmap aims to turn broad climate commitments into practical policy options, while questions of finance, affordability and national circumstances remain unresolved.",
+      "why_it_matters": "The roadmap aims to turn broad climate commitments into practical policy options, while questions of finance, affordability and national circumstances remain unresolved.",
+      "pakistan_perspective": "Relevant to Pakistan's diplomacy, energy security and international policy analysis.",
+      "key_takeaways": [
+        "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026."
+      ],
+      "quick_gk": [
+        "Brazil presented a proposed fossil-fuel transition roadmap at COP31 in November 2026."
+      ],
+      "question_angles": [
+        "Which country presented a fossil-fuel transition roadmap at COP31 in November 2026?"
+      ],
+      "topics": [
+        "Current Affairs 2026"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Brazil presents road map away from fossil fuels and toward renewable energies at UN climate talks",
+          "url": "https://apnews.com/article/1a76dbefe56039c8841e9aeb49468048"
         }
       ]
     }
