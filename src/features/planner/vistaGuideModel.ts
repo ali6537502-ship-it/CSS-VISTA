@@ -87,17 +87,35 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
   return papers
 }
 export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] {
-  return subject.sections.flatMap(section => section.topics.map(topic => {
-    const isEssay = exam === 'css' ? subject.id === 'essay' : subject.id === 'compulsory-english-essay'
-    const isPrecis = exam === 'css' ? subject.id === 'precis-composition' : subject.id === 'compulsory-english-precis-comprehension-grammar-and-translation-etc'
-    return {
-      id: topic.id, subjectId: subject.id, subject: subject.title,
-      section: topic.section || section.title, title: topic.title,
-      syllabus: [section.title, topic.section && topic.section !== section.title ? topic.section : '', section.detail, outline(topic)].filter(Boolean).join('\n'),
-      paper: exam === 'css' ? 'CSS' : 'PMS Punjab',
-      ...(isEssay ? { resource: 'essay' as const, ...(topic.id.includes(':theme:') ? {resourceSlug:topic.id.split(':theme:')[1]} : {}) } : isPrecis ? { resource: 'precis' as const } : {}),
+  const isEssay = exam === 'css' ? subject.id === 'essay' : subject.id === 'compulsory-english-essay'
+  const isPrecis = exam === 'css' ? subject.id === 'precis-composition' : subject.id === 'compulsory-english-precis-comprehension-grammar-and-translation-etc'
+  const result: VistaUnit[] = []
+  for (const section of subject.sections) for (const root of section.topics) {
+    function walk(node: VistaNode, parents: VistaNode[]) {
+      // A chapter with real child topics is a syllabus container, not one
+      // enormous day's task. Use its leaves without losing parent context.
+      if (node.children?.length) {
+        for (const child of node.children) walk(child, [...parents, node])
+        return
+      }
+      if (!node.title.trim() && !node.detail.trim()) return
+      const ancestors = parents.map(parent =>
+        parent.title + (parent.detail?.trim() && parent.detail.trim() !== parent.title.trim() ? '\n' + parent.detail : '')
+      )
+      const sectionName = node.section || parents.findLast(p => p.section)?.section || section.title
+      result.push({
+        id: node.id, subjectId: subject.id, subject: subject.title,
+        section: sectionName, title: node.title,
+        syllabus: [section.title, section.detail, ...ancestors, outline(node)]
+          .filter(Boolean).join('\n'),
+        paper: exam === 'css' ? 'CSS' : 'PMS Punjab',
+        ...(isEssay ? { resource: 'essay' as const, ...(node.id.includes(':theme:') ? { resourceSlug: node.id.split(':theme:')[1] } : {}) }
+          : isPrecis ? { resource: 'precis' as const } : {}),
+      })
     }
-  }))
+    walk(root, [])
+  }
+  return result
 }
 export function findGuideUnit(subjects: VistaSubject[], exam: VistaExam, id: string): VistaUnit | null {
   for (const subject of subjects) {
