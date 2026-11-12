@@ -30,6 +30,13 @@ interface LinkCard {
 
 const quickActions: LinkCard[] = [
   {
+    title: 'PMS Vista',
+    description: 'Free PMS preparation & updated PPSC syllabus',
+    to: '/pms-vista',
+    icon: BookOpen,
+    tone: 'emerald',
+  },
+  {
     title: 'CSS Study Material',
     description: 'Optional notes, Islamic references & essay roadmap',
     to: '/study-material',
@@ -399,6 +406,17 @@ export default function Home() {
           <HomeHero />
         </div>
 
+        <section className="mt-4 rounded-[24px] border border-emerald-200 bg-gradient-to-r from-emerald-50 via-white to-[#e8f5e9] px-5 py-5 shadow-sm sm:px-7 sm:py-6" aria-labelledby="home-pms-vista-title">
+          <div className="flex flex-wrap items-center justify-between gap-5">
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-extrabold uppercase tracking-[.13em] text-emerald-800">Free Punjab PMS preparation · Updated PPSC syllabus</p>
+              <h2 id="home-pms-vista-title" className="mt-2 font-[Georgia,serif] text-2xl font-semibold leading-tight text-slate-900 sm:text-3xl">PMS Vista — prepare every chapter with a plan</h2>
+              <p className="mt-2 max-w-3xl text-[13px] leading-6 text-slate-700">Explore 40 compulsory and optional subject outlines, read the revised PMS syllabus online, and build your own chapter-by-chapter timetable with analytical notes commands and revision tracking. Free to use.</p>
+            </div>
+            <Link to="/pms-vista" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-emerald-900 px-5 py-3 text-[13px] font-bold text-white transition hover:bg-emerald-800">Explore PMS Vista <ArrowRight className="h-4 w-4" aria-hidden="true"/></Link>
+          </div>
+        </section>
+
         <Link to="/100-million-trees" className="group relative isolate mt-4 block overflow-hidden rounded-[26px] border border-[#96c69b]/40 bg-[#092f23] text-white shadow-[0_18px_48px_rgba(5,47,29,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_25px_55px_rgba(5,47,29,0.24)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-emerald-500" aria-label="Explore the Esar ul Ebad Welfare Foundation and CSS Vista 100 Million Trees for Punjab campaign">
           <img src="https://images.unsplash.com/photo-1568309507341-b4cfba3caf92?auto=format&fit=crop&w=1400&q=78" width="1400" height="700" loading="lazy" decoding="async" alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-70 transition-transform duration-700 group-hover:scale-[1.035]"/>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#06291f] via-[#073a2b]/95 to-[#06291e]/55" aria-hidden="true"/>
@@ -487,7 +505,7 @@ export default function Home() {
 
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
           <SectionHeading title="Start preparing" eyebrow="Quick access" />
-          <div id="quick-access" className="grid grid-cols-2 gap-2 lg:grid-cols-5 lg:gap-2.5">
+          <div id="quick-access" className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6 lg:gap-2.5">
             {quickActions.filter((item) => !(MPT_HIBERNATED && item.to.startsWith('/mpt'))).map((item) => (
               <Link
                 key={item.title}
