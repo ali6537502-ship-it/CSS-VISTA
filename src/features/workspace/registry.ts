@@ -23,7 +23,7 @@ export function activeSection(path: string) {
 export type Feature = { id: string; title: string; description: string; to: string; category: string; keywords: string }
 const extra: Feature[] = [
   { id:'daily-study',title:'Daily study session',description:'Connect a lesson, independent writing, feedback and review in the time you have.',to:'/account/dashboard#daily-study',category:'Preparation',keywords:'daily study learn writing feedback review session time' },
-  { id: 'pms-punjab', title: 'PMS Punjab Planner', description: 'Explore the revised PPSC syllabus and build an editable daily topic schedule.', to: '/account/tasks?exam=pms-punjab&view=syllabus', category: 'Study Planning', keywords: 'pms punjab provincial management services ppsc schedule syllabus' },
+  { id: 'pms-punjab', title: 'PMS Vista', description: 'Personalized PMS preparation, full syllabus, daily study schedule and chapter notes commands.', to: '/account/tasks?exam=pms-punjab&view=syllabus', category: 'Study Planning', keywords: 'pms punjab provincial management services ppsc schedule syllabus' },
   { id: 'daily-pdfs', title: 'Current Affairs Daily PDFs', description: 'Browse published daily PDF editions.', to: '/current-affairs-daily', category: 'Current Affairs', keywords: 'news newspaper pdf' },
   { id: 'current-affairs', title: 'Daily Briefing', description: 'Read published news, explanations and original sources.', to: '/daily-briefing', category: 'Current Affairs', keywords: 'daily briefing news current affairs explanations sources' },
   { id: 'daily-english', title: 'Daily English', description: 'Your daily language activities.', to: '/account/english', category: 'Grammar', keywords: 'vocabulary english' },
@@ -36,7 +36,7 @@ const extra: Feature[] = [
     ['precis', 'CSS Vista Preci Mentor', '/account/precis'],
     ['answers', 'My Answer Performance', '/account/answer-performance'], ['affairs-desk', 'My Current Affairs Desk', '/account/current-affairs'],
     ['expression', 'English Expression Guide', '/account/expression'], ['handwriting', 'Earlier handwritten work', '/account/handwriting'],
-    ['tutor', 'Earlier tutoring responses', '/account/ask-vista'], ['essay-builder', 'Essay Themes Builder', '/account/essay-builder'],
+    ['tutor', 'Earlier tutoring responses', '/account/ask-vista'], ['essay-themes-2027', 'Essay Themes 2027', '/study-material/essay-themes'],
     ['argumentation', 'Argumentation Skills Builder', '/account/argumentation'], ['analysis-builder', 'Analytical Skills Builder', '/account/analytical-skills'],
     ['preparation', 'My Preparation', '/account/preparation'],
   ].map(([id,title,to]) => ({ id,title,to,description: `Open ${title.toLowerCase()}.`, category: 'Preparation', keywords: id === 'precis' ? 'precis précis english composition handbook mentor writing practice learning' : 'writing practice learning' })),
