@@ -21,8 +21,9 @@ function canSave(){
  const lease=JSON.parse(localStorage.getItem('cssvista:reset-write:v1:'+binding.owner)||'null');
  return !(lease?.at&&Math.abs(Date.now()-lease.at)<30000)&&localStorage.getItem('cssvista:progress-owner')===binding.owner&&localStorage.getItem('cssvista:sync-generation:v1:'+binding.owner)===binding.generation;
 }
+let unsaved=false;
 function notify(){
- try{if(!canSave())throw Error('Study account changed');localStorage.setItem(storageKey,JSON.stringify(saved));window.dispatchEvent(new Event('cssvista:progress-changed'));if(embedded)window.parent.postMessage({type:'cssvista:gsa:changed'},location.origin)}catch{ui.error='Course records could not be saved. Check account synchronization and retry your change.';draw()}
+ try{if(!canSave())throw Error('Study account changed');localStorage.setItem(storageKey,JSON.stringify(saved));unsaved=false;window.dispatchEvent(new Event('cssvista:progress-changed'));if(embedded)window.parent.postMessage({type:'cssvista:gsa:changed'},location.origin);return true}catch{unsaved=true;ui.error='Course records could not be saved. Keep this page open and retry saving, or export your records.';return false}
 }
 const isDone=id=>!!saved.completed?.[id];
 const countDone=()=>lessons.filter(x=>isDone(x.id)).length;
@@ -32,8 +33,8 @@ const countMissedQuestions=()=>Object.values(saved.questionReview||{}).filter(v=
 const countReview=()=>Object.keys(saved.revisit||{}).filter(id=>byId.has(id)).length;
 const nwords=s=>String(s||'').trim().split(/\s+/).filter(Boolean).length;
 function weights(s){return Math.max(100,s.words||100)}
-// Planning heuristic, not measured human learning time: manuscript reading at 150 wpm plus 6 minutes per recall/check.
-function estimatedMinutes(s){return Math.ceil(weights(s)/150+6)}
+// Provisional workload includes reading, a concept check and written recall; not measured learning time.
+function estimatedMinutes(s){return Math.ceil(weights(s)/150+12)}
 function validPlan(p){
  const date=typeof p?.startDate==='string'?new Date(p.startDate+'T12:00:00Z'):new Date(NaN);
  return !!(p&&Number.isInteger(p.days)&&p.days>=5&&p.days<=120&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===p.startDate&&
@@ -53,7 +54,32 @@ function dueReviews(){
  return Object.entries(saved.reviewDue||{}).filter(([id,record])=>byId.has(id)&&record?.date&&/^\d{4}-\d{2}-\d{2}$/.test(record.date)).map(([id,record])=>({id,date:record.date,stage:record.stage||1})).sort((a,b)=>a.date.localeCompare(b.date));
 }
 function countDueReviews(){return dueReviews().filter(r=>r.date<=now()).length}
+function capacitySchedule(plan){
+ const days=[];let cursor=0;
+ const reviews=dueReviews();const budget=plan.dailyMinutes||90;
+ // Keep the selected duration as a minimum; extend when capacity requires it.
+ // An indivisible lesson longer than the budget remains visible as an exception.
+ for(let i=0;i<120&&(cursor<lessons.length||i<plan.days);i++){
+   const date=studyDate(plan,i),day={date,day:i+1,ids:[],words:0,estimatedMinutes:0,done:0,reviews:[]};
+   while(reviews.length&&reviews[0].date<=date&&(day.estimatedMinutes+5<=budget||!day.reviews.length)){
+     day.reviews.push(reviews.shift().id);day.estimatedMinutes+=5;
+   }
+   while(cursor<lessons.length){
+     const s=lessons[cursor],cost=isDone(s.id)?0:estimatedMinutes(s);
+     if(day.estimatedMinutes+cost>budget&&(day.ids.some(id=>!isDone(id))||day.reviews.length))break;
+     day.ids.push(s.id);day.words+=weights(s);day.estimatedMinutes+=cost;if(isDone(s.id))day.done++;cursor++;
+   }
+   days.push(day);
+ }
+ // Never drop work if the requested availability cannot fit within 120 sessions.
+ const last=days[days.length-1];
+ while(cursor<lessons.length){const s=lessons[cursor++];last.ids.push(s.id);last.words+=weights(s);if(isDone(s.id))last.done++;else last.estimatedMinutes+=estimatedMinutes(s)}
+ for(const r of reviews){if(r.date<=last.date){last.reviews.push(r.id);last.estimatedMinutes+=5;last.beyondHorizon=true}}
+ for(const day of days)day.estimatedMinutes-=5*day.reviews.length;
+ return days;
+}
 function schedule(plan){
+ if(plan.algorithm==='capacity-v1')return capacitySchedule(plan);
  const res=Array.from({length:plan.days},()=>[]);const sum=lessons.reduce((n,s)=>n+estimatedMinutes(s),0);
  let cursor=0,used=0;
  for(let d=0;d<plan.days;d++){
@@ -70,11 +96,17 @@ function schedule(plan){
  return studyDays;
 }
 function savedPlan(){return validPlan(saved.plan)?saved.plan:null}
+function retainPlan(){
+ if(!savedPlan())return;
+ saved.planHistory??={};
+ const at=new Date().toISOString(),id='plan-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
+ saved.planHistory[id]={at,plan:{...saved.plan,restDays:[...(saved.plan.restDays||[])]}};
+}
 function todayDay(days){return days.find(d=>d.done<d.ids.length&&d.date<=now())||days.find(d=>d.done<d.ids.length)||days[days.length-1]}
 function chapterName(ch){return catalog.chapters.find(c=>c.id===ch)?.title||''}
 function heading(){return '<header class="top"><div class="brand"><img src="/images/logo.webp" alt="" width="32" height="32"><div>CSS VISTA<small>GENERAL SCIENCE TUTOR</small></div></div><nav class="nav" aria-label="GSA Tutor"><button data-view="course" class="'+(ui.view==='course'?'active':'')+'">My course</button><button data-view="library" class="'+(ui.view==='library'?'active':'')+'">Chapters</button><button data-view="practice" class="'+(ui.view==='practice'?'active':'')+'">Practice</button><button data-view="review" class="'+(ui.view==='review'?'active':'')+'">Revision</button></nav></header>'}
 function pillProgress(){
- return '<div class="stat-row"><div><strong>'+countDone()+' / '+lessons.length+'</strong><span>Lessons studied</span></div><div><strong>'+countConfident()+' / '+lessons.length+'</strong><span>Self-rated clear</span></div><div><strong>'+countReview()+'</strong><span>Lessons to revisit</span></div><div><strong>'+countMissedQuestions()+'</strong><span>Missed questions</span></div><div><strong>'+countDueReviews()+'</strong><span>Reviews due</span></div><div><strong>'+(savedPlan()?saved.plan.days:'—')+'</strong><span>Course days</span></div></div><div class="track" role="progressbar" aria-label="Lessons self-rated clear" aria-valuemin="0" aria-valuemax="'+lessons.length+'" aria-valuenow="'+countConfident()+'"><div class="fill" style="width:'+(countConfident()/lessons.length*100)+'%"></div></div>';
+ return '<div class="stat-row"><div><strong>'+countDone()+' / '+lessons.length+'</strong><span>Lessons studied</span></div><div><strong>'+countConfident()+' / '+lessons.length+'</strong><span>Self-rated clear</span></div><div><strong>'+countReview()+'</strong><span>Lessons to revisit</span></div><div><strong>'+countMissedQuestions()+'</strong><span>Missed questions</span></div><div><strong>'+countDueReviews()+'</strong><span>Reviews due</span></div><div><strong>'+(savedPlan()?schedule(saved.plan).length:'—')+'</strong><span>Course days</span></div></div><div class="track" role="progressbar" aria-label="Lessons self-rated clear" aria-valuemin="0" aria-valuemax="'+lessons.length+'" aria-valuenow="'+countConfident()+'"><div class="fill" style="width:'+(countConfident()/lessons.length*100)+'%"></div></div>';
 }
 function setup(){
  const days=ui.setupDays,date=ui.setupDate,rest=new Set(ui.setupRestDays||[]);
@@ -85,21 +117,23 @@ function setup(){
  return '<section class="page"><div class="hero"><div><p class="eyebrow">Your preparation, your timetable</p><h1>Choose how much time you have.</h1><p class="subtitle">All 28 chapters and 141 lessons remain in every plan. Choose active study days and days off; revisions are scheduled separately from new reading.</p></div></div><div class="panel"><p class="eyebrow">Active study sessions</p><div class="duration-grid">'+[8,14,20,30,45,60].map(n=>'<button class="duration '+(n===days?'active':'')+'" data-days="'+n+'"><strong>'+n+'</strong><span>days</span></button>').join('')+'</div><div class="fields"><label>Other duration (5–120 study days)<input type="number" id="custom-days" min="5" max="120" value="'+days+'"></label><label>Start date<input type="date" id="start-date" value="'+safe(date)+'"></label><label>Daily time available (minutes)<input type="number" id="daily-minutes" min="15" max="600" step="15" value="'+ui.setupDailyMinutes+'"></label></div><fieldset class="rest-field"><legend>Weekly rest days</legend><div class="rest-options">'+restControls+'</div></fieldset><p class="notice">'+Math.floor(lessons.length/days)+'–'+Math.ceil(lessons.length/days+2)+' lessons on most active days. '+Math.round(totalWords/days).toLocaleString()+' manuscript words per study day on average, excluding tests and recall. Provisional workload: about '+estimate+' minutes per study day versus '+ui.setupDailyMinutes+' available, before scheduled reviews. This heuristic is not a measured study duration.</p><button class="btn primary" data-action="saveplan">Create my course</button></div></section>';
 }
 function course(){
- if(!savedPlan())return setup();
+ if(ui.editingPlan||!savedPlan())return setup();
  const days=schedule(saved.plan),target=todayDay(days);
  const visibleDays=ui.showAllDays?days:days.filter(d=>d.day>=Math.max(1,target.day-1)&&d.day<=Math.min(days.length,target.day+5));
  const first=target?.ids.find(id=>!isDone(id))||lessons.find(s=>!isDone(s.id))?.id||lessons[0].id;
  const due=dueReviews().filter(x=>x.date<=now());
  const reviewBanner=due.length?'<div class="panel"><div class="spread"><div><p class="eyebrow">Spaced recall</p><h2>'+due.length+' review'+(due.length===1?'':'s')+' due</h2><p class="muted">Review these topics before proceeding; your earlier work is saved.</p></div><button class="btn primary" data-view="review">Open revision</button></div></div>':'';
  const rest=(saved.plan.restDays||[]).length?['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].filter((_,i)=>saved.plan.restDays.includes(i)).join(', '):'none';
+ const fitted=saved.plan.algorithm==='capacity-v1';
  const overBudget=days.filter(d=>d.estimatedMinutes+5*d.reviews.length>(saved.plan.dailyMinutes||90)).length;
- const paceNote='<p class="tiny muted">Time available: '+(saved.plan.dailyMinutes||90)+' minutes per active study day · Weekly rest: '+rest+'. Planning estimate: source reading at 150 words/minute plus six minutes per lesson and five minutes per scheduled review. Times vary by learner and topic.</p>'+(overBudget?'<p class="notice warn">'+overBudget+' study day(s) have an estimated workload exceeding your stated time. Increase the course duration or daily availability if needed.</p>':'');
+ const paceNote='<p class="tiny muted">Time available: '+(saved.plan.dailyMinutes||90)+' minutes per active study day · Weekly rest: '+rest+'. Planning estimate: source reading at 150 words/minute plus twelve minutes per lesson for checks and written recall and five minutes per scheduled review. Times vary by learner and topic.</p>'+(overBudget?'<p class="notice warn">'+overBudget+' study day(s) have an estimated workload exceeding your stated time. Increase the course duration or daily availability if needed.</p>':'');
+ const capacityNote='<div class="panel"><h2>Fit upcoming work to your time</h2><p>Rebuild from today using unfinished reading, concept checks, written recall and dated reviews. Completed lessons and all earlier records stay saved. The selected duration is a minimum; extra sessions are added where needed, up to 120. A single lesson may need more than your daily budget.</p><button class="btn" data-action="fitplan">Rebalance from today</button>'+(fitted?'<p role="status">'+days.length+' study sessions scheduled. '+(overBudget?'Some work still exceeds the budget; split these study sessions or increase your availability.':'All scheduled sessions fit the provisional time budget.')+'</p>':'')+'</div>';
  const dayRows=visibleDays.map(d=>{
    const entries=d.ids.map(id=>{const sec=byId.get(id);return '<button class="day-lesson '+(isDone(id)?'done':'')+'" data-lesson="'+safe(id)+'"><span>'+(isDone(id)?'✓':'○')+' '+safe(sec.number)+' · '+safe(sec.title)+'</span><small>'+sec.words+' words</small></button>'}).join('');
    const revisions=d.reviews.length?'<div class="scheduled-review"><strong>Spaced recall</strong>'+d.reviews.map(id=>'<button class="day-lesson" data-lesson="'+safe(id)+'">↻ '+safe(byId.get(id)?.title||'Lesson')+'</button>').join('')+'</div>':'';
    return '<details class="day" '+(d.day===target.day?'open':'')+'><summary><b>Day '+d.day+'</b><span><strong>'+dateLabel(d.date)+(d.done===d.ids.length?' · Studied':d.date<now()?' · Catch up':d.date===now()?' · Today':'')+'</strong><em>'+d.done+'/'+d.ids.length+' studied · '+d.words.toLocaleString()+' source words · ~'+(d.estimatedMinutes+5*d.reviews.length)+' min · '+d.reviews.length+' recalls</em></span></summary><div class="day-lessons">'+entries+revisions+'</div></details>';
  }).join('');
- return '<section class="page"><div class="hero"><div><p class="eyebrow">General Science · Part I · 60 marks</p><h1>Your '+saved.plan.days+'-study-day programme</h1><p class="subtitle">Work through the explanations, practise source questions, and return to concepts when scheduled. Off-days are excluded from the calendar.</p></div><button class="btn" data-action="editplan">Change plan</button></div><div class="panel accent">'+pillProgress()+'</div>'+reviewBanner+'<div class="panel"><div class="spread"><div><p class="eyebrow">'+(target?.date===now()?'Today’s session':'Continue from here')+'</p><h2>Day '+target.day+' · '+dateLabel(target.date)+'</h2><p class="muted">'+target.done+' of '+target.ids.length+' lessons studied · '+target.words.toLocaleString()+' source words assigned</p></div><button class="btn primary" data-lesson="'+safe(first)+'">Continue learning</button></div></div><div class="spread"><h2 style="margin:10px 0">Daily timetable</h2><small class="muted">Expand a day to see lessons and spaced recall</small></div><div class="plan-grid">'+dayRows+'</div>'+(ui.showAllDays?'<button class="btn" data-action="expandplan">Show current week</button>':days.length>visibleDays.length?'<button class="btn" data-action="expandplan">Show all '+days.length+' study days</button>':'')+paceNote+'<p class="tiny muted">Rescheduling preserves studied lessons and earlier recall records. The manuscript content does not change when the number of days changes.</p></section>';
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">General Science · Part I · 60 marks</p><h1>Your '+days.length+'-study-day programme</h1><p class="subtitle">Work through the explanations, practise source questions, and return to concepts when scheduled. Off-days are excluded from the calendar.</p></div><button class="btn" data-action="editplan">Change plan</button></div><div class="panel accent">'+pillProgress()+'</div>'+reviewBanner+capacityNote+'<div class="panel"><div class="spread"><div><p class="eyebrow">'+(target?.date===now()?'Today’s session':'Continue from here')+'</p><h2>Day '+target.day+' · '+dateLabel(target.date)+'</h2><p class="muted">'+target.done+' of '+target.ids.length+' lessons studied · '+target.words.toLocaleString()+' source words assigned</p></div><button class="btn primary" data-lesson="'+safe(first)+'">Continue learning</button></div></div><div class="spread"><h2 style="margin:10px 0">Daily timetable</h2><small class="muted">Expand a day to see lessons and spaced recall</small></div><div class="plan-grid">'+dayRows+'</div>'+(ui.showAllDays?'<button class="btn" data-action="expandplan">Show current week</button>':days.length>visibleDays.length?'<button class="btn" data-action="expandplan">Show all '+days.length+' study days</button>':'')+paceNote+'<p class="tiny muted">Rescheduling preserves studied lessons and earlier recall records. The manuscript content does not change when the number of days changes.</p></section>';
 }
 function library(){
  const items=catalog.chapters.filter(c=>!ui.search||[c.title,c.part,...c.sections.map(s=>s.title)].join(' ').toLowerCase().includes(ui.search.toLowerCase()));
@@ -148,6 +182,7 @@ function questionFor(s,c){
    const words=t=>new Set((String(t).toLowerCase().match(/[a-z]{4,}/g)||[]).filter(w=>!excluded.has(w)));
    const ranked=[];
    for(const q of c.questions){
+     if(q.lessonId)continue;
      const question=words(q.prompt+' '+q.options[q.answer]);
      for(const sec of c.sections){
        const title=words(sec.title),body=words(sec.text);
@@ -158,10 +193,12 @@ function questionFor(s,c){
    }
    ranked.sort((a,b)=>b.score-a.score);
    const assigned={},used=new Set();
+   const explicit=new Set(c.questions.filter(q=>q.lessonId).map(q=>q.lessonId));
    for(const row of ranked){
-     if(assigned[row.sec.id]||used.has(row.q.id))continue;
+     if(explicit.has(row.sec.id)||assigned[row.sec.id]||used.has(row.q.id))continue;
      assigned[row.sec.id]=row.q;used.add(row.q.id);
    }
+   for(const q of c.questions){if(q.lessonId&&c.sections.some(sec=>sec.id===q.lessonId))assigned[q.lessonId]=q}
    c._lessonQuestions=assigned;
  }
  return c._lessonQuestions[s.id]||null;
@@ -263,9 +300,9 @@ function chooseGrade(g){
  const attempts=Object.values(saved.recallAttempts).filter(x=>x?.lessonId===id).sort((a,b)=>Date.parse(a.at)-Date.parse(b.at));
  let streak=0;for(let i=attempts.length-1;i>=0&&attempts[i].selfRating==='gotit';i--)streak++;
  const stage=g==='gotit'?Math.min(5,streak+1):0,interval=stage?[0,3,7,14,30,60][stage]:1;
- saved.recallAttempts[attemptId]={at,lessonId:id,selfRating:g};
+ saved.recallAttempts[attemptId]={at,lessonId:id,selfRating:g,response:saved.drafts?.[id]||'',assessment:'self-review'};
  saved.reviewDue[id]={at,date:dateAdd(now(),interval),stage};
- ui.grade=g;notify();ui.view='finished';draw();
+ ui.grade=g;if(notify())ui.view='finished';draw();
 }
 function saveQuizAnswer(value){
  const c=chapterCache.get(ui.chapter),q=c?.questions?.[ui.qindex];
@@ -281,7 +318,7 @@ function saveQuizAnswer(value){
  }
  if(!saved.quizAttempts?.[ui.attemptId])beginQuizAttempt(c.id);
  const attempt=saved.quizAttempts[ui.attemptId];
- attempt.responses[q.id]={at,selected:value,correct};
+ attempt.responses[q.id]={at,selected:value,correct,answerKey:q.answer,contentVersion:catalog.edition||'original-manuscript',verification:'unreviewed-source'};
  attempt.at=at;
  notify();draw();
 }
@@ -310,6 +347,7 @@ function draw(){
  if(!catalog){root.innerHTML='<div class="spinner">Loading your course…</div>';return}
  let content='';
  if(ui.error)content='<p class="notice warn" role="alert">'+safe(ui.error)+'</p>';
+ if(unsaved)content+='<div class="notice warn" role="status">Changes are in memory and have not been saved. <button class="btn small" data-action="retrysave">Retry saving</button> <button class="btn small" data-action="exporthistory">Export records</button></div>';
  if(ui.busy){root.innerHTML=heading()+content+'<div class="spinner">Opening the original source…</div>';return}
  if(ui.view==='course')content+=course();
  if(ui.view==='library')content+=library();
@@ -323,7 +361,7 @@ function draw(){
  if(ui.view==='chapterIndex')content+=chapterOverview(chapterCache.get(ui.chapter));
  if(ui.view==='chapter')content+=chapterPractice(chapterCache.get(ui.chapter));
  if(ui.view==='written'){const c=chapterCache.get(ui.chapter);content+=written(c,c.analytical.find(x=>x.id===ui.opening))}
- root.innerHTML=heading()+content;
+ root.innerHTML=heading()+'<p class="tiny muted" role="note">Educational preview · Reading and self-ratings do not establish mastery. Reviewed assessments and independent educational approval are pending.</p>'+content;
  // Keep one natural page scrollbar when embedded in My CSS VISTA.
  if(window.parent!==window)window.requestAnimationFrame(()=>window.parent.postMessage({type:'cssvista:gsa:height',height:Math.ceil(document.documentElement.scrollHeight)+24},location.origin));
 }
@@ -351,6 +389,10 @@ root.addEventListener('click',async e=>{
    const item=byId.get(ui.id),c=chapterCache.get(item.chapter),q=questionFor(c.sections.find(x=>x.id===ui.id),c);
    if(!q||!Object.prototype.hasOwnProperty.call(q.options,t.dataset.choice)||ui.selected)return;
    ui.selected=t.dataset.choice;const at=new Date().toISOString(),correct=ui.selected===q.answer;
+   const attemptId='check-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
+   saved.quizAttempts??={};
+   saved.quizAttempts[attemptId]={at,chapter:item.chapter,lessonId:ui.id,mode:'lesson-check',finishedAt:at,responses:{[q.id]:{at,selected:ui.selected,correct,answerKey:q.answer,contentVersion:catalog.edition||'original-manuscript',verification:'unreviewed-source'}}};
+   saved.quizHistory??={};saved.quizHistory[q.id]={at,selected:ui.selected,correct};
    saved.questionReview??={};saved.questionReview[q.id]={at,chapter:item.chapter,unresolved:!correct};
    if(!correct)saved.revisit[ui.id]={at,kind:'question',questionId:q.id};
    else if(saved.revisit?.[ui.id]?.kind==='question')delete saved.revisit[ui.id];
@@ -360,12 +402,19 @@ root.addEventListener('click',async e=>{
  if(t.dataset.quizChoice){saveQuizAnswer(t.dataset.quizChoice);return}
  if(t.dataset.grade){ui.grade=t.dataset.grade;draw();return}
  switch(t.dataset.action){
+  case 'retrysave':if(notify()){ui.error='';if(ui.grade&&saved.completed?.[ui.id])ui.view='finished'}draw();break;
+  case 'fitplan':{
+   if(!savedPlan())break;
+   retainPlan();
+   saved.plan={...saved.plan,algorithm:'capacity-v1',startDate:now(),changedAt:new Date().toISOString()};
+   ui.showAllDays=false;notify();draw();break;
+  }
   case 'expandplan':ui.showAllDays=!ui.showAllDays;draw();break;
-  case 'editplan':ui.setupDays=saved.plan.days;ui.setupDate=saved.plan.startDate;ui.setupRestDays=[...(saved.plan.restDays||[])];ui.setupDailyMinutes=saved.plan.dailyMinutes||90;saved.plan=null;ui.view='course';draw();break;
+  case 'editplan':ui.setupDays=saved.plan.days;ui.setupDate=saved.plan.startDate;ui.setupRestDays=[...(saved.plan.restDays||[])];ui.setupDailyMinutes=saved.plan.dailyMinutes||90;ui.editingPlan=true;ui.view='course';draw();break;
   case 'saveplan':{
    const dd=document.getElementById('custom-days'),sd=document.getElementById('start-date'),dm=document.getElementById('daily-minutes'),days=dd?Number(dd.value):ui.setupDays,date=sd?sd.value:ui.setupDate,dailyMinutes=dm?Number(dm.value):ui.setupDailyMinutes,restDays=[...ui.setupRestDays].sort((a,b)=>a-b);
    if(!validPlan({days,startDate:date,dailyMinutes,restDays})){ui.error='Choose 5–120 study days, 15–600 minutes daily, a valid start date and at least one active weekday.';draw();return}
-   saved.plan={days,startDate:date,restDays,dailyMinutes,changedAt:new Date().toISOString()};ui.showAllDays=false;ui.setupDays=days;ui.setupDate=date;ui.setupDailyMinutes=dailyMinutes;notify();draw();break;
+   retainPlan();saved.plan={days,startDate:date,restDays,dailyMinutes,changedAt:new Date().toISOString()};ui.editingPlan=false;ui.showAllDays=false;ui.setupDays=days;ui.setupDate=date;ui.setupDailyMinutes=dailyMinutes;notify();draw();break;
   }
   case 'prevbeat':ui.beat=Math.max(0,ui.beat-1);draw();break;
   case 'nextbeat':{
@@ -394,7 +443,7 @@ root.addEventListener('click',async e=>{
   case 'restartquestions':ui.qindex=0;ui.selected='';ui.reviewSingle=false;beginQuizAttempt(ui.chapter);draw();break;
   case 'exporthistory':exportLearningRecords();break;
   case 'returnreview':ui.reviewSingle=false;ui.view='review';draw();break;
-  case 'savewriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');break;
+  case 'savewriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');draw();break;
   case 'revealwriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');ui.reveal=true;draw();break;
  }
 });
@@ -409,7 +458,14 @@ root.addEventListener('change',e=>{
 root.addEventListener('input',e=>{
  if(e.target.id==='search'){ui.search=e.target.value;const selectionStart=e.target.selectionStart;draw();let input=document.getElementById('search');if(input){input.focus();input.setSelectionRange(selectionStart,selectionStart)}}
  if(e.target.id==='recall'){ui.draft=e.target.value;const b=root.querySelector('[data-action="reveal"]');if(b)b.disabled=nwords(ui.draft)<16}
+ if(e.target.id==='recall'||e.target.id==='write'){
+   const id=e.target.id==='recall'?ui.id:ui.opening;
+   saved.drafts??={};saved.drafts[id]=e.target.value;
+   // Persist without redrawing the active textarea or disturbing keyboard focus.
+   if(!notify()){if(accountChanged){draw();return}const alert=root.querySelector('[data-save-alert]')||document.createElement('p');alert.dataset.saveAlert='true';alert.className='notice warn';alert.setAttribute('role','alert');alert.textContent='This response is not saved. Keep this page open; use Save draft or Compare to retry.';if(!alert.isConnected)root.prepend(alert)}else{root.querySelector('[data-save-alert]')?.remove()}
+ }
 });
+window.addEventListener('beforeunload',e=>{if(unsaved){e.preventDefault();e.returnValue=''}});
 window.addEventListener('storage',e=>{
  if(embedded||e.key!==null&&e.key!=='cssvista:progress-owner')return;
  try{if((localStorage.getItem('cssvista:progress-owner')||null)===(binding?.owner||null))return}catch{/* Hide the previous account when ownership cannot be read. */}
@@ -418,10 +474,11 @@ window.addEventListener('storage',e=>{
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==window.parent||e.data?.type!=='cssvista:gsa:hydrate')return;
  const incoming=e.data.snapshot;if(!incoming||typeof incoming!=='object')return;
- const previousOwner=binding?.owner;const previouslyBound=binding!==null;
+ const previousOwner=binding?.owner,previousGeneration=binding?.generation;const previouslyBound=binding!==null;
  const metadata=e.data.storage;if(metadata&&typeof metadata.key==='string'&&(metadata.key===KEY||metadata.key.startsWith('cssvista:reset-data:v1:')&&metadata.key.endsWith(encodeURIComponent(KEY)))){storageKey=metadata.key;binding={owner:metadata.owner||null,generation:metadata.generation||null}}else{storageKey=KEY;binding={owner:localStorage.getItem('cssvista:progress-owner'),generation:null}}
- if(e.data.preserveView&&previouslyBound&&previousOwner===binding.owner){saved={...defaults(),...incoming};draw();return}
- saved={...defaults(),...incoming};ui.id=byId.has(saved.last)?saved.last:lessons[0]?.id;ui.view='course';ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;draw();
+ if(e.data.preserveView&&previouslyBound&&previousOwner===binding.owner&&previousGeneration===binding.generation&&unsaved){ui.error='Unsaved work is retained on this page. Retry saving or export it before accepting synchronized changes.';draw();return}
+ if(e.data.preserveView&&previouslyBound&&previousOwner===binding.owner&&previousGeneration===binding.generation){saved={...defaults(),...incoming};draw();return}
+ unsaved=false;ui.editingPlan=false;saved={...defaults(),...incoming};ui.id=byId.has(saved.last)?saved.last:lessons[0]?.id;ui.view='course';ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;draw();
 });
 document.getElementById('close-reference').addEventListener('click',()=>document.getElementById('reference').close());
 function eclipseSvg(kind){

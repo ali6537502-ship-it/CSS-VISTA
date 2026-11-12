@@ -88,7 +88,7 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
     merged.plan = cloudPlan ?? localPlan
   }
   // Keep the latest graded attempt and revisit decision for each lesson.
-  for (const field of ['completed', 'revisit', 'bookmarks', 'bookmarkRemoved', 'quizHistory', 'quizAttempts', 'questionReview', 'recallAttempts', 'reviewDue'] as const) {
+  for (const field of ['completed', 'revisit', 'bookmarks', 'bookmarkRemoved', 'quizHistory', 'quizAttempts', 'questionReview', 'recallAttempts', 'reviewDue', 'planHistory'] as const) {
     const cloudRecords = isRecord(cloud[field]) ? cloud[field] : {}
     const localRecords = isRecord(local[field]) ? local[field] : {}
     const records: Record<string, unknown> = { ...cloudRecords, ...localRecords }
@@ -99,6 +99,22 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
       }
     }
     merged[field] = records
+  }
+  // A resumed attempt may receive different responses on two devices. Merge
+  // responses by question timestamp rather than dropping the older whole session.
+  const attempts = merged.quizAttempts as Record<string, unknown>
+  const cloudAttempts = isRecord(cloud.quizAttempts) ? cloud.quizAttempts : {}
+  const localAttempts = isRecord(local.quizAttempts) ? local.quizAttempts : {}
+  for (const id of Object.keys(attempts)) {
+    const a = cloudAttempts[id], b = localAttempts[id], current = attempts[id]
+    if (!isRecord(a) || !isRecord(b) || !isRecord(current)) continue
+    const ar = isRecord(a.responses) ? a.responses : {}
+    const br = isRecord(b.responses) ? b.responses : {}
+    const responses: Record<string, unknown> = { ...ar, ...br }
+    for (const q of Object.keys(responses)) {
+      if (q in ar && q in br) responses[q] = recordTime(ar[q]) > recordTime(br[q]) ? ar[q] : br[q]
+    }
+    attempts[id] = { ...current, responses }
   }
   const bookmarks = isRecord(merged.bookmarks) ? { ...merged.bookmarks } : {}
   const removed = isRecord(merged.bookmarkRemoved) ? { ...merged.bookmarkRemoved } : {}

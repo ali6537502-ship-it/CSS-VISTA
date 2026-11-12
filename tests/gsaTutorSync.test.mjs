@@ -99,3 +99,18 @@ test('later dated recall wins and separate recall attempt histories survive devi
    assert.deepEqual(Object.keys(merged.recallAttempts).sort(),['one','two']);
  }
 });
+
+test('responses to a shared practice session survive merges in both directions',()=>{
+ const cloud={[key]:{quizAttempts:{shared:{at:t1,chapter:6,responses:{A:{at:t0,selected:'A'},B:{at:t1,selected:'B'}}}}}};
+ const local={[key]:{quizAttempts:{shared:{at:t2,chapter:6,responses:{A:{at:t2,selected:'D'},C:{at:t2,selected:'C'}}}}}};
+ for(const state of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+   assert.deepEqual(Object.keys(state.quizAttempts.shared.responses).sort(),['A','B','C']);
+   assert.equal(state.quizAttempts.shared.responses.A.selected,'D');
+ }
+});
+
+test('rescheduling histories from separate devices are additive',()=>{
+ const cloud={[key]:{planHistory:{one:{at:t0,plan:{days:8}}}}};
+ const local={[key]:{planHistory:{two:{at:t2,plan:{days:60}}}}};
+ assert.deepEqual(Object.keys(merge(cloud,local)[key].planHistory).sort(),['one','two']);
+});

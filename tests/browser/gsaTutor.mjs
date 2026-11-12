@@ -9,7 +9,7 @@ const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXE
 const problems=[]
 await mkdir('test-artifacts/gsa-tutor',{recursive:true})
 try{
- for(const width of [375,768,1440]){
+ for(const width of [320,375,768,1440]){
    const context=await browser.newContext({viewport:{width,height:900}})
    const page=await context.newPage()
    page.on('pageerror',e=>problems.push(width+': '+e.message))
@@ -53,6 +53,19 @@ try{
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)
    assert.ok(overflow<=2,'unwanted horizontal scroll at '+width+': '+overflow)
    await page.screenshot({path:'test-artifacts/gsa-tutor/learning-'+width+'.png',fullPage:true})
+   if(width===320){
+     await page.locator('[data-action="fitplan"]').click()
+     await page.getByRole('status').filter({hasText:'study sessions scheduled'}).waitFor()
+     assert.ok(await page.locator('.day').count()>0)
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2,'rebalanced mobile layout overflows')
+     await page.keyboard.press('Tab')
+     assert.ok(await page.evaluate(()=>document.activeElement?.tagName==='BUTTON'),'keyboard focus must reach a control')
+   }
+   if(width===1440){
+     await page.evaluate(()=>document.documentElement.style.zoom='2')
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)<=2,'200% zoom layout overflows')
+     await page.evaluate(()=>document.documentElement.style.zoom='1')
+   }
    if(width===768){
      await page.locator('[data-view="library"]').click()
      await page.locator('[data-chapter="9"]').click()
@@ -90,5 +103,5 @@ try{
    await context.close()
  }
  assert.deepEqual(problems,[],problems.join('; '))
- console.log('PASS standalone GSA: three responsive lesson journeys, stale writer/account-switch redaction, real reload recovery and reset-generation isolation.')
+ console.log('PASS standalone GSA: four responsive lesson journeys, capacity rebalancing, keyboard focus and 200% zoom, stale writer/account-switch redaction, real reload recovery and reset-generation isolation.')
 }finally{await browser.close()}

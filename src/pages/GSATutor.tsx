@@ -7,7 +7,7 @@ import { notifyProgressChanged, PROGRESS_CHANGED_EVENT } from '@/lib/progressEve
 
 const STORAGE_KEY = 'cssvista:tool:gsa-tutor:v1'
 type GsaProgress = {
-  plan?: { days: number; startDate: string } | null
+  plan?: { days: number; startDate: string; algorithm?: string } | null
   completed?: Record<string, { at?: string; selfRating?: string }>
   revisit?: Record<string, unknown>
   questionReview?: Record<string, { unresolved?: boolean }>
@@ -126,7 +126,7 @@ function GSATutorWorkspace() {
           </div>
         </div>
         <div className="mb-4 flex flex-wrap items-center gap-x-6 gap-y-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs text-slate-600" aria-live="polite">
-          <span><strong className="text-slate-900">{result.days ? result.days + '-day' : 'Not scheduled'}</strong> course</span>
+          <span><strong className="text-slate-900">{result.days ? result.days + (progress.plan?.algorithm === 'capacity-v1' ? '-day minimum' : '-day') : 'Not scheduled'}</strong> course</span>
           <span><strong className="text-slate-900">{Math.min(result.completed, 141)}/141</strong> lessons studied</span>
           <span><strong className="text-slate-900">{result.confident}</strong> self-rated clear</span>
           <span><strong className="text-slate-900">{result.missed}</strong> missed questions</span>
@@ -141,7 +141,7 @@ function GSATutorWorkspace() {
         key={user?.id ?? (loading ? "session-loading" : "guest")}
         ref={iframeRef}
         title="CSS VISTA GSA Tutor interactive lessons and personal course schedule"
-        src="/gsa-tutor/studio.html?v=gsa-tutor-upgrade-20261106"
+        src="/gsa-tutor/studio.html?v=gsa-tutor-foundations-20261112"
         className="block w-full border-0 bg-white"
         style={{ height: frameHeight }}
         onLoad={() => {

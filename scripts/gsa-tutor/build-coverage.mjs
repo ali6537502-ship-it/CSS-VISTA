@@ -1,0 +1,70 @@
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+const read=p=>JSON.parse(readFileSync(p,'utf8'))
+const syllabus=read('public/fpsc-syllabus.json')
+const subject=syllabus.subjects.find(s=>s.slug==='general-science-ability')
+const catalog=read('public/gsa-tutor/content/catalog.json')
+const chapters=catalog.chapters.map(c=>read(`public/gsa-tutor/content/chapter-${String(c.id).padStart(2,'0')}.json`))
+// Editorial mapping candidates, never inferred by keyword matching. Content depth
+// and individual claims still need independent review against the original PDF.
+const mappings=[
+ [[1,2,3],'Universe; galaxies; light-year; astronomical unit; Sun; Earth; solar system','Check units, distance versus time, stellar evidence and prerequisite explanations.'],
+ [[3,4],'Eclipses; rotation; revolution; temperature; pressure; circulation; precipitation; humidity; weather variation','Check eclipse inclination, axial tilt, pressure gradients, saturation and causal explanations.'],
+ [[5],'Earthquakes; volcanoes; tsunami; flood; avalanche; tropical and mid-latitude cyclones; tornado; drought; wildfire; urban fire; disaster risk','Review each named hazard, especially mid-latitude cyclones and hazard versus vulnerability.'],
+ [[7,8],'Renewable and non-renewable energy; LED efficiency; solar; wind; conservation; sustainable use','Clarify that LEDs conserve energy; they are not primary renewable energy sources. Confirm ambiguous official wording against PDF.'],
+ [[6],'Atomic structure; chemical bonding; electromagnetic radiation','Only one MCQ for five lessons; add reviewed bond, spectrum and application checks and written models.'],
+ [[8,13],'Ceramics; plastics; semiconductors; antibiotics; vaccines; fertilizers; pesticides','Review ceramics depth and distinctions among medicines, agricultural chemicals and electronic materials.'],
+ [[9],'Cell structure; nucleus; mitochondria; ribosomes; organelle functions','Review cell prerequisites and organelle structure-function reasoning.'],
+ [[10,21],'Proteins; lipids; carbohydrates; enzymes','Check molecular structure, functions, enzyme specificity and temperature/pH mechanisms.'],
+ [[11],'Plant and animal diversity; similarities and differences','Three MCQs and no written model; add reviewed comparisons rather than lists alone.'],
+ [[12],'Human physiology; digestion; circulation; respiration; excretion; nervous and endocrine control; reproduction; immunity','No written models; review integrated homeostasis and prerequisite explanations.'],
+ [[13],'Polio; diarrhoea; malaria; hepatitis; dengue; causes; prevention','Check each named disease, transmission routes, prevention and current medical claims individually.'],
+ [[14],'Biofuel production; fermentation; transesterification; anaerobic digestion; emerging methods','Only one MCQ and no model; teach feedstock-to-product mechanisms and limitations.'],
+ [[15],'Atmosphere layers and composition; hydrosphere compartments and water cycle; biosphere biomes; lithosphere minerals, rocks and tectonics','Review every named Earth sphere and causal links; do not count title mentions as complete coverage.'],
+ [[16],'COx; particulate matter; NOx; SOx; tropospheric ozone; VOCs; dioxins; acid rain; ozone depletion; greenhouse effect; warming; Montreal and Kyoto Protocols','Verify named pollutants, mechanisms, health effects and the distinction between ozone depletion and warming.'],
+ [[17],'Synthetic organics; oxygen demand; nutrients; thermal pollution; pathogens; sediments; radioactivity; metals; acids','36 MCQs concentrated here; review distractors and redistribute future assessment effort.'],
+ [[17,18],'Drinking-water quality; standards; multiple treatment barriers','Verify numerical standards by authority, date and jurisdiction; treatment diagrams do not certify safety.'],
+ [[18],'Land pollution; solid waste management; disposal','Review waste hierarchy, treatment limitations and local claims.'],
+ [[19],'Remote sensing; GIS; environmental applications','Add reviewed interpretation exercises for resolution, spectral evidence and spatial analysis.'],
+ [[20],'Population planning; demographic change; resource pressure','Check population planning coverage beyond population growth; no in-chapter source links in original audit.'],
+ [[21,22],'Balanced diet; vitamins; carbohydrates; proteins; fats and oils; minerals; fibre','No written models in either chapter; review physiological roles and deficiency claims.'],
+ [[22,23,24],'Nutrient bioavailability; appearance; texture; flavour; packed and frozen food; additives; preservatives; antioxidants','Check every sensory/processing subtopic and distinguish quality, safety and bioavailability.'],
+ [[23,24],'Food deterioration; adulteration; preservation','Review microbial, chemical and physical causes and mechanism-specific controls.'],
+ [[25,26,27,28],'Hardware; software; input/output; processing; storage; networking; internet standards; applications; business software; social media; information systems; AI','Separate official core from enrichment; add scientific reasoning and reviewed IT source references.'],
+ [[19,26],'Wireless; mobile; satellite; surveillance; GPS; optical fibre','Review signal transmission, positioning versus communication and fibre guidance.']
+]
+let index=0
+const rows=[]
+for(const section of subject.sections.slice(1,6)){
+ // Preserve paragraph boundaries from the existing FPSC transcription.
+ const starts={
+  'I. Physical Sciences':['Constituents and Structure','Process of Nature','Natural Hazards and Disasters','Energy Resources','Atomic Structure','Modern Materials/Chemicals'],
+  'II. Biological Sciences':['The Basis of Life','Biomolecules:','Plant and Animal Kingdom','A Brief Account','Common Diseases','New Model Concept'],
+  'III. Environmental Science':['Environment:','Atmospheric Pollution','Water Pollution','Drinking water','Land Pollution','Role of Remote','Population Planning'],
+  'IV. Food Science':['Concept of Balance','Quality of Food','Food Deterioration'],
+  'V. Information Technology':['Computer (','Telecommunications:']
+ }[section.title]
+ const text=section.items.join(' '),positions=starts.map(s=>text.indexOf(s))
+ if(positions.some((p,i)=>p<0||(i>0&&p<=positions[i-1])))throw Error('Source headings changed')
+ const paragraphs=positions.map((p,i)=>text.slice(p,positions[i+1]??text.length))
+ for(const prescribed of paragraphs){
+  const map=mappings[index++];if(!map)throw Error('Syllabus paragraph boundaries changed')
+  const [chapterIds,concepts,gaps]=map
+  const mapped=chapters.filter(c=>chapterIds.includes(c.id))
+  rows.push({id:`GS-I-${String(index).padStart(2,'0')}`,domain:section.title,exactPrescribedTopic:prescribed.trim(),essentialConcepts:concepts.split('; '),chapterIds,lessonIds:mapped.flatMap(c=>c.sections.map(s=>s.id)),mappingStatus:'candidate-not-independently-reviewed',existingCoverage:'Relevant manuscript sections present; instructional completeness not established.',missingInstructionalMaterial:'Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.',expansionRequired:gaps,verifiedPastPaperQuestions:[],pastPaperStatus:'No paper question has been authenticated in this run; do not infer absence of relevant questions.',sources:[syllabus.source],editorialVerification:'pending-original-PDF-and-independent-review'})
+ }
+}
+if(index!==mappings.length)throw Error(`Expected ${mappings.length} topics, found ${index}`)
+const report={version:1,scope:'General Science Part I, 60 marks; General Ability Part II excluded',source:syllabus.source,sourceRetrieval:{checkedOn:'2026-11-12',status:'HTTP 503',limitation:'Official current PDF and legacy asset URL unavailable in this run. Exact topic text is the repository transcription, including spacing/OCR artifacts; current authoritative confirmation is pending.'},academicApproval:'WITHHELD',rows}
+const audit=chapters.map(c=>({chapter:c.id,title:c.title,lessons:c.sections.map(s=>({id:s.id,title:s.title,words:s.text.trim().split(/\s+/).length,contentHash:createHash('sha256').update(s.html).digest('hex'),instructionalStagesReviewed:false,scientificReview:'pending'})),mcqs:c.questions.length,writtenModels:c.analytical.length,questionsWithExplicitLessonMapping:c.questions.filter(q=>q.lessonId&&q.conceptId).length,questionsWithShortExplanations:c.questions.filter(q=>q.explanation.trim().split(/\s+/).length<15).length,approvedAssessments:0,releaseBlockers:['Scientific claim and formula verification pending','Lesson objectives, prerequisites and eight teaching stages need independent review','Question mapping, distractors, explanations and answer keys need review',...(c.analytical.length===0?['No original analytical model answers']:['Written models lack independent rubric approval'])]}))
+const outputs={
+ 'docs/gsa-tutor/syllabus-coverage.json':JSON.stringify(report,null,2)+'\n',
+ 'docs/gsa-tutor/chapter-audit.json':JSON.stringify({version:1,baseline:'Original manuscript; no lesson or answer-key changes',chapters:audit},null,2)+'\n',
+ 'docs/gsa-tutor/syllabus-coverage.md':'# General Science Part I coverage register\n\nStatus: **not certified**. Official retrieval returned HTTP 503 on 12 November 2026. Rows preserve the existing repository transcription; these are mapping candidates, not proof of adequate teaching. Part II is excluded. No authentic past-paper question was independently verified in this run.\n\nSource: '+syllabus.source.url+'\n\n| ID | Domain | Prescribed topic (repository transcription) | Candidate chapters | Required review / expansion |\n|---|---|---|---|---|\n'+rows.map(r=>`| ${r.id} | ${r.domain} | ${r.exactPrescribedTopic.replaceAll('|','/')} | ${r.chapterIds.join(', ')} | ${r.expansionRequired} |`).join('\n')+'\n\nSee `syllabus-coverage.json` for essential concepts, lesson IDs, source and verification status, and `chapter-audit.json` for all 141 lesson hashes and chapter assessment gaps. Automated inventory cannot establish scientific or pedagogical completeness.\n'
+}
+for(const [path,content] of Object.entries(outputs)){
+ if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==content)throw Error('Stale coverage artifact: '+path)}
+ else{mkdirSync('docs/gsa-tutor',{recursive:true});writeFileSync(path,content)}
+}
+console.log(`Coverage register: ${rows.length} prescribed topic groups; ${audit.length} chapters; academic approval withheld.`)
+if(process.argv.includes('--release')){console.error('RELEASE BLOCKED: official-source confirmation and independent academic approval pending.');process.exitCode=1}

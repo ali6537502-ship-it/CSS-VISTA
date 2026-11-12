@@ -112,7 +112,9 @@
     "audit:grammar-release": "node scripts/grammar-v5/build.mjs --check --release",
     "test:daily-pdf": "node --test tests/dailyPdf.test.mjs tests/daily-pdf/credentials.test.mjs",
     "validate:daily-pdf": "node scripts/daily-pdf/package.mjs --check",
-    "test:free-learning": "node --test tests/freeLearning.test.ts"
+    "test:free-learning": "node --test tests/freeLearning.test.ts",
+    "audit:gsa-coverage": "node scripts/gsa-tutor/build-coverage.mjs --check",
+    "audit:gsa-release": "node scripts/gsa-tutor/build-coverage.mjs --check --release"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

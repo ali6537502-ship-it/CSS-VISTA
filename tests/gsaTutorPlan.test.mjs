@@ -367,3 +367,87 @@ test('short course clearly warns when tentative workload exceeds available time'
  assert.equal(saved.plan.days,5);
  p.dom.window.close();
 });
+
+test('capacity rebalancing extends an unrealistic course and keeps all records',async()=>{
+ const id=catalog.chapters[0].sections[0].id;
+ const history={at:'2026-01-01T00:00:00Z',lessonId:id,selfRating:'partial',response:'Earlier recall'};
+ const p=await open({plan:{days:5,startDate:'2026-01-01',dailyMinutes:60,restDays:[0]},completed:{[id]:{at:'2026-01-01',selfRating:'partial'}},recallAttempts:{old:history}});
+ p.click('[data-action="fitplan"]');
+ p.click('[data-action="expandplan"]');
+ const days=[...p.document.querySelectorAll('.day')];
+ assert.ok(days.length>5,'Realistic time budget must extend the duration');
+ const ids=[...p.document.querySelectorAll('.day-lesson:not(.scheduled-review .day-lesson)')].map(b=>b.dataset.lesson);
+ assert.equal(ids.length,141);assert.equal(new Set(ids).size,141);
+ for(const day of days){const minutes=Number(day.querySelector('em').textContent.match(/~(\d+) min/)[1]);assert.ok(minutes<=60,'Rebalance fits available time')}
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.deepEqual(state.recallAttempts.old,history);assert.ok(state.completed[id]);
+ assert.equal(Object.values(state.planHistory)[0].plan.startDate,'2026-01-01');
+ assert.equal(state.plan.algorithm,'capacity-v1');assert.deepEqual(state.plan.restDays,[0]);
+ p.dom.window.close();
+});
+
+test('editing a timetable never stores a null plan through another save',async()=>{
+ const plan={days:20,startDate:'2026-11-01',dailyMinutes:90};
+ const p=await open({plan});
+ p.click('[data-action="editplan"]');
+ p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ p.click('[data-action="bookmark"]');
+ assert.deepEqual(JSON.parse(p.dom.window.localStorage.getItem(KEY)).plan,plan);
+ p.dom.window.close();
+});
+
+test('lesson checks retain correct and incorrect attempts without changing the original key',async()=>{
+ const p=await open();p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ const q=chapter(6).questions[0];
+ p.click('[data-choice="A"]');p.click('[data-action="tolearn"]');
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ p.click('[data-choice="D"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ const attempts=Object.values(state.quizAttempts);
+ assert.equal(attempts.length,2);
+ assert.deepEqual(attempts.map(a=>a.responses[q.id].correct),[false,true]);
+ assert.ok(attempts.every(a=>a.mode==='lesson-check'&&a.responses[q.id].answerKey==='D'));
+ assert.equal(state.questionReview[q.id].unresolved,false);
+ p.dom.window.close();
+});
+
+test('written answers persist while typing before blur or navigation',async()=>{
+ const p=await open();p.click('[data-view="practice"]');p.click('[data-practice="13"]');await wait(35);
+ const model=chapter(13).analytical[0];p.click('[data-analytical="'+model.id+'"]');
+ const el=p.document.getElementById('write');el.value='My interrupted answer is retained before I click any button.';
+ el.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ assert.equal(JSON.parse(p.dom.window.localStorage.getItem(KEY)).drafts[model.id],el.value);
+ p.dom.window.close();
+});
+
+test('storage failure offers retry and never reports a failed recall as saved',async()=>{
+ const p=await open();p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ p.click('[data-choice="D"]');p.click('[data-action="torecall"]');
+ const el=p.document.getElementById('recall');
+ el.value='Atoms have protons and neutrons in the nucleus and electrons in quantum states around it. Isotopes differ in neutron number.';
+ el.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));p.click('[data-action="reveal"]');p.click('[data-grade="gotit"]');
+ const prototype=p.dom.window.Storage.prototype,original=prototype.setItem;
+ prototype.setItem=()=>{throw new Error('Quota exceeded')};
+ p.click('[data-action="finish"]');
+ assert.equal(p.document.querySelector('.eyebrow')?.textContent==='Session saved',false);
+ assert.ok(p.document.querySelector('[data-action="retrysave"]'));
+ assert.equal(JSON.parse(p.dom.window.localStorage.getItem(KEY)).completed['c6-s6-1'],undefined);
+ prototype.setItem=original;p.click('[data-action="retrysave"]');
+ assert.ok(JSON.parse(p.dom.window.localStorage.getItem(KEY)).completed['c6-s6-1']);
+ assert.match(p.document.getElementById('app').textContent,/Session saved/);
+ p.dom.window.close();
+});
+
+test('explicit lesson metadata takes precedence over provisional keyword matching',async()=>{
+ const p=await open();p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ assert.equal(p.document.querySelector('.lesson-card h2').textContent,chapter(6).questions[0].prompt);
+ assert.equal(chapter(6).questions[0].verification.status,'pending-independent-review');
+ p.dom.window.close();
+});
