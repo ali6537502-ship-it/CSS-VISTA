@@ -6,6 +6,7 @@ import type { HomeCard } from '@/lib/admin'
 export const homeFeaturePriority = [
   '100-million-trees',
   'start-css',
+  'pms-vista',
   'css-eligibility-calculator',
   'exam-intelligence',
   'study-planner',
@@ -66,6 +67,7 @@ export function sortHomeCardsByPriority<T extends HomeCard>(cards: T[]): T[] {
 export const defaultHomeCards: HomeCard[] = [
   { id: '100-million-trees', title: '100 Million Trees for Punjab', desc: 'Join our collective planting campaign with Esar ul Ebad Welfare Foundation', to: '/100-million-trees', icon: 'Globe', visible: true, order: 0.12 },
   { id: 'exam-intelligence', title: 'VISTA Exam Intelligence', desc: 'Your personal preparation command center', to: '/exam-intelligence', icon: 'ChartNoAxesCombined', visible: true, order: 0.25 },
+  { id: 'pms-vista', title: 'PMS Vista — Free PMS Preparation', desc: 'Updated Punjab PMS syllabus, all 40 subjects, personalized free study planner and chapter notes', to: '/pms-vista', icon: 'BookOpen', visible: true, order: 1.05 },
   { id: 'gsa-tutor', title: 'GSA Tutor', desc: 'General Science interactive lessons and personalised study durations', to: '/gsa-tutor', icon: 'BookOpen', visible: true, order: 1.2 },
   { id: 'start-css', title: 'Start CSS', desc: 'Eligibility, stages and roadmap', to: '/start-css', icon: 'BookOpen', visible: true, order: 1 },
   { id: 'css-eligibility-calculator', title: 'CSS Age & Attempts Calculator', desc: 'Check FPSC age window and written chances', to: '/css-eligibility-calculator', icon: 'CalendarClock', visible: true, order: 1.1 },
