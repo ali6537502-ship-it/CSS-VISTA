@@ -8,13 +8,13 @@ The JSON companion retains exact lesson IDs, passage excerpts, expansion work an
 
 | Domain | Prescribed topic / subtopic | Candidate lessons | Required review / expansion |
 |---|---|---|---|
-|Physical Sciences|Constituents and Structure / Universe|c1-s1-1, c1-s1-2|Check AU/light-year/parsec distinctions and beginner prerequisites.|
+|Physical Sciences|Constituents and Structure / Universe|c1-s1-1, c1-s1-3|Check AU/light-year/parsec distinctions and beginner prerequisites.|
 |Physical Sciences|Constituents and Structure / Galaxy|c2-s2-1|Check AU/light-year/parsec distinctions and beginner prerequisites.|
-|Physical Sciences|Constituents and Structure / Light Year|c1-s1-3|Check AU/light-year/parsec distinctions and beginner prerequisites.|
+|Physical Sciences|Constituents and Structure / Light Year|c1-s1-2|Check AU/light-year/parsec distinctions and beginner prerequisites.|
 |Physical Sciences|Constituents and Structure / Solar System|c3-s3-1|Check AU/light-year/parsec distinctions and beginner prerequisites.|
 |Physical Sciences|Constituents and Structure / Sun|c2-s2-3|Check AU/light-year/parsec distinctions and beginner prerequisites.|
 |Physical Sciences|Constituents and Structure / Earth|c3-s3-3|Check AU/light-year/parsec distinctions and beginner prerequisites.|
-|Physical Sciences|Constituents and Structure / Astronomical System of Units|c1-s1-3|Check AU/light-year/parsec distinctions and beginner prerequisites.|
+|Physical Sciences|Constituents and Structure / Astronomical System of Units|c1-s1-2|Check AU/light-year/parsec distinctions and beginner prerequisites.|
 |Physical Sciences|Process of Nature / Solar Eclipses|c3-s3-4|Verify geometry and weather mechanisms; provide applied interpretation checks.|
 |Physical Sciences|Process of Nature / Lunar Eclipses|c3-s3-4|Verify geometry and weather mechanisms; provide applied interpretation checks.|
 |Physical Sciences|Process of Nature / Rotation|c3-s3-3|Verify geometry and weather mechanisms; provide applied interpretation checks.|

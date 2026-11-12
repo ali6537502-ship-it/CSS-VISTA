@@ -28,7 +28,7 @@
       "essentialConcepts": "Define and explain Universe; distinguish related concepts; apply and recall with appropriate scientific terminology.",
       "lessonIds": [
         "c1-s1-1",
-        "c1-s1-2"
+        "c1-s1-3"
       ],
       "existingCoverage": "Candidate passages located; instructional sufficiency and scientific accuracy not approved.",
       "evidence": [
@@ -39,10 +39,10 @@
           "sourceExcerpt": "The universe includes space, time, matter and energy. Matter ranges from elementary particles to planets, stars and galaxies. Radiation carries energy through space. Gravity connects the behaviour of these components acr"
         },
         {
-          "lessonId": "c1-s1-2",
-          "title": "Astronomical distances and measurement",
-          "words": 220,
-          "sourceExcerpt": "The astronomical unit, AU, is a convenient scale for the Solar System. One AU is exactly 149,597,870,700 metres, approximately the mean Earth–Sun distance. A light-year is the distance light travels in vacuum in one Juli"
+          "lessonId": "c1-s1-3",
+          "title": "The hot Big Bang model",
+          "words": 200,
+          "sourceExcerpt": "The Big Bang model describes an early hot, dense universe followed by expansion and cooling. It is not an ordinary explosion throwing matter from a central point into surrounding empty space. On sufficiently large scales"
         }
       ],
       "missingOrExpansionRequired": "Check AU/light-year/parsec distinctions and beginner prerequisites.",
@@ -86,15 +86,15 @@
       "prescribedSubtopic": "Light Year",
       "essentialConcepts": "Define and explain Light Year; distinguish related concepts; apply and recall with appropriate scientific terminology.",
       "lessonIds": [
-        "c1-s1-3"
+        "c1-s1-2"
       ],
       "existingCoverage": "Candidate passages located; instructional sufficiency and scientific accuracy not approved.",
       "evidence": [
         {
-          "lessonId": "c1-s1-3",
-          "title": "The hot Big Bang model",
-          "words": 200,
-          "sourceExcerpt": "The Big Bang model describes an early hot, dense universe followed by expansion and cooling. It is not an ordinary explosion throwing matter from a central point into surrounding empty space. On sufficiently large scales"
+          "lessonId": "c1-s1-2",
+          "title": "Astronomical distances and measurement",
+          "words": 220,
+          "sourceExcerpt": "The astronomical unit, AU, is a convenient scale for the Solar System. One AU is exactly 149,597,870,700 metres, approximately the mean Earth–Sun distance. A light-year is the distance light travels in vacuum in one Juli"
         }
       ],
       "missingOrExpansionRequired": "Check AU/light-year/parsec distinctions and beginner prerequisites.",
@@ -190,15 +190,15 @@
       "prescribedSubtopic": "Astronomical System of Units",
       "essentialConcepts": "Define and explain Astronomical System of Units; distinguish related concepts; apply and recall with appropriate scientific terminology.",
       "lessonIds": [
-        "c1-s1-3"
+        "c1-s1-2"
       ],
       "existingCoverage": "Candidate passages located; instructional sufficiency and scientific accuracy not approved.",
       "evidence": [
         {
-          "lessonId": "c1-s1-3",
-          "title": "The hot Big Bang model",
-          "words": 200,
-          "sourceExcerpt": "The Big Bang model describes an early hot, dense universe followed by expansion and cooling. It is not an ordinary explosion throwing matter from a central point into surrounding empty space. On sufficiently large scales"
+          "lessonId": "c1-s1-2",
+          "title": "Astronomical distances and measurement",
+          "words": 220,
+          "sourceExcerpt": "The astronomical unit, AU, is a convenient scale for the Solar System. One AU is exactly 149,597,870,700 metres, approximately the mean Earth–Sun distance. A light-year is the distance light travels in vacuum in one Juli"
         }
       ],
       "missingOrExpansionRequired": "Check AU/light-year/parsec distinctions and beginner prerequisites.",
