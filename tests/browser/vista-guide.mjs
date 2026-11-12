@@ -89,6 +89,15 @@ async function check(width,height,exam) {
   }
   const finalOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1)
   assert.equal(finalOverflow,false,exam+' '+width+'px horizontal overflow')
+  await page.addScriptTag({path:resolve(root,'tests/browser/node_modules/axe-core/axe.min.js')})
+  const accessibility=await page.evaluate(async()=>{
+    const result=await window.axe.run(document.querySelector('.vg-root'),{
+      runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}
+    })
+    return result.violations.filter(v=>v.impact==='critical'||v.impact==='serious')
+      .map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.map(n=>n.target)}))
+  })
+  assert.deepEqual(accessibility,[],exam+' '+width+'px serious accessibility violations: '+JSON.stringify(accessibility))
   assert.deepEqual(errors,[],exam+' JS runtime errors at '+width+'px')
   report.results.push({exam,width,height,initialOverflow,finalOverflow,subjects:Number(initialSubjects),runtimeErrors:errors})
   await context.close()
