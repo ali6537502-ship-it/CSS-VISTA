@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { document } from './fixture.mjs'
 
-const parser = process.env.CSSV_QPDF_TEST_BIN || 'qpdf'
+const parser = process.env.CSSV_QPDF_TEST_BIN || process.env.CSSV_QPDF_PATH || '/usr/bin/qpdf'
 const directory = await mkdtemp(join(tmpdir(), 'cssv-pdf-fixtures-'))
 try {
   console.log(execFileSync(parser, ['--version'], { encoding: 'utf8' }).trim())

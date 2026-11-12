@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { readFile, writeFile, mkdir, rm, access } from "node:fs/promises";
+import { readFile, writeFile, mkdir, rm, access, readdir } from "node:fs/promises";
+import { join } from "node:path";
 import { createHash } from "node:crypto";
 import { document } from "./fixture.mjs";
 if (
@@ -8,6 +9,11 @@ if (
 )
   throw Error("Isolated CI database required");
 const base = process.env.CSSV_DAILY_TEST_ORIGIN || "http://127.0.0.1:4174";
+const privateStorage = process.env.CSSV_PRIVATE_STORAGE_DIR;
+assert.ok(privateStorage, "Private isolated test storage is required");
+async function validationCleared() {
+  assert.equal((await readdir(join(privateStorage, "daily-pdf/validation"))).length, 0, "Validation copies must be removed after success and rejection");
+}
 const owner = JSON.parse(
   await readFile("test-artifacts/admin-session.json", "utf8"),
 );
@@ -82,8 +88,12 @@ try {
     422,
   );
   assert.equal((await save({}, Buffer.alloc(26214401))).status, 422);
+  const malformed = Buffer.from(bytes.toString("ascii").replace("/Root 1 0 R", "/Root 9 0 R"));
+  assert.equal((await save({}, malformed)).status, 422, "Structurally invalid PDFs remain rejected");
+  await validationCleared();
   let result = await save({}, bytes);
   assert.equal(result.status, 200, JSON.stringify(result));
+  await validationCleared();
   assert.equal((await library()).items.length, 1, "draft hidden");
   let e = (await admin()).items.find((e) => e.date === "2026-10-24");
   const preview = await fetch(
@@ -182,7 +192,7 @@ try {
   assert.equal((await fetch(base + e.pdfUrl)).status, 404);
   assert.ok((await admin()).audit.some((a) => a.action === "replaced"));
   console.log(
-    "PASS: owner upload/draft/preview/publish; unauthorized and CSRF rejection; malformed/oversized PDF; merged catalogue; conflict protection; range/download delivery; withdrawal persistence; replacement; scheduling; removal; audit.",
+    "PASS: private validation copies cleaned after success/rejection; owner upload/draft/preview/publish; unauthorized and CSRF rejection; malformed/oversized PDF; merged catalogue; conflict protection; range/download delivery; withdrawal persistence; replacement; scheduling; removal; audit.",
   );
 } finally {
   await rm(dir, { recursive: true, force: true });
