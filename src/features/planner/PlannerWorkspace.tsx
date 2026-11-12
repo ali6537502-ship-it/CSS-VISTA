@@ -16,8 +16,7 @@ const ResetPanel = lazy(() => import('@/features/preparation-reset/ResetPreparat
 
 const Suggestions = lazy(() => import('./PlannerSuggestions'))
 const Attempts = lazy(() => import('@/features/preparation/Continuation'))
-const Pms = lazy(() => import('./PlannerPms'))
-const labels = { today: 'Today', week: 'My week', syllabus: 'Preparation guide', revision: 'Revise', goals: 'Goals', pms: 'Previous PMS planner', settings: 'Set up' }
+const labels = { today: 'Today', week: 'My week', syllabus: 'Preparation guide', revision: 'Revise', goals: 'Goals', pms: 'PMS Vista', settings: 'Set up' }
 const icons = { today: CalendarDays, week: CalendarRange, syllabus: BookOpen, revision: RotateCcw, goals: Target, pms: BookOpen, settings: Settings2 }
 export default function PlannerWorkspace() {
   const { user, syncStatus, syncError } = useAccount()
@@ -53,23 +52,22 @@ export default function PlannerWorkspace() {
     return plannerHref(pathname, params, nextView, hash)
   }
   function createSession() {
-    if (exam === 'css') { openTools(); return }
     const next = new URLSearchParams(params)
     next.set('view', 'syllabus')
     setParams(next, { preventScrollReset: true })
   }
   return <main className="planner-workspace pl-root" data-planner-view={view}>
-    <header className="pl-page-header"><div><p className="pl-kicker">YOUR PREPARATION, PURPOSEFULLY PLANNED</p><h1 ref={heading} tabIndex={-1}>{exam === 'pms-punjab' ? 'PMS Vista' : 'CSS Vista'}</h1><p>{exam === 'pms-punjab' ? 'Your complete PMS syllabus, personalized daily study plan, revision and chapter notes commands.' : 'Your complete CSS preparation space: plan one to three subjects a day, follow your syllabus, create analytical notes with copyable commands and track revision and progress.'}</p></div><button ref={addButton} type="button" className="pl-primary" aria-expanded={exam === 'css' ? toolsOpen : undefined} aria-controls={exam === 'css' ? 'pl-task-composer' : undefined} onClick={createSession}><Plus size={18}/>{exam === 'pms-punjab' ? 'Plan PMS topics' : 'Add a study session'}</button></header>
+    <header className="pl-page-header"><div><p className="pl-kicker">YOUR PREPARATION, PURPOSEFULLY PLANNED</p><h1 ref={heading} tabIndex={-1}>{exam === 'pms-punjab' ? 'PMS Vista' : 'CSS Vista'}</h1><p>{exam === 'pms-punjab' ? 'Your complete PMS syllabus, personalized daily study plan, revision and chapter notes commands.' : 'Your complete CSS preparation space: plan one to three subjects a day, follow your syllabus, create analytical notes with copyable commands and track revision and progress.'}</p></div><button ref={addButton} type="button" className="pl-primary" onClick={createSession}><Plus size={18}/>Plan syllabus chapters</button></header>
     <div className="pl-exam-switch" role="group" aria-label="Preparation examination">{(['css', 'pms-punjab'] as const).map(id => <button key={id} type="button" aria-pressed={exam === id} onClick={() => { const next = new URLSearchParams(params); next.set('exam', id); if (next.get('view') === 'pms') next.set('view', 'syllabus'); setParams(next, { preventScrollReset: true }) }}><BookOpen size={17}/>{id === 'css' ? 'CSS preparation' : 'PMS Punjab'}</button>)}</div>
-    <nav className="pl-view-nav" aria-label="Study planner sections">{plannerViews.filter(id => id !== 'pms' && (exam === 'css' || !['revision', 'goals'].includes(id))).map(id => {
+    <nav className="pl-view-nav" aria-label="Study planner sections">{plannerViews.filter(id => id !== 'pms').map(id => {
       const Icon = icons[id]
       return <Link key={id} to={linkTo(id)} preventScrollReset aria-current={view === id || view === 'pms' && id === 'syllabus' ? 'page' : undefined}><Icon size={18}/><span>{labels[id]}</span>{id === 'revision' && snapshot.revision.due > 0 && <small>{snapshot.revision.due}</small>}</Link>
     })}</nav>
     {syncStatus === 'syncing' && <p className="pl-note" role="status">Your saved account plan is syncing. Device records stay available while it loads.</p>}
     {syncError && <p className="pl-warning" role="status">Account sync needs attention. Your device records are retained. <Link to="/account/settings">Open sync settings</Link>.</p>}
     <section ref={composer} id="pl-task-composer" hidden={!toolsOpen} className="pl-composer-panel" aria-label="Add tasks or import a schedule"><div className="pl-composer-close"><button type="button" className="pl-icon-button" aria-label="Close task composer" onClick={() => { setToolsOpen(false); addButton.current?.focus() }}><X size={18}/></button></div><ScheduledSyllabusBoard toolsOnly/></section>
-    {exam === 'css' && view === 'today' && <section className="pl-start-guide" aria-label="How to use the study planner">
-      <div className="pl-start-guide-head"><div><p className="pl-kicker">START HERE</p><h2>Build your plan in three steps</h2><p className="pl-muted">Each step opens the tool you need. Follow them in order, or open any step to update your plan.</p></div><span className="pl-guide-status">{completedSteps} of 3 steps completed</span></div>
+    {view === 'today' && <section className="pl-start-guide" aria-label="How to use the study planner">
+      <div className="pl-start-guide-head"><div><p className="pl-kicker">START HERE</p><h2>Build your plan in three steps</h2><p className="pl-muted">Choose your exam, set your subjects and daily hours, then study each chapter in the same Vista Mentor workspace.</p></div><span className="pl-guide-status">{completedSteps} of 3 steps completed</span></div>
       <div className="pl-guide-steps">
         <Link className={`pl-guide-step ${guideStep === 0 ? 'is-current' : ''}`} to={linkTo('settings')}>
           <span className="pl-guide-number">{planConfigured ? <Check size={17}/> : '1'}</span>
@@ -87,12 +85,12 @@ export default function PlannerWorkspace() {
       <div className="pl-guide-bottom"><span>Prefer to enter a task yourself?</span><button type="button" className="pl-secondary" onClick={openTools}><Plus size={15}/>Add manually or import a schedule</button></div>
     </section>}
     <div className="pl-panels"><Suspense fallback={<div className="pl-panel-loading" role="status"><span/><span/><span/>Loading planner tools…</div>}>
-      {(visited.has('today') || view === 'today') && <section id="pl-today-agenda" hidden={view !== 'today'} aria-label="Today planner"><PlannerDashboard key={exam} exam={exam} view="today" onCreate={createSession}/>{exam === 'css' && <Suggestions/>}</section>}
+      {(visited.has('today') || view === 'today') && <section id="pl-today-agenda" hidden={view !== 'today'} aria-label="Today planner"><PlannerDashboard key={exam} exam={exam} view="today" onCreate={createSession}/>{exam === 'css' && <Suggestions/>}<div className="vg-actions mt-4"><button type="button" className="pl-secondary" onClick={openTools}><Plus size={15}/>Add a manual task</button></div></section>
       {(visited.has('week') || view === 'week') && <section hidden={view !== 'week'} aria-label="Weekly planner"><PlannerDashboard key={exam} exam={exam} view="week" onCreate={createSession}/></section>}
       {(visited.has('syllabus') || view === 'syllabus') && <section hidden={view !== 'syllabus'} aria-label="Syllabus planner"><Guide exam={exam}/></section>}
-      {(visited.has('revision') || view === 'revision') && <section hidden={view !== 'revision'} aria-label="Revision planner"><Revision/></section>}
+      {(visited.has('revision') || view === 'revision') && <section hidden={view !== 'revision'} aria-label="Revision planner">{exam === 'pms-punjab' ? <Guide exam={exam}/> : <Revision/>}</section>}
       {(visited.has('goals') || view === 'goals') && <section hidden={view !== 'goals'} aria-label="Goals planner"><Goals/></section>}
-      {(visited.has('pms') || view === 'pms') && <section hidden={view !== 'pms'} aria-label="PMS Punjab planner"><Pms/></section>}
+      {(visited.has('pms') || view === 'pms') && <section hidden={view !== 'pms'} aria-label="PMS Punjab planner"><Guide exam="pms-punjab"/></section>}
       {(visited.has('settings') || view === 'settings') && <section hidden={view !== 'settings'} aria-label="Planner settings"><Guide exam={exam} mode="settings"/><ResetPanel/></section>}
     </Suspense></div>
     {user && exam === 'css' && <div className="pl-connected-attempts"><Suspense fallback={<p role="status" className="pl-muted">Loading account-linked attempts…</p>}><Attempts/></Suspense></div>}
