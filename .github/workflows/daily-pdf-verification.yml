@@ -38,6 +38,8 @@ jobs:
           ini-values: upload_max_filesize=25M, post_max_size=30M
       - run: sudo apt-get update && sudo apt-get install -y qpdf
       - run: npm ci --no-audit --no-fund
+      - name: Verify synthetic PDFs with the installed parser
+        run: node tests/daily-pdf/validate-fixtures.mjs
       - run: npm run test:daily-pdf && npm run validate:daily-pdf
       - name: Prepare isolated owner session and durable test storage
         run: |
