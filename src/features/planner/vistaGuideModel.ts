@@ -53,13 +53,24 @@ export function pmsGuideSubjects(data: { subjects: VistaSubject[] }): VistaSubje
   return data.subjects
 }
 export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: string; designation: 'compulsory' | 'optional'; marks: number; sections: Array<{ title: string; items: string[] }> }> }): VistaSubject[] {
-  return data.subjects.map(s => ({
+  const papers = data.subjects.map(s => ({
     id: s.slug, title: s.name, designation: s.designation, marks: s.marks,
     sections: s.sections.map((section, i) => ({
       id: 's' + (i + 1), title: section.title, detail: '',
       topics: [{ id: 'vista-css:' + s.slug + ':s' + (i + 1), title: section.title, detail: section.items.join(' ').replace(/\s+/g, ' ').trim() }],
     })),
   }))
+  // The distributed FPSC JSON omits the separate Essay paper. This is a
+  // clearly labelled preparation activity linking to the existing roadmap,
+  // not a fabricated transcription of an FPSC syllabus section.
+  if (!papers.some(s => s.id === 'essay')) papers.unshift({
+    id: 'essay', title: 'English Essay', designation: 'compulsory', marks: 100,
+    sections: [{ id: 's1', title: 'Essay Themes 2027 — preparation resource (not an FPSC syllabus extract)', detail: '',
+      topics: [{ id: 'vista-css:essay:s1', title: 'Essay research, outlines and timed writing',
+        detail: 'Work through the existing Essay Themes 2027 research roadmap and practise analytical essay writing.' }],
+    }],
+  })
+  return papers
 }
 export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] {
   return subject.sections.flatMap(section => section.topics.map(topic => {
