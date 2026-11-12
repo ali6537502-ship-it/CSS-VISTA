@@ -9,15 +9,15 @@ import { AuthenticatedAccountAd } from '@/components/Ads'
 import { taskExam } from './pmsModel'
 import { plannerHref, plannerView, plannerViews, type PlannerView } from './model'
 import './planner.css'
-const Syllabus = lazy(() => import('@/components/FpscSyllabusPlanner'))
+const Guide = lazy(() => import('./VistaStudyGuide'))
 const Revision = lazy(() => import('./PlannerRevision'))
 const Goals = lazy(() => import('./PlannerGoals'))
 const ResetPanel = lazy(() => import('@/features/preparation-reset/ResetPreparationPanel'))
-const Settings = lazy(() => import('./PlannerSettings'))
+
 const Suggestions = lazy(() => import('./PlannerSuggestions'))
 const Attempts = lazy(() => import('@/features/preparation/Continuation'))
 const Pms = lazy(() => import('./PlannerPms'))
-const labels = { today: 'Today', week: 'My week', syllabus: 'Choose topics', revision: 'Revise', goals: 'Goals', pms: 'PMS Punjab', settings: 'Set up' }
+const labels = { today: 'Today', week: 'My week', syllabus: 'Preparation guide', revision: 'Revise', goals: 'Goals', pms: 'Previous PMS planner', settings: 'Set up' }
 const icons = { today: CalendarDays, week: CalendarRange, syllabus: BookOpen, revision: RotateCcw, goals: Target, pms: BookOpen, settings: Settings2 }
 export default function PlannerWorkspace() {
   const { user, syncStatus, syncError } = useAccount()
@@ -59,7 +59,7 @@ export default function PlannerWorkspace() {
     setParams(next, { preventScrollReset: true })
   }
   return <main className="planner-workspace pl-root" data-planner-view={view}>
-    <header className="pl-page-header"><div><p className="pl-kicker">YOUR PREPARATION, PURPOSEFULLY PLANNED</p><h1 ref={heading} tabIndex={-1}>Study Planner</h1><p>A clear place for today’s work, the week ahead and everything you’re building towards.</p></div><button ref={addButton} type="button" className="pl-primary" aria-expanded={exam === 'css' ? toolsOpen : undefined} aria-controls={exam === 'css' ? 'pl-task-composer' : undefined} onClick={createSession}><Plus size={18}/>{exam === 'pms-punjab' ? 'Plan PMS topics' : 'Add a study session'}</button></header>
+    <header className="pl-page-header"><div><p className="pl-kicker">YOUR PREPARATION, PURPOSEFULLY PLANNED</p><h1 ref={heading} tabIndex={-1}>{exam === 'pms-punjab' ? 'PMS Vista' : 'CSS Vista Planner'}</h1><p>Personalized syllabus coverage, daily preparation, revision and analytical chapter notes.</p></div><button ref={addButton} type="button" className="pl-primary" aria-expanded={exam === 'css' ? toolsOpen : undefined} aria-controls={exam === 'css' ? 'pl-task-composer' : undefined} onClick={createSession}><Plus size={18}/>{exam === 'pms-punjab' ? 'Plan PMS topics' : 'Add a study session'}</button></header>
     <div className="pl-exam-switch" role="group" aria-label="Preparation examination">{(['css', 'pms-punjab'] as const).map(id => <button key={id} type="button" aria-pressed={exam === id} onClick={() => { const next = new URLSearchParams(params); next.set('exam', id); if (next.get('view') === 'pms') next.set('view', 'syllabus'); setParams(next, { preventScrollReset: true }) }}><BookOpen size={17}/>{id === 'css' ? 'CSS preparation' : 'PMS Punjab'}</button>)}</div>
     <nav className="pl-view-nav" aria-label="Study planner sections">{plannerViews.filter(id => id !== 'pms' && (exam === 'css' || !['revision', 'goals'].includes(id))).map(id => {
       const Icon = icons[id]
@@ -89,11 +89,11 @@ export default function PlannerWorkspace() {
     <div className="pl-panels"><Suspense fallback={<div className="pl-panel-loading" role="status"><span/><span/><span/>Loading planner tools…</div>}>
       {(visited.has('today') || view === 'today') && <section id="pl-today-agenda" hidden={view !== 'today'} aria-label="Today planner"><PlannerDashboard key={exam} exam={exam} view="today" onCreate={createSession}/>{exam === 'css' && <Suggestions/>}</section>}
       {(visited.has('week') || view === 'week') && <section hidden={view !== 'week'} aria-label="Weekly planner"><PlannerDashboard key={exam} exam={exam} view="week" onCreate={createSession}/></section>}
-      {(visited.has('syllabus') || view === 'syllabus') && <section hidden={view !== 'syllabus'} aria-label="Syllabus planner">{exam === 'pms-punjab' ? <Pms/> : <Syllabus embedded showScheduleBoard={false}/>}</section>}
+      {(visited.has('syllabus') || view === 'syllabus') && <section hidden={view !== 'syllabus'} aria-label="Syllabus planner"><Guide exam={exam}/></section>}
       {(visited.has('revision') || view === 'revision') && <section hidden={view !== 'revision'} aria-label="Revision planner"><Revision/></section>}
       {(visited.has('goals') || view === 'goals') && <section hidden={view !== 'goals'} aria-label="Goals planner"><Goals/></section>}
       {(visited.has('pms') || view === 'pms') && <section hidden={view !== 'pms'} aria-label="PMS Punjab planner"><Pms/></section>}
-      {(visited.has('settings') || view === 'settings') && <section hidden={view !== 'settings'} aria-label="Planner settings">{exam === 'pms-punjab' ? <Pms mode="settings"/> : <Settings/>}<ResetPanel/></section>}
+      {(visited.has('settings') || view === 'settings') && <section hidden={view !== 'settings'} aria-label="Planner settings"><Guide exam={exam} mode="settings"/><ResetPanel/></section>}
     </Suspense></div>
     {user && exam === 'css' && <div className="pl-connected-attempts"><Suspense fallback={<p role="status" className="pl-muted">Loading account-linked attempts…</p>}><Attempts/></Suspense></div>}
     <footer className="pl-footer"><p>Your timetable, optional daily suggestions and preparation attempts track different parts of your work. Completing a personal task is a self-reported check.</p><Link to="/account/dashboard">Back to overview <ArrowUpRight size={14}/></Link></footer>
