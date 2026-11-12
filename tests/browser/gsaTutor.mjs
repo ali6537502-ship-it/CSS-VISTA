@@ -134,6 +134,7 @@ try{
      await page.locator('[data-action="fullsource"]').click()
      assert.ok(await page.locator('#reference math').count()>0,'Chemical reaction should render as MathML')
      assert.equal(await page.locator('#reference .math-source-fallback').count(),0)
+     const scrollEquation=page.locator('#reference .scrollable-equation').first();await scrollEquation.waitFor();await scrollEquation.focus();await page.keyboard.press('ArrowRight');await page.waitForTimeout(100);assert.ok(await scrollEquation.evaluate(el=>el.scrollLeft)>0,'Long equations must support keyboard scrolling')
      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
      await page.screenshot({path:'test-artifacts/gsa-tutor/formulas-320.png',fullPage:true})
      await page.locator('#close-reference').click()
@@ -158,6 +159,13 @@ try{
      await page.reload();await page.getByRole('heading',{name:'Choose how much time you have.',exact:true}).waitFor();await page.locator('[data-days="8"]').click();await page.locator('[data-action="saveplan"]').click()
      assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem(`cssvista:reset-data:v1:standalone-fixture-c:fixture-reset:${encodeURIComponent('cssvista:tool:gsa-tutor:v1')}`)).plan.days),8)
      assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1')),null)
+   }
+   if(width===320){
+     const retained=await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1'))
+     await context.route('**/gsa-tutor/assessment-ui.js*',route=>route.abort())
+     await page.reload();await page.getByRole('heading',{name:'Course assets could not be loaded',exact:true}).waitFor()
+     assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1')),retained,'Asset-load failures must not alter historical progress')
+     await context.unroute('**/gsa-tutor/assessment-ui.js*');await page.getByRole('button',{name:'Reload course',exact:true}).click();await page.getByRole('heading',{name:/programme/}).waitFor()
    }
    await context.close()
  }

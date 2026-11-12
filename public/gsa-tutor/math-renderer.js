@@ -32,6 +32,9 @@
    }
    fragment.append(document.createTextNode(text.slice(position)));node.replaceWith(fragment);
   }
+  if(scope.requestAnimationFrame)scope.requestAnimationFrame(()=>{
+   for(const equation of container.querySelectorAll('.gsa-equation'))if(equation.scrollWidth>equation.clientWidth+1){equation.tabIndex=0;equation.classList.add('scrollable-equation');equation.setAttribute('role','group');equation.setAttribute('aria-label','Scientific equation; use left and right arrow keys to scroll');}
+  });
   return {rendered,issues,repairs};
  }
  scope.CSSVistaGSAMath={render};

@@ -5,6 +5,10 @@ const KEY='cssvista:tool:gsa-tutor:v1';
 let storageKey=KEY,binding=null,accountChanged=false;const embedded=window.parent!==window;
 if(!embedded){try{const owner=localStorage.getItem('cssvista:progress-owner')||null,generation=owner?localStorage.getItem('cssvista:sync-generation:v1:'+owner):null;binding={owner,generation};if(owner&&generation)storageKey=`cssvista:reset-data:v1:${encodeURIComponent(owner)}:${generation}:${encodeURIComponent(KEY)}`}catch{/* Saving reports unavailable storage. */}}
 const root=document.getElementById('app');
+if(!window.CSSVistaGSALearning||!window.CSSVistaGSAAssessment||!window.CSSVistaGSAAssessmentUI){
+ root.innerHTML='<section class="panel" role="alert"><h1>Course assets could not be loaded</h1><p>Check your connection and reload. Your stored study records have not been changed.</p><button class="btn" id="retry-course-assets">Reload course</button></section>';
+ document.getElementById('retry-course-assets').addEventListener('click',()=>location.reload());return;
+}
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const now=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const dateAdd=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};

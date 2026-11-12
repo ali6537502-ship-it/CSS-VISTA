@@ -47,7 +47,7 @@ These checks support the specific new explanations only. They do not verify ever
 - `npm run build:hostinger`: passed, including the existing MPT source/exported release safeguards. Existing bundle-size and content-rights/editorial warnings do not constitute GSA academic approval.
 - `npm run audit:routes`: 119 registry routes, four redirects, five true 404 checks and 923 sitemap URLs verified against the generated artifact.
 - `npm run test:routes`: 21 passing tests after the production build.
-- `node tests/browser/gsaTutor.mjs`: passed in Chromium at **320, 375, 768 and 1440 px**, with complete lesson journeys, keyboard model interaction, pilot rubric persistence, 200% zoom, overflow checks, timed-assessment resume/submission, 156 rendered expressions and stale-account/reset isolation. This is a local fixture test, not authenticated production or real cross-device testing.
+- `node tests/browser/gsaTutor.mjs`: passed in Chromium at **320, 375, 768 and 1440 px**, with complete lesson journeys, keyboard model interaction, pilot rubric persistence, 200% zoom, overflow checks, timed-assessment resume/submission, 156 rendered expressions, keyboard scrolling of long equations, recovery from missing script assets and stale-account/reset isolation. This is a local fixture test, not authenticated production or real cross-device testing.
 - `npm run audit:gsa-release`: expected nonzero result, preserving the educational release hold.
 - `git diff --check`: passed.
 
