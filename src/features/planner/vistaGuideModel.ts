@@ -135,17 +135,18 @@ export function selectedVistaSubjects(subjects: VistaSubject[], exam: VistaExam,
 }
 export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' | 'revision' = 'comprehensive') {
   const level = depth === 'revision' ? 'focused revision notes while retaining all syllabus headings' : 'comprehensive, textbook-depth notes for independent preparation'
+  const supplemental = unit.resource === 'essay' && (unit.id.includes(':theme:') || unit.id.endsWith(':resource'))
   return [
     'VISTA NOTES COMMAND — EXAMINATION PREPARATION',
     'Act as a specialist teacher, examiner and academic researcher for the subject and examination below.',
-    'Prepare ' + level + ' strictly grounded in the exact supplied syllabus.',
+    'Prepare ' + level + ' strictly grounded in the supplied ' + (supplemental ? 'supplementary essay-preparation roadmap, which is not an official syllabus extract.' : 'official syllabus extract.'),
     '',
     'EXAMINATION: ' + unit.paper,
     'SUBJECT: ' + unit.subject,
     'PAPER / SECTION: ' + unit.section,
     'ASSIGNED CHAPTER OR TOPIC: ' + unit.title,
     '',
-    'EXACT PRESCRIBED SYLLABUS:',
+    supplemental ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP (NOT AN OFFICIAL SYLLABUS EXTRACT):' : 'EXACT PRESCRIBED SYLLABUS:',
     unit.syllabus,
     '',
     'INSTRUCTIONS:',
@@ -155,7 +156,7 @@ export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' |
     '4. Use only verifiable facts, quotations, case law and current data. If browsing is available, check authoritative sources and give traceable references; otherwise clearly state which claims require verification. Never invent citations or statistics.',
     '5. Include original examination-style analytical questions with structured model answer frameworks and a revision summary.',
     '6. Make notes substantial enough to support independent preparation. If too long for one reply, label the output Part 1 and enumerate exactly which remaining syllabus subtopics still need coverage.',
-    '7. Clearly distinguish additional analytical background from the supplied official syllabus. Do not silently add or omit prescribed material.',
+    '7. Clearly distinguish additional analytical background from official syllabus requirements. Never claim that supplementary essay themes are officially prescribed. Do not silently add or omit supplied material.',
     '',
     'Begin with the first syllabus heading.',
   ].join('\n')
