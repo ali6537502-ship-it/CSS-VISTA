@@ -62,3 +62,51 @@ test('CSS guide includes a clearly labelled essay activity without pretending it
   assert.match(s.find(x=>x.id==='essay')!.sections[0].title,/not an FPSC syllabus extract/)
   assert.equal(selectedVistaSubjects(s,'css',prefs()).length,2)
 })
+
+test('40-subject structure includes all 1,414 leaf topics, 5 Urdu and Punjabi parts and prescribed reading lists',()=>{
+  const d=JSON.parse(readFileSync('public/pms-punjab/vista-syllabus.json','utf8'))
+  assert.equal(d.subjects.filter((s:VistaSubject)=>s.designation==='compulsory').length,10)
+  assert.equal(d.subjects.filter((s:VistaSubject)=>s.designation==='optional').length,30)
+  assert.equal(d.subjects.reduce((sum:number,s:VistaSubject)=>sum+s.sections.length,0),179)
+  assert.equal(d.subjects.reduce((sum:number,s:VistaSubject)=>sum+guideUnits(s,'pms-punjab').length,0),1414)
+  for(const name of ['Urdu','Punjabi']){
+    const subject=d.subjects.find((s:VistaSubject)=>s.title===name) as VistaSubject
+    assert.ok(subject)
+    assert.equal(subject.sections.length,5)
+    assert.equal(subject.readings?.length,name==='Urdu'?19:21)
+  }
+  const punjabi=d.subjects.find((s:VistaSubject)=>s.title==='Punjabi') as VistaSubject
+  assert.match(guideUnits(punjabi,'pms-punjab').map(u=>u.syllabus).join('\n'),/جگراتے/)
+  const urdu=d.subjects.find((s:VistaSubject)=>s.title==='Urdu') as VistaSubject
+  assert.match(guideUnits(urdu,'pms-punjab').map(u=>u.syllabus).join('\n'),/شہرِ کوفے کا ایک آدمی/)
+})
+test('nested official chapters are scheduled individually with parent syllabus context',()=>{
+  const nested:VistaSubject={id:'optional-law',title:'Law',designation:'optional',marks:100,sections:[{
+    id:'s1',title:'Paper I',topics:[{id:'pms-punjab:vista:optional-law:s1:n1',title:'Constitutional law',detail:'Foundations',
+      children:[{id:'pms-punjab:vista:optional-law:s1:n1-1',title:'Judicial review',detail:'Scope and grounds'},
+                {id:'pms-punjab:vista:optional-law:s1:n1-2',title:'Separation of powers',detail:'Executive and legislature'}]}],
+  }]}
+  const units=guideUnits(nested,'pms-punjab')
+  assert.equal(units.length,2)
+  assert.match(units[0].syllabus,/Constitutional law/)
+  assert.match(units[0].syllabus,/Foundations/)
+  assert.match(units[0].syllabus,/Scope and grounds/)
+})
+test('six-hour single-subject days can contain multiple realistic sessions',()=>{
+  const topics=Array.from({length:12},(_,i)=>'Chapter '+(i+1))
+  const result=generateVistaPlan([subject('a',topics)],'css',prefs({subjectsPerDay:1,dailyMinutes:360,targetDate:''}),[],{},'2026-11-12')
+  assert.equal(result.draft.length,12)
+  const first=result.draft.filter(t=>t.date==='2026-11-12')
+  assert.ok(first.length>1)
+  assert.ok(first.reduce((sum,t)=>sum+t.minutes,0)<=360)
+  assert.ok(result.draft.every(t=>t.minutes>=30&&t.minutes<=600))
+})
+test('three-subject rotation preserves daily time and distinct-subject bounds',()=>{
+  const subjects=['a','b','c','d'].map(name=>subject(name,Array.from({length:8},(_,i)=>name+'-'+i)))
+  const result=generateVistaPlan(subjects,'css',prefs({subjectsPerDay:3,dailyMinutes:180,targetDate:''}),[],{},'2026-11-12')
+  for(const date of new Set(result.draft.map(t=>t.date))){
+    const today=result.draft.filter(t=>t.date===date)
+    assert.ok(new Set(today.map(t=>t.subject)).size<=3)
+    assert.ok(today.reduce((n,t)=>n+t.minutes,0)<=180)
+  }
+})
