@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router'
-import { BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCopy, Clock3, ExternalLink, RefreshCw, Save, Search, Settings2, Sparkles } from 'lucide-react'
+import { Link, useSearchParams } from 'react-router'
+import { BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCopy, Clock3, RefreshCw, Save, Search, Settings2, Sparkles } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { currentHostingerAccountUser } from '@/lib/hostingerApi'
 import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
@@ -66,6 +66,7 @@ function CopyNotes({ unit, compact = false }: { unit: VistaUnit; compact?: boole
 
 export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: VistaExam; mode?: 'syllabus' | 'settings' }) {
   const { user, syncStatus, syncError } = useAccount()
+  const [query] = useSearchParams()
   const { snapshot, refresh } = useAccountSnapshot()
   const [catalogue, setCatalogue] = useState<VistaSubject[] | null>(null)
   const [loadError, setLoadError] = useState('')
@@ -77,7 +78,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const [plan, setPlan] = useState<VistaPlan | null>(null)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
-  const [subjectId, setSubjectId] = useState('')
+  const [subjectId, setSubjectId] = useState(() => query.get('subject') || '')
   const [subjectSearch, setSubjectSearch] = useState('')
   const [optionalSearch, setOptionalSearch] = useState('')
   const [showOnlyRemaining, setShowOnlyRemaining] = useState(false)
@@ -290,14 +291,14 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       <div className="vg-actions"><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=today'}>Open Today</Link><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=week'}>View my week</Link></div>
     </section>
     <section className="vg-panel">
-      <div className="vg-section-head"><div><p className="pl-kicker">COMPLETE SYLLABUS</p><h3>Study by subject, chapter and section</h3><p>Every prescribed part remains in the syllabus. Completion is always your decision.</p></div><button className="pl-secondary" onClick={()=>setShowAll(v=>!v)}>{showAll?'My selected subjects':'View all subjects'}</button></div>
+      <div className="vg-section-head"><div><p className="pl-kicker">COMPLETE SYLLABUS</p><h3>Study by subject, chapter and section</h3><p>Open every syllabus chapter and its subtopics here, copy a detailed notes command, and track progress without leaving your study space.</p></div><button className="pl-secondary" onClick={()=>setShowAll(v=>!v)}>{showAll?'My selected subjects':'View all subjects'}</button></div>
       <label className="vg-search"><Search size={15}/><input value={subjectSearch} onChange={e=>setSubjectSearch(e.target.value)} placeholder="Search your subjects" /></label>
       <div className="vg-subjects">{filtered.map(s=><button type="button" key={s.id} aria-pressed={active?.id===s.id} onClick={()=>{setSubjectId(s.id);setShowCount(20)}}>{s.title}</button>)}</div>
       {active && <div className="vg-syllabus">
         <details className="vg-readings"><summary>View complete section structure ({active.sections.length} sections)</summary>
           <ol>{active.sections.map(section=><li key={section.id} dir="auto"><strong>{section.title}</strong> — {section.topics.length} syllabus item{section.topics.length===1?'':'s'}{!section.topics.length && ' (heading only in source)'}</li>)}</ol>
         </details>
-        <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} chapters complete</small></div>{active.file && <a className="pl-secondary" href={active.file} target="_blank" rel="noreferrer"><ExternalLink size={14}/>Official PDF</a>}</div>
+        <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} chapters complete</small></div><span className="vg-syllabus-chip">Read chapters here — no PDF required</span></div>
         <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished chapters only</label>
         {visibleUnits.slice(0,showCount).map(u=><article key={u.id} className="vg-unit"><div><small>{u.section}</small><h4 dir="auto">{u.title}</h4><details><summary>Read complete syllabus for this chapter</summary><pre dir="auto">{u.syllabus}</pre></details></div><div className="vg-unit-tools"><CopyNotes unit={u} compact/>{resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Open Essay Themes 2027'}</Link>}<button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button>{hasStatus(u) && <button className="vg-inline-action" onClick={()=>scheduleRevision(u)}><RefreshCw size={15}/>Schedule revision</button>}</div></article>)}
         {visibleUnits.length>showCount&&<button className="pl-secondary" onClick={()=>setShowCount(n=>n+20)}>Show more chapters · {visibleUnits.length-showCount} remaining</button>}
