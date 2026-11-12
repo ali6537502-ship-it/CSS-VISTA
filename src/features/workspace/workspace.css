@@ -239,3 +239,37 @@
  .ws-bottom button[aria-expanded=true] { color:#355c40; font-weight:700; }
 }
 @media(max-width:359px) { .ws-mobile-brand img { max-width:82px; } .ws-header { gap:7px; } }
+
+
+/* Vista Mentor: one entry with separate exam-specific preparation spaces. */
+.ws-mentor-group{display:grid;gap:5px;padding:6px;border:1px solid #d8e5d8;background:linear-gradient(135deg,#eef5ed,#fbfdf9);border-radius:14px}
+.ws-sidebar nav .ws-mentor-toggle{width:100%;display:flex;align-items:center;gap:12px;min-height:46px;padding:11px 9px;border:0;border-radius:10px;background:transparent;color:#1e583f;font-size:13px;font-weight:760;text-align:left}
+.ws-mentor-toggle:hover,.ws-mentor-toggle:focus-visible{background:#e0ede1}
+.ws-sidebar .ws-mentor-chevron{margin-left:auto;transition:transform .18s ease}
+.ws-mentor-group[data-open="true"] .ws-mentor-chevron{transform:rotate(180deg)}
+.ws-mentor-links{display:grid;gap:3px;padding:0 2px 4px 28px}
+.ws-sidebar nav .ws-mentor-links a{display:flex;align-items:center;min-height:39px;padding:9px 12px;border-left:2px solid #b4d1bb;border-radius:0 9px 9px 0;background:#fff9;color:#315646;font-weight:650;font-size:12px}
+.ws-sidebar nav .ws-mentor-links a:hover{background:#e4f0e4}
+.ws-sidebar nav .ws-mentor-links a[aria-current="page"]{background:#235b42;border-left-color:#235b42;color:white}
+.ws-collapsed .ws-mentor-group{padding:3px}
+.ws-collapsed .ws-mentor-toggle{justify-content:center;padding:11px 6px}
+.ws-collapsed .ws-mentor-links,.ws-collapsed .ws-mentor-chevron{display:none}
+.ws-drawer-mentor{margin:7px 0;padding:8px;border:1px solid #d7e5d9;border-radius:14px;background:#f2f8f0}
+.ws-drawer-mentor-toggle{display:flex;align-items:center;gap:12px;width:100%;min-height:47px;padding:10px;border-radius:10px;color:#24533b;font-size:14px;font-weight:750;text-align:left}
+.ws-drawer-mentor-toggle svg:last-child{margin-left:auto}
+.ws-drawer-mentor-links{display:grid;gap:5px;margin-left:12px;border-left:2px solid #c4dcc9;padding:2px 0 2px 8px}
+.ws-drawer-mentor-links .ws-drawer-link{background:white;border-radius:10px;padding-left:10px}
+.vg-syllabus-chip{display:inline-flex;align-items:center;padding:7px 11px;border-radius:100px;border:1px solid #cbdccc;background:#eef6ee;color:#2b6348;font-size:11px;font-weight:700}
+
+/* Practice: General Science course is the single focused account entry point. */
+.ws-practice-course-intro{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:29px 32px;margin-bottom:22px;border:1px solid #d7e7db;border-radius:22px;background:linear-gradient(115deg,#eff7ec 0%,#f9fbf6 70%,#e5efe5 100%);color:#19382b}
+.ws-practice-course-copy{display:grid;gap:13px;max-width:650px}
+.ws-practice-course-eyebrow{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.13em;color:#35634d}
+.ws-practice-course-copy h2{font:600 clamp(24px,3vw,34px)/1.2 Georgia,'Times New Roman',serif;color:#193d2b;letter-spacing:-.025em}
+.ws-practice-course-copy>p:not(.ws-practice-course-eyebrow){color:#52675a;font-size:14px;line-height:1.7;max-width:570px}
+.ws-practice-course-open{display:inline-flex;align-items:center;justify-content:center;gap:10px;justify-self:start;min-height:45px;padding:11px 17px;background:#235d40;border:1px solid #235d40;border-radius:11px;color:white;font-size:13px;font-weight:750;text-decoration:none}
+.ws-practice-course-open:hover{background:#17452e;color:white}
+.ws-practice-course-open:focus-visible{outline:3px solid #568d6a;outline-offset:3px}
+.ws-practice-course-graphic{display:grid;place-items:center;flex:0 0 auto;width:116px;height:116px;border:1px solid #cbdfce;border-radius:27px;color:#346949;background:#ffffffaa}
+@media(max-width:600px){.ws-practice-course-intro{padding:21px;gap:11px}.ws-practice-course-graphic{width:65px;height:65px;border-radius:17px}.ws-practice-course-graphic svg{width:36px;height:36px}.ws-practice-course-copy h2{font-size:24px}.ws-practice-course-copy>p:not(.ws-practice-course-eyebrow){font-size:12px}}
+@media(max-width:390px){.ws-practice-course-graphic{display:none}}

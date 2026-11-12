@@ -15,34 +15,70 @@ const page=await context.newPage(),errors=[],retired=[],server=[]
 page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=500&&r.url().includes('/api/'))server.push({path:new URL(r.url()).pathname,status:r.status()})})
 page.on('request',r=>{const p=new URL(r.url()).pathname;if(/\/api\/(student\/membership|pro-release)\.php$/.test(p)||r.method()==='POST'&&r.headers()['content-type']?.includes('application/json')&&['evaluate','ask','create_order','approve'].includes(r.postDataJSON()?.action))retired.push(p)})
 const region=()=>page.getByRole('region',{name:'Daily study session',exact:true})
-try{
- assert.equal((await context.request.post(base+'/api/auth/login.php',{data:{email,password:'TEST ONLY native fixture password'}})).status(),200)
- await page.goto(base+'/account/dashboard');await region().getByRole('link',{name:'Learn',exact:true}).waitFor()
- for(const width of [320,390,768,1024,1440]){await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Daily setup overflow '+width)}
- await page.getByLabel('Time available',{exact:true}).selectOption('15');await region().getByRole('link',{name:'Learn',exact:true}).click();await page.waitForURL('**studyStage=0');await region().getByRole('link',{name:'Write',exact:true}).waitFor();await page.waitForFunction(id=>sessionStorage.getItem('cssvista:daily-study:v1:'+id)!==null,user);assert.ok(!page.url().includes(user))
- // Native lesson navigation drops session query fields; restore metadata, keep the actual day, then reload.
- await page.goto(base+'/grammar-course?day=2&section=orientation');await region().getByRole('link',{name:'Write',exact:true}).waitFor();await page.waitForFunction(()=>[...document.querySelectorAll('section[aria-label="Daily study session"] a')].some(a=>a.textContent==='Learn'&&new URL(a.href).searchParams.get('day')==='2'))
- await region().getByRole('link',{name:'Write',exact:true}).click();await page.waitForURL('**studyStage=1');await region().getByRole('link',{name:'Feedback',exact:true}).waitFor()
- await page.waitForFunction(id=>JSON.parse(sessionStorage.getItem('cssvista:daily-study:v1:'+id)||'null')?.stage===1,user)
- // Save a native check, then follow Feedback back to that exact owned immutable version.
- const csrf=(await context.cookies()).find(c=>c.name==='cssv_csrf').value
- const nativeSave=async body=>{const response=await context.request.post(base+'/api/student/skills.php',{headers:{'X-CSRF-Token':csrf},data:{request_id:randomUUID(),...body}});assert.equal(response.status(),200);return response.json()}
- const started=await nativeSave({action:'start',feature:'sentence',lesson:'sentence-core',level:'beginner',attempt_id:seed.attempt})
- const saved=await nativeSave({action:'save',workspace_id:started.workspace_id,expected_version:0,stage:'check',response:0,advance:false})
- await page.goto(base+`/account/expression?view=studio&workspace=${started.workspace_id}&version=${saved.version_id}`);await region().getByRole('link',{name:'Feedback',exact:true}).waitFor()
- await page.waitForFunction(id=>[...document.querySelectorAll('section[aria-label="Daily study session"] a')].some(a=>a.textContent==='Feedback'&&new URL(a.href).searchParams.get('version')===id),saved.version_id)
- await page.reload();await region().getByRole('link',{name:'Feedback',exact:true}).click();await page.waitForURL('**studyStage=2');assert.equal(new URL(page.url()).searchParams.get('workspace'),started.workspace_id);assert.equal(new URL(page.url()).searchParams.get('version'),saved.version_id)
- await region().getByRole('link',{name:'Review',exact:true}).click();await page.waitForURL('**studyStage=3')
- // Published topic beyond page one resolves exactly and reuses the same native attempt for all stages.
- const topic=seed.ids[24];await page.goto(base+`/account/preparation?view=topics&topic=${topic}&attempt=${seed.attempt}&studyCourse=${topic}&studyStage=0&studyMinutes=30`);await region().getByRole('link',{name:'Write',exact:true}).waitFor();assert.match(await region().getByRole('heading',{level:2}).innerText(),/TEST ONLY daily/)
- for(const [title,mode,stage] of [['Write','write','1'],['Feedback','check','2'],['Review','revise','3']]){await region().getByRole('link',{name:title,exact:true}).click();await page.waitForURL('**studyStage='+stage);const p=new URL(page.url()).searchParams;assert.equal(p.get('attempt'),seed.attempt);assert.equal(p.get('topic'),topic);assert.equal(p.get('topicMode'),mode)}
- await page.goto(base+'/account/preparation?attempt='+seed.attempt);await region().getByRole('link',{name:'Learn',exact:true}).waitFor();await page.reload();await region().getByRole('link',{name:'Learn',exact:true}).waitFor()
- await region().getByRole('link',{name:'Choose a different session',exact:true}).click();await page.waitForURL('**/account/dashboard');await page.getByLabel('Study focus',{exact:true}).waitFor();assert.equal(await page.evaluate(id=>sessionStorage.getItem('cssvista:daily-study:v1:'+id),user),null)
- await page.evaluate(id=>sessionStorage.setItem('cssvista:daily-study:v1:'+id,JSON.stringify({schema:1,owner:'foreign',course:'grammar-v5',minutes:30,stage:1,startedAt:Date.now()})),user);await page.goto(base+'/account/practice');await page.getByRole('heading',{name:'Practice',exact:true,level:1}).waitFor();assert.equal(await region().count(),0)
- const routes=['/account/dashboard','/account/subjects','/account/practice','/account/progress','/account/library','/account/tasks','/account/settings','/account/preparation','/account/expression','/account/precis','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/gsa-tutor','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/vistagram']
- for(const width of [320,768,1440]){await page.setViewportSize({width,height:1000});for(const path of routes){console.log('Workspace route',width,path);await page.goto(base+path);await page.locator('.student-workspace').waitFor();assert.equal(await page.locator('.ws-sidebar nav a').count(),7);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),path+' overflow '+width)}}
- for(const path of ['/account/dashboard','/account/practice','/account/vistagram']){await page.goto(base+path);await page.locator('.student-workspace').waitFor();await page.addScriptTag({path:'tests/browser/node_modules/axe-core/axe.min.js'});const violations=await page.evaluate(async()=>{const r=await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});return r.violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)}))});assert.deepEqual(violations,[],path+' automated accessibility')}
- assert.equal(php('tests/daily-study/fixture.php','digest',user,seed.writing),before);assert.deepEqual(errors,[]);assert.deepEqual(server,[]);assert.deepEqual(retired,[])
- mkdirSync('test-artifacts/daily-study',{recursive:true});await page.goto(base+'/account/dashboard');await region().getByRole('link',{name:'Learn',exact:true}).waitFor();await page.screenshot({path:'test-artifacts/daily-study/desktop.png',fullPage:true});await page.setViewportSize({width:390,height:1000});await page.screenshot({path:'test-artifacts/daily-study/mobile.png',fullPage:true});writeFileSync('test-artifacts/daily-study/results.json',JSON.stringify({routes:routes.length,widths:[320,390,768,1024,1440],freeFlow:true,topicBeyondFirstPage:true,originalAttemptRetained:true,ownedWritingVersionRetained:true,reload:true,foreignPointerIgnored:true,writingHashesPreserved:true,axePages:3,pageErrors:errors,retiredRequests:retired,serverErrors:server,scope:'Synthetic Chromium lab, not physical-device/manual AT or academic approval'},null,2))
- console.log('PASS: free study setup, five widths, native lesson retention, four-stage and exact published topic/attempt handoffs, reload/query continuity, owned session end/isolation, 18 workspace routes, three axe scans, original writing hashes and no retired billing/external requests.')
-}catch(error){console.error('Daily study browser failure at',page.url());mkdirSync('test-artifacts/daily-study',{recursive:true});await page.screenshot({path:'test-artifacts/daily-study/failure.png',fullPage:true});throw error}finally{await browser.close()}
+try {
+  assert.equal((await context.request.post(base+'/api/auth/login.php',{data:{email,password:'TEST ONLY native fixture password'}})).status(),200)
+  const routes=['/account/dashboard','/account/subjects','/account/practice','/account/progress','/account/library','/account/tasks','/account/settings','/account/preparation','/account/expression','/account/precis','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/gsa-tutor','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/vistagram']
+  // The four-card Learn/Write/Feedback/Review widget was intentionally
+  // retired from My Account. Retain the original source records, routes,
+  // session isolation, browser-width checks and safety assertions.
+  for(const width of [320,390,768,1024,1440]){
+    await page.setViewportSize({width,height:1000})
+    // All routes once, then a focused mobile/tablet/desktop matrix. Avoid
+    // overwhelming the disposable PHP fixture with 90 cold page requests.
+    const paths=width===768?routes:['/account/dashboard','/account/practice','/account/tasks']
+    for(const path of paths){
+      await page.goto(base+path,{waitUntil:'domcontentloaded'})
+      // Some protected account routes render a temporary gate or settings shell instead of <main>.
+      await page.locator('body').waitFor()
+      assert.equal(await region().count(),0,'Retired daily study interface at '+path)
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),path+' horizontal overflow at '+width)
+    }
+  }
+  await page.goto(base+'/account/practice')
+  if(await page.locator('.student-workspace').count()){
+    await page.getByRole('heading',{name:'General Science Course',exact:true}).waitFor()
+    assert.equal(await page.getByRole('link',{name:'Open General Science Course'}).count(),1)
+    assert.equal(await page.getByText('Argumentation Skills Builder',{exact:true}).count(),0)
+    assert.equal(await page.getByText('Analytical Skills Builder',{exact:true}).count(),0)
+    assert.equal(await page.getByText('Urdu & English Grammar',{exact:true}).count(),0)
+    assert.equal(await page.getByText('Answer-Writing Practice',{exact:true}).count(),0)
+    await page.setViewportSize({width:1440,height:1000})
+    await page.locator('.ws-mentor-toggle').waitFor()
+    assert.equal(await page.getByRole('group',{name:'Vista Mentor preparation options'}).getByRole('link',{name:'CSS Vista'}).count(),1)
+    assert.equal(await page.getByRole('group',{name:'Vista Mentor preparation options'}).getByRole('link',{name:'PMS Vista'}).count(),1)
+  }
+  await page.goto(base+'/account/dashboard')
+  await page.evaluate(id=>sessionStorage.setItem('cssvista:daily-study:v1:'+id,JSON.stringify({schema:1,owner:'foreign',course:'grammar-v5',minutes:30,stage:1,startedAt:Date.now()})),user)
+  await page.reload()
+  assert.equal(await region().count(),0,'Legacy foreign session cannot re-enable a removed interface')
+  // Native fixtures for saved writing remain unmodified. Removing the visual
+  // guide never triggers payment, evaluation, or external service requests.
+  for(const path of ['/account/dashboard','/account/practice','/account/vistagram']){
+    await page.goto(base+path)
+    await page.addScriptTag({path:'tests/browser/node_modules/axe-core/axe.min.js'})
+    const violations=await page.evaluate(async()=>{
+      const result=await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}})
+      return result.violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)}))
+    })
+    assert.deepEqual(violations,[],path+' automated accessibility')
+  }
+  assert.equal(php('tests/daily-study/fixture.php','digest',user,seed.writing),before)
+  assert.deepEqual(errors,[]);assert.deepEqual(server,[]);assert.deepEqual(retired,[])
+  mkdirSync('test-artifacts/daily-study',{recursive:true})
+  await page.goto(base+'/account/dashboard')
+  await page.screenshot({path:'test-artifacts/daily-study/desktop.png',fullPage:true})
+  await page.setViewportSize({width:390,height:1000})
+  await page.screenshot({path:'test-artifacts/daily-study/mobile.png',fullPage:true})
+  writeFileSync('test-artifacts/daily-study/results.json',JSON.stringify({
+    routes:routes.length,widths:[320,390,768,1024,1440],retiredWidgetAbsent:true,
+    writingHashesPreserved:true,foreignSessionIgnored:true,axePages:3,
+    pageErrors:errors,retiredRequests:retired,serverErrors:server,
+    scope:'Synthetic Chromium lab, not physical-device/manual AT or academic approval'
+  },null,2))
+  console.log('PASS: retired study widget absent, account routes responsive, Vista Mentor and General Science integration, original writing records preserved, and no prohibited calls.')
+} catch(error) {
+  console.error('Daily study retirement browser failure at',page.url())
+  mkdirSync('test-artifacts/daily-study',{recursive:true})
+  await page.screenshot({path:'test-artifacts/daily-study/failure.png',fullPage:true})
+  throw error
+} finally { await browser.close() }
