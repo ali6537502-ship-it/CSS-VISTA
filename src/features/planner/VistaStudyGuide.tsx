@@ -13,7 +13,7 @@ import PlannerTask from './PlannerTask'
 import { dayKey, readableDay, shiftDay, validDay } from './model'
 import { PMS_SETTINGS_KEY, readPmsSettings, taskExam } from './pmsModel'
 import {
-  buildVistaNotesCommand, cssGuideSubjects, defaultVistaPreferences, findGuideUnit,
+  buildVistaNotesCommand, cssGuideSubjects,
   generateVistaPlan, guideUnits, pmsGuideSubjects, readVistaPreferences,
   selectedVistaSubjects, type VistaExam, type VistaPlan, type VistaPreferences,
   type VistaSubject, type VistaUnit,
@@ -102,7 +102,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const alreadyScheduled = new Set(snapshot.state.studyScheduleTasks.map(t=>t.syllabusItemId))
   const remaining = chosenUnits.filter(u=>!hasStatus(u) && !alreadyScheduled.has(u.id))
   const completed = chosenUnits.filter(u=>hasStatus(u)).length
-  const visibleUnits = allUnits.filter(u=>u.title.toLowerCase().includes(subjectSearch.toLowerCase()) || active?.title.toLowerCase().includes(subjectSearch.toLowerCase())).filter(u=>!showOnlyRemaining || !hasStatus(u))
+  const visibleUnits = allUnits.filter(u=>!showOnlyRemaining || !hasStatus(u))
   const cssOptionalValidation = useMemo(()=>{
     const recognized = optionalCatalogue.filter(s=>draftPrefs.selectedOptionals.includes(s.name))
     const unknown = draftPrefs.selectedOptionals.filter(n=>!recognized.some(s=>s.name===n))
@@ -132,7 +132,6 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       if(localStorage.getItem(key)!==value)throw Error('Device preferences could not be saved')
       if(exam==='pms-punjab'){
         const legacy=readPmsSettings(null)
-        const previous=initial(exam)
         const old=readPmsSettings(JSON.parse(localStorage.getItem(preparationPhysicalKey(PMS_SETTINGS_KEY))||'null'))
         const merged={...legacy,...old,selectedOptionals:draftPrefs.selectedOptionals,alternative:draftPrefs.alternative==='ethics'?'ethics' as const:'islamic-studies' as const,
           dailyMinutes:draftPrefs.dailyMinutes,restDays:draftPrefs.restDays,targetDate:draftPrefs.targetDate,
@@ -190,8 +189,8 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
         let attempts=0
         while(prefs.restDays.includes(new Date(date+'T12:00:00').getDay())
           || occupied.filter(row=>row.date===date).reduce((n,row)=>n+row.minutes,0)+t.minutes>prefs.dailyMinutes
-          || occupied.filter(row=>row.date===date && taskExam(row)===exam).some(row=>row.subject!==t.subject)
-            && new Set(occupied.filter(row=>row.date===date && taskExam(row)===exam).map(row=>row.subject)).size>=prefs.subjectsPerDay){
+          || (!occupied.some(row=>row.date===date && taskExam(row)===exam && row.subject===t.subject)
+            && new Set(occupied.filter(row=>row.date===date && taskExam(row)===exam).map(row=>row.subject)).size>=prefs.subjectsPerDay)){
           date=shiftDay(date,1)
           if(++attempts>3650)throw Error('Missed sessions exceed the available schedule.')
         }
