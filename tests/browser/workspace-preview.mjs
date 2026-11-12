@@ -85,7 +85,7 @@ try {
             await drawer.getByRole('button',{name:'Vista Mentor'}).waitFor()
             assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).locator('a[href*="exam=css&view=syllabus"]').count(),1)
             assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).locator('a[href*="exam=pms-punjab&view=syllabus"]').count(),1)
-            await drawer.getByRole('button',{name:'Close account menu'}).click()
+            await drawer.getByRole('dialog',{name:'My CSS Vista account menu'}).getByRole('button',{name:'Close account menu'}).click()
           }
           if(width===1440){
             assert.equal(await page.locator('.ws-sidebar .ws-mentor-toggle').count(),1)
