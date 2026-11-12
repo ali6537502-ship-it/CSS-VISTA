@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 287,
+  "count": 288,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2008,6 +2008,13 @@
     {
       "id": "pakistan-current-affairs-2026-11-11-kohat-police-attack",
       "text": "A deadly police ambush reported on 11 November 2026 occurred in Kohat, Khyber Pakhtunkhwa.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-12-pakistan-detention",
+      "text": "Uzma Khan and Noreen Niazi were released from Kot Lakhpat Jail in Lahore on 12 November 2026, Reuters reported.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
