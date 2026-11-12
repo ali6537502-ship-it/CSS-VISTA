@@ -4,7 +4,7 @@
  const domains=['Physical Sciences','Biological Sciences','Environmental Sciences','Food Science','Information Technology'];
  const clone=value=>JSON.parse(JSON.stringify(value));
  function select(chapters,{mode='diagnostic',chapterIds=[],seed=Date.now()}={}){
-  if(!['diagnostic','cumulative','timed'].includes(mode))throw Error('Unknown assessment mode');
+  if(!['diagnostic','cumulative','timed','science-mock'].includes(mode))throw Error('Unknown assessment mode');
   const eligible=chapters.filter(c=>domains.includes(c.part)&&(mode!=='cumulative'||chapterIds.includes(c.id)));
   if(!eligible.length)throw Error('Select at least one science chapter.');
   const pools=domains.map(domain=>eligible.filter(c=>c.part===domain).flatMap(c=>c.questions.map(q=>({...clone(q),chapter:c.id,domain,sourceVersion:'original-manuscript',verification:q.verification?.status||'unreviewed-source'}))));
@@ -23,7 +23,16 @@
  function create(chapters,options={}){
   const stamp=options.at??Date.now(),mode=options.mode||'diagnostic';
   const questions=select(chapters,options);
-  return {at:new Date(stamp).toISOString(),startedAt:new Date(stamp).toISOString(),mode,questions,responses:{},choiceEvents:{},finishedAt:null,deadline:mode==='timed'?new Date(stamp+30*60*1000).toISOString():null,policy:'gsa-source-practice-v1',scope:'General Science Part I',index:0};
+  let writtenQuestions=[],paperSources=[],duration=mode==='timed'?30:null;
+  if(mode==='science-mock'){
+   const groups=options.writtenGroups||[],validGroups=[...new Set(groups)];
+   if(validGroups.length!==2||validGroups.some(g=>![2,3,4,5].includes(g)))throw Error('Choose exactly two science question groups.');
+   writtenQuestions=(options.paperQuestions||[]).filter(q=>validGroups.includes(Number(q.questionNumber?.match(/^([2-5])\([a-d]\)$/)?.[1]))).map(clone);
+   paperSources=(options.paperSources||[]).map(clone);if(writtenQuestions.some(q=>!paperSources.some(s=>s.id===q.sourceId&&/^\/past-papers\/.+\.pdf$/.test(s.path)&&/^[a-f0-9]{64}$/.test(s.sha256))))throw Error('Archived written-question source provenance is incomplete.');
+   if(writtenQuestions.length!==8||writtenQuestions.some(q=>q.marks!==5)||questions.length!==20)throw Error('The 20 + 40 science practice blueprint is incomplete.');
+   duration=options.durationMinutes??120;if(![60,90,120,150,180].includes(duration))throw Error('Choose a valid practice time budget.');
+  }
+  return {at:new Date(stamp).toISOString(),startedAt:new Date(stamp).toISOString(),mode,questions,responses:{},choiceEvents:{},finishedAt:null,deadline:duration?new Date(stamp+duration*60*1000).toISOString():null,durationMinutes:duration,writtenQuestions,paperSources,writtenResponses:{},blueprint:mode==='science-mock'?{objectiveMarks:20,writtenMarks:40,totalMarks:60,timing:'learner-selected practice budget; not an official standalone-paper duration'}:null,policy:'gsa-source-practice-v1',scope:'General Science Part I',index:0};
  }
  function expired(attempt,at=Date.now()){return !!attempt.deadline&&at>=Date.parse(attempt.deadline)}
  function result(attempt){
@@ -33,7 +42,7 @@
    const response=attempt.responses?.[q.id],valid=!!q.options?.[response?.selected];
    if(valid){answered++;bucket.answered++;if(response.selected===q.answer){correct++;bucket.correct++}}
   }
-  return {correct,answered,total:attempt.questions?.length||0,byDomain,mastery:'not-established',reason:'Source practice is not an independently reviewed readiness assessment.'};
+  return {correct,answered,total:attempt.questions?.length||0,byDomain,writtenAnswered:(attempt.writtenQuestions||[]).filter(q=>attempt.writtenResponses?.[q.id]?.text?.trim()).length,writtenTotal:attempt.writtenQuestions?.length||0,writtenMarks:(attempt.writtenQuestions||[]).reduce((n,q)=>n+q.marks,0),writtenScore:null,mastery:'not-established',reason:'Source practice is not an independently reviewed readiness assessment.'};
  }
  function estimate(lesson,plan={},records={}){
   const level={beginner:1.3,intermediate:1,refresher:.85}[plan.startingLevel]||1;
@@ -50,5 +59,22 @@
   // Observed time covers the whole lesson, whereas the initial estimate needs a check/recall allowance.
   return Math.ceil(Math.max(12,(baseline*level*weak*prior)+(observed.length?0:12)));
  }
- Object.assign(window,{CSSVistaGSALearning:{domains,select,create,expired,result,estimate}});
+ function activities(catalog,records={}){
+  const queue=[];
+  for(const chapter of catalog.chapters){
+   for(const section of chapter.sections)queue.push({kind:'lesson',lesson:{...section,chapter:chapter.id}});
+   const attempts=Object.values(records.quizAttempts||{}).filter(a=>a.chapter===chapter.id&&!['lesson-check','targeted-review'].includes(a.mode));
+   const budget=Math.max(15,records.plan?.dailyMinutes||90),perChunk=Math.max(1,Math.floor((budget-3)/1.5));
+   const ids=chapter.questionIds||[];
+   if(ids.length){
+    for(let i=0;i<ids.length;i+=perChunk){const questionIds=ids.slice(i,i+perChunk),part=Math.floor(i/perChunk);queue.push({kind:'practice',id:'chapter-practice-'+chapter.id+(part?'-part-'+part:''),type:'chapter',chapter:chapter.id,label:'Chapter MCQ practice'+(ids.length>perChunk?' · block '+(part+1):''),minutes:Math.max(3,Math.ceil(questionIds.length*1.5+(i===0?3:0))),questionIds,done:questionIds.every(id=>attempts.some(a=>a.responses?.[id]))})}
+   }else if(chapter.questionCount)queue.push({kind:'practice',id:'chapter-practice-'+chapter.id,type:'chapter',chapter:chapter.id,label:'Chapter MCQ practice',minutes:Math.ceil(chapter.questionCount*1.5+3),done:attempts.some(a=>a.finishedAt&&Object.keys(a.responses||{}).length>=chapter.questionCount)});
+   for(const [modelIndex,questionId] of (chapter.analyticalIds||[]).entries())queue.push({kind:'practice',id:'chapter-writing-'+chapter.id+'-'+modelIndex,type:'writing',chapter:chapter.id,modelIndex,label:'Written-answer comparison '+(modelIndex+1),minutes:15,done:Object.values(records.writtenAttempts||{}).some(a=>a.questionId===questionId&&a.response?.trim())});
+
+  }
+  const mockDone=Object.values(records.assessmentAttempts||{}).some(a=>a.mode==='science-mock'&&a.finishedAt&&result(a).answered===20&&result(a).writtenAnswered===8);
+  queue.push({kind:'practice',id:'science-mock',type:'mock',label:'Science mock practice — 60-minute chosen budget',minutes:60,done:mockDone});
+  return queue;
+ }
+ Object.assign(window,{CSSVistaGSALearning:{domains,select,create,expired,result,estimate,activities}});
 })();

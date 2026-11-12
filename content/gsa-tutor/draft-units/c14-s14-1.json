@@ -1,0 +1,236 @@
+{
+  "version": "draft-1",
+  "lessonId": "c14-s14-1",
+  "title": "Biological fuels: distinguish resource, feedstock, conversion and use",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-12"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "biofuels",
+      "title": "Biofuels explained",
+      "publisher": "US Energy Information Administration",
+      "url": "https://www.eia.gov/energyexplained/biofuels/",
+      "resolvedUrl": "https://www.eia.gov/energyexplained/biofuels/",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "1919c7bd8694c0836b077be13031c9c05c58fac22d26ce979dfb013459eff1ba",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "lifecycle",
+      "title": "Biofuels and the environment",
+      "publisher": "US Energy Information Administration",
+      "url": "https://www.eia.gov/energyexplained/biofuels/biofuels-and-the-environment.php",
+      "resolvedUrl": "https://www.eia.gov/energyexplained/biofuels/biofuels-and-the-environment.php",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "cda21405ae8fbd4c625f13f2bd06d5e6e370f17fd8467dcf8585c09fbf160d0f",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "digestion",
+      "title": "How Does Anaerobic Digestion Work?",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/agstar/how-does-anaerobic-digestion-work",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "2ad419ec714592ab09c9dd135e0307f0209ab33bf6cc72f9eb1ba1ab4e0e9a3e",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish biomass, a biofuel and a conversion process.",
+        "Compare solid, liquid and gaseous fuel pathways without assuming automatic sustainability."
+      ],
+      "prerequisites": [
+        "A fuel supplies chemical energy through a conversion such as combustion.",
+        "An energy resource is not the same thing as the electricity or heat finally delivered."
+      ],
+      "terms": {
+        "biomass": "Material derived from living or recently living organisms.",
+        "feedstock": "Raw material entering a production process.",
+        "biofuel": "Fuel produced from biomass.",
+        "life cycle": "The linked stages from obtaining resources through processing, distribution and use."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "fuel-classification",
+        "sourceIds": [
+          "biofuels"
+        ],
+        "explanation": "Start an energy explanation with a chain: resource → feedstock → conversion → fuel or energy carrier → useful energy. Biomass includes many biological materials, but a crop residue, an ethanol molecule and a gas mixture are not the same thing. Solid biomass can be used for heat, while processing can produce liquid fuels such as ethanol or biodiesel and gaseous fuels such as biogas. The name biofuel describes origin; it does not identify a single composition or production mechanism."
+      },
+      {
+        "conceptId": "conversion-pathways",
+        "sourceIds": [
+          "biofuels",
+          "digestion"
+        ],
+        "explanation": "Different feedstocks require different pathways. Sugar-rich material can supply substrates for ethanol fermentation. Oils and fats can be converted into biodiesel. Suitable organic wastes can undergo anaerobic digestion to produce biogas. Direct burning is another route to obtain energy from biomass and must not be described as fermentation. A useful comparison states the input, the transformation, the product and an intended use for each pathway."
+      },
+      {
+        "conceptId": "renewability",
+        "sourceIds": [
+          "lifecycle"
+        ],
+        "explanation": "Renewability concerns replenishment over relevant timescales, not a guarantee of unlimited supply or no pollution. Burning carbon-containing fuels releases carbon dioxide; cultivation, transport and processing also have consequences. Whether a particular biofuel improves an outcome depends on its full production system and the alternative it replaces. Avoid the unsupported sentence that all biofuels are carbon-neutral. A broad science answer should identify trade-offs rather than assume a benefit from the label biological."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "resource-to-use-flow",
+      "nodes": [
+        "Biomass resource",
+        "Prepared feedstock",
+        "Biological or chemical conversion",
+        "Solid, liquid or gaseous fuel",
+        "Useful heat, motion or electricity"
+      ],
+      "description": "Draw separate branches for sugar-to-ethanol, oil-to-biodiesel and organic-waste-to-biogas.",
+      "limitations": "Classification diagram, not a calculated life-cycle comparison or design specification.",
+      "sourceIds": [
+        "biofuels",
+        "lifecycle"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Manure can enter an anaerobic digester as feedstock. Biogas is a resulting gaseous fuel mixture, and useful heat or electricity is a later energy output. Naming these separately prevents confusion between the material entering a plant and the energy service it supplies.",
+      "sourceIds": [
+        "biofuels",
+        "digestion"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Differentiate biomass and biogas, and outline three ways of obtaining useful energy from biomass."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-FUEL-01",
+          "lessonId": "c14-s14-1",
+          "conceptId": "fuel-classification",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which comparison correctly distinguishes a feedstock from an energy carrier produced from it?",
+          "options": {
+            "A": "Manure and biogas are identical substances.",
+            "B": "Ethanol must be a fossil fuel because it contains carbon.",
+            "C": "Biogas is a feedstock category that excludes gases.",
+            "D": "Manure can be a feedstock, while biogas is a gaseous product of its conversion."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Feedstock material and its gaseous conversion products have different compositions.",
+            "B": "Carbon content alone does not distinguish biological from fossil origin.",
+            "C": "Biogas is a gaseous fuel mixture, not a category excluding gases.",
+            "D": "The input and product occupy different positions in the conversion chain."
+          },
+          "sources": [
+            "biofuels"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-FUEL-02",
+          "lessonId": "c14-s14-1",
+          "conceptId": "renewability",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Why does biological origin alone fail to establish that a fuel has negligible environmental impact?",
+          "options": {
+            "A": "Production, land use, processing and combustion still matter.",
+            "B": "A biological feedstock cannot release carbon dioxide.",
+            "C": "All biological resources replenish instantly.",
+            "D": "An energy carrier and its production process are always identical."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "A life-cycle assessment considers inputs, conversion, land effects and use rather than origin alone.",
+            "B": "Carbon-containing biofuels can release carbon dioxide when used.",
+            "C": "Renewal occurs over time and can be limited by harvesting and growth.",
+            "D": "A carrier is a product; its production pathway also affects environmental performance."
+          },
+          "sources": [
+            "lifecycle"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Biomass is material of biological origin that can serve as an energy resource or feedstock. Biogas is a gaseous product made when suitable organic material is converted by anaerobic digestion; it is not a synonym for all biomass. Energy can be obtained by direct combustion of solid biomass, by fermentation of suitable sugars to ethanol, or by digestion to biogas. Oils and fats can also be converted into biodiesel. Each route should identify its input, process and product. Biological origin does not alone establish sustainability: replenishment, land use, processing and emissions must be considered across the production system.",
+      "rubric": [
+        {
+          "criterion": "Define biomass as the resource/material.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define biogas as a gaseous conversion product.",
+          "marks": 1
+        },
+        {
+          "criterion": "Outline two distinct conversion routes accurately.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify a third valid route or suitable input/product link.",
+          "marks": 1
+        },
+        {
+          "criterion": "State a justified life-cycle qualification.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Using biomass, biogas and biodiesel interchangeably.",
+        "Calling direct combustion a microbial fermentation.",
+        "Assuming renewable means impact-free."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Resource, feedstock, process, fuel and useful energy are different parts of a chain.",
+        "Biofuel origin does not by itself prove environmental performance."
+      ],
+      "closedBookRecall": [
+        "Trace three feedstocks into three different products.",
+        "Explain a life-cycle trade-off without inventing an emissions percentage."
+      ],
+      "reviewPolicy": "Reconstruct a comparison table from memory before reading the explanation again."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

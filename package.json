@@ -118,7 +118,9 @@
     "build:gsa-math": "node scripts/gsa-tutor/build-math.mjs",
     "audit:gsa-math": "node scripts/gsa-tutor/build-math.mjs --check && node scripts/gsa-tutor/audit-math.mjs",
     "audit:gsa-units": "node scripts/gsa-tutor/audit-units.mjs",
-    "audit:gsa-scope": "node scripts/gsa-tutor/build-scope.mjs --check"
+    "audit:gsa-scope": "node scripts/gsa-tutor/build-scope.mjs --check",
+    "dev:gsa-editorial": "CSSV_GSA_EDITORIAL=true vite --host 127.0.0.1 --port 5175",
+    "audit:gsa-publication": "node scripts/gsa-tutor/audit-publication.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

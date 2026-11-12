@@ -17,7 +17,7 @@ function readCourse() {
   try { raw = JSON.parse(localStorage.getItem(preparationPhysicalKey('cssvista:tool:gsa-tutor:v1')) || '{}') as CourseSnapshot } catch { /* Corrupt local records do not block the dashboard. */ }
   return {
     days: typeof raw.plan?.days === 'number' && raw.plan.days >= 5 && raw.plan.days <= 120 ? raw.plan.days : null,
-    minimum: raw.plan?.algorithm === 'capacity-v1',
+    minimum: ['capacity-v1', 'capacity-v2'].includes(raw.plan?.algorithm || ''),
     completed: Object.keys(raw.completed || {}).length,
     confident: Object.entries(raw.completed || {}).filter(([id, record]) => record?.selfRating === 'gotit' && !raw.revisit?.[id]).length,
     revision: Object.keys(raw.revisit || {}).length,

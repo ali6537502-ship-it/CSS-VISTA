@@ -135,7 +135,14 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
     }
     const ae = isRecord(a.choiceEvents) ? a.choiceEvents : {}
     const be = isRecord(b.choiceEvents) ? b.choiceEvents : {}
-    assessments[id] = { ...winner, responses, choiceEvents: { ...ae, ...be } }
+    const writtenResponses: Record<string, unknown> = {}
+    for (const attempt of [a, b]) {
+      if (!isRecord(attempt.writtenResponses)) continue
+      for (const [q, r] of Object.entries(attempt.writtenResponses)) {
+        if (recordTime(r) <= cutoff && (!(q in writtenResponses) || recordTime(r) > recordTime(writtenResponses[q]))) writtenResponses[q] = r
+      }
+    }
+    assessments[id] = { ...winner, responses, writtenResponses, choiceEvents: { ...ae, ...be } }
   }
   const bookmarks = isRecord(merged.bookmarks) ? { ...merged.bookmarks } : {}
   const removed = isRecord(merged.bookmarkRemoved) ? { ...merged.bookmarkRemoved } : {}

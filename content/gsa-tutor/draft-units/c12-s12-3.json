@@ -1,0 +1,225 @@
+{
+  "version": "draft-1",
+  "lessonId": "c12-s12-3",
+  "title": "Gas exchange and circulation: connect lung gradients, heart chambers and tissue capillaries",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-10"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "heart",
+      "title": "OpenStax Biology 2e 40.3, Mammalian Heart and Blood Vessels",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/biology-2e/pages/40-3-mammalian-heart-and-blood-vessels",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/40-3-mammalian-heart-and-blood-vessels",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "f927ee050682e23a13cca71dfd3725d3f3385ab91c6836a3751ed6d5b22e55b9",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "exchange",
+      "title": "OpenStax Biology 2e 39.2, Gas Exchange across Respiratory Surfaces",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/biology-2e/pages/39-2-gas-exchange-across-respiratory-surfaces",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/39-2-gas-exchange-across-respiratory-surfaces",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "afcba5cb4141ad1c898705fd62086ea4b34d80563109ee0dfa279dca463c50ac",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Trace pulmonary and systemic circulation in the correct order.",
+        "Explain diffusion at the lungs and tissues using structure and gradients.",
+        "Avoid defining arteries and veins by oxygen content."
+      ],
+      "prerequisites": [
+        "Diffusion is net movement down a concentration or appropriate pressure gradient.",
+        "Blood flows through vessels; a heart chamber changes pressure to drive flow."
+      ],
+      "terms": {
+        "pulmonary circulation": "Blood flow between the heart and lungs.",
+        "systemic circulation": "Blood flow between the heart and the other body tissues.",
+        "capillary": "A small vessel with a thin wall across which exchange can occur.",
+        "partial pressure": "The contribution of a gas to the pressure of a mixture; gradients help explain gas diffusion."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "gas-exchange",
+        "sourceIds": [
+          "exchange"
+        ],
+        "explanation": "Ventilation moves air into and out of the lungs, whereas gas exchange transfers gases across respiratory surfaces. These are connected but different processes. In the lungs, oxygen diffuses from alveolar air into blood when its partial pressure is higher in the alveoli. Carbon dioxide diffuses in the opposite direction under the corresponding gradient. Large exchange area and a short barrier distance support transfer. Oxygen delivery still requires circulation; breathing alone is not a complete explanation of how a distant tissue receives oxygen."
+      },
+      {
+        "conceptId": "circulation-route",
+        "sourceIds": [
+          "heart"
+        ],
+        "explanation": "Blood returning from systemic tissues enters the right atrium, passes to the right ventricle and goes through the pulmonary arteries to the lungs. After lung exchange, pulmonary veins return it to the left atrium; the left ventricle then drives it through the aorta into systemic circulation. Valves support one-way flow through the heart. Arteries carry blood away from the heart and veins carry it toward the heart. Oxygen content is not the definition: pulmonary arteries and veins provide important counterexamples to the usual systemic pattern."
+      },
+      {
+        "conceptId": "capillary-exchange",
+        "sourceIds": [
+          "heart",
+          "exchange"
+        ],
+        "explanation": "Arteries distribute blood under pressure, while capillaries provide thin exchange surfaces close to tissues. In systemic tissues, oxygen can move from blood toward cells that consume it, while carbon dioxide produced by metabolism moves toward blood. The directions reverse relative to the external medium at the lungs. Describing a capillary as thin is incomplete unless linked to its short diffusion distance and exchange function. Distinguish this diffusion explanation from a claim that every substance always moves freely across every vascular wall."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-double-circulation-flow",
+      "nodes": [
+        "Body tissues → right atrium → right ventricle",
+        "Pulmonary arteries → lungs",
+        "Pulmonary veins → left atrium → left ventricle",
+        "Aorta → body tissues"
+      ],
+      "description": "Use arrows for flow and separately label lung versus tissue gas gradients. Identify the capillary wall as the short exchange barrier.",
+      "limitations": "Flow and exchange schematic, not a pressure waveform or a medical diagnostic model.",
+      "sourceIds": [
+        "heart",
+        "exchange"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A pulmonary artery carries blood away from the right ventricle toward the lungs even though its oxygen content is lower than blood returning through pulmonary veins. The artery/vein naming rule follows flow direction.",
+      "sourceIds": [
+        "heart"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Describe capillary structure and function, and show how pulmonary and systemic circulation connect gas exchange to tissue supply."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-CIRC-01",
+          "lessonId": "c12-s12-3",
+          "conceptId": "circulation-route",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "process-sequencing",
+          "prompt": "Which route correctly follows blood leaving the right ventricle?",
+          "options": {
+            "A": "Aorta → body → left atrium",
+            "B": "Pulmonary artery → lungs → pulmonary veins → left atrium",
+            "C": "Pulmonary veins → body → right atrium",
+            "D": "Aorta → lungs → right atrium"
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "The right ventricle supplies pulmonary circulation rather than ejecting into the aorta.",
+            "B": "The right ventricle sends blood toward the lungs; it returns through pulmonary veins to the left atrium.",
+            "C": "This reverses the role of pulmonary veins and omits the lung exchange step.",
+            "D": "The aorta supplies systemic circulation from the left ventricle."
+          },
+          "sources": [
+            "heart"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-CIRC-02",
+          "lessonId": "c12-s12-3",
+          "conceptId": "capillary-exchange",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "application",
+          "prompt": "Which feature most directly supports exchange across capillary walls?",
+          "options": {
+            "A": "A thick, multilayered muscular wall.",
+            "B": "Valves at every point along each capillary.",
+            "C": "A short diffusion distance through a very thin wall.",
+            "D": "A requirement that all capillaries carry oxygen-rich blood."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "A thicker wall would increase diffusion distance; muscular arteries serve different mechanical functions.",
+            "B": "Capillary exchange is not explained by an imagined continuous series of valves.",
+            "C": "Thin walls allow substances to cross short distances between blood and tissues.",
+            "D": "Exchange depends on local gradients and location; pulmonary and systemic capillaries have different gas-exchange directions."
+          },
+          "sources": [
+            "heart",
+            "exchange"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Capillaries have very thin walls and lie close to tissues, providing a short distance for exchange. At systemic tissues, oxygen moves from blood toward consuming cells, while carbon dioxide moves toward blood under appropriate partial-pressure gradients. Blood returns to the right atrium and ventricle, which supplies the lungs through pulmonary arteries. Lung exchange adds oxygen and removes carbon dioxide; pulmonary veins return blood to the left atrium and ventricle. The left ventricle supplies systemic tissues through the aorta. Arteries are defined by flow away from the heart, not by high oxygen content. A labelled flow diagram should keep the two circuits and their exchange sites distinct.",
+      "rubric": [
+        {
+          "criterion": "Describe thin capillary walls and short exchange distance.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain tissue gas exchange using gradients.",
+          "marks": 1
+        },
+        {
+          "criterion": "Trace the right-heart-to-lung route.",
+          "marks": 1
+        },
+        {
+          "criterion": "Trace lung return and left-heart systemic output.",
+          "marks": 1
+        },
+        {
+          "criterion": "Use correct artery/vein definitions or an accurate labelled diagram.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Confusing ventilation with gas exchange.",
+        "Defining every artery as oxygen-rich.",
+        "Reversing pulmonary artery and vein directions."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Artery: away from heart. Vein: toward heart.",
+        "Thin exchange surfaces shorten diffusion distance."
+      ],
+      "closedBookRecall": [
+        "Trace a complete circulation without omitting a chamber.",
+        "Explain why a capillary’s structure suits exchange."
+      ],
+      "reviewPolicy": "Draw the route and gas arrows from memory, then correct one missing link before repeating."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

@@ -10,10 +10,11 @@ const chapter=id=>JSON.parse(fs.readFileSync('public/gsa-tutor/content/chapter-'
 const KEY='cssvista:tool:gsa-tutor:v1'
 const wait=ms=>new Promise(r=>setTimeout(r,ms))
 async function open(saved,storage={},config={}){
- const requests=[]
+ const requests=[],cacheModes=[]
  const dom=new JSDOM(html,{url:'https://www.css-vista.com/gsa-tutor/studio.html',runScripts:'outside-only',pretendToBeVisual:true,beforeParse(window){if(config.clock){window.Date.now=()=>config.clock.time;window.setInterval=fn=>config.clock.callbacks.push(fn)}if(saved)window.localStorage.setItem(KEY,JSON.stringify(saved));for(const [key,value]of Object.entries(storage))window.localStorage.setItem(key,typeof value==='string'?value:JSON.stringify(value))}})
  dom.window.scrollTo=()=>{}
- dom.window.fetch=async url=>{
+ dom.window.fetch=async (url,options)=>{
+   cacheModes.push(options?.cache)
    requests.push(String(url))
    const path=String(url)
    if(path.endsWith('/catalog.json'))return {ok:true,json:async()=>catalog}
@@ -24,11 +25,11 @@ async function open(saved,storage={},config={}){
  dom.window.eval(fs.readFileSync('public/gsa-tutor/learning-core.js','utf8'))
  dom.window.eval(script)
  await wait(30)
- return {dom,requests,document:dom.window.document,click(selector){const button=dom.window.document.querySelector(selector);assert.ok(button,selector+' unavailable');button.click()}}
+ return {dom,requests,cacheModes,document:dom.window.document,click(selector){const button=dom.window.document.querySelector(selector);assert.ok(button,selector+' unavailable');button.click()}}
 }
 test('course loads only a small catalogue until a chapter is opened',async()=>{
  const p=await open()
- assert.deepEqual(p.requests,['/gsa-tutor/content/catalog.json'])
+ assert.deepEqual(p.requests,['/gsa-tutor/content/catalog.json']);assert.equal(p.cacheModes[0],'no-cache','Revalidate catalogue metadata after code upgrades')
  assert.equal(p.document.querySelectorAll('.duration').length,6)
  p.click('[data-view="library"]')
  p.click('[data-chapter="1"]')
@@ -38,8 +39,8 @@ test('course loads only a small catalogue until a chapter is opened',async()=>{
  assert.equal(p.document.querySelectorAll('[data-chapter="2"]').length,0)
  p.dom.window.close()
 })
-test('every duration retains all 141 unique lessons',async()=>{
- const p=await open()
+test('every duration retains all 141 unique lessons',async t=>{
+ const p=await open();t.after(()=>p.dom.window.close())
  for(const n of [5,8,14,20,30,45,60,120]){
    if(p.document.querySelector('[data-action="editplan"]'))p.click('[data-action="editplan"]')
    const input=p.document.getElementById('custom-days')
@@ -47,11 +48,11 @@ test('every duration retains all 141 unique lessons',async()=>{
    p.click('[data-action="saveplan"]')
    if(p.document.querySelector('[data-action="expandplan"]'))p.click('[data-action="expandplan"]')
    const days=[...p.document.querySelectorAll('.day')]
-   assert.equal(days.length,n)
+   assert.ok(days.length>=n&&days.length<=120,'Time budget may extend the selected minimum')
    const ids=[...p.document.querySelectorAll('.day-lesson')].map(el=>el.dataset.lesson)
    assert.equal(ids.length,141)
    assert.equal(new Set(ids).size,141)
-   assert.ok(days.every(x=>x.querySelectorAll('.day-lesson').length>=1))
+   assert.ok(days.every(x=>x.querySelectorAll('.day-lesson,.planned-activity').length>=1),'Each scheduled day needs a concrete activity at minimum '+n+'; empty days: '+days.filter(x=>!x.querySelector('.day-lesson,.planned-activity')).map(x=>x.querySelector('summary b').textContent).join(', '))
  }
  p.dom.window.close()
 })
@@ -280,7 +281,7 @@ test('a wrong concept check cannot be self-rated clear until it is passed',async
  p.dom.window.close();
 });
 
-test('rest days are excluded without dropping lessons or changing the total number of study sessions',async()=>{
+test('rest days are excluded while capacity-aware plans retain all lessons and their selected minimum',async()=>{
  const p=await open();
  p.click('[data-days="8"]');
  const monday=p.document.querySelector('[data-rest-day="1"]'),friday=p.document.querySelector('[data-rest-day="5"]');
@@ -291,7 +292,7 @@ test('rest days are excluded without dropping lessons or changing the total numb
  assert.deepEqual(saved.plan.restDays,[1,5]);assert.equal(saved.plan.dailyMinutes,60);
  p.click('[data-action="expandplan"]');
  const rows=[...p.document.querySelectorAll('.day')];
- assert.equal(rows.length,8);
+ assert.ok(rows.length>=8&&rows.length<=120);
  const dates=rows.map(row=>{const m=row.querySelector('summary strong').textContent.match(/\d{1,2} [A-Za-z]+ \d{4}/);return new Date(m[0]+' 12:00:00 UTC').getUTCDay()});
  assert.ok(dates.every(day=>day!==1&&day!==5),'No active session may land on an excluded weekday');
  assert.equal(p.document.querySelectorAll('.day-lesson').length,141);
@@ -383,7 +384,7 @@ test('capacity rebalancing extends an unrealistic course and keeps all records',
  const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
  assert.deepEqual(state.recallAttempts.old,history);assert.ok(state.completed[id]);
  assert.equal(Object.values(state.planHistory)[0].plan.startDate,'2026-01-01');
- assert.equal(state.plan.algorithm,'capacity-v1');assert.deepEqual(state.plan.restDays,[0]);
+ assert.equal(state.plan.algorithm,'capacity-v2');assert.deepEqual(state.plan.restDays,[0]);
  p.dom.window.close();
 });
 
@@ -510,4 +511,54 @@ test('observed page time excludes hidden periods and never grants reading comple
  assert.equal(Object.values(state.studySessions)[0].completed,false);
  assert.equal(Object.keys(state.completed).length,0);
  p.dom.window.close();
+});
+
+test('science mock written answers survive reload and remain explicitly ungraded',async()=>{
+ const p=await open();p.click('[data-view="practice"]');p.click('[data-assessment="science-mock"]');await wait(80);
+ assert.match(p.document.getElementById('app').textContent,/Question 1 \/ 28/);
+ p.click('[data-assessment-index="20"]');const el=p.document.getElementById('mock-writing');
+ el.value='A scientific written response retained through an interrupted mock.';el.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),id=Object.keys(state.assessmentAttempts)[0];
+ const q=await open(state);q.click('[data-view="practice"]');q.click('[data-resume-assessment="'+id+'"]');q.click('[data-assessment-index="20"]');
+ assert.equal(q.document.getElementById('mock-writing').value,el.value);q.click('[data-action="finishassessment"]');
+ assert.match(q.document.getElementById('app').textContent,/40 marks of written tasks remain ungraded/);
+ const a=JSON.parse(q.dom.window.localStorage.getItem(KEY)).assessmentAttempts[id];assert.ok(a.finishedAt);assert.equal(a.paperSources.length,1);
+ p.dom.window.close();q.dom.window.close();
+});
+
+test('scheduled written practice opens an available model directly without creating a quiz attempt',async()=>{
+ const p=await open();p.click('[data-days="20"]');p.click('[data-action="saveplan"]');p.click('[data-action="expandplan"]');
+ p.click('[data-planned-writing="4"]');await wait(45);
+ assert.ok(p.document.getElementById('write'));
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));assert.equal(Object.keys(state.quizAttempts).length,0);
+ p.dom.window.close();
+});
+
+test('finishing reading does not move unfinished work into different calendar assignments',async t=>{
+ const p=await open();t.after(()=>p.dom.window.close());p.click('[data-days="60"]');p.click('[data-action="saveplan"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),assignments=state.plan.assignments;
+ assert.ok(assignments.length>=60);const initial=JSON.parse(JSON.stringify(assignments));
+ for(const id of assignments.flatMap(d=>d.ids).slice(0,8))state.completed[id]={at:'2026-11-12T09:00:00Z',selfRating:'gotit'};
+ const q=await open(state);t.after(()=>q.dom.window.close());q.click('[data-action="expandplan"]');
+ const rows=[...q.document.querySelectorAll('.day')];
+ assert.deepEqual(rows.map(row=>[...row.querySelectorAll('.day-lesson')].map(b=>b.dataset.lesson)),initial.map(d=>d.ids));
+ q.click('[data-action="fitplan"]');const updated=JSON.parse(q.dom.window.localStorage.getItem(KEY));
+ assert.deepEqual(Object.values(updated.planHistory).at(-1).plan.assignments,initial,'Explicit rebalancing archives the earlier complete timetable');
+});
+
+test('malformed timetable snapshots fall back safely without rewriting retained records',async t=>{
+ const original={plan:{days:5,startDate:'2026-11-12',dailyMinutes:90,algorithm:'capacity-v2',assignments:[null,null,null,null,null]},drafts:{keep:'Retained writing'}};
+ const p=await open(original);t.after(()=>p.dom.window.close());
+ assert.ok(p.document.querySelector('.day'));p.click('[data-action="expandplan"]');
+ assert.equal(p.document.querySelectorAll('.day-lesson').length,141);
+ assert.deepEqual(JSON.parse(p.dom.window.localStorage.getItem(KEY)),original);
+});
+
+test('interrupted chapter practice resumes the first unanswered question and retains the same attempt',async t=>{
+ const p=await open();t.after(()=>p.dom.window.close());p.click('[data-view="practice"]');p.click('[data-practice="1"]');await wait(35);
+ p.click('[data-quiz-choice="A"]');p.click('[data-action="nextquestion"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),id=Object.keys(state.quizAttempts)[0];
+ const q=await open(state);t.after(()=>q.dom.window.close());q.click('[data-view="practice"]');q.click('[data-practice="1"]');await wait(35);
+ assert.match(q.document.getElementById('app').textContent,/Question 2 of 4/);
+ const updated=JSON.parse(q.dom.window.localStorage.getItem(KEY));assert.equal(Object.keys(updated.quizAttempts).length,1);assert.ok(updated.quizAttempts[id]);
 });

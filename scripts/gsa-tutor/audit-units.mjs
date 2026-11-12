@@ -19,11 +19,12 @@ for(const file of readdirSync('content/gsa-tutor/draft-units').filter(f=>f.endsW
   if(ids.has(q.id))fail('Duplicate question ID');ids.add(q.id)
   if(q.lessonId!==label||!q.conceptId||!q.syllabusRefs?.length||!q.difficulty||!q.type)fail('Question missing explicit mapping metadata')
   if(q.origin!=='original-examination-style-practice')fail('Draft questions must not claim authentic-paper provenance')
+  if(new Set(Object.values(q.options||{}).map(v=>v.trim())).size!==4)fail('MCQ options must be distinct')
   if(Object.keys(q.options||{}).sort().join('')!=='ABCD'||!q.options[q.answer]||Object.keys(q.optionExplanations||{}).sort().join('')!=='ABCD'||Object.values(q.optionExplanations).some(x=>!x.trim()))fail('Question needs four explained options and one existing key')
   if(q.sources?.some(s=>!sourceIds.has(s)))fail('Unknown question source')
  }
  const model=u.stages?.answerWriting
- if(!model?.modelResponse||model.rubric?.reduce((n,r)=>n+r.marks,0)!==model.marks||model.marks!==5||!model.commonMistakes?.length)fail('Incomplete five-mark model and rubric')
+ if(!model?.modelResponse||model.rubric?.some(r=>!r.criterion||!Number.isFinite(r.marks)||r.marks<=0)||model.rubric?.reduce((n,r)=>n+r.marks,0)!==model.marks||model.marks!==5||!model.commonMistakes?.length)fail('Incomplete five-mark model and rubric')
  else models++
  if(u.status!=='approved')pending.push(label)
  else{

@@ -1,10 +1,12 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 const read=p=>JSON.parse(readFileSync(p,'utf8'))
 const syllabus=read('public/fpsc-syllabus.json')
 const provided=read('docs/gsa-tutor/sources/provided-fpsc-syllabus.json')
 const subject={sections:[{},...provided.domains]}
 const catalog=read('public/gsa-tutor/content/catalog.json')
+const draftUnits=readdirSync('content/gsa-tutor/draft-units').filter(f=>f.endsWith('.json')).map(f=>read('content/gsa-tutor/draft-units/'+f));
+const unitIds=new Set(draftUnits.map(u=>u.lessonId));
 const chapters=catalog.chapters.map(c=>read(`public/gsa-tutor/content/chapter-${String(c.id).padStart(2,'0')}.json`))
 // Editorial mapping candidates, never inferred by keyword matching. Content depth
 // and individual claims still need independent review against the original PDF.
@@ -58,7 +60,9 @@ for(const section of subject.sections.slice(1,6)){
 if(index!==mappings.length)throw Error(`Expected ${mappings.length} topics, found ${index}`)
 const report={version:1,scope:'General Science Part I, 60 marks; General Ability Part II excluded',source:syllabus.source,sourceRetrieval:{checkedOn:'2026-11-12',status:'provided-FPSC-PDF-inspected',document:provided,limitation:'User-supplied FPSC PDF directly inspected. Live FPSC endpoints still return HTTP 503; latest online revision not independently confirmed.'},academicApproval:'WITHHELD',rows}
 const audit=chapters.map(c=>({chapter:c.id,title:c.title,lessons:c.sections.map(s=>({id:s.id,title:s.title,words:s.text.trim().split(/\s+/).length,contentHash:createHash('sha256').update(s.html).digest('hex'),instructionalStagesReviewed:false,scientificReview:'pending'})),mcqs:c.questions.length,writtenModels:c.analytical.length,questionsWithExplicitLessonMapping:c.questions.filter(q=>q.lessonId&&q.conceptId).length,questionsWithShortExplanations:c.questions.filter(q=>q.explanation.trim().split(/\s+/).length<15).length,approvedAssessments:0,releaseBlockers:['Scientific claim and formula verification pending','Lesson objectives, prerequisites and eight teaching stages need independent review','Question mapping, distractors, explanations and answer keys need review',...(c.analytical.length===0?['No original analytical model answers']:['Written models lack independent rubric approval'])]}))
+const unitProgress={date:'2026-11-12',scope:'Whole existing course, including enrichment',academicApproval:'WITHHELD',totals:{originalLessons:141,draftUnits:draftUnits.length,lessonsWithoutRebuiltDraft:141-unitIds.size,approvedUnits:draftUnits.filter(u=>u.status==='approved').length,newDraftQuestions:draftUnits.reduce((n,u)=>n+u.stages.activeUnderstanding.questions.length,0),draftWrittenModels:draftUnits.length},lessons:catalog.chapters.flatMap(c=>c.sections.map(s=>{const u=draftUnits.find(u=>u.lessonId===s.id);return {id:s.id,chapter:c.id,title:s.title,domain:c.part,courseScope:s.courseScope,draftStatus:u?.status||'no-rebuilt-unit-yet',unitVersion:u?.version||null,unitHash:u?createHash('sha256').update(JSON.stringify(u)).digest('hex'):null,independentReview:'pending',originalSourceRemainsAvailable:true}}))};
 const outputs={
+ 'docs/gsa-tutor/teaching-unit-progress.json':JSON.stringify(unitProgress,null,2)+'\n',
  'docs/gsa-tutor/syllabus-coverage.json':JSON.stringify(report,null,2)+'\n',
  'docs/gsa-tutor/chapter-audit.json':JSON.stringify({version:1,baseline:'Original manuscript; chapter 25 HTML formula transcription repaired against unchanged canonical text; no answer-key changes',chapters:audit},null,2)+'\n',
  'docs/gsa-tutor/syllabus-coverage.md':'# General Science Part I coverage register\n\nStatus: **syllabus text checked against the user-supplied FPSC PDF; teaching completeness not certified**. The supplied extract contains 23 bullets; water-pollution and drinking-water standards are split for 24 traceability rows. Live FPSC endpoints remain unavailable. Part II is excluded. Sixteen 2025 science questions were transcribed and visually checked against the archived scan; publisher-origin confirmation from FPSC remains unavailable. No answer key or reviewed model is inferred from these links. Required content and enrichment remain separate classifications, without removing broader course material.\n\nSource: '+syllabus.source.url+'\n\n| ID | Domain | Prescribed topic (supplied PDF transcription) | Candidate chapters | Required review / expansion |\n|---|---|---|---|---|\n'+rows.map(r=>`| ${r.id} | ${r.domain} | ${r.exactPrescribedTopic.replaceAll('|','/')} | ${r.chapterIds.join(', ')} | ${r.expansionRequired} |`).join('\n')+'\n\nSee `syllabus-coverage.json` for essential concepts, lesson IDs, source and verification status, and `chapter-audit.json` for all 141 lesson hashes and chapter assessment gaps. Automated inventory cannot establish scientific or pedagogical completeness.\n'
@@ -68,4 +72,4 @@ for(const [path,content] of Object.entries(outputs)){
  else{mkdirSync('docs/gsa-tutor',{recursive:true});writeFileSync(path,content)}
 }
 console.log(`Coverage register: ${rows.length} prescribed topic groups; ${audit.length} chapters; academic approval withheld.`)
-if(process.argv.includes('--release')){console.error('RELEASE BLOCKED: official-source confirmation and independent academic approval pending.');process.exitCode=1}
+if(process.argv.includes('--release')){console.error('RELEASE BLOCKED: independent curriculum/science/assessment review, learner trials and owner release authorization are pending. The supplied FPSC syllabus has been inspected.');process.exitCode=1}

@@ -123,3 +123,11 @@ test('finished assessments cannot be reopened by a stale device, and retain elig
   const a=merged.assessmentAttempts.one;assert.equal(a.finishedAt,t1);assert.equal(a.responses.A.selected,'A');assert.equal(a.responses.B.selected,'B');assert.equal(Object.keys(a.choiceEvents).length,2);
  }
 });
+
+test('mock written responses merge without losing separate-device work or accepting post-submit changes',()=>{
+ const cloud={[key]:{assessmentAttempts:{mock:{at:t1,finishedAt:t1,responses:{},writtenResponses:{A:{at:t0,text:'First response'}}}}}};
+ const local={[key]:{assessmentAttempts:{mock:{at:t2,finishedAt:null,responses:{},writtenResponses:{A:{at:t2,text:'Too late'},B:{at:t0,text:'Other response'}}}}}};
+ for(const merged of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+  const a=merged.assessmentAttempts.mock;assert.equal(a.finishedAt,t1);assert.equal(a.writtenResponses.A.text,'First response');assert.equal(a.writtenResponses.B.text,'Other response');
+ }
+});

@@ -5,6 +5,8 @@ const rows={1:[1,1,1,1,1],2:[1,1,1,1,1],3:[1,1,2,2,1],4:[2,2,2,2,2,2],5:[3,3,3,3
 const enrichment=new Set(['3.5','6.3','6.5','9.4','9.5','10.3','10.4','10.5','11.3','15.7','18.2','20.1','20.2','20.3','20.5','23.4','23.5','27.2','27.3','27.4','28.3','28.4'])
 const mixed=new Set(['1.3','1.4','1.5','2.2','2.5','7.4','14.5','19.4','21.4','24.3','25.4','27.1','28.2'])
 for(const c of catalog.chapters){
+ const chapter=JSON.parse(readFileSync('public/gsa-tutor/content/chapter-'+String(c.id).padStart(2,'0')+'.json','utf8'));
+ c.questionIds=chapter.questions.map(q=>q.id);c.analyticalIds=chapter.analytical.map(q=>q.id);
  if(rows[c.id].length!==c.sections.length)throw Error('Scope map differs from chapter '+c.id)
  for(const [i,s] of c.sections.entries()){
   s.syllabusRefs=rows[c.id][i]?[`GS-I-${String(rows[c.id][i]).padStart(2,'0')}`]:[]

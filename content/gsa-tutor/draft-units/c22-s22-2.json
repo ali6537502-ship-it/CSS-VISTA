@@ -1,0 +1,223 @@
+{
+  "version": "draft-1",
+  "lessonId": "c22-s22-2",
+  "title": "Minerals and bioavailability: distinguish food composition from uptake and use",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-21"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "nutrition",
+      "title": "OpenStax Biology 2e 34.2, Nutrition and Energy Production",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "1d153f67deaa73f6ab10e33e536d959f90076dbe0b0f139cb3062794b6c5fb4b",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "absorption",
+      "title": "OpenStax Anatomy and Physiology 2e 23.7, Chemical Digestion and Absorption: A Closer Look",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "66cb4c6c90ea2a54bb6ee07597e89b46699daad7aea2859e36aff85a475dbc4a",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish nutrient intake, digestion, absorption and physiological use.",
+        "Explain why a mineral-content number alone is an incomplete nutrition assessment."
+      ],
+      "prerequisites": [
+        "Food contains chemical substances that the body must obtain or process.",
+        "The digestive tract lumen and the body’s internal transport systems are separated by an absorptive surface."
+      ],
+      "terms": {
+        "essential nutrient": "A nutrient the body needs to obtain from the diet in an appropriate form and amount.",
+        "absorption": "Transfer of substances across the digestive epithelium into internal transport pathways.",
+        "bioavailability": "The extent to which an ingested nutrient is available for absorption and physiological use."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "mineral-functions",
+        "sourceIds": [
+          "nutrition"
+        ],
+        "explanation": "Minerals contribute to structures and physiological processes rather than serving as calorie-bearing fuels. Different minerals have different roles; grouping them under one heading does not mean they are interchangeable. A balanced diet must provide essential nutrients in suitable amounts while the body regulates their use. A nutrient-deficiency explanation should identify the particular nutrient and function rather than assume that every symptom has one nutritional cause."
+      },
+      {
+        "conceptId": "absorption-role",
+        "sourceIds": [
+          "absorption"
+        ],
+        "explanation": "Digestion breaks food components into forms that can be taken up, while absorption transfers appropriate substances across the intestinal epithelium. Transport into the body and subsequent physiological use are additional steps. Mineral absorption uses mechanisms that depend on the substance and physiological context. For example, the discussion of iron and calcium absorption in the source textbook shows that food content cannot simply be equated with an identical amount delivered to every tissue."
+      },
+      {
+        "conceptId": "bioavailability",
+        "sourceIds": [
+          "nutrition",
+          "absorption"
+        ],
+        "explanation": "A food-composition value records how much nutrient is present in a stated amount of food. Bioavailability adds the question of how much becomes available to the body. Chemical form, the food matrix, digestive release, other dietary components and physiological conditions can affect this process. Therefore equal listed amounts in two foods need not imply equal uptake for an individual. This principle supports careful dietary comparison but does not justify inventing an absorption percentage, diagnosing deficiency from a symptom list or recommending a supplement dose without appropriate evidence."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "intake-to-use-flow",
+      "nodes": [
+        "Nutrient in a stated food portion",
+        "Release and digestive processing",
+        "Absorption across intestinal epithelium",
+        "Internal transport and physiological use"
+      ],
+      "description": "Keep the food-content quantity separate from an individual absorption or tissue-use measurement.",
+      "limitations": "Conceptual nutrition pathway, not a diagnostic tool or supplement prescription.",
+      "sourceIds": [
+        "nutrition",
+        "absorption"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "When two foods report the same mineral amount, first compare the stated serving and composition basis. Then recognize that uptake can depend on form and context; do not manufacture an exact absorbed amount from the label alone.",
+      "sourceIds": [
+        "absorption"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Define nutrient bioavailability and explain why nutrient content alone does not establish the physiological value of a food."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-NUT-01",
+          "lessonId": "c22-s22-2",
+          "conceptId": "bioavailability",
+          "syllabusRefs": [
+            "GS-I-21"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Two foods list the same amount of a mineral per serving. What conclusion is justified?",
+          "options": {
+            "A": "The listed amount alone does not establish that the same amount will be absorbed and used.",
+            "B": "Their absorption must be identical for every person.",
+            "C": "Neither can contain any other nutrients.",
+            "D": "A food label directly measures each eater’s tissue uptake."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Intake, absorption and subsequent use are different quantities; form, matrix and physiological conditions can matter.",
+            "B": "Equal listed content is not proof of identical individual absorption.",
+            "C": "Equal content of one mineral says nothing of that kind about other nutrients.",
+            "D": "A composition label describes the food, not a direct measurement of an individual’s uptake."
+          },
+          "sources": [
+            "nutrition",
+            "absorption"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-NUT-02",
+          "lessonId": "c22-s22-2",
+          "conceptId": "absorption-role",
+          "syllabusRefs": [
+            "GS-I-21"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "process-sequencing",
+          "prompt": "Which sequence correctly separates digestive availability from nutrient use?",
+          "options": {
+            "A": "Tissue use → food content → intestinal absorption",
+            "B": "Food content → absorption → disappearance of all physiological regulation",
+            "C": "Food content → identical uptake in every individual",
+            "D": "Food content and digestive release → intestinal absorption → transport and physiological use"
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "This reverses the relationship between intake and uptake.",
+            "B": "Absorption does not remove subsequent transport or physiological regulation.",
+            "C": "Food composition does not establish identical individual uptake.",
+            "D": "These are connected but distinct stages from ingested material to use in the body."
+          },
+          "sources": [
+            "absorption"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Nutrient content is the amount present in a specified portion of food. Bioavailability concerns availability for absorption and physiological use. Food must release appropriate substances through digestive processing, after which absorption across the intestinal epithelium and internal transport occur. Chemical form, the food matrix and physiological conditions can affect uptake. Equal listed mineral amounts therefore do not necessarily produce equal absorbed amounts or tissue use. Minerals have distinct structural and physiological roles rather than providing interchangeable calorie energy. A sound comparison states the food portion and relevant factors without inventing an absorption percentage or treating the label as an individual diagnostic measurement.",
+      "rubric": [
+        {
+          "criterion": "Distinguish food content from bioavailability.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain digestive release and absorption as different steps.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify relevant food/form/physiological factors.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect minerals with distinct physiological roles.",
+          "marks": 1
+        },
+        {
+          "criterion": "Apply the distinction to a defensible comparison without invented numbers.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Treating mineral content as a direct tissue-uptake measurement.",
+        "Assuming all minerals have identical functions.",
+        "Turning a general nutrition principle into a diagnosis or dose recommendation."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Content is in the food; absorption crosses an epithelium; use occurs within the body.",
+        "Bioavailability adds form and physiological context to intake."
+      ],
+      "closedBookRecall": [
+        "Draw the intake-to-use pathway.",
+        "Explain two reasons that equal label content need not imply equal uptake."
+      ],
+      "reviewPolicy": "Interpret a hypothetical food comparison before revisiting the definitions."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}
