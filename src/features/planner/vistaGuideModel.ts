@@ -1,5 +1,5 @@
 import type { StudyScheduleTask, SyllabusItemStatus } from '@/lib/store'
-import { dayWorkload, shiftDay, validDay } from './model.ts'
+import { shiftDay, validDay } from './model.ts'
 
 export type VistaExam = 'css' | 'pms-punjab'
 export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[] }
