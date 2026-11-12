@@ -1,0 +1,4 @@
+.daily-study-panel { box-sizing:border-box; width:100%; max-width:80rem; margin:1rem auto 1.25rem; padding:clamp(1rem,2.5vw,1.6rem); border:1px solid #d7e0da; border-radius:1.25rem; background:white; color:#17251f; }
+.daily-study-panel :is(button,select,a) { min-height:44px; }
+.daily-study-panel :is(h2,p) { overflow-wrap:anywhere; }
+.daily-study-panel :focus-visible { outline:2px solid #166a91; outline-offset:3px; }

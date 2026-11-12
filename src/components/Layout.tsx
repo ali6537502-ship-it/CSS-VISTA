@@ -1,3 +1,4 @@
+import { StudyRail } from '@/features/daily-study/Flow'
 import { useWorkspacePreview } from '@/features/workspace-preview/context'
 import { ProfileGate } from '@/components/ProfileGate'
 import { Outlet } from 'react-router'
@@ -1279,6 +1280,7 @@ export default function Layout() {
         </nav>
       </aside>
 
+      <StudyRail />
       <main className="flex-1 pb-[calc(200px+env(safe-area-inset-bottom))] md:pb-0">
         <div
           key={location.pathname}
