@@ -186,7 +186,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     if(!checkWrite())return
     const old=hasStatus(u), next=old?'in-progress':'completed'
     setSyllabusItemStatus(u.id,next)
-    for(const task of getState().studyScheduleTasks.filter(t=>t.syllabusItemId===u.id)){
+    for(const task of getState().studyScheduleTasks.filter(t=>t.syllabusItemId===u.id && t.activity!=='revision')){
       updateStudyScheduleTask(task.id,{status:next})
     }
     if(getState().syllabusItemStatuses?.[u.id]!==next){setError('Completion could not be saved. Try again.');return}
@@ -277,6 +277,8 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       </fieldset>
       <div className="vg-actions"><button className="pl-primary" disabled={syncStatus==='syncing'} onClick={save}><Save size={16}/>Save my preparation choices</button><button className="pl-secondary" onClick={()=>{edited.current=false;setDraftPrefs(prefs);setSettingsOpen(false);setError('')}}>Cancel changes</button></div>
     </section>}
+    {error && <p role="alert" className="pl-error vg-feedback">{error}</p>}
+    {message && <p role="status" className="pl-success vg-feedback">{message}</p>}
     <section className="vg-panel">
       <div className="vg-section-head"><div><p className="pl-kicker">STEP 2</p><h3>Generate your full study schedule</h3><p>Your selected chapters are distributed over study days with {prefs.subjectsPerDay} subject{prefs.subjectsPerDay===1?'':'s'} per day. Existing tasks consume your available time.</p></div><button className="pl-primary" onClick={preview}><CalendarDays size={16}/>Generate my plan</button></div>
       {plan && <div className="vg-preview"><p><strong>{plan.draft.length} new sessions</strong> across {plan.scheduledSubjects} subjects. {plan.alreadyCovered} previously completed or scheduled chapters retained. {plan.draft.length>0?'Estimated final day: '+readableDay(plan.finishedOn):'Nothing new to schedule.'}</p><div className="vg-preview-rows">{plan.draft.slice(0,6).map(t=><div key={t.syllabusItemId}><span>{t.date}</span><strong>{t.subject}</strong><span>{t.topic}</span><small>{t.minutes} min</small></div>)}</div>{plan.draft.length>6&&<p className="pl-muted">Showing first six sessions. All {plan.draft.length} will be saved.</p>}{plan.draft.length>0&&<button className="pl-primary" onClick={commit}><CheckCircle2 size={16}/>Confirm and save all sessions</button>}</div>}
@@ -291,7 +293,11 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       <div className="vg-section-head"><div><p className="pl-kicker">COMPLETE SYLLABUS</p><h3>Study by subject, chapter and section</h3><p>Every prescribed part remains in the syllabus. Completion is always your decision.</p></div><button className="pl-secondary" onClick={()=>setShowAll(v=>!v)}>{showAll?'My selected subjects':'View all subjects'}</button></div>
       <label className="vg-search"><Search size={15}/><input value={subjectSearch} onChange={e=>setSubjectSearch(e.target.value)} placeholder="Search your subjects" /></label>
       <div className="vg-subjects">{filtered.map(s=><button type="button" key={s.id} aria-pressed={active?.id===s.id} onClick={()=>{setSubjectId(s.id);setShowCount(20)}}>{s.title}</button>)}</div>
-      {active && <div className="vg-syllabus"><div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} chapters complete</small></div>{active.file && <a className="pl-secondary" href={active.file} target="_blank" rel="noreferrer"><ExternalLink size={14}/>Official PDF</a>}</div>
+      {active && <div className="vg-syllabus">
+        <details className="vg-readings"><summary>View complete section structure ({active.sections.length} sections)</summary>
+          <ol>{active.sections.map(section=><li key={section.id} dir="auto"><strong>{section.title}</strong> — {section.topics.length} syllabus item{section.topics.length===1?'':'s'}{!section.topics.length && ' (heading only in source)'}</li>)}</ol>
+        </details>
+        <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} chapters complete</small></div>{active.file && <a className="pl-secondary" href={active.file} target="_blank" rel="noreferrer"><ExternalLink size={14}/>Official PDF</a>}</div>
         <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished chapters only</label>
         {visibleUnits.slice(0,showCount).map(u=><article key={u.id} className="vg-unit"><div><small>{u.section}</small><h4 dir="auto">{u.title}</h4><details><summary>Read complete syllabus for this chapter</summary><pre dir="auto">{u.syllabus}</pre></details></div><div className="vg-unit-tools"><CopyNotes unit={u} compact/>{resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Open Essay Themes 2027'}</Link>}<button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button>{hasStatus(u) && <button className="vg-inline-action" onClick={()=>scheduleRevision(u)}><RefreshCw size={15}/>Schedule revision</button>}</div></article>)}
         {visibleUnits.length>showCount&&<button className="pl-secondary" onClick={()=>setShowCount(n=>n+20)}>Show more chapters · {visibleUnits.length-showCount} remaining</button>}
@@ -300,8 +306,6 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       </div>}
     </section>
     <section className="vg-resources"><Link to="/account/precis"><BookOpen size={19}/><span><strong>Précis Guide</strong><small>Handbook, writing lessons and practice</small></span></Link><Link to="/study-material/essay-themes"><Sparkles size={19}/><span><strong>Essay Themes 2027</strong><small>Research themes and preparation roadmap</small></span></Link><Link to="/account/practice"><CheckCircle2 size={19}/><span><strong>Practice and mocks</strong><small>Apply and test what you have studied</small></span></Link><Link to="/account/progress"><Clock3 size={19}/><span><strong>My performance</strong><small>Review your recorded practice progress</small></span></Link></section>
-    {error&&<p role="alert" className="pl-error">{error}</p>}
-    {message&&<p role="status" className="pl-success">{message}</p>}
     {exam==='pms-punjab' && <p className="vg-note"><Link to="/account/tasks?exam=pms-punjab&view=pms">View previous PMS outline and historical checklist</Link></p>}
     <p className="vg-note"><Clock3 size={14}/> Personal schedules and chapter checks are self-reported. Your original tasks, syllabus history and account records are not deleted.</p>
   </div>
