@@ -72,14 +72,33 @@ function dp_validate_upload(array $file): array {
     // Fail closed: qpdf is a real parser, rather than trusting extension/signature.
     $parser=cssv_env('CSSV_QPDF_PATH') ?: '/usr/bin/qpdf';
     if (!is_executable($parser) || !is_callable('exec')) throw new RuntimeException('PDF validation is unavailable. Configure the server qpdf parser before uploading.');
-    exec(escapeshellarg($parser).' --check '.escapeshellarg($tmp).' 2>&1',$lines,$code);
-    if ($code!==0) throw new InvalidArgumentException('The PDF failed structural validation. Export a fresh PDF and retry.');
-    exec(escapeshellarg($parser).' --json '.escapeshellarg($tmp).' 2>/dev/null',$json,$code);
-    $structure=json_decode(implode("\n",$json),true);
-    if($code!==0 || !is_array($structure)) throw new InvalidArgumentException('Unable to inspect PDF structure.');
-    $objects=json_encode($structure);
-    if(preg_match('~/JavaScript|/JS["\s]|/Launch|/EmbeddedFiles|/RichMedia|/SubmitForm~',$objects)) throw new InvalidArgumentException('Active content and embedded files are not accepted.');
-    return ['size'=>$size,'sha256'=>hash_file('sha256',$tmp),'pageCount'=>count($structure['pages'] ?? []) ?: null];
+    // External parser confinement may deny PHP's extensionless system temp files.
+    // Parse a private, byte-identical PDF copy; retain the original for move_uploaded_file.
+    $directory=realpath(cssv_private_storage_dir('daily-pdf/validation'));
+    $public=realpath(dirname(__DIR__));
+    $documentRoot=realpath((string)($_SERVER['DOCUMENT_ROOT'] ?? ''));
+    foreach(array_filter([$public,$documentRoot]) as $root) {
+        if($directory===$root || ($directory && str_starts_with($directory,$root.DIRECTORY_SEPARATOR))) throw new RuntimeException('PDF validation storage must be private.');
+    }
+    if(!$directory) throw new RuntimeException('Private PDF validation storage is unavailable.');
+    $staged=$directory.'/'.bin2hex(random_bytes(16)).'.pdf';
+    $digest=hash('sha256',$data);
+    try {
+        if(!copy($tmp,$staged) || !chmod($staged,0600) || filesize($staged)!==$size || !hash_equals($digest,hash_file('sha256',$staged))) throw new RuntimeException('Unable to prepare the PDF for validation.');
+        exec(escapeshellarg($parser).' --check '.escapeshellarg($staged).' 2>&1',$lines,$code);
+        if ($code!==0) {
+            error_log('CSSV Daily PDF: structural parser exit status '.(int)$code);
+            throw new InvalidArgumentException('The PDF failed structural validation. Export a fresh PDF and retry.');
+        }
+        exec(escapeshellarg($parser).' --json '.escapeshellarg($staged).' 2>/dev/null',$json,$code);
+        $structure=json_decode(implode("\n",$json),true);
+        if($code!==0 || !is_array($structure)) throw new InvalidArgumentException('Unable to inspect PDF structure.');
+        $objects=json_encode($structure);
+        if(preg_match('~/JavaScript|/JS["\\s]|/Launch|/EmbeddedFiles|/RichMedia|/SubmitForm~',$objects)) throw new InvalidArgumentException('Active content and embedded files are not accepted.');
+        return ['size'=>$size,'sha256'=>$digest,'pageCount'=>count($structure['pages'] ?? []) ?: null];
+    } finally {
+        if(is_file($staged) && !@unlink($staged)) error_log('CSSV Daily PDF: validation temporary file cleanup failed.');
+    }
 }
 
 function dp_cover_path(array $r): string {
