@@ -102,7 +102,7 @@ export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] 
       const ancestors = parents.map(parent =>
         parent.title + (parent.detail?.trim() && parent.detail.trim() !== parent.title.trim() ? '\n' + parent.detail : '')
       )
-      const sectionName = node.section || parents.findLast(p => p.section)?.section || section.title
+      const sectionName = node.section || parents.slice().reverse().find(p => p.section)?.section || section.title
       result.push({
         id: node.id, subjectId: subject.id, subject: subject.title,
         section: sectionName, title: node.title,
