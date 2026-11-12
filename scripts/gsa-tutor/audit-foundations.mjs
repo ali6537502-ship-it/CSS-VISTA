@@ -20,6 +20,7 @@ for(const meta of catalog.chapters){
  for(const s of c.sections){
   if(s.teaching&&(!s.teaching.objective||!s.teaching.prerequisites||!s.teaching.revision?.length||!s.teaching.verification?.sourceUrl||unsafe(s.teaching.explanationHtml)))failures.push('Invalid teaching extension '+s.id)
  }
+ for(const q of c.questions){if(!ids.has(q.lessonId)||!q.conceptId||!q.type||!q.difficulty||!q.verification?.mappingStatus||!q.syllabusRefs?.length||q.syllabusRefs.some(ref=>!syllabusIds.has(ref)))failures.push('Incomplete explicit source mapping '+q.id)}
  for(const q of c.supplementalQuestions||[]){
   supplements.push(q)
   if(!ids.has(q.lessonId)||!q.conceptId||(!q.syllabusRefs?.length||q.syllabusRefs.some(ref=>!syllabusIds.has(ref)))||Object.keys(q.options||{}).sort().join('')!=='ABCD'||!q.options[q.answer]||!q.explanation||q.origin!=='original-practice'||!q.verification?.sourceUrl||!q.type||!q.difficulty)failures.push('Invalid supplement '+q.id)

@@ -90,10 +90,53 @@ try{
      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
      await page.screenshot({path:'test-artifacts/gsa-tutor/writing-320.png',fullPage:true})
    }
+   if(width===320){
+     const sections=Array.from({length:28},(_,i)=>JSON.parse(readFileSync('public/gsa-tutor/content/chapter-'+String(i+1).padStart(2,'0')+'.json','utf8')).sections).flat()
+     const formulaReport=await page.evaluate(sections=>{
+       const host=document.createElement('div');host.className='study-copy';host.style.cssText='position:absolute;left:0;top:0;width:250px;background:white';document.body.append(host)
+       const issues=[];let rendered=0,repairs=0
+       for(const section of sections){host.innerHTML=section.html;const r=window.CSSVistaGSAMath.render(host,{sourceText:section.text});rendered+=r.rendered;repairs+=r.repairs;if(r.issues.length)issues.push(section.id+': source issue');for(const eq of host.querySelectorAll('.gsa-equation'))if(eq.getBoundingClientRect().width>252)issues.push(section.id+': oversized equation')}
+       host.remove();return {rendered,repairs,issues}
+     },sections)
+     assert.equal(formulaReport.rendered,156)
+     assert.equal(formulaReport.repairs,1)
+     assert.deepEqual(formulaReport.issues,[])
+   }
    if(width===1440){
      await page.evaluate(()=>document.documentElement.style.zoom='200%')
      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2,'No overflow at 200% zoom')
      await page.screenshot({path:'test-artifacts/gsa-tutor/zoom-200.png',fullPage:true})
+   }
+   if(width===320){
+     await page.locator('[data-view="practice"]').click()
+     await page.locator('#assessment-count').fill('5')
+     await page.locator('#assessment-mode').selectOption('timed')
+     await page.locator('#assessment-minutes').fill('1')
+     await page.locator('[data-assessment-start]').click()
+     await page.locator('[data-assessment-choice="A"]').waitFor()
+     assert.equal(await page.locator('.assessment-explanation').count(),0,'Keys must stay hidden before submission')
+     const assessment=await page.evaluate(()=>window.CSSVistaGSAAssessment.hydrateAttempt(Object.values(JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentAttempts).at(-1),JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentQuestionSnapshots))
+     await page.locator('[data-assessment-choice="'+assessment.questions[0].answer+'"]').click()
+     await page.reload()
+     await page.locator('[data-view="practice"]').click()
+     await page.locator('[data-assessment-open="'+assessment.id+'"]').click()
+     await page.locator('#assessment-clock').waitFor()
+     const restored=await page.evaluate(()=>Object.values(JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentEvents).filter(e=>e.attemptId===Object.keys(JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentAttempts).at(-1)&&e.type==='answer'))
+     assert.equal(restored.length,1)
+     await page.locator('[data-assessment-submit]').click()
+     await page.getByRole('heading',{name:'Assessment results',exact:true}).waitFor()
+     assert.match(await page.locator('.panel.accent').innerText(),/1 \/ 5 correct/)
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
+     await page.screenshot({path:'test-artifacts/gsa-tutor/assessment-320.png',fullPage:true})
+     await page.locator('[data-view="library"]').click()
+     await page.locator('[data-chapter="14"]').click()
+     await page.locator('[data-lesson="c14-s14-2"]').click()
+     await page.locator('[data-action="fullsource"]').click()
+     assert.ok(await page.locator('#reference math').count()>0,'Chemical reaction should render as MathML')
+     assert.equal(await page.locator('#reference .math-source-fallback').count(),0)
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
+     await page.screenshot({path:'test-artifacts/gsa-tutor/formulas-320.png',fullPage:true})
+     await page.locator('#close-reference').click()
    }
    if(width===375){
      await page.locator('.day-lesson').first().click();await page.locator('.lesson-card').waitFor()
@@ -119,5 +162,5 @@ try{
    await context.close()
  }
  assert.deepEqual(problems,[],problems.join('; '))
- console.log('PASS standalone GSA: four responsive lesson journeys, keyboard model controls, 200% zoom, pilot writing rubrics, stale writer/account-switch redaction, real reload recovery and reset-generation isolation.')
+ console.log('PASS standalone GSA: four responsive lesson journeys, keyboard model controls, 200% zoom, pilot writing rubrics, resumable assessments and 156 rendered equations, stale writer/account-switch redaction, real reload recovery and reset-generation isolation.')
 }finally{await browser.close()}

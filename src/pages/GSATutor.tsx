@@ -141,7 +141,7 @@ function GSATutorWorkspace() {
         key={user?.id ?? (loading ? "session-loading" : "guest")}
         ref={iframeRef}
         title="CSS VISTA GSA Tutor interactive lessons and personal course schedule"
-        src="/gsa-tutor/studio.html?v=gsa-tutor-foundations-20261112"
+        src="/gsa-tutor/studio.html?v=gsa-tutor-assessments-20261112"
         className="block w-full border-0 bg-white"
         style={{ height: frameHeight }}
         onLoad={() => {

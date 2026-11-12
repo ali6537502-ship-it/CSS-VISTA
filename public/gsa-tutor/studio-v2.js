@@ -9,7 +9,7 @@ const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'
 const now=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const dateAdd=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
 const dateLabel=s=>new Date(s+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
-const defaults=()=>({completed:{},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},draftMeta:{},quizHistory:{},quizAttempts:{},conceptAttempts:{},writingAttempts:{},questionReview:{},recallAttempts:{},reviewDue:{},last:null,plan:null});
+const defaults=()=>({completed:{},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},draftMeta:{},quizHistory:{},quizAttempts:{},assessmentAttempts:{},assessmentEvents:{},assessmentQuestionSnapshots:{},conceptAttempts:{},writingAttempts:{},questionReview:{},recallAttempts:{},reviewDue:{},last:null,plan:null});
 function read(){try{const o=JSON.parse(localStorage.getItem(storageKey)||'null');return o&&typeof o==='object'&&!Array.isArray(o)?{...defaults(),...o}:defaults()}catch{return defaults()}}
 let saved=embedded?defaults():read(),catalog=null,lessons=[],byId=new Map(),chapterCache=new Map();
 let ui={radioMHz:150,bioOutput:'gas',view:'course',id:saved.last,stage:'learn',beat:0,selected:'',draft:'',reveal:false,grade:'',chapter:1,qindex:0,phase:0,month:0,eclipse:'solar',seismic:'P',osm:'iso',water:0,editingPlan:false,setupLevel:'beginner',setupDifficult:[],setupDays:20,setupDate:now(),setupRestDays:[],setupDailyMinutes:90,search:'',opening:'',showAllDays:false,busy:false,error:'',attemptId:null,reviewSingle:false};
@@ -22,8 +22,10 @@ function canSave(){
  return !(lease?.at&&Math.abs(Date.now()-lease.at)<30000)&&localStorage.getItem('cssvista:progress-owner')===binding.owner&&localStorage.getItem('cssvista:sync-generation:v1:'+binding.owner)===binding.generation;
 }
 function notify(){
- try{if(!canSave())throw Error('Study account changed');localStorage.setItem(storageKey,JSON.stringify(saved));window.dispatchEvent(new Event('cssvista:progress-changed'));if(embedded)window.parent.postMessage({type:'cssvista:gsa:changed'},location.origin)}catch{ui.error='Course records could not be saved. Check account synchronization and retry your change.';draw()}
+ try{if(!canSave())throw Error('Study account changed');localStorage.setItem(storageKey,JSON.stringify(saved));window.dispatchEvent(new Event('cssvista:progress-changed'));if(embedded)window.parent.postMessage({type:'cssvista:gsa:changed'},location.origin);return true}catch{ui.error='Course records could not be saved. Check account synchronization and retry your change.';draw();return false}
 }
+const assessments=window.CSSVistaGSAAssessmentUI({safe,saved:()=>saved,catalog:()=>catalog,persist:notify,draw,loadChapter,dateAdd,identity:()=>JSON.stringify({storageKey,binding}),view:value=>{ui.view=value},visible:()=>ui.view==='assessment'&&!accountChanged,busy:value=>{ui.busy=value;if(value)ui.error='';draw()},error:message=>{ui.error=message;draw()}});
+window.setInterval(()=>assessments.tick(),1000);
 const isDone=id=>!!saved.completed?.[id];
 const countDone=()=>lessons.filter(x=>isDone(x.id)).length;
 const isConfident=id=>saved.completed?.[id]?.selfRating==='gotit'&&!saved.revisit?.[id];
@@ -122,7 +124,7 @@ function review(){
  return '<section class="page"><div class="hero"><div><p class="eyebrow">Learn · Test · Return</p><h1>Revision notebook</h1><p class="subtitle">Dated recall sessions, difficult concepts and wrong source questions are tracked independently. Previous attempts remain saved.</p></div></div><div class="panel"><h2>Recall due · '+due.length+'</h2>'+recallRows(due,'Due')+'</div><div class="panel"><h2>Upcoming recall · '+upcoming.length+'</h2>'+recallRows(upcoming,'Scheduled')+'</div><div class="panel"><h2>'+ids.length+' lessons to revisit</h2>'+lessonRows+'</div><div class="panel"><h2>'+missed.length+' missed questions</h2>'+questionRows+'</div><p class="tiny muted">The 3, 7, 14, 30 and 60-day sequence is a fixed revision aid, not a scientifically verified measure of mastery.</p></section>';
 }
 function practice(){
- return '<section class="page"><div class="hero"><div><p class="eyebrow">Examination preparation</p><h1>Practice by chapter.</h1><p class="subtitle">Use 250 original manuscript MCQs and 31 source models, plus explicitly labelled development practice in chapters 6 and 14. Original practice is not an authentic FPSC past-paper question. Independent academic approval is pending.</p></div></div><div class="panel">'+catalog.chapters.map(c=>'<div class="list-row"><div><strong>'+safe(c.title)+'</strong><p>Chapter '+c.id+' · '+c.questionCount+' MCQs · '+c.analyticalCount+' model answers</p></div><button class="btn small" data-practice="'+c.id+'">Practise</button></div>').join('')+'</div><p class="tiny muted">Earlier practice and recall attempts remain in your study records. Export a personal backup if you need one.</p><button class="btn small" data-action="exporthistory">Export my learning records</button></section>';
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">Examination preparation</p><h1>Practice by chapter.</h1><p class="subtitle">Use 250 original manuscript MCQs and 31 source models, plus explicitly labelled development practice in chapters 6 and 14. Original practice is not an authentic FPSC past-paper question. Independent academic approval is pending.</p></div></div>'+assessments.home()+'<div class="panel">'+catalog.chapters.map(c=>'<div class="list-row"><div><strong>'+safe(c.title)+'</strong><p>Chapter '+c.id+' · '+c.questionCount+' MCQs · '+c.analyticalCount+' model answers</p></div><button class="btn small" data-practice="'+c.id+'">Practise</button></div>').join('')+'</div><p class="tiny muted">Earlier practice and recall attempts remain in your study records. Export a personal backup if you need one.</p><button class="btn small" data-action="exporthistory">Export my learning records</button></section>';
 }
 async function loadChapter(id){
  id=Number(id);if(chapterCache.has(id))return chapterCache.get(id);
@@ -138,7 +140,7 @@ function blocks(html){
  let result=[];
  for(const el of [...div.children]){
    let text=(el.textContent||'').trim();if(!text)continue;
-   if(el.tagName==='P'&&nwords(text)>205&&!el.querySelector('code,math,span.math,pre')){
+   if(el.tagName==='P'&&nwords(text)>205&&!el.querySelector('code,math,span.math,pre')&&!text.includes('$')){
       const sentences=text.match(/[^.!?]+(?:[.!?]+|$)/g)||[text];let run='';
       for(const s of sentences){if(nwords(run+' '+s)>120&&run.trim()){result.push('<p>'+safe(run.trim())+'</p>');run=''}run+=' '+s}
       if(run.trim())result.push('<p>'+safe(run.trim())+'</p>');
@@ -147,32 +149,9 @@ function blocks(html){
  return result.length?result:['<p>No study text was found for this lesson.</p>'];
 }
 function questionFor(s,c){
- const explicit=c.questions.find(q=>q.lessonId===s.id&&q.conceptId);
- if(explicit)return explicit;
- // Match each published question to only one suitable lesson in its chapter.
- // Never repeat the same chapter-wide MCQ across several successive lessons.
- if(!c._lessonQuestions){
-   const excluded=new Set('their there these those which where would should about because under between during after other while could from have that this with what when into them were they more such known both used always different occur depends process produces often each most than also however using through'.split(' '));
-   const words=t=>new Set((String(t).toLowerCase().match(/[a-z]{4,}/g)||[]).filter(w=>!excluded.has(w)));
-   const ranked=[];
-   for(const q of c.questions){
-     const question=words(q.prompt+' '+q.options[q.answer]);
-     for(const sec of c.sections){
-       const title=words(sec.title),body=words(sec.text);
-       let score=0;
-       for(const w of question){if(title.has(w))score+=6;else if(body.has(w))score+=1}
-       if(score>=4)ranked.push({q,sec,score});
-     }
-   }
-   ranked.sort((a,b)=>b.score-a.score);
-   const assigned={},used=new Set();
-   for(const row of ranked){
-     if(assigned[row.sec.id]||used.has(row.q.id))continue;
-     assigned[row.sec.id]=row.q;used.add(row.q.id);
-   }
-   c._lessonQuestions=assigned;
- }
- return c._lessonQuestions[s.id]||null;
+ // Every retained link is explicit and versioned as an editorial draft.
+ // A missing mapping produces a visible assessment gap rather than a guessed question.
+ return c.questions.find(q=>q.lessonId===s.id&&q.conceptId)||null;
 }
 function modelFrame(title,controls,graphic,note,reference,label){
  return '<div class="model" aria-label="'+safe(label||title)+'"><p class="eyebrow">'+safe(title)+'</p><div class="tabs">'+controls+'</div><div class="science-graphic">'+graphic+'</div><p class="tiny muted">'+safe(note)+'</p><p class="tiny"><a href="'+reference+'" target="_blank" rel="noopener noreferrer">Scientific reference ↗</a></p></div>';
@@ -210,12 +189,12 @@ function lesson(s,c){
   content='<div class="lesson-card"><p class="segment-note">Understand · Section '+(beat+1)+' of '+pieces.length+'</p><h2>'+safe(s.title)+'</h2>'+(beat===0?teachingFoundation(s):'')+'<div class="study-copy">'+pieces[beat]+'</div>'+(beat===0?visual(s):'')+'<div class="lesson-bottom"><button class="btn" data-action="prevbeat" '+(!beat?'disabled':'')+'>Previous</button><span class="tiny muted">Read · Think · Understand</span><button class="btn primary" data-action="nextbeat">'+(beat===pieces.length-1?(q?'Check understanding':'Write your explanation'):'Next explanation')+' →</button></div></div>';
  }else if(ui.stage==='question'&&q){
   const selected=ui.selected, answered=!!selected;
-  content='<div class="lesson-card"><p class="segment-note">Apply · Source question '+safe(q.id)+'</p><h2>'+safe(q.prompt)+'</h2><p class="muted">'+(q.lessonId?'Explicitly linked to this lesson. '+(q.origin==='original-practice'?'Original practice; not an FPSC past-paper question.':'Original manuscript question.'):'Provisional keyword match from the chapter; lesson relevance has not been editorially approved.')+'</p><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(answered?(k===q.answer?'correct':k===selected?'wrong':''):k===selected?'chosen':'')+'" data-choice="'+k+'" '+(answered?'disabled':'')+'><b>'+k+'</b><span>'+safe(v)+'</span></button>').join('')+'</div>'+(answered?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct.':'Review the explanation.')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Review the explanation</button><button class="btn primary" data-action="torecall" '+(!answered?'disabled':'')+'>Explain it yourself →</button></div></div>';
+  content='<div class="lesson-card"><p class="segment-note">Apply · Source question '+safe(q.id)+'</p><h2>'+safe(q.prompt)+'</h2><p class="muted">'+(q.lessonId?'Editorial draft link to this lesson. '+(q.origin==='original-practice'?'Original practice; not an FPSC past-paper question.':'Original manuscript question.'):'Provisional keyword match from the chapter; lesson relevance has not been editorially approved.')+'</p><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(answered?(k===q.answer?'correct':k===selected?'wrong':''):k===selected?'chosen':'')+'" data-choice="'+k+'" '+(answered?'disabled':'')+'><b>'+k+'</b><span>'+safe(v)+'</span></button>').join('')+'</div>'+(answered?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct.':'Review the explanation.')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Review the explanation</button><button class="btn primary" data-action="torecall" '+(!answered?'disabled':'')+'>Explain it yourself →</button></div></div>';
  }else{
   const draft=ui.draft||saved.drafts?.[s.id]||'',sample=s.teaching?.explanationHtml||pieces.slice(0,Math.min(pieces.length,3)).join(''),revealed=ui.reveal,checklist=sourceChecklist(s);
   content='<div class="lesson-card"><p class="segment-note">Recall · Closed-book explanation</p><h2>Can you explain '+safe(s.title.toLowerCase())+'?</h2><p class="muted">Write the mechanism, evidence, distinction or application in your own words. Include an example where the original lesson provides one. Your response is for self-review; it is not automatically graded.</p><textarea class="textarea" id="recall" placeholder="Explain the idea here, using your own words...">'+safe(draft)+'</textarea>'+(revealed?'<div class="compare"><h3>Compare with the source</h3><div class="study-copy">'+sample+'</div>'+checklist+'<button class="btn small" data-action="fullsource">Read the complete section</button><p class="muted tiny">Decide what you explained correctly and what needs another reading.</p><div class="score-group"><button class="btn" data-grade="gotit">I understood</button><button class="btn" data-grade="partial">Partly clear</button><button class="btn" data-grade="again">Repeat</button></div></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Read again</button>'+(revealed?'<button class="btn primary" data-action="finish" '+(!ui.grade?'disabled':'')+'>Save & finish →</button>':'<button class="btn primary" data-action="reveal" '+(nwords(draft)<16?'disabled':'')+'>Compare with the book →</button>')+'</div></div>';
  }
- return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button><span class="muted tiny"> / '+safe(c.part)+' / Chapter '+c.id+' / Lesson '+safe(s.number)+'</span></div><p class="eyebrow">'+(s.teaching?'Teaching draft + original reference':'Original source')+' · '+s.words+' words · General Science Part I</p><h1 class="lesson-title">'+safe(s.title)+'</h1><div class="progress-meta"><span>'+current+' of '+total+' learning steps</span><span>'+Math.round(current/total*100)+'%</span></div><div class="track"><div class="fill" style="width:'+(current/total*100)+'%"></div></div>'+content+'<div class="flex"><button class="btn small" data-action="fullsource">Complete reference</button><button class="btn small" data-action="bookmark">'+(saved.bookmarks?.[s.id]?'Remove bookmark':'Bookmark')+'</button><button class="btn small" data-action="markreview">Add to revision</button></div>'+(s.teaching?'<details class="panel"><summary>Revision sheet and source record</summary><ul>'+s.teaching.revision.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul><p>'+safe(s.teaching.verification.sourceTitle)+' · '+safe(s.teaching.verification.publisher)+'</p><a target="_blank" rel="noopener noreferrer" href="'+safe(s.teaching.verification.sourceUrl)+'">Read supporting source</a><p class="tiny">'+safe(s.teaching.verification.reviewedAt)+' · '+safe(s.teaching.verification.reviewer)+'</p></details>':'')+'<p class="tiny muted">Content is drawn from the CSS VISTA General Science manuscript. Questions and source statements remain subject to editorial review.</p></section>';
+ return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button><span class="muted tiny"> / '+safe(c.part)+' / Chapter '+c.id+' / Lesson '+safe(s.number)+'</span></div><p class="eyebrow">'+(s.teaching?'Teaching draft + original reference':'Original source')+' · '+s.words+' words · General Science Part I</p><h1 class="lesson-title">'+safe(s.title)+'</h1><div class="progress-meta"><span>'+current+' of '+total+' learning steps</span><span>'+Math.round(current/total*100)+'%</span></div><div class="track"><div class="fill" style="width:'+(current/total*100)+'%"></div></div>'+content+(!q?'<p class="notice">No explicitly mapped MCQ is available for this lesson yet. Written recall is self-review and does not establish assessed understanding.</p>':'')+'<div class="flex"><button class="btn small" data-action="fullsource">Complete reference</button><button class="btn small" data-action="bookmark">'+(saved.bookmarks?.[s.id]?'Remove bookmark':'Bookmark')+'</button><button class="btn small" data-action="markreview">Add to revision</button></div>'+(s.teaching?'<details class="panel"><summary>Revision sheet and source record</summary><ul>'+s.teaching.revision.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul><p>'+safe(s.teaching.verification.sourceTitle)+' · '+safe(s.teaching.verification.publisher)+'</p><a target="_blank" rel="noopener noreferrer" href="'+safe(s.teaching.verification.sourceUrl)+'">Read supporting source</a><p class="tiny">'+safe(s.teaching.verification.reviewedAt)+' · '+safe(s.teaching.verification.reviewer)+'</p></details>':'')+'<p class="tiny muted">Content is drawn from the CSS VISTA General Science manuscript. Questions and source statements remain subject to editorial review.</p></section>';
 }
 function finishedView(){
  const index=lessons.findIndex(s=>s.id===ui.id),next=lessons.slice(index+1).find(s=>!isDone(s.id))||lessons.slice(0,index+1).find(s=>!isDone(s.id));
@@ -322,7 +301,7 @@ function exportLearningRecords(){
 }
 function fullSource(){
  let s=chapterCache.get(byId.get(ui.id).chapter)?.sections.find(s=>s.id===ui.id);
- if(!s)return;const dialog=document.getElementById('reference');dialog.querySelector('h2').textContent=s.number+' · '+s.title;dialog.querySelector('.ref-source').innerHTML=s.html;dialog.showModal();
+ if(!s)return;const dialog=document.getElementById('reference');dialog.querySelector('h2').textContent=s.number+' · '+s.title;dialog.querySelector('.ref-source').innerHTML=s.html;window.CSSVistaGSAMath?.render(dialog.querySelector('.ref-source'),{sourceText:s.text});dialog.showModal();
 }
 function draw(){
  const focused=document.activeElement;const focusAttributes=focused&&root.contains(focused)?[...focused.attributes].filter(a=>a.name==='id'||a.name.startsWith('data-')).map(a=>[a.name,a.value]):[];
@@ -335,6 +314,7 @@ function draw(){
  if(ui.view==='library')content+=library();
  if(ui.view==='review')content+=review();
  if(ui.view==='practice')content+=practice();
+ if(ui.view==='assessment')content+=assessments.render();
  if(ui.view==='lesson'){
   const item=byId.get(ui.id),ch=item&&chapterCache.get(item.chapter),s=ch?.sections.find(x=>x.id===ui.id);
   content+=s?lesson({...s,words:item.words},ch):'<div class="spinner">Select a lesson from your course.</div>';
@@ -344,6 +324,7 @@ function draw(){
  if(ui.view==='chapter')content+=chapterPractice(chapterCache.get(ui.chapter));
  if(ui.view==='written'){const c=chapterCache.get(ui.chapter);content+=written(c,c.analytical.find(x=>x.id===ui.opening))}
  root.innerHTML=heading()+content;
+ window.CSSVistaGSAMath?.render(root,{sourceText:ui.view==='lesson'?chapterCache.get(byId.get(ui.id)?.chapter)?.sections.find(s=>s.id===ui.id)?.text||'':''});
  if(focusAttributes.length){const control=[...root.querySelectorAll('button,input,textarea,select')].find(el=>focusAttributes.every(([key,value])=>el.getAttribute(key)===value));if(control)control.focus({preventScroll:true});else{const heading=root.querySelector('h2,h1');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true})}}}
 
  // Keep one natural page scrollbar when embedded in My CSS VISTA.
@@ -351,6 +332,7 @@ function draw(){
 }
 root.addEventListener('click',async e=>{
  const t=e.target.closest('button');if(!t)return;if(accountChanged){if(t.dataset.action==='reloadaccount')location.reload();return}if(ui.busy)return;
+ if(assessments.handle(t))return;
  if(t.dataset.view){ui.view=t.dataset.view;ui.error='';draw();scrollTo({top:0,behavior:'instant'});return}
  if(t.dataset.lesson){await openLesson(t.dataset.lesson);return}
  if(t.dataset.reviewQuestion){
@@ -451,8 +433,8 @@ window.addEventListener('message',e=>{
  const incoming=e.data.snapshot;if(!incoming||typeof incoming!=='object')return;
  const previousOwner=binding?.owner;const previouslyBound=binding!==null;
  const metadata=e.data.storage;if(metadata&&typeof metadata.key==='string'&&(metadata.key===KEY||metadata.key.startsWith('cssvista:reset-data:v1:')&&metadata.key.endsWith(encodeURIComponent(KEY)))){storageKey=metadata.key;binding={owner:metadata.owner||null,generation:metadata.generation||null}}else{storageKey=KEY;binding={owner:localStorage.getItem('cssvista:progress-owner'),generation:null}}
- if(e.data.preserveView&&previouslyBound&&previousOwner===binding.owner){saved={...defaults(),...incoming};draw();return}
- saved={...defaults(),...incoming};ui.id=byId.has(saved.last)?saved.last:lessons[0]?.id;ui.view='course';ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;draw();
+ if(e.data.preserveView&&previouslyBound&&previousOwner===binding.owner){saved={...defaults(),...incoming};assessments.reconcile();draw();return}
+ saved={...defaults(),...incoming};ui.id=byId.has(saved.last)?saved.last:lessons[0]?.id;ui.view='course';ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;assessments.reconcile();draw();
 });
 document.getElementById('close-reference').addEventListener('click',()=>document.getElementById('reference').close());
 function eclipseSvg(kind){
@@ -488,7 +470,7 @@ function moonSvg(phase){
   const response=await fetch('/gsa-tutor/content/catalog.json',{cache:'force-cache'});if(!response.ok)throw Error('Course catalogue could not be loaded');
   catalog=await response.json();lessons=catalog.chapters.flatMap(c=>c.sections.map(s=>({...s,chapter:c.id,chapterTitle:c.title,part:c.part})));byId=new Map(lessons.map(s=>[s.id,s]));
   if(lessons.length!==141||catalog.chapters.length!==28)throw Error('The course catalogue is incomplete');
-  ui.id=byId.has(saved.last)?saved.last:lessons[0].id;ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;draw();
+  ui.id=byId.has(saved.last)?saved.last:lessons[0].id;ui.setupDays=savedPlan()?.days||20;ui.setupDate=savedPlan()?.startDate||now();ui.setupRestDays=[...(savedPlan()?.restDays||[])];ui.setupDailyMinutes=savedPlan()?.dailyMinutes||90;assessments.reconcile();draw();
  }catch(e){root.innerHTML='<div class="panel" role="alert"><h2>Course temporarily unavailable</h2><p>'+safe(e.message)+'</p><button class="btn" onclick="location.reload()">Reload course</button></div>'}
 })();
 })();

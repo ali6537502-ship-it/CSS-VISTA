@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
+import {webcrypto} from 'node:crypto'
 import { JSDOM } from 'jsdom'
 
 const html=fs.readFileSync('public/gsa-tutor/studio.html','utf8')
@@ -12,6 +13,7 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms))
 async function open(saved,storage={}){
  const requests=[]
  const dom=new JSDOM(html,{url:'https://www.css-vista.com/gsa-tutor/studio.html',runScripts:'outside-only',pretendToBeVisual:true,beforeParse(window){if(saved)window.localStorage.setItem(KEY,JSON.stringify(saved));for(const [key,value]of Object.entries(storage))window.localStorage.setItem(key,typeof value==='string'?value:JSON.stringify(value))}})
+ Object.defineProperty(dom.window.crypto,'subtle',{value:webcrypto.subtle});dom.window.TextEncoder=TextEncoder
  dom.window.scrollTo=()=>{}
  dom.window.fetch=async url=>{
    requests.push(String(url))
@@ -22,6 +24,8 @@ async function open(saved,storage={}){
    return {ok:false,status:404}
  }
  dom.window.eval(fs.readFileSync('public/gsa-tutor/learning-engine.js','utf8'))
+ dom.window.eval(fs.readFileSync('public/gsa-tutor/assessment-engine.js','utf8'))
+ dom.window.eval(fs.readFileSync('public/gsa-tutor/assessment-ui.js','utf8'))
  dom.window.eval(script)
  await wait(30)
  return {dom,requests,document:dom.window.document,click(selector){const button=dom.window.document.querySelector(selector);assert.ok(button,selector+' unavailable');button.click()}}
@@ -418,5 +422,49 @@ test('topic-specific written comparison retains the learner response and honest 
  assert.equal(record.selfAwarded,1)
  assert.equal(record.evaluation,'learner-self-evaluation')
  assert.match(p.document.getElementById('app').textContent,/not an independently assessed mark/)
+ p.dom.window.close()
+})
+
+test('assessment centre retains responses across reload and hides keys until submission',async()=>{
+ const p=await open();p.click('[data-view="practice"]')
+ p.document.getElementById('assessment-count').value='5';p.click('[data-assessment-start]');await wait(160)
+ assert.ok(p.document.querySelector('[data-assessment-choice]'))
+ assert.equal(p.document.querySelectorAll('.assessment-explanation').length,0)
+ let state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),a=p.dom.window.CSSVistaGSAAssessment.hydrateAttempt(Object.values(state.assessmentAttempts)[0],state.assessmentQuestionSnapshots)
+ assert.equal(new Set(a.questions.map(q=>q.domain)).size,5)
+ p.click('[data-assessment-choice="'+a.questions[0].answer+'"]')
+ state=JSON.parse(p.dom.window.localStorage.getItem(KEY));p.dom.window.close()
+ const q=await open(state);q.click('[data-view="practice"]');q.click('[data-assessment-open="'+a.id+'"]')
+ assert.equal(q.document.querySelectorAll('[data-assessment-choice]').length,4)
+ q.click('[data-assessment-submit]')
+ assert.match(q.document.getElementById('app').textContent,/1 \/ 5 correct/)
+ assert.match(q.document.getElementById('app').textContent,/4 unanswered/)
+ assert.equal(q.document.querySelectorAll('.assessment-explanation').length,5)
+ q.dom.window.close()
+})
+test('cumulative practice refuses untagged content and insufficient question counts remain explicit',async()=>{
+ const p=await open({completed:{'c6-s6-4':{at:'2026-11-12',selfRating:'gotit'}}})
+ p.click('[data-view="practice"]');p.document.getElementById('assessment-mode').value='cumulative';p.click('[data-assessment-start]');await wait(160)
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),a=p.dom.window.CSSVistaGSAAssessment.hydrateAttempt(Object.values(state.assessmentAttempts)[0],state.assessmentQuestionSnapshots)
+ assert.equal(a.questions.length,2);assert.equal(a.requestedCount,15)
+ assert.ok(a.questions.every(q=>q.lessonId==='c6-s6-4'));p.dom.window.close()
+})
+test('expired assessment reload shows results and rejects further answers',async()=>{
+ const source=chapter(6).questions[0],at='2026-01-01T10:00:00Z',id='expired'
+ const p=await open({assessmentAttempts:{[id]:{id,at,mode:'timed',questions:[{...source,domain:'Physical Sciences'}],deadline:'2026-01-01T10:01:00Z',scoring:'one point'}},assessmentEvents:{}})
+ p.click('[data-view="practice"]');p.click('[data-assessment-open="expired"]')
+ assert.equal(p.document.querySelectorAll('[data-assessment-choice]').length,0)
+ assert.match(p.document.getElementById('app').textContent,/time-expired/)
+ assert.match(p.document.getElementById('app').textContent,/0 \/ 1 correct/)
+ p.dom.window.close()
+})
+test('failed question-bank download does not create a partial assessment or discard saved attempts',async()=>{
+ const p=await open({assessmentAttempts:{},drafts:{kept:'Existing writing'}})
+ p.click('[data-view="practice"]');const fetch=p.dom.window.fetch
+ p.dom.window.fetch=async url=>String(url).includes('chapter-14')?{ok:false,status:503}:fetch(url)
+ p.click('[data-assessment-start]');await wait(160)
+ assert.match(p.document.getElementById('app').textContent,/HTTP 503/)
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)||'{"assessmentAttempts":{}}')
+ assert.equal(Object.keys(state.assessmentAttempts).length,0)
  p.dom.window.close()
 })

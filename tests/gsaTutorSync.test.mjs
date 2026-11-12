@@ -115,3 +115,13 @@ test('independent concept and written self-evaluation histories survive synchron
   assert.equal(Object.keys(result.writingAttempts).length,2)
  }
 })
+
+test('same assessment retains concurrent device answer and submission events independently',()=>{
+ const definition={id:'assessment-1',at:t0,questions:[{id:'q1',answer:'B'}]}
+ const cloud={[key]:{assessmentAttempts:{'assessment-1':definition},assessmentEvents:{first:{at:t1,attemptId:'assessment-1',questionId:'q1',selected:'A',type:'answer'}}}}
+ const local={[key]:{assessmentAttempts:{'assessment-1':definition},assessmentEvents:{second:{at:t2,attemptId:'assessment-1',type:'submit'}}}}
+ for(const merged of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+  assert.equal(Object.keys(merged.assessmentEvents).length,2)
+  assert.deepEqual(merged.assessmentAttempts['assessment-1'],definition)
+ }
+})
