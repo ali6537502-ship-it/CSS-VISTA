@@ -73,7 +73,11 @@ function dp_validate_upload(array $file): array {
     $parser=cssv_env('CSSV_QPDF_PATH') ?: '/usr/bin/qpdf';
     if (!is_executable($parser) || !is_callable('exec')) throw new RuntimeException('PDF validation is unavailable. Configure the server qpdf parser before uploading.');
     exec(escapeshellarg($parser).' --check '.escapeshellarg($tmp).' 2>&1',$lines,$code);
-    if ($code!==0) throw new InvalidArgumentException('The PDF failed structural validation. Export a fresh PDF and retry.');
+    if ($code!==0) {
+        error_log('CSSV Daily PDF: structural parser exit status '.(int)$code);
+        if(getenv('CI')==='true' && getenv('CSSV_DB_NAME')==='cssvista_briefing_test') error_log('CSSV isolated PDF parser: '.implode(' | ',$lines));
+        throw new InvalidArgumentException('The PDF failed structural validation. Export a fresh PDF and retry.');
+    }
     exec(escapeshellarg($parser).' --json '.escapeshellarg($tmp).' 2>/dev/null',$json,$code);
     $structure=json_decode(implode("\n",$json),true);
     if($code!==0 || !is_array($structure)) throw new InvalidArgumentException('Unable to inspect PDF structure.');

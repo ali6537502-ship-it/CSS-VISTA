@@ -54,3 +54,6 @@ jobs:
           php -S 127.0.0.1:4174 -t public > test-artifacts/daily-pdf-server.log 2>&1 &
           node -e "const run=async()=>{for(let i=0;i<30;i++){try{await fetch('http://127.0.0.1:4174/api/daily-pdf.php');return}catch{}await new Promise(r=>setTimeout(r,300))}process.exit(1)};run()"
           node tests/daily-pdf/integration.mjs
+      - name: Isolated publishing diagnostics on failure
+        if: failure()
+        run: tail -n 100 test-artifacts/daily-pdf-server.log
