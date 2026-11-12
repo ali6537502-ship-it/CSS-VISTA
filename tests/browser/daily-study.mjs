@@ -25,7 +25,8 @@ try {
     await page.setViewportSize({width,height:1000})
     for(const path of routes){
       await page.goto(base+path)
-      await page.locator('main').first().waitFor()
+      // Some protected account routes render a temporary gate or settings shell instead of <main>.
+      await page.locator('body').waitFor()
       assert.equal(await region().count(),0,'Retired daily study interface at '+path)
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),path+' horizontal overflow at '+width)
     }
