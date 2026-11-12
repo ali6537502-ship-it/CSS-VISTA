@@ -20,6 +20,7 @@ import {
 } from '../src/data/routeRegistry.mjs'
 import { getAdRoutePolicy } from '../src/lib/ads.ts'
 import { loadGeneratedPastPapers } from '../scripts/lib/past-paper-registry.mjs'
+import { pmsVistaSubjectMeta } from '../src/data/pmsVistaMeta.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
@@ -71,7 +72,7 @@ if (built) {
 
 /** Indexable routes: real content, self-canonical, indexable robots, in sitemap. */
 const INDEXABLE = [
-  '/', '/start-css', '/subjects/compulsory', '/subjects/compulsory/essay',
+  '/', '/start-css', '/pms-vista', '/subjects/compulsory', '/subjects/compulsory/essay',
   '/subjects/compulsory/pakistan-affairs', '/subjects/compulsory/islamic-studies',
   '/subjects/optional', '/fpsc-syllabus', '/past-papers', '/notes', '/essay',
   '/mentors', '/services', '/analysis', '/psych-viva', '/fpsc-updates',
@@ -114,6 +115,27 @@ test('indexable routes are served with real content, self-canonical and indexabl
     assert.equal(/What you can do here/.test(body), false, `${path} contains retired template copy`)
     assert.equal(/\b(Loading|under construction|coming soon)\b/i.test(body), false, `${path} shows a placeholder state`)
   }
+})
+
+test('PMS Vista subject pages are crawlable, self-canonical, rendered from real syllabus and included in the sitemap', { skip: !built }, () => {
+  assert.equal(pmsVistaSubjectMeta.length, 40)
+  const hub = served('/pms-vista')
+  assert.match(text(hub), /Free PMS preparation in Punjab/)
+  assert.match(text(hub), /Updated Punjab PMS syllabus/)
+  for (const subject of pmsVistaSubjectMeta) {
+    const path = '/pms-vista/syllabus/' + subject.id
+    const route = findRouteDefinition(path)
+    assert.equal(route?.indexable,true,path)
+    assert.equal(route?.access,'public',path)
+    const html = served(path)
+    assert.match(metaRobots(html),/^index, follow/,path)
+    assert.equal(canonicalOf(html), CANONICAL_ORIGIN + path,path)
+    assert.ok(sitemapUrls.has(CANONICAL_ORIGIN + path),path+' absent from sitemap')
+    assert.match(text(html), new RegExp('PMS.*syllabus|PMS.*study guide','i'),path)
+    assert.match(html,/<h1\b/,path)
+    assert.equal(/<meta name="robots" content="noindex/.test(html),false,path)
+  }
+  assert.equal(sitemapUrls.has(CANONICAL_ORIGIN + '/account/tasks'),false,'private planner must not be indexed')
 })
 
 test('noindex routes remain fully served and stay out of the sitemap', { skip: !built }, () => {
