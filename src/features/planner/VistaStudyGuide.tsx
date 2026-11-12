@@ -280,6 +280,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     <section className="vg-resources"><Link to="/account/precis"><BookOpen size={19}/><span><strong>Précis Guide</strong><small>Handbook, writing lessons and practice</small></span></Link><Link to="/study-material/essay-themes"><Sparkles size={19}/><span><strong>Essay Themes 2027</strong><small>Research themes and preparation roadmap</small></span></Link></section>
     {error&&<p role="alert" className="pl-error">{error}</p>}
     {message&&<p role="status" className="pl-success">{message}</p>}
+    {exam==='pms-punjab' && <p className="vg-note"><Link to="/account/tasks?exam=pms-punjab&view=pms">View previous PMS outline and historical checklist</Link></p>}
     <p className="vg-note"><Clock3 size={14}/> Personal schedules and chapter checks are self-reported. Your original tasks, syllabus history and account records are not deleted.</p>
   </div>
 }
