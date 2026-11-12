@@ -11,13 +11,14 @@ const chapter=id=>JSON.parse(fs.readFileSync('public/gsa-tutor/content/chapter-'
 const KEY='cssvista:tool:gsa-tutor:v1'
 const wait=ms=>new Promise(r=>setTimeout(r,ms))
 async function open(saved,storage={}){
- const requests=[]
+ const requests=[],rawRequests=[]
  const dom=new JSDOM(html,{url:'https://www.css-vista.com/gsa-tutor/studio.html',runScripts:'outside-only',pretendToBeVisual:true,beforeParse(window){if(saved)window.localStorage.setItem(KEY,JSON.stringify(saved));for(const [key,value]of Object.entries(storage))window.localStorage.setItem(key,typeof value==='string'?value:JSON.stringify(value))}})
  Object.defineProperty(dom.window.crypto,'subtle',{value:webcrypto.subtle});dom.window.TextEncoder=TextEncoder
  dom.window.scrollTo=()=>{}
  dom.window.fetch=async url=>{
-   requests.push(String(url))
-   const path=String(url)
+   rawRequests.push(String(url))
+   const path=new URL(String(url),'https://www.css-vista.com').pathname
+   requests.push(path)
    if(path.endsWith('/catalog.json'))return {ok:true,json:async()=>catalog}
    const match=path.match(/chapter-(\d+)\.json$/)
    if(match)return {ok:true,json:async()=>chapter(Number(match[1]))}
@@ -28,7 +29,7 @@ async function open(saved,storage={}){
  dom.window.eval(fs.readFileSync('public/gsa-tutor/assessment-ui.js','utf8'))
  dom.window.eval(script)
  await wait(30)
- return {dom,requests,document:dom.window.document,click(selector){const button=dom.window.document.querySelector(selector);assert.ok(button,selector+' unavailable');button.click()}}
+ return {dom,requests,rawRequests,document:dom.window.document,click(selector){const button=dom.window.document.querySelector(selector);assert.ok(button,selector+' unavailable');button.click()}}
 }
 test('course loads only a small catalogue until a chapter is opened',async()=>{
  const p=await open()
@@ -466,5 +467,12 @@ test('failed question-bank download does not create a partial assessment or disc
  assert.match(p.document.getElementById('app').textContent,/HTTP 503/)
  const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)||'{"assessmentAttempts":{}}')
  assert.equal(Object.keys(state.assessmentAttempts).length,0)
+ p.dom.window.close()
+})
+
+test('chapter downloads carry a content revision so stale cached untagged questions cannot replace new mappings',async()=>{
+ const p=await open();p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35)
+ const request=p.rawRequests.find(url=>url.includes('chapter-06.json'))
+ assert.ok(new URL(request,'https://www.css-vista.com').searchParams.get('v'),'New question metadata needs a separate cache key')
  p.dom.window.close()
 })

@@ -2,6 +2,7 @@
 (() => {
 'use strict';
 const KEY='cssvista:tool:gsa-tutor:v1';
+const CONTENT_REVISION='gsa-question-links-20261112';
 let storageKey=KEY,binding=null,accountChanged=false;const embedded=window.parent!==window;
 if(!embedded){try{const owner=localStorage.getItem('cssvista:progress-owner')||null,generation=owner?localStorage.getItem('cssvista:sync-generation:v1:'+owner):null;binding={owner,generation};if(owner&&generation)storageKey=`cssvista:reset-data:v1:${encodeURIComponent(owner)}:${generation}:${encodeURIComponent(KEY)}`}catch{/* Saving reports unavailable storage. */}}
 const root=document.getElementById('app');
@@ -132,7 +133,7 @@ function practice(){
 }
 async function loadChapter(id){
  id=Number(id);if(chapterCache.has(id))return chapterCache.get(id);
- const response=await fetch('/gsa-tutor/content/chapter-'+String(id).padStart(2,'0')+'.json',{cache:'force-cache'});
+ const response=await fetch('/gsa-tutor/content/chapter-'+String(id).padStart(2,'0')+'.json?v='+CONTENT_REVISION,{cache:'force-cache'});
  if(!response.ok)throw Error('Chapter could not be loaded (HTTP '+response.status+').');
  const item=await response.json();if(!Array.isArray(item.sections)||item.id!==id)throw Error('Invalid chapter source');
  item.questions=[...item.questions,...(item.supplementalQuestions||[])];item.analytical=[...item.analytical,...(item.supplementalAnalytical||[])];
