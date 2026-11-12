@@ -168,3 +168,15 @@ test('CSS and PMS share the chapter guide without promoting legacy PDF redirects
   assert.doesNotMatch(guide,/href=\{active\.file\}/)
   assert.doesNotMatch(guide,/Official PDF/)
 })
+
+test('Practice replaces obsolete activity widgets with the original General Science Course',()=>{
+  const practice=readFileSync('src/pages/account/WorkspaceSections.tsx','utf8')
+  const source=readFileSync('src/features/daily-study/Flow.tsx','utf8')
+  assert.match(practice,/General Science Course/)
+  assert.match(practice,/<AccountGSATutorCard\s*\/>/)
+  assert.match(practice,/\/account\/gsa-tutor/)
+  assert.doesNotMatch(practice,/Write with focus/)
+  assert.doesNotMatch(practice,/<FeatureFinder practice\s*\/>/)
+  assert.doesNotMatch(practice,/Open answer timer/)
+  assert.doesNotMatch(source,/pathname\.startsWith\('\/account\/'\)/)
+})
