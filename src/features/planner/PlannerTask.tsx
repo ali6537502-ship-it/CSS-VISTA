@@ -1,6 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { Archive, Check, ClipboardCopy, Clock3, Pencil, Save, X } from 'lucide-react'
 import { getState, updateStudyScheduleTask, type StudyScheduleTask } from '@/lib/store'
+import { essayThemeIndex } from '@/data/essayThemes'
 import { archiveTaskState, isTaskArchived } from '@/lib/myTasks'
 import { subjectVisual } from '@/features/workspace/Visuals'
 import { formatMinutes } from '@/pages/account/shared'
@@ -49,7 +50,7 @@ export default function PlannerTask({ task, refresh, conflict = false }: { task:
       const response = await fetch(path)
       if (!response.ok) throw Error('Unable to read the syllabus.')
       const data = await response.json()
-      const subjects = pms ? pmsGuideSubjects(data) : cssGuideSubjects(data)
+      const subjects = pms ? pmsGuideSubjects(data,essayThemeIndex()) : cssGuideSubjects(data,essayThemeIndex())
       const unit = findGuideUnit(subjects,pms?'pms-punjab':'css',task.syllabusItemId)
       if(!unit)throw Error('The original syllabus item was not found; the task has not been altered.')
       const command=buildVistaNotesCommand(unit)
