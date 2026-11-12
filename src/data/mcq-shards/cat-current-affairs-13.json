@@ -433,5 +433,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/business/energy/rwe-kkr-finalise-16-billion-investment-uk-renewables-2026-11-11/"
+  },
+  {
+    "id": "current-affairs-20261112-aiib",
+    "q": "Which institution agreed a $1.6 billion climate-policy package with Türkiye in November 2026?",
+    "o": [
+      "Asian Infrastructure Investment Bank",
+      "Asian Development Bank",
+      "European Investment Bank",
+      "Islamic Development Bank"
+    ],
+    "a": 0,
+    "e": "The Asian Infrastructure Investment Bank agreed a $1.6 billion climate-policy financing package with Türkiye in November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-host-turkey-aiib-strike-record-16-billion-climate-policy-deal-2026-11-12/"
+  },
+  {
+    "id": "current-affairs-20261112-pakistan-detention",
+    "q": "From which Lahore prison were Uzma Khan and Noreen Niazi released on 12 November 2026?",
+    "o": [
+      "Adiala Jail",
+      "Kot Lakhpat Jail",
+      "District Jail Attock",
+      "Central Jail Karachi"
+    ],
+    "a": 1,
+    "e": "Uzma Khan and Noreen Niazi were released from Kot Lakhpat Jail in Lahore on 12 November 2026, Reuters reported.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/pakistan-ex-pm-imran-khans-sisters-released-jail-local-media-report-2026-11-12/"
+  },
+  {
+    "id": "current-affairs-20261112-apec-envoy",
+    "q": "Who was named Taiwan's envoy to the 2026 APEC leaders' summit in Shenzhen?",
+    "o": [
+      "Morris Chang",
+      "Tsai Ing-wen",
+      "Stan Shih",
+      "Joseph Wu"
+    ],
+    "a": 2,
+    "e": "Acer founder Stan Shih was named Taiwan's representative to the 2026 APEC leaders' summit in Shenzhen.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/taiwan-is-taking-part-apec-china-summit-an-equal-basis-president-says-2026-11-12/"
   }
 ]
