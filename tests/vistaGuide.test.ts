@@ -57,7 +57,7 @@ test('legacy-safe preferences and comprehensive full syllabus command',()=>{
   assert.match(text,/Never invent citations or statistics/)
 })
 test('CSS guide includes a clearly labelled essay activity without pretending it was in syllabus JSON',()=>{
-  const s=cssGuideSubjects({subjects:[{slug:'precis-composition',name:'English (Precis & Composition)',designation:'compulsory',marks:100,sections:[{title:'Writing',items:['Precis']}]}]})
+  const s=cssGuideSubjects({subjects:[{slug:'precis-composition',name:'English (Precis & Composition)',designation:'compulsory',marks:100,sections:[{title:'Writing',items:['Precis']}]}]},[{slug:'education',name:'Education',brief:'A research theme',sections:[{letter:'A',title:'Definitions'}]}])
   assert.ok(s.some(x=>x.id==='essay'))
   assert.match(s.find(x=>x.id==='essay')!.sections[0].title,/not an FPSC syllabus extract/)
   assert.equal(selectedVistaSubjects(s,'css',prefs()).length,2)
