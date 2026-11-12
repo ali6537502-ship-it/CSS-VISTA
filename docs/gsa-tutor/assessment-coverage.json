@@ -1,0 +1,2970 @@
+{
+  "status": "editorial-draft",
+  "sourceQuestions": 250,
+  "originalSupplementalPractice": 4,
+  "approvedQuestions": 0,
+  "lessonsWithChecks": 94,
+  "lessonsWithoutChecks": [
+    "c1-s1-1",
+    "c1-s1-3",
+    "c1-s1-5",
+    "c2-s2-1",
+    "c2-s2-2",
+    "c2-s2-5",
+    "c3-s3-1",
+    "c3-s3-5",
+    "c4-s4-1",
+    "c4-s4-2",
+    "c4-s4-5",
+    "c5-s5-6",
+    "c6-s6-2",
+    "c6-s6-3",
+    "c6-s6-5",
+    "c7-s7-1",
+    "c7-s7-2",
+    "c7-s7-5",
+    "c8-s8-1",
+    "c8-s8-4",
+    "c8-s8-5",
+    "c9-s9-1",
+    "c10-s10-1",
+    "c10-s10-3",
+    "c11-s11-1",
+    "c11-s11-2",
+    "c11-s11-4",
+    "c12-s12-1",
+    "c12-s12-2",
+    "c12-s12-6",
+    "c13-s13-1",
+    "c13-s13-2",
+    "c14-s14-1",
+    "c14-s14-2",
+    "c14-s14-3",
+    "c14-s14-5",
+    "c15-s15-1",
+    "c15-s15-4",
+    "c16-s16-1",
+    "c16-s16-6",
+    "c20-s20-1",
+    "c20-s20-4",
+    "c21-s21-1",
+    "c22-s22-3",
+    "c22-s22-4",
+    "c23-s23-1",
+    "c23-s23-3"
+  ],
+  "lessons": [
+    {
+      "lessonId": "c1-s1-1",
+      "title": "Space, time and the observable universe",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c1-s1-2",
+      "title": "Astronomical distances and measurement",
+      "questionIds": [
+        "D19-Q19",
+        "D20-Q03"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c1-s1-3",
+      "title": "The hot Big Bang model",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c1-s1-4",
+      "title": "Evidence for cosmic evolution",
+      "questionIds": [
+        "D20-Q01",
+        "D20-Q02"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c1-s1-5",
+      "title": "Matter, gravity and the future",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c2-s2-1",
+      "title": "Galaxies and their organization",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c2-s2-2",
+      "title": "How a star forms",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c2-s2-3",
+      "title": "Fusion, energy transport and the Sun",
+      "questionIds": [
+        "D19-Q18"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c2-s2-4",
+      "title": "Brightness, temperature and spectra",
+      "questionIds": [
+        "D20-Q04",
+        "D20-Q05"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c2-s2-5",
+      "title": "Stellar endings and the origin of elements",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c3-s3-1",
+      "title": "Formation and major constituents",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c3-s3-2",
+      "title": "Gravity and orbital motion",
+      "questionIds": [
+        "D19-Q22",
+        "D20-Q06"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c3-s3-3",
+      "title": "Rotation, revolution and seasons",
+      "questionIds": [
+        "D19-Q16",
+        "D20-Q08"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c3-s3-4",
+      "title": "The Moon, phases and eclipses",
+      "questionIds": [
+        "D19-Q17",
+        "D20-Q07"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c3-s3-5",
+      "title": "Tides and connected gravitational effects",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c4-s4-1",
+      "title": "Temperature and the atmospheric energy balance",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c4-s4-2",
+      "title": "Why air exerts pressure",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c4-s4-3",
+      "title": "Humidity, saturation and condensation",
+      "questionIds": [
+        "D20-Q09"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c4-s4-4",
+      "title": "Clouds and precipitation",
+      "questionIds": [
+        "D20-Q11",
+        "D20-Q12"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c4-s4-5",
+      "title": "Global winds and Pakistan's monsoon",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c4-s4-6",
+      "title": "Stability, inversions and forecasting",
+      "questionIds": [
+        "D20-Q10"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c5-s5-1",
+      "title": "Hazard, exposure and vulnerability",
+      "questionIds": [
+        "D19-Q43"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c5-s5-2",
+      "title": "Earthquakes and seismic evidence",
+      "questionIds": [
+        "D19-Q20"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c5-s5-3",
+      "title": "Volcanoes and tsunamis",
+      "questionIds": [
+        "D20-Q13",
+        "D20-Q14"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c5-s5-4",
+      "title": "Floods, slope failures and avalanches",
+      "questionIds": [
+        "D20-Q15"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c5-s5-5",
+      "title": "Cyclones, tornadoes and drought",
+      "questionIds": [
+        "D19-Q21"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c5-s5-6",
+      "title": "Wildfire, urban fire and resilience",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c6-s6-1",
+      "title": "Atomic structure and the periodic system",
+      "questionIds": [
+        "D20-Q20"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c6-s6-2",
+      "title": "Chemical bonding and material properties",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c6-s6-3",
+      "title": "Reactions, acids and oxidation",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c6-s6-4",
+      "title": "Waves, photons and the spectrum",
+      "questionIds": [
+        "GS26-EM-1",
+        "GS26-EM-2"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c6-s6-5",
+      "title": "Radioactivity and nuclear change",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c7-s7-1",
+      "title": "Energy, power and efficiency",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c7-s7-2",
+      "title": "Renewable and non-renewable resources",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c7-s7-3",
+      "title": "Solar, wind and water technologies",
+      "questionIds": [
+        "D19-Q23"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c7-s7-4",
+      "title": "Fission, fusion and reactor operation",
+      "questionIds": [
+        "D20-Q16",
+        "D20-Q17"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c7-s7-5",
+      "title": "Energy conservation and Pakistan applications",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c8-s8-1",
+      "title": "Structure determines function",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c8-s8-2",
+      "title": "Plastics, polymers and environmental behaviour",
+      "questionIds": [
+        "D19-Q24"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c8-s8-3",
+      "title": "Semiconductors and electronic devices",
+      "questionIds": [
+        "D20-Q18",
+        "D20-Q19"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c8-s8-4",
+      "title": "Fertilizers and soil fertility",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c8-s8-5",
+      "title": "Pesticides and integrated pest management",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c9-s9-1",
+      "title": "Cellular organization",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c9-s9-2",
+      "title": "Organelles and division of labour",
+      "questionIds": [
+        "D19-Q26",
+        "D20-Q23",
+        "D20-Q24"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c9-s9-3",
+      "title": "Membrane transport and osmotic balance",
+      "questionIds": [
+        "D19-Q27",
+        "D20-Q21",
+        "D20-Q22"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c9-s9-4",
+      "title": "DNA, genes and replication",
+      "questionIds": [
+        "D20-Q27"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c9-s9-5",
+      "title": "Gene expression and cell division",
+      "questionIds": [
+        "D19-Q28",
+        "D20-Q26"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c10-s10-1",
+      "title": "Chemical foundations of life",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c10-s10-2",
+      "title": "Enzyme action and regulation",
+      "questionIds": [
+        "D20-Q28"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c10-s10-3",
+      "title": "ATP and energy coupling",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c10-s10-4",
+      "title": "Aerobic respiration step by step",
+      "questionIds": [
+        "D19-Q25"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c10-s10-5",
+      "title": "Photosynthesis and plant energy",
+      "questionIds": [
+        "D19-Q34",
+        "D20-Q25"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c11-s11-1",
+      "title": "Classification and evolutionary relationships",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c11-s11-2",
+      "title": "Plant diversity and reproduction",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c11-s11-3",
+      "title": "Water, minerals and sugar transport",
+      "questionIds": [
+        "D20-Q30",
+        "D20-Q31"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c11-s11-4",
+      "title": "Animal diversity",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c11-s11-5",
+      "title": "Fungi, microbes and ecological roles",
+      "questionIds": [
+        "D20-Q29"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c12-s12-1",
+      "title": "Organization and internal balance",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c12-s12-2",
+      "title": "Digestion and absorption",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c12-s12-3",
+      "title": "Breathing, gas exchange and circulation",
+      "questionIds": [
+        "D20-Q33",
+        "D20-Q34",
+        "D20-Q35"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c12-s12-4",
+      "title": "Kidneys and fluid balance",
+      "questionIds": [
+        "D19-Q30",
+        "D20-Q32"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c12-s12-5",
+      "title": "Nervous and endocrine coordination",
+      "questionIds": [
+        "D19-Q29",
+        "D20-Q36",
+        "D20-Q37"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c12-s12-6",
+      "title": "Movement, reproduction and immunity",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c13-s13-1",
+      "title": "Pathogens and transmission",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c13-s13-2",
+      "title": "Polio and diarrhoeal disease",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c13-s13-3",
+      "title": "Malaria and dengue",
+      "questionIds": [
+        "D20-Q39"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c13-s13-4",
+      "title": "Hepatitis viruses and liver disease",
+      "questionIds": [
+        "D19-Q32"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c13-s13-5",
+      "title": "Antibiotics and resistance",
+      "questionIds": [
+        "D19-Q31"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c13-s13-6",
+      "title": "Vaccines, immunity and epidemic prevention",
+      "questionIds": [
+        "D20-Q38",
+        "D20-Q40"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c14-s14-1",
+      "title": "What makes a fuel biological",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c14-s14-2",
+      "title": "Ethanol from sugars, starch and cellulose",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c14-s14-3",
+      "title": "Biodiesel and oil conversion",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c14-s14-4",
+      "title": "Biogas production step by step",
+      "questionIds": [
+        "D19-Q33",
+        "GS26-BIO-1",
+        "GS26-BIO-2"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c14-s14-5",
+      "title": "Sustainability, algae and Pakistan applications",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c15-s15-1",
+      "title": "Earth's connected spheres",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c15-s15-2",
+      "title": "Atmospheric composition and layers",
+      "questionIds": [
+        "D20-Q41",
+        "D20-Q42"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c15-s15-3",
+      "title": "Water compartments and the water cycle",
+      "questionIds": [
+        "D20-Q43"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c15-s15-4",
+      "title": "Minerals, rocks and the rock cycle",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c15-s15-5",
+      "title": "Plate tectonics and Earth's interior",
+      "questionIds": [
+        "D20-Q47"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c15-s15-6",
+      "title": "Ecosystems, biomes and food webs",
+      "questionIds": [
+        "D20-Q44"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c15-s15-7",
+      "title": "Biogeochemical cycles",
+      "questionIds": [
+        "D19-Q36"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c16-s16-1",
+      "title": "Emissions, concentrations and exposure",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c16-s16-2",
+      "title": "Major pollutants and their effects",
+      "questionIds": [
+        "D20-Q52"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c16-s16-3",
+      "title": "Photochemical smog and acid deposition",
+      "questionIds": [
+        "D19-Q37",
+        "D19-Q38",
+        "D20-Q49",
+        "D20-Q50"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c16-s16-4",
+      "title": "Stratospheric ozone depletion",
+      "questionIds": [
+        "D20-Q51"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c16-s16-5",
+      "title": "The greenhouse effect and climate response",
+      "questionIds": [
+        "D19-Q39"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c16-s16-6",
+      "title": "Mitigation, adaptation and international action",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c17-s17-1",
+      "title": "Sources, transport and measurement",
+      "questionIds": [
+        "D15-Q01",
+        "D15-Q02",
+        "D15-Q03",
+        "D15-Q04",
+        "D15-Q05",
+        "D15-Q06",
+        "D15-Q07",
+        "D15-Q08",
+        "D15-Q09",
+        "D15-Q10",
+        "D19-Q40",
+        "D20-Q56"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c17-s17-2",
+      "title": "Nutrients, heat and infectious agents",
+      "questionIds": [
+        "D15-Q11",
+        "D15-Q12",
+        "D15-Q13",
+        "D15-Q14",
+        "D15-Q15",
+        "D15-Q18",
+        "D15-Q19",
+        "D15-Q20"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c17-s17-3",
+      "title": "Chemical and radiological contamination",
+      "questionIds": [
+        "D15-Q21",
+        "D15-Q22",
+        "D15-Q23",
+        "D15-Q24",
+        "D15-Q26",
+        "D15-Q27",
+        "D15-Q28",
+        "D15-Q29",
+        "D20-Q45",
+        "D20-Q53"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c17-s17-4",
+      "title": "Drinking-water quality and Pakistan evidence",
+      "questionIds": [
+        "D15-Q16",
+        "D15-Q17",
+        "D15-Q25",
+        "D15-Q49",
+        "D15-Q50",
+        "D19-Q41"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c18-s18-1",
+      "title": "Drinking-water treatment as a multiple-barrier system",
+      "questionIds": [
+        "D15-Q30",
+        "D15-Q31",
+        "D15-Q32",
+        "D15-Q33",
+        "D15-Q34",
+        "D15-Q35",
+        "D20-Q55"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c18-s18-2",
+      "title": "Municipal wastewater and sludge",
+      "questionIds": [
+        "D15-Q36",
+        "D15-Q37",
+        "D15-Q38",
+        "D15-Q39",
+        "D15-Q40",
+        "D15-Q41",
+        "D15-Q42",
+        "D19-Q35",
+        "D20-Q54"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c18-s18-3",
+      "title": "Soil contamination and remediation",
+      "questionIds": [
+        "D15-Q43",
+        "D15-Q44"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c18-s18-4",
+      "title": "Waste prevention, recovery and disposal",
+      "questionIds": [
+        "D15-Q45",
+        "D15-Q46",
+        "D15-Q47",
+        "D15-Q48",
+        "D20-Q57"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c19-s19-1",
+      "title": "From electromagnetic signals to environmental information",
+      "questionIds": [
+        "D19-Q15",
+        "D20-Q99"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c19-s19-2",
+      "title": "Spectral signatures, indices and measurement resolution",
+      "questionIds": [
+        "D20-Q58"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c19-s19-3",
+      "title": "Geographic data and spatial analysis",
+      "questionIds": [
+        "D19-Q42",
+        "D20-Q59"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c19-s19-4",
+      "title": "GNSS positioning and integrated applications",
+      "questionIds": [
+        "D19-Q13"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c20-s20-1",
+      "title": "Environmental management and evidence",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c20-s20-2",
+      "title": "Environmental Impact Assessment",
+      "questionIds": [
+        "D20-Q60"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c20-s20-3",
+      "title": "Conservation and ecosystem services",
+      "questionIds": [
+        "D20-Q46"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c20-s20-4",
+      "title": "Population change and resource pressure",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c20-s20-5",
+      "title": "Urbanization, footprints and sustainable development",
+      "questionIds": [
+        "D20-Q48"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c21-s21-1",
+      "title": "Food chemistry and energy",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c21-s21-2",
+      "title": "Carbohydrates, fibre and starch behaviour",
+      "questionIds": [
+        "D20-Q64"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c21-s21-3",
+      "title": "Proteins, fats and molecular structure",
+      "questionIds": [
+        "D20-Q61",
+        "D20-Q62",
+        "D20-Q65"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c21-s21-4",
+      "title": "Enzymes, browning and cooking",
+      "questionIds": [
+        "D20-Q63"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c22-s22-1",
+      "title": "Vitamins and physiological function",
+      "questionIds": [
+        "D20-Q66",
+        "D20-Q67",
+        "D20-Q68"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c22-s22-2",
+      "title": "Minerals, absorption and bioavailability",
+      "questionIds": [
+        "D19-Q47",
+        "D20-Q69",
+        "D20-Q70"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c22-s22-3",
+      "title": "Dietary reference values and balanced eating",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c22-s22-4",
+      "title": "Digestion, metabolism and the double burden",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c23-s23-1",
+      "title": "Quality, spoilage and safety",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c23-s23-2",
+      "title": "Foodborne infection, intoxication and contamination",
+      "questionIds": [
+        "D20-Q78"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c23-s23-3",
+      "title": "Adulteration, additives and assessment",
+      "questionIds": [],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c23-s23-4",
+      "title": "HACCP and practical food hygiene",
+      "questionIds": [
+        "D20-Q79"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c23-s23-5",
+      "title": "Food security and Pakistan's food system",
+      "questionIds": [
+        "D20-Q80"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c24-s24-1",
+      "title": "Preservation and water activity",
+      "questionIds": [
+        "D19-Q45",
+        "D20-Q76"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c24-s24-2",
+      "title": "Heating, pasteurization and commercial sterility",
+      "questionIds": [
+        "D19-Q44",
+        "D19-Q46",
+        "D20-Q71",
+        "D20-Q72"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c24-s24-3",
+      "title": "Canning, acidification and process control",
+      "questionIds": [
+        "D20-Q74"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c24-s24-4",
+      "title": "Refrigeration, freezing and cold chains",
+      "questionIds": [
+        "D20-Q75"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c24-s24-5",
+      "title": "Fermentation, irradiation and other barriers",
+      "questionIds": [
+        "D20-Q77"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c24-s24-6",
+      "title": "Packaging and integrated preservation",
+      "questionIds": [
+        "D20-Q73"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c25-s25-1",
+      "title": "A computer as an information-processing system",
+      "questionIds": [
+        "D18-Q01",
+        "D18-Q02"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c25-s25-2",
+      "title": "Processing, memory and storage",
+      "questionIds": [
+        "D18-Q03",
+        "D18-Q04",
+        "D18-Q05",
+        "D18-Q06",
+        "D18-Q07",
+        "D18-Q08",
+        "D18-Q09",
+        "D18-Q10",
+        "D18-Q11",
+        "D18-Q12",
+        "D20-Q81",
+        "D20-Q82",
+        "D20-Q83",
+        "D20-Q84"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c25-s25-3",
+      "title": "Operating systems, programs and algorithms",
+      "questionIds": [
+        "D18-Q13",
+        "D18-Q14",
+        "D18-Q15",
+        "D18-Q20"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c25-s25-4",
+      "title": "Binary, text, images and storage units",
+      "questionIds": [
+        "D18-Q16",
+        "D18-Q17",
+        "D18-Q18",
+        "D18-Q19",
+        "D20-Q85"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c25-s25-5",
+      "title": "Application software, business systems and social media",
+      "questionIds": [
+        "D19-Q48"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c26-s26-1",
+      "title": "Networks and internet operation",
+      "questionIds": [
+        "D18-Q21",
+        "D18-Q22",
+        "D18-Q23",
+        "D18-Q24",
+        "D18-Q25",
+        "D18-Q26",
+        "D18-Q27",
+        "D18-Q28",
+        "D20-Q86",
+        "D20-Q87",
+        "D20-Q88",
+        "D20-Q89"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c26-s26-2",
+      "title": "Signals, modulation and communication quality",
+      "questionIds": [
+        "D19-Q01",
+        "D19-Q02",
+        "D19-Q04"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c26-s26-3",
+      "title": "Cellular mobile communication",
+      "questionIds": [
+        "D19-Q05",
+        "D19-Q06"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c26-s26-4",
+      "title": "Satellites, orbits and navigation distinctions",
+      "questionIds": [
+        "D19-Q07",
+        "D19-Q08",
+        "D19-Q09",
+        "D19-Q10"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c26-s26-5",
+      "title": "Optical fibre and radar ranging",
+      "questionIds": [
+        "D19-Q03",
+        "D19-Q11",
+        "D19-Q12",
+        "D19-Q14"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c27-s27-1",
+      "title": "Data organization and transactions",
+      "questionIds": [
+        "D18-Q29",
+        "D18-Q30",
+        "D18-Q31",
+        "D18-Q32",
+        "D18-Q33",
+        "D20-Q90",
+        "D20-Q91"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c27-s27-2",
+      "title": "Cloud resources and responsibility",
+      "questionIds": [
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D20-Q95"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c27-s27-3",
+      "title": "Security objectives and common threats",
+      "questionIds": [
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c27-s27-4",
+      "title": "Governance and public-service resilience",
+      "questionIds": [
+        "D18-Q40",
+        "D18-Q50"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c28-s28-1",
+      "title": "Intelligent systems and learning approaches",
+      "questionIds": [
+        "D18-Q41",
+        "D18-Q42",
+        "D18-Q43",
+        "D18-Q44"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c28-s28-2",
+      "title": "Training, optimization and evaluation",
+      "questionIds": [
+        "D18-Q45",
+        "D19-Q49",
+        "D20-Q96",
+        "D20-Q97",
+        "D20-Q98"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c28-s28-3",
+      "title": "Neural networks and language processing",
+      "questionIds": [
+        "D18-Q46",
+        "D18-Q47",
+        "D18-Q48"
+      ],
+      "academicApproval": "pending"
+    },
+    {
+      "lessonId": "c28-s28-4",
+      "title": "Robotics, feedback and responsible applications",
+      "questionIds": [
+        "D18-Q49",
+        "D19-Q50",
+        "D20-Q100"
+      ],
+      "academicApproval": "pending"
+    }
+  ],
+  "syllabus": [
+    {
+      "syllabusRef": "fpsc-gs-001",
+      "topic": "Universe",
+      "practiceQuestionIds": [
+        "D20-Q01",
+        "D20-Q02",
+        "D20-Q04",
+        "D20-Q05"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-002",
+      "topic": "Galaxy",
+      "practiceQuestionIds": [
+        "D20-Q01",
+        "D20-Q02",
+        "D20-Q04",
+        "D20-Q05"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-003",
+      "topic": "Light Year",
+      "practiceQuestionIds": [
+        "D19-Q19",
+        "D20-Q01",
+        "D20-Q02",
+        "D20-Q03",
+        "D20-Q04",
+        "D20-Q05"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-004",
+      "topic": "Solar System",
+      "practiceQuestionIds": [
+        "D20-Q01",
+        "D20-Q02",
+        "D20-Q04",
+        "D20-Q05"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-005",
+      "topic": "Sun",
+      "practiceQuestionIds": [
+        "D20-Q01",
+        "D20-Q02",
+        "D19-Q18",
+        "D20-Q04",
+        "D20-Q05"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-006",
+      "topic": "Earth",
+      "practiceQuestionIds": [
+        "D20-Q01",
+        "D20-Q02",
+        "D20-Q04",
+        "D20-Q05",
+        "D19-Q16",
+        "D20-Q08"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-007",
+      "topic": "Astronomical System of Units",
+      "practiceQuestionIds": [
+        "D19-Q19",
+        "D20-Q01",
+        "D20-Q02",
+        "D20-Q03",
+        "D20-Q04",
+        "D20-Q05"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-008",
+      "topic": "Solar Eclipses",
+      "practiceQuestionIds": [
+        "D19-Q17",
+        "D19-Q22",
+        "D20-Q06",
+        "D20-Q07"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-009",
+      "topic": "Lunar Eclipses",
+      "practiceQuestionIds": [
+        "D19-Q17",
+        "D19-Q22",
+        "D20-Q06",
+        "D20-Q07"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-010",
+      "topic": "Rotation",
+      "practiceQuestionIds": [
+        "D19-Q16",
+        "D19-Q22",
+        "D20-Q06",
+        "D20-Q08"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-011",
+      "topic": "Revolution",
+      "practiceQuestionIds": [
+        "D19-Q16",
+        "D19-Q22",
+        "D20-Q06",
+        "D20-Q08"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-012",
+      "topic": "Global Temperature",
+      "practiceQuestionIds": [
+        "D19-Q22",
+        "D20-Q06"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-013",
+      "topic": "Pressure",
+      "practiceQuestionIds": [
+        "D19-Q22",
+        "D20-Q06"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-014",
+      "topic": "Circulation",
+      "practiceQuestionIds": [
+        "D19-Q22",
+        "D20-Q06"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-015",
+      "topic": "Precipitation",
+      "practiceQuestionIds": [
+        "D19-Q22",
+        "D20-Q06",
+        "D20-Q11",
+        "D20-Q12"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-016",
+      "topic": "Humidity",
+      "practiceQuestionIds": [
+        "D19-Q22",
+        "D20-Q06",
+        "D20-Q09"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-017",
+      "topic": "Weather Variations",
+      "practiceQuestionIds": [
+        "D19-Q22",
+        "D20-Q06",
+        "D20-Q10"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-018",
+      "topic": "Earth Quake",
+      "practiceQuestionIds": [
+        "D19-Q20"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-019",
+      "topic": "Volcanic Eruption",
+      "practiceQuestionIds": [
+        "D20-Q13",
+        "D20-Q14"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-020",
+      "topic": "Tsunami",
+      "practiceQuestionIds": [
+        "D20-Q13",
+        "D20-Q14"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-021",
+      "topic": "Floods",
+      "practiceQuestionIds": [
+        "D20-Q15"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-022",
+      "topic": "Avalanche",
+      "practiceQuestionIds": [
+        "D20-Q15"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-023",
+      "topic": "Tropical Cyclone",
+      "practiceQuestionIds": [
+        "D19-Q21"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-024",
+      "topic": "Middle Latitude Cyclone",
+      "practiceQuestionIds": [
+        "D19-Q21"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-025",
+      "topic": "Tornadoes",
+      "practiceQuestionIds": [
+        "D19-Q21"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-026",
+      "topic": "Drought",
+      "practiceQuestionIds": [
+        "D19-Q21"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-027",
+      "topic": "Wildfire",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-028",
+      "topic": "Urban Fire",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-029",
+      "topic": "Disaster Risk Management",
+      "practiceQuestionIds": [
+        "D19-Q43"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-030",
+      "topic": "Sources of Energy",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-031",
+      "topic": "Renewable Energy",
+      "practiceQuestionIds": [
+        "D19-Q23"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-032",
+      "topic": "LED Energy",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-033",
+      "topic": "Solar Energy",
+      "practiceQuestionIds": [
+        "D19-Q23"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-034",
+      "topic": "Wind Energy",
+      "practiceQuestionIds": [
+        "D19-Q23"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-035",
+      "topic": "Non-Renewable Energy",
+      "practiceQuestionIds": [
+        "D20-Q16",
+        "D20-Q17"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-036",
+      "topic": "Energy conservation and its sustainable use",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-037",
+      "topic": "Atomic Structure",
+      "practiceQuestionIds": [
+        "D20-Q20"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-038",
+      "topic": "Chemical Bonding",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-039",
+      "topic": "Electromagnetic Radiations",
+      "practiceQuestionIds": [
+        "GS26-EM-1",
+        "GS26-EM-2"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-040",
+      "topic": "Ceramics",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-041",
+      "topic": "Plastics",
+      "practiceQuestionIds": [
+        "D19-Q24"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-042",
+      "topic": "Semiconductors",
+      "practiceQuestionIds": [
+        "D20-Q18",
+        "D20-Q19"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-043",
+      "topic": "Antibiotics",
+      "practiceQuestionIds": [
+        "D19-Q31"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-044",
+      "topic": "Vaccines",
+      "practiceQuestionIds": [
+        "D20-Q38",
+        "D20-Q40"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-045",
+      "topic": "Fertilizers",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-046",
+      "topic": "Pesticides",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-047",
+      "topic": "Cell Structures and Functions",
+      "practiceQuestionIds": [
+        "D19-Q26",
+        "D19-Q27",
+        "D19-Q28",
+        "D20-Q21",
+        "D20-Q22",
+        "D20-Q23",
+        "D20-Q24",
+        "D20-Q26",
+        "D20-Q27"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-048",
+      "topic": "Nucleus",
+      "practiceQuestionIds": [
+        "D19-Q26",
+        "D19-Q27",
+        "D19-Q28",
+        "D20-Q21",
+        "D20-Q22",
+        "D20-Q23",
+        "D20-Q24",
+        "D20-Q26",
+        "D20-Q27"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-049",
+      "topic": "Mitochondria",
+      "practiceQuestionIds": [
+        "D19-Q26",
+        "D19-Q27",
+        "D19-Q28",
+        "D20-Q21",
+        "D20-Q22",
+        "D20-Q23",
+        "D20-Q24",
+        "D20-Q26",
+        "D20-Q27"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-050",
+      "topic": "Ribosomes",
+      "practiceQuestionIds": [
+        "D19-Q26",
+        "D19-Q27",
+        "D19-Q28",
+        "D20-Q21",
+        "D20-Q22",
+        "D20-Q23",
+        "D20-Q24",
+        "D20-Q26",
+        "D20-Q27"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-051",
+      "topic": "Proteins",
+      "practiceQuestionIds": [
+        "D19-Q25",
+        "D19-Q34",
+        "D20-Q25",
+        "D20-Q61",
+        "D20-Q62",
+        "D20-Q65"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-052",
+      "topic": "Lipids",
+      "practiceQuestionIds": [
+        "D19-Q25",
+        "D19-Q34",
+        "D20-Q25",
+        "D20-Q61",
+        "D20-Q62",
+        "D20-Q65"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-053",
+      "topic": "Carbohydrates",
+      "practiceQuestionIds": [
+        "D19-Q25",
+        "D19-Q34",
+        "D20-Q25",
+        "D20-Q64"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-054",
+      "topic": "Enzymes",
+      "practiceQuestionIds": [
+        "D19-Q25",
+        "D19-Q34",
+        "D20-Q25",
+        "D20-Q28"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-055",
+      "topic": "Plant kingdom similarities and diversities",
+      "practiceQuestionIds": [
+        "D20-Q29",
+        "D20-Q30",
+        "D20-Q31"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-056",
+      "topic": "Animal kingdom similarities and diversities",
+      "practiceQuestionIds": [
+        "D20-Q29",
+        "D20-Q30",
+        "D20-Q31"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-057",
+      "topic": "Human physiology",
+      "practiceQuestionIds": [
+        "D19-Q29",
+        "D19-Q30",
+        "D20-Q32",
+        "D20-Q33",
+        "D20-Q34",
+        "D20-Q35",
+        "D20-Q36",
+        "D20-Q37"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-058",
+      "topic": "Polio causes and prevention",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-059",
+      "topic": "Diarrhea causes and prevention",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-060",
+      "topic": "Malaria causes and prevention",
+      "practiceQuestionIds": [
+        "D20-Q39"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-061",
+      "topic": "Hepatitis causes and prevention",
+      "practiceQuestionIds": [
+        "D19-Q32"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-062",
+      "topic": "Dengue causes and prevention",
+      "practiceQuestionIds": [
+        "D20-Q39"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-063",
+      "topic": "BIO Fuel Method",
+      "practiceQuestionIds": [
+        "D19-Q33",
+        "GS26-BIO-1",
+        "GS26-BIO-2"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-064",
+      "topic": "Atmosphere layered structure",
+      "practiceQuestionIds": [
+        "D19-Q36",
+        "D20-Q41",
+        "D20-Q42"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-065",
+      "topic": "Atmosphere composition",
+      "practiceQuestionIds": [
+        "D19-Q36",
+        "D20-Q41",
+        "D20-Q42"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-066",
+      "topic": "Hydrosphere water cycle",
+      "practiceQuestionIds": [
+        "D19-Q36",
+        "D20-Q43"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-067",
+      "topic": "Major Water Compartments",
+      "practiceQuestionIds": [
+        "D19-Q36",
+        "D20-Q43"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-068",
+      "topic": "Biosphere major biomes",
+      "practiceQuestionIds": [
+        "D19-Q36",
+        "D20-Q44"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-069",
+      "topic": "Lithosphere minerals and rocks",
+      "practiceQuestionIds": [
+        "D19-Q36"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-070",
+      "topic": "Rock Types",
+      "practiceQuestionIds": [
+        "D19-Q36"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-071",
+      "topic": "Plate Tectonics",
+      "practiceQuestionIds": [
+        "D19-Q36",
+        "D20-Q47"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-072",
+      "topic": "Types sources causes and effects",
+      "practiceQuestionIds": [
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-073",
+      "topic": "COx",
+      "practiceQuestionIds": [
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-074",
+      "topic": "Particulate Matter",
+      "practiceQuestionIds": [
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-075",
+      "topic": "NOx",
+      "practiceQuestionIds": [
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-076",
+      "topic": "SOx",
+      "practiceQuestionIds": [
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-077",
+      "topic": "Tropospheric Ozone",
+      "practiceQuestionIds": [
+        "D19-Q37",
+        "D19-Q38",
+        "D20-Q49",
+        "D20-Q50",
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-078",
+      "topic": "Volatile Organic Compounds",
+      "practiceQuestionIds": [
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-079",
+      "topic": "Dioxins",
+      "practiceQuestionIds": [
+        "D20-Q52"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-080",
+      "topic": "Acid-rain",
+      "practiceQuestionIds": [
+        "D19-Q37",
+        "D19-Q38",
+        "D20-Q49",
+        "D20-Q50"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-081",
+      "topic": "Ozone Depletion",
+      "practiceQuestionIds": [
+        "D20-Q51"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-082",
+      "topic": "Greenhouse Effect",
+      "practiceQuestionIds": [
+        "D19-Q39"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-083",
+      "topic": "Global Warming",
+      "practiceQuestionIds": [
+        "D19-Q39"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-084",
+      "topic": "Montreal Protocol",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-085",
+      "topic": "Kyoto Protocol",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-086",
+      "topic": "Types sources causes and effects",
+      "practiceQuestionIds": [
+        "D15-Q01",
+        "D15-Q02",
+        "D15-Q03",
+        "D15-Q04",
+        "D15-Q05",
+        "D15-Q06",
+        "D15-Q07",
+        "D15-Q08",
+        "D15-Q09",
+        "D15-Q10",
+        "D19-Q40",
+        "D20-Q56"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-087",
+      "topic": "Synthetic Organic Chemicals",
+      "practiceQuestionIds": [
+        "D15-Q21",
+        "D15-Q22",
+        "D15-Q23",
+        "D15-Q24",
+        "D15-Q26",
+        "D15-Q27",
+        "D15-Q28",
+        "D15-Q29",
+        "D20-Q45",
+        "D20-Q53"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-088",
+      "topic": "Oxygen Demanding Wastes",
+      "practiceQuestionIds": [
+        "D15-Q01",
+        "D15-Q02",
+        "D15-Q03",
+        "D15-Q04",
+        "D15-Q05",
+        "D15-Q06",
+        "D15-Q07",
+        "D15-Q08",
+        "D15-Q09",
+        "D15-Q10",
+        "D15-Q11",
+        "D15-Q12",
+        "D15-Q13",
+        "D15-Q14",
+        "D15-Q15",
+        "D15-Q18",
+        "D15-Q19",
+        "D15-Q20",
+        "D19-Q40",
+        "D20-Q56"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-089",
+      "topic": "Plant Nutrients",
+      "practiceQuestionIds": [
+        "D15-Q11",
+        "D15-Q12",
+        "D15-Q13",
+        "D15-Q14",
+        "D15-Q15",
+        "D15-Q18",
+        "D15-Q19",
+        "D15-Q20"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-090",
+      "topic": "Thermal Pollution",
+      "practiceQuestionIds": [
+        "D15-Q11",
+        "D15-Q12",
+        "D15-Q13",
+        "D15-Q14",
+        "D15-Q15",
+        "D15-Q18",
+        "D15-Q19",
+        "D15-Q20"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-091",
+      "topic": "Infectious Agents",
+      "practiceQuestionIds": [
+        "D15-Q11",
+        "D15-Q12",
+        "D15-Q13",
+        "D15-Q14",
+        "D15-Q15",
+        "D15-Q18",
+        "D15-Q19",
+        "D15-Q20"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-092",
+      "topic": "Sediments",
+      "practiceQuestionIds": [
+        "D15-Q01",
+        "D15-Q02",
+        "D15-Q03",
+        "D15-Q04",
+        "D15-Q05",
+        "D15-Q06",
+        "D15-Q07",
+        "D15-Q08",
+        "D15-Q09",
+        "D15-Q10",
+        "D19-Q40",
+        "D20-Q56"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-093",
+      "topic": "Radioactivity",
+      "practiceQuestionIds": [
+        "D15-Q21",
+        "D15-Q22",
+        "D15-Q23",
+        "D15-Q24",
+        "D15-Q26",
+        "D15-Q27",
+        "D15-Q28",
+        "D15-Q29",
+        "D20-Q45",
+        "D20-Q53"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-094",
+      "topic": "Heavy Metals",
+      "practiceQuestionIds": [
+        "D15-Q21",
+        "D15-Q22",
+        "D15-Q23",
+        "D15-Q24",
+        "D15-Q26",
+        "D15-Q27",
+        "D15-Q28",
+        "D15-Q29",
+        "D20-Q45",
+        "D20-Q53"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-095",
+      "topic": "Acids",
+      "practiceQuestionIds": [
+        "D15-Q21",
+        "D15-Q22",
+        "D15-Q23",
+        "D15-Q24",
+        "D15-Q26",
+        "D15-Q27",
+        "D15-Q28",
+        "D15-Q29",
+        "D20-Q45",
+        "D20-Q53"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-096",
+      "topic": "Drinking water quality and standards",
+      "practiceQuestionIds": [
+        "D15-Q16",
+        "D15-Q17",
+        "D15-Q25",
+        "D15-Q49",
+        "D15-Q50",
+        "D19-Q41"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-097",
+      "topic": "Solid waste management and disposal",
+      "practiceQuestionIds": [
+        "D15-Q30",
+        "D15-Q31",
+        "D15-Q32",
+        "D15-Q33",
+        "D15-Q34",
+        "D15-Q35",
+        "D15-Q36",
+        "D15-Q37",
+        "D15-Q38",
+        "D15-Q39",
+        "D15-Q40",
+        "D15-Q41",
+        "D15-Q42",
+        "D15-Q43",
+        "D15-Q44",
+        "D15-Q45",
+        "D15-Q46",
+        "D15-Q47",
+        "D15-Q48",
+        "D19-Q35",
+        "D20-Q54",
+        "D20-Q55",
+        "D20-Q57"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-098",
+      "topic": "Remote Sensing",
+      "practiceQuestionIds": [
+        "D19-Q15",
+        "D20-Q58",
+        "D20-Q99"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-099",
+      "topic": "GIS",
+      "practiceQuestionIds": [
+        "D19-Q42",
+        "D20-Q59"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-100",
+      "topic": "Population Planning",
+      "practiceQuestionIds": [
+        "D20-Q46",
+        "D20-Q48",
+        "D20-Q60"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-101",
+      "topic": "Vitamins",
+      "practiceQuestionIds": [
+        "D20-Q66",
+        "D20-Q67",
+        "D20-Q68"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-102",
+      "topic": "Carbohydrates",
+      "practiceQuestionIds": [
+        "D20-Q64"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-103",
+      "topic": "Protein",
+      "practiceQuestionIds": [
+        "D20-Q61",
+        "D20-Q62",
+        "D20-Q65"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-104",
+      "topic": "Fats and oil",
+      "practiceQuestionIds": [
+        "D20-Q61",
+        "D20-Q62",
+        "D20-Q65"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-105",
+      "topic": "Minerals",
+      "practiceQuestionIds": [
+        "D19-Q47",
+        "D20-Q69",
+        "D20-Q70"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-106",
+      "topic": "Fiber",
+      "practiceQuestionIds": [
+        "D20-Q64"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-107",
+      "topic": "Balance Diet",
+      "practiceQuestionIds": [],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-108",
+      "topic": "Bioavailability of Nutrients",
+      "practiceQuestionIds": [
+        "D20-Q63",
+        "D19-Q47",
+        "D20-Q69",
+        "D20-Q70"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-109",
+      "topic": "Appearance",
+      "practiceQuestionIds": [
+        "D20-Q63"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-110",
+      "topic": "Texture",
+      "practiceQuestionIds": [
+        "D20-Q63",
+        "D20-Q64"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-111",
+      "topic": "Flavor",
+      "practiceQuestionIds": [
+        "D20-Q63"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-112",
+      "topic": "Quality of Packed Food",
+      "practiceQuestionIds": [
+        "D20-Q63",
+        "D20-Q73"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-113",
+      "topic": "Quality of Frozen Food",
+      "practiceQuestionIds": [
+        "D20-Q63",
+        "D20-Q75"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-114",
+      "topic": "Food Additives",
+      "practiceQuestionIds": [
+        "D20-Q63"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-115",
+      "topic": "Preservatives",
+      "practiceQuestionIds": [
+        "D20-Q63",
+        "D19-Q45",
+        "D20-Q76"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-116",
+      "topic": "Antioxidants",
+      "practiceQuestionIds": [
+        "D20-Q63"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-117",
+      "topic": "Causes of Food Deterioration",
+      "practiceQuestionIds": [
+        "D20-Q78",
+        "D20-Q79",
+        "D20-Q80"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-118",
+      "topic": "Adulteration",
+      "practiceQuestionIds": [
+        "D20-Q79",
+        "D20-Q80"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-119",
+      "topic": "Food Preservation",
+      "practiceQuestionIds": [
+        "D20-Q79",
+        "D20-Q80",
+        "D19-Q44",
+        "D19-Q45",
+        "D19-Q46",
+        "D20-Q71",
+        "D20-Q72",
+        "D20-Q73",
+        "D20-Q74",
+        "D20-Q75",
+        "D20-Q76",
+        "D20-Q77"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-120",
+      "topic": "Hardware fundamentals",
+      "practiceQuestionIds": [
+        "D18-Q01",
+        "D18-Q02",
+        "D18-Q03",
+        "D18-Q04",
+        "D18-Q05",
+        "D18-Q06",
+        "D18-Q07",
+        "D18-Q08",
+        "D18-Q09",
+        "D18-Q10",
+        "D18-Q11",
+        "D18-Q12",
+        "D20-Q81",
+        "D20-Q82",
+        "D20-Q83",
+        "D20-Q84",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-121",
+      "topic": "Software fundamentals",
+      "practiceQuestionIds": [
+        "D18-Q13",
+        "D18-Q14",
+        "D18-Q15",
+        "D18-Q20",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-122",
+      "topic": "I/O Processing",
+      "practiceQuestionIds": [
+        "D18-Q01",
+        "D18-Q02",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-123",
+      "topic": "Data storage",
+      "practiceQuestionIds": [
+        "D18-Q03",
+        "D18-Q04",
+        "D18-Q05",
+        "D18-Q06",
+        "D18-Q07",
+        "D18-Q08",
+        "D18-Q09",
+        "D18-Q10",
+        "D18-Q11",
+        "D18-Q12",
+        "D18-Q16",
+        "D18-Q17",
+        "D18-Q18",
+        "D18-Q19",
+        "D20-Q81",
+        "D20-Q82",
+        "D20-Q83",
+        "D20-Q84",
+        "D20-Q85",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-124",
+      "topic": "Networking",
+      "practiceQuestionIds": [
+        "D18-Q21",
+        "D18-Q22",
+        "D18-Q23",
+        "D18-Q24",
+        "D18-Q25",
+        "D18-Q26",
+        "D18-Q27",
+        "D18-Q28",
+        "D20-Q86",
+        "D20-Q87",
+        "D20-Q88",
+        "D20-Q89",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-125",
+      "topic": "Internet Standards",
+      "practiceQuestionIds": [
+        "D18-Q21",
+        "D18-Q22",
+        "D18-Q23",
+        "D18-Q24",
+        "D18-Q25",
+        "D18-Q26",
+        "D18-Q27",
+        "D18-Q28",
+        "D20-Q86",
+        "D20-Q87",
+        "D20-Q88",
+        "D20-Q89",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-126",
+      "topic": "Application Software",
+      "practiceQuestionIds": [
+        "D19-Q48",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-127",
+      "topic": "Business Software",
+      "practiceQuestionIds": [
+        "D19-Q48",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-128",
+      "topic": "Social Media Websites",
+      "practiceQuestionIds": [
+        "D19-Q48",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-129",
+      "topic": "Information Systems",
+      "practiceQuestionIds": [
+        "D19-Q48",
+        "D18-Q29",
+        "D18-Q30",
+        "D18-Q31",
+        "D18-Q32",
+        "D18-Q33",
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q90",
+        "D20-Q91",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-130",
+      "topic": "Fundamentals of artificial intelligence",
+      "practiceQuestionIds": [
+        "D18-Q34",
+        "D18-Q35",
+        "D18-Q36",
+        "D18-Q37",
+        "D18-Q38",
+        "D18-Q39",
+        "D18-Q40",
+        "D18-Q50",
+        "D20-Q92",
+        "D20-Q93",
+        "D20-Q94",
+        "D20-Q95",
+        "D18-Q41",
+        "D18-Q42",
+        "D18-Q43",
+        "D18-Q44",
+        "D18-Q45",
+        "D18-Q46",
+        "D18-Q47",
+        "D18-Q48",
+        "D18-Q49",
+        "D19-Q49",
+        "D19-Q50",
+        "D20-Q96",
+        "D20-Q97",
+        "D20-Q98",
+        "D20-Q100"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-131",
+      "topic": "Basics of Wireless Communication",
+      "practiceQuestionIds": [
+        "D19-Q01",
+        "D19-Q02",
+        "D19-Q04"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-132",
+      "topic": "Mobile",
+      "practiceQuestionIds": [
+        "D19-Q05",
+        "D19-Q06"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-133",
+      "topic": "Satellite",
+      "practiceQuestionIds": [
+        "D19-Q07",
+        "D19-Q08",
+        "D19-Q09",
+        "D19-Q10"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-134",
+      "topic": "Surveillance",
+      "practiceQuestionIds": [
+        "D19-Q03",
+        "D19-Q11",
+        "D19-Q12",
+        "D19-Q14"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-135",
+      "topic": "GPS",
+      "practiceQuestionIds": [
+        "D19-Q13",
+        "D19-Q07",
+        "D19-Q08",
+        "D19-Q09",
+        "D19-Q10"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    },
+    {
+      "syllabusRef": "fpsc-gs-136",
+      "topic": "Fiber Optic",
+      "practiceQuestionIds": [
+        "D19-Q03",
+        "D19-Q11",
+        "D19-Q12",
+        "D19-Q14"
+      ],
+      "verifiedPastPaperQuestionIds": [],
+      "status": "draft mappings; scientific review pending"
+    }
+  ]
+}
