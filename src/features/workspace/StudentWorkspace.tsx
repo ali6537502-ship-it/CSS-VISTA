@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useState, type ReactNode } from 'react'
+import { Fragment, lazy, Suspense, useCallback, useEffect, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router'
 import { Home, CalendarDays, BookOpen, PenLine, ChartNoAxesCombined, Library, Settings, PanelLeftClose, PanelLeftOpen, MoreHorizontal, Search, ArrowUpRight, Menu, Dumbbell, GraduationCap, ChevronDown } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
@@ -18,16 +18,22 @@ export default function StudentWorkspace({ children }: { children: ReactNode }) 
   const [mobileOpen,setMobileOpen]=useState(false)
   const [mentorOpen,setMentorOpen]=useState(true)
   const closeMobile=useCallback(()=>setMobileOpen(false),[])
-  useEffect(()=>{setMobileOpen(false)},[pathname])
+  useEffect(()=>{setMobileOpen(false)},[pathname,search])
   const active = activeSection(pathname)
-  const mentorExam = pathname.startsWith('/account/tasks') && new URLSearchParams(search).get('exam') === 'pms-punjab' ? 'pms-punjab' : 'css'
+  const mentorExam = pathname.startsWith('/account/tasks') && (new URLSearchParams(search).get('exam') === 'pms-punjab' || new URLSearchParams(search).get('view') === 'pms') ? 'pms-punjab' : 'css'
   const mentorActive = /^\/account\/(tasks|plan)/.test(pathname)
   return <div data-section={active} className={`student-workspace ${collapsed ? 'ws-collapsed' : ''}`}>
     <a className="ws-skip" href="#workspace-content">Skip to preparation</a>
     <aside className="ws-sidebar">
       <Link to="/account/dashboard" className="ws-brand"><img src="/images/logo.webp" alt="CSS Vista — Sadia Zahoor and Ali Hassan Sargana" /></Link>
       <p className="ws-label">YOUR PREPARATION WORKSPACE</p>
-      <nav aria-label="Student workspace">{sections.map((s,i) => { const Icon = icons[i]; return <Link key={s.id} to={s.to} aria-label={s.title} aria-current={active === s.id ? 'page' : undefined} title={s.title}><Icon size={20} aria-hidden="true" /><span>{s.title}</span></Link> })}</nav>
+      <nav aria-label="Student workspace">{sections.map((s,i) => { const Icon = icons[i]; return <Fragment key={s.id}><Link to={s.to} aria-label={s.title} aria-current={active === s.id && !(s.id === 'plan' && mentorActive) ? 'page' : undefined} title={s.title}><Icon size={20} aria-hidden="true" /><span>{s.title}</span></Link>{s.id === 'overview' && <div className="ws-mentor-group" data-open={mentorOpen}>
+        <button type="button" className="ws-mentor-toggle" aria-expanded={mentorOpen} aria-controls="ws-vista-mentor-links" onClick={() => { if(collapsed){setCollapsed(false);setMentorOpen(true)} else setMentorOpen(v=>!v) }} title="Vista Mentor"><GraduationCap size={20} aria-hidden="true"/><span>Vista Mentor</span><ChevronDown className="ws-mentor-chevron" size={16} aria-hidden="true"/></button>
+        {mentorOpen && <div id="ws-vista-mentor-links" className="ws-mentor-links" role="group" aria-label="Vista Mentor preparation options">
+          <Link to="/account/tasks?exam=css&view=syllabus" aria-label="CSS Vista" aria-current={mentorActive && mentorExam === 'css' ? 'page' : undefined}><span>CSS Vista</span></Link>
+          <Link to="/account/tasks?exam=pms-punjab&view=syllabus" aria-label="PMS Vista" aria-current={mentorActive && mentorExam === 'pms-punjab' ? 'page' : undefined}><span>PMS Vista</span></Link>
+        </div>}
+      </div>}</Fragment> })}</nav>
       <div className="ws-sidebar-feature"><Link to="/account/fitness-coach" title="My Fitness Coach" aria-label="My Fitness Coach"><Dumbbell size={20} aria-hidden="true"/><span>My Fitness Coach</span></Link><Link to="/account/directory" title="Find all features" aria-label="Find all features"><Search size={20} aria-hidden="true"/><span>Find All Features</span></Link></div>
       <div className="ws-sidebar-end"><Link to="/">Visit CSS Vista website</Link><button onClick={() => setCollapsed(v => !v)} aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}>{collapsed ? <PanelLeftOpen /> : <PanelLeftClose />}<span>Collapse sidebar</span></button></div>
     </aside>
