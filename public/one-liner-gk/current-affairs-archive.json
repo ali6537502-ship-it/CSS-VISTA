@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 731,
+  "count": 737,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5116,6 +5116,48 @@
     {
       "id": "current-affairs-archive-2026-11-11-climate-finance-plans",
       "text": "The COP29 climate-finance goal calls for at least $300 billion annually for developing countries by 2035.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-kohat-police-attack",
+      "text": "A deadly police ambush reported on 11 November 2026 occurred in Kohat, Khyber Pakhtunkhwa.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-spain-housing-strike",
+      "text": "Housing affordability was a central demand in Spain's general strike of 11 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-uk-climate-security-envoy",
+      "text": "Madeleine Alessandri was appointed the UK's special representative for climate security in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-german-growth-forecast",
+      "text": "Germany's Council of Economic Experts projected 1.3% GDP growth for 2026 in its November assessment.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-iran-oil-hormuz",
+      "text": "The Strait of Hormuz remained a major Gulf energy-shipping security concern on 11 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-11-uk-offshore-wind-investment",
+      "text": "RWE and KKR finalised a roughly £12 billion UK offshore wind investment in November 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
