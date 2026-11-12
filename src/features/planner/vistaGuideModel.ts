@@ -1,6 +1,5 @@
 import type { StudyScheduleTask, SyllabusItemStatus } from '@/lib/store'
-import { dayWorkload, shiftDay, validDay } from './model'
-import { essayThemeIndex } from '@/data/essayThemes'
+import { dayWorkload, shiftDay, validDay } from './model.ts'
 
 export type VistaExam = 'css' | 'pms-punjab'
 export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[] }
@@ -50,24 +49,25 @@ function outline(node: VistaNode, depth = 0): string {
   const children = (node.children || []).map(n => outline(n, depth + 1)).join('\n')
   return title + detail + (children ? '\n' + children : '')
 }
-function essayThemeTopics(prefix: string): VistaNode[] {
-  return essayThemeIndex().map(theme => ({
+export type VistaEssayTheme = { slug: string; name: string; brief: string; sections: Array<{letter: string; title: string}> }
+function essayThemeTopics(prefix: string, themes: VistaEssayTheme[]): VistaNode[] {
+  return themes.map(theme => ({
     id: prefix + theme.slug,
     title: theme.name,
     detail: theme.brief + '\nResearch stages: ' + theme.sections.map(s=>s.letter+'. '+s.title).join('; '),
   }))
 }
-export function pmsGuideSubjects(data: { subjects: VistaSubject[] }): VistaSubject[] {
+export function pmsGuideSubjects(data: { subjects: VistaSubject[] }, themes: VistaEssayTheme[] = []): VistaSubject[] {
   return data.subjects.map(subject=>subject.id==='compulsory-english-essay' ? {
     ...subject,sections:[...subject.sections,{
       id:'essay-themes-2027',
       title:'Essay Themes 2027 — additional preparation resource, not prescribed PPSC syllabus content',
       detail:'The existing research roadmap offers twenty-five themes for structured essay practice.',
-      topics:essayThemeTopics('pms-punjab:vista:compulsory-english-essay:theme:'),
+      topics:essayThemeTopics('pms-punjab:vista:compulsory-english-essay:theme:',themes),
     }],
   }:subject)
 }
-export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: string; designation: 'compulsory' | 'optional'; marks: number; sections: Array<{ title: string; items: string[] }> }> }): VistaSubject[] {
+export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: string; designation: 'compulsory' | 'optional'; marks: number; sections: Array<{ title: string; items: string[] }> }> }, themes: VistaEssayTheme[] = []): VistaSubject[] {
   const papers = data.subjects.map(s => ({
     id: s.slug, title: s.name, designation: s.designation, marks: s.marks,
     sections: s.sections.map((section, i) => ({
@@ -81,7 +81,7 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
   if (!papers.some(s => s.id === 'essay')) papers.unshift({
     id: 'essay', title: 'English Essay', designation: 'compulsory', marks: 100,
     sections: [{ id: 's1', title: 'Essay Themes 2027 — preparation resource (not an FPSC syllabus extract)', detail: 'Follow the existing twenty-five-theme research roadmap and practise essay writing.',
-      topics: essayThemeTopics('vista-css:essay:theme:'),
+      topics: essayThemeTopics('vista-css:essay:theme:',themes).length ? essayThemeTopics('vista-css:essay:theme:',themes) : [{id:'vista-css:essay:resource',title:'Open Essay Themes 2027 research roadmap',detail:'Follow the existing roadmap for essay research and timed practice.'}],
     }],
   })
   return papers
