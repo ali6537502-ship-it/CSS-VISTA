@@ -32,7 +32,7 @@ jobs:
       PHP_CLI_SERVER_WORKERS: '8'
       CSSV_TEST_HANDWRITING_TRANSPORT: '1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
