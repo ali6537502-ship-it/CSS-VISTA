@@ -1,0 +1,47 @@
+name: PMS Vista and CSS Planner browser QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/features/planner/**'
+      - 'public/pms-punjab/vista-syllabus.json'
+      - 'tests/browser/vista-guide.mjs'
+      - '.github/workflows/pms-vista-browser-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  guide-browser-qa:
+    name: Desktop/mobile student journey in Chromium
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install site dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck and validate syllabus structure
+        run: |
+          npm run typecheck
+          node --test tests/vistaGuide.test.ts
+      - name: Build actual Hostinger artifact
+        run: npm run build:hostinger
+      - name: Install isolated browser dependencies and Chromium
+        run: |
+          npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
+          npm exec --prefix tests/browser -- playwright-core install --with-deps chromium
+      - name: Test real CSS and PMS interfaces at desktop, mobile and tablet sizes
+        shell: bash
+        run: |
+          browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
+          CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/vista-guide.mjs
+      - name: Preserve browser screenshots and test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pms-vista-browser-audit
+          path: test-artifacts/vista/
+          if-no-files-found: ignore
+          retention-days: 14
