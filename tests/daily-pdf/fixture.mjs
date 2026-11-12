@@ -4,7 +4,8 @@ export function document(pages = 1) {
   for (const [i, obj] of [
     "<< /Type /Catalog /Pages 2 0 R >>",
     `<< /Type /Pages /Kids [${Array.from({length:pages},(_,i)=>`${i+3} 0 R`).join(" ")}] /Count ${pages} >>`,
-    ...Array.from({length:pages},()=>"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] >>"),
+    // Blank pages still need a Resources dictionary; qpdf 12 checks this strictly.
+    ...Array.from({length:pages},()=>"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] /Resources << >> >>"),
   ].entries()) {
     offsets.push(s.length);
     s += `${i + 1} 0 obj\n${obj}\nendobj\n`;

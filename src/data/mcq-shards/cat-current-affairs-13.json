@@ -298,5 +298,140 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://apnews.com/article/1a76dbefe56039c8841e9aeb49468048"
+  },
+  {
+    "id": "current-affairs-20261111-pakistan-cop31-leaders",
+    "q": "Which city hosted the COP31 leaders' summit in November 2026?",
+    "o": [
+      "Istanbul",
+      "Ankara",
+      "Antalya",
+      "Izmir"
+    ],
+    "a": 2,
+    "e": "COP31 was held in Antalya, Türkiye.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2043746"
+  },
+  {
+    "id": "current-affairs-20261111-un-chief-cop31",
+    "q": "Which UN Secretary-General urged faster climate action at the COP31 leaders' summit on 11 November 2026?",
+    "o": [
+      "Ban Ki-moon",
+      "António Guterres",
+      "Kofi Annan",
+      "Boutros Boutros-Ghali"
+    ],
+    "a": 1,
+    "e": "António Guterres addressed the COP31 leaders' summit.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.marketscreener.com/news/world-leaders-to-address-cop31-as-turkey-pushes-for-new-climate-deal-ce785edbd889f523"
+  },
+  {
+    "id": "current-affairs-20261111-climate-finance-plans",
+    "q": "What annual climate-finance goal for developing countries was agreed at COP29 for 2035?",
+    "o": [
+      "$100 billion",
+      "$200 billion",
+      "$300 billion",
+      "$500 billion"
+    ],
+    "a": 2,
+    "e": "The COP29 goal is at least $300 billion annually by 2035; it is a goal, not an amount already disbursed.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.theguardian.com/environment/2026/nov/11/developing-countries-climate-finance-delay"
+  },
+  {
+    "id": "current-affairs-20261111-kohat-police-attack",
+    "q": "In which district of Khyber Pakhtunkhwa did the deadly police ambush reported on 11 November 2026 occur?",
+    "o": [
+      "Bannu",
+      "Kohat",
+      "Swat",
+      "Dera Ismail Khan"
+    ],
+    "a": 1,
+    "e": "AP identified Kohat as the location of the 11 November police ambush.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/260c8876601c767a4111b17fa9dd255c"
+  },
+  {
+    "id": "current-affairs-20261111-spain-housing-strike",
+    "q": "Which policy issue was the central focus of Spain's general strike on 11 November 2026?",
+    "o": [
+      "Housing affordability",
+      "Agricultural tariffs",
+      "Defence conscription",
+      "University tuition"
+    ],
+    "a": 0,
+    "e": "Reuters reported that the strike centred on high rents and housing shortages.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/world-at-work/workers-across-spain-stage-first-general-strike-14-years-anger-over-housing-2026-11-11/"
+  },
+  {
+    "id": "current-affairs-20261111-uk-climate-security-envoy",
+    "q": "Who was appointed the United Kingdom's special representative for climate security in November 2026?",
+    "o": [
+      "Mia Mottley",
+      "Madeleine Alessandri",
+      "Ursula von der Leyen",
+      "Christiana Figueres"
+    ],
+    "a": 1,
+    "e": "The Guardian identified Madeleine Alessandri as the appointee.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.theguardian.com/politics/2026/nov/11/uk-appoints-worlds-first-special-representative-for-climate-security"
+  },
+  {
+    "id": "current-affairs-20261111-german-growth-forecast",
+    "q": "What GDP growth rate did Germany's Council of Economic Experts forecast for 2026 in its November 2026 assessment?",
+    "o": [
+      "0.3%",
+      "0.8%",
+      "1.3%",
+      "2.3%"
+    ],
+    "a": 2,
+    "e": "Reuters reported the council's revised 2026 growth forecast as 1.3%.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/markets/us/german-economic-council-significantly-revised-up-growth-forecast-says-chair-2026-11-11/"
+  },
+  {
+    "id": "current-affairs-20261111-iran-oil-hormuz",
+    "q": "Which strategic strait remained central to Gulf shipping risks reported on 11 November 2026?",
+    "o": [
+      "Strait of Malacca",
+      "Bosporus",
+      "Strait of Gibraltar",
+      "Strait of Hormuz"
+    ],
+    "a": 3,
+    "e": "Reuters described continuing disruption and security risks around the Strait of Hormuz.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/oil-rises-two-month-low-hormuz-shipping-attacks-offset-iran-truce-hopes-2026-11-11/"
+  },
+  {
+    "id": "current-affairs-20261111-uk-offshore-wind-investment",
+    "q": "Which two firms finalised a roughly £12 billion UK offshore wind investment reported on 11 November 2026?",
+    "o": [
+      "RWE and KKR",
+      "Shell and BP",
+      "Ørsted and TotalEnergies",
+      "Enel and Siemens"
+    ],
+    "a": 0,
+    "e": "Reuters identified German utility RWE and US investment firm KKR.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/rwe-kkr-finalise-16-billion-investment-uk-renewables-2026-11-11/"
   }
 ]
