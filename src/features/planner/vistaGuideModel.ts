@@ -162,47 +162,68 @@ export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' |
 }
 export interface VistaDraftTask { syllabusItemId: string; subject: string; paper: string; section: string; topic: string; date: string; minutes: number }
 export interface VistaPlan { draft: VistaDraftTask[]; finishedOn: string; scheduledSubjects: number; alreadyCovered: number }
+/** Suggested study minutes reflect reading load, not official exam time guidance. */
+export function suggestedVistaMinutes(unit: VistaUnit) {
+  return Math.max(45, Math.min(150, 45 + 15 * Math.floor(unit.syllabus.length / 260)))
+}
 export function generateVistaPlan(subjects: VistaSubject[], exam: VistaExam, preferences: VistaPreferences, existing: StudyScheduleTask[], statuses: Record<string,SyllabusItemStatus>, starting: string): VistaPlan {
-  if (!validDay(starting) || preferences.restDays.length === 7 || preferences.dailyMinutes < 30) throw Error('Choose a valid start date, available study time and at least one study day.')
+  if (!validDay(starting) || preferences.restDays.length === 7 || preferences.dailyMinutes < 30 || preferences.dailyMinutes > 720) throw Error('Choose a valid start date, 30 minutes to 12 hours, and at least one study day.')
   if (preferences.targetDate && preferences.targetDate < starting) throw Error('The target completion date must be on or after the start date.')
   const chosen = selectedVistaSubjects(subjects, exam, preferences)
   if (!chosen.length) throw Error('Choose your subjects first.')
-  const previouslyScheduled = new Set(existing.map(t => t.syllabusItemId))
-  const rows = chosen.map(s => ({
-    subject: s, items: guideUnits(s, exam).filter(u => statuses[u.id] !== 'completed' && !previouslyScheduled.has(u.id)),
-  })).filter(r => r.items.length)
-  const alreadyCovered = chosen.reduce((sum,s) => sum + guideUnits(s,exam).filter(u=>statuses[u.id]==='completed'||previouslyScheduled.has(u.id)).length,0)
-  const drafts: VistaDraftTask[] = []
-  if (!rows.length) return { draft: [], finishedOn: starting, scheduledSubjects: chosen.length, alreadyCovered }
-  let day = starting, cursor = 0, dayGuard = 0
-  while (rows.some(row => row.items.length)) {
-    if (++dayGuard > 3650) throw Error('This plan cannot fit within ten years; reduce the selection or revise your schedule.')
-    const weekday = new Date(day + 'T12:00:00').getDay()
-    const reserved = dayWorkload([...existing, ...drafts.map((d,i)=>({...d,id:'vista-preview-'+i,status:'not-started' as const,createdAt:''}))],day).minutes
-    const available = preferences.dailyMinutes - reserved
-    if (!preferences.restDays.includes(weekday) && available >= 30) {
-      const target = Math.min(preferences.subjectsPerDay, Math.floor(available / 30), rows.filter(x=>x.items.length>0).length)
-      const today: typeof rows = []
-      if (preferences.mode === 'focus') {
-        for(const row of rows) { if(row.items.length && today.length < target) today.push(row) }
-      } else {
-        let seen=0
-        while(today.length < target && seen < rows.length) {
-          const row=rows[(cursor+seen)%rows.length]
-          if(row.items.length) today.push(row)
-          seen++
+  const previouslyScheduled = new Set(existing.map(task => task.syllabusItemId))
+  const rows = chosen.map(subject => ({
+    subject,
+    items: guideUnits(subject,exam).filter(unit=>statuses[unit.id]!=='completed' && !previouslyScheduled.has(unit.id)),
+  })).filter(row=>row.items.length)
+  const alreadyCovered = chosen.reduce((sum,subject) =>
+    sum+guideUnits(subject,exam).filter(unit=>statuses[unit.id]==='completed'||previouslyScheduled.has(unit.id)).length,0)
+  const draft: VistaDraftTask[] = []
+  if(!rows.length)return {draft,finishedOn:starting,scheduledSubjects:chosen.length,alreadyCovered}
+  // Existing CSS and PMS sessions share a student's available hours.
+  // Index those hours once, rather than rebuilding the full schedule every day.
+  const workload=new Map<string,number>()
+  for(const task of existing)workload.set(task.date,(workload.get(task.date)||0)+task.minutes)
+  let day=starting,cursor=0,scans=0
+  while(rows.some(row=>row.items.length)) {
+    if(++scans>3650)throw Error('The selected workload cannot fit into ten years. Revise the subject selection or availability.')
+    const weekday=new Date(day+'T12:00:00').getDay()
+    const available=preferences.dailyMinutes-(workload.get(day)||0)
+    if(!preferences.restDays.includes(weekday)&&available>=30) {
+      const target=Math.min(preferences.subjectsPerDay,Math.floor(available/30),rows.filter(row=>row.items.length).length)
+      const today:typeof rows=[]
+      if(preferences.mode==='focus'){
+        for(const row of rows)if(row.items.length&&today.length<target)today.push(row)
+      }else{
+        let inspected=0
+        while(today.length<target&&inspected<rows.length){
+          const row=rows[(cursor+inspected)%rows.length]
+          if(row.items.length)today.push(row)
+          inspected++
         }
-        cursor=(cursor+seen)%rows.length
+        cursor=(cursor+inspected)%rows.length
       }
-      const perSubject=Math.min(600,Math.floor(available/Math.max(1,today.length)))
+      let consumed=0
       for(const row of today) {
-        const u=row.items.shift()
-        if(!u)continue
-        drafts.push({syllabusItemId:u.id,subject:u.subject,paper:u.paper,section:u.section,topic:u.title,date:day,minutes:perSubject})
+        const budget=Math.floor(available/Math.max(1,today.length))
+        let spent=0
+        // Several manageable chapters of the same subject can share a study
+        // day. The number of DISTINCT subjects never exceeds the student's choice.
+        while(row.items.length&&budget-spent>=30) {
+          const unit=row.items[0],estimate=suggestedVistaMinutes(unit)
+          const duration=Math.min(600,estimate,budget-spent)
+          if(duration<30)break
+          row.items.shift()
+          draft.push({syllabusItemId:unit.id,subject:unit.subject,paper:unit.paper,section:unit.section,topic:unit.title,date:day,minutes:duration})
+          spent+=duration
+        }
+        consumed+=spent
       }
+      workload.set(day,(workload.get(day)||0)+consumed)
     }
-    if(rows.some(x=>x.items.length))day=shiftDay(day,1)
-    if(preferences.targetDate && day>preferences.targetDate && rows.some(x=>x.items.length)) throw Error('The remaining chapters will not fit before your chosen target. Increase the time available, select up to three subjects daily, or extend your target.')
+    if(rows.some(row=>row.items.length))day=shiftDay(day,1)
+    if(preferences.targetDate&&day>preferences.targetDate&&rows.some(row=>row.items.length))
+      throw Error('The remaining chapters will not fit before your chosen target. Increase the time available or extend your target.')
   }
-  return {draft:drafts,finishedOn:day,scheduledSubjects:chosen.length,alreadyCovered}
+  return {draft,finishedOn:day,scheduledSubjects:chosen.length,alreadyCovered}
 }
