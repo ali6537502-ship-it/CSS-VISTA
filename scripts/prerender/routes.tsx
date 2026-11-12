@@ -8,6 +8,9 @@
  */
 import Home from '@/pages/Home'
 import StartCSS from '@/pages/StartCSS'
+import PmsVista from '@/pages/PmsVista'
+import PmsVistaSubject from '@/pages/PmsVistaSubject'
+import { pmsVistaSubjectMeta } from '@/data/pmsVistaMeta.mjs'
 import CssEligibilityCalculator from '@/pages/CssEligibilityCalculator'
 import CompulsoryList from '@/pages/CompulsoryList'
 import SubjectDetail from '@/pages/SubjectDetail'
@@ -143,6 +146,8 @@ function vistagramRoutes(): PrerenderRoute[] {
 export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/', () => <Home />),
   page('/start-css', () => <StartCSS />),
+  page('/pms-vista', () => <PmsVista />),
+  ...pmsVistaSubjectMeta.map(subject => page('/pms-vista/syllabus/' + subject.id, () => <PmsVistaSubject />, '/pms-vista/syllabus/:subject')),
   page('/css-eligibility-calculator', () => <CssEligibilityCalculator />),
   page('/subjects/compulsory', () => <CompulsoryList />),
   page('/subjects/compulsory/essay', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
