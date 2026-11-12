@@ -1,3 +1,5 @@
+import { pmsVistaSubjectMeta } from './pmsVistaMeta.mjs'
+
 export const CANONICAL_ORIGIN = 'https://www.css-vista.com'
 
 /**
@@ -100,6 +102,8 @@ export const ROUTE_REGISTRY = [
   publicPage('/', 'Free CSS, PMS and One-Paper Exam Preparation', 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.', 'CSS Vista', { titleIsComplete: true, contentQuality: 'substantial', adMode: 'enabled', title: 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform', minimumHeight: 0, schemaType: 'WebSite' }),
   publicPage('/100-million-trees', '100 Million Trees for Punjab — Plant, Report & Track', 'Join the Esar ul Ebad Welfare Foundation and CSS Vista planting campaign. Register, report nursery saplings and seeds, explore reviewed city-level progress and public leaderboards.', '100 Million Trees for Punjab', { contentQuality: 'interactive', adMode: 'disabled', indexable: false, sitemap: false, minimumHeight: 0 }),
   publicPage('/gsa-tutor', 'GSA Tutor — Interactive General Science Course', 'Choose a General Science course duration and learn all 28 chapters through guided lessons, revision and topic practice.', 'GSA Tutor', { contentQuality: 'interactive', adMode: 'disabled', indexable: false, sitemap: false }),
+  publicPage('/pms-vista', 'PMS Vista — Free PMS Punjab Preparation & Updated Syllabus', 'Free PMS preparation in Punjab: revised PPSC syllabus for 40 subjects, subject-wise study guides, daily PMS study planner, notes commands and revision.', 'Free PMS preparation in Punjab — PMS Vista', { adMode: 'disabled', schemaType: 'CollectionPage' }),
+  ...pmsVistaSubjectMeta.map(subject => publicPage('/pms-vista/syllabus/' + subject.id, 'PMS ' + subject.title + ' Syllabus — Free PMS Preparation', 'Read the updated Punjab PMS ' + subject.title + ' syllabus free on PMS Vista, with original topic headings, PPSC subject sections and a personalized study planner.', 'PMS ' + subject.title + ' syllabus — free study guide', { adMode: 'disabled', schemaType: 'LearningResource' })),
   publicPage('/start-css', 'How to Start CSS Preparation', 'A practical guide to CSS eligibility, examination stages, subject selection and an effective preparation roadmap.', 'How to start CSS preparation', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/subjects/compulsory', 'CSS Compulsory Subjects', 'Explore the compulsory CSS subjects, syllabus coverage and study resources for the written examination.', 'CSS compulsory subjects', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/subjects/compulsory/essay', 'CSS English Essay', 'Study the CSS English Essay syllabus, preparation approach and relevant learning resources.', 'CSS English Essay', { contentQuality: 'substantial', adMode: 'enabled' }),
