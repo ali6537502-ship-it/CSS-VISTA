@@ -84,6 +84,8 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const [showOnlyRemaining, setShowOnlyRemaining] = useState(false)
   const [showAll, setShowAll] = useState(false)
   const [showCount, setShowCount] = useState(20)
+  const linkedSubject = query.get('subject') || ''
+  useEffect(() => { if (linkedSubject) { setSubjectId(linkedSubject);setShowCount(20) } },[exam,linkedSubject])
   useEffect(()=>{
     const controller = new AbortController()
     setCatalogue(null); setLoadError('')
