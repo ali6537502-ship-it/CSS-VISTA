@@ -29,11 +29,11 @@ export function SubjectOverview({ compact = false }: { compact?: boolean }) {
   </div>
 }
 import '@/features/planner/planner.css'
-const Pms = lazy(() => import('@/features/planner/PlannerPms'))
+const PmsVista = lazy(() => import('@/features/planner/VistaStudyGuide'))
 export default function Subjects() {
   const [params] = useSearchParams(), pms = params.get('exam') === 'pms-punjab'
-  return <AccountPage title="My Subjects" intro={pms ? 'The revised PPSC syllabus, your planning subjects and manually tracked outline coverage.' : 'Six compulsory CSS papers and your saved optional selection. Coverage reflects manually tracked syllabus items, not assessed mastery.'} action={<Link className="ws-action" to={pms ? '/account/tasks?exam=pms-punjab&view=settings' : '/account/plan'}>Edit subject choices</Link>}>
+  return <AccountPage title="My Subjects" intro={pms ? 'Your PMS Vista syllabus, selected papers and personalized preparation progress.' : 'Six compulsory CSS papers and your saved optional selection. Coverage reflects manually tracked syllabus items, not assessed mastery.'} action={<Link className="ws-action" to={pms ? '/account/tasks?exam=pms-punjab&view=settings' : '/account/plan'}>Edit subject choices</Link>}>
     <div className="pl-exam-switch" aria-label="Subject examination"><Link className={!pms ? 'is-selected' : ''} aria-current={!pms ? 'page' : undefined} to="/account/subjects">CSS subjects</Link><Link className={pms ? 'is-selected' : ''} aria-current={pms ? 'page' : undefined} to="/account/subjects?exam=pms-punjab">PMS Punjab subjects</Link></div>
-    {pms ? <Suspense fallback={<p role="status">Loading PMS subjects…</p>}><Pms/></Suspense> : <SubjectOverview/>}
+    {pms ? <Suspense fallback={<p role="status">Loading PMS subjects…</p>}><PmsVista exam="pms-punjab"/></Suspense> : <SubjectOverview/>}
   </AccountPage>
 }
