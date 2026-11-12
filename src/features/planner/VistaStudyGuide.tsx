@@ -4,6 +4,7 @@ import { BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCopy, Clock3, Ext
 import { useAccount } from '@/lib/accountContext'
 import { currentHostingerAccountUser } from '@/lib/hostingerApi'
 import { preparationPhysicalKey, preparationWriteCurrent } from '@/lib/preparationStorage'
+import { isTaskArchived } from '@/lib/myTasks'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 import { addStudyScheduleTasks, getState, saveStudyPlanner, setSyllabusItemStatus, updateStudyScheduleTask } from '@/lib/store'
 import { useAccountSnapshot } from '@/pages/account/shared'
@@ -26,18 +27,26 @@ function initial(exam: VistaExam) {
   const state = getState(), css = state.studyPlanner
   let legacy = readPmsSettings(null)
   try { legacy = readPmsSettings(JSON.parse(localStorage.getItem(preparationPhysicalKey(PMS_SETTINGS_KEY)) || 'null')) } catch { /* use safe defaults */ }
+  let comparative = false
+  if(exam==='css'){
+    try {
+      const id=currentHostingerAccountUser()
+      const saved=JSON.parse(localStorage.getItem('cssvista:workspace:v1:'+(id||'guest'))||'null')
+      comparative=saved?.comparative===true
+    } catch { /* retain Islamic Studies default */ }
+  }
   const fallback: Partial<VistaPreferences> = exam === 'pms-punjab' ? {
     selectedOptionals: legacy.selectedOptionals, alternative: legacy.alternative,
     dailyMinutes: legacy.dailyMinutes, restDays: legacy.restDays, targetDate: legacy.targetDate,
   } : {
     selectedOptionals: css?.selectedOptionals || [], dailyMinutes: Math.round((css?.dailyHours || 4) * 60),
-    restDays: [css?.restDay ?? 0], targetDate: css?.examDate || '',
+    restDays: [css?.restDay ?? 0], targetDate: css?.examDate || '', alternative: comparative ? 'comparative' : 'islamic-studies',
   }
   try { return readVistaPreferences(JSON.parse(localStorage.getItem(preparationPhysicalKey(KEY + exam)) || 'null'), fallback) }
   catch { return readVistaPreferences(null, fallback) }
 }
 function resourcePath(u: VistaUnit) {
-  return u.resource === 'precis' ? '/account/precis' : u.resource === 'essay' ? '/study-material/essay-themes' : ''
+  return u.resource === 'precis' ? '/account/precis' : u.resource === 'essay' ? '/study-material/essay-themes' + (u.resourceSlug ? '/' + encodeURIComponent(u.resourceSlug) : '') : ''
 }
 function CopyNotes({ unit, compact = false }: { unit: VistaUnit; compact?: boolean }) {
   const [status, setStatus] = useState('')
@@ -141,6 +150,11 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
         const state=getState().studyPlanner
         saveStudyPlanner({examDate:draftPrefs.targetDate || state?.examDate || '',dailyHours:draftPrefs.dailyMinutes/60,
           restDay:draftPrefs.restDays[0]??0,selectedOptionals:draftPrefs.selectedOptionals})
+        if(user) {
+          const workspaceKey='cssvista:workspace:v1:'+user.id
+          const existingWorkspace=JSON.parse(localStorage.getItem(workspaceKey)||'{}')
+          localStorage.setItem(workspaceKey,JSON.stringify({...existingWorkspace,comparative:draftPrefs.alternative==='comparative'}))
+        }
       }
       setPrefs(draftPrefs); edited.current=false;setSettingsOpen(false);setPlan(null)
       setError('');setMessage('Your preparation choices have been saved. Existing sessions and progress are retained.')
@@ -178,7 +192,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   }
   function recoverMissed(){
     if(!checkWrite())return
-    const overdue=getState().studyScheduleTasks.filter(t=>taskExam(t)===exam && t.status!=='completed' && t.date<today)
+    const overdue=getState().studyScheduleTasks.filter(t=>taskExam(t)===exam && t.status!=='completed' && t.date<today && !isTaskArchived(t.id))
     if(!overdue.length){setMessage('No unfinished overdue sessions to move.');return}
     if(!window.confirm('Move '+overdue.length+' unfinished overdue sessions forward? Completed records will not change.'))return
     const occupied=getState().studyScheduleTasks.filter(t=>!overdue.some(old=>old.id===t.id))
