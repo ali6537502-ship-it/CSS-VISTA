@@ -110,7 +110,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const todayRows = activeTasks.filter(t=>t.date===today)
   const revisions = activeTasks.filter(t=>t.activity==='revision' && t.status!=='completed' && t.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,6)
   const hasStatus = (u:VistaUnit) => snapshot.state.syllabusItemStatuses?.[u.id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===u.id && t.status==='completed')
-  const alreadyScheduled = new Set(snapshot.state.studyScheduleTasks.map(t=>t.syllabusItemId))
+  const alreadyScheduled = new Set(snapshot.state.studyScheduleTasks.filter(t=>!isTaskArchived(t.id) || t.status==='completed').map(t=>t.syllabusItemId))
   const remaining = chosenUnits.filter(u=>!hasStatus(u) && !alreadyScheduled.has(u.id))
   const completed = chosenUnits.filter(u=>hasStatus(u)).length
   const visibleUnits = allUnits.filter(u=>!showOnlyRemaining || !hasStatus(u))
@@ -167,14 +167,14 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     if(!checkWrite() || !catalogue)return
     if(edited.current){setError('Save your changed subjects and routine first.');return}
     try {
-      const next=generateVistaPlan(subjects,exam,prefs,getState().studyScheduleTasks,getState().syllabusItemStatuses||{},prefs.startDate || today)
+      const next=generateVistaPlan(subjects,exam,prefs,getState().studyScheduleTasks.filter(t=>!isTaskArchived(t.id) || t.status==='completed'),getState().syllabusItemStatuses||{},prefs.startDate || today)
       setPlan(next);setError('');setMessage('')
     }catch(e){setPlan(null);setError(e instanceof Error?e.message:'Could not calculate the schedule')}
   }
   function commit(){
     if(!plan?.draft.length || !checkWrite())return
     try{
-      const current=getState().studyScheduleTasks, taken=new Set(current.map(t=>t.syllabusItemId))
+      const current=getState().studyScheduleTasks, taken=new Set(current.filter(t=>!isTaskArchived(t.id) || t.status==='completed').map(t=>t.syllabusItemId))
       if(plan.draft.some(t=>taken.has(t.syllabusItemId)))throw Error('The schedule changed since preview. Generate it again.')
       const created=addStudyScheduleTasks(plan.draft), saved=getState().studyScheduleTasks
       if(created.length!==plan.draft.length || created.some(t=>!saved.some(s=>s.id===t.id)))throw Error('The schedule was not fully saved. Review the daily planner before retrying.')
@@ -217,7 +217,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     const overdue=getState().studyScheduleTasks.filter(t=>taskExam(t)===exam && t.status!=='completed' && t.date<today && !isTaskArchived(t.id))
     if(!overdue.length){setMessage('No unfinished overdue sessions to move.');return}
     if(!window.confirm('Move '+overdue.length+' unfinished overdue sessions forward? Completed records will not change.'))return
-    const occupied=getState().studyScheduleTasks.filter(t=>!overdue.some(old=>old.id===t.id))
+    const occupied=getState().studyScheduleTasks.filter(t=>!overdue.some(old=>old.id===t.id) && !isTaskArchived(t.id))
     let date=today, moved=0
     try{
       for(const t of overdue.sort((a,b)=>a.date.localeCompare(b.date))){
