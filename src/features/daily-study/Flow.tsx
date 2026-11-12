@@ -55,6 +55,7 @@ export default function StudyFlow({ compact = false }: { compact?: boolean }) {
 export function StudyRail() {
   const [params] = useSearchParams(), { user } = useAccount(), { pathname } = useLocation()
   const session = useStudySession(user?.id)
-  const studyPage = pathname.startsWith('/account/') || ['/grammar-course','/mistakes','/answer-writing','/answer-timer'].includes(pathname)
+  // The standalone study-session rail is retired from My Account. Its records remain untouched.
+  const studyPage = ['/grammar-course','/mistakes','/answer-writing','/answer-timer'].includes(pathname)
   return studyPage && user && (params.has('studyCourse') || session) ? <StudyFlow key={user.id} compact /> : null
 }
