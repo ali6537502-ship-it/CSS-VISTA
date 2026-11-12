@@ -23,6 +23,7 @@ try{
  // Native lesson navigation drops session query fields; restore metadata, keep the actual day, then reload.
  await page.goto(base+'/grammar-course?day=2&section=orientation');await region().getByRole('link',{name:'Write',exact:true}).waitFor();await page.waitForFunction(()=>[...document.querySelectorAll('section[aria-label="Daily study session"] a')].some(a=>a.textContent==='Learn'&&new URL(a.href).searchParams.get('day')==='2'))
  await region().getByRole('link',{name:'Write',exact:true}).click();await page.waitForURL('**studyStage=1');await region().getByRole('link',{name:'Feedback',exact:true}).waitFor()
+ await page.waitForFunction(id=>JSON.parse(sessionStorage.getItem('cssvista:daily-study:v1:'+id)||'null')?.stage===1,user)
  // Save a native check, then follow Feedback back to that exact owned immutable version.
  const csrf=(await context.cookies()).find(c=>c.name==='cssv_csrf').value
  const nativeSave=async body=>{const response=await context.request.post(base+'/api/student/skills.php',{headers:{'X-CSRF-Token':csrf},data:{request_id:randomUUID(),...body}});assert.equal(response.status(),200);return response.json()}
