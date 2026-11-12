@@ -184,7 +184,15 @@ export function generateVistaPlan(subjects: VistaSubject[], exam: VistaExam, pre
   // Existing CSS and PMS sessions share a student's available hours.
   // Index those hours once, rather than rebuilding the full schedule every day.
   const workload=new Map<string,number>()
-  for(const task of existing)workload.set(task.date,(workload.get(task.date)||0)+task.minutes)
+  const existingSubjects=new Map<string,Set<string>>()
+  for(const task of existing){
+    workload.set(task.date,(workload.get(task.date)||0)+task.minutes)
+    const sameExam=exam==='pms-punjab' ? task.syllabusItemId.startsWith('pms-punjab:') : !task.syllabusItemId.startsWith('pms-punjab:')
+    if(sameExam){
+      if(!existingSubjects.has(task.date))existingSubjects.set(task.date,new Set())
+      existingSubjects.get(task.date)!.add(task.subject)
+    }
+  }
   let day=starting,cursor=0,scans=0
   while(rows.some(row=>row.items.length)) {
     if(++scans>3650)throw Error('The selected workload cannot fit into ten years. Revise the subject selection or availability.')
@@ -193,17 +201,15 @@ export function generateVistaPlan(subjects: VistaSubject[], exam: VistaExam, pre
     if(!preferences.restDays.includes(weekday)&&available>=30) {
       const target=Math.min(preferences.subjectsPerDay,Math.floor(available/30),rows.filter(row=>row.items.length).length)
       const today:typeof rows=[]
-      if(preferences.mode==='focus'){
-        for(const row of rows)if(row.items.length&&today.length<target)today.push(row)
-      }else{
-        let inspected=0
-        while(today.length<target&&inspected<rows.length){
-          const row=rows[(cursor+inspected)%rows.length]
-          if(row.items.length)today.push(row)
-          inspected++
-        }
-        cursor=(cursor+inspected)%rows.length
+      const covered=new Set(existingSubjects.get(day)||[])
+      const candidates=preferences.mode==='focus'?rows:rows.map((_,i)=>rows[(cursor+i)%rows.length])
+      for(const row of candidates){
+        if(!row.items.length || today.length>=target)continue
+        if(!covered.has(row.subject.title)&&covered.size>=preferences.subjectsPerDay)continue
+        covered.add(row.subject.title)
+        today.push(row)
       }
+      if(preferences.mode==='rotate')cursor=(cursor+Math.max(1,today.length))%rows.length
       let consumed=0
       for(const row of today) {
         const budget=Math.floor(available/Math.max(1,today.length))
