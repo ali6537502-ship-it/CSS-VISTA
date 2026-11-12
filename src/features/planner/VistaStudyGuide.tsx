@@ -243,7 +243,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   if(!catalogue)return <div className="pl-panel-loading" role="status">Loading your syllabus and preparation guide…</div>
   return <div className="vg-root">
     <section className="vg-hero">
-      <div><p className="pl-kicker">YOUR PERSONALIZED PREPARATION</p><h2>{exam==='pms-punjab'?'PMS Vista':'CSS Vista Planner'}</h2><p>One simple place for the complete syllabus, daily study tasks, revision and comprehensive chapter notes.</p></div>
+      <div><p className="pl-kicker">YOUR PERSONALIZED PREPARATION</p><h2>{exam==='pms-punjab'?'PMS Vista':'CSS Vista'}</h2><p>{exam==='pms-punjab'?'Study the complete PMS syllabus with your own daily schedule, comprehensive notes commands, revision and progress tracking.':'Prepare for CSS through syllabus-based daily study plans, one to three parallel subjects, analytical chapter notes commands, revision and progress tracking.'}</p></div>
       <button className="pl-secondary" onClick={()=>setSettingsOpen(open=>!open)}><Settings2 size={16}/>Subjects and routine</button>
     </section>
     {syncError && <p className="pl-warning" role="alert">Account sync needs attention. <Link to="/account/settings">Review account settings</Link>.</p>}
