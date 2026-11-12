@@ -83,8 +83,8 @@ try {
             await page.getByRole('button',{name:'Open account menu'}).click()
             const drawer=page.locator('#ws-mobile-account-drawer')
             await drawer.getByRole('button',{name:'Vista Mentor'}).waitFor()
-            assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).getByRole('link',{name:'CSS Vista',exact:true}).count(),1)
-            assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).getByRole('link',{name:'PMS Vista',exact:true}).count(),1)
+            assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).locator('a[href*="exam=css&view=syllabus"]').count(),1)
+            assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).locator('a[href*="exam=pms-punjab&view=syllabus"]').count(),1)
             await drawer.getByRole('button',{name:'Close account menu'}).click()
           }
           if(width===1440){
