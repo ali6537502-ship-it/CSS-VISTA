@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 737,
+  "count": 740,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5158,6 +5158,27 @@
     {
       "id": "current-affairs-archive-2026-11-11-uk-offshore-wind-investment",
       "text": "RWE and KKR finalised a roughly £12 billion UK offshore wind investment in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-12-aiib",
+      "text": "The Asian Infrastructure Investment Bank agreed a $1.6 billion climate-policy financing package with Türkiye in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-12-pakistan-detention",
+      "text": "Uzma Khan and Noreen Niazi were released from Kot Lakhpat Jail in Lahore on 12 November 2026, Reuters reported.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-12-apec-envoy",
+      "text": "Acer founder Stan Shih was named Taiwan's representative to the 2026 APEC leaders' summit in Shenzhen.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
