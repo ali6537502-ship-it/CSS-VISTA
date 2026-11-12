@@ -38,7 +38,7 @@ export function readVistaPreferences(raw: unknown, fallback: Partial<VistaPrefer
     restDays: Array.isArray(x.restDays) ? [...new Set(x.restDays.filter((v): v is number => Number.isInteger(v) && v >= 0 && v <= 6))] : base.restDays,
     targetDate: typeof x.targetDate === 'string' && (x.targetDate === '' || validDay(x.targetDate)) ? x.targetDate : base.targetDate,
     startDate: typeof x.startDate === 'string' && (x.startDate === '' || validDay(x.startDate)) ? x.startDate : base.startDate,
-    mode: x.mode === 'focus' ? 'focus' : base.mode === 'focus' ? 'focus' : 'rotate',
+    mode: x.mode === 'focus' || x.mode === 'rotate' ? x.mode : base.mode,
     selectedOptionals: Array.isArray(x.selectedOptionals) ? [...new Set(x.selectedOptionals.filter((v): v is string => typeof v === 'string'))] : base.selectedOptionals,
     alternative: x.alternative === 'ethics' || x.alternative === 'comparative' || x.alternative === 'islamic-studies' ? x.alternative : base.alternative,
   }
@@ -92,8 +92,8 @@ export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] 
     const isPrecis = exam === 'css' ? subject.id === 'precis-composition' : subject.id === 'compulsory-english-precis-comprehension-grammar-and-translation-etc'
     return {
       id: topic.id, subjectId: subject.id, subject: subject.title,
-      section: section.title, title: topic.title,
-      syllabus: [section.title, section.detail, outline(topic)].filter(Boolean).join('\n'),
+      section: topic.section || section.title, title: topic.title,
+      syllabus: [section.title, topic.section && topic.section !== section.title ? topic.section : '', section.detail, outline(topic)].filter(Boolean).join('\n'),
       paper: exam === 'css' ? 'CSS' : 'PMS Punjab',
       ...(isEssay ? { resource: 'essay' as const, ...(topic.id.includes(':theme:') ? {resourceSlug:topic.id.split(':theme:')[1]} : {}) } : isPrecis ? { resource: 'precis' as const } : {}),
     }
