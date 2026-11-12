@@ -134,3 +134,37 @@ test('Essay Themes 2027 adds exactly 25 clearly labelled preparation units, not 
   assert.match(prompt,/SUPPLEMENTARY ESSAY RESEARCH ROADMAP/)
   assert.doesNotMatch(prompt,/EXACT PRESCRIBED SYLLABUS/)
 })
+
+
+test('Vista Mentor groups both examination guides in desktop and mobile account menus',()=>{
+  const sidebar=readFileSync('src/features/workspace/StudentWorkspace.tsx','utf8')
+  const mobile=readFileSync('src/features/workspace/WorkspaceMobileDrawer.tsx','utf8')
+  for(const source of [sidebar,mobile]){
+    assert.match(source,/Vista Mentor/)
+    assert.match(source,/CSS Vista/)
+    assert.match(source,/PMS Vista/)
+    assert.match(source,/\/account\/tasks\?exam=css&view=syllabus/)
+    assert.match(source,/\/account\/tasks\?exam=pms-punjab&view=syllabus/)
+  }
+  assert.doesNotMatch(sidebar,/<StudyRail\s*\/>/)
+})
+
+test('account dashboard no longer mounts the obsolete four-step daily-study widget',()=>{
+  const overview=readFileSync('src/pages/AccountHome.tsx','utf8')
+  const directory=readFileSync('src/features/workspace/registry.ts','utf8')
+  assert.doesNotMatch(overview,/<DailyStudyFlow\s*\/>/)
+  assert.doesNotMatch(overview,/id="daily-study"/)
+  assert.doesNotMatch(overview,/Preparation journey<\/h2>/)
+  assert.doesNotMatch(directory,/to:'\/account\/dashboard#daily-study'/)
+})
+
+test('CSS and PMS share the chapter guide without promoting legacy PDF redirects or the previous PMS planner',()=>{
+  const shell=readFileSync('src/features/planner/PlannerWorkspace.tsx','utf8')
+  const guide=readFileSync('src/features/planner/VistaStudyGuide.tsx','utf8')
+  assert.match(shell,/const Guide = lazy\(\(\) => import\('\.\/VistaStudyGuide'\)\)/)
+  assert.doesNotMatch(shell,/import\('\.\/PlannerPms'\)/)
+  assert.match(shell,/<Guide exam="pms-punjab"\/>/)
+  assert.match(guide,/Read chapters here — no PDF required/)
+  assert.doesNotMatch(guide,/href=\{active\.file\}/)
+  assert.doesNotMatch(guide,/Official PDF/)
+})
