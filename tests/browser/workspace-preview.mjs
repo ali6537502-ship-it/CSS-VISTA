@@ -69,6 +69,29 @@ try {
         await page.locator('.student-workspace').waitFor()
         assert.equal(await page.locator('.ws-feature').filter({hasText:/Pro · membership required|Membership & Payments/}).count(),0)
         if(route==='subjects') await page.getByRole('heading',{name:'Political Science',exact:true}).waitFor()
+        if(route==='dashboard'){
+          assert.equal(await page.getByText('Your next focused study session',{exact:true}).count(),0,'retired account study widget must not reappear')
+          assert.equal(await page.locator('.ds-rail').count(),0,'no legacy account study rail')
+        }
+        if(route==='practice'){
+          await page.getByRole('heading',{name:'General Science Course',exact:true}).waitFor()
+          await page.getByRole('heading',{name:'My GSA Tutor',exact:true}).waitFor()
+          assert.equal(await page.getByText('Write with focus',{exact:true}).count(),0,'obsolete writing banner removed')
+          assert.equal(await page.getByLabel('Practice tools').count(),0,'obsolete feature-grid list removed')
+          assert.equal(await page.getByRole('link',{name:'Open General Science Course'}).count(),1,'original course opens from Practice')
+          if(width===390){
+            await page.getByRole('button',{name:'Open account menu'}).click()
+            const drawer=page.locator('#ws-mobile-account-drawer')
+            await drawer.getByRole('button',{name:'Vista Mentor'}).waitFor()
+            assert.equal(await drawer.getByRole('link',{name:'CSS Vista'}).count(),1)
+            assert.equal(await drawer.getByRole('link',{name:'PMS Vista'}).count(),1)
+            await drawer.getByRole('button',{name:'Close account menu'}).click()
+          }
+          if(width===1440){
+            assert.equal(await page.locator('.ws-sidebar .ws-mentor-toggle').count(),1)
+            assert.equal(await page.locator('.ws-mentor-links a').count(),2)
+          }
+        }
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${route} overflow at ${width}`)
         assert.equal(await page.getByRole('navigation',{name:'Primary mobile navigation',exact:true}).count(),0)
         if(width===390||width===1440) await page.screenshot({path:`${output}/selected-${route}-${width}.png`,fullPage:true})
