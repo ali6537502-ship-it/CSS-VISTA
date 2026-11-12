@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "profile": "daily-six",
+  "date": "2026-11-12",
+  "published_at": "2026-11-12T12:04:20+05:00",
+  "edition": "Daily Vistagram Six — 12 November 2026",
+  "editorial_safety": {
+    "neutral_factual": true,
+    "non_partisan": true,
+    "no_personal_attacks": true,
+    "respectful_of_state_and_religion": true,
+    "no_defamation_or_inflammatory_framing": true
+  },
+  "posts": [
+    {
+      "id": "right-to-information-in-pakistan-article-19a-public-records-and-administrative-accountability",
+      "slug": "right-to-information-in-pakistan-article-19a-public-records-and-administrative-accountability",
+      "dedupeKey": "right-to-information-in-pakistan-article-19a-public-records-and-administrative-accountability",
+      "scope": "Pakistan",
+      "title": "Right to Information in Pakistan: Article 19A, Public Records and Administrative Accountability",
+      "excerpt": "Article 19A of Pakistan's Constitution recognises citizens' access to information in matters of public importance, subject to lawful regulation and reasonable restrictions. This is different from a general promise that every government record must be disclosed without qualification. The right connects public administration with citizens' ability to",
+      "type": "Explainer",
+      "category": "Governance & Public Policies",
+      "topic": "Role of Citizens in Governance; Accountability",
+      "tags": [
+        "Governance",
+        "Pakistan",
+        "Article 19A",
+        "Information Commission",
+        "Transparency"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "The constitutional foundation",
+          "paragraphs": [
+            "Article 19A of Pakistan's Constitution recognises citizens' access to information in matters of public importance, subject to lawful regulation and reasonable restrictions. This is different from a general promise that every government record must be disclosed without qualification. The right connects public administration with citizens' ability to understand decisions, examine spending and participate meaningfully in civic affairs. The federal Right of Access to Information Act, 2017 provides a statutory framework for exercising this entitlement in relation to federal public bodies. An accurate discussion should distinguish the constitutional guarantee from the procedures, exceptions and institutional remedies created by legislation."
+          ]
+        },
+        {
+          "heading": "From a request to an administrative response",
+          "paragraphs": [
+            "Access to information begins with identifying a public body and specifying a record clearly enough for officials to locate it. Requests may concern a public institution's functions, a policy's stated criteria, expenditure information or other material covered by the law. The administrative challenge is not merely answering a letter: reliable recordkeeping, indexing, retention and trained public information officers are necessary for effective compliance. Proactive publication can reduce the need for individual requests. A useful distinction is between information already published by an agency and material that must be requested through a formal procedure. Neither category should be confused with an unrestricted right to confidential personal information."
+          ]
+        },
+        {
+          "heading": "Institutional enforcement and limits",
+          "paragraphs": [
+            "The Pakistan Information Commission is the federal enforcement body established under the 2017 Act. Its stated functions include supporting compliance, training public information officers, monitoring implementation and deciding complaints. This creates a review mechanism when a request is mishandled or a lawful entitlement is denied. However, a commission's existence does not automatically guarantee timely access: administrative capacity, record quality, public awareness and application of legal exceptions affect outcomes. Equally, transparency must be reconciled with legitimate confidentiality, privacy and security considerations as defined by law. The analytical task is to assess both enforceable rights and the practical machinery needed to make them effective."
+          ]
+        },
+        {
+          "heading": "How to evaluate the policy",
+          "paragraphs": [
+            "A sound governance answer separates three questions: what citizens may lawfully request, which public institution must respond, and how a refusal or delay can be reviewed. Indicators might include the clarity of disclosure rules, accessibility of request channels, preservation of records, publication of institutional information and reasoned decisions on appeals. Avoid assuming that the volume of requests alone proves success or failure. Better governance depends on accessible information being accurate, understandable and useful for public scrutiny. The broader lesson is that participation and accountability require both a legal right and routine administrative systems capable of implementing it."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the concept, explain its mechanisms, use source-backed examples and evaluate the limits of the explanation."
+      ],
+      "sources": [
+        {
+          "label": "Pakistan Information Commission — Constitutional right and 2017 Act",
+          "url": "https://rti.gov.pk/GoPInitiative"
+        },
+        {
+          "label": "Ministry of Information and Broadcasting — PIC mandate",
+          "url": "https://moib.gov.pk/Pages/180/PIC"
+        }
+      ]
+    },
+    {
+      "id": "pakistans-ramsar-wetlands-ecological-character-wise-use-and-conservation-planning",
+      "slug": "pakistans-ramsar-wetlands-ecological-character-wise-use-and-conservation-planning",
+      "dedupeKey": "pakistans-ramsar-wetlands-ecological-character-wise-use-and-conservation-planning",
+      "scope": "Pakistan",
+      "title": "Pakistan's Ramsar Wetlands: Ecological Character, Wise Use and Conservation Planning",
+      "excerpt": "Wetlands are not simply unused land covered by water. They include lakes, marshes, riverine habitats, coastal lagoons, estuaries and other ecosystems where water strongly shapes ecological processes. Such environments can support fish, migratory birds, aquatic plants and surrounding livelihoods. They may also moderate flooding, retain sediment, imp",
+      "type": "Explainer",
+      "category": "Environmental Sciences",
+      "topic": "Global Initiatives — Ramsar Convention; Biodiversity Conservation",
+      "tags": [
+        "Environmental Sciences",
+        "Pakistan",
+        "Ramsar",
+        "Wetlands",
+        "Biodiversity"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "What makes a wetland valuable",
+          "paragraphs": [
+            "Wetlands are not simply unused land covered by water. They include lakes, marshes, riverine habitats, coastal lagoons, estuaries and other ecosystems where water strongly shapes ecological processes. Such environments can support fish, migratory birds, aquatic plants and surrounding livelihoods. They may also moderate flooding, retain sediment, improve certain water-quality functions and help sustain groundwater connections, depending on local conditions. A wetland's value therefore lies in interacting ecological processes rather than the presence of water alone. Conversion, altered flows, pollution and poorly planned extraction can disrupt these processes even when part of a wetland remains visibly flooded."
+          ]
+        },
+        {
+          "heading": "Pakistan's international commitment",
+          "paragraphs": [
+            "Pakistan's Convention on Wetlands country profile records entry into force on 23 November 1976 and identifies 19 Ramsar sites. Ramsar designation recognises international importance; it should not be confused with a claim that every site is free of threats or automatically protected by identical domestic rules. The convention's guiding idea of wise use concerns maintaining ecological character through ecosystem approaches within sustainable development. Pakistan's wetland settings differ in climate, salinity, water supply and surrounding land uses. Consequently, management suited to a coastal lagoon cannot simply be copied to an inland river habitat. Site-specific assessment is essential before choosing conservation measures."
+          ]
+        },
+        {
+          "heading": "Managing ecological character",
+          "paragraphs": [
+            "Ecological character refers to the combination of ecosystem components, processes and services that make a wetland function. Managers may examine seasonal water levels, water quality, vegetation, habitat connectivity and the pressures of surrounding development. Monitoring needs a baseline so that changes can be interpreted rather than merely photographed. Community participation matters because fishing, grazing, water abstraction and tourism may interact with conservation objectives. Wise use does not necessarily mean excluding people from every site; it means evaluating which activities are compatible with maintaining ecological functions. Restoration can involve reducing pollution, reconnecting water flows or rehabilitating habitat, but the suitable intervention depends on evidence."
+          ]
+        },
+        {
+          "heading": "Examination framework and trade-offs",
+          "paragraphs": [
+            "In an analytical answer, start by defining wetland and Ramsar designation, then connect ecosystem services to biodiversity and local livelihoods. Explain how environmental governance requires cooperation among responsible agencies, researchers and communities. Distinguish a legal or international commitment from implementation performance. Discuss trade-offs between immediate economic uses and long-term ecosystem health without inventing national loss estimates. Finally, recommend inventory, ecological monitoring, water management, pollution control and transparent consultation as practical tools. The central insight is that a listed site is not a completed conservation achievement; it is a continuing management responsibility."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the concept, explain its mechanisms, use source-backed examples and evaluate the limits of the explanation."
+      ],
+      "sources": [
+        {
+          "label": "Convention on Wetlands — Pakistan country profile",
+          "url": "https://www.ramsar.org/country-profile/pakistan"
+        },
+        {
+          "label": "Convention on Wetlands — Mission and wise use",
+          "url": "https://www.ramsar.org/about/our-mission"
+        }
+      ]
+    },
+    {
+      "id": "industrial-effluent-in-pakistan-national-environmental-quality-standards-and-treatment-choices",
+      "slug": "industrial-effluent-in-pakistan-national-environmental-quality-standards-and-treatment-choices",
+      "dedupeKey": "industrial-effluent-in-pakistan-national-environmental-quality-standards-and-treatment-choices",
+      "scope": "Pakistan",
+      "title": "Industrial Effluent in Pakistan: National Environmental Quality Standards and Treatment Choices",
+      "excerpt": "Industrial wastewater differs by production process. Food processing may produce water with substantial biodegradable organic matter, while other industries may generate oils, salts, dyes, suspended solids or hazardous chemicals. It is therefore misleading to describe every industrial discharge as having the same composition or requiring the same t",
+      "type": "Explainer",
+      "category": "Environmental Sciences",
+      "topic": "Environmental Pollution — Water Pollution; Environmental Governance",
+      "tags": [
+        "Environmental Sciences",
+        "Pakistan",
+        "Industrial Effluent",
+        "NEQS",
+        "Water Treatment"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Understanding industrial wastewater",
+          "paragraphs": [
+            "Industrial wastewater differs by production process. Food processing may produce water with substantial biodegradable organic matter, while other industries may generate oils, salts, dyes, suspended solids or hazardous chemicals. It is therefore misleading to describe every industrial discharge as having the same composition or requiring the same treatment. The relevant scientific questions are what pollutants are present, their concentrations, the volume and timing of discharge, and the sensitivity of the receiving environment. Parameters such as pH, biochemical oxygen demand, chemical oxygen demand and suspended solids help describe water quality, but their significance depends on the applicable standard and the industrial process."
+          ]
+        },
+        {
+          "heading": "The regulatory framework",
+          "paragraphs": [
+            "Pakistan's Environmental Protection Agency identifies enforcement of the Pakistan Environmental Protection Act, 1997 and work relating to National Environmental Quality Standards among its functions. Standards provide benchmarks against which relevant emissions or discharges can be assessed. An environmental impact assessment or initial environmental examination may address potential project effects before operations begin, whereas discharge monitoring examines ongoing performance. These functions are related but not interchangeable. Applicable jurisdiction and current regulatory instruments must be checked before asserting a specific legal limit for a particular facility. A national overview should avoid presenting a single unverified numerical threshold as universal across all pollutants and contexts."
+          ]
+        },
+        {
+          "heading": "Treatment is a sequence, not a single machine",
+          "paragraphs": [
+            "Wastewater treatment generally begins with understanding the waste stream and preventing avoidable pollution at source. Screening and settling can remove larger particles and suspended material. Biological treatment may reduce biodegradable organic loads where conditions are suitable. Chemical precipitation, filtration, adsorption or other advanced processes may be needed for particular dissolved contaminants. No technique is automatically sufficient for every industry. Sludge and concentrated residuals also require safe management; transferring pollution from water into poorly handled solid waste is not a complete solution. Reuse opportunities depend on verified treatment quality and the intended application rather than a generic claim that treated effluent is safe."
+          ]
+        },
+        {
+          "heading": "What effective compliance requires",
+          "paragraphs": [
+            "A credible control strategy combines process audits, realistic sampling plans, laboratory quality assurance, maintenance, operator training and transparent reporting. Sampling must reflect changing production conditions rather than a single convenient moment. Regulators need credible evidence, while firms need predictable requirements and incentives to reduce waste at source. An examination response can organise the problem into pollution characteristics, standards, treatment technology and institutional enforcement. It should also discuss financing and technical capacity, because a plant installed without reliable operation may deliver little environmental benefit. The strongest conclusion is that sustained performance matters more than equipment purchase or the existence of a rule alone."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the concept, explain its mechanisms, use source-backed examples and evaluate the limits of the explanation."
+      ],
+      "sources": [
+        {
+          "label": "Pakistan Environmental Protection Agency — statutory functions and NEQS",
+          "url": "https://environment.gov.pk/Detail/MGRiNzFkNDUtZTFjNS00N2ZkLWEwM2UtZjBiNGI3OGViZDA3"
+        },
+        {
+          "label": "Pakistan Environmental Protection Agency — PEPA 1997",
+          "url": "https://environment.gov.pk/Detail/MGVkMmYzNjQtOGFjMS00YWZlLTg1Y2MtNWZhNjVlYWZkMjVl"
+        }
+      ]
+    },
+    {
+      "id": "operant-conditioning-reinforcement-punishment-and-the-logic-of-behaviour-change",
+      "slug": "operant-conditioning-reinforcement-punishment-and-the-logic-of-behaviour-change",
+      "dedupeKey": "operant-conditioning-reinforcement-punishment-and-the-logic-of-behaviour-change",
+      "scope": "Global",
+      "title": "Operant Conditioning: Reinforcement, Punishment and the Logic of Behaviour Change",
+      "excerpt": "Operant conditioning describes how the consequences of an action influence the likelihood that the action will occur again. It is commonly associated with B. F. Skinner's experimental work on behaviour. The learner is not merely responding to a stimulus that predicts another stimulus; the organism performs an action and experiences a consequence. T",
+      "type": "Explainer",
+      "category": "Psychology",
+      "topic": "Learning and Memory — Operant Conditioning, Reinforcement and Punishment",
+      "tags": [
+        "Psychology",
+        "Operant Conditioning",
+        "Skinner",
+        "Learning",
+        "Reinforcement"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Learning from consequences",
+          "paragraphs": [
+            "Operant conditioning describes how the consequences of an action influence the likelihood that the action will occur again. It is commonly associated with B. F. Skinner's experimental work on behaviour. The learner is not merely responding to a stimulus that predicts another stimulus; the organism performs an action and experiences a consequence. This distinction separates operant conditioning from classical conditioning, where learning centres on associations between stimuli. Operant principles help explain patterns in classrooms, workplaces and everyday routines, but they should not be treated as a complete theory of human motivation. Expectations, social context and biological factors may also influence behaviour."
+          ]
+        },
+        {
+          "heading": "The four consequence categories",
+          "paragraphs": [
+            "Reinforcement increases the likelihood of a behaviour, while punishment decreases it. Positive means adding a stimulus; negative means removing one. Thus positive reinforcement adds something desirable after an action, and negative reinforcement removes something unpleasant after an action. Positive punishment adds an aversive consequence to reduce behaviour; negative punishment removes a valued stimulus to reduce it. These labels describe functional effects, not moral judgments. Negative reinforcement is often mistaken for punishment, although the former strengthens behaviour and the latter weakens it. An example is fastening a seat belt to stop an irritating warning sound: removal of the sound can reinforce fastening the belt."
+          ]
+        },
+        {
+          "heading": "Shaping, extinction and schedules",
+          "paragraphs": [
+            "Complex behaviours may be developed through shaping, in which progressively closer approximations to a desired action are reinforced. A teacher might first reward an attempt to organise notes, then increasingly reward complete and accurate organisation. Extinction occurs when a previously reinforced behaviour no longer receives the consequence that maintained it, though change may not be immediate or uniform. Reinforcement schedules also matter: consequences can follow every response or only some responses, with different effects on learning and persistence. These ideas show why the timing and consistency of consequences matter. They also explain why a poorly designed reward system can strengthen unintended actions."
+          ]
+        },
+        {
+          "heading": "Applying the concept responsibly",
+          "paragraphs": [
+            "Applications should be evaluated for effectiveness, fairness and possible unintended effects. Rewarding a visible action may improve its frequency without guaranteeing deeper understanding or internal commitment. Punishment may suppress behaviour temporarily but fail to teach a suitable alternative; excessive use can carry social and emotional costs. For an examination answer, define the process, draw the four-category matrix and contrast it with classical conditioning. Then add shaping, extinction and a realistic example. Avoid the false claim that all reinforcement involves rewards in the everyday sense or that negative always means harmful. The key test is what happens to the future probability of the behaviour."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the concept, explain its mechanisms, use source-backed examples and evaluate the limits of the explanation."
+      ],
+      "sources": [
+        {
+          "label": "OpenStax Psychology 2e — Operant Conditioning",
+          "url": "https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning"
+        }
+      ]
+    },
+    {
+      "id": "the-crimean-war-and-the-eastern-question-ottoman-decline-and-european-balance-of-power",
+      "slug": "the-crimean-war-and-the-eastern-question-ottoman-decline-and-european-balance-of-power",
+      "dedupeKey": "the-crimean-war-and-the-eastern-question-ottoman-decline-and-european-balance-of-power",
+      "scope": "Global",
+      "title": "The Crimean War and the Eastern Question: Ottoman Decline and European Balance of Power",
+      "excerpt": "The Eastern Question referred to diplomatic and strategic problems created as Ottoman power weakened and European states debated how its territories, routes and political influence should be managed. Russia had interests around the Black Sea and in the status of Orthodox Christian communities under Ottoman rule. Britain and France viewed the region",
+      "type": "Explainer",
+      "category": "European History",
+      "topic": "The Eastern Question (1804–1856) — Crimean War and Consequences",
+      "tags": [
+        "European History",
+        "Crimean War",
+        "Eastern Question",
+        "Ottoman Empire",
+        "Treaty of Paris"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Why the Eastern Question mattered",
+          "paragraphs": [
+            "The Eastern Question referred to diplomatic and strategic problems created as Ottoman power weakened and European states debated how its territories, routes and political influence should be managed. Russia had interests around the Black Sea and in the status of Orthodox Christian communities under Ottoman rule. Britain and France viewed the regional balance through their own strategic and political concerns. These interests were not identical, but they converged against a feared expansion of Russian influence. Religious disputes over holy places contributed to the immediate crisis, yet they do not fully explain the war. The deeper context was rivalry over security, influence and the future of the Ottoman Empire."
+          ]
+        },
+        {
+          "heading": "From diplomatic crisis to war",
+          "paragraphs": [
+            "The conflict began in 1853 and widened when Britain and France joined the Ottoman side against Russia. Fighting became especially associated with the Crimean Peninsula and the siege of Sevastopol. The war exposed the importance of supply, transport, communication and medical organisation. It also revealed that battlefield courage could not compensate for inadequate logistics and administration. Sardinia-Piedmont later joined the coalition, seeking a diplomatic role in European affairs. Students should avoid reducing the conflict to a simple religious contest or presenting it as an inevitable clash between fixed national blocs. Diplomatic choices, changing alliances and the European balance of power shaped its escalation."
+          ]
+        },
+        {
+          "heading": "The settlement of 1856",
+          "paragraphs": [
+            "The Treaty of Paris in March 1856 ended the war and sought to limit Russian naval power in the Black Sea. The settlement reflected the victors' intention to constrain unilateral influence while maintaining an Ottoman position within the European order. Yet treaties can restrict immediate options without eliminating the interests that produced conflict. The Eastern Question continued to trouble European diplomacy after 1856. The outcome also affected domestic debates over military administration and reform in several states. It is therefore important to distinguish the immediate diplomatic settlement from the longer-term durability of the regional balance. Peace terms were an arrangement, not a permanent solution to every underlying dispute."
+          ]
+        },
+        {
+          "heading": "How to build an analytical answer",
+          "paragraphs": [
+            "A strong response links four dimensions: Ottoman decline, great-power interests, wartime military realities and the limits of the peace settlement. Compare Russia's objectives with British and French concerns, then show why control of maritime routes and diplomatic prestige mattered. Explain the significance of logistical weakness without claiming that one technology alone determined victory. Finally, assess whether the 1856 agreement stabilised Europe or merely postponed renewed rivalry. The conclusion should recognise that the Crimean War was both a regional conflict and a wider test of the nineteenth-century European balance-of-power system."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the concept, explain its mechanisms, use source-backed examples and evaluate the limits of the explanation."
+      ],
+      "sources": [
+        {
+          "label": "History — Crimean War causes and consequences",
+          "url": "https://www.history.com/articles/crimean-war"
+        },
+        {
+          "label": "Encyclopaedia Britannica 1911 — Eastern Question historical reference",
+          "url": "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Eastern_Question%2C_The"
+        }
+      ]
+    },
+    {
+      "id": "constructivism-in-international-relations-identities-norms-and-the-meaning-of-anarchy",
+      "slug": "constructivism-in-international-relations-identities-norms-and-the-meaning-of-anarchy",
+      "dedupeKey": "constructivism-in-international-relations-identities-norms-and-the-meaning-of-anarchy",
+      "scope": "Global",
+      "title": "Constructivism in International Relations: Identities, Norms and the Meaning of Anarchy",
+      "excerpt": "Constructivism asks how shared meanings, identities and social practices shape international behaviour. A state's interests cannot always be understood solely by counting military assets or economic resources. Decision-makers also interpret who other actors are, what behaviour is appropriate and which rules carry legitimacy. Those interpretations d",
+      "type": "Explainer",
+      "category": "International Relations",
+      "topic": "Theories and Approaches — Constructivism",
+      "tags": [
+        "International Relations",
+        "Constructivism",
+        "Norms",
+        "Identity",
+        "Alexander Wendt"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Why ideas belong in international politics",
+          "paragraphs": [
+            "Constructivism asks how shared meanings, identities and social practices shape international behaviour. A state's interests cannot always be understood solely by counting military assets or economic resources. Decision-makers also interpret who other actors are, what behaviour is appropriate and which rules carry legitimacy. Those interpretations develop through diplomacy, history, institutions and repeated interaction. Constructivism does not claim that material capabilities are imaginary; it asks how their significance depends on social context. The same capability may be viewed as reassuring when held by a trusted partner and threatening when held by an adversary. The analytical focus is the relationship between material circumstances and collectively understood meanings."
+          ]
+        },
+        {
+          "heading": "Anarchy does not dictate one response",
+          "paragraphs": [
+            "International relations scholars commonly use anarchy to describe the absence of a world government with authority comparable to that of a domestic sovereign. Alexander Wendt's constructivist approach challenges the assumption that anarchy necessarily produces identical patterns of self-help competition. States may treat one another as enemies, rivals or friends depending on shared expectations and historical relationships. This does not mean conflict disappears through optimistic language. It means the meaning of anarchy is mediated by social interaction and institutional practice. A useful examination comparison is that realism stresses constraints and power competition, whereas constructivism examines how identities and norms help constitute interests and responses."
+          ]
+        },
+        {
+          "heading": "Norms and identity in practice",
+          "paragraphs": [
+            "Norms are shared expectations about appropriate conduct. They can influence policy by shaping legitimacy, reputation and the range of options considered acceptable. Identity refers to how actors understand themselves and others, including roles and relationships. A state may see itself as a regional mediator, security guarantor or member of a particular diplomatic community. Such identities can evolve, and actors may contest them. Analysts should therefore look for evidence in official statements, institutional behaviour, patterns of recognition and changing practices. It is insufficient to assert that a norm caused a policy simply because both existed at the same time. Competing explanations and material incentives must also be considered."
+          ]
+        },
+        {
+          "heading": "Strengths and limits of the approach",
+          "paragraphs": [
+            "Constructivism helps explain why institutions can matter beyond enforcement power and why ideas of legitimacy sometimes change over time. It is particularly useful for analysing diplomatic norms, identity shifts and the social meaning of security. Its challenge is that norms and identities can be difficult to measure independently, and explanations may become vague if they ignore evidence. A disciplined answer defines constructivism, explains anarchy and social construction, contrasts it with realism and liberalism, and applies the framework to a carefully documented example. The conclusion should not claim that ideas always defeat power; rather, ideas and power interact in the construction of international politics."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "Define the concept, explain its mechanisms, use source-backed examples and evaluate the limits of the explanation."
+      ],
+      "sources": [
+        {
+          "label": "Cambridge University Press — Constructivism in international relations",
+          "url": "https://www.cambridge.org/core/books/abs/an-introduction-to-international-relations/constructivism/1A57C34852A5893E7DC11181EE3EAC98"
+        },
+        {
+          "label": "Cambridge University Press — Social Theory of International Politics",
+          "url": "https://doi.org/10.1017/CBO9780511612183"
+        }
+      ]
+    }
+  ]
+}
