@@ -66,3 +66,5 @@ h1,h2,h3{line-height:1.2;letter-spacing:-.025em}h1{font-size:clamp(26px,4.2vw,43
 .recall-checklist{border:1px solid var(--line);background:#f7faf5;padding:14px 17px;border-radius:12px;margin:18px 0}
 .recall-checklist h3{font-size:16px;margin:0 0 9px}
 .recall-checklist ul{padding-left:20px;margin:0 0 8px;display:grid;gap:4px}
+
+.rubric-row{display:flex;gap:10px;align-items:baseline;margin:14px 0}.fields select{width:100%;min-height:44px;font:inherit;background:white;border:1px solid #ccd8ce;border-radius:8px;padding:9px}.rest-options{flex-wrap:wrap}.rest-options>label{max-width:100%}

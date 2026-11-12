@@ -1,0 +1,175 @@
+{
+  "baselineCommit": "625b6109fcc085d0f21cbea77a25d457063e0e76",
+  "baselineFields": "Original sections (id, number, title, text, html), original MCQ fields and analytical models only. New metadata and supplemental fields are excluded.",
+  "originalChapters": [
+    {
+      "chapter": 1,
+      "sha256": "a23791117c9fbac83fde7daeff3cbd4fb801b4dc6099f0600f9129dc4730946e",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 2,
+      "sha256": "0dc54c3828872387d5ff631b8d8d41a8f9a8375dea02877c9c2d08191d736562",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 3,
+      "sha256": "56ebaa1cf9d3106d8174b736665ba73de4ed8eafbd2e04dd6e60acb0c7c21450",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 4,
+      "sha256": "a766279e4510101dfbc84712ed5c269df03ed9a6b502a53e6bb085a033f6d3c7",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 5,
+      "sha256": "8d2ec8bca36e4d8a7b66d2ea200d6315742748105d8bf9160555bf00eb7fb2d7",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 6,
+      "sha256": "229e6f0951d8f9bd34841003fd7124416f4ee1436f901f053eac3b50e326f6a4",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 7,
+      "sha256": "245261b308b4e38df0cc00dc6fd2dafb7685a41f8aefe665542800d9bb4a051a",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 8,
+      "sha256": "511f66f5e8710c14c6de06b8964395d4591ccd03ad2232d128d118810e16516a",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 9,
+      "sha256": "0bcc1ef05e232df80d712d669f0c23343913d3a2202ba39d474248548c3d3a12",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 10,
+      "sha256": "6925efc8c402f56a5e64c5cefa207f6de4e13b4b0a695acb067dca7f5ad35a2a",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 11,
+      "sha256": "5425850a0aa13976f064bb2452a4504e33192ff3f18ece1b7c21e9a16c7e5b18",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 12,
+      "sha256": "30b72860f2fea2540d8721a16428794f6334dead85e08700eba04c17a052959b",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 13,
+      "sha256": "0fc1d953b4db6f0bac33a5521b635c563f7fcbdb61f7ac28ad989323de77e362",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 14,
+      "sha256": "041d1910eeb657636da3c503841500f5879f7dce78780c8700a53e561dfd63a1",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 15,
+      "sha256": "d5f822ac505cf7493ed466786d3e96ee795f414830615d59ffc7fe74c2b4c7ce",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 16,
+      "sha256": "f7592b23dc6c4373e970546d593082f84192d22b546a5c32f0798033b6d381af",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 17,
+      "sha256": "38992549f286a88a0af21d6c3d1a4b61461434fafcc8380b3ea8a7d583d5a180",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 18,
+      "sha256": "4f4959fa7b8d64bf0b08dbb3e9168364ce6b97be4ab178b4398c5253f4e6f969",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 19,
+      "sha256": "d9cc45c2bfa7681721ba7b10b0a6ec01c96d69b6f295328da33cbbbe9911f628",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 20,
+      "sha256": "643540cf14a526cbbabc8bba518f86bb35d4094cbd7b412d335434945c865502",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 21,
+      "sha256": "9f0858af54f4ade27f7338bc5ec2c351df20a3b9c7dfbfcc4865ff4a54694013",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 22,
+      "sha256": "6658ce6949cbbc63de7d6d2f06643d307f474d086a35b009912a575c540b1649",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 23,
+      "sha256": "0ddf6618860fdf2dd1349d17b9f56f9be98a8e65a0660c61bc18663472f051d2",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 24,
+      "sha256": "c3cd8079d903466ca06fc944c8df17f490b5f7ee0b3ea8107150598ddbb5de33",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 25,
+      "sha256": "4d10c109ea70133a355b71fcf3898ce0fb8d8f5dafcdc949a4f388285baa2582",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 26,
+      "sha256": "1c8d1d1865984f4a03495a0559acb282692500b7c99063f0a8d070c78c3978cb",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 27,
+      "sha256": "d506d8fccb7c8a3a0f0e2f1677ae37ed3b7a60dc7d2cd2eebbf802815eeeffa9",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    },
+    {
+      "chapter": 28,
+      "sha256": "410d6bae847c9d2e07a6019418e367907af2a2b558c7119297a901ff314fe5f5",
+      "academicStatus": "unreviewed",
+      "reviewRequired": "All claims, source MCQs, models and visual explanations; no approval inferred from structural checks."
+    }
+  ],
+  "approvedContentVersions": []
+}

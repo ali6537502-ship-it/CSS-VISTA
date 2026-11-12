@@ -91,8 +91,8 @@
     "test:expression-security": "node tests/free-learning/security.mjs",
     "test:grammar": "node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts && node tests/pro/grammar-preservation.mjs && node scripts/grammar/export-catalog.mjs --check",
     "test:precis": "node --test tests/precis.test.ts tests/precisGuide.test.ts tests/precisWritingAnalyzer.test.ts tests/precisBook.test.ts && python3 tests/precis/test_import_handbook.py && python3 scripts/precis/check-handbook.py",
-    "test:gsa-tutor": "node --test tests/gsaTutorPlan.test.mjs tests/gsaTutorSync.test.mjs",
-    "audit:gsa-content": "node scripts/gsa-tutor/audit-content.mjs",
+    "test:gsa-tutor": "node --test tests/gsaTutorPlan.test.mjs tests/gsaTutorSync.test.mjs tests/gsaLearningEngine.test.mjs",
+    "audit:gsa-content": "node scripts/gsa-tutor/audit-content.mjs && node scripts/gsa-tutor/audit-foundations.mjs",
     "test:precis-server": "php tests/precis/unit.php && php tests/precis/feedback-unit.php",
     "test:precis-security": "node tests/precis/security.mjs && node tests/free-learning/security.mjs",
     "test:mentor-server": "php tests/mentor/unit.php",
@@ -112,7 +112,8 @@
     "audit:grammar-release": "node scripts/grammar-v5/build.mjs --check --release",
     "test:daily-pdf": "node --test tests/dailyPdf.test.mjs tests/daily-pdf/credentials.test.mjs",
     "validate:daily-pdf": "node scripts/daily-pdf/package.mjs --check",
-    "test:free-learning": "node --test tests/freeLearning.test.ts"
+    "test:free-learning": "node --test tests/freeLearning.test.ts",
+    "audit:gsa-release": "node scripts/gsa-tutor/audit-foundations.mjs --release"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

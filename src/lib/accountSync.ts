@@ -88,7 +88,7 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
     merged.plan = cloudPlan ?? localPlan
   }
   // Keep the latest graded attempt and revisit decision for each lesson.
-  for (const field of ['completed', 'revisit', 'bookmarks', 'bookmarkRemoved', 'quizHistory', 'quizAttempts', 'questionReview', 'recallAttempts', 'reviewDue'] as const) {
+  for (const field of ['completed', 'revisit', 'bookmarks', 'bookmarkRemoved', 'quizHistory', 'quizAttempts', 'conceptAttempts', 'writingAttempts', 'draftMeta', 'questionReview', 'recallAttempts', 'reviewDue'] as const) {
     const cloudRecords = isRecord(cloud[field]) ? cloud[field] : {}
     const localRecords = isRecord(local[field]) ? local[field] : {}
     const records: Record<string, unknown> = { ...cloudRecords, ...localRecords }
@@ -100,6 +100,12 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
     }
     merged[field] = records
   }
+  // New timestamped drafts win over stale-device text; legacy string drafts remain readable.
+  const drafts = isRecord(merged.drafts) ? { ...merged.drafts } : {}
+  for (const [id, entry] of Object.entries(isRecord(merged.draftMeta) ? merged.draftMeta : {})) {
+    if (isRecord(entry) && typeof entry.value === 'string') drafts[id] = entry.value
+  }
+  merged.drafts = drafts
   const bookmarks = isRecord(merged.bookmarks) ? { ...merged.bookmarks } : {}
   const removed = isRecord(merged.bookmarkRemoved) ? { ...merged.bookmarkRemoved } : {}
   for (const id of Object.keys(removed)) {

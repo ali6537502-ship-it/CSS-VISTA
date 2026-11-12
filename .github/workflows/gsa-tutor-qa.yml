@@ -11,6 +11,8 @@ on:
       - 'src/lib/accountSync.ts'
       - 'tests/gsaTutorPlan.test.mjs'
       - 'tests/gsaTutorSync.test.mjs'
+      - 'tests/gsaLearningEngine.test.mjs'
+      - 'docs/gsa-tutor/**'
       - 'tests/browser/gsaTutor.mjs'
       - 'src/lib/accountSync.ts'
       - 'package.json'

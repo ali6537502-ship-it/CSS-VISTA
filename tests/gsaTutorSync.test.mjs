@@ -99,3 +99,19 @@ test('later dated recall wins and separate recall attempt histories survive devi
    assert.deepEqual(Object.keys(merged.recallAttempts).sort(),['one','two']);
  }
 });
+
+test('timestamped drafts survive stale devices including deliberate empty drafts',()=>{
+ const cloud={[key]:{drafts:{A:'new'},draftMeta:{A:{at:t2,value:'new'}}}}
+ const stale={[key]:{drafts:{A:'old'},draftMeta:{A:{at:t0,value:'old'}}}}
+ for(const result of [merge(cloud,stale)[key],merge(stale,cloud)[key]])assert.equal(result.drafts.A,'new')
+ const cleared={[key]:{draftMeta:{A:{at:t2,value:''}}}}
+ assert.equal(merge(stale,cleared)[key].drafts.A,'')
+})
+test('independent concept and written self-evaluation histories survive synchronization',()=>{
+ const cloud={[key]:{conceptAttempts:{first:{at:t1,correct:false}},writingAttempts:{one:{at:t1,evaluation:'learner-self-evaluation'}}}}
+ const local={[key]:{conceptAttempts:{second:{at:t2,correct:true}},writingAttempts:{two:{at:t2,evaluation:'learner-self-evaluation'}}}}
+ for(const result of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+  assert.equal(Object.keys(result.conceptAttempts).length,2)
+  assert.equal(Object.keys(result.writingAttempts).length,2)
+ }
+})

@@ -9,10 +9,10 @@ const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'
 const now=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const dateAdd=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
 const dateLabel=s=>new Date(s+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
-const defaults=()=>({completed:{},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},quizHistory:{},quizAttempts:{},questionReview:{},recallAttempts:{},reviewDue:{},last:null,plan:null});
+const defaults=()=>({completed:{},revisit:{},bookmarks:{},bookmarkRemoved:{},drafts:{},draftMeta:{},quizHistory:{},quizAttempts:{},conceptAttempts:{},writingAttempts:{},questionReview:{},recallAttempts:{},reviewDue:{},last:null,plan:null});
 function read(){try{const o=JSON.parse(localStorage.getItem(storageKey)||'null');return o&&typeof o==='object'&&!Array.isArray(o)?{...defaults(),...o}:defaults()}catch{return defaults()}}
 let saved=embedded?defaults():read(),catalog=null,lessons=[],byId=new Map(),chapterCache=new Map();
-let ui={view:'course',id:saved.last,stage:'learn',beat:0,selected:'',draft:'',reveal:false,grade:'',chapter:1,qindex:0,phase:0,month:0,eclipse:'solar',seismic:'P',osm:'iso',water:0,setupDays:20,setupDate:now(),setupRestDays:[],setupDailyMinutes:90,search:'',opening:'',showAllDays:false,busy:false,error:'',attemptId:null,reviewSingle:false};
+let ui={radioMHz:150,bioOutput:'gas',view:'course',id:saved.last,stage:'learn',beat:0,selected:'',draft:'',reveal:false,grade:'',chapter:1,qindex:0,phase:0,month:0,eclipse:'solar',seismic:'P',osm:'iso',water:0,editingPlan:false,setupLevel:'beginner',setupDifficult:[],setupDays:20,setupDate:now(),setupRestDays:[],setupDailyMinutes:90,search:'',opening:'',showAllDays:false,busy:false,error:'',attemptId:null,reviewSingle:false};
 let hasCourse=false;
 function canSave(){
  if(!binding)return false;
@@ -38,7 +38,9 @@ function validPlan(p){
  const date=typeof p?.startDate==='string'?new Date(p.startDate+'T12:00:00Z'):new Date(NaN);
  return !!(p&&Number.isInteger(p.days)&&p.days>=5&&p.days<=120&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===p.startDate&&
  (!p.restDays||Array.isArray(p.restDays)&&p.restDays.length<7&&p.restDays.every(n=>Number.isInteger(n)&&n>=0&&n<=6))&&
- (p.dailyMinutes===undefined||Number.isInteger(p.dailyMinutes)&&p.dailyMinutes>=15&&p.dailyMinutes<=600));
+ (p.dailyMinutes===undefined||Number.isInteger(p.dailyMinutes)&&p.dailyMinutes>=15&&p.dailyMinutes<=600)&&
+ (p.level===undefined||['beginner','familiar','revision'].includes(p.level))&&
+ (p.difficultChapters===undefined||Array.isArray(p.difficultChapters)&&p.difficultChapters.every(n=>Number.isInteger(n)&&n>=1&&n<=28)));
 }
 function studyDate(plan,index){
  const rests=new Set(plan.restDays||[]);let date=plan.startDate,passed=0;
@@ -54,6 +56,7 @@ function dueReviews(){
 }
 function countDueReviews(){return dueReviews().filter(r=>r.date<=now()).length}
 function schedule(plan){
+ if(plan.plannerVersion===2)return window.CSSVistaGSALearning.planCourse(lessons,plan,saved.completed,dueReviews());
  const res=Array.from({length:plan.days},()=>[]);const sum=lessons.reduce((n,s)=>n+estimatedMinutes(s),0);
  let cursor=0,used=0;
  for(let d=0;d<plan.days;d++){
@@ -74,32 +77,34 @@ function todayDay(days){return days.find(d=>d.done<d.ids.length&&d.date<=now())|
 function chapterName(ch){return catalog.chapters.find(c=>c.id===ch)?.title||''}
 function heading(){return '<header class="top"><div class="brand"><img src="/images/logo.webp" alt="" width="32" height="32"><div>CSS VISTA<small>GENERAL SCIENCE TUTOR</small></div></div><nav class="nav" aria-label="GSA Tutor"><button data-view="course" class="'+(ui.view==='course'?'active':'')+'">My course</button><button data-view="library" class="'+(ui.view==='library'?'active':'')+'">Chapters</button><button data-view="practice" class="'+(ui.view==='practice'?'active':'')+'">Practice</button><button data-view="review" class="'+(ui.view==='review'?'active':'')+'">Revision</button></nav></header>'}
 function pillProgress(){
- return '<div class="stat-row"><div><strong>'+countDone()+' / '+lessons.length+'</strong><span>Lessons studied</span></div><div><strong>'+countConfident()+' / '+lessons.length+'</strong><span>Self-rated clear</span></div><div><strong>'+countReview()+'</strong><span>Lessons to revisit</span></div><div><strong>'+countMissedQuestions()+'</strong><span>Missed questions</span></div><div><strong>'+countDueReviews()+'</strong><span>Reviews due</span></div><div><strong>'+(savedPlan()?saved.plan.days:'—')+'</strong><span>Course days</span></div></div><div class="track" role="progressbar" aria-label="Lessons self-rated clear" aria-valuemin="0" aria-valuemax="'+lessons.length+'" aria-valuenow="'+countConfident()+'"><div class="fill" style="width:'+(countConfident()/lessons.length*100)+'%"></div></div>';
+ return '<div class="stat-row"><div><strong>'+countDone()+' / '+lessons.length+'</strong><span>Lessons studied</span></div><div><strong>'+countConfident()+' / '+lessons.length+'</strong><span>Self-rated clear</span></div><div><strong>'+countReview()+'</strong><span>Lessons to revisit</span></div><div><strong>'+countMissedQuestions()+'</strong><span>Missed questions</span></div><div><strong>'+countDueReviews()+'</strong><span>Reviews due</span></div><div><strong>'+(savedPlan()?schedule(saved.plan).length:'—')+'</strong><span>Scheduled sessions</span></div></div><div class="track" role="progressbar" aria-label="Lessons self-rated clear" aria-valuemin="0" aria-valuemax="'+lessons.length+'" aria-valuenow="'+countConfident()+'"><div class="fill" style="width:'+(countConfident()/lessons.length*100)+'%"></div></div>';
 }
 function setup(){
  const days=ui.setupDays,date=ui.setupDate,rest=new Set(ui.setupRestDays||[]);
  const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
  const restControls=dayNames.map((name,i)=>'<label class="rest-toggle"><input type="checkbox" data-rest-day="'+i+'" '+(rest.has(i)?'checked':'')+'><span>'+name+'</span></label>').join('');
  const totalWords=lessons.reduce((n,s)=>n+weights(s),0);
- const estimate=Math.round(lessons.reduce((n,s)=>n+estimatedMinutes(s),0)/days);
- return '<section class="page"><div class="hero"><div><p class="eyebrow">Your preparation, your timetable</p><h1>Choose how much time you have.</h1><p class="subtitle">All 28 chapters and 141 lessons remain in every plan. Choose active study days and days off; revisions are scheduled separately from new reading.</p></div></div><div class="panel"><p class="eyebrow">Active study sessions</p><div class="duration-grid">'+[8,14,20,30,45,60].map(n=>'<button class="duration '+(n===days?'active':'')+'" data-days="'+n+'"><strong>'+n+'</strong><span>days</span></button>').join('')+'</div><div class="fields"><label>Other duration (5–120 study days)<input type="number" id="custom-days" min="5" max="120" value="'+days+'"></label><label>Start date<input type="date" id="start-date" value="'+safe(date)+'"></label><label>Daily time available (minutes)<input type="number" id="daily-minutes" min="15" max="600" step="15" value="'+ui.setupDailyMinutes+'"></label></div><fieldset class="rest-field"><legend>Weekly rest days</legend><div class="rest-options">'+restControls+'</div></fieldset><p class="notice">'+Math.floor(lessons.length/days)+'–'+Math.ceil(lessons.length/days+2)+' lessons on most active days. '+Math.round(totalWords/days).toLocaleString()+' manuscript words per study day on average, excluding tests and recall. Provisional workload: about '+estimate+' minutes per study day versus '+ui.setupDailyMinutes+' available, before scheduled reviews. This heuristic is not a measured study duration.</p><button class="btn primary" data-action="saveplan">Create my course</button></div></section>';
+ const estimate=Math.round(lessons.reduce((n,s)=>n+window.CSSVistaGSALearning.minutes(s,{level:ui.setupLevel,difficultChapters:ui.setupDifficult}),0)/days);
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">Your preparation, your timetable</p><h1>Choose how much time you have.</h1><p class="subtitle">All 28 chapters and 141 lessons remain in every plan. Choose active study days and days off; revisions are scheduled separately from new reading.</p></div></div><div class="panel"><p class="eyebrow">Active study sessions</p><div class="duration-grid">'+[8,14,20,30,45,60].map(n=>'<button class="duration '+(n===days?'active':'')+'" data-days="'+n+'"><strong>'+n+'</strong><span>days</span></button>').join('')+'</div><div class="fields"><label>Other duration (5–120 study days)<input type="number" id="custom-days" min="5" max="120" value="'+days+'"></label><label>Start date<input type="date" id="start-date" value="'+safe(date)+'"></label><label>Daily time available (minutes)<input type="number" id="daily-minutes" min="15" max="600" step="15" value="'+ui.setupDailyMinutes+'"></label><label>Starting level<select id="starting-level">'+[['beginner','Beginner'],['familiar','Some background'],['revision','Revision']].map(([v,t])=>'<option value="'+v+'" '+(ui.setupLevel===v?'selected':'')+'>'+t+'</option>').join('')+'</select></label></div><details><summary>Chapters I find difficult</summary><div class="rest-options">'+catalog.chapters.map(c=>'<label><input type="checkbox" data-difficult="'+c.id+'" '+(ui.setupDifficult.includes(c.id)?'checked':'')+'> '+safe(c.title)+'</label>').join('')+'</div></details><fieldset class="rest-field"><legend>Weekly rest days</legend><div class="rest-options">'+restControls+'</div></fieldset><p class="notice">'+Math.floor(lessons.length/days)+'–'+Math.ceil(lessons.length/days+2)+' lessons on most active days. '+Math.round(totalWords/days).toLocaleString()+' manuscript words per study day on average, excluding tests and recall. Provisional workload: about '+estimate+' minutes per study day versus '+ui.setupDailyMinutes+' available, before scheduled reviews. This heuristic is not a measured study duration.</p><button class="btn primary" data-action="saveplan">Save budgeted timetable</button>'+(savedPlan()?'<button class="btn" data-action="cancelplan">Keep current plan</button>':'')+'</div></section>';
 }
 function course(){
- if(!savedPlan())return setup();
+ if(ui.editingPlan||!savedPlan())return setup();
  const days=schedule(saved.plan),target=todayDay(days);
  const visibleDays=ui.showAllDays?days:days.filter(d=>d.day>=Math.max(1,target.day-1)&&d.day<=Math.min(days.length,target.day+5));
  const first=target?.ids.find(id=>!isDone(id))||lessons.find(s=>!isDone(s.id))?.id||lessons[0].id;
  const due=dueReviews().filter(x=>x.date<=now());
  const reviewBanner=due.length?'<div class="panel"><div class="spread"><div><p class="eyebrow">Spaced recall</p><h2>'+due.length+' review'+(due.length===1?'':'s')+' due</h2><p class="muted">Review these topics before proceeding; your earlier work is saved.</p></div><button class="btn primary" data-view="review">Open revision</button></div></div>':'';
  const rest=(saved.plan.restDays||[]).length?['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].filter((_,i)=>saved.plan.restDays.includes(i)).join(', '):'none';
- const overBudget=days.filter(d=>d.estimatedMinutes+5*d.reviews.length>(saved.plan.dailyMinutes||90)).length;
- const paceNote='<p class="tiny muted">Time available: '+(saved.plan.dailyMinutes||90)+' minutes per active study day · Weekly rest: '+rest+'. Planning estimate: source reading at 150 words/minute plus six minutes per lesson and five minutes per scheduled review. Times vary by learner and topic.</p>'+(overBudget?'<p class="notice warn">'+overBudget+' study day(s) have an estimated workload exceeding your stated time. Increase the course duration or daily availability if needed.</p>':'');
+ const reviewMinutes=d=>saved.plan.plannerVersion===2?0:5*d.reviews.length;
+ const overBudget=days.filter(d=>d.estimatedMinutes+reviewMinutes(d)>(saved.plan.dailyMinutes||90)).length;
+ const extension=days.length>saved.plan.days?'<p class="notice warn">This workload needs '+days.length+' active days at the selected budget; the requested '+saved.plan.days+' days are not sufficient. Your calendar extends to '+dateLabel(days[days.length-1].date)+'.</p>':'';
+ const paceNote='<p class="tiny muted">Time available: '+(saved.plan.dailyMinutes||90)+' minutes per active study day · Weekly rest: '+rest+'. Planning estimates are provisional: source reading plus conceptual work, practice and recall, adjusted for starting level and difficult chapters. Each scheduled review reserves five minutes. A long lesson may need more than one sitting.</p>'+(overBudget?'<p class="notice warn">'+overBudget+' study day(s) contain an indivisible lesson exceeding the budget. Allow extra time or study that lesson over multiple sittings.</p>':'');
  const dayRows=visibleDays.map(d=>{
    const entries=d.ids.map(id=>{const sec=byId.get(id);return '<button class="day-lesson '+(isDone(id)?'done':'')+'" data-lesson="'+safe(id)+'"><span>'+(isDone(id)?'✓':'○')+' '+safe(sec.number)+' · '+safe(sec.title)+'</span><small>'+sec.words+' words</small></button>'}).join('');
    const revisions=d.reviews.length?'<div class="scheduled-review"><strong>Spaced recall</strong>'+d.reviews.map(id=>'<button class="day-lesson" data-lesson="'+safe(id)+'">↻ '+safe(byId.get(id)?.title||'Lesson')+'</button>').join('')+'</div>':'';
-   return '<details class="day" '+(d.day===target.day?'open':'')+'><summary><b>Day '+d.day+'</b><span><strong>'+dateLabel(d.date)+(d.done===d.ids.length?' · Studied':d.date<now()?' · Catch up':d.date===now()?' · Today':'')+'</strong><em>'+d.done+'/'+d.ids.length+' studied · '+d.words.toLocaleString()+' source words · ~'+(d.estimatedMinutes+5*d.reviews.length)+' min · '+d.reviews.length+' recalls</em></span></summary><div class="day-lessons">'+entries+revisions+'</div></details>';
+   return '<details class="day" '+(d.day===target.day?'open':'')+'><summary><b>Day '+d.day+'</b><span><strong>'+dateLabel(d.date)+(!d.ids.length?' · Revision / consolidation':d.done===d.ids.length?' · Studied':d.date<now()?' · Catch up':d.date===now()?' · Today':'')+'</strong><em>'+d.done+'/'+d.ids.length+' studied · '+d.words.toLocaleString()+' source words · ~'+(d.estimatedMinutes+reviewMinutes(d))+' min · '+d.reviews.length+' recalls</em></span></summary><div class="day-lessons">'+entries+revisions+'</div></details>';
  }).join('');
- return '<section class="page"><div class="hero"><div><p class="eyebrow">General Science · Part I · 60 marks</p><h1>Your '+saved.plan.days+'-study-day programme</h1><p class="subtitle">Work through the explanations, practise source questions, and return to concepts when scheduled. Off-days are excluded from the calendar.</p></div><button class="btn" data-action="editplan">Change plan</button></div><div class="panel accent">'+pillProgress()+'</div>'+reviewBanner+'<div class="panel"><div class="spread"><div><p class="eyebrow">'+(target?.date===now()?'Today’s session':'Continue from here')+'</p><h2>Day '+target.day+' · '+dateLabel(target.date)+'</h2><p class="muted">'+target.done+' of '+target.ids.length+' lessons studied · '+target.words.toLocaleString()+' source words assigned</p></div><button class="btn primary" data-lesson="'+safe(first)+'">Continue learning</button></div></div><div class="spread"><h2 style="margin:10px 0">Daily timetable</h2><small class="muted">Expand a day to see lessons and spaced recall</small></div><div class="plan-grid">'+dayRows+'</div>'+(ui.showAllDays?'<button class="btn" data-action="expandplan">Show current week</button>':days.length>visibleDays.length?'<button class="btn" data-action="expandplan">Show all '+days.length+' study days</button>':'')+paceNote+'<p class="tiny muted">Rescheduling preserves studied lessons and earlier recall records. The manuscript content does not change when the number of days changes.</p></section>';
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">General Science · Part I · 60 marks</p><h1>Your '+days.length+'-session programme</h1><p class="subtitle">Work through the explanations, practise source questions, and return to concepts when scheduled. Off-days are excluded from the calendar.</p></div><div class="flex"><button class="btn" data-action="editplan">Change plan</button><button class="btn" data-action="catchup">Rebalance remaining work from today</button></div></div>'+extension+'<div class="panel accent">'+pillProgress()+'</div>'+reviewBanner+'<div class="panel"><div class="spread"><div><p class="eyebrow">'+(target?.date===now()?'Today’s session':'Continue from here')+'</p><h2>Day '+target.day+' · '+dateLabel(target.date)+'</h2><p class="muted">'+target.done+' of '+target.ids.length+' lessons studied · '+target.words.toLocaleString()+' source words assigned</p></div><button class="btn primary" data-lesson="'+safe(first)+'">Continue learning</button></div></div><div class="spread"><h2 style="margin:10px 0">Daily timetable</h2><small class="muted">Expand a day to see lessons and spaced recall</small></div><div class="plan-grid">'+dayRows+'</div>'+(ui.showAllDays?'<button class="btn" data-action="expandplan">Show current week</button>':days.length>visibleDays.length?'<button class="btn" data-action="expandplan">Show all '+days.length+' study days</button>':'')+paceNote+'<p class="tiny muted">Rescheduling preserves studied lessons and earlier recall records. The manuscript content does not change when the number of days changes.</p></section>';
 }
 function library(){
  const items=catalog.chapters.filter(c=>!ui.search||[c.title,c.part,...c.sections.map(s=>s.title)].join(' ').toLowerCase().includes(ui.search.toLowerCase()));
@@ -117,13 +122,14 @@ function review(){
  return '<section class="page"><div class="hero"><div><p class="eyebrow">Learn · Test · Return</p><h1>Revision notebook</h1><p class="subtitle">Dated recall sessions, difficult concepts and wrong source questions are tracked independently. Previous attempts remain saved.</p></div></div><div class="panel"><h2>Recall due · '+due.length+'</h2>'+recallRows(due,'Due')+'</div><div class="panel"><h2>Upcoming recall · '+upcoming.length+'</h2>'+recallRows(upcoming,'Scheduled')+'</div><div class="panel"><h2>'+ids.length+' lessons to revisit</h2>'+lessonRows+'</div><div class="panel"><h2>'+missed.length+' missed questions</h2>'+questionRows+'</div><p class="tiny muted">The 3, 7, 14, 30 and 60-day sequence is a fixed revision aid, not a scientifically verified measure of mastery.</p></section>';
 }
 function practice(){
- return '<section class="page"><div class="hero"><div><p class="eyebrow">Examination preparation</p><h1>Practice by chapter.</h1><p class="subtitle">Use the 250 original textbook MCQs and 31 available analytical model answers. Answers are shown with their explanations. No questions are invented to fill gaps.</p></div></div><div class="panel">'+catalog.chapters.map(c=>'<div class="list-row"><div><strong>'+safe(c.title)+'</strong><p>Chapter '+c.id+' · '+c.questionCount+' MCQs · '+c.analyticalCount+' model answers</p></div><button class="btn small" data-practice="'+c.id+'">Practise</button></div>').join('')+'</div><p class="tiny muted">Earlier practice and recall attempts remain in your study records. Export a personal backup if you need one.</p><button class="btn small" data-action="exporthistory">Export my learning records</button></section>';
+ return '<section class="page"><div class="hero"><div><p class="eyebrow">Examination preparation</p><h1>Practice by chapter.</h1><p class="subtitle">Use 250 original manuscript MCQs and 31 source models, plus explicitly labelled development practice in chapters 6 and 14. Original practice is not an authentic FPSC past-paper question. Independent academic approval is pending.</p></div></div><div class="panel">'+catalog.chapters.map(c=>'<div class="list-row"><div><strong>'+safe(c.title)+'</strong><p>Chapter '+c.id+' · '+c.questionCount+' MCQs · '+c.analyticalCount+' model answers</p></div><button class="btn small" data-practice="'+c.id+'">Practise</button></div>').join('')+'</div><p class="tiny muted">Earlier practice and recall attempts remain in your study records. Export a personal backup if you need one.</p><button class="btn small" data-action="exporthistory">Export my learning records</button></section>';
 }
 async function loadChapter(id){
  id=Number(id);if(chapterCache.has(id))return chapterCache.get(id);
  const response=await fetch('/gsa-tutor/content/chapter-'+String(id).padStart(2,'0')+'.json',{cache:'force-cache'});
  if(!response.ok)throw Error('Chapter could not be loaded (HTTP '+response.status+').');
  const item=await response.json();if(!Array.isArray(item.sections)||item.id!==id)throw Error('Invalid chapter source');
+ item.questions=[...item.questions,...(item.supplementalQuestions||[])];item.analytical=[...item.analytical,...(item.supplementalAnalytical||[])];
  if(chapterCache.size>=3)chapterCache.delete(chapterCache.keys().next().value);
  chapterCache.set(id,item);return item;
 }
@@ -141,6 +147,8 @@ function blocks(html){
  return result.length?result:['<p>No study text was found for this lesson.</p>'];
 }
 function questionFor(s,c){
+ const explicit=c.questions.find(q=>q.lessonId===s.id&&q.conceptId);
+ if(explicit)return explicit;
  // Match each published question to only one suitable lesson in its chapter.
  // Never repeat the same chapter-wide MCQ across several successive lessons.
  if(!c._lessonQuestions){
@@ -170,6 +178,8 @@ function modelFrame(title,controls,graphic,note,reference,label){
  return '<div class="model" aria-label="'+safe(label||title)+'"><p class="eyebrow">'+safe(title)+'</p><div class="tabs">'+controls+'</div><div class="science-graphic">'+graphic+'</div><p class="tiny muted">'+safe(note)+'</p><p class="tiny"><a href="'+reference+'" target="_blank" rel="noopener noreferrer">Scientific reference ↗</a></p></div>';
 }
 function visual(s){
+ if(s.id==='c6-s6-4')return modelFrame('Explore frequency and wavelength', [75,150,300].map(f=>'<button data-radio-mhz="'+f+'" aria-pressed="'+(ui.radioMHz===f)+'">'+f+' MHz</button>').join(''),'<div role="status"><p>Vacuum frequency: <strong>'+ui.radioMHz+' MHz</strong></p><p>Wavelength: <strong>'+(300/ui.radioMHz)+' m</strong></p><math aria-label="Wavelength equals speed divided by frequency" xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>c</mi><mi>f</mi></mfrac></math></div>','Calculated with c ≈ 3 × 10⁸ m/s in vacuum. Doubling frequency halves wavelength. This calculator illustrates a relation; it does not simulate propagation in real materials.','https://openstax.org/books/chemistry-2e/pages/6-1-electromagnetic-energy');
+ if(s.id==='c14-s14-4')return modelFrame('Follow a digester’s outputs',['gas','digestate'].map(k=>'<button data-bio-output="'+k+'" aria-pressed="'+(ui.bioOutput===k)+'">'+(k==='gas'?'Biogas':'Digestate')+'</button>').join(''),'<div role="status"><p>Organic feedstock → anaerobic reactor → <strong>'+ (ui.bioOutput==='gas'?'biogas → cleaning or upgrading → energy use':'digestate → appropriate treatment and management → suitable use')+'</strong></p></div>','Two output streams, not a quantitative process simulation. No output is assumed safe for every use.','https://www.epa.gov/agstar/how-does-anaerobic-digestion-work');
  if(s.id==='c3-s3-3')return '<div class="model"><p class="eyebrow">Explore the seasons</p><div class="tabs"><button data-month="0" class="'+(!ui.month?'active':'')+'">June</button><button data-month="1" class="'+(ui.month?'active':'')+'">December</button></div><div id="science-model">'+seasonSvg(!ui.month)+'</div><p class="tiny muted">Diagram is schematic. The direction of Earth’s axial tilt explains the opposite seasons.</p></div>';
  if(s.id==='c3-s3-4'){
   const moons='<div class="model"><p class="eyebrow">Explore lunar phases</p><div class="tabs">'+['New','First quarter','Full','Last quarter'].map((x,i)=>'<button data-phase="'+i+'" aria-pressed="'+(ui.phase===i)+'" class="'+(ui.phase===i?'active':'')+'">'+x+'</button>').join('')+'</div><div id="science-model">'+moonSvg(ui.phase)+'</div><p class="tiny muted">Moon orbit viewed schematically from above; not to scale.</p></div>';
@@ -187,21 +197,25 @@ function sourceChecklist(section){
  const headings=[...new Set(found)].slice(0,6);
  return headings.length?'<div class="recall-checklist"><h3>Check against the manuscript headings</h3><ul>'+headings.map(t=>'<li>'+safe(t)+'</li>').join('')+'</ul><p class="tiny muted">These are source headings for self-review, not automated marks or an independently validated rubric.</p></div>':'';
 }
+function teachingFoundation(s){
+ const t=s.teaching;if(!t)return '';
+ return '<aside class="notice"><strong>Learning objective</strong><p>'+safe(t.objective)+'</p><strong>Start here</strong><p>'+safe(t.prerequisites)+'</p><p class="tiny">Source-checked development draft · independent academic approval pending · '+safe(t.version)+'</p></aside>';
+}
 function lesson(s,c){
- const pieces=blocks(s.html),beat=Math.max(0,Math.min(ui.beat,pieces.length-1)),q=questionFor(s,c);
+ const pieces=blocks((s.teaching?.explanationHtml||'')+s.html),beat=Math.max(0,Math.min(ui.beat,pieces.length-1)),q=questionFor(s,c);
  let content='';
  let total=pieces.length+(q?1:0)+1;
  let current=ui.stage==='learn'?beat+1:ui.stage==='question'?pieces.length+1:total;
  if(ui.stage==='learn'){
-  content='<div class="lesson-card"><p class="segment-note">Understand · Section '+(beat+1)+' of '+pieces.length+'</p><h2>'+safe(s.title)+'</h2><div class="study-copy">'+pieces[beat]+'</div>'+(beat===0?visual(s):'')+'<div class="lesson-bottom"><button class="btn" data-action="prevbeat" '+(!beat?'disabled':'')+'>Previous</button><span class="tiny muted">Read · Think · Understand</span><button class="btn primary" data-action="nextbeat">'+(beat===pieces.length-1?(q?'Check understanding':'Write your explanation'):'Next explanation')+' →</button></div></div>';
+  content='<div class="lesson-card"><p class="segment-note">Understand · Section '+(beat+1)+' of '+pieces.length+'</p><h2>'+safe(s.title)+'</h2>'+(beat===0?teachingFoundation(s):'')+'<div class="study-copy">'+pieces[beat]+'</div>'+(beat===0?visual(s):'')+'<div class="lesson-bottom"><button class="btn" data-action="prevbeat" '+(!beat?'disabled':'')+'>Previous</button><span class="tiny muted">Read · Think · Understand</span><button class="btn primary" data-action="nextbeat">'+(beat===pieces.length-1?(q?'Check understanding':'Write your explanation'):'Next explanation')+' →</button></div></div>';
  }else if(ui.stage==='question'&&q){
   const selected=ui.selected, answered=!!selected;
-  content='<div class="lesson-card"><p class="segment-note">Apply · Source question '+safe(q.id)+'</p><h2>'+safe(q.prompt)+'</h2><p class="muted">A chapter-level question from the original textbook. It may connect ideas covered in more than one lesson.</p><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(answered?(k===q.answer?'correct':k===selected?'wrong':''):k===selected?'chosen':'')+'" data-choice="'+k+'" '+(answered?'disabled':'')+'><b>'+k+'</b><span>'+safe(v)+'</span></button>').join('')+'</div>'+(answered?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct.':'Review the explanation.')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Review the explanation</button><button class="btn primary" data-action="torecall" '+(!answered?'disabled':'')+'>Explain it yourself →</button></div></div>';
+  content='<div class="lesson-card"><p class="segment-note">Apply · Source question '+safe(q.id)+'</p><h2>'+safe(q.prompt)+'</h2><p class="muted">'+(q.lessonId?'Explicitly linked to this lesson. '+(q.origin==='original-practice'?'Original practice; not an FPSC past-paper question.':'Original manuscript question.'):'Provisional keyword match from the chapter; lesson relevance has not been editorially approved.')+'</p><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(answered?(k===q.answer?'correct':k===selected?'wrong':''):k===selected?'chosen':'')+'" data-choice="'+k+'" '+(answered?'disabled':'')+'><b>'+k+'</b><span>'+safe(v)+'</span></button>').join('')+'</div>'+(answered?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct.':'Review the explanation.')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Review the explanation</button><button class="btn primary" data-action="torecall" '+(!answered?'disabled':'')+'>Explain it yourself →</button></div></div>';
  }else{
-  const draft=ui.draft||saved.drafts?.[s.id]||'',sample=pieces.slice(0,Math.min(pieces.length,3)).join(''),revealed=ui.reveal,checklist=sourceChecklist(s);
+  const draft=ui.draft||saved.drafts?.[s.id]||'',sample=s.teaching?.explanationHtml||pieces.slice(0,Math.min(pieces.length,3)).join(''),revealed=ui.reveal,checklist=sourceChecklist(s);
   content='<div class="lesson-card"><p class="segment-note">Recall · Closed-book explanation</p><h2>Can you explain '+safe(s.title.toLowerCase())+'?</h2><p class="muted">Write the mechanism, evidence, distinction or application in your own words. Include an example where the original lesson provides one. Your response is for self-review; it is not automatically graded.</p><textarea class="textarea" id="recall" placeholder="Explain the idea here, using your own words...">'+safe(draft)+'</textarea>'+(revealed?'<div class="compare"><h3>Compare with the source</h3><div class="study-copy">'+sample+'</div>'+checklist+'<button class="btn small" data-action="fullsource">Read the complete section</button><p class="muted tiny">Decide what you explained correctly and what needs another reading.</p><div class="score-group"><button class="btn" data-grade="gotit">I understood</button><button class="btn" data-grade="partial">Partly clear</button><button class="btn" data-grade="again">Repeat</button></div></div>':'')+'<div class="lesson-bottom"><button class="btn" data-action="tolearn">Read again</button>'+(revealed?'<button class="btn primary" data-action="finish" '+(!ui.grade?'disabled':'')+'>Save & finish →</button>':'<button class="btn primary" data-action="reveal" '+(nwords(draft)<16?'disabled':'')+'>Compare with the book →</button>')+'</div></div>';
  }
- return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button><span class="muted tiny"> / '+safe(c.part)+' / Chapter '+c.id+' / Lesson '+safe(s.number)+'</span></div><p class="eyebrow">Original source · '+s.words+' words · General Science Part I</p><h1 class="lesson-title">'+safe(s.title)+'</h1><div class="progress-meta"><span>'+current+' of '+total+' learning steps</span><span>'+Math.round(current/total*100)+'%</span></div><div class="track"><div class="fill" style="width:'+(current/total*100)+'%"></div></div>'+content+'<div class="flex"><button class="btn small" data-action="fullsource">Complete reference</button><button class="btn small" data-action="bookmark">'+(saved.bookmarks?.[s.id]?'Remove bookmark':'Bookmark')+'</button><button class="btn small" data-action="markreview">Add to revision</button></div><p class="tiny muted">Content is drawn from the CSS VISTA General Science manuscript. Questions and source statements remain subject to editorial review.</p></section>';
+ return '<section class="study-layout"><div class="breadcrumb"><button data-view="course">← My course</button><span class="muted tiny"> / '+safe(c.part)+' / Chapter '+c.id+' / Lesson '+safe(s.number)+'</span></div><p class="eyebrow">'+(s.teaching?'Teaching draft + original reference':'Original source')+' · '+s.words+' words · General Science Part I</p><h1 class="lesson-title">'+safe(s.title)+'</h1><div class="progress-meta"><span>'+current+' of '+total+' learning steps</span><span>'+Math.round(current/total*100)+'%</span></div><div class="track"><div class="fill" style="width:'+(current/total*100)+'%"></div></div>'+content+'<div class="flex"><button class="btn small" data-action="fullsource">Complete reference</button><button class="btn small" data-action="bookmark">'+(saved.bookmarks?.[s.id]?'Remove bookmark':'Bookmark')+'</button><button class="btn small" data-action="markreview">Add to revision</button></div>'+(s.teaching?'<details class="panel"><summary>Revision sheet and source record</summary><ul>'+s.teaching.revision.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul><p>'+safe(s.teaching.verification.sourceTitle)+' · '+safe(s.teaching.verification.publisher)+'</p><a target="_blank" rel="noopener noreferrer" href="'+safe(s.teaching.verification.sourceUrl)+'">Read supporting source</a><p class="tiny">'+safe(s.teaching.verification.reviewedAt)+' · '+safe(s.teaching.verification.reviewer)+'</p></details>':'')+'<p class="tiny muted">Content is drawn from the CSS VISTA General Science manuscript. Questions and source statements remain subject to editorial review.</p></section>';
 }
 function finishedView(){
  const index=lessons.findIndex(s=>s.id===ui.id),next=lessons.slice(index+1).find(s=>!isDone(s.id))||lessons.slice(0,index+1).find(s=>!isDone(s.id));
@@ -219,15 +233,19 @@ function chapterPractice(c){
  const responses=Object.values(attempt.responses||{});
  const correct=responses.filter(answer=>answer.correct).length;
  const count=responses.length;
- const question=q?'<p class="eyebrow">'+(ui.reviewSingle?'Targeted revision':'Question '+(ui.qindex+1)+' of '+c.questions.length)+' · '+safe(q.id)+'</p><h2>'+safe(q.prompt)+'</h2><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(selected?(k===q.answer?'correct':k===selected?'wrong':''):'')+'" data-quiz-choice="'+k+'" '+(selected?'disabled':'')+'><b>'+k+'</b>'+safe(v)+'</button>').join('')+'</div>'+(selected?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct':'Check the reasoning')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><span class="muted tiny">'+count+' answered · '+correct+' correct in this attempt</span>'+(ui.reviewSingle?'<button class="btn primary" data-action="returnreview">Return to revision →</button>':'<button class="btn primary" data-action="nextquestion" '+(!selected?'disabled':'')+'>'+(ui.qindex===c.questions.length-1?'View results':'Next question')+' →</button>')+'</div>':c.questions.length?'<div class="panel accent"><h2>Attempt finished</h2><p class="muted">'+correct+' correct out of '+count+' questions answered in this attempt. Earlier attempts remain saved separately.</p><button class="btn primary" data-action="restartquestions">Start a new attempt</button></div>':'<p>There are no source MCQs for this chapter.</p>';
+ const question=q?'<p class="eyebrow">'+(ui.reviewSingle?'Targeted revision':'Question '+(ui.qindex+1)+' of '+c.questions.length)+' · '+safe(q.id)+'</p><p class="tiny muted">'+(q.origin==='original-practice'?'Original practice · development draft · not an FPSC past-paper question. Academic approval pending.':'Original manuscript question · academic review pending.')+'</p><h2>'+safe(q.prompt)+'</h2><div class="choice-list">'+Object.entries(q.options).map(([k,v])=>'<button class="choice '+(selected?(k===q.answer?'correct':k===selected?'wrong':''):'')+'" data-quiz-choice="'+k+'" '+(selected?'disabled':'')+'><b>'+k+'</b>'+safe(v)+'</button>').join('')+'</div>'+(selected?'<div class="feedback '+(selected===q.answer?'':'error')+'"><strong>'+(selected===q.answer?'Correct':'Check the reasoning')+'</strong><p>'+safe(q.explanation)+'</p></div>':'')+'<div class="lesson-bottom"><span class="muted tiny">'+count+' answered · '+correct+' correct in this attempt</span>'+(ui.reviewSingle?'<button class="btn primary" data-action="returnreview">Return to revision →</button>':'<button class="btn primary" data-action="nextquestion" '+(!selected?'disabled':'')+'>'+(ui.qindex===c.questions.length-1?'View results':'Next question')+' →</button>')+'</div>':c.questions.length?'<div class="panel accent"><h2>Attempt finished</h2><p class="muted">'+correct+' correct out of '+count+' questions answered in this attempt. Earlier attempts remain saved separately.</p><button class="btn primary" data-action="restartquestions">Start a new attempt</button></div>':'<p>There are no source MCQs for this chapter.</p>';
  const attempts=Object.entries(saved.quizAttempts||{}).filter(([id,entry])=>id!==ui.attemptId&&entry?.chapter===c.id&&Object.keys(entry.responses||{}).length>0).sort((a,b)=>Date.parse(b[1].at||0)-Date.parse(a[1].at||0)).slice(0,5);
  const history=attempts.length?'<div class="panel"><h2>Previous practice attempts</h2>'+attempts.map(([,attempt])=>{const answers=Object.values(attempt.responses||{});const score=answers.filter(a=>a.correct).length;return '<div class="list-row"><div><strong>'+score+' / '+answers.length+' correct</strong><p>'+safe((attempt.at||'').slice(0,10))+(attempt.finishedAt?' · Finished':' · Partial attempt')+'</p></div></div>'}).join('')+'</div>':'';
  const a=c.analytical||[];
- return '<section class="page"><div class="breadcrumb"><button data-view="practice">← All chapters</button></div><p class="eyebrow">Chapter '+c.id+' · '+safe(c.part)+'</p><h1>'+safe(c.title)+'</h1><div class="panel">'+question+'</div>'+history+'<div class="panel"><h2>Analytical writing</h2>'+(a.length?a.map(q=>'<div class="list-row"><div><strong>'+safe(q.prompt)+'</strong><p>Original model answer available</p></div><button class="btn small" data-analytical="'+safe(q.id)+'">Write answer</button></div>').join(''):'<p class="muted">This chapter does not have a published model analytical answer in the supplied manuscript. The section material remains available for study.</p>')+'</div></section>';
+ return '<section class="page"><div class="breadcrumb"><button data-view="practice">← All chapters</button></div><p class="eyebrow">Chapter '+c.id+' · '+safe(c.part)+'</p><h1>'+safe(c.title)+'</h1><div class="panel">'+question+'</div>'+history+'<div class="panel"><h2>Analytical writing</h2>'+(a.length?a.map(q=>'<div class="list-row"><div><strong>'+safe(q.prompt)+'</strong><p>'+safe(q.verification?'Original practice model · academic approval pending':'Original manuscript model available')+'</p></div><button class="btn small" data-analytical="'+safe(q.id)+'">Write answer</button></div>').join(''):'<p class="muted">This chapter does not have a published model analytical answer in the supplied manuscript. The section material remains available for study.</p>')+'</div></section>';
+}
+function writingRubric(a){
+ if(!a.rubric)return '<p class="muted">No reviewed topic-specific rubric is available for this manuscript answer. Compare the source without treating it as a scored evaluation.</p>';
+ return '<fieldset class="panel"><legend>Rubric-based self-evaluation · draft, not official FPSC marks</legend>'+a.rubric.map((r,i)=>'<label class="rubric-row"><input type="checkbox" data-rubric="'+i+'"> '+safe(r.criterion)+' ('+r.marks+' mark)</label>').join('')+'<p>Common mistakes: '+safe(a.commonMistakes.join(' '))+'</p><button class="btn" data-action="saveevaluation">Save my self-evaluation</button><p class="tiny">This is your own comparison with a draft rubric. No human evaluation or automated scientific score is provided.</p></fieldset>';
 }
 function written(c,a){
  const draft=saved.drafts?.[a.id]||'';
- return '<section class="page"><div class="breadcrumb"><button data-practice="'+c.id+'">← Chapter practice</button></div><p class="eyebrow">Analytical answer writing · '+safe(a.id)+'</p><h1>'+safe(a.prompt)+'</h1><div class="panel"><p class="muted">Develop a structured explanation using scientific concepts, mechanisms and examples from the chapter. The manuscript model appears only when you choose to compare.</p><textarea class="textarea" id="write" placeholder="Introduction, explanation, evidence, application and conclusion...">'+safe(draft)+'</textarea><div class="flex" style="margin-top:15px"><button class="btn" data-action="savewriting">Save draft</button><button class="btn primary" data-action="revealwriting">Compare with model answer</button></div>'+(ui.reveal?'<div class="compare study-copy">'+a.answer_html+'</div>':'')+'</div></section>';
+ return '<section class="page"><div class="breadcrumb"><button data-practice="'+c.id+'">← Chapter practice</button></div><p class="eyebrow">Analytical answer writing · '+safe(a.id)+'</p><p class="tiny muted">'+(a.verification?'Original practice model and rubric · academic approval pending.':'Original manuscript model · academic review pending.')+'</p><h1>'+safe(a.prompt)+'</h1><div class="panel"><p class="muted">Develop a structured explanation using scientific concepts, mechanisms and examples from the chapter. The manuscript model appears only when you choose to compare.</p><textarea class="textarea" id="write" placeholder="Introduction, explanation, evidence, application and conclusion...">'+safe(draft)+'</textarea><div class="flex" style="margin-top:15px"><button class="btn" data-action="savewriting">Save draft</button><button class="btn primary" data-action="revealwriting">Compare with model answer</button></div>'+(ui.reveal?'<div class="compare study-copy">'+a.answer_html+'</div>'+writingRubric(a):'')+'</div></section>';
 }
 async function openLesson(id){
  if(!byId.has(id))return;
@@ -274,6 +292,7 @@ function saveQuizAnswer(value){
  ui.selected=value;
  saved.quizHistory??={};saved.quizHistory[q.id]={at,selected:value,correct};
  saved.questionReview??={};saved.questionReview[q.id]={at,chapter:c.id,unresolved:!correct};
+ if(!correct&&q.lessonId&&byId.has(q.lessonId)){saved.revisit[q.lessonId]={at,kind:'question',questionId:q.id};saved.reviewDue[q.lessonId]={at,date:dateAdd(now(),1),stage:0}}
  if(correct){
    for(const [lessonId,item] of Object.entries(saved.revisit||{})){
      if(item?.kind==='question'&&item.questionId===q.id)delete saved.revisit[lessonId];
@@ -281,12 +300,12 @@ function saveQuizAnswer(value){
  }
  if(!saved.quizAttempts?.[ui.attemptId])beginQuizAttempt(c.id);
  const attempt=saved.quizAttempts[ui.attemptId];
- attempt.responses[q.id]={at,selected:value,correct};
+ attempt.responses[q.id]={at,selected:value,correct,question:{prompt:q.prompt,options:q.options,answer:q.answer,explanation:q.explanation},contentVersion:c.contentVersion||catalog.edition};
  attempt.at=at;
  notify();draw();
 }
 function saveBookmark(){const id=ui.id;saved.bookmarks??={};saved.bookmarkRemoved??={};if(saved.bookmarks[id]){delete saved.bookmarks[id];saved.bookmarkRemoved[id]={at:new Date().toISOString()}}else{saved.bookmarks[id]={at:new Date().toISOString()};delete saved.bookmarkRemoved[id]}notify();draw()}
-function saveDraft(id,value){saved.drafts??={};saved.drafts[id]=value;notify()}
+function saveDraft(id,value){saved.drafts??={};saved.draftMeta??={};saved.drafts[id]=value;saved.draftMeta[id]={at:new Date().toISOString(),value};notify()}
 function exportLearningRecords(){
  try{
    const archive={exportedAt:new Date().toISOString(),edition:catalog?.edition||'General Science preview',records:saved};
@@ -306,6 +325,7 @@ function fullSource(){
  if(!s)return;const dialog=document.getElementById('reference');dialog.querySelector('h2').textContent=s.number+' · '+s.title;dialog.querySelector('.ref-source').innerHTML=s.html;dialog.showModal();
 }
 function draw(){
+ const focused=document.activeElement;const focusAttributes=focused&&root.contains(focused)?[...focused.attributes].filter(a=>a.name==='id'||a.name.startsWith('data-')).map(a=>[a.name,a.value]):[];
  if(accountChanged){root.innerHTML='<section class="panel" role="alert"><h2>Study account changed</h2><p>Reload this course to open the current account’s records.</p><button type="button" class="btn" data-action="reloadaccount">Reload course</button></section>';return}
  if(!catalog){root.innerHTML='<div class="spinner">Loading your course…</div>';return}
  let content='';
@@ -324,6 +344,8 @@ function draw(){
  if(ui.view==='chapter')content+=chapterPractice(chapterCache.get(ui.chapter));
  if(ui.view==='written'){const c=chapterCache.get(ui.chapter);content+=written(c,c.analytical.find(x=>x.id===ui.opening))}
  root.innerHTML=heading()+content;
+ if(focusAttributes.length){const control=[...root.querySelectorAll('button,input,textarea,select')].find(el=>focusAttributes.every(([key,value])=>el.getAttribute(key)===value));if(control)control.focus({preventScroll:true});else{const heading=root.querySelector('h2,h1');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true})}}}
+
  // Keep one natural page scrollbar when embedded in My CSS VISTA.
  if(window.parent!==window)window.requestAnimationFrame(()=>window.parent.postMessage({type:'cssvista:gsa:height',height:Math.ceil(document.documentElement.scrollHeight)+24},location.origin));
 }
@@ -342,6 +364,8 @@ root.addEventListener('click',async e=>{
  if(t.dataset.analytical){ui.opening=t.dataset.analytical;ui.view='written';ui.reveal=false;draw();return}
  if(t.dataset.days){ui.setupDays=Number(t.dataset.days);draw();return}
  if(t.dataset.month!==undefined){ui.month=Number(t.dataset.month);draw();return}
+ if(t.dataset.radioMhz){ui.radioMHz=Number(t.dataset.radioMhz);draw();return}
+ if(t.dataset.bioOutput){ui.bioOutput=t.dataset.bioOutput;draw();return}
  if(t.dataset.phase!==undefined){ui.phase=Number(t.dataset.phase);draw();return}
  if(t.dataset.eclipse){ui.eclipse=t.dataset.eclipse;draw();return}
  if(t.dataset.seismic){ui.seismic=t.dataset.seismic;draw();return}
@@ -351,8 +375,9 @@ root.addEventListener('click',async e=>{
    const item=byId.get(ui.id),c=chapterCache.get(item.chapter),q=questionFor(c.sections.find(x=>x.id===ui.id),c);
    if(!q||!Object.prototype.hasOwnProperty.call(q.options,t.dataset.choice)||ui.selected)return;
    ui.selected=t.dataset.choice;const at=new Date().toISOString(),correct=ui.selected===q.answer;
+   saved.conceptAttempts??={};saved.conceptAttempts['check-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)]={at,lessonId:ui.id,conceptId:q.conceptId||null,questionId:q.id,selected:ui.selected,correct,contentVersion:c.contentVersion||catalog.edition,question:{prompt:q.prompt,options:q.options,answer:q.answer,explanation:q.explanation},verificationStatus:q.verification?.status||'unreviewed'};
    saved.questionReview??={};saved.questionReview[q.id]={at,chapter:item.chapter,unresolved:!correct};
-   if(!correct)saved.revisit[ui.id]={at,kind:'question',questionId:q.id};
+   if(!correct){saved.revisit[ui.id]={at,kind:'question',questionId:q.id};saved.reviewDue[ui.id]={at,date:dateAdd(now(),1),stage:0}}
    else if(saved.revisit?.[ui.id]?.kind==='question')delete saved.revisit[ui.id];
    if(correct)ui.error='';
    notify();draw();return;
@@ -360,21 +385,23 @@ root.addEventListener('click',async e=>{
  if(t.dataset.quizChoice){saveQuizAnswer(t.dataset.quizChoice);return}
  if(t.dataset.grade){ui.grade=t.dataset.grade;draw();return}
  switch(t.dataset.action){
+  case 'catchup':{saved.plan={...saved.plan,startDate:now(),remainingOnly:true,plannerVersion:2,changedAt:new Date().toISOString()};notify();draw();break;}
+  case 'cancelplan':ui.editingPlan=false;ui.view='course';draw();break;
   case 'expandplan':ui.showAllDays=!ui.showAllDays;draw();break;
-  case 'editplan':ui.setupDays=saved.plan.days;ui.setupDate=saved.plan.startDate;ui.setupRestDays=[...(saved.plan.restDays||[])];ui.setupDailyMinutes=saved.plan.dailyMinutes||90;saved.plan=null;ui.view='course';draw();break;
+  case 'editplan':ui.editingPlan=true;ui.setupLevel=saved.plan.level||'beginner';ui.setupDifficult=[...(saved.plan.difficultChapters||[])];ui.setupDays=saved.plan.days;ui.setupDate=saved.plan.startDate;ui.setupRestDays=[...(saved.plan.restDays||[])];ui.setupDailyMinutes=saved.plan.dailyMinutes||90;ui.view='course';draw();break;
   case 'saveplan':{
    const dd=document.getElementById('custom-days'),sd=document.getElementById('start-date'),dm=document.getElementById('daily-minutes'),days=dd?Number(dd.value):ui.setupDays,date=sd?sd.value:ui.setupDate,dailyMinutes=dm?Number(dm.value):ui.setupDailyMinutes,restDays=[...ui.setupRestDays].sort((a,b)=>a-b);
    if(!validPlan({days,startDate:date,dailyMinutes,restDays})){ui.error='Choose 5–120 study days, 15–600 minutes daily, a valid start date and at least one active weekday.';draw();return}
-   saved.plan={days,startDate:date,restDays,dailyMinutes,changedAt:new Date().toISOString()};ui.showAllDays=false;ui.setupDays=days;ui.setupDate=date;ui.setupDailyMinutes=dailyMinutes;notify();draw();break;
+   saved.plan={days,startDate:date,restDays,dailyMinutes,level:ui.setupLevel,difficultChapters:ui.setupDifficult,remainingOnly:!!saved.plan?.remainingOnly,plannerVersion:2,changedAt:new Date().toISOString()};ui.editingPlan=false;ui.showAllDays=false;ui.setupDays=days;ui.setupDate=date;ui.setupDailyMinutes=dailyMinutes;notify();draw();break;
   }
   case 'prevbeat':ui.beat=Math.max(0,ui.beat-1);draw();break;
   case 'nextbeat':{
-   const s=chapterCache.get(byId.get(ui.id).chapter).sections.find(s=>s.id===ui.id),ps=blocks(s.html);
+   const s=chapterCache.get(byId.get(ui.id).chapter).sections.find(s=>s.id===ui.id),ps=blocks((s.teaching?.explanationHtml||'')+s.html);
    if(ui.beat<ps.length-1)ui.beat++;else{ui.stage=questionFor(s,chapterCache.get(byId.get(ui.id).chapter))?'question':'recall';ui.selected=''}
    draw();break;
   }
   case 'tolearn':ui.stage='learn';ui.beat=0;ui.selected='';draw();break;
-  case 'torecall':ui.stage='recall';ui.selected='';draw();break;
+  case 'torecall':ui.stage='recall';draw();break;
   case 'reveal':{
    const text=document.getElementById('recall')?.value||ui.draft;if(nwords(text)<16)return;ui.draft=text;saveDraft(ui.id,text);ui.reveal=true;draw();break;
   }
@@ -394,6 +421,7 @@ root.addEventListener('click',async e=>{
   case 'restartquestions':ui.qindex=0;ui.selected='';ui.reviewSingle=false;beginQuizAttempt(ui.chapter);draw();break;
   case 'exporthistory':exportLearningRecords();break;
   case 'returnreview':ui.reviewSingle=false;ui.view='review';draw();break;
+  case 'saveevaluation':{const c=chapterCache.get(ui.chapter),a=c.analytical.find(x=>x.id===ui.opening);if(!a?.rubric)break;const checked=[...root.querySelectorAll('[data-rubric]:checked')].map(el=>Number(el.dataset.rubric));const at=new Date().toISOString();saved.writingAttempts??={};saved.writingAttempts['writing-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)]={at,answerId:a.id,response:saved.drafts[a.id]||'',checkedCriteria:checked,selfAwarded:checked.reduce((n,i)=>n+a.rubric[i].marks,0),rubric:a.rubric,contentVersion:c.contentVersion,evaluation:'learner-self-evaluation',verificationStatus:a.verification.status};notify();ui.error='Your self-evaluation was saved. It is not an independently assessed mark.';draw();break;}
   case 'savewriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');break;
   case 'revealwriting':saveDraft(ui.opening,document.getElementById('write')?.value||'');ui.reveal=true;draw();break;
  }
@@ -401,6 +429,8 @@ root.addEventListener('click',async e=>{
 root.addEventListener('change',e=>{
  if(e.target.id==='custom-days'){const n=Number(e.target.value);if(n>=5&&n<=120)ui.setupDays=n}
  if(e.target.id==='start-date')ui.setupDate=e.target.value;
+ if(e.target.id==='starting-level')ui.setupLevel=e.target.value;
+ if(e.target.dataset.difficult){const id=Number(e.target.dataset.difficult);ui.setupDifficult=e.target.checked?[...new Set([...ui.setupDifficult,id])]:ui.setupDifficult.filter(x=>x!==id)}
  if(e.target.id==='daily-minutes')ui.setupDailyMinutes=Number(e.target.value);
  if(e.target.dataset.restDay!==undefined){const d=Number(e.target.dataset.restDay);ui.setupRestDays=e.target.checked?[...new Set([...ui.setupRestDays,d])]:ui.setupRestDays.filter(x=>x!==d)}
  if(e.target.id==='recall'){ui.draft=e.target.value;saveDraft(ui.id,ui.draft)}
@@ -408,7 +438,8 @@ root.addEventListener('change',e=>{
 });
 root.addEventListener('input',e=>{
  if(e.target.id==='search'){ui.search=e.target.value;const selectionStart=e.target.selectionStart;draw();let input=document.getElementById('search');if(input){input.focus();input.setSelectionRange(selectionStart,selectionStart)}}
- if(e.target.id==='recall'){ui.draft=e.target.value;const b=root.querySelector('[data-action="reveal"]');if(b)b.disabled=nwords(ui.draft)<16}
+ if(e.target.id==='write')saveDraft(ui.opening,e.target.value);
+ if(e.target.id==='recall'){ui.draft=e.target.value;saveDraft(ui.id,ui.draft);const b=root.querySelector('[data-action="reveal"]');if(b)b.disabled=nwords(ui.draft)<16}
 });
 window.addEventListener('storage',e=>{
  if(embedded||e.key!==null&&e.key!=='cssvista:progress-owner')return;
