@@ -9,6 +9,7 @@ import { notifyProgressChanged } from '@/lib/progressEvents'
 import { addStudyScheduleTasks, getState, saveStudyPlanner, setSyllabusItemStatus, updateStudyScheduleTask } from '@/lib/store'
 import { useAccountSnapshot } from '@/pages/account/shared'
 import { optionalCatalogue } from '@/features/workspace/model'
+import { essayThemeIndex } from '@/data/essayThemes'
 import { validateSubjectCombination } from '@/lib/subjectSelection'
 import PlannerTask from './PlannerTask'
 import { dayKey, readableDay, shiftDay, validDay } from './model'
@@ -87,7 +88,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     setCatalogue(null); setLoadError('')
     const path = exam === 'pms-punjab' ? '/pms-punjab/vista-syllabus.json' : '/fpsc-syllabus.json'
     fetch(path,{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Unable to load syllabus');return r.json()}).then(json=>{
-      const subjects = exam === 'pms-punjab' ? pmsGuideSubjects(json) : cssGuideSubjects(json)
+      const subjects = exam === 'pms-punjab' ? pmsGuideSubjects(json,essayThemeIndex()) : cssGuideSubjects(json,essayThemeIndex())
       if (!subjects.length || exam === 'pms-punjab' && subjects.length !== 40 || subjects.some(s=>!s.id || !Array.isArray(s.sections))) throw Error('The syllabus catalogue is incomplete.')
       if(!controller.signal.aborted)setCatalogue(subjects)
     }).catch(e=>{if(!controller.signal.aborted)setLoadError(e instanceof Error?e.message:'Syllabus temporarily unavailable')})
