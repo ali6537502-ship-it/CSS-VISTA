@@ -108,6 +108,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const activeTasks = snapshot.activeTasks.filter(t=>taskExam(t)===exam)
   const today = dayKey()
   const todayRows = activeTasks.filter(t=>t.date===today)
+  const revisions = activeTasks.filter(t=>t.activity==='revision' && t.status!=='completed' && t.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,6)
   const hasStatus = (u:VistaUnit) => snapshot.state.syllabusItemStatuses?.[u.id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===u.id && t.status==='completed')
   const alreadyScheduled = new Set(snapshot.state.studyScheduleTasks.map(t=>t.syllabusItemId))
   const remaining = chosenUnits.filter(u=>!hasStatus(u) && !alreadyScheduled.has(u.id))
@@ -191,6 +192,26 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     if(getState().syllabusItemStatuses?.[u.id]!==next){setError('Completion could not be saved. Try again.');return}
     setMessage(old?'Chapter returned to in progress.':'Chapter marked complete by you.');refresh()
   }
+  function scheduleRevision(u: VistaUnit) {
+    if(!checkWrite())return
+    if(!hasStatus(u)){setError('Mark the original chapter complete before scheduling its revision.');return}
+    const sessionMinutes=Math.min(45,prefs.dailyMinutes)
+    const all=getState().studyScheduleTasks
+    let date=shiftDay(today,3), attempts=0
+    while(attempts<3650) {
+      const used=all.filter(t=>t.date===date).reduce((sum,t)=>sum+t.minutes,0)
+      const rest=prefs.restDays.includes(new Date(date+'T12:00:00').getDay())
+      const duplicate=all.some(t=>t.syllabusItemId===u.id && t.date===date)
+      if(!rest && used+sessionMinutes<=prefs.dailyMinutes && !duplicate)break
+      date=shiftDay(date,1);attempts++
+    }
+    if(attempts>=3650){setError('No available revision date could be found. Please revise your routine.');return}
+    if(prefs.targetDate && date>prefs.targetDate){setError('Revision would fall after your target date. Extend your target to schedule it.');return}
+    const added=addStudyScheduleTasks([{syllabusItemId:u.id,subject:u.subject,paper:u.paper,section:u.section,topic:u.title,date,minutes:sessionMinutes,activity:'revision'}])
+    if(added.length!==1){setError('Revision was not saved. Check your schedule and try again.');return}
+    setError('');setMessage('Revision scheduled for '+readableDay(date)+'. The original chapter remains complete.')
+    refresh()
+  }
   function recoverMissed(){
     if(!checkWrite())return
     const overdue=getState().studyScheduleTasks.filter(t=>taskExam(t)===exam && t.status!=='completed' && t.date<today && !isTaskArchived(t.id))
@@ -263,6 +284,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     <section className="vg-panel">
       <div className="vg-section-head"><div><p className="pl-kicker">STEP 3</p><h3>Today's chapters</h3><p>{readableDay(today)} · Complete them yourself, or copy a notes command and study with ChatGPT.</p></div><button className="pl-secondary" onClick={recoverMissed}><RefreshCw size={15}/>Reschedule missed sessions</button></div>
       {todayRows.length?<div className="vg-today">{todayRows.map(t=><PlannerTask key={t.id} task={t} refresh={refresh}/>)}</div>:<p className="pl-note">No sessions assigned for today. Generate a plan or open your saved weekly schedule.</p>}
+      {revisions.length>0&&<div className="vg-preview"><p><strong>Upcoming revision sessions</strong> · Review your completed chapters without changing the original coverage.</p><div className="vg-today">{revisions.map(t=><PlannerTask key={t.id} task={t} refresh={refresh}/>)}</div></div>}
       <div className="vg-actions"><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=today'}>Open Today</Link><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=week'}>View my week</Link></div>
     </section>
     <section className="vg-panel">
@@ -271,13 +293,13 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       <div className="vg-subjects">{filtered.map(s=><button type="button" key={s.id} aria-pressed={active?.id===s.id} onClick={()=>{setSubjectId(s.id);setShowCount(20)}}>{s.title}</button>)}</div>
       {active && <div className="vg-syllabus"><div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} chapters complete</small></div>{active.file && <a className="pl-secondary" href={active.file} target="_blank" rel="noreferrer"><ExternalLink size={14}/>Official PDF</a>}</div>
         <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished chapters only</label>
-        {visibleUnits.slice(0,showCount).map(u=><article key={u.id} className="vg-unit"><div><small>{u.section}</small><h4 dir="auto">{u.title}</h4><details><summary>Read complete syllabus for this chapter</summary><pre dir="auto">{u.syllabus}</pre></details></div><div className="vg-unit-tools"><CopyNotes unit={u} compact/>{resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Open Essay Themes 2027'}</Link>}<button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button></div></article>)}
+        {visibleUnits.slice(0,showCount).map(u=><article key={u.id} className="vg-unit"><div><small>{u.section}</small><h4 dir="auto">{u.title}</h4><details><summary>Read complete syllabus for this chapter</summary><pre dir="auto">{u.syllabus}</pre></details></div><div className="vg-unit-tools"><CopyNotes unit={u} compact/>{resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Open Essay Themes 2027'}</Link>}<button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button>{hasStatus(u) && <button className="vg-inline-action" onClick={()=>scheduleRevision(u)}><RefreshCw size={15}/>Schedule revision</button>}</div></article>)}
         {visibleUnits.length>showCount&&<button className="pl-secondary" onClick={()=>setShowCount(n=>n+20)}>Show more chapters · {visibleUnits.length-showCount} remaining</button>}
         {(active.readings||[]).length>0&&<details className="vg-readings"><summary>Suggested readings ({(active.readings||[]).length})</summary><ol>{(active.readings||[]).map((r,i)=><li key={i}>{r}</li>)}</ol></details>}
         {(active.notes||[]).length>0&&<details className="vg-readings"><summary>Source instructions and notes</summary>{(active.notes||[]).map((n,i)=><p key={i}>{n}</p>)}</details>}
       </div>}
     </section>
-    <section className="vg-resources"><Link to="/account/precis"><BookOpen size={19}/><span><strong>Précis Guide</strong><small>Handbook, writing lessons and practice</small></span></Link><Link to="/study-material/essay-themes"><Sparkles size={19}/><span><strong>Essay Themes 2027</strong><small>Research themes and preparation roadmap</small></span></Link></section>
+    <section className="vg-resources"><Link to="/account/precis"><BookOpen size={19}/><span><strong>Précis Guide</strong><small>Handbook, writing lessons and practice</small></span></Link><Link to="/study-material/essay-themes"><Sparkles size={19}/><span><strong>Essay Themes 2027</strong><small>Research themes and preparation roadmap</small></span></Link><Link to="/account/practice"><CheckCircle2 size={19}/><span><strong>Practice and mocks</strong><small>Apply and test what you have studied</small></span></Link><Link to="/account/progress"><Clock3 size={19}/><span><strong>My performance</strong><small>Review your recorded practice progress</small></span></Link></section>
     {error&&<p role="alert" className="pl-error">{error}</p>}
     {message&&<p role="status" className="pl-success">{message}</p>}
     {exam==='pms-punjab' && <p className="vg-note"><Link to="/account/tasks?exam=pms-punjab&view=pms">View previous PMS outline and historical checklist</Link></p>}
