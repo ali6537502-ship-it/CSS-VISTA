@@ -1,0 +1,281 @@
+{
+  "source": {
+    "id": "fpsc-gsa-2025-archive",
+    "year": 2025,
+    "publisherShown": "Federal Public Service Commission",
+    "title": "Competitive Examination 2025 — General Knowledge-I (General Science & Ability)",
+    "path": "/past-papers/2025/general-science-ability-2025.pdf",
+    "sha256": "99417eef520fd6b87a2e898ca4d08d43fbb4adb6ac42f1cf6922e98671dbcfe3",
+    "printedPage": 2,
+    "verification": "Question text and year checked against the archived scan, including page image.",
+    "originLimitation": "CSS VISTA archive copy; a matching FPSC-hosted copy was not available for independent publisher-origin confirmation.",
+    "answerReview": "No answer key or approved model answer inferred from this paper."
+  },
+  "questions": [
+    {
+      "id": "FPSC-2025-2(a)",
+      "year": 2025,
+      "questionNumber": "2(a)",
+      "marks": 5,
+      "prompt": "What effects are produced due to Rotation & Revolution of Earth? Explain briefly.",
+      "lessonIds": [
+        "c3-s3-3"
+      ],
+      "syllabusRefs": [
+        "GS-I-02"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-2(b)",
+      "year": 2025,
+      "questionNumber": "2(b)",
+      "marks": 5,
+      "prompt": "Describe Electromagnetic Radiations. Give its types and explain their applications.",
+      "lessonIds": [
+        "c6-s6-4"
+      ],
+      "syllabusRefs": [
+        "GS-I-05"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-2(c)",
+      "year": 2025,
+      "questionNumber": "2(c)",
+      "marks": 5,
+      "prompt": "What are Hurricanes? How they are formed and what level of damage they can produce?",
+      "lessonIds": [
+        "c5-s5-5"
+      ],
+      "syllabusRefs": [
+        "GS-I-03"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-2(d)",
+      "year": 2025,
+      "questionNumber": "2(d)",
+      "marks": 5,
+      "prompt": "Explain the advantages and disadvantages of nitrogen containing fertilizers and insecticides.",
+      "lessonIds": [
+        "c8-s8-4",
+        "c8-s8-5"
+      ],
+      "syllabusRefs": [
+        "GS-I-06"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-3(a)",
+      "year": 2025,
+      "questionNumber": "3(a)",
+      "marks": 5,
+      "prompt": "Explain how temperature and light intensity affect the rate of photosynthesis in plants.",
+      "lessonIds": [
+        "c10-s10-5"
+      ],
+      "syllabusRefs": [
+        "GS-I-08"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-3(b)",
+      "year": 2025,
+      "questionNumber": "3(b)",
+      "marks": 5,
+      "prompt": "Describe the structure and functions of capillaries in the human blood circulatory system.",
+      "lessonIds": [
+        "c12-s12-3"
+      ],
+      "syllabusRefs": [
+        "GS-I-10"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-3(c)",
+      "year": 2025,
+      "questionNumber": "3(c)",
+      "marks": 5,
+      "prompt": "What is hepatitis? Give its types and briefly explain its common symptoms along with preventions.",
+      "lessonIds": [
+        "c13-s13-4"
+      ],
+      "syllabusRefs": [
+        "GS-I-11"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-3(d)",
+      "year": 2025,
+      "questionNumber": "3(d)",
+      "marks": 5,
+      "prompt": "Differentiate between biomass and biogas. Briefly explain various methods for obtaining energy from biomass.",
+      "lessonIds": [
+        "c14-s14-1",
+        "c14-s14-4"
+      ],
+      "syllabusRefs": [
+        "GS-I-12"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-4(a)",
+      "year": 2025,
+      "questionNumber": "4(a)",
+      "marks": 5,
+      "prompt": "What is deforestation? State the disadvantages caused to the environment due to this.",
+      "lessonIds": [
+        "c20-s20-3"
+      ],
+      "syllabusRefs": [],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-4(b)",
+      "year": 2025,
+      "questionNumber": "4(b)",
+      "marks": 5,
+      "prompt": "Explain how water pollution is produced? Describe the part played by bacteria after a river has been polluted by sewage.",
+      "lessonIds": [
+        "c17-s17-1",
+        "c17-s17-2"
+      ],
+      "syllabusRefs": [
+        "GS-I-15"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-4(c)",
+      "year": 2025,
+      "questionNumber": "4(c)",
+      "marks": 5,
+      "prompt": "State some examples of pollution caused by human activity and discuss the effects of each example.",
+      "lessonIds": [
+        "c16-s16-2",
+        "c17-s17-3"
+      ],
+      "syllabusRefs": [
+        "GS-I-14",
+        "GS-I-15"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-4(d)",
+      "year": 2025,
+      "questionNumber": "4(d)",
+      "marks": 5,
+      "prompt": "What does air pollution means? State ten serious effects of air pollution on the environment and briefly explain how they can be reduced?",
+      "lessonIds": [
+        "c16-s16-1",
+        "c16-s16-2"
+      ],
+      "syllabusRefs": [
+        "GS-I-14"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-5(a)",
+      "year": 2025,
+      "questionNumber": "5(a)",
+      "marks": 5,
+      "prompt": "Differentiate between food contaminants and food adulterants.",
+      "lessonIds": [
+        "c23-s23-2",
+        "c23-s23-3"
+      ],
+      "syllabusRefs": [
+        "GS-I-22"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-5(b)",
+      "year": 2025,
+      "questionNumber": "5(b)",
+      "marks": 5,
+      "prompt": "Enlist major food groups based on nutrients, their functions and sources.",
+      "lessonIds": [
+        "c21-s21-1",
+        "c21-s21-2",
+        "c21-s21-3",
+        "c22-s22-1"
+      ],
+      "syllabusRefs": [
+        "GS-I-20"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-5(c)",
+      "year": 2025,
+      "questionNumber": "5(c)",
+      "marks": 5,
+      "prompt": "What is Artificial Intelligence and how does it differ from traditional programming? Describe the main branches of Artificial Intelligence.",
+      "lessonIds": [
+        "c28-s28-1",
+        "c28-s28-2"
+      ],
+      "syllabusRefs": [
+        "GS-I-23"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    },
+    {
+      "id": "FPSC-2025-5(d)",
+      "year": 2025,
+      "questionNumber": "5(d)",
+      "marks": 5,
+      "prompt": "What are the advantages of optical fibers in communication system? Draw basic structure of optical fiber and explain propagation of light through it.",
+      "lessonIds": [
+        "c26-s26-5"
+      ],
+      "syllabusRefs": [
+        "GS-I-24"
+      ],
+      "sourceId": "fpsc-gsa-2025-archive",
+      "sourcePage": 2,
+      "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+    }
+  ]
+}

@@ -88,7 +88,7 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
     merged.plan = cloudPlan ?? localPlan
   }
   // Keep the latest graded attempt and revisit decision for each lesson.
-  for (const field of ['completed', 'revisit', 'bookmarks', 'bookmarkRemoved', 'quizHistory', 'quizAttempts', 'questionReview', 'recallAttempts', 'reviewDue', 'planHistory'] as const) {
+  for (const field of ['completed', 'revisit', 'bookmarks', 'bookmarkRemoved', 'quizHistory', 'quizAttempts', 'questionReview', 'recallAttempts', 'reviewDue', 'planHistory', 'assessmentAttempts', 'studySessions', 'writtenAttempts'] as const) {
     const cloudRecords = isRecord(cloud[field]) ? cloud[field] : {}
     const localRecords = isRecord(local[field]) ? local[field] : {}
     const records: Record<string, unknown> = { ...cloudRecords, ...localRecords }
@@ -115,6 +115,27 @@ function mergeGsaProgress(cloud: unknown, local: unknown): unknown {
       if (q in ar && q in br) responses[q] = recordTime(ar[q]) > recordTime(br[q]) ? ar[q] : br[q]
     }
     attempts[id] = { ...current, responses }
+  }
+  const assessments = merged.assessmentAttempts as Record<string, unknown>
+  const ca = isRecord(cloud.assessmentAttempts) ? cloud.assessmentAttempts : {}
+  const la = isRecord(local.assessmentAttempts) ? local.assessmentAttempts : {}
+  for (const id of Object.keys(assessments)) {
+    const a = ca[id], b = la[id]
+    if (!isRecord(a) || !isRecord(b)) continue
+    const finished = [a, b].filter(x => typeof x.finishedAt === 'string').sort((x, y) => Date.parse(String(x.finishedAt)) - Date.parse(String(y.finishedAt)))
+    const winner = finished[0] ?? (recordTime(a) > recordTime(b) ? a : b)
+    const deadline = typeof winner.deadline === 'string' ? Date.parse(winner.deadline) : Infinity
+    const cutoff = Math.min(deadline, typeof winner.finishedAt === 'string' ? Date.parse(winner.finishedAt) : Infinity)
+    const responses: Record<string, unknown> = {}
+    for (const attempt of [a, b]) {
+      if (!isRecord(attempt.responses)) continue
+      for (const [q, r] of Object.entries(attempt.responses)) {
+        if (recordTime(r) <= cutoff && (!(q in responses) || recordTime(r) > recordTime(responses[q]))) responses[q] = r
+      }
+    }
+    const ae = isRecord(a.choiceEvents) ? a.choiceEvents : {}
+    const be = isRecord(b.choiceEvents) ? b.choiceEvents : {}
+    assessments[id] = { ...winner, responses, choiceEvents: { ...ae, ...be } }
   }
   const bookmarks = isRecord(merged.bookmarks) ? { ...merged.bookmarks } : {}
   const removed = isRecord(merged.bookmarkRemoved) ? { ...merged.bookmarkRemoved } : {}

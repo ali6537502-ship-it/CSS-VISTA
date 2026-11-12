@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "baseline": "Original manuscript; no lesson or answer-key changes",
+  "baseline": "Original manuscript; chapter 25 HTML formula transcription repaired against unchanged canonical text; no answer-key changes",
   "chapters": [
     {
       "chapter": 1,
@@ -1426,7 +1426,7 @@
           "id": "c25-s25-4",
           "title": "Binary, text, images and storage units",
           "words": 271,
-          "contentHash": "a7744adc2a00f2d16ec067e146bdbb06b228ac0ff0dcab4e5948c2d4b303701b",
+          "contentHash": "28ad009ad2181b628123aa06a8acc11fe9106f35805430000654c5694ad52568",
           "instructionalStagesReviewed": false,
           "scientificReview": "pending"
         },

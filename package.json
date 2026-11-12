@@ -91,7 +91,7 @@
     "test:expression-security": "node tests/free-learning/security.mjs",
     "test:grammar": "node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts && node tests/pro/grammar-preservation.mjs && node scripts/grammar/export-catalog.mjs --check",
     "test:precis": "node --test tests/precis.test.ts tests/precisGuide.test.ts tests/precisWritingAnalyzer.test.ts tests/precisBook.test.ts && python3 tests/precis/test_import_handbook.py && python3 scripts/precis/check-handbook.py",
-    "test:gsa-tutor": "node --test tests/gsaTutorPlan.test.mjs tests/gsaTutorSync.test.mjs",
+    "test:gsa-tutor": "node --test tests/gsaTutorPlan.test.mjs tests/gsaTutorSync.test.mjs tests/gsaTutorLearning.test.mjs",
     "audit:gsa-content": "node scripts/gsa-tutor/audit-content.mjs",
     "test:precis-server": "php tests/precis/unit.php && php tests/precis/feedback-unit.php",
     "test:precis-security": "node tests/precis/security.mjs && node tests/free-learning/security.mjs",
@@ -114,7 +114,11 @@
     "validate:daily-pdf": "node scripts/daily-pdf/package.mjs --check",
     "test:free-learning": "node --test tests/freeLearning.test.ts",
     "audit:gsa-coverage": "node scripts/gsa-tutor/build-coverage.mjs --check",
-    "audit:gsa-release": "node scripts/gsa-tutor/build-coverage.mjs --check --release"
+    "audit:gsa-release": "node scripts/gsa-tutor/build-coverage.mjs --check --release",
+    "build:gsa-math": "node scripts/gsa-tutor/build-math.mjs",
+    "audit:gsa-math": "node scripts/gsa-tutor/build-math.mjs --check && node scripts/gsa-tutor/audit-math.mjs",
+    "audit:gsa-units": "node scripts/gsa-tutor/audit-units.mjs",
+    "audit:gsa-scope": "node scripts/gsa-tutor/build-scope.mjs --check"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -151,6 +155,7 @@
     "dompurify": "^3.4.17",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
+    "katex": "0.16.33",
     "lucide-react": "^0.562.0",
     "next-themes": "^0.4.6",
     "pdfjs-dist": "^5.4.624",

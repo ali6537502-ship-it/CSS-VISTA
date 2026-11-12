@@ -66,3 +66,4 @@ h1,h2,h3{line-height:1.2;letter-spacing:-.025em}h1{font-size:clamp(26px,4.2vw,43
 .recall-checklist{border:1px solid var(--line);background:#f7faf5;padding:14px 17px;border-radius:12px;margin:18px 0}
 .recall-checklist h3{font-size:16px;margin:0 0 9px}
 .recall-checklist ul{padding-left:20px;margin:0 0 8px;display:grid;gap:4px}
+.katex-display{display:block;max-width:100%;overflow-x:auto;padding:.4em 0}.katex math{font-size:1.08em}.study-copy{overflow-wrap:break-word}.assessment-nav{display:flex;flex-wrap:wrap;gap:8px}.assessment-nav button[aria-current="true"]{outline:2px solid var(--green)}.fields select{border:1px solid #cbdacb;border-radius:10px;padding:10px;background:white;max-width:100%}fieldset{min-width:0}.review-check{display:flex;gap:10px;align-items:flex-start;margin:10px 0}.review-check input{margin-top:7px;min-width:20px}.study-copy math{max-width:100%}

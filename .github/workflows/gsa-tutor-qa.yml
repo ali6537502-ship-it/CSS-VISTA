@@ -6,6 +6,8 @@ on:
       - 'public/gsa-tutor/**'
       - 'scripts/gsa-tutor/**'
       - 'docs/gsa-tutor/**'
+      - 'content/gsa-tutor/**'
+      - 'tests/gsaTutorLearning.test.mjs'
       - 'public/fpsc-syllabus.json'
       - 'src/pages/GSATutor.tsx'
       - 'src/features/gsa-tutor/**'
@@ -37,6 +39,8 @@ jobs:
         run: npm run audit:gsa-content
       - name: Verify syllabus traceability artifacts (does not certify science)
         run: npm run audit:gsa-coverage
+      - name: Check scope, equation assets and draft-unit structure
+        run: npm run audit:gsa-scope && npm run audit:gsa-math && npm run audit:gsa-units
       - name: Verify TypeScript integration
         run: npm run typecheck
       - name: Build deployment artifact for route audit
