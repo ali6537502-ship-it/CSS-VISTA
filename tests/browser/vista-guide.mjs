@@ -31,12 +31,22 @@ async function check(width,height,exam) {
   const response=await page.goto(origin+path,{waitUntil:'domcontentloaded'})
   assert.equal(response.status(),200,'planner route resolves')
   await page.locator('.vg-hero h2').waitFor({timeout:30000})
-  assert.equal((await page.locator('.vg-hero h2').textContent()).trim(),exam==='pms-punjab'?'PMS Vista':'CSS Vista Planner')
+  assert.equal((await page.locator('.vg-hero h2').textContent()).trim(),exam==='pms-punjab'?'PMS Vista':'CSS Vista')
   const initialOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1)
   assert.equal(initialOverflow,false,exam+' '+width+'px initial horizontal overflow')
   assert.equal(await page.getByRole('button',{name:'Subjects and routine'}).count(),1)
   const initialSubjects=await page.locator('.vg-metrics strong').first().textContent()
   assert.ok(Number(initialSubjects)>0,'compulsory subjects automatically selected')
+  assert.equal(await page.getByRole('link',{name:'Official PDF'}).count(),0,'no PDF redirects promoted in chapter guide')
+  assert.equal(await page.locator('a[href*="/pms-punjab/syllabus/"]').count(),0,'syllabus content remains on page')
+  if(exam==='pms-punjab'){
+    await page.goto(origin+'/study-planner?exam=pms-punjab&view=pms')
+    await page.locator('.vg-hero h2').waitFor()
+    assert.equal((await page.locator('.vg-hero h2').textContent()).trim(),'PMS Vista','legacy PMS route lands in current guide')
+    assert.equal(await page.getByText('Previous PMS planner').count(),0,'legacy label is retired')
+    await page.goto(origin+path)
+    await page.locator('.vg-hero h2').waitFor()
+  }
 
   if(exam==='pms-punjab' && width>=1000) {
     await page.getByRole('button',{name:'View all subjects'}).click()
