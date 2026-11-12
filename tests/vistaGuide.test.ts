@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
-  buildVistaNotesCommand, cssGuideSubjects, generateVistaPlan,
+  buildVistaNotesCommand, cssGuideSubjects, pmsGuideSubjects, generateVistaPlan,
   guideUnits, readVistaPreferences, selectedVistaSubjects,
   type VistaSubject, type VistaPreferences,
 } from '../src/features/planner/vistaGuideModel.ts'
@@ -109,4 +109,28 @@ test('three-subject rotation preserves daily time and distinct-subject bounds',(
     assert.ok(new Set(today.map(t=>t.subject)).size<=3)
     assert.ok(today.reduce((n,t)=>n+t.minutes,0)<=180)
   }
+})
+
+test('a selected one-subject day cannot silently add a second already-scheduled subject',()=>{
+  const a=subject('a',['one','two','three']), b=subject('b',['four','five'])
+  const old={id:'old-1',syllabusItemId:'vista-css:a:s1:n0',subject:'a',paper:'CSS',section:'Section A',topic:'one',
+    date:'2026-11-12',minutes:60,status:'in-progress' as const,createdAt:'2026-11-11'}
+  const result=generateVistaPlan([a,b],'css',prefs({subjectsPerDay:1,dailyMinutes:180,targetDate:''}),[old],{},'2026-11-12')
+  const first=result.draft.filter(t=>t.date==='2026-11-12')
+  assert.ok(first.length>0)
+  assert.deepEqual([...new Set(first.map(t=>t.subject))],['a'])
+  assert.ok(first.reduce((n,t)=>n+t.minutes,0)+old.minutes<=180)
+})
+test('Essay Themes 2027 adds exactly 25 clearly labelled preparation units, not fictional prescribed sections',()=>{
+  const source=JSON.parse(readFileSync('public/pms-punjab/vista-syllabus.json','utf8'))
+  const index=JSON.parse(readFileSync('src/data/bundled/essay-themes-index.json','utf8'))
+  assert.equal(index.themes.length,25)
+  const subjects=pmsGuideSubjects(source,index.themes)
+  const essay=subjects.find(s=>s.id==='compulsory-english-essay')!
+  assert.ok(essay.sections.some(section=>/not prescribed PPSC syllabus/.test(section.title)))
+  const themes=guideUnits(essay,'pms-punjab').filter(unit=>unit.resourceSlug)
+  assert.equal(themes.length,25)
+  const prompt=buildVistaNotesCommand(themes[0])
+  assert.match(prompt,/SUPPLEMENTARY ESSAY RESEARCH ROADMAP/)
+  assert.doesNotMatch(prompt,/EXACT PRESCRIBED SYLLABUS/)
 })
