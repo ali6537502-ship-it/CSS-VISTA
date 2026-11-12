@@ -56,4 +56,6 @@ jobs:
           node tests/daily-pdf/integration.mjs
       - name: Isolated publishing diagnostics on failure
         if: failure()
-        run: tail -n 100 test-artifacts/daily-pdf-server.log
+        run: |
+          tail -n 100 test-artifacts/daily-pdf-server.log
+          sudo journalctl -k --since '-10 minutes' --no-pager | rg 'apparmor.*qpdf|qpdf.*DENIED' || true

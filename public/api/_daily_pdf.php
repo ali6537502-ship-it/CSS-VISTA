@@ -75,7 +75,10 @@ function dp_validate_upload(array $file): array {
     exec(escapeshellarg($parser).' --check '.escapeshellarg($tmp).' 2>&1',$lines,$code);
     if ($code!==0) {
         error_log('CSSV Daily PDF: structural parser exit status '.(int)$code);
-        if(getenv('CI')==='true' && getenv('CSSV_DB_NAME')==='cssvista_briefing_test') error_log('CSSV isolated PDF parser: '.implode(' | ',$lines));
+        if(getenv('CI')==='true' && getenv('CSSV_DB_NAME')==='cssvista_briefing_test') {
+            error_log('CSSV isolated PDF parser: '.implode(' | ',$lines));
+            error_log('CSSV isolated PDF permissions: owner='.fileowner($tmp).' mode='.decoct(fileperms($tmp)&0777).' euid='.(function_exists('posix_geteuid')?posix_geteuid():'unavailable').' readable='.(is_readable($tmp)?'yes':'no'));
+        }
         throw new InvalidArgumentException('The PDF failed structural validation. Export a fresh PDF and retry.');
     }
     exec(escapeshellarg($parser).' --json '.escapeshellarg($tmp).' 2>/dev/null',$json,$code);
