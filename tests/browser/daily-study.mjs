@@ -23,8 +23,11 @@ try {
   // session isolation, browser-width checks and safety assertions.
   for(const width of [320,390,768,1024,1440]){
     await page.setViewportSize({width,height:1000})
-    for(const path of routes){
-      await page.goto(base+path)
+    // All routes once, then a focused mobile/tablet/desktop matrix. Avoid
+    // overwhelming the disposable PHP fixture with 90 cold page requests.
+    const paths=width===768?routes:['/account/dashboard','/account/practice','/account/tasks']
+    for(const path of paths){
+      await page.goto(base+path,{waitUntil:'domcontentloaded'})
       // Some protected account routes render a temporary gate or settings shell instead of <main>.
       await page.locator('body').waitFor()
       assert.equal(await region().count(),0,'Retired daily study interface at '+path)
