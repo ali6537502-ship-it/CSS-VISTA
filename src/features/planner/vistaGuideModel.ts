@@ -245,7 +245,7 @@ export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' |
     'ASSIGNED TOPIC: ' + unit.title,
     'SOURCE CLASSIFICATION: ' + kind,
     '',
-    isEssay ? 'SUPPLEMENTARY ROADMAP (not prescribed examination content):' :
+    isEssay ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP (not prescribed examination content):' :
       isMentalGuidebook ? 'PPSC GUIDEBOOK MATERIAL (non-exhaustive):' : 'Exact prescribed content as supplied (verify against the official source when possible):',
     unit.syllabus,
     '',
