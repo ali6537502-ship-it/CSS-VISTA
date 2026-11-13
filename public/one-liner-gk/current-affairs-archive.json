@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 740,
+  "count": 743,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5179,6 +5179,27 @@
     {
       "id": "current-affairs-archive-2026-11-12-apec-envoy",
       "text": "Acer founder Stan Shih was named Taiwan's representative to the 2026 APEC leaders' summit in Shenzhen.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-12-china-turkiye-renewables",
+      "text": "China and Türkiye signed a preliminary agreement on 12 November 2026 envisaging 7,000 MW of solar and wind capacity.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-12-pakistan-cop31-climate-finance",
+      "text": "Pakistan's prime minister appealed for adequate climate-disaster finance at COP31 in Antalya in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-12-imf-ai-market-risks",
+      "text": "Julie Kozack was the IMF spokesperson commenting on AI-related market volatility on 12 November 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

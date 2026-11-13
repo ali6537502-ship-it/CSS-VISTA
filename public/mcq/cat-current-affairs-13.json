@@ -478,5 +478,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/china/taiwan-is-taking-part-apec-china-summit-an-equal-basis-president-says-2026-11-12/"
+  },
+  {
+    "id": "current-affairs-20261112-china-turkiye-renewables",
+    "q": "What combined solar and wind capacity was envisaged in the China–Türkiye preliminary energy agreement announced on 12 November 2026?",
+    "o": [
+      "4,000 MW",
+      "5,500 MW",
+      "7,000 MW",
+      "10,000 MW"
+    ],
+    "a": 2,
+    "e": "Reuters reported a preliminary agreement for 7,000 MW of solar and wind capacity; 4,000 MW referred separately to transmission infrastructure.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/china-signs-preliminary-deal-invest-15-bln-solar-wind-power-plants-turkey-2026-11-12/"
+  },
+  {
+    "id": "current-affairs-20261112-pakistan-cop31-climate-finance",
+    "q": "At which city hosting COP31 did Pakistan appeal for greater climate-disaster financing in November 2026?",
+    "o": [
+      "Antalya",
+      "Ankara",
+      "Istanbul",
+      "Izmir"
+    ],
+    "a": 0,
+    "e": "AP reported Pakistan's appeal at COP31, which was held in Antalya, Türkiye.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/f3e3326d07ab4fbff40c37b605ecd66c"
+  },
+  {
+    "id": "current-affairs-20261112-imf-ai-market-risks",
+    "q": "Which international institution said on 12 November 2026 that it was too early to determine whether AI investment was undergoing a lasting market reassessment?",
+    "o": [
+      "World Trade Organization",
+      "International Monetary Fund",
+      "Bank for International Settlements",
+      "World Bank"
+    ],
+    "a": 1,
+    "e": "IMF spokesperson Julie Kozack said recent AI-related market volatility did not yet establish a durable investment reassessment.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/retail-consumer/imf-monitoring-ai-developments-too-early-say-if-ai-reassessment-underway-2026-11-12/"
   }
 ]
