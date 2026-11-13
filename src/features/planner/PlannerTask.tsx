@@ -7,7 +7,7 @@ import { archiveTaskState, isTaskArchived } from '@/lib/myTasks'
 import { subjectVisual } from '@/features/workspace/Visuals'
 import { formatMinutes } from '@/pages/account/shared'
 import { shiftDay, dayKey, readableDay, validDay } from './model'
-import { buildVistaNotesCommand, cssGuideSubjects, findGuideUnit, pmsGuideSubjects } from './vistaGuideModel'
+import { buildVistaNotesCommand, cssGuideSubjects, findGuideUnit, pmsGuideSubjects, resolveLegacyCssNotesUnit } from './vistaGuideModel'
 
 export default function PlannerTask({ task, refresh, conflict = false }: { task: StudyScheduleTask; refresh: () => void; conflict?: boolean }) {
   const [editing, setEditing] = useState(false)
@@ -18,6 +18,10 @@ export default function PlannerTask({ task, refresh, conflict = false }: { task:
   const [notesStatus, setNotesStatus] = useState('')
   const [manualCommand, setManualCommand] = useState('')
   const isEssay = task.syllabusItemId.startsWith('vista-css:essay:') || task.syllabusItemId.startsWith('pms-punjab:vista:compulsory-english-essay:')
+  // Original FPSC schedule topics use slug:section:item; keep those task IDs and
+  // offer exactly the same source-resolved command as newly generated Vista tasks.
+  const legacyCssSyllabusTopic = /^[a-z0-9-]+:\d+:\d+$/.test(task.syllabusItemId)
+  const canPrepareNotes = task.syllabusItemId.startsWith('pms-punjab:vista:') || task.syllabusItemId.startsWith('vista-css:') || legacyCssSyllabusTopic
   const legacyEssayInstruction = task.syllabusItemId.startsWith('pms-punjab:vista:compulsory-english-essay:s1:')
   const themeSlug = task.syllabusItemId.includes(':theme:') ? task.syllabusItemId.split(':theme:')[1].split(':')[0] : ''
   const themeLink = '/study-material/essay-themes' + (themeSlug ? '/' + encodeURIComponent(themeSlug) : '')
@@ -57,9 +61,10 @@ export default function PlannerTask({ task, refresh, conflict = false }: { task:
       const data = await response.json()
       const subjects = pms ? pmsGuideSubjects(data,essayThemeIndex()) : cssGuideSubjects(data,essayThemeIndex())
       const unit = findGuideUnit(subjects,pms?'pms-punjab':'css',task.syllabusItemId)
-      if(!unit)throw Error('The original syllabus item was not found; the task has not been altered.')
+        || (!pms && legacyCssSyllabusTopic ? resolveLegacyCssNotesUnit(data,task.syllabusItemId) : null)
+      if(!unit)throw Error('This task could not be matched to an official syllabus topic. No command was generated and your saved task was not changed.')
       const command=buildVistaNotesCommand(unit)
-      try { await navigator.clipboard.writeText(command); setManualCommand('');setNotesStatus('Command copied. Paste into ChatGPT to prepare your notes.') }
+      try { await navigator.clipboard.writeText(command); setManualCommand('');setNotesStatus('Command copied. Paste it into ChatGPT for detailed, source-checked notes with useful diagrams and sourced images when available.') }
       catch { setManualCommand(command);setNotesStatus('Select and copy the command below.') }
     } catch(e) { setNotesStatus(e instanceof Error ? e.message : 'Unable to copy notes command.') }
   }
@@ -80,7 +85,7 @@ export default function PlannerTask({ task, refresh, conflict = false }: { task:
         setEditing(value => !value)
       }}><Pencil size={16}/></button>
     </div>
-    {(task.syllabusItemId.startsWith('pms-punjab:vista:') || task.syllabusItemId.startsWith('vista-css:')) && <div className="pl-actions" style={{padding:'0 15px 10px'}}>
+    {canPrepareNotes && <div className="pl-actions" style={{padding:'0 15px 10px'}}>
       {isEssay?<Link className="pl-secondary" to={themeLink}>Build essay theme</Link>:<button className="pl-secondary" type="button" onClick={copyNotes}><ClipboardCopy size={15}/>Copy analytical notes command</button>}
       {notesStatus && <span role="status" className="pl-muted">{notesStatus}</span>}
       {manualCommand && <textarea aria-label="Copy generated chapter command" readOnly rows={5} value={manualCommand} onFocus={e=>e.currentTarget.select()}/>}
