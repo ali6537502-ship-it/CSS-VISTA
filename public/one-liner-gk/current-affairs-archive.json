@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 743,
+  "count": 747,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5200,6 +5200,34 @@
     {
       "id": "current-affairs-archive-2026-11-12-imf-ai-market-risks",
       "text": "Julie Kozack was the IMF spokesperson commenting on AI-related market volatility on 12 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-taiwan-drills",
+      "text": "Taiwanese officials said more than 100 Chinese naval and coast guard vessels took part at one point in the November 2026 western Pacific deployment.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-china-ai-chips",
+      "text": "A Reuters review on 13 November 2026 identified more than $3 billion in Chinese AI computing projects specifying Nvidia processors.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-germany-budget",
+      "text": "Germany's parliamentary budget committee advanced a 2027 spending plan of approximately €561 billion on 13 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-ukraine-talks",
+      "text": "US envoy Jared Kushner said on 13 November 2026 that European countries would be included in a forthcoming round of Ukraine peace talks.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
