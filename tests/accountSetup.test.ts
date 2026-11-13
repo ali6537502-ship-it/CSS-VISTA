@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { accountDestination, accessIssues, type AccessValues } from '../src/features/account/accessForm.ts'
 import { registrationIssues } from '../src/features/account/registrationModel.ts'
 import { firstIncompleteProfileStep, incompatibleProfileList, profileDraft, profileIssues, profilePayload, profileSteps, type StudentProfile } from '../src/features/account/profileForm.ts'
@@ -86,4 +87,17 @@ test('profile continuation comes from saved server requirements, while completed
   assert.equal(firstIncompleteProfileStep(saved), 2)
   assert.equal(firstIncompleteProfileStep({ ...saved, previous_css_vista_student: '' }), 0)
   assert.equal(firstIncompleteProfileStep({ ...saved, completion: { ...saved.completion, complete: true } }), 0)
+})
+
+test('all student account photo pickers optimize automatically without linking to a separate compressor', () => {
+  const files = [
+    'src/features/account/RegistrationForm.tsx',
+    'src/features/account/StudentProfileForm.tsx',
+    'src/features/workspace-classic/components/StudentProfilePanel.tsx',
+  ]
+  for (const path of files) {
+    const content = readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
+    assert.match(content, /prepareProfilePhoto\(/, `${path} prepares the selected photo`)
+    assert.doesNotMatch(content, /to=["']\/photo-compressor["']|Please resize the photo/, `${path} must not send the student to manual compression`)
+  }
 })
