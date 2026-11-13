@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { useAccount } from '@/lib/accountContext'
 type Preferences = { pins: string[]; guidanceDismissed: boolean; comparative: boolean }
-const defaults: Preferences = { pins:['daily-pdfs','current-affairs','daily-english','vistagram','grammar-course'], guidanceDismissed:false, comparative:false }
+const defaults: Preferences = { pins:['precis','current-affairs','daily-english','vistagram','grammar-course'], guidanceDismissed:false, comparative:false }
+/** Replace only the retired Quick Action slot; retain each person's other pins. */
+export function normalizeWorkspacePins(pins: string[]): string[] {
+  return [...new Set(pins.map(id => id === 'daily-pdfs' ? 'precis' : id))]
+}
 export function useWorkspacePreferences() {
   const { user } = useAccount()
   const key = `cssvista:workspace:v1:${user?.id ?? 'guest'}`
@@ -9,7 +13,7 @@ export function useWorkspacePreferences() {
   const [error, setError] = useState('')
   void revision
   let preferences = defaults
-  try { const raw = localStorage.getItem(key); if (raw) { const p = JSON.parse(raw); preferences = { pins:Array.isArray(p.pins) ? p.pins.filter((x:unknown) => typeof x === 'string') : defaults.pins, guidanceDismissed:p.guidanceDismissed === true, comparative:p.comparative === true } } } catch { /* Retain readable defaults; do not overwrite malformed preferences. */ }
+  try { const raw = localStorage.getItem(key); if (raw) { const p = JSON.parse(raw); preferences = { pins:Array.isArray(p.pins) ? normalizeWorkspacePins(p.pins.filter((x:unknown):x is string => typeof x === 'string')) : defaults.pins, guidanceDismissed:p.guidanceDismissed === true, comparative:p.comparative === true } } } catch { /* Retain readable defaults; do not overwrite malformed preferences. */ }
   function update(patch: Partial<Preferences>) {
     if (!user) return
     try { localStorage.setItem(key, JSON.stringify({...preferences,...patch})); setError(''); setRevision(v => v+1) }
