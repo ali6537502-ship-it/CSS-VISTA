@@ -1,5 +1,6 @@
 import type { StudyScheduleTask, SyllabusItemStatus } from '@/lib/store'
 import { shiftDay, validDay } from './model.ts'
+import { pmsMentalAbilitySubject } from '@/data/pmsMentalAbility'
 
 export type VistaExam = 'css' | 'pms-punjab'
 export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[] }
@@ -32,8 +33,17 @@ export const defaultVistaPreferences: VistaPreferences = {
   startDate: '', mode: 'rotate', selectedOptionals: [], alternative: 'islamic-studies',
   studySubjects: null, prioritySubjects: [], selectedEssayThemes: null,
 }
+export function serializeVistaPreferences(prefs: VistaPreferences): string {
+  // The progress cloud merges object arrays by union. An atomic string prevents
+  // removed optionals, themes or study subjects from silently reappearing.
+  return JSON.stringify({version: 1, settings: JSON.stringify(prefs)})
+}
 export function readVistaPreferences(raw: unknown, fallback: Partial<VistaPreferences> = {}): VistaPreferences {
-  const x = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw as Partial<VistaPreferences> : {}
+  let value = raw
+  if (value && typeof value === 'object' && !Array.isArray(value) && typeof (value as {settings?:unknown}).settings === 'string') {
+    try { value = JSON.parse((value as {settings:string}).settings) } catch { value = null }
+  }
+  const x = value && typeof value === 'object' && !Array.isArray(value) ? value as Partial<VistaPreferences> : {}
   const base = { ...defaultVistaPreferences, ...fallback }
   return {
     version: 1,
@@ -76,7 +86,7 @@ function essayThemeTopics(prefix: string, themes: VistaEssayTheme[]): VistaNode[
   }))
 }
 export function pmsGuideSubjects(data: { subjects: VistaSubject[] }, themes: VistaEssayTheme[] = []): VistaSubject[] {
-  return data.subjects.map(subject=>{
+  const updated = data.subjects.map(subject=>{
     if(subject.id !== 'compulsory-english-essay')return subject
     // Retain every official PPSC requirement verbatim as guidance. Do not turn
     // the two examination instructions into scheduled chapters.
@@ -92,6 +102,8 @@ export function pmsGuideSubjects(data: { subjects: VistaSubject[] }, themes: Vis
       }],
     }
   })
+  if (!updated.some(subject=>subject.id===pmsMentalAbilitySubject.id)) updated.splice(1,0,pmsMentalAbilitySubject)
+  return updated
 }
 export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: string; designation: 'compulsory' | 'optional'; marks: number; sections: Array<{ title: string; items: string[] }> }> }, themes: VistaEssayTheme[] = []): VistaSubject[] {
   const papers = data.subjects.map(s => ({
@@ -116,7 +128,15 @@ export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] 
   const isEssay = exam === 'css' ? subject.id === 'essay' : subject.id === 'compulsory-english-essay'
   const isPrecis = exam === 'css' ? subject.id === 'precis-composition' : subject.id === 'compulsory-english-precis-comprehension-grammar-and-translation-etc'
   const result: VistaUnit[] = []
-  for (const section of subject.sections) for (const root of section.topics) {
+  for (const section of subject.sections) {
+    // Some official outlines include a whole examinable section only as text
+    // under its heading. Keep that material schedulable without inventing subtopics.
+    const topics = section.topics.length ? section.topics : section.detail?.trim() ? [{
+      id: (exam==='css' ? 'vista-css:' : 'pms-punjab:vista:') + subject.id + ':' + section.id + ':overview',
+      title: section.title,
+      detail: section.detail,
+    }] : []
+    for (const root of topics) {
     function walk(node: VistaNode, parents: VistaNode[]) {
       // A chapter with real child topics is a syllabus container, not one
       // enormous day's task. Use its leaves without losing parent context.
@@ -140,6 +160,7 @@ export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] 
       })
     }
     walk(root, [])
+    }
   }
   return result
 }
@@ -213,6 +234,8 @@ export function generateVistaPlan(subjects: VistaSubject[], exam: VistaExam, pre
   if (preferences.targetDate && preferences.targetDate < starting) throw Error('The target completion date must be on or after the start date.')
   const chosen = selectedVistaSubjects(subjects, exam, preferences)
   if (!chosen.length) throw Error('Choose your subjects first.')
+  if (exam === 'pms-punjab' && preferences.selectedOptionals.length > 1)
+    throw Error('The revised PMS scheme allows one optional subject. Choose one optional paper in Subjects and routine.')
   if (chosen.some(subject => subject.id === (exam === 'css' ? 'essay' : 'compulsory-english-essay')) && preferences.selectedEssayThemes?.length === 0)
     throw Error('Select at least one essay theme or remove English Essay from the subjects you want to study now.')
   const previouslyScheduled = new Set(existing.map(task => task.syllabusItemId))
