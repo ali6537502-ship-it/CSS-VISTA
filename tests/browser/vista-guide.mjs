@@ -5,6 +5,7 @@
 import assert from 'node:assert/strict'
 import { chromium } from 'playwright-core'
 import { mkdir, writeFile } from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { startArtifactPreview } from './artifact-preview.mjs'
 
@@ -112,7 +113,44 @@ async function check(width,height,exam) {
   report.results.push({exam,width,height,initialOverflow,finalOverflow,subjects:Number(initialSubjects),runtimeErrors:errors})
   await context.close()
 }
+
+async function checkLegacyCssScheduleNotes() {
+  const source=JSON.parse(readFileSync(resolve(root,'public/fpsc-syllabus.json'),'utf8'))
+  const selected=source.subjects.find(subject=>subject.sections.some(section=>section.items.length))
+  assert.ok(selected,'official source contains a CSS syllabus topic')
+  const sectionIndex=selected.sections.findIndex(section=>section.items.length)
+  const section=selected.sections[sectionIndex]
+  const taskId=selected.slug+':'+sectionIndex+':0'
+  const context=await browser.newContext({viewport:{width:1280,height:900}})
+  await context.grantPermissions(['clipboard-read','clipboard-write'],{origin})
+  await context.addInitScript(({selected,section,taskId})=>{
+    const now=new Date()
+    const date=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-')
+    localStorage.setItem('cssvista:v1',JSON.stringify({syllabusItemStatuses:{},studyScheduleTasks:[
+      {id:'legacy-css-command',syllabusItemId:taskId,subject:selected.name,paper:'CSS',section:section.title,topic:section.items[0],date,minutes:45,status:'not-started',createdAt:new Date().toISOString()},
+      {id:'personal-manual-task',syllabusItemId:'manual:personal-example',subject:'General',paper:'',section:'Personal task',topic:'Take a study break',date,minutes:15,status:'not-started',createdAt:new Date().toISOString()},
+    ]}))
+  },{selected,section,taskId})
+  const page=await context.newPage()
+  const response=await page.goto(origin+'/study-planner?exam=css&view=today',{waitUntil:'domcontentloaded'})
+  assert.equal(response.status(),200)
+  const legacy=page.locator('[data-task-id="legacy-css-command"]')
+  await legacy.waitFor({timeout:30000})
+  await legacy.getByRole('button',{name:'Copy analytical notes command'}).click()
+  await legacy.getByText('Command copied.',{exact:false}).waitFor()
+  const command=await page.evaluate(()=>navigator.clipboard.readText())
+  assert.ok(command.includes(section.items[0]),'exact source topic retained for legacy CSS tasks')
+  assert.match(command,/EXAMINATION: CSS/)
+  assert.match(command,/FPSC SYLLABUS TOPIC OR SECTION/)
+  assert.match(command,/REAL photographs, maps/)
+  assert.match(command,/Never invent citations or statistics/)
+  const manual=page.locator('[data-task-id="personal-manual-task"]')
+  assert.equal(await manual.getByRole('button',{name:'Copy analytical notes command'}).count(),0,'personal tasks cannot be misrepresented as the FPSC syllabus')
+  report.results.push({exam:'css',scenario:'historical syllabus schedule notes',sourceTopic:taskId,commandCopied:true})
+  await context.close()
+}
 try{
+  await checkLegacyCssScheduleNotes()
   await check(1440,900,'pms-punjab')
   await check(390,844,'pms-punjab')
   await check(1440,900,'css')

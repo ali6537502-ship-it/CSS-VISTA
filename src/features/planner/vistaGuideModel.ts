@@ -110,7 +110,7 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
     id: s.slug, title: s.name, designation: s.designation, marks: s.marks,
     sections: s.sections.map((section, i) => ({
       id: 's' + (i + 1), title: section.title, detail: '',
-      topics: [{ id: 'vista-css:' + s.slug + ':s' + (i + 1), title: section.title, detail: section.items.join(' ').replace(/\s+/g, ' ').trim() }],
+      topics: [{ id: 'vista-css:' + s.slug + ':s' + (i + 1), title: section.title, detail: section.items.map((item, index) => (index + 1) + '. ' + item.trim()).join('\n') }],
     })),
   }))
   // The distributed FPSC JSON omits the separate Essay paper. This is a
@@ -190,32 +190,80 @@ export function plannedVistaUnits(subject: VistaSubject, exam: VistaExam, prefs:
     unit.resource !== 'essay' || prefs.selectedEssayThemes === null
       || !!unit.resourceSlug && prefs.selectedEssayThemes.includes(unit.resourceSlug))
 }
+/**
+ * Original FPSC topic tasks use slug:sectionIndex:itemIndex, unlike Vista's
+ * section-level tasks. Resolve the old task only from its exact source index;
+ * never turn manual tasks or imported prose into alleged FPSC syllabus text.
+ */
+export function resolveLegacyCssNotesUnit(
+  data: { subjects: Array<{ slug: string; name: string; sections: Array<{ title: string; items: string[] }> }> },
+  syllabusItemId: string,
+): VistaUnit | null {
+  const match = /^([^:]+):(\d+):(\d+)$/.exec(syllabusItemId)
+  if (!match) return null
+  const subject = data.subjects.find(row => row.slug === match[1])
+  if (!subject) return null
+  const section = subject.sections[Number(match[2])]
+  const topic = section?.items[Number(match[3])]
+  if (!section || typeof topic !== 'string' || !topic.trim()) return null
+  return {
+    id: syllabusItemId,
+    subjectId: subject.slug,
+    subject: subject.name,
+    section: section.title,
+    title: topic.trim(),
+    syllabus: section.title + '\n' + topic.trim(),
+    paper: 'CSS',
+  }
+}
+
+/**
+ * One shared source-grounded notes command for CSS and PMS, including older
+ * CSS schedule items. Its instructions are deliberately discipline-aware but
+ * cannot guarantee a model's factual accuracy or that browser/image tools
+ * will be available in the user's chosen ChatGPT conversation.
+ */
 export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' | 'revision' = 'comprehensive') {
-  const level = depth === 'revision' ? 'focused revision notes while retaining all syllabus headings' : 'comprehensive, textbook-depth notes for independent preparation'
-  const supplemental = unit.resource === 'essay' && (unit.id.includes(':theme:') || unit.id.endsWith(':resource'))
+  const isEssay = unit.resource === 'essay'
+  const isMentalGuidebook = unit.paper === 'PMS Punjab' && unit.subjectId === 'compulsory-mental-ability-and-reasoning-test'
+  const kind = isEssay
+    ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP — NOT AN OFFICIAL SYLLABUS'
+    : isMentalGuidebook
+      ? 'PPSC MENTAL ABILITY GUIDEBOOK TOPIC — THE GUIDEBOOK IS NON-EXHAUSTIVE'
+      : unit.paper === 'CSS'
+        ? 'FPSC SYLLABUS TOPIC OR SECTION (SOURCE TRANSCRIPTION)'
+        : 'PPSC SYLLABUS TOPIC OR SECTION (SOURCE TRANSCRIPTION)'
+  const scope = depth === 'revision' ? 'focused but complete revision notes' : 'comprehensive, textbook-depth learning notes'
   return [
-    'VISTA NOTES COMMAND — EXAMINATION PREPARATION',
-    'Act as a specialist teacher, examiner and academic researcher for the subject and examination below.',
-    'Prepare ' + level + ' strictly grounded in the supplied ' + (supplemental ? 'supplementary essay-preparation roadmap, which is not an official syllabus extract.' : 'official syllabus extract.'),
+    'EXAMINATION NOTES — SOURCE-LED STUDY COMMAND',
+    'You are an expert teacher, subject specialist, examiner and careful academic researcher.',
+    'Produce ' + scope + ' for independent examination preparation. Do not make the answer generic, superficial, or a collection of one-paragraph headings.',
     '',
     'EXAMINATION: ' + unit.paper,
     'SUBJECT: ' + unit.subject,
     'PAPER / SECTION: ' + unit.section,
-    'ASSIGNED CHAPTER OR TOPIC: ' + unit.title,
+    'ASSIGNED TOPIC: ' + unit.title,
+    'SOURCE CLASSIFICATION: ' + kind,
     '',
-    supplemental ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP (NOT AN OFFICIAL SYLLABUS EXTRACT):' : 'EXACT PRESCRIBED SYLLABUS:',
+    isEssay ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP (not prescribed examination content):' :
+      isMentalGuidebook ? 'PPSC GUIDEBOOK MATERIAL (non-exhaustive):' : 'Exact prescribed content as supplied (verify against the official source when possible):',
     unit.syllabus,
     '',
-    'INSTRUCTIONS:',
-    '1. Cover every supplied heading, concept, author, work and subtopic without omission. Preserve all meaningful sections and their hierarchy.',
-    '2. Explain the background and fundamental concepts in clear language. Develop analytical arguments, competing interpretations, objections, comparative dimensions, implications and genuine examples appropriate to this subject.',
-    '3. For legal topics cite the applicable law and provisions accurately; for quantitative subjects provide formulas and worked solutions; for literary topics analyze prescribed texts and interpretations; for languages use the required script.',
-    '4. Use only verifiable facts, quotations, case law and current data. If browsing is available, check authoritative sources and give traceable references; otherwise clearly state which claims require verification. Never invent citations or statistics.',
-    '5. Include original examination-style analytical questions with structured model answer frameworks and a revision summary.',
-    '6. Make notes substantial enough to support independent preparation. If too long for one reply, label the output Part 1 and enumerate exactly which remaining syllabus subtopics still need coverage.',
-    '7. Clearly distinguish additional analytical background from official syllabus requirements. Never claim that supplementary essay themes are officially prescribed. Do not silently add or omit supplied material.',
+    'MANDATORY WORKING RULES:',
+    '1. First identify the subject, examination, requested scope and every heading/subheading/individual topic visible above. Treat the supplied wording as the coverage checklist; retain its order, names, important quotations, prescribed authors and original-language terms. If the source is a flat list, preserve it as distinct items rather than merging or losing entries. Reconstruct a clear numbered teaching hierarchy, explicitly marking any explanatory subheadings you add as your own organization, not as official syllabus entries.',
+    '2. Cover every distinct syllabus item, including nested points, in meaningful depth. Under each substantive heading explain definitions, background, mechanisms, competing interpretations, causes, consequences, objections, applications and examination relevance wherever appropriate. Explain fundamentals before difficult analysis, in clear language, and connect arguments logically. Avoid vague padding, repeated introductory paragraphs and unsupported sweeping claims.',
+    '3. Adapt the method to the subject instead of forcing one template: for history use accurate chronology, actors, causes, historiography and consequences; for political science, governance and international relations examine thinkers, institutions, theories and competing views; for economics and current affairs explain indicators, official figures, trade-offs, policy options and implications; for law identify jurisdiction, instruments, precise provisions and holdings; for science and environment explain processes, mechanisms and experiments; for mathematics, statistics and ability provide definitions, correct formulas and worked problems; for languages and literature use the prescribed original script and analyse the specified texts; for Islamic Studies cite Qur’an by surah and verse and hadith only when their exact references can be verified. Omit discipline-specific requirements that do not fit.',
+    '4. When a claim depends on recent events, law, statistics, exact quotations, historical dates, treaty provisions or named cases, use web research if the conversation supports it. Prioritize primary authorities (official commission syllabi, constitutions, statutes, court judgments, official statistics, recognised institutions and original works), then reputable scholarship. Cross-check material claims with independent credible sources when possible. Cite the actual source title, institution, date/year and working link beside the relevant claim or in that section’s references. Do not cite a source you have not accessed. Distinguish official source text from extra explanatory material.',
+    '5. Never invent citations or statistics. Do not fabricate case names, dates, articles, books, page numbers, treaties, quotations, source URLs, numerical values, author attributions or supposed expert consensus. If verification is unavailable, explicitly label the claim as needing verification or omit it. Do not pretend to have browsed, inspected a PDF or seen a source when you have not. If two trustworthy accounts disagree, explain the disagreement rather than silently choosing one.',
+    '6. Include helpful ORIGINAL labelled diagrams, flowcharts, timelines, comparison tables, maps, scientific sketches or mathematical illustrations when they clarify a difficult concept. Keep proportions/geography accurate; do not fabricate labels or datasets. If drawing or diagram tools are unavailable, use a readable text or Mermaid diagram where supported, otherwise describe the diagram precisely; do not claim that a diagram was rendered when it was not.',
+    '7. Include relevant REAL photographs, maps, institutional illustrations, archival visuals or charts when their evidentiary and teaching value is clear. If image/web search is available, locate suitable trustworthy sources, attribute the source and explain what each image shows. Use actual images only if the interface supports displaying them; otherwise give verified source links and descriptive captions. Do not invent image URLs, depict fabricated images as documentary photographs, or add decorative/unrelated photos. For abstract topics with no useful genuine image, omit photographs.',
+    '8. Include verified, specific examples, suitable comparative cases, counterarguments and genuine illustrations for each major conceptual dimension. Mark a teaching example as hypothetical when it is not a historical or real-world fact. For numerical topics, show steps, units, assumptions and checks. For essays distinguish the optional theme roadmap from any officially prescribed topic and prioritise argument building, evidence and structured writing practice.',
+    '9. Write cohesive textbook-style explanations under exact logical headings (e.g., 1, 1.1, 1.1.1 where useful); use tables only for real comparisons. Do not replace detailed explanations with lists, unsupported slogans, motivational filler, prompts for the student to research everything, or an excessive number of tiny bullet points. Use easy-to-understand language without sacrificing accuracy or analytical depth.',
+    '10. Add exam-relevant analytical questions with substantial answer outlines, common misconceptions and a concise revision recap after the teaching sections. Separate substantiated facts, analytical interpretation and recommendations; never imply that your original practice questions are past examination questions.',
+    '11. Before finishing, check coverage against every supplied heading/subheading and state any genuinely uncovered items or uncertain references. If the full chapter cannot fit in one reply, provide as much continuous, substantial content as possible in Part 1, stop at a natural section boundary, and state exactly which topics remain for continuation. Do not compress or silently omit sections to fit.',
+    '12. Deliver the actual notes in this ChatGPT conversation. Do not substitute a PDF, promise later background research, or ask unnecessary setup questions. If a tool required for visuals or current verification is unavailable, acknowledge that limitation briefly and complete the text notes using only reliable information.',
     '',
-    'Begin with the first syllabus heading.',
+    'START NOW with the first supplied heading. Do not begin with an explanation of what this command does.',
   ].join('\n')
 }
 export interface VistaDraftTask { syllabusItemId: string; subject: string; paper: string; section: string; topic: string; date: string; minutes: number }
