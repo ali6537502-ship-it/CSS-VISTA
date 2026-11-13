@@ -10,7 +10,7 @@ export default function ContinueStudying({ greeting }: { greeting?: string }) {
       <h1>{greeting || 'Make space for your next big idea.'}</h1>
       <p className="ws-hero-description">Your ambitions, one focused session at a time.</p>
       <div className="ws-next-activity"><span className="ws-icon-box"><CalendarDays size={19}/></span><div><small>YOUR NEXT STUDY SESSION</small><h2>{task?.topic || 'Let’s give today a clear direction.'}</h2>{task && <p>{task.subject} · {task.minutes} min estimated</p>}</div></div>
-      <Link className="ws-action" to={task?.syllabusItemId.startsWith('pms-punjab:') ? '/account/tasks?exam=pms-punjab' : '/account/tasks'}>Open my study plan<ArrowUpRight size={18}/></Link>
+      <Link className="ws-action" to={task?.syllabusItemId.startsWith('pms-punjab:') || /^PMS\b/i.test(task?.paper||'') ? '/account/tasks?exam=pms-punjab&view=today' : '/account/tasks?exam=css&view=today'}>Open my study plan<ArrowUpRight size={18}/></Link>
     </div><StudyArtwork/>
   </section>
 }
