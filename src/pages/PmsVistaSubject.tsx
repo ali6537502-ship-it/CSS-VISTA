@@ -1,15 +1,17 @@
 import { Link, useParams } from 'react-router'
 import { ArrowRight, BookOpen, ChevronRight } from 'lucide-react'
-import { pmsVistaSubjects, pmsVistaSubjectsById } from '@/data/pmsVistaPublic.generated.mjs'
+import { pmsVistaSubjects } from '@/data/pmsVistaPublic.generated.mjs'
+import { PMS_MENTAL_ID, PMS_MENTAL_SOURCE, pmsMentalAbilitySubject } from '@/data/pmsMentalAbility'
 
 type Topic = { title: string; detail?: string; children?: Topic[] }
 type Section = { title: string; detail?: string; topics: Topic[] }
 type Subject = {
   id: string; title: string; designation: 'compulsory' | 'optional'; marks?: number | null
-  sections: Section[]; readings: string[]; notes: string[]
+  sections: Section[]; readings: readonly string[]; notes: readonly string[]
 }
-const allSubjects = pmsVistaSubjects as Subject[]
-const byId = pmsVistaSubjectsById as Map<string, Subject>
+const originalSubjects = pmsVistaSubjects as Subject[]
+const allSubjects: Subject[] = [originalSubjects[0], pmsMentalAbilitySubject, ...originalSubjects.slice(1)]
+const byId = new Map(allSubjects.map(subject=>[subject.id,subject]))
 
 function TopicTree({ nodes, depth = 0 }: { nodes: Topic[]; depth?: number }) {
   if (depth > 12) return null
@@ -46,18 +48,19 @@ export default function PmsVistaSubject() {
       <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-800">Punjab PMS · {paper.designation === 'optional' ? 'Optional subject' : 'Compulsory paper'}</p>
       <h1 dir="auto" className="mt-2 font-[Georgia,serif] text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">PMS {paper.title} syllabus — free study guide</h1>
       <p className="mt-4 max-w-3xl text-[14px] leading-7 text-slate-700">
-        Browse the updated Punjab Public Service Commission syllabus outline for {paper.title}, with its subject sections, prescribed concepts and available suggested readings. The complete topic hierarchy is shown directly here; your personal study timetable is kept separately in Vista Mentor.
+        {paper.id===PMS_MENTAL_ID?'Study the four competency areas named in PPSC’s published Mental Ability and Reasoning Test guidebook. The guidebook is non-exhaustive; the sample questions are illustrations rather than a prescribed question bank.':'Browse the Punjab Public Service Commission syllabus outline, including source section headings, study topics and available suggested readings.'} Your personal timetable is kept separately in Vista Mentor.
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-3">
-        <Link to={studyUrl} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-emerald-900 px-4 py-3 text-sm font-bold text-white hover:bg-emerald-800">Plan these PMS chapters <ArrowRight size={16} aria-hidden="true"/></Link>
-        <Link to="/pms-vista#pms-syllabus" className="inline-flex min-h-11 items-center text-sm font-bold text-emerald-800 underline">All 40 PMS subjects</Link>
+        <Link to={studyUrl} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-emerald-900 px-4 py-3 text-sm font-bold text-white hover:bg-emerald-800">Plan these PMS topics <ArrowRight size={16} aria-hidden="true"/></Link>
+        <Link to="/pms-vista#pms-syllabus" className="inline-flex min-h-11 items-center text-sm font-bold text-emerald-800 underline">All PMS subject guides</Link>
       </div>
-      <p className="mt-4 text-xs text-slate-600">100-mark paper in the current subject catalogue · Free to read · No account required for syllabus access</p>
+      <p className="mt-4 text-xs text-slate-600">100-mark paper · Free to read · No account required to browse</p>
+      {paper.id===PMS_MENTAL_ID&&<a href={PMS_MENTAL_SOURCE} rel="noopener noreferrer" target="_blank" className="mt-3 inline-flex text-sm font-semibold text-emerald-800 underline">Open PPSC original Mental Ability guidebook</a>}
     </header>
     <section aria-labelledby="subject-syllabus-structure" className="mt-10">
       <h2 id="subject-syllabus-structure" className="text-2xl font-bold text-slate-900" dir="auto">{paper.title}: syllabus sections and topics</h2>
       <p className="mt-2 text-[13px] leading-6 text-slate-600">
-        This is a readable transcription of the published outline used by PMS Vista. Section headings and their contents have not been replaced by suggested or generated study topics. Use the official PPSC document for controlling wording and any later revisions.
+        This guide preserves the source outline headings and available topics. For the Mental Ability paper, the listed skills are from PPSC's later guidebook; other subject outlines come from the published syllabus files. The original PPSC documents remain authoritative.
       </p>
       <nav aria-label="Jump to a section" className="mt-5 flex flex-wrap gap-2">
         {paper.sections.map((section,i)=><a key={i} href={'#pms-section-' + (i+1)} dir="auto" className="inline-flex min-h-9 items-center rounded-full border border-slate-300 bg-white px-3 py-2 text-[11px] font-semibold text-emerald-800 hover:bg-emerald-50">{section.title}</a>)}

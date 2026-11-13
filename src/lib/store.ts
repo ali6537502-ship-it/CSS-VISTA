@@ -641,13 +641,13 @@ export function addStudyScheduleTasks(tasks: Array<Omit<StudyScheduleTask, 'id' 
       ...task,
       id: `syllabus-task-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       createdAt: new Date().toISOString(),
-      status: task.activity === 'revision' ? 'in-progress' : state.syllabusItemStatuses?.[task.syllabusItemId] === 'completed' ? 'completed' : 'in-progress',
+      status: task.activity === 'revision' ? 'in-progress' : state.syllabusItemStatuses?.[task.syllabusItemId] === 'completed' ? 'completed' : (task.syllabusItemId.startsWith('pms-punjab:vista:') || task.syllabusItemId.startsWith('vista-css:')) ? 'not-started' : 'in-progress',
     }))
   if ((state.studyScheduleTasks?.length ?? 0) + additions.length > 3000) { notifyStorageFailed(); return [] }
   state.studyScheduleTasks = [...(state.studyScheduleTasks ?? []), ...additions]
   additions.forEach((task) => {
     if (task.activity !== 'revision' && state.syllabusItemStatuses?.[task.syllabusItemId] !== 'completed') {
-      state.syllabusItemStatuses = { ...(state.syllabusItemStatuses ?? {}), [task.syllabusItemId]: 'in-progress' }
+      state.syllabusItemStatuses = { ...(state.syllabusItemStatuses ?? {}), [task.syllabusItemId]: task.status }
     }
   })
   save(state)

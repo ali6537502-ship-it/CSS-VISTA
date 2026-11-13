@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
   buildVistaNotesCommand, cssGuideSubjects, pmsGuideSubjects, generateVistaPlan,
-  guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects,
+  guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
   type VistaSubject, type VistaPreferences,
 } from '../src/features/planner/vistaGuideModel.ts'
 
@@ -68,7 +68,7 @@ test('40-subject structure includes all 1,414 leaf topics, 5 Urdu and Punjabi pa
   assert.equal(d.subjects.filter((s:VistaSubject)=>s.designation==='compulsory').length,10)
   assert.equal(d.subjects.filter((s:VistaSubject)=>s.designation==='optional').length,30)
   assert.equal(d.subjects.reduce((sum:number,s:VistaSubject)=>sum+s.sections.length,0),179)
-  assert.equal(d.subjects.reduce((sum:number,s:VistaSubject)=>sum+guideUnits(s,'pms-punjab').length,0),1414)
+  assert.equal(d.subjects.reduce((sum:number,s:VistaSubject)=>sum+guideUnits(s,'pms-punjab').length,0),1417) // includes three General Knowledge headings
   for(const name of ['Urdu','Punjabi']){
     const subject=d.subjects.find((s:VistaSubject)=>s.title===name) as VistaSubject
     assert.ok(subject)
@@ -221,4 +221,48 @@ test('Practice replaces obsolete activity widgets with the original General Scie
   assert.doesNotMatch(practice,/<FeatureFinder practice\s*\/>/)
   assert.doesNotMatch(practice,/Open answer timer/)
   assert.doesNotMatch(source,/pathname\.startsWith\('\/account\/'\)/)
+})
+
+test('the November PPSC Mental Ability guidebook is a separate, source-backed compulsory track',()=>{
+  const source=JSON.parse(readFileSync('public/pms-punjab/vista-syllabus.json','utf8'))
+  const subjects=pmsGuideSubjects(source)
+  const mental=subjects.find(s=>s.id==='compulsory-mental-ability-and-reasoning-test')
+  assert.ok(mental)
+  assert.equal(subjects.length,41)
+  assert.equal(mental.sections.length,4)
+  assert.equal(guideUnits(mental,'pms-punjab').length,34)
+  assert.match(mental.sourceUrl||'',/^https:\/\/www\.ppsc\.gop\.pk\/Misc_Uploading\//)
+  assert.ok(mental.sections.some(s=>s.title==='Problem Solving and Decision Making'))
+  assert.equal(source.subjects.length,40,'the original syllabus bundle remains unchanged')
+  const plan=generateVistaPlan(subjects,'pms-punjab',prefs({
+    studySubjects:['compulsory-mental-ability-and-reasoning-test'],targetDate:'',
+  }),[],{},'2026-11-12')
+  assert.equal(plan.draft.length,34)
+})
+test('the PMS syllabus permits at most one selected optional paper',()=>{
+  const source=JSON.parse(readFileSync('public/pms-punjab/vista-syllabus.json','utf8'))
+  const subjects=pmsGuideSubjects(source)
+  assert.throws(()=>generateVistaPlan(subjects,'pms-punjab',prefs({
+    selectedOptionals:['optional-law','optional-political-science'],
+    studySubjects:['optional-law','optional-political-science'],targetDate:'',
+  }),[],{},'2026-11-12'),/one optional subject/)
+})
+test('preparation choices are persisted atomically so cloud arrays cannot restore deselections',()=>{
+  const settings=prefs({studySubjects:['compulsory-english-essay'],selectedOptionals:['optional-law'],prioritySubjects:['compulsory-english-essay'],selectedEssayThemes:['education']})
+  const serialized=serializeVistaPreferences(settings)
+  const raw=JSON.parse(serialized)
+  assert.equal(typeof raw.settings,'string')
+  assert.equal('selectedOptionals' in raw,false)
+  assert.deepEqual(readVistaPreferences(raw),settings)
+  assert.deepEqual(readVistaPreferences(settings),settings)
+  assert.deepEqual(readVistaPreferences({version:1,settings:'invalid'}).selectedOptionals,[])
+})
+test('all three source-only General Knowledge sections remain schedulable',()=>{
+  const source=JSON.parse(readFileSync('public/pms-punjab/vista-syllabus.json','utf8'))
+  const general=source.subjects.find((s:VistaSubject)=>s.id==='compulsory-general-knowledge')
+  assert.ok(general)
+  const units=guideUnits(general,'pms-punjab')
+  for(const name of ['English','Urdu','Islamic Studies (General Knowledge for non-Muslim candidates)']){
+    assert.ok(units.some(unit=>unit.title===name && unit.syllabus.length>50),name)
+  }
 })

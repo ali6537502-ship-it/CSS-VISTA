@@ -85,3 +85,14 @@ test('homepage, navigation and prerender use the same public PMS Vista destinati
   assert.match(prerender,/page\('\/pms-vista'/)
   assert.match(prerender,/pmsVistaSubjectMeta\.map/)
 })
+
+test('the source-backed Mental Ability guidebook has a public, crawlable route without modifying the 40 original PDFs',()=>{
+  const url='/pms-vista/syllabus/compulsory-mental-ability-and-reasoning-test'
+  const route=findRouteDefinition(url)
+  assert.equal(route?.indexable,true)
+  assert.equal(route?.sitemap,true)
+  assert.match(route?.title||'',/Mental Ability/)
+  assert.match(readFileSync('src/pages/PmsVista.tsx','utf8'),/pmsMentalAbilitySubject/)
+  assert.match(readFileSync('src/pages/PmsVistaSubject.tsx','utf8'),/Open PPSC original Mental Ability guidebook/)
+  assert.match(readFileSync('scripts/prerender/routes.tsx','utf8'),/compulsory-mental-ability-and-reasoning-test/)
+})
