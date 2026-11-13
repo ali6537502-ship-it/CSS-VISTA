@@ -1,0 +1,246 @@
+{
+  "version": "draft-1",
+  "lessonId": "c14-s14-2",
+  "title": "Fuel ethanol: from feedstock preparation to fermentation and recovery",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-12"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "fermentation",
+      "title": "OpenStax Biology 2e, 7.5 Metabolism without Oxygen",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "88b37603b8743fd1a9c3af3c36d90090ee15056f1e45f474e9059e496b387e5b",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "ethanol",
+      "title": "Ethanol explained",
+      "publisher": "US Energy Information Administration",
+      "url": "https://www.eia.gov/energyexplained/biofuels/ethanol.php",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "7500bcd3f487bbdd4e0ebcfb372a2f549507f300349c7bd44465d441d0598218",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain why sugar, starch and cellulose feedstocks need different preparation.",
+        "Trace fermentation and distinguish biological conversion from product separation."
+      ],
+      "prerequisites": [
+        "A carbohydrate is an organic compound that can supply carbon and chemical energy.",
+        "An enzyme helps a biochemical reaction proceed; it is not a fuel consumed as the main feedstock."
+      ],
+      "terms": {
+        "feedstock": "Raw material supplied to a production process.",
+        "hydrolysis": "Breaking chemical bonds using water, often with enzyme assistance.",
+        "fermentation": "Here, the pathway regenerating NAD+ as pyruvate-derived compounds are converted to ethanol.",
+        "distillation": "Separation based on differences in volatility, not creation of ethanol by microbes."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "feedstock-preparation",
+        "sourceIds": [
+          "ethanol"
+        ],
+        "explanation": "A sugar-rich feedstock already supplies relatively accessible sugars. Starch must be broken into smaller fermentable sugars. Cellulose is another glucose-based polymer, but cellulosic feedstocks require pretreatment and hydrolysis to release accessible sugars from plant material. Naming the feedstock is therefore insufficient: explain how its chemical structure affects preparation. Crop residues may supply carbon, but they do not become ethanol merely by being placed in a tank."
+      },
+      {
+        "conceptId": "fermentation",
+        "sourceIds": [
+          "fermentation"
+        ],
+        "explanation": "Yeast first uses glycolysis to convert glucose to pyruvate. In alcoholic fermentation, pyruvate loses carbon dioxide to form acetaldehyde; acetaldehyde is then reduced to ethanol as NADH is oxidized to NAD+. Regenerating NAD+ allows glycolysis to continue. The simplified overall conversion is C6H12O6 → 2C2H5OH + 2CO2. It summarizes carbon and atom balance, not every enzyme-mediated reaction or an industrial yield guarantee."
+      },
+      {
+        "conceptId": "recovery",
+        "sourceIds": [
+          "ethanol"
+        ],
+        "explanation": "The fermentation mixture contains ethanol together with water and other material. Product recovery and further processing are separate industrial operations; they do not replace the biological conversion step. Fuel ethanol production also requires suitable product quality and handling. A useful answer separates preparation, conversion and recovery rather than listing the words fermentation and distillation without showing their different functions."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-process-flow",
+      "description": "Sugar feedstock → fermentable sugars → glycolysis → pyruvate → acetaldehyde + CO2 → ethanol. Show starch/cellulose preparation as upstream branches. Label NADH → NAD+ at the final biological conversion.",
+      "limitations": "Schematic pathway, not a process-design specification or a prediction of industrial yield.",
+      "sourceIds": [
+        "fermentation",
+        "ethanol"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Compare sugar-rich material with a cellulosic residue. The latter needs extra preparation to make sugars accessible; both still require biological conversion to ethanol.",
+      "sourceIds": [
+        "ethanol"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain production of bioethanol from a starch-rich feedstock, distinguishing preparation, fermentation and recovery."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-ETH-01",
+          "lessonId": "c14-s14-2",
+          "conceptId": "feedstock-preparation",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "process-sequencing",
+          "prompt": "Why does a starch-rich feedstock require a conversion step before its sugars are fermented for ethanol?",
+          "options": {
+            "A": "Starch must first be converted into accessible smaller sugars.",
+            "B": "Yeast must convert ethanol back into starch.",
+            "C": "Distillation produces the starting glucose.",
+            "D": "Starch contains no stored chemical energy."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Hydrolysis supplies fermentable sugars from the larger starch carbohydrate.",
+            "B": "The production pathway proceeds toward ethanol, not from ethanol to the feedstock.",
+            "C": "Distillation separates volatile components; it does not make the glucose substrate.",
+            "D": "Starch is an energy-containing carbohydrate; accessibility is the issue."
+          },
+          "sources": [
+            "ethanol",
+            "fermentation"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-ETH-02",
+          "lessonId": "c14-s14-2",
+          "conceptId": "fermentation",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Which process directly restores NAD+ during alcoholic fermentation?",
+          "options": {
+            "A": "Removing CO2 from pyruvate to form acetaldehyde, without the next reaction.",
+            "B": "Reducing acetaldehyde to ethanol using NADH.",
+            "C": "Oxidizing ethanol back to acetaldehyde with NAD+.",
+            "D": "Sending electrons to oxygen as the final acceptor of aerobic respiration."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Decarboxylation produces the acetaldehyde substrate, but NAD+ regeneration occurs in the subsequent reduction.",
+            "B": "NADH donates electrons during the reduction, regenerating NAD+ needed for glycolysis.",
+            "C": "This is the reverse redox direction: it consumes NAD+ and produces NADH rather than regenerating NAD+.",
+            "D": "Aerobic respiration uses a different terminal electron-accepting pathway; it is not the alcoholic fermentation reaction asked for."
+          },
+          "sources": [
+            "fermentation"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-ETH-03",
+          "lessonId": "c14-s14-2",
+          "conceptId": "balanced-fermentation",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "The simplified glucose fermentation equation produces how many ethanol molecules per glucose molecule?",
+          "options": {
+            "A": "One",
+            "B": "Four",
+            "C": "Two",
+            "D": "Six"
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "One ethanol would not match the stated balanced overall equation.",
+            "B": "Four ethanol molecules would contain more carbon than one glucose molecule supplies.",
+            "C": "C6H12O6 → 2C2H5OH + 2CO2 balances six carbons, twelve hydrogens and six oxygens.",
+            "D": "Six is the glucose carbon count, not the ethanol coefficient."
+          },
+          "sources": [
+            "fermentation"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "A starch-rich feedstock first needs processing and hydrolysis to make fermentable sugars available. Yeast converts glucose to pyruvate through glycolysis. During alcoholic fermentation, pyruvate releases carbon dioxide and forms acetaldehyde, which is reduced to ethanol while NADH is oxidized to NAD+. This restores the electron carrier needed for glycolysis. The simplified overall equation is C6H12O6 → 2C2H5OH + 2CO2. Ethanol must then be recovered from the fermentation mixture through separate processing operations. Thus hydrolysis prepares the substrate, fermentation produces ethanol biologically, and recovery separates the product; these are different functions.",
+      "rubric": [
+        {
+          "criterion": "Explain hydrolysis of starch to accessible sugars.",
+          "marks": 1
+        },
+        {
+          "criterion": "Place glycolysis before the pyruvate-to-ethanol steps.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain CO2 release and acetaldehyde reduction.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify NAD+ regeneration or provide the balanced overall equation correctly.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish biological conversion from product recovery.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Saying distillation creates ethanol from glucose.",
+        "Claiming fermentation and anaerobic respiration are identical.",
+        "Treating the overall equation as a guaranteed industrial yield."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Hydrolysis prepares sugars; fermentation changes them biologically; recovery separates products.",
+        "Alcoholic fermentation regenerates NAD+ so glycolysis can continue."
+      ],
+      "closedBookRecall": [
+        "Draw the feedstock-to-product flow without looking.",
+        "Balance carbon, hydrogen and oxygen in the overall equation."
+      ],
+      "reviewPolicy": "Use process sequencing before re-reading, then revisit whichever link was missed."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

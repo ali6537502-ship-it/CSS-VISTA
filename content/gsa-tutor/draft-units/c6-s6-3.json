@@ -1,0 +1,221 @@
+{
+  "version": "draft-1",
+  "lessonId": "c6-s6-3",
+  "title": "Chemical changes: distinguish acid–base transfer, precipitation and redox",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-05"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "reactions",
+      "title": "OpenStax Chemistry 2e 4.2, Classifying Chemical Reactions",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/4-2-classifying-chemical-reactions",
+      "resolvedUrl": "https://openstax.org/books/chemistry-2e/pages/4-2-classifying-chemical-reactions",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "37d3530a6d704c0f791f390a0098fef07d9a32da100a8f55b69484542fdf0ce5",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "ph",
+      "title": "OpenStax Chemistry 2e 14.2, pH and pOH",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/14-2-ph-and-poh",
+      "resolvedUrl": "https://openstax.org/books/chemistry-2e/pages/14-2-ph-and-poh",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "9b26a1a532c31fae800f642326bbe9e8e17e5b735ce7a6e23f196aaf8cf0ac94",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Classify a reaction by the change occurring, rather than by memorizing its appearance.",
+        "Interpret the logarithmic pH scale and distinguish strong from concentrated."
+      ],
+      "prerequisites": [
+        "Atoms and electric charge must balance in a chemical equation.",
+        "A solution contains substances distributed through a solvent."
+      ],
+      "terms": {
+        "precipitate": "An insoluble solid formed from species initially in solution.",
+        "oxidation": "Loss of electrons, tracked through a rise in oxidation number.",
+        "reduction": "Gain of electrons, tracked through a fall in oxidation number.",
+        "pH": "A logarithmic measure of hydrogen-ion activity; dilute-solution calculations approximate it using hydronium concentration."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "reaction-types",
+        "sourceIds": [
+          "reactions"
+        ],
+        "explanation": "A chemical reaction rearranges atoms into different substances. A balanced equation preserves each element and total charge; it does not promise that the reaction is rapid or complete. In a precipitation reaction, dissolved ions form an insoluble solid. In an acid–base reaction, proton transfer provides a useful explanation: an acid donates a proton and a base accepts it. An indicator colour change may provide evidence about conditions, but colour alone is not a general definition of a chemical reaction."
+      },
+      {
+        "conceptId": "ph-logarithm",
+        "sourceIds": [
+          "ph"
+        ],
+        "explanation": "For a dilute aqueous solution, pH is approximately −log10[H3O+], using the molar concentration relative to the standard concentration. A solution with [H3O+]=10^-3 M has pH about 3. Reducing that concentration by a factor of ten raises pH by one unit. Neutrality means equal hydronium and hydroxide concentrations; neutral pH is 7 at 25°C, rather than a temperature-independent law. Strong versus weak describes acid ionization, while concentrated versus dilute describes how much solute is present. A dilute strong acid and a concentrated weak acid must not be treated as interchangeable categories."
+      },
+      {
+        "conceptId": "redox",
+        "sourceIds": [
+          "reactions"
+        ],
+        "explanation": "Oxidation and reduction occur together: electrons lost by one reactant are gained by another. Oxidation numbers help account for this transfer even when electrons are not shown in a simple molecular equation. Burning fuels, some corrosion processes and battery reactions involve redox, but the term oxidation is broader than reaction with oxygen gas. Acid–base neutralization and precipitation need not involve a change in oxidation number. Identify the relevant mechanism before naming the reaction."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "comparison-flow",
+      "nodes": [
+        "Check element and charge balance",
+        "Identify solid formation, proton transfer or oxidation-number change",
+        "Explain the observed change"
+      ],
+      "description": "Use separate labelled examples for precipitation, proton transfer and electron transfer. Include a pH number line with a tenfold concentration step.",
+      "limitations": "Classification aid; not a prediction of rate, equilibrium position or safe chemical handling.",
+      "sourceIds": [
+        "reactions",
+        "ph"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "At the same temperature, changing dilute-solution hydronium concentration from 10^-3 to 10^-5 M changes pH from about 3 to about 5. The two-unit change corresponds to a hundredfold concentration ratio, not a hundredfold change in pH.",
+      "sourceIds": [
+        "ph"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish acid–base and oxidation–reduction reactions, and explain the meaning of a two-unit pH increase."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-CHEM-01",
+          "lessonId": "c6-s6-3",
+          "conceptId": "ph-logarithm",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "For dilute aqueous solutions at the same temperature, [H3O+] falls from 10^-3 M to 10^-5 M. What happens to pH?",
+          "options": {
+            "A": "It decreases by two.",
+            "B": "It increases by two.",
+            "C": "It increases by a factor of 100.",
+            "D": "It stays unchanged because both are dilute."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Lower hydronium concentration raises pH, not lowers it.",
+            "B": "The negative logarithms are 3 and 5; the increase is two pH units.",
+            "C": "Concentration changes by a factor of 100; pH changes additively because it is logarithmic.",
+            "D": "Dilution can change hydronium concentration and hence pH."
+          },
+          "sources": [
+            "ph"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-CHEM-02",
+          "lessonId": "c6-s6-3",
+          "conceptId": "redox",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "In a chemical reaction, a species loses electrons. Which description is correct?",
+          "options": {
+            "A": "It has been reduced.",
+            "B": "Its atomic nuclei must have changed.",
+            "C": "It has been oxidized.",
+            "D": "It must have reacted with oxygen gas."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Reduction means electron gain, not loss.",
+            "B": "Ordinary chemical redox changes electron accounting rather than the identity of nuclei.",
+            "C": "Oxidation is electron loss; a corresponding reduction accepts electrons.",
+            "D": "Oxygen is involved in many familiar oxidations, but electron loss does not require oxygen gas."
+          },
+          "sources": [
+            "reactions"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "An acid–base reaction can be described as proton transfer from an acid to a base. A redox reaction instead involves electron accounting: oxidation is electron loss and reduction is electron gain, so the two occur together. These processes should not be identified solely by the presence of oxygen or a colour change. For dilute aqueous solutions, pH is approximately −log10[H3O+]. An increase from pH 3 to pH 5 corresponds to hydronium concentration falling from approximately 10^-3 M to 10^-5 M, a hundredfold reduction. Neutral pH equals 7 specifically at 25°C; neutral means equal hydronium and hydroxide concentrations.",
+      "rubric": [
+        {
+          "criterion": "Explain acid–base proton transfer.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define oxidation and reduction with electrons.",
+          "marks": 1
+        },
+        {
+          "criterion": "State that oxidation and reduction are coupled.",
+          "marks": 1
+        },
+        {
+          "criterion": "Interpret the pH logarithm correctly.",
+          "marks": 1
+        },
+        {
+          "criterion": "Calculate the hundredfold concentration change.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Treating pH as a linear concentration scale.",
+        "Using strong and concentrated as synonyms.",
+        "Defining all oxidation as adding oxygen."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Oxidation: electron loss; reduction: electron gain.",
+        "For dilute solutions, a one-unit pH increase corresponds to tenfold lower hydronium concentration."
+      ],
+      "closedBookRecall": [
+        "Give one distinguishing mechanism for each reaction category.",
+        "Explain why neutrality need not always mean pH 7."
+      ],
+      "reviewPolicy": "Recalculate a pH ratio without notes, then explain the logarithmic relation in words."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

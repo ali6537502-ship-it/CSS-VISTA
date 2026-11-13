@@ -99,3 +99,35 @@ test('later dated recall wins and separate recall attempt histories survive devi
    assert.deepEqual(Object.keys(merged.recallAttempts).sort(),['one','two']);
  }
 });
+
+test('responses to a shared practice session survive merges in both directions',()=>{
+ const cloud={[key]:{quizAttempts:{shared:{at:t1,chapter:6,responses:{A:{at:t0,selected:'A'},B:{at:t1,selected:'B'}}}}}};
+ const local={[key]:{quizAttempts:{shared:{at:t2,chapter:6,responses:{A:{at:t2,selected:'D'},C:{at:t2,selected:'C'}}}}}};
+ for(const state of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+   assert.deepEqual(Object.keys(state.quizAttempts.shared.responses).sort(),['A','B','C']);
+   assert.equal(state.quizAttempts.shared.responses.A.selected,'D');
+ }
+});
+
+test('rescheduling histories from separate devices are additive',()=>{
+ const cloud={[key]:{planHistory:{one:{at:t0,plan:{days:8}}}}};
+ const local={[key]:{planHistory:{two:{at:t2,plan:{days:60}}}}};
+ assert.deepEqual(Object.keys(merge(cloud,local)[key].planHistory).sort(),['one','two']);
+});
+
+test('finished assessments cannot be reopened by a stale device, and retain eligible responses',()=>{
+ const questions=[{id:'A'},{id:'B'}];
+ const cloud={[key]:{assessmentAttempts:{one:{at:t1,finishedAt:t1,questions,responses:{A:{at:t0,selected:'A'}},choiceEvents:{first:{at:t0}}}}}};
+ const local={[key]:{assessmentAttempts:{one:{at:t2,finishedAt:null,questions,responses:{B:{at:t0,selected:'B'},A:{at:t2,selected:'D'}},choiceEvents:{second:{at:t2}}}}}};
+ for(const merged of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+  const a=merged.assessmentAttempts.one;assert.equal(a.finishedAt,t1);assert.equal(a.responses.A.selected,'A');assert.equal(a.responses.B.selected,'B');assert.equal(Object.keys(a.choiceEvents).length,2);
+ }
+});
+
+test('mock written responses merge without losing separate-device work or accepting post-submit changes',()=>{
+ const cloud={[key]:{assessmentAttempts:{mock:{at:t1,finishedAt:t1,responses:{},writtenResponses:{A:{at:t0,text:'First response'}}}}}};
+ const local={[key]:{assessmentAttempts:{mock:{at:t2,finishedAt:null,responses:{},writtenResponses:{A:{at:t2,text:'Too late'},B:{at:t0,text:'Other response'}}}}}};
+ for(const merged of [merge(cloud,local)[key],merge(local,cloud)[key]]){
+  const a=merged.assessmentAttempts.mock;assert.equal(a.finishedAt,t1);assert.equal(a.writtenResponses.A.text,'First response');assert.equal(a.writtenResponses.B.text,'Other response');
+ }
+});

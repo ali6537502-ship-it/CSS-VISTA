@@ -1,0 +1,228 @@
+{
+  "version": "draft-1",
+  "lessonId": "c13-s13-5",
+  "title": "Antibiotics and resistance",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-06",
+    "GS-I-11"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/microbiology/pages/14-3-mechanisms-of-antibacterial-drugs",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/14-3-mechanisms-of-antibacterial-drugs",
+      "title": "14.3 Mechanisms of Antibacterial Drugs - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.474479+00:00",
+      "retrievedSha256": "cba818556f9fb4007bd230b778206e6ef09b3d8eac89fb438c62bd055d7108bd",
+      "id": "antibiotics",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/14-5-drug-resistance",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/14-5-drug-resistance",
+      "title": "14.5 Drug Resistance - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.508510+00:00",
+      "retrievedSha256": "8a7ea9e30f1484d4283042e36855d75f806ecc9fa74896cbc39c581fcf361a1a",
+      "id": "resistance",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain selective antibacterial targets.",
+        "Describe selection and spread of resistance without claiming the patient becomes resistant."
+      ],
+      "prerequisites": [
+        "Bacteria have cellular structures different from viruses.",
+        "Heritable variation can affect survival and reproduction."
+      ],
+      "terms": {
+        "selective toxicity": "Preferential harm to a pathogen relative to host cells.",
+        "resistance": "A microbial capacity to withstand an antimicrobial under relevant conditions.",
+        "horizontal gene transfer": "Movement of genetic information between organisms outside parent-to-offspring inheritance."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "antibacterial-targets",
+        "sourceIds": [
+          "antibiotics"
+        ],
+        "explanation": "Antibacterial medicines act on bacterial structures or pathways. Some inhibit cell-wall synthesis, others target bacterial protein synthesis, nucleic-acid processes or metabolism. Selectivity reflects differences between microbial and host biology, but it does not imply complete absence of adverse effects. Viruses lack bacterial cell walls and ribosomes and depend on host machinery, so an antibacterial drug targeting those structures does not thereby treat a viral infection."
+      },
+      {
+        "conceptId": "resistance-selection",
+        "sourceIds": [
+          "resistance"
+        ],
+        "explanation": "A bacterial population can contain variants with reduced susceptibility because of mutation or acquired resistance genes. Drug exposure can remove susceptible competitors while resistant organisms survive and reproduce. The population changes through selection; the bacteria do not deliberately train, and the patient’s body is not what becomes antibiotic-resistant. Resistance genes can spread by inheritance and horizontal transfer, including plasmid-associated transfer."
+      },
+      {
+        "conceptId": "resistance-mechanisms",
+        "sourceIds": [
+          "resistance"
+        ],
+        "explanation": "Mechanisms include enzymes that inactivate a drug, changes to its target, reduced entry and efflux pumps that remove it. These are different explanations of reduced susceptibility, not proof that every strain resists every antibiotic. Appropriate diagnosis, susceptibility information where relevant, infection prevention and responsible prescribing help limit ineffective use and spread. Follow professional treatment instructions; this educational mechanism does not justify self-selecting a drug, dose or duration."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Variation or acquired gene",
+        "Antimicrobial exposure",
+        "Susceptible bacteria reduced",
+        "Resistant survivors reproduce",
+        "Genes/organisms spread"
+      ],
+      "description": "Use two differently labelled populations before and after exposure; label relative selection, not conscious adaptation.",
+      "limitations": "Qualitative population diagram; no invented survival percentages or treatment prediction.",
+      "sourceIds": [
+        "antibiotics",
+        "resistance"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "An enzyme that degrades a particular antibiotic can protect a bacterium even though a drug with a different target may behave differently.",
+      "sourceIds": [
+        "antibiotics",
+        "resistance"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain antibiotic action and the development and spread of resistance."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c13-s13-5-1",
+          "lessonId": "c13-s13-5",
+          "conceptId": "antibacterial-targets",
+          "syllabusRefs": [
+            "GS-I-06",
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Why does a drug inhibiting bacterial cell-wall synthesis not directly solve a viral infection?",
+          "options": {
+            "A": "Viruses have a thicker version of bacterial peptidoglycan.",
+            "B": "Viruses lack the bacterial cell-wall target.",
+            "C": "The drug targets only viral envelope lipid instead.",
+            "D": "The absence of symptoms is what removes the drug target."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Viruses do not possess bacterial peptidoglycan walls.",
+            "B": "The specified antibacterial target is absent from viruses.",
+            "C": "This changes the stated mechanism without evidence.",
+            "D": "Biological structure, not symptom presence, determines that target."
+          },
+          "sources": [
+            "antibiotics"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c13-s13-5-2",
+          "lessonId": "c13-s13-5",
+          "conceptId": "resistance-selection",
+          "syllabusRefs": [
+            "GS-I-06",
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "After exposure, resistant bacteria form a larger fraction of a population. Which explanation fits selection?",
+          "options": {
+            "A": "The patient’s own cells become the antibiotic-resistant population.",
+            "B": "Exposure guarantees that every bacterium acquires the same directed mutation.",
+            "C": "Selection requires the complete absence of prior genetic variation or transfer.",
+            "D": "Resistant variants survived and reproduced better under the exposure."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "The relevant resistance is a microbial property.",
+            "B": "Mutation and gene acquisition do not require identical intentional changes.",
+            "C": "Variation or acquired genes provide material on which selection can act.",
+            "D": "Differential survival and reproduction change population composition."
+          },
+          "sources": [
+            "resistance"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Antibacterial drugs exploit targets such as bacterial cell-wall synthesis or ribosomal function, providing selective toxicity rather than universal harmlessness. These targets do not make such drugs direct treatments for viruses. Resistance can arise through mutation or acquisition of genes; antimicrobial exposure then selects resistant survivors. Their reproduction and gene transfer spread reduced susceptibility. Drug inactivation, target alteration and efflux are examples of mechanisms. Effective infection control and responsible, professionally guided antimicrobial use reduce avoidable selection and transmission.",
+      "rubric": [
+        {
+          "criterion": "Explain a specific antibacterial target.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish bacterial and viral targets.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain variation and differential survival.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe inheritance or horizontal gene transfer.",
+          "marks": 1
+        },
+        {
+          "criterion": "Give a resistance mechanism and relevant control.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Saying the patient becomes antibiotic-resistant.",
+        "Describing resistance as conscious bacterial learning."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "selective toxicity: Preferential harm to a pathogen relative to host cells.",
+        "resistance: A microbial capacity to withstand an antimicrobial under relevant conditions.",
+        "horizontal gene transfer: Movement of genetic information between organisms outside parent-to-offspring inheritance."
+      ],
+      "closedBookRecall": [
+        "Draw a selection diagram.",
+        "Compare drug inactivation and target modification."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

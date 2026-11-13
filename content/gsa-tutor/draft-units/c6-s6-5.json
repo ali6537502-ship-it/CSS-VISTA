@@ -1,0 +1,211 @@
+{
+  "version": "draft-1",
+  "lessonId": "c6-s6-5",
+  "title": "Radioactive change: separate particle bookkeeping from decay probability",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-05"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "decay",
+      "title": "OpenStax Chemistry 2e 21.3, Radioactive Decay",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/21-3-radioactive-decay",
+      "resolvedUrl": "https://openstax.org/books/chemistry-2e/pages/21-3-radioactive-decay",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "604b2feee895b20fff8359c5fca42b8e0207830d140a2301dbd72e5384dfd4fa",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish alpha, beta-minus and gamma changes using A and Z.",
+        "Apply the half-life relation without treating it as a countdown for one nucleus."
+      ],
+      "prerequisites": [
+        "Z counts protons and A counts protons plus neutrons.",
+        "A photon carries energy but is not a proton or neutron."
+      ],
+      "terms": {
+        "radioactive decay": "Spontaneous transformation of an unstable nucleus.",
+        "half-life": "Time over which half of a large population of a particular radioactive isotope is expected to decay.",
+        "daughter": "The nuclear species produced by a decay.",
+        "N0": "The initial number of nuclei of the isotope being followed.",
+        "N": "The number of those original-isotope nuclei remaining.",
+        "n": "The elapsed time expressed as a number of half-life intervals."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "nuclear-change",
+        "sourceIds": [
+          "decay"
+        ],
+        "explanation": "Radioactive decay concerns the nucleus, unlike ordinary chemical changes that primarily involve electron arrangements. An alpha particle contains two protons and two neutrons; emitting it lowers the parent’s mass number by four and atomic number by two. In beta-minus decay a neutron is converted to a proton, with an electron and an antineutrino emitted; mass number stays the same while atomic number rises by one. A gamma transition releases excitation energy as a photon without changing A or Z. These descriptions are specific modes, not a claim that every isotope can undergo every mode."
+      },
+      {
+        "conceptId": "half-life",
+        "sourceIds": [
+          "decay"
+        ],
+        "explanation": "A decay probability does not tell us the exact time at which an individual nucleus will transform. For a large collection, a characteristic half-life gives a predictable population pattern. After n half-lives, the expected number of original nuclei is N=N0(1/2)^n. This fraction applies to nuclei of the original radioactive isotope. Their decay products still exist as other particles or nuclear species; matter has not simply vanished."
+      },
+      {
+        "conceptId": "interpretation",
+        "sourceIds": [
+          "decay"
+        ],
+        "explanation": "Read a decay graph by identifying what the vertical axis counts and how many half-life intervals have passed. Equal intervals reduce the remaining isotope by equal fractions, not equal masses. For 80 mg of an isotope, the successive remaining amounts are 40, 20 and 10 mg. Actual small-number observations fluctuate, whereas the exponential description expresses a statistical expectation. Neither a half-life calculation nor a schematic decay diagram is a radiation-dose or safe-handling assessment."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "decay-graph-specification",
+      "nodes": [
+        "Original isotope: 80 mg",
+        "After one half-life: 40 mg",
+        "After two: 20 mg",
+        "After three: 10 mg"
+      ],
+      "description": "Plot remaining original isotope against elapsed half-lives. Beside it, compare alpha, beta-minus and gamma bookkeeping.",
+      "limitations": "Expected population curve; not individual decay-time prediction or a dose model.",
+      "sourceIds": [
+        "decay"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "After three half-lives, one eighth of the initial original isotope remains. A statement that the sample is one eighth as radioactive also needs the same isotope and measurement conditions; a full safety conclusion requires more than this fraction.",
+      "sourceIds": [
+        "decay"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish alpha, beta-minus and gamma changes, and calculate the fraction of an isotope remaining after three half-lives."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-NUC-01",
+          "lessonId": "c6-s6-5",
+          "conceptId": "half-life",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "An initially 80 mg sample of one radioactive isotope is followed for three half-lives. How much of that isotope remains, ignoring other production?",
+          "options": {
+            "A": "60 mg",
+            "B": "10 mg",
+            "C": "20 mg",
+            "D": "0 mg"
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Half-life is not a fixed 20 mg subtraction each interval.",
+            "B": "80×(1/2)^3=10 mg of the original isotope remains.",
+            "C": "20 mg remains after two, not three, half-lives.",
+            "D": "Exponential decay does not imply all nuclei disappear after three half-lives."
+          },
+          "sources": [
+            "decay"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-NUC-02",
+          "lessonId": "c6-s6-5",
+          "conceptId": "nuclear-change",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "An excited nucleus emits only a gamma photon. What happens to its proton number and mass number?",
+          "options": {
+            "A": "Both decrease.",
+            "B": "Proton number increases but mass number stays fixed.",
+            "C": "Both remain unchanged.",
+            "D": "Mass number increases by one."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Gamma emission releases excitation energy without removing nucleons.",
+            "B": "This describes neither the proton count nor the energy-only transition of gamma emission.",
+            "C": "The nucleus changes energy state while retaining its proton and nucleon counts.",
+            "D": "A photon does not add a nucleon to the nucleus."
+          },
+          "sources": [
+            "decay"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Alpha decay emits a helium nucleus, reducing A by four and Z by two. Beta-minus decay converts a neutron to a proton while emitting an electron and an antineutrino, so A is unchanged and Z increases by one. Gamma emission releases nuclear excitation energy without changing either count. A half-life describes the statistical decay of a population, not the exact lifetime of each nucleus. After n half-lives, N=N0(1/2)^n; after three, one eighth remains. Thus an initial 80 mg of a particular radioactive isotope has an expected 10 mg of that original isotope remaining, without implying that its daughter products have disappeared.",
+      "rubric": [
+        {
+          "criterion": "Give correct alpha changes in A and Z.",
+          "marks": 1
+        },
+        {
+          "criterion": "Give correct beta-minus changes.",
+          "marks": 1
+        },
+        {
+          "criterion": "Give correct gamma energy-only distinction.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define half-life statistically.",
+          "marks": 1
+        },
+        {
+          "criterion": "Calculate one eighth or 10 mg correctly.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Subtracting the same mass every half-life.",
+        "Saying gamma emission necessarily changes the element.",
+        "Treating half-life alone as a safety threshold."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Alpha: ΔA=−4, ΔZ=−2. Beta-minus: ΔA=0, ΔZ=+1. Gamma: neither changes.",
+        "N=N0(1/2)^n after n half-lives."
+      ],
+      "closedBookRecall": [
+        "Explain what remains and what has changed after decay.",
+        "Work backward from a remaining fraction of 1/16 to the number of half-lives."
+      ],
+      "reviewPolicy": "Recall particle bookkeeping separately from a decay calculation, then connect them in an answer."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "version": "draft-1",
+  "lessonId": "c12-s12-1",
+  "title": "Organization and internal balance",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-10"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-2-structural-organization-of-the-human-body",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-2-structural-organization-of-the-human-body",
+      "title": "1.2 Structural Organization of the Human Body  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:33.893929+00:00",
+      "retrievedSha256": "1a2583047e2d4515a7ba63ff5eacc6c17428b37b7e8e85cf4e137a73fada39b9",
+      "id": "organization",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "title": "1.5 Homeostasis  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.449747+00:00",
+      "retrievedSha256": "0af666d55f507e9f402caf2d4be006496cc93e78eddd99245c46e514a24a035c",
+      "id": "homeostasis",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Relate cells, tissues, organs and systems.",
+        "Explain a negative-feedback loop without calling the internal environment unchanging."
+      ],
+      "prerequisites": [
+        "Cells perform specialized functions.",
+        "A control response can change the condition that triggered it."
+      ],
+      "terms": {
+        "tissue": "An organized group of cells and associated material with related functions.",
+        "homeostasis": "Regulation of internal conditions within ranges compatible with function.",
+        "negative feedback": "A response that opposes the initial deviation."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "body-organization",
+        "sourceIds": [
+          "organization"
+        ],
+        "explanation": "Cells specialize: a muscle cell contracts, while a neuron communicates. Tissues organize cells and extracellular material into functional groups. An organ contains more than one tissue type; the stomach includes epithelial, muscular, connective and nervous tissues. Related organs form a system, such as the digestive system. These are levels of organization, not independent miniature bodies. The intestine supplies absorbed nutrients, blood transports them and cells use them; failure of one link affects other systems."
+      },
+      {
+        "conceptId": "feedback-components",
+        "sourceIds": [
+          "homeostasis"
+        ],
+        "explanation": "A regulated variable is a measurable condition, such as body temperature. A receptor detects a change; a control centre integrates information relative to an appropriate operating range; an effector produces a response. In negative feedback that response opposes the deviation. If temperature rises, appropriate heat-loss responses can reduce it. Sweating helps when evaporation transfers heat away; the word negative describes the direction of correction, not harm. Regulation is dynamic: values fluctuate rather than remaining mathematically fixed."
+      },
+      {
+        "conceptId": "feedback-distinction",
+        "sourceIds": [
+          "homeostasis"
+        ],
+        "explanation": "Positive feedback reinforces a change during a bounded process. During childbirth, cervical stretch can promote oxytocin release and stronger contractions, which cause further stretch; birth ends this loop. This is not the ordinary mechanism for stabilizing temperature. When interpreting a diagram, identify the regulated variable and direction of response rather than counting arrows. The same organ may participate in more than one system, and homeostasis requires coordinated nervous, endocrine, circulatory and excretory activity."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Temperature rises",
+        "Receptors detect deviation",
+        "Control centre coordinates",
+        "Effectors increase heat loss",
+        "Temperature moves back toward its operating range"
+      ],
+      "description": "Draw a return arrow from the corrected variable to the original sensing step; label the response as opposing the deviation.",
+      "limitations": "Qualitative control diagram; no fixed universal temperature or clinical diagnostic threshold is implied.",
+      "sourceIds": [
+        "organization",
+        "homeostasis"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "During activity, heat production and heat loss both change. A stable-looking temperature can therefore conceal continuing active regulation.",
+      "sourceIds": [
+        "organization",
+        "homeostasis"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain homeostasis using a negative-feedback example and distinguish it from positive feedback."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c12-s12-1-1",
+          "lessonId": "c12-s12-1",
+          "conceptId": "feedback-components",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "In a stabilizing feedback loop, what defines negative feedback?",
+          "options": {
+            "A": "The response opposes the initiating deviation.",
+            "B": "The response always lowers the regulated variable.",
+            "C": "The response amplifies the initiating deviation until an endpoint.",
+            "D": "The response stops all fluctuations permanently."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Opposition to the deviation defines negative feedback.",
+            "B": "A variable below its range can require an upward response.",
+            "C": "Amplification describes positive feedback.",
+            "D": "Regulation is dynamic rather than permanent removal of fluctuations."
+          },
+          "sources": [
+            "homeostasis"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c12-s12-1-2",
+          "lessonId": "c12-s12-1",
+          "conceptId": "body-organization",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Why is the stomach classified as an organ rather than one tissue?",
+          "options": {
+            "A": "It consists of one specialized tissue type.",
+            "B": "It is a collection of organs forming an entire system.",
+            "C": "It contains different tissues working together.",
+            "D": "It is a single cell performing several functions."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "A single tissue type is a different organizational level.",
+            "B": "The stomach is one organ within a system.",
+            "C": "Cooperation among several tissues establishes the organ level.",
+            "D": "The stomach contains many cells and tissues."
+          },
+          "sources": [
+            "organization"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Homeostasis maintains internal variables within functional ranges through continuing regulation. A negative-feedback loop contains a receptor, an integrating control centre and an effector. When temperature rises, detection and coordinated responses such as increased heat loss oppose that rise. As the deviation decreases, the corrective drive diminishes. Values can fluctuate within a range; homeostasis is not complete immobility. Positive feedback instead reinforces change during a bounded process, such as the contraction–stretch loop in childbirth. A labelled loop should show the initial deviation, sensing, response and return toward the operating range.",
+      "rubric": [
+        {
+          "criterion": "Define dynamic internal regulation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify receptor, control centre and effector.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe a correct temperature example.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain how the response opposes the deviation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish positive feedback with a bounded example.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling negative feedback harmful.",
+        "Treating a range as a single invariant value."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "tissue: An organized group of cells and associated material with related functions.",
+        "homeostasis: Regulation of internal conditions within ranges compatible with function.",
+        "negative feedback: A response that opposes the initial deviation."
+      ],
+      "closedBookRecall": [
+        "Draw the loop from memory.",
+        "Explain why a stomach contains several tissues."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "version": "draft-1",
+  "lessonId": "c12-s12-6",
+  "title": "Movement, reproduction and immunity",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-10"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-3-muscle-fiber-contraction-and-relaxation",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-3-muscle-fiber-contraction-and-relaxation",
+      "title": "10.3 Muscle Fiber Contraction and Relaxation  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.107600+00:00",
+      "retrievedSha256": "86d0578a3f79082fe9419f9baa72a2946b9960282f7968a72b49d2383c2d9f7e",
+      "id": "muscles",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/28-1-fertilization",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/28-1-fertilization",
+      "title": "28.1 Fertilization  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.121979+00:00",
+      "retrievedSha256": "ca018c5c01badd36e430677dbae79790f267f373186cbef5c8214cdc6a36f171",
+      "id": "reproduction",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response",
+      "title": "42.1 Innate Immune Response - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.531413+00:00",
+      "retrievedSha256": "142c58c589c2eda614a5f7ddfb22c90ab330c5198a726408624c9d7b70da1055",
+      "id": "innate",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "immunity",
+      "title": "OpenStax Biology 2e 42.2, Adaptive Immune Response",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "7c92a6ea62927acac7d3c37c0db9bf2bc1fc0eb8ba693a4707b4da57a803c0f1",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain muscle sliding and distinguish reproduction from development.",
+        "Connect physical barriers and adaptive memory with defence."
+      ],
+      "prerequisites": [
+        "ATP supports cellular work.",
+        "DNA carries genetic information; cell division and differentiation are distinct."
+      ],
+      "terms": {
+        "sarcomere": "A repeating contractile unit in striated muscle.",
+        "gamete": "A haploid reproductive cell such as sperm or an oocyte.",
+        "zygote": "The diploid cell formed through fertilization.",
+        "antigen": "A molecular feature recognized by components of adaptive immunity."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "muscle-sliding",
+        "sourceIds": [
+          "muscles"
+        ],
+        "explanation": "Skeletal muscles pull through tendons on bones across joints; opposing muscle groups permit movement in opposite directions. Within muscle fibres, myosin interacts with actin so that filaments slide relative to one another, shortening sarcomeres without requiring each filament to shrink. Calcium exposes binding sites through regulatory proteins, while ATP supports cross-bridge cycling and detachment. Relaxation requires removal of the activating calcium signal as well as changes in neural input; contraction is not simply a muscle filling with blood."
+      },
+      {
+        "conceptId": "fertilization-development",
+        "sourceIds": [
+          "reproduction"
+        ],
+        "explanation": "Sperm and an oocyte carry haploid genetic complements. Fertilization normally occurs in a uterine tube and brings parental genetic contributions together in a diploid zygote. Early divisions produce more cells; later development includes differentiation and organization into tissues. Fertilization is distinct from implantation in the uterine lining. Neither process is the same as the production of gametes. Keep these stages separate when drawing a reproductive sequence."
+      },
+      {
+        "conceptId": "defence-layers",
+        "sourceIds": [
+          "innate",
+          "immunity"
+        ],
+        "explanation": "Skin and mucosal surfaces provide barriers. Innate responses include inflammation and phagocytosis, in which cells engulf material; these act without the antigen-specific memory characteristic of adaptive responses. Adaptive defence includes B-cell antibody responses and T-cell functions. Memory cells can support a faster or more effective response to a later encounter with a recognized antigen. Antibodies are not antibiotics, and inflammation is a host response rather than the name of a pathogen."
+      },
+      {
+        "conceptId": "integrated-functions",
+        "sourceIds": [
+          "muscles",
+          "reproduction",
+          "innate"
+        ],
+        "explanation": "Movement, reproduction and immunity are separate functions coordinated within one organism. Muscle activity depends on neural signals, energy supply and calcium regulation; reproduction depends on specialized cells and developmental coordination; defence limits damage from threats. An examination answer should explain the requested mechanism before listing other systems. This broad overview connects those functions; detailed hormonal reproductive cycles and immune pathways require the linked chapter material and further independent depth review."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Motor signal → calcium availability → actin–myosin interaction",
+        "Gametes → fertilization → zygote → development",
+        "Barrier breach → innate response → antigen-specific adaptive response and memory"
+      ],
+      "description": "Use three labelled lanes; connect them only through shared support such as circulation, not as one causal chain.",
+      "limitations": "Overview, not an anatomical scale model or claim that these three processes occur sequentially.",
+      "sourceIds": [
+        "muscles",
+        "reproduction",
+        "innate",
+        "immunity"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Pulling a hand away, replacing damaged tissue and responding to an antigen require different mechanisms even though all involve living cells and chemical energy.",
+      "sourceIds": [
+        "muscles",
+        "reproduction",
+        "innate",
+        "immunity"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain sliding-filament contraction and distinguish innate from adaptive defence."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c12-s12-6-1",
+          "lessonId": "c12-s12-6",
+          "conceptId": "muscle-sliding",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "What changes during the sliding-filament account of contraction?",
+          "options": {
+            "A": "Actin and myosin filaments each shorten by the same amount.",
+            "B": "The relative overlap of actin and myosin increases as the sarcomere shortens.",
+            "C": "Sarcomeres lengthen while overlap decreases.",
+            "D": "ATP is needed only after all cross-bridge cycling has finished."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "The sliding account does not require filament shrinkage.",
+            "B": "Sliding increases overlap and shortens the sarcomere.",
+            "C": "This describes the opposite geometrical change.",
+            "D": "ATP supports cycling and detachment during the process."
+          },
+          "sources": [
+            "muscles"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c12-s12-6-2",
+          "lessonId": "c12-s12-6",
+          "conceptId": "fertilization-development",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "process-sequencing",
+          "prompt": "Which sequence preserves the distinction between reproduction and development?",
+          "options": {
+            "A": "Gametes fuse → implantation → zygote.",
+            "B": "Zygote forms → gametes fuse → early divisions.",
+            "C": "Gametes fuse → diploid zygote → early cell divisions.",
+            "D": "Gametes fuse → early implantation → first cell division."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "The zygote forms before implantation.",
+            "B": "Gamete fusion forms the zygote rather than following it.",
+            "C": "This places fertilization before the zygote’s divisions.",
+            "D": "Early divisions precede implantation."
+          },
+          "sources": [
+            "reproduction"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "In skeletal muscle, calcium-dependent regulation permits myosin to interact with actin, and ATP supports cross-bridge cycling. Filaments slide so sarcomeres shorten; the actin and myosin filaments themselves need not shorten. Host defence begins with barriers and innate responses, including phagocytosis and inflammation. Adaptive responses use antigen-specific B- and T-cell activity, and memory cells can improve responses to later encounters. A useful diagram labels the muscle-filament movement separately from the barrier–innate–adaptive defence sequence; the mechanisms should not be combined into one chain.",
+      "rubric": [
+        {
+          "criterion": "Explain filament sliding rather than filament shrinkage.",
+          "marks": 1
+        },
+        {
+          "criterion": "State calcium and ATP roles.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify a barrier and an innate response.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify antigen-specific adaptive components.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain adaptive memory and keep the diagrams distinct.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Confusing antibodies with antibiotics.",
+        "Calling fertilization implantation."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "sarcomere: A repeating contractile unit in striated muscle.",
+        "gamete: A haploid reproductive cell such as sperm or an oocyte.",
+        "zygote: The diploid cell formed through fertilization.",
+        "antigen: A molecular feature recognized by components of adaptive immunity."
+      ],
+      "closedBookRecall": [
+        "Sketch a shortening sarcomere.",
+        "Explain fertilization versus implantation.",
+        "Compare phagocytosis with adaptive memory."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

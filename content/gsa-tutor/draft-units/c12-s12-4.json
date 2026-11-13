@@ -1,0 +1,243 @@
+{
+  "version": "draft-1",
+  "lessonId": "c12-s12-4",
+  "title": "Kidneys and fluid balance",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-10"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-5-physiology-of-urine-formation",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-5-physiology-of-urine-formation",
+      "title": "25.5 Physiology of Urine Formation  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.139094+00:00",
+      "retrievedSha256": "0b427b1350a4ae9d79166db3a4b68ea18402491c581d2e724c780e2391a989f0",
+      "id": "nephron",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-6-tubular-reabsorption",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-6-tubular-reabsorption",
+      "title": "25.6 Tubular Reabsorption  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.121849+00:00",
+      "retrievedSha256": "be14c3fc5d64bb761e3251bac88333174ca56ea2efcbf6244c89964ff87aab7c",
+      "id": "reabsorption",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-8-endocrine-regulation-of-kidney-function",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-8-endocrine-regulation-of-kidney-function",
+      "title": "25.8 Endocrine Regulation of Kidney Function  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.904562+00:00",
+      "retrievedSha256": "e8af1f4e8593aebdf78ff5d955cca6109b481d4431756f844b47270ea6b384b1",
+      "id": "renal-hormones",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain filtration, reabsorption and secretion.",
+        "Connect ADH and kidney structure with water conservation."
+      ],
+      "prerequisites": [
+        "Blood contains cells, proteins, water and dissolved small solutes.",
+        "Osmosis moves water across a suitable barrier under an appropriate gradient."
+      ],
+      "terms": {
+        "nephron": "The microscopic kidney unit that filters and modifies fluid.",
+        "filtrate": "Fluid entering the nephron from plasma across the filtration barrier.",
+        "reabsorption": "Transfer from tubular fluid back toward blood.",
+        "secretion": "Transfer from blood or tubular cells into tubular fluid."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "urine-formation",
+        "sourceIds": [
+          "nephron"
+        ],
+        "explanation": "Kidneys receive blood and regulate its composition; they do not merely store urine. Pressure drives water and small solutes across the glomerular filtration barrier into the nephron. Blood cells and most plasma proteins are normally retained in the circulation. The resulting filtrate is not final urine: it contains useful substances as well as wastes. Urine later drains through collecting pathways to the renal pelvis, ureter and bladder; the bladder stores it before excretion through the urethra."
+      },
+      {
+        "conceptId": "tubular-processing",
+        "sourceIds": [
+          "reabsorption"
+        ],
+        "explanation": "Tubular cells selectively return substances such as glucose, ions and water toward the blood: this is reabsorption. Transport proteins and gradients make this selective rather than a simple sieve. Secretion adds selected substances from blood or tubular cells to the lumen. Final excretion can be represented as filtered amount minus reabsorbed amount plus secreted amount for a specified substance and interval. Water follows appropriate osmotic gradients; different nephron segments have different permeabilities, so not all solutes and water move together everywhere."
+      },
+      {
+        "conceptId": "water-regulation",
+        "sourceIds": [
+          "renal-hormones",
+          "reabsorption"
+        ],
+        "explanation": "The loop of Henle and surrounding tissues help establish the medullary gradient. ADH increases water-channel availability in collecting-duct cells, allowing more water to return down an osmotic gradient when conservation is needed. This can reduce urine volume and increase its concentration under suitable conditions; it does not manufacture water. Kidney function also contributes to electrolyte and acid–base balance. Excretion removes metabolic wastes, whereas egestion removes unabsorbed digestive material; the two are not synonyms."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Blood → glomerular filter",
+        "Filtrate → tubule",
+        "Reabsorption: tubule → blood",
+        "Secretion: blood/cells → tubule",
+        "Remaining fluid → urine"
+      ],
+      "description": "Use separate arrows for blood flow and tubular flow; mark the collecting duct and ADH-dependent water return.",
+      "limitations": "Conceptual nephron, not a scale drawing, kidney-function test or numerical clinical model.",
+      "sourceIds": [
+        "nephron",
+        "reabsorption",
+        "renal-hormones"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "During a water-conserving response, altered collecting-duct permeability changes water recovery; it does not require all filtration to cease.",
+      "sourceIds": [
+        "nephron",
+        "reabsorption",
+        "renal-hormones"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain how the nephron forms urine and regulates water balance."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c12-s12-4-1",
+          "lessonId": "c12-s12-4",
+          "conceptId": "tubular-processing",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Glucose moves from tubular fluid back toward blood. What is this?",
+          "options": {
+            "A": "Filtration.",
+            "B": "Secretion.",
+            "C": "Reabsorption.",
+            "D": "Egestion."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Filtration initially moves fluid from plasma into the nephron.",
+            "B": "Secretion adds substances to tubular fluid.",
+            "C": "Return from lumen toward blood is reabsorption.",
+            "D": "Egestion concerns digestive residue."
+          },
+          "sources": [
+            "reabsorption"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c12-s12-4-2",
+          "lessonId": "c12-s12-4",
+          "conceptId": "water-regulation",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "application",
+          "prompt": "What is the direct collecting-duct effect emphasized for ADH?",
+          "options": {
+            "A": "Increased water permeability supporting recovery down an osmotic gradient.",
+            "B": "Reduced water permeability causing obligatory water loss.",
+            "C": "Increased glucose filtration as the sole means of conserving water.",
+            "D": "Direct pumping of water into the duct against its osmotic gradient."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "ADH promotes water-channel availability and recovery.",
+            "B": "This reverses the described ADH effect.",
+            "C": "Glucose filtration is not the direct collecting-duct mechanism.",
+            "D": "The described water movement follows an osmotic gradient through channels."
+          },
+          "sources": [
+            "renal-hormones"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Glomerular filtration transfers water and small solutes from plasma into the nephron while normally retaining blood cells and most proteins. Tubular reabsorption returns useful substances and water toward the circulation; secretion adds selected substances to tubular fluid. Their combined effects determine final excretion. Segment-specific transport and the medullary osmotic gradient permit regulated water recovery. ADH increases collecting-duct water permeability, supporting water conservation and often a smaller, more concentrated urine volume. Urine then drains through ureters to the bladder for storage before elimination.",
+      "rubric": [
+        {
+          "criterion": "Explain selective glomerular filtration.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe reabsorption with its direction.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe secretion with its direction.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect ADH, permeability and osmotic water recovery.",
+          "marks": 1
+        },
+        {
+          "criterion": "Give the correct urine drainage route.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling filtrate final urine.",
+        "Reversing secretion and reabsorption."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "nephron: The microscopic kidney unit that filters and modifies fluid.",
+        "filtrate: Fluid entering the nephron from plasma across the filtration barrier.",
+        "reabsorption: Transfer from tubular fluid back toward blood.",
+        "secretion: Transfer from blood or tubular cells into tubular fluid."
+      ],
+      "closedBookRecall": [
+        "Draw both directions across a tubule wall.",
+        "Explain why ADH cannot compensate by creating water."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

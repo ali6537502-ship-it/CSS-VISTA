@@ -1,0 +1,207 @@
+{
+  "version": "draft-1",
+  "lessonId": "c6-s6-4",
+  "title": "Electromagnetic radiation: connect the spectrum to wavelength and photon energy",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-05"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "em",
+      "title": "OpenStax Chemistry 2e 6.1, Electromagnetic Energy",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/6-1-electromagnetic-energy",
+      "resolvedUrl": "https://openstax.org/books/chemistry-2e/pages/6-1-electromagnetic-energy",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "14aa9439de6a1e49a14c283f074557d1527908fa245da52fbb2a603089539d47",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Use c=fλ and E=hf with consistent units.",
+        "Explain why spectrum regions have different interactions and applications."
+      ],
+      "prerequisites": [
+        "A wave repeats; frequency counts repetitions per second.",
+        "A wavelength is the distance over which a wave pattern repeats."
+      ],
+      "terms": {
+        "frequency": "Cycles per second, measured in hertz.",
+        "photon": "A discrete packet in which electromagnetic energy is exchanged; its energy is hf.",
+        "spectrum": "The ordered range of electromagnetic frequencies or wavelengths."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "wave-relation",
+        "sourceIds": [
+          "em"
+        ],
+        "explanation": "Electromagnetic radiation consists of coupled electric and magnetic field variations and can travel through vacuum. Its speed in vacuum is c. Frequency f and wavelength λ satisfy c=fλ there, so increasing frequency means decreasing wavelength. Convert units before calculation: 100 MHz is 100×10^6 Hz, not 100 Hz. Radiation travels differently in materials; do not apply the vacuum-speed assumption to a fibre without stating the approximation."
+      },
+      {
+        "conceptId": "photon-energy",
+        "sourceIds": [
+          "em"
+        ],
+        "explanation": "Radiation also exchanges energy in photons. Each photon has energy E=hf, where h is Planck’s constant. Higher frequency therefore means greater energy per photon. This differs from beam intensity: a brighter beam can deliver more photons per unit time without each photon having higher energy. A useful explanation distinguishes photon energy, total energy delivered and exposure conditions rather than calling all intense radiation the same kind."
+      },
+      {
+        "conceptId": "spectrum-applications",
+        "sourceIds": [
+          "em"
+        ],
+        "explanation": "In order of increasing frequency, the familiar regions are radio, microwave, infrared, visible, ultraviolet, X-ray and gamma radiation. Boundaries are conventions rather than changes in the fundamental nature of the wave. Applications depend on interactions: radio frequencies can carry communication signals, infrared is associated with thermal emission, and X-rays can provide imaging contrast through differential absorption. Some high-frequency radiation can ionize matter; neither all ultraviolet wavelengths nor every electromagnetic exposure should be assigned the same effect. A labelled spectrum should show opposite arrows for frequency and wavelength."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-spectrum",
+      "nodes": [
+        "Radio → microwave → infrared → visible → ultraviolet → X-ray → gamma",
+        "Frequency and photon energy increase →",
+        "← Wavelength increases"
+      ],
+      "description": "Place the two mathematical relations beside the spectrum and label the opposing directions.",
+      "limitations": "Spectrum ordering, not calibrated band boundaries, a dose model or medical-exposure advice.",
+      "sourceIds": [
+        "em"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "For a 100 MHz wave in vacuum, λ=(3.0×10^8 m/s)/(100×10^6 s^-1)=3.0 m. The units reduce to metres. Doubling its frequency halves its wavelength while doubling the energy of each photon.",
+      "sourceIds": [
+        "em"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Describe electromagnetic radiation and explain how frequency, wavelength and photon energy are related. Give two relevant applications."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-EM-01",
+          "lessonId": "c6-s6-4",
+          "conceptId": "wave-relation",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "A wave has frequency 100 MHz and travels at 3.0×10^8 m/s in vacuum. What is its wavelength?",
+          "options": {
+            "A": "0.33 m",
+            "B": "3.0×10^6 m",
+            "C": "300 m",
+            "D": "3.0 m"
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "This reverses the division or misuses the powers of ten.",
+            "B": "MHz means 10^6 Hz; the numerical frequency is 100×10^6 Hz.",
+            "C": "This fails to convert megahertz to hertz correctly.",
+            "D": "λ=c/f=(3.0×10^8)/(100×10^6)=3.0 m."
+          },
+          "sources": [
+            "em"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-EM-02",
+          "lessonId": "c6-s6-4",
+          "conceptId": "photon-energy",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "For two photons in vacuum, photon X has twice the frequency of photon Y. Which relation follows?",
+          "options": {
+            "A": "X has twice the energy and half the wavelength.",
+            "B": "X has half the energy and twice the wavelength.",
+            "C": "X travels twice as fast.",
+            "D": "X has the same energy but twice the speed."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "E=hf makes energy proportional to frequency; c=fλ makes wavelength inversely proportional at fixed speed.",
+            "B": "Both proportionalities are reversed.",
+            "C": "Both travel at c in vacuum; frequency does not set different vacuum speeds.",
+            "D": "The energy changes with frequency while vacuum speed remains the same."
+          },
+          "sources": [
+            "em"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Electromagnetic radiation consists of coupled electric and magnetic field variations and can propagate through vacuum. In vacuum, c=fλ: frequency and wavelength vary inversely because their product is the same speed. Each photon has energy E=hf, so energy per photon increases with frequency. The spectrum runs from radio through microwave, infrared, visible and ultraviolet to X-rays and gamma rays in increasing frequency. Radio radiation is used for communication, while X-rays are used in imaging because different materials absorb them differently. A spectrum diagram should label both the frequency direction and the opposite wavelength direction; it should not imply that higher-frequency radiation travels faster in vacuum.",
+      "rubric": [
+        {
+          "criterion": "Describe electromagnetic radiation and vacuum propagation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain c=fλ with an inverse frequency–wavelength relation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain E=hf as energy per photon.",
+          "marks": 1
+        },
+        {
+          "criterion": "Order representative spectrum regions correctly.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect two applications with appropriate regions.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Confusing intensity with energy per photon.",
+        "Using megahertz as if it were hertz.",
+        "Claiming different regions have different vacuum speeds."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "c=fλ in vacuum; E=hf for a photon.",
+        "Frequency up: wavelength down; photon energy up."
+      ],
+      "closedBookRecall": [
+        "Draw spectrum arrows without looking.",
+        "Calculate the wavelength at 200 MHz using the stated vacuum speed."
+      ],
+      "reviewPolicy": "Alternate a numerical example with a verbal explanation of the inverse relationship."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

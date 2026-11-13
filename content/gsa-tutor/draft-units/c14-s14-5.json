@@ -1,0 +1,222 @@
+{
+  "version": "draft-1",
+  "lessonId": "c14-s14-5",
+  "title": "Biofuel sustainability: compare whole pathways and state what the evidence supports",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-12"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "lifecycle",
+      "title": "Biofuels and the environment",
+      "publisher": "US Energy Information Administration",
+      "url": "https://www.eia.gov/energyexplained/biofuels/biofuels-and-the-environment.php",
+      "resolvedUrl": "https://www.eia.gov/energyexplained/biofuels/biofuels-and-the-environment.php",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "cda21405ae8fbd4c625f13f2bd06d5e6e370f17fd8467dcf8585c09fbf160d0f",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "biofuels",
+      "title": "Biofuels explained",
+      "publisher": "US Energy Information Administration",
+      "url": "https://www.eia.gov/energyexplained/biofuels/",
+      "resolvedUrl": "https://www.eia.gov/energyexplained/biofuels/",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "1919c7bd8694c0836b077be13031c9c05c58fac22d26ce979dfb013459eff1ba",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Define a fair comparison and its system boundary.",
+        "Separate a promising feedstock from evidence of scalable environmental benefit."
+      ],
+      "prerequisites": [
+        "Different fuels can supply the same service through different conversion systems.",
+        "An observation establishes only what was actually measured under its stated conditions."
+      ],
+      "terms": {
+        "life-cycle assessment": "Evaluation of linked resource inputs and impacts across specified production and use stages.",
+        "system boundary": "The processes included in a comparison.",
+        "trade-off": "An improvement in one outcome that may carry a cost in another."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "system-boundary",
+        "sourceIds": [
+          "lifecycle"
+        ],
+        "explanation": "A sustainability claim needs a comparison: which production pathway, which alternative and which energy service? A simple chain includes feedstock cultivation or collection, processing, transport and fuel use. Land-use effects can also matter. Omitting a relevant stage can change the apparent result. Avoid comparing only one litre of one fuel with one litre of another when their energy content or end-use efficiency differs; state a comparable basis for the service supplied."
+      },
+      {
+        "conceptId": "trade-offs",
+        "sourceIds": [
+          "lifecycle"
+        ],
+        "explanation": "Biofuels may provide useful alternatives, but feedstock production can require land, water, fertilizer and energy. Waste-derived inputs may offer different opportunities and constraints from purpose-grown crops. The timing and location of effects matter, so there is no universal impact number for every biological fuel. A careful examination answer explains why an outcome depends on the pathway instead of repeating that plant growth automatically cancels every emission."
+      },
+      {
+        "conceptId": "evidence-limits",
+        "sourceIds": [
+          "lifecycle",
+          "biofuels"
+        ],
+        "explanation": "New feedstocks and methods should be described at the level the evidence supports. A laboratory or pilot observation does not by itself demonstrate a reliable commercial cost, yield or net environmental benefit. For algae or another proposed feedstock, ask about collection or harvesting, conversion, inputs, residual management and scale. In a Pakistan application, identify a locally relevant resource or constraint as a question to investigate; do not fabricate a national output figure, project result or policy guarantee."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "system-boundary-map",
+      "nodes": [
+        "Feedstock production or collection",
+        "Processing and conversion",
+        "Transport and distribution",
+        "Fuel use",
+        "Residuals and land/resource effects"
+      ],
+      "description": "Draw a boundary around included stages and label which energy service is being compared.",
+      "limitations": "A qualitative assessment framework, not a calculated carbon footprint or forecast.",
+      "sourceIds": [
+        "lifecycle"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Compare a waste-based fuel pathway with its realistic alternative use or disposal route. State what energy and resources are required and which emissions would need measurement rather than assuming every waste feedstock has zero impact.",
+      "sourceIds": [
+        "lifecycle"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain why biological origin alone does not prove that a fuel is sustainable. Outline a defensible assessment framework."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-LCA-01",
+          "lessonId": "c14-s14-5",
+          "conceptId": "system-boundary",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Which comparison is most appropriate when assessing whether a biofuel reduces greenhouse-gas emissions relative to another fuel?",
+          "options": {
+            "A": "Compare complete production and use pathways for a comparable energy service.",
+            "B": "Count only carbon dioxide from the vehicle exhaust.",
+            "C": "Assume all emissions are zero if the feedstock is a plant.",
+            "D": "Compare fuel volumes while ignoring differences in delivered energy."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "A stated system boundary and comparable service make the comparison meaningful.",
+            "B": "Exhaust alone omits cultivation, processing, transport and other relevant stages.",
+            "C": "Biological origin does not erase production or use emissions.",
+            "D": "Equal volumes need not provide equal useful energy, so the basis of comparison must be clear."
+          },
+          "sources": [
+            "lifecycle"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-LCA-02",
+          "lessonId": "c14-s14-5",
+          "conceptId": "evidence-limits",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "inference",
+          "prompt": "A demonstration shows algae growing rapidly in one tank. What can be concluded about commercial fuel production?",
+          "options": {
+            "A": "The resulting fuel is automatically cheaper than fossil alternatives.",
+            "B": "Land and water impacts are necessarily zero.",
+            "C": "Every life-cycle impact has been measured.",
+            "D": "The observation supports growth under those conditions, but does not establish a commercial fuel outcome."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Commercial cost depends on much more than observed growth in one demonstration.",
+            "B": "A biological system still has resource inputs and operating conditions.",
+            "C": "A growth observation is not a full life-cycle measurement.",
+            "D": "The evidence has a limited scope; harvesting, conversion, inputs and scale still need evaluation."
+          },
+          "sources": [
+            "lifecycle"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Biological origin identifies a resource pathway, not an environmental guarantee. A defensible comparison states the alternative fuel or service and the system boundary. Relevant stages can include cultivation or collection, processing, transport and final use, together with land, water and residual-management effects. Equal fuel volumes may not provide equal useful energy, so a comparable service is needed. Waste-derived and purpose-grown feedstocks may have different trade-offs. A promising demonstration, including algae growth, does not alone establish commercial yield, cost or a net emissions benefit. The conclusion should match measured evidence and identify unresolved assumptions rather than inventing a universal reduction percentage.",
+      "rubric": [
+        {
+          "criterion": "Distinguish biological origin from demonstrated sustainability.",
+          "marks": 1
+        },
+        {
+          "criterion": "Specify an alternative and comparable service.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe a meaningful system boundary.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify at least two relevant resource/impact trade-offs.",
+          "marks": 1
+        },
+        {
+          "criterion": "State a justified evidence limitation without invented statistics.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling every biofuel carbon-neutral without a boundary.",
+        "Treating pilot growth as proof of commercial fuel cost.",
+        "Inventing Pakistan production or emissions statistics."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Compare pathways for a stated service.",
+        "A claim is only as broad as its measured evidence and assumptions."
+      ],
+      "closedBookRecall": [
+        "Draw a system boundary from memory.",
+        "List three measurements needed before accepting a novel-feedstock sustainability claim."
+      ],
+      "reviewPolicy": "Practice identifying missing assumptions in a new claim before reviewing the checklist."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

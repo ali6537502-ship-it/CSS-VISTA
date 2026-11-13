@@ -1,0 +1,225 @@
+{
+  "version": "draft-1",
+  "lessonId": "c14-s14-3",
+  "title": "Biodiesel: explain oil conversion rather than treating all diesel substitutes as identical",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-12"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "biodiesel",
+      "title": "Biodiesel Basics",
+      "publisher": "US Department of Energy, Alternative Fuels Data Center",
+      "url": "https://afdc.energy.gov/fuels/biodiesel_basics.html",
+      "resolvedUrl": "https://afdc.energy.gov/fuels/biodiesel-basics",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "9773ff9baa50dfbf44d35e4ff48e7c6d92c4f357f49b50c8bd816e85a1d6afc0",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "biodiesel-production",
+      "title": "Biodiesel Production and Distribution",
+      "publisher": "US Department of Energy, Alternative Fuels Data Center",
+      "url": "https://afdc.energy.gov/fuels/biodiesel-production",
+      "resolvedUrl": "https://afdc.energy.gov/fuels/biodiesel-production",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "2ff0fc03631181c378135ae11a45db1180047156b30c0543367eb6bf92fbbe5e",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Identify the reactants and products of conventional biodiesel production.",
+        "Distinguish biodiesel, untreated vegetable oil and renewable diesel."
+      ],
+      "prerequisites": [
+        "An oil or fat contains triglyceride molecules.",
+        "A chemical conversion changes molecular composition; a separation operation sorts components."
+      ],
+      "terms": {
+        "triglyceride": "A molecule formed from glycerol and three fatty-acid groups.",
+        "transesterification": "A reaction exchanging an ester’s alcohol-derived group.",
+        "biodiesel": "A fuel made of fatty-acid alkyl esters meeting applicable fuel requirements.",
+        "glycerol": "A co-product of conventional triglyceride-to-biodiesel conversion."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "transesterification",
+        "sourceIds": [
+          "biodiesel-production"
+        ],
+        "explanation": "Conventional biodiesel production uses oils or fats, often from vegetable or animal sources, and an alcohol in a transesterification process. The triglyceride feedstock is converted into fatty-acid alkyl esters, with glycerol as a co-product. A catalyst is commonly used. A good explanation identifies this as a chemical reaction, not simply mixing oil with a petroleum fuel or straining out solid particles. The reaction description is not a safe operating recipe for handling alcohols or catalysts."
+      },
+      {
+        "conceptId": "separation-quality",
+        "sourceIds": [
+          "biodiesel-production",
+          "biodiesel"
+        ],
+        "explanation": "After conversion, products and residual materials need separation and fuel-quality control. The presence of combustible material does not mean the mixture meets a fuel specification. Untreated vegetable oil retains a different molecular composition and properties from the ester product. Filtration can remove some particles but cannot by itself accomplish the transesterification reaction or establish suitability for a fuel system."
+      },
+      {
+        "conceptId": "fuel-distinctions",
+        "sourceIds": [
+          "biodiesel"
+        ],
+        "explanation": "Biodiesel and renewable diesel may use similar biological feedstocks, but the names do not mean identical chemicals. Biodiesel is an ester fuel; renewable diesel is a hydrocarbon fuel produced through different processing. A blend designation describes how a fuel is combined with another fuel, rather than changing the underlying distinction between these products. Claims about compatibility or environmental benefit require the relevant specification, application and production pathway."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-conversion-flow",
+      "nodes": [
+        "Oils/fats containing triglycerides + alcohol",
+        "Transesterification",
+        "Fatty-acid alkyl esters + glycerol",
+        "Separation and fuel-quality checks"
+      ],
+      "description": "Show glycerol leaving as a separate co-product stream rather than labelling every output biodiesel.",
+      "limitations": "Conceptual chemistry only; no chemical quantities, operating conditions or equipment-design instructions.",
+      "sourceIds": [
+        "biodiesel-production"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "When comparing used cooking oil with finished biodiesel, state that conversion and quality control are needed. Being derived from a kitchen oil does not establish the fuel properties of the final ester product.",
+      "sourceIds": [
+        "biodiesel",
+        "biodiesel-production"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain production of biodiesel from oils or fats and distinguish it from untreated vegetable oil and renewable diesel."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-BD-01",
+          "lessonId": "c14-s14-3",
+          "conceptId": "transesterification",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "In conventional biodiesel production from oils and fats, which description is correct?",
+          "options": {
+            "A": "The triglycerides are simply diluted in water.",
+            "B": "All feedstock carbon is converted into ethanol.",
+            "C": "Transesterification produces fatty-acid alkyl esters and glycerol.",
+            "D": "The product is necessarily the same fuel as hydrotreated renewable diesel."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Dilution is not the ester-conversion reaction.",
+            "B": "Ethanol fermentation is a different pathway and product.",
+            "C": "The ester products form biodiesel, while glycerol is a co-product requiring separation.",
+            "D": "Renewable diesel can be produced from similar feedstocks but has different chemistry and processing."
+          },
+          "sources": [
+            "biodiesel-production",
+            "biodiesel"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-BD-02",
+          "lessonId": "c14-s14-3",
+          "conceptId": "fuel-quality",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "application",
+          "prompt": "Why is pouring untreated vegetable oil into a diesel system not equivalent to using specification-compliant biodiesel?",
+          "options": {
+            "A": "Vegetable oil contains no chemical energy.",
+            "B": "Its composition and physical properties differ from the processed ester fuel.",
+            "C": "Biodiesel contains no carbon.",
+            "D": "Transesterification is merely a name for filtering out particles."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Vegetable oil contains stored chemical energy; that does not establish suitability for a particular fuel system.",
+            "B": "Processing changes the chemical species, and fuel quality must meet relevant specifications.",
+            "C": "Fatty-acid esters contain carbon.",
+            "D": "Transesterification changes chemical bonds; filtration is a physical separation operation."
+          },
+          "sources": [
+            "biodiesel",
+            "biodiesel-production"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Conventional biodiesel production converts triglycerides in oils or fats through transesterification with an alcohol, commonly using a catalyst. The principal fuel products are fatty-acid alkyl esters, with glycerol as a co-product. Separation and quality control are needed after reaction; filtration alone is not the conversion mechanism. Untreated vegetable oil is therefore not chemically equivalent to finished biodiesel. Renewable diesel is also distinct: it is a hydrocarbon fuel made through different processing, even when its feedstock resembles the biodiesel feedstock. A process diagram should label the input, chemical conversion, ester product and glycerol stream.",
+      "rubric": [
+        {
+          "criterion": "Identify oils/fats and alcohol as conventional inputs.",
+          "marks": 1
+        },
+        {
+          "criterion": "Name and explain transesterification as a chemical conversion.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify ester fuel and glycerol co-product.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish untreated oil from processed biodiesel.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish ester biodiesel from hydrocarbon renewable diesel.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling biodiesel untreated vegetable oil.",
+        "Confusing a co-product with the intended fuel.",
+        "Treating all biologically derived diesel substitutes as chemically identical."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Conventional biodiesel: fatty-acid alkyl esters.",
+        "Transesterification is not the same as filtration or blending."
+      ],
+      "closedBookRecall": [
+        "Draw the glycerol co-product branch.",
+        "State one chemical distinction between biodiesel and renewable diesel."
+      ],
+      "reviewPolicy": "Use a feedstock/process/product comparison, then revisit the distinction using a fresh example."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

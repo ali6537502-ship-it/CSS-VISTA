@@ -1,0 +1,208 @@
+{
+  "version": "draft-1",
+  "lessonId": "c24-s24-2",
+  "title": "Thermal food preservation: connect process conditions to microbial reduction",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-22"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "heat",
+      "title": "OpenStax Microbiology 13.2, Using Physical Methods to Control Microorganisms",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "afe6721818050a62a3c05502299b76be5ea1582654ea06ff1d2cea8af7103307",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish reduction, pasteurization and sterilization claims.",
+        "Interpret a decimal-reduction example only under its stated conditions."
+      ],
+      "prerequisites": [
+        "Different microbial forms have different resistance to treatment.",
+        "A process has a duration and conditions; a temperature name alone is not a complete treatment specification."
+      ],
+      "terms": {
+        "pasteurization": "A specified treatment used to reduce relevant microorganisms; not a claim of absolute sterility.",
+        "endospore": "A resistant dormant form produced by certain bacteria.",
+        "D-value": "The time for a tenfold population reduction under specified conditions in the stated model."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "pasteurization",
+        "sourceIds": [
+          "heat"
+        ],
+        "explanation": "Heat can reduce microbial populations, but effectiveness depends on temperature, time, the organism and the material being treated. A vegetative cell and a resistant endospore need not respond identically. Pasteurization is a controlled treatment aimed at relevant microbial hazards or spoilage organisms; it does not mean every microbial form has been eliminated. Subsequent storage and handling can still matter. Avoid the unsupported claim that a product becomes permanently safe simply because it has once been heated."
+      },
+      {
+        "conceptId": "decimal-reduction",
+        "sourceIds": [
+          "heat"
+        ],
+        "explanation": "A decimal-reduction time, or D-value, describes the time for a tenfold reduction under particular conditions. In an idealized log-linear example, repeated equal D intervals reduce the count by equal factors, not equal absolute numbers. If D=2 minutes, a 6-minute exposure is three D intervals; a hypothetical initial count of 10^5 becomes 10^2. This is an instructional calculation under specified assumptions, not a validated processing schedule for any particular food."
+      },
+      {
+        "conceptId": "process-limits",
+        "sourceIds": [
+          "heat"
+        ],
+        "explanation": "A preservation claim must name the target and the intended conditions. Commercial sterility is a process-and-storage concept, not an assertion that every conceivable organism is absent. A food’s properties, its packaging and potential recontamination affect the complete control system. A boiling-water example, laboratory autoclave description and commercial food process should not be exchanged as if they were equivalent household instructions. Validating a safe food process requires appropriate product-specific evidence."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "microbial-reduction-flow",
+      "nodes": [
+        "Specify product, target and conditions",
+        "Apply a validated time–temperature process",
+        "Prevent recontamination",
+        "Maintain required storage conditions"
+      ],
+      "description": "Add a hypothetical tenfold-count ladder beside the complete preservation sequence.",
+      "limitations": "Conceptual teaching, not a canning recipe, commercial process specification or assurance of food safety.",
+      "sourceIds": [
+        "heat"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "In the hypothetical D=2 minute calculation, counts change from 10^5 to 10^4 to 10^3 to 10^2 at successive 2-minute intervals. The arithmetic alone does not establish a safe treatment for milk, meat or a canned product.",
+      "sourceIds": [
+        "heat"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish pasteurization from sterility and explain why a thermal preservation process requires more than a named temperature."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-HEAT-01",
+          "lessonId": "c24-s24-2",
+          "conceptId": "pasteurization",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which statement best distinguishes pasteurization from an absolute claim of sterility?",
+          "options": {
+            "A": "Pasteurization guarantees destruction of every microbial form in every food.",
+            "B": "Pasteurization is a controlled reduction process and does not imply that every organism or spore is absent.",
+            "C": "Pasteurization means cooling without any treatment.",
+            "D": "All heat processes have the same effect regardless of time, temperature or food."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Pasteurization is not a universal guarantee that all microbial forms are eliminated.",
+            "B": "Its purpose and effectiveness depend on a specified process and product; it is not equivalent to absolute sterility.",
+            "C": "Cooling and heat treatment are different control methods.",
+            "D": "Microbial response and the food matrix depend on process conditions."
+          },
+          "sources": [
+            "heat"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-HEAT-02",
+          "lessonId": "c24-s24-2",
+          "conceptId": "decimal-reduction",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "In a hypothetical fixed-condition test, the D-value is 2 minutes. Starting with 10^5 organisms, what is the expected count after 6 minutes under the stated log-linear model?",
+          "options": {
+            "A": "10^4",
+            "B": "0",
+            "C": "10^2",
+            "D": "10^3"
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "One D interval reduces the count tenfold; 6 minutes contains three such intervals.",
+            "B": "The stated model gives a count reduction, not a guarantee of zero organisms.",
+            "C": "Three D intervals reduce 10^5 by 10^3, leaving 10^2.",
+            "D": "10^3 corresponds to two D intervals, or 4 minutes in this hypothetical test."
+          },
+          "sources": [
+            "heat"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Thermal treatment reduces microbial populations according to the organism, food and exposure conditions. Pasteurization is a specified reduction treatment, not a guarantee that every microbial form or endospore is absent. A D-value expresses the time for a tenfold reduction under stated conditions; repeated equal intervals give equal fractional reductions in the idealized model. A complete preservation explanation also considers target organisms, time, temperature, packaging, recontamination and storage. Commercial sterility concerns a specified product and intended conditions, rather than absolute absence of all conceivable life. Numerical teaching examples must not be presented as validated household or industrial processing schedules.",
+      "rubric": [
+        {
+          "criterion": "Explain pasteurization as a specified reduction process.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish resistant forms and absolute-sterility claims.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define the D-value with its conditions.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain both time and temperature or product dependence.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect treatment with contamination control and storage.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Saying all heated food is sterile.",
+        "Omitting the conditions of a D-value.",
+        "Treating a classroom calculation as a safe canning recipe."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "A process needs specified conditions and targets.",
+        "One D interval gives a tenfold reduction under the stated model."
+      ],
+      "closedBookRecall": [
+        "Explain why pasteurized food still needs suitable handling.",
+        "Calculate a hypothetical two-D reduction without claiming a safe food process."
+      ],
+      "reviewPolicy": "Practice the mechanism and the limitations together, rather than memorizing a temperature alone."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

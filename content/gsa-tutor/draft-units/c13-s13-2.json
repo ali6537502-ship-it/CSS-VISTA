@@ -1,0 +1,240 @@
+{
+  "version": "draft-1",
+  "lessonId": "c13-s13-2",
+  "title": "Polio and diarrhoeal disease",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-11"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/microbiology/pages/26-3-acellular-diseases-of-the-nervous-system",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/26-3-acellular-diseases-of-the-nervous-system",
+      "title": "26.3 Acellular Diseases of the Nervous System - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.394765+00:00",
+      "retrievedSha256": "b5f71e4c9a13050dcbc800cad952196bc8636707a0a2e82807aa95b0655c9678",
+      "id": "polio",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/24-3-bacterial-infections-of-the-gastrointestinal-tract",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/24-3-bacterial-infections-of-the-gastrointestinal-tract",
+      "title": "24.3 Bacterial Infections of the Gastrointestinal Tract - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.251779+00:00",
+      "retrievedSha256": "d20a2e5eeda8f5f3917941d9d3a3fd9d1daa4c8af881eb5c966e8c1d80438335",
+      "id": "diarrhoea",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "title": "16.3 Modes of Disease Transmission - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.179247+00:00",
+      "retrievedSha256": "7761daeb528afa4ef4784ae53cb222da5df92f5ced2e7ada8c95872f0e7ad7e4",
+      "id": "spread",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain poliovirus transmission and possible neurological damage.",
+        "Distinguish diarrhoea as a syndrome from a single infectious cause."
+      ],
+      "prerequisites": [
+        "Faecal contamination can reach another person’s mouth through food, water or hands.",
+        "Body-fluid balance depends on water and dissolved electrolytes."
+      ],
+      "terms": {
+        "faecal–oral route": "Transfer of an agent from faecal contamination to another person’s mouth.",
+        "diarrhoea": "Abnormally loose or watery stools; a syndrome with multiple possible causes.",
+        "dehydration": "Loss of body water sufficient to disturb normal balance."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "polio-mechanism",
+        "sourceIds": [
+          "polio"
+        ],
+        "explanation": "Poliovirus enters through the mouth and replicates initially in sites including the digestive tract. Faecal–oral spread is important, so sanitation and safe water matter. Many infections do not produce paralysis, but in some cases the virus reaches nervous tissue and damages motor neurons, potentially causing weakness or paralysis. Do not define all poliovirus infection by the severest outcome or assume an apparently well infected person cannot shed virus. Vaccination and transmission control address different parts of prevention."
+      },
+      {
+        "conceptId": "diarrhoeal-mechanism",
+        "sourceIds": [
+          "diarrhoea"
+        ],
+        "explanation": "Diarrhoea is not the name of one microbe. Different bacteria, viruses, parasites and noninfectious conditions can produce it. In cholera, Vibrio cholerae toxin drives intestinal ion secretion, with water following; severe fluid and electrolyte losses can result. Other infections can damage or invade intestinal tissue. The common outcome of loose stools therefore does not prove that all cases have the same mechanism or need the same antimicrobial."
+      },
+      {
+        "conceptId": "prevention-fluid-loss",
+        "sourceIds": [
+          "diarrhoea",
+          "spread"
+        ],
+        "explanation": "Safe water, sanitation, hand hygiene and hygienic food handling reduce faecal–oral exposure. Rehydration addresses water and electrolyte loss rather than automatically eliminating the pathogen. Oral rehydration solutions use coupled intestinal solute and water uptake; clinical care and assessment remain important in serious illness. A general science answer should explain fluid loss and replacement without inventing a homemade mixing formula, universal drug choice or treatment dose. Polio vaccination prevents relevant viral disease; antibiotics do not replace it."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Faecal contamination → ingestion → intestinal infection",
+        "Poliovirus: possible neural involvement",
+        "Diarrhoeal illness: water/electrolyte loss",
+        "Prevention and rehydration address different problems"
+      ],
+      "description": "Branch after ingestion to show distinct diseases; never draw diarrhoea as a necessary stage of paralytic polio.",
+      "limitations": "Mechanism overview; no prevalence estimate, diagnosis or treatment protocol.",
+      "sourceIds": [
+        "polio",
+        "diarrhoea",
+        "spread"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A community water intervention can reduce exposure to several faecal–oral agents, while vaccination targets particular infections and rehydration addresses a physiological consequence.",
+      "sourceIds": [
+        "polio",
+        "diarrhoea",
+        "spread"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Compare polio and infectious diarrhoeal illness in cause, mechanism and prevention."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c13-s13-2-1",
+          "lessonId": "c13-s13-2",
+          "conceptId": "polio-mechanism",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which statement about polio is defensible?",
+          "options": {
+            "A": "Every infected person develops paralysis.",
+            "B": "Only people with paralysis can shed the virus.",
+            "C": "Polio vaccination replaces all need for sanitation.",
+            "D": "Poliovirus infection may be asymptomatic, but some cases involve motor-neuron damage."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Paralysis is not universal.",
+            "B": "Shedding can occur without apparent paralytic disease.",
+            "C": "Vaccination and sanitation target different links.",
+            "D": "This distinguishes infection from a possible severe outcome."
+          },
+          "sources": [
+            "polio"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c13-s13-2-2",
+          "lessonId": "c13-s13-2",
+          "conceptId": "diarrhoeal-mechanism",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Why can substantial watery diarrhoea disturb circulation and cell function?",
+          "options": {
+            "A": "Loss of water and electrolytes disrupts body-fluid balance.",
+            "B": "Only undigested solids leave the body, preserving all fluid.",
+            "C": "All intestinal absorption necessarily ceases permanently.",
+            "D": "Loss of intestinal water necessarily increases circulating blood volume."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Fluid and electrolyte loss can impair physiological balance.",
+            "B": "Watery diarrhoea can involve substantial fluid loss.",
+            "C": "Some uptake pathways remain useful in rehydration.",
+            "D": "Loss does not necessarily increase circulating volume."
+          },
+          "sources": [
+            "diarrhoea"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Polio is caused by poliovirus, with important faecal–oral transmission and initial replication including the digestive tract. Infection does not always cause paralysis; neurological invasion can damage motor neurons in affected cases. Diarrhoea is a syndrome with multiple agents and mechanisms; cholera toxin, for example, promotes intestinal secretion and water loss. Safe water, sanitation and hand hygiene reduce relevant exposure, while polio vaccination provides infection-specific prevention. Rehydration replaces lost water and electrolytes and serves a different purpose from antimicrobial treatment or vaccination.",
+      "rubric": [
+        {
+          "criterion": "Identify poliovirus and its transmission.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain possible motor-neuron injury without universalizing paralysis.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify diarrhoea as a syndrome with varied causes.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain fluid/electrolyte loss using a valid mechanism.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish prevention from replacement of fluid losses.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling diarrhoea a single bacterial species.",
+        "Equating rehydration with killing a virus."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "faecal–oral route: Transfer of an agent from faecal contamination to another person’s mouth.",
+        "diarrhoea: Abnormally loose or watery stools; a syndrome with multiple possible causes.",
+        "dehydration: Loss of body water sufficient to disturb normal balance."
+      ],
+      "closedBookRecall": [
+        "Compare polio prevention and diarrhoeal-fluid management.",
+        "Explain why similar symptoms do not establish identical causes."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

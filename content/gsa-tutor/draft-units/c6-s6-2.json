@@ -1,0 +1,259 @@
+{
+  "version": "draft-1",
+  "lessonId": "c6-s6-2",
+  "title": "Chemical bonding: connect charge and electron arrangement to material properties",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-05"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "ionic",
+      "title": "OpenStax Chemistry 2e, 7.1 Ionic Bonding",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-1-ionic-bonding",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "c49c6d3b424509c1ef07c1185d8fd491bca003909342e41e8c97695402cab86a",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "covalent",
+      "title": "OpenStax Chemistry 2e, 7.2 Covalent Bonding",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-2-covalent-bonding",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "a72684ad10f5437c565a31fc0f53206bd46527b99e9227c72aa7c4dcf092bc66",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "solids",
+      "title": "OpenStax Chemistry 2e, 10.5 The Solid State of Matter",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/10-5-the-solid-state-of-matter",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "7197547ae84d1a82b9844e79c88c7f08fce65529d2bc772d7f74db07a27f1911",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish ionic attraction from covalent electron sharing.",
+        "Explain one structure–property relationship without overgeneralizing."
+      ],
+      "prerequisites": [
+        "Atoms contain charged protons and electrons.",
+        "An ion carries net charge when proton and electron counts do not balance."
+      ],
+      "terms": {
+        "cation": "A positively charged ion.",
+        "anion": "A negatively charged ion.",
+        "lattice": "A repeated three-dimensional arrangement of particles.",
+        "covalent bond": "A bond involving a shared pair of electrons attracted by the bonded nuclei."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "ionic-lattice",
+        "sourceIds": [
+          "ionic"
+        ],
+        "explanation": "When sodium forms Na+ it loses an electron; chlorine gains an electron to form Cl−. The electron transfer explains how these ions can be produced. The ionic bond itself is the electrostatic attraction among oppositely charged ions. In solid sodium chloride, the ions form an extended three-dimensional lattice rather than isolated NaCl molecules. The formula gives the simplest ratio of ions, here one Na+ per Cl−."
+      },
+      {
+        "conceptId": "covalent-bond",
+        "sourceIds": [
+          "covalent"
+        ],
+        "explanation": "In a covalent bond, atoms share electron density. In the simple H2 model, a shared pair is attracted by both hydrogen nuclei. Calling the electrons shared does not mean they stop moving or sit halfway between atoms as two stationary dots. A line in a structural formula is a useful representation of one shared pair. Electron sharing may be unequal when bonded atoms have different tendencies to attract electrons."
+      },
+      {
+        "conceptId": "structure-properties",
+        "sourceIds": [
+          "solids",
+          "ionic",
+          "covalent"
+        ],
+        "explanation": "To explain a property, identify the structure and the mobile particles or interactions that matter. Solid NaCl normally does not conduct because its ions cannot move freely through the lattice. When molten, the ions can transport charge. Many small molecular substances melt at relatively low temperatures because the forces between molecules are weaker than their internal covalent bonds. Do not generalize this to all covalent substances: extended network solids have different structures and can have high melting temperatures."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "comparison-diagram",
+      "description": "Compare an alternating positive/negative ionic array with a labelled H–H shared-pair diagram. Add a two-column solid/molten NaCl comparison indicating whether ions can move.",
+      "limitations": "Two-dimensional schematic; dots are bookkeeping symbols, not actual electron locations.",
+      "sourceIds": [
+        "ionic",
+        "covalent",
+        "solids"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Explain a salt-melt conductivity change by ion mobility, not by saying that charge appears only after melting.",
+      "sourceIds": [
+        "solids"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish ionic and covalent bonding and explain why solid and molten sodium chloride differ in electrical conductivity."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-BOND-01",
+          "lessonId": "c6-s6-2",
+          "conceptId": "ionic-lattice",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "What holds the ions together in a sodium chloride crystal?",
+          "options": {
+            "A": "A shared electron pair restricted to each Na–Cl pair.",
+            "B": "Gravity between the nuclei.",
+            "C": "Electrostatic attraction among oppositely charged ions.",
+            "D": "Attraction between electrically neutral sodium molecules."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "A crystal is an extended ionic lattice, not separate Na–Cl covalent molecules.",
+            "B": "Gravitational attraction is not the bonding mechanism here.",
+            "C": "The lattice is stabilized by attractions among Na+ and Cl− ions, with repulsions and geometry also contributing to structure.",
+            "D": "The lattice contains sodium cations and chloride anions, not neutral sodium molecules."
+          },
+          "sources": [
+            "ionic"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-BOND-02",
+          "lessonId": "c6-s6-2",
+          "conceptId": "structure-properties",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "application",
+          "prompt": "Why can molten sodium chloride conduct electricity whereas solid sodium chloride ordinarily does not?",
+          "options": {
+            "A": "Melting produces more protons.",
+            "B": "Its ions can move through the molten material.",
+            "C": "Solid ions carry no charge.",
+            "D": "Melting turns it into a metal."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Melting is a physical change and does not create extra protons.",
+            "B": "Charged ions can move in the melt; in the crystal their positions are constrained.",
+            "C": "Ions remain charged in the solid, but long-range charge transport requires mobile carriers.",
+            "D": "Molten sodium chloride remains an ionic material, not a metallic conductor."
+          },
+          "sources": [
+            "solids"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-BOND-03",
+          "lessonId": "c6-s6-2",
+          "conceptId": "covalent-bond",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "What does the line in the simplest H–H electron-pair model represent?",
+          "options": {
+            "A": "One shared pair of electrons.",
+            "B": "One proton moving between nuclei.",
+            "C": "A pair of neutrons.",
+            "D": "Two complete ions arranged in a lattice."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "A single covalent bond represents a shared electron pair attracted by both nuclei.",
+            "B": "The bond is not represented by a proton travelling between atoms.",
+            "C": "Neutrons are nuclear particles, not the shared bonding pair.",
+            "D": "H2 is a discrete molecule; this model is not an extended ionic lattice."
+          },
+          "sources": [
+            "covalent"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Ionic bonding is electrostatic attraction among oppositely charged ions, whereas covalent bonding involves shared electron density attracted by bonded nuclei. Sodium chloride forms an extended lattice of Na+ and Cl− ions; its formula describes their simplest ratio. In H2, a shared electron pair is represented by a single H–H bond. A property follows from structure and particle mobility: ions in solid sodium chloride are constrained in the lattice, so the solid ordinarily does not conduct electricity. In molten sodium chloride, charged ions can move and carry current. Melting changes their mobility, not their charge or atomic nuclei.",
+      "rubric": [
+        {
+          "criterion": "Define ionic bonding as electrostatic attraction.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain covalent sharing using H2 or another correct simple example.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe NaCl as an extended lattice rather than isolated molecules.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain constrained ions in the solid.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain mobile charge carriers in the melt.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Describing electron transfer alone as the attractive force.",
+        "Claiming all covalent materials have low melting points.",
+        "Confusing weak intermolecular forces with weak covalent bonds."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Ionic: attraction among charged ions. Covalent: shared electron density.",
+        "Conductivity requires mobile charge carriers."
+      ],
+      "closedBookRecall": [
+        "Explain why an ion can remain charged while its solid fails to conduct.",
+        "Use a diagram to distinguish an ionic ratio formula from a molecular formula."
+      ],
+      "reviewPolicy": "Compare the two structures from memory, then apply the explanation to a new property question."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}
