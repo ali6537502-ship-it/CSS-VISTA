@@ -12,7 +12,7 @@ type Profile = Record<string, unknown> & { completion: Completion; has_photo: bo
 type Field = { key: string; label: string; type?: string; max?: number; options?: string[]; multiOptions?: string[]; hint?: string; textarea?: boolean }
 
 const MAX_PROFILE_PHOTO_BYTES = 60 * 1024
-const OVERSIZE_PHOTO_ERROR = 'Profile photo must be 60 KB or smaller. Please resize the photo and upload it again.'
+const OVERSIZE_PHOTO_ERROR = 'This photo was not prepared correctly. Please choose it again.'
 
 const groups: { title: string; fields: Field[] }[] = [
   {
@@ -83,19 +83,6 @@ function values(value: string): string[] {
   return value.split(',').map(item => item.trim()).filter(Boolean)
 }
 
-function preparePhoto(file: File): File {
-  if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-    throw new Error('Choose a JPG, PNG or WebP photo.')
-  }
-  if (file.size < 512) {
-    throw new Error('Choose a valid photo file.')
-  }
-  if (file.size > MAX_PROFILE_PHOTO_BYTES) {
-    throw new Error(OVERSIZE_PHOTO_ERROR)
-  }
-  return file
-}
-
 export function StudentProfilePanel({ email }: { email: string }) {
   const { user } = useAccount()
   const owner = user?.id || ''
@@ -149,7 +136,6 @@ export function StudentProfilePanel({ email }: { email: string }) {
   }, [photo])
 
   const dirty = useMemo(() => profile && JSON.stringify(form) !== JSON.stringify(asForm(profile)), [form, profile])
-  const showPhotoCompressor = step === 2 && (error === OVERSIZE_PHOTO_ERROR || error.includes('60 KB'))
 
   function notify() {
     if (!isCurrent()) return
@@ -202,14 +188,18 @@ export function StudentProfilePanel({ email }: { email: string }) {
     setPhoto(null)
     setPreview('')
     try {
-      const next = preparePhoto(file)
-      if (job === photoJob.current) setPhoto(next)
+      const { prepareProfilePhoto } = await import('@/lib/photoCompression')
+      const prepared = await prepareProfilePhoto(file)
+      if (job === photoJob.current && isCurrent()) {
+        setPhoto(prepared.file)
+        setMessage(prepared.note)
+      }
     } catch (e) {
-      if (job === photoJob.current) {
-        setError(e instanceof Error ? e.message : 'The photo could not be checked.')
+      if (job === photoJob.current && isCurrent()) {
+        setError(e instanceof Error ? e.message : 'The photo could not be prepared.')
       }
     } finally {
-      if (job === photoJob.current) setBusy(false)
+      if (job === photoJob.current && isCurrent()) setBusy(false)
     }
   }
 
@@ -287,11 +277,6 @@ export function StudentProfilePanel({ email }: { email: string }) {
             {error && (
               <div role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">
                 <p>{error}</p>
-                {showPhotoCompressor && (
-                  <Link to="/photo-compressor" className="mt-2 inline-flex min-h-10 items-center rounded-lg border border-red-200 bg-white px-3 font-semibold text-pine hover:bg-red-50">
-                    Resize photo to 60 KB
-                  </Link>
-                )}
               </div>
             )}
             {message && <p role="status" className="mb-4 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-900">{message}</p>}
@@ -388,10 +373,7 @@ export function StudentProfilePanel({ email }: { email: string }) {
           ) : (
             <div>
               <h3 className="text-lg font-bold text-pine">Add your profile photo</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">Choose a clear JPG, PNG or WebP photo that is 60 KB or smaller. Photos above 60 KB are not accepted.</p>
-              <Link to="/photo-compressor" className="mt-3 inline-flex min-h-10 items-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 text-sm font-semibold text-pine hover:bg-emerald-100">
-                Photo larger than 60 KB? Resize it here
-              </Link>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">Choose a clear JPG, PNG or WebP photo. CSS Vista automatically compresses it before saving; no manual resizing is needed.</p>
               <div className="mt-5 flex flex-wrap items-center gap-5">
                 <div className="flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-2xl border bg-emerald-50">
                   {photoUrl ? <img src={photoUrl} alt="Your profile photo preview" className="h-full w-full object-cover" /> : <UserRound size={48} className="text-emerald-700" />}
@@ -401,7 +383,7 @@ export function StudentProfilePanel({ email }: { email: string }) {
                     <Camera size={17} />Choose photo
                     <input className="sr-only" name="photo" type="file" accept="image/jpeg,image/png,image/webp" disabled={busy} onChange={e => { void choosePhoto(e.target.files?.[0]); e.target.value = '' }} />
                   </label>
-                  <p className="mt-2 text-xs text-muted-foreground">JPG, PNG or WebP · maximum file size 60 KB</p>
+                  <p className="mt-2 text-xs text-muted-foreground">Original photo up to 20 MB · optimized automatically</p>
                 </div>
               </div>
               {photo && (
