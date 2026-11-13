@@ -8,7 +8,10 @@ export type PmsCatalogue = { version: string; retrievedOn: string; publisher: st
 export type PmsSettings = { version: 1; selectedOptionals: string[]; alternative: 'islamic-studies' | 'ethics'; dailyMinutes: number; sessionMinutes: number; restDays: number[]; targetDate: string }
 export const defaultPmsSettings: PmsSettings = { version: 1, selectedOptionals: [], alternative: 'islamic-studies', dailyMinutes: 180, sessionMinutes: 45, restDays: [0], targetDate: '' }
 export const encodePmsSettings = (settings: PmsSettings) => JSON.stringify({ version: 1, settings: JSON.stringify(settings) })
-export const taskExam = (task: Pick<StudyScheduleTask, 'syllabusItemId'>) : ExamTrack => task.syllabusItemId.startsWith('pms-punjab:') ? 'pms-punjab' : 'css'
+/** Recognise both native PMS task IDs and earlier imported tasks labelled as PMS. */
+export const taskExam = (task: Pick<StudyScheduleTask, 'syllabusItemId'> & Partial<Pick<StudyScheduleTask,'paper'>>) : ExamTrack =>
+  task.syllabusItemId.startsWith('pms-punjab:') || /^(?:PMS(?: Punjab)?|Provincial Management Service)(?:\s|$)/i.test(task.paper || '')
+    ? 'pms-punjab' : 'css'
 export function readPmsSettings(value: unknown): PmsSettings {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return structuredClone(defaultPmsSettings)
   if ('settings' in value && typeof value.settings === 'string') { try { return readPmsSettings(JSON.parse(value.settings)) } catch { return structuredClone(defaultPmsSettings) } }

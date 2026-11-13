@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useLocation, useSearchParams } from 'react-router'
 import { BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCopy, Clock3, RefreshCw, Save, Search, Settings2, Sparkles } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { currentHostingerAccountUser } from '@/lib/hostingerApi'
@@ -13,7 +13,7 @@ import { essayThemeIndex } from '@/data/essayThemes'
 import { PMS_MENTAL_ID, PMS_MENTAL_SOURCE } from '@/data/pmsMentalAbility'
 import { validateSubjectCombination } from '@/lib/subjectSelection'
 import PlannerTask from './PlannerTask'
-import { dayKey, readableDay, shiftDay, validDay } from './model'
+import { dayKey, readableDay, shiftDay, validDay, plannerHref } from './model'
 import { PMS_SETTINGS_KEY, readPmsSettings, taskExam } from './pmsModel'
 import {
   buildVistaNotesCommand, cssGuideSubjects,
@@ -68,6 +68,9 @@ function CopyNotes({ unit, compact = false }: { unit: VistaUnit; compact?: boole
 export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: VistaExam; mode?: 'syllabus' | 'settings' }) {
   const { user, syncStatus, syncError } = useAccount()
   const [query] = useSearchParams()
+  const { pathname, hash } = useLocation()
+  const todayLink = plannerHref(pathname,query,'today',hash)
+  const weekLink = plannerHref(pathname,query,'week',hash)
   const { snapshot, refresh } = useAccountSnapshot()
   const [catalogue, setCatalogue] = useState<VistaSubject[] | null>(null)
   const [loadError, setLoadError] = useState('')
@@ -117,6 +120,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const activeTasks = snapshot.activeTasks.filter(t=>taskExam(t)===exam)
   const today = dayKey()
   const todayRows = activeTasks.filter(t=>t.date===today)
+  const nextPmsSession = exam==='pms-punjab' ? activeTasks.filter(t=>t.date>today && t.status!=='completed').sort((a,b)=>a.date.localeCompare(b.date))[0] : undefined
   const revisions = activeTasks.filter(t=>t.activity==='revision' && t.status!=='completed' && t.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,6)
   const hasStatus = (u:VistaUnit) => snapshot.state.syllabusItemStatuses?.[u.id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===u.id && t.status==='completed')
   const alreadyScheduled = new Set(snapshot.state.studyScheduleTasks.filter(t=>!isTaskArchived(t.id) || t.status==='completed').map(t=>t.syllabusItemId))
@@ -280,6 +284,13 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       <div><p className="pl-kicker">YOUR PERSONALIZED PREPARATION</p><h2>{exam==='pms-punjab'?'PMS Vista':'CSS Vista'}</h2><p>{exam==='pms-punjab'?'Choose your starting subjects and priorities. Build English Essay themes, follow a personal schedule, and track real study progress.':'Prepare for CSS through syllabus-based daily study plans, one to three parallel subjects, analytical chapter notes commands, revision and progress tracking.'}</p></div>
       <button className="pl-secondary" onClick={()=>setSettingsOpen(open=>!open)}><Settings2 size={16}/>Subjects and routine</button>
     </section>
+    {exam==='pms-punjab'&&<section className="vg-panel vg-pms-today" aria-label="Today's PMS tasks">
+      <div className="vg-section-head"><div><p className="pl-kicker">YOUR PMS DAILY PLAN</p><h3>Today's PMS tasks</h3><p>{readableDay(today)} · {todayRows.filter(task=>task.status==='completed').length} of {todayRows.length} scheduled tasks completed</p></div><Link className="pl-secondary" to={todayLink}>Open PMS Today</Link></div>
+      {todayRows.length
+        ? <div className="vg-today">{todayRows.slice(0,4).map(task=><PlannerTask key={task.id} task={task} refresh={refresh}/>)}</div>
+        : <p className="pl-note">No PMS task is scheduled for today. {nextPmsSession ? 'Your next saved PMS session is '+readableDay(nextPmsSession.date,true)+'. Existing sessions have not been moved.' : 'Generate a schedule or review your chosen rest days and start date.'} <Link className="underline" to={weekLink}>Review my PMS week</Link>.</p>}
+      {todayRows.length>4&&<p className="pl-muted mt-2">{todayRows.length-4} more PMS tasks are available in Today.</p>}
+    </section>}
     {syncError && <p className="pl-warning" role="alert">Account sync needs attention. <Link to="/account/settings">Review account settings</Link>.</p>}
     <div className="vg-metrics">
       <div><strong>{chosen.length}</strong><span>Subjects chosen for now</span></div>
@@ -338,9 +349,9 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     </section>
     <section className="vg-panel">
       <div className="vg-section-head"><div><p className="pl-kicker">STEP 3</p><h3>Today's study activities</h3><p>{readableDay(today)} · Follow your chosen subjects and priorities. Essay tasks open the theme-building workspace.</p></div><button className="pl-secondary" onClick={recoverMissed}><RefreshCw size={15}/>Reschedule missed sessions</button></div>
-      {todayRows.length?<div className="vg-today">{todayRows.map(t=><PlannerTask key={t.id} task={t} refresh={refresh}/>)}</div>:<p className="pl-note">No sessions assigned for today. Generate a plan or open your saved weekly schedule.</p>}
+      {exam==='pms-punjab'?<p className="pl-note">Your PMS tasks for today appear at the top of this page. <Link className="underline" to={todayLink}>Manage today's PMS schedule</Link>.</p>:todayRows.length?<div className="vg-today">{todayRows.map(t=><PlannerTask key={t.id} task={t} refresh={refresh}/>)}</div>:<p className="pl-note">No sessions assigned for today. Generate a plan or open your saved weekly schedule.</p>}
       {revisions.length>0&&<div className="vg-preview"><p><strong>Upcoming revision sessions</strong> · Review your completed chapters without changing the original coverage.</p><div className="vg-today">{revisions.map(t=><PlannerTask key={t.id} task={t} refresh={refresh}/>)}</div></div>}
-      <div className="vg-actions"><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=today'}>Open Today</Link><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=week'}>View my week</Link></div>
+      <div className="vg-actions"><Link className="pl-secondary" to={todayLink}>Open Today</Link><Link className="pl-secondary" to={weekLink}>View my week</Link></div>
     </section>
     <section className="vg-panel">
       <div className="vg-section-head"><div><p className="pl-kicker">COMPLETE SYLLABUS</p><h3>Study by subject, chapter and theme</h3><p>Follow the prescribed syllabus for subject papers and the separate theme-building roadmap for English Essay. Track each activity as you prepare.</p></div><button className="pl-secondary" onClick={()=>setShowAll(v=>!v)}>{showAll?'My selected subjects':'View all subjects'}</button></div>

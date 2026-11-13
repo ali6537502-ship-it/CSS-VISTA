@@ -44,3 +44,12 @@ test('manual coverage uses only this source outline and never claims assessment 
   const subject=catalogue.subjects.find(s=>s.id==='optional-political-science')!
   assert.deepEqual(pmsCoverage(subject,{[subject.topics[0].id]:'completed','css:other':'completed'}),{completed:1,total:subject.topics.length,percent:Math.round(100/subject.topics.length)})
 })
+
+test('native PMS tasks and earlier PMS-labelled schedule tasks stay on PMS Today, not CSS Today',()=>{
+  assert.equal(taskExam({syllabusItemId:'pms-punjab:vista:compulsory-general-knowledge:s1:n1'}),'pms-punjab')
+  assert.equal(taskExam({syllabusItemId:'imported:session-1',paper:'PMS Punjab'}),'pms-punjab')
+  assert.equal(taskExam({syllabusItemId:'imported:session-2',paper:'PMS Paper I'}),'pms-punjab')
+  assert.equal(taskExam({syllabusItemId:'imported:session-3',paper:'Provincial Management Service'}),'pms-punjab')
+  assert.equal(taskExam({syllabusItemId:'political-science:0:0',paper:'Paper I'}),'css')
+  assert.equal(taskExam({syllabusItemId:'manual:session-1'}),'css')
+})
