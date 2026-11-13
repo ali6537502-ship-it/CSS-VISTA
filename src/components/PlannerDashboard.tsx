@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { taskExam, readPmsSettings, PMS_SETTINGS_KEY, type ExamTrack } from '@/features/planner/pmsModel'
+import { readVistaPreferences } from '@/features/planner/vistaGuideModel'
 import { preparationPhysicalKey } from '@/lib/preparationStorage'
 import type { StudyScheduleTask } from '@/lib/store'
 import { Link, useLocation, useSearchParams } from 'react-router'
@@ -27,7 +28,13 @@ export default function PlannerDashboard({ view = 'today', onCreate, exam }: { v
   const dates = weekDays(selectedDay)
   const activeTasks = exam ? snapshot.activeTasks.filter(task => taskExam(task) === exam) : snapshot.activeTasks
   let dailyHours = snapshot.state.studyPlanner?.dailyHours
-  if (exam === 'pms-punjab') { try { dailyHours = readPmsSettings(JSON.parse(localStorage.getItem(preparationPhysicalKey(PMS_SETTINGS_KEY)) || 'null')).dailyMinutes / 60 } catch { dailyHours = undefined } }
+  if (exam === 'pms-punjab') {
+    try {
+      const legacy = readPmsSettings(JSON.parse(localStorage.getItem(preparationPhysicalKey(PMS_SETTINGS_KEY)) || 'null'))
+      const preferences = JSON.parse(localStorage.getItem(preparationPhysicalKey('cssvista:tool:vista-guide:v1:pms-punjab')) || 'null')
+      dailyHours = readVistaPreferences(preferences,{dailyMinutes:legacy.dailyMinutes}).dailyMinutes / 60
+    } catch { dailyHours = undefined }
+  }
   const tasks = [...activeTasks].sort(taskOrder)
   const overlaps = useMemo(() => {
     const grouped = new Map<string, StudyScheduleTask[]>()
