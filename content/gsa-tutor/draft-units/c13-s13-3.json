@@ -1,0 +1,240 @@
+{
+  "version": "draft-1",
+  "lessonId": "c13-s13-3",
+  "title": "Malaria and dengue",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-11"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/microbiology/pages/25-4-parasitic-infections-of-the-circulatory-and-lymphatic-systems",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/25-4-parasitic-infections-of-the-circulatory-and-lymphatic-systems",
+      "title": "25.4 Parasitic Infections of the Circulatory and Lymphatic Systems - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.605268+00:00",
+      "retrievedSha256": "e569a9a8fcecf6fb80f713d3125cda078e2bba836e9cb5c8dea97499e6c43fb7",
+      "id": "malaria",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/25-3-viral-infections-of-the-circulatory-and-lymphatic-systems",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/25-3-viral-infections-of-the-circulatory-and-lymphatic-systems",
+      "title": "25.3 Viral Infections of the Circulatory and Lymphatic Systems - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.459433+00:00",
+      "retrievedSha256": "ce393a6ef96155faee93ee79853671cf86beb8116aaa848fad092dc29ec5ebfa",
+      "id": "dengue",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "title": "16.3 Modes of Disease Transmission - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.179247+00:00",
+      "retrievedSha256": "7761daeb528afa4ef4784ae53cb222da5df92f5ced2e7ada8c95872f0e7ad7e4",
+      "id": "spread",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Compare malaria and dengue agents and vectors.",
+        "Connect life cycles and vector ecology with prevention."
+      ],
+      "prerequisites": [
+        "A vector is distinct from the agent it transmits.",
+        "Viruses and protozoan parasites are different biological groups."
+      ],
+      "terms": {
+        "Plasmodium": "A genus of protozoan parasites that includes malaria agents.",
+        "biological vector": "A living transmitter in which an agent undergoes relevant development or replication.",
+        "viraemia": "Presence of virus in the blood."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "malaria-cycle",
+        "sourceIds": [
+          "malaria"
+        ],
+        "explanation": "Malaria is caused by Plasmodium parasites, commonly transmitted through infected female Anopheles mosquitoes. Parasites introduced during a bite undergo liver stages before blood-stage parasites infect red blood cells. Repeated multiplication and release from red cells contribute to illness; some sexual forms can be taken up by another mosquito, completing transmission. The parasite is not a bacterium, and the mosquito is not the human liver stage. Exact fever timing is not a reliable universal diagnostic rule."
+      },
+      {
+        "conceptId": "dengue-agent",
+        "sourceIds": [
+          "dengue"
+        ],
+        "explanation": "Dengue is viral and is principally transmitted by infected Aedes mosquitoes. The virus replicates in the human host and vector as part of its transmission cycle; it does not follow the Plasmodium liver-to-red-cell protozoan cycle. Dengue can range in severity, and some cases involve serious plasma leakage or bleeding-related complications. Fever alone cannot distinguish it from malaria or other infections. Use agent and vector evidence, not the generic phrase mosquito disease, to explain the difference."
+      },
+      {
+        "conceptId": "vector-prevention",
+        "sourceIds": [
+          "spread",
+          "malaria",
+          "dengue"
+        ],
+        "explanation": "Reducing mosquito breeding sites, limiting bites and organized vector control can interrupt transmission. Measures must fit the vector’s habitats and biting behaviour; bed nets are important in relevant malaria settings, while avoiding daytime Aedes exposure and container breeding can matter for dengue. These are complementary ecological controls, not a claim that one intervention guarantees elimination. Vaccine or drug eligibility and current recommendations vary and need current public-health guidance; this lesson does not invent a universal schedule or shared treatment."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Malaria: Anopheles → Plasmodium liver stage → red-cell stages → mosquito",
+        "Dengue: Aedes → dengue virus in host → mosquito"
+      ],
+      "description": "Draw parallel labelled transmission loops with agent names and vector names in separate boxes.",
+      "limitations": "Qualitative routes; no epidemiological prediction, fever-based diagnosis or treatment selection.",
+      "sourceIds": [
+        "malaria",
+        "dengue",
+        "spread"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Two mosquito-control campaigns may need different timing and habitat priorities because the vectors are not biologically identical.",
+      "sourceIds": [
+        "malaria",
+        "dengue",
+        "spread"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Compare malaria and dengue with reference to agent, vector, mechanism and prevention."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c13-s13-3-1",
+          "lessonId": "c13-s13-3",
+          "conceptId": "malaria-cycle",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which pairing and human-stage sequence is correct for malaria?",
+          "options": {
+            "A": "Aedes → Plasmodium → red-cell stages before the initial liver stage.",
+            "B": "Anopheles → Plasmodium → liver stages followed by red-cell stages.",
+            "C": "Anopheles → dengue virus → liver stages followed by red-cell stages.",
+            "D": "Aedes → dengue virus → the Plasmodium sexual cycle in human red cells."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "This swaps the principal vector and broad initial human sequence.",
+            "B": "Correct principal malaria vector, agent and human-stage order.",
+            "C": "This substitutes dengue virus for the malaria parasite.",
+            "D": "It combines different agents and misplaces the Plasmodium sexual cycle."
+          },
+          "sources": [
+            "malaria"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c13-s13-3-2",
+          "lessonId": "c13-s13-3",
+          "conceptId": "dengue-agent",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "What is the strongest reason not to treat malaria and dengue as one disease?",
+          "options": {
+            "A": "They always involve identical vectors and human stages.",
+            "B": "They can be distinguished reliably from fever timing alone.",
+            "C": "They differ in causal agent, vector relationships and pathogenesis.",
+            "D": "All vector-control measures have identical effectiveness against both."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Their agent–vector relationships and mechanisms differ.",
+            "B": "Symptoms and timing alone are not universal identification rules.",
+            "C": "The mechanistic differences require distinct explanations.",
+            "D": "Ecology and behaviour influence the suitability of each measure."
+          },
+          "sources": [
+            "dengue",
+            "malaria"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Malaria is caused by Plasmodium parasites transmitted by infected female Anopheles mosquitoes. Its human cycle includes liver stages followed by red-cell infection and multiplication. Dengue is caused by dengue virus and is principally transmitted by Aedes mosquitoes; it does not have the same protozoan red-cell cycle. Both can cause fever, so symptoms alone cannot establish the agent. Prevention combines vector-source management and suitable bite reduction, adapted to the relevant mosquito ecology. A comparison diagram should separate agent, vector and human stages and avoid proposing one universal treatment.",
+      "rubric": [
+        {
+          "criterion": "Correctly identify the malaria agent and vector.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain the liver-to-red-cell malaria sequence.",
+          "marks": 1
+        },
+        {
+          "criterion": "Correctly identify dengue as viral and Aedes-associated.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain why shared fever does not establish shared cause.",
+          "marks": 1
+        },
+        {
+          "criterion": "Justify vector-appropriate prevention.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling malaria viral.",
+        "Using mosquito as the name of the pathogen."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Plasmodium: A genus of protozoan parasites that includes malaria agents.",
+        "biological vector: A living transmitter in which an agent undergoes relevant development or replication.",
+        "viraemia: Presence of virus in the blood."
+      ],
+      "closedBookRecall": [
+        "Draw the two routes without swapping vectors.",
+        "Explain why fever alone is insufficient for identification."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "version": "draft-1",
+  "lessonId": "c24-s24-3",
+  "title": "Canning, acidification and process control",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-22"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://nchfp.uga.edu/how/pickle/general-information-pickling/ensuring-safe-canned-foods/",
+      "resolvedUrl": "https://nchfp.uga.edu/how/pickle/general-information-pickling/ensuring-safe-canned-foods/",
+      "title": "Ensuring Safe Canned Foods - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:36:45.210961+00:00",
+      "retrievedSha256": "eb99d3204e23686f2f2f2f3b7d36eabad3bb9eed64be0c53e1fa0859b9de8c56",
+      "id": "canning-principles",
+      "publisher": "National Center for Home Food Preservation / University of Georgia",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://nchfp.uga.edu/faqs/general-canning/category/faq-canning",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-canning/category/faq-canning",
+      "title": "General Canning FAQs - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:33:59.476392+00:00",
+      "retrievedSha256": "0ed09c621d636f07d9445661b19ca32fdd8da2b6de4332029d8425d0c213e105",
+      "id": "canning",
+      "publisher": "National Center for Home Food Preservation / University of Georgia",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "title": "13.2 Using Physical Methods to Control Microorganisms - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.560308+00:00",
+      "retrievedSha256": "afe6721818050a62a3c05502299b76be5ea1582654ea06ff1d2cea8af7103307",
+      "id": "micro-control",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain why sealing alone cannot establish safety.",
+        "Connect acidity, heat resistance and validated process control."
+      ],
+      "prerequisites": [
+        "Vegetative cells and resistant spores can respond differently to heat.",
+        "A closure and a heat process perform different functions."
+      ],
+      "terms": {
+        "hermetic seal": "A closure intended to prevent entry through the sealed package under specified conditions.",
+        "endospore": "A resistant bacterial survival structure.",
+        "acidification": "Increasing a food’s acidity through controlled addition or formation of acid."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "sealed-environment",
+        "sourceIds": [
+          "canning-principles"
+        ],
+        "explanation": "Canning combines a suitable process with a sealed container that limits later contamination. Sealing alone is not a microbial kill step. A moist, low-acid, oxygen-limited environment can support hazardous botulinum growth if relevant controls fail. Clostridium botulinum can form resistant spores, so a process effective against ordinary vegetative cells may not provide the required spore control. A vacuum lid is evidence about the closure, not proof of an adequate process."
+      },
+      {
+        "conceptId": "acid-and-heat",
+        "sourceIds": [
+          "canning-principles",
+          "micro-control"
+        ],
+        "explanation": "Acidity affects microbial growth and the required thermal process. Low-acid foods require appropriate pressure-canning controls in validated home-canning guidance; pressurization permits temperatures above ordinary open-water boiling. Acid or correctly acidified foods use different validated processes. Acidification must achieve the intended product conditions throughout, not merely add an arbitrary splash of vinegar. The product, container and procedure determine the appropriate schedule; a named temperature alone is insufficient."
+      },
+      {
+        "conceptId": "critical-process-factors",
+        "sourceIds": [
+          "canning",
+          "canning-principles"
+        ],
+        "explanation": "Recipe composition, consistency, container size, filling, heat penetration, equipment operation and altitude-related adjustments can affect processing. Changing a tested formulation can invalidate its evidence. Finished-package integrity and storage are later parts of the system, not replacements for the heat and acidity controls. Use product-specific authoritative instructions for actual preservation; this lesson explains mechanisms and supplies no homemade process time or universal pressure setting."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Characterize product and hazards",
+        "Validated formulation and container",
+        "Appropriate heat/acidity process",
+        "Closure integrity",
+        "Specified storage"
+      ],
+      "description": "Draw separate checkpoints for product, process and closure; mark the coldest-heating region conceptually rather than assuming the lid controls the centre.",
+      "limitations": "Process-control schematic, not a canning recipe or a validation calculation.",
+      "sourceIds": [
+        "canning-principles",
+        "canning",
+        "micro-control"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Two sealed jars can look similar while having different product acidity and processing histories; appearance does not establish equal safety.",
+      "sourceIds": [
+        "canning-principles",
+        "canning",
+        "micro-control"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain why canned-food safety depends on acidity, heat processing and sealing together."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c24-s24-3-1",
+          "lessonId": "c24-s24-3",
+          "conceptId": "sealed-environment",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "A jar seals successfully after an unvalidated treatment. Which conclusion is justified?",
+          "options": {
+            "A": "The seal alone does not prove adequate microbial control.",
+            "B": "A vacuum proves that the coldest part reached its required process conditions.",
+            "C": "Closure guarantees complete spore destruction regardless of heat treatment.",
+            "D": "A successful seal directly establishes product acidity throughout."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Closure and validated processing are distinct requirements.",
+            "B": "Vacuum does not measure the heat history at the coldest region.",
+            "C": "Sealing alone does not destroy every spore.",
+            "D": "Closure does not measure acidity."
+          },
+          "sources": [
+            "canning-principles"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c24-s24-3-2",
+          "lessonId": "c24-s24-3",
+          "conceptId": "acid-and-heat",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Why can pressure canning be relevant to low-acid foods?",
+          "options": {
+            "A": "Pressure alone guarantees destruction of all spores without time or heat.",
+            "B": "Oxygen removal is the sole microbial-killing mechanism.",
+            "C": "Pressure makes product consistency and container geometry irrelevant.",
+            "D": "Pressurization permits higher processing temperatures than ordinary open boiling."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Process time, temperature and product conditions remain essential.",
+            "B": "Pressure canning is not simply vacuum-based killing.",
+            "C": "Heat penetration depends on product and geometry.",
+            "D": "Controlled pressure permits higher-temperature processing."
+          },
+          "sources": [
+            "canning-principles",
+            "micro-control"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Canning requires an appropriate validated process and a sound closure. Sealing alone cannot destroy resistant spores or establish suitable product acidity. Low-acid, moist, oxygen-limited conditions can permit hazardous botulinum growth, making correct heat and formulation controls essential. Pressure processing permits temperatures above ordinary open boiling, while acid or properly acidified products follow different validated procedures. Recipe composition, container and heat penetration matter; subsequent integrity and storage preserve the result rather than compensate for an inadequate process.",
+      "rubric": [
+        {
+          "criterion": "Separate sealing from microbial inactivation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain resistant spores and the low-acid hazard.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect pressure with higher processing temperature.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain controlled acidity and product-specific validation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify container/process/storage factors.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Saying a vacuum proves sterility.",
+        "Treating an arbitrary vinegar addition as a validated process."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "hermetic seal: A closure intended to prevent entry through the sealed package under specified conditions.",
+        "endospore: A resistant bacterial survival structure.",
+        "acidification: Increasing a food’s acidity through controlled addition or formation of acid."
+      ],
+      "closedBookRecall": [
+        "Explain why two sealed jars can differ in safety.",
+        "List the evidence needed before assigning a process schedule."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

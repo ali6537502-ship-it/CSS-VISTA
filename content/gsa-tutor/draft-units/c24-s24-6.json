@@ -1,0 +1,260 @@
+{
+  "version": "draft-1",
+  "lessonId": "c24-s24-6",
+  "title": "Packaging and integrated preservation",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-21"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://nchfp.uga.edu/how/pickle/general-information-pickling/ensuring-safe-canned-foods/",
+      "resolvedUrl": "https://nchfp.uga.edu/how/pickle/general-information-pickling/ensuring-safe-canned-foods/",
+      "title": "Ensuring Safe Canned Foods - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:36:45.210961+00:00",
+      "retrievedSha256": "eb99d3204e23686f2f2f2f3b7d36eabad3bb9eed64be0c53e1fa0859b9de8c56",
+      "id": "canning-principles",
+      "publisher": "National Center for Home Food Preservation / University of Georgia",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://nchfp.uga.edu/faqs/general-freezing/category/faq-freezing",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-freezing/category/faq-freezing",
+      "title": "General Freezing FAQs - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:33:56.554525+00:00",
+      "retrievedSha256": "04c96c8f69928b8d1a9ce01508bc1bebf0aee9b63767be5a1889e2102c7ad214",
+      "id": "freezing",
+      "publisher": "National Center for Home Food Preservation / University of Georgia",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://www.gov.mb.ca/agriculture/food-safety/education-resources/water-content-water-activity.html",
+      "resolvedUrl": "https://www.gov.mb.ca/agriculture/food-safety/education-resources/water-content-water-activity.html",
+      "title": "Province of Manitoba | agriculture - Water Content and Water Activity: Two Factors That Affect Food Safety",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:15.440803+00:00",
+      "retrievedSha256": "11b71fa47bb9ab8160f5aa084e90de4dd0e0b07744549059960f95b87838e7cd",
+      "id": "water-activity",
+      "publisher": "Government of Manitoba",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "title": "13.2 Using Physical Methods to Control Microorganisms - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.560308+00:00",
+      "retrievedSha256": "afe6721818050a62a3c05502299b76be5ea1582654ea06ff1d2cea8af7103307",
+      "id": "micro-control",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain packaging as a barrier with specific functions.",
+        "Combine preservation controls without claiming a package alone guarantees safety."
+      ],
+      "prerequisites": [
+        "Processing reduces specified hazards under defined conditions.",
+        "Packaging and storage can maintain or change product conditions."
+      ],
+      "terms": {
+        "barrier property": "A material’s capacity to limit transfer such as water vapour or gases.",
+        "recontamination": "Introduction of contaminants after an earlier control step.",
+        "integrated preservation": "Use of appropriate combined product, process, package and storage controls."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "package-functions",
+        "sourceIds": [
+          "freezing",
+          "water-activity"
+        ],
+        "explanation": "Packaging contains the food, limits physical damage and can reduce moisture or gas transfer. The needed properties depend on the product: dried foods may need protection from moisture uptake, while frozen foods require suitable containers and protection from moisture loss. A material need not provide the same barrier to water vapour, gases and light. Product quality and safety therefore depend on specified performance rather than the word sealed alone."
+      },
+      {
+        "conceptId": "atmosphere-limits",
+        "sourceIds": [
+          "canning-principles",
+          "micro-control"
+        ],
+        "explanation": "Limiting oxygen can slow some changes and restrict oxygen-dependent organisms, but it is not a universal antimicrobial treatment. Oxygen-limited, moist, low-acid conditions can favour dangerous botulinum growth if controls fail. A sound closure prevents later entry through that route; it does not erase contamination already inside. Vacuum packaging, validated heat treatment and refrigeration are distinct controls with different roles."
+      },
+      {
+        "conceptId": "integrated-system",
+        "sourceIds": [
+          "water-activity",
+          "micro-control",
+          "canning-principles"
+        ],
+        "explanation": "Start with the product and relevant hazards. Select appropriate processing, water-availability or acidity controls, a suitable package and required storage. Verify that the combined conditions achieve the intended outcome and monitor factors that could change it. A leak can permit contamination or moisture transfer; a temperature interruption can invalidate a cold-storage assumption. The label or intact appearance cannot supply missing validation. Integration means explaining how controls work together, not merely listing technologies."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Product and hazard characterization",
+        "Validated process",
+        "Suitable package and closure",
+        "Required storage and distribution",
+        "Monitoring and corrective decisions"
+      ],
+      "description": "Place packaging between processing and distribution, with arrows showing possible moisture transfer, contamination and temperature interruption.",
+      "limitations": "System map, not a package specification, shelf-life prediction or certification of a commercial product.",
+      "sourceIds": [
+        "canning-principles",
+        "freezing",
+        "water-activity",
+        "micro-control"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A dried food exposed to humid air and a refrigerated vacuum-packed food face different failure pathways even when both were initially sealed.",
+      "sourceIds": [
+        "canning-principles",
+        "freezing",
+        "water-activity",
+        "micro-control"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain packaging’s role in an integrated preservation system and why vacuum alone is insufficient."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c24-s24-6-1",
+          "lessonId": "c24-s24-6",
+          "conceptId": "atmosphere-limits",
+          "syllabusRefs": [
+            "GS-I-21"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Why does removing air from a moist, low-acid food not establish complete safety?",
+          "options": {
+            "A": "All foodborne hazards require oxygen to grow.",
+            "B": "Some hazards can persist or grow under oxygen-limited conditions.",
+            "C": "An oxygen barrier proves an adequate earlier heat treatment.",
+            "D": "Vacuum directly establishes the required acidity."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Oxygen requirements differ.",
+            "B": "Appropriate anaerobic-hazard controls remain necessary.",
+            "C": "Barrier properties do not document processing history.",
+            "D": "Vacuum is not an acidity measurement."
+          },
+          "sources": [
+            "canning-principles"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c24-s24-6-2",
+          "lessonId": "c24-s24-6",
+          "conceptId": "integrated-system",
+          "syllabusRefs": [
+            "GS-I-21"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Which explanation best describes integrated preservation?",
+          "options": {
+            "A": "A stronger package removes the need to identify the initial hazard.",
+            "B": "Adding several process names establishes the combined outcome.",
+            "C": "Product, process, package and storage controls are chosen and validated together.",
+            "D": "A final visual inspection replaces monitoring critical conditions."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Hazard identification remains essential.",
+            "B": "Names without conditions or evidence do not establish effectiveness.",
+            "C": "Integration connects controls to hazards, conditions and outcomes.",
+            "D": "Appearance cannot replace required measurements and process evidence."
+          },
+          "sources": [
+            "water-activity",
+            "micro-control"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Packaging contains and protects food and can limit moisture, gas or contaminant transfer according to its barrier properties. A sound closure helps prevent later entry, but it does not remove organisms already present. Vacuum alone is insufficient because some hazards can grow in oxygen-limited conditions. An integrated system matches product hazards with validated processing, suitable packaging and required storage. Monitoring must detect failures such as leaks, moisture uptake or temperature interruptions; an intact-looking package cannot establish the whole process history.",
+      "rubric": [
+        {
+          "criterion": "Identify containment and appropriate barrier functions.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish prevention of re-entry from inactivation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain the limitation of oxygen removal.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect product, process, package and storage.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain monitoring and validation beyond appearance.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling every sealed product sterile.",
+        "Treating packaging price as proof of performance."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "barrier property: A material’s capacity to limit transfer such as water vapour or gases.",
+        "recontamination: Introduction of contaminants after an earlier control step.",
+        "integrated preservation: Use of appropriate combined product, process, package and storage controls."
+      ],
+      "closedBookRecall": [
+        "Draw an integrated system with two failure routes.",
+        "Explain why vacuum requires other relevant controls."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

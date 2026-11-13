@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
-import { Activity, BookOpen, BookMarked, CalendarDays, ChartNoAxesCombined, Compass, Dumbbell, Home, LibraryBig, LogOut, PenLine, Settings, X } from 'lucide-react'
+import { Activity, BookOpen, BookMarked, CalendarDays, ChartNoAxesCombined, ChevronDown, Compass, Dumbbell, GraduationCap, Home, LibraryBig, LogOut, PenLine, Settings, X } from 'lucide-react'
 import { sections } from './registry'
 import type { LucideIcon } from 'lucide-react'
 
@@ -14,6 +14,7 @@ const extras:{to:string;label:string;icon:LucideIcon;hint:string}[] = [
 ]
 export default function WorkspaceMobileDrawer({onClose,onLogout,busy}:{onClose:()=>void;onLogout:()=>void;busy:boolean}){
  const drawer=useRef<HTMLElement>(null)
+ const [mentorOpen,setMentorOpen]=useState(true)
  useEffect(()=>{
   const previous=document.activeElement instanceof HTMLElement?document.activeElement:null
   const original=document.body.style.overflow
@@ -38,7 +39,13 @@ export default function WorkspaceMobileDrawer({onClose,onLogout,busy}:{onClose:(
      <div className="ws-drawer-top"><div><span className="ws-drawer-eyebrow">MY CSS VISTA</span><h2>Account menu</h2></div><button type="button" data-drawer-close className="ws-drawer-close" aria-label="Close account menu" onClick={onClose}><X size={21}/></button></div>
      <nav aria-label="My account sections">
        <p className="ws-drawer-heading">Workspace</p>
-       {sections.map((section,i)=>link(section.to,section.title,sectionIcons[i]))}
+       {sections.map((section,i)=><Fragment key={section.id}>{link(section.to,section.title,sectionIcons[i])}{section.id === 'overview' && <div className="ws-drawer-mentor">
+         <button type="button" className="ws-drawer-mentor-toggle" aria-expanded={mentorOpen} aria-controls="ws-drawer-mentor-links" onClick={()=>setMentorOpen(value=>!value)}><GraduationCap size={20} aria-hidden="true"/><span>Vista Mentor</span><ChevronDown size={17} aria-hidden="true"/></button>
+         {mentorOpen && <div id="ws-drawer-mentor-links" className="ws-drawer-mentor-links" role="group" aria-label="Vista Mentor options">
+           {link('/account/tasks?exam=css&view=syllabus','CSS Vista',BookOpen,'Complete CSS syllabus, notes and daily planning')}
+           {link('/account/tasks?exam=pms-punjab&view=syllabus','PMS Vista',BookOpen,'Complete PMS syllabus, notes and daily planning')}
+         </div>}
+       </div>}</Fragment>)}
        <p className="ws-drawer-heading">More tools</p>
        {extras.map(e=>link(e.to,e.label,e.icon,e.hint))}
      </nav>

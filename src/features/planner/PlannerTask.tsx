@@ -1,10 +1,12 @@
 import { useRef, useState, type FormEvent } from 'react'
-import { Archive, Check, Clock3, Pencil, Save, X } from 'lucide-react'
+import { Archive, Check, ClipboardCopy, Clock3, Pencil, Save, X } from 'lucide-react'
 import { getState, updateStudyScheduleTask, type StudyScheduleTask } from '@/lib/store'
+import { essayThemeIndex } from '@/data/essayThemes'
 import { archiveTaskState, isTaskArchived } from '@/lib/myTasks'
 import { subjectVisual } from '@/features/workspace/Visuals'
 import { formatMinutes } from '@/pages/account/shared'
 import { shiftDay, dayKey, readableDay, validDay } from './model'
+import { buildVistaNotesCommand, cssGuideSubjects, findGuideUnit, pmsGuideSubjects } from './vistaGuideModel'
 
 export default function PlannerTask({ task, refresh, conflict = false }: { task: StudyScheduleTask; refresh: () => void; conflict?: boolean }) {
   const [editing, setEditing] = useState(false)
@@ -12,6 +14,8 @@ export default function PlannerTask({ task, refresh, conflict = false }: { task:
   const editBase = useRef({ date: task.date, time: task.time, minutes: task.minutes, status: task.status })
   const editButton = useRef<HTMLButtonElement>(null)
   const [error, setError] = useState('')
+  const [notesStatus, setNotesStatus] = useState('')
+  const [manualCommand, setManualCommand] = useState('')
   const done = task.status === 'completed'
   const visual = subjectVisual(task.subject)
   function update(patch: Partial<Pick<StudyScheduleTask, 'date' | 'time' | 'minutes' | 'status'>>, expected?: Partial<Pick<StudyScheduleTask, 'date' | 'time' | 'minutes' | 'status'>>) {
@@ -38,6 +42,22 @@ export default function PlannerTask({ task, refresh, conflict = false }: { task:
     const expected = Object.fromEntries(changed.map(key => [key, editBase.current[key]]))
     if (!changed.length || update(patch, expected)) setEditing(false)
   }
+  async function copyNotes() {
+    setNotesStatus('Preparing chapter-specific command...')
+    try {
+      const pms = task.syllabusItemId.startsWith('pms-punjab:vista:')
+      const path = pms ? '/pms-punjab/vista-syllabus.json' : '/fpsc-syllabus.json'
+      const response = await fetch(path)
+      if (!response.ok) throw Error('Unable to read the syllabus.')
+      const data = await response.json()
+      const subjects = pms ? pmsGuideSubjects(data,essayThemeIndex()) : cssGuideSubjects(data,essayThemeIndex())
+      const unit = findGuideUnit(subjects,pms?'pms-punjab':'css',task.syllabusItemId)
+      if(!unit)throw Error('The original syllabus item was not found; the task has not been altered.')
+      const command=buildVistaNotesCommand(unit)
+      try { await navigator.clipboard.writeText(command); setManualCommand('');setNotesStatus('Command copied. Paste into ChatGPT to prepare your notes.') }
+      catch { setManualCommand(command);setNotesStatus('Select and copy the command below.') }
+    } catch(e) { setNotesStatus(e instanceof Error ? e.message : 'Unable to copy notes command.') }
+  }
   function archive() {
     archiveTaskState(task.id)
     if (!isTaskArchived(task.id)) { setError('Archiving could not be saved. Please try again.'); return }
@@ -55,6 +75,11 @@ export default function PlannerTask({ task, refresh, conflict = false }: { task:
         setEditing(value => !value)
       }}><Pencil size={16}/></button>
     </div>
+    {(task.syllabusItemId.startsWith('pms-punjab:vista:') || task.syllabusItemId.startsWith('vista-css:')) && <div className="pl-actions" style={{padding:'0 15px 10px'}}>
+      <button className="pl-secondary" type="button" onClick={copyNotes}><ClipboardCopy size={15}/>Copy analytical notes command</button>
+      {notesStatus && <span role="status" className="pl-muted">{notesStatus}</span>}
+      {manualCommand && <textarea aria-label="Copy generated chapter command" readOnly rows={5} value={manualCommand} onFocus={e=>e.currentTarget.select()}/>}
+    </div>}
     {editing && <form onSubmit={save} className="pl-task-editor">
       <p className="pl-muted">Reschedule this task without changing its identity or topic history.</p>
       <div className="pl-form-grid"><label>Date<input type="date" required value={draft.date} onChange={e => setDraft({ ...draft, date: e.target.value })}/></label><label>Time (optional)<input type="time" value={draft.time} onChange={e => setDraft({ ...draft, time: e.target.value })}/></label><label>Estimated minutes<input type="number" required min={5} max={600} step={1} value={draft.minutes} onChange={e => setDraft({ ...draft, minutes: e.target.value })}/></label><label>Status<select value={draft.status} onChange={e => setDraft({ ...draft, status: e.target.value as StudyScheduleTask['status'] })}><option value="not-started">Not started</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label></div>

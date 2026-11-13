@@ -53,5 +53,5 @@ try{
   await context.close()
  }
  assert.deepEqual(errors,[])
- console.log('PASS editorial: 16 draft units, all eight stages at 320/768/1440, choice explanations, model rubric, source guards and zero saved-record writes.')
+ console.log(`PASS editorial: ${units.length} draft units, all eight stages at 320/768/1440, choice explanations, model rubric, source guards and zero saved-record writes.`)
 }finally{await browser.close()}

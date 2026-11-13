@@ -1,0 +1,226 @@
+{
+  "version": "draft-1",
+  "lessonId": "c24-s24-4",
+  "title": "Refrigeration, freezing and cold chains",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-21"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "title": "13.2 Using Physical Methods to Control Microorganisms - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.560308+00:00",
+      "retrievedSha256": "afe6721818050a62a3c05502299b76be5ea1582654ea06ff1d2cea8af7103307",
+      "id": "micro-control",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://nchfp.uga.edu/faqs/general-freezing/category/faq-freezing",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-freezing/category/faq-freezing",
+      "title": "General Freezing FAQs - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:33:56.554525+00:00",
+      "retrievedSha256": "04c96c8f69928b8d1a9ce01508bc1bebf0aee9b63767be5a1889e2102c7ad214",
+      "id": "freezing",
+      "publisher": "National Center for Home Food Preservation / University of Georgia",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain cooling as growth control rather than guaranteed sterilization.",
+        "Connect freezing, texture and cold-chain continuity."
+      ],
+      "prerequisites": [
+        "Temperature affects microbial activity and food reactions.",
+        "Time-dependent exposure cannot be reconstructed from a single final observation."
+      ],
+      "terms": {
+        "cold chain": "A temperature-controlled sequence of storage and transport.",
+        "refrigeration": "Cooling that slows many biological and chemical processes without freezing all product water.",
+        "freezing": "Formation of ice from part of a product’s water under suitable conditions."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "cold-growth-control",
+        "sourceIds": [
+          "micro-control"
+        ],
+        "explanation": "Refrigeration slows metabolism and multiplication for many microbes and reduces rates of some spoilage reactions. Some organisms can still grow in the cold, so refrigeration is not sterilization. Freezing generally restricts microbial growth more strongly while water remains frozen, but surviving cells can resume activity after thawing. Cold storage does not automatically remove toxins formed earlier or correct every previous handling failure."
+      },
+      {
+        "conceptId": "ice-and-quality",
+        "sourceIds": [
+          "freezing",
+          "micro-control"
+        ],
+        "explanation": "Ice formation redistributes water and can damage food structure. Frozen fruits may be softer after thawing because freezing disrupts tissues; a change in texture is not itself a microbial count. Packaging limits moisture loss and environmental transfer, while headspace and suitable containers accommodate product expansion where required. Appropriate pretreatment can address quality changes, but a universal step cannot be assumed for every food."
+      },
+      {
+        "conceptId": "continuity-monitoring",
+        "sourceIds": [
+          "micro-control"
+        ],
+        "explanation": "A cold chain links preparation, storage, transport, retail and final handling. A safe-looking final temperature does not document the whole exposure history: time spent warm during interruption may matter. Monitoring and product-specific limits are therefore more informative than the single claim kept cold. Thawing restores conditions that can permit growth, so handling after thawing remains important. This conceptual lesson gives no universal salvage rule or expiry extension after a failure."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Initial safe handling",
+        "Cooling or freezing",
+        "Monitored storage",
+        "Controlled transport",
+        "Appropriate thawing and later handling"
+      ],
+      "description": "Draw a timeline with temperature observations and mark an unknown interruption as unknown, not automatically safe.",
+      "limitations": "Qualitative cold-chain model; no growth-rate simulation or invented safe time after power failure.",
+      "sourceIds": [
+        "micro-control",
+        "freezing"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A frozen fruit becoming softer on thawing illustrates structural change, while microbial safety still depends on contamination and handling history.",
+      "sourceIds": [
+        "micro-control",
+        "freezing"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain how refrigeration and freezing preserve food and why the cold chain must be maintained."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c24-s24-4-1",
+          "lessonId": "c24-s24-4",
+          "conceptId": "cold-growth-control",
+          "syllabusRefs": [
+            "GS-I-21"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "What is the best description of freezing as microbial control?",
+          "options": {
+            "A": "It guarantees destruction of every spore.",
+            "B": "It removes all preformed toxins whenever ice appears.",
+            "C": "It inhibits growth while frozen but can leave viable organisms.",
+            "D": "It makes contamination before freezing irrelevant."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Spore destruction is not guaranteed.",
+            "B": "Freezing does not universally remove toxins.",
+            "C": "Survival and later renewed growth remain possible.",
+            "D": "Earlier contamination and handling still matter."
+          },
+          "sources": [
+            "micro-control"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c24-s24-4-2",
+          "lessonId": "c24-s24-4",
+          "conceptId": "continuity-monitoring",
+          "syllabusRefs": [
+            "GS-I-21"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Why is one final cold-temperature reading insufficient to document an uninterrupted cold chain?",
+          "options": {
+            "A": "Final temperature determines the entire earlier time–temperature history.",
+            "B": "It cannot reveal every earlier warm exposure.",
+            "C": "Warm exposure cannot affect organisms if the product is later recooled.",
+            "D": "Thawing makes microbial survival impossible."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "One reading cannot reconstruct earlier conditions.",
+            "B": "Historical exposure is separate evidence.",
+            "C": "Recooling does not erase every effect of earlier exposure.",
+            "D": "Surviving organisms can resume activity after thawing."
+          },
+          "sources": [
+            "micro-control"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Refrigeration slows many microbial and chemical processes, while freezing forms ice and strongly restricts growth under frozen conditions. Neither guarantees destruction of every cell or spore, and preformed toxins are not universally removed. Freezing can also alter food texture through tissue disruption. A cold chain maintains appropriate conditions across storage and transport, with monitoring that accounts for interruptions. After thawing, surviving organisms may resume activity, so a final cold reading cannot replace the full handling history.",
+      "rubric": [
+        {
+          "criterion": "Explain refrigeration as slowing growth.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain freezing without claiming sterility.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe a freezing-related quality change.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define a continuous monitored cold chain.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain thawing and exposure-history limitations.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Equating freezing with sterilization.",
+        "Declaring an interrupted chain safe from one final reading."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "cold chain: A temperature-controlled sequence of storage and transport.",
+        "refrigeration: Cooling that slows many biological and chemical processes without freezing all product water.",
+        "freezing: Formation of ice from part of a product’s water under suitable conditions."
+      ],
+      "closedBookRecall": [
+        "Sketch the stages of a cold chain.",
+        "Separate texture change from microbial safety."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

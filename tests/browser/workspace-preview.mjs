@@ -60,7 +60,7 @@ try {
     const token=decodeURIComponent((await context.cookies()).find(cookie=>cookie.name==='cssv_csrf').value)
     const payload={'cssvista:v1':{studyPlanner:{examDate:'2027-12-01',dailyHours:2,restDay:5,selectedOptionals:['Political Science','Criminology','European History','Punjabi','Environmental Sciences'],configuredAt:now.toISOString()},studyScheduleTasks:[{id:'pilot-task',syllabusItemId:'manual:pilot',subject:'Political Science',topic:'TEST ONLY retained study task',paper:'Paper I',section:'Personal task',date:today,minutes:30,status:'not-started'}],bookmarks:['TEST ONLY retained bookmark'],quizResults:[{id:'pilot-result',type:'quiz',category:'TEST ONLY',score:3,total:5,date:now.toISOString()}]}}
     assert.equal((await context.request.put(base+'/api/student/progress.php',{headers:{'X-CSRF-Token':token},data:{payload}})).status(),200)
-    const routes={dashboard:'Today’s Study Plan',tasks:'Study Planner',subjects:'My Subjects',practice:'Practice',progress:'My Performance',library:'My Library',settings:'Account & Settings'}
+    const routes={dashboard:'Today’s Study Plan',tasks:'CSS Vista',subjects:'My Subjects',practice:'Practice',progress:'My Performance',library:'My Library',settings:'Account & Settings'}
     for(const width of [320,375,390,768,1024,1440]) {
       await page.setViewportSize({width,height:900})
       for(const [route,title] of Object.entries(routes)) {
@@ -69,6 +69,29 @@ try {
         await page.locator('.student-workspace').waitFor()
         assert.equal(await page.locator('.ws-feature').filter({hasText:/Pro · membership required|Membership & Payments/}).count(),0)
         if(route==='subjects') await page.getByRole('heading',{name:'Political Science',exact:true}).waitFor()
+        if(route==='dashboard'){
+          assert.equal(await page.getByText('Your next focused study session',{exact:true}).count(),0,'retired account study widget must not reappear')
+          assert.equal(await page.locator('.ds-rail').count(),0,'no legacy account study rail')
+        }
+        if(route==='practice'){
+          await page.getByRole('heading',{name:'General Science Course',exact:true}).waitFor()
+          await page.getByRole('heading',{name:'My GSA Tutor',exact:true}).waitFor()
+          assert.equal(await page.getByText('Write with focus',{exact:true}).count(),0,'obsolete writing banner removed')
+          assert.equal(await page.getByLabel('Practice tools').count(),0,'obsolete feature-grid list removed')
+          assert.equal(await page.getByRole('link',{name:'Open General Science Course'}).count(),1,'original course opens from Practice')
+          if(width===390){
+            await page.getByRole('button',{name:'Open account menu'}).click()
+            const drawer=page.locator('#ws-mobile-account-drawer')
+            await drawer.getByRole('button',{name:'Vista Mentor'}).waitFor()
+            assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).locator('a[href*="exam=css&view=syllabus"]').count(),1)
+            assert.equal(await drawer.getByRole('group',{name:'Vista Mentor options'}).locator('a[href*="exam=pms-punjab&view=syllabus"]').count(),1)
+            await drawer.getByRole('dialog',{name:'My CSS Vista account menu'}).getByRole('button',{name:'Close account menu'}).click()
+          }
+          if(width===1440){
+            assert.equal(await page.locator('.ws-sidebar .ws-mentor-toggle').count(),1)
+            assert.equal(await page.locator('.ws-mentor-links a').count(),2)
+          }
+        }
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${route} overflow at ${width}`)
         assert.equal(await page.getByRole('navigation',{name:'Primary mobile navigation',exact:true}).count(),0)
         if(width===390||width===1440) await page.screenshot({path:`${output}/selected-${route}-${width}.png`,fullPage:true})

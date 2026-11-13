@@ -1,0 +1,225 @@
+{
+  "version": "draft-1",
+  "lessonId": "c13-s13-4",
+  "title": "Hepatitis viruses and liver disease",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-11"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/microbiology/pages/24-4-viral-infections-of-the-gastrointestinal-tract",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/24-4-viral-infections-of-the-gastrointestinal-tract",
+      "title": "24.4 Viral Infections of the Gastrointestinal Tract - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.413611+00:00",
+      "retrievedSha256": "9d9ae2e4e95b00f36a511029dabd88b9cd9aa4372743bef42c416c84e2eeea31",
+      "id": "hepatitis",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "title": "16.3 Modes of Disease Transmission - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.179247+00:00",
+      "retrievedSha256": "7761daeb528afa4ef4784ae53cb222da5df92f5ced2e7ada8c95872f0e7ad7e4",
+      "id": "spread",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Compare routes of hepatitis A–E.",
+        "Distinguish liver inflammation, infection and chronic consequences."
+      ],
+      "prerequisites": [
+        "Blood-borne exposure and faecal–oral exposure are different routes.",
+        "Inflammation is a tissue response and does not name one specific pathogen."
+      ],
+      "terms": {
+        "hepatitis": "Inflammation of the liver, with infectious and noninfectious causes.",
+        "hepatocyte": "A principal functional liver cell.",
+        "chronic infection": "Infection that persists over an extended period."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "liver-inflammation",
+        "sourceIds": [
+          "hepatitis"
+        ],
+        "explanation": "The liver processes nutrients and contributes to bile production and many metabolic functions. Hepatitis describes inflammation of this organ, not one particular virus. Several unrelated viruses are labelled A, B, C, D and E because of their association with hepatitis. Similar symptoms, including possible jaundice, do not prove identical transmission. Nonviral causes also exist, so the term hepatitis alone does not establish infection by a named virus."
+      },
+      {
+        "conceptId": "hepatitis-routes",
+        "sourceIds": [
+          "hepatitis"
+        ],
+        "explanation": "Hepatitis A and E are principally associated with faecal–oral exposure, including contaminated food or water. Hepatitis B can spread through infected blood and relevant body fluids, including sexual and perinatal routes. Hepatitis C is predominantly blood-borne. Hepatitis D depends on hepatitis B virus for its propagation. Therefore safe water is relevant to A/E prevention but does not replace safe injection practices, screened blood and appropriate other controls for blood-borne infection."
+      },
+      {
+        "conceptId": "persistence-prevention",
+        "sourceIds": [
+          "hepatitis",
+          "spread"
+        ],
+        "explanation": "Hepatitis B and C can establish chronic infection, with potential long-term liver injury; this is not an inevitable outcome of every exposure. Vaccination is available for hepatitis A and B; protection against B also helps prevent D infection dependent on B. Do not infer that a B vaccine directly prevents C or that one vaccine covers every hepatitis virus. Infection testing and clinical management require appropriate evaluation. A scientific comparison should align each virus with its route, persistence and relevant prevention rather than list all measures indiscriminately."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "A/E: faecal contamination → ingestion → liver infection",
+        "B/C: relevant infected blood/body-fluid routes → liver infection",
+        "D: requires B infection",
+        "Some infections persist → possible chronic liver injury"
+      ],
+      "description": "Use separate route lanes and a dependency arrow from B to D.",
+      "limitations": "Overview of principal routes, not an exhaustive exposure-risk calculator or vaccine schedule.",
+      "sourceIds": [
+        "hepatitis",
+        "spread"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Screening donated blood addresses a blood-borne route; improving drinking-water sanitation targets a different exposure pathway.",
+      "sourceIds": [
+        "hepatitis",
+        "spread"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Compare hepatitis A, B and C and explain the relationship between B and D."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c13-s13-4-1",
+          "lessonId": "c13-s13-4",
+          "conceptId": "hepatitis-routes",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which grouping best matches principal transmission routes?",
+          "options": {
+            "A": "A/E mainly faecal–oral; C predominantly blood-borne.",
+            "B": "A/C mainly faecal–oral; E predominantly blood-borne.",
+            "C": "B/C mainly faecal–oral; A predominantly blood-borne.",
+            "D": "All five viruses have the same principal route."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "This correctly separates important enteric and blood-borne patterns.",
+            "B": "This misclassifies C and E.",
+            "C": "This reverses the important route distinction.",
+            "D": "Shared liver involvement does not imply identical transmission."
+          },
+          "sources": [
+            "hepatitis"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c13-s13-4-2",
+          "lessonId": "c13-s13-4",
+          "conceptId": "persistence-prevention",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Why can hepatitis B vaccination also help prevent hepatitis D?",
+          "options": {
+            "A": "D is simply another name for the same B virus.",
+            "B": "B vaccination is directly protective against every hepatitis virus.",
+            "C": "D propagation depends on the presence of B virus.",
+            "D": "B vaccination removes all previous chronic D infection immediately."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "D is a distinct agent with a dependency.",
+            "B": "B protection is not universal protection against A, C and E.",
+            "C": "Preventing B interrupts a requirement for D propagation.",
+            "D": "Prevention is not an assertion of immediate treatment of established infection."
+          },
+          "sources": [
+            "hepatitis"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Hepatitis means liver inflammation and can have viral or nonviral causes. Among the named viruses, A and E are principally faecal–oral, B spreads through infected blood and relevant body fluids, and C is predominantly blood-borne. B and C can persist and cause chronic liver injury, though outcomes vary. D requires B for propagation, so prevention of B also helps prevent D. Water and sanitation, safe injections and screened blood address different routes; A or B vaccination should not be described as protection against every hepatitis virus.",
+      "rubric": [
+        {
+          "criterion": "Define hepatitis without equating it to one agent.",
+          "marks": 1
+        },
+        {
+          "criterion": "Correctly group A/E routes.",
+          "marks": 1
+        },
+        {
+          "criterion": "Correctly distinguish B and C routes.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain chronic-infection possibility without inevitability.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain D dependence and route-specific prevention.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Claiming all hepatitis is faecal–oral.",
+        "Claiming B vaccination covers C."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "hepatitis: Inflammation of the liver, with infectious and noninfectious causes.",
+        "hepatocyte: A principal functional liver cell.",
+        "chronic infection: Infection that persists over an extended period."
+      ],
+      "closedBookRecall": [
+        "Make a route-and-prevention comparison from memory.",
+        "Explain why the word jaundice cannot identify the exact virus."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}
