@@ -50,7 +50,7 @@ async function check(width,height,exam) {
 
   if(exam==='pms-punjab' && width>=1000) {
     await page.getByRole('button',{name:'View all subjects'}).click()
-    assert.equal(await page.locator('.vg-subjects button').count(),40,'all 40 PMS subjects')
+    assert.equal(await page.locator('.vg-subjects button').count(),41,'40 source documents and the new Mental Ability guidebook')
     await page.locator('.vg-subjects button').filter({hasText:'Punjabi'}).click()
     await page.locator('.vg-syllabus h3').filter({hasText:'Punjabi'}).waitFor()
     const first=page.locator('.vg-unit').first()
