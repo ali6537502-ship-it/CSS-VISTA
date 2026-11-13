@@ -523,5 +523,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/business/retail-consumer/imf-monitoring-ai-developments-too-early-say-if-ai-reassessment-underway-2026-11-12/"
+  },
+  {
+    "id": "current-affairs-20261113-taiwan-drills",
+    "q": "According to Taiwanese officials cited by Reuters on 13 November 2026, approximately how many Chinese naval and coast guard vessels were involved at the peak of the reported exercises?",
+    "o": [
+      "More than 100",
+      "About 20",
+      "About 40",
+      "Fewer than 10"
+    ],
+    "a": 0,
+    "e": "Taiwanese officials said more than 100 Chinese naval and coast guard vessels took part at one point in the November 2026 western Pacific deployment.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/china-stages-unannounced-pacific-drills-silent-intimidation-taiwan-officials-say-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261113-china-ai-chips",
+    "q": "A Reuters review published on 13 November 2026 identified more than $3 billion in Chinese AI data-centre projects specifying chips from which company?",
+    "o": [
+      "AMD",
+      "Intel",
+      "Nvidia",
+      "Qualcomm"
+    ],
+    "a": 2,
+    "e": "A Reuters review on 13 November 2026 identified more than $3 billion in Chinese AI computing projects specifying Nvidia processors.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/factbox-chinas-3-billion-plus-pipeline-nvidia-powered-ai-data-centres-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261113-germany-budget",
+    "q": "What was the approximate total spending in Germany's 2027 budget plan advanced by a parliamentary committee on 13 November 2026?",
+    "o": [
+      "€261 billion",
+      "€361 billion",
+      "€461 billion",
+      "€561 billion"
+    ],
+    "a": 3,
+    "e": "Germany's parliamentary budget committee advanced a 2027 spending plan of approximately €561 billion on 13 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/german-budget-committee-agrees-2027-budget-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261113-ukraine-talks",
+    "q": "Which US envoy said on 13 November 2026 that European countries would join a forthcoming round of Ukraine peace talks?",
+    "o": [
+      "Steve Bannon",
+      "Jared Kushner",
+      "Marco Rubio",
+      "Mike Waltz"
+    ],
+    "a": 1,
+    "e": "US envoy Jared Kushner said on 13 November 2026 that European countries would be included in a forthcoming round of Ukraine peace talks.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/kushner-says-us-working-toward-largest-prisoner-exchange-russias-war-ukraine-2026-11-13/"
   }
 ]
