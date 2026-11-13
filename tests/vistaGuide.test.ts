@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import {
   buildVistaNotesCommand, cssGuideSubjects, pmsGuideSubjects, generateVistaPlan,
   guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
+  resolveLegacyCssNotesUnit,
   type VistaSubject, type VistaPreferences,
 } from '../src/features/planner/vistaGuideModel.ts'
 
@@ -265,4 +266,61 @@ test('all three source-only General Knowledge sections remain schedulable',()=>{
   for(const name of ['English','Urdu','Islamic Studies (General Knowledge for non-Muslim candidates)']){
     assert.ok(units.some(unit=>unit.title===name && unit.syllabus.length>50),name)
   }
+})
+
+
+test('the same notes command resolves actual historical FPSC schedule topic IDs without rewriting saved records',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8')) as {
+    subjects:Array<{slug:string;name:string;sections:Array<{title:string;items:string[]}>}>
+  }
+  const chosen=source.subjects.find(s=>s.sections.some(section=>section.items.length>=2))
+  assert.ok(chosen,'source has at least one multi-topic section')
+  const index=chosen.sections.findIndex(section=>section.items.length>=2)
+  const original=chosen.sections[index]
+  const legacyId=chosen.slug+':'+index+':0'
+  const unit=resolveLegacyCssNotesUnit(source,legacyId)
+  assert.ok(unit,'old slug:section:item key resolves from the source')
+  assert.equal(unit.id,legacyId)
+  assert.equal(unit.title,original.items[0].trim())
+  assert.ok(unit.syllabus.includes(original.title))
+  assert.ok(unit.syllabus.includes(original.items[0].trim()))
+  const command=buildVistaNotesCommand(unit)
+  assert.ok(command.includes(original.items[0].trim()))
+  assert.match(command,/EXAMINATION: CSS/)
+  assert.match(command,/FPSC SYLLABUS TOPIC OR SECTION/)
+  assert.match(command,/REAL photographs, maps/)
+  assert.match(command,/Never invent citations or statistics/)
+  assert.match(command,/Do not substitute a PDF/)
+  assert.equal(resolveLegacyCssNotesUnit(source,'manual:student-task'),null)
+  assert.equal(resolveLegacyCssNotesUnit(source,'unknown-subject:0:0'),null)
+  assert.equal(resolveLegacyCssNotesUnit(source,chosen.slug+':999999:0'),null)
+  assert.equal(resolveLegacyCssNotesUnit(source,chosen.slug+':'+index+':999999'),null)
+})
+
+test('CSS section commands preserve each official syllabus line as an individual numbered subtopic',()=>{
+  const source={subjects:[{slug:'political-science',name:'Political Science',designation:'optional' as const,marks:200,sections:[{title:'Political Theory',items:['Concept of sovereignty','Political culture and socialisation','Forms of government']}]}]}
+  const paper=cssGuideSubjects(source).find(p=>p.id==='political-science')!
+  const unit=guideUnits(paper,'css')[0]
+  assert.match(unit.syllabus,/1\. Concept of sovereignty\n2\. Political culture and socialisation\n3\. Forms of government/)
+  assert.match(buildVistaNotesCommand(unit),/1\. Concept of sovereignty\n2\. Political culture and socialisation\n3\. Forms of government/)
+})
+
+test('universal notes prompt covers discipline-specific reasoning, visual evidence and uncertainty for both exams',()=>{
+  const css=guideUnits(subject('constitutional-law',['Judicial review']),'css')[0]
+  const pms={...css,paper:'PMS Punjab',subject:'Economy and Development',subjectId:'compulsory-economy-and-development'}
+  for(const unit of [css,pms]){
+    const command=buildVistaNotesCommand(unit)
+    assert.match(command,/every heading\/subheading\/individual topic/)
+    assert.match(command,/history use accurate chronology/)
+    assert.match(command,/mathematics, statistics and ability/)
+    assert.match(command,/Never invent citations or statistics/)
+    assert.match(command,/If image\/web search is available/)
+    assert.match(command,/Do not fabricate case names/)
+    assert.match(command,/do not claim that a diagram was rendered/)
+    assert.match(command,/If the full chapter cannot fit in one reply/)
+    assert.match(command,/Do not substitute a PDF/)
+  }
+  const mental=buildVistaNotesCommand({...pms,subjectId:'compulsory-mental-ability-and-reasoning-test'})
+  assert.match(mental,/PPSC MENTAL ABILITY GUIDEBOOK TOPIC/)
+  assert.doesNotMatch(mental,/EXACT PRESCRIBED SYLLABUS:/)
 })
