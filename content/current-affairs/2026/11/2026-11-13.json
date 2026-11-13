@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "published_at": "2026-11-13T19:01:23+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 13 November 2026 | Evening preliminary edition (00:00–19:01 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-13-taiwan-drills",
+      "category": "World — Indo-Pacific Security",
+      "headline": "Taiwan reports large unannounced Chinese naval exercises in western Pacific",
+      "summary": "Reuters reported on 13 November that Taiwan's officials described a large, unannounced Chinese naval deployment in the western Pacific as pressure on the island. Taiwanese officials said more than 100 naval and coast guard vessels were involved at one point; Beijing described aircraft-carrier activity as routine. These are competing official characterisations, not a confirmed declaration of blockade.",
+      "what_happened": "Reuters reported on 13 November that Taiwan's officials described a large, unannounced Chinese naval deployment in the western Pacific as pressure on the island. Taiwanese officials said more than 100 naval and coast guard vessels were involved at one point; Beijing described aircraft-carrier activity as routine. These are competing official characterisations, not a confirmed declaration of blockade.",
+      "background": "Cross-strait tensions have increased alongside disagreements over Taiwan's status, regional military deployments and maritime security.",
+      "why_it_matters": "The reported exercises matter for deterrence, freedom of navigation and the risk of military miscalculation across major Asian trade routes.",
+      "pakistan_perspective": "Pakistan has significant economic relations with China and relies on stable Indo-Pacific trade; analysis should distinguish observed movements from claims about intentions.",
+      "key_takeaways": [
+        "Taiwanese officials said more than 100 Chinese naval and coast guard vessels took part at one point in the November 2026 western Pacific deployment."
+      ],
+      "quick_gk": [
+        "Taiwanese officials said more than 100 Chinese naval and coast guard vessels took part at one point in the November 2026 western Pacific deployment."
+      ],
+      "question_angles": [
+        "According to Taiwanese officials cited by Reuters on 13 November 2026, approximately how many Chinese naval and coast guard vessels were involved at the peak of the reported exercises?"
+      ],
+      "topics": [
+        "World — Indo-Pacific Security"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "China stages unannounced Pacific drills in 'silent intimidation' of Taiwan, officials say",
+          "url": "https://www.reuters.com/world/china/china-stages-unannounced-pacific-drills-silent-intimidation-taiwan-officials-say-2026-11-13/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-13-china-ai-chips",
+      "category": "World — Technology and Trade",
+      "headline": "Reuters review finds more than $3 billion in Chinese Nvidia-based AI data-centre plans",
+      "summary": "A Reuters review published on 13 November identified more than $3 billion of proposed Chinese AI computing projects specifying Nvidia processors despite US export restrictions. Project plans do not establish that restricted chips were delivered or that all facilities were completed.",
+      "what_happened": "A Reuters review published on 13 November identified more than $3 billion of proposed Chinese AI computing projects specifying Nvidia processors despite US export restrictions. Project plans do not establish that restricted chips were delivered or that all facilities were completed.",
+      "background": "US semiconductor export controls and China's domestic chip-development policies shape access to advanced AI accelerators.",
+      "why_it_matters": "The findings illustrate how technology controls, supply-chain dependence and capital-intensive AI infrastructure intersect.",
+      "pakistan_perspective": "Pakistan's digital-development planning must distinguish announced computing capacity from operational infrastructure and consider supply-chain and electricity constraints.",
+      "key_takeaways": [
+        "A Reuters review on 13 November 2026 identified more than $3 billion in Chinese AI computing projects specifying Nvidia processors."
+      ],
+      "quick_gk": [
+        "A Reuters review on 13 November 2026 identified more than $3 billion in Chinese AI computing projects specifying Nvidia processors."
+      ],
+      "question_angles": [
+        "A Reuters review published on 13 November 2026 identified more than $3 billion in Chinese AI data-centre projects specifying chips from which company?"
+      ],
+      "topics": [
+        "World — Technology and Trade"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "China's $3 billion-plus pipeline of Nvidia-powered AI data centres",
+          "url": "https://www.reuters.com/world/china/factbox-chinas-3-billion-plus-pipeline-nvidia-powered-ai-data-centres-2026-11-13/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-13-germany-budget",
+      "category": "World — Public Finance",
+      "headline": "German budget committee advances 2027 spending plan with substantial borrowing",
+      "summary": "Reuters reported on 13 November that Germany's parliamentary budget committee approved a 2027 spending plan of approximately €561 billion, including €210.4 billion in planned new borrowing. Committee approval is not final enactment of the budget.",
+      "what_happened": "Reuters reported on 13 November that Germany's parliamentary budget committee approved a 2027 spending plan of approximately €561 billion, including €210.4 billion in planned new borrowing. Committee approval is not final enactment of the budget.",
+      "background": "Germany is debating fiscal space for infrastructure and defence spending alongside welfare commitments and economic growth.",
+      "why_it_matters": "The plan highlights tensions between public investment, borrowing and fiscal sustainability in a major European economy.",
+      "pakistan_perspective": "Germany's fiscal choices affect the European economic outlook, which is relevant to Pakistan's exports and trade relations.",
+      "key_takeaways": [
+        "Germany's parliamentary budget committee advanced a 2027 spending plan of approximately €561 billion on 13 November 2026."
+      ],
+      "quick_gk": [
+        "Germany's parliamentary budget committee advanced a 2027 spending plan of approximately €561 billion on 13 November 2026."
+      ],
+      "question_angles": [
+        "What was the approximate total spending in Germany's 2027 budget plan advanced by a parliamentary committee on 13 November 2026?"
+      ],
+      "topics": [
+        "World — Public Finance"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Germany set for near-record new borrowing in 2027 after difficult budget deal",
+          "url": "https://www.reuters.com/world/europe/german-budget-committee-agrees-2027-budget-2026-11-13/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-13-ukraine-talks",
+      "category": "World — Diplomacy and Security",
+      "headline": "US envoy describes plans to broaden Ukraine peace talks and pursue prisoner exchange",
+      "summary": "Reuters reported on 13 November that US envoy Jared Kushner said Russia and Ukraine had agreed to include European countries in a forthcoming round of US-brokered talks. He also described efforts toward a large prisoner exchange. Neither a completed exchange nor a peace agreement was confirmed.",
+      "what_happened": "Reuters reported on 13 November that US envoy Jared Kushner said Russia and Ukraine had agreed to include European countries in a forthcoming round of US-brokered talks. He also described efforts toward a large prisoner exchange. Neither a completed exchange nor a peace agreement was confirmed.",
+      "background": "Russia's full-scale invasion of Ukraine began in February 2022, and territorial disputes and security guarantees remain central obstacles.",
+      "why_it_matters": "European participation could influence future security arrangements, but diplomatic discussions do not by themselves amount to a ceasefire.",
+      "pakistan_perspective": "Continued instability affects food, energy and international diplomacy relevant to import-dependent economies including Pakistan.",
+      "key_takeaways": [
+        "US envoy Jared Kushner said on 13 November 2026 that European countries would be included in a forthcoming round of Ukraine peace talks."
+      ],
+      "quick_gk": [
+        "US envoy Jared Kushner said on 13 November 2026 that European countries would be included in a forthcoming round of Ukraine peace talks."
+      ],
+      "question_angles": [
+        "Which US envoy said on 13 November 2026 that European countries would join a forthcoming round of Ukraine peace talks?"
+      ],
+      "topics": [
+        "World — Diplomacy and Security"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Kushner says US working toward 'largest prisoner exchange' of Russia's war in Ukraine",
+          "url": "https://www.reuters.com/world/europe/kushner-says-us-working-toward-largest-prisoner-exchange-russias-war-ukraine-2026-11-13/"
+        }
+      ]
+    }
+  ]
+}
