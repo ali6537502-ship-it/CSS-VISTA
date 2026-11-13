@@ -1,6 +1,6 @@
 import type { StudyScheduleTask, SyllabusItemStatus } from '@/lib/store'
 import { shiftDay, validDay } from './model.ts'
-import { pmsMentalAbilitySubject } from '@/data/pmsMentalAbility'
+import { pmsMentalAbilitySubject } from '../../data/pmsMentalAbility.ts'
 
 export type VistaExam = 'css' | 'pms-punjab'
 export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[] }
