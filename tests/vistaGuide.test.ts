@@ -3,12 +3,12 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
   buildVistaNotesCommand, cssGuideSubjects, pmsGuideSubjects, generateVistaPlan,
-  guideUnits, readVistaPreferences, selectedVistaSubjects,
+  guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects,
   type VistaSubject, type VistaPreferences,
 } from '../src/features/planner/vistaGuideModel.ts'
 
 function prefs(extra: Partial<VistaPreferences> = {}): VistaPreferences {
-  return {version:1,subjectsPerDay:2,dailyMinutes:180,restDays:[],targetDate:'2026-11-30',startDate:'2026-11-12',mode:'rotate',selectedOptionals:[],alternative:'islamic-studies',...extra}
+  return {version:1,subjectsPerDay:2,dailyMinutes:180,restDays:[],targetDate:'2026-11-30',startDate:'2026-11-12',mode:'rotate',selectedOptionals:[],alternative:'islamic-studies',studySubjects:null,prioritySubjects:[],selectedEssayThemes:null,...extra}
 }
 function subject(id:string,topics:string[]): VistaSubject {
   return {id,title:id,designation:'compulsory',marks:100,sections:[{id:'s1',title:'Section A',topics:topics.map((title,i)=>({id:'vista-css:'+id+':s1:n'+i,title,detail:'Exact prescribed content for '+title}))}]}
@@ -121,6 +121,43 @@ test('a selected one-subject day cannot silently add a second already-scheduled 
   assert.deepEqual([...new Set(first.map(t=>t.subject))],['a'])
   assert.ok(first.reduce((n,t)=>n+t.minutes,0)+old.minutes<=180)
 })
+test('PMS English Essay schedules research, outlines, writing and review, never the assessment instructions',()=>{
+  const source=JSON.parse(readFileSync('public/pms-punjab/vista-syllabus.json','utf8'))
+  const index=JSON.parse(readFileSync('src/data/bundled/essay-themes-index.json','utf8'))
+  const essay=pmsGuideSubjects(source,index.themes).find((s:VistaSubject)=>s.id==='compulsory-english-essay')!
+  const selected=prefs({studySubjects:['compulsory-english-essay'],selectedEssayThemes:[index.themes[0].slug],targetDate:''})
+  const activities=plannedVistaUnits(essay,'pms-punjab',selected)
+  assert.equal(activities.length,4)
+  assert.ok(activities.every(unit=>unit.resourceSlug===index.themes[0].slug))
+  assert.match(activities.map(unit=>unit.title).join(' | '),/Research the theme/)
+  assert.match(activities.map(unit=>unit.title).join(' | '),/Build arguments and outline/)
+  assert.match(activities.map(unit=>unit.title).join(' | '),/Write a full essay/)
+  const plan=generateVistaPlan([essay],'pms-punjab',selected,[],{},'2026-11-12')
+  assert.equal(plan.draft.length,4)
+  assert.ok(plan.draft.every(task=>task.syllabusItemId.includes(':theme:')))
+  assert.throws(()=>generateVistaPlan([essay],'pms-punjab',{...selected,selectedEssayThemes:[]},[],{},'2026-11-12'),/Select at least one essay theme/)
+})
+test('selected starting subjects and priority order override the original catalogue order',()=>{
+  const papers=[subject('a',['a1','a2']),subject('b',['b1','b2']),subject('c',['c1','c2'])]
+  const chosen=prefs({studySubjects:['a','c'],prioritySubjects:['c','a'],subjectsPerDay:1,targetDate:''})
+  assert.deepEqual(selectedVistaSubjects(papers,'css',chosen).map(s=>s.id),['c','a'])
+  const result=generateVistaPlan(papers,'css',chosen,[],{},'2026-11-12')
+  assert.equal(result.scheduledSubjects,2)
+  assert.equal(result.draft[0].subject,'c')
+  assert.ok(result.draft.every(task=>task.subject!=='b'))
+  assert.equal(selectedVistaSubjects(papers,'css',{...chosen,studySubjects:[]}).length,0)
+  const old=readVistaPreferences({version:1,selectedOptionals:[]})
+  assert.equal(old.studySubjects,null)
+  assert.deepEqual(old.prioritySubjects,[])
+})
+test('essay activity cards link to theme preparation instead of a generic copied command',()=>{
+  const card=readFileSync('src/features/planner/PlannerTask.tsx','utf8')
+  const guide=readFileSync('src/features/planner/VistaStudyGuide.tsx','utf8')
+  assert.match(card,/legacyEssayInstruction/)
+  assert.match(card,/Build essay theme/)
+  assert.match(guide,/u\.resource!=='essay'&&<CopyNotes/)
+  assert.match(guide,/Choose your starting subjects and priority/)
+})
 test('Essay Themes 2027 adds exactly 25 clearly labelled preparation units, not fictional prescribed sections',()=>{
   const source=JSON.parse(readFileSync('public/pms-punjab/vista-syllabus.json','utf8'))
   const index=JSON.parse(readFileSync('src/data/bundled/essay-themes-index.json','utf8'))
@@ -129,7 +166,12 @@ test('Essay Themes 2027 adds exactly 25 clearly labelled preparation units, not 
   const essay=subjects.find(s=>s.id==='compulsory-english-essay')!
   assert.ok(essay.sections.some(section=>/not prescribed PPSC syllabus/.test(section.title)))
   const themes=guideUnits(essay,'pms-punjab').filter(unit=>unit.resourceSlug)
-  assert.equal(themes.length,25)
+  assert.equal(themes.length,100)
+  assert.equal(new Set(themes.map(unit=>unit.resourceSlug)).size,25)
+  assert.ok(themes.some(unit=>unit.id.endsWith(':draft')))
+  assert.equal(essay.officialGuidance?.length,2)
+  assert.ok(essay.officialGuidance?.some(line=>line.includes('conceptual clarity')))
+  assert.ok(!themes.some(unit=>unit.title.startsWith('The candidates are expected')))
   const prompt=buildVistaNotesCommand(themes[0])
   assert.match(prompt,/SUPPLEMENTARY ESSAY RESEARCH ROADMAP/)
   assert.doesNotMatch(prompt,/EXACT PRESCRIBED SYLLABUS/)
