@@ -58,6 +58,9 @@ function outline(node: VistaNode, depth = 0): string {
 }
 export type VistaEssayTheme = { slug: string; name: string; brief: string; sections: Array<{letter: string; title: string}> }
 function essayThemeTopics(prefix: string, themes: VistaEssayTheme[]): VistaNode[] {
+  const writingGuidance = prefix.startsWith('pms-punjab:')
+    ? 'Write a coherent essay of about 1,500 words, following the prescribed PMS Punjab requirement.'
+    : 'Write a full coherent practice essay, following the applicable CSS English Essay paper requirements.'
   // Essay paper instructions describe assessment, not lessons. Each genuine
   // research-roadmap theme produces four actionable preparation sessions.
   return themes.map(theme => ({
@@ -67,7 +70,7 @@ function essayThemeTopics(prefix: string, themes: VistaEssayTheme[]): VistaNode[
     children: [
       { id: prefix + theme.slug, title: 'Research the theme: ' + theme.name, detail: 'Define the theme, explore its dimensions and collect verifiable evidence using the existing research roadmap.' },
       { id: prefix + theme.slug + ':outline', title: 'Build arguments and outline: ' + theme.name, detail: 'Frame a clear thesis, develop balanced arguments and counterarguments, and construct a logical essay outline.' },
-      { id: prefix + theme.slug + ':draft', title: 'Write a full essay: ' + theme.name, detail: 'Write a coherent essay of about 1,500 words, practising the stated PMS English Essay length requirement.' },
+      { id: prefix + theme.slug + ':draft', title: 'Write a full essay: ' + theme.name, detail: writingGuidance },
       { id: prefix + theme.slug + ':review', title: 'Evaluate and improve: ' + theme.name, detail: 'Review conceptual clarity, organisation, reasoning, expression, grammar and evidence; then rewrite weak passages.' },
     ],
   }))
@@ -199,7 +202,7 @@ export interface VistaPlan { draft: VistaDraftTask[]; finishedOn: string; schedu
 /** Suggested study minutes reflect reading load, not official exam time guidance. */
 export function suggestedVistaMinutes(unit: VistaUnit) {
   if (unit.resource === 'essay') {
-    if (unit.id.endsWith(':draft')) return 150
+    if (unit.id.endsWith(':draft')) return unit.paper === 'CSS' ? 180 : 150
     if (unit.id.endsWith(':outline') || unit.id.endsWith(':review')) return 60
     return 90
   }
