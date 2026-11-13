@@ -92,6 +92,20 @@ async function check(width,height,exam) {
       subjectsByDay.get(task.date).add(task.subject)
     }
     assert.ok([...subjectsByDay.values()].every(set=>set.size<=3),'no more than three subjects per day')
+
+    if(exam==='pms-punjab') {
+      const todayKey=await page.evaluate(()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')})
+      const todayPms=schedule.filter(task=>task.date===todayKey)
+      const visibleGuide=page.locator('.vg-pms-today')
+      await visibleGuide.getByRole('heading',{name:"Today's PMS tasks",exact:true}).waitFor()
+      assert.equal(await visibleGuide.locator('[data-task-id]').count(),Math.min(4,todayPms.length),'PMS guide shows saved tasks for today, never just setup screens')
+      await visibleGuide.getByRole('link',{name:'Open PMS Today'}).click()
+      await page.getByRole('heading',{name:"Today’s tasks",exact:true}).waitFor()
+      assert.equal(await page.locator('.pl-agenda-section').first().locator('[data-task-id]').count(),todayPms.length,'PMS Today fetches confirmed saved sessions')
+      assert.equal((await page.locator('.pl-agenda-section').first().textContent()).includes('Political theory: liberty'),false,'PMS Today excludes unrelated CSS work')
+      await page.goto(origin+path)
+      await page.locator('.vg-hero h2').waitFor()
+    }
     await page.screenshot({path:resolve(root,'test-artifacts/vista/'+exam+'-desktop-schedule.png'),fullPage:true})
   } else {
     await page.getByRole('button',{name:'View all subjects'}).click()
