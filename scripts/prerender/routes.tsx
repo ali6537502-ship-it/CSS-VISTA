@@ -148,6 +148,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/start-css', () => <StartCSS />),
   page('/pms-vista', () => <PmsVista />),
   ...pmsVistaSubjectMeta.map(subject => page('/pms-vista/syllabus/' + subject.id, () => <PmsVistaSubject />, '/pms-vista/syllabus/:subject')),
+  page('/pms-vista/syllabus/compulsory-mental-ability-and-reasoning-test', () => <PmsVistaSubject />, '/pms-vista/syllabus/:subject'),
   page('/css-eligibility-calculator', () => <CssEligibilityCalculator />),
   page('/subjects/compulsory', () => <CompulsoryList />),
   page('/subjects/compulsory/essay', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
