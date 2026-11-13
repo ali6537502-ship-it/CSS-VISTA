@@ -83,7 +83,7 @@ export function pmsGuideSubjects(data: { subjects: VistaSubject[] }, themes: Vis
       ...subject, officialGuidance,
       sections: [{
         id: 'essay-themes-2027',
-        title: 'Essay Themes 2027 — supplementary preparation roadmap (not a PPSC prescribed topic list)',
+        title: 'Essay Themes 2027 — supplementary preparation roadmap (not prescribed PPSC syllabus topics)',
         detail: 'Select and prepare research themes through evidence gathering, outlines, full essays and editorial review. The official PPSC essay requirements are displayed separately.',
         topics: essayThemeTopics('pms-punjab:vista:compulsory-english-essay:theme:', themes),
       }],
