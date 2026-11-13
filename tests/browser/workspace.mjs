@@ -40,6 +40,35 @@ try{
  await page.getByText('Task could not be saved on this device. Try again.',{exact:true}).waitFor()
  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:v1')).studyScheduleTasks[0].status),'completed')
  await page.evaluate(() => { Storage.prototype.setItem = window.fixtureSetItem })
+
+ await page.evaluate(today=>{
+   const state=JSON.parse(localStorage.getItem('cssvista:v1') || '{}')
+   state.studyScheduleTasks.push({
+     id:'fixture-pms-today',
+     syllabusItemId:'pms-punjab:vista:compulsory-general-knowledge:s1:n1',
+     subject:'General Knowledge',
+     topic:'PMS official general knowledge study',
+     paper:'PMS Punjab',
+     section:'General Knowledge',
+     date:today,minutes:45,status:'not-started',createdAt:new Date().toISOString(),
+   })
+   localStorage.setItem('cssvista:v1',JSON.stringify(state))
+   localStorage.setItem('cssvista:workspace:v1:fixture-a',JSON.stringify({pins:['daily-pdfs','daily-english','vistagram'],guidanceDismissed:false,comparative:false}))
+ },today)
+ await page.reload()
+ await page.getByRole('heading',{name:'Today’s Study Plan',exact:true}).waitFor()
+ await page.getByText('PMS official general knowledge study',{exact:true}).first().waitFor()
+ assert.equal(await page.locator('.ws-shortcut[href="/account/precis"]').count(),1,'Preci Mentor replaces prior Daily PDF quick-action pin')
+ assert.equal(await page.locator('.ws-shortcut[href="/current-affairs-daily"]').count(),0,'old PDF shortcut is not pinned')
+ assert.equal(await page.locator('.ws-shortcut[href="/account/english"]').count(),1,'other personalized pins are retained')
+ await page.getByRole('link',{name:'View PMS Today'}).click()
+ await page.getByRole('heading',{name:'Today’s tasks',exact:true}).waitFor()
+ await page.locator('[data-task-id="fixture-pms-today"]').waitFor()
+ assert.equal(await page.locator('[data-task-id="fixture-task"]').count(),0,'PMS Today does not substitute CSS tasks')
+ await page.goto(origin+'/account/tasks?exam=pms-punjab&view=syllabus')
+ await page.getByRole('heading',{name:"Today's PMS tasks",exact:true}).waitFor()
+ await page.locator('[data-task-id="fixture-pms-today"]').waitFor()
+
  const widths=[320,375,390,768,1024,1440],routes=['dashboard','tasks','subjects','practice','progress','library','settings','more']
  for(const width of widths){
   console.log('Checking width',width)
@@ -107,6 +136,7 @@ try{
  assert.equal(await page.getByRole('heading',{name:'Islamic Studies',exact:true}).count(),0)
  await page.goto(origin+'/account/directory');await page.getByRole('searchbox').fill('daily pdf')
  await page.getByRole('heading',{name:'Current Affairs Daily PDFs',exact:true}).waitFor()
+ await page.getByRole('button',{name:'Pin Current Affairs Daily PDFs',exact:true}).click()
  await page.getByRole('button',{name:'Unpin Current Affairs Daily PDFs',exact:true}).click()
  await page.goto(origin+'/account/dashboard');assert.equal(await page.getByRole('link',{name:'Current Affairs Daily PDFs Free',exact:true}).count(),0)
  await page.getByRole('button',{name:'Dismiss getting started',exact:true}).click()
