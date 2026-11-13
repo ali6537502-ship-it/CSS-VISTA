@@ -16,7 +16,7 @@ import { dayKey, readableDay, shiftDay, validDay } from './model'
 import { PMS_SETTINGS_KEY, readPmsSettings, taskExam } from './pmsModel'
 import {
   buildVistaNotesCommand, cssGuideSubjects,
-  generateVistaPlan, guideUnits, pmsGuideSubjects, readVistaPreferences,
+  generateVistaPlan, guideUnits, plannedVistaUnits, pmsGuideSubjects, readVistaPreferences,
   selectedVistaSubjects, type VistaExam, type VistaPlan, type VistaPreferences,
   type VistaSubject, type VistaUnit,
 } from './vistaGuideModel'
@@ -103,7 +103,11 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   useEffect(()=>{if(mode==='settings')setSettingsOpen(true)},[mode])
   const subjects = catalogue || []
   const chosen = useMemo(()=>selectedVistaSubjects(subjects,exam,prefs),[subjects,exam,prefs])
-  const chosenUnits = useMemo(()=>chosen.flatMap(s=>guideUnits(s,exam)),[chosen,exam])
+  const chosenUnits = useMemo(()=>chosen.flatMap(s=>plannedVistaUnits(s,exam,prefs)),[chosen,exam,prefs])
+  const draftEligibleSubjects = selectedVistaSubjects(subjects,exam,{...draftPrefs,studySubjects:null})
+  const draftStudyIds = draftPrefs.studySubjects===null ? draftEligibleSubjects.map(s=>s.id) : draftPrefs.studySubjects.filter(id=>draftEligibleSubjects.some(s=>s.id===id))
+  const draftStudySubjects = selectedVistaSubjects(subjects,exam,{...draftPrefs,studySubjects:draftStudyIds})
+  const essayId = exam==='pms-punjab' ? 'compulsory-english-essay' : 'essay'
   const visible = showAll ? subjects : chosen
   const filtered = visible.filter(s=>s.title.toLowerCase().includes(subjectSearch.toLowerCase()))
   const active = subjects.find(s=>s.id===subjectId) || chosen[0] || subjects[0]
@@ -133,6 +137,24 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     edited.current=true;setPlan(null);setMessage('');setError('')
     setDraftPrefs(p=>({...p,...patch}))
   }
+  function toggleStudySubject(id: string) {
+    const next = draftStudyIds.includes(id) ? draftStudyIds.filter(value=>value!==id) : [...draftStudyIds,id]
+    change({studySubjects:next,prioritySubjects:[...draftPrefs.prioritySubjects.filter(value=>next.includes(value)),...draftEligibleSubjects.map(s=>s.id).filter(value=>next.includes(value)&&!draftPrefs.prioritySubjects.includes(value))]})
+  }
+  function movePriority(id: string, direction: -1 | 1) {
+    const order=draftStudySubjects.map(s=>s.id), at=order.indexOf(id), target=at+direction
+    if(at<0||target<0||target>=order.length)return
+    ;[order[at],order[target]]=[order[target],order[at]]
+    change({prioritySubjects:order})
+  }
+  function putFirst(id: string) {
+    change({prioritySubjects:[id,...draftStudySubjects.map(s=>s.id).filter(value=>value!==id)]})
+  }
+  function toggleEssayTheme(slug: string) {
+    const all=essayThemeIndex().map(theme=>theme.slug)
+    const current=draftPrefs.selectedEssayThemes===null ? all : draftPrefs.selectedEssayThemes
+    change({selectedEssayThemes:current.includes(slug)?current.filter(value=>value!==slug):[...current,slug]})
+  }
   function save(){
     if(!checkWrite())return
     if(draftPrefs.dailyMinutes<30 || draftPrefs.dailyMinutes>720 || draftPrefs.restDays.length===7 || ![1,2,3].includes(draftPrefs.subjectsPerDay)
@@ -140,6 +162,8 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       setError('Choose 30 minutes to 12 hours, one to three subjects per day, valid dates, and at least one study day.');return
     }
     if(exam==='css' && !cssOptionalValidation.valid){setError('Review the FPSC subject combination before saving: '+cssOptionalValidation.messages.join('; '));return}
+    if(!draftStudySubjects.length){setError('Choose at least one subject to study now.');return}
+    if(draftStudyIds.includes(essayId) && draftPrefs.selectedEssayThemes?.length===0){setError('Choose at least one essay theme to prepare.');return}
     try {
       const key=preparationPhysicalKey(KEY+exam), value=JSON.stringify(draftPrefs)
       localStorage.setItem(key,value)
@@ -246,15 +270,15 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   if(!catalogue)return <div className="pl-panel-loading" role="status">Loading your syllabus and preparation guide…</div>
   return <div className="vg-root">
     <section className="vg-hero">
-      <div><p className="pl-kicker">YOUR PERSONALIZED PREPARATION</p><h2>{exam==='pms-punjab'?'PMS Vista':'CSS Vista'}</h2><p>{exam==='pms-punjab'?'Study the complete PMS syllabus with your own daily schedule, comprehensive notes commands, revision and progress tracking.':'Prepare for CSS through syllabus-based daily study plans, one to three parallel subjects, analytical chapter notes commands, revision and progress tracking.'}</p></div>
+      <div><p className="pl-kicker">YOUR PERSONALIZED PREPARATION</p><h2>{exam==='pms-punjab'?'PMS Vista':'CSS Vista'}</h2><p>{exam==='pms-punjab'?'Choose your starting subjects and priorities. Build English Essay themes, follow a personal schedule, and track real study progress.':'Prepare for CSS through syllabus-based daily study plans, one to three parallel subjects, analytical chapter notes commands, revision and progress tracking.'}</p></div>
       <button className="pl-secondary" onClick={()=>setSettingsOpen(open=>!open)}><Settings2 size={16}/>Subjects and routine</button>
     </section>
     {syncError && <p className="pl-warning" role="alert">Account sync needs attention. <Link to="/account/settings">Review account settings</Link>.</p>}
     <div className="vg-metrics">
-      <div><strong>{chosen.length}</strong><span>Subjects in your plan</span></div>
+      <div><strong>{chosen.length}</strong><span>Subjects chosen for now</span></div>
       <div><strong>{prefs.subjectsPerDay}</strong><span>Parallel subjects daily</span></div>
-      <div><strong>{completed}/{chosenUnits.length}</strong><span>Chapters marked complete</span></div>
-      <div><strong>{remaining.length}</strong><span>Unscheduled chapters</span></div>
+      <div><strong>{completed}/{chosenUnits.length}</strong><span>Study activities completed</span></div>
+      <div><strong>{remaining.length}</strong><span>Unscheduled activities</span></div>
     </div>
     {(settingsOpen || mode==='settings') && <section className="vg-panel vg-settings">
       <div className="pl-section-heading"><div><p className="pl-kicker">STEP 1</p><h3>Choose your preparation routine</h3></div></div>
@@ -278,32 +302,50 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
         })}</div>
         {exam==='css' && !cssOptionalValidation.valid && <p role="alert" className="pl-warning">{cssOptionalValidation.messages.join('. ')}</p>}
       </fieldset>
+      <fieldset className="vg-options">
+        <legend>Choose your starting subjects and priority</legend>
+        <p className="pl-muted">Select only the subjects you want in your current timetable. Your other compulsory and optional papers stay in the syllabus; you can add them later. The first subject below starts first. Use the arrows to rank what matters most.</p>
+        <div className="vg-priority-list">{draftEligibleSubjects.map(subject=>{
+          const selected=draftStudyIds.includes(subject.id), rank=draftStudySubjects.findIndex(row=>row.id===subject.id)
+          return <div key={subject.id} className="vg-priority-row">
+            <label><input type="checkbox" checked={selected} onChange={()=>toggleStudySubject(subject.id)}/><span>{subject.title}</span></label>
+            {selected&&<div className="vg-priority-tools"><span className="vg-priority-rank">Priority {rank+1}</span><button type="button" onClick={()=>putFirst(subject.id)} disabled={rank===0}>Start first</button><button type="button" aria-label={'Move '+subject.title+' earlier'} onClick={()=>movePriority(subject.id,-1)} disabled={rank===0}>↑</button><button type="button" aria-label={'Move '+subject.title+' later'} onClick={()=>movePriority(subject.id,1)} disabled={rank===draftStudySubjects.length-1}>↓</button></div>}
+          </div>
+        })}</div>
+      </fieldset>
+      {draftStudyIds.includes(essayId)&&<fieldset className="vg-options">
+        <legend>English Essay — build themes, not copied syllabus instructions</legend>
+        <p className="pl-muted">Choose research themes to work on. Each theme has four activities: evidence research, analytical outline, full essay writing and revision. These themes are supplementary preparation material, not prescribed PPSC or FPSC essay titles.</p>
+        <div className="vg-actions"><button type="button" className="vg-inline-action" onClick={()=>change({selectedEssayThemes:null})}>Select all themes</button><button type="button" className="vg-inline-action" onClick={()=>change({selectedEssayThemes:[]})}>Clear themes</button></div>
+        <div className="vg-theme-grid">{essayThemeIndex().map(theme=><label key={theme.slug}><input type="checkbox" checked={draftPrefs.selectedEssayThemes===null||draftPrefs.selectedEssayThemes.includes(theme.slug)} onChange={()=>toggleEssayTheme(theme.slug)}/><span>{theme.name}</span></label>)}</div>
+      </fieldset>}
       <div className="vg-actions"><button className="pl-primary" disabled={syncStatus==='syncing'} onClick={save}><Save size={16}/>Save my preparation choices</button><button className="pl-secondary" onClick={()=>{edited.current=false;setDraftPrefs(prefs);setSettingsOpen(false);setError('')}}>Cancel changes</button></div>
     </section>}
     {error && <p role="alert" className="pl-error vg-feedback">{error}</p>}
     {message && <p role="status" className="pl-success vg-feedback">{message}</p>}
     <section className="vg-panel">
-      <div className="vg-section-head"><div><p className="pl-kicker">STEP 2</p><h3>Generate your full study schedule</h3><p>Your selected chapters are distributed over study days with {prefs.subjectsPerDay} subject{prefs.subjectsPerDay===1?'':'s'} per day. Existing tasks consume your available time.</p></div><button className="pl-primary" onClick={preview}><CalendarDays size={16}/>Generate my plan</button></div>
-      {plan && <div className="vg-preview"><p><strong>{plan.draft.length} new sessions</strong> across {plan.scheduledSubjects} subjects. {plan.alreadyCovered} previously completed or scheduled chapters retained. {plan.draft.length>0?'Estimated final day: '+readableDay(plan.finishedOn):'Nothing new to schedule.'}</p><div className="vg-preview-rows">{plan.draft.slice(0,6).map(t=><div key={t.syllabusItemId}><span>{t.date}</span><strong>{t.subject}</strong><span>{t.topic}</span><small>{t.minutes} min</small></div>)}</div>{plan.draft.length>6&&<p className="pl-muted">Showing first six sessions. All {plan.draft.length} will be saved.</p>}{plan.draft.length>0&&<button className="pl-primary" onClick={commit}><CheckCircle2 size={16}/>Confirm and save all sessions</button>}</div>}
+      <div className="vg-section-head"><div><p className="pl-kicker">STEP 2</p><h3>Generate your full study schedule</h3><p>Your chosen study activities are distributed over study days with {prefs.subjectsPerDay} subject{prefs.subjectsPerDay===1?'':'s'} per day. Existing tasks consume your available time.</p></div><button className="pl-primary" onClick={preview}><CalendarDays size={16}/>Generate my plan</button></div>
+      {plan && <div className="vg-preview"><p><strong>{plan.draft.length} new sessions</strong> across {plan.scheduledSubjects} subjects. {plan.alreadyCovered} previously completed or scheduled activities retained. {plan.draft.length>0?'Estimated final day: '+readableDay(plan.finishedOn):'Nothing new to schedule.'}</p><div className="vg-preview-rows">{plan.draft.slice(0,6).map(t=><div key={t.syllabusItemId}><span>{t.date}</span><strong>{t.subject}</strong><span>{t.topic}</span><small>{t.minutes} min</small></div>)}</div>{plan.draft.length>6&&<p className="pl-muted">Showing first six sessions. All {plan.draft.length} will be saved.</p>}{plan.draft.length>0&&<button className="pl-primary" onClick={commit}><CheckCircle2 size={16}/>Confirm and save all sessions</button>}</div>}
     </section>
     <section className="vg-panel">
-      <div className="vg-section-head"><div><p className="pl-kicker">STEP 3</p><h3>Today's chapters</h3><p>{readableDay(today)} · Complete them yourself, or copy a notes command and study with ChatGPT.</p></div><button className="pl-secondary" onClick={recoverMissed}><RefreshCw size={15}/>Reschedule missed sessions</button></div>
+      <div className="vg-section-head"><div><p className="pl-kicker">STEP 3</p><h3>Today's study activities</h3><p>{readableDay(today)} · Follow your chosen subjects and priorities. Essay tasks open the theme-building workspace.</p></div><button className="pl-secondary" onClick={recoverMissed}><RefreshCw size={15}/>Reschedule missed sessions</button></div>
       {todayRows.length?<div className="vg-today">{todayRows.map(t=><PlannerTask key={t.id} task={t} refresh={refresh}/>)}</div>:<p className="pl-note">No sessions assigned for today. Generate a plan or open your saved weekly schedule.</p>}
       {revisions.length>0&&<div className="vg-preview"><p><strong>Upcoming revision sessions</strong> · Review your completed chapters without changing the original coverage.</p><div className="vg-today">{revisions.map(t=><PlannerTask key={t.id} task={t} refresh={refresh}/>)}</div></div>}
       <div className="vg-actions"><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=today'}>Open Today</Link><Link className="pl-secondary" to={'/account/tasks?exam='+exam+'&view=week'}>View my week</Link></div>
     </section>
     <section className="vg-panel">
-      <div className="vg-section-head"><div><p className="pl-kicker">COMPLETE SYLLABUS</p><h3>Study by subject, chapter and section</h3><p>Open every syllabus chapter and its subtopics here, copy a detailed notes command, and track progress without leaving your study space.</p></div><button className="pl-secondary" onClick={()=>setShowAll(v=>!v)}>{showAll?'My selected subjects':'View all subjects'}</button></div>
+      <div className="vg-section-head"><div><p className="pl-kicker">COMPLETE SYLLABUS</p><h3>Study by subject, chapter and theme</h3><p>Follow the prescribed syllabus for subject papers and the separate theme-building roadmap for English Essay. Track each activity as you prepare.</p></div><button className="pl-secondary" onClick={()=>setShowAll(v=>!v)}>{showAll?'My selected subjects':'View all subjects'}</button></div>
       <label className="vg-search"><Search size={15}/><input value={subjectSearch} onChange={e=>setSubjectSearch(e.target.value)} placeholder="Search your subjects" /></label>
       <div className="vg-subjects">{filtered.map(s=><button type="button" key={s.id} aria-pressed={active?.id===s.id} onClick={()=>{setSubjectId(s.id);setShowCount(20)}}>{s.title}</button>)}</div>
       {active && <div className="vg-syllabus">
         <details className="vg-readings"><summary>View complete section structure ({active.sections.length} sections)</summary>
           <ol>{active.sections.map(section=><li key={section.id} dir="auto"><strong>{section.title}</strong> — {section.topics.length} syllabus item{section.topics.length===1?'':'s'}{!section.topics.length && ' (heading only in source)'}</li>)}</ol>
         </details>
-        <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} chapters complete</small></div><span className="vg-syllabus-chip">Read chapters here — no PDF required</span></div>
-        <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished chapters only</label>
-        {visibleUnits.slice(0,showCount).map(u=><article key={u.id} className="vg-unit"><div><small>{u.section}</small><h4 dir="auto">{u.title}</h4><details><summary>Read complete syllabus for this chapter</summary><pre dir="auto">{u.syllabus}</pre></details></div><div className="vg-unit-tools"><CopyNotes unit={u} compact/>{resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Open Essay Themes 2027'}</Link>}<button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button>{hasStatus(u) && <button className="vg-inline-action" onClick={()=>scheduleRevision(u)}><RefreshCw size={15}/>Schedule revision</button>}</div></article>)}
-        {visibleUnits.length>showCount&&<button className="pl-secondary" onClick={()=>setShowCount(n=>n+20)}>Show more chapters · {visibleUnits.length-showCount} remaining</button>}
+        {(active.officialGuidance||[]).length>0&&<details className="vg-readings"><summary>Official PPSC English Essay paper requirements (guidance, not study chapters)</summary><ol>{active.officialGuidance!.map((text,i)=><li key={i}>{text}</li>)}</ol></details>}
+        <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} activities complete</small></div><span className="vg-syllabus-chip">Read chapters here — no PDF required</span></div>
+        <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished activities only</label>
+        {visibleUnits.slice(0,showCount).map(u=><article key={u.id} className="vg-unit"><div><small>{u.section}</small><h4 dir="auto">{u.title}</h4><details><summary>{u.resource==='essay'?'View theme preparation brief':'Read complete syllabus for this chapter'}</summary><pre dir="auto">{u.syllabus}</pre></details></div><div className="vg-unit-tools">{u.resource!=='essay'&&<CopyNotes unit={u} compact/>}{resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Build this essay theme'}</Link>}<button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button>{hasStatus(u) && <button className="vg-inline-action" onClick={()=>scheduleRevision(u)}><RefreshCw size={15}/>Schedule revision</button>}</div></article>)}
+        {visibleUnits.length>showCount&&<button className="pl-secondary" onClick={()=>setShowCount(n=>n+20)}>Show more activities · {visibleUnits.length-showCount} remaining</button>}
         {(active.readings||[]).length>0&&<details className="vg-readings"><summary>Suggested readings ({(active.readings||[]).length})</summary><ol>{(active.readings||[]).map((r,i)=><li key={i}>{r}</li>)}</ol></details>}
         {(active.notes||[]).length>0&&<details className="vg-readings"><summary>Source instructions and notes</summary>{(active.notes||[]).map((n,i)=><p key={i}>{n}</p>)}</details>}
       </div>}
