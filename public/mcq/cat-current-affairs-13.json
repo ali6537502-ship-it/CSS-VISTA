@@ -583,5 +583,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/europe/kushner-says-us-working-toward-largest-prisoner-exchange-russias-war-ukraine-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261113-delhi-lahore-smog",
+    "q": "Which city overtook Lahore in a live air-pollution ranking reported by Reuters on 13 November 2026?",
+    "o": [
+      "Dhaka",
+      "Delhi",
+      "Kathmandu",
+      "Tehran"
+    ],
+    "a": 1,
+    "e": "Reuters reported on 13 November 2026 that Delhi overtook Lahore in a live ranking of the most polluted major cities.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/environment/delhi-overtakes-lahore-worlds-most-polluted-city-air-quality-drops-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261113-climate-finance-trilateral",
+    "q": "Development finance institutions from which three countries launched a $10 billion climate initiative on 13 November 2026?",
+    "o": [
+      "UK, Norway and Canada",
+      "France, Germany and Italy",
+      "Japan, China and India",
+      "US, Mexico and Brazil"
+    ],
+    "a": 0,
+    "e": "UK, Norwegian and Canadian development finance institutions announced a $10 billion emerging-market climate finance initiative targeting 2030.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/uk-norway-canada-launch-10-billion-climate-finance-initiative-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261113-island-remittance-resilience",
+    "q": "What remittance charge was proposed by a group of Small Island Developing States for climate resilience, as reported on 13 November 2026?",
+    "o": [
+      "1%",
+      "2%",
+      "3%",
+      "8%"
+    ],
+    "a": 2,
+    "e": "A group of Small Island Developing States proposed a 3% charge on diaspora remittances to support climate resilience.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/small-islands-aim-use-remittances-fund-climate-resilience-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261113-us-ai-cyber-taskforce",
+    "q": "Which sector was a central focus of US AI task-force discussions on cyberattack reporting reported on 13 November 2026?",
+    "o": [
+      "Film production",
+      "Critical infrastructure",
+      "Professional sports",
+      "Retail fashion"
+    ],
+    "a": 1,
+    "e": "A US presidential AI task force discussed cyber incident reporting for critical-infrastructure operators in November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/us/trumps-ai-task-force-met-thursday-discussed-ai-powered-cyberattacks-2026-11-13/"
   }
 ]

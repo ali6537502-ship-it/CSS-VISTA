@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 747,
+  "count": 751,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5228,6 +5228,34 @@
     {
       "id": "current-affairs-archive-2026-11-13-ukraine-talks",
       "text": "US envoy Jared Kushner said on 13 November 2026 that European countries would be included in a forthcoming round of Ukraine peace talks.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-delhi-lahore-smog",
+      "text": "Reuters reported on 13 November 2026 that Delhi overtook Lahore in a live ranking of the most polluted major cities.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-climate-finance-trilateral",
+      "text": "UK, Norwegian and Canadian development finance institutions announced a $10 billion emerging-market climate finance initiative targeting 2030.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-island-remittance-resilience",
+      "text": "A group of Small Island Developing States proposed a 3% charge on diaspora remittances to support climate resilience.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-13-us-ai-cyber-taskforce",
+      "text": "A US presidential AI task force discussed cyber incident reporting for critical-infrastructure operators in November 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
