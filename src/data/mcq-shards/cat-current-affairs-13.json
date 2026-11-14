@@ -643,5 +643,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/us/trumps-ai-task-force-met-thursday-discussed-ai-powered-cyberattacks-2026-11-13/"
+  },
+  {
+    "id": "current-affairs-20261114-eco-islamabad",
+    "q": "Which city was announced as host of the 30th ECO Council of Ministers meeting scheduled for 15–16 November 2026?",
+    "o": [
+      "Islamabad",
+      "Tehran",
+      "Ankara",
+      "Tashkent"
+    ],
+    "a": 0,
+    "e": "Pakistan's Foreign Office announced Islamabad as the venue.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2044472"
+  },
+  {
+    "id": "current-affairs-20261114-cop31-stiell",
+    "q": "Who urged COP31 negotiators to avoid tactical delays on 14 November 2026?",
+    "o": [
+      "Chris Bowen",
+      "Simon Stiell",
+      "António Costa",
+      "Murat Kurum"
+    ],
+    "a": 1,
+    "e": "UN climate chief Simon Stiell made the appeal.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/un-climate-chief-urges-speed-cop31-confronts-fossil-fuel-divide-2026-11-14/"
+  },
+  {
+    "id": "current-affairs-20261114-india-900gw",
+    "q": "What non-fossil electricity capacity target did India report for 2035?",
+    "o": [
+      "500 GW",
+      "700 GW",
+      "900 GW",
+      "1,200 GW"
+    ],
+    "a": 2,
+    "e": "AP reported India's 900-gigawatt target for 2035.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/695ca45d03df77bc207941ae7ca66fca"
   }
 ]

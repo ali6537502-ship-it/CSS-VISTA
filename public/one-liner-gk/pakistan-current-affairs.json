@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 290,
+  "count": 291,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2030,6 +2030,13 @@
       "id": "pakistan-current-affairs-2026-11-13-delhi-lahore-smog",
       "text": "Reuters reported on 13 November 2026 that Delhi overtook Lahore in a live ranking of the most polluted major cities.",
       "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-14-eco-ministers",
+      "text": "Pakistan announced that Islamabad would host the 30th ECO Council of Ministers meeting on 15–16 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
     }

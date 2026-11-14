@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 751,
+  "count": 754,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5256,6 +5256,27 @@
     {
       "id": "current-affairs-archive-2026-11-13-us-ai-cyber-taskforce",
       "text": "A US presidential AI task force discussed cyber incident reporting for critical-infrastructure operators in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-14-eco-ministers",
+      "text": "Pakistan announced that Islamabad would host the 30th ECO Council of Ministers meeting on 15–16 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-14-cop31-stiell",
+      "text": "UN climate chief Simon Stiell urged COP31 delegates in Antalya to accelerate negotiations on 14 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-14-india-900gw",
+      "text": "India aims for 900 GW of non-fossil electricity capacity by 2035, according to AP reporting on 14 November 2026.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

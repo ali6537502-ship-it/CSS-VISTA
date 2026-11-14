@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "published_at": "2026-11-14T19:04:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 14 November 2026 | Preliminary evening edition (00:00–19:04 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-14-eco-ministers-islamabad",
+      "category": "Pakistan — Regional Diplomacy",
+      "headline": "Pakistan announces Islamabad meeting of ECO Council of Ministers for 15–16 November",
+      "summary": "Pakistan's Foreign Office announced on 14 November that Islamabad would host the 30th Economic Cooperation Organization Council of Ministers meeting on 15–16 November 2026. The gathering is scheduled, not yet completed; Deputy Prime Minister and Foreign Minister Ishaq Dar is expected to chair it.",
+      "background": "ECO is a regional intergovernmental organisation focused on economic connectivity, trade and cooperation. Pakistan holds the ECO chairmanship for 2026–27.",
+      "why_it_matters": "The ministerial agenda offers a platform for regional connectivity and trade diplomacy, but planned discussions should not be mistaken for adopted agreements.",
+      "pakistan_perspective": "The announced theme, 'Reviving Regionalism for a Resilient ECO', reflects Pakistan's stated regional-cooperation priorities.",
+      "key_takeaways": [
+        "The 30th ECO Council of Ministers meeting was announced for Islamabad on 15–16 November 2026."
+      ],
+      "quick_gk": [
+        "Pakistan announced that Islamabad would host the 30th ECO Council of Ministers meeting on 15–16 November 2026."
+      ],
+      "question_angles": [
+        "Which city was announced on 14 November as host of the 30th ECO Council of Ministers meeting?"
+      ],
+      "topics": [
+        "ECO",
+        "Pakistan foreign policy",
+        "Regional connectivity"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Economic Cooperation Organization"
+      ],
+      "people": [
+        "Ishaq Dar"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Pakistan to host 30th ECO Council of Ministers meeting on Nov 15-16",
+          "url": "https://www.dawn.com/news/2044472"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-14-cop31-stiell-negotiations",
+      "category": "World — Climate Diplomacy",
+      "headline": "UN climate chief urges COP31 negotiators to accelerate talks amid fossil-fuel divisions",
+      "summary": "Reuters reported on 14 November that UN climate chief Simon Stiell urged COP31 negotiators in Antalya, Türkiye, to move quickly on difficult issues and avoid tactical delays. Disagreements over fossil-fuel language and climate finance remained unresolved; no final agreement was reported.",
+      "background": "COP31 negotiations address implementation of international climate commitments, adaptation finance and the transition away from fossil fuels.",
+      "why_it_matters": "Disputes over fossil-fuel wording and finance affect the credibility and implementation of international climate cooperation.",
+      "pakistan_perspective": "Pakistan's climate vulnerability makes adaptation funding and clarity on actual financial commitments especially important.",
+      "key_takeaways": [
+        "Simon Stiell urged faster negotiations at COP31 on 14 November; the final outcome remained pending."
+      ],
+      "quick_gk": [
+        "UN climate chief Simon Stiell urged COP31 delegates in Antalya to accelerate negotiations on 14 November 2026."
+      ],
+      "question_angles": [
+        "Who urged COP31 negotiators to avoid tactical delays on 14 November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "UNFCCC",
+        "Climate finance"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "people": [
+        "Simon Stiell"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "UN climate chief urges speed as COP31 confronts fossil fuel divide",
+          "url": "https://www.reuters.com/sustainability/cop/un-climate-chief-urges-speed-cop31-confronts-fossil-fuel-divide-2026-11-14/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-14-india-clean-capacity-2035",
+      "category": "World — Energy Transition",
+      "headline": "India sets out ambition to reach 900 GW of non-fossil electricity capacity by 2035",
+      "summary": "Associated Press reported on 14 November that India aims to raise non-fossil electricity capacity to 900 gigawatts by 2035, from a little over 300 GW. Transmission, storage and rising demand remain significant constraints; the target is not capacity already installed.",
+      "background": "Installed renewable capacity and electricity actually delivered differ because grid congestion, storage limitations and generation profiles affect usable output.",
+      "why_it_matters": "India's plan illustrates the scale of investment needed to expand low-carbon power while maintaining grid reliability.",
+      "pakistan_perspective": "Pakistan faces related questions around grid investment, renewable integration, power-sector affordability and energy-import dependence.",
+      "key_takeaways": [
+        "India's reported non-fossil electricity capacity ambition is 900 GW by 2035."
+      ],
+      "quick_gk": [
+        "India aims for 900 GW of non-fossil electricity capacity by 2035, according to AP reporting on 14 November 2026."
+      ],
+      "question_angles": [
+        "What non-fossil power capacity target for 2035 did India outline in November 2026?"
+      ],
+      "topics": [
+        "Energy transition",
+        "India",
+        "Electricity grids"
+      ],
+      "countries": [
+        "India"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "India seeks to triple clean energy capacity to 900 gigawatts by 2035, but major hurdles remain",
+          "url": "https://apnews.com/article/695ca45d03df77bc207941ae7ca66fca"
+        }
+      ]
+    }
+  ]
+}
