@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-13",
-  "published_at": "2026-11-13T19:01:23+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 13 November 2026 | Evening preliminary edition (00:00–19:01 PKT)",
+  "published_at": "2026-11-13T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 13 November 2026 | Final previous-day edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-13-taiwan-drills",
@@ -117,6 +117,122 @@
           "publisher": "Reuters",
           "title": "Kushner says US working toward 'largest prisoner exchange' of Russia's war in Ukraine",
           "url": "https://www.reuters.com/world/europe/kushner-says-us-working-toward-largest-prisoner-exchange-russias-war-ukraine-2026-11-13/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-13-delhi-lahore-smog",
+      "category": "Pakistan — Environment and Public Health",
+      "headline": "Delhi overtakes Lahore in live air-pollution ranking as regional smog intensifies",
+      "summary": "Reuters reported on 13 November that Delhi overtook Lahore in a live ranking of the world's most polluted major cities as hazardous smog reduced visibility. Such real-time rankings fluctuate and are not annual WHO rankings.",
+      "what_happened": "Reuters reported on 13 November that Delhi overtook Lahore in a live ranking of the world's most polluted major cities as hazardous smog reduced visibility. Such real-time rankings fluctuate and are not annual WHO rankings.",
+      "background": "Seasonal particulate pollution affects the Indo-Gangetic Plain and Punjab, with emissions from vehicles, industry, burning and meteorological conditions contributing to severe episodes.",
+      "why_it_matters": "The cross-border pollution episode highlights public-health risks and the need for verified monitoring, emission controls and regional coordination.",
+      "pakistan_perspective": "Lahore's recurring smog imposes costs on health, education, transport and productivity. A one-day city ranking is not proof of a long-term trend.",
+      "key_takeaways": [
+        "Reuters reported on 13 November 2026 that Delhi overtook Lahore in a live ranking of the most polluted major cities."
+      ],
+      "quick_gk": [
+        "Reuters reported on 13 November 2026 that Delhi overtook Lahore in a live ranking of the most polluted major cities."
+      ],
+      "question_angles": [
+        "Which city overtook Lahore in a live air-pollution ranking reported by Reuters on 13 November 2026?"
+      ],
+      "topics": [
+        "Pakistan — Environment and Public Health"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Delhi overtakes Lahore as world's most polluted city as air quality drops",
+          "url": "https://www.reuters.com/business/environment/delhi-overtakes-lahore-worlds-most-polluted-city-air-quality-drops-2026-11-13/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-13-climate-finance-trilateral",
+      "category": "World — Climate Finance",
+      "headline": "UK, Norway and Canada development financiers launch $10 billion climate initiative",
+      "summary": "Development finance institutions from the United Kingdom, Norway and Canada launched an initiative on 13 November intended to channel $10 billion into climate projects in emerging markets by 2030. The figure is a target, not money already disbursed.",
+      "what_happened": "Development finance institutions from the United Kingdom, Norway and Canada launched an initiative on 13 November intended to channel $10 billion into climate projects in emerging markets by 2030. The figure is a target, not money already disbursed.",
+      "background": "Climate investment in emerging economies faces financing-cost, currency and project-development constraints.",
+      "why_it_matters": "The initiative illustrates the role of development finance institutions in mobilising capital and the need to distinguish pledges from verified disbursements.",
+      "pakistan_perspective": "Pakistan's adaptation and clean-energy financing priorities make the structure and accessibility of such initiatives relevant, but no Pakistan allocation was established in this announcement.",
+      "key_takeaways": [
+        "UK, Norwegian and Canadian development finance institutions announced a $10 billion emerging-market climate finance initiative targeting 2030."
+      ],
+      "quick_gk": [
+        "UK, Norwegian and Canadian development finance institutions announced a $10 billion emerging-market climate finance initiative targeting 2030."
+      ],
+      "question_angles": [
+        "Development finance institutions from which three countries launched a $10 billion climate initiative on 13 November 2026?"
+      ],
+      "topics": [
+        "World — Climate Finance"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "UK, Norway and Canada launch $10 billion climate finance initiative",
+          "url": "https://www.reuters.com/sustainability/cop/uk-norway-canada-launch-10-billion-climate-finance-initiative-2026-11-13/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-13-island-remittance-resilience",
+      "category": "World — Climate Adaptation",
+      "headline": "Small island states propose remittance-backed climate resilience financing",
+      "summary": "Reuters reported on 13 November that representatives of Small Island Developing States were developing a financing mechanism using a proposed 3% charge on diaspora remittances to help fund adaptation. The initiative remained a proposal, not an adopted global levy.",
+      "what_happened": "Reuters reported on 13 November that representatives of Small Island Developing States were developing a financing mechanism using a proposed 3% charge on diaspora remittances to help fund adaptation. The initiative remained a proposal, not an adopted global levy.",
+      "background": "Small island economies are particularly exposed to rising seas and storms while facing limited access to affordable adaptation finance.",
+      "why_it_matters": "The proposal raises important questions about predictable climate finance, remittance costs, distributional fairness and governance.",
+      "pakistan_perspective": "Pakistan is a major remittance-receiving economy; the proposal offers a comparative policy case, not a tax announced for Pakistan.",
+      "key_takeaways": [
+        "A group of Small Island Developing States proposed a 3% charge on diaspora remittances to support climate resilience."
+      ],
+      "quick_gk": [
+        "A group of Small Island Developing States proposed a 3% charge on diaspora remittances to support climate resilience."
+      ],
+      "question_angles": [
+        "What remittance charge was proposed by a group of Small Island Developing States for climate resilience, as reported on 13 November 2026?"
+      ],
+      "topics": [
+        "World — Climate Adaptation"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Small islands aim to use remittances to fund climate resilience",
+          "url": "https://www.reuters.com/sustainability/cop/small-islands-aim-use-remittances-fund-climate-resilience-2026-11-13/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-13-us-ai-cyber-taskforce",
+      "category": "World — AI and Cybersecurity",
+      "headline": "US AI task force discusses critical-infrastructure cyber incident reporting",
+      "summary": "Reuters reported on 13 November that a US presidential AI task force had met on Thursday to discuss encouraging critical-infrastructure operators to share information about AI-powered cyberattacks and vulnerabilities. Discussion did not itself establish new mandatory reporting law.",
+      "what_happened": "Reuters reported on 13 November that a US presidential AI task force had met on Thursday to discuss encouraging critical-infrastructure operators to share information about AI-powered cyberattacks and vulnerabilities. Discussion did not itself establish new mandatory reporting law.",
+      "background": "Financial services, energy networks and emergency services depend on cyber-resilient infrastructure, while AI tools can change the speed and scale of attacks.",
+      "why_it_matters": "The discussion illustrates the regulatory challenge of sharing threat intelligence without discouraging reporting or exposing sensitive systems.",
+      "pakistan_perspective": "Pakistan's critical-infrastructure cyber preparedness can draw lessons from international incident-reporting debates without treating a US proposal as enacted law.",
+      "key_takeaways": [
+        "A US presidential AI task force discussed cyber incident reporting for critical-infrastructure operators in November 2026."
+      ],
+      "quick_gk": [
+        "A US presidential AI task force discussed cyber incident reporting for critical-infrastructure operators in November 2026."
+      ],
+      "question_angles": [
+        "Which sector was a central focus of US AI task-force discussions on cyberattack reporting reported on 13 November 2026?"
+      ],
+      "topics": [
+        "World — AI and Cybersecurity"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Trump's AI task force met Thursday, discussed AI-powered cyberattacks",
+          "url": "https://www.reuters.com/world/us/trumps-ai-task-force-met-thursday-discussed-ai-powered-cyberattacks-2026-11-13/"
         }
       ]
     }
