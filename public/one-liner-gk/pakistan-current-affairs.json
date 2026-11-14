@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 289,
+  "count": 290,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2023,6 +2023,13 @@
       "id": "pakistan-current-affairs-2026-11-12-pakistan-cop31-climate-finance",
       "text": "Pakistan's prime minister appealed for adequate climate-disaster finance at COP31 in Antalya in November 2026.",
       "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-13-delhi-lahore-smog",
+      "text": "Reuters reported on 13 November 2026 that Delhi overtook Lahore in a live ranking of the most polluted major cities.",
+      "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
     }
