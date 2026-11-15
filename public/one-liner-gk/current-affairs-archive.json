@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 754,
+  "count": 757,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5277,6 +5277,27 @@
     {
       "id": "current-affairs-archive-2026-11-14-india-900gw",
       "text": "India aims for 900 GW of non-fossil electricity capacity by 2035, according to AP reporting on 14 November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-14-punjab-stubble",
+      "text": "Punjab's reported anti-stubble-fire response involved 67 units staffed by 750 officers in November 2026.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-14-us-iran",
+      "text": "Reuters reported on 14 November that Trump's possible restraint on Iran attacks was conditional on no new provocations.",
+      "subcategory": "Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "current-affairs-archive-2026-11-14-ukraine-black-sea",
+      "text": "Ukraine's reported 14 November diplomatic priorities included an energy ceasefire and reopening the Black Sea.",
       "subcategory": "Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true

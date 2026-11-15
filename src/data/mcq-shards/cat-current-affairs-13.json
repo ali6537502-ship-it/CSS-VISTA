@@ -688,5 +688,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://apnews.com/article/695ca45d03df77bc207941ae7ca66fca"
+  },
+  {
+    "id": "current-affairs-20261114-punjab-rapid-response",
+    "q": "How many rapid-response units did Punjab deploy to tackle crop-residue fires, according to Reuters on 14 November 2026?",
+    "o": [
+      "47",
+      "57",
+      "67",
+      "77"
+    ],
+    "a": 2,
+    "e": "Reuters reported 67 units staffed by 750 officers.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/environment/smog-hangs-over-lahore-pakistans-new-pollution-squad-races-douse-stubble-fires-2026-11-14/"
+  },
+  {
+    "id": "current-affairs-20261114-iran-houthis",
+    "q": "Which Yemen-based movement was mentioned in Reuters' 14 November report about the US position on further attacks against Iran?",
+    "o": [
+      "Houthis",
+      "Southern Transitional Council",
+      "Al-Islah",
+      "National Resistance Forces"
+    ],
+    "a": 0,
+    "e": "The report referred to possible provocations from Iran or Iran-backed Houthis.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/trump-tells-advisers-he-may-hold-off-iran-attacks-barring-new-provocations-2026-11-14/"
+  },
+  {
+    "id": "current-affairs-20261114-ukraine-black-sea",
+    "q": "Which sea did Zelenskyy identify as a priority for reopening during the November 2026 diplomatic discussions?",
+    "o": [
+      "Baltic Sea",
+      "Caspian Sea",
+      "Adriatic Sea",
+      "Black Sea"
+    ],
+    "a": 3,
+    "e": "The AP report listed reopening the Black Sea among Ukraine's priorities.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/f9a8629626c087424f05adc85d127780"
   }
 ]
