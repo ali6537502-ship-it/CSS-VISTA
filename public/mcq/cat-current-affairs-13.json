@@ -733,5 +733,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://apnews.com/article/f9a8629626c087424f05adc85d127780"
+  },
+  {
+    "id": "current-affairs-20261115-eco-chair",
+    "q": "Who was announced to chair the 30th ECO Council of Ministers meeting in Islamabad on 15–16 November 2026?",
+    "o": [
+      "Mohammad Ishaq Dar",
+      "Hakan Fidan",
+      "Abbas Araghchi",
+      "Serdar Berdimuhamedow"
+    ],
+    "a": 0,
+    "e": "Pakistan's Foreign Office identified Deputy Prime Minister and Foreign Minister Ishaq Dar as chair of the meeting.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://pid.gov.pk/site/press_detail/34686"
+  },
+  {
+    "id": "current-affairs-20261115-saudi-interceptions",
+    "q": "How many Houthi ballistic missiles did the Saudi-led coalition say it intercepted towards Riyadh on 15 November 2026?",
+    "o": [
+      "One",
+      "Two",
+      "Three",
+      "Four"
+    ],
+    "a": 1,
+    "e": "The coalition reported two ballistic missiles towards Riyadh, alongside three drones in the Eastern Province.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.brecorder.com/news/40449006/saudi-led-coalition-intercepts-missiles-towards-riyadh-drones-in-eastern-province"
+  },
+  {
+    "id": "current-affairs-20261115-transition-coalition",
+    "q": "Which pair was reported as incoming leaders of the voluntary fossil-fuel transition coalition at COP31?",
+    "o": [
+      "Norway and Sweden",
+      "France and Germany",
+      "Ireland and Tuvalu",
+      "Brazil and Canada"
+    ],
+    "a": 2,
+    "e": "AP reported that Ireland and Tuvalu would take over leadership after Colombia's withdrawal.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/09c81f8bc4afd44fb6a4c5a804b74cab"
+  },
+  {
+    "id": "current-affairs-20261115-canary-boats",
+    "q": "Spain's rescue service reported rescuing 1,488 people near the Canary Islands on 14 November 2026 from how many boats?",
+    "o": [
+      "9",
+      "11",
+      "12",
+      "14"
+    ],
+    "a": 3,
+    "e": "Reuters reported 1,488 people rescued from 14 boats on Saturday, 14 November; the article was published on 15 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/africa/nearly-1500-migrants-arrive-canary-islands-one-day-2026-11-15/"
   }
 ]

@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 292,
+  "count": 293,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2045,6 +2045,12 @@
       "text": "Punjab's reported anti-stubble-fire response involved 67 units staffed by 750 officers in November 2026.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261115-eco-council-islamabad",
+      "text": "Islamabad was announced as host of the 30th ECO Council of Ministers meeting on 15–16 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-15",
       "timeSensitive": true
     }
   ]

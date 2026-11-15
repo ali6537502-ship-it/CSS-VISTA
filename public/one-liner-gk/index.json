@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-11-06",
-  "total": 31069,
+  "total": 31074,
   "sourcePagesProcessed": 207,
   "excludedPages": "208-244 (Urdu and English grammar material, outside One-Liner GK scope)",
   "categories": [
@@ -371,20 +371,16 @@
     {
       "slug": "current-affairs-archive",
       "name": "Current Affairs Archive",
-      "count": 757,
-      "timeSensitiveCount": 753,
+      "count": 761,
+      "timeSensitiveCount": 761,
       "subcategories": [
-        {
-          "name": "Current Affairs",
-          "count": 8
-        },
         {
           "name": "Current Affairs 2024-25",
           "count": 250
         },
         {
-          "name": "Current Affairs 2026",
-          "count": 407
+          "name": "World Affairs 2024-25",
+          "count": 21
         },
         {
           "name": "International Relations",
@@ -395,32 +391,48 @@
           "count": 42
         },
         {
+          "name": "Current Affairs",
+          "count": 8
+        },
+        {
           "name": "Recent Events",
           "count": 16
         },
         {
-          "name": "World Affairs 2024-25",
-          "count": 21
+          "name": "Current Affairs 2026",
+          "count": 407
+        },
+        {
+          "name": "Current Affairs 2026 — 2026-11-15",
+          "count": 4
         }
       ]
     },
     {
       "slug": "pakistan-current-affairs",
       "name": "Pakistan Current Affairs Archive",
-      "count": 292,
-      "timeSensitiveCount": 290,
+      "count": 293,
+      "timeSensitiveCount": 293,
       "subcategories": [
-        {
-          "name": "Foreign Relations",
-          "count": 26
-        },
         {
           "name": "Pakistan Affairs 2024-25",
           "count": 95
         },
         {
+          "name": "Foreign Relations",
+          "count": 26
+        },
+        {
           "name": "Pakistan Current Affairs 2026",
           "count": 170
+        },
+        {
+          "name": "Current Affairs 2026",
+          "count": 1
+        },
+        {
+          "name": "Pakistan Current Affairs 2026 — 2026-11-15",
+          "count": 1
         }
       ]
     },
