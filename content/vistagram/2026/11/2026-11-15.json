@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "profile": "daily-six",
+  "date": "2026-11-15",
+  "published_at": "2026-11-15T12:00:00+05:00",
+  "edition": "Daily Vistagram Six — 15 November 2026",
+  "editorial_safety": {
+    "neutral_factual": true,
+    "non_partisan": true,
+    "no_personal_attacks": true,
+    "respectful_of_state_and_religion": true,
+    "no_defamation_or_inflammatory_framing": true
+  },
+  "posts": [
+    {
+      "id": "waterlogging-and-soil-salinity-in-pakistan-drainage-root-zones-and-farm-recovery",
+      "slug": "waterlogging-and-soil-salinity-in-pakistan-drainage-root-zones-and-farm-recovery",
+      "dedupeKey": "waterlogging-and-soil-salinity-in-pakistan-drainage-root-zones-and-farm-recovery",
+      "scope": "Pakistan",
+      "title": "Waterlogging and Soil Salinity in Pakistan: Drainage, Root Zones and Farm Recovery",
+      "excerpt": "Waterlogging occurs when excess water fills the pore spaces of soil for long enough to restrict the oxygen available to plant roots. Salinity refers to the accumulation of soluble salts in the soil solution, which can make water uptake difficult even when the ground appears wet. ",
+      "type": "Explainer",
+      "category": "Agriculture & Forestry",
+      "topic": "Soil Profile, Soil Fertility, Water Logging and Salinity",
+      "tags": [
+        "Soil Salinity",
+        "Waterlogging",
+        "Drainage",
+        "Pakistan Agriculture"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Two related but different soil problems",
+          "paragraphs": [
+            "Waterlogging occurs when excess water fills the pore spaces of soil for long enough to restrict the oxygen available to plant roots. Salinity refers to the accumulation of soluble salts in the soil solution, which can make water uptake difficult even when the ground appears wet. These conditions may occur together, but they are not synonyms. In an irrigated field, seepage and inadequate drainage can raise the water table. Evaporation then removes water while leaving salts behind near the surface. A correct diagnosis requires separate observations of groundwater depth, soil texture, electrical conductivity and crop symptoms. A yellowing crop alone cannot establish whether the principal problem is waterlogging, salt, disease or poor nutrition."
+          ]
+        },
+        {
+          "heading": "Why the Indus irrigation setting matters",
+          "paragraphs": [
+            "Pakistan's extensive canal-irrigation landscape supports agriculture in areas where rainfall alone would not reliably meet crop-water needs. Irrigation changes the local water balance: water entering fields must eventually be consumed by crops, evaporate, drain away or recharge groundwater. Where inflows persistently exceed safe outflows, the water table may rise. Salt movement depends on the quality of irrigation water, drainage, climate and the movement of groundwater. The historical development of drainage and reclamation projects in the Indus Basin illustrates that irrigation infrastructure must be assessed together with its environmental consequences. The objective is not simply to supply more water, but to manage water and salts across the whole root zone."
+          ]
+        },
+        {
+          "heading": "Interventions and trade-offs",
+          "paragraphs": [
+            "Surface drainage can remove standing water, while subsurface drains or carefully designed pumping can help lower excessive groundwater levels. Salt-affected land may require leaching with suitable water and a functioning outlet; applying more water without drainage can make the underlying problem worse. Crop selection, irrigation scheduling, land levelling and soil monitoring can complement engineering measures. However, saline drainage water itself needs responsible disposal or reuse assessment because shifting salts downstream can transfer the burden to another community. Solutions should be matched to local hydrogeology and farm resources. A treatment suitable for one field may be uneconomic or environmentally unsuitable in another."
+          ]
+        },
+        {
+          "heading": "How to analyse the issue in an examination",
+          "paragraphs": [
+            "A useful answer begins with definitions and a simple root-zone water balance. It then explains the causal chain from canal seepage or over-irrigation through rising groundwater to reduced aeration and possible salt accumulation. Next, distinguish short-term field practices from long-term drainage investment, maintenance and basin-level governance. Discuss the competing needs of crop production, groundwater management and disposal of drainage effluent without asserting that one technology will solve every problem. Historical FAO and irrigation-research documents can establish the institutional context, but their older numerical estimates should not be represented as current measurements. The strongest conclusion connects soil science with incentives, monitoring and sustained maintenance rather than a single engineering project."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "For Agriculture & Forestry, connect the core mechanisms with evidence, competing explanations and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "FAO AQUASTAT Pakistan water resources",
+          "url": "https://www.fao.org/fileadmin/user_upload/faowater/docs/WR_37_web.pdf"
+        },
+        {
+          "label": "IWMI Indus Basin research",
+          "url": "https://agris.fao.org/search/en/providers/123818/records/67236016b605bda15e0ac740"
+        }
+      ]
+    },
+    {
+      "id": "keeping-children-in-school-in-pakistan-enrolment-retention-and-learning",
+      "slug": "keeping-children-in-school-in-pakistan-enrolment-retention-and-learning",
+      "dedupeKey": "keeping-children-in-school-in-pakistan-enrolment-retention-and-learning",
+      "scope": "Pakistan",
+      "title": "Keeping Children in School in Pakistan: Enrolment, Retention and Learning",
+      "excerpt": "Educational access means more than having a school building within a district. A child must be able to enrol, attend regularly, progress between grades and acquire useful skills. These stages are distinct: an improvement in initial enrolment does not automatically demonstrate imp",
+      "type": "Explainer",
+      "category": "Pakistan Affairs",
+      "topic": "Social Problems of Pakistan — Education",
+      "tags": [
+        "Education",
+        "School Retention",
+        "Pakistan",
+        "Learning"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Access is only the first stage",
+          "paragraphs": [
+            "Educational access means more than having a school building within a district. A child must be able to enrol, attend regularly, progress between grades and acquire useful skills. These stages are distinct: an improvement in initial enrolment does not automatically demonstrate improved completion or learning. Household costs, travel safety, disability access, seasonal work, language and school quality can affect participation. UNICEF's Pakistan education overview identifies both exclusion and retention as important concerns. A careful discussion should therefore avoid treating the number of registered pupils as a complete measure of educational success. It should ask who is missing, who leaves early and whether those who remain actually learn."
+          ]
+        },
+        {
+          "heading": "Understanding dropout and transition",
+          "paragraphs": [
+            "A student may attend primary school but not continue to lower secondary education because the next school is distant, transport is costly or household responsibilities change. Some pupils remain enrolled but attend irregularly, creating a risk of falling behind. Transition rates describe movement between levels; dropout concerns leaving before completion. Both require consistent definitions and reliable records. Aggregate figures can hide differences between rural and urban areas, girls and boys, and children with disabilities. Comparing cohorts over time is more informative than combining figures from unrelated surveys. When writing about the scale of exclusion, identify the survey year, age group and methodology rather than presenting one estimate as timeless."
+          ]
+        },
+        {
+          "heading": "What a retention-oriented response looks like",
+          "paragraphs": [
+            "Policies aimed at retention can combine nearby school places, safe transport, functioning sanitation, inclusive classrooms, trained teachers and timely support for learners who are falling behind. Flexible learning routes may help children whose schooling has been interrupted. Community engagement can reveal barriers that administrative attendance registers do not capture. Yet the design must be realistic: a cash incentive alone cannot compensate for an inaccessible school, while a new building does not guarantee qualified teachers or useful instruction. Evaluation should follow attendance, grade progression and foundational learning, while checking whether improvements reach disadvantaged groups rather than merely raising a provincial average."
+          ]
+        },
+        {
+          "heading": "Turning the issue into a policy answer",
+          "paragraphs": [
+            "A strong Pakistan Affairs answer frames education as a connected challenge of equity, public finance, service delivery and human development. Start with the distinction between enrolment, retention, completion and learning outcomes. Identify plausible barriers, explain how they interact and compare interventions against the evidence they would need. A district-level example might track pupils from their first year through the transition to middle school, noting where absences rise and what support exists. Avoid attributing every dropout to a single cultural or economic cause. The analytical conclusion is that keeping children in school requires sustained quality and accessible pathways, not merely an annual enrolment campaign."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "For Pakistan Affairs, connect the core mechanisms with evidence, competing explanations and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "UNICEF Pakistan education overview",
+          "url": "https://www.unicef.org/pakistan/education"
+        }
+      ]
+    },
+    {
+      "id": "merit-based-public-recruitment-in-pakistan-selection-fairness-and-capacity",
+      "slug": "merit-based-public-recruitment-in-pakistan-selection-fairness-and-capacity",
+      "dedupeKey": "merit-based-public-recruitment-in-pakistan-selection-fairness-and-capacity",
+      "scope": "Pakistan",
+      "title": "Merit-Based Public Recruitment in Pakistan: Selection, Fairness and Capacity",
+      "excerpt": "Public recruitment concerns the allocation of positions carrying responsibilities to citizens and institutions. A merit system seeks to assess candidates against relevant qualifications and demonstrated abilities rather than personal favour. This does not mean that one written ex",
+      "type": "Explainer",
+      "category": "Public Administration",
+      "topic": "Managing Human Resources — Merit System in Public Employment",
+      "tags": [
+        "Merit System",
+        "Public Administration",
+        "Recruitment",
+        "Pakistan"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Why merit is an administrative principle",
+          "paragraphs": [
+            "Public recruitment concerns the allocation of positions carrying responsibilities to citizens and institutions. A merit system seeks to assess candidates against relevant qualifications and demonstrated abilities rather than personal favour. This does not mean that one written examination can measure every dimension of professional competence. Job analysis must identify what the position requires before appropriate assessment methods are selected. The Federal Public Service Commission describes merit-based and transparent selection as part of its mission. In examination answers, distinguish the principle of merit from the particular procedures used by different public bodies; not every public appointment is governed by the same recruitment route."
+          ]
+        },
+        {
+          "heading": "Stages of a credible selection process",
+          "paragraphs": [
+            "A recruitment process begins with a clear vacancy notice, eligibility rules and a defensible description of duties. Applications then need consistent screening, secure assessment, documented evaluation and communication of results. Tests may assess knowledge, reasoning or specialist skills, while interviews can explore professional judgment if questions and scoring criteria are structured. Accessibility and fair treatment matter at every stage. A transparent process should permit applicants to understand requirements without exposing confidential examination material. Digital application systems can improve convenience and record keeping, but they must also address connectivity, privacy and user support. Technology is a tool for procedural fairness, not proof that fairness has been achieved."
+          ]
+        },
+        {
+          "heading": "Merit, representation and institutional performance",
+          "paragraphs": [
+            "Merit is often discussed alongside representation, inclusion and equality of opportunity. These are not necessarily opposing goals: broad outreach and accessible assessment can enlarge the pool of capable candidates. Nevertheless, policy design must follow the applicable legal framework and make trade-offs explicit. Recruitment quality also depends on the accuracy of job descriptions, examiner training, integrity controls and post-selection development. Even well-selected staff need induction, supervision, performance feedback and opportunities to update skills. An agency may conduct an orderly competition yet still suffer weak service delivery if positions remain vacant or employees lack operational resources."
+          ]
+        },
+        {
+          "heading": "A useful analytical framework",
+          "paragraphs": [
+            "For Public Administration, compare a merit system with patronage-based or spoil-system recruitment at the level of incentives, public trust and administrative continuity. Then separate recruitment from promotion, training and performance management. A hypothetical selection for a technical inspector can illustrate why a generic memory test may be insufficient without assessing the competencies of the role. Discuss safeguards such as consistent rubrics, audit trails and complaint mechanisms, while recognising the need for lawful confidentiality. The conclusion should not claim that a single institution or online portal eliminates all recruitment problems. Rather, public-sector capability depends on a chain of fair entry, relevant training, accountable management and continuous institutional learning."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "For Public Administration, connect the core mechanisms with evidence, competing explanations and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "Federal Public Service Commission official mission",
+          "url": "https://fpsc.gov.pk/"
+        },
+        {
+          "label": "FPSC applicant portal",
+          "url": "https://apply.fpsc.gov.pk/"
+        }
+      ]
+    },
+    {
+      "id": "chromatography-stationary-phases-mobile-phases-and-separation-of-mixtures",
+      "slug": "chromatography-stationary-phases-mobile-phases-and-separation-of-mixtures",
+      "dedupeKey": "chromatography-stationary-phases-mobile-phases-and-separation-of-mixtures",
+      "scope": "Global",
+      "title": "Chromatography: Stationary Phases, Mobile Phases and Separation of Mixtures",
+      "excerpt": "Chromatography separates components of a mixture because different substances distribute differently between a stationary phase and a moving phase. The stationary phase may be a solid surface or a liquid held on a support; the mobile phase is a gas or liquid that carries sample c",
+      "type": "Explainer",
+      "category": "Chemistry",
+      "topic": "Separation Methods — Chromatography",
+      "tags": [
+        "Chromatography",
+        "Analytical Chemistry",
+        "Separation Methods"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "The central separation idea",
+          "paragraphs": [
+            "Chromatography separates components of a mixture because different substances distribute differently between a stationary phase and a moving phase. The stationary phase may be a solid surface or a liquid held on a support; the mobile phase is a gas or liquid that carries sample components through the system. Substances that interact more strongly with the stationary phase generally move differently from substances that prefer the mobile phase. This creates spatial or temporal separation. The method does not require that every component have a different colour. NIST explains chromatography as a way to obtain fractions of different composition and to help identify or measure components of mixtures."
+          ]
+        },
+        {
+          "heading": "Paper, thin-layer and column methods",
+          "paragraphs": [
+            "In paper chromatography, a solvent moves through a paper support and carries dissolved substances at different rates. Thin-layer chromatography commonly uses a coated plate, with the sample spotted near the starting line. In column chromatography, a mobile phase passes through a packed or otherwise structured stationary phase, and components emerge at different times or in different fractions. The details of retention depend on the chemical properties of analytes and phases. Students should not assume that a larger molecule always travels more slowly: the mechanism may involve adsorption, partition, charge or size exclusion, depending on the chosen technique."
+          ]
+        },
+        {
+          "heading": "Interpreting results carefully",
+          "paragraphs": [
+            "A chromatogram displays a detector response against time or another separation coordinate. Peaks can help reveal the presence of different components, but a peak is not automatically a unique chemical identification. Reference standards, suitable detectors and method validation are important when establishing identity and concentration. In a simple planar experiment, a retention factor compares the distance travelled by a spot with the distance travelled by the solvent front under the same conditions. Such values can change when solvent composition, stationary phase or experimental conditions change. A good laboratory answer also considers contamination, overloaded samples and overlapping peaks as possible sources of error."
+          ]
+        },
+        {
+          "heading": "Applications and examination strategy",
+          "paragraphs": [
+            "Chromatography supports analysis in pharmaceuticals, food testing, environmental monitoring and biochemical research. A food-dye demonstration is a useful starting example because visibly separated bands make the principle intuitive, but modern instruments can analyse substances that are invisible to the eye. In a Chemistry answer, first draw the stationary and mobile phases, then explain differential migration and compare two techniques. Discuss why method selection depends on sample stability, required sensitivity, cost and the purpose of analysis. Finish by distinguishing separation from definitive identification: obtaining a clean fraction is valuable, but evidence about chemical identity may require an appropriate analytical standard or additional measurement."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "For Chemistry, connect the core mechanisms with evidence, competing explanations and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "NIST What is Chromatography All About?",
+          "url": "https://www.nist.gov/publications/what-chromatography-all-about"
+        }
+      ]
+    },
+    {
+      "id": "karst-landforms-limestone-dissolution-caves-and-sinkhole-risk",
+      "slug": "karst-landforms-limestone-dissolution-caves-and-sinkhole-risk",
+      "dedupeKey": "karst-landforms-limestone-dissolution-caves-and-sinkhole-risk",
+      "scope": "Global",
+      "title": "Karst Landforms: Limestone Dissolution, Caves and Sinkhole Risk",
+      "excerpt": "Karst is a landscape shaped substantially by the dissolution of soluble bedrock, often limestone, dolomite or gypsum. Rainwater can acquire dissolved carbon dioxide and become mildly acidic, allowing it to dissolve carbonate rock along fractures and bedding planes. Over long peri",
+      "type": "Explainer",
+      "category": "Geography",
+      "topic": "Physical Geography — Karst Cycle and Landforms",
+      "tags": [
+        "Karst",
+        "Limestone",
+        "Geomorphology",
+        "Sinkholes"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "How soluble rock changes the landscape",
+          "paragraphs": [
+            "Karst is a landscape shaped substantially by the dissolution of soluble bedrock, often limestone, dolomite or gypsum. Rainwater can acquire dissolved carbon dioxide and become mildly acidic, allowing it to dissolve carbonate rock along fractures and bedding planes. Over long periods, openings may enlarge and connect, creating distinctive surface and underground drainage. The US National Park Service identifies sinkholes, sinking streams, caves and springs as characteristic features. Not every cave is karstic, and not every karst area has spectacular surface caves. The rock type, fracture pattern, climate and history of water movement all influence the landforms that develop."
+          ]
+        },
+        {
+          "heading": "Surface and underground features",
+          "paragraphs": [
+            "A sinkhole is a depression that can form through dissolution, subsidence or collapse associated with underground voids. Sinking streams disappear into openings and may re-emerge at springs after travelling through subsurface channels. Caves can develop where water enlarges fractures and passages, while dripstone formations may later grow when dissolved minerals precipitate from cave water. These processes operate on different timescales. A student should distinguish the formation of a cavity from the sudden failure of material above it. A cross-section showing fractures, an underground passage and a spring often communicates the hydrological system more clearly than a list of named landforms."
+          ]
+        },
+        {
+          "heading": "Water resources and vulnerability",
+          "paragraphs": [
+            "Karst aquifers can store and transmit important groundwater, but their rapid pathways can also make them vulnerable to pollution. Water entering a sinkhole may reach an underground channel with less filtration than water moving slowly through fine sediments. Land use near recharge points can therefore affect springs far from the visible source of contamination. Pumping, construction and changes in drainage may influence local stability, although sinkhole risk varies greatly by site. The presence of limestone alone is not enough to predict a collapse. Geological investigation, groundwater observations and site-specific engineering assessment are necessary when planning structures or water-supply protection in susceptible terrain."
+          ]
+        },
+        {
+          "heading": "Using karst in a Geography answer",
+          "paragraphs": [
+            "A strong explanation begins with rock solubility and the role of water, then links dissolution to a set of related landforms and groundwater routes. Compare karst drainage with a typical surface-stream network and explain why a watershed boundary drawn on a map may not perfectly describe underground flow. Use a labelled diagram showing a sinkhole, cave passage and spring. Evaluate human implications for drinking water, land-use planning and construction without claiming all karst areas are unsafe. Finally, note that climate and geological structure shape the pace and expression of karst development. This combines geomorphic processes with practical environmental geography."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "For Geography, connect the core mechanisms with evidence, competing explanations and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "US National Park Service karst landscapes",
+          "url": "https://www.nps.gov/subjects/caves/karst-landscapes.htm"
+        },
+        {
+          "label": "US National Park Service caves and aquifers",
+          "url": "https://www.nps.gov/articles/caves-and-aquifers.htm"
+        }
+      ]
+    },
+    {
+      "id": "the-congress-of-vienna-legitimacy-balance-of-power-and-the-congress-system",
+      "slug": "the-congress-of-vienna-legitimacy-balance-of-power-and-the-congress-system",
+      "dedupeKey": "the-congress-of-vienna-legitimacy-balance-of-power-and-the-congress-system",
+      "scope": "Global",
+      "title": "The Congress of Vienna: Legitimacy, Balance of Power and the Congress System",
+      "excerpt": "The Congress of Vienna brought European diplomats together in 1814–1815 to negotiate a post-Napoleonic political settlement. Its participants faced questions of territorial boundaries, the security of major powers and the restoration or reorganisation of governments disrupted by ",
+      "type": "Explainer",
+      "category": "European History",
+      "topic": "The Concert of Europe — Congress of Vienna and Balance of Power",
+      "tags": [
+        "Congress of Vienna",
+        "Concert of Europe",
+        "Metternich",
+        "Balance of Power"
+      ],
+      "evergreen": true,
+      "sections": [
+        {
+          "heading": "Europe after the Napoleonic wars",
+          "paragraphs": [
+            "The Congress of Vienna brought European diplomats together in 1814–1815 to negotiate a post-Napoleonic political settlement. Its participants faced questions of territorial boundaries, the security of major powers and the restoration or reorganisation of governments disrupted by years of war. The settlement is often associated with the principles of legitimacy, compensation and balance of power. These were broad diplomatic concerns rather than a perfectly consistent formula applied to every territory. A careful history answer distinguishes the Vienna negotiations from the later Congress System and from the wider Concert of Europe, which describes practices of consultation among leading powers."
+          ]
+        },
+        {
+          "heading": "Legitimacy and territorial balance",
+          "paragraphs": [
+            "Legitimacy commonly referred to the restoration of established dynastic authority, but strategic calculations also influenced the settlement. Britain sought a European balance that would limit any one power's domination; Austria, Russia and Prussia pursued security and influence in regions important to them. France's place in the new order also mattered because lasting stability could not depend solely on treating it as a permanent outsider. Territorial adjustments and buffer arrangements were designed with strategic concerns in mind. The result was not a democratic constitutional settlement for all Europeans. National aspirations and liberal movements often sat uneasily with the priorities of conservative diplomacy."
+          ]
+        },
+        {
+          "heading": "From a peace settlement to consultation",
+          "paragraphs": [
+            "The Congress System refers to meetings through which major powers sought to discuss international disputes after the settlement. Such consultation could reduce uncertainty, but the powers did not share identical interests or a common view of intervention. Disagreement over revolutions, constitutional change and the appropriate role of collective action exposed limitations. It is misleading to describe the arrangement as a modern international organisation with universal membership and binding legal machinery. Its influence lay more in diplomatic habits, power relationships and the expectation that major territorial changes should be considered within a broader European framework."
+          ]
+        },
+        {
+          "heading": "Assessing achievements and limits",
+          "paragraphs": [
+            "An analytical answer should avoid both extremes: the claim that Vienna created uninterrupted peace and the claim that its diplomacy had no lasting effect. The settlement helped frame the postwar balance, while later conflicts and revolutions demonstrated its limits. Compare short-term objectives such as preventing renewed French domination with long-term tensions arising from nationalism, liberalism and rivalry among the great powers. Explain Metternich's association with conservative stability without making one statesman responsible for every decision. A useful concluding judgment is that the Congress of Vienna was significant as an experiment in great-power management, but its stability depended on political conditions and cooperation that could not be guaranteed indefinitely."
+          ]
+        }
+      ],
+      "examRelevance": [
+        "For European History, connect the core mechanisms with evidence, competing explanations and limitations in a structured examination answer."
+      ],
+      "sources": [
+        {
+          "label": "ERIC educational history document on Concert of Europe",
+          "url": "https://files.eric.ed.gov/fulltext/ED266996.pdf"
+        }
+      ]
+    }
+  ]
+}
