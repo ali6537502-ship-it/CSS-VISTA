@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-14",
-  "published_at": "2026-11-14T19:04:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 14 November 2026 | Preliminary evening edition (00:00–19:04 PKT)",
+  "published_at": "2026-11-14T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 14 November 2026 | Finalized morning edition",
   "stories": [
     {
       "id": "ca-2026-11-14-eco-ministers-islamabad",
@@ -109,6 +109,118 @@
           "publisher": "Associated Press",
           "title": "India seeks to triple clean energy capacity to 900 gigawatts by 2035, but major hurdles remain",
           "url": "https://apnews.com/article/695ca45d03df77bc207941ae7ca66fca"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-14-punjab-stubble-fire-response",
+      "category": "Pakistan — Environment",
+      "headline": "Punjab deploys rapid-response units against crop-residue fires as Lahore battles smog",
+      "summary": "Reuters reported on 14 November that Punjab had deployed 67 rapid-response units involving 750 officers to respond to crop-residue burning. Officials described enforcement and machinery subsidies, but severe air-pollution exposure remained a concern. Reported enforcement outcomes are official claims, not proof that the wider smog crisis has ended.",
+      "what_happened": "Punjab's anti-smog teams seek to reach reported agricultural fires within 10–15 minutes; authorities reported extinguishing 650 of 679 fires in one day. The government also subsidises super seeders to reduce the need to burn stubble.",
+      "background": "Crop burning is one contributor to seasonal particulate pollution, alongside transport, industry, meteorology and cross-border sources.",
+      "why_it_matters": "The response illustrates the combination of enforcement, agricultural technology and regional cooperation needed to reduce harmful air pollution.",
+      "pakistan_perspective": "Assess the effectiveness of stubble management without attributing all Lahore smog to a single source; distinguish official statistics from independently measured air-quality outcomes.",
+      "key_takeaways": [
+        "Reuters reported 67 rapid-response units and 750 officers deployed in Punjab against stubble fires."
+      ],
+      "quick_gk": [
+        "Punjab's reported anti-stubble-fire response involved 67 units staffed by 750 officers in November 2026."
+      ],
+      "question_angles": [
+        "How many rapid-response units did Punjab deploy against crop-residue fires, according to Reuters on 14 November?"
+      ],
+      "topics": [
+        "Air pollution",
+        "Stubble burning",
+        "Agricultural policy"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "As smog hangs over Lahore, Pakistan's new pollution squad races to douse stubble fires",
+          "url": "https://www.reuters.com/business/environment/smog-hangs-over-lahore-pakistans-new-pollution-squad-races-douse-stubble-fires-2026-11-14/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-14-us-iran-conditional-restraint",
+      "category": "World — Geopolitics",
+      "headline": "Reuters reports Trump considering holding off further Iran attacks absent new provocations",
+      "summary": "Reuters reported on 14 November, citing three people familiar with discussions, that US President Donald Trump had told advisers he might hold off attacking Iran if no new provocations came from Tehran or Iran-backed Houthis. The report described a conditional position, not a binding ceasefire or settled policy.",
+      "what_happened": "The report indicated that US decisions remained contingent on regional developments and further provocations.",
+      "background": "US–Iran tensions and shipping security in the Gulf influence energy markets and regional diplomacy.",
+      "why_it_matters": "Conditional restraint could reduce near-term escalation risk, but it does not establish a negotiated settlement.",
+      "pakistan_perspective": "Pakistan has an interest in Gulf stability because of energy imports, expatriate communities and regional diplomacy.",
+      "key_takeaways": [
+        "The reported US position was conditional on the absence of further provocations."
+      ],
+      "quick_gk": [
+        "Reuters reported on 14 November that Trump's possible restraint on Iran attacks was conditional on no new provocations."
+      ],
+      "question_angles": [
+        "Which Iran-aligned group in Yemen was specifically mentioned in Reuters' 14 November account?"
+      ],
+      "topics": [
+        "US–Iran relations",
+        "Gulf security",
+        "Energy security"
+      ],
+      "countries": [
+        "United States",
+        "Iran",
+        "Yemen"
+      ],
+      "people": [
+        "Donald Trump"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Trump tells advisers he may hold off on Iran attacks barring new provocations, sources say",
+          "url": "https://www.reuters.com/world/middle-east/trump-tells-advisers-he-may-hold-off-iran-attacks-barring-new-provocations-2026-11-14/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-14-ukraine-europe-security-framework",
+      "category": "World — European Security",
+      "headline": "Zelenskyy raises concerns over proposed European security framework and Ukraine's territorial position",
+      "summary": "Associated Press reported on 14 November that Ukrainian President Volodymyr Zelenskyy criticised a US-floated European security framework and rejected surrendering Ukrainian-held territory in Donbas or accepting neutrality. He also identified an energy ceasefire, Black Sea access and prisoner exchanges among Ukraine's diplomatic priorities; proposals and tentative exchanges were not completed agreements.",
+      "what_happened": "Zelenskyy said European countries should be central to European security decisions and expressed concern that proposals could weaken NATO.",
+      "background": "Ukraine's security guarantees, sovereignty and future relations with NATO remain major unresolved elements of Russia–Ukraine negotiations.",
+      "why_it_matters": "The debate connects territorial sovereignty, alliance commitments and the terms of any potential negotiated settlement.",
+      "pakistan_perspective": "Pakistan's foreign-policy analysis should distinguish proposed security frameworks from adopted treaties and consider implications for international law and trade routes.",
+      "key_takeaways": [
+        "Zelenskyy identified reopening the Black Sea among Ukraine's diplomatic priorities."
+      ],
+      "quick_gk": [
+        "Ukraine's reported 14 November diplomatic priorities included an energy ceasefire and reopening the Black Sea."
+      ],
+      "question_angles": [
+        "Which maritime region did Zelenskyy identify as a priority to reopen in the 14 November report?"
+      ],
+      "topics": [
+        "Ukraine war",
+        "NATO",
+        "Black Sea"
+      ],
+      "countries": [
+        "Ukraine",
+        "Russia",
+        "United States"
+      ],
+      "people": [
+        "Volodymyr Zelenskyy"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Zelenskyy says a new European security framework floated by US could benefit Putin",
+          "url": "https://apnews.com/article/f9a8629626c087424f05adc85d127780"
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 291,
+  "count": 292,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2036,6 +2036,13 @@
     {
       "id": "pakistan-current-affairs-2026-11-14-eco-ministers",
       "text": "Pakistan announced that Islamabad would host the 30th ECO Council of Ministers meeting on 15–16 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026",
+      "sourcePage": 0,
+      "timeSensitive": true
+    },
+    {
+      "id": "pakistan-current-affairs-2026-11-14-punjab-stubble",
+      "text": "Punjab's reported anti-stubble-fire response involved 67 units staffed by 750 officers in November 2026.",
       "subcategory": "Pakistan Current Affairs 2026",
       "sourcePage": 0,
       "timeSensitive": true
