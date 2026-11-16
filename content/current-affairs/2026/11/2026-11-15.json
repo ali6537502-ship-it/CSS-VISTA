@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-15",
-  "published_at": "2026-11-15T19:03:26+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 15 November 2026 | Preliminary evening edition (through 19:03 PKT)",
+  "published_at": "2026-11-15T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 15 November 2026 | Morning finalization (full Pakistan calendar day)",
   "stories": [
     {
       "id": "ca-2026-11-15-eco-council-islamabad",
@@ -10,7 +10,7 @@
       "headline": "ECO Council of Ministers convenes in Islamabad for two-day regional meeting",
       "summary": "Reporting on 15 November said the 30th Economic Cooperation Organization Council of Ministers meeting was due to begin in Islamabad on Sunday and continue on Monday, with Deputy Prime Minister and Foreign Minister Ishaq Dar chairing. The announcement confirms the schedule, not any negotiated outcome.",
       "background": "ECO provides a regional forum for trade, connectivity and economic cooperation among its member states.",
-      "what_happened": "Pakistan hosted delegations for the scheduled 15–16 November ministerial gathering; as of this partial-day edition, substantive outcomes have not been independently confirmed.",
+      "what_happened": "On 15 November foreign delegations arrived in Islamabad for the 30th ECO Council of Ministers meeting. Reported arrivals included deputy foreign ministers from Türkiye, Azerbaijan and Kazakhstan and senior representatives of the SCO and OIC. Meeting outcomes were not confirmed for 15 November.",
       "why_it_matters": "ECO discussions may affect cross-border trade and transport links, but announced priorities must be distinguished from binding agreements.",
       "pakistan_perspective": "Pakistan is seeking stronger economic integration and transit connectivity through ECO.",
       "key_takeaways": [
@@ -47,6 +47,11 @@
           "publisher": "Press Information Department Pakistan",
           "title": "PR No. 67 Islamabad: November 6, 2026",
           "url": "https://pid.gov.pk/site/press_detail/34686"
+        },
+        {
+          "publisher": "Dawn",
+          "title": "Islamabad hosts foreign dignitaries for two-day ECO ministerial meeting",
+          "url": "https://www.dawn.com/news/2044691/islamabad-hosts-foreign-dignitaries-for-two-day-eco-ministerial-meeting"
         }
       ]
     },
@@ -156,6 +161,164 @@
           "publisher": "Reuters",
           "title": "Nearly 1,500 migrants arrive in Canary Islands in one day",
           "url": "https://www.reuters.com/world/africa/nearly-1500-migrants-arrive-canary-islands-one-day-2026-11-15/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-15-fbr-sales-tax-restructure",
+      "category": "Pakistan — Economy and Tax Administration",
+      "headline": "Pakistan plans functional separation of sales-tax and income-tax administration",
+      "summary": "Dawn reported on 15 November that Pakistan's Federal Board of Revenue intends to separate sales-tax and income-tax functions within the Inland Revenue Service, reversing 17 years of functional integration. Officials estimated the sales-tax revenue gap at Rs3.4 trillion; the announced reorganization is not a creation of separate tax services.",
+      "what_happened": "Dedicated sales-tax commissioner-level zones are planned, with rollout at Large Taxpayer Offices beginning on 1 December 2026, followed by other offices.",
+      "background": "Since 2009 sales tax and income tax were jointly administered within the Inland Revenue Service. Officials say the arrangement weakened specialized sales-tax enforcement.",
+      "why_it_matters": "A tax collection gap undermines fiscal capacity and makes structural reform relevant to Pakistan's IMF-linked revenue objectives.",
+      "pakistan_perspective": "The reported sales-tax gap is an estimate of uncollected potential revenue, not an amount already collected or appropriated.",
+      "key_takeaways": [
+        "The planned separation is functional and remains within the IRS.",
+        "Dawn reported an estimated Rs3.4 trillion sales-tax revenue gap."
+      ],
+      "quick_gk": [
+        "Pakistan's announced 2026 FBR restructuring begins functional sales-tax separation at commissioner level, not by creating a separate tax service."
+      ],
+      "question_angles": [
+        "At which administrative level will the new sales-tax functional separation begin?"
+      ],
+      "topics": [
+        "FBR",
+        "Tax reform",
+        "Fiscal governance"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Federal Board of Revenue",
+        "Inland Revenue Service"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Sales tax gets new enforcement structure to cut collection gap",
+          "url": "https://www.dawn.com/news/2044613/sales-tax-gets-new-enforcement-structure-to-cut-collection-gap"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-15-ssgc-gas-supply",
+      "category": "Pakistan — Energy Security",
+      "headline": "SSGC chief links restricted household gas hours to declining domestic production",
+      "summary": "In a 15 November interview, SSGC managing director Muhammad Amin Rajput said Pakistan's indigenous gas production had fallen about 50% over the past decade and the utility's available supply was about 605 million cubic feet per day, compared with 695 million a year earlier. The company has restricted household supply to meal-time windows.",
+      "what_happened": "SSGC's chief attributed constrained supply to depletion of gas fields and limited LNG availability, while describing the priority for domestic cooking periods.",
+      "background": "Gas shortages require allocation between households, industry, electricity generation and fertiliser production.",
+      "why_it_matters": "Domestic gas depletion and import exposure make energy security, storage and demand management major structural issues.",
+      "pakistan_perspective": "The 605 mmcfd figure is the SSGC chief's reported availability figure, not total national gas production.",
+      "key_takeaways": [
+        "SSGC's chief reported about 605 mmcfd availability, down from 695 mmcfd a year earlier.",
+        "Domestic supply was prioritized around three daily meal-time windows."
+      ],
+      "quick_gk": [
+        "SSGC's managing director reported gas availability of approximately 605 mmcfd in November 2026."
+      ],
+      "question_angles": [
+        "What gas availability did the SSGC chief report in November 2026?"
+      ],
+      "topics": [
+        "Natural gas",
+        "Energy security",
+        "Gas rationing"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Sui Southern Gas Company"
+      ],
+      "people": [
+        "Muhammad Amin Rajput"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Gas output halves in 10 years, says SSGC chief",
+          "url": "https://www.dawn.com/news/2044611/gas-output-halves-in-10-years-says-ssgc-chief"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-15-yemen-bab-mandeb-retreat",
+      "category": "World — Red Sea Security",
+      "headline": "Saudi-backed Yemeni forces announce withdrawal from Bab el-Mandeb area amid regional escalation",
+      "summary": "Reuters reported on 15 November that Saudi-backed Yemeni government forces announced a withdrawal from the Bab el-Mandeb area and Dhubab Airport to reinforce Aden and nearby fronts. The announcement was made against a background of Houthi advances and regional aerial attacks.",
+      "what_happened": "Government-aligned forces said they were redeploying from positions near the strategic strait; the report does not establish that the Houthis had captured the strait.",
+      "background": "Bab el-Mandeb connects the Red Sea and Gulf of Aden and is strategically important to trade routes toward the Suez Canal.",
+      "why_it_matters": "Instability near the maritime chokepoint can raise shipping costs and risks to energy and merchandise flows.",
+      "pakistan_perspective": "Pakistan's importers and exporters are exposed to disruption of Red Sea routes and associated freight costs.",
+      "regional_implications": "The redeployment could alter military balances around Aden and shipping approaches, but its operational consequences remained uncertain.",
+      "key_takeaways": [
+        "Saudi-backed Yemeni government forces reported redeployment away from the Bab el-Mandeb area.",
+        "The announcement did not independently establish a change in control of the strait."
+      ],
+      "quick_gk": [
+        "Bab el-Mandeb is the maritime chokepoint linking the Red Sea to the Gulf of Aden."
+      ],
+      "question_angles": [
+        "Which two bodies of water are linked by Bab el-Mandeb?"
+      ],
+      "topics": [
+        "Yemen conflict",
+        "Maritime security",
+        "Red Sea"
+      ],
+      "countries": [
+        "Yemen",
+        "Saudi Arabia"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Anti-Houthi forces retreat in Yemen as Iran strikes Bahrain",
+          "url": "https://www.reuters.com/world/middle-east/anti-houthi-forces-retreat-yemen-iran-strikes-bahrain-2026-11-15/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-15-cop31-investors-climate-risk",
+      "category": "World — Climate Finance",
+      "headline": "Major institutional investors warn at COP31 that climate risk threatens financial stability",
+      "summary": "The Financial Times reported on 15 November that representatives of 40 major pension funds, insurers and sovereign wealth funds at COP31 warned of systemic climate-related financial risks. They stressed the need for reliable public policy and investable projects, especially in emerging markets.",
+      "what_happened": "Institutional asset owners discussed investment risks and the barriers to financing climate projects in developing economies; no binding financial commitment by all participants was reported.",
+      "background": "Pension funds and insurers hold long-term assets exposed to physical climate damage and economic transition risks.",
+      "why_it_matters": "Climate finance depends not only on capital availability but also on credible policies, risk assessment and project structures.",
+      "pakistan_perspective": "For Pakistan, resilient infrastructure and transparent investment rules are important for attracting long-term climate capital.",
+      "global_implications": "Climate-related financial risks can affect insurers, pension funds and banks across jurisdictions.",
+      "key_takeaways": [
+        "Representatives of 40 major institutional investors raised climate-financial-risk concerns at COP31.",
+        "Discussion of mobilizing finance is not equivalent to disbursement or binding commitments."
+      ],
+      "quick_gk": [
+        "At COP31 in November 2026, representatives of 40 major pension funds, insurers and sovereign wealth funds discussed systemic climate-financial risks."
+      ],
+      "question_angles": [
+        "Which types of institutions participated in the 40-investor climate-finance discussion at COP31?"
+      ],
+      "topics": [
+        "COP31",
+        "Climate finance",
+        "Financial stability"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "institutions": [
+        "Pension funds",
+        "Insurance companies",
+        "Sovereign wealth funds"
+      ],
+      "sources": [
+        {
+          "publisher": "Financial Times",
+          "title": "Pension funds raise alarm on systemic risk from climate events",
+          "url": "https://www.ft.com/content/fcce6df7-7040-4c83-84ea-30f8fbac1239"
         }
       ]
     }

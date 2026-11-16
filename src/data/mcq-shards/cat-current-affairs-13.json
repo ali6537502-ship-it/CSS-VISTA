@@ -793,5 +793,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/world/africa/nearly-1500-migrants-arrive-canary-islands-one-day-2026-11-15/"
+  },
+  {
+    "id": "current-affairs-20261115-fbr-commissioner",
+    "q": "At which level will Pakistan's announced sales-tax functional separation begin under the FBR restructuring reported on 15 November 2026?",
+    "o": [
+      "Commissioner level",
+      "Federal cabinet level",
+      "Provincial assembly level",
+      "District judiciary level"
+    ],
+    "a": 0,
+    "e": "The announced functional split begins at commissioner level within the existing Inland Revenue Service.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2044613/sales-tax-gets-new-enforcement-structure-to-cut-collection-gap"
+  },
+  {
+    "id": "current-affairs-20261115-ssgc-availability",
+    "q": "What gas availability did SSGC's managing director report in November 2026?",
+    "o": [
+      "Approximately 405 mmcfd",
+      "Approximately 605 mmcfd",
+      "Approximately 805 mmcfd",
+      "Approximately 1,005 mmcfd"
+    ],
+    "a": 1,
+    "e": "Dawn quoted the SSGC chief as reporting around 605 mmcfd, compared with 695 mmcfd the previous year.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2044611/gas-output-halves-in-10-years-says-ssgc-chief"
+  },
+  {
+    "id": "current-affairs-20261115-bab-mandeb-waterways",
+    "q": "Which two bodies of water are connected by the Bab el-Mandeb strait, near which Yemeni forces reported redeploying in November 2026?",
+    "o": [
+      "Persian Gulf and Gulf of Oman",
+      "Mediterranean Sea and Black Sea",
+      "Red Sea and Gulf of Aden",
+      "Arabian Sea and Bay of Bengal"
+    ],
+    "a": 2,
+    "e": "Bab el-Mandeb connects the Red Sea with the Gulf of Aden.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/anti-houthi-forces-retreat-yemen-iran-strikes-bahrain-2026-11-15/"
+  },
+  {
+    "id": "current-affairs-20261115-cop31-asset-owners",
+    "q": "Which group of institutions was represented in the COP31 climate-financial-risk discussions involving 40 major asset owners?",
+    "o": [
+      "Only central banks",
+      "Only commercial airlines",
+      "Only national energy ministries",
+      "Pension funds, insurers and sovereign wealth funds"
+    ],
+    "a": 3,
+    "e": "The Financial Times described representatives of 40 major pension funds, insurers and sovereign wealth funds.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.ft.com/content/fcce6df7-7040-4c83-84ea-30f8fbac1239"
   }
 ]

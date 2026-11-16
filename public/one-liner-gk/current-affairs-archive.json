@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 761,
+  "count": 765,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5323,6 +5323,30 @@
     {
       "id": "ca-gk-20261115-canary-migration-report",
       "text": "Reuters reported on 15 November that Spain rescued 1,488 migrants from 14 boats near the Canary Islands on 14 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261115-fbr-sales-tax-restructure",
+      "text": "Pakistan's announced 2026 FBR restructuring begins functional sales-tax separation at commissioner level, not by creating a separate tax service.",
+      "subcategory": "Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261115-ssgc-gas-supply",
+      "text": "SSGC's managing director reported gas availability of approximately 605 mmcfd in November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261115-yemen-bab-mandeb-retreat",
+      "text": "Bab el-Mandeb is the maritime chokepoint linking the Red Sea to the Gulf of Aden.",
+      "subcategory": "Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261115-cop31-investors-climate-risk",
+      "text": "At COP31 in November 2026, representatives of 40 major pension funds, insurers and sovereign wealth funds discussed systemic climate-financial risks.",
       "subcategory": "Current Affairs 2026 — 2026-11-15",
       "timeSensitive": true
     }

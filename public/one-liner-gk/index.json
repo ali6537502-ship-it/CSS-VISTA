@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-11-06",
-  "total": 31074,
+  "total": 31080,
   "sourcePagesProcessed": 207,
   "excludedPages": "208-244 (Urdu and English grammar material, outside One-Liner GK scope)",
   "categories": [
@@ -371,7 +371,7 @@
     {
       "slug": "current-affairs-archive",
       "name": "Current Affairs Archive",
-      "count": 761,
+      "count": 765,
       "timeSensitiveCount": 761,
       "subcategories": [
         {
@@ -411,7 +411,7 @@
     {
       "slug": "pakistan-current-affairs",
       "name": "Pakistan Current Affairs Archive",
-      "count": 293,
+      "count": 295,
       "timeSensitiveCount": 293,
       "subcategories": [
         {

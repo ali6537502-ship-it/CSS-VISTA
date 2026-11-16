@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 293,
+  "count": 295,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2050,6 +2050,18 @@
     {
       "id": "pak-ca-gk-20261115-eco-council-islamabad",
       "text": "Islamabad was announced as host of the 30th ECO Council of Ministers meeting on 15–16 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261115-fbr-sales-tax-restructure",
+      "text": "Pakistan's announced 2026 FBR restructuring begins functional sales-tax separation at commissioner level, not by creating a separate tax service.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261115-ssgc-gas-supply",
+      "text": "SSGC's managing director reported gas availability of approximately 605 mmcfd in November 2026.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-15",
       "timeSensitive": true
     }
