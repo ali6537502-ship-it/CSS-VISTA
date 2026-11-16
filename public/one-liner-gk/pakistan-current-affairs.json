@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 295,
+  "count": 296,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2063,6 +2063,12 @@
       "id": "pak-ca-gk-20261115-ssgc-gas-supply",
       "text": "SSGC's managing director reported gas availability of approximately 605 mmcfd in November 2026.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261116-eco-dar-diplomacy",
+      "text": "The Economic Cooperation Organization (ECO) has ten member states.",
+      "subcategory": "Current Affairs 2026 — 2026-11-16",
       "timeSensitive": true
     }
   ]

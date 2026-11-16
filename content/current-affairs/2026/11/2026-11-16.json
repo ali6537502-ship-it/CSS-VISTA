@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "published_at": "2026-11-16T20:01:11+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 16 November 2026 | Evening preliminary edition (00:00–20:01 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-16-eco-dar-diplomacy",
+      "category": "Pakistan — Foreign Relations",
+      "headline": "Pakistan pledges continued US–Iran diplomacy at ECO Council in Islamabad",
+      "summary": "At the 30th ECO Council of Ministers meeting in Islamabad on 16 November, Foreign Minister Ishaq Dar pledged continued diplomacy to ease US–Iran tensions and linked progress with Afghanistan to action on terrorism. These were diplomatic statements, not a newly concluded peace agreement.",
+      "what_happened": "The ten-member ECO convened in Islamabad. Dar emphasized regional peace, trade and transport connectivity, while Iranian Foreign Minister Abbas Araghchi urged regional cooperation. No Afghan representative attended, according to AP.",
+      "background": "The ECO links Pakistan, Iran, Türkiye, Afghanistan and Central Asian member states in economic cooperation. Gulf tensions and Pakistan–Afghanistan security disputes complicate regional trade.",
+      "why_it_matters": "The Strait of Hormuz disruption and regional insecurity affect Pakistan's energy import costs and transport prospects.",
+      "pakistan_perspective": "Pakistan's diplomatic positioning connects energy security, relations with Iran, and the security conditions necessary for transit trade with Afghanistan.",
+      "key_takeaways": [
+        "Ishaq Dar spoke at the ECO Council of Ministers in Islamabad on 16 November.",
+        "Dar promised continued diplomatic efforts; this did not constitute a new US–Iran agreement."
+      ],
+      "quick_gk": [
+        "The Economic Cooperation Organization (ECO) has ten member states."
+      ],
+      "topics": [
+        "ECO",
+        "Pakistan foreign policy",
+        "Regional connectivity"
+      ],
+      "countries": [
+        "Pakistan",
+        "Iran",
+        "Afghanistan"
+      ],
+      "people": [
+        "Ishaq Dar",
+        "Abbas Araghchi"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "Pakistan vows US-Iran diplomacy, urges Afghan action on terrorism at regional economic bloc meeting",
+          "url": "https://apnews.com/article/fff3bfdcebb7ef084f0f29dd04d239ee"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-16-fed-barr-ai-finance",
+      "category": "World — Financial Stability and AI",
+      "headline": "Federal Reserve governor warns AI may amplify financial-system risks",
+      "summary": "Federal Reserve Governor Michael Barr warned on 16 November about AI-related risks to trading, cyber resilience and financial consumer protection. Reuters reported that 87% of surveyed contacts in the Fed's latest Financial Stability Report identified AI as a significant risk.",
+      "what_happened": "Barr outlined potential correlated algorithmic trading, unauthorized AI agents, cyberattacks and biased lending; he did not announce a monetary-policy change.",
+      "background": "AI use in trading and banking may increase speed and complexity, raising oversight challenges.",
+      "why_it_matters": "Concentrated AI exposures and rapid automated responses could transmit financial stress across institutions.",
+      "pakistan_perspective": "Pakistani financial regulators and banks face similar issues of cybersecurity, algorithmic accountability and consumer protection.",
+      "key_takeaways": [
+        "Barr identified AI-driven trading and cyber risks.",
+        "Reuters reported an 87% survey result; it is a share of surveyed contacts, not all US financial institutions."
+      ],
+      "quick_gk": [
+        "Reuters reported that 87% of contacts surveyed in the Fed's Financial Stability Report identified AI as a significant risk."
+      ],
+      "topics": [
+        "Artificial intelligence",
+        "Financial stability",
+        "Cybersecurity"
+      ],
+      "countries": [
+        "United States"
+      ],
+      "people": [
+        "Michael Barr"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Fed's Barr warns on AI risks to financial system",
+          "url": "https://www.reuters.com/world/feds-barr-warns-ai-risks-financial-system-2026-11-16/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-16-cop31-draft",
+      "category": "World — Climate Diplomacy",
+      "headline": "COP31 negotiators consider preliminary fossil-fuel transition text",
+      "summary": "An 18-page draft decision circulated during the second week of COP31 in Antalya on 16 November included proposals for accelerated fossil-fuel transition and stronger climate action. The draft remained contested and had not been adopted as a final agreement.",
+      "what_happened": "Negotiators debated adaptation finance, just transition arrangements and a proposed cover decision as the summit entered its second week.",
+      "background": "COP31 negotiations must reconcile mitigation goals with developing countries' demands for predictable adaptation funding.",
+      "why_it_matters": "Draft wording can shape future climate commitments, but proposed language has no status as an agreed COP outcome.",
+      "pakistan_perspective": "Pakistan's adaptation-finance needs make the distinction between draft commitments and implemented public funding particularly important.",
+      "key_takeaways": [
+        "An 18-page draft was under discussion, not adopted.",
+        "Adaptation finance and just transition support remained contested."
+      ],
+      "quick_gk": [
+        "The COP31 negotiations in November 2026 were held in Antalya, Türkiye."
+      ],
+      "topics": [
+        "COP31",
+        "Climate finance",
+        "Fossil fuels"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "sources": [
+        {
+          "publisher": "The Guardian",
+          "title": "Cop31 live: draft climate deal calls for faster shift away from fossil fuels",
+          "url": "https://www.theguardian.com/environment/live/2026/nov/16/cop31-climate-crisis-talks-turkey-latest-news-updates"
+        },
+        {
+          "publisher": "Folha de S.Paulo",
+          "title": "Chefia da COP31 cita meta de eletrificação e fim dos combustíveis fósseis em texto preliminar",
+          "url": "https://www1.folha.uol.com.br/ambiente/2026/11/chefia-da-cop31-cita-meta-de-eletrificacao-e-fim-dos-combustiveis-fosseis-em-texto-preliminar.shtml"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-16-us-cop31-local-leaders",
+      "category": "World — Climate Governance",
+      "headline": "US state and local leaders attend COP31 despite federal absence",
+      "summary": "Reuters reported that roughly 120 US Democratic lawmakers, governors, local officials and former officials attended COP31 through the America Is All In coalition while the federal administration stayed out of the summit. Their participation did not amount to a change in US federal policy.",
+      "what_happened": "Subnational and former officials advocated continued climate cooperation and discussed existing state-level clean-energy measures.",
+      "background": "Federal and state governments have distinct authorities over climate policy in the United States.",
+      "why_it_matters": "Subnational diplomacy can sustain international cooperation but cannot by itself bind the federal government to a treaty.",
+      "pakistan_perspective": "Climate-vulnerable states must distinguish non-federal climate initiatives from official US treaty and finance commitments.",
+      "key_takeaways": [
+        "About 120 US non-federal and former officials were reported attending.",
+        "The federal government did not thereby rejoin COP31 negotiations."
+      ],
+      "quick_gk": [
+        "The America Is All In coalition brought US subnational and former officials to COP31 in November 2026."
+      ],
+      "topics": [
+        "COP31",
+        "Federalism",
+        "Climate diplomacy"
+      ],
+      "countries": [
+        "United States",
+        "Türkiye"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "US Democrats bring hope of climate comeback to COP31",
+          "url": "https://www.reuters.com/legal/litigation/absent-officially-unofficially-america-is-all-in-cop31-2026-11-16/"
+        }
+      ]
+    }
+  ]
+}

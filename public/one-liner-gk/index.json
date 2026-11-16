@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-11-06",
-  "total": 31080,
+  "total": 31085,
   "sourcePagesProcessed": 207,
   "excludedPages": "208-244 (Urdu and English grammar material, outside One-Liner GK scope)",
   "categories": [
@@ -371,8 +371,8 @@
     {
       "slug": "current-affairs-archive",
       "name": "Current Affairs Archive",
-      "count": 765,
-      "timeSensitiveCount": 761,
+      "count": 769,
+      "timeSensitiveCount": 769,
       "subcategories": [
         {
           "name": "Current Affairs 2024-25",
@@ -405,14 +405,18 @@
         {
           "name": "Current Affairs 2026 — 2026-11-15",
           "count": 4
+        },
+        {
+          "name": "Current Affairs 2026 — 2026-11-16",
+          "count": 4
         }
       ]
     },
     {
       "slug": "pakistan-current-affairs",
       "name": "Pakistan Current Affairs Archive",
-      "count": 295,
-      "timeSensitiveCount": 293,
+      "count": 296,
+      "timeSensitiveCount": 296,
       "subcategories": [
         {
           "name": "Pakistan Affairs 2024-25",
@@ -432,6 +436,10 @@
         },
         {
           "name": "Pakistan Current Affairs 2026 — 2026-11-15",
+          "count": 1
+        },
+        {
+          "name": "Current Affairs 2026 — 2026-11-16",
           "count": 1
         }
       ]

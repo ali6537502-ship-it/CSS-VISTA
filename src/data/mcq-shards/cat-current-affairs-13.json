@@ -853,5 +853,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.ft.com/content/fcce6df7-7040-4c83-84ea-30f8fbac1239"
+  },
+  {
+    "id": "current-affairs-20261116-eco-members",
+    "q": "How many member states belong to the Economic Cooperation Organization, whose Council of Ministers met in Islamabad on 16 November 2026?",
+    "o": [
+      "8",
+      "10",
+      "12",
+      "15"
+    ],
+    "a": 1,
+    "e": "AP described ECO as a ten-member regional organization.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/fff3bfdcebb7ef084f0f29dd04d239ee"
+  },
+  {
+    "id": "current-affairs-20261116-fed-ai-survey",
+    "q": "What share of contacts surveyed in the Federal Reserve's latest Financial Stability Report identified AI as a significant risk, according to Reuters on 16 November 2026?",
+    "o": [
+      "47%",
+      "67%",
+      "87%",
+      "97%"
+    ],
+    "a": 2,
+    "e": "Reuters reported 87% of surveyed contacts, not the share of all banks.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/feds-barr-warns-ai-risks-financial-system-2026-11-16/"
+  },
+  {
+    "id": "current-affairs-20261116-cop31-draft",
+    "q": "What was the status of the 18-page COP31 fossil-fuel transition text discussed on 16 November 2026?",
+    "o": [
+      "An adopted treaty",
+      "A preliminary draft decision",
+      "A binding UN Security Council resolution",
+      "A ratified protocol"
+    ],
+    "a": 1,
+    "e": "It was a negotiating draft, not an adopted COP decision.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.theguardian.com/environment/live/2026/nov/16/cop31-climate-crisis-talks-turkey-latest-news-updates"
+  },
+  {
+    "id": "current-affairs-20261116-us-cop31-coalition",
+    "q": "Which coalition facilitated participation by US subnational and former officials at COP31 in November 2026?",
+    "o": [
+      "America Is All In",
+      "Global Methane Pledge",
+      "Climate Vulnerable Forum",
+      "International Solar Alliance"
+    ],
+    "a": 0,
+    "e": "Reuters identified the America Is All In coalition.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/legal/litigation/absent-officially-unofficially-america-is-all-in-cop31-2026-11-16/"
   }
 ]

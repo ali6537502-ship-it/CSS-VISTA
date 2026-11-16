@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 765,
+  "count": 769,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5348,6 +5348,30 @@
       "id": "ca-gk-20261115-cop31-investors-climate-risk",
       "text": "At COP31 in November 2026, representatives of 40 major pension funds, insurers and sovereign wealth funds discussed systemic climate-financial risks.",
       "subcategory": "Current Affairs 2026 — 2026-11-15",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261116-eco-dar-diplomacy",
+      "text": "The Economic Cooperation Organization (ECO) has ten member states.",
+      "subcategory": "Current Affairs 2026 — 2026-11-16",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261116-fed-barr-ai-finance",
+      "text": "Reuters reported that 87% of contacts surveyed in the Fed's Financial Stability Report identified AI as a significant risk.",
+      "subcategory": "Current Affairs 2026 — 2026-11-16",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261116-cop31-draft",
+      "text": "The COP31 negotiations in November 2026 were held in Antalya, Türkiye.",
+      "subcategory": "Current Affairs 2026 — 2026-11-16",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261116-us-cop31-local-leaders",
+      "text": "The America Is All In coalition brought US subnational and former officials to COP31 in November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-16",
       "timeSensitive": true
     }
   ]
