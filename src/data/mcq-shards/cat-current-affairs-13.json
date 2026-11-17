@@ -913,5 +913,95 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/legal/litigation/absent-officially-unofficially-america-is-all-in-cop31-2026-11-16/"
+  },
+  {
+    "id": "current-affairs-20261117-saudi-delta-pakistan-energy",
+    "q": "Which Pakistani entity signed an exploratory energy infrastructure agreement with Delta Energy Saudi on 17 November 2026?",
+    "o": [
+      "Inter State Gas Systems",
+      "Pakistan Petroleum Limited",
+      "National Transmission and Despatch Company",
+      "Oil and Gas Regulatory Authority"
+    ],
+    "a": 0,
+    "e": "Delta Energy Saudi signed an exploratory energy infrastructure agreement with Pakistan's Inter State Gas Systems on 17 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/saudis-delta-energy-explore-30-billion-energy-investment-pakistan-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-quad-manila-meeting",
+    "q": "Which set of countries constitutes the Quad grouping whose leaders met in Manila on 17 November 2026?",
+    "o": [
+      "United States, India, Japan and Australia",
+      "United States, Japan, South Korea and Philippines",
+      "China, Russia, India and Brazil",
+      "Australia, Indonesia, Japan and New Zealand"
+    ],
+    "a": 0,
+    "e": "The Quad consists of Australia, India, Japan and the United States.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/trump-kick-off-asia-trip-with-quad-talks-manila-ahead-china-visit-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-apec-shenzhen-trade",
+    "q": "Which Chinese city hosted the November 2026 APEC leaders' gathering?",
+    "o": [
+      "Hangzhou",
+      "Shenzhen",
+      "Chengdu",
+      "Tianjin"
+    ],
+    "a": 1,
+    "e": "Shenzhen, China, hosted the November 2026 APEC leaders' gathering.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/apec-members-expected-look-past-trade-differences-agree-summit-text-official-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-png-taiwan-office",
+    "q": "Which Papua New Guinea prime minister discussed the Taiwan office closure with Xi Jinping in Shenzhen in November 2026?",
+    "o": [
+      "Peter O'Neill",
+      "James Marape",
+      "Anthony Albanese",
+      "Sitiveni Rabuka"
+    ],
+    "a": 1,
+    "e": "Papua New Guinea's prime minister at the November 2026 Xi Jinping meeting was James Marape.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/papua-new-guineas-prime-minister-says-taiwan-does-not-operate-there-anymore-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-ebrd-ai-defence-report",
+    "q": "Which institution warned in November 2026 that many developing economies risk missing the AI and defence investment boom?",
+    "o": [
+      "Asian Development Bank",
+      "European Bank for Reconstruction and Development",
+      "Bank for International Settlements",
+      "International Energy Agency"
+    ],
+    "a": 1,
+    "e": "The institution issuing the November 2026 transition report warning about AI and defence opportunities was the EBRD.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/finance/developing-economies-risk-missing-out-defence-ai-boom-ebrd-warns-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-cop31-electrification-pledge",
+    "q": "What target is proposed by the voluntary COP31 '35x35' electrification initiative?",
+    "o": [
+      "35% renewable power capacity by 2030",
+      "35% electricity share of final energy demand by 2035",
+      "35 gigawatts of nuclear power by 2035",
+      "35% cut in global coal use by 2028"
+    ],
+    "a": 1,
+    "e": "The voluntary COP31 '35x35' initiative proposes a 35% electricity share of global final energy demand by 2035.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/can-cop31s-proposed-age-electricity-slow-global-warming-2026-11-17/"
   }
 ]

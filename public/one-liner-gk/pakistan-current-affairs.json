@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 296,
+  "count": 297,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2069,6 +2069,12 @@
       "id": "pak-ca-gk-20261116-eco-dar-diplomacy",
       "text": "The Economic Cooperation Organization (ECO) has ten member states.",
       "subcategory": "Current Affairs 2026 — 2026-11-16",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261117-saudi-delta-pakistan-energy",
+      "text": "Delta Energy Saudi signed an exploratory energy infrastructure agreement with Pakistan's Inter State Gas Systems on 17 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-17",
       "timeSensitive": true
     }
   ]

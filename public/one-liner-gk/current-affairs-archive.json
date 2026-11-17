@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 769,
+  "count": 775,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5372,6 +5372,42 @@
       "id": "ca-gk-20261116-us-cop31-local-leaders",
       "text": "The America Is All In coalition brought US subnational and former officials to COP31 in November 2026.",
       "subcategory": "Current Affairs 2026 — 2026-11-16",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-saudi-delta-pakistan-energy",
+      "text": "Delta Energy Saudi signed an exploratory energy infrastructure agreement with Pakistan's Inter State Gas Systems on 17 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-quad-manila-meeting",
+      "text": "The Quad consists of Australia, India, Japan and the United States.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-apec-shenzhen-trade",
+      "text": "Shenzhen, China, hosted the November 2026 APEC leaders' gathering.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-png-taiwan-office",
+      "text": "Papua New Guinea's prime minister at the November 2026 Xi Jinping meeting was James Marape.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-ebrd-ai-defence-report",
+      "text": "The institution issuing the November 2026 transition report warning about AI and defence opportunities was the EBRD.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-cop31-electrification-pledge",
+      "text": "The voluntary COP31 '35x35' initiative proposes a 35% electricity share of global final energy demand by 2035.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
       "timeSensitive": true
     }
   ]
