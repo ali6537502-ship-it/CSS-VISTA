@@ -1003,5 +1003,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/sustainability/cop/can-cop31s-proposed-age-electricity-slow-global-warming-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-cop31-eu-clean-energy",
+    "q": "Which EU climate commissioner urged stronger clean-energy transition language at COP31 on 17 November 2026?",
+    "o": [
+      "Maroš Šefčovič",
+      "Wopke Hoekstra",
+      "Kadri Simson",
+      "Frans Timmermans"
+    ],
+    "a": 1,
+    "e": "Wopke Hoekstra was the EU climate commissioner urging stronger clean-energy action at COP31 on 17 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-talks-must-drive-shift-towards-greener-energy-eu-climate-chief-says-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-asean-china-sea-code",
+    "q": "Which existing instrument did ASEAN and China say they would follow while negotiating a South China Sea code of conduct?",
+    "o": [
+      "Treaty of Amity and Cooperation",
+      "Declaration on the Conduct of Parties",
+      "Five Power Defence Arrangements",
+      "Manila Pact"
+    ],
+    "a": 1,
+    "e": "ASEAN and China had not finalized a South China Sea code of conduct as of 17 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/asean-china-committed-follow-south-china-sea-declaration-until-code-conduct-is-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-apec-ai-data-governance",
+    "q": "Who chaired the APEC Senior Officials' Meeting that discussed responsible AI deployment in November 2026?",
+    "o": [
+      "Chen Xu",
+      "Kristalina Georgieva",
+      "Ngozi Okonjo-Iweala",
+      "Kao Kim Hourn"
+    ],
+    "a": 0,
+    "e": "Chen Xu chaired the 2026 APEC Senior Officials' Meeting and discussed responsible AI deployment on 17 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/technology/apec-focuses-safe-responsible-ai-use-chinas-ex-un-envoy-says-2026-11-17/"
+  },
+  {
+    "id": "current-affairs-20261117-nepal-loss-damage-fund",
+    "q": "In which year was the UN Loss and Damage Fund agreed to support climate-vulnerable countries?",
+    "o": [
+      "2015",
+      "2018",
+      "2022",
+      "2025"
+    ],
+    "a": 2,
+    "e": "The UN Loss and Damage Fund was agreed in 2022 to help vulnerable countries address climate impacts.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/77a91aafbd547b5bcc881f1e16a28e9e"
   }
 ]

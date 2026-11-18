@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-11-17",
   "published_at": "2026-11-17T19:00:41+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 17 November 2026 | Evening preliminary edition (00:00–19:00 PKT)",
+  "edition": "CSS VISTA — Daily Current Affairs | 17 November 2026 | Finalized coverage (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-17-saudi-delta-pakistan-energy",
@@ -44,7 +44,7 @@
       "category": "World — Indo-Pacific Diplomacy",
       "headline": "US president meets Quad partners in Manila ahead of China visit",
       "summary": "On 17 November, US President Donald Trump met leaders of India, Japan and Australia in Manila at a Quad gathering before his planned China visit. The talks highlighted Indo-Pacific strategic cooperation.",
-      "what_happened": "Leaders of the four Quad countries convened in the Philippines during regional diplomatic meetings.",
+      "what_happened": "Leaders of the four Quad countries convened in the Philippines during regional diplomatic meetings. The leaders' joint statement opposed destabilising unilateral changes to the status quo and raised concerns about economic coercion and arbitrary export restrictions.",
       "background": "The Quad comprises Australia, India, Japan and the United States and coordinates on regional security, economic resilience and technology.",
       "why_it_matters": "Regional strategic coordination shapes supply-chain choices and the balance of influence across the Indo-Pacific.",
       "pakistan_perspective": "Pakistan should monitor Indo-Pacific alignments and implications for regional security and technology access.",
@@ -74,6 +74,11 @@
           "publisher": "Reuters",
           "title": "Trump meets regional allies in Manila ahead of China visit",
           "url": "https://www.reuters.com/world/china/trump-kick-off-asia-trip-with-quad-talks-manila-ahead-china-visit-2026-11-17/"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "Quad leaders flag 'economic coercion', oppose unilateral actions undermining peace",
+          "url": "https://www.reuters.com/world/quad-leaders-flag-economic-coercion-oppose-unilateral-actions-undermining-peace-2026-11-17/"
         }
       ]
     },
@@ -214,6 +219,146 @@
           "publisher": "Reuters",
           "title": "Can COP31's proposed 'age of electricity' slow global warming?",
           "url": "https://www.reuters.com/sustainability/cop/can-cop31s-proposed-age-electricity-slow-global-warming-2026-11-17/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-17-cop31-eu-clean-energy",
+      "category": "World — Climate Negotiations",
+      "headline": "EU climate commissioner urges stronger clean-energy transition language at COP31",
+      "summary": "At COP31 in Antalya on 17 November, EU climate commissioner Wopke Hoekstra called for sustained emissions cuts and a stronger clean-energy transition signal, criticizing the preliminary cover-decision text. Negotiations on fossil fuels and finance remained unresolved.",
+      "what_happened": "The EU climate commissioner addressed delegates while competing draft formulations included a transition away from fossil fuels or stronger phase-out language. Neither was a final adopted outcome.",
+      "background": "The Paris Agreement seeks to limit warming well below 2°C and pursue efforts toward 1.5°C; COP decisions require negotiations among parties with divergent interests.",
+      "why_it_matters": "Differences over fossil-fuel wording and implementation finance affect whether the summit produces actionable commitments.",
+      "pakistan_perspective": "Pakistan's adaptation needs make clarity on finance and emissions reductions important; draft language is not guaranteed funding.",
+      "key_takeaways": [
+        "Wopke Hoekstra was the EU climate commissioner urging stronger clean-energy action at COP31 on 17 November 2026."
+      ],
+      "quick_gk": [
+        "Wopke Hoekstra was the EU climate commissioner urging stronger clean-energy action at COP31 on 17 November 2026."
+      ],
+      "question_angles": [
+        "Which EU climate commissioner urged stronger clean-energy transition language at COP31 on 17 November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "Fossil-fuel transition",
+        "Climate finance"
+      ],
+      "countries": [
+        "Türkiye",
+        "European Union"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "COP31 talks must drive a shift towards greener energy, EU climate chief says",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-talks-must-drive-shift-towards-greener-energy-eu-climate-chief-says-2026-11-17/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-17-asean-china-sea-code",
+      "category": "World — Maritime Security",
+      "headline": "ASEAN and China reaffirm interim South China Sea declaration as code remains unfinished",
+      "summary": "Philippine President Ferdinand Marcos Jr. said on 17 November that ASEAN and China would continue following the existing South China Sea Declaration on Conduct while negotiations for a binding code of conduct remained unfinished.",
+      "what_happened": "Following the ASEAN summit in Manila, Marcos described continued adherence to the declaration pending an agreed code, and emphasized consistency with the UN Convention on the Law of the Sea.",
+      "background": "The 2002 Declaration on the Conduct of Parties is distinct from a still-negotiated code of conduct. Maritime claims and freedom of navigation remain contested.",
+      "why_it_matters": "The distinction between a declaration and an agreed code is central to assessing regional maritime conflict management.",
+      "pakistan_perspective": "Maritime stability matters for Asian trade routes and international law debates affecting Pakistan's commercial interests.",
+      "key_takeaways": [
+        "ASEAN and China had not finalized a South China Sea code of conduct as of 17 November 2026."
+      ],
+      "quick_gk": [
+        "ASEAN and China had not finalized a South China Sea code of conduct as of 17 November 2026."
+      ],
+      "question_angles": [
+        "Which existing instrument did ASEAN and China say they would follow while negotiating a South China Sea code of conduct?"
+      ],
+      "topics": [
+        "ASEAN",
+        "South China Sea",
+        "UNCLOS"
+      ],
+      "countries": [
+        "Philippines",
+        "China"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "ASEAN, China committed to follow South China Sea declaration until code of conduct is completed",
+          "url": "https://www.reuters.com/world/china/asean-china-committed-follow-south-china-sea-declaration-until-code-conduct-is-2026-11-17/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-17-apec-ai-data-governance",
+      "category": "World — Technology Governance",
+      "headline": "APEC officials discuss responsible AI deployment and data's role in AI development",
+      "summary": "At an APEC briefing on 17 November, senior-officials chair Chen Xu said participating economies had discussed responsible AI deployment and, for the first time in that forum's discussions, the role of data in driving AI development.",
+      "what_happened": "Chen Xu described substantive exchanges on AI safety, applications and data during the Shenzhen APEC meetings; the remarks did not establish a binding international AI treaty.",
+      "background": "APEC operates as a voluntary economic cooperation forum, while competition over advanced chips and cross-border data governance has intensified.",
+      "why_it_matters": "AI governance affects technology access, industrial competitiveness and digital trade.",
+      "pakistan_perspective": "Pakistan can study non-binding regional standards when designing its own AI governance and digital-economy policies.",
+      "key_takeaways": [
+        "Chen Xu chaired the 2026 APEC Senior Officials' Meeting and discussed responsible AI deployment on 17 November."
+      ],
+      "quick_gk": [
+        "Chen Xu chaired the 2026 APEC Senior Officials' Meeting and discussed responsible AI deployment on 17 November."
+      ],
+      "question_angles": [
+        "Who chaired the APEC Senior Officials' Meeting that discussed responsible AI deployment in November 2026?"
+      ],
+      "topics": [
+        "APEC",
+        "AI governance",
+        "Data policy"
+      ],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "APEC focuses on safe, responsible AI use, China's ex-UN envoy says",
+          "url": "https://www.reuters.com/technology/apec-focuses-safe-responsible-ai-use-chinas-ex-un-envoy-says-2026-11-17/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-17-nepal-loss-damage-fund",
+      "category": "World — Climate Finance",
+      "headline": "Nepal seeks faster loss-and-damage support for Himalayan disaster recovery",
+      "summary": "At COP31, Nepal highlighted the disparity between major disaster-recovery costs and limited international support. AP reported a roughly $20 million pledge from the UN Loss and Damage Fund against estimated losses of $2.5 billion, with no disbursement date announced.",
+      "what_happened": "Nepal advocated stronger assistance and early warning systems after severe Himalayan flooding, while reporting that pledged money had not yet been disbursed.",
+      "background": "The Loss and Damage Fund was agreed in 2022 to help climate-vulnerable countries respond to adverse climate impacts.",
+      "why_it_matters": "Pledges, actual disbursements and estimated losses are distinct measures; confusing them overstates financial support.",
+      "pakistan_perspective": "Pakistan faces comparable mountain-glacier, flood and adaptation-finance challenges and benefits from faster, accessible loss-and-damage support.",
+      "key_takeaways": [
+        "The UN Loss and Damage Fund was agreed in 2022 to help vulnerable countries address climate impacts."
+      ],
+      "quick_gk": [
+        "The UN Loss and Damage Fund was agreed in 2022 to help vulnerable countries address climate impacts."
+      ],
+      "question_angles": [
+        "In which year was the UN Loss and Damage Fund agreed to support climate-vulnerable countries?"
+      ],
+      "topics": [
+        "Loss and Damage Fund",
+        "COP31",
+        "Himalayan floods"
+      ],
+      "countries": [
+        "Nepal",
+        "Pakistan",
+        "Türkiye"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "At COP31, Nepal pushes for billions to help disaster survivors. So far, $20 million is promised",
+          "url": "https://apnews.com/article/77a91aafbd547b5bcc881f1e16a28e9e"
         }
       ]
     }

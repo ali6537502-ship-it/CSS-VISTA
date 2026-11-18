@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-11-06",
-  "total": 31092,
+  "total": 31096,
   "sourcePagesProcessed": 207,
   "excludedPages": "208-244 (Urdu and English grammar material, outside One-Liner GK scope)",
   "categories": [
@@ -371,16 +371,32 @@
     {
       "slug": "current-affairs-archive",
       "name": "Current Affairs Archive",
-      "count": 775,
-      "timeSensitiveCount": 775,
+      "count": 779,
+      "timeSensitiveCount": 779,
       "subcategories": [
+        {
+          "name": "Current Affairs",
+          "count": 8
+        },
         {
           "name": "Current Affairs 2024-25",
           "count": 250
         },
         {
-          "name": "World Affairs 2024-25",
-          "count": 21
+          "name": "Current Affairs 2026",
+          "count": 407
+        },
+        {
+          "name": "Current Affairs 2026 — 2026-11-15",
+          "count": 8
+        },
+        {
+          "name": "Current Affairs 2026 — 2026-11-16",
+          "count": 4
+        },
+        {
+          "name": "Current Affairs 2026 — 2026-11-17",
+          "count": 10
         },
         {
           "name": "International Relations",
@@ -391,28 +407,12 @@
           "count": 42
         },
         {
-          "name": "Current Affairs",
-          "count": 8
-        },
-        {
           "name": "Recent Events",
           "count": 16
         },
         {
-          "name": "Current Affairs 2026",
-          "count": 407
-        },
-        {
-          "name": "Current Affairs 2026 — 2026-11-15",
-          "count": 4
-        },
-        {
-          "name": "Current Affairs 2026 — 2026-11-16",
-          "count": 4
-        },
-        {
-          "name": "Current Affairs 2026 — 2026-11-17",
-          "count": 6
+          "name": "World Affairs 2024-25",
+          "count": 21
         }
       ]
     },

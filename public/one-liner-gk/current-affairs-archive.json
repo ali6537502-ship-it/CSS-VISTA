@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 775,
+  "count": 779,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5407,6 +5407,30 @@
     {
       "id": "ca-gk-20261117-cop31-electrification-pledge",
       "text": "The voluntary COP31 '35x35' initiative proposes a 35% electricity share of global final energy demand by 2035.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-cop31-eu-clean-energy",
+      "text": "Wopke Hoekstra was the EU climate commissioner urging stronger clean-energy action at COP31 on 17 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-asean-china-sea-code",
+      "text": "ASEAN and China had not finalized a South China Sea code of conduct as of 17 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-apec-ai-data-governance",
+      "text": "Chen Xu chaired the 2026 APEC Senior Officials' Meeting and discussed responsible AI deployment on 17 November.",
+      "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261117-nepal-loss-damage-fund",
+      "text": "The UN Loss and Damage Fund was agreed in 2022 to help vulnerable countries address climate impacts.",
       "subcategory": "Current Affairs 2026 — 2026-11-17",
       "timeSensitive": true
     }
