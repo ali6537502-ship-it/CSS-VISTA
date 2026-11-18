@@ -1063,5 +1063,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://apnews.com/article/77a91aafbd547b5bcc881f1e16a28e9e"
+  },
+  {
+    "id": "current-affairs-20261118-pakistan-current-account",
+    "q": "What was Pakistan's reported current-account balance for October 2026?",
+    "o": [
+      "$39 million surplus",
+      "$371 million surplus",
+      "$850 million surplus",
+      "$935 million deficit"
+    ],
+    "a": 0,
+    "e": "The October balance was a $39 million surplus; the July–October FY2027 cumulative balance remained in deficit.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045284/current-account-posts-39m-surplus"
+  },
+  {
+    "id": "current-affairs-20261118-turkish-air-chief",
+    "q": "Which Turkish Air Force commander met Pakistan's air chief on 18 November 2026?",
+    "o": [
+      "General Rafet Dalkıran",
+      "General Yaşar Güler",
+      "General Metin Gürak",
+      "General Hulusi Akar"
+    ],
+    "a": 0,
+    "e": "General Rafet Dalkıran met Air Chief Marshal Zaheer Ahmed Baber Sidhu to discuss aerospace and electronic-warfare cooperation.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045393/pakistan-turkiye-discuss-expanding-defence-cooperation-in-electronic-warfare-drone-and-aerospace-technologies"
+  },
+  {
+    "id": "current-affairs-20261118-apec-full-name",
+    "q": "Which expansion correctly identifies APEC, the forum central to the November 2026 China meetings?",
+    "o": [
+      "Asia-Pacific Economic Cooperation",
+      "Asian Partnership for Economic Coordination",
+      "Asia-Pacific Energy Council",
+      "Association of Pacific Exporting Countries"
+    ],
+    "a": 0,
+    "e": "APEC is the Asia-Pacific Economic Cooperation forum.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/chinas-xi-calls-free-open-trade-apec-summit-2026-11-18/"
+  },
+  {
+    "id": "current-affairs-20261118-aosis-full-name",
+    "q": "What does AOSIS, active in the COP31 climate-finance negotiations, stand for?",
+    "o": [
+      "Alliance of Small Island States",
+      "Association of Southern Island States",
+      "Alliance of Sustainable International Societies",
+      "Association of Small Industrial States"
+    ],
+    "a": 0,
+    "e": "AOSIS is the Alliance of Small Island States, representing vulnerable island countries in climate negotiations.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://apnews.com/article/6d0afe638c93be3150b5bb3b5cd3fd23"
   }
 ]

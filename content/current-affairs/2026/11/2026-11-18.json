@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "published_at": "2026-11-18T18:58:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 18 November 2026 | Evening preliminary coverage (00:00–18:58 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-18-pakistan-current-account",
+      "category": "Pakistan — Macroeconomy",
+      "headline": "Pakistan reports $39 million October current-account surplus amid wider trade deficit",
+      "summary": "Figures reported on 18 November showed Pakistan's October 2026 current account recorded a $39 million surplus, reversing September's $371 million deficit. The first four months of FY2027 still showed an $850 million current-account deficit.",
+      "what_happened": "Dawn reported State Bank data indicating an October current-account surplus of $39 million. Foreign direct investment during July–October rose to $935 million from $764 million a year earlier, while the goods-and-services trade deficit widened.",
+      "background": "The current account includes trade, primary income and secondary income such as remittances. A monthly surplus need not imply that the fiscal-year external balance is positive.",
+      "why_it_matters": "The contrasting monthly and cumulative figures illustrate why external-sector analysis must distinguish one-month changes from structural import and financing pressures.",
+      "pakistan_perspective": "The wider goods-and-services trade deficit and energy-price exposure remain important vulnerabilities despite the monthly surplus.",
+      "key_takeaways": [
+        "October 2026 current-account balance: $39 million surplus.",
+        "July–October FY2027 current-account balance: $850 million deficit."
+      ],
+      "statistics": [
+        {
+          "label": "October 2026 current-account balance",
+          "value": "$39 million surplus",
+          "source": "Dawn",
+          "date": "2026-11-18"
+        },
+        {
+          "label": "July–October FY2027 foreign direct investment",
+          "value": "$935 million",
+          "source": "Dawn",
+          "date": "2026-11-18"
+        }
+      ],
+      "quick_gk": [
+        "Pakistan's October 2026 current account posted a $39 million surplus, according to figures reported on 18 November."
+      ],
+      "question_angles": [
+        "What was Pakistan's reported October 2026 current-account balance?"
+      ],
+      "topics": [
+        "Current account",
+        "Foreign direct investment",
+        "Balance of payments"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "State Bank of Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Current account posts $39m surplus",
+          "url": "https://www.dawn.com/news/2045284/current-account-posts-39m-surplus"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-18-pakistan-turkiye-defence",
+      "category": "Pakistan — Foreign Relations and Security",
+      "headline": "Pakistan and Türkiye discuss cooperation in electronic warfare, drones and aerospace",
+      "summary": "On 18 November, Pakistan Air Force chief Zaheer Ahmed Baber Sidhu met Turkish Air Force commander General Rafet Dalkıran and discussed potential cooperation in unmanned systems, electronic warfare and aerospace technologies.",
+      "what_happened": "The Pakistan Air Force's public-relations directorate described discussions on training, professional exchanges, indigenous research and development, and emerging aerospace capabilities. The meeting is not evidence that a new procurement contract has been concluded.",
+      "background": "Pakistan and Türkiye maintain longstanding military training and industrial relationships. Unmanned systems and electronic warfare are increasingly important elements of air-power modernization.",
+      "why_it_matters": "Defence-industrial cooperation may shape technology transfer and interoperability, but concrete programmes require separate confirmation.",
+      "pakistan_perspective": "The talks highlight Pakistan's interest in indigenous aerospace capacity and collaboration with Türkiye.",
+      "key_takeaways": [
+        "The Turkish Air Force commander involved was General Rafet Dalkıran."
+      ],
+      "quick_gk": [
+        "General Rafet Dalkıran met Pakistan Air Force chief Zaheer Ahmed Baber Sidhu on 18 November 2026."
+      ],
+      "question_angles": [
+        "Which Turkish Air Force commander met Pakistan's air chief on 18 November 2026?"
+      ],
+      "topics": [
+        "Pakistan-Türkiye relations",
+        "Electronic warfare",
+        "Aerospace"
+      ],
+      "countries": [
+        "Pakistan",
+        "Türkiye"
+      ],
+      "institutions": [
+        "Pakistan Air Force",
+        "Turkish Air Force"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Pakistan, Turkiye discuss expanding defence cooperation in electronic warfare, drone and aerospace technologies",
+          "url": "https://www.dawn.com/news/2045393/pakistan-turkiye-discuss-expanding-defence-cooperation-in-electronic-warfare-drone-and-aerospace-technologies"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-18-apec-xi-putin-trade",
+      "category": "World — Trade and Geopolitics",
+      "headline": "Xi and Putin criticize protectionism and sanctions as Trump arrives in China",
+      "summary": "Reuters reported on 18 November that Chinese President Xi Jinping and Russian President Vladimir Putin criticized Western protectionism and sanctions around the APEC diplomatic gathering as US President Donald Trump arrived in China.",
+      "what_happened": "The remarks placed trade restrictions and sanctions at the centre of diplomatic exchanges surrounding the APEC meetings. The report does not establish that new trade agreements were signed.",
+      "background": "APEC is an Asia-Pacific economic forum whose members are described as economies; debates over tariffs, export controls and sanctions shape supply-chain strategies.",
+      "why_it_matters": "Disagreements among major powers complicate regional economic cooperation and raise uncertainty for businesses and emerging economies.",
+      "pakistan_perspective": "Pakistan has an interest in trade stability, energy access and avoiding supply-chain disruption linked to great-power competition.",
+      "key_takeaways": [
+        "The November 2026 remarks were reported around APEC-related diplomacy in China."
+      ],
+      "quick_gk": [
+        "APEC stands for Asia-Pacific Economic Cooperation."
+      ],
+      "question_angles": [
+        "What does APEC stand for?"
+      ],
+      "topics": [
+        "APEC",
+        "Protectionism",
+        "Sanctions"
+      ],
+      "countries": [
+        "China",
+        "Russia",
+        "United States"
+      ],
+      "people": [
+        "Xi Jinping",
+        "Vladimir Putin",
+        "Donald Trump"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Xi, Putin blast Western 'protectionism' and sanctions as Trump lands in China",
+          "url": "https://www.reuters.com/world/chinas-xi-calls-free-open-trade-apec-summit-2026-11-18/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-18-cop31-small-islands",
+      "category": "World — Climate Diplomacy",
+      "headline": "Small-island states press COP31 for stronger adaptation and loss-and-damage support",
+      "summary": "At COP31 in Antalya on 18 November, representatives of small island states urged stronger emissions reductions and more accessible climate finance, emphasizing risks from rising seas and extreme weather.",
+      "what_happened": "AP reported that the Alliance of Small Island States, representing 39 members, pressed wealthier and higher-emitting countries for tangible support. Negotiations remained ongoing, not finalized.",
+      "background": "Small island developing states contribute relatively little to cumulative global emissions but face high exposure to sea-level rise and climate-related disasters.",
+      "why_it_matters": "The demands underscore disputes over climate justice, adaptation funding and the effectiveness of voluntary international commitments.",
+      "pakistan_perspective": "Pakistan shares an interest in accessible adaptation and loss-and-damage finance given its own flood and climate vulnerabilities.",
+      "key_takeaways": [
+        "The Alliance of Small Island States (AOSIS) was described as a 39-member coalition."
+      ],
+      "quick_gk": [
+        "AOSIS stands for Alliance of Small Island States."
+      ],
+      "question_angles": [
+        "What does AOSIS stand for?"
+      ],
+      "topics": [
+        "COP31",
+        "Climate finance",
+        "Small island developing states"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "institutions": [
+        "Alliance of Small Island States"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "With heightened stakes, the world's small islands demand 'more action' at UN climate talks",
+          "url": "https://apnews.com/article/6d0afe638c93be3150b5bb3b5cd3fd23"
+        }
+      ]
+    }
+  ]
+}

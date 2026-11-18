@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 779,
+  "count": 783,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5432,6 +5432,30 @@
       "id": "ca-gk-20261117-nepal-loss-damage-fund",
       "text": "The UN Loss and Damage Fund was agreed in 2022 to help vulnerable countries address climate impacts.",
       "subcategory": "Current Affairs 2026 — 2026-11-17",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261118-pakistan-current-account",
+      "text": "Pakistan's October 2026 current account posted a $39 million surplus, according to figures reported on 18 November.",
+      "subcategory": "Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261118-pakistan-turkiye-defence",
+      "text": "General Rafet Dalkıran met Pakistan Air Force chief Zaheer Ahmed Baber Sidhu on 18 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261118-apec-trade",
+      "text": "APEC stands for Asia-Pacific Economic Cooperation.",
+      "subcategory": "Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261118-cop31-aosis",
+      "text": "AOSIS stands for Alliance of Small Island States.",
+      "subcategory": "Current Affairs 2026 — 2026-11-18",
       "timeSensitive": true
     }
   ]
