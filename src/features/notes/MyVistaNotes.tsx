@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode, type ClipboardEvent } from 'react'
 import { useAccount } from '@/lib/accountContext'
+import { useSearchParams } from 'react-router'
 import { HostingerApiError } from '@/lib/hostingerApi'
 import { Bold, Italic, Underline, Strikethrough, Highlighter, List, ListOrdered, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Quote, Undo2, Redo2, Plus, FolderPlus, Folder, FolderOpen, FileText, Pin, PinOff, Trash2, RotateCcw, Search, Cloud, CloudOff, CheckCircle2, RefreshCw, ChevronLeft, ChevronRight, History, Download, Table2, Superscript, Subscript, AlertTriangle, Pencil, X } from 'lucide-react'
 import {
@@ -23,6 +24,8 @@ const fmtTime = (iso: string) => { const t = Date.parse(iso); return Number.isFi
 
 export default function MyVistaNotes() {
   const { user } = useAccount()
+  const [query] = useSearchParams()
+  const linkedNoteId = query.get('note')
   const owner = user?.id || ''
   const [folders,setFolders] = useState<NoteFolder[]>([])
   const [notes,setNotes] = useState<NoteSummary[]>([])
@@ -57,6 +60,7 @@ export default function MyVistaNotes() {
   const changeSequence = useRef(0)
   const draftQueue = useRef<Promise<unknown>>(Promise.resolve())
   const retryDelay = useRef(1800)
+  const openedDeepLink = useRef<string | null>(null)
 
   const foldersById = useMemo(()=>new Map(folders.map(folder=>[folder.id,folder])),[folders])
   const folderIsVisible = useCallback((id:string|null):boolean=>{
@@ -111,6 +115,16 @@ export default function MyVistaNotes() {
     }catch(e){if(sequence===loadSequence.current)setError(e instanceof Error?e.message:'Unable to open note.')}
     finally{if(sequence===loadSequence.current)setBusy(false)}
   },[owner])
+
+  // Open the note that a lesson has just saved, without requiring a manual search.
+  useEffect(()=>{
+    if(!owner || !linkedNoteId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(linkedNoteId))return
+    const identity=owner+':'+linkedNoteId
+    if(openedDeepLink.current===identity)return
+    openedDeepLink.current=identity
+    setSelectedFolder(null);setTrash(false);setSelectedNote(linkedNoteId)
+    void loadDocument(linkedNoteId)
+  },[owner,linkedNoteId,loadDocument])
 
   // A page switch does not discard the previous page's IndexedDB draft.
   useEffect(()=>{
