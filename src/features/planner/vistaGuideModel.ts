@@ -4,7 +4,7 @@ import { pmsMentalAbilitySubject } from '../../data/pmsMentalAbility.ts'
 
 export type VistaExam = 'css' | 'pms-punjab'
 export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[] }
-export interface VistaSection { id: string; title: string; detail?: string; topics: VistaNode[] }
+export interface VistaSection { id: string; title: string; detail?: string; topics: VistaNode[]; sourceItems?: string[] }
 export interface VistaSubject {
   id: string; title: string; designation: 'compulsory' | 'optional'; marks: number | null
   file?: string; sourceUrl?: string; sections: VistaSection[]
@@ -12,7 +12,7 @@ export interface VistaSubject {
 }
 export interface VistaUnit {
   id: string; subjectId: string; subject: string; section: string; title: string
-  syllabus: string; paper: string; resource?: 'precis' | 'essay'; resourceSlug?: string
+  syllabus: string; paper: string; resource?: 'precis' | 'essay'; resourceSlug?: string; excerptFocus?: boolean
 }
 export interface VistaPreferences {
   version: 1
@@ -110,6 +110,9 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
     id: s.slug, title: s.name, designation: s.designation, marks: s.marks,
     sections: s.sections.map((section, i) => ({
       id: 's' + (i + 1), title: section.title, detail: '',
+      // Retain raw FPSC lines only for optional-subject focused copy commands.
+      // The existing section-level schedule IDs and progress records stay unchanged.
+      sourceItems: s.designation === 'optional' ? section.items : undefined,
       topics: [{ id: 'vista-css:' + s.slug + ':s' + (i + 1), title: section.title, detail: section.items.map((item, index) => (index + 1) + '. ' + item.trim()).join('\n') }],
     })),
   }))
@@ -123,6 +126,33 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
     }],
   })
   return papers
+}
+/**
+ * Optional papers include OCR-wrapped source lines, not consistently separated
+ * syllabus topics. Offer focused commands for exact original entries with the
+ * whole section as context; never treat a line fragment as an invented chapter.
+ * These units are copy-only and are deliberately absent from scheduled units.
+ */
+export function cssOptionalFocusUnits(subject: VistaSubject, section: VistaSection): VistaUnit[] {
+  if (subject.designation !== 'optional' || !section.sourceItems?.length) return []
+  const allLines = section.sourceItems.map(line => line.trim())
+  return allLines.flatMap((excerpt, index) => excerpt ? [{
+    id: 'vista-css:' + subject.id + ':' + section.id + ':source:' + index,
+    subjectId: subject.id,
+    subject: subject.title,
+    section: section.title,
+    title: excerpt,
+    paper: 'CSS',
+    excerptFocus: true,
+    syllabus: [
+      'OFFICIAL FPSC SECTION: ' + section.title,
+      'SELECTED SOURCE EXCERPT (may be part of a line-wrapped passage):',
+      excerpt,
+      '',
+      'COMPLETE SECTION TEXT FOR CONTEXT ONLY (original source order):',
+      allLines.filter(Boolean).join('\\n'),
+    ].join('\\n'),
+  }] : [])
 }
 export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] {
   const isEssay = exam === 'css' ? subject.id === 'essay' : subject.id === 'compulsory-english-essay'
@@ -226,7 +256,9 @@ export function resolveLegacyCssNotesUnit(
 export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' | 'revision' = 'comprehensive') {
   const isEssay = unit.resource === 'essay'
   const isMentalGuidebook = unit.paper === 'PMS Punjab' && unit.subjectId === 'compulsory-mental-ability-and-reasoning-test'
-  const kind = isEssay
+  const kind = unit.excerptFocus
+    ? 'FPSC OPTIONAL SYLLABUS EXCERPT — CONTEXT MAY INCLUDE WRAPPED LINES'
+    : isEssay
     ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP — NOT AN OFFICIAL SYLLABUS'
     : isMentalGuidebook
       ? 'PPSC MENTAL ABILITY GUIDEBOOK TOPIC — THE GUIDEBOOK IS NON-EXHAUSTIVE'
@@ -250,8 +282,9 @@ export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' |
     unit.syllabus,
     '',
     'MANDATORY WORKING RULES:',
-    '1. First identify the subject, examination, requested scope and every heading/subheading/individual topic visible above. Treat the supplied wording as the coverage checklist; retain its order, names, important quotations, prescribed authors and original-language terms. If the source is a flat list, preserve it as distinct items rather than merging or losing entries. Reconstruct a clear numbered teaching hierarchy, explicitly marking any explanatory subheadings you add as your own organization, not as official syllabus entries.',
-    '2. Cover every distinct syllabus item, including nested points, in meaningful depth. Under each substantive heading explain definitions, background, mechanisms, competing interpretations, causes, consequences, objections, applications and examination relevance wherever appropriate. Explain fundamentals before difficult analysis, in clear language, and connect arguments logically. Avoid vague padding, repeated introductory paragraphs and unsupported sweeping claims.',
+    ...(unit.excerptFocus ? ['FOCUS RULE: Explain the selected source excerpt and its natural continuation in the section. The complete section text is reference context, not an instruction to generate notes for every neighboring topic. FPSC line breaks are not always topic boundaries. Do not claim that this excerpt is a standalone official chapter.'] : []),
+    unit.excerptFocus ? '1. Identify the selected source excerpt and its complete meaning using adjacent lines as context. Preserve original terms, wording and prescribed names; never confuse document line breaks with official topic boundaries. Organize the focused teaching material logically, and distinguish added explanation from original syllabus text.' : '1. First identify the subject, examination, requested scope and every heading/subheading/individual topic visible above. Treat the supplied wording as the coverage checklist; retain its order, names, important quotations, prescribed authors and original-language terms. If the source is a flat list, preserve it as distinct items rather than merging or losing entries. Reconstruct a clear numbered teaching hierarchy, explicitly marking any explanatory subheadings you add as your own organization, not as official syllabus entries.',
+    unit.excerptFocus ? '2. Cover the focused excerpt and any necessary continuation in meaningful textbook depth. Explain definitions, background, mechanisms, competing views, examples and examination relevance as appropriate. Do not drift into unrelated topics from the surrounding section. Avoid repetitive padding and superficial summaries.' : '2. Cover every distinct syllabus item, including nested points, in meaningful depth. Under each substantive heading explain definitions, background, mechanisms, competing interpretations, causes, consequences, objections, applications and examination relevance wherever appropriate. Explain fundamentals before difficult analysis, in clear language, and connect arguments logically. Avoid vague padding, repeated introductory paragraphs and unsupported sweeping claims.',
     '3. Adapt the method to the subject instead of forcing one template: for history use accurate chronology, actors, causes, historiography and consequences; for political science, governance and international relations examine thinkers, institutions, theories and competing views; for economics and current affairs explain indicators, official figures, trade-offs, policy options and implications; for law identify jurisdiction, instruments, precise provisions and holdings; for science and environment explain processes, mechanisms and experiments; for mathematics, statistics and ability provide definitions, correct formulas and worked problems; for languages and literature use the prescribed original script and analyse the specified texts; for Islamic Studies cite Qur’an by surah and verse and hadith only when their exact references can be verified. Omit discipline-specific requirements that do not fit.',
     '4. When a claim depends on recent events, law, statistics, exact quotations, historical dates, treaty provisions or named cases, use web research if the conversation supports it. Prioritize primary authorities (official commission syllabi, constitutions, statutes, court judgments, official statistics, recognised institutions and original works), then reputable scholarship. Cross-check material claims with independent credible sources when possible. Cite the actual source title, institution, date/year and working link beside the relevant claim or in that section’s references. Do not cite a source you have not accessed. Distinguish official source text from extra explanatory material.',
     '5. Never invent citations or statistics. Do not fabricate case names, dates, articles, books, page numbers, treaties, quotations, source URLs, numerical values, author attributions or supposed expert consensus. If verification is unavailable, explicitly label the claim as needing verification or omit it. Do not pretend to have browsed, inspected a PDF or seen a source when you have not. If two trustworthy accounts disagree, explain the disagreement rather than silently choosing one.',
@@ -260,7 +293,7 @@ export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' |
     '8. Include verified, specific examples, suitable comparative cases, counterarguments and genuine illustrations for each major conceptual dimension. Mark a teaching example as hypothetical when it is not a historical or real-world fact. For numerical topics, show steps, units, assumptions and checks. For essays distinguish the optional theme roadmap from any officially prescribed topic and prioritise argument building, evidence and structured writing practice.',
     '9. Write cohesive textbook-style explanations under exact logical headings (e.g., 1, 1.1, 1.1.1 where useful); use tables only for real comparisons. Do not replace detailed explanations with lists, unsupported slogans, motivational filler, prompts for the student to research everything, or an excessive number of tiny bullet points. Use easy-to-understand language without sacrificing accuracy or analytical depth.',
     '10. Add exam-relevant analytical questions with substantial answer outlines, common misconceptions and a concise revision recap after the teaching sections. Separate substantiated facts, analytical interpretation and recommendations; never imply that your original practice questions are past examination questions.',
-    '11. Before finishing, check coverage against every supplied heading/subheading and state any genuinely uncovered items or uncertain references. If the full chapter cannot fit in one reply, provide as much continuous, substantial content as possible in Part 1, stop at a natural section boundary, and state exactly which topics remain for continuation. Do not compress or silently omit sections to fit.',
+    unit.excerptFocus ? '11. Check that the selected excerpt and its necessary continuation were explained, naming any uncertain reference. If the answer must continue, identify exactly which aspects of the focused excerpt remain. Do not silently broaden the assignment to the complete syllabus section.' : '11. Before finishing, check coverage against every supplied heading/subheading and state any genuinely uncovered items or uncertain references. If the full chapter cannot fit in one reply, provide as much continuous, substantial content as possible in Part 1, stop at a natural section boundary, and state exactly which topics remain for continuation. Do not compress or silently omit sections to fit.',
     '12. Deliver the actual notes in this ChatGPT conversation. Do not substitute a PDF, promise later background research, or ask unnecessary setup questions. If a tool required for visuals or current verification is unavailable, acknowledge that limitation briefly and complete the text notes using only reliable information.',
     '',
     'START NOW with the first supplied heading. Do not begin with an explanation of what this command does.',
