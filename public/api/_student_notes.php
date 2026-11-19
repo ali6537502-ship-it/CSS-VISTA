@@ -318,7 +318,14 @@ function cssv_notes_mutate(PDO $pdo,string $user,array $body): array
                 } else $html=$body['html']??null;
                 if (!is_string($html) || strlen($html)>CSSV_NOTES_PAGE_BYTES) throw new InvalidArgumentException('This page is too large. Continue on a new page.');
                 if ($html===$page['content_html']) { $result=['id'=>$id,'version'=>$page['version'],'unchanged'=>true];break; }
-                $pdo->prepare('INSERT INTO student_note_revisions(user_id,page_id,version,content_html) VALUES(?,?,?,?)')->execute([$user,$id,$page['version'],$page['content_html']]);
+                // Preserve recoverable checkpoints without copying an entire
+                // multi-megabyte page on every autosave. Keep the first two
+                // versions, then capture at most one checkpoint per five minutes.
+                $recent=$pdo->prepare('SELECT COUNT(*) FROM student_note_revisions WHERE user_id=? AND page_id=? AND created_at>=DATE_SUB(NOW(6), INTERVAL 5 MINUTE)');
+                $recent->execute([$user,$id]);
+                if ($page['version']<=2 || (int)$recent->fetchColumn()===0) {
+                    $pdo->prepare('INSERT INTO student_note_revisions(user_id,page_id,version,content_html) VALUES(?,?,?,?)')->execute([$user,$id,$page['version'],$page['content_html']]);
+                }
                 $next=$page['version']+1;
                 $pdo->prepare('UPDATE student_note_pages SET content_html=?,version=?,last_request_id=?,updated_at=NOW(6) WHERE id=? AND user_id=? AND version=?')->execute([$html,$next,$requestId,$id,$user,$page['version']]);
                 $pdo->prepare('UPDATE student_notes SET updated_at=NOW(6) WHERE id=? AND user_id=?')->execute([$page['note_id'],$user]);
