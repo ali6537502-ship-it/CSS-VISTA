@@ -65,7 +65,8 @@ export function sanitizeNoteHtml(html: string): string {
   })
   template.content.querySelectorAll('a').forEach(link => {
     const url = link.getAttribute('href') || ''
-    if (!/^(https?:\/\/|mailto:|#)/i.test(url)) link.removeAttribute('href')
+    const local = url.startsWith('/') && !url.startsWith('//') && !url.includes('..') && !url.includes('\\')
+    if (!/^(https?:\/\/|mailto:|#)/i.test(url) && !local) link.removeAttribute('href')
     else link.setAttribute('rel','noopener noreferrer')
   })
   // DOMPurify sanitizes markup; the additional pass only narrows style/link values.
