@@ -103,6 +103,7 @@ const AccountAnswerPerformance = lazy(() => import('./pages/account/AnswerPerfor
 const AccountLearning = lazy(() => import('./pages/account/Learning'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
 const MyVistaNotes = lazy(() => import('./features/notes/MyVistaNotes'))
+const NotesProtectionPending = lazy(() => import('./features/notes/NotesProtectionPending'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
 const MptArea = lazy(() => import('./pages/mpt/MptArea'))
 const MptApply = lazy(() => import('./pages/mpt/MptApply'))
@@ -262,7 +263,7 @@ export default function App() {
         <Route path="/account/membership/*" element={<Navigate to="/account/settings" replace />} />
         <Route path="/account/ai-usage/*" element={<Navigate to="/account/progress" replace />} />
         <Route path="/account/library" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountLibrary />}><AccountLibrary /></WorkspaceVariant></S></ProfileGate>} />
-        <Route path="/account/notes" element={NOTES_RELEASED ? <ProfileGate><S><MyVistaNotes /></S></ProfileGate> : <Navigate to="/account/dashboard" replace />} />
+        <Route path="/account/notes" element={<ProfileGate><S>{NOTES_RELEASED ? <MyVistaNotes /> : <NotesProtectionPending />}</S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;
             these routes only render it, and stay inert while the flag is off. */}
