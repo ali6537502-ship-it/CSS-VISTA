@@ -150,8 +150,8 @@ export function cssOptionalFocusUnits(subject: VistaSubject, section: VistaSecti
       excerpt,
       '',
       'COMPLETE SECTION TEXT FOR CONTEXT ONLY (original source order):',
-      allLines.filter(Boolean).join('\\n'),
-    ].join('\\n'),
+      allLines.filter(Boolean).join('\n'),
+    ].join('\n'),
   }] : [])
 }
 export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] {
