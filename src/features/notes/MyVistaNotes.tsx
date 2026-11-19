@@ -256,6 +256,17 @@ export default function MyVistaNotes() {
     return()=>{stopped=true;window.clearInterval(timer);document.removeEventListener('visibilitychange',visible)}
   },[owner,selectedNote])
 
+  useEffect(()=>{
+    const warn=(event:BeforeUnloadEvent)=>{
+      if(dirtyHtmlRef.current!==null){
+        event.preventDefault()
+        event.returnValue=''
+      }
+    }
+    window.addEventListener('beforeunload',warn)
+    return()=>window.removeEventListener('beforeunload',warn)
+  },[])
+
   useEffect(()=>()=>{
     if(saveTimer.current)clearTimeout(saveTimer.current)
     if(draftTimer.current)clearTimeout(draftTimer.current)
@@ -451,7 +462,7 @@ export default function MyVistaNotes() {
               </span>
               <button type="button" title="Download current page" onClick={downloadPage}><Download size={17}/></button>
               <button type="button" title="Page history" onClick={()=>void openHistory()}><History size={17}/></button>
-              <button type="button" title="Move note to trash" disabled={busy||!!documentData.note.deleted_at} onClick={()=>{if(window.confirm('Move this note to Recently deleted?'))void mutation({action:'note_trash',id:selectedNote},()=>{setSelectedNote(null);setDocumentData(null)})}}><Trash2 size={17}/></button>
+              <button type="button" title="Move note to trash" disabled={busy||!!documentData.note.deleted_at} onClick={()=>{void (async()=>{if(!await canLeaveCurrent())return;if(window.confirm('Move this note to Recently deleted?'))await mutation({action:'note_trash',id:selectedNote},()=>{setSelectedNote(null);setDocumentData(null)})})()}}><Trash2 size={17}/></button>
             </div>
           </div>
           <div className="notes-document-location"><label>Folder <select aria-label="Move note to folder" value={documentData.note.folder_id??''} disabled={busy||!!documentData.note.deleted_at} onChange={e=>void mutation({action:'note_update',id:selectedNote,folder_id:e.target.value||null},()=>setDocumentData(current=>current?{...current,note:{...current.note,folder_id:e.target.value||null}}:current))}><option value="">Root</option>{folders.filter(f=>!f.deleted_at&&folderIsVisible(f.id)).map(f=><option value={f.id} key={f.id}>{'— '.repeat(Math.max(0,f.depth-1))+f.name}</option>)}</select></label>
