@@ -76,7 +76,7 @@ export default function MyVistaNotes() {
     const sequence=++listSequence.current
     const start=append?offset:0
     try {
-      const params=new URLSearchParams({ view:'list',offset:String(start),trash:trash?'1':'0' })
+      const params=new URLSearchParams({ view:'list',offset:String(start),trash:trash?'1':'0',folder:selectedFolder||'root' })
       if(search.trim())params.set('search',search.trim())
       const data=await notesRequest<NoteList>('?'+params)
       if(sequence!==listSequence.current)return
@@ -88,14 +88,14 @@ export default function MyVistaNotes() {
     } catch(e) {
       if(sequence===listSequence.current)setError(e instanceof Error?e.message:'Unable to load notes.')
     }
-  },[owner,offset,search,trash])
+  },[owner,offset,search,trash,selectedFolder])
   // Keep list refresh independent from pagination state.
   const loadListRef=useRef(loadList)
   loadListRef.current=loadList
   useEffect(()=>{
     const timer=setTimeout(()=>{setOffset(0);void loadListRef.current(false)},search?220:0)
     return()=>clearTimeout(timer)
-  },[owner,search,trash])
+  },[owner,search,trash,selectedFolder])
 
   const loadDocument=useCallback(async(id:string)=>{
     if(!owner)return
@@ -403,7 +403,7 @@ export default function MyVistaNotes() {
 
   const allPages=documentData?.pages.filter(p=>!p.deleted_at)??[]
   const currentIndex=allPages.findIndex(p=>p.id===selectedPage)
-  const visibleNotes=notes.filter(note=>trash||(!note.deleted_at && note.folder_id===selectedFolder && folderIsVisible(note.folder_id)))
+  const visibleNotes=notes.filter(note=>trash||(!note.deleted_at && (search.trim()!==''||(note.folder_id===selectedFolder && folderIsVisible(note.folder_id)))))
   const folderTree=(parent:string|null,level:number):ReactNode=>folders.filter(f=>f.parent_id===parent && !f.deleted_at).map(f=><div key={f.id} className="notes-tree-node">
     <div className="notes-folder-row" style={{paddingLeft:(level-1)*12}}>
       <button type="button" className={'notes-folder-button'+(selectedFolder===f.id?' active':'')} onClick={()=>void changeFolder(f.id,false)}><Folder size={16}/><span>{f.name}</span></button>
