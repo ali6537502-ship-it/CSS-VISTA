@@ -17,7 +17,9 @@ try {
         // Structural operations are logged and rate-limited. Autosaves are
         // deliberately not added to the login security event log on every edit.
         if ($action!=='page_save') {
-            cssv_enforce_rate_limit($pdo,'note_structure',$user,300,3600);
+            $limit=$pdo->prepare("SELECT COUNT(*) FROM login_security_events WHERE user_id=? AND event_type='note_structure' AND occurred_at>=DATE_SUB(NOW(6),INTERVAL 1 HOUR)");
+            $limit->execute([$user]);
+            if ((int)$limit->fetchColumn()>=300) cssv_fail('Too many folder or note changes. Try again later.',429,'notes_rate_limited');
             cssv_log_security_event($pdo,'note_structure',$user);
         }
         $result=cssv_notes_mutate($pdo,$user,$body);
