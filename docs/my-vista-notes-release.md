@@ -26,6 +26,14 @@ Once approved and configured, a backup must capture the entire live MySQL databa
 
 Encrypted snapshots must be outside the Hostinger failure domain, with independently accessible encryption keys and preferably a second immutable provider-managed copy. Retention, monitoring, restored hashes/row counts and separate recovery credentials must be verified. Daily backups alone can lose edits newer than the last copy; strong RPO requires binlog point-in-time recovery or replication.
 
+## Fail-closed two-sided release switch
+
+Both switches default to **off**, so a future code merge alone does not expose private writing.
+
+- Website build: set `VITE_CSSV_PERSONAL_NOTES_ENABLED=true` only for an approved production build. Otherwise the Notes sidebar, mobile navigation and Library shortcut stay hidden, and a direct visit redirects to the dashboard.
+- Private PHP runtime config (outside Git and public_html): set `CSSV_NOTES_ENABLED=1` only after independent backups and a real restore are verified. If absent or any value other than `1`, all Notes API requests reject with HTTP 503 and cannot create or modify student records.
+- Both settings are required. Do not leave a public feature enabled while the private API is unavailable. Roll back by disabling the server-side flag first if a backup or security problem arises.
+- Treat these switches as an operational safety mechanism, **not** proof that an actual independent backup exists. Backup job health and recovered data must be checked separately.
 ## Non-negotiable deployment checklist
 
 1. Establish and independently verify real backup operation and a full isolated recovery; provision the provider and restricted credentials outside the repository.
