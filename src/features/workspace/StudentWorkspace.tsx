@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router'
 import { Home, CalendarDays, BookOpen, PenLine, ChartNoAxesCombined, Library, NotebookPen, Settings, PanelLeftClose, PanelLeftOpen, MoreHorizontal, Search, ArrowUpRight, Menu, Dumbbell, GraduationCap, ChevronDown } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { sections, activeSection } from './registry'
-import { NOTES_RELEASED } from '../notes/availability'
 import WorkspaceAvatar from './WorkspaceAvatar'
 import WorkspaceMobileDrawer from './WorkspaceMobileDrawer'
 import './workspace.css'
@@ -45,7 +44,7 @@ export default function StudentWorkspace({ children }: { children: ReactNode }) 
       {id:'overview',to:'/account/dashboard',label:'Home',Icon:Home},
       {id:'plan',to:'/account/tasks',label:'My Plan',Icon:CalendarDays},
       {id:'practice',to:'/account/practice',label:'Practice',Icon:PenLine},
-      {id:NOTES_RELEASED?'notes':'library',to:NOTES_RELEASED?'/account/notes':'/account/library',label:NOTES_RELEASED?'Notes':'Library',Icon:NOTES_RELEASED?NotebookPen:Library},
+      {id:'notes',to:'/account/notes',label:'My Notes',Icon:NotebookPen},
     ].map(entry => {const Icon=entry.Icon;return <Link key={entry.id} to={entry.to} aria-current={entry.id === active ? 'page' : undefined}><Icon size={20} aria-hidden="true" /><span>{entry.label}</span></Link>})}<button type="button" onClick={()=>setMobileOpen(true)} aria-label="Open all account features" aria-expanded={mobileOpen} aria-controls="ws-mobile-account-drawer"><MoreHorizontal size={20} aria-hidden="true"/><span>More</span></button></nav>
     {mobileOpen && <div id="ws-mobile-account-drawer"><WorkspaceMobileDrawer onClose={closeMobile} onLogout={()=>void logout()} busy={busy}/></div>}
   </div>
