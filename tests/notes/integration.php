@@ -54,6 +54,10 @@ check(count(cssv_notes_page_history($pdo,$userA,$pageId)['revisions'])===2,'revi
 $restored=cssv_notes_mutate($pdo,$userA,['action'=>'page_restore_revision','id'=>$pageId,'version'=>3,'revision'=>2,'request_id'=>cssv_uuid_v4()]);
 check($restored['version']===4,'history restores to newer version');
 check(cssv_notes_own_page($pdo,$userA,$pageId)['content_html']==='<p><strong>Important content</strong></p>','restored content matches');
+check(count(cssv_notes_page_history($pdo,$userA,$pageId)['revisions'])===3,'explicit restoration snapshots overwritten current version');
+$undone=cssv_notes_mutate($pdo,$userA,['action'=>'page_restore_revision','id'=>$pageId,'version'=>4,'revision'=>3,'request_id'=>cssv_uuid_v4()]);
+check($undone['version']===5,'restoration can be undone');
+check(cssv_notes_own_page($pdo,$userA,$pageId)['content_html']===$bigHtml,'current content recovered after undo');
 $page2=cssv_notes_mutate($pdo,$userA,['action'=>'page_create','note_id'=>$note['id']]);
 check($page2['position']===2,'second page creation');
 cssv_notes_mutate($pdo,$userA,['action'=>'page_trash','id'=>$page2['id']]);
