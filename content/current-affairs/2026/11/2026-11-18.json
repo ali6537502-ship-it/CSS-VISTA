@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-11-18",
   "published_at": "2026-11-18T18:58:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 18 November 2026 | Evening preliminary coverage (00:00–18:58 PKT)",
+  "edition": "CSS VISTA — Daily Current Affairs | 18 November 2026 | Full-day coverage (00:00–23:59 PKT); finalized 19 November",
   "stories": [
     {
       "id": "ca-2026-11-18-pakistan-current-account",
@@ -170,6 +170,130 @@
           "publisher": "Associated Press",
           "title": "With heightened stakes, the world's small islands demand 'more action' at UN climate talks",
           "url": "https://apnews.com/article/6d0afe638c93be3150b5bb3b5cd3fd23"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-18-cop31-opec-electrification",
+      "category": "World — Energy and Climate Diplomacy",
+      "headline": "OPEC challenges the climate benefits of COP31 electrification pledge",
+      "summary": "On 18 November OPEC Secretary General Haitham Al Ghais argued that electrification alone would not solve climate challenges as COP31 debated a voluntary goal to increase electricity's share of final energy demand to 35% by 2035.",
+      "what_happened": "Reuters reported that OPEC defended the continued role of petroleum-based materials and fossil fuels in constructing electricity networks. COP31 host Türkiye's proposed voluntary electrification goal did not explicitly require the additional electricity to come from carbon-free sources. Negotiations were still in progress.",
+      "background": "Electricity generation can itself involve fossil fuels; electrification's emissions benefits depend on generation mix, demand and efficiency. OPEC represents oil-exporting member states.",
+      "why_it_matters": "The debate highlights the difference between electrifying energy demand and decarbonizing the power supply, a distinction central to evaluating energy transition pledges.",
+      "pakistan_perspective": "Pakistan faces linked questions of grid investment, imported fuel costs, power-sector reliability and affordable low-carbon electricity.",
+      "key_takeaways": [
+        "The voluntary COP31 electrification proposal targeted 35% of final energy demand by 2035.",
+        "OPEC's Secretary General was Haitham Al Ghais.",
+        "The proposal did not explicitly require all additional electricity to be carbon-free."
+      ],
+      "quick_gk": [
+        "OPEC Secretary General Haitham Al Ghais addressed COP31 electrification negotiations on 18 November 2026."
+      ],
+      "question_angles": [
+        "Who was OPEC Secretary General at COP31 in November 2026?"
+      ],
+      "topics": [
+        "COP31",
+        "OPEC",
+        "Electrification",
+        "Energy transition"
+      ],
+      "countries": [
+        "Türkiye"
+      ],
+      "institutions": [
+        "Organization of the Petroleum Exporting Countries"
+      ],
+      "people": [
+        "Haitham Al Ghais"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "OPEC speaks up for fossil fuels at COP31 climate talks",
+          "url": "https://www.reuters.com/business/energy/opec-speaks-up-fossil-fuels-cop31-climate-talks-2026-11-18/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-18-taiwan-apec-diplomacy",
+      "category": "World — East Asian Security",
+      "headline": "Taiwan seeks diplomatic reassurance ahead of US–China–Russia APEC talks",
+      "summary": "Reuters reported on 18 November that Taiwan was in close contact with the United States before anticipated high-level meetings involving US, Chinese and Russian leaders at APEC in Shenzhen.",
+      "what_happened": "Taiwan's APEC envoy Stan Shih said he would engage other participating economies and emphasized Taiwan's role in technology and AI supply chains. Taipei urged regional stability and reaffirmed its intention to maintain the status quo. The report did not establish that the anticipated leaders' talks had concluded.",
+      "background": "Taiwan participates in APEC as Chinese Taipei. Its political representation differs from sovereign-state summits and remains a point of cross-strait tension.",
+      "why_it_matters": "APEC's economic agenda intersects with strategic competition and semiconductor supply-chain security, making Taiwan's representation diplomatically sensitive.",
+      "pakistan_perspective": "Pakistan's trade and technology access may be affected by broader East Asian supply-chain disruptions; Pakistan maintains its longstanding one-China policy.",
+      "key_takeaways": [
+        "Taiwan's APEC representative in November 2026 was Stan Shih.",
+        "The reported summit was hosted in Shenzhen, China."
+      ],
+      "quick_gk": [
+        "Stan Shih represented Taiwan at the November 2026 APEC gathering in Shenzhen."
+      ],
+      "question_angles": [
+        "Who represented Taiwan at APEC in Shenzhen in November 2026?"
+      ],
+      "topics": [
+        "APEC",
+        "Taiwan Strait",
+        "Semiconductors",
+        "Geopolitics"
+      ],
+      "countries": [
+        "Taiwan",
+        "China",
+        "United States",
+        "Russia"
+      ],
+      "people": [
+        "Stan Shih"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Taiwan in 'close contact' with US ahead of US-China-Russia talks at APEC",
+          "url": "https://www.reuters.com/world/china/taiwans-apec-envoy-says-he-will-speak-with-other-members-china-hosted-summit-2026-11-18/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-18-cop31-fossil-treaty-bloc",
+      "category": "World — Climate Diplomacy",
+      "headline": "Thirty countries back separate fossil-fuel treaty initiative as COP31 talks continue",
+      "summary": "On 18 November, Panama's environment minister Juan Carlos Navarro said that 30 countries had joined an initiative to negotiate a separate fossil-fuel treaty while COP31 negotiations remained divided over energy transition and adaptation finance.",
+      "what_happened": "The Guardian reported that the proposed treaty process was separate from the UN COP31 negotiating outcome. No finalized fossil-fuel treaty was announced. Negotiators continued to dispute transition wording and finance commitments.",
+      "background": "The Fossil Fuel Non-Proliferation Treaty Initiative is a proposed complementary international process rather than an existing binding universal treaty.",
+      "why_it_matters": "The initiative illustrates how coalitions may pursue additional agreements when consensus-based UN climate negotiations stall.",
+      "pakistan_perspective": "Pakistan's energy security and climate vulnerability make both transition financing and equitable implementation central to any prospective treaty assessment.",
+      "key_takeaways": [
+        "Panama's environment minister Juan Carlos Navarro discussed the initiative.",
+        "Thirty countries were reported to have joined the separate treaty effort by 18 November."
+      ],
+      "quick_gk": [
+        "Panama's environment minister Juan Carlos Navarro said 30 countries backed a separate fossil-fuel treaty initiative on 18 November 2026."
+      ],
+      "question_angles": [
+        "Which country's environment minister reported a 30-country fossil-fuel treaty initiative at COP31?"
+      ],
+      "topics": [
+        "COP31",
+        "Fossil Fuel Non-Proliferation Treaty Initiative",
+        "Climate diplomacy"
+      ],
+      "countries": [
+        "Panama",
+        "Türkiye"
+      ],
+      "people": [
+        "Juan Carlos Navarro"
+      ],
+      "sources": [
+        {
+          "publisher": "The Guardian",
+          "title": "World 'held hostage by oil mafia', says Panama minister at Cop 31",
+          "url": "https://www.theguardian.com/environment/2026/nov/18/world-held-hostage-by-oil-mafia-says-panama-minister-at-cop-31"
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 783,
+  "count": 786,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5455,6 +5455,24 @@
     {
       "id": "ca-gk-20261118-cop31-aosis",
       "text": "AOSIS stands for Alliance of Small Island States.",
+      "subcategory": "Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261118-opec-electrification",
+      "text": "OPEC Secretary General Haitham Al Ghais addressed COP31 electrification negotiations on 18 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261118-taiwan-apec-envoy",
+      "text": "Stan Shih represented Taiwan at the November 2026 APEC gathering in Shenzhen.",
+      "subcategory": "Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261118-fossil-treaty-bloc",
+      "text": "Panama's environment minister Juan Carlos Navarro said 30 countries backed a separate fossil-fuel treaty initiative on 18 November 2026.",
       "subcategory": "Current Affairs 2026 — 2026-11-18",
       "timeSensitive": true
     }
