@@ -1,7 +1,6 @@
 import { allOptionalSubjects } from '../../lib/studyPlanner.ts'
 import { defaultHomeCards } from '../../data/homeCards.ts'
 import { MPT_HIBERNATED } from '../../lib/featureHibernation.ts'
-import { NOTES_RELEASED } from '../notes/availability.ts'
 
 export const sections = [
   { id: 'overview', title: 'Overview', to: '/account/dashboard' },
@@ -10,7 +9,7 @@ export const sections = [
   { id: 'practice', title: 'Practice', to: '/account/practice' },
   { id: 'performance', title: 'My Performance', to: '/account/progress' },
   { id: 'library', title: 'My Library', to: '/account/library' },
-  ...(NOTES_RELEASED ? [{ id: 'notes', title: 'My Notes', to: '/account/notes' } as const] : []),
+  { id: 'notes', title: 'My Notes', to: '/account/notes' },
   { id: 'settings', title: 'Account & Settings', to: '/account/settings' },
 ] as const
 export function activeSection(path: string) {
