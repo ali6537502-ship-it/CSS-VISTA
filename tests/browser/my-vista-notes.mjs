@@ -55,7 +55,7 @@ await context.route('**/*',async route=>{
   if(existing)return reply(route,{ok:true,id:existing.id,replayed:true})
   const id=body.id,pageId=randomUUID()
   notes.push({id,folder_id:null,title:body.title,pinned:false,deleted_at:null,created_at:now,updated_at:now})
-  pages.set(pageId,{id:pageId,note_id:id,position:1,content_html:'<h2>'+body.title+'</h2><p>Saved from lesson: '+body.source_url+'</p><p>'+body.text+'</p>',version:1,deleted_at:null,updated_at:now})
+  pages.set(pageId,{id:pageId,note_id:id,position:1,content_html:'<h2>'+body.title+'</h2><p>Saved from lesson: <a href="'+body.source_url+'">'+body.title+'</a></p><p>'+body.text+'</p>',version:1,deleted_at:null,updated_at:now})
   return reply(route,{ok:true,id,page_id:pageId})
  }
  if(body.action==='note_create'){
