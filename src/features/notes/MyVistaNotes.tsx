@@ -228,6 +228,34 @@ export default function MyVistaNotes() {
     return()=>window.removeEventListener('online',online)
   },[save])
 
+  // Lightweight remote metadata check: no full document download on every poll.
+  useEffect(()=>{
+    if(!owner)return
+    let stopped=false
+    const tick=async()=>{
+      if(stopped||document.visibilityState!=='visible'||!navigator.onLine)return
+      void loadListRef.current(false)
+      const open=pageRef.current
+      if(!open||!selectedNote||dirtyHtmlRef.current!==null||savingRef.current)return
+      try{
+        const meta=await notesRequest<NoteView>('?view=note&id='+encodeURIComponent(selectedNote))
+        const newer=meta.pages.find(p=>p.id===open.id&&!p.deleted_at)
+        if(!newer||newer.version===open.version||stopped||dirtyHtmlRef.current!==null)return
+        const remote=await notesRequest<PageView>('?view=page&id='+encodeURIComponent(open.id))
+        if(stopped||pageRef.current?.id!==open.id||dirtyHtmlRef.current!==null)return
+        if(editorRef.current)editorRef.current.innerHTML=sanitizeNoteHtml(remote.page.content_html)
+        pageRef.current.version=remote.page.version
+        setDocumentData({note:meta.note,pages:meta.pages})
+        setMessage('This page was updated from another signed-in device.')
+        setSaveState('saved')
+      }catch{/* Temporary network interruptions do not replace existing writing. */}
+    }
+    const timer=window.setInterval(()=>{void tick()},30000)
+    const visible=()=>{if(document.visibilityState==='visible')void tick()}
+    document.addEventListener('visibilitychange',visible)
+    return()=>{stopped=true;window.clearInterval(timer);document.removeEventListener('visibilitychange',visible)}
+  },[owner,selectedNote])
+
   useEffect(()=>()=>{
     if(saveTimer.current)clearTimeout(saveTimer.current)
     if(draftTimer.current)clearTimeout(draftTimer.current)
