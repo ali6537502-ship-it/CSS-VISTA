@@ -3,6 +3,7 @@ declare(strict_types=1);
 require_once dirname(__DIR__).'/_bootstrap.php';
 require_once dirname(__DIR__).'/_student_notes.php';
 cssv_require_method('GET','POST');
+if (cssv_env('CSSV_NOTES_ENABLED','0') !== '1') cssv_fail('Personal notes are temporarily unavailable until secure recovery is enabled.',503,'personal_notes_not_enabled');
 
 try {
     $pdo=cssv_db();
