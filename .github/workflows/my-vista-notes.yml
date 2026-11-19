@@ -50,4 +50,5 @@ jobs:
       - name: Typecheck and route security
         run: |
           npm run typecheck
+          npm run build:hostinger
           npm run audit:routes
