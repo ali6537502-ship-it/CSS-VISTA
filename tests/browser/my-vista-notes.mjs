@@ -96,6 +96,9 @@ try{
  await page.getByRole('button',{name:'New note'}).click()
  const editor=page.getByRole('textbox',{name:'Write your note'})
  await editor.waitFor()
+ // The editor is rendered before the initial page fetch finishes; typing must
+ // begin only after remote data and any account-scoped device draft hydrate.
+ await page.locator('.notes-rich-editor[contenteditable="true"]').waitFor({timeout:15000})
  await editor.fill('Drafting an original research outline.')
  await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
  assert.ok([...pages.values()][0].content_html.includes('Drafting an original research outline.'))
@@ -153,7 +156,7 @@ try{
  const capturedNoteId=pasted?.note_id
  await page.getByRole('link',{name:'Open saved note'}).click()
  await page.getByRole('heading',{name:'My Notes'}).waitFor()
- await page.getByRole('textbox',{name:'Write your note'}).waitFor({timeout:12000})
+ await page.locator('.notes-rich-editor[contenteditable="true"]').waitFor({timeout:15000})
  assert.ok(page.url().includes('note='+capturedNoteId),'open-saved-note link targets the newly captured note')
  assert.ok((await page.getByRole('textbox',{name:'Write your note'}).innerText()).includes('Key point to revise:'))
  assert.ok(await page.locator('.notes-rich-editor a[href^="/study-material/optional/"]').count(),'saved note should retain an internal link to its source lesson')
