@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 299,
+  "count": 300,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2087,6 +2087,12 @@
       "id": "pak-ca-gk-20261118-pakistan-turkiye-defence",
       "text": "General Rafet Dalkıran met Pakistan Air Force chief Zaheer Ahmed Baber Sidhu on 18 November 2026.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261119-pakistan-qatar-security-mou",
+      "text": "Pakistan and Qatar signed a security MoU between the Federal Constabulary and Qatar's Lekhwiya on 19 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-19",
       "timeSensitive": true
     }
   ]
