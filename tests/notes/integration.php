@@ -73,4 +73,35 @@ check(count(cssv_notes_list($pdo,$userA,[])['notes'])===1,'A cannot see B note')
 check(count(cssv_notes_list($pdo,$userA,['folder'=>$folder5])['notes'])===1,'folder-specific paging contains its own note');
 check(count(cssv_notes_list($pdo,$userA,['folder'=>'root'])['notes'])===0,'root browsing excludes nested notes');
 check(count(cssv_notes_list($pdo,$userA,['search'=>'Constitutional'])['notes'])===1,'search sees subject notes across folders');
+$captureId=cssv_uuid_v4();
+$captureText="Quoted lesson passage & <script>alert('not content')</script>\nStudy comparison in Urdu: تعلیم";
+$captured=cssv_notes_mutate($pdo,$userA,[
+    'action'=>'lesson_capture','id'=>$captureId,'title'=>'Exam topic lesson',
+    'text'=>$captureText,'source_url'=>'/study-material/optional/example/example-topic?section=a&mode=read',
+]);
+check($captured['id']===$captureId,'captured lesson ID preserved');
+$capturedPages=cssv_notes_detail($pdo,$userA,$captureId)['pages'];
+check(count($capturedPages)===1,'atomic lesson paste creates a single page');
+$html=cssv_notes_own_page($pdo,$userA,$capturedPages[0]['id'])['content_html'];
+check(str_contains($html,'&lt;script&gt;alert'),'plain text is HTML escaped');
+check(!str_contains($html,'<script>'),'scripts never become rendered markup');
+check(str_contains($html,'a&amp;mode=read'),'lesson source query is escaped');
+check(str_contains($html,'تعلیم'),'Unicode captured lesson text preserved');
+$replayed=cssv_notes_mutate($pdo,$userA,[
+    'action'=>'lesson_capture','id'=>$captureId,'title'=>'Exam topic lesson',
+    'text'=>$captureText,'source_url'=>'/study-material/optional/example/example-topic?section=a&mode=read',
+]);
+check(($replayed['replayed']??false)===true,'lesson capture retry does not create duplicate');
+check(count(cssv_notes_detail($pdo,$userA,$captureId)['pages'])===1,'retry leaves exactly one page');
+rejects(fn()=>cssv_notes_detail($pdo,$userB,$captureId),OutOfBoundsException::class,'captured lesson remains student private');
+rejects(fn()=>cssv_notes_mutate($pdo,$userB,[
+    'action'=>'lesson_capture','id'=>$captureId,'title'=>'Stolen','text'=>'Unauthorized','source_url'=>'/grammar-course'
+]),OutOfBoundsException::class,'captured note ID cannot be claimed by another student');
+rejects(fn()=>cssv_notes_mutate($pdo,$userA,[
+    'action'=>'lesson_capture','id'=>cssv_uuid_v4(),'title'=>'Unsafe URL','text'=>'Test',
+    'source_url'=>'https://external.example/paste'
+]),InvalidArgumentException::class,'external source URLs rejected');
+check(count(cssv_notes_list($pdo,$userA,['folder'=>'root'])['notes'])===1,'lesson captured into the student notebook root');
+check(count(cssv_notes_list($pdo,$userB,[])['notes'])===1,'capturing does not affect other students');
+
 echo "Notes MySQL integration passed: ownership, deep folders, large pages, conflict, revisions, trash and recovery.\n";
