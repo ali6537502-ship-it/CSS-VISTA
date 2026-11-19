@@ -12,9 +12,15 @@ try {
     cssv_notes_schema($pdo);
 
     if ($_SERVER['REQUEST_METHOD']==='POST') {
-        // High ceiling for frequent autosaves, but prevent uncontrolled abuse.
-        cssv_enforce_rate_limit($pdo,'note_write',$user,12000,3600);
-        $result=cssv_notes_mutate($pdo,$user,cssv_request_json(CSSV_NOTES_PAGE_BYTES+16384));
+        $body=cssv_request_json(CSSV_NOTES_PAGE_BYTES+16384);
+        $action=$body['action']??'';
+        // Structural operations are logged and rate-limited. Autosaves are
+        // deliberately not added to the login security event log on every edit.
+        if ($action!=='page_save') {
+            cssv_enforce_rate_limit($pdo,'note_structure',$user,300,3600);
+            cssv_log_security_event($pdo,'note_structure',$user);
+        }
+        $result=cssv_notes_mutate($pdo,$user,$body);
         cssv_json(['ok'=>true,...$result]);
     }
 
