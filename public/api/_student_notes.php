@@ -333,7 +333,7 @@ function cssv_notes_mutate(PDO $pdo,string $user,array $body): array
                 // versions, then capture at most one checkpoint per five minutes.
                 $recent=$pdo->prepare('SELECT COUNT(*) FROM student_note_revisions WHERE user_id=? AND page_id=? AND created_at>=DATE_SUB(NOW(6), INTERVAL 5 MINUTE)');
                 $recent->execute([$user,$id]);
-                if ($page['version']<=2 || (int)$recent->fetchColumn()===0) {
+                if ($action==='page_restore_revision' || $page['version']<=2 || (int)$recent->fetchColumn()===0) {
                     $pdo->prepare('INSERT INTO student_note_revisions(user_id,page_id,version,content_html) VALUES(?,?,?,?)')->execute([$user,$id,$page['version'],$page['content_html']]);
                 }
                 $next=$page['version']+1;
