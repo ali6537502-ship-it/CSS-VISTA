@@ -79,7 +79,7 @@ function cssv_notes_id(mixed $value): string
 function cssv_notes_title(mixed $value, int $max = 255): string
 {
     if (!is_string($value)) throw new InvalidArgumentException('Enter a valid title.');
-    $title = trim(preg_replace('/[\x00-\x1f\x7f]+/u', ' ', $value) ?? '');
+    $title = trim(preg_replace('/\s+/u', ' ', preg_replace('/[\x00-\x1f\x7f]+/u', ' ', $value) ?? '') ?? '');
     if ($title === '' || mb_strlen($title) > $max) throw new InvalidArgumentException('Title is empty or too long.');
     return $title;
 }
