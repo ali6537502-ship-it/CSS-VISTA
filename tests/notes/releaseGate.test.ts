@@ -6,10 +6,12 @@ import { NOTES_RELEASED } from '../../src/features/notes/availability.ts'
 import { sections, features } from '../../src/features/workspace/registry.ts'
 
 const root=process.cwd()
-test('private notes remain undiscoverable in default production configuration',()=>{
-  assert.equal(NOTES_RELEASED,false,'feature flag must default to off')
-  assert.equal(sections.some(section=>section.id==='notes'),false)
-  assert.equal(features.some(feature=>feature.to==='/account/notes'),false)
+test('students can find My Notes while cloud saving stays disabled by default',()=>{
+  assert.equal(NOTES_RELEASED,false,'cloud feature flag must default to off')
+  assert.equal(sections.some(section=>section.id==='notes'),true,'sidebar should always contain My Notes')
+  assert.equal(features.some(feature=>feature.to==='/account/notes'),true,'workspace directory should link to My Notes')
+  const app=readFileSync(resolve(root,'src/App.tsx'),'utf8')
+  assert.match(app,/NotesProtectionPending/,'disabled route must show truthful recovery status')
 })
 
 test('private notes backend is fail-closed independently of client navigation',()=>{
