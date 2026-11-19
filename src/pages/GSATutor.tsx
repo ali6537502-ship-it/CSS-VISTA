@@ -3,6 +3,7 @@ import { RESET_CHANGED_EVENT } from '@/features/preparation-reset/model'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { useAccount } from '@/lib/accountContext'
+import LessonNotesCapture from '@/features/notes/LessonNotesCapture'
 import { notifyProgressChanged, PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 
 const STORAGE_KEY = 'cssvista:tool:gsa-tutor:v1'
@@ -115,6 +116,7 @@ function GSATutorWorkspace() {
             <p className="mt-1 text-xs leading-5 text-slate-600">Choose your duration, follow a daily lesson, practise, and return to difficult concepts.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            <LessonNotesCapture title="General Science course lesson" />
             {user?.profile_complete ? (
               <>
                 <Link className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-bold text-emerald-900" to={isAccount ? '/account/dashboard' : '/account/gsa-tutor'}>{isAccount ? 'My CSS VISTA' : 'Open in my account'}</Link>
