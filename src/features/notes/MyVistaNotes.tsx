@@ -211,7 +211,9 @@ export default function MyVistaNotes() {
   const markChanged=useCallback(()=>{
     if(!owner||!pageRef.current||!editorRef.current)return
     changeSequence.current++
-    dirtyHtmlRef.current=editorRef.current.innerHTML
+    // Mark dirty without serializing a potentially large rich-text DOM on every keypress.
+    // Capture complete HTML only after a typing pause, before saving, or when leaving.
+    dirtyHtmlRef.current=''
     setDirty(true)
     if(!conflictRef.current)setSaveState('draft')
     if(draftTimer.current)clearTimeout(draftTimer.current)
