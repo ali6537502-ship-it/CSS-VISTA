@@ -46,6 +46,14 @@ await context.route('**/*',async route=>{
  }
  if(request.method()!=='POST')return reply(route,{error:'method'},405)
  const body=request.postDataJSON()
+ if(body.action==='lesson_capture'){
+  const existing=notes.find(n=>n.id===body.id)
+  if(existing)return reply(route,{ok:true,id:existing.id,replayed:true})
+  const id=body.id,pageId=randomUUID()
+  notes.push({id,folder_id:null,title:body.title,pinned:false,deleted_at:null,created_at:now,updated_at:now})
+  pages.set(pageId,{id:pageId,note_id:id,position:1,content_html:'<h2>'+body.title+'</h2><p>Saved from lesson: '+body.source_url+'</p><p>'+body.text+'</p>',version:1,deleted_at:null,updated_at:now})
+  return reply(route,{ok:true,id,page_id:pageId})
+ }
  if(body.action==='note_create'){
   const id=randomUUID(),pageId=randomUUID()
   notes.push({id,folder_id:body.folder_id||null,title:body.title||'Untitled note',pinned:false,deleted_at:null,created_at:now,updated_at:now})
@@ -80,6 +88,7 @@ page.on('pageerror',error=>errors.push(error.message))
 try{
  await page.goto(origin+'/account/notes',{waitUntil:'domcontentloaded'})
  await page.getByRole('heading',{name:'My Notes'}).waitFor()
+ assert.ok(await page.getByRole('link',{name:'My Notes',exact:true}).count(),'My Notes must be discoverable in account navigation')
  await page.getByRole('button',{name:'New note'}).click()
  const editor=page.getByRole('textbox',{name:'Write your note'})
  await editor.waitFor()
@@ -121,6 +130,28 @@ try{
  await page.setViewportSize({width:390,height:844})
  await page.waitForTimeout(300)
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile viewport must not overflow horizontally')
+ // A public reading lesson lets an authenticated student paste directly into My Notes.
+ await page.goto(origin+'/study-material/optional/constitutional-law/constitutional-history-of-pakistan',{waitUntil:'domcontentloaded'})
+ const shortcut=page.getByRole('button',{name:'Paste to My Notes'})
+ await shortcut.waitFor({timeout:12000})
+ await shortcut.click()
+ const pasteBox=page.getByRole('textbox',{name:'Paste lesson text here to save automatically'})
+ await pasteBox.waitFor()
+ await pasteBox.evaluate(node=>{
+  const transfer=new DataTransfer()
+  transfer.setData('text/plain','Key point to revise: constitutional development and judicial review.')
+  node.dispatchEvent(new ClipboardEvent('paste',{bubbles:true,cancelable:true,clipboardData:transfer}))
+ })
+ await page.getByText('Saved to your account',{exact:true}).waitFor({timeout:12000})
+ assert.ok(notes.some(n=>n.title.includes('Constitutional')),'lesson paste appears in the private notes catalogue')
+ const pasted=[...pages.values()].find(p=>p.content_html.includes('Key point to revise:'))
+ assert.ok(pasted?.content_html.includes('constitutional development'),'pasted passage stored in a new note')
+ const capturedNoteId=pasted?.note_id
+ await page.getByRole('link',{name:'Open saved note'}).click()
+ await page.getByRole('heading',{name:'My Notes'}).waitFor()
+ await page.getByRole('textbox',{name:'Write your note'}).waitFor({timeout:12000})
+ assert.ok(page.url().includes('note='+capturedNoteId),'open-saved-note link targets the newly captured note')
+ assert.ok((await page.getByRole('textbox',{name:'Write your note'}).innerText()).includes('Key point to revise:'))
  assert.deepEqual(errors,[],'No uncaught errors in notes editor fixture')
  console.log('My VISTA Notes browser fixture passed')
 }finally{
