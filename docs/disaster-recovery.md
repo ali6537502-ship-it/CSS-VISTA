@@ -109,3 +109,17 @@ node --test tests/offsiteBackup.test.mjs
 ```
 
 **Release gate:** no cron, credentials, cloud backup claim, new personal Notes launch or hosting cutover until the operator provides evidence of a secure independent destination, a successful real encrypted snapshot and successful isolated recovery of actual application records. This branch does not change any existing account route, database table or production release.
+
+## Automated monitoring (prepared, not activated)
+
+A nightly backup is not enough if it silently stops. A remote snapshot freshness monitor now exists:
+
+    CSSV_BACKUP_ENV_FILE=/absolute/private/path/backup.env bash server/bin/cssv-offsite-health.sh
+
+Set CSSV_BACKUP_MAX_AGE_HOURS (default 30). The check queries the remote restic repository, validates the latest snapshot time, and exits nonzero if it is stale, missing or inaccessible. Run it from an independently monitored machine or a correctly configured CLI scheduler. Failures must produce an external alert that the owner has tested receiving.
+
+The default 30-hour freshness limit supports a *daily* plan; it is not 15-minute point-in-time recovery. Achieving that requires supported binlog/PITR or replication, restore testing, and a verified recovery-point objective.
+
+    node --test tests/offsiteBackup.test.mjs tests/offsiteHealth.test.mjs
+
+**Important:** This script does not create a real cloud account, install a cron, set credentials, send alerts, or prove data restoration. The off-host backup has not been activated or verified in production. Do not launch private Notes merely because code fixtures pass.
