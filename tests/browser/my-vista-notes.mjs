@@ -8,6 +8,10 @@ import { startArtifactPreview } from './artifact-preview.mjs'
 const {server,origin}=await startArtifactPreview(resolve(import.meta.dirname,'../../dist'))
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||'/usr/bin/chromium',headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({viewport:{width:1400,height:900},reducedMotion:'reduce'})
+// A real signed-in student has this same-origin CSRF cookie. The AccountProvider
+// uses its presence to restore sessions when opening public lesson routes.
+// The isolated fixture must model that condition without using real accounts.
+await context.addCookies([{name:'cssv_csrf',value:'disposable-browser-fixture-token',url:origin}])
 const studentId='11111111-1111-4111-8111-111111111111'
 const folders=[],notes=[],pages=new Map()
 let failSave=false,notesWrites=0
@@ -51,7 +55,7 @@ await context.route('**/*',async route=>{
   if(existing)return reply(route,{ok:true,id:existing.id,replayed:true})
   const id=body.id,pageId=randomUUID()
   notes.push({id,folder_id:null,title:body.title,pinned:false,deleted_at:null,created_at:now,updated_at:now})
-  pages.set(pageId,{id:pageId,note_id:id,position:1,content_html:'<h2>'+body.title+'</h2><p>Saved from lesson: '+body.source_url+'</p><p>'+body.text+'</p>',version:1,deleted_at:null,updated_at:now})
+  pages.set(pageId,{id:pageId,note_id:id,position:1,content_html:'<h2>'+body.title+'</h2><p>Saved from lesson: <a href="'+body.source_url+'">'+body.title+'</a></p><p>'+body.text+'</p>',version:1,deleted_at:null,updated_at:now})
   return reply(route,{ok:true,id,page_id:pageId})
  }
  if(body.action==='note_create'){
@@ -92,6 +96,9 @@ try{
  await page.getByRole('button',{name:'New note'}).click()
  const editor=page.getByRole('textbox',{name:'Write your note'})
  await editor.waitFor()
+ // The editor is rendered before the initial page fetch finishes; typing must
+ // begin only after remote data and any account-scoped device draft hydrate.
+ await page.locator('.notes-rich-editor[contenteditable="true"]').waitFor({timeout:15000})
  await editor.fill('Drafting an original research outline.')
  await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
  assert.ok([...pages.values()][0].content_html.includes('Drafting an original research outline.'))
@@ -149,7 +156,7 @@ try{
  const capturedNoteId=pasted?.note_id
  await page.getByRole('link',{name:'Open saved note'}).click()
  await page.getByRole('heading',{name:'My Notes'}).waitFor()
- await page.getByRole('textbox',{name:'Write your note'}).waitFor({timeout:12000})
+ await page.locator('.notes-rich-editor[contenteditable="true"]').waitFor({timeout:15000})
  assert.ok(page.url().includes('note='+capturedNoteId),'open-saved-note link targets the newly captured note')
  assert.ok((await page.getByRole('textbox',{name:'Write your note'}).innerText()).includes('Key point to revise:'))
  assert.ok(await page.locator('.notes-rich-editor a[href^="/study-material/optional/"]').count(),'saved note should retain an internal link to its source lesson')
