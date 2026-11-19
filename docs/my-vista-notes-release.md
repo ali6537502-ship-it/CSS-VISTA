@@ -43,6 +43,19 @@ Both switches default to **off**, so a future code merge alone does not expose p
 5. Confirm server storage limits, alerts and realistic restore time. Obtain release approval only when cloud snapshots are recoverable.
 6. Merge and deploy only after these checks; verify the exact deployed fingerprint and a real signed-in student's note workflow. A draft PR is not a release.
 
+
+## Sidebar discovery and one-step lesson capture
+
+- The `My Notes` link is always displayed in the student sidebar, mobile account drawer, mobile bottom navigation and My Library, so students can discover their private notebook. When the backend release flag is disabled, the `/account/notes` page clearly explains that encrypted off-host recovery must be verified before personal data can be saved.
+- A reusable `Paste to My Notes` shortcut appears in optional-subject lesson pages, Islamic Studies reference topics, guided study lessons, Grammar Course lessons and the General Science course header. It never uploads text until the student deliberately pastes or clicks Save.
+- Students may highlight text and click the button to prefill it, paste into the capture field to save instantly, or click `Paste clipboard & save` after granting browser permission. A separate Save button supports editing before submission.
+- The API `lesson_capture` stores one private note with an escaped lesson title and first-party source path, plus one text page in a single transaction. It validates the authenticated owner and accepts an idempotent client-generated UUID so a network retry does not duplicate the note.
+- Failed capture attempts retain a best-effort account-scoped device draft; the status is not misrepresented as an account save. Successful saves link directly to the new note at `/account/notes?note=<id>`.
+- The cloud API remains fail-closed unless `CSSV_NOTES_ENABLED=1` is configured privately on the server. A public sidebar entry or visible shortcut does **not** imply the feature is active or that independent backups have been activated.
+
+## Safe staged publishing
+
+The product shell (sidebar link, status page and disabled lesson shortcut) may be released separately from enabling private note persistence. This staged release does not add or modify live student notes while the server-side release flag remains off. Enabling the live Notes service still requires successful independent off-host backups and a full restore rehearsal first. Do not promise live saving until verified.
 ## Known limitations
 
 The rich text editor uses native browser editing commands, requiring a mobile-browser compatibility pass before production approval. This first implementation does not upload images/attachments, support formula authoring, offer full-text content search, or export whole multi-page notes in one PDF. The only download action exports the active page as HTML. These features must not be advertised as already built.
