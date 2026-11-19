@@ -3,6 +3,13 @@ on:
   pull_request:
     paths:
       - 'src/features/notes/**'
+      - 'src/features/topics/Lesson.tsx'
+      - 'src/features/grammar-v5/LessonView.tsx'
+      - 'src/pages/OptionalTopicNotes.tsx'
+      - 'src/pages/IslamicReferenceTopic.tsx'
+      - 'src/pages/GSATutor.tsx'
+      - 'src/features/workspace-classic/pages/AccountHome.tsx'
+      - 'src/features/workspace-classic/pages/account/Library.tsx'
       - 'src/features/workspace/**'
       - 'src/App.tsx'
       - 'src/data/routeRegistry.mjs'
@@ -13,6 +20,9 @@ on:
       - 'tests/notes/**'
       - 'tests/browser/my-vista-notes.mjs'
       - '.github/workflows/my-vista-notes.yml'
+concurrency:
+  group: my-vista-notes-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
