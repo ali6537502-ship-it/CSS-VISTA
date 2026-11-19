@@ -49,6 +49,20 @@ export function sanitizeNoteHtml(html: string): string {
     if (result.length) node.setAttribute('style',result.join(';'))
     else node.removeAttribute('style')
   })
+  template.content.querySelectorAll<HTMLElement>('*').forEach(node => {
+    const color = node.getAttribute('color')
+    if (color !== null && !TEXT_COLORS.test(color)) node.removeAttribute('color')
+    const background = node.getAttribute('bgcolor')
+    if (background !== null && !TEXT_COLORS.test(background)) node.removeAttribute('bgcolor')
+    const face = node.getAttribute('face')
+    if (face !== null && !FAMILY.test(face)) node.removeAttribute('face')
+    const size = node.getAttribute('size')
+    if (size !== null && !/^[1-7]$/.test(size)) node.removeAttribute('size')
+    for (const attr of ['colspan','rowspan']) {
+      const value = node.getAttribute(attr)
+      if (value !== null && (!/^\d{1,3}$/.test(value) || Number(value) > 100 || Number(value) < 1)) node.removeAttribute(attr)
+    }
+  })
   template.content.querySelectorAll('a').forEach(link => {
     const url = link.getAttribute('href') || ''
     if (!/^(https?:\/\/|mailto:|#)/i.test(url)) link.removeAttribute('href')
