@@ -1,10 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
-import { Activity, BookOpen, BookMarked, CalendarDays, ChartNoAxesCombined, ChevronDown, Compass, Dumbbell, GraduationCap, Home, LibraryBig, LogOut, PenLine, Settings, X } from 'lucide-react'
+import { Activity, BookOpen, BookMarked, CalendarDays, ChartNoAxesCombined, ChevronDown, Compass, Dumbbell, GraduationCap, Home, LibraryBig, NotebookPen, LogOut, PenLine, Settings, X } from 'lucide-react'
 import { sections } from './registry'
 import type { LucideIcon } from 'lucide-react'
 
-const sectionIcons:LucideIcon[] = [Home, CalendarDays, BookOpen, PenLine, ChartNoAxesCombined, LibraryBig, Settings]
+const sectionIcons:LucideIcon[] = [Home, CalendarDays, BookOpen, PenLine, ChartNoAxesCombined, LibraryBig, NotebookPen, Settings]
 const extras:{to:string;label:string;icon:LucideIcon;hint:string}[] = [
  {to:'/account/fitness-coach',label:'My Fitness Coach',icon:Dumbbell,hint:'Food, workouts & target'},
  {to:'/account/gsa-tutor',label:'GSA Tutor',icon:BookMarked,hint:'Your science course'},
