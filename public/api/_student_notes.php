@@ -14,6 +14,8 @@ function cssv_notes_schema(PDO $pdo): void
 {
     static $ready = false;
     if ($ready) return;
+    $existing = $pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name IN ('student_note_folders','student_notes','student_note_pages','student_note_revisions')");
+    if ((int)$existing->fetchColumn() === 4) { $ready = true; return; }
     if ((int)$pdo->query("SELECT GET_LOCK('cssvista-notes-schema-v1', 5)")->fetchColumn() !== 1) {
         throw new RuntimeException('Notes database setup is busy.');
     }
@@ -149,7 +151,14 @@ function cssv_notes_valid_folder(PDO $pdo, string $user, ?string $id): void
 {
     if ($id === null) return;
     $folders = cssv_notes_folders($pdo,$user);
-    cssv_notes_move_depths($folders,null,$id);
+    $byId = array_column($folders,null,'id');
+    $walk=$id;$seen=[];$depth=0;
+    while($walk!==null) {
+        if(!isset($byId[$walk]) || $byId[$walk]['deleted_at']!==null || isset($seen[$walk])) throw new InvalidArgumentException('Choose an active folder in your account.');
+        $seen[$walk]=true;$depth++;
+        if($depth>CSSV_NOTES_MAX_FOLDER_DEPTH) throw new InvalidArgumentException('Folder nesting exceeds five levels.');
+        $walk=$byId[$walk]['parent_id'];
+    }
 }
 
 function cssv_notes_list(PDO $pdo, string $user, array $query): array
