@@ -30,7 +30,7 @@ Encrypted snapshots must be outside the Hostinger failure domain, with independe
 
 Both switches default to **off**, so a future code merge alone does not expose private writing.
 
-- Website build: set `VITE_CSSV_PERSONAL_NOTES_ENABLED=true` only for an approved production build. Otherwise the Notes sidebar, mobile navigation and Library shortcut stay hidden, and a direct visit redirects to the dashboard.
+- Website build: set `VITE_CSSV_PERSONAL_NOTES_ENABLED=true` only for an approved full Notes release. Without this flag, the sidebar and Library links remain visible, but the private Notes route shows a clear protected-service status page instead of allowing creation or editing.
 - Private PHP runtime config (outside Git and public_html): set `CSSV_NOTES_ENABLED=1` only after independent backups and a real restore are verified. If absent or any value other than `1`, all Notes API requests reject with HTTP 503 and cannot create or modify student records.
 - Both settings are required. Do not leave a public feature enabled while the private API is unavailable. Roll back by disabling the server-side flag first if a backup or security problem arises.
 - Treat these switches as an operational safety mechanism, **not** proof that an actual independent backup exists. Backup job health and recovered data must be checked separately.
@@ -41,7 +41,7 @@ Both switches default to **off**, so a future code merge alone does not expose p
 3. Run the disposable database tests in tests/notes and the full TypeScript build/route audit, plus account/profile/CSRF isolation checks.
 4. Test rich editing and formatting, heavy paste, mobile browsers, offline interruptions, account switching, parallel devices, history, folder cycles and 2 MiB page-size boundaries.
 5. Confirm server storage limits, alerts and realistic restore time. Obtain release approval only when cloud snapshots are recoverable.
-6. Merge and deploy only after these checks; verify the exact deployed fingerprint and a real signed-in student's note workflow. A draft PR is not a release.
+6. A **disabled public preview** (sidebar link, protected status and inactive lesson shortcut) may be merged after its own QA because it cannot store private notes. A **live saving release** requires every backup and restore check above; verify the deployed fingerprint and signed-in workflows before announcing it. A draft PR is not a live release.
 
 
 ## Sidebar discovery and one-step lesson capture
