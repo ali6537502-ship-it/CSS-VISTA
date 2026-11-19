@@ -101,7 +101,7 @@ export async function readLocalDraft(user: string, note: string, page: string): 
   return withDraftStore<LocalDraft>('readonly',store=>store.get(keyOf(user,note,page)))
 }
 export async function writeLocalDraft(draft: LocalDraft): Promise<boolean> {
-  const result=await withDraftStore<string>('readwrite',store=>store.put(draft,keyOf(draft.user,draft.note,draft.page)))
+  const result=await withDraftStore<IDBValidKey>('readwrite',store=>store.put(draft,keyOf(draft.user,draft.note,draft.page)))
   return result !== null
 }
 export async function clearLocalDraft(user:string,note:string,page:string):Promise<void> {
