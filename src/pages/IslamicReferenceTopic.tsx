@@ -5,6 +5,7 @@ import {
   chapterName, findTopicSummary, loadTopic, topicNow, type ReferenceEntry, type TopicPayload,
 } from '@/data/islamicReferences'
 import { BilingualRow, LanguageSwitch, WideRow, type LanguageView } from '@/features/islamic-references/Bilingual'
+import LessonNotesCapture from '@/features/notes/LessonNotesCapture'
 
 /**
  * One reference.
@@ -134,6 +135,8 @@ export default function IslamicReferenceTopic() {
           </div>
         )}
       </header>
+
+      <div className="mt-3"><LessonNotesCapture title={topic.titleEn} /></div>
 
       <div className="relative mt-4">
         <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />

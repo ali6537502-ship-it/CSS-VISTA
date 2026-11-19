@@ -1,0 +1,90 @@
+name: My VISTA Notes — integrity and privacy
+on:
+  pull_request:
+    paths:
+      - 'src/features/notes/**'
+      - 'src/features/topics/Lesson.tsx'
+      - 'src/features/grammar-v5/LessonView.tsx'
+      - 'src/pages/OptionalTopicNotes.tsx'
+      - 'src/pages/IslamicReferenceTopic.tsx'
+      - 'src/pages/GSATutor.tsx'
+      - 'src/features/workspace-classic/pages/AccountHome.tsx'
+      - 'src/features/workspace-classic/pages/account/Library.tsx'
+      - 'src/features/workspace/**'
+      - 'src/App.tsx'
+      - 'src/data/routeRegistry.mjs'
+      - 'src/pages/account/Library.tsx'
+      - 'public/api/_student_notes.php'
+      - 'public/api/student/notes.php'
+      - 'server/sql/student_notes_v1.sql'
+      - 'tests/notes/**'
+      - 'tests/browser/my-vista-notes.mjs'
+      - '.github/workflows/my-vista-notes.yml'
+concurrency:
+  group: my-vista-notes-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  notes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: notes-only-test-password
+          MYSQL_DATABASE: cssvista_notes_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pnotes-only-test-password" --health-interval=10s --health-timeout=5s --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax and pure note logic
+        run: |
+          php -l public/api/_student_notes.php
+          php -l public/api/student/notes.php
+          php -l tests/notes/unit.php
+          php -l tests/notes/integration.php
+          php tests/notes/unit.php
+      - name: Disposable MySQL ownership and recovery tests
+        env:
+          CSSV_NOTES_TEST_DSN: mysql:host=127.0.0.1;port=3306;dbname=cssvista_notes_test;charset=utf8mb4
+          CSSV_NOTES_TEST_USER: root
+          CSSV_NOTES_TEST_PASSWORD: notes-only-test-password
+        run: php tests/notes/integration.php
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Verify private Notes remain unreleased by default
+        run: node --test tests/notes/releaseGate.test.ts
+      - name: Typecheck and route security
+        run: |
+          npm run typecheck
+          npm run build:hostinger
+          npm run audit:routes
+
+  browser-fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VITE_CSSV_PERSONAL_NOTES_ENABLED: 'true'
+      CSSV_BROWSER_EXECUTABLE: /usr/bin/chromium
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
+      - name: Install disposable headless Chromium
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq chromium
+      - name: Build enabled Notes for isolated browser fixture only
+        run: npm run build:hostinger
+      - name: Test autosave, offline recovery, conflicts and mobile
+        run: node tests/browser/my-vista-notes.mjs

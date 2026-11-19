@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 
-import { Archive, ArrowRight, Bookmark, Newspaper, Search, Sparkles } from 'lucide-react'
+import { Archive, ArrowRight, Bookmark, Newspaper, Search, Sparkles, NotebookPen } from 'lucide-react'
 import { briefingRoot, latestRange, overviewSchema } from '@/features/current-affairs/model'
 import { useBriefing } from '@/features/current-affairs/useBriefing'
 
@@ -8,6 +8,7 @@ import RecallDeck from '@/features/current-affairs/RecallDeck'
 import { AccountPage, SectionTitle, useAccountSnapshot } from '@/features/workspace-classic/pages/account/shared.tsx'
 
 const destinations = [
+  { to: '/account/notes', icon: NotebookPen, title: 'My Notes', detail: 'Private lesson extracts and personal study writing.' },
   { to: '/account/saved', icon: Bookmark, title: 'Saved items', detail: 'Developments and material you kept for revision.' },
   { to: '/account/factbook', icon: Sparkles, title: 'Daily Factbook', detail: 'Facts, statistics and quick GK, ready to revise.' },
   { to: briefingRoot + '/archive', icon: Archive, title: 'Current Affairs archive', detail: 'Return to any earlier day’s edition.' },

@@ -10,6 +10,7 @@ import { AdSenseProvider } from './components/Ads'
 import TrustFooter from './components/TrustFooter'
 import Home from './pages/Home'
 import { MPT_HIBERNATED } from './lib/featureHibernation'
+import { NOTES_RELEASED } from './features/notes/availability'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
@@ -101,6 +102,8 @@ const AccountSkills = lazy(() => import('./pages/account/Skills'))
 const AccountAnswerPerformance = lazy(() => import('./pages/account/AnswerPerformance'))
 const AccountLearning = lazy(() => import('./pages/account/Learning'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
+const MyVistaNotes = lazy(() => import('./features/notes/MyVistaNotes'))
+const NotesProtectionPending = lazy(() => import('./features/notes/NotesProtectionPending'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
 const MptArea = lazy(() => import('./pages/mpt/MptArea'))
 const MptApply = lazy(() => import('./pages/mpt/MptApply'))
@@ -260,6 +263,7 @@ export default function App() {
         <Route path="/account/membership/*" element={<Navigate to="/account/settings" replace />} />
         <Route path="/account/ai-usage/*" element={<Navigate to="/account/progress" replace />} />
         <Route path="/account/library" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountLibrary />}><AccountLibrary /></WorkspaceVariant></S></ProfileGate>} />
+        <Route path="/account/notes" element={<ProfileGate><S>{NOTES_RELEASED ? <MyVistaNotes /> : <NotesProtectionPending />}</S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;
             these routes only render it, and stay inert while the flag is off. */}

@@ -217,6 +217,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/essay-builder', 'Essay Themes Builder', 'Private theme-bound brainstorming, thesis, arguments, outline and independent writing.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/general-ability', 'Practice', 'Continue to free subject practice.', { h1: 'Practice', robots: 'noindex, nofollow' }),
   protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/notes', 'My Notes', 'Your private notes, study folders and synchronized notebook.', { robots: 'noindex, nofollow', adMode: 'disabled' }),
   protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs/archive', 'Current Affairs Archive', 'Browse protected Current Affairs editions by date and topic.', { robots: 'noindex, nofollow' }),

@@ -22,6 +22,7 @@ import {
 } from './types'
 import { topicPanel } from './styles'
 import { GuidedSection, MistakeReview } from './Guided'
+import LessonNotesCapture from '@/features/notes/LessonNotesCapture'
 
 type Send = (body: Record<string, unknown>) => Promise<void>
 function PendingAction({ action }: { action: PreparationAction }) {
@@ -459,6 +460,7 @@ export default function TopicLesson({
           </div>
         </div>
         <h3 className="mt-5 text-2xl font-semibold leading-9 sm:text-3xl">{data.topic.title}</h3>
+        <div className="mt-3"><LessonNotesCapture title={data.topic.title} /></div>
         <p className="mt-3 text-sm leading-7 text-slate-600">{data.topic.summary}</p>
         {active && definition && (
           <>
