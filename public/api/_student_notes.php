@@ -268,6 +268,34 @@ function cssv_notes_mutate(PDO $pdo,string $user,array $body): array
                 }
                 $result=['id'=>$id];break;
             }
+            case 'lesson_capture': {
+                // The student chooses a stable UUID for safe retries; do not
+                // create duplicate notes when a network response is lost.
+                $id=cssv_notes_id($body['id']??null);
+                $existing=$pdo->prepare('SELECT user_id FROM student_notes WHERE id=? LIMIT 1');
+                $existing->execute([$id]);
+                $existingOwner=$existing->fetchColumn();
+                if ($existingOwner!==false) {
+                    if ((string)$existingOwner!==$user) throw new OutOfBoundsException('Note was not found.');
+                    $result=['id'=>$id,'replayed'=>true];break;
+                }
+                $title=cssv_notes_title($body['title']??'');
+                $plain=$body['text']??null;
+                if (!is_string($plain) || trim($plain)==='') throw new InvalidArgumentException('Paste or select lesson material before saving.');
+                $source=$body['source_url']??'';
+                if (!is_string($source) || strlen($source)>700 || !preg_match('~^/(?!/)[^\\x00-\\x1f\\x7f\\\\]*$~D', $source) || str_contains($source,'..')) {
+                    throw new InvalidArgumentException('Lesson source must be a valid website path.');
+                }
+                $escapedTitle=htmlspecialchars($title, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
+                $escapedText=htmlspecialchars($plain, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
+                $escapedSource=htmlspecialchars($source, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
+                $html='<h2>'.$escapedTitle.'</h2><p>Saved from lesson: <a href="'.$escapedSource.'">'.$escapedTitle.'</a></p><p>'.nl2br($escapedText,false).'</p>';
+                if (strlen($html)>CSSV_NOTES_PAGE_BYTES) throw new InvalidArgumentException('The selected text exceeds one page. Save it in smaller sections.');
+                $page=cssv_uuid_v4();
+                $pdo->prepare('INSERT INTO student_notes(id,user_id,folder_id,title) VALUES(?,?,NULL,?)')->execute([$id,$user,$title]);
+                $pdo->prepare('INSERT INTO student_note_pages(id,user_id,note_id,position,content_html) VALUES(?,?,?,1,?)')->execute([$page,$user,$id,$html]);
+                $result=['id'=>$id,'page_id'=>$page];break;
+            }
             case 'note_create': {
                 $folder=empty($body['folder_id'])?null:cssv_notes_id($body['folder_id']);
                 cssv_notes_valid_folder($pdo,$user,$folder);
