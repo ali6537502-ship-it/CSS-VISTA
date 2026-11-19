@@ -171,6 +171,17 @@ function cssv_notes_list(PDO $pdo, string $user, array $query): array
     if ($offset === false) throw new InvalidArgumentException('Invalid page number.');
     $where = 'user_id=? AND deleted_at IS '.($trash ? 'NOT NULL' : 'NULL');
     $params = [$user];
+    // Keep folder browsing bounded as a user's notebook grows.
+    if (!$trash && $search === '' && isset($query['folder'])) {
+        if ($query['folder'] === 'root') {
+            $where .= ' AND folder_id IS NULL';
+        } else {
+            $folder=cssv_notes_id($query['folder']);
+            cssv_notes_valid_folder($pdo,$user,$folder);
+            $where .= ' AND folder_id=?';
+            $params[]=$folder;
+        }
+    }
     if ($search !== '') { $where .= ' AND title LIKE ?'; $params[] = '%'.addcslashes($search, '%_\\').'%'; }
     $stmt = $pdo->prepare('SELECT id,folder_id,title,pinned,deleted_at,updated_at,created_at FROM student_notes WHERE '.$where.' ORDER BY pinned DESC,updated_at DESC,id DESC LIMIT 101 OFFSET '.(int)$offset);
     $stmt->execute($params);
