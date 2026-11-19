@@ -9,11 +9,13 @@ export const sections = [
   { id: 'practice', title: 'Practice', to: '/account/practice' },
   { id: 'performance', title: 'My Performance', to: '/account/progress' },
   { id: 'library', title: 'My Library', to: '/account/library' },
+  { id: 'notes', title: 'My Notes', to: '/account/notes' },
   { id: 'settings', title: 'Account & Settings', to: '/account/settings' },
 ] as const
 export function activeSection(path: string) {
   if (/^\/account\/(tasks|plan|preparation)/.test(path)) return 'plan'
   if (path.startsWith('/account/subjects')) return 'subjects'
+  if (path.startsWith('/account/notes')) return 'notes'
   if (/^\/account\/(progress|answer-performance|mpt\/performance|mpt\/history)/.test(path)) return 'performance'
   if (/^\/account\/(library|directory|resources|saved|factbook|search|vistagram|current-affairs)/.test(path)) return 'library'
   if (/^\/account\/(settings|membership|ai-usage|more)/.test(path)) return 'settings'
