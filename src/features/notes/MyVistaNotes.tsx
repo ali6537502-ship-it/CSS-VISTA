@@ -54,6 +54,9 @@ export default function MyVistaNotes() {
   const draftTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const loadSequence = useRef(0)
   const listSequence = useRef(0)
+  const changeSequence = useRef(0)
+  const draftQueue = useRef<Promise<unknown>>(Promise.resolve())
+  const retryDelay = useRef(1800)
 
   const foldersById = useMemo(()=>new Map(folders.map(folder=>[folder.id,folder])),[folders])
   const folderIsVisible = useCallback((id:string|null):boolean=>{
@@ -116,6 +119,7 @@ export default function MyVistaNotes() {
     setLoadingPage(true);setSaveState('loading');setDirty(false);setHistory(null);setHistoryPreview(null)
     pageRef.current=null
     dirtyHtmlRef.current=null
+    changeSequence.current=0
     conflictRef.current=false
     const run=async()=>{
       try{
@@ -145,37 +149,48 @@ export default function MyVistaNotes() {
     return()=>{loadSequence.current++;if(saveTimer.current)clearTimeout(saveTimer.current);if(draftTimer.current)clearTimeout(draftTimer.current)}
   },[owner,selectedNote,selectedPage])
 
+  const captureCurrent=useCallback(()=>{
+    if(owner&&pageRef.current&&editorRef.current&&dirtyHtmlRef.current!==null)dirtyHtmlRef.current=editorRef.current.innerHTML
+  },[owner])
+
   const persistDraft=useCallback(async()=>{
     const p=pageRef.current,html=dirtyHtmlRef.current
     if(!owner||!p||html===null)return
-    const written=await writeLocalDraft({user:owner,note:p.note,page:p.id,html,version:p.version,changed_at:Date.now()})
-    if(!written)setMessage('This browser cannot retain a local draft. Copy your work and check your connection.')
+    const draft={user:owner,note:p.note,page:p.id,html,version:p.version,changed_at:Date.now()}
+    const write=draftQueue.current.catch(()=>undefined).then(()=>writeLocalDraft(draft))
+    draftQueue.current=write
+    if(!await write)setMessage('This browser cannot retain a local draft. Copy your work and check your connection.')
   },[owner])
 
   const save=useCallback(async()=>{
-    if(savingRef.current || conflictRef.current || !owner)return
-    const page=pageRef.current
-    const html=dirtyHtmlRef.current
-    if(!page || html===null)return
-    if(noteBytes(html)>PAGE_BYTES){
-      setError('This page has reached its transfer size. Add another page and continue writing; the note itself has no overall word-count limit.')
-      setSaveState('draft')
-      await persistDraft()
-      return
+    if(savingRef.current||conflictRef.current||!owner)return
+    captureCurrent()
+    const page=pageRef.current,html=dirtyHtmlRef.current
+    if(!page||html===null)return
+    const clean=sanitizeNoteHtml(html)
+    if(noteBytes(clean)>PAGE_BYTES){
+      setError('This page has reached its transfer size. Add another page and continue writing; the note has no overall word-count limit.')
+      setSaveState('draft');await persistDraft();return
     }
     savingRef.current=true;setSaveState('saving');setError('')
-    const requestId=crypto.randomUUID()
-    try {
-      const result=await notesWrite<SaveReply>({action:'page_save',id:page.id,version:page.version,request_id:requestId,html})
+    const requestId=crypto.randomUUID(), changesAtSave=changeSequence.current
+    let failed=false
+    try{
+      const result=await notesWrite<SaveReply>({action:'page_save',id:page.id,version:page.version,request_id:requestId,html:clean})
       if(pageRef.current?.id===page.id)pageRef.current.version=result.version
       setDocumentData(previous=>previous?{...previous,pages:previous.pages.map(p=>p.id===page.id?{...p,version:result.version}:p)}:previous)
-      if(pageRef.current?.id===page.id && dirtyHtmlRef.current===html){
-        dirtyHtmlRef.current=null
+      retryDelay.current=1800
+      if(pageRef.current?.id===page.id&&changeSequence.current===changesAtSave&&dirtyHtmlRef.current===html){
         if(draftTimer.current)clearTimeout(draftTimer.current)
-        await clearLocalDraft(owner,page.note,page.id)
-        setDirty(false);setSaveState('saved');setMessage('')
-      }else if(pageRef.current?.id===page.id){setSaveState('draft')}
+        await draftQueue.current.catch(()=>undefined)
+        if(changeSequence.current===changesAtSave&&dirtyHtmlRef.current===html){
+          dirtyHtmlRef.current=null
+          await clearLocalDraft(owner,page.note,page.id)
+          setDirty(false);setSaveState('saved');setMessage('')
+        }
+      }else if(pageRef.current?.id===page.id)setSaveState('draft')
     }catch(e){
+      failed=true
       if(pageRef.current?.id===page.id){
         conflictRef.current=e instanceof HostingerApiError&&e.status===409
         setSaveState(conflictRef.current?'conflict':'offline')
@@ -184,27 +199,34 @@ export default function MyVistaNotes() {
       await persistDraft()
     }finally{
       savingRef.current=false
-      if(pageRef.current?.id===page.id && dirtyHtmlRef.current!==null && !conflictRef.current){
+      if(pageRef.current?.id===page.id&&dirtyHtmlRef.current!==null&&!conflictRef.current){
         if(saveTimer.current)clearTimeout(saveTimer.current)
-        saveTimer.current=setTimeout(()=>void save(),1800)
+        const delay=failed?retryDelay.current:1450
+        retryDelay.current=failed?Math.min(60000,retryDelay.current*2):1800
+        if(navigator.onLine)saveTimer.current=setTimeout(()=>void save(),delay)
       }
     }
-  },[owner,persistDraft])
+  },[owner,captureCurrent,persistDraft])
 
   const markChanged=useCallback(()=>{
-    const page=pageRef.current,editor=editorRef.current
-    if(!owner||!page||!editor)return
-    const html=sanitizeNoteHtml(editor.innerHTML)
-    dirtyHtmlRef.current=html
+    if(!owner||!pageRef.current||!editorRef.current)return
+    changeSequence.current++
+    dirtyHtmlRef.current=editorRef.current.innerHTML
     setDirty(true)
     if(!conflictRef.current)setSaveState('draft')
     if(draftTimer.current)clearTimeout(draftTimer.current)
-    draftTimer.current=setTimeout(()=>void persistDraft(),180)
+    draftTimer.current=setTimeout(()=>{captureCurrent();void persistDraft()},220)
     if(!conflictRef.current){
       if(saveTimer.current)clearTimeout(saveTimer.current)
       saveTimer.current=setTimeout(()=>void save(),1450)
     }
-  },[owner,persistDraft,save])
+  },[owner,captureCurrent,persistDraft,save])
+
+  useEffect(()=>{
+    const online=()=>{if(dirtyHtmlRef.current!==null&&!conflictRef.current){if(saveTimer.current)clearTimeout(saveTimer.current);saveTimer.current=setTimeout(()=>void save(),350)}}
+    window.addEventListener('online',online)
+    return()=>window.removeEventListener('online',online)
+  },[save])
 
   useEffect(()=>()=>{
     if(saveTimer.current)clearTimeout(saveTimer.current)
