@@ -152,6 +152,7 @@ try{
  await page.getByRole('textbox',{name:'Write your note'}).waitFor({timeout:12000})
  assert.ok(page.url().includes('note='+capturedNoteId),'open-saved-note link targets the newly captured note')
  assert.ok((await page.getByRole('textbox',{name:'Write your note'}).innerText()).includes('Key point to revise:'))
+ assert.ok(await page.locator('.notes-rich-editor a[href^="/study-material/optional/"]').count(),'saved note should retain an internal link to its source lesson')
  assert.deepEqual(errors,[],'No uncaught errors in notes editor fixture')
  console.log('My VISTA Notes browser fixture passed')
 }finally{
