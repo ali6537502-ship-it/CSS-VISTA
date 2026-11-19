@@ -87,10 +87,12 @@ async function withDraftStore<T>(mode: IDBTransactionMode, fn: (store: IDBObject
         try {
           const transaction=db.transaction(STORE,mode)
           const request=fn(transaction.objectStore(STORE))
-          request.onsuccess=()=>finish(request.result ?? null)
+          let value:T|null=null
+          request.onsuccess=()=>{value=request.result ?? null}
           request.onerror=()=>finish(null)
-          transaction.onabort=()=>finish(null)
-          transaction.oncomplete=()=>db.close()
+          transaction.onabort=()=>{db.close();finish(null)}
+          transaction.onerror=()=>{db.close();finish(null)}
+          transaction.oncomplete=()=>{db.close();finish(value)}
         } catch {db.close();finish(null)}
       }
     } catch {finish(null)}
