@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
-  buildVistaNotesCommand, cssGuideSubjects, pmsGuideSubjects, generateVistaPlan,
+  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, pmsGuideSubjects, generateVistaPlan,
   guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
   resolveLegacyCssNotesUnit,
   type VistaSubject, type VistaPreferences,
@@ -323,4 +323,40 @@ test('universal notes prompt covers discipline-specific reasoning, visual eviden
   const mental=buildVistaNotesCommand({...pms,subjectId:'compulsory-mental-ability-and-reasoning-test'})
   assert.match(mental,/PPSC MENTAL ABILITY GUIDEBOOK TOPIC/)
   assert.doesNotMatch(mental,/EXACT PRESCRIBED SYLLABUS:/)
+})
+
+test('CSS optional subjects expose focused, source-exact notes copy commands without changing saved section schedule IDs',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const subjects=cssGuideSubjects(source)
+  const optionals=subjects.filter(s=>s.designation==='optional')
+  assert.equal(optionals.length,source.subjects.filter((s:{designation:string})=>s.designation==='optional').length)
+  for(const optional of optionals){
+    const original=source.subjects.find((s:{slug:string})=>s.slug===optional.id)!
+    const scheduled=guideUnits(optional,'css')
+    assert.deepEqual(scheduled.map(u=>u.id),original.sections.map((_:unknown,i:number)=>'vista-css:'+optional.id+':s'+(i+1)),
+      'Existing section-level scheduled IDs must not be changed')
+    for(let i=0;i<optional.sections.length;i++){
+      const section=optional.sections[i]
+      const entries=cssOptionalFocusUnits(optional,section)
+      assert.deepEqual(entries.map(u=>u.title),original.sections[i].items.map((item:string)=>item.trim()).filter(Boolean),
+        'Do not paraphrase, invent or silently omit original FPSC source text')
+      assert.ok(entries.every(u=>u.excerptFocus && u.paper==='CSS'))
+      if(entries.length){
+        const command=buildVistaNotesCommand(entries[0])
+        assert.match(command,/FPSC OPTIONAL SYLLABUS EXCERPT/)
+        assert.match(command,/FOCUS RULE/)
+        assert.match(command,/Never invent citations or statistics/)
+        assert.ok(command.includes(entries[0].title))
+        assert.ok(command.includes(section.title))
+        assert.match(command,/complete section text is reference context/)
+      }
+    }
+  }
+  const sample=optionals.find(s=>s.sections.some(section=>section.sourceItems?.length))
+  assert.ok(sample)
+  assert.equal(cssOptionalFocusUnits({...sample,designation:'compulsory'},sample.sections[0]).length,0)
+  const guide=readFileSync('src/features/planner/VistaStudyGuide.tsx','utf8')
+  assert.match(guide,/CssOptionalFocusList/)
+  assert.match(guide,/Copy notes for a specific FPSC syllabus entry/)
+  assert.match(guide,/onToggle=\{event => setExpanded\(event.currentTarget.open\)\}/)
 })
