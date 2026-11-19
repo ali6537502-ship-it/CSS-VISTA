@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode, type ClipboardEvent } from 'react'
 import { useAccount } from '@/lib/accountContext'
 import { HostingerApiError } from '@/lib/hostingerApi'
-import { Bold, Italic, Underline, Strikethrough, Highlighter, List, ListOrdered, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Quote, Undo2, Redo2, Plus, FolderPlus, Folder, FolderOpen, FileText, Pin, PinOff, Trash2, RotateCcw, Search, Cloud, CloudOff, CheckCircle2, RefreshCw, ChevronLeft, ChevronRight, History, Download, Table2, Superscript, Subscript, Copy, AlertTriangle, Pencil, X } from 'lucide-react'
+import { Bold, Italic, Underline, Strikethrough, Highlighter, List, ListOrdered, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Quote, Undo2, Redo2, Plus, FolderPlus, Folder, FolderOpen, FileText, Pin, PinOff, Trash2, RotateCcw, Search, Cloud, CloudOff, CheckCircle2, RefreshCw, ChevronLeft, ChevronRight, History, Download, Table2, Superscript, Subscript, AlertTriangle, Pencil, X } from 'lucide-react'
 import {
-  noteBytes, noteText, notesRequest, notesWrite, sanitizeNoteHtml,
+  noteBytes, notesRequest, notesWrite, sanitizeNoteHtml,
   readLocalDraft, writeLocalDraft, clearLocalDraft, PAGE_BYTES,
   type NoteFolder, type NoteSummary, type NoteDocument, type NoteList, type NotePage,
-  type NotePageMeta, type NoteRevision
+  type NoteRevision
 } from './model'
 import './notes.css'
 
@@ -228,7 +228,7 @@ export default function MyVistaNotes() {
     document.execCommand(command,false,value)
     keepSelection();markChanged()
   }
-  function paste(event:React.ClipboardEvent<HTMLDivElement>){
+  function paste(event:ClipboardEvent<HTMLDivElement>){
     event.preventDefault()
     const html=event.clipboardData.getData('text/html')
     const plain=event.clipboardData.getData('text/plain')
