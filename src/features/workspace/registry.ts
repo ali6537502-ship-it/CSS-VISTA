@@ -1,7 +1,7 @@
 import { allOptionalSubjects } from '../../lib/studyPlanner.ts'
 import { defaultHomeCards } from '../../data/homeCards.ts'
 import { MPT_HIBERNATED } from '../../lib/featureHibernation.ts'
-import { NOTES_RELEASED } from '../notes/availability'
+import { NOTES_RELEASED } from '../notes/availability.ts'
 
 export const sections = [
   { id: 'overview', title: 'Overview', to: '/account/dashboard' },
