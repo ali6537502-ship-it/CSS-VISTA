@@ -4,7 +4,9 @@ on:
     paths:
       - 'server/bin/cssv-offsite-backup.sh'
       - 'server/bin/cssv-verify-offsite-restore.sh'
+      - 'server/bin/cssv-offsite-health.sh'
       - 'tests/offsiteBackup.test.mjs'
+      - 'tests/offsiteHealth.test.mjs'
       - 'docs/disaster-recovery.md'
       - '.github/workflows/offsite-recovery.yml'
   push:
@@ -12,7 +14,9 @@ on:
     paths:
       - 'server/bin/cssv-offsite-backup.sh'
       - 'server/bin/cssv-verify-offsite-restore.sh'
+      - 'server/bin/cssv-offsite-health.sh'
       - 'tests/offsiteBackup.test.mjs'
+      - 'tests/offsiteHealth.test.mjs'
       - '.github/workflows/offsite-recovery.yml'
 permissions:
   contents: read
@@ -25,8 +29,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate backup and isolated recovery fixtures
+      - name: Validate backup freshness and isolated recovery fixtures
         run: |
           bash -n server/bin/cssv-offsite-backup.sh
           bash -n server/bin/cssv-verify-offsite-restore.sh
-          node --test tests/offsiteBackup.test.mjs
+          bash -n server/bin/cssv-offsite-health.sh
+          node --test tests/offsiteBackup.test.mjs tests/offsiteHealth.test.mjs
