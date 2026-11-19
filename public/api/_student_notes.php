@@ -216,8 +216,18 @@ function cssv_notes_mutate(PDO $pdo,string $user,array $body): array
 {
     $action = $body['action'] ?? '';
     if (!is_string($action)) throw new InvalidArgumentException('Unknown notes action.');
-    $pdo->beginTransaction();
+    // Serialize folder hierarchy edits per account. Without a lock, two
+    // simultaneous moves can independently validate then create a cycle.
+    $folderLock = null;
+    if (str_starts_with($action,'folder_')) {
+        $candidate='cssvista-notes-folders-'.md5($user);
+        $q=$pdo->prepare('SELECT GET_LOCK(?,5)');
+        $q->execute([$candidate]);
+        if ((int)$q->fetchColumn()!==1) throw new RuntimeException('Folder is busy. Retry the operation.');
+        $folderLock=$candidate;
+    }
     try {
+        $pdo->beginTransaction();
         switch ($action) {
             case 'folder_create':
             case 'folder_update': {
@@ -352,5 +362,14 @@ function cssv_notes_mutate(PDO $pdo,string $user,array $body): array
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) $pdo->rollBack();
         throw $e;
+    } finally {
+        if ($folderLock!==null) {
+            try {
+                $q=$pdo->prepare('SELECT RELEASE_LOCK(?)');
+                $q->execute([$folderLock]);
+            } catch (Throwable $error) {
+                error_log('CSSV folder advisory lock release failed.');
+            }
+        }
     }
 }
