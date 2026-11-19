@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 786,
+  "count": 791,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5474,6 +5474,36 @@
       "id": "ca-gk-20261118-fossil-treaty-bloc",
       "text": "Panama's environment minister Juan Carlos Navarro said 30 countries backed a separate fossil-fuel treaty initiative on 18 November 2026.",
       "subcategory": "Current Affairs 2026 — 2026-11-18",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261119-icj-rohingya-genocide",
+      "text": "The Gambia brought the ICJ genocide case against Myanmar concerning the Rohingya.",
+      "subcategory": "Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261119-pakistan-qatar-security-mou",
+      "text": "Pakistan and Qatar signed a security MoU between the Federal Constabulary and Qatar's Lekhwiya on 19 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261119-xi-trump-taiwan-apec",
+      "text": "Xi Jinping and Donald Trump held talks in Shenzhen during APEC diplomacy on 19 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261119-cop31-revised-draft",
+      "text": "The 19 November COP31 revised draft removed an earlier proposed $120 billion adaptation-finance target.",
+      "subcategory": "Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-20261119-el-nino-adaptation-finance",
+      "text": "Reuters reported on 19 November 2026 that developing countries need about $300 billion annually for climate adaptation.",
+      "subcategory": "Current Affairs 2026 — 2026-11-19",
       "timeSensitive": true
     }
   ]
