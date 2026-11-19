@@ -78,7 +78,7 @@ try{
     assert.equal(await page.getByRole('link',{name:'Original PDF',exact:true}).count(),0)
     assert.equal((await state()).studyScheduleTasks.length,2)
     await page.getByRole('button',{name:'View all subjects'}).click()
-    assert.equal(await page.locator('.vg-subjects button').count(),40)
+    assert.equal(await page.locator('.vg-subjects button').count(),41,'40 source subject documents plus the new Mental Ability guidebook')
     await page.locator('.vg-subjects button').filter({hasText:'Punjabi'}).click()
     await page.locator('.vg-syllabus').getByText('بابا فرید',{exact:false}).first().waitFor()
     assert.equal(await page.locator('.vg-unit h4').first().getAttribute('dir'),'auto')
