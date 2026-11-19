@@ -66,4 +66,7 @@ check(cssv_notes_own_note($pdo,$userA,$note['id'])['deleted_at']===null,'note re
 $other=cssv_notes_mutate($pdo,$userB,['action'=>'note_create','title'=>'Private student B']);
 check(count(cssv_notes_list($pdo,$userB,[])['notes'])===1,'list contains only own notes');
 check(count(cssv_notes_list($pdo,$userA,[])['notes'])===1,'A cannot see B note');
+check(count(cssv_notes_list($pdo,$userA,['folder'=>$folder5])['notes'])===1,'folder-specific paging contains its own note');
+check(count(cssv_notes_list($pdo,$userA,['folder'=>'root'])['notes'])===0,'root browsing excludes nested notes');
+check(count(cssv_notes_list($pdo,$userA,['search'=>'Constitutional'])['notes'])===1,'search sees subject notes across folders');
 echo "Notes MySQL integration passed: ownership, deep folders, large pages, conflict, revisions, trash and recovery.\n";
