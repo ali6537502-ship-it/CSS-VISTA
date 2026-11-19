@@ -275,7 +275,7 @@ export default function MyVistaNotes() {
     finally{setBusy(false)}
   }
   async function createNote(){
-    if(!owner||busy)return
+    if(!owner||busy||!await canLeaveCurrent())return
     setBusy(true);setError('')
     try{
       const result=await notesWrite<IdReply>({action:'note_create',title:'Untitled note',folder_id:selectedFolder})
@@ -284,13 +284,20 @@ export default function MyVistaNotes() {
     }catch(e){setError(e instanceof Error?e.message:'Unable to create note.')}
     finally{setBusy(false)}
   }
+  async function canLeaveCurrent():Promise<boolean>{
+    captureCurrent()
+    if(dirtyHtmlRef.current===null)return true
+    await persistDraft()
+    if(!conflictRef.current)await save()
+    if(dirtyHtmlRef.current===null)return true
+    return window.confirm('This page still has unsynced changes. A device draft has been kept where supported. Leave it without a confirmed cloud save?')
+  }
+  async function changeFolder(id:string|null, showTrash:boolean){
+    if(!await canLeaveCurrent())return
+    setSelectedFolder(id);setTrash(showTrash);setSelectedNote(null);setDocumentData(null)
+  }
   async function createPage(){
-    if(!selectedNote||busy)return
-    if(dirtyHtmlRef.current!==null){
-      await persistDraft()
-      if(!conflictRef.current)await save()
-      if(dirtyHtmlRef.current!==null && !window.confirm('The current page has not yet synced. A local draft has been kept. Continue to a new page?'))return
-    }
+    if(!selectedNote||busy||!await canLeaveCurrent())return
     setBusy(true)
     try{
       const reply=await notesWrite<IdReply>({action:'page_create',note_id:selectedNote})
@@ -301,21 +308,11 @@ export default function MyVistaNotes() {
     finally{setBusy(false)}
   }
   async function switchPage(id:string){
-    if(id===selectedPage)return
-    if(dirtyHtmlRef.current!==null){
-      await persistDraft()
-      if(!conflictRef.current)await save()
-      if(dirtyHtmlRef.current!==null&&!window.confirm('Current page is not fully synced. A local draft remains. Open another page?'))return
-    }
+    if(id===selectedPage||!await canLeaveCurrent())return
     setSelectedPage(id)
   }
   async function selectNote(id:string){
-    if(id===selectedNote)return
-    if(dirtyHtmlRef.current!==null){
-      await persistDraft()
-      if(!conflictRef.current)await save()
-      if(dirtyHtmlRef.current!==null&&!window.confirm('Current page is not fully synced. A local draft remains. Open another note?'))return
-    }
+    if(id===selectedNote||!await canLeaveCurrent())return
     setSelectedNote(id)
     void loadDocument(id)
   }
@@ -381,7 +378,7 @@ export default function MyVistaNotes() {
   const visibleNotes=notes.filter(note=>trash||(!note.deleted_at && note.folder_id===selectedFolder && folderIsVisible(note.folder_id)))
   const folderTree=(parent:string|null,level:number):ReactNode=>folders.filter(f=>f.parent_id===parent && !f.deleted_at).map(f=><div key={f.id} className="notes-tree-node">
     <div className="notes-folder-row" style={{paddingLeft:(level-1)*12}}>
-      <button type="button" className={'notes-folder-button'+(selectedFolder===f.id?' active':'')} onClick={()=>{setSelectedFolder(f.id);setSelectedNote(null);setDocumentData(null)}}><Folder size={16}/><span>{f.name}</span></button>
+      <button type="button" className={'notes-folder-button'+(selectedFolder===f.id?' active':'')} onClick={()=>void changeFolder(f.id,false)}><Folder size={16}/><span>{f.name}</span></button>
       <button className="notes-small-icon" title={'Edit '+f.name} aria-label={'Edit '+f.name} onClick={()=>setFolderForm({id:f.id,name:f.name,parent_id:f.parent_id})}><Pencil size={14}/></button>
     </div>
     {level<5&&folderTree(f.id,level+1)}
@@ -397,9 +394,9 @@ export default function MyVistaNotes() {
     <div className="notes-grid">
       <aside className="notes-folders" aria-label="Note folders">
         <div className="notes-pane-heading"><strong>Folders</strong><button type="button" title="New folder" disabled={trash} onClick={()=>setFolderForm({id:null,name:'',parent_id:selectedFolder})}><FolderPlus size={18}/></button></div>
-        <button type="button" className={'notes-folder-button notes-root'+(!selectedFolder&&!trash?' active':'')} onClick={()=>{setTrash(false);setSelectedFolder(null);setSelectedNote(null);setDocumentData(null)}}><FolderOpen size={17}/> All notes at root</button>
+        <button type="button" className={'notes-folder-button notes-root'+(!selectedFolder&&!trash?' active':'')} onClick={()=>void changeFolder(null,false)}><FolderOpen size={17}/> All notes at root</button>
         <div className="notes-folder-scroll">{folderTree(null,1)}</div>
-        <button type="button" className={'notes-folder-button notes-trash'+(trash?' active':'')} onClick={()=>{setTrash(value=>!value);setSelectedFolder(null);setSelectedNote(null);setDocumentData(null)}}><Trash2 size={17}/> Recently deleted</button>
+        <button type="button" className={'notes-folder-button notes-trash'+(trash?' active':'')} onClick={()=>void changeFolder(null,!trash)}><Trash2 size={17}/> Recently deleted</button>
         <p className="notes-folder-hint">Up to five folder levels. Create as many notes and pages as you need.</p>
       </aside>
       <section className="notes-list-pane" aria-label="Your notes">
