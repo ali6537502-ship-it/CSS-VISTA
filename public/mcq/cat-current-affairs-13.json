@@ -1168,5 +1168,80 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.theguardian.com/environment/2026/nov/18/world-held-hostage-by-oil-mafia-says-panama-minister-at-cop-31"
+  },
+  {
+    "id": "current-affairs-20261119-icj-gambia",
+    "q": "Which state brought the Rohingya genocide case against Myanmar before the ICJ?",
+    "o": [
+      "Bangladesh",
+      "The Gambia",
+      "Malaysia",
+      "Indonesia"
+    ],
+    "a": 1,
+    "e": "On 19 November, the International Court of Justice ruled that Myanmar's 2017 military campaign against the Rohingya amounted to genocide, in a case brought by The Gambia.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045689/top-un-court-finds-myanmar-committed-state-sponsored-genocide-against-muslim-rohingya"
+  },
+  {
+    "id": "current-affairs-20261119-pak-qatar-lekhwiya",
+    "q": "Pakistan's 19 November 2026 security MoU with Qatar linked the Federal Constabulary with which Qatari body?",
+    "o": [
+      "Qatar Armed Forces",
+      "Qatar Central Bank",
+      "Lekhwiya",
+      "Qatar Airways"
+    ],
+    "a": 2,
+    "e": "Pakistan and Qatar signed a memorandum of understanding on security cooperation and an action plan against drug smuggling on 19 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045683/pakistan-qatar-sign-mou-on-security-cooperation"
+  },
+  {
+    "id": "current-affairs-20261119-xi-trump-shenzhen",
+    "q": "In which city did Xi Jinping and Donald Trump meet during APEC diplomacy on 19 November 2026?",
+    "o": [
+      "Beijing",
+      "Shanghai",
+      "Guangzhou",
+      "Shenzhen"
+    ],
+    "a": 3,
+    "e": "Chinese President Xi Jinping told US President Donald Trump that Washington should handle Taiwan carefully, according to a 19 November Chinese state-media account of their talks.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/chinas-xi-says-us-should-do-right-thing-taiwan-avoid-setbacks-relations-2026-11-19/"
+  },
+  {
+    "id": "current-affairs-20261119-cop31-finance-target",
+    "q": "Which proposed annual adaptation-finance figure was removed from the revised COP31 draft of 19 November 2026?",
+    "o": [
+      "$120 billion",
+      "$25 billion",
+      "$500 billion",
+      "$1 trillion"
+    ],
+    "a": 0,
+    "e": "COP31 negotiators circulated a revised draft on 19 November that omitted references to fossil fuels and an earlier proposed $120 billion adaptation-finance benchmark.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-negotiators-publish-revised-deal-text-with-no-mention-fossil-fuels-2026-11-19/"
+  },
+  {
+    "id": "current-affairs-20261119-el-nino-adaptation-need",
+    "q": "About how much annual adaptation finance did developing countries need according to the 19 November Reuters COP31 report?",
+    "o": [
+      "$36 billion",
+      "$75 billion",
+      "$300 billion",
+      "$900 billion"
+    ],
+    "a": 2,
+    "e": "Reuters reported on 19 November that strong El Niño conditions were amplifying food-security risks as COP31 negotiators debated adaptation finance.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/el-nino-raises-stakes-cop31-wrestles-over-finance-2026-11-19/"
   }
 ]
