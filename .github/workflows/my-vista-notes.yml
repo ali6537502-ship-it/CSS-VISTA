@@ -47,6 +47,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: Verify private Notes remain unreleased by default
+        run: node --test tests/notes/releaseGate.test.ts
       - name: Typecheck and route security
         run: |
           npm run typecheck
