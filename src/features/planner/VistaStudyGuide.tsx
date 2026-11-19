@@ -16,10 +16,10 @@ import PlannerTask from './PlannerTask'
 import { dayKey, readableDay, shiftDay, validDay, plannerHref } from './model'
 import { PMS_SETTINGS_KEY, readPmsSettings, taskExam } from './pmsModel'
 import {
-  buildVistaNotesCommand, cssGuideSubjects,
+  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits,
   generateVistaPlan, guideUnits, plannedVistaUnits, pmsGuideSubjects, readVistaPreferences,
   selectedVistaSubjects, serializeVistaPreferences, type VistaExam, type VistaPlan, type VistaPreferences,
-  type VistaSubject, type VistaUnit,
+  type VistaSection, type VistaSubject, type VistaUnit,
 } from './vistaGuideModel'
 import './vistaGuide.css'
 
@@ -63,6 +63,24 @@ function CopyNotes({ unit, compact = false }: { unit: VistaUnit; compact?: boole
     {status && <span className="vg-copy-feedback" role="status">{status}</span>}
     {text && <textarea aria-label="Copy notes command manually" value={text} readOnly rows={6} onFocus={e=>e.currentTarget.select()}/>}
   </div>
+}
+
+function CssOptionalFocusList({ subject, section }: { subject: VistaSubject; section: VistaSection }) {
+  const [expanded, setExpanded] = useState(false)
+  const entries = useMemo(() => cssOptionalFocusUnits(subject, section), [subject, section])
+  if (!entries.length) return null
+  return <details className="vg-readings" onToggle={event => setExpanded(event.currentTarget.open)}>
+    <summary>Copy notes for a specific FPSC syllabus entry ({entries.length})</summary>
+    {expanded && <>
+      <p className="pl-muted">These are original syllabus text entries, not independently verified topic boundaries. Some lines continue into the next line. Each command keeps the full section as context and focuses the notes on your selected entry.</p>
+      <div className="vg-optional-focus-list">
+        {entries.map((entry, index) => <div className="vg-optional-focus-row" key={entry.id}>
+          <div><small>Source entry {index + 1}</small><p dir="auto">{entry.title}</p></div>
+          <CopyNotes unit={entry} compact />
+        </div>)}
+      </div>
+    </>}
+  </details>
 }
 
 export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: VistaExam; mode?: 'syllabus' | 'settings' }) {
@@ -363,9 +381,27 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
         </details>
         {(active.officialGuidance||[]).length>0&&<details className="vg-readings"><summary>Official PPSC English Essay paper requirements (guidance, not study chapters)</summary><ol>{active.officialGuidance!.map((text,i)=><li key={i}>{text}</li>)}</ol></details>}
         <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} activities complete</small></div><span className="vg-syllabus-chip">{active.id==='compulsory-english-essay'||active.id==='essay'?'Supplementary essay preparation themes':'Read chapters here — no PDF required'}</span></div>
+        {exam==='css' && active.designation==='optional' && <p className="pl-note">Copy a command for the complete syllabus section, or expand its source entries below to prepare a specific part in greater depth. Previously saved section tasks remain unchanged.</p>}
+        {exam==='css' && active.designation==='optional' && !active.sections.length && <p role="status" className="pl-note">This optional subject has no transcribed syllabus sections in the current catalogue. A source-based notes command cannot be prepared until its official syllabus is added. Check the <a href="https://www.fpsc.gov.pk/" target="_blank" rel="noopener noreferrer">FPSC website</a> for the prescribed outline.</p>}
         {active.id===PMS_MENTAL_ID && <p className="pl-note">Based on the published PPSC Mental Ability and Reasoning Test guidebook. <a href={PMS_MENTAL_SOURCE} target="_blank" rel="noopener noreferrer">Read the original PPSC guidebook</a>. Topic headings are from the four official competency areas; sample questions are examples, not an exhaustive question bank.</p>}
         <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished activities only</label>
-        {visibleUnits.slice(0,showCount).map(u=><article key={u.id} className="vg-unit"><div><small>{u.section}</small><h4 dir="auto">{u.title}</h4><details><summary>{u.resource==='essay'?'View theme preparation brief':'Read complete syllabus for this chapter'}</summary><pre dir="auto">{u.syllabus}</pre></details></div><div className="vg-unit-tools">{u.resource!=='essay'&&<CopyNotes unit={u} compact/>}{resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Build this essay theme'}</Link>}<button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button>{hasStatus(u) && <button className="vg-inline-action" onClick={()=>scheduleRevision(u)}><RefreshCw size={15}/>Schedule revision</button>}</div></article>)}
+        {visibleUnits.slice(0,showCount).map(u=>{
+          const sourceSection = exam==='css' && active.designation==='optional'
+            ? active.sections.find(section=>u.id==='vista-css:'+active.id+':'+section.id)
+            : undefined
+          return <article key={u.id} className="vg-unit">
+            <div><small>{u.section}</small><h4 dir="auto">{u.title}</h4>
+              <details><summary>{u.resource==='essay'?'View theme preparation brief':'Read complete syllabus for this chapter'}</summary><pre dir="auto">{u.syllabus}</pre></details>
+              {sourceSection && <CssOptionalFocusList subject={active} section={sourceSection}/>}
+            </div>
+            <div className="vg-unit-tools">
+              {u.resource!=='essay'&&<CopyNotes unit={u} compact/>}
+              {resourcePath(u) && <Link className="vg-inline-action" to={resourcePath(u)}>{u.resource==='precis'?'Open Précis Guide':'Build this essay theme'}</Link>}
+              <button className="vg-inline-action" aria-pressed={hasStatus(u)} onClick={()=>mark(u)}><Check size={15}/>{hasStatus(u)?'Completed':'Mark complete'}</button>
+              {hasStatus(u) && <button className="vg-inline-action" onClick={()=>scheduleRevision(u)}><RefreshCw size={15}/>Schedule revision</button>}
+            </div>
+          </article>
+        })}
         {visibleUnits.length>showCount&&<button className="pl-secondary" onClick={()=>setShowCount(n=>n+20)}>Show more activities · {visibleUnits.length-showCount} remaining</button>}
         {(active.readings||[]).length>0&&<details className="vg-readings"><summary>Suggested readings ({(active.readings||[]).length})</summary><ol>{(active.readings||[]).map((r,i)=><li key={i}>{r}</li>)}</ol></details>}
         {(active.notes||[]).length>0&&<details className="vg-readings"><summary>Source instructions and notes</summary>{(active.notes||[]).map((n,i)=><p key={i}>{n}</p>)}</details>}
