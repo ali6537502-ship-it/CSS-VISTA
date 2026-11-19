@@ -8,6 +8,10 @@ import { startArtifactPreview } from './artifact-preview.mjs'
 const {server,origin}=await startArtifactPreview(resolve(import.meta.dirname,'../../dist'))
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||'/usr/bin/chromium',headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({viewport:{width:1400,height:900},reducedMotion:'reduce'})
+// A real signed-in student has this same-origin CSRF cookie. The AccountProvider
+// uses its presence to restore sessions when opening public lesson routes.
+// The isolated fixture must model that condition without using real accounts.
+await context.addCookies([{name:'cssv_csrf',value:'disposable-browser-fixture-token',url:origin}])
 const studentId='11111111-1111-4111-8111-111111111111'
 const folders=[],notes=[],pages=new Map()
 let failSave=false,notesWrites=0
