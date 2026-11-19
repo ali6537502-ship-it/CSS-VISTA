@@ -10,6 +10,7 @@ import { AdSenseProvider } from './components/Ads'
 import TrustFooter from './components/TrustFooter'
 import Home from './pages/Home'
 import { MPT_HIBERNATED } from './lib/featureHibernation'
+import { NOTES_RELEASED } from './features/notes/availability'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
@@ -261,7 +262,7 @@ export default function App() {
         <Route path="/account/membership/*" element={<Navigate to="/account/settings" replace />} />
         <Route path="/account/ai-usage/*" element={<Navigate to="/account/progress" replace />} />
         <Route path="/account/library" element={<ProfileGate><S><WorkspaceVariant classic={<ClassicAccountLibrary />}><AccountLibrary /></WorkspaceVariant></S></ProfileGate>} />
-        <Route path="/account/notes" element={<ProfileGate><S><MyVistaNotes /></S></ProfileGate>} />
+        <Route path="/account/notes" element={NOTES_RELEASED ? <ProfileGate><S><MyVistaNotes /></S></ProfileGate> : <Navigate to="/account/dashboard" replace />} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;
             these routes only render it, and stay inert while the flag is off. */}
