@@ -106,7 +106,7 @@ export function pmsGuideSubjects(data: { subjects: VistaSubject[] }, themes: Vis
   return updated
 }
 export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: string; designation: 'compulsory' | 'optional'; marks: number; sections: Array<{ title: string; items: string[] }> }> }, themes: VistaEssayTheme[] = []): VistaSubject[] {
-  const papers = data.subjects.map(s => ({
+  const papers: VistaSubject[] = data.subjects.map(s => ({
     id: s.slug, title: s.name, designation: s.designation, marks: s.marks,
     sections: s.sections.map((section, i) => ({
       id: 's' + (i + 1), title: section.title, detail: '',
