@@ -111,6 +111,7 @@ try{
  failSave=false
  page.on('dialog',dialog=>dialog.accept())
  await page.reload({waitUntil:'domcontentloaded'})
+ await page.locator('.notes-select-note').first().click()
  await page.getByText('Save conflict',{exact:true}).waitFor({timeout:15000})
  assert.ok((await editor.innerText()).includes('unsynced private continuation'),'Unsynced local draft must survive a remote conflict')
  assert.ok(cloudPage.content_html.includes('Newer edit'),'Newer cloud edit must not be overwritten')
