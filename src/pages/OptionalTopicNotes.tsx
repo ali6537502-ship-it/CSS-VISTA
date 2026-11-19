@@ -5,6 +5,7 @@ import {
   findOptionalTopic, loadOptionalTopic, optionalTopicNow, topicOutline, type TopicPayload,
 } from '@/data/optionalNotes'
 import { NoteBlocks } from '@/features/optional-notes/Blocks'
+import LessonNotesCapture from '@/features/notes/LessonNotesCapture'
 
 export default function OptionalTopicNotes() {
   const { subject: subjectSlug = '', topic: topicSlug = '' } = useParams()
@@ -63,6 +64,8 @@ export default function OptionalTopicNotes() {
           about {Math.max(1, Math.round(topic.words / 200))} min read
         </p>
       </header>
+
+      <div className="mt-3"><LessonNotesCapture title={topic.title} /></div>
 
       {/* A long unit needs its own contents; a short one does not. */}
       {outline.length > 3 && (
