@@ -1,0 +1,53 @@
+name: My VISTA Notes — integrity and privacy
+on:
+  pull_request:
+    paths:
+      - 'src/features/notes/**'
+      - 'src/features/workspace/**'
+      - 'src/App.tsx'
+      - 'src/data/routeRegistry.mjs'
+      - 'src/pages/account/Library.tsx'
+      - 'public/api/_student_notes.php'
+      - 'public/api/student/notes.php'
+      - 'server/sql/student_notes_v1.sql'
+      - 'tests/notes/**'
+      - '.github/workflows/my-vista-notes.yml'
+permissions:
+  contents: read
+jobs:
+  notes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: notes-only-test-password
+          MYSQL_DATABASE: cssvista_notes_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pnotes-only-test-password" --health-interval=10s --health-timeout=5s --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax and pure note logic
+        run: |
+          php -l public/api/_student_notes.php
+          php -l public/api/student/notes.php
+          php -l tests/notes/unit.php
+          php -l tests/notes/integration.php
+          php tests/notes/unit.php
+      - name: Disposable MySQL ownership and recovery tests
+        env:
+          CSSV_NOTES_TEST_DSN: mysql:host=127.0.0.1;port=3306;dbname=cssvista_notes_test;charset=utf8mb4
+          CSSV_NOTES_TEST_USER: root
+          CSSV_NOTES_TEST_PASSWORD: notes-only-test-password
+        run: php tests/notes/integration.php
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Typecheck and route security
+        run: |
+          npm run typecheck
+          npm run audit:routes
