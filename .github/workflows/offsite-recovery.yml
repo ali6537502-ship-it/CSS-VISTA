@@ -1,0 +1,37 @@
+name: Off-host recovery tooling
+on:
+  pull_request:
+    paths:
+      - 'server/bin/cssv-offsite-backup.sh'
+      - 'server/bin/cssv-verify-offsite-restore.sh'
+      - 'server/bin/cssv-offsite-health.sh'
+      - 'tests/offsiteBackup.test.mjs'
+      - 'tests/offsiteHealth.test.mjs'
+      - 'docs/disaster-recovery.md'
+      - '.github/workflows/offsite-recovery.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'server/bin/cssv-offsite-backup.sh'
+      - 'server/bin/cssv-verify-offsite-restore.sh'
+      - 'server/bin/cssv-offsite-health.sh'
+      - 'tests/offsiteBackup.test.mjs'
+      - 'tests/offsiteHealth.test.mjs'
+      - '.github/workflows/offsite-recovery.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate backup freshness and isolated recovery fixtures
+        run: |
+          bash -n server/bin/cssv-offsite-backup.sh
+          bash -n server/bin/cssv-verify-offsite-restore.sh
+          bash -n server/bin/cssv-offsite-health.sh
+          node --test tests/offsiteBackup.test.mjs tests/offsiteHealth.test.mjs
