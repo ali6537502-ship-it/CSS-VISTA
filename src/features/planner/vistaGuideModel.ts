@@ -337,6 +337,22 @@ export function resolveLegacyCssNotesUnit(
  * cannot guarantee a model's factual accuracy or that browser/image tools
  * will be available in the user's chosen ChatGPT conversation.
  */
+/** An explicitly non-prescriptive fallback when the bundled FPSC extract has no sections. */
+export function buildMissingCssOptionalSourceCommand(subject: string): string {
+  return [
+    'FPSC CSS OPTIONAL PAPER — OFFICIAL SYLLABUS RESEARCH',
+    'SUBJECT: ' + subject,
+    'OFFICIAL PUBLISHER: Federal Public Service Commission (FPSC), Pakistan',
+    'PRIMARY SOURCE: https://www.fpsc.gov.pk/',
+    '',
+    'The website catalogue currently has no verified transcribed syllabus sections for this paper. DO NOT invent a list of chapters or claim unverified content is officially prescribed.',
+    '1. Find and inspect the latest applicable FPSC CSS syllabus document for this exact paper. Cite the document title, publication or revision date if shown, URL, and relevant syllabus pages.',
+    '2. Reproduce the authentic syllabus hierarchy accurately, respecting the paper divisions and original language. Explain whether each entry is a formal heading or a source-text continuation.',
+    '3. Produce a comprehensive, ordered preparation schedule and a distinct copy-ready textbook-depth notes command for each verifiable syllabus unit. For language and literature papers, preserve script and prescribed authors or texts.',
+    '4. Cross-check claims, case studies, quotations and references with authoritative sources. Do not invent statistics, books, authors or quotations.',
+    '5. If the current official document cannot be accessed or verified, STOP and ask me to upload the official syllabus. Do not substitute a guessed syllabus or unrelated preparation guide.',
+  ].join('\\n')
+}
 export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' | 'revision' = 'comprehensive') {
   const isEssay = unit.resource === 'essay'
   const isMentalGuidebook = unit.paper === 'PMS Punjab' && unit.subjectId === 'compulsory-mental-ability-and-reasoning-test'
