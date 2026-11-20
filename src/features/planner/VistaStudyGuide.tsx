@@ -414,7 +414,8 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
           const firstInSection=sourceSection && allUnits.find(row=>row.id==='vista-css:'+active.id+':'+sourceSection.id || row.legacySectionId==='vista-css:'+active.id+':'+sourceSection.id)?.id===u.id
           return <article key={u.id} className="vg-unit">
             <div><small>{u.section}</small><h4 dir="auto">{u.title}</h4>
-              <details><summary>{u.resource==='essay'?'View theme preparation brief':'Read complete syllabus for this chapter'}</summary><pre dir="auto">{u.syllabus}</pre></details>
+              <details><summary>{u.resource==='essay'?'View theme preparation brief':u.sourceBlock?'Read selected source lines and full section context':'Read complete syllabus for this chapter'}</summary><pre dir="auto">{u.syllabus}</pre></details>
+              {u.legacySectionId && alreadyScheduled.has(u.legacySectionId) && <p className="pl-muted">Already included in your earlier section-level timetable. No duplicate session will be created.</p>}
               {sourceSection && firstInSection && <CssOptionalFocusList subject={active} section={sourceSection}/>}
             </div>
             <div className="vg-unit-tools">
