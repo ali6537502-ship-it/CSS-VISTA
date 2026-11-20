@@ -3,7 +3,7 @@ import { shiftDay, validDay } from './model.ts'
 import { pmsMentalAbilitySubject } from '../../data/pmsMentalAbility.ts'
 
 export type VistaExam = 'css' | 'pms-punjab'
-export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[] }
+export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[]; sourceItemIds?: string[] }
 export interface VistaSection { id: string; title: string; detail?: string; topics: VistaNode[]; sourceItems?: string[] }
 export interface VistaSubject {
   id: string; title: string; designation: 'compulsory' | 'optional'; marks: number | null
@@ -13,7 +13,7 @@ export interface VistaSubject {
 export interface VistaUnit {
   id: string; subjectId: string; subject: string; section: string; title: string
   syllabus: string; paper: string; resource?: 'precis' | 'essay'; resourceSlug?: string; excerptFocus?: boolean
-  sourceBlock?: boolean; sourceFocus?: string; legacySectionId?: string
+  sourceBlock?: boolean; sourceFocus?: string; legacySectionId?: string; sourceItemIds?: string[]
 }
 export interface VistaPreferences {
   version: 1
@@ -111,13 +111,14 @@ export function pmsGuideSubjects(data: { subjects: VistaSubject[] }, themes: Vis
  * The resulting units are PRACTICE STUDY BLOCKS, not invented FPSC headings.
  * Preserve every actual source line and its original order, including OCR spelling.
  */
-export function cssOptionalStudyBlocks(items: string[]): Array<{ start: number; text: string }> {
-  const blocks: Array<{ start: number; text: string }> = []
+export function cssOptionalStudyBlocks(items: string[]): Array<{ start: number; text: string; indices: number[] }> {
+  const blocks: Array<{ start: number; text: string; indices: number[] }> = []
   let current: string[] = []
+  let indices: number[] = []
   let start = 0
   const flush = () => {
-    if (current.length) blocks.push({ start, text: current.join('\n') })
-    current = []
+    if (current.length) blocks.push({ start, text: current.join('\n'), indices })
+    current = [];indices = []
   }
   for (let i = 0; i < items.length; i++) {
     const line = items[i]?.trim()
@@ -133,7 +134,7 @@ export function cssOptionalStudyBlocks(items: string[]): Array<{ start: number; 
     // lessons; break only between source lines, retaining every word in order.
     if (current.length && (!followsPrevious || current.join(' ').length + line.length > 420)) flush()
     if (!current.length) start = i
-    current.push(line)
+    current.push(line);indices.push(i)
   }
   flush()
   return blocks
@@ -161,6 +162,7 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
           // New optional schedules cover all readable entries in focused blocks.
           ...(blocks.length>1 ? {children:blocks.map((block,index)=>({
             id:rootId+':block:'+block.start,
+            sourceItemIds:block.indices.map(itemIndex=>s.slug+':'+i+':'+itemIndex),
             title:'Study block '+(index+1)+' of '+blocks.length+' — '+block.text.replace(/\s+/g,' ').slice(0,90),
             detail:'SELECTED OFFICIAL SOURCE LINES (not necessarily standalone syllabus headings):\n'+block.text,
           }))} : {}),
@@ -235,7 +237,7 @@ export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] 
         id: node.id, subjectId: subject.id, subject: subject.title,
         section: sectionName, title: node.title,
         ...(exam==='css' && subject.designation==='optional' && node.id.includes(':block:') ? {
-          sourceBlock:true, legacySectionId:node.id.split(':block:')[0], sourceFocus:node.detail.replace(/^SELECTED OFFICIAL SOURCE LINES[^\n]*\n/,'')
+          sourceBlock:true, legacySectionId:node.id.split(':block:')[0], sourceFocus:node.detail.replace(/^SELECTED OFFICIAL SOURCE LINES[^\n]*\n/,''),sourceItemIds:node.sourceItemIds
         } : {}),
         syllabus: [section.title, section.detail, ...ancestors, outline(node)]
           .filter(Boolean).join('\n'),
@@ -292,7 +294,8 @@ export function cssOptionalStudyProgress(
   const units = guideUnits(subject,'css')
   const completed = units.filter(unit =>
     statuses[unit.id]==='completed' || completedTasks.has(unit.id) ||
-    !!unit.legacySectionId && (statuses[unit.legacySectionId]==='completed' || completedTasks.has(unit.legacySectionId))
+    !!unit.legacySectionId && (statuses[unit.legacySectionId]==='completed' || completedTasks.has(unit.legacySectionId)) ||
+    !!unit.sourceItemIds?.length && unit.sourceItemIds.every(id=>statuses[id]==='completed' || completedTasks.has(id))
   ).length
   return {completed,total:units.length,percent:units.length?Math.round(completed/units.length*100):null}
 }
@@ -410,7 +413,8 @@ export function generateVistaPlan(subjects: VistaSubject[], exam: VistaExam, pre
   const previouslyScheduled = new Set(existing.map(task => task.syllabusItemId))
   const accountedFor=(unit: VistaUnit) =>
     statuses[unit.id]==='completed' || previouslyScheduled.has(unit.id) ||
-    !!unit.legacySectionId && (statuses[unit.legacySectionId]==='completed' || previouslyScheduled.has(unit.legacySectionId))
+    !!unit.legacySectionId && (statuses[unit.legacySectionId]==='completed' || previouslyScheduled.has(unit.legacySectionId)) ||
+    !!unit.sourceItemIds?.length && unit.sourceItemIds.every(id=>statuses[id]==='completed' || previouslyScheduled.has(id))
   const rows = chosen.map(subject => ({
     subject,
     items: plannedVistaUnits(subject,exam,preferences).filter(unit=>!accountedFor(unit)),
