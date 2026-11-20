@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 303,
+  "count": 307,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2111,6 +2111,30 @@
       "id": "pak-ca-gk-20261119-airport-advisory-contract",
       "text": "An EY Middle East-led consortium signed the financial advisory agreement for Karachi and Lahore airports on 19 November 2026.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-20-sco-delhi-malik",
+      "text": "Musadik Malik led Pakistan's delegation to the SCO Civilisational Dialogue Forum in New Delhi on 20 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-20",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-20-lsm-first-quarter-report",
+      "text": "PBS figures reported on 20 November 2026 showed 2.07% large-scale manufacturing growth in the first quarter of FY2027.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-20",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-20-punjab-smog-aqi",
+      "text": "Lahore's reported hourly AQI reached 465 between 7am and 8am on 20 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-20",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-20-afghanistan-regional-conference",
+      "text": "Pakistan's Foreign Office cited non-recognition of the Taliban government in explaining Afghanistan's exclusion from a regional conference on 20 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-20",
       "timeSensitive": true
     }
   ]
