@@ -274,6 +274,22 @@ export function selectedVistaSubjects(subjects: VistaSubject[], exam: VistaExam,
   return eligible.sort((a,b) =>
     (priorities.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (priorities.get(b.id) ?? Number.MAX_SAFE_INTEGER))
 }
+/** Track the same optional study blocks on My Subjects and in the daily planner.
+ * Old section-level completion remains credited; existing account records stay intact.
+ */
+export function cssOptionalStudyProgress(
+  subject: VistaSubject,
+  statuses: Record<string,SyllabusItemStatus>,
+  tasks: Pick<StudyScheduleTask,'syllabusItemId'|'status'>[],
+): { completed: number; total: number; percent: number | null } {
+  const completedTasks = new Set(tasks.filter(t=>t.status==='completed').map(t=>t.syllabusItemId))
+  const units = guideUnits(subject,'css')
+  const completed = units.filter(unit =>
+    statuses[unit.id]==='completed' || completedTasks.has(unit.id) ||
+    !!unit.legacySectionId && (statuses[unit.legacySectionId]==='completed' || completedTasks.has(unit.legacySectionId))
+  ).length
+  return {completed,total:units.length,percent:units.length?Math.round(completed/units.length*100):null}
+}
 export function plannedVistaUnits(subject: VistaSubject, exam: VistaExam, prefs: VistaPreferences): VistaUnit[] {
   return guideUnits(subject, exam).filter(unit =>
     unit.resource !== 'essay' || prefs.selectedEssayThemes === null
