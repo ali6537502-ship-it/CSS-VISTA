@@ -138,6 +138,11 @@ export function cssOptionalStudyBlocks(items: string[]): Array<{ start: number; 
   flush()
   return blocks
 }
+/** A paper/part number with no content is a divider, not a study topic. */
+export function cssOptionalPaperDivider(title: string, items: string[]): boolean {
+  return !items.some(item=>item.trim()) &&
+    /^(?:part|paper)\s*[-–]?\s*(?:[IVXLCDM]+|\d+)\s*(?:\([^()]*\bmarks?\b[^()]*\))?$/i.test(title.trim())
+}
 export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: string; designation: 'compulsory' | 'optional'; marks: number; sections: Array<{ title: string; items: string[] }> }> }, themes: VistaEssayTheme[] = []): VistaSubject[] {
   const papers: VistaSubject[] = data.subjects.map(s => ({
     id: s.slug, title: s.name, designation: s.designation, marks: s.marks,
@@ -146,6 +151,7 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
       // Raw source wording remains untouched and is available for exact focus commands.
       sourceItems: s.designation === 'optional' ? section.items : undefined,
       topics: (() => {
+        if (s.designation==='optional' && cssOptionalPaperDivider(section.title,section.items)) return []
         const rootId='vista-css:' + s.slug + ':s' + (i + 1)
         const originalText=section.items.map((item,index)=>(index+1)+'. '+item.trim()).join('\n')
         const blocks=s.designation==='optional' ? cssOptionalStudyBlocks(section.items) : []
