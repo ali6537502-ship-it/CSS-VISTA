@@ -26,7 +26,10 @@ function CopyNextSubjectCommand({ subject, optional, statuses, tasks }: {
     const done=new Set(tasks.filter(task=>task.status==='completed').map(task=>task.syllabusItemId))
     return items.find(item=>{
       const ids=item.legacySectionId ? [item.id,item.legacySectionId] : [item.id]
-      return !ids.some(id=>statuses[id]==='completed'||done.has(id))
+      const completedByCurrent=ids.some(id=>statuses[id]==='completed'||done.has(id))
+      const completedByOldLines=!!item.sourceItemIds?.length &&
+        item.sourceItemIds.every(id=>statuses[id]==='completed'||done.has(id))
+      return !completedByCurrent && !completedByOldLines
     }) || items[0] || null
   },[subject,optional,statuses,tasks])
   if(!unit)return null
