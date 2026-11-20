@@ -2,8 +2,8 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
-  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, pmsGuideSubjects, generateVistaPlan,
-  guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
+  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, cssOptionalStudyBlocks, pmsGuideSubjects, generateVistaPlan,
+  findGuideUnit, guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
   resolveLegacyCssNotesUnit,
   type VistaSubject, type VistaPreferences,
 } from '../src/features/planner/vistaGuideModel.ts'
@@ -325,38 +325,113 @@ test('universal notes prompt covers discipline-specific reasoning, visual eviden
   assert.doesNotMatch(mental,/EXACT PRESCRIBED SYLLABUS:/)
 })
 
-test('CSS optional subjects expose focused, source-exact notes copy commands without changing saved section schedule IDs',()=>{
+
+test('every transcribed CSS optional source entry is available in the timetable and notes commands',()=>{
   const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
   const subjects=cssGuideSubjects(source)
   const optionals=subjects.filter(s=>s.designation==='optional')
   assert.equal(optionals.length,source.subjects.filter((s:{designation:string})=>s.designation==='optional').length)
+  let expanded=0
   for(const optional of optionals){
     const original=source.subjects.find((s:{slug:string})=>s.slug===optional.id)!
     const scheduled=guideUnits(optional,'css')
-    assert.deepEqual(scheduled.map(u=>u.id),original.sections.map((_:unknown,i:number)=>'vista-css:'+optional.id+':s'+(i+1)),
-      'Existing section-level scheduled IDs must not be changed')
+    if(!original.sections.length){
+      assert.equal(scheduled.length,0,'Do not invent sections for '+optional.title)
+      continue
+    }
     for(let i=0;i<optional.sections.length;i++){
       const section=optional.sections[i]
+      const priorId='vista-css:'+optional.id+':s'+(i+1)
+      const historical=findGuideUnit(subjects,'css',priorId)
+      assert.ok(historical,'Historical section task must stay resolvable: '+priorId)
+      assert.equal(historical?.id,priorId)
       const entries=cssOptionalFocusUnits(optional,section)
       assert.deepEqual(entries.map(u=>u.title),original.sections[i].items.map((item:string)=>item.trim()).filter(Boolean),
-        'Do not paraphrase, invent or silently omit original FPSC source text')
+        'Do not paraphrase, invent or silently omit FPSC source entries')
       assert.ok(entries.every(u=>u.excerptFocus && u.paper==='CSS'))
+      const chunks=cssOptionalStudyBlocks(original.sections[i].items)
+      assert.equal(chunks.map(x=>x.text).join('\n'),original.sections[i].items.map((x:string)=>x.trim()).filter(Boolean).join('\n'),
+        'Every original source line must be scheduled in its original order')
+      const sectionUnits=scheduled.filter(u=>u.id===priorId || u.legacySectionId===priorId)
+      assert.equal(sectionUnits.length,Math.max(1,chunks.length),'One task per source-backed study block')
+      if(chunks.length>1) {
+        expanded++
+        assert.ok(sectionUnits.every(u=>u.sourceBlock && u.legacySectionId===priorId && u.sourceFocus),
+          'Long sections must be source-grounded study blocks, not invented official headings')
+        assert.deepEqual(sectionUnits.map(u=>u.sourceFocus),chunks.map(x=>x.text))
+      }
+      for(const unit of sectionUnits){
+        const fromTask=findGuideUnit(subjects,'css',unit.id)
+        assert.equal(fromTask?.id,unit.id,'Today/week task must resolve notes command')
+        const command=buildVistaNotesCommand(unit)
+        assert.match(command,/Never invent citations or statistics/)
+        assert.ok(command.includes(section.title))
+        if(unit.sourceBlock){
+          assert.match(command,/FPSC OPTIONAL SYLLABUS STUDY BLOCK/)
+          assert.match(command,/FOCUS RULE/)
+          assert.ok(command.includes(unit.sourceFocus!))
+        }
+      }
       if(entries.length){
         const command=buildVistaNotesCommand(entries[0])
         assert.match(command,/FPSC OPTIONAL SYLLABUS EXCERPT/)
         assert.match(command,/FOCUS RULE/)
-        assert.match(command,/Never invent citations or statistics/)
         assert.ok(command.includes(entries[0].title))
-        assert.ok(command.includes(section.title))
-        assert.match(command,/complete section text is reference context/)
       }
     }
   }
-  const sample=optionals.find(s=>s.sections.some(section=>section.sourceItems?.length))
-  assert.ok(sample)
+  assert.ok(expanded>60,'Optional sections must contain many independently scheduled study blocks')
+  const sample=optionals.find(s=>s.sections.some(section=>section.sourceItems?.length))!
   assert.equal(cssOptionalFocusUnits({...sample,designation:'compulsory'},sample.sections[0]).length,0)
   const guide=readFileSync('src/features/planner/VistaStudyGuide.tsx','utf8')
   assert.match(guide,/CssOptionalFocusList/)
   assert.match(guide,/Copy notes for a specific FPSC syllabus entry/)
   assert.match(guide,/onToggle=\{event => setExpanded\(event.currentTarget.open\)\}/)
+})
+
+test('CSS optional study sessions preserve selected paper and daily task behavior',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const papers=cssGuideSubjects(source)
+  const optional=papers.find(s=>s.id==='gender-studies')!
+  assert.ok(optional)
+  const blocks=guideUnits(optional,'css')
+  assert.ok(blocks.length>optional.sections.length,'Optional is no longer limited to one task per entire section')
+  const settings=prefs({selectedOptionals:['Gender Studies'],studySubjects:['gender-studies'],
+    prioritySubjects:['gender-studies'],targetDate:'',subjectsPerDay:1,dailyMinutes:120})
+  const plan=generateVistaPlan(papers,'css',settings,[],{},'2026-11-20')
+  assert.equal(plan.scheduledSubjects,1)
+  assert.equal(plan.draft.length,blocks.length)
+  assert.deepEqual(plan.draft.map(t=>t.syllabusItemId),blocks.map(b=>b.id))
+  assert.ok(plan.draft.every(t=>t.subject==='Gender Studies'&&t.paper==='CSS'&&t.minutes>=30&&t.minutes<=120))
+  assert.ok(new Set(plan.draft.map(t=>t.date)).size>1)
+  assert.ok(plan.draft.every(t=>findGuideUnit(papers,'css',t.syllabusItemId)!==null))
+})
+
+test('previous whole-section optional tasks remain preserved without duplicated source blocks',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const papers=cssGuideSubjects(source),optional=papers.find(s=>s.id==='gender-studies')!
+  const parent='vista-css:gender-studies:s1'
+  const children=guideUnits(optional,'css').filter(u=>u.legacySectionId===parent)
+  assert.ok(children.length>1)
+  const old={
+    id:'existing-gender-section',syllabusItemId:parent,subject:'Gender Studies',paper:'CSS',section:optional.sections[0].title,
+    topic:optional.sections[0].title,date:'2026-11-21',minutes:90,status:'not-started' as const,createdAt:'2026-11-19',
+  }
+  const settings=prefs({selectedOptionals:['Gender Studies'],studySubjects:['gender-studies'],targetDate:''})
+  const remaining=generateVistaPlan(papers,'css',settings,[old],{},'2026-11-20')
+  assert.ok(remaining.draft.every(t=>!children.some(child=>child.id===t.syllabusItemId)),
+    'Historical section task must not be duplicated by new source-block tasks')
+  assert.ok(remaining.alreadyCovered>=children.length)
+  const complete=generateVistaPlan(papers,'css',settings,[],{[parent]:'completed'},'2026-11-20')
+  assert.ok(complete.draft.every(t=>!children.some(child=>child.id===t.syllabusItemId)))
+  assert.equal(findGuideUnit(papers,'css',parent)?.title,optional.sections[0].title)
+})
+
+test('missing FPSC optional source sections are reported rather than silently scheduled',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const subjects=cssGuideSubjects(source)
+  const missing=subjects.find(s=>s.designation==='optional'&&!s.sections.length)
+  assert.ok(missing)
+  const settings=prefs({selectedOptionals:[missing.title],studySubjects:[missing.id],targetDate:''})
+  assert.throws(()=>generateVistaPlan(subjects,'css',settings,[],{},'2026-11-20'),/no transcribed sections/)
 })
