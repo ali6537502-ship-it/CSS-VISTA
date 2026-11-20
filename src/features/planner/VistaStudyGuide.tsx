@@ -13,6 +13,7 @@ import { essayThemeIndex } from '@/data/essayThemes'
 import { PMS_MENTAL_ID, PMS_MENTAL_SOURCE } from '@/data/pmsMentalAbility'
 import { validateStudySelection } from '@/lib/subjectSelection'
 import PlannerTask from './PlannerTask'
+import MissingOptionalSyllabusCommand from './MissingOptionalSyllabusCommand'
 import { dayKey, readableDay, shiftDay, validDay, plannerHref } from './model'
 import { PMS_SETTINGS_KEY, readPmsSettings, taskExam } from './pmsModel'
 import {
@@ -415,7 +416,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
         {(active.officialGuidance||[]).length>0&&<details className="vg-readings"><summary>Official PPSC English Essay paper requirements (guidance, not study chapters)</summary><ol>{active.officialGuidance!.map((text,i)=><li key={i}>{text}</li>)}</ol></details>}
         <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} activities complete</small></div><span className="vg-syllabus-chip">{active.id==='compulsory-english-essay'||active.id==='essay'?'Supplementary essay preparation themes':'Read chapters here — no PDF required'}</span></div>
         {exam==='css' && active.designation==='optional' && <p className="pl-note">This optional paper follows the same daily schedule, notes commands, completion checks and revision system as compulsory papers. Long sections are divided into manageable source-backed study blocks; block labels are preparation aids, not separately prescribed FPSC chapters. Earlier section-level tasks and their completion remain recognized.</p>}
-        {exam==='css' && active.designation==='optional' && !active.sections.length && <p role="status" className="pl-note">This optional subject has no transcribed syllabus sections in the current catalogue. A source-based notes command cannot be prepared until its official syllabus is added. Check the <a href="https://www.fpsc.gov.pk/" target="_blank" rel="noopener noreferrer">FPSC website</a> for the prescribed outline.</p>}
+        {exam==='css' && active.designation==='optional' && !active.sections.length && <div role="status" className="pl-note"><p>This optional subject has no verified transcribed syllabus sections in the current catalogue. A chapter-specific study plan cannot be invented. Check the <a href="https://www.fpsc.gov.pk/" target="_blank" rel="noopener noreferrer">FPSC website</a> for its prescribed outline.</p><MissingOptionalSyllabusCommand subject={active.title}/></div>}
         {active.id===PMS_MENTAL_ID && <p className="pl-note">Based on the published PPSC Mental Ability and Reasoning Test guidebook. <a href={PMS_MENTAL_SOURCE} target="_blank" rel="noopener noreferrer">Read the original PPSC guidebook</a>. Topic headings are from the four official competency areas; sample questions are examples, not an exhaustive question bank.</p>}
         <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished activities only</label>
         {visibleUnits.slice(0,showCount).map(u=>{
