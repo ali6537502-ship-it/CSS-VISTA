@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "published_at": "2026-11-20T19:04:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 20 November 2026 | Preliminary evening coverage (00:00–19:04 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-20-sco-delhi-malik",
+      "category": "Pakistan — Multilateral Diplomacy",
+      "headline": "Pakistan's climate minister arrives in New Delhi for SCO Civilisational Dialogue Forum",
+      "summary": "Federal Minister Musadik Malik arrived in New Delhi on 20 November to lead Pakistan's delegation to the SCO Civilisational Dialogue Forum scheduled for 20–22 November.",
+      "what_happened": "Pakistan's High Commission said Chargé d'Affaires Saad Waraich received Malik. The visit is a multilateral SCO engagement; no bilateral Pakistan–India negotiations were announced.",
+      "background": "Pakistan and India have continued limited official contact at multilateral SCO events despite strained bilateral relations.",
+      "why_it_matters": "The SCO offers a forum for regional dialogue and people-to-people exchanges even when bilateral diplomacy is restricted.",
+      "pakistan_perspective": "Pakistan holds the rotating SCO Council of Heads of State chairmanship for 2026–27, with a summit planned for Islamabad in August 2027.",
+      "quick_gk": [
+        "Musadik Malik led Pakistan's delegation to the SCO Civilisational Dialogue Forum in New Delhi on 20 November 2026."
+      ],
+      "question_angles": [
+        "Which Pakistani federal minister travelled to New Delhi for the SCO Civilisational Dialogue Forum on 20 November 2026?"
+      ],
+      "countries": [
+        "Pakistan",
+        "India"
+      ],
+      "institutions": [
+        "Shanghai Cooperation Organisation"
+      ],
+      "topics": [
+        "SCO",
+        "Pakistan–India relations",
+        "Regional diplomacy"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Musadik Malik arrives in New Delhi to attend SCO dialogue forum",
+          "url": "https://www.dawn.com/news/2045878"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-20-lsm-first-quarter-report",
+      "category": "Pakistan — Economy and Industry",
+      "headline": "Newly reported PBS figures show 2.07% growth in large-scale manufacturing in FY27 first quarter",
+      "summary": "A report published on 20 November detailed Pakistan Bureau of Statistics data showing large-scale manufacturing output grew 2.07% in July–September FY2027; 12 of 22 manufacturing sectors expanded.",
+      "what_happened": "Dawn reported the PBS figures released on 19 November. Automobiles grew 32.67% and wearing apparel 17.03%, while textiles declined 4.08% and food production 9.43%. These figures describe an earlier quarter, not output produced on 20 November.",
+      "background": "Large-scale manufacturing is tracked by the Quantum Index of Manufacturing and reflects activity in major industrial sectors.",
+      "why_it_matters": "Uneven industrial recovery complicates employment, exports and fiscal planning.",
+      "pakistan_perspective": "Textiles and food are important components of Pakistan's manufacturing and export structure.",
+      "quick_gk": [
+        "PBS figures reported on 20 November 2026 showed 2.07% large-scale manufacturing growth in the first quarter of FY2027."
+      ],
+      "question_angles": [
+        "What year-on-year growth rate was reported for Pakistan's large-scale manufacturing in the first quarter of FY2027?"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Pakistan Bureau of Statistics"
+      ],
+      "topics": [
+        "Large-scale manufacturing",
+        "Industrial policy",
+        "FY2027"
+      ],
+      "statistics": [
+        {
+          "label": "LSM first-quarter growth",
+          "value": "2.07%",
+          "source": "Dawn",
+          "year": "FY2027"
+        }
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Big industry output rises 2.07 per cent",
+          "url": "https://www.dawn.com/news/2045787/big-industry-output-rises-207-per-cent"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-20-punjab-smog-aqi",
+      "category": "Pakistan — Environment and Public Health",
+      "headline": "Hazardous smog readings reported across Punjab on 20 November",
+      "summary": "Dawn reported a Lahore hourly AQI reading of 465 between 7am and 8am on 20 November; Gujranwala and Multan were separately reported at 661 and 641, respectively.",
+      "what_happened": "The reported readings were snapshots from real-time air-quality monitoring, not full-day averages. Punjab authorities also reported enforcement against polluting brick kilns.",
+      "background": "AQI is a time- and location-dependent indicator of air pollution; readings from different monitoring sources and times may differ.",
+      "why_it_matters": "Severe particulate pollution increases risks to respiratory and cardiovascular health, particularly for vulnerable groups.",
+      "pakistan_perspective": "Seasonal smog highlights the need for emissions control, transparent monitoring and regional coordination.",
+      "quick_gk": [
+        "Lahore's reported hourly AQI reached 465 between 7am and 8am on 20 November 2026."
+      ],
+      "question_angles": [
+        "What hourly AQI did Dawn report for Lahore between 7am and 8am on 20 November 2026?"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "topics": [
+        "Air pollution",
+        "Punjab smog",
+        "Environmental health"
+      ],
+      "statistics": [
+        {
+          "label": "Lahore hourly AQI, 7–8am on 20 November",
+          "value": "465",
+          "source": "Dawn",
+          "date": "2026-11-20"
+        }
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Lahore once again ranks as world's most polluted major city as AQI crosses 400",
+          "url": "https://www.dawn.com/news/2045870/lahore-once-again-ranks-as-worlds-most-polluted-major-city-as-aqi-crosses-400"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-20-afghanistan-regional-conference",
+      "category": "Pakistan — Foreign Policy and Security",
+      "headline": "Pakistan explains Afghanistan's exclusion from regional conference amid recognition dispute",
+      "summary": "At a 20 November briefing, Pakistan's Foreign Office said Afghanistan was not invited to a regional conference because Islamabad does not recognize the Taliban government.",
+      "what_happened": "The Foreign Office linked progress in regional cooperation to concerns over cross-border militancy. The remarks state Pakistan's diplomatic position, not an independently established finding about responsibility for specific attacks.",
+      "background": "Recognition of Afghanistan's de facto authorities and cross-border security concerns remain major obstacles to regional diplomacy.",
+      "why_it_matters": "The dispute affects regional cooperation, border security and diplomatic engagement in South and Central Asia.",
+      "pakistan_perspective": "Pakistan has emphasized counterterrorism assurances as a condition for improved relations with Kabul.",
+      "quick_gk": [
+        "Pakistan's Foreign Office cited non-recognition of the Taliban government in explaining Afghanistan's exclusion from a regional conference on 20 November 2026."
+      ],
+      "question_angles": [
+        "What reason did Pakistan's Foreign Office cite for excluding Afghanistan from the regional conference discussed on 20 November 2026?"
+      ],
+      "countries": [
+        "Pakistan",
+        "Afghanistan"
+      ],
+      "institutions": [
+        "Pakistan Ministry of Foreign Affairs"
+      ],
+      "topics": [
+        "Afghanistan",
+        "Diplomatic recognition",
+        "Regional security"
+      ],
+      "sources": [
+        {
+          "publisher": "Arab News Pakistan",
+          "title": "Pakistan says it excluded Afghanistan from regional conference over Taliban recognition",
+          "url": "https://www.arabnews.pk/pakistan/pakistan-says-it-excluded-afghanistan-from-regional-conference-over-taliban-recognition-3007593"
+        }
+      ]
+    }
+  ]
+}
