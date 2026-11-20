@@ -1318,5 +1318,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://iimm.un.org/icj-gambia-v-myanmar"
+  },
+  {
+    "id": "current-affairs-20261120-sco-malik",
+    "q": "Which Pakistani minister arrived in New Delhi on 20 November 2026 to attend the SCO Civilisational Dialogue Forum?",
+    "o": [
+      "Ishaq Dar",
+      "Musadik Malik",
+      "Ahsan Iqbal",
+      "Mohsin Naqvi"
+    ],
+    "a": 1,
+    "e": "Federal Minister for Climate Change Musadik Malik led the Pakistani delegation to the 20–22 November forum.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045878"
+  },
+  {
+    "id": "current-affairs-20261120-lsm-fy27",
+    "q": "What first-quarter FY2027 large-scale manufacturing growth rate did PBS data reported on 20 November 2026 show?",
+    "o": [
+      "0.65%",
+      "2.07%",
+      "4.98%",
+      "7.25%"
+    ],
+    "a": 1,
+    "e": "The reported July–September FY2027 LSM growth was 2.07%; the data were released on 19 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045787/big-industry-output-rises-207-per-cent"
+  },
+  {
+    "id": "current-affairs-20261120-lahore-hourly-aqi",
+    "q": "What hourly AQI was reported for Lahore between 7am and 8am on 20 November 2026?",
+    "o": [
+      "289",
+      "350",
+      "465",
+      "661"
+    ],
+    "a": 2,
+    "e": "Dawn reported a Lahore hourly AQI of 465 in that interval; 661 was a separate Gujranwala reading.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045870/lahore-once-again-ranks-as-worlds-most-polluted-major-city-as-aqi-crosses-400"
+  },
+  {
+    "id": "current-affairs-20261120-afghan-recognition",
+    "q": "What diplomatic reason did Pakistan's Foreign Office cite on 20 November 2026 for Afghanistan's exclusion from a regional conference?",
+    "o": [
+      "A trade embargo",
+      "Non-recognition of the Taliban government",
+      "A border demarcation treaty",
+      "Afghanistan's withdrawal from the SCO"
+    ],
+    "a": 1,
+    "e": "The Foreign Office cited Pakistan's non-recognition of the Taliban government and separately raised cross-border security concerns.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.arabnews.pk/pakistan/pakistan-says-it-excluded-afghanistan-from-regional-conference-over-taliban-recognition-3007593"
   }
 ]
