@@ -11,7 +11,7 @@ import { useAccountSnapshot } from '@/pages/account/shared'
 import { optionalCatalogue } from '@/features/workspace/model'
 import { essayThemeIndex } from '@/data/essayThemes'
 import { PMS_MENTAL_ID, PMS_MENTAL_SOURCE } from '@/data/pmsMentalAbility'
-import { validateSubjectCombination } from '@/lib/subjectSelection'
+import { validateStudySelection } from '@/lib/subjectSelection'
 import PlannerTask from './PlannerTask'
 import { dayKey, readableDay, shiftDay, validDay, plannerHref } from './model'
 import { PMS_SETTINGS_KEY, readPmsSettings, taskExam } from './pmsModel'
@@ -149,8 +149,10 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const cssOptionalValidation = useMemo(()=>{
     const recognized = optionalCatalogue.filter(s=>draftPrefs.selectedOptionals.includes(s.name))
     const unknown = draftPrefs.selectedOptionals.filter(n=>!recognized.some(s=>s.name===n))
-    const result = validateSubjectCombination(recognized)
-    return {valid:!unknown.length && (!draftPrefs.selectedOptionals.length || result.valid),messages:[...result.violations,...unknown.map(n=>'Unknown subject: '+n)]}
+    const result = validateStudySelection(recognized)
+    return {valid:!unknown.length && result.valid,total:result.total,
+      incomplete:result.total>0 && result.total<600,
+      messages:[...result.violations,...unknown.map(n=>'Unknown subject: '+n)]}
   },[draftPrefs.selectedOptionals])
   function checkWrite(){
     if(syncStatus==='syncing' || !preparationWriteCurrent() || (user && currentHostingerAccountUser()!==user.id)){
@@ -359,6 +361,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
           return <label key={s.id}><input type={exam==='pms-punjab'?'radio':'checkbox'} name={exam==='pms-punjab'?'pms-one-optional':undefined} checked={selected} onChange={()=>chooseOptional(s)}/>{s.title}{exam==='css'&&!s.sections.length&&<small> · source outline unavailable</small>}</label>
         })}</div>
         {exam==='css' && !cssOptionalValidation.valid && <p role="alert" className="pl-warning">{cssOptionalValidation.messages.join('. ')}</p>}
+        {exam==='css' && cssOptionalValidation.incomplete && <p className="pl-note">Current study selection: {cssOptionalValidation.total} of 600 optional marks. You may prepare individual papers now, but a final FPSC examination combination must total exactly 600 marks and meet all group rules.</p>}
         {exam==='pms-punjab' && <button className="vg-inline-action" type="button" onClick={()=>change({selectedOptionals:[]})}>No optional selected yet</button>}
       </fieldset>
       <fieldset className="vg-options">
