@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
-  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, cssOptionalStudyBlocks, pmsGuideSubjects, generateVistaPlan,
+  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, cssOptionalStudyBlocks, cssOptionalStudyProgress, pmsGuideSubjects, generateVistaPlan,
   findGuideUnit, guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
   resolveLegacyCssNotesUnit,
   type VistaSubject, type VistaPreferences,
@@ -434,4 +434,30 @@ test('missing FPSC optional source sections are reported rather than silently sc
   assert.ok(missing)
   const settings=prefs({selectedOptionals:[missing.title],studySubjects:[missing.id],targetDate:''})
   assert.throws(()=>generateVistaPlan(subjects,'css',settings,[],{},'2026-11-20'),/no transcribed sections/)
+})
+
+test('My Subjects optional-paper progress uses the same blocks and saved completions as the timetable',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const subject=cssGuideSubjects(source).find(s=>s.id==='gender-studies')!
+  const units=guideUnits(subject,'css')
+  const first=units.find(u=>u.sourceBlock)!
+  const section=first.legacySectionId!
+  assert.ok(first && section)
+  const fresh=cssOptionalStudyProgress(subject,{},[])
+  assert.equal(fresh.completed,0)
+  assert.equal(fresh.total,units.length)
+  assert.equal(fresh.percent,0)
+  const marked=cssOptionalStudyProgress(subject,{[first.id]:'completed'},[])
+  assert.equal(marked.completed,1)
+  assert.equal(marked.total,units.length)
+  const historical=cssOptionalStudyProgress(subject,{[section]:'completed'},[])
+  assert.equal(historical.completed,units.filter(u=>u.legacySectionId===section).length,
+    'Previously completed whole section must count as completed source blocks')
+  const byTask=cssOptionalStudyProgress(subject,{},[
+    {syllabusItemId:first.id,status:'completed'},{syllabusItemId:section,status:'not-started'},
+  ])
+  assert.equal(byTask.completed,1)
+  const card=readFileSync('src/pages/account/Subjects.tsx','utf8')
+  assert.match(card,/cssOptionalStudyProgress/)
+  assert.match(card,/Earlier source-item checks/)
 })
