@@ -313,9 +313,11 @@ export function resolveLegacyCssNotesUnit(
 export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' | 'revision' = 'comprehensive') {
   const isEssay = unit.resource === 'essay'
   const isMentalGuidebook = unit.paper === 'PMS Punjab' && unit.subjectId === 'compulsory-mental-ability-and-reasoning-test'
-  const kind = unit.excerptFocus || unit.sourceBlock
-    ? 'FPSC OPTIONAL SYLLABUS STUDY BLOCK — SOURCE LINES MAY BE WRAPPED'
-    : isEssay
+  const kind = unit.excerptFocus
+    ? 'FPSC OPTIONAL SYLLABUS EXCERPT — CONTEXT MAY INCLUDE WRAPPED LINES'
+    : unit.sourceBlock
+      ? 'FPSC OPTIONAL SYLLABUS STUDY BLOCK — SOURCE LINES MAY BE WRAPPED'
+      : isEssay
     ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP — NOT AN OFFICIAL SYLLABUS'
     : isMentalGuidebook
       ? 'PPSC MENTAL ABILITY GUIDEBOOK TOPIC — THE GUIDEBOOK IS NON-EXHAUSTIVE'
