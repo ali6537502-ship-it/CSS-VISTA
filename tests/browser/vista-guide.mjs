@@ -180,7 +180,7 @@ async function checkCssOptionalPlannerParity() {
     await page.locator('.vg-hero h2').waitFor()
     await page.getByRole('button',{name:'Subjects and routine'}).click()
     await page.getByRole('button',{name:'Choose from scratch'}).click()
-    await page.getByRole('searchbox',{name:'Search optional subjects'}).fill('Gender Studies')
+    await page.locator('input[placeholder="Search optional subjects"]').fill('Gender Studies')
     await page.getByRole('checkbox',{name:'Gender Studies'}).check()
     await page.getByRole('button',{name:'Save my preparation choices'}).click()
     await page.getByText('Your preparation choices have been saved.',{exact:false}).waitFor()
