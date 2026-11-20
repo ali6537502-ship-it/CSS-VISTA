@@ -478,3 +478,28 @@ test('an empty Part I divider is not treated as an official chapter, while subst
   assert.equal(cssOptionalPaperDivider(forests.title,forests.sourceItems||[]),false)
   assert.ok(guideUnits(agriculture,'css').some(u=>u.id==='vista-css:'+agriculture.id+':'+forests.id))
 })
+
+test('legacy per-line CSS optional tasks are credited without rewriting the earlier source schedule',()=>{
+  const raw=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const subjects=cssGuideSubjects(raw)
+  const paper=subjects.find(s=>s.id==='gender-studies')!
+  const block=guideUnits(paper,'css').find(unit=>unit.sourceBlock && !!unit.sourceItemIds?.length)!
+  assert.ok(block && block.sourceItemIds?.length)
+  for(const id of block.sourceItemIds!){
+    const legacy=resolveLegacyCssNotesUnit(raw,id)
+    assert.ok(legacy,'Every historic source index must still resolve')
+    assert.equal(legacy?.subject,'Gender Studies')
+  }
+  const allCompleted=Object.fromEntries(block.sourceItemIds!.map(id=>[id,'completed' as const]))
+  const selection=prefs({selectedOptionals:['Gender Studies'],studySubjects:['gender-studies'],targetDate:''})
+  const plan=generateVistaPlan(subjects,'css',selection,[],allCompleted,'2026-11-20')
+  assert.ok(!plan.draft.some(t=>t.syllabusItemId===block.id),'Already completed legacy lines prevent duplicate block')
+  assert.ok(cssOptionalStudyProgress(paper,allCompleted,[]).completed>=1)
+  const history=block.sourceItemIds!.map((id,i)=>({
+    id:'legacy-line-'+i,syllabusItemId:id,subject:'Gender Studies',paper:'CSS',
+    section:block.section,topic:'Original source activity',date:'2026-11-21',
+    minutes:45,status:'not-started' as const,createdAt:'2026-11-19',
+  }))
+  const withScheduled=generateVistaPlan(subjects,'css',selection,history,{},'2026-11-20')
+  assert.ok(!withScheduled.draft.some(t=>t.syllabusItemId===block.id),'Already scheduled legacy lines prevent duplicate block')
+})
