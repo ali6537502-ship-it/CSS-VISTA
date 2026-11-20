@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-19",
-  "published_at": "2026-11-19T18:56:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 19 November 2026 | Evening preliminary coverage (00:00–18:56 PKT)",
+  "published_at": "2026-11-19T23:59:59+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 19 November 2026 | Final coverage (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-19-icj-rohingya-genocide",
@@ -37,8 +37,14 @@
           "publisher": "Reuters",
           "title": "Top UN court finds Myanmar committed state-sponsored genocide against Muslim Rohingya",
           "url": "https://www.dawn.com/news/2045689/top-un-court-finds-myanmar-committed-state-sponsored-genocide-against-muslim-rohingya"
+        },
+        {
+          "publisher": "UN Independent Investigative Mechanism for Myanmar",
+          "title": "ICJ – The Gambia v. Myanmar",
+          "url": "https://iimm.un.org/icj-gambia-v-myanmar"
         }
-      ]
+      ],
+      "explanation": "The judgment found state responsibility under the Genocide Convention and included reparations and obligations facilitating the Rohingya's safe, voluntary and dignified return. This does not amount to an individual criminal conviction."
     },
     {
       "id": "ca-2026-11-19-pakistan-qatar-security-mou",
@@ -171,6 +177,110 @@
           "publisher": "Reuters",
           "title": "El Nino raises the stakes as COP31 wrestles over finance",
           "url": "https://www.reuters.com/sustainability/cop/el-nino-raises-stakes-cop31-wrestles-over-finance-2026-11-19/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-19-pakistan-asean-security",
+      "category": "Pakistan — Foreign Relations",
+      "headline": "Pakistan and ASEAN agree to deepen cooperation on non-traditional security",
+      "summary": "On 19 November, Deputy Prime Minister Ishaq Dar and ASEAN Secretary-General Kao Kim Hourn discussed closer cooperation on climate resilience, food and energy security, cybersecurity and economic connectivity.",
+      "what_happened": "The visiting ASEAN secretary-general and Pakistan's foreign minister held delegation-level talks in Islamabad. They discussed trade, digital technologies, research links and regional security. This was diplomatic engagement, not a signed trade agreement.",
+      "background": "Pakistan has been an ASEAN Sectoral Dialogue Partner since 1993 and joined the ASEAN Regional Forum in 2004.",
+      "why_it_matters": "Cooperation with Southeast Asia could diversify Pakistan's trade and diplomatic partnerships while addressing transnational security and climate risks.",
+      "pakistan_perspective": "Pakistan emphasized supply-chain resilience, education and digital integration. No binding investment commitments were reported.",
+      "quick_gk": [
+        "Kao Kim Hourn was the ASEAN secretary-general who met Ishaq Dar in Islamabad on 19 November 2026."
+      ],
+      "question_angles": [
+        "Which ASEAN official held talks with Ishaq Dar in Islamabad on 19 November 2026?"
+      ],
+      "topics": [
+        "Pakistan — Foreign Relations"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "DPM Dar, Asean secretary general agree to enhance cooperation to address ‘non-traditional’ security challenges",
+          "url": "https://www.dawn.com/news/2045678/dpm-dar-asean-secretary-general-discuss-opportunities-to-expand-trade-investment-with-blocs-member-states-fo"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-19-secp-nano-loan-apr",
+      "category": "Pakistan — Financial Regulation",
+      "headline": "SECP lowers digital nano-loan annual percentage rate ceilings",
+      "summary": "Pakistan's securities regulator lowered the permitted annual percentage rate for digital nano-loans to 90% for new borrowers and 70% for repeat borrowers, from the previous 274% cap.",
+      "what_happened": "SECP Circular 26 of 2026 revised its earlier 2024 rules for loans up to Rs50,000 with repayment periods of up to 90 days. The caps cover associated charges as well as markup.",
+      "background": "Short-term digital credit can carry very high effective annual costs; APR standardizes comparisons across borrowing products.",
+      "why_it_matters": "Lower ceilings may reduce consumer borrowing costs, though affordability, enforcement and lender risk assessment remain important.",
+      "pakistan_perspective": "The regulator is also developing a borrower repository to help identify overlapping nano-loan obligations.",
+      "quick_gk": [
+        "SECP set a 90% APR cap for new digital nano-loan borrowers and 70% for repeat borrowers in November 2026."
+      ],
+      "question_angles": [
+        "Under the SECP's November 2026 revised digital nano-loan rules, what is the APR cap for repeat borrowers?"
+      ],
+      "topics": [
+        "Pakistan — Financial Regulation"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Cost of digital nano loans cut sharply",
+          "url": "https://www.dawn.com/news/2045506"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-19-airport-advisory-contract",
+      "category": "Pakistan — Economic Reform",
+      "headline": "Privatisation Commission signs advisory agreement for Karachi and Lahore airport outsourcing",
+      "summary": "On 19 November, Pakistan's Privatisation Commission signed a financial advisory services agreement with an EY Middle East-led consortium for proposed outsourcing of Karachi and Lahore airports.",
+      "what_happened": "The adviser is tasked with structuring possible competitive concession or management arrangements for Jinnah International Airport and Allama Iqbal International Airport. No airport operating concession was awarded by this advisory agreement.",
+      "background": "The government has considered private-sector participation in airport operations to improve management, investment and passenger services.",
+      "why_it_matters": "The distinction between hiring an adviser and awarding a concession is important for assessing actual progress in privatization.",
+      "pakistan_perspective": "Future transactions depend on procurement, bidding and contractual safeguards; the advisory contract itself does not transfer airport operations.",
+      "quick_gk": [
+        "An EY Middle East-led consortium signed the financial advisory agreement for Karachi and Lahore airports on 19 November 2026."
+      ],
+      "question_angles": [
+        "Which consortium was appointed financial adviser for the proposed outsourcing of Karachi and Lahore airports in November 2026?"
+      ],
+      "topics": [
+        "Pakistan — Economic Reform"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "EY-led consortium signs financial advisory pact for outsourcing of Karachi, Lahore airports",
+          "url": "https://www.dawn.com/news/2045686/ey-led-consortium-signs-financial-advisory-pact-for-outsourcing-of-karachi-lahore-airports"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-19-cop31-electrification-business",
+      "category": "World — Climate and Energy",
+      "headline": "Business coalition presses COP31 negotiators for stronger electrification commitments",
+      "summary": "On 19 November, 123 companies, investors and business groups urged COP31 negotiators to strengthen electrification commitments while discussions continued on a proposed 35% electricity share of final energy use by 2035.",
+      "what_happened": "The signatories argued that stronger commitments could support investment planning. The 35% figure was under negotiation and should not be treated as a binding adopted target.",
+      "background": "Electrification reduces direct fossil-fuel use in transport and heating, but climate gains depend on how electricity is generated.",
+      "why_it_matters": "The dispute concerns whether an electrification goal without clean-power safeguards can deliver emissions reductions.",
+      "pakistan_perspective": "Pakistan's energy transition depends on reliable grids, affordable renewable electricity and financing for industry and households.",
+      "quick_gk": [
+        "A coalition of 123 business and investor groups urged stronger electrification commitments at COP31 on 19 November 2026."
+      ],
+      "question_angles": [
+        "How many companies, investors and business groups signed the 19 November 2026 COP31 electrification appeal?"
+      ],
+      "topics": [
+        "World — Climate and Energy"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Businesses urge faster action on electrification as COP31 enters final hours",
+          "url": "https://www.reuters.com/sustainability/cop/businesses-urge-faster-action-electrification-cop31-enters-final-hours-2026-11-19/"
         }
       ]
     }

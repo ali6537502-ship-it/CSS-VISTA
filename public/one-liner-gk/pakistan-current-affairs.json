@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 300,
+  "count": 303,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2092,6 +2092,24 @@
     {
       "id": "pak-ca-gk-20261119-pakistan-qatar-security-mou",
       "text": "Pakistan and Qatar signed a security MoU between the Federal Constabulary and Qatar's Lekhwiya on 19 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261119-pakistan-asean-security",
+      "text": "Kao Kim Hourn was the ASEAN secretary-general who met Ishaq Dar in Islamabad on 19 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261119-secp-nano-loan-apr",
+      "text": "SECP set a 90% APR cap for new digital nano-loan borrowers and 70% for repeat borrowers in November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-19",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-20261119-airport-advisory-contract",
+      "text": "An EY Middle East-led consortium signed the financial advisory agreement for Karachi and Lahore airports on 19 November 2026.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-19",
       "timeSensitive": true
     }

@@ -1243,5 +1243,80 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.reuters.com/sustainability/cop/el-nino-raises-stakes-cop31-wrestles-over-finance-2026-11-19/"
+  },
+  {
+    "id": "current-affairs-20261119-pakistan-asean-security",
+    "q": "Which ASEAN official held talks with Ishaq Dar in Islamabad on 19 November 2026?",
+    "o": [
+      "Kao Kim Hourn",
+      "Lim Jock Hoi",
+      "Surin Pitsuwan",
+      "Le Luong Minh"
+    ],
+    "a": 0,
+    "e": "Kao Kim Hourn was the ASEAN secretary-general who met Ishaq Dar in Islamabad on 19 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045678/dpm-dar-asean-secretary-general-discuss-opportunities-to-expand-trade-investment-with-blocs-member-states-fo"
+  },
+  {
+    "id": "current-affairs-20261119-secp-nano-loan-apr",
+    "q": "Under the SECP's November 2026 revised digital nano-loan rules, what is the APR cap for repeat borrowers?",
+    "o": [
+      "50%",
+      "70%",
+      "90%",
+      "274%"
+    ],
+    "a": 1,
+    "e": "SECP set a 90% APR cap for new digital nano-loan borrowers and 70% for repeat borrowers in November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045506"
+  },
+  {
+    "id": "current-affairs-20261119-airport-advisory-contract",
+    "q": "Which consortium was appointed financial adviser for the proposed outsourcing of Karachi and Lahore airports in November 2026?",
+    "o": [
+      "Deloitte South Asia-led consortium",
+      "EY Middle East-led consortium",
+      "ADB infrastructure team",
+      "World Bank IFC-only team"
+    ],
+    "a": 1,
+    "e": "An EY Middle East-led consortium signed the financial advisory agreement for Karachi and Lahore airports on 19 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045686/ey-led-consortium-signs-financial-advisory-pact-for-outsourcing-of-karachi-lahore-airports"
+  },
+  {
+    "id": "current-affairs-20261119-cop31-electrification-business",
+    "q": "How many companies, investors and business groups signed the 19 November 2026 COP31 electrification appeal?",
+    "o": [
+      "35",
+      "75",
+      "123",
+      "200"
+    ],
+    "a": 2,
+    "e": "A coalition of 123 business and investor groups urged stronger electrification commitments at COP31 on 19 November 2026.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/businesses-urge-faster-action-electrification-cop31-enters-final-hours-2026-11-19/"
+  },
+  {
+    "id": "current-affairs-20261119-icj-reparations-rohingya",
+    "q": "Which UN judicial body delivered the 19 November 2026 judgment in The Gambia v. Myanmar?",
+    "o": [
+      "International Criminal Court",
+      "International Court of Justice",
+      "Permanent Court of Arbitration",
+      "UN Human Rights Committee"
+    ],
+    "a": 1,
+    "e": "The ICJ's 19 November 2026 Myanmar judgment concerned the Genocide Convention and was brought by The Gambia.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://iimm.un.org/icj-gambia-v-myanmar"
   }
 ]
