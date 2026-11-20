@@ -30,7 +30,7 @@ export function SubjectOverview({ compact = false }: { compact?: boolean }) {
       const isOptional=group.title==='Your optional subjects'
       const syllabusStatuses=snapshot.state.syllabusItemStatuses ?? {}
       const vistaPaper=isOptional && source
-        ? cssGuideSubjects({subjects:[{...source,designation:'optional' as const}]})[0]
+        ? cssGuideSubjects({subjects:[{...source,designation:'optional' as const}]}).find(paper=>paper.id===source.slug)
         : null
       const coverage=vistaPaper
         ? cssOptionalStudyProgress(vistaPaper,syllabusStatuses,snapshot.state.studyScheduleTasks)
