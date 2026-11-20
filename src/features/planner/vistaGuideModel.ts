@@ -158,6 +158,7 @@ export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: s
         const blocks=s.designation==='optional' ? cssOptionalStudyBlocks(section.items) : []
         return [{
           id:rootId,title:section.title,detail:originalText,
+          ...(s.designation==='optional' && blocks.length===1 ? {sourceItemIds:blocks[0].indices.map(itemIndex=>s.slug+':'+i+':'+itemIndex)} : {}),
           // Keep the old root ID as a real syllabus container for historical tasks.
           // New optional schedules cover all readable entries in focused blocks.
           ...(blocks.length>1 ? {children:blocks.map((block,index)=>({
@@ -236,6 +237,7 @@ export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] 
       result.push({
         id: node.id, subjectId: subject.id, subject: subject.title,
         section: sectionName, title: node.title,
+        ...(node.sourceItemIds?.length ? {sourceItemIds:node.sourceItemIds} : {}),
         ...(exam==='css' && subject.designation==='optional' && node.id.includes(':block:') ? {
           sourceBlock:true, legacySectionId:node.id.split(':block:')[0], sourceFocus:node.detail.replace(/^SELECTED OFFICIAL SOURCE LINES[^\n]*\n/,''),sourceItemIds:node.sourceItemIds
         } : {}),
