@@ -351,7 +351,7 @@ export function buildMissingCssOptionalSourceCommand(subject: string): string {
     '3. Produce a comprehensive, ordered preparation schedule and a distinct copy-ready textbook-depth notes command for each verifiable syllabus unit. For language and literature papers, preserve script and prescribed authors or texts.',
     '4. Cross-check claims, case studies, quotations and references with authoritative sources. Do not invent statistics, books, authors or quotations.',
     '5. If the current official document cannot be accessed or verified, STOP and ask me to upload the official syllabus. Do not substitute a guessed syllabus or unrelated preparation guide.',
-  ].join('\\n')
+  ].join('\n')
 }
 export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' | 'revision' = 'comprehensive') {
   const isEssay = unit.resource === 'essay'
