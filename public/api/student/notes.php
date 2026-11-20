@@ -3,7 +3,8 @@ declare(strict_types=1);
 require_once dirname(__DIR__).'/_bootstrap.php';
 require_once dirname(__DIR__).'/_student_notes.php';
 cssv_require_method('GET','POST');
-if (cssv_env('CSSV_NOTES_ENABLED','0') !== '1') cssv_fail('Personal notes are temporarily unavailable until secure recovery is enabled.',503,'personal_notes_not_enabled');
+// Account authentication, profile permissions and CSRF still gate every operation.
+// Notes use existing native MySQL storage; the owner manages off-host backups manually.
 
 try {
     $pdo=cssv_db();

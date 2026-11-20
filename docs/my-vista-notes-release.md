@@ -1,6 +1,6 @@
 # My VISTA Notes — release and recovery guide
 
-**Development status: not live. Release is blocked until independently verified backups are operational.**
+**Release decision:** The owner requested that student Notes be activated on the existing Hostinger-native MySQL account system without waiting for independently automated backups. Manual backup downloads are the owner's chosen recovery process. This does not establish or verify any automated off-host backup. Do not claim automatic backups or guaranteed recovery.
 
 ## What was implemented
 
@@ -20,46 +20,43 @@ A lightweight metadata check runs on visible tabs every 30 seconds, downloading 
 
 ## Disaster recovery and actual backup status
 
-The operational source of truth remains Hostinger MySQL and private storage. Backup tooling is in a separate draft, PR #199. There is no evidence yet of a configured independent storage destination, actual off-host snapshot, restore drill or recovery monitoring. DO NOT tell students three copies are running.
+The operational source of truth remains Hostinger MySQL and private storage. Optional encrypted backup tooling is included in the main repository, but it is not running automatically. There is no evidence yet of a configured independent storage destination, actual off-host snapshot, restore drill or recovery monitoring. DO NOT tell students three copies are running.
 
 Once approved and configured, a backup must capture the entire live MySQL database, including users, profiles, password hashes, progress, notes, folders, individual note pages and revisions. It must also capture private files and the matching runtime application configuration/secret. A new Hostinger account or different provider can recreate compatible tables from the SQL dump and preserve UUIDs, but only after a tested restore. Browser-only drafts are not included in a MySQL dump.
 
 Encrypted snapshots must be outside the Hostinger failure domain, with independently accessible encryption keys and preferably a second immutable provider-managed copy. Retention, monitoring, restored hashes/row counts and separate recovery credentials must be verified. Daily backups alone can lose edits newer than the last copy; strong RPO requires binlog point-in-time recovery or replication.
 
-## Fail-closed two-sided release switch
+## Direct native-account activation
 
-Both switches default to **off**, so a future code merge alone does not expose private writing.
+The frontend now loads the full Notes editor at `/account/notes` without a backup-specific release flag, and the PHP Notes endpoint no longer requires `CSSV_NOTES_ENABLED`. The backend still requires an authenticated existing student account, the existing profile gate, account-scoped SQL and CSRF protection on every write. Schema creation is additive and uses four new tables; existing student records are not rewritten. The backend may need MySQL table-creation privilege on first access, or the approved `server/sql/student_notes_v1.sql` migration must be applied separately by an administrator.
 
-- Website build: set `VITE_CSSV_PERSONAL_NOTES_ENABLED=true` only for an approved full Notes release. Without this flag, the sidebar and Library links remain visible, but the private Notes route shows a clear protected-service status page instead of allowing creation or editing.
-- Private PHP runtime config (outside Git and public_html): set `CSSV_NOTES_ENABLED=1` only after independent backups and a real restore are verified. If absent or any value other than `1`, all Notes API requests reject with HTTP 503 and cannot create or modify student records.
-- Both settings are required. Do not leave a public feature enabled while the private API is unavailable. Roll back by disabling the server-side flag first if a backup or security problem arises.
-- Treat these switches as an operational safety mechanism, **not** proof that an actual independent backup exists. Backup job health and recovered data must be checked separately.
+The owner will manage backup downloads manually. Verify actual database and private-file download contents frequently; manual copies do not protect writing newer than the latest downloaded copy. If live checks show database/schema or permission errors, keep the editor unavailable until the issue is resolved rather than claiming a successful save.
 ## Non-negotiable deployment checklist
 
-1. Establish and independently verify real backup operation and a full isolated recovery; provision the provider and restricted credentials outside the repository.
+1. Owner acknowledges the risks of manual downloads and records the latest available complete Hostinger database and private-files backup.
 2. Test the additive schema in server/sql/student_notes_v1.sql against a representative Hostinger MySQL/MariaDB environment, including prepared migration rollback and old-account record preservation.
 3. Run the disposable database tests in tests/notes and the full TypeScript build/route audit, plus account/profile/CSRF isolation checks.
 4. Test rich editing and formatting, heavy paste, mobile browsers, offline interruptions, account switching, parallel devices, history, folder cycles and 2 MiB page-size boundaries.
-5. Confirm server storage limits, alerts and realistic restore time. Obtain release approval only when cloud snapshots are recoverable.
-6. A **disabled public preview** (sidebar link, protected status and inactive lesson shortcut) may be merged after its own QA because it cannot store private notes. A **live saving release** requires every backup and restore check above; verify the deployed fingerprint and signed-in workflows before announcing it. A draft PR is not a live release.
+5. Confirm server storage limits, MySQL CREATE TABLE privileges for the additive first-use schema, runtime database availability and expected backup-loss window. Do not imply automatic external recovery.
+6. Build, test and merge the activation, verify the actual Hostinger deployment fingerprint, then sign in with a designated test student to create, refresh, re-open and paste from a lesson; verify all operations return saved-to-account confirmation. Do not claim live operation until these checks succeed.
 
 
 ## Sidebar discovery and one-step lesson capture
 
-- The `My Notes` link is always displayed in the student sidebar, mobile account drawer, mobile bottom navigation and My Library, so students can discover their private notebook. When the backend release flag is disabled, the `/account/notes` page clearly explains that encrypted off-host recovery must be verified before personal data can be saved.
+- The `My Notes` link is displayed in the student sidebar, mobile account drawer, bottom navigation and My Library. The protected `/account/notes` route opens the native-account editor after successful authentication and profile checks.
 - A reusable `Paste to My Notes` shortcut appears in optional-subject lesson pages, Islamic Studies reference topics, guided study lessons, Grammar Course lessons and the General Science course header. It never uploads text until the student deliberately pastes or clicks Save.
 - Students may highlight text and click the button to prefill it, paste into the capture field to save instantly, or click `Paste clipboard & save` after granting browser permission. A separate Save button supports editing before submission.
 - The API `lesson_capture` stores one private note with an escaped lesson title and first-party source path, plus one text page in a single transaction. It validates the authenticated owner and accepts an idempotent client-generated UUID so a network retry does not duplicate the note.
 - Failed capture attempts retain a best-effort account-scoped device draft; the status is not misrepresented as an account save. Successful saves link directly to the new note at `/account/notes?note=<id>`.
-- The cloud API remains fail-closed unless `CSSV_NOTES_ENABLED=1` is configured privately on the server. A public sidebar entry or visible shortcut does **not** imply the feature is active or that independent backups have been activated.
+- The cloud API still requires authenticated access and CSRF on changes. Opening the editor does not prove automatic backups exist; a successful save to MySQL is not a verified manual backup.
 
-## Safe staged publishing
+## Direct publishing
 
-The product shell (sidebar link, status page and disabled lesson shortcut) may be released separately from enabling private note persistence. This staged release does not add or modify live student notes while the server-side release flag remains off. Enabling the live Notes service still requires successful independent off-host backups and a full restore rehearsal first. Do not promise live saving until verified.
+After the tests pass, merge the activation branch and verify the installed website build. Account-owned notes live in the existing MySQL database, not in GitHub. The owner accepts the manual-backup recovery risk and should regularly download and safeguard the full database and private files. The application must not claim that an independently monitored off-host recovery copy is in operation.
 ## Known limitations
 
 The rich text editor uses native browser editing commands, requiring a mobile-browser compatibility pass before production approval. This first implementation does not upload images/attachments, support formula authoring, offer full-text content search, or export whole multi-page notes in one PDF. The only download action exports the active page as HTML. These features must not be advertised as already built.
 
 Private device drafts are stored in the browser profile and can disappear if browser storage is cleared, incognito mode expires or a device fails. Students must see the difference between a saved cloud page and an unsynced local draft.
 
-No one can truthfully promise 100% protection from every technical failure. The release standard is verified recovery, observable backups and clear recovery-point limits.
+No one can promise 100% protection from every technical failure. Manual backups can be outdated, lost or incomplete; the owner has explicitly chosen to proceed with that risk.
