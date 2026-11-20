@@ -11,7 +11,7 @@ import { useAccountSnapshot } from '@/pages/account/shared'
 import { optionalCatalogue } from '@/features/workspace/model'
 import { essayThemeIndex } from '@/data/essayThemes'
 import { PMS_MENTAL_ID, PMS_MENTAL_SOURCE } from '@/data/pmsMentalAbility'
-import { validateSubjectCombination } from '@/lib/subjectSelection'
+import { validateStudySelection } from '@/lib/subjectSelection'
 import PlannerTask from './PlannerTask'
 import { dayKey, readableDay, shiftDay, validDay, plannerHref } from './model'
 import { PMS_SETTINGS_KEY, readPmsSettings, taskExam } from './pmsModel'
@@ -140,16 +140,23 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const todayRows = activeTasks.filter(t=>t.date===today)
   const nextPmsSession = exam==='pms-punjab' ? activeTasks.filter(t=>t.date>today && t.status!=='completed').sort((a,b)=>a.date.localeCompare(b.date))[0] : undefined
   const revisions = activeTasks.filter(t=>t.activity==='revision' && t.status!=='completed' && t.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,6)
-  const hasStatus = (u:VistaUnit) => snapshot.state.syllabusItemStatuses?.[u.id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===u.id && t.status==='completed')
+  const hasStatus = (u:VistaUnit) =>
+    [u.id,...(u.legacySectionId?[u.legacySectionId]:[])]
+      .some(id=>snapshot.state.syllabusItemStatuses?.[id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===id && t.status==='completed')) ||
+    !!u.sourceItemIds?.length && u.sourceItemIds.every(id=>snapshot.state.syllabusItemStatuses?.[id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===id && t.status==='completed'))
   const alreadyScheduled = new Set(snapshot.state.studyScheduleTasks.filter(t=>!isTaskArchived(t.id) || t.status==='completed').map(t=>t.syllabusItemId))
-  const remaining = chosenUnits.filter(u=>!hasStatus(u) && !alreadyScheduled.has(u.id))
+  const remaining = chosenUnits.filter(u=>!hasStatus(u) && !alreadyScheduled.has(u.id) &&
+    (!u.legacySectionId || !alreadyScheduled.has(u.legacySectionId)) &&
+    (!u.sourceItemIds?.length || !u.sourceItemIds.every(id=>alreadyScheduled.has(id)||snapshot.state.syllabusItemStatuses?.[id]==='completed'))) 
   const completed = chosenUnits.filter(u=>hasStatus(u)).length
   const visibleUnits = allUnits.filter(u=>!showOnlyRemaining || !hasStatus(u))
   const cssOptionalValidation = useMemo(()=>{
     const recognized = optionalCatalogue.filter(s=>draftPrefs.selectedOptionals.includes(s.name))
     const unknown = draftPrefs.selectedOptionals.filter(n=>!recognized.some(s=>s.name===n))
-    const result = validateSubjectCombination(recognized)
-    return {valid:!unknown.length && (!draftPrefs.selectedOptionals.length || result.valid),messages:[...result.violations,...unknown.map(n=>'Unknown subject: '+n)]}
+    const result = validateStudySelection(recognized)
+    return {valid:!unknown.length && result.valid,total:result.total,
+      incomplete:result.total>0 && result.total<600,
+      messages:[...result.violations,...unknown.map(n=>'Unknown subject: '+n)]}
   },[draftPrefs.selectedOptionals])
   function checkWrite(){
     if(syncStatus==='syncing' || !preparationWriteCurrent() || (user && currentHostingerAccountUser()!==user.id)){
@@ -160,6 +167,22 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   function change(patch:Partial<VistaPreferences>){
     edited.current=true;setPlan(null);setMessage('');setError('')
     setDraftPrefs(p=>({...p,...patch}))
+  }
+  // When a student chooses an optional paper, also add it to an explicitly
+  // limited current timetable instead of leaving it silently outside the plan.
+  function chooseOptional(subject: VistaSubject) {
+    const id=exam==='css'?subject.title:subject.id
+    const had=draftPrefs.selectedOptionals.includes(id)
+    const next=exam==='pms-punjab'
+      ? had ? [] : [id]
+      : had ? draftPrefs.selectedOptionals.filter(value=>value!==id) : [...draftPrefs.selectedOptionals,id]
+    const keep=new Set(next)
+    const eligibleStudy = draftPrefs.studySubjects===null ? null
+      : draftPrefs.studySubjects.filter(value=>!subjects.some(s=>s.designation==='optional' && s.id===value && !keep.has(exam==='css'?s.title:s.id)))
+    const studySubjects = eligibleStudy===null ? null
+      : had ? eligibleStudy : [...eligibleStudy.filter(value=>value!==subject.id),subject.id]
+    change({selectedOptionals:next,studySubjects,
+      prioritySubjects:draftPrefs.prioritySubjects.filter(value=>studySubjects===null || studySubjects.includes(value))})
   }
   function focusStudySubject(id: string) {
     change({studySubjects:[id],prioritySubjects:[id]})
@@ -240,6 +263,15 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   }
   function mark(u:VistaUnit){
     if(!checkWrite())return
+    if(u.legacySectionId && (snapshot.state.syllabusItemStatuses?.[u.legacySectionId]==='completed'
+      || activeTasks.some(t=>t.syllabusItemId===u.legacySectionId && t.status==='completed'))) {
+      setMessage('This study block is already credited through a completed section in your previous schedule. You can schedule a revision without changing that historical record.')
+      return
+    }
+    if(u.sourceItemIds?.length && u.sourceItemIds.every(id=>snapshot.state.syllabusItemStatuses?.[id]==='completed' || activeTasks.some(t=>t.syllabusItemId===id && t.status==='completed'))){
+      setMessage('This block is already covered by completed activities in your earlier syllabus checklist. Your recorded history is retained.')
+      return
+    }
     const old=hasStatus(u), next=old?'in-progress':'completed'
     setSyllabusItemStatus(u.id,next)
     for(const task of getState().studyScheduleTasks.filter(t=>t.syllabusItemId===u.id && t.activity!=='revision')){
@@ -331,17 +363,18 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
         {exam==='pms-punjab'?<label className="vg-alt">Compulsory alternative<select value={draftPrefs.alternative==='ethics'?'ethics':'islamic-studies'} onChange={e=>change({alternative:e.target.value as 'ethics' | 'islamic-studies'})}><option value="islamic-studies">Islamic Studies</option><option value="ethics">Ethics (for eligible Non-Muslim candidates)</option></select></label>:<label className="vg-alt">Sixth compulsory paper<select value={draftPrefs.alternative==='comparative'?'comparative':'islamic-studies'} onChange={e=>change({alternative:e.target.value as 'comparative' | 'islamic-studies'})}><option value="islamic-studies">Islamic Studies</option><option value="comparative">Comparative Study of Major Religions (if eligible)</option></select></label>}
         <p className="pl-muted">The compulsory syllabus stays available even when you are not studying every paper this week. {exam==='pms-punjab'?'The revised examination allows one optional paper; select a single optional subject here.':'Choose your optional papers according to the applicable examination rules.'} Your preparation selection is not an examination application.</p>
         {exam==='css' && <p className="pl-muted">CSS optional subjects must follow FPSC group and marks rules.</p>}
-        <label className="vg-search"><Search size={15}/><input type="search" placeholder="Search optional subjects" value={optionalSearch} onChange={e=>setOptionalSearch(e.target.value)}/></label>
+        <label className="vg-search"><Search size={15}/><input type="search" aria-label="Search optional subjects" placeholder="Search optional subjects" value={optionalSearch} onChange={e=>setOptionalSearch(e.target.value)}/></label>
         <div className="vg-optional-grid">{subjects.filter(s=>s.designation==='optional' && s.title.toLowerCase().includes(optionalSearch.toLowerCase())).map(s=>{
           const value=exam==='css'?s.title:s.id,selected=draftPrefs.selectedOptionals.includes(value)
-          return <label key={s.id}><input type={exam==='pms-punjab'?'radio':'checkbox'} name={exam==='pms-punjab'?'pms-one-optional':undefined} checked={selected} onChange={()=>change({selectedOptionals:exam==='pms-punjab'?[value]:selected?draftPrefs.selectedOptionals.filter(v=>v!==value):[...draftPrefs.selectedOptionals,value]})}/>{s.title}</label>
+          return <label key={s.id}><input type={exam==='pms-punjab'?'radio':'checkbox'} name={exam==='pms-punjab'?'pms-one-optional':undefined} checked={selected} onChange={()=>chooseOptional(s)}/>{s.title}{exam==='css'&&!s.sections.length&&<small> · source outline unavailable</small>}</label>
         })}</div>
         {exam==='css' && !cssOptionalValidation.valid && <p role="alert" className="pl-warning">{cssOptionalValidation.messages.join('. ')}</p>}
+        {exam==='css' && cssOptionalValidation.incomplete && <p className="pl-note">Current study selection: {cssOptionalValidation.total} of 600 optional marks. You may prepare individual papers now, but a final FPSC examination combination must total exactly 600 marks and meet all group rules.</p>}
         {exam==='pms-punjab' && <button className="vg-inline-action" type="button" onClick={()=>change({selectedOptionals:[]})}>No optional selected yet</button>}
       </fieldset>
       <fieldset className="vg-options">
         <legend>Choose your starting subjects and priority</legend>
-        <p className="pl-muted">Select only the subjects you want in your current timetable. Your other compulsory and optional papers stay in the syllabus; you can add them later. The first subject below starts first. Use the arrows to rank what matters most.</p>
+        <p className="pl-muted">Select only the subjects you want in your current timetable. Optional papers you check above are included automatically, even when you previously chose a limited timetable. The first subject below starts first. Use the arrows to rank what matters most.</p>
         <div className="vg-actions"><button type="button" className="vg-inline-action" onClick={()=>change({studySubjects:[],prioritySubjects:[]})}>Choose from scratch</button><button type="button" className="vg-inline-action" onClick={()=>change({studySubjects:null,prioritySubjects:[]})}>Include all selected papers</button></div>
         <div className="vg-priority-list">{displayedPrioritySubjects.map(subject=>{
           const selected=draftStudyIds.includes(subject.id), rank=draftStudySubjects.findIndex(row=>row.id===subject.id)
@@ -377,22 +410,24 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
       <div className="vg-subjects">{filtered.map(s=><button type="button" key={s.id} aria-pressed={active?.id===s.id} onClick={()=>{setSubjectId(s.id);setShowCount(20)}}>{s.title}</button>)}</div>
       {active && <div className="vg-syllabus">
         <details className="vg-readings"><summary>View complete section structure ({active.sections.length} sections)</summary>
-          <ol>{active.sections.map(section=><li key={section.id} dir="auto"><strong>{section.title}</strong> — {section.topics.length} syllabus item{section.topics.length===1?'':'s'}{!section.topics.length && ' (heading only in source)'}</li>)}</ol>
+          <ol>{active.sections.map(section=>{const count=exam==='css' && active.designation==='optional' ? allUnits.filter(u=>u.id==='vista-css:'+active.id+':'+section.id || u.legacySectionId==='vista-css:'+active.id+':'+section.id).length : section.topics.length;return <li key={section.id} dir="auto"><strong>{section.title}</strong> — {count} study activit{count===1?'y':'ies'}{!section.sourceItems?.length&&exam==='css'&&active.designation==='optional'&&' (source section heading only)'}</li>})}</ol>
         </details>
         {(active.officialGuidance||[]).length>0&&<details className="vg-readings"><summary>Official PPSC English Essay paper requirements (guidance, not study chapters)</summary><ol>{active.officialGuidance!.map((text,i)=><li key={i}>{text}</li>)}</ol></details>}
         <div className="vg-section-head"><div><h3>{active.title}</h3><small>{allUnits.filter(hasStatus).length} of {allUnits.length} activities complete</small></div><span className="vg-syllabus-chip">{active.id==='compulsory-english-essay'||active.id==='essay'?'Supplementary essay preparation themes':'Read chapters here — no PDF required'}</span></div>
-        {exam==='css' && active.designation==='optional' && <p className="pl-note">Copy a command for the complete syllabus section, or expand its source entries below to prepare a specific part in greater depth. Previously saved section tasks remain unchanged.</p>}
+        {exam==='css' && active.designation==='optional' && <p className="pl-note">This optional paper follows the same daily schedule, notes commands, completion checks and revision system as compulsory papers. Long sections are divided into manageable source-backed study blocks; block labels are preparation aids, not separately prescribed FPSC chapters. Earlier section-level tasks and their completion remain recognized.</p>}
         {exam==='css' && active.designation==='optional' && !active.sections.length && <p role="status" className="pl-note">This optional subject has no transcribed syllabus sections in the current catalogue. A source-based notes command cannot be prepared until its official syllabus is added. Check the <a href="https://www.fpsc.gov.pk/" target="_blank" rel="noopener noreferrer">FPSC website</a> for the prescribed outline.</p>}
         {active.id===PMS_MENTAL_ID && <p className="pl-note">Based on the published PPSC Mental Ability and Reasoning Test guidebook. <a href={PMS_MENTAL_SOURCE} target="_blank" rel="noopener noreferrer">Read the original PPSC guidebook</a>. Topic headings are from the four official competency areas; sample questions are examples, not an exhaustive question bank.</p>}
         <label className="vg-filter"><input type="checkbox" checked={showOnlyRemaining} onChange={e=>setShowOnlyRemaining(e.target.checked)}/>Show unfinished activities only</label>
         {visibleUnits.slice(0,showCount).map(u=>{
           const sourceSection = exam==='css' && active.designation==='optional'
-            ? active.sections.find(section=>u.id==='vista-css:'+active.id+':'+section.id)
+            ? active.sections.find(section=>u.id==='vista-css:'+active.id+':'+section.id || u.legacySectionId==='vista-css:'+active.id+':'+section.id)
             : undefined
+          const firstInSection=sourceSection && visibleUnits.find(row=>row.id==='vista-css:'+active.id+':'+sourceSection.id || row.legacySectionId==='vista-css:'+active.id+':'+sourceSection.id)?.id===u.id
           return <article key={u.id} className="vg-unit">
             <div><small>{u.section}</small><h4 dir="auto">{u.title}</h4>
-              <details><summary>{u.resource==='essay'?'View theme preparation brief':'Read complete syllabus for this chapter'}</summary><pre dir="auto">{u.syllabus}</pre></details>
-              {sourceSection && <CssOptionalFocusList subject={active} section={sourceSection}/>}
+              <details><summary>{u.resource==='essay'?'View theme preparation brief':u.sourceBlock?'Read selected source lines and full section context':'Read complete syllabus for this chapter'}</summary><pre dir="auto">{u.syllabus}</pre></details>
+              {u.legacySectionId && alreadyScheduled.has(u.legacySectionId) && <p className="pl-muted">Already included in your earlier section-level timetable. No duplicate session will be created.</p>}
+              {sourceSection && firstInSection && <CssOptionalFocusList subject={active} section={sourceSection}/>}
             </div>
             <div className="vg-unit-tools">
               {u.resource!=='essay'&&<CopyNotes unit={u} compact/>}

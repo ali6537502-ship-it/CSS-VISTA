@@ -3,7 +3,7 @@ import { shiftDay, validDay } from './model.ts'
 import { pmsMentalAbilitySubject } from '../../data/pmsMentalAbility.ts'
 
 export type VistaExam = 'css' | 'pms-punjab'
-export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[] }
+export interface VistaNode { id: string; title: string; detail: string; section?: string; children?: VistaNode[]; sourceItemIds?: string[] }
 export interface VistaSection { id: string; title: string; detail?: string; topics: VistaNode[]; sourceItems?: string[] }
 export interface VistaSubject {
   id: string; title: string; designation: 'compulsory' | 'optional'; marks: number | null
@@ -13,6 +13,7 @@ export interface VistaSubject {
 export interface VistaUnit {
   id: string; subjectId: string; subject: string; section: string; title: string
   syllabus: string; paper: string; resource?: 'precis' | 'essay'; resourceSlug?: string; excerptFocus?: boolean
+  sourceBlock?: boolean; sourceFocus?: string; legacySectionId?: string; sourceItemIds?: string[]
 }
 export interface VistaPreferences {
   version: 1
@@ -105,15 +106,68 @@ export function pmsGuideSubjects(data: { subjects: VistaSubject[] }, themes: Vis
   if (!updated.some(subject=>subject.id===pmsMentalAbilitySubject.id)) updated.splice(1,0,pmsMentalAbilitySubject)
   return updated
 }
+/**
+ * Group adjacent source lines only when the previous line visibly continues.
+ * The resulting units are PRACTICE STUDY BLOCKS, not invented FPSC headings.
+ * Preserve every actual source line and its original order, including OCR spelling.
+ */
+export function cssOptionalStudyBlocks(items: string[]): Array<{ start: number; text: string; indices: number[] }> {
+  const blocks: Array<{ start: number; text: string; indices: number[] }> = []
+  let current: string[] = []
+  let indices: number[] = []
+  let start = 0
+  const flush = () => {
+    if (current.length) blocks.push({ start, text: current.join('\n'), indices })
+    current = [];indices = []
+  }
+  for (let i = 0; i < items.length; i++) {
+    const line = items[i]?.trim()
+    if (!line) continue
+    const previous = current[current.length - 1]
+    const followsPrevious = !!previous && (
+      /[,;:([\-–]$/.test(previous) ||
+      /\b(?:and|or|the|a|of|to|from|in|with|for|by|including|between)\s*$/i.test(previous) ||
+      /^[a-z]/.test(line) ||
+      (previous.length > 75 && previous.includes(',') && !/[.!?]$/.test(previous))
+    )
+    // Even a continuously wrapped OCR paragraph needs several manageable
+    // lessons; break only between source lines, retaining every word in order.
+    if (current.length && (!followsPrevious || current.join(' ').length + line.length > 420)) flush()
+    if (!current.length) start = i
+    current.push(line);indices.push(i)
+  }
+  flush()
+  return blocks
+}
+/** A paper/part number with no content is a divider, not a study topic. */
+export function cssOptionalPaperDivider(title: string, items: string[]): boolean {
+  return !items.some(item=>item.trim()) &&
+    /^(?:part|paper)\s*[-–]?\s*(?:[IVXLCDM]+|\d+)\s*(?:\([^()]*\bmarks?\b[^()]*\))?$/i.test(title.trim())
+}
 export function cssGuideSubjects(data: { subjects: Array<{ slug: string; name: string; designation: 'compulsory' | 'optional'; marks: number; sections: Array<{ title: string; items: string[] }> }> }, themes: VistaEssayTheme[] = []): VistaSubject[] {
   const papers: VistaSubject[] = data.subjects.map(s => ({
     id: s.slug, title: s.name, designation: s.designation, marks: s.marks,
     sections: s.sections.map((section, i) => ({
       id: 's' + (i + 1), title: section.title, detail: '',
-      // Retain raw FPSC lines only for optional-subject focused copy commands.
-      // The existing section-level schedule IDs and progress records stay unchanged.
+      // Raw source wording remains untouched and is available for exact focus commands.
       sourceItems: s.designation === 'optional' ? section.items : undefined,
-      topics: [{ id: 'vista-css:' + s.slug + ':s' + (i + 1), title: section.title, detail: section.items.map((item, index) => (index + 1) + '. ' + item.trim()).join('\n') }],
+      topics: (() => {
+        if (s.designation==='optional' && cssOptionalPaperDivider(section.title,section.items)) return []
+        const rootId='vista-css:' + s.slug + ':s' + (i + 1)
+        const originalText=section.items.map((item,index)=>(index+1)+'. '+item.trim()).join('\n')
+        const blocks=s.designation==='optional' ? cssOptionalStudyBlocks(section.items) : []
+        return [{
+          id:rootId,title:section.title,detail:originalText,
+          // Keep the old root ID as a real syllabus container for historical tasks.
+          // New optional schedules cover all readable entries in focused blocks.
+          ...(blocks.length>1 ? {children:blocks.map((block,index)=>({
+            id:rootId+':block:'+block.start,
+            sourceItemIds:block.indices.map(itemIndex=>s.slug+':'+i+':'+itemIndex),
+            title:'Study block '+(index+1)+' of '+blocks.length+' — '+block.text.replace(/\s+/g,' ').slice(0,90),
+            detail:'SELECTED OFFICIAL SOURCE LINES (not necessarily standalone syllabus headings):\n'+block.text,
+          }))} : {}),
+        }]
+      })(),
     })),
   }))
   // The distributed FPSC JSON omits the separate Essay paper. This is a
@@ -182,6 +236,9 @@ export function guideUnits(subject: VistaSubject, exam: VistaExam): VistaUnit[] 
       result.push({
         id: node.id, subjectId: subject.id, subject: subject.title,
         section: sectionName, title: node.title,
+        ...(exam==='css' && subject.designation==='optional' && node.id.includes(':block:') ? {
+          sourceBlock:true, legacySectionId:node.id.split(':block:')[0], sourceFocus:node.detail.replace(/^SELECTED OFFICIAL SOURCE LINES[^\n]*\n/,''),sourceItemIds:node.sourceItemIds
+        } : {}),
         syllabus: [section.title, section.detail, ...ancestors, outline(node)]
           .filter(Boolean).join('\n'),
         paper: exam === 'css' ? 'CSS' : 'PMS Punjab',
@@ -198,6 +255,16 @@ export function findGuideUnit(subjects: VistaSubject[], exam: VistaExam, id: str
   for (const subject of subjects) {
     const result = guideUnits(subject, exam).find(u => u.id === id || id.startsWith(u.id + '-'))
     if (result) return result
+    if(exam==='css' && subject.designation==='optional') {
+      // A historical section-level task must remain resolvable after it gains
+      // source-backed children. Do not change or delete its saved task ID.
+      const section=subject.sections.find(s=>'vista-css:'+subject.id+':'+s.id===id)
+      if(section)return {
+        id,subjectId:subject.id,subject:subject.title,section:section.title,
+        title:section.title,paper:'CSS',
+        syllabus:[section.title,...(section.sourceItems||[])].join('\n'),
+      }
+    }
   }
   return null
 }
@@ -214,6 +281,23 @@ export function selectedVistaSubjects(subjects: VistaSubject[], exam: VistaExam,
   // point for rotation. Unranked subjects keep their original syllabus order.
   return eligible.sort((a,b) =>
     (priorities.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (priorities.get(b.id) ?? Number.MAX_SAFE_INTEGER))
+}
+/** Track the same optional study blocks on My Subjects and in the daily planner.
+ * Old section-level completion remains credited; existing account records stay intact.
+ */
+export function cssOptionalStudyProgress(
+  subject: VistaSubject,
+  statuses: Record<string,SyllabusItemStatus>,
+  tasks: Pick<StudyScheduleTask,'syllabusItemId'|'status'>[],
+): { completed: number; total: number; percent: number | null } {
+  const completedTasks = new Set(tasks.filter(t=>t.status==='completed').map(t=>t.syllabusItemId))
+  const units = guideUnits(subject,'css')
+  const completed = units.filter(unit =>
+    statuses[unit.id]==='completed' || completedTasks.has(unit.id) ||
+    !!unit.legacySectionId && (statuses[unit.legacySectionId]==='completed' || completedTasks.has(unit.legacySectionId)) ||
+    !!unit.sourceItemIds?.length && unit.sourceItemIds.every(id=>statuses[id]==='completed' || completedTasks.has(id))
+  ).length
+  return {completed,total:units.length,percent:units.length?Math.round(completed/units.length*100):null}
 }
 export function plannedVistaUnits(subject: VistaSubject, exam: VistaExam, prefs: VistaPreferences): VistaUnit[] {
   return guideUnits(subject, exam).filter(unit =>
@@ -258,7 +342,9 @@ export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' |
   const isMentalGuidebook = unit.paper === 'PMS Punjab' && unit.subjectId === 'compulsory-mental-ability-and-reasoning-test'
   const kind = unit.excerptFocus
     ? 'FPSC OPTIONAL SYLLABUS EXCERPT — CONTEXT MAY INCLUDE WRAPPED LINES'
-    : isEssay
+    : unit.sourceBlock
+      ? 'FPSC OPTIONAL SYLLABUS STUDY BLOCK — SOURCE LINES MAY BE WRAPPED'
+      : isEssay
     ? 'SUPPLEMENTARY ESSAY RESEARCH ROADMAP — NOT AN OFFICIAL SYLLABUS'
     : isMentalGuidebook
       ? 'PPSC MENTAL ABILITY GUIDEBOOK TOPIC — THE GUIDEBOOK IS NON-EXHAUSTIVE'
@@ -282,9 +368,9 @@ export function buildVistaNotesCommand(unit: VistaUnit, depth: 'comprehensive' |
     unit.syllabus,
     '',
     'MANDATORY WORKING RULES:',
-    ...(unit.excerptFocus ? ['FOCUS RULE: Explain the selected source excerpt and its natural continuation in the section. The complete section text is reference context, not an instruction to generate notes for every neighboring topic. FPSC line breaks are not always topic boundaries. Do not claim that this excerpt is a standalone official chapter.'] : []),
-    unit.excerptFocus ? '1. Identify the selected source excerpt and its complete meaning using adjacent lines as context. Preserve original terms, wording and prescribed names; never confuse document line breaks with official topic boundaries. Organize the focused teaching material logically, and distinguish added explanation from original syllabus text.' : '1. First identify the subject, examination, requested scope and every heading/subheading/individual topic visible above. Treat the supplied wording as the coverage checklist; retain its order, names, important quotations, prescribed authors and original-language terms. If the source is a flat list, preserve it as distinct items rather than merging or losing entries. Reconstruct a clear numbered teaching hierarchy, explicitly marking any explanatory subheadings you add as your own organization, not as official syllabus entries.',
-    unit.excerptFocus ? '2. Cover the focused excerpt and any necessary continuation in meaningful textbook depth. Explain definitions, background, mechanisms, competing views, examples and examination relevance as appropriate. Do not drift into unrelated topics from the surrounding section. Avoid repetitive padding and superficial summaries.' : '2. Cover every distinct syllabus item, including nested points, in meaningful depth. Under each substantive heading explain definitions, background, mechanisms, competing interpretations, causes, consequences, objections, applications and examination relevance wherever appropriate. Explain fundamentals before difficult analysis, in clear language, and connect arguments logically. Avoid vague padding, repeated introductory paragraphs and unsupported sweeping claims.',
+    ...(unit.excerptFocus || unit.sourceBlock ? ['FOCUS RULE: Explain the selected source lines and their natural continuation. The complete section text is reference context, not an instruction to generate notes for every neighboring topic. FPSC line breaks do not define official chapter boundaries. Do not claim this study block is a standalone official syllabus chapter.'] : []),
+    unit.excerptFocus || unit.sourceBlock ? '1. Identify the selected source passage and its complete meaning using adjacent lines as context. Preserve original terms, wording and prescribed names; never confuse document line breaks with official topic boundaries. Organize focused teaching material logically, distinguishing explanatory subheadings from official syllabus text.' : '1. First identify the subject, examination, requested scope and every heading/subheading/individual topic visible above. Treat the supplied wording as the coverage checklist; retain its order, names, important quotations, prescribed authors and original-language terms. If the source is a flat list, preserve it as distinct items rather than merging or losing entries. Reconstruct a clear numbered teaching hierarchy, explicitly marking any explanatory subheadings you add as your own organization, not as official syllabus entries.',
+    unit.excerptFocus || unit.sourceBlock ? '2. Cover the focused passage and any necessary continuation in meaningful textbook depth. Explain definitions, background, mechanisms, competing views, examples and examination relevance as appropriate. Do not drift into unrelated topics from the surrounding section. Avoid repetitive padding and superficial summaries.' : '2. Cover every distinct syllabus item, including nested points, in meaningful depth. Under each substantive heading explain definitions, background, mechanisms, competing interpretations, causes, consequences, objections, applications and examination relevance wherever appropriate. Explain fundamentals before difficult analysis, in clear language, and connect arguments logically. Avoid vague padding, repeated introductory paragraphs and unsupported sweeping claims.',
     '3. Adapt the method to the subject instead of forcing one template: for history use accurate chronology, actors, causes, historiography and consequences; for political science, governance and international relations examine thinkers, institutions, theories and competing views; for economics and current affairs explain indicators, official figures, trade-offs, policy options and implications; for law identify jurisdiction, instruments, precise provisions and holdings; for science and environment explain processes, mechanisms and experiments; for mathematics, statistics and ability provide definitions, correct formulas and worked problems; for languages and literature use the prescribed original script and analyse the specified texts; for Islamic Studies cite Qur’an by surah and verse and hadith only when their exact references can be verified. Omit discipline-specific requirements that do not fit.',
     '4. When a claim depends on recent events, law, statistics, exact quotations, historical dates, treaty provisions or named cases, use web research if the conversation supports it. Prioritize primary authorities (official commission syllabi, constitutions, statutes, court judgments, official statistics, recognised institutions and original works), then reputable scholarship. Cross-check material claims with independent credible sources when possible. Cite the actual source title, institution, date/year and working link beside the relevant claim or in that section’s references. Do not cite a source you have not accessed. Distinguish official source text from extra explanatory material.',
     '5. Never invent citations or statistics. Do not fabricate case names, dates, articles, books, page numbers, treaties, quotations, source URLs, numerical values, author attributions or supposed expert consensus. If verification is unavailable, explicitly label the claim as needing verification or omit it. Do not pretend to have browsed, inspected a PDF or seen a source when you have not. If two trustworthy accounts disagree, explain the disagreement rather than silently choosing one.',
@@ -308,7 +394,8 @@ export function suggestedVistaMinutes(unit: VistaUnit) {
     if (unit.id.endsWith(':outline') || unit.id.endsWith(':review')) return 60
     return 90
   }
-  return Math.max(45, Math.min(150, 45 + 15 * Math.floor(unit.syllabus.length / 260)))
+  const size=unit.sourceBlock ? (unit.sourceFocus||'').length : unit.syllabus.length
+  return Math.max(45, Math.min(150, 45 + 15 * Math.floor(size / 260)))
 }
 export function generateVistaPlan(subjects: VistaSubject[], exam: VistaExam, preferences: VistaPreferences, existing: StudyScheduleTask[], statuses: Record<string,SyllabusItemStatus>, starting: string): VistaPlan {
   if (!validDay(starting) || preferences.restDays.length === 7 || preferences.dailyMinutes < 30 || preferences.dailyMinutes > 720) throw Error('Choose a valid start date, 30 minutes to 12 hours, and at least one study day.')
@@ -319,13 +406,21 @@ export function generateVistaPlan(subjects: VistaSubject[], exam: VistaExam, pre
     throw Error('The revised PMS scheme allows one optional subject. Choose one optional paper in Subjects and routine.')
   if (chosen.some(subject => subject.id === (exam === 'css' ? 'essay' : 'compulsory-english-essay')) && preferences.selectedEssayThemes?.length === 0)
     throw Error('Select at least one essay theme or remove English Essay from the subjects you want to study now.')
+  if(exam==='css') {
+    const unavailable=chosen.filter(subject=>subject.designation==='optional' && !subject.sections.length)
+    if(unavailable.length)throw Error('The current FPSC syllabus extract has no transcribed sections for '+unavailable.map(s=>s.title).join(', ')+'. No source-based schedule can be invented. Choose another paper or supply an official complete outline.')
+  }
   const previouslyScheduled = new Set(existing.map(task => task.syllabusItemId))
+  const accountedFor=(unit: VistaUnit) =>
+    statuses[unit.id]==='completed' || previouslyScheduled.has(unit.id) ||
+    !!unit.legacySectionId && (statuses[unit.legacySectionId]==='completed' || previouslyScheduled.has(unit.legacySectionId)) ||
+    !!unit.sourceItemIds?.length && unit.sourceItemIds.every(id=>statuses[id]==='completed' || previouslyScheduled.has(id))
   const rows = chosen.map(subject => ({
     subject,
-    items: plannedVistaUnits(subject,exam,preferences).filter(unit=>statuses[unit.id]!=='completed' && !previouslyScheduled.has(unit.id)),
+    items: plannedVistaUnits(subject,exam,preferences).filter(unit=>!accountedFor(unit)),
   })).filter(row=>row.items.length)
   const alreadyCovered = chosen.reduce((sum,subject) =>
-    sum+plannedVistaUnits(subject,exam,preferences).filter(unit=>statuses[unit.id]==='completed'||previouslyScheduled.has(unit.id)).length,0)
+    sum+plannedVistaUnits(subject,exam,preferences).filter(accountedFor).length,0)
   const draft: VistaDraftTask[] = []
   if(!rows.length)return {draft,finishedOn:starting,scheduledSubjects:chosen.length,alreadyCovered}
   // Existing CSS and PMS sessions share a student's available hours.

@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { optionalGroups, type OptionalSubject } from '../src/data/syllabus.ts'
-import { buildSubjectCombination, validateSubjectCombination } from '../src/lib/subjectSelection.ts'
+import { buildSubjectCombination, validateSubjectCombination, validateStudySelection } from '../src/lib/subjectSelection.ts'
 
 const all = optionalGroups.flatMap((group) => group.subjects)
 const subject = (name: string): OptionalSubject => {
@@ -117,4 +117,37 @@ test('alternate ranking produces a different legal combination without mutating 
   assert.equal(alternative.valid, true)
   assert.notDeepEqual(alternative.subjects.map((entry) => entry.name), primary.subjects.map((entry) => entry.name))
   assert.deepEqual(all, before)
+})
+
+
+test('partial optional study selection is allowed without claiming a valid FPSC examination combination',()=>{
+  const gender=[subject('Gender Studies')]
+  assert.equal(validateSubjectCombination(gender).valid,false)
+  const focused=validateStudySelection(gender)
+  assert.equal(focused.total,100)
+  assert.equal(focused.valid,true)
+  assert.deepEqual(focused.violations,[])
+  const halfGroupII=validateStudySelection([subject('Statistics')])
+  assert.equal(halfGroupII.total,100)
+  assert.equal(halfGroupII.valid,true,'A single 100-mark Group II option can be prepared ahead of its final pair')
+  assert.equal(validateSubjectCombination([subject('Statistics')]).valid,false)
+  const final=buildSubjectCombination(all)
+  assert.equal(validateStudySelection(final.subjects).valid,true)
+  assert.equal(validateSubjectCombination(final.subjects).valid,true)
+})
+
+test('partial study permission never overrides duplicate, group or maximum marks rules',()=>{
+  const sameGroup=validateStudySelection([subject('Gender Studies'),subject('Environmental Sciences')])
+  assert.equal(sameGroup.valid,false)
+  assert.match(sameGroup.violations.join(' '),/Group 5/)
+  const over=validateStudySelection([
+    subject('Political Science'),subject('Physics'),subject('Business Administration'),
+    subject('History of USA'),subject('Gender Studies'),subject('Criminology'),
+  ])
+  assert.equal(over.total,800)
+  assert.equal(over.valid,false)
+  assert.match(over.violations.join(' '),/maximum 600/)
+  assert.equal(validateStudySelection([subject('Statistics'),subject('Physics')]).valid,false)
+  assert.equal(validateStudySelection([subject('Political Science'),subject('Statistics'),subject('Public Administration'),subject('History of USA'),subject('Gender Studies')]).valid,false,'A fully selected 600-mark scheme cannot contain an unpaired Group II 100-mark subject')
+  assert.equal(validateStudySelection([subject('Gender Studies'),subject('Gender Studies')]).valid,false)
 })
