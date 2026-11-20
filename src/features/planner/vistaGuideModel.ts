@@ -129,7 +129,9 @@ export function cssOptionalStudyBlocks(items: string[]): Array<{ start: number; 
       /^[a-z]/.test(line) ||
       (previous.length > 75 && previous.includes(',') && !/[.!?]$/.test(previous))
     )
-    if (current.length && !followsPrevious) flush()
+    // Even a continuously wrapped OCR paragraph needs several manageable
+    // lessons; break only between source lines, retaining every word in order.
+    if (current.length && (!followsPrevious || current.join(' ').length + line.length > 420)) flush()
     if (!current.length) start = i
     current.push(line)
   }
