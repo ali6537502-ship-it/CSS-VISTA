@@ -163,8 +163,59 @@ async function checkLegacyCssScheduleNotes() {
   report.results.push({exam:'css',scenario:'historical syllabus schedule notes',sourceTopic:taskId,commandCopied:true})
   await context.close()
 }
+async function checkCssOptionalPlannerParity() {
+  const context=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:'reduce'})
+  await context.grantPermissions(['clipboard-read','clipboard-write'],{origin})
+  await context.route('**/*',route=>{
+    const request=route.request(),uri=new URL(request.url())
+    if(request.method()!=='GET'||uri.origin!==origin||uri.pathname.startsWith('/api/'))
+      return route.abort('blockedbyclient')
+    return route.continue()
+  })
+  const page=await context.newPage(),errors=[]
+  page.setDefaultTimeout(25000)
+  page.on('pageerror',error=>errors.push(error.message))
+  try {
+    await page.goto(origin+'/study-planner?exam=css&view=syllabus',{waitUntil:'domcontentloaded'})
+    await page.locator('.vg-hero h2').waitFor()
+    await page.getByRole('button',{name:'Subjects and routine'}).click()
+    await page.getByRole('button',{name:'Choose from scratch'}).click()
+    await page.getByRole('searchbox',{name:'Search optional subjects'}).fill('Gender Studies')
+    await page.getByRole('checkbox',{name:'Gender Studies'}).check()
+    await page.getByRole('button',{name:'Save my preparation choices'}).click()
+    await page.getByText('Your preparation choices have been saved.',{exact:false}).waitFor()
+    assert.match(await page.locator('.vg-metrics').textContent(),/1Subjects chosen for now/,
+      'Selecting one optional adds it to the current timetable automatically')
+    await page.getByRole('button',{name:'Generate my plan'}).click()
+    const preview=page.locator('.vg-preview').first()
+    await preview.getByText(/new sessions/).waitFor()
+    const shown=await preview.textContent()
+    const count=Number(shown.match(/(\d+) new sessions/)?.[1]||0)
+    assert.ok(count>15,'Optional syllabus is scheduled as multiple study blocks, not one section-only task')
+    assert.match(shown,/Gender Studies/)
+    await page.getByRole('button',{name:'Confirm and save all sessions'}).click()
+    const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:v1')||'{}'))
+    assert.equal(state.studyScheduleTasks.length,count,'All previewed optional sessions were saved')
+    assert.ok(state.studyScheduleTasks.every(task=>task.subject==='Gender Studies'&&task.syllabusItemId.startsWith('vista-css:gender-studies:')),
+      'No unexpected compulsory or unrelated optional tasks were inserted')
+    const unit=page.locator('.vg-unit').first()
+    await unit.getByRole('button',{name:'Copy notes command'}).click()
+    await page.getByText('Command copied.',{exact:false}).first().waitFor()
+    const copied=await page.evaluate(()=>navigator.clipboard.readText())
+    assert.match(copied,/SUBJECT: Gender Studies/)
+    assert.match(copied,/Never invent citations or statistics/)
+    assert.match(copied,/FPSC OPTIONAL SYLLABUS (STUDY BLOCK|EXCERPT)/)
+    await page.setViewportSize({width:375,height:812})
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),
+      'Selected optional schedule and source command must not overflow mobile')
+    assert.deepEqual(errors,[],'Optional planner should not throw uncaught browser errors')
+    report.results.push({exam:'css',scenario:'full optional subject plan and source notes commands',scheduled:count,source:'Gender Studies',mobile:true})
+  }finally{await context.close()}
+}
+
 try{
   await checkLegacyCssScheduleNotes()
+  await checkCssOptionalPlannerParity()
   await check(1440,900,'pms-punjab')
   await check(390,844,'pms-punjab')
   await check(1440,900,'css')
