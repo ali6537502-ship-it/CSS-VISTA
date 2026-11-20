@@ -459,6 +459,7 @@ test('My Subjects optional-paper progress uses the same blocks and saved complet
   assert.equal(byTask.completed,1)
   const card=readFileSync('src/pages/account/Subjects.tsx','utf8')
   assert.match(card,/cssOptionalStudyProgress/)
+  assert.match(card,/\.find\(paper=>paper\.id===source\.slug\)/,'Dashboard must use the selected optional, not the Essay roadmap injected into CSS guide')
   assert.match(card,/Earlier source-item checks/)
 })
 
