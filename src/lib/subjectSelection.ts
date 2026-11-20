@@ -49,7 +49,7 @@ export function validateSubjectCombination(subjects: OptionalSubject[]): Subject
 export function validateStudySelection(subjects: OptionalSubject[]): SubjectCombination {
   const official = validateSubjectCombination(subjects)
   const selectedGroupTwo = subjects.filter(s=>s.group===2)
-  const incompleteGroupTwo = selectedGroupTwo.length===1 && selectedGroupTwo[0].marks===100
+  const incompleteGroupTwo = official.total < 600 && selectedGroupTwo.length===1 && selectedGroupTwo[0].marks===100
   const violations = official.violations.filter(violation =>
     !/^Total is \d+, must be exactly 600$/.test(violation) &&
     !(incompleteGroupTwo && violation==='Group II permits one 200-mark subject or two 100-mark subjects'))
