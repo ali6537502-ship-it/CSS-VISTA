@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
-  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, cssOptionalPaperDivider, cssOptionalStudyBlocks, cssOptionalStudyProgress, pmsGuideSubjects, generateVistaPlan,
+  buildMissingCssOptionalSourceCommand, buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, cssOptionalPaperDivider, cssOptionalStudyBlocks, cssOptionalStudyProgress, pmsGuideSubjects, generateVistaPlan,
   findGuideUnit, guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
   resolveLegacyCssNotesUnit,
   type VistaSubject, type VistaPreferences,
@@ -502,6 +502,44 @@ test('legacy per-line CSS optional tasks are credited without rewriting the earl
   }))
   const withScheduled=generateVistaPlan(subjects,'css',selection,history,{},'2026-11-20')
   assert.ok(!withScheduled.draft.some(t=>t.syllabusItemId===block.id),'Already scheduled legacy lines prevent duplicate block')
+})
+
+
+test('each CSS optional has a real syllabus notes command or a clearly marked official-source lookup command',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const optionals=cssGuideSubjects(source).filter(s=>s.designation==='optional')
+  assert.equal(optionals.length,45)
+  let missing=0
+  for(const subject of optionals){
+    const units=guideUnits(subject,'css')
+    if(!subject.sections.length) {
+      missing++
+      assert.equal(units.length,0,'Missing syllabus must never produce invented study topics')
+      const command=buildMissingCssOptionalSourceCommand(subject.title)
+      assert.match(command,/FPSC CSS OPTIONAL PAPER/)
+      assert.match(command,/DO NOT invent/)
+      assert.match(command,/STOP and ask me to upload/)
+      assert.ok(command.includes(subject.title))
+    }else {
+      assert.ok(units.length>0,subject.title)
+      assert.ok(units.every(unit=>{
+        const command=buildVistaNotesCommand(unit)
+        return command.includes('SUBJECT: '+subject.title) &&
+          command.includes(unit.section) && command.includes('Never invent citations or statistics')
+      }),subject.title)
+    }
+  }
+  assert.ok(missing>0,'No fake syllabus content is created for incomplete source papers')
+  const cards=readFileSync('src/pages/account/Subjects.tsx','utf8')
+  const guide=readFileSync('src/features/planner/VistaStudyGuide.tsx','utf8')
+  assert.match(cards,/Copy next chapter command/)
+  assert.match(cards,/CopyNextSubjectCommand/)
+  assert.match(cards,/MissingOptionalSyllabusCommand/)
+  assert.match(guide,/MissingOptionalSyllabusCommand/)
+  assert.match(guide,/CopyNotes unit=/)
+  const task=readFileSync('src/features/planner/PlannerTask.tsx','utf8')
+  assert.match(task,/Copy analytical notes command/)
+  assert.match(task,/findGuideUnit/)
 })
 
 test('legacy optional syllabus-line credit also protects a single-block section',()=>{
