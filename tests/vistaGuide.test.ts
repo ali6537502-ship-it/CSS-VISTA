@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
-  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, cssOptionalStudyBlocks, cssOptionalStudyProgress, pmsGuideSubjects, generateVistaPlan,
+  buildVistaNotesCommand, cssGuideSubjects, cssOptionalFocusUnits, cssOptionalPaperDivider, cssOptionalStudyBlocks, cssOptionalStudyProgress, pmsGuideSubjects, generateVistaPlan,
   findGuideUnit, guideUnits, plannedVistaUnits, readVistaPreferences, selectedVistaSubjects, serializeVistaPreferences,
   resolveLegacyCssNotesUnit,
   type VistaSubject, type VistaPreferences,
@@ -353,7 +353,7 @@ test('every transcribed CSS optional source entry is available in the timetable 
       assert.equal(chunks.map(x=>x.text).join('\n'),original.sections[i].items.map((x:string)=>x.trim()).filter(Boolean).join('\n'),
         'Every original source line must be scheduled in its original order')
       const sectionUnits=scheduled.filter(u=>u.id===priorId || u.legacySectionId===priorId)
-      assert.equal(sectionUnits.length,Math.max(1,chunks.length),'One task per source-backed study block')
+      assert.equal(sectionUnits.length,cssOptionalPaperDivider(section.title,section.sourceItems||[]) ? 0 : Math.max(1,chunks.length),'Study blocks are complete, without empty paper-divider tasks')
       if(chunks.length>1) {
         expanded++
         assert.ok(sectionUnits.every(u=>u.sourceBlock && u.legacySectionId===priorId && u.sourceFocus),
@@ -460,4 +460,20 @@ test('My Subjects optional-paper progress uses the same blocks and saved complet
   const card=readFileSync('src/pages/account/Subjects.tsx','utf8')
   assert.match(card,/cssOptionalStudyProgress/)
   assert.match(card,/Earlier source-item checks/)
+})
+
+test('an empty Part I divider is not treated as an official chapter, while substantive heading-only sections remain schedulable',()=>{
+  const source=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const subjects=cssGuideSubjects(source)
+  const history=subjects.find(s=>s.id==='european-history')!
+  const sourceHeading=history.sections.find(s=>cssOptionalPaperDivider(s.title,s.sourceItems||[]))
+  assert.ok(sourceHeading)
+  const unitId='vista-css:'+history.id+':'+sourceHeading.id
+  assert.equal(guideUnits(history,'css').filter(u=>u.id===unitId).length,0)
+  assert.ok(findGuideUnit(subjects,'css',unitId),'Earlier saved section tasks still remain readable')
+  const agriculture=subjects.find(s=>s.id==='agriculture-forestry')!
+  const forests=agriculture.sections.find(s=>s.title.includes('Forest management and utilization'))!
+  assert.ok(forests)
+  assert.equal(cssOptionalPaperDivider(forests.title,forests.sourceItems||[]),false)
+  assert.ok(guideUnits(agriculture,'css').some(u=>u.id==='vista-css:'+agriculture.id+':'+forests.id))
 })
