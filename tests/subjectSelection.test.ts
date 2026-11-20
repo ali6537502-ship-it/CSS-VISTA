@@ -148,5 +148,6 @@ test('partial study permission never overrides duplicate, group or maximum marks
   assert.equal(over.valid,false)
   assert.match(over.violations.join(' '),/maximum 600/)
   assert.equal(validateStudySelection([subject('Statistics'),subject('Physics')]).valid,false)
+  assert.equal(validateStudySelection([subject('Political Science'),subject('Statistics'),subject('Public Administration'),subject('History of USA'),subject('Gender Studies')]).valid,false,'A fully selected 600-mark scheme cannot contain an unpaired Group II 100-mark subject')
   assert.equal(validateStudySelection([subject('Gender Studies'),subject('Gender Studies')]).valid,false)
 })
