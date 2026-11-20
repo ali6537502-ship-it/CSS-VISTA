@@ -6,26 +6,27 @@ import { NOTES_RELEASED } from '../../src/features/notes/availability.ts'
 import { sections, features } from '../../src/features/workspace/registry.ts'
 
 const root=process.cwd()
-test('students can find My Notes while cloud saving stays disabled by default',()=>{
-  assert.equal(NOTES_RELEASED,false,'cloud feature flag must default to off')
-  assert.equal(sections.some(section=>section.id==='notes'),true,'sidebar should always contain My Notes')
+test('student notes editor and lesson paste are available under native account permissions',()=>{
+  assert.equal(NOTES_RELEASED,true,'student Notes editor should be released')
+  assert.equal(sections.some(section=>section.id==='notes'),true,'sidebar should contain My Notes')
   assert.equal(features.some(feature=>feature.to==='/account/notes'),true,'workspace directory should link to My Notes')
   const app=readFileSync(resolve(root,'src/App.tsx'),'utf8')
-  assert.match(app,/NotesProtectionPending/,'disabled route must show truthful recovery status')
+  assert.match(app,/path="\/account\/notes"/)
+  assert.match(app,/<ProfileGate>/,'protected account routes must retain the profile gate')
+  const capture=readFileSync(resolve(root,'src/features/notes/LessonNotesCapture.tsx'),'utf8')
+  assert.match(capture,/lesson_capture/,'lesson paste must target private Notes')
 })
 
-test('private notes backend is fail-closed independently of client navigation',()=>{
+test('private Notes API requires authenticated user and CSRF for writing',()=>{
   const php=readFileSync(resolve(root,'public/api/student/notes.php'),'utf8')
-  assert.match(php,/CSSV_NOTES_ENABLED/)
-  assert.match(php,/CSSV_NOTES_ENABLED','0'/)
-  assert.match(php,/personal_notes_not_enabled/)
-  assert.match(php,/cssv_require_csrf\(\$session\)/)
   assert.match(php,/cssv_require_user\(\$pdo\)/)
+  assert.match(php,/cssv_require_csrf\(\$session\)/)
+  assert.match(php,/cssv_notes_schema\(\$pdo\)/)
+  assert.doesNotMatch(php,/personal_notes_not_enabled|CSSV_NOTES_ENABLED/,'manual backup choice must not silently lock the editor')
 })
 
-test('public study notes catalogue is separate from protected personal notebooks',()=>{
+test('public reference notes catalogue remains separate from personal account notebook',()=>{
   const app=readFileSync(resolve(root,'src/App.tsx'),'utf8')
   assert.match(app,/path="\/notes"/)
   assert.match(app,/path="\/account\/notes"/)
-  assert.match(app,/NOTES_RELEASED \?/)
 })
