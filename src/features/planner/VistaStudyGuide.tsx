@@ -140,10 +140,14 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const todayRows = activeTasks.filter(t=>t.date===today)
   const nextPmsSession = exam==='pms-punjab' ? activeTasks.filter(t=>t.date>today && t.status!=='completed').sort((a,b)=>a.date.localeCompare(b.date))[0] : undefined
   const revisions = activeTasks.filter(t=>t.activity==='revision' && t.status!=='completed' && t.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,6)
-  const hasStatus = (u:VistaUnit) => [u.id,...(u.legacySectionId?[u.legacySectionId]:[])]
-    .some(id=>snapshot.state.syllabusItemStatuses?.[id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===id && t.status==='completed'))
+  const hasStatus = (u:VistaUnit) =>
+    [u.id,...(u.legacySectionId?[u.legacySectionId]:[])]
+      .some(id=>snapshot.state.syllabusItemStatuses?.[id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===id && t.status==='completed')) ||
+    !!u.sourceItemIds?.length && u.sourceItemIds.every(id=>snapshot.state.syllabusItemStatuses?.[id] === 'completed' || activeTasks.some(t=>t.syllabusItemId===id && t.status==='completed'))
   const alreadyScheduled = new Set(snapshot.state.studyScheduleTasks.filter(t=>!isTaskArchived(t.id) || t.status==='completed').map(t=>t.syllabusItemId))
-  const remaining = chosenUnits.filter(u=>!hasStatus(u) && !alreadyScheduled.has(u.id) && (!u.legacySectionId || !alreadyScheduled.has(u.legacySectionId)))
+  const remaining = chosenUnits.filter(u=>!hasStatus(u) && !alreadyScheduled.has(u.id) &&
+    (!u.legacySectionId || !alreadyScheduled.has(u.legacySectionId)) &&
+    (!u.sourceItemIds?.length || !u.sourceItemIds.every(id=>alreadyScheduled.has(id)||snapshot.state.syllabusItemStatuses?.[id]==='completed'))) 
   const completed = chosenUnits.filter(u=>hasStatus(u)).length
   const visibleUnits = allUnits.filter(u=>!showOnlyRemaining || !hasStatus(u))
   const cssOptionalValidation = useMemo(()=>{
@@ -262,6 +266,10 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     if(u.legacySectionId && (snapshot.state.syllabusItemStatuses?.[u.legacySectionId]==='completed'
       || activeTasks.some(t=>t.syllabusItemId===u.legacySectionId && t.status==='completed'))) {
       setMessage('This study block is already credited through a completed section in your previous schedule. You can schedule a revision without changing that historical record.')
+      return
+    }
+    if(u.sourceItemIds?.length && u.sourceItemIds.every(id=>snapshot.state.syllabusItemStatuses?.[id]==='completed' || activeTasks.some(t=>t.syllabusItemId===id && t.status==='completed'))){
+      setMessage('This block is already covered by completed activities in your earlier syllabus checklist. Your recorded history is retained.')
       return
     }
     const old=hasStatus(u), next=old?'in-progress':'completed'
