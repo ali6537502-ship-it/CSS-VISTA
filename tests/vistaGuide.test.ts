@@ -503,3 +503,20 @@ test('legacy per-line CSS optional tasks are credited without rewriting the earl
   const withScheduled=generateVistaPlan(subjects,'css',selection,history,{},'2026-11-20')
   assert.ok(!withScheduled.draft.some(t=>t.syllabusItemId===block.id),'Already scheduled legacy lines prevent duplicate block')
 })
+
+test('legacy optional syllabus-line credit also protects a single-block section',()=>{
+  const raw=JSON.parse(readFileSync('public/fpsc-syllabus.json','utf8'))
+  const optionals=cssGuideSubjects(raw).filter(s=>s.designation==='optional')
+  const subject=optionals.find(s=>s.sections.some(sec=>sec.sourceItems?.some(x=>x.trim()) && cssOptionalStudyBlocks(sec.sourceItems||[]).length===1))!
+  assert.ok(subject)
+  const section=subject.sections.find(sec=>sec.sourceItems?.some(x=>x.trim()) && cssOptionalStudyBlocks(sec.sourceItems||[]).length===1)!
+  const id='vista-css:'+subject.id+':'+section.id
+  const unit=guideUnits(subject,'css').find(u=>u.id===id)!
+  assert.ok(unit.sourceItemIds?.length,'Single-block source line IDs must be carried into the scheduled unit')
+  for(const rawId of unit.sourceItemIds!)assert.ok(resolveLegacyCssNotesUnit(raw,rawId),'Legacy task can still resolve: '+rawId)
+  const statuses=Object.fromEntries(unit.sourceItemIds!.map(id=>[id,'completed' as const]))
+  const prefsForSubject=prefs({selectedOptionals:[subject.title],studySubjects:[subject.id],targetDate:''})
+  const plan=generateVistaPlan(cssGuideSubjects(raw),'css',prefsForSubject,[],statuses,'2026-11-20')
+  assert.ok(!plan.draft.some(task=>task.syllabusItemId===unit.id),'Do not repeat already completed source lines as a new single-block section')
+  assert.ok(cssOptionalStudyProgress(subject,statuses,[]).completed>=1)
+})
