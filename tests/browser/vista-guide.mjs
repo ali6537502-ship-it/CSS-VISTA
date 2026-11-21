@@ -142,8 +142,14 @@ async function checkCssOptionalPublicGuide() {
     await page.getByRole('heading',{name:'All CSS optional subjects'}).waitFor()
     assert.equal(await page.locator('#css-optional-syllabus article').count(),45,'All 45 optional papers listed')
     await page.getByRole('link',{name:/Explore topics and copy commands/}).first().waitFor()
-    await page.goto(origin+'/css-vista/syllabus/gender-studies',{waitUntil:'domcontentloaded'})
-    await page.getByRole('heading',{name:/Gender Studies — syllabus and preparation commands/}).waitFor()
+    const subjectResponse=await page.goto(origin+'/css-vista/syllabus/gender-studies',{waitUntil:'domcontentloaded'})
+    try {
+      await page.getByRole('heading',{name:/Gender Studies — syllabus and preparation commands/}).waitFor({timeout:8500})
+    } catch (failure) {
+      console.error('CSS optional public route diagnostics:',JSON.stringify({status:subjectResponse?.status(),url:page.url(),headings:await page.locator('h1,h2').allTextContents(),body:(await page.locator('body').innerText()).slice(0,2500),errors}))
+      await page.screenshot({path:resolve(root,'test-artifacts/vista/css-vista-public-route-failure.png'),fullPage:true})
+      throw failure
+    }
     const first=page.getByRole('button',{name:'Copy study-unit notes command'}).first()
     await first.click()
     await page.getByText('Copied. Paste the command into your notes conversation.').first().waitFor()
