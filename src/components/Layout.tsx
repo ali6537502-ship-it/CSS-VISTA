@@ -53,6 +53,7 @@ const nav = [
     items: [
       { label: 'Start CSS', to: '/start-css', icon: GraduationCap },
       { label: 'PMS Vista — Free PMS Preparation', to: '/pms-vista', icon: GraduationCap },
+      { label: 'CSS Vista — Optional Topic Guides', to: '/css-vista', icon: BookOpen },
       { label: 'Compulsory Subjects', to: '/subjects/compulsory', icon: BookOpen },
       { label: 'Optional Subjects', to: '/subjects/optional', icon: BookOpen },
       { label: 'Subject Selection Tool', to: '/subjects/selector', icon: Target },
