@@ -30,6 +30,13 @@ interface LinkCard {
 
 const quickActions: LinkCard[] = [
   {
+    title: 'CSS Vista — Optional Study Guide',
+    description: 'All 45 optional papers, source topics and copyable notes commands',
+    to: '/css-vista',
+    icon: BookOpen,
+    tone: 'emerald',
+  },
+  {
     title: 'PMS Vista',
     description: 'Free PMS preparation & updated PPSC syllabus',
     to: '/pms-vista',
