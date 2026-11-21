@@ -105,7 +105,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
   const [subjectSearch, setSubjectSearch] = useState('')
   const [optionalSearch, setOptionalSearch] = useState('')
   const [showOnlyRemaining, setShowOnlyRemaining] = useState(false)
-  const [showAll, setShowAll] = useState(false)
+  const [showAll, setShowAll] = useState(exam === 'css')
   const [showCount, setShowCount] = useState(20)
   const linkedSubject = query.get('subject') || ''
   useEffect(() => { if (linkedSubject) { setSubjectId(linkedSubject);setShowCount(20) } },[exam,linkedSubject])
@@ -121,6 +121,7 @@ export default function VistaStudyGuide({ exam, mode = 'syllabus' }: { exam: Vis
     return ()=>controller.abort()
   },[exam,retry])
   useEffect(()=>{
+    setShowAll(exam === 'css')
     if(!edited.current){const next=initial(exam);setPrefs(next);setDraftPrefs(next);setPlan(null)}
   },[exam,syncStatus])
   useEffect(()=>{if(mode==='settings')setSettingsOpen(true)},[mode])
