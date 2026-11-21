@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router'
-import { Search, Target } from 'lucide-react'
+import { ArrowRight, Search, Target } from 'lucide-react'
+import { cssVistaOptionals } from '@/data/cssVistaPublic'
 import { PageHeader, SourceNote, Badge } from '@/components/shared'
 import { optionalGroups, syllabusSource, examFacts } from '@/data/syllabus'
 import ConsultationCard from '@/components/ConsultationCard'
@@ -28,6 +29,11 @@ export default function OptionalSubjects() {
         description={`Choose 600 marks from seven groups under the official grouping rules. For every subject: nature, background required, overlap, difficulty, preparation time and risks. Total optional marks: ${examFacts.optionalTotal}.`}
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
+        <section className="mb-7 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+          <h2 className="text-xl font-bold text-emerald-950">Prepare every CSS optional paper, topic by topic</h2>
+          <p className="mt-2 text-sm leading-7 text-emerald-950">Open the dedicated CSS Vista subject guide to see the source syllabus sections, copy notes commands for individual study units, and build your daily timetable.</p>
+          <Link to="/css-vista" className="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-emerald-900 underline">Browse all 45 CSS optional subject guides <ArrowRight size={16}/></Link>
+        </section>
         <div className="flex flex-col gap-3 rounded-lg border bg-white p-4 sm:flex-row sm:items-center">
           <div className="relative flex-1">
             <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -76,6 +82,7 @@ export default function OptionalSubjects() {
                       <div className="flex gap-2"><dt className="w-24 shrink-0 font-medium text-muted-foreground">Suited for</dt><dd>{s.suitedFor}</dd></div>
                       <div className="flex gap-2"><dt className="w-24 shrink-0 font-medium text-muted-foreground">Risks</dt><dd className="text-amber-800">{s.risks}</dd></div>
                     </dl>
+                    {cssVistaOptionals.find(p=>p.name===s.name) && <Link to={'/css-vista/syllabus/'+cssVistaOptionals.find(p=>p.name===s.name)!.slug} className="mt-4 inline-flex min-h-10 items-center gap-2 text-sm font-bold text-emerald-800 underline">View syllabus topics and copy commands <ArrowRight size={16}/></Link>}
                   </div>
                 ))}
               </div>
