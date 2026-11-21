@@ -9,7 +9,7 @@ const home = read('../src/pages/Home.tsx')
 const studentDashboard = read('../src/pages/AccountHome.tsx')
 const introduction = read('../src/components/TutorialAnnouncement.tsx')
 
-test('one official tutorial URL and video ID are used across both entry points', () => {
+test('featured tutorial remains the primary video on both public and student homepages', () => {
   assert.match(tutorialData, /TdRfMW-DxO8/)
   assert.match(tutorialData, /https:\/\/youtu\.be\/TdRfMW-DxO8/)
   assert.match(card, /CSS_VISTA_TUTORIAL_THUMBNAIL_URL/)
@@ -22,8 +22,21 @@ test('one official tutorial URL and video ID are used across both entry points',
   assert.doesNotMatch(introduction, /RawGyL7BkEk/)
 })
 
-test('thumbnail and text link both reach the tutorial instead of a decorative play control', () => {
+test('featured thumbnail and text link both open the official tutorial', () => {
   assert.match(card, /<a[\s\S]*?href=\{CSS_VISTA_TUTORIAL_URL\}[\s\S]*?<img[\s\S]*?src=\{CSS_VISTA_TUTORIAL_THUMBNAIL_URL\}/)
   assert.match(card, /Watch the tutorial/)
   assert.match(card, /aria-label="How to use CSS Vista tutorial"/)
+})
+
+test('three earlier tutorial links have matching YouTube thumbnails inside a collapsed disclosure', () => {
+  for (const id of ['pw9U9nvRsqs', '2-w9_OsO06Q', 'RawGyL7BkEk']) {
+    assert.match(tutorialData, new RegExp(`https://youtu\\.be/${id}`))
+    assert.match(tutorialData, new RegExp(`https://i\\.ytimg\\.com/vi/${id}/hqdefault\\.jpg`))
+  }
+  assert.match(card, /<details[^>]*>[\s\S]*?<summary/)
+  assert.match(card, /Previous tutorial videos/)
+  assert.match(card, /CSS_VISTA_PREVIOUS_TUTORIALS\.map/)
+  assert.match(card, /href=\{tutorial\.url\}/)
+  assert.match(card, /src=\{tutorial\.thumbnailUrl\}/)
+  assert.match(card, /loading="lazy"/)
 })
