@@ -1,5 +1,9 @@
-import { ArrowUpRight, Play } from 'lucide-react'
-import { CSS_VISTA_TUTORIAL_URL, CSS_VISTA_TUTORIAL_THUMBNAIL_URL } from '@/data/tutorialVideo'
+import { ArrowUpRight, ChevronDown, Play } from 'lucide-react'
+import {
+  CSS_VISTA_PREVIOUS_TUTORIALS,
+  CSS_VISTA_TUTORIAL_URL,
+  CSS_VISTA_TUTORIAL_THUMBNAIL_URL,
+} from '@/data/tutorialVideo'
 
 type TutorialVideoCardProps = { className?: string }
 
@@ -51,6 +55,49 @@ export default function TutorialVideoCard({ className = '' }: TutorialVideoCardP
           </a>
         </div>
       </div>
+
+      <details className="group border-t border-emerald-200/80 bg-white/70">
+        <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 hover:bg-emerald-50/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-600 sm:px-6 [&::-webkit-details-marker]:hidden">
+          <span className="flex min-w-0 flex-col">
+            <span className="text-sm font-bold text-emerald-950">Previous tutorial videos</span>
+            <span className="text-xs text-slate-600">Click to view {CSS_VISTA_PREVIOUS_TUTORIALS.length} more tutorials</span>
+          </span>
+          <ChevronDown className="h-5 w-5 shrink-0 text-emerald-800 transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <div className="grid gap-3 border-t border-emerald-100 px-4 py-4 sm:grid-cols-3 sm:px-6 sm:py-5">
+          {CSS_VISTA_PREVIOUS_TUTORIALS.map((tutorial) => (
+            <a
+              key={tutorial.id}
+              href={tutorial.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Watch ${tutorial.title} on YouTube (opens in a new tab)`}
+              className="group/video overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+            >
+              <span className="relative block overflow-hidden bg-slate-900">
+                <img
+                  src={tutorial.thumbnailUrl}
+                  alt={`Thumbnail for ${tutorial.title}`}
+                  width={480}
+                  height={270}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-video w-full object-cover transition-transform duration-300 group-hover/video:scale-[1.035]"
+                />
+                <span className="pointer-events-none absolute inset-0 grid place-items-center bg-black/10" aria-hidden="true">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-red-600 text-white shadow-lg">
+                    <Play className="ml-0.5 h-5 w-5 fill-current" />
+                  </span>
+                </span>
+              </span>
+              <span className="flex items-center justify-between gap-2 p-3">
+                <span className="text-sm font-semibold text-slate-800">{tutorial.title}</span>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-emerald-800" aria-hidden="true" />
+              </span>
+            </a>
+          ))}
+        </div>
+      </details>
     </section>
   )
 }
