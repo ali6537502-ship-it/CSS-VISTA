@@ -1423,5 +1423,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.dawn.com/news/2045885"
+  },
+  {
+    "id": "current-affairs-20261121-dar-multilateralism",
+    "q": "Which Pakistani official stressed multilateralism rather than bloc politics in an interview reported on 21 November 2026?",
+    "o": [
+      "Muhammad Aurangzeb",
+      "Ishaq Dar",
+      "Musadik Malik",
+      "Ahsan Iqbal"
+    ],
+    "a": 1,
+    "e": "Dawn reported remarks by Deputy Prime Minister and Foreign Minister Ishaq Dar.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046111"
+  },
+  {
+    "id": "current-affairs-20261121-sco-tajik-minister",
+    "q": "Sattoriyon Amonzoda, who met Musadik Malik at the SCO forum on 21 November 2026, was a minister of which country?",
+    "o": [
+      "Iran",
+      "Uzbekistan",
+      "Tajikistan",
+      "Kazakhstan"
+    ],
+    "a": 2,
+    "e": "Amonzoda was identified as Tajikistan's culture minister.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046109/at-sco-moot-in-india-musadik-malik-declares-climate-change-enemy-of-civilisations"
+  },
+  {
+    "id": "current-affairs-20261121-ecc-sme-export",
+    "q": "What revised minimum export share did Pakistan's ECC approve for eligible SMEs under the Long-Term Export Growth Financing Facility?",
+    "o": [
+      "30%",
+      "40%",
+      "50%",
+      "70%"
+    ],
+    "a": 2,
+    "e": "The ECC reduced the threshold from 80% to 50%, to be met within four years.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045994/the-economic-coordination-committee-lowers-export-threshold-for-smes"
+  },
+  {
+    "id": "current-affairs-20261121-unesco-preschool-gap",
+    "q": "What annual financing gap for pre-primary education in low- and lower-middle-income countries during 2027–2030 was estimated in the 2026 UNESCO-linked report?",
+    "o": [
+      "US$15 billion",
+      "US$25 billion",
+      "US$35 billion",
+      "US$69 billion"
+    ],
+    "a": 2,
+    "e": "The $35 billion gap is approximately half the estimated $69 billion annual need.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046006"
   }
 ]

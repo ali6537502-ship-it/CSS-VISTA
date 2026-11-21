@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 307,
+  "count": 310,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2135,6 +2135,24 @@
       "id": "pak-ca-gk-2026-11-20-afghanistan-regional-conference",
       "text": "Pakistan's Foreign Office cited non-recognition of the Taliban government in explaining Afghanistan's exclusion from a regional conference on 20 November 2026.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-20",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-21-dar-multilateralism",
+      "text": "Ishaq Dar reiterated Pakistan's commitment to multilateralism in an interview reported on 21 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-21",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-21-sco-iran-tajikistan",
+      "text": "Musadik Malik met Tajikistan's culture minister Sattoriyon Amonzoda at the SCO forum on 21 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-21",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-21-ecc-sme-export-threshold",
+      "text": "An ECC decision reported on 21 November 2026 reduced the SME export threshold under a long-term financing facility from 80% to 50%.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-21",
       "timeSensitive": true
     }
   ]
