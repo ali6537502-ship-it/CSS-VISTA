@@ -1,0 +1,226 @@
+{
+  "version": "draft-1",
+  "lessonId": "c12-s12-2",
+  "title": "Digestion and absorption",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-10"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "title": "23.1 Overview of the Digestive System  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.808469+00:00",
+      "retrievedSha256": "9cdf063593069ef42d3aa1c0f052b1521a4357630f7fadc989fe5ebd5ed37cf3",
+      "id": "digestive",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "title": "23.7 Chemical Digestion and Absorption: A Closer Look  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.786764+00:00",
+      "retrievedSha256": "66cb4c6c90ea2a54bb6ee07597e89b46699daad7aea2859e36aff85a475dbc4a",
+      "id": "absorption",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Trace food and distinguish digestion from absorption.",
+        "Explain enzyme, bile and absorptive-surface functions."
+      ],
+      "prerequisites": [
+        "Food contains large molecules that cannot all cross cell surfaces intact.",
+        "Blood and lymph distribute substances after uptake."
+      ],
+      "terms": {
+        "hydrolysis": "Chemical cleavage of a bond using water.",
+        "peristalsis": "Coordinated muscular movement that propels digestive contents.",
+        "villus": "A projection of small-intestinal mucosa that increases absorptive area."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "digestive-route",
+        "sourceIds": [
+          "digestive"
+        ],
+        "explanation": "Food passes through mouth, pharynx, oesophagus, stomach, small intestine and large intestine before waste leaves through the rectum and anus. Chewing and muscular mixing physically divide or redistribute food. Peristalsis propels it. Chemical digestion hydrolyses large molecules into absorbable units; movement alone does not perform that molecular breakdown. Accessory organs deliver secretions without food normally passing through them: the pancreas supplies digestive enzymes and bicarbonate, and the liver produces bile stored and concentrated in the gallbladder."
+      },
+      {
+        "conceptId": "enzyme-and-bile",
+        "sourceIds": [
+          "absorption"
+        ],
+        "explanation": "Amylases begin breaking starch into smaller carbohydrates; intestinal enzymes complete conversion to absorbable monosaccharides. Proteases break proteins into smaller peptides and amino acids. Lipases act on triglycerides. Bile salts emulsify fat into smaller droplets and help form micelles, improving access and transfer of lipid digestion products. Bile is not a protease or lipase and does not itself hydrolyse the fat bonds. Stomach acid supports the gastric environment and protein digestion, while bicarbonate helps neutralize acid entering the small intestine."
+      },
+      {
+        "conceptId": "absorptive-pathways",
+        "sourceIds": [
+          "digestive",
+          "absorption"
+        ],
+        "explanation": "Folds, villi and cellular microvilli increase the small intestine’s absorptive surface. Monosaccharides and amino acids enter blood pathways and reach the liver through portal circulation. Many long-chain lipid products are reassembled and packaged into chylomicrons, which enter intestinal lymphatic vessels before reaching blood. Water and electrolytes are also absorbed; the large intestine recovers water and forms faeces from remaining material. Digestion, absorption, transport and cellular assimilation are distinct stages, so an empty stomach is not proof of complete nutrient uptake."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Food in lumen",
+        "Mechanical processing and enzymatic hydrolysis",
+        "Absorptive intestinal surface",
+        "Blood or lymph",
+        "Transport to tissues"
+      ],
+      "description": "Draw a villus with lumen outside, epithelium at its boundary, capillaries and a central lymphatic vessel inside.",
+      "limitations": "Route schematic; not every nutrient follows the same transport pathway.",
+      "sourceIds": [
+        "digestive",
+        "absorption"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A meal can be digested into small molecules yet still require transport across intestinal cells before its nutrients become available to tissues.",
+      "sourceIds": [
+        "digestive",
+        "absorption"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish digestion and absorption, explaining the roles of enzymes, bile and villi."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c12-s12-2-1",
+          "lessonId": "c12-s12-2",
+          "conceptId": "enzyme-and-bile",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which description correctly explains bile salts in fat digestion?",
+          "options": {
+            "A": "They hydrolyse triglycerides by the same catalytic action as lipase.",
+            "B": "They emulsify fat and assist lipid handling without being lipase.",
+            "C": "They transport all digested lipids directly into portal blood.",
+            "D": "They provide the acidic gastric environment for pepsin."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Lipase catalyses bond cleavage; bile salts have a different role.",
+            "B": "Emulsification and micelle formation aid lipid digestion and handling.",
+            "C": "Many long-chain lipids enter lymphatic transport after packaging.",
+            "D": "Gastric acid and bile have different origins and functions."
+          },
+          "sources": [
+            "absorption"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c12-s12-2-2",
+          "lessonId": "c12-s12-2",
+          "conceptId": "absorptive-pathways",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which event is absorption rather than chemical digestion?",
+          "options": {
+            "A": "Starch cleavage by amylase.",
+            "B": "Peptide hydrolysis by proteases.",
+            "C": "Triglyceride hydrolysis by lipase.",
+            "D": "Glucose crossing intestinal epithelium into internal transport."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Cleavage is digestion.",
+            "B": "Hydrolysis is chemical digestion.",
+            "C": "Lipase catalyses breakdown.",
+            "D": "Crossing the absorptive surface is uptake into the body."
+          },
+          "sources": [
+            "absorption"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Digestion mechanically processes food and chemically hydrolyses macromolecules into absorbable units. Amylases, proteases and lipases act on different substrates. Bile salts emulsify lipids and support their handling, while lipase catalyses bond cleavage. Absorption moves digestion products across intestinal epithelium; villi and microvilli provide a large surface. Sugars and amino acids mainly enter blood and portal transport, while many long-chain lipid products enter lymph as chylomicrons. These routes connect intestinal processing with delivery and later cellular use.",
+      "rubric": [
+        {
+          "criterion": "Distinguish breakdown from uptake.",
+          "marks": 1
+        },
+        {
+          "criterion": "Give appropriate enzyme–substrate examples.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain bile without calling it lipase.",
+          "marks": 1
+        },
+        {
+          "criterion": "Link villi or microvilli to surface area.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish blood and lymph transport routes.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling bile an enzyme.",
+        "Equating digestion with uptake into blood."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "hydrolysis: Chemical cleavage of a bond using water.",
+        "peristalsis: Coordinated muscular movement that propels digestive contents.",
+        "villus: A projection of small-intestinal mucosa that increases absorptive area."
+      ],
+      "closedBookRecall": [
+        "Trace a carbohydrate from food to blood.",
+        "Label the villus blood and lymph routes."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

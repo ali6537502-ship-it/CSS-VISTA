@@ -1,0 +1,238 @@
+{
+  "version": "draft-1",
+  "lessonId": "c24-s24-5",
+  "title": "Fermentation, irradiation and other barriers",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-22"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://nchfp.uga.edu/how/can/general-information/general-information-on-pickling/",
+      "resolvedUrl": "https://nchfp.uga.edu/how/can/general-information/general-information-on-pickling/",
+      "title": "General Information on Pickling - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:36:45.239649+00:00",
+      "retrievedSha256": "d419964dca2d8a68958445471620a916a763b93906e17fe802fbf6befd834316",
+      "id": "ferment-principles",
+      "publisher": "National Center for Home Food Preservation / University of Georgia",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "fermentation",
+      "title": "OpenStax Biology 2e, 7.5 Metabolism without Oxygen",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "88b37603b8743fd1a9c3af3c36d90090ee15056f1e45f474e9059e496b387e5b",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "title": "13.2 Using Physical Methods to Control Microorganisms - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.560308+00:00",
+      "retrievedSha256": "afe6721818050a62a3c05502299b76be5ea1582654ea06ff1d2cea8af7103307",
+      "id": "micro-control",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Compare fermentation with irradiation and pressure treatment.",
+        "Explain why each barrier needs appropriate validation."
+      ],
+      "prerequisites": [
+        "Different microbial groups use different metabolic pathways.",
+        "A treatment’s mechanism and its validated effectiveness are different evidence."
+      ],
+      "terms": {
+        "fermentation": "Metabolic processing in which organic molecules serve as electron acceptors in pathways regenerating electron carriers.",
+        "irradiation": "Treatment using radiation under controlled conditions.",
+        "hurdle": "One barrier contributing to an integrated preservation system."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "fermented-food-controls",
+        "sourceIds": [
+          "ferment-principles",
+          "fermentation"
+        ],
+        "explanation": "Desirable microbes can transform food components and produce acids or other products that help restrict competitors. Fermented vegetable systems depend on appropriate salt, ingredients and conditions, which influence which microbes grow. Fermentation is not synonymous with uncontrolled decay, nor is every sour product fermented: adding acid directly is a different route. Tested formulation and monitoring matter; an arbitrary salt reduction can alter the system rather than merely change taste."
+      },
+      {
+        "conceptId": "irradiation-control",
+        "sourceIds": [
+          "micro-control"
+        ],
+        "explanation": "Appropriate radiation can damage microbial genetic material and reduce target organisms. Effects depend on radiation type, dose, organism and food. Food irradiation is not equivalent to contaminating a product with radioactive material, and a reduction treatment need not make a product sterile. Subsequent contamination and storage still matter. A scientific answer should distinguish the physical mechanism from unsupported claims of universal safety, total nutrient retention or unlimited shelf life."
+      },
+      {
+        "conceptId": "other-barriers",
+        "sourceIds": [
+          "micro-control"
+        ],
+        "explanation": "High-pressure processing can disrupt microbial membranes and protein function under controlled conditions; resistance varies, and spores can remain a challenge. Drying, acidity, cooling and packaging can add other barriers. Each targets particular mechanisms, and combinations may improve control, but the number of named methods does not itself prove effectiveness. Product-specific validation must show that the combined process achieves the intended outcome without assuming every barrier eliminates every hazard."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Fermentation → controlled microbial activity → protective products",
+        "Irradiation → damage to susceptible targets",
+        "Pressure → disruption of susceptible structures",
+        "Appropriate additional barriers and storage"
+      ],
+      "description": "Use separate mechanism lanes converging at a validated product-control system.",
+      "limitations": "Comparative mechanism diagram; no dose, pressure, recipe or safety certification is supplied.",
+      "sourceIds": [
+        "ferment-principles",
+        "fermentation",
+        "micro-control"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Controlled vegetable fermentation and direct vinegar acidification can both alter acidity, but only the former depends on the intended microbial fermentation process.",
+      "sourceIds": [
+        "ferment-principles",
+        "fermentation",
+        "micro-control"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Compare fermentation, irradiation and high-pressure preservation, identifying a limitation of each."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c24-s24-5-1",
+          "lessonId": "c24-s24-5",
+          "conceptId": "fermented-food-controls",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "How does controlled vegetable fermentation differ from simply adding vinegar?",
+          "options": {
+            "A": "Fermentation and direct acidification require identical microbial metabolism.",
+            "B": "Sour taste alone proves the intended fermentation process succeeded safely.",
+            "C": "Adding acid proves all resistant spores have been destroyed.",
+            "D": "Fermentation depends on microbial transformation under suitable conditions."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Direct acid addition need not involve fermentation.",
+            "B": "Taste alone does not validate the process.",
+            "C": "Acidification is not a universal spore destruction claim.",
+            "D": "Microbial transformation distinguishes fermentation."
+          },
+          "sources": [
+            "ferment-principles"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c24-s24-5-2",
+          "lessonId": "c24-s24-5",
+          "conceptId": "other-barriers",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Why must a high-pressure treatment still be validated for the product?",
+          "options": {
+            "A": "Microbial resistance and product conditions affect the outcome.",
+            "B": "Every spore has the same susceptibility as every vegetative cell.",
+            "C": "A specified pressure alone makes time and product composition irrelevant.",
+            "D": "The process name proves complete inactivation without outcome evidence."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Mechanism alone cannot establish product-specific effectiveness.",
+            "B": "Resistance differs among microbial forms.",
+            "C": "Other processing conditions remain relevant.",
+            "D": "A name does not supply validation."
+          },
+          "sources": [
+            "micro-control"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Controlled fermentation uses desirable microbial activity to produce changes such as acid formation, with formulation and conditions shaping the outcome. Irradiation reduces susceptible microbial targets through radiation damage under specified conditions. High-pressure treatment can disrupt susceptible membranes and proteins, while resistant forms may require additional controls. None of these process names alone establishes sterility or unlimited shelf life. Appropriate combinations, later handling and product-specific validation are needed to show that the intended hazard control has been achieved.",
+      "rubric": [
+        {
+          "criterion": "Explain microbial transformation in fermentation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish direct acid addition and formulation control.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain radiation damage without radioactive-contamination confusion.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe pressure effects with resistance limitations.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect all methods to validation and subsequent handling.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling spontaneous spoilage validated fermentation.",
+        "Claiming any pressure treatment destroys every spore."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "fermentation: Metabolic processing in which organic molecules serve as electron acceptors in pathways regenerating electron carriers.",
+        "irradiation: Treatment using radiation under controlled conditions.",
+        "hurdle: One barrier contributing to an integrated preservation system."
+      ],
+      "closedBookRecall": [
+        "Explain one mechanism and one limitation for each process.",
+        "Distinguish fermented acid production from direct acidification."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

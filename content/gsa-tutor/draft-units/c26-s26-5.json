@@ -1,0 +1,237 @@
+{
+  "version": "draft-1",
+  "lessonId": "c26-s26-5",
+  "title": "Fibre guidance and radar ranging: explain the physical relation behind the technology",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-24"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "fibre",
+      "title": "OpenStax College Physics 2e 25.4, Total Internal Reflection",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/college-physics-2e/pages/25-4-total-internal-reflection",
+      "resolvedUrl": "https://openstax.org/books/college-physics-2e/pages/25-4-total-internal-reflection",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "c81f6a507c414a9288ad78c3b7689043d60d53a67df86757310ce5e7fbcd142e",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "radar",
+      "title": "How Radar Works",
+      "publisher": "US National Oceanic and Atmospheric Administration, JetStream",
+      "url": "https://www.noaa.gov/jetstream/doppler/how-radar-works",
+      "resolvedUrl": "https://www.noaa.gov/jetstream/doppler/how-radar-works",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "e7a2a521ab500e06c03970fab681a508ead11d48d59129ca6b156254c64d086c",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "em",
+      "title": "OpenStax Chemistry 2e 6.1, Electromagnetic Energy",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/6-1-electromagnetic-energy",
+      "resolvedUrl": "https://openstax.org/books/chemistry-2e/pages/6-1-electromagnetic-energy",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "14aa9439de6a1e49a14c283f074557d1527908fa245da52fbb2a603089539d47",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain total internal reflection using index direction and angle from the normal.",
+        "Distinguish guided communication from two-way pulse ranging."
+      ],
+      "prerequisites": [
+        "Refraction changes a ray’s direction at an interface when propagation speed changes.",
+        "A round-trip signal path is twice a one-way distance in the stated simple geometry."
+      ],
+      "terms": {
+        "refractive index": "The ratio of vacuum light speed to phase speed in a medium for the specified conditions.",
+        "critical angle": "The incidence angle in the higher-index medium corresponding to a refracted angle of 90° in the lower-index medium.",
+        "range": "The distance to a target inferred from an appropriate signal measurement.",
+        "n1 and n2": "Refractive indices of the incident and second medium respectively in the stated interface model."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "tir-conditions",
+        "sourceIds": [
+          "fibre"
+        ],
+        "explanation": "In the ray model, total internal reflection requires propagation toward an interface from higher to lower refractive index and an incidence angle greater than the critical angle. Angles are measured from the normal to the interface. At the critical angle, the refracted ray is parallel to the interface. With n1>n2, sin θc=n2/n1. Do not reverse the ratio or use the ray’s angle to the surface without converting it."
+      },
+      {
+        "conceptId": "fibre-guidance",
+        "sourceIds": [
+          "fibre"
+        ],
+        "explanation": "An optical fibre uses a core and surrounding material with suitable refractive-index properties so light can be guided. A higher-index core and lower-index cladding provide a simple step-index ray explanation. A labelled cross-section should distinguish core, cladding and protective layers rather than attribute guidance to a shiny metal wall. Real propagation and loss require a fuller wave and material description; the simple drawing does not mean all rays are guided or that bending and attenuation can be ignored."
+      },
+      {
+        "conceptId": "radar-ranging",
+        "sourceIds": [
+          "radar",
+          "em"
+        ],
+        "explanation": "Radar can transmit radiation and detect returned signals. In an ideal straight-path time-of-flight example, a return interval t contains the outward and return journey, so one-way range is R=ct/2 when the propagation-speed approximation is c. For 20 microseconds and 3.0×10^8 m/s, the range is 3000 m. Communication through a fibre and radar ranging both use electromagnetic phenomena, but one explains guided signal transport while the other infers target information from returned radiation."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "two-panel-scientific-diagram",
+      "nodes": [
+        "Fibre: core index > cladding index",
+        "Incidence angle measured from the normal",
+        "Radar: transmitter → target → returned signal",
+        "One-way range = propagation speed × round-trip time / 2"
+      ],
+      "description": "Use separate fibre-interface and radar-path panels. Label the normal and the two travel directions explicitly.",
+      "limitations": "Ideal ray/path geometry, not a calibrated link-budget, radar-resolution or real-fibre-loss simulation.",
+      "sourceIds": [
+        "fibre",
+        "radar"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "For a 20 microsecond return time, the ideal total path is 6000 m, giving a 3000 m one-way range. The division by two comes from geometry, not an arbitrary correction factor.",
+      "sourceIds": [
+        "radar",
+        "em"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain optical-fibre guidance using total internal reflection and distinguish it from the time-of-flight principle used for radar range."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-OPT-01",
+          "lessonId": "c26-s26-5",
+          "conceptId": "tir-conditions",
+          "syllabusRefs": [
+            "GS-I-24"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which condition is required for total internal reflection at an ideal interface?",
+          "options": {
+            "A": "Light enters the higher-index medium from the lower-index medium at any angle.",
+            "B": "Light travels from higher to lower refractive index and its incidence angle exceeds the critical angle.",
+            "C": "The refractive indices must be exactly equal.",
+            "D": "The incidence angle is measured from the surface and must always be zero."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "The higher-to-lower index direction is necessary for the usual critical-angle condition.",
+            "B": "These are the two necessary ray-model conditions; incidence angles are measured from the normal.",
+            "C": "Equal indices do not provide the stated total-internal-reflection mechanism.",
+            "D": "The standard incidence angle is measured from the normal, not the surface."
+          },
+          "sources": [
+            "fibre"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-OPT-02",
+          "lessonId": "c26-s26-5",
+          "conceptId": "radar-ranging",
+          "syllabusRefs": [
+            "GS-I-24"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "A radar pulse returns after 20 microseconds. Using c=3.0×10^8 m/s and an ideal straight round trip, what is the target range?",
+          "options": {
+            "A": "6 km",
+            "B": "30 km",
+            "C": "3 km",
+            "D": "0.3 km"
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "ct is the round-trip path length; the one-way range is half of it.",
+            "B": "This misuses the microsecond conversion or path-length factor.",
+            "C": "R=ct/2=(3.0×10^8)(20×10^-6)/2=3000 m=3 km.",
+            "D": "This has an extra factor-of-ten error."
+          },
+          "sources": [
+            "radar",
+            "em"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Total internal reflection occurs when light approaches an interface from higher to lower refractive index at an angle exceeding the critical angle, measured from the normal. For n1>n2, sin θc=n2/n1. A simple optical-fibre model uses a higher-index core and lower-index cladding to explain guidance, while real losses and wave behavior require more detail. Radar range uses a different measurement: a transmitted pulse travels to a target and back. With the ideal speed approximation c, the one-way range is R=ct/2 because the measured return interval covers both journeys. For 20 microseconds, the stated approximation gives a 3 km range.",
+      "rubric": [
+        {
+          "criterion": "State the index-direction requirement.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define critical angle and correct angle reference.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect core/cladding structure with guidance.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain the radar round trip and factor of two.",
+          "marks": 1
+        },
+        {
+          "criterion": "Apply the range relation with correct units.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Measuring incidence from the surface without conversion.",
+        "Reversing the refractive-index ratio.",
+        "Using the whole round-trip path as the target range."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "TIR requires higher-to-lower index and incidence above the critical angle.",
+        "Ideal pulse range R=ct/2 uses the round-trip interval."
+      ],
+      "closedBookRecall": [
+        "Draw a normal, incidence angle and critical ray.",
+        "Explain the factor of two before doing a range calculation."
+      ],
+      "reviewPolicy": "Alternate a labelled ray diagram with a numerical time-of-flight example."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

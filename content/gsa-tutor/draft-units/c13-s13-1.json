@@ -1,0 +1,229 @@
+{
+  "version": "draft-1",
+  "lessonId": "c13-s13-1",
+  "title": "Pathogens and transmission",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-11"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/microbiology/pages/15-1-characteristics-of-infectious-disease",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/15-1-characteristics-of-infectious-disease",
+      "title": "15.1 Characteristics of Infectious Disease - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.106975+00:00",
+      "retrievedSha256": "d3d2b925daf0c6d690439d456aeaa44d5d82001a8a1a9acad439aa7f905851f3",
+      "id": "pathogens",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "title": "16.3 Modes of Disease Transmission - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.179247+00:00",
+      "retrievedSha256": "7761daeb528afa4ef4784ae53cb222da5df92f5ced2e7ada8c95872f0e7ad7e4",
+      "id": "spread",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish a pathogen, an infection and disease.",
+        "Choose prevention measures by tracing transmission."
+      ],
+      "prerequisites": [
+        "Microorganisms differ in structure and biological role.",
+        "A cause, a transmission route and an observed effect are different parts of an explanation."
+      ],
+      "terms": {
+        "pathogen": "An agent capable of causing disease.",
+        "reservoir": "A habitat in which an infectious agent normally persists.",
+        "vector": "A living carrier that transmits an agent between hosts.",
+        "asymptomatic infection": "Infection without apparent symptoms."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "infection-disease",
+        "sourceIds": [
+          "pathogens"
+        ],
+        "explanation": "Bacteria are cells; viruses depend on host cells for replication; fungi and protozoan parasites are other groups that can cause infections. Not every microorganism causes disease: normal microbiota can be beneficial or harmless in their usual setting. Infection and disease are distinct: an agent may establish itself without producing apparent symptoms. Disease involves disrupted function and manifestations of damage. A symptom is experienced by the patient, such as nausea; a sign is observable or measurable, such as a measured fever. Neither alone identifies the specific agent."
+      },
+      {
+        "conceptId": "chain-of-transmission",
+        "sourceIds": [
+          "spread"
+        ],
+        "explanation": "Trace a source or reservoir, a route of exit, a transfer mechanism, an entry route and a susceptible host. Contact can be direct or mediated by contaminated objects; food and water can carry agents; respiratory routes and vectors provide other pathways. A mosquito is the vector in mosquito-borne infection, not automatically the microscopic pathogen itself. An asymptomatic carrier can still transmit some agents, so screening only for visible illness does not break every chain."
+      },
+      {
+        "conceptId": "targeted-prevention",
+        "sourceIds": [
+          "spread",
+          "pathogens"
+        ],
+        "explanation": "Prevention works by interrupting a relevant link: sanitation and safe water reduce faecal contamination; hand hygiene reduces contact transfer; appropriate ventilation and respiratory precautions address respiratory spread; vector control reduces mosquito-mediated exposure. Vaccination changes host susceptibility for vaccine-preventable infections. These measures are complementary, not interchangeable. An examination answer should name the agent or route and explain how the proposed control interrupts it, rather than attach a generic cleanliness sentence to every disease."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Reservoir/source",
+        "Exit",
+        "Transfer: contact, vehicle or vector",
+        "Entry",
+        "Susceptible host"
+      ],
+      "description": "Draw arrows from source to host, then place each control beside the link it targets.",
+      "limitations": "Generic chain; actual routes and infectious stages must be specified for each disease.",
+      "sourceIds": [
+        "pathogens",
+        "spread"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Covered drinking-water storage targets contamination after treatment; mosquito-source reduction addresses a different transmission pathway.",
+      "sourceIds": [
+        "pathogens",
+        "spread"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain the chain of infection and use it to justify three prevention measures."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c13-s13-1-1",
+          "lessonId": "c13-s13-1",
+          "conceptId": "infection-disease",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which conclusion follows from an infected person having no symptoms?",
+          "options": {
+            "A": "The absence of symptoms excludes infection.",
+            "B": "Visible symptoms are not necessary for every infection or all transmission.",
+            "C": "The absence of symptoms guarantees no shedding of any agent.",
+            "D": "The absence of symptoms identifies the exact transmission route."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Some infections are asymptomatic.",
+            "B": "Symptoms are not universally required for infection or transmission.",
+            "C": "Some asymptomatic infections can still transmit.",
+            "D": "Symptoms alone do not establish the route."
+          },
+          "sources": [
+            "pathogens",
+            "spread"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c13-s13-1-2",
+          "lessonId": "c13-s13-1",
+          "conceptId": "chain-of-transmission",
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "In malaria, how should the mosquito be classified relative to Plasmodium?",
+          "options": {
+            "A": "As the protozoan pathogen itself.",
+            "B": "As a nonliving vehicle such as contaminated water.",
+            "C": "As a living vector that transmits the parasite.",
+            "D": "As evidence that malaria is spread only by direct human contact."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Plasmodium is the parasite, distinct from the mosquito.",
+            "B": "A living transmitter is distinct from a nonliving vehicle.",
+            "C": "The mosquito transmits the agent between hosts.",
+            "D": "The described vector route is not ordinary direct contact."
+          },
+          "sources": [
+            "spread"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "A chain of infection connects a reservoir or source to a susceptible host through exit, transfer and entry. Infection may be asymptomatic, whereas disease involves harmful functional effects; absence of visible illness therefore does not always exclude transmission. Safe water and sanitation interrupt faecal transfer, hand hygiene reduces contact transmission, and vector control reduces exposure through living carriers. Vaccination can reduce susceptibility for relevant infections. Each measure earns explanatory value when linked to the actual transmission route, rather than presented as a universal substitute for the others.",
+      "rubric": [
+        {
+          "criterion": "Describe source and exit.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe transfer and entry.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain susceptibility and asymptomatic infection.",
+          "marks": 1
+        },
+        {
+          "criterion": "Link two specific controls to their relevant routes.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish a vector from the pathogen.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling every bacterium harmful.",
+        "Treating symptoms as proof of a particular pathogen."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "pathogen: An agent capable of causing disease.",
+        "reservoir: A habitat in which an infectious agent normally persists.",
+        "vector: A living carrier that transmits an agent between hosts.",
+        "asymptomatic infection: Infection without apparent symptoms."
+      ],
+      "closedBookRecall": [
+        "Draw a chain with two places where prevention can interrupt it.",
+        "Explain infection without apparent disease."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

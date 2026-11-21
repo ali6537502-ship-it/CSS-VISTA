@@ -1,0 +1,233 @@
+{
+  "version": "draft-1",
+  "lessonId": "c6-s6-1",
+  "title": "Atoms, isotopes and ions: count particles before naming the species",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-05"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "atomic",
+      "title": "OpenStax Chemistry 2e, 2.3 Atomic Structure and Symbolism",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "b9fb49012ed8c1ee9f0a464891834ffcd89afb953651d1b73bf926b062df1f5c",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Identify the particles that determine element, isotope and ionic charge.",
+        "Calculate neutrons and electrons from a nuclide symbol.",
+        "Distinguish a model of an atom from a scaled picture."
+      ],
+      "prerequisites": [
+        "An electric charge may be positive, negative or zero; opposite charges attract.",
+        "An element is a substance identified by a particular number of protons."
+      ],
+      "terms": {
+        "nucleus": "The small central region containing protons and, in most atoms, neutrons.",
+        "nucleon": "A proton or neutron in the nucleus.",
+        "ion": "An atom or group of atoms with a net charge."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "particles",
+        "sourceIds": [
+          "atomic"
+        ],
+        "explanation": "An atom contains a small nucleus and electrons occupying the surrounding region. A proton has positive charge, a neutron is uncharged and an electron has an equal-magnitude negative charge. Nearly all atomic mass is associated with the nucleus. A diagram that shows separate dots is a counting model; it does not show real particle sizes or the quantum distribution of electrons."
+      },
+      {
+        "conceptId": "isotopes",
+        "sourceIds": [
+          "atomic"
+        ],
+        "explanation": "Atomic number Z equals the number of protons and fixes the element. Mass number A counts protons plus neutrons, so N=A−Z. Carbon-12 and carbon-14 both have Z=6. Their neutron counts are 12−6=6 and 14−6=8. They are isotopes, not separate elements. Mass number is an integer count for a nuclide; it is not the periodic table’s abundance-weighted average atomic mass."
+      },
+      {
+        "conceptId": "ions",
+        "sourceIds": [
+          "atomic"
+        ],
+        "explanation": "In a neutral atom the positive and negative charges balance, so electrons equal protons. Losing an electron creates a positive ion; gaining one creates a negative ion. If q is the signed charge in elementary-charge units, electron count is Z−q. Thus a species with Z=11 and q=+1 has 10 electrons. Changing electron count does not change Z or A. By contrast, changing neutron number changes the isotope."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-particle-count-model",
+      "description": "Show separate labelled counts for protons, neutrons and electrons. Toggle carbon-12/carbon-14 while holding Z=6, then toggle charge while holding nucleons fixed.",
+      "limitations": "Not to scale; no fixed planetary electron paths or prediction of isotope stability.",
+      "sourceIds": [
+        "atomic"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "For a species with A=23, Z=11 and charge +1: protons=11, neutrons=12 and electrons=10. Check the charge independently: 11−10=+1.",
+      "sourceIds": [
+        "atomic"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Using carbon-12 and carbon-14, distinguish an isotope from an ion. Show how proton, neutron and electron counts determine the difference."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-ATOM-01",
+          "lessonId": "c6-s6-1",
+          "conceptId": "isotopes",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Two neutral atoms each have six protons. One has six neutrons and the other eight. Which statement is correct?",
+          "options": {
+            "A": "They are different elements.",
+            "B": "They are isotopes of carbon.",
+            "C": "They have different numbers of electrons.",
+            "D": "The heavier atom must have a positive charge."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "The element is fixed by proton number; both have six.",
+            "B": "Equal proton numbers and different neutron numbers define isotopes of the same element.",
+            "C": "Both are neutral, so each has six electrons.",
+            "D": "Neutrons add no charge, so the additional neutrons do not make a positive ion."
+          },
+          "sources": [
+            "atomic"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-ATOM-02",
+          "lessonId": "c6-s6-1",
+          "conceptId": "ions",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "A sodium species has 11 protons, 12 neutrons and 10 electrons. What are its mass number and charge?",
+          "options": {
+            "A": "23 and +1",
+            "B": "22 and +1",
+            "C": "23 and -1",
+            "D": "11 and 0"
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Mass number is 11+12=23; charge is 11−10=+1 in elementary-charge units.",
+            "B": "Subtracting an electron does not change mass number, which counts nucleons only.",
+            "C": "There are more protons than electrons, so the net charge is positive.",
+            "D": "11 is the atomic number, and the unequal proton/electron counts mean the species is not neutral."
+          },
+          "sources": [
+            "atomic"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-ATOM-03",
+          "lessonId": "c6-s6-1",
+          "conceptId": "nucleons",
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "An atom loses one electron. Which quantity necessarily changes?",
+          "options": {
+            "A": "Atomic number",
+            "B": "Number of neutrons",
+            "C": "Mass number",
+            "D": "Net electric charge"
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Atomic number is proton number and remains unchanged.",
+            "B": "An electronic change does not remove or add a neutron.",
+            "C": "Mass number counts protons and neutrons, neither of which changes.",
+            "D": "Removing negative charge makes the net charge one elementary charge more positive."
+          },
+          "sources": [
+            "atomic"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Atomic number Z is the number of protons and identifies an element. Mass number A is the number of protons plus neutrons, so N=A−Z. Carbon-12 and carbon-14 both have six protons but have six and eight neutrons respectively; they are isotopes of carbon. A neutral atom has equal proton and electron counts. An ion forms when this charge balance changes through electron loss or gain: a carbon species with six protons and five electrons has charge +1, while its isotope identity is still determined by its neutron count. Therefore isotope differences concern neutrons; ionic charge concerns the balance of protons and electrons.",
+      "rubric": [
+        {
+          "criterion": "Define atomic number and mass number correctly.",
+          "marks": 1
+        },
+        {
+          "criterion": "Calculate six versus eight neutrons for the two carbon isotopes.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain why both remain the same element.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain electron loss/gain and the sign of ionic charge.",
+          "marks": 1
+        },
+        {
+          "criterion": "Make a direct isotope-versus-ion distinction using a correct example.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Adding electron mass to the integer mass number.",
+        "Calling isotopes different elements.",
+        "Assuming every isotope is radioactive."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Z=protons; A=protons+neutrons; N=A−Z.",
+        "Electron count=Z−q when q is signed in elementary-charge units."
+      ],
+      "closedBookRecall": [
+        "Explain why losing an electron does not make a new element.",
+        "Calculate particle counts for A=23, Z=11, q=+1 without viewing the worked example."
+      ],
+      "reviewPolicy": "Attempt recall after one day; revisit missed items before increasing the interval. These are study aids, not proof of mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "version": "draft-1",
+  "lessonId": "c16-s16-5",
+  "title": "Greenhouse warming: follow energy transfers and distinguish climate from weather",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-14"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "climate",
+      "title": "The Causes of Climate Change",
+      "publisher": "NASA Science",
+      "url": "https://science.nasa.gov/climate-change/causes/",
+      "resolvedUrl": "https://science.nasa.gov/climate-change/causes/",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "54b5ee36d0a8d9eca15bc2acbe5eae6934693eab314290bc603d5cbcf3b3fc53",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain the natural greenhouse effect and the effect of changing atmospheric composition.",
+        "Distinguish weather variability, climate trends and different environmental mechanisms."
+      ],
+      "prerequisites": [
+        "Earth receives energy from the Sun and emits infrared radiation.",
+        "A stable average state requires a balance between energy gained and lost."
+      ],
+      "terms": {
+        "greenhouse effect": "The effect of atmospheric absorption and emission of infrared radiation on Earth’s thermal state.",
+        "forcing": "A change that perturbs the planetary energy balance.",
+        "climate": "Patterns and statistics of environmental conditions over time, rather than one weather event."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "greenhouse-mechanism",
+        "sourceIds": [
+          "climate"
+        ],
+        "explanation": "Solar radiation supplies energy to Earth, and the surface and atmosphere emit energy as infrared radiation. Some gases absorb and emit infrared radiation. This alters heat transfer to space and supports a warmer surface than a comparable planet without that atmospheric effect. The natural greenhouse effect is therefore not itself a synonym for harmful pollution. Explain incoming and outgoing energy separately rather than drawing a layer that permanently seals every ray of sunlight inside the atmosphere."
+      },
+      {
+        "conceptId": "enhanced-warming",
+        "sourceIds": [
+          "climate"
+        ],
+        "explanation": "Changing greenhouse-gas concentrations can perturb the energy balance. Human activities, including fossil-fuel use and land-use change, have increased important greenhouse gases and are the principal cause of the recent warming described by NASA. The system responds through changes in temperature and other connected processes. Different gases and feedbacks have different roles, so a careful explanation does not assume that the most abundant variable atmospheric gas is necessarily the original driver of a particular change."
+      },
+      {
+        "conceptId": "weather-climate",
+        "sourceIds": [
+          "climate"
+        ],
+        "explanation": "A climate trend is not inferred from one hot afternoon or disproved by one cold week. Observations must be interpreted at suitable spatial scales and over time. Global warming concerns a rise in the global average thermal state; regional weather still varies. Ozone depletion, photochemical smog and greenhouse warming are also different mechanisms and should not be used as interchangeable labels. Explain the process being asked about and then connect consequences or responses to that process without inventing a numerical projection."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "energy-balance-diagram",
+      "nodes": [
+        "Incoming solar energy",
+        "Surface and atmosphere absorb and exchange energy",
+        "Outgoing infrared radiation",
+        "Greenhouse gases absorb and emit infrared; balance adjusts"
+      ],
+      "description": "Use separately labelled arrows for incoming solar and outgoing infrared energy; do not draw a perfectly sealed heat barrier.",
+      "limitations": "Qualitative energy-transfer model, not a climate forecast or a calibrated simulation.",
+      "sourceIds": [
+        "climate"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "When interpreting a cold local week during a broader warming period, identify the weather event’s location and duration separately from the long-term global dataset. The observation alone does not reverse a global trend.",
+      "sourceIds": [
+        "climate"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain the greenhouse effect and distinguish human-driven recent warming from a single weather event and from ozone depletion."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-CLIM-01",
+          "lessonId": "c16-s16-5",
+          "conceptId": "greenhouse-mechanism",
+          "syllabusRefs": [
+            "GS-I-14"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "What is central to the atmospheric greenhouse effect?",
+          "options": {
+            "A": "Some atmospheric gases absorb and emit outgoing infrared radiation.",
+            "B": "All sunlight is permanently stopped above the atmosphere.",
+            "C": "Ozone depletion and carbon dioxide accumulation are the same chemical process.",
+            "D": "Greenhouse gases make energy conservation cease to apply."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Infrared absorption and emission alter the transfer of heat to space and the conditions of energy balance.",
+            "B": "Substantial incoming solar radiation reaches the surface; the mechanism is not complete blockage.",
+            "C": "Ozone depletion and enhanced greenhouse warming are distinct processes even though atmospheric issues can interact.",
+            "D": "Earth’s energy balance remains the relevant physical framework."
+          },
+          "sources": [
+            "climate"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-CLIM-02",
+          "lessonId": "c16-s16-5",
+          "conceptId": "weather-climate",
+          "syllabusRefs": [
+            "GS-I-14"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "inference",
+          "prompt": "A city has one unusually cold week. Which conclusion follows most defensibly?",
+          "options": {
+            "A": "The global climate trend has necessarily reversed.",
+            "B": "Greenhouse gases no longer absorb infrared radiation.",
+            "C": "Climate is defined by the temperature at one location on one day.",
+            "D": "A local short-term event must be assessed separately from long-term global patterns."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "A brief local event cannot by itself establish reversal of a global long-term trend.",
+            "B": "The observation does not remove the physical absorption mechanism.",
+            "C": "Climate concerns patterns and statistics over time, not a single observation.",
+            "D": "Scale and duration matter; local weather variability is not equivalent to a global climate trend."
+          },
+          "sources": [
+            "climate"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Earth receives solar energy and loses energy as infrared radiation. Greenhouse gases absorb and emit some infrared radiation, changing heat transfer to space and the thermal conditions at which the system balances. The natural effect supports a warmer surface, while increasing greenhouse-gas concentrations can perturb that balance. NASA identifies human activities as the main cause of recent global warming. A global long-term trend is distinct from a short-term local weather event. Ozone depletion is another atmospheric process and should not be substituted for the greenhouse mechanism. A labelled diagram should distinguish incoming solar energy, outgoing infrared radiation and atmospheric exchange.",
+      "rubric": [
+        {
+          "criterion": "Identify incoming solar and outgoing infrared energy.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain infrared absorption/emission by greenhouse gases.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish natural effect from composition-driven enhancement.",
+          "marks": 1
+        },
+        {
+          "criterion": "Separate long-term climate from local weather.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish the mechanism from ozone depletion or provide a correct diagram.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Describing an atmosphere that traps all energy forever.",
+        "Using one weather event as proof of a global trend.",
+        "Treating the ozone hole as the greenhouse effect."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "A climate conclusion requires appropriate scale and duration.",
+        "The greenhouse mechanism concerns infrared transfer and energy balance."
+      ],
+      "closedBookRecall": [
+        "Draw two differently labelled energy arrows.",
+        "Explain why a cold week does not settle a global climate question."
+      ],
+      "reviewPolicy": "Reconstruct the mechanism before revisiting impacts or response measures."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

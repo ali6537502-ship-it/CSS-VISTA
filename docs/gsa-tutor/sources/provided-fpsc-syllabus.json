@@ -1,0 +1,66 @@
+{
+  "title": "General Science & Ability — Revised Scheme and Syllabus for CSS Competitive Examination",
+  "publisher": "Federal Public Service Commission",
+  "origin": "User-supplied PDF, inspected directly",
+  "originalFilename": "GENERAL SCIENCE & ABILITY (1).pdf",
+  "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+  "receivedOn": "2026-11-12",
+  "printedPages": [
+    7,
+    8,
+    9
+  ],
+  "scope": "Part I General Science, 60 marks; Part II excluded",
+  "onlineCurrentVersion": "unconfirmed; FPSC endpoints returned HTTP 503",
+  "status": "compared-with-provided-FPSC-document",
+  "domains": [
+    {
+      "title": "I. Physical Sciences",
+      "items": [
+        "Constituents and Structure:-Universe, Galaxy, Light Year, Solar System, Sun, Earth, Astronomical System of Units.",
+        "Process of Nature: - Solar and Lunar Eclipses, Rotation and Revolution, Weather Variables (Global Temperature, Pressure, Circulation, Precipitation, Humidity) and Weather Variations.",
+        "Natural Hazards and Disasters: - Earth Quake, Volcanic Eruption, Tsunami, Floods, Avalanche, Travelling Cyclone (Tropical Cyclone, Middle Latitude Cyclone and Tornadoes), Drought, Wildfire, Urban Fire. Disaster Risk Management.",
+        "Energy Resources: - Sources of Energy (Renewable i.e. LED Energy, Solar Energy, Wind Energy and Non-Renewable Energy conservation and its sustainable use.",
+        "Atomic Structure, Chemical Bonding, Electromagnetic Radiations.",
+        "Modern Materials/Chemicals: - Ceramics, Plastics, Semiconductors. Antibiotics, Vaccines, Fertilizers, Pesticides."
+      ]
+    },
+    {
+      "title": "II. Biological Sciences",
+      "items": [
+        "The Basis of Life: - Cell Structures and Functions (Subcellular Organelles such as Nucleus, Mitochondria and Ribosomes).",
+        "Biomolecules: - Proteins, Lipids, Carbohydrates and Enzymes.",
+        "Plant and Animal Kingdom: - A brief survey of plant and animal kingdom to pinpoint similarities and diversities in nature.",
+        "A Brief Account of Human Physiology.",
+        "Common Diseases and Epidemics: - Polio, Diarrhea, Malaria, Hepatitis, Dengue their Causes and Prevention.",
+        "New Model Concept of Producing BIO Fuel Method"
+      ]
+    },
+    {
+      "title": "III. Environmental Science",
+      "items": [
+        "Environment: - The Atmosphere (Layered Structure and Composition), Hydrosphere (Water Cycle, Major Water Compartments), Biosphere (Major Biomes) and Lithosphere (Minerals and Rocks, Rock Types, Plate Tectonics).",
+        "Atmospheric Pollution: - Types, Sources, Causes and effects of major air pollutants (COx, Particulate Matter, NOx, SOx, Tropospheric Ozone, Volatile Organic Compounds, Dioxins). Regional and Global air pollution issues (Acid-rain, Ozone Depletion, Greenhouse Effect and Global Warming). International agreements on air pollution control (Montreal Protocol and Kyoto Protocol).",
+        "Water Pollution:- Types, sources, causes and effects of major water pollutants (Synthetic Organic Chemicals, Oxygen Demanding Wastes, Plant Nutrients, Thermal Pollution, Infectious Agents, Sediments, Radioactivity, Heavy Metals and Acids). Drinking water quality and standards.",
+        "Land Pollution: - Solid waste management and disposal.",
+        "Role of Remote Sensing and GIS in Environmental Science.",
+        "Population Planning."
+      ]
+    },
+    {
+      "title": "IV. Food Science",
+      "items": [
+        "Concept of Balance Diet: - Vitamins, Carbohydrates, Protein, Fats and oil, Minerals, Fiber.",
+        "Quality of Food:- Bioavailability of Nutrients, Appearance, Texture, Flavor, Quality of Packed and Frozen Food, Food Additives, Preservatives and Antioxidants",
+        "Food Deterioration and its Control: - Causes of Food Deterioration, Adulteration, Food Preservation."
+      ]
+    },
+    {
+      "title": "V. Information Technology",
+      "items": [
+        "Computer (Hardware & Software Fundamentals); I/O Processing and data storage, Networking & Internet Standards, Application and business Software, Social Media Websites. Information Systems. Fundamentals of artificial intelligence.",
+        "Telecommunications: - Basics of Wireless Communication (Mobile, Satellite, Surveillance and GPS and Fiber Optic etc."
+      ]
+    }
+  ]
+}

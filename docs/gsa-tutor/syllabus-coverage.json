@@ -1,0 +1,1455 @@
+{
+  "version": 1,
+  "scope": "General Science Part I, 60 marks; General Ability Part II excluded",
+  "source": {
+    "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+    "publisher": "Federal Public Service Commission",
+    "updated": "2015-07-07",
+    "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf"
+  },
+  "sourceRetrieval": {
+    "checkedOn": "2026-11-12",
+    "status": "provided-FPSC-PDF-inspected",
+    "document": {
+      "title": "General Science & Ability — Revised Scheme and Syllabus for CSS Competitive Examination",
+      "publisher": "Federal Public Service Commission",
+      "origin": "User-supplied PDF, inspected directly",
+      "originalFilename": "GENERAL SCIENCE & ABILITY (1).pdf",
+      "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+      "receivedOn": "2026-11-12",
+      "printedPages": [
+        7,
+        8,
+        9
+      ],
+      "scope": "Part I General Science, 60 marks; Part II excluded",
+      "onlineCurrentVersion": "unconfirmed; FPSC endpoints returned HTTP 503",
+      "status": "compared-with-provided-FPSC-document",
+      "domains": [
+        {
+          "title": "I. Physical Sciences",
+          "items": [
+            "Constituents and Structure:-Universe, Galaxy, Light Year, Solar System, Sun, Earth, Astronomical System of Units.",
+            "Process of Nature: - Solar and Lunar Eclipses, Rotation and Revolution, Weather Variables (Global Temperature, Pressure, Circulation, Precipitation, Humidity) and Weather Variations.",
+            "Natural Hazards and Disasters: - Earth Quake, Volcanic Eruption, Tsunami, Floods, Avalanche, Travelling Cyclone (Tropical Cyclone, Middle Latitude Cyclone and Tornadoes), Drought, Wildfire, Urban Fire. Disaster Risk Management.",
+            "Energy Resources: - Sources of Energy (Renewable i.e. LED Energy, Solar Energy, Wind Energy and Non-Renewable Energy conservation and its sustainable use.",
+            "Atomic Structure, Chemical Bonding, Electromagnetic Radiations.",
+            "Modern Materials/Chemicals: - Ceramics, Plastics, Semiconductors. Antibiotics, Vaccines, Fertilizers, Pesticides."
+          ]
+        },
+        {
+          "title": "II. Biological Sciences",
+          "items": [
+            "The Basis of Life: - Cell Structures and Functions (Subcellular Organelles such as Nucleus, Mitochondria and Ribosomes).",
+            "Biomolecules: - Proteins, Lipids, Carbohydrates and Enzymes.",
+            "Plant and Animal Kingdom: - A brief survey of plant and animal kingdom to pinpoint similarities and diversities in nature.",
+            "A Brief Account of Human Physiology.",
+            "Common Diseases and Epidemics: - Polio, Diarrhea, Malaria, Hepatitis, Dengue their Causes and Prevention.",
+            "New Model Concept of Producing BIO Fuel Method"
+          ]
+        },
+        {
+          "title": "III. Environmental Science",
+          "items": [
+            "Environment: - The Atmosphere (Layered Structure and Composition), Hydrosphere (Water Cycle, Major Water Compartments), Biosphere (Major Biomes) and Lithosphere (Minerals and Rocks, Rock Types, Plate Tectonics).",
+            "Atmospheric Pollution: - Types, Sources, Causes and effects of major air pollutants (COx, Particulate Matter, NOx, SOx, Tropospheric Ozone, Volatile Organic Compounds, Dioxins). Regional and Global air pollution issues (Acid-rain, Ozone Depletion, Greenhouse Effect and Global Warming). International agreements on air pollution control (Montreal Protocol and Kyoto Protocol).",
+            "Water Pollution:- Types, sources, causes and effects of major water pollutants (Synthetic Organic Chemicals, Oxygen Demanding Wastes, Plant Nutrients, Thermal Pollution, Infectious Agents, Sediments, Radioactivity, Heavy Metals and Acids). Drinking water quality and standards.",
+            "Land Pollution: - Solid waste management and disposal.",
+            "Role of Remote Sensing and GIS in Environmental Science.",
+            "Population Planning."
+          ]
+        },
+        {
+          "title": "IV. Food Science",
+          "items": [
+            "Concept of Balance Diet: - Vitamins, Carbohydrates, Protein, Fats and oil, Minerals, Fiber.",
+            "Quality of Food:- Bioavailability of Nutrients, Appearance, Texture, Flavor, Quality of Packed and Frozen Food, Food Additives, Preservatives and Antioxidants",
+            "Food Deterioration and its Control: - Causes of Food Deterioration, Adulteration, Food Preservation."
+          ]
+        },
+        {
+          "title": "V. Information Technology",
+          "items": [
+            "Computer (Hardware & Software Fundamentals); I/O Processing and data storage, Networking & Internet Standards, Application and business Software, Social Media Websites. Information Systems. Fundamentals of artificial intelligence.",
+            "Telecommunications: - Basics of Wireless Communication (Mobile, Satellite, Surveillance and GPS and Fiber Optic etc."
+          ]
+        }
+      ]
+    },
+    "limitation": "User-supplied FPSC PDF directly inspected. Live FPSC endpoints still return HTTP 503; latest online revision not independently confirmed."
+  },
+  "academicApproval": "WITHHELD",
+  "rows": [
+    {
+      "id": "GS-I-01",
+      "domain": "I. Physical Sciences",
+      "exactPrescribedTopic": "Constituents and Structure:-Universe, Galaxy, Light Year, Solar System, Sun, Earth, Astronomical System of Units.",
+      "essentialConcepts": [
+        "Universe",
+        "galaxies",
+        "light-year",
+        "astronomical unit",
+        "Sun",
+        "Earth",
+        "solar system"
+      ],
+      "chapterIds": [
+        1,
+        2,
+        3
+      ],
+      "lessonIds": [
+        "c1-s1-1",
+        "c1-s1-2",
+        "c1-s1-3",
+        "c1-s1-4",
+        "c1-s1-5",
+        "c2-s2-1",
+        "c2-s2-2",
+        "c2-s2-3",
+        "c2-s2-4",
+        "c2-s2-5",
+        "c3-s3-1",
+        "c3-s3-2",
+        "c3-s3-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Check units, distance versus time, stellar evidence and prerequisite explanations.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-02",
+      "domain": "I. Physical Sciences",
+      "exactPrescribedTopic": "Process of Nature: - Solar and Lunar Eclipses, Rotation and Revolution, Weather Variables (Global Temperature, Pressure, Circulation, Precipitation, Humidity) and Weather Variations.",
+      "essentialConcepts": [
+        "Eclipses",
+        "rotation",
+        "revolution",
+        "temperature",
+        "pressure",
+        "circulation",
+        "precipitation",
+        "humidity",
+        "weather variation"
+      ],
+      "chapterIds": [
+        3,
+        4
+      ],
+      "lessonIds": [
+        "c3-s3-3",
+        "c3-s3-4",
+        "c4-s4-1",
+        "c4-s4-2",
+        "c4-s4-3",
+        "c4-s4-4",
+        "c4-s4-5",
+        "c4-s4-6"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Check eclipse inclination, axial tilt, pressure gradients, saturation and causal explanations.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-2(a)",
+          "year": 2025,
+          "questionNumber": "2(a)",
+          "marks": 5,
+          "prompt": "What effects are produced due to Rotation & Revolution of Earth? Explain briefly.",
+          "lessonIds": [
+            "c3-s3-3"
+          ],
+          "syllabusRefs": [
+            "GS-I-02"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-03",
+      "domain": "I. Physical Sciences",
+      "exactPrescribedTopic": "Natural Hazards and Disasters: - Earth Quake, Volcanic Eruption, Tsunami, Floods, Avalanche, Travelling Cyclone (Tropical Cyclone, Middle Latitude Cyclone and Tornadoes), Drought, Wildfire, Urban Fire. Disaster Risk Management.",
+      "essentialConcepts": [
+        "Earthquakes",
+        "volcanoes",
+        "tsunami",
+        "flood",
+        "avalanche",
+        "tropical and mid-latitude cyclones",
+        "tornado",
+        "drought",
+        "wildfire",
+        "urban fire",
+        "disaster risk"
+      ],
+      "chapterIds": [
+        5
+      ],
+      "lessonIds": [
+        "c5-s5-1",
+        "c5-s5-2",
+        "c5-s5-3",
+        "c5-s5-4",
+        "c5-s5-5",
+        "c5-s5-6"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Review each named hazard, especially mid-latitude cyclones and hazard versus vulnerability.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-2(c)",
+          "year": 2025,
+          "questionNumber": "2(c)",
+          "marks": 5,
+          "prompt": "What are Hurricanes? How they are formed and what level of damage they can produce?",
+          "lessonIds": [
+            "c5-s5-5"
+          ],
+          "syllabusRefs": [
+            "GS-I-03"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-04",
+      "domain": "I. Physical Sciences",
+      "exactPrescribedTopic": "Energy Resources: - Sources of Energy (Renewable i.e. LED Energy, Solar Energy, Wind Energy and Non-Renewable Energy conservation and its sustainable use.",
+      "essentialConcepts": [
+        "Renewable and non-renewable energy",
+        "LED efficiency",
+        "solar",
+        "wind",
+        "conservation",
+        "sustainable use"
+      ],
+      "chapterIds": [
+        7,
+        8
+      ],
+      "lessonIds": [
+        "c7-s7-1",
+        "c7-s7-2",
+        "c7-s7-3",
+        "c7-s7-4",
+        "c7-s7-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Clarify that LEDs conserve energy; they are not primary renewable energy sources. The supplied PDF does say “LED Energy”; preserve this wording while explaining LED lighting as efficiency technology. Independent interpretation remains pending.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-05",
+      "domain": "I. Physical Sciences",
+      "exactPrescribedTopic": "Atomic Structure, Chemical Bonding, Electromagnetic Radiations.",
+      "essentialConcepts": [
+        "Atomic structure",
+        "chemical bonding",
+        "electromagnetic radiation"
+      ],
+      "chapterIds": [
+        6
+      ],
+      "lessonIds": [
+        "c6-s6-1",
+        "c6-s6-2",
+        "c6-s6-3",
+        "c6-s6-4",
+        "c6-s6-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Only one MCQ for five lessons; add reviewed bond, spectrum and application checks and written models.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-2(b)",
+          "year": 2025,
+          "questionNumber": "2(b)",
+          "marks": 5,
+          "prompt": "Describe Electromagnetic Radiations. Give its types and explain their applications.",
+          "lessonIds": [
+            "c6-s6-4"
+          ],
+          "syllabusRefs": [
+            "GS-I-05"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-06",
+      "domain": "I. Physical Sciences",
+      "exactPrescribedTopic": "Modern Materials/Chemicals: - Ceramics, Plastics, Semiconductors. Antibiotics, Vaccines, Fertilizers, Pesticides.",
+      "essentialConcepts": [
+        "Ceramics",
+        "plastics",
+        "semiconductors",
+        "antibiotics",
+        "vaccines",
+        "fertilizers",
+        "pesticides"
+      ],
+      "chapterIds": [
+        8,
+        13
+      ],
+      "lessonIds": [
+        "c8-s8-1",
+        "c8-s8-2",
+        "c8-s8-3",
+        "c8-s8-4",
+        "c8-s8-5",
+        "c13-s13-5",
+        "c13-s13-6"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Review ceramics depth and distinctions among medicines, agricultural chemicals and electronic materials.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-2(d)",
+          "year": 2025,
+          "questionNumber": "2(d)",
+          "marks": 5,
+          "prompt": "Explain the advantages and disadvantages of nitrogen containing fertilizers and insecticides.",
+          "lessonIds": [
+            "c8-s8-4",
+            "c8-s8-5"
+          ],
+          "syllabusRefs": [
+            "GS-I-06"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-07",
+      "domain": "II. Biological Sciences",
+      "exactPrescribedTopic": "The Basis of Life: - Cell Structures and Functions (Subcellular Organelles such as Nucleus, Mitochondria and Ribosomes).",
+      "essentialConcepts": [
+        "Cell structure",
+        "nucleus",
+        "mitochondria",
+        "ribosomes",
+        "organelle functions"
+      ],
+      "chapterIds": [
+        9
+      ],
+      "lessonIds": [
+        "c9-s9-1",
+        "c9-s9-2",
+        "c9-s9-3",
+        "c9-s9-4",
+        "c9-s9-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Review cell prerequisites and organelle structure-function reasoning.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-08",
+      "domain": "II. Biological Sciences",
+      "exactPrescribedTopic": "Biomolecules: - Proteins, Lipids, Carbohydrates and Enzymes.",
+      "essentialConcepts": [
+        "Proteins",
+        "lipids",
+        "carbohydrates",
+        "enzymes"
+      ],
+      "chapterIds": [
+        10,
+        21
+      ],
+      "lessonIds": [
+        "c10-s10-1",
+        "c10-s10-2",
+        "c10-s10-3",
+        "c10-s10-4",
+        "c10-s10-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Check molecular structure, functions, enzyme specificity and temperature/pH mechanisms.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-3(a)",
+          "year": 2025,
+          "questionNumber": "3(a)",
+          "marks": 5,
+          "prompt": "Explain how temperature and light intensity affect the rate of photosynthesis in plants.",
+          "lessonIds": [
+            "c10-s10-5"
+          ],
+          "syllabusRefs": [
+            "GS-I-08"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-09",
+      "domain": "II. Biological Sciences",
+      "exactPrescribedTopic": "Plant and Animal Kingdom: - A brief survey of plant and animal kingdom to pinpoint similarities and diversities in nature.",
+      "essentialConcepts": [
+        "Plant and animal diversity",
+        "similarities and differences"
+      ],
+      "chapterIds": [
+        11
+      ],
+      "lessonIds": [
+        "c11-s11-1",
+        "c11-s11-2",
+        "c11-s11-3",
+        "c11-s11-4",
+        "c11-s11-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Three MCQs and no written model; add reviewed comparisons rather than lists alone.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-10",
+      "domain": "II. Biological Sciences",
+      "exactPrescribedTopic": "A Brief Account of Human Physiology.",
+      "essentialConcepts": [
+        "Human physiology",
+        "digestion",
+        "circulation",
+        "respiration",
+        "excretion",
+        "nervous and endocrine control",
+        "reproduction",
+        "immunity"
+      ],
+      "chapterIds": [
+        12
+      ],
+      "lessonIds": [
+        "c12-s12-1",
+        "c12-s12-2",
+        "c12-s12-3",
+        "c12-s12-4",
+        "c12-s12-5",
+        "c12-s12-6"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "No written models; review integrated homeostasis and prerequisite explanations.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-3(b)",
+          "year": 2025,
+          "questionNumber": "3(b)",
+          "marks": 5,
+          "prompt": "Describe the structure and functions of capillaries in the human blood circulatory system.",
+          "lessonIds": [
+            "c12-s12-3"
+          ],
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-11",
+      "domain": "II. Biological Sciences",
+      "exactPrescribedTopic": "Common Diseases and Epidemics: - Polio, Diarrhea, Malaria, Hepatitis, Dengue their Causes and Prevention.",
+      "essentialConcepts": [
+        "Polio",
+        "diarrhoea",
+        "malaria",
+        "hepatitis",
+        "dengue",
+        "causes",
+        "prevention"
+      ],
+      "chapterIds": [
+        13
+      ],
+      "lessonIds": [
+        "c13-s13-1",
+        "c13-s13-2",
+        "c13-s13-3",
+        "c13-s13-4",
+        "c13-s13-5",
+        "c13-s13-6"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Check each named disease, transmission routes, prevention and current medical claims individually.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-3(c)",
+          "year": 2025,
+          "questionNumber": "3(c)",
+          "marks": 5,
+          "prompt": "What is hepatitis? Give its types and briefly explain its common symptoms along with preventions.",
+          "lessonIds": [
+            "c13-s13-4"
+          ],
+          "syllabusRefs": [
+            "GS-I-11"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-12",
+      "domain": "II. Biological Sciences",
+      "exactPrescribedTopic": "New Model Concept of Producing BIO Fuel Method",
+      "essentialConcepts": [
+        "Biofuel production",
+        "fermentation",
+        "transesterification",
+        "anaerobic digestion",
+        "emerging methods"
+      ],
+      "chapterIds": [
+        14
+      ],
+      "lessonIds": [
+        "c14-s14-1",
+        "c14-s14-2",
+        "c14-s14-3",
+        "c14-s14-4",
+        "c14-s14-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Only one MCQ and no model; teach feedstock-to-product mechanisms and limitations.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-3(d)",
+          "year": 2025,
+          "questionNumber": "3(d)",
+          "marks": 5,
+          "prompt": "Differentiate between biomass and biogas. Briefly explain various methods for obtaining energy from biomass.",
+          "lessonIds": [
+            "c14-s14-1",
+            "c14-s14-4"
+          ],
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-13",
+      "domain": "III. Environmental Science",
+      "exactPrescribedTopic": "Environment: - The Atmosphere (Layered Structure and Composition), Hydrosphere (Water Cycle, Major Water Compartments), Biosphere (Major Biomes) and Lithosphere (Minerals and Rocks, Rock Types, Plate Tectonics).",
+      "essentialConcepts": [
+        "Atmosphere layers and composition",
+        "hydrosphere compartments and water cycle",
+        "biosphere biomes",
+        "lithosphere minerals, rocks and tectonics"
+      ],
+      "chapterIds": [
+        15
+      ],
+      "lessonIds": [
+        "c15-s15-1",
+        "c15-s15-2",
+        "c15-s15-3",
+        "c15-s15-4",
+        "c15-s15-5",
+        "c15-s15-6",
+        "c15-s15-7"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Review every named Earth sphere and causal links; do not count title mentions as complete coverage.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-14",
+      "domain": "III. Environmental Science",
+      "exactPrescribedTopic": "Atmospheric Pollution: - Types, Sources, Causes and effects of major air pollutants (COx, Particulate Matter, NOx, SOx, Tropospheric Ozone, Volatile Organic Compounds, Dioxins). Regional and Global air pollution issues (Acid-rain, Ozone Depletion, Greenhouse Effect and Global Warming). International agreements on air pollution control (Montreal Protocol and Kyoto Protocol).",
+      "essentialConcepts": [
+        "COx",
+        "particulate matter",
+        "NOx",
+        "SOx",
+        "tropospheric ozone",
+        "VOCs",
+        "dioxins",
+        "acid rain",
+        "ozone depletion",
+        "greenhouse effect",
+        "warming",
+        "Montreal and Kyoto Protocols"
+      ],
+      "chapterIds": [
+        16
+      ],
+      "lessonIds": [
+        "c16-s16-1",
+        "c16-s16-2",
+        "c16-s16-3",
+        "c16-s16-4",
+        "c16-s16-5",
+        "c16-s16-6"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Verify named pollutants, mechanisms, health effects and the distinction between ozone depletion and warming.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-4(c)",
+          "year": 2025,
+          "questionNumber": "4(c)",
+          "marks": 5,
+          "prompt": "State some examples of pollution caused by human activity and discuss the effects of each example.",
+          "lessonIds": [
+            "c16-s16-2",
+            "c17-s17-3"
+          ],
+          "syllabusRefs": [
+            "GS-I-14",
+            "GS-I-15"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        },
+        {
+          "id": "FPSC-2025-4(d)",
+          "year": 2025,
+          "questionNumber": "4(d)",
+          "marks": 5,
+          "prompt": "What does air pollution means? State ten serious effects of air pollution on the environment and briefly explain how they can be reduced?",
+          "lessonIds": [
+            "c16-s16-1",
+            "c16-s16-2"
+          ],
+          "syllabusRefs": [
+            "GS-I-14"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-15",
+      "domain": "III. Environmental Science",
+      "exactPrescribedTopic": "Water Pollution:- Types, sources, causes and effects of major water pollutants (Synthetic Organic Chemicals, Oxygen Demanding Wastes, Plant Nutrients, Thermal Pollution, Infectious Agents, Sediments, Radioactivity, Heavy Metals and Acids).",
+      "essentialConcepts": [
+        "Synthetic organics",
+        "oxygen demand",
+        "nutrients",
+        "thermal pollution",
+        "pathogens",
+        "sediments",
+        "radioactivity",
+        "metals",
+        "acids"
+      ],
+      "chapterIds": [
+        17
+      ],
+      "lessonIds": [
+        "c17-s17-1",
+        "c17-s17-2",
+        "c17-s17-3",
+        "c18-s18-2"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "36 MCQs concentrated here; review distractors and redistribute future assessment effort.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-4(b)",
+          "year": 2025,
+          "questionNumber": "4(b)",
+          "marks": 5,
+          "prompt": "Explain how water pollution is produced? Describe the part played by bacteria after a river has been polluted by sewage.",
+          "lessonIds": [
+            "c17-s17-1",
+            "c17-s17-2"
+          ],
+          "syllabusRefs": [
+            "GS-I-15"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        },
+        {
+          "id": "FPSC-2025-4(c)",
+          "year": 2025,
+          "questionNumber": "4(c)",
+          "marks": 5,
+          "prompt": "State some examples of pollution caused by human activity and discuss the effects of each example.",
+          "lessonIds": [
+            "c16-s16-2",
+            "c17-s17-3"
+          ],
+          "syllabusRefs": [
+            "GS-I-14",
+            "GS-I-15"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-16",
+      "domain": "III. Environmental Science",
+      "exactPrescribedTopic": "Drinking water quality and standards.",
+      "essentialConcepts": [
+        "Drinking-water quality",
+        "standards",
+        "multiple treatment barriers"
+      ],
+      "chapterIds": [
+        17,
+        18
+      ],
+      "lessonIds": [
+        "c17-s17-4",
+        "c18-s18-1"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Verify numerical standards by authority, date and jurisdiction; treatment diagrams do not certify safety.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-17",
+      "domain": "III. Environmental Science",
+      "exactPrescribedTopic": "Land Pollution: - Solid waste management and disposal.",
+      "essentialConcepts": [
+        "Land pollution",
+        "solid waste management",
+        "disposal"
+      ],
+      "chapterIds": [
+        18
+      ],
+      "lessonIds": [
+        "c18-s18-3",
+        "c18-s18-4"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Review waste hierarchy, treatment limitations and local claims.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-18",
+      "domain": "III. Environmental Science",
+      "exactPrescribedTopic": "Role of Remote Sensing and GIS in Environmental Science.",
+      "essentialConcepts": [
+        "Remote sensing",
+        "GIS",
+        "environmental applications"
+      ],
+      "chapterIds": [
+        19
+      ],
+      "lessonIds": [
+        "c19-s19-1",
+        "c19-s19-2",
+        "c19-s19-3"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Add reviewed interpretation exercises for resolution, spectral evidence and spatial analysis.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-19",
+      "domain": "III. Environmental Science",
+      "exactPrescribedTopic": "Population Planning.",
+      "essentialConcepts": [
+        "Population planning",
+        "demographic change",
+        "resource pressure"
+      ],
+      "chapterIds": [
+        20
+      ],
+      "lessonIds": [
+        "c20-s20-4"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Check population planning coverage beyond population growth; no in-chapter source links in original audit.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-20",
+      "domain": "IV. Food Science",
+      "exactPrescribedTopic": "Concept of Balance Diet: - Vitamins, Carbohydrates, Protein, Fats and oil, Minerals, Fiber.",
+      "essentialConcepts": [
+        "Balanced diet",
+        "vitamins",
+        "carbohydrates",
+        "proteins",
+        "fats and oils",
+        "minerals",
+        "fibre"
+      ],
+      "chapterIds": [
+        21,
+        22
+      ],
+      "lessonIds": [
+        "c21-s21-1",
+        "c21-s21-2",
+        "c21-s21-3",
+        "c21-s21-4",
+        "c22-s22-1",
+        "c22-s22-3",
+        "c22-s22-4"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "No written models in either chapter; review physiological roles and deficiency claims.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-5(b)",
+          "year": 2025,
+          "questionNumber": "5(b)",
+          "marks": 5,
+          "prompt": "Enlist major food groups based on nutrients, their functions and sources.",
+          "lessonIds": [
+            "c21-s21-1",
+            "c21-s21-2",
+            "c21-s21-3",
+            "c22-s22-1"
+          ],
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-21",
+      "domain": "IV. Food Science",
+      "exactPrescribedTopic": "Quality of Food:- Bioavailability of Nutrients, Appearance, Texture, Flavor, Quality of Packed and Frozen Food, Food Additives, Preservatives and Antioxidants",
+      "essentialConcepts": [
+        "Nutrient bioavailability",
+        "appearance",
+        "texture",
+        "flavour",
+        "packed and frozen food",
+        "additives",
+        "preservatives",
+        "antioxidants"
+      ],
+      "chapterIds": [
+        22,
+        23,
+        24
+      ],
+      "lessonIds": [
+        "c22-s22-2",
+        "c23-s23-1",
+        "c23-s23-2",
+        "c24-s24-4",
+        "c24-s24-6"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Check every sensory/processing subtopic and distinguish quality, safety and bioavailability.",
+      "verifiedPastPaperQuestions": [],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-22",
+      "domain": "IV. Food Science",
+      "exactPrescribedTopic": "Food Deterioration and its Control: - Causes of Food Deterioration, Adulteration, Food Preservation.",
+      "essentialConcepts": [
+        "Food deterioration",
+        "adulteration",
+        "preservation"
+      ],
+      "chapterIds": [
+        23,
+        24
+      ],
+      "lessonIds": [
+        "c23-s23-3",
+        "c24-s24-1",
+        "c24-s24-2",
+        "c24-s24-3",
+        "c24-s24-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Review microbial, chemical and physical causes and mechanism-specific controls.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-5(a)",
+          "year": 2025,
+          "questionNumber": "5(a)",
+          "marks": 5,
+          "prompt": "Differentiate between food contaminants and food adulterants.",
+          "lessonIds": [
+            "c23-s23-2",
+            "c23-s23-3"
+          ],
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-23",
+      "domain": "V. Information Technology",
+      "exactPrescribedTopic": "Computer (Hardware & Software Fundamentals); I/O Processing and data storage, Networking & Internet Standards, Application and business Software, Social Media Websites. Information Systems. Fundamentals of artificial intelligence.",
+      "essentialConcepts": [
+        "Hardware",
+        "software",
+        "input/output",
+        "processing",
+        "storage",
+        "networking",
+        "internet standards",
+        "applications",
+        "business software",
+        "social media",
+        "information systems",
+        "AI"
+      ],
+      "chapterIds": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "lessonIds": [
+        "c25-s25-1",
+        "c25-s25-2",
+        "c25-s25-3",
+        "c25-s25-4",
+        "c25-s25-5",
+        "c26-s26-1",
+        "c27-s27-1",
+        "c28-s28-1",
+        "c28-s28-2",
+        "c28-s28-3",
+        "c28-s28-4"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Separate official core from enrichment; add scientific reasoning and reviewed IT source references.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-5(c)",
+          "year": 2025,
+          "questionNumber": "5(c)",
+          "marks": 5,
+          "prompt": "What is Artificial Intelligence and how does it differ from traditional programming? Describe the main branches of Artificial Intelligence.",
+          "lessonIds": [
+            "c28-s28-1",
+            "c28-s28-2"
+          ],
+          "syllabusRefs": [
+            "GS-I-23"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    },
+    {
+      "id": "GS-I-24",
+      "domain": "V. Information Technology",
+      "exactPrescribedTopic": "Telecommunications: - Basics of Wireless Communication (Mobile, Satellite, Surveillance and GPS and Fiber Optic etc.",
+      "essentialConcepts": [
+        "Wireless",
+        "mobile",
+        "satellite",
+        "surveillance",
+        "GPS",
+        "optical fibre"
+      ],
+      "chapterIds": [
+        19,
+        26
+      ],
+      "lessonIds": [
+        "c19-s19-4",
+        "c26-s26-2",
+        "c26-s26-3",
+        "c26-s26-4",
+        "c26-s26-5"
+      ],
+      "mappingStatus": "candidate-not-independently-reviewed",
+      "existingCoverage": "Relevant manuscript sections present; instructional completeness not established.",
+      "missingInstructionalMaterial": "Requires objective-by-objective review of teaching, examples, visual explanations, checks and answer-writing rubrics.",
+      "expansionRequired": "Review signal transmission, positioning versus communication and fibre guidance.",
+      "verifiedPastPaperQuestions": [
+        {
+          "id": "FPSC-2025-5(d)",
+          "year": 2025,
+          "questionNumber": "5(d)",
+          "marks": 5,
+          "prompt": "What are the advantages of optical fibers in communication system? Draw basic structure of optical fiber and explain propagation of light through it.",
+          "lessonIds": [
+            "c26-s26-5"
+          ],
+          "syllabusRefs": [
+            "GS-I-24"
+          ],
+          "sourceId": "fpsc-gsa-2025-archive",
+          "sourcePage": 2,
+          "transcriptionStatus": "checked-against-archived-scan; original wording retained"
+        }
+      ],
+      "pastPaperStatus": "2025 linked question text checked against the CSS VISTA archived scan. Publisher-origin reconfirmation from FPSC remains unavailable; no approved answer inferred.",
+      "sources": [
+        {
+          "title": "Revised Syllabi for CSS Competitive Examination, CE-2016",
+          "publisher": "Federal Public Service Commission",
+          "updated": "2015-07-07",
+          "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+          "providedDocument": "GENERAL SCIENCE & ABILITY (1).pdf",
+          "sha256": "e3c4416053b670eeec6d9a867ee92c3f75cd0ab8ec01fdfe30194e31c2566e19",
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "editorialVerification": "compared-to-provided-PDF; independent-curriculum-review-pending"
+    }
+  ]
+}

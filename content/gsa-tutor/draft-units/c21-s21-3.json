@@ -1,0 +1,238 @@
+{
+  "version": "draft-1",
+  "lessonId": "c21-s21-3",
+  "title": "Proteins, fats and molecular structure",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-20"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "title": "3.4 Proteins - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.637638+00:00",
+      "retrievedSha256": "5024620f11ecbd6b5eaae3dc3e9935b97eb513abffd71f74bb03d18d02c3441c",
+      "id": "proteins",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/3-3-lipids",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/3-3-lipids",
+      "title": "3.3 Lipids - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.617659+00:00",
+      "retrievedSha256": "c3af02e70c67df77d9bb033a58b7b79e4a8195ceb8b9f1a19bb979b62c15b763",
+      "id": "fats",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "title": "34.2 Nutrition and Energy Production - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.707255+00:00",
+      "retrievedSha256": "1d153f67deaa73f6ab10e33e536d959f90076dbe0b0f139cb3062794b6c5fb4b",
+      "id": "nutrition",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Relate protein structure to function.",
+        "Compare triglycerides and phospholipids and explain unsaturation."
+      ],
+      "prerequisites": [
+        "Molecular structure influences interactions with water and other molecules.",
+        "Bond cleavage is distinct from a change in a molecule’s folded organization."
+      ],
+      "terms": {
+        "amino acid": "A building unit of proteins joined to others through peptide bonds.",
+        "denaturation": "Disruption of a protein’s usual folded structure, often altering function.",
+        "unsaturated fatty acid": "A fatty acid containing one or more carbon–carbon double bonds."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "protein-structure",
+        "sourceIds": [
+          "proteins"
+        ],
+        "explanation": "A protein’s amino-acid sequence forms a chain that folds into a functional structure. Side-chain interactions and the surrounding environment affect that shape. Some proteins catalyse reactions; others support structure, transport or signalling. Denaturation changes higher-level organization and can impair function without necessarily hydrolysing the peptide backbone. Essential amino acids must be supplied through the diet in adequate form and amount; eating protein is not the same as transferring a whole food protein unchanged into human muscle."
+      },
+      {
+        "conceptId": "lipid-types",
+        "sourceIds": [
+          "fats"
+        ],
+        "explanation": "A triglyceride contains glycerol esterified to three fatty acids and is important for energy storage. A typical phospholipid has a polar head and nonpolar tails; this mixed affinity helps it organize into membrane bilayers in water. These are different molecular arrangements and roles. Lipids are a broad class, not all long chains of identical repeating monomers like proteins. Their low affinity for water helps explain oil–water separation."
+      },
+      {
+        "conceptId": "saturation-properties",
+        "sourceIds": [
+          "fats"
+        ],
+        "explanation": "A saturated fatty-acid chain has no carbon–carbon double bond, while an unsaturated chain has at least one. Cis double bonds introduce bends that often reduce close packing, helping explain why many unsaturated-rich fats are more fluid under comparable conditions. Chain length, mixture and temperature also matter, so solid versus liquid is not an infallible classification test. A molecular explanation is stronger than claiming all fats behave identically or assigning a medical verdict to one structural term alone."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Amino-acid sequence → folding → protein function",
+        "Glycerol + three fatty acids → triglyceride",
+        "Polar head + nonpolar tails → phospholipid organization"
+      ],
+      "description": "Draw an amino-acid chain and folded shape separately from triglyceride and phospholipid schematics; mark a cis bend.",
+      "limitations": "Molecular cartoons omit atomic scale and cannot predict an entire food’s health effects.",
+      "sourceIds": [
+        "proteins",
+        "fats",
+        "nutrition"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Heating an egg changes protein organization and texture; oil–water separation reflects different molecular interactions rather than the creation of new elements.",
+      "sourceIds": [
+        "proteins",
+        "fats",
+        "nutrition"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Relate protein and lipid molecular structure to their biological and food functions."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c21-s21-3-1",
+          "lessonId": "c21-s21-3",
+          "conceptId": "protein-structure",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which distinction correctly separates denaturation from hydrolysis?",
+          "options": {
+            "A": "Denaturation always cleaves every peptide bond.",
+            "B": "Both processes necessarily leave the folded structure unchanged.",
+            "C": "Denaturation changes folding; hydrolysis can cleave peptide bonds.",
+            "D": "Hydrolysis changes only folding, while denaturation always forms free amino acids."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Unfolding need not cleave the backbone.",
+            "B": "Either process can alter molecular organization or structure.",
+            "C": "This separates higher-order structure from bond cleavage.",
+            "D": "This reverses the distinction."
+          },
+          "sources": [
+            "proteins"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c21-s21-3-2",
+          "lessonId": "c21-s21-3",
+          "conceptId": "saturation-properties",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which feature defines an unsaturated fatty acid?",
+          "options": {
+            "A": "At least one carbon–carbon double bond.",
+            "B": "Exactly three fatty acids attached to each chain.",
+            "C": "Absence of all carbon–carbon single bonds.",
+            "D": "A requirement to remain liquid at every temperature."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "The double bond defines unsaturation.",
+            "B": "Three fatty acids characterize a triglyceride arrangement, not one fatty acid.",
+            "C": "An unsaturated chain also contains other bonds.",
+            "D": "Physical state depends on temperature, chain length and mixture."
+          },
+          "sources": [
+            "fats"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Proteins are amino-acid chains whose sequence and folding support functions such as catalysis, structure and transport. Denaturation alters usual folding and can impair function without necessarily cleaving all peptide bonds. Triglycerides contain glycerol and three fatty acids and support energy storage. Phospholipids combine polar heads with nonpolar tails, favouring membrane organization in water. Unsaturated fatty acids contain carbon–carbon double bonds; cis bonds often reduce close packing, although temperature, chain length and mixtures also affect physical behaviour.",
+      "rubric": [
+        {
+          "criterion": "Explain amino-acid sequence and folding.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish denaturation from peptide hydrolysis.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe triglyceride structure and storage role.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect phospholipid polarity with membranes.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define unsaturation and qualify physical-state predictions.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Defining every liquid fat as a pure unsaturated compound.",
+        "Equating protein denaturation with complete digestion."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "amino acid: A building unit of proteins joined to others through peptide bonds.",
+        "denaturation: Disruption of a protein’s usual folded structure, often altering function.",
+        "unsaturated fatty acid: A fatty acid containing one or more carbon–carbon double bonds."
+      ],
+      "closedBookRecall": [
+        "Draw a triglyceride beside a phospholipid.",
+        "Explain why shape matters for a protein."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

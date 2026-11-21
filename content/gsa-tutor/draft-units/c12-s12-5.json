@@ -1,0 +1,262 @@
+{
+  "version": "draft-1",
+  "lessonId": "c12-s12-5",
+  "title": "Nervous and endocrine coordination",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-10"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-3-the-function-of-nervous-tissue",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-3-the-function-of-nervous-tissue",
+      "title": "12.3 The Function of Nervous Tissue  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.976334+00:00",
+      "retrievedSha256": "54ce462c2bed85fc88453345ac5c31f0d17b0d4e16783b7ea414a2bef9cf0d91",
+      "id": "neurons",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-2-hormones",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-2-hormones",
+      "title": "17.2 Hormones  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.373760+00:00",
+      "retrievedSha256": "a64229a1e9aadf54e8a54b52d1ec2b9bc97956cd17a6410ebb756a3805016043",
+      "id": "hormones",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas",
+      "title": "17.9 The Endocrine Pancreas  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.060453+00:00",
+      "retrievedSha256": "68f6f7de0a03bb294b54c5994dbbdaf84de0c50e693fe4e5983180c58eed48e3",
+      "id": "glucose",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "title": "1.5 Homeostasis  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.449747+00:00",
+      "retrievedSha256": "0af666d55f507e9f402caf2d4be006496cc93e78eddd99245c46e514a24a035c",
+      "id": "homeostasis",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Compare neural and endocrine signals.",
+        "Explain reflex pathways and glucose negative feedback."
+      ],
+      "prerequisites": [
+        "Cells can respond to chemical signals through receptors.",
+        "Negative feedback opposes a deviation in a regulated variable."
+      ],
+      "terms": {
+        "neuron": "A signalling cell that uses electrical changes and chemical communication.",
+        "synapse": "A junction where a neuron communicates with another cell.",
+        "hormone": "A chemical messenger released into circulation to act on cells with suitable receptors."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "neural-signals",
+        "sourceIds": [
+          "neurons"
+        ],
+        "explanation": "A neuron receives and integrates inputs; a sufficient stimulus can initiate an action potential along its axon. At a chemical synapse, neurotransmitter release changes the activity of a receiving cell. A signal is not a miniature blood-borne hormone travelling inside a wire. Sensory pathways carry information toward central processing, while motor pathways influence effectors such as muscles. The brain and spinal cord form the central nervous system; peripheral nerves connect it with the body."
+      },
+      {
+        "conceptId": "reflex-coordination",
+        "sourceIds": [
+          "neurons"
+        ],
+        "explanation": "A reflex pathway links receptor, sensory neuron, central integration, motor neuron and effector. A spinal withdrawal response can begin before conscious awareness, while information also reaches the brain. Not every reflex has precisely the same number of synapses or excludes brain influence. A labelled pathway should show signal direction and distinguish the sensory and motor roles. Coordination therefore includes rapid local circuits as well as conscious decisions."
+      },
+      {
+        "conceptId": "endocrine-specificity",
+        "sourceIds": [
+          "hormones"
+        ],
+        "explanation": "Endocrine cells release hormones into blood. A messenger can circulate widely but affects cells with an appropriate receptor and response machinery. Neural signals usually provide rapid, targeted communication; endocrine effects often develop more slowly and persist longer, but these are useful general patterns rather than absolute rules. Hormones participate in growth, metabolism, reproduction and fluid regulation. Receptor specificity explains why a circulating hormone does not make every cell respond identically."
+      },
+      {
+        "conceptId": "glucose-feedback",
+        "sourceIds": [
+          "glucose",
+          "homeostasis"
+        ],
+        "explanation": "After blood glucose rises, pancreatic beta cells release insulin, which supports glucose uptake in responsive tissues and storage. When glucose falls, pancreatic alpha cells release glucagon, supporting hepatic glucose release through processes including glycogen breakdown. These complementary responses help oppose deviations. The pancreas also has exocrine digestive functions, so an organ can serve multiple roles. This introductory feedback model does not imply that all forms of diabetes have the same cause or can be diagnosed by a diagram."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Stimulus → receptor",
+        "Sensory neuron → central integration",
+        "Motor neuron → effector",
+        "Blood glucose → pancreatic hormone → responsive target → corrective change"
+      ],
+      "description": "Draw neural and endocrine routes side by side: a directed synaptic pathway and a blood-carried messenger with receptor-labelled target cells.",
+      "limitations": "Qualitative comparison; timing varies by pathway and this is not a diabetes diagnostic model.",
+      "sourceIds": [
+        "neurons",
+        "hormones",
+        "glucose",
+        "homeostasis"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Withdrawal from a hot surface and regulation of post-meal glucose both coordinate tissues, but their signal routes and typical timing differ.",
+      "sourceIds": [
+        "neurons",
+        "hormones",
+        "glucose",
+        "homeostasis"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Compare nervous and endocrine coordination, illustrating reflex action and glucose feedback."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c12-s12-5-1",
+          "lessonId": "c12-s12-5",
+          "conceptId": "endocrine-specificity",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Why can a blood-carried hormone act selectively?",
+          "options": {
+            "A": "Only the nearest organ receives the circulating messenger.",
+            "B": "All tissues contain identical numbers of functional receptors.",
+            "C": "Blood flow alone determines the same response in every cell.",
+            "D": "Responsive cells have appropriate receptors and signalling machinery."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Blood transports the hormone to multiple tissues.",
+            "B": "Receptor expression and response machinery vary.",
+            "C": "Delivery does not establish identical receptor-mediated responses.",
+            "D": "Receptor recognition and cellular context support specificity."
+          },
+          "sources": [
+            "hormones"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c12-s12-5-2",
+          "lessonId": "c12-s12-5",
+          "conceptId": "glucose-feedback",
+          "syllabusRefs": [
+            "GS-I-10"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which pairing is correct in the introductory glucose model?",
+          "options": {
+            "A": "Alpha cells release insulin; beta cells release glucagon.",
+            "B": "Beta cells release insulin; alpha cells release glucagon.",
+            "C": "Beta cells release glucagon; alpha cells release somatostatin.",
+            "D": "Alpha cells release digestive amylase; beta cells release bile."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "This swaps the principal cell–hormone pairs.",
+            "B": "These are the correct principal pairings.",
+            "C": "Glucagon is principally an alpha-cell product in this model.",
+            "D": "The stated islet cells are endocrine; bile is produced by the liver."
+          },
+          "sources": [
+            "glucose"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Nervous coordination uses action potentials and synaptic communication along defined pathways, often supporting rapid responses. A withdrawal reflex links a receptor, sensory neuron, central integration, motor neuron and muscle, and may begin before conscious perception. Endocrine coordination uses hormones carried in blood, with responses determined by target-cell receptors. In glucose regulation, pancreatic beta-cell insulin supports uptake and storage after a rise, whereas alpha-cell glucagon supports hepatic glucose release during a fall. These responses illustrate negative feedback because they oppose the initiating deviation; typical timing differences between the two systems are not universal absolutes.",
+      "rubric": [
+        {
+          "criterion": "Explain electrical and synaptic neural signalling.",
+          "marks": 1
+        },
+        {
+          "criterion": "Give a directed reflex pathway.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain blood-borne endocrine signalling.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect target receptors with specificity.",
+          "marks": 1
+        },
+        {
+          "criterion": "Correctly relate insulin and glucagon to glucose feedback.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Saying every reflex requires prior conscious thought.",
+        "Saying circulating hormones affect every cell identically."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "neuron: A signalling cell that uses electrical changes and chemical communication.",
+        "synapse: A junction where a neuron communicates with another cell.",
+        "hormone: A chemical messenger released into circulation to act on cells with suitable receptors."
+      ],
+      "closedBookRecall": [
+        "Label a withdrawal pathway.",
+        "Explain the two pancreatic responses without looking."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

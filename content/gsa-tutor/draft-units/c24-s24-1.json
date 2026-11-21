@@ -1,0 +1,241 @@
+{
+  "version": "draft-1",
+  "lessonId": "c24-s24-1",
+  "title": "Preservation and water activity",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-22"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://www.gov.mb.ca/agriculture/food-safety/education-resources/water-content-water-activity.html",
+      "resolvedUrl": "https://www.gov.mb.ca/agriculture/food-safety/education-resources/water-content-water-activity.html",
+      "title": "Province of Manitoba | agriculture - Water Content and Water Activity: Two Factors That Affect Food Safety",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:15.440803+00:00",
+      "retrievedSha256": "11b71fa47bb9ab8160f5aa084e90de4dd0e0b07744549059960f95b87838e7cd",
+      "id": "water-activity",
+      "publisher": "Government of Manitoba",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/9-5-other-environmental-conditions-that-affect-growth",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/9-5-other-environmental-conditions-that-affect-growth",
+      "title": "9.5 Other Environmental Conditions that Affect Growth - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.543037+00:00",
+      "retrievedSha256": "5bd02b9c67e1ab4d9bbc7aa0434d4e9fa655bce7bdc29c03b86e6b33fdd3236a",
+      "id": "micro-food",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "title": "13.2 Using Physical Methods to Control Microorganisms - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.560308+00:00",
+      "retrievedSha256": "afe6721818050a62a3c05502299b76be5ea1582654ea06ff1d2cea8af7103307",
+      "id": "micro-control",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish moisture content from water activity.",
+        "Explain how drying and dissolved solutes can restrict microbial growth."
+      ],
+      "prerequisites": [
+        "Microbial survival and microbial multiplication are different.",
+        "Water can interact with dissolved solutes and food components."
+      ],
+      "terms": {
+        "moisture content": "The amount of water present in a food, expressed on a stated mass basis.",
+        "water activity": "A measure of water availability related to equilibrium vapour behaviour, distinct from total water content.",
+        "plasmolysis": "Loss of cell water that causes the cell contents to shrink away from a rigid wall."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "water-availability",
+        "sourceIds": [
+          "water-activity"
+        ],
+        "explanation": "Total moisture describes how much water is present. Water activity describes its availability within the food system; interactions with solutes and food components matter. Two foods with similar total water can therefore differ in microbial growth potential. Water activity is not the same as pH, which concerns acidity, or relative humidity measured arbitrarily somewhere in a room. A preservation explanation must identify the relevant property rather than infer safety from wet or dry appearance."
+      },
+      {
+        "conceptId": "drying-and-solutes",
+        "sourceIds": [
+          "micro-food",
+          "micro-control"
+        ],
+        "explanation": "Drying removes water, while salt or sugar can lower water availability through interactions in a concentrated solution. High external solute concentrations can draw water from microbial cells and hinder growth. However, microbes differ: some tolerate high salt or sugar and some survive drying. Growth inhibition does not mean every organism has been killed. A dried food can still contain surviving cells or spores even when multiplication is restricted."
+      },
+      {
+        "conceptId": "storage-limits",
+        "sourceIds": [
+          "water-activity",
+          "micro-control"
+        ],
+        "explanation": "Packaging that limits moisture uptake helps maintain the intended condition; rehydration or humid storage can change it. Water activity is one factor among temperature, acidity, atmosphere, initial contamination and processing. Low water availability does not prove that previously formed toxins are absent. Measured product properties and validated controls are needed for a safety claim. This principle explains preservation without providing an improvised universal drying endpoint or salt concentration."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Food water and solute interactions",
+        "Water availability changes",
+        "Microbial growth may be restricted",
+        "Packaging and storage maintain conditions"
+      ],
+      "description": "Compare two boxes with equal total water but different binding/solute conditions; mark surviving cells separately from multiplying cells.",
+      "limitations": "Qualitative water-availability model; no invented shelf life or universal safe threshold.",
+      "sourceIds": [
+        "water-activity",
+        "micro-food",
+        "micro-control"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A dry product that absorbs moisture after opening may no longer have the same growth conditions as the sealed product.",
+      "sourceIds": [
+        "water-activity",
+        "micro-food",
+        "micro-control"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish moisture content and water activity, explaining drying, solutes and preservation limits."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c24-s24-1-1",
+          "lessonId": "c24-s24-1",
+          "conceptId": "water-availability",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Two foods have the same moisture content. Must their water activities be equal?",
+          "options": {
+            "A": "Yes, water activity is the same as total water percentage.",
+            "B": "Yes, all food water has identical availability regardless of solutes.",
+            "C": "No, interactions and solutes can alter water availability.",
+            "D": "No, because pH is a direct measurement of total food water."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Mass percentage and availability are distinct.",
+            "B": "Food components and solutes affect availability.",
+            "C": "Equal total water does not establish equal availability.",
+            "D": "pH measures acidity rather than total water."
+          },
+          "sources": [
+            "water-activity"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c24-s24-1-2",
+          "lessonId": "c24-s24-1",
+          "conceptId": "drying-and-solutes",
+          "syllabusRefs": [
+            "GS-I-22"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Why does inhibition of growth in a dried food not prove sterility?",
+          "options": {
+            "A": "Growth and survival always require identical conditions.",
+            "B": "Some organisms can survive conditions that restrict their multiplication.",
+            "C": "An apparently dry texture directly proves complete spore destruction.",
+            "D": "All microbial toxins must disappear as soon as growth slows."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "An organism may survive without multiplying.",
+            "B": "Survival and growth are distinct states.",
+            "C": "Appearance is not proof of inactivation.",
+            "D": "Growth inhibition does not universally remove prior toxins."
+          },
+          "sources": [
+            "micro-control"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Moisture content measures total water on a stated mass basis; water activity concerns water availability and is affected by the food system. Drying removes water, while suitable dissolved solutes can reduce its availability and impose osmotic stress on microbes. These conditions may inhibit growth without killing every surviving cell or spore. Packaging and storage must maintain the intended condition, since moisture uptake can alter it. Acidity, temperature, contamination and processing also matter, so one water-related measurement alone does not establish complete safety.",
+      "rubric": [
+        {
+          "criterion": "Distinguish total water from availability.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain drying.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain solute-related osmotic effects.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish inhibition from killing.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect preservation with packaging and other controls.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling moisture percentage water activity.",
+        "Claiming all dried food is sterile."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "moisture content: The amount of water present in a food, expressed on a stated mass basis.",
+        "water activity: A measure of water availability related to equilibrium vapour behaviour, distinct from total water content.",
+        "plasmolysis: Loss of cell water that causes the cell contents to shrink away from a rigid wall."
+      ],
+      "closedBookRecall": [
+        "Explain equal moisture but different availability.",
+        "State what might change after moisture enters a package."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "version": "draft-1",
+  "lessonId": "c21-s21-2",
+  "title": "Carbohydrates, fibre and starch behaviour",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-20"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates",
+      "title": "3.2 Carbohydrates - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.604537+00:00",
+      "retrievedSha256": "7dcf332122be55427be938f563feeeb89df4674417b1b15f43199a4a5b9afb30",
+      "id": "carbohydrates",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "title": "23.7 Chemical Digestion and Absorption: A Closer Look  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.786764+00:00",
+      "retrievedSha256": "66cb4c6c90ea2a54bb6ee07597e89b46699daad7aea2859e36aff85a475dbc4a",
+      "id": "absorption",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://asbe.org/article/starch-gelatinization/",
+      "resolvedUrl": "https://asbe.org/article/starch-gelatinization/",
+      "title": "Starch Gelatinization | American Society of Baking",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.948262+00:00",
+      "retrievedSha256": "0a4d9efe9d6a4e365609a03085b6a277406f507d6a65d36acac08984f7d0a987",
+      "id": "starch",
+      "publisher": "American Society of Baking",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "title": "23.5 The Small and Large Intestines  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:43:10.553459+00:00",
+      "retrievedSha256": "17a3fba35ddb784dd73c46724a901f3b33820dbbb2f0bd27053e315e78724dd0",
+      "id": "intestine",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish sugars, starch and cellulose by structure and digestion.",
+        "Explain starch gelatinization without confusing it with hydrolysis."
+      ],
+      "prerequisites": [
+        "Small molecules can be joined into larger chains.",
+        "Enzymes act selectively on particular molecular structures and bonds."
+      ],
+      "terms": {
+        "monosaccharide": "A single sugar unit such as glucose.",
+        "polysaccharide": "A carbohydrate composed of many linked sugar units.",
+        "gelatinization": "Loss of ordered starch-granule structure during heating with suitable water, associated with swelling."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "carbohydrate-structure",
+        "sourceIds": [
+          "carbohydrates"
+        ],
+        "explanation": "Monosaccharides are individual sugar units. Disaccharides contain two linked units, while polysaccharides contain many. Starch is plant carbohydrate storage and includes amylose and branched amylopectin. Cellulose forms structural fibres in plant walls. Both can be glucose polymers, yet the linkage arrangement differs, so identical constituent sugar names do not establish identical properties or digestibility."
+      },
+      {
+        "conceptId": "digestible-and-fibre",
+        "sourceIds": [
+          "carbohydrates",
+          "absorption",
+          "intestine"
+        ],
+        "explanation": "Human amylases and intestinal enzymes can break relevant starch linkages into smaller sugars and finally absorbable monosaccharides. Human enzymes do not hydrolyse cellulose in the same way. Dietary fibre includes several resistant materials with differing properties; some can be fermented by gut microorganisms. It is therefore inaccurate to label every carbohydrate rapidly available glucose or to assume all fibre is chemically identical. Digestion depends on molecular links and food structure as well as the presence of carbon, hydrogen and oxygen."
+      },
+      {
+        "conceptId": "starch-heating",
+        "sourceIds": [
+          "starch"
+        ],
+        "explanation": "When starch is heated with sufficient water, granules absorb water, swell and lose ordered structure; this contributes to thickening in many foods. Gelatinization is distinct from amylase hydrolysis, which cleaves chemical bonds. The result depends on starch source, water availability and processing conditions. A sauce thickening during cooking is not evidence that all starch has already become glucose."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Glucose units → different linkages → starch or cellulose",
+        "Starch + suitable water and heat → swelling and loss of order",
+        "Starch + amylase → smaller carbohydrate products"
+      ],
+      "description": "Draw two polymer chains with linkage labels, then separate cooking and enzymatic-breakdown arrows.",
+      "limitations": "Schematic polymer and granule diagrams; no universal gelatinization temperature or exact digestion-rate prediction.",
+      "sourceIds": [
+        "carbohydrates",
+        "absorption",
+        "starch"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A starch-thickened sauce illustrates physical organization changing during heating; intestinal starch digestion subsequently involves different enzyme-mediated events.",
+      "sourceIds": [
+        "carbohydrates",
+        "absorption",
+        "starch"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Compare starch and cellulose, and distinguish starch gelatinization from digestion."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c21-s21-2-1",
+          "lessonId": "c21-s21-2",
+          "conceptId": "carbohydrate-structure",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Why can starch and cellulose have different human digestibility despite both being glucose polymers?",
+          "options": {
+            "A": "They have identical linkages but human amylase acts randomly.",
+            "B": "Their linkage arrangements differ and human enzymes act selectively.",
+            "C": "All glucose polymers are digested identically regardless of structure.",
+            "D": "Cellulose is absorbed intact while starch must cross as whole granules."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Linkages differ and enzyme action is selective.",
+            "B": "Molecular linkage and enzyme specificity explain the difference.",
+            "C": "Polymer structure affects enzyme accessibility and recognition.",
+            "D": "Intact-polymer absorption is not the ordinary mechanism."
+          },
+          "sources": [
+            "carbohydrates"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c21-s21-2-2",
+          "lessonId": "c21-s21-2",
+          "conceptId": "starch-heating",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "application",
+          "prompt": "A starch mixture thickens when heated with water. Which claim is justified?",
+          "options": {
+            "A": "Thickening proves intestinal absorption has occurred.",
+            "B": "All starch has necessarily been hydrolysed to glucose.",
+            "C": "Gelatinization is the same process as peptide hydrolysis.",
+            "D": "Granule swelling and structural changes can contribute to gelatinization."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "A cooking mixture has not crossed an intestinal surface.",
+            "B": "Structural gelatinization does not prove complete bond hydrolysis.",
+            "C": "Starch structural change differs from protein-bond cleavage.",
+            "D": "Water uptake and loss of ordered granule structure support gelatinization."
+          },
+          "sources": [
+            "starch"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Starch and cellulose are glucose polymers with different linkage arrangements. Starch acts as plant carbohydrate storage and contains amylose and amylopectin; cellulose has a structural role in cell walls. Human digestive enzymes can hydrolyse relevant starch bonds but do not digest cellulose in the same manner. Heating starch with suitable water causes granule swelling and loss of ordered structure, contributing to gelatinization and thickening. This structural cooking change must be distinguished from enzymatic cleavage into smaller carbohydrates and later intestinal absorption.",
+      "rubric": [
+        {
+          "criterion": "Identify both as glucose polymers.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish their structure and biological roles.",
+          "marks": 1
+        },
+        {
+          "criterion": "Link enzyme specificity to digestibility.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain water-and-heat gelatinization.",
+          "marks": 1
+        },
+        {
+          "criterion": "Separate gelatinization, hydrolysis and absorption.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling gelatinization complete conversion to glucose.",
+        "Calling cellulose a lipid."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "monosaccharide: A single sugar unit such as glucose.",
+        "polysaccharide: A carbohydrate composed of many linked sugar units.",
+        "gelatinization: Loss of ordered starch-granule structure during heating with suitable water, associated with swelling."
+      ],
+      "closedBookRecall": [
+        "Draw two distinct pathways for cooking and digestion.",
+        "Explain why monomer identity alone is insufficient."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

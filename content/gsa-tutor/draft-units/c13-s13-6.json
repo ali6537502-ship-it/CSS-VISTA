@@ -1,0 +1,213 @@
+{
+  "version": "draft-1",
+  "lessonId": "c13-s13-6",
+  "title": "Adaptive immunity and vaccines: explain specificity, memory and limits of protection",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-06",
+    "GS-I-11"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "immunity",
+      "title": "OpenStax Biology 2e 42.2, Adaptive Immune Response",
+      "publisher": "OpenStax / Rice University",
+      "url": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "7c92a6ea62927acac7d3c37c0db9bf2bc1fc0eb8ba693a4707b4da57a803c0f1",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish antigen recognition, antibody production and cellular responses.",
+        "Explain immune memory without treating vaccination as an absolute guarantee."
+      ],
+      "prerequisites": [
+        "A pathogen can carry molecules recognized by the immune system.",
+        "A host cell is part of the infected organism rather than the invading pathogen."
+      ],
+      "terms": {
+        "antigen": "A molecular structure that can be specifically recognized by an adaptive immune response.",
+        "antibody": "A protein produced by plasma cells that binds a specific antigenic target.",
+        "immune memory": "Persistence of responses or cells that support a later response to a recognized antigen.",
+        "lymphocyte": "A type of white blood cell; B and T lymphocytes contribute to adaptive responses.",
+        "plasma cell": "An activated B-cell derivative that secretes antibodies."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "adaptive-specificity",
+        "sourceIds": [
+          "immunity"
+        ],
+        "explanation": "Adaptive immunity recognizes particular antigenic targets rather than treating every invading material as identical. B cells and T cells contribute through different mechanisms. Activated B-cell lineages can produce plasma cells that secrete antibodies. Antibodies bind their targets and can help neutralize them or promote other immune actions. Cytotoxic T cells can act against infected host cells. These roles are connected but should not be collapsed into the claim that all immunity consists of antibodies."
+      },
+      {
+        "conceptId": "immune-memory",
+        "sourceIds": [
+          "immunity"
+        ],
+        "explanation": "An initial adaptive response takes time to develop. Some activated lineages support memory, allowing a later encounter with the recognized antigen to provoke a more effective response. A vaccine uses suitable antigen information to prepare this process without requiring the learner to undergo the full natural disease as an instructional step. Vaccine platforms differ, so do not describe every vaccine as a live pathogen or every preparation as a killed whole organism."
+      },
+      {
+        "conceptId": "protection-limits",
+        "sourceIds": [
+          "immunity"
+        ],
+        "explanation": "Immune preparation does not mean a universal promise that infection can never occur. The type and durability of protection depend on the pathogen, vaccine and host response. Protection against infection, symptomatic disease and severe outcomes are different endpoints. An examination answer should explain the biological mechanism and avoid inventing an effectiveness percentage or replacing current clinical guidance with a textbook generalization. Vaccination, treatment of infection and broad public-health measures have distinct functions."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "immune-response-flow",
+      "nodes": [
+        "Antigen recognition",
+        "Activation and expansion of relevant lymphocyte lineages",
+        "Effector responses, including antibodies or cellular action",
+        "Memory supports a later response"
+      ],
+      "description": "Separate B-cell/antibody and T-cell branches, then identify where memory changes the response to a later encounter.",
+      "limitations": "Conceptual immune pathway; not a personalized vaccination recommendation or numerical protection prediction.",
+      "sourceIds": [
+        "immunity"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Compare a first antigen encounter with a later encounter with the same recognized target. Explain the role of memory rather than claiming that the immune system has become equally prepared for every unrelated pathogen.",
+      "sourceIds": [
+        "immunity"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain how vaccination uses adaptive immune memory, distinguishing antibodies, cellular responses and the limits of protection."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-IMM-01",
+          "lessonId": "c13-s13-6",
+          "conceptId": "immune-memory",
+          "syllabusRefs": [
+            "GS-I-06",
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "How does a vaccine principally prepare adaptive immunity?",
+          "options": {
+            "A": "By replacing all immune cells with the pathogen.",
+            "B": "By acting as an antibiotic that directly kills every virus.",
+            "C": "By exposing the immune system to suitable antigen information so a later response can be prepared.",
+            "D": "By guaranteeing that infection can never occur."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Vaccination stimulates the immune system; it does not replace immune cells with the pathogen.",
+            "B": "Antibiotic action and vaccine-induced immune preparation are different mechanisms.",
+            "C": "Antigen recognition can generate specific responses and memory that support a later response.",
+            "D": "Protection varies by vaccine, pathogen and circumstances; it is not an absolute guarantee."
+          },
+          "sources": [
+            "immunity"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-IMM-02",
+          "lessonId": "c13-s13-6",
+          "conceptId": "adaptive-specificity",
+          "syllabusRefs": [
+            "GS-I-06",
+            "GS-I-11"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "comparison",
+          "prompt": "Which comparison correctly distinguishes antibodies and cytotoxic T-cell action?",
+          "options": {
+            "A": "Both are names for the same circulating protein.",
+            "B": "Antibodies recognize antigens, while cytotoxic T cells can target infected host cells.",
+            "C": "Cytotoxic T cells are secreted antibody molecules.",
+            "D": "Antibodies must enter every infected cell to act as replacement nuclei."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Antibodies are proteins; cytotoxic T cells are cells with distinct functions.",
+            "B": "This distinguishes antigen binding from a cellular mechanism targeting infected cells.",
+            "C": "A cytotoxic T cell is not a secreted immunoglobulin molecule.",
+            "D": "This does not describe antibody action or nuclear function."
+          },
+          "sources": [
+            "immunity"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Adaptive immunity recognizes specific antigens through relevant lymphocyte lineages. B-cell responses can produce plasma cells that secrete antibodies, while T-cell responses include mechanisms targeting infected host cells. Following activation, memory can support a later response to the recognized target. Vaccination presents suitable antigen information to prepare this response without using natural disease as the necessary route to immune preparation. Vaccine types differ, and protection is not an absolute guarantee against every infection. A sound answer distinguishes protection endpoints and explains specificity and memory rather than inventing an effectiveness figure.",
+      "rubric": [
+        {
+          "criterion": "Explain antigen-specific recognition.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe B-cell/antibody involvement accurately.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify a distinct cellular immune role.",
+          "marks": 1
+        },
+        {
+          "criterion": "Connect vaccination with memory and later response.",
+          "marks": 1
+        },
+        {
+          "criterion": "State an appropriate protection limitation.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Saying every vaccine contains a live pathogen.",
+        "Confusing antibodies with immune cells.",
+        "Claiming vaccination guarantees protection from every infection."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Specificity concerns a recognized antigen; memory changes a later response.",
+        "Antibodies and cytotoxic T cells have different roles."
+      ],
+      "closedBookRecall": [
+        "Draw B-cell and T-cell branches.",
+        "Explain one difference between immune preparation and treatment of established infection."
+      ],
+      "reviewPolicy": "Recall the mechanism first, then test whether a claim overstates what protection means."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

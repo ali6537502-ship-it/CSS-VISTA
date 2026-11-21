@@ -1,0 +1,270 @@
+{
+  "version": "draft-1",
+  "lessonId": "c21-s21-4",
+  "title": "Enzymes, browning and cooking",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-20"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/6-5-enzymes",
+      "title": "6.5 Enzymes - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.724290+00:00",
+      "retrievedSha256": "51820c5d058abd6ffd7c7b8da012f1743055f085d1efa280db699e03c776ac30",
+      "id": "enzymes",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "title": "3.4 Proteins - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.637638+00:00",
+      "retrievedSha256": "5024620f11ecbd6b5eaae3dc3e9935b97eb513abffd71f74bb03d18d02c3441c",
+      "id": "proteins",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://food.unl.edu/article/how-prevent-cut-fruit-turning-brown/",
+      "resolvedUrl": "https://food.unl.edu/article/how-prevent-cut-fruit-turning-brown/",
+      "title": "How to Prevent Cut Fruit from Turning Brown | UNL Food | Nebraska",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:33.515500+00:00",
+      "retrievedSha256": "0e3395d43031dfe3274687462f57f9671233ef22ef3b5db81139643aae4feb48",
+      "id": "browning",
+      "publisher": "University of Nebraska–Lincoln Extension",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://asbe.org/article/maillard-reaction/",
+      "resolvedUrl": "https://asbe.org/article/maillard-reaction/",
+      "title": "Maillard Reaction | American Society of Baking",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.914608+00:00",
+      "retrievedSha256": "ecfd3910670e5ad8d6dbe62101de7c20dcd70acb54ed30e6c5e98aff7c206db9",
+      "id": "maillard",
+      "publisher": "American Society of Baking",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://asbe.org/article/caramelization/",
+      "resolvedUrl": "https://asbe.org/article/caramelization/",
+      "title": "Caramelization | American Society of Baking",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.941081+00:00",
+      "retrievedSha256": "981456da399d2f7748f929a5d937a811d1abd55910d9b58ad2f0dbb451ee256d",
+      "id": "caramelization",
+      "publisher": "American Society of Baking",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Explain enzyme specificity and environmental effects.",
+        "Distinguish enzymatic browning, Maillard reactions and caramelization."
+      ],
+      "prerequisites": [
+        "Reactions involve molecular rearrangement and energy barriers.",
+        "A physical appearance can have more than one chemical cause."
+      ],
+      "terms": {
+        "activation energy": "The energy barrier associated with reaching a reaction’s transition state.",
+        "active site": "The region of an enzyme that binds substrates and supports catalysis.",
+        "reducing sugar": "A sugar with a reactive group capable of participating in relevant reduction and browning reactions."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "enzyme-catalysis",
+        "sourceIds": [
+          "enzymes"
+        ],
+        "explanation": "Enzymes accelerate reactions by lowering activation-energy barriers, without changing the overall reaction’s free-energy difference or being consumed as net reactants. Substrate binding depends on the active site’s shape and chemical properties. Temperature can affect reaction rate, but sufficiently disruptive heat can impair protein structure; pH changes can alter charged groups and activity. Thus faster heating does not indefinitely increase every enzyme’s function, and cooling that slows a reaction is not identical to irreversible denaturation."
+      },
+      {
+        "conceptId": "enzymatic-browning",
+        "sourceIds": [
+          "browning"
+        ],
+        "explanation": "Cutting some fruits exposes cellular components to air and allows enzyme-mediated browning reactions. An apple turning brown after cutting is therefore different from a toasted crust. Reducing air exposure, changing suitable conditions or appropriately inactivating enzymes can limit such colour changes. These are quality-control principles; reduced browning alone does not establish that a food is microbiologically safe."
+      },
+      {
+        "conceptId": "nonenzymatic-browning",
+        "sourceIds": [
+          "maillard",
+          "caramelization"
+        ],
+        "explanation": "Maillard reactions involve reducing sugars and available amino groups, producing complex colour and flavour changes under suitable processing conditions. Caramelization instead involves heated sugars and does not require an amino reactant. Both are nonenzymatic browning processes and can occur together in a complex food. Avoid one universal temperature or the claim that every brown colour proves the same chemistry. Cooking also changes proteins and water distribution, so colour alone cannot identify every molecular change."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Cut fruit + air + relevant enzyme → enzymatic browning",
+        "Reducing sugar + amino group + suitable conditions → Maillard products",
+        "Sugar + heat → caramelization products"
+      ],
+      "description": "Use three independent reaction lanes, each with required participants labelled.",
+      "limitations": "Qualitative pathways; no universal cooking temperature, complete reaction network or food-safety indicator.",
+      "sourceIds": [
+        "enzymes",
+        "proteins",
+        "browning",
+        "maillard",
+        "caramelization"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A cut apple, toasted bread and heated sugar illustrate different browning routes; similar colour does not prove the same starting materials or mechanism.",
+      "sourceIds": [
+        "enzymes",
+        "proteins",
+        "browning",
+        "maillard",
+        "caramelization"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish enzymatic browning, Maillard reactions and caramelization, explaining how enzyme activity depends on conditions."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c21-s21-4-1",
+          "lessonId": "c21-s21-4",
+          "conceptId": "enzyme-catalysis",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "What does an enzyme generally change in the reaction it catalyses?",
+          "options": {
+            "A": "The overall reaction free-energy difference.",
+            "B": "The activation-energy barrier.",
+            "C": "The equilibrium composition by being a net reactant.",
+            "D": "The amount of energy released by changing the reactant’s elemental identity."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Catalysis does not change the overall free-energy difference.",
+            "B": "Lowering the barrier accelerates an available reaction pathway.",
+            "C": "An enzyme is not consumed to shift equilibrium as a net reactant.",
+            "D": "Catalysis does not change elemental identity."
+          },
+          "sources": [
+            "enzymes"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c21-s21-4-2",
+          "lessonId": "c21-s21-4",
+          "conceptId": "nonenzymatic-browning",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which comparison is correct?",
+          "options": {
+            "A": "Maillard reactions need amino groups but no reducing sugars.",
+            "B": "Caramelization always requires an active fruit-browning enzyme.",
+            "C": "Maillard reactions involve reducing sugars and amino groups; caramelization does not require an amino reactant.",
+            "D": "Enzymatic browning and caramelization are identical mechanisms at different colours."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Both relevant reactant types are involved in Maillard chemistry.",
+            "B": "Caramelization is nonenzymatic.",
+            "C": "These participant requirements distinguish the processes.",
+            "D": "Shared colour does not make the mechanisms identical."
+          },
+          "sources": [
+            "maillard",
+            "caramelization"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Enzymes lower activation-energy barriers through specific active-site interactions, and their activity depends on conditions such as temperature and pH. Cutting fruit can permit enzyme-mediated browning involving exposure to air. Maillard browning is nonenzymatic and involves reducing sugars and available amino groups. Caramelization is another nonenzymatic process involving heated sugars without a required amino reactant. Similar colour therefore does not establish identical chemistry, and suppression of browning is not proof of microbial safety.",
+      "rubric": [
+        {
+          "criterion": "Explain active-site catalysis and activation energy.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe effects of temperature or pH with a limitation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain cut-fruit enzymatic browning.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify Maillard participants.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish caramelization and avoid colour-as-safety claims.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling every brown food caramelized.",
+        "Saying enzyme activity increases indefinitely with heating."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "activation energy: The energy barrier associated with reaching a reaction’s transition state.",
+        "active site: The region of an enzyme that binds substrates and supports catalysis.",
+        "reducing sugar: A sugar with a reactive group capable of participating in relevant reduction and browning reactions."
+      ],
+      "closedBookRecall": [
+        "Identify the three browning routes from their reactants.",
+        "Explain why slowing an enzyme is not always denaturing it."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

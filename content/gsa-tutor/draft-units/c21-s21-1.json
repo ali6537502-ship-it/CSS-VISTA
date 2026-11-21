@@ -1,0 +1,226 @@
+{
+  "version": "draft-1",
+  "lessonId": "c21-s21-1",
+  "title": "Food chemistry and energy",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-20"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "title": "34.2 Nutrition and Energy Production - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.707255+00:00",
+      "retrievedSha256": "1d153f67deaa73f6ab10e33e536d959f90076dbe0b0f139cb3062794b6c5fb4b",
+      "id": "nutrition",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/7-6-connections-of-carbohydrate-protein-and-lipid-metabolic-pathways",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/7-6-connections-of-carbohydrate-protein-and-lipid-metabolic-pathways",
+      "title": "7.6 Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.744424+00:00",
+      "retrievedSha256": "fedfbed683b0b065323e3f45fbee0e4486ba24f9a0fd1be5f5294f1a3e18c251",
+      "id": "metabolism",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Separate food energy from nutrient adequacy.",
+        "Use stated energy factors and units in a worked estimate."
+      ],
+      "prerequisites": [
+        "Mass and energy are different quantities and require different units.",
+        "Cells transform chemical energy through metabolic reactions."
+      ],
+      "terms": {
+        "macronutrient": "A nutrient needed in relatively large amounts, such as carbohydrate, fat or protein.",
+        "micronutrient": "A vitamin or mineral needed in smaller amounts.",
+        "kilocalorie": "A unit of energy; food Calories conventionally mean kilocalories."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "food-functions",
+        "sourceIds": [
+          "nutrition"
+        ],
+        "explanation": "Food supplies chemical energy, building material and essential nutrients for regulation. Carbohydrates, proteins and fats can contribute energy, but they also have different structural and physiological roles. Water supports transport and chemical environments without being an energy-yielding fuel. Vitamins and minerals are required for specific functions but should not be described as calorie sources. A food’s colour or price alone cannot establish its nutrient composition."
+      },
+      {
+        "conceptId": "energy-accounting",
+        "sourceIds": [
+          "nutrition",
+          "metabolism"
+        ],
+        "explanation": "Dietary energy estimates commonly use approximate factors of 4 kilocalories per gram of available carbohydrate, 4 per gram of protein and 9 per gram of fat. These are general accounting factors, not exact values for every food or fibre fraction. For a hypothetical portion with 10 g available carbohydrate, 3 g protein and 2 g fat, the estimate is 10×4 + 3×4 + 2×9 = 70 kcal. State the assumed factors, multiply each mass by its factor, add and retain the energy unit. Do not read this invented portion as a measured commercial product."
+      },
+      {
+        "conceptId": "energy-versus-quality",
+        "sourceIds": [
+          "nutrition",
+          "metabolism"
+        ],
+        "explanation": "Cells transform chemical energy through metabolism; eating energy is not identical to immediately converting all of it into useful work. Some energy is stored or released as heat, and nutrient pathways interconnect. Two portions with equal estimated energy can differ in fibre, protein quality, vitamins, minerals and water. Energy balance and nutrient adequacy therefore answer different questions. Neither the total calorie number nor a single nutrient can fully describe a diet."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Measured or stated nutrient masses",
+        "Multiply each by an appropriate energy factor",
+        "Sum with units",
+        "Evaluate nutrient quality separately"
+      ],
+      "description": "Show separate columns for carbohydrate, protein and fat and a distinct box for non-energy nutrients.",
+      "limitations": "Approximate classroom accounting; not a measured food label, metabolic test or personalized diet prescription.",
+      "sourceIds": [
+        "nutrition",
+        "metabolism"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A cereal-based meal and a fat-rich snack could have similar energy estimates while supplying different nutrient patterns; compare their composition rather than infer equality of nutritional value.",
+      "sourceIds": [
+        "nutrition",
+        "metabolism"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain how food provides energy and why calorie content alone does not establish dietary adequacy."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c21-s21-1-1",
+          "lessonId": "c21-s21-1",
+          "conceptId": "energy-accounting",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "numerical",
+          "prompt": "Using 4 kcal/g carbohydrate, 4 kcal/g protein and 9 kcal/g fat, what is the estimate for 10 g, 3 g and 2 g respectively?",
+          "options": {
+            "A": "15 kcal.",
+            "B": "52 kcal.",
+            "C": "70 kcal.",
+            "D": "135 kcal."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "Adding masses alone gives grams, not energy.",
+            "B": "This omits the fat contribution.",
+            "C": "40 + 12 + 18 = 70 kcal.",
+            "D": "Applying 9 to every gram ignores distinct factors."
+          },
+          "sources": [
+            "nutrition"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c21-s21-1-2",
+          "lessonId": "c21-s21-1",
+          "conceptId": "energy-versus-quality",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Two portions provide equal estimated energy. What follows?",
+          "options": {
+            "A": "They must contain identical amounts of each micronutrient.",
+            "B": "They may differ substantially in nutrient quality and composition.",
+            "C": "They must have identical proportions of fat, carbohydrate and protein.",
+            "D": "They must have equal masses because energy density is fixed for every food."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "Equal energy does not determine micronutrient composition.",
+            "B": "Different compositions can yield the same total energy estimate.",
+            "C": "Different macronutrient mixtures can have equal energy.",
+            "D": "Energy density varies with composition."
+          },
+          "sources": [
+            "nutrition"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Food provides energy, structural material and essential regulatory nutrients. Carbohydrate, protein and fat contribute dietary energy, conventionally estimated with approximate factors of 4, 4 and 9 kcal/g respectively. A stated example containing 10 g available carbohydrate, 3 g protein and 2 g fat gives 70 kcal. Water, vitamins and minerals have essential roles but are not energy-yielding fuels in this accounting. Equal energy does not imply equal fibre, protein quality or micronutrient content, so dietary evaluation must assess both energy and nutrient adequacy.",
+      "rubric": [
+        {
+          "criterion": "Identify energy, structural and regulatory functions.",
+          "marks": 1
+        },
+        {
+          "criterion": "State the three approximate energy factors.",
+          "marks": 1
+        },
+        {
+          "criterion": "Show the worked estimate with units.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish non-energy essential nutrients.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain why equal energy is not equal nutritional quality.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Adding grams and labelling the result kcal.",
+        "Calling vitamin content an energy measurement."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "macronutrient: A nutrient needed in relatively large amounts, such as carbohydrate, fat or protein.",
+        "micronutrient: A vitamin or mineral needed in smaller amounts.",
+        "kilocalorie: A unit of energy; food Calories conventionally mean kilocalories."
+      ],
+      "closedBookRecall": [
+        "Redo the calculation with the assumptions stated.",
+        "Name two differences that equal-energy portions can retain."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

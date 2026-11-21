@@ -1,0 +1,227 @@
+{
+  "version": "draft-1",
+  "lessonId": "c22-s22-3",
+  "title": "Dietary reference values and balanced eating",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-20"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://www.canada.ca/en/health-canada/services/food-nutrition/healthy-eating/dietary-reference-intakes/definitions-relationship-risk-inadequacy-risk-adverse-effects.html",
+      "resolvedUrl": "https://www.canada.ca/en/health-canada/services/food-nutrition/healthy-eating/dietary-reference-intakes/definitions-relationship-risk-inadequacy-risk-adverse-effects.html",
+      "title": "DRI Definitions and Relationship to Risk of Inadequacy and Risk of Adverse Effects - Canada.ca",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:15.755165+00:00",
+      "retrievedSha256": "24f95bc370e7ce6f066c81bfaa086e2c58c85572ca54207f7d9f82a195d167d3",
+      "id": "dri",
+      "publisher": "Health Canada",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "title": "34.2 Nutrition and Energy Production - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.707255+00:00",
+      "retrievedSha256": "1d153f67deaa73f6ab10e33e536d959f90076dbe0b0f139cb3062794b6c5fb4b",
+      "id": "nutrition",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Distinguish EAR, RDA, AI and UL.",
+        "Apply reference-value purpose without diagnosing an individual from one day."
+      ],
+      "prerequisites": [
+        "Usual intake differs from one day’s food record.",
+        "Healthy people’s nutrient requirements vary across individuals and life stages."
+      ],
+      "terms": {
+        "EAR": "Estimated Average Requirement: intake estimated to meet half the requirements of a specified healthy group.",
+        "RDA": "Recommended Dietary Allowance: intake intended to meet requirements of nearly all healthy people in a specified group.",
+        "AI": "Adequate Intake: a reference used when evidence is insufficient to establish an EAR and RDA.",
+        "UL": "Tolerable Upper Intake Level: an upper average intake associated with low expected adverse-effect risk for almost all people in the relevant population."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "reference-purpose",
+        "sourceIds": [
+          "dri"
+        ],
+        "explanation": "Dietary reference values concern usual intake in defined healthy life-stage groups. EAR, RDA, AI and UL serve different assessment or planning purposes; they are not four names for one target. An EAR describes an estimated middle requirement, whereas the RDA allows for variation. AI is used when evidence cannot support an EAR/RDA. UL addresses excess risk, not an intake to aim for. The issuing framework and relevant age and physiological group matter."
+      },
+      {
+        "conceptId": "balanced-pattern",
+        "sourceIds": [
+          "nutrition"
+        ],
+        "explanation": "A balanced eating pattern combines energy needs with essential amino acids, fatty acids, vitamins, minerals, fibre and water from varied foods. No single food must supply every nutrient, and a large energy total cannot guarantee micronutrient adequacy. Practical comparisons consider portions and usual patterns rather than only a highlighted nutrient or marketing phrase. This principle supports flexible food combinations without inventing a universal meal prescription."
+      },
+      {
+        "conceptId": "interpretation-limits",
+        "sourceIds": [
+          "dri",
+          "nutrition"
+        ],
+        "explanation": "A single day below a reference is not enough to diagnose deficiency; usual intake, absorption and clinical context matter. Likewise exceeding a UL signals increased concern, not a prediction that a precise symptom begins immediately in every individual. Reference values from one authority should be identified as such rather than silently labelled Pakistani or FPSC medical standards. This lesson teaches interpretation and does not insert unsourced numerical allowances."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Identify nutrient and population",
+        "Select the matching reference purpose",
+        "Assess usual intake and context",
+        "Plan adequacy while considering excess risk"
+      ],
+      "description": "Use four labelled boxes for EAR, RDA, AI and UL; do not put AI at a fabricated fixed distance along an EAR-to-RDA scale.",
+      "limitations": "Reference interpretation only; no new local dietary standard or individualized prescription.",
+      "sourceIds": [
+        "dri",
+        "nutrition"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A learner comparing two food labels should first identify the portion and reference population; a percentage printed on a package is not a direct measurement of personal nutrient status.",
+      "sourceIds": [
+        "dri",
+        "nutrition"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish the four main DRI concepts and explain their appropriate interpretation."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c22-s22-3-1",
+          "lessonId": "c22-s22-3",
+          "conceptId": "reference-purpose",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which DRI is primarily about limiting risk from excessive usual intake?",
+          "options": {
+            "A": "EAR.",
+            "B": "RDA.",
+            "C": "UL.",
+            "D": "AI."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "EAR concerns estimated requirement, not the upper excess boundary.",
+            "B": "RDA concerns adequacy for nearly all in the relevant group.",
+            "C": "UL addresses the upper-intake risk question.",
+            "D": "AI is an adequacy reference used when evidence is insufficient for EAR/RDA."
+          },
+          "sources": [
+            "dri"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c22-s22-3-2",
+          "lessonId": "c22-s22-3",
+          "conceptId": "interpretation-limits",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "One day’s reported intake falls below an RDA. What follows?",
+          "options": {
+            "A": "Deficiency is clinically proven without further evidence.",
+            "B": "Usual intake and context are needed before a deficiency conclusion.",
+            "C": "The person must increase intake to the UL as a target.",
+            "D": "The RDA can be interpreted as that person’s directly measured requirement."
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "A single-day record does not establish nutrient status.",
+            "B": "Appropriate time and physiological context matter.",
+            "C": "UL is not the optimal intake target.",
+            "D": "RDA is a population-based reference rather than a personal measurement."
+          },
+          "sources": [
+            "dri"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "EAR estimates the requirement of half a specified healthy group, while RDA is designed to cover nearly all within that group. AI is used when evidence is insufficient to establish an EAR and RDA. UL concerns upper usual intake and adverse-effect risk, so it is not a target for maximum consumption. Interpretation requires the relevant authority, population and usual intake pattern. A single day below a reference is not a clinical diagnosis, and adequate energy alone does not prove a balanced nutrient supply.",
+      "rubric": [
+        {
+          "criterion": "Distinguish EAR from RDA.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain the evidence-related purpose of AI.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain UL without treating it as a target.",
+          "marks": 1
+        },
+        {
+          "criterion": "Identify population, authority and usual-intake context.",
+          "marks": 1
+        },
+        {
+          "criterion": "Separate reference comparison from clinical diagnosis.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling UL an optimal intake target.",
+        "Applying one adult reference to every life stage."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "EAR: Estimated Average Requirement: intake estimated to meet half the requirements of a specified healthy group.",
+        "RDA: Recommended Dietary Allowance: intake intended to meet requirements of nearly all healthy people in a specified group.",
+        "AI: Adequate Intake: a reference used when evidence is insufficient to establish an EAR and RDA.",
+        "UL: Tolerable Upper Intake Level: an upper average intake associated with low expected adverse-effect risk for almost all people in the relevant population."
+      ],
+      "closedBookRecall": [
+        "Explain all four labels without memorizing doses.",
+        "Describe why one day is insufficient for a diagnosis."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

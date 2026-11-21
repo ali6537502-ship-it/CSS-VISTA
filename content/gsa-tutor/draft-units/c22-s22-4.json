@@ -1,0 +1,240 @@
+{
+  "version": "draft-1",
+  "lessonId": "c22-s22-4",
+  "title": "Digestion, metabolism and the double burden",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-20"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "title": "23.7 Chemical Digestion and Absorption: A Closer Look  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.786764+00:00",
+      "retrievedSha256": "66cb4c6c90ea2a54bb6ee07597e89b46699daad7aea2859e36aff85a475dbc4a",
+      "id": "absorption",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/7-6-connections-of-carbohydrate-protein-and-lipid-metabolic-pathways",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/7-6-connections-of-carbohydrate-protein-and-lipid-metabolic-pathways",
+      "title": "7.6 Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.744424+00:00",
+      "retrievedSha256": "fedfbed683b0b065323e3f45fbee0e4486ba24f9a0fd1be5f5294f1a3e18c251",
+      "id": "metabolism",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "double-burden",
+      "title": "Malnutrition — overview",
+      "publisher": "World Health Organization",
+      "url": "https://www.who.int/health-topics/malnutrition",
+      "retrievedOn": "2026-11-13",
+      "retrievedAt": "2026-11-13T04:34:24.791589+00:00",
+      "retrievalStatus": 200,
+      "retrievalMethod": "Web source reader; extracted lines 84–89 inspected; direct HTTP access unavailable",
+      "retrievedSha256": "a9fc27e60f6236292c487d19d510f46ae047588f3f27dba5fcb844ff5767d33c",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Separate digestion, absorption and metabolism.",
+        "Explain why excess energy can coexist with nutrient inadequacy."
+      ],
+      "prerequisites": [
+        "Digestion and absorption are separate steps.",
+        "Energy adequacy and the supply of each essential nutrient are different questions."
+      ],
+      "terms": {
+        "catabolism": "Breakdown pathways that release energy or provide simpler intermediates.",
+        "anabolism": "Biosynthetic pathways that build molecules using resources and energy.",
+        "double burden of malnutrition": "Coexistence of undernutrition with overweight, obesity or diet-related noncommunicable disease."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "from-meal-to-cell",
+        "sourceIds": [
+          "absorption",
+          "metabolism"
+        ],
+        "explanation": "Digestion hydrolyses food molecules; absorption moves appropriate products across the intestinal surface; circulation distributes them; cellular metabolism transforms them. Catabolic pathways break down substrates and contribute to ATP generation, while anabolic pathways use energy and intermediates for synthesis. These processes interconnect, so a carbohydrate, fat or protein does not remain confined to one isolated metabolic box. Digestion in a lumen and ATP production inside cells are different locations and mechanisms."
+      },
+      {
+        "conceptId": "energy-nutrients",
+        "sourceIds": [
+          "metabolism"
+        ],
+        "explanation": "A pattern supplying more usable energy than expenditure over time can promote energy storage, while still failing to supply a needed micronutrient. Conversely inadequate food intake or impaired uptake can limit both energy and essential materials. Intake, absorption, physiological demand and use all affect nutritional outcomes. Body size alone cannot establish the adequacy of every nutrient or identify the biochemical cause of poor health."
+      },
+      {
+        "conceptId": "double-burden",
+        "sourceIds": [
+          "double-burden"
+        ],
+        "explanation": "Malnutrition includes inadequate, excessive or imbalanced nutrient availability and use. The double burden brings undernutrition together with overweight, obesity or diet-related noncommunicable disease. It is therefore too narrow to equate malnutrition only with visible thinness. A learning example may contrast inadequate micronutrient supply with excess energy; it must not attach invented prevalence or diagnose an individual from appearance. Assessment needs suitable dietary and health evidence."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Food → digestion → absorption → transport",
+        "Cellular catabolism ↔ shared intermediates ↔ anabolism",
+        "Energy adequacy and micronutrient adequacy: separate questions"
+      ],
+      "description": "Label the intestinal boundary and the cell boundary, then draw two separate adequacy axes.",
+      "limitations": "Qualitative pathways and nutrition concepts, not a body-composition or clinical diagnostic model.",
+      "sourceIds": [
+        "absorption",
+        "metabolism",
+        "double-burden"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "A hypothetical diet can be rich in energy yet poor in a required micronutrient; equal calorie intake does not ensure identical nutritional status.",
+      "sourceIds": [
+        "absorption",
+        "metabolism",
+        "double-burden"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Distinguish digestion, absorption and metabolism, and explain the double burden of malnutrition."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c22-s22-4-1",
+          "lessonId": "c22-s22-4",
+          "conceptId": "from-meal-to-cell",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which process is cellular anabolism?",
+          "options": {
+            "A": "Transport of glucose across the intestinal surface.",
+            "B": "Hydrolysis of dietary starch in the lumen.",
+            "C": "Breakdown of a stored fuel to release usable energy.",
+            "D": "Synthesis of cellular molecules using energy and intermediates."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Transport is not cellular biosynthesis.",
+            "B": "This is digestive breakdown.",
+            "C": "Breakdown describes catabolism.",
+            "D": "Building molecules is anabolic."
+          },
+          "sources": [
+            "metabolism"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c22-s22-4-2",
+          "lessonId": "c22-s22-4",
+          "conceptId": "energy-nutrients",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Why can high energy intake fail to establish nutritional adequacy?",
+          "options": {
+            "A": "Energy supply and essential micronutrient supply are different aspects of diet.",
+            "B": "A calorie total directly measures every micronutrient concentration.",
+            "C": "Equal energy intake guarantees equal absorption of all nutrients.",
+            "D": "Body size alone establishes biochemical sufficiency for each vitamin."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "Energy sufficiency does not guarantee every essential nutrient.",
+            "B": "Energy accounting does not measure all micronutrients.",
+            "C": "Composition and uptake can differ.",
+            "D": "Appearance cannot determine every nutrient’s status."
+          },
+          "sources": [
+            "metabolism",
+            "double-burden"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Digestion breaks food into absorbable products, absorption transfers them across the intestinal epithelium, and metabolism transforms substrates within cells. Catabolism provides energy and intermediates, while anabolism builds molecules. These pathways are interconnected. Energy supply and micronutrient adequacy are separate, so energy excess does not guarantee a balanced diet. The double burden of malnutrition includes undernutrition alongside overweight, obesity or diet-related noncommunicable disease; it cannot be assessed by body size alone.",
+      "rubric": [
+        {
+          "criterion": "Distinguish digestion from absorption.",
+          "marks": 1
+        },
+        {
+          "criterion": "Locate metabolism within cells.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish catabolism and anabolism.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain energy versus nutrient adequacy.",
+          "marks": 1
+        },
+        {
+          "criterion": "Define the double burden without diagnosing appearance.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling all malnutrition starvation alone.",
+        "Equating digestion with cellular respiration."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "catabolism: Breakdown pathways that release energy or provide simpler intermediates.",
+        "anabolism: Biosynthetic pathways that build molecules using resources and energy.",
+        "double burden of malnutrition: Coexistence of undernutrition with overweight, obesity or diet-related noncommunicable disease."
+      ],
+      "closedBookRecall": [
+        "Trace food to cellular synthesis.",
+        "Explain a hypothetical energy-rich but nutrient-poor pattern."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

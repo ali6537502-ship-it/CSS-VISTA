@@ -1,0 +1,250 @@
+{
+  "version": "draft-1",
+  "lessonId": "c14-s14-4",
+  "title": "Biogas: follow microbial conversion without confusing stages with tanks",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-12"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "id": "digestion",
+      "title": "How Does Anaerobic Digestion Work?",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/agstar/how-does-anaerobic-digestion-work",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "2ad419ec714592ab09c9dd135e0307f0209ab33bf6cc72f9eb1ba1ab4e0e9a3e",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "id": "guide",
+      "title": "Anaerobic Digester/Biogas System Operator Guidebook, chapter 1",
+      "publisher": "US Environmental Protection Agency, AgSTAR",
+      "url": "https://www.epa.gov/sites/default/files/2020-11/documents/agstar-operator-guidebook.pdf",
+      "retrievedOn": "2026-11-12",
+      "retrievalStatus": 200,
+      "retrievedSha256": "e9d635dff05de1090c06c9ff74e1dde16c9b044712b3c94f03486c3b6177b6de",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Trace feedstock through the main anaerobic digestion stages.",
+        "Distinguish biogas, methane and digestate.",
+        "Explain a system limitation without inventing yield or safety guarantees."
+      ],
+      "prerequisites": [
+        "Organic matter contains carbon compounds that microbes can transform.",
+        "Anaerobic means oxygen is absent from the digestion process."
+      ],
+      "terms": {
+        "biogas": "A gas mixture produced by anaerobic digestion, mainly methane and carbon dioxide.",
+        "digestate": "The residual solid and liquid material after digestion.",
+        "methanogenesis": "Microbial methane-forming pathways.",
+        "co-digestion": "Processing more than one organic feedstock together."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "anaerobic-digestion",
+        "sourceIds": [
+          "digestion",
+          "guide"
+        ],
+        "explanation": "An anaerobic digester provides a controlled environment in which microbial communities break down biodegradable organic material without oxygen. Suitable inputs include manure, food waste and other organic materials, depending on system design. The outputs are biogas and digestate. Methane is the energy-bearing major component of biogas, but raw biogas is not pure methane. It also contains carbon dioxide and may contain contaminants requiring treatment for the intended use."
+      },
+      {
+        "conceptId": "staged-digestion",
+        "sourceIds": [
+          "guide"
+        ],
+        "explanation": "A useful teaching sequence has four main stages. Hydrolysis breaks complex organic compounds into smaller molecules. Acidogenesis converts these into simpler fermentation products, including organic acids. Acetogenesis supplies acetate and other substrates used by methane-forming pathways. Methanogenesis produces methane from suitable substrates. The arrows represent dependence among processes; in many digesters, several stages occur concurrently within the same vessel. Four named biological stages therefore do not mean four tanks are always required."
+      },
+      {
+        "conceptId": "system-limits",
+        "sourceIds": [
+          "digestion",
+          "guide"
+        ],
+        "explanation": "Feedstock composition, process conditions, loading and microbial activity affect operation. A learning diagram cannot supply a guaranteed gas yield or certify that a design is safe. Digestate may have beneficial uses, but handling and application still require appropriate management. Similarly, capturing biogas can enable energy recovery, but environmental performance depends on the complete system, including preventing uncontrolled gas loss and managing residual material."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "interactive-stage-selector",
+      "description": "Select hydrolysis, acidogenesis, acetogenesis or methanogenesis to highlight its input/output relationship. A second output branch distinguishes gas collection from digestate removal.",
+      "limitations": "Qualitative process model; not a construction guide, gas-yield calculator or safe-operation certificate.",
+      "sourceIds": [
+        "digestion",
+        "guide"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "For a manure-based system, identify the organic material entering the reactor, the gas sent for appropriate treatment/use, and the residual digestate requiring management. Do not describe all three as methane.",
+      "sourceIds": [
+        "digestion",
+        "guide"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Describe biogas production by anaerobic digestion and distinguish the biological stages from the outputs and physical equipment."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-GAS-01",
+          "lessonId": "c14-s14-4",
+          "conceptId": "anaerobic-digestion",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which description best distinguishes biogas from the digestate leaving an anaerobic digester?",
+          "options": {
+            "A": "Biogas is the solid fertilizer; digestate is pure methane.",
+            "B": "Both are identical names for the feedstock.",
+            "C": "Biogas is a gas mixture; digestate is residual solid/liquid material.",
+            "D": "Digestate is oxygen produced by fermentation."
+          },
+          "answer": "C",
+          "optionExplanations": {
+            "A": "This reverses the gas and residual material, and neither output is automatically pure.",
+            "B": "Feedstock enters the process; biogas and digestate are outputs.",
+            "C": "Biogas contains mainly methane and carbon dioxide; digestate is the residual material.",
+            "D": "Anaerobic digestion does not produce digestate as oxygen gas."
+          },
+          "sources": [
+            "digestion"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-GAS-02",
+          "lessonId": "c14-s14-4",
+          "conceptId": "staged-digestion",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "process-sequencing",
+          "prompt": "Which simplified sequence describes the main microbial stages of anaerobic digestion?",
+          "options": {
+            "A": "Methanogenesis → hydrolysis → acidogenesis → acetogenesis",
+            "B": "Hydrolysis → acidogenesis → acetogenesis → methanogenesis",
+            "C": "Hydrolysis → methanogenesis → acetogenesis → acidogenesis",
+            "D": "Acetogenesis → hydrolysis → methanogenesis → acidogenesis"
+          },
+          "answer": "B",
+          "optionExplanations": {
+            "A": "This puts methane formation before preparation of its substrates.",
+            "B": "Hydrolysis releases smaller molecules, followed by acid-forming and acetate-forming processes and then methane formation.",
+            "C": "This places methane formation before the acid- and acetate-forming processes supplying its substrates.",
+            "D": "This puts acetate formation before the initial breakdown of complex material and reverses the final process relationships."
+          },
+          "sources": [
+            "guide"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-GAS-03",
+          "lessonId": "c14-s14-4",
+          "conceptId": "system-limits",
+          "syllabusRefs": [
+            "GS-I-12"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "diagram-interpretation",
+          "prompt": "A process diagram shows four biological stages. What does this imply about the number of physical digesters required?",
+          "options": {
+            "A": "Exactly four separate vessels are mandatory.",
+            "B": "Only one microbial population is involved.",
+            "C": "Stages cannot occur in overlapping conditions.",
+            "D": "The stages may occur concurrently in one reactor; the diagram alone does not set vessel number."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "A biological-stage diagram is not a requirement for four physical reactors.",
+            "B": "Digestion uses communities with different metabolic functions.",
+            "C": "The stages can overlap in a single reactor.",
+            "D": "EPA describes single-reactor systems and staged configurations; biological stages are not identical to vessel count."
+          },
+          "sources": [
+            "guide"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Anaerobic digestion uses microbial communities to break down biodegradable organic material without oxygen. Hydrolysis first releases smaller molecules from complex material. Acidogenesis forms simpler fermentation products, and acetogenesis supplies substrates used by methane-forming pathways. Methanogenesis produces methane. These biological processes may overlap in one reactor; a four-stage flowchart does not necessarily mean four separate digesters. The principal outputs are biogas, containing mainly methane and carbon dioxide, and digestate, the residual solid/liquid material. Gas treatment and digestate management depend on their intended uses. A process outline explains the mechanism but does not guarantee yield, environmental benefit or operational safety.",
+      "rubric": [
+        {
+          "criterion": "State the anaerobic setting and suitable organic input.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe hydrolysis and acidogenesis in sequence.",
+          "marks": 1
+        },
+        {
+          "criterion": "Describe acetogenesis followed by methane formation.",
+          "marks": 1
+        },
+        {
+          "criterion": "Distinguish biogas from digestate accurately.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain stage-versus-vessel distinction or an appropriate system limitation.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Calling biogas pure methane.",
+        "Confusing digestate with the gas product.",
+        "Assuming four biological stages require four physical tanks.",
+        "Claiming a diagram guarantees gas output or safe construction."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "Anaerobic digestion: microbial conversion without oxygen.",
+        "Biogas is a gas mixture; digestate is residual material."
+      ],
+      "closedBookRecall": [
+        "Name the four stages in order and explain what each contributes.",
+        "Draw the two output branches and identify their management needs."
+      ],
+      "reviewPolicy": "Reconstruct the flow from memory, check missed links, and repeat the process explanation at a later review."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-12",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}

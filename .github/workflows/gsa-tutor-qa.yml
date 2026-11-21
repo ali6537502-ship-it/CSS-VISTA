@@ -5,6 +5,10 @@ on:
       - '.github/workflows/gsa-tutor-qa.yml'
       - 'public/gsa-tutor/**'
       - 'scripts/gsa-tutor/**'
+      - 'docs/gsa-tutor/**'
+      - 'content/gsa-tutor/**'
+      - 'tests/gsaTutorLearning.test.mjs'
+      - 'public/fpsc-syllabus.json'
       - 'src/pages/GSATutor.tsx'
       - 'src/features/gsa-tutor/**'
       - 'src/components/AccountProvider.tsx'
@@ -12,6 +16,8 @@ on:
       - 'tests/gsaTutorPlan.test.mjs'
       - 'tests/gsaTutorSync.test.mjs'
       - 'tests/browser/gsaTutor.mjs'
+      - 'tests/browser/gsaTutorEditorial.mjs'
+      - 'vite.config.ts'
       - 'src/lib/accountSync.ts'
       - 'package.json'
       - 'package-lock.json'
@@ -33,12 +39,16 @@ jobs:
         run: npm run test:gsa-tutor
       - name: Audit GSA source quality and structural readiness
         run: npm run audit:gsa-content
+      - name: Verify syllabus traceability artifacts (does not certify science)
+        run: npm run audit:gsa-coverage
+      - name: Check scope, equation assets and draft-unit structure
+        run: npm run audit:gsa-scope && npm run audit:gsa-math && npm run audit:gsa-units
       - name: Verify TypeScript integration
         run: npm run typecheck
       - name: Build deployment artifact for route audit
         run: npm run build:hostinger
       - name: Check lesson route and public content
-        run: npm run audit:routes
+        run: npm run audit:routes && npm run audit:gsa-publication
       - name: Install browser test tooling
         run: |
           npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
@@ -51,6 +61,14 @@ jobs:
           node -e "const go=async()=>{for(let i=0;i<40;i++){try{const r=await fetch('http://127.0.0.1:5173/gsa-tutor/studio.html');if(r.ok)return}catch{}await new Promise(x=>setTimeout(x,500))}process.exit(1)};go()"
           browser_path="$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")"
           CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/gsaTutor.mjs
+      - name: Inspect eight-stage drafts locally without student-record writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run dev:gsa-editorial > /tmp/gsa-editorial.log 2>&1 &
+          node -e "const go=async()=>{for(let i=0;i<40;i++){try{const r=await fetch('http://127.0.0.1:5175/__gsa-editorial__/index.json');if(r.ok)return}catch{}await new Promise(x=>setTimeout(x,500))}process.exit(1)};go()"
+          browser_path="$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")"
+          CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/gsaTutorEditorial.mjs
       - name: Preserve GSA visual checks
         if: always()
         uses: actions/upload-artifact@v4

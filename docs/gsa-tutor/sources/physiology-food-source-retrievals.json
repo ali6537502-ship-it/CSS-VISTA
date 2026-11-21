@@ -1,0 +1,454 @@
+{
+  "batch-sections": {
+    "organization": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-2-structural-organization-of-the-human-body",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-2-structural-organization-of-the-human-body",
+      "title": "1.2 Structural Organization of the Human Body  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:33.893929+00:00",
+      "retrievedSha256": "1a2583047e2d4515a7ba63ff5eacc6c17428b37b7e8e85cf4e137a73fada39b9"
+    },
+    "homeostasis": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "title": "1.5 Homeostasis  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.449747+00:00",
+      "retrievedSha256": "0af666d55f507e9f402caf2d4be006496cc93e78eddd99245c46e514a24a035c"
+    },
+    "digestive": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "title": "23.1 Overview of the Digestive System  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.808469+00:00",
+      "retrievedSha256": "9cdf063593069ef42d3aa1c0f052b1521a4357630f7fadc989fe5ebd5ed37cf3"
+    },
+    "absorption": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "title": "23.7 Chemical Digestion and Absorption: A Closer Look  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.786764+00:00",
+      "retrievedSha256": "66cb4c6c90ea2a54bb6ee07597e89b46699daad7aea2859e36aff85a475dbc4a"
+    },
+    "nephron": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-5-physiology-of-urine-formation",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-5-physiology-of-urine-formation",
+      "title": "25.5 Physiology of Urine Formation  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.139094+00:00",
+      "retrievedSha256": "0b427b1350a4ae9d79166db3a4b68ea18402491c581d2e724c780e2391a989f0"
+    },
+    "reabsorption": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-6-tubular-reabsorption",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-6-tubular-reabsorption",
+      "title": "25.6 Tubular Reabsorption  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.121849+00:00",
+      "retrievedSha256": "be14c3fc5d64bb761e3251bac88333174ca56ea2efcbf6244c89964ff87aab7c"
+    },
+    "renal-hormones": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-8-endocrine-regulation-of-kidney-function",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-8-endocrine-regulation-of-kidney-function",
+      "title": "25.8 Endocrine Regulation of Kidney Function  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.904562+00:00",
+      "retrievedSha256": "e8af1f4e8593aebdf78ff5d955cca6109b481d4431756f844b47270ea6b384b1"
+    },
+    "neurons": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-3-the-function-of-nervous-tissue",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-3-the-function-of-nervous-tissue",
+      "title": "12.3 The Function of Nervous Tissue  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:34.976334+00:00",
+      "retrievedSha256": "54ce462c2bed85fc88453345ac5c31f0d17b0d4e16783b7ea414a2bef9cf0d91"
+    },
+    "hormones": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-2-hormones",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-2-hormones",
+      "title": "17.2 Hormones  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.373760+00:00",
+      "retrievedSha256": "a64229a1e9aadf54e8a54b52d1ec2b9bc97956cd17a6410ebb756a3805016043"
+    },
+    "glucose": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas",
+      "title": "17.9 The Endocrine Pancreas  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.060453+00:00",
+      "retrievedSha256": "68f6f7de0a03bb294b54c5994dbbdaf84de0c50e693fe4e5983180c58eed48e3"
+    },
+    "muscles": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-3-muscle-fiber-contraction-and-relaxation",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-3-muscle-fiber-contraction-and-relaxation",
+      "title": "10.3 Muscle Fiber Contraction and Relaxation  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.107600+00:00",
+      "retrievedSha256": "86d0578a3f79082fe9419f9baa72a2946b9960282f7968a72b49d2383c2d9f7e"
+    },
+    "reproduction": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/28-1-fertilization",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/28-1-fertilization",
+      "title": "28.1 Fertilization  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.121979+00:00",
+      "retrievedSha256": "ca018c5c01badd36e430677dbae79790f267f373186cbef5c8214cdc6a36f171"
+    },
+    "diet": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet",
+      "title": "24.7 Nutrition and Diet  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.325822+00:00",
+      "retrievedSha256": "5826c9837fe2861fb60802524396e405a6d2d03317d0802998e12ae568f156b8"
+    },
+    "pathogens": {
+      "url": "https://openstax.org/books/microbiology/pages/15-1-characteristics-of-infectious-disease",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/15-1-characteristics-of-infectious-disease",
+      "title": "15.1 Characteristics of Infectious Disease - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.106975+00:00",
+      "retrievedSha256": "d3d2b925daf0c6d690439d456aeaa44d5d82001a8a1a9acad439aa7f905851f3"
+    },
+    "spread": {
+      "url": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/16-3-modes-of-disease-transmission",
+      "title": "16.3 Modes of Disease Transmission - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.179247+00:00",
+      "retrievedSha256": "7761daeb528afa4ef4784ae53cb222da5df92f5ced2e7ada8c95872f0e7ad7e4"
+    },
+    "polio": {
+      "url": "https://openstax.org/books/microbiology/pages/26-3-acellular-diseases-of-the-nervous-system",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/26-3-acellular-diseases-of-the-nervous-system",
+      "title": "26.3 Acellular Diseases of the Nervous System - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.394765+00:00",
+      "retrievedSha256": "b5f71e4c9a13050dcbc800cad952196bc8636707a0a2e82807aa95b0655c9678"
+    },
+    "diarrhoea": {
+      "url": "https://openstax.org/books/microbiology/pages/24-3-bacterial-infections-of-the-gastrointestinal-tract",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/24-3-bacterial-infections-of-the-gastrointestinal-tract",
+      "title": "24.3 Bacterial Infections of the Gastrointestinal Tract - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.251779+00:00",
+      "retrievedSha256": "d20a2e5eeda8f5f3917941d9d3a3fd9d1daa4c8af881eb5c966e8c1d80438335"
+    },
+    "hepatitis": {
+      "url": "https://openstax.org/books/microbiology/pages/24-4-viral-infections-of-the-gastrointestinal-tract",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/24-4-viral-infections-of-the-gastrointestinal-tract",
+      "title": "24.4 Viral Infections of the Gastrointestinal Tract - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.413611+00:00",
+      "retrievedSha256": "9d9ae2e4e95b00f36a511029dabd88b9cd9aa4372743bef42c416c84e2eeea31"
+    },
+    "dengue": {
+      "url": "https://openstax.org/books/microbiology/pages/25-3-viral-infections-of-the-circulatory-and-lymphatic-systems",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/25-3-viral-infections-of-the-circulatory-and-lymphatic-systems",
+      "title": "25.3 Viral Infections of the Circulatory and Lymphatic Systems - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.459433+00:00",
+      "retrievedSha256": "ce393a6ef96155faee93ee79853671cf86beb8116aaa848fad092dc29ec5ebfa"
+    },
+    "malaria": {
+      "url": "https://openstax.org/books/microbiology/pages/25-4-parasitic-infections-of-the-circulatory-and-lymphatic-systems",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/25-4-parasitic-infections-of-the-circulatory-and-lymphatic-systems",
+      "title": "25.4 Parasitic Infections of the Circulatory and Lymphatic Systems - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.605268+00:00",
+      "retrievedSha256": "e569a9a8fcecf6fb80f713d3125cda078e2bba836e9cb5c8dea97499e6c43fb7"
+    },
+    "antibiotics": {
+      "url": "https://openstax.org/books/microbiology/pages/14-3-mechanisms-of-antibacterial-drugs",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/14-3-mechanisms-of-antibacterial-drugs",
+      "title": "14.3 Mechanisms of Antibacterial Drugs - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.474479+00:00",
+      "retrievedSha256": "cba818556f9fb4007bd230b778206e6ef09b3d8eac89fb438c62bd055d7108bd"
+    },
+    "resistance": {
+      "url": "https://openstax.org/books/microbiology/pages/14-5-drug-resistance",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/14-5-drug-resistance",
+      "title": "14.5 Drug Resistance - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.508510+00:00",
+      "retrievedSha256": "8a7ea9e30f1484d4283042e36855d75f806ecc9fa74896cbc39c581fcf361a1a"
+    },
+    "micro-control": {
+      "url": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/13-2-using-physical-methods-to-control-microorganisms",
+      "title": "13.2 Using Physical Methods to Control Microorganisms - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.560308+00:00",
+      "retrievedSha256": "afe6721818050a62a3c05502299b76be5ea1582654ea06ff1d2cea8af7103307"
+    },
+    "micro-food": {
+      "url": "https://openstax.org/books/microbiology/pages/9-5-other-environmental-conditions-that-affect-growth",
+      "resolvedUrl": "https://openstax.org/books/microbiology/pages/9-5-other-environmental-conditions-that-affect-growth",
+      "title": "9.5 Other Environmental Conditions that Affect Growth - Microbiology | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.543037+00:00",
+      "retrievedSha256": "5bd02b9c67e1ab4d9bbc7aa0434d4e9fa655bce7bdc29c03b86e6b33fdd3236a"
+    },
+    "carbohydrates": {
+      "url": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates",
+      "title": "3.2 Carbohydrates - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.604537+00:00",
+      "retrievedSha256": "7dcf332122be55427be938f563feeeb89df4674417b1b15f43199a4a5b9afb30"
+    },
+    "fats": {
+      "url": "https://openstax.org/books/biology-2e/pages/3-3-lipids",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/3-3-lipids",
+      "title": "3.3 Lipids - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.617659+00:00",
+      "retrievedSha256": "c3af02e70c67df77d9bb033a58b7b79e4a8195ceb8b9f1a19bb979b62c15b763"
+    },
+    "proteins": {
+      "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "title": "3.4 Proteins - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.637638+00:00",
+      "retrievedSha256": "5024620f11ecbd6b5eaae3dc3e9935b97eb513abffd71f74bb03d18d02c3441c"
+    },
+    "enzymes": {
+      "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/6-5-enzymes",
+      "title": "6.5 Enzymes - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.724290+00:00",
+      "retrievedSha256": "51820c5d058abd6ffd7c7b8da012f1743055f085d1efa280db699e03c776ac30"
+    },
+    "nutrition": {
+      "url": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "title": "34.2 Nutrition and Energy Production - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.707255+00:00",
+      "retrievedSha256": "1d153f67deaa73f6ab10e33e536d959f90076dbe0b0f139cb3062794b6c5fb4b"
+    },
+    "metabolism": {
+      "url": "https://openstax.org/books/biology-2e/pages/7-6-connections-of-carbohydrate-protein-and-lipid-metabolic-pathways",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/7-6-connections-of-carbohydrate-protein-and-lipid-metabolic-pathways",
+      "title": "7.6 Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.744424+00:00",
+      "retrievedSha256": "fedfbed683b0b065323e3f45fbee0e4486ba24f9a0fd1be5f5294f1a3e18c251"
+    }
+  },
+  "batch-food": {
+    "canning": {
+      "url": "https://nchfp.uga.edu/faqs/general-canning/",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-canning/",
+      "title": "Frequently Asked Questions | National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:41.602468+00:00",
+      "retrievedSha256": "a776cf78690e28bc82e8c21fa5d1243cd71f7007619a1d0958c5050553369d77"
+    },
+    "freezing": {
+      "url": "https://nchfp.uga.edu/faqs/general-freezing/",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-freezing/",
+      "title": "Frequently Asked Questions | National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:42.992617+00:00",
+      "retrievedSha256": "8e3aeea4f6e1bc5a6c832cea192320ac39a89709f1a188010c4b9adbb5e3024b"
+    },
+    "drying": {
+      "url": "https://nchfp.uga.edu/faqs/general-drying/",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-drying/",
+      "title": "Frequently Asked Questions | National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:41.614759+00:00",
+      "retrievedSha256": "fa26ff260d6d97b06b58f08cce74490fe73839132c6a371bb28e9f99b43d1335"
+    },
+    "fermenting": {
+      "url": "https://nchfp.uga.edu/faqs/general-fermenting/",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-fermenting/",
+      "title": "Frequently Asked Questions | National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:43.075415+00:00",
+      "retrievedSha256": "625fa6d4572c36e435633ec30b5e3ea2c44e9103d1cd36539507a4462ceb681b"
+    },
+    "pickling": {
+      "url": "https://nchfp.uga.edu/faqs/general-pickling/",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-pickling/",
+      "title": "Frequently Asked Questions | National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:41.616374+00:00",
+      "retrievedSha256": "caa2c026077d4b6578490e40c5543879103896f945d9af31351436f0735dd8af"
+    }
+  },
+  "batch-supplements": {
+    "dri": {
+      "url": "https://www.canada.ca/en/health-canada/services/food-nutrition/healthy-eating/dietary-reference-intakes/definitions-relationship-risk-inadequacy-risk-adverse-effects.html",
+      "resolvedUrl": "https://www.canada.ca/en/health-canada/services/food-nutrition/healthy-eating/dietary-reference-intakes/definitions-relationship-risk-inadequacy-risk-adverse-effects.html",
+      "title": "DRI Definitions and Relationship to Risk of Inadequacy and Risk of Adverse Effects - Canada.ca",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:15.755165+00:00",
+      "retrievedSha256": "24f95bc370e7ce6f066c81bfaa086e2c58c85572ca54207f7d9f82a195d167d3"
+    },
+    "water-activity": {
+      "url": "https://www.gov.mb.ca/agriculture/food-safety/education-resources/water-content-water-activity.html",
+      "resolvedUrl": "https://www.gov.mb.ca/agriculture/food-safety/education-resources/water-content-water-activity.html",
+      "title": "Province of Manitoba | agriculture - Water Content and Water Activity: Two Factors That Affect Food Safety",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:15.440803+00:00",
+      "retrievedSha256": "11b71fa47bb9ab8160f5aa084e90de4dd0e0b07744549059960f95b87838e7cd"
+    }
+  },
+  "batch-final-food": {
+    "browning": {
+      "url": "https://food.unl.edu/article/how-prevent-cut-fruit-turning-brown/",
+      "resolvedUrl": "https://food.unl.edu/article/how-prevent-cut-fruit-turning-brown/",
+      "title": "How to Prevent Cut Fruit from Turning Brown | UNL Food | Nebraska",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:33.515500+00:00",
+      "retrievedSha256": "0e3395d43031dfe3274687462f57f9671233ef22ef3b5db81139643aae4feb48"
+    },
+    "maillard": {
+      "url": "https://asbe.org/article/maillard-reaction/",
+      "resolvedUrl": "https://asbe.org/article/maillard-reaction/",
+      "title": "Maillard Reaction | American Society of Baking",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.914608+00:00",
+      "retrievedSha256": "ecfd3910670e5ad8d6dbe62101de7c20dcd70acb54ed30e6c5e98aff7c206db9"
+    },
+    "caramelization": {
+      "url": "https://asbe.org/article/caramelization/",
+      "resolvedUrl": "https://asbe.org/article/caramelization/",
+      "title": "Caramelization | American Society of Baking",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.941081+00:00",
+      "retrievedSha256": "981456da399d2f7748f929a5d937a811d1abd55910d9b58ad2f0dbb451ee256d"
+    },
+    "double-burden": {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK487900/",
+      "resolvedUrl": "https://www.ncbi.nlm.nih.gov/books/NBK487900/",
+      "title": "Checking your browser - reCAPTCHA",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.530425+00:00",
+      "retrievedSha256": "4ccd307610c13fc178c616043a7f301486479526e9644e1ded99f2b0a727e72f"
+    },
+    "starch": {
+      "url": "https://asbe.org/article/starch-gelatinization/",
+      "resolvedUrl": "https://asbe.org/article/starch-gelatinization/",
+      "title": "Starch Gelatinization | American Society of Baking",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.948262+00:00",
+      "retrievedSha256": "0a4d9efe9d6a4e365609a03085b6a277406f507d6a65d36acac08984f7d0a987"
+    },
+    "innate": {
+      "url": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response",
+      "title": "42.1 Innate Immune Response - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:30:31.531413+00:00",
+      "retrievedSha256": "142c58c589c2eda614a5f7ddfb22c90ab330c5198a726408624c9d7b70da1055"
+    }
+  },
+  "batch-corrected": {
+    "canning": {
+      "url": "https://nchfp.uga.edu/faqs/general-canning/category/faq-canning",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-canning/category/faq-canning",
+      "title": "General Canning FAQs - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:33:59.476392+00:00",
+      "retrievedSha256": "0ed09c621d636f07d9445661b19ca32fdd8da2b6de4332029d8425d0c213e105"
+    },
+    "freezing": {
+      "url": "https://nchfp.uga.edu/faqs/general-freezing/category/faq-freezing",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-freezing/category/faq-freezing",
+      "title": "General Freezing FAQs - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:33:56.554525+00:00",
+      "retrievedSha256": "04c96c8f69928b8d1a9ce01508bc1bebf0aee9b63767be5a1889e2102c7ad214"
+    },
+    "drying": {
+      "url": "https://nchfp.uga.edu/faqs/general-drying/category/faq-drying",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-drying/category/faq-drying",
+      "title": "General Drying FAQs - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:33:56.571546+00:00",
+      "retrievedSha256": "e5edc1ccc3b0d2286d3d426ea9abb61add67e483aaa9f9b93ad99db29cb47a77"
+    },
+    "pickling": {
+      "url": "https://nchfp.uga.edu/faqs/general-pickling/category/faq-pickling",
+      "resolvedUrl": "https://nchfp.uga.edu/faqs/general-pickling/category/faq-pickling",
+      "title": "General Pickling FAQs - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:33:56.557474+00:00",
+      "retrievedSha256": "fce43cde3a787ebb632e6e193557efdf76762b5c3ceb8a841b14ad2176991fd3"
+    },
+    "double-burden": {
+      "url": "https://www.emro.who.int/nutrition/double-burden-of-nutrition/",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  },
+  "batch-who": {
+    "double-burden": {
+      "id": "double-burden",
+      "title": "Malnutrition — overview",
+      "publisher": "World Health Organization",
+      "url": "https://www.who.int/health-topics/malnutrition",
+      "retrievedOn": "2026-11-13",
+      "retrievedAt": "2026-11-13T04:34:24.791589+00:00",
+      "retrievalStatus": 200,
+      "retrievalMethod": "Web source reader; extracted lines 84–89 inspected; direct HTTP access unavailable",
+      "retrievedSha256": "a9fc27e60f6236292c487d19d510f46ae047588f3f27dba5fcb844ff5767d33c",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  },
+  "batch-specific-preserve": {
+    "canning-principles": {
+      "url": "https://nchfp.uga.edu/how/pickle/general-information-pickling/ensuring-safe-canned-foods/",
+      "resolvedUrl": "https://nchfp.uga.edu/how/pickle/general-information-pickling/ensuring-safe-canned-foods/",
+      "title": "Ensuring Safe Canned Foods - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:36:45.210961+00:00",
+      "retrievedSha256": "eb99d3204e23686f2f2f2f3b7d36eabad3bb9eed64be0c53e1fa0859b9de8c56"
+    },
+    "ferment-principles": {
+      "url": "https://nchfp.uga.edu/how/can/general-information/general-information-on-pickling/",
+      "resolvedUrl": "https://nchfp.uga.edu/how/can/general-information/general-information-on-pickling/",
+      "title": "General Information on Pickling - National Center for Home Food Preservation",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:36:45.239649+00:00",
+      "retrievedSha256": "d419964dca2d8a68958445471620a916a763b93906e17fe802fbf6befd834316"
+    },
+    "b12": {
+      "url": "https://www.medlineplus.gov/ency/article/002403.htm",
+      "resolvedUrl": "https://www.medlineplus.gov/ency/article/002403.htm",
+      "title": "Vitamin B12: MedlinePlus Medical Encyclopedia",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:36:45.521808+00:00",
+      "retrievedSha256": "9c06cab0def33b002bbb099785edbdf69d9bafaee73ba256ddc31f9e6643b3f1"
+    },
+    "cold": {
+      "url": "https://extension.umn.edu/food/preparing/cooking-at-home/food-preservation/freezing",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  },
+  "contentInspection": {
+    "general-faq-short-paths": "HTTP 200 but only general index; replaced with category paths.",
+    "NCBI-double-burden": "HTTP 200 browser-check page, not cited. Replaced by WHO text through source reader.",
+    "who-direct": "Direct HTTP unavailable; WHO overview lines 84–89 inspected through source reader.",
+    "cold-extension": "HTTP 403; not cited. OpenStax Microbiology physical methods supports cooling mechanisms.",
+    "verification": "Source comparison by Assistant only. No independent scientific approval or publishing rights determination is inferred."
+  },
+  "batch-intestine": {
+    "intestine": {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "title": "23.5 The Small and Large Intestines  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:43:10.553459+00:00",
+      "retrievedSha256": "17a3fba35ddb784dd73c46724a901f3b33820dbbb2f0bd27053e315e78724dd0"
+    }
+  }
+}

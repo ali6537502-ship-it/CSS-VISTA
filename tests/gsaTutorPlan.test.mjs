@@ -9,11 +9,12 @@ const catalog=JSON.parse(fs.readFileSync('public/gsa-tutor/content/catalog.json'
 const chapter=id=>JSON.parse(fs.readFileSync('public/gsa-tutor/content/chapter-'+String(id).padStart(2,'0')+'.json','utf8'))
 const KEY='cssvista:tool:gsa-tutor:v1'
 const wait=ms=>new Promise(r=>setTimeout(r,ms))
-async function open(saved,storage={}){
- const requests=[]
- const dom=new JSDOM(html,{url:'https://www.css-vista.com/gsa-tutor/studio.html',runScripts:'outside-only',pretendToBeVisual:true,beforeParse(window){if(saved)window.localStorage.setItem(KEY,JSON.stringify(saved));for(const [key,value]of Object.entries(storage))window.localStorage.setItem(key,typeof value==='string'?value:JSON.stringify(value))}})
+async function open(saved,storage={},config={}){
+ const requests=[],cacheModes=[]
+ const dom=new JSDOM(html,{url:'https://www.css-vista.com/gsa-tutor/studio.html',runScripts:'outside-only',pretendToBeVisual:true,beforeParse(window){if(config.clock){window.Date.now=()=>config.clock.time;window.setInterval=fn=>config.clock.callbacks.push(fn)}if(saved)window.localStorage.setItem(KEY,JSON.stringify(saved));for(const [key,value]of Object.entries(storage))window.localStorage.setItem(key,typeof value==='string'?value:JSON.stringify(value))}})
  dom.window.scrollTo=()=>{}
- dom.window.fetch=async url=>{
+ dom.window.fetch=async (url,options)=>{
+   cacheModes.push(options?.cache)
    requests.push(String(url))
    const path=String(url)
    if(path.endsWith('/catalog.json'))return {ok:true,json:async()=>catalog}
@@ -21,13 +22,14 @@ async function open(saved,storage={}){
    if(match)return {ok:true,json:async()=>chapter(Number(match[1]))}
    return {ok:false,status:404}
  }
+ dom.window.eval(fs.readFileSync('public/gsa-tutor/learning-core.js','utf8'))
  dom.window.eval(script)
  await wait(30)
- return {dom,requests,document:dom.window.document,click(selector){const button=dom.window.document.querySelector(selector);assert.ok(button,selector+' unavailable');button.click()}}
+ return {dom,requests,cacheModes,document:dom.window.document,click(selector){const button=dom.window.document.querySelector(selector);assert.ok(button,selector+' unavailable');button.click()}}
 }
 test('course loads only a small catalogue until a chapter is opened',async()=>{
  const p=await open()
- assert.deepEqual(p.requests,['/gsa-tutor/content/catalog.json'])
+ assert.deepEqual(p.requests,['/gsa-tutor/content/catalog.json']);assert.equal(p.cacheModes[0],'no-cache','Revalidate catalogue metadata after code upgrades')
  assert.equal(p.document.querySelectorAll('.duration').length,6)
  p.click('[data-view="library"]')
  p.click('[data-chapter="1"]')
@@ -37,8 +39,8 @@ test('course loads only a small catalogue until a chapter is opened',async()=>{
  assert.equal(p.document.querySelectorAll('[data-chapter="2"]').length,0)
  p.dom.window.close()
 })
-test('every duration retains all 141 unique lessons',async()=>{
- const p=await open()
+test('every duration retains all 141 unique lessons',async t=>{
+ const p=await open();t.after(()=>p.dom.window.close())
  for(const n of [5,8,14,20,30,45,60,120]){
    if(p.document.querySelector('[data-action="editplan"]'))p.click('[data-action="editplan"]')
    const input=p.document.getElementById('custom-days')
@@ -46,11 +48,11 @@ test('every duration retains all 141 unique lessons',async()=>{
    p.click('[data-action="saveplan"]')
    if(p.document.querySelector('[data-action="expandplan"]'))p.click('[data-action="expandplan"]')
    const days=[...p.document.querySelectorAll('.day')]
-   assert.equal(days.length,n)
+   assert.ok(days.length>=n&&days.length<=120,'Time budget may extend the selected minimum')
    const ids=[...p.document.querySelectorAll('.day-lesson')].map(el=>el.dataset.lesson)
    assert.equal(ids.length,141)
    assert.equal(new Set(ids).size,141)
-   assert.ok(days.every(x=>x.querySelectorAll('.day-lesson').length>=1))
+   assert.ok(days.every(x=>x.querySelectorAll('.day-lesson,.planned-activity').length>=1),'Each scheduled day needs a concrete activity at minimum '+n+'; empty days: '+days.filter(x=>!x.querySelector('.day-lesson,.planned-activity')).map(x=>x.querySelector('summary b').textContent).join(', '))
  }
  p.dom.window.close()
 })
@@ -279,7 +281,7 @@ test('a wrong concept check cannot be self-rated clear until it is passed',async
  p.dom.window.close();
 });
 
-test('rest days are excluded without dropping lessons or changing the total number of study sessions',async()=>{
+test('rest days are excluded while capacity-aware plans retain all lessons and their selected minimum',async()=>{
  const p=await open();
  p.click('[data-days="8"]');
  const monday=p.document.querySelector('[data-rest-day="1"]'),friday=p.document.querySelector('[data-rest-day="5"]');
@@ -290,7 +292,7 @@ test('rest days are excluded without dropping lessons or changing the total numb
  assert.deepEqual(saved.plan.restDays,[1,5]);assert.equal(saved.plan.dailyMinutes,60);
  p.click('[data-action="expandplan"]');
  const rows=[...p.document.querySelectorAll('.day')];
- assert.equal(rows.length,8);
+ assert.ok(rows.length>=8&&rows.length<=120);
  const dates=rows.map(row=>{const m=row.querySelector('summary strong').textContent.match(/\d{1,2} [A-Za-z]+ \d{4}/);return new Date(m[0]+' 12:00:00 UTC').getUTCDay()});
  assert.ok(dates.every(day=>day!==1&&day!==5),'No active session may land on an excluded weekday');
  assert.equal(p.document.querySelectorAll('.day-lesson').length,141);
@@ -366,4 +368,197 @@ test('short course clearly warns when tentative workload exceeds available time'
  assert.equal(saved.plan.dailyMinutes,30);
  assert.equal(saved.plan.days,5);
  p.dom.window.close();
+});
+
+test('capacity rebalancing extends an unrealistic course and keeps all records',async()=>{
+ const id=catalog.chapters[0].sections[0].id;
+ const history={at:'2026-01-01T00:00:00Z',lessonId:id,selfRating:'partial',response:'Earlier recall'};
+ const p=await open({plan:{days:5,startDate:'2026-01-01',dailyMinutes:60,restDays:[0]},completed:{[id]:{at:'2026-01-01',selfRating:'partial'}},recallAttempts:{old:history}});
+ p.click('[data-action="fitplan"]');
+ p.click('[data-action="expandplan"]');
+ const days=[...p.document.querySelectorAll('.day')];
+ assert.ok(days.length>5,'Realistic time budget must extend the duration');
+ const ids=[...p.document.querySelectorAll('.day-lesson:not(.scheduled-review .day-lesson)')].map(b=>b.dataset.lesson);
+ assert.equal(ids.length,141);assert.equal(new Set(ids).size,141);
+ for(const day of days){const minutes=Number(day.querySelector('em').textContent.match(/~(\d+) min/)[1]);assert.ok(minutes<=60,'Rebalance fits available time')}
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.deepEqual(state.recallAttempts.old,history);assert.ok(state.completed[id]);
+ assert.equal(Object.values(state.planHistory)[0].plan.startDate,'2026-01-01');
+ assert.equal(state.plan.algorithm,'capacity-v2');assert.deepEqual(state.plan.restDays,[0]);
+ p.dom.window.close();
+});
+
+test('editing a timetable never stores a null plan through another save',async()=>{
+ const plan={days:20,startDate:'2026-11-01',dailyMinutes:90};
+ const p=await open({plan});
+ p.click('[data-action="editplan"]');
+ p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ p.click('[data-action="bookmark"]');
+ assert.deepEqual(JSON.parse(p.dom.window.localStorage.getItem(KEY)).plan,plan);
+ p.dom.window.close();
+});
+
+test('lesson checks retain correct and incorrect attempts without changing the original key',async()=>{
+ const p=await open();p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ const q=chapter(6).questions[0];
+ p.click('[data-choice="A"]');p.click('[data-action="tolearn"]');
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ p.click('[data-choice="D"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ const attempts=Object.values(state.quizAttempts);
+ assert.equal(attempts.length,2);
+ assert.deepEqual(attempts.map(a=>a.responses[q.id].correct),[false,true]);
+ assert.ok(attempts.every(a=>a.mode==='lesson-check'&&a.responses[q.id].answerKey==='D'));
+ assert.equal(state.questionReview[q.id].unresolved,false);
+ p.dom.window.close();
+});
+
+test('written answers persist while typing before blur or navigation',async()=>{
+ const p=await open();p.click('[data-view="practice"]');p.click('[data-practice="13"]');await wait(35);
+ const model=chapter(13).analytical[0];p.click('[data-analytical="'+model.id+'"]');
+ const el=p.document.getElementById('write');el.value='My interrupted answer is retained before I click any button.';
+ el.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ assert.equal(JSON.parse(p.dom.window.localStorage.getItem(KEY)).drafts[model.id],el.value);
+ p.dom.window.close();
+});
+
+test('storage failure offers retry and never reports a failed recall as saved',async()=>{
+ const p=await open();p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ p.click('[data-choice="D"]');p.click('[data-action="torecall"]');
+ const el=p.document.getElementById('recall');
+ el.value='Atoms have protons and neutrons in the nucleus and electrons in quantum states around it. Isotopes differ in neutron number.';
+ el.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));p.click('[data-action="reveal"]');p.click('[data-grade="gotit"]');
+ const prototype=p.dom.window.Storage.prototype,original=prototype.setItem;
+ prototype.setItem=()=>{throw new Error('Quota exceeded')};
+ p.click('[data-action="finish"]');
+ assert.equal(p.document.querySelector('.eyebrow')?.textContent==='Session saved',false);
+ assert.ok(p.document.querySelector('[data-action="retrysave"]'));
+ assert.equal(JSON.parse(p.dom.window.localStorage.getItem(KEY)).completed['c6-s6-1'],undefined);
+ prototype.setItem=original;p.click('[data-action="retrysave"]');
+ assert.ok(JSON.parse(p.dom.window.localStorage.getItem(KEY)).completed['c6-s6-1']);
+ assert.match(p.document.getElementById('app').textContent,/Session saved/);
+ p.dom.window.close();
+});
+
+test('explicit lesson metadata takes precedence over provisional keyword matching',async()=>{
+ const p=await open();p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);
+ p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ while(p.document.querySelector('[data-action="nextbeat"]'))p.click('[data-action="nextbeat"]');
+ assert.equal(p.document.querySelector('.lesson-card h2').textContent,chapter(6).questions[0].prompt);
+ assert.equal(chapter(6).questions[0].verification.status,'pending-independent-review');
+ p.dom.window.close();
+});
+
+test('timed assessment saves responses, resumes after reload, then freezes source-key results',async()=>{
+ const p=await open();p.click('[data-view="practice"]');p.click('[data-assessment="timed"]');await wait(80);
+ assert.match(p.document.getElementById('app').textContent,/Time remaining/);
+ p.click('[data-assessment-choice="A"]');p.click('[data-action="assessmentnext"]');p.click('[data-assessment-choice="B"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),id=Object.keys(state.assessmentAttempts)[0];
+ assert.equal(Object.keys(state.assessmentAttempts[id].responses).length,2);
+ assert.equal(p.document.querySelectorAll('.feedback').length,0,'No answer is revealed before submission');
+ const q=await open(state);q.click('[data-view="practice"]');q.click('[data-resume-assessment="'+id+'"]');
+ assert.equal(q.document.querySelector('[data-assessment-choice="A"]').getAttribute('aria-pressed'),'true');
+ q.click('[data-action="finishassessment"]');assert.match(q.document.getElementById('app').textContent,/does not establish mastery/);
+ const finished=JSON.parse(q.dom.window.localStorage.getItem(KEY));assert.ok(finished.assessmentAttempts[id].finishedAt);
+ assert.equal(Object.keys(finished.questionReview).length,20);assert.ok(finished.assessmentAttempts[id].questions.every(x=>x.answer&&x.sourceVersion));
+ p.dom.window.close();q.dom.window.close();
+});
+test('expired timed work submits before accepting another answer',async()=>{
+ const p=await open();p.click('[data-view="practice"]');p.click('[data-assessment="timed"]');await wait(80);
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),id=Object.keys(state.assessmentAttempts)[0];
+ state.assessmentAttempts[id].deadline='2000-01-01T00:00:00Z';
+ const q=await open(state);q.click('[data-view="practice"]');q.click('[data-resume-assessment="'+id+'"]');
+ assert.equal(q.document.querySelector('[data-assessment-choice]'),null);assert.match(q.document.getElementById('app').textContent,/0 \/ 20 correct/);
+ p.dom.window.close();q.dom.window.close();
+});
+test('planner preferences persist without assigning completion or mastery',async()=>{
+ const p=await open();const level=p.document.getElementById('starting-level');level.value='beginner';level.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}));
+ for(const selector of ['[data-difficult-chapter="6"]','[data-prior-chapter="14"]']){const el=p.document.querySelector(selector);el.checked=true;el.dispatchEvent(new p.dom.window.Event('change',{bubbles:true}))}
+ p.click('[data-action="saveplan"]');const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(state.plan.startingLevel,'beginner');assert.deepEqual(state.plan.difficultChapters,[6]);assert.deepEqual(state.plan.previouslyStudied,[14]);assert.equal(Object.keys(state.completed).length,0);
+ p.dom.window.close();
+});
+test('written self-evaluation retains response snapshots and never invents marks',async()=>{
+ const p=await open();p.click('[data-view="practice"]');p.click('[data-practice="13"]');await wait(35);
+ const model=chapter(13).analytical[0];p.click('[data-analytical="'+model.id+'"]');
+ const el=p.document.getElementById('write');el.value='A draft scientific explanation to compare with the manuscript model.';el.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ p.click('[data-action="revealwriting"]');
+ for(const select of p.document.querySelectorAll('[data-writing-criterion]'))select.value='revise';
+ p.click('[data-action="savewritingselfreview"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),attempt=Object.values(state.writtenAttempts)[0];
+ assert.equal(attempt.response,el.value);assert.equal(attempt.score,undefined);assert.equal(attempt.modelReview,'pending-independent-review');assert.ok(attempt.modelSnapshot);
+ p.dom.window.close();
+});
+
+test('observed page time excludes hidden periods and never grants reading completion',async()=>{
+ const clock={time:Date.parse('2026-11-12T10:00:00Z'),callbacks:[]};
+ const p=await open(undefined,{}, {clock});
+ p.click('[data-view="library"]');p.click('[data-chapter="6"]');await wait(35);p.click('[data-lesson="c6-s6-1"]');await wait(35);
+ Object.defineProperty(p.document,'hasFocus',{value:()=>true,configurable:true});
+ Object.defineProperty(p.document,'visibilityState',{value:'visible',configurable:true});
+ const tick=()=>{clock.time+=10000;for(const fn of clock.callbacks)fn()};
+ tick();Object.defineProperty(p.document,'visibilityState',{value:'hidden',configurable:true});
+ for(let i=0;i<10;i++)tick();
+ Object.defineProperty(p.document,'visibilityState',{value:'visible',configurable:true});
+ p.dom.window.dispatchEvent(new p.dom.window.Event('scroll'));tick();p.click('[data-view="library"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));
+ assert.equal(Object.values(state.studySessions)[0].activeSeconds,20);
+ assert.equal(Object.values(state.studySessions)[0].completed,false);
+ assert.equal(Object.keys(state.completed).length,0);
+ p.dom.window.close();
+});
+
+test('science mock written answers survive reload and remain explicitly ungraded',async()=>{
+ const p=await open();p.click('[data-view="practice"]');p.click('[data-assessment="science-mock"]');await wait(80);
+ assert.match(p.document.getElementById('app').textContent,/Question 1 \/ 28/);
+ p.click('[data-assessment-index="20"]');const el=p.document.getElementById('mock-writing');
+ el.value='A scientific written response retained through an interrupted mock.';el.dispatchEvent(new p.dom.window.Event('input',{bubbles:true}));
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),id=Object.keys(state.assessmentAttempts)[0];
+ const q=await open(state);q.click('[data-view="practice"]');q.click('[data-resume-assessment="'+id+'"]');q.click('[data-assessment-index="20"]');
+ assert.equal(q.document.getElementById('mock-writing').value,el.value);q.click('[data-action="finishassessment"]');
+ assert.match(q.document.getElementById('app').textContent,/40 marks of written tasks remain ungraded/);
+ const a=JSON.parse(q.dom.window.localStorage.getItem(KEY)).assessmentAttempts[id];assert.ok(a.finishedAt);assert.equal(a.paperSources.length,1);
+ p.dom.window.close();q.dom.window.close();
+});
+
+test('scheduled written practice opens an available model directly without creating a quiz attempt',async()=>{
+ const p=await open();p.click('[data-days="20"]');p.click('[data-action="saveplan"]');p.click('[data-action="expandplan"]');
+ p.click('[data-planned-writing="4"]');await wait(45);
+ assert.ok(p.document.getElementById('write'));
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY));assert.equal(Object.keys(state.quizAttempts).length,0);
+ p.dom.window.close();
+});
+
+test('finishing reading does not move unfinished work into different calendar assignments',async t=>{
+ const p=await open();t.after(()=>p.dom.window.close());p.click('[data-days="60"]');p.click('[data-action="saveplan"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),assignments=state.plan.assignments;
+ assert.ok(assignments.length>=60);const initial=JSON.parse(JSON.stringify(assignments));
+ for(const id of assignments.flatMap(d=>d.ids).slice(0,8))state.completed[id]={at:'2026-11-12T09:00:00Z',selfRating:'gotit'};
+ const q=await open(state);t.after(()=>q.dom.window.close());q.click('[data-action="expandplan"]');
+ const rows=[...q.document.querySelectorAll('.day')];
+ assert.deepEqual(rows.map(row=>[...row.querySelectorAll('.day-lesson')].map(b=>b.dataset.lesson)),initial.map(d=>d.ids));
+ q.click('[data-action="fitplan"]');const updated=JSON.parse(q.dom.window.localStorage.getItem(KEY));
+ assert.deepEqual(Object.values(updated.planHistory).at(-1).plan.assignments,initial,'Explicit rebalancing archives the earlier complete timetable');
+});
+
+test('malformed timetable snapshots fall back safely without rewriting retained records',async t=>{
+ const original={plan:{days:5,startDate:'2026-11-12',dailyMinutes:90,algorithm:'capacity-v2',assignments:[null,null,null,null,null]},drafts:{keep:'Retained writing'}};
+ const p=await open(original);t.after(()=>p.dom.window.close());
+ assert.ok(p.document.querySelector('.day'));p.click('[data-action="expandplan"]');
+ assert.equal(p.document.querySelectorAll('.day-lesson').length,141);
+ assert.deepEqual(JSON.parse(p.dom.window.localStorage.getItem(KEY)),original);
+});
+
+test('interrupted chapter practice resumes the first unanswered question and retains the same attempt',async t=>{
+ const p=await open();t.after(()=>p.dom.window.close());p.click('[data-view="practice"]');p.click('[data-practice="1"]');await wait(35);
+ p.click('[data-quiz-choice="A"]');p.click('[data-action="nextquestion"]');
+ const state=JSON.parse(p.dom.window.localStorage.getItem(KEY)),id=Object.keys(state.quizAttempts)[0];
+ const q=await open(state);t.after(()=>q.dom.window.close());q.click('[data-view="practice"]');q.click('[data-practice="1"]');await wait(35);
+ assert.match(q.document.getElementById('app').textContent,/Question 2 of 4/);
+ const updated=JSON.parse(q.dom.window.localStorage.getItem(KEY));assert.equal(Object.keys(updated.quizAttempts).length,1);assert.ok(updated.quizAttempts[id]);
 });

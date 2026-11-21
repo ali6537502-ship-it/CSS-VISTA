@@ -1,0 +1,244 @@
+{
+  "version": "draft-1",
+  "lessonId": "c22-s22-1",
+  "title": "Vitamins and physiological function",
+  "status": "draft-pending-independent-review",
+  "author": "Assistant",
+  "independentReviewer": null,
+  "approvedContentHash": null,
+  "syllabusRefs": [
+    "GS-I-20"
+  ],
+  "courseScope": "core-and-enrichment",
+  "sources": [
+    {
+      "url": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "resolvedUrl": "https://openstax.org/books/biology-2e/pages/34-2-nutrition-and-energy-production",
+      "title": "34.2 Nutrition and Energy Production - Biology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.707255+00:00",
+      "retrievedSha256": "1d153f67deaa73f6ab10e33e536d959f90076dbe0b0f139cb3062794b6c5fb4b",
+      "id": "nutrition",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet",
+      "resolvedUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet",
+      "title": "24.7 Nutrition and Diet  - Anatomy and Physiology 2e | OpenStax",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:29:35.325822+00:00",
+      "retrievedSha256": "5826c9837fe2861fb60802524396e405a6d2d03317d0802998e12ae568f156b8",
+      "id": "diet",
+      "publisher": "OpenStax / Rice University",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    },
+    {
+      "url": "https://www.medlineplus.gov/ency/article/002403.htm",
+      "resolvedUrl": "https://www.medlineplus.gov/ency/article/002403.htm",
+      "title": "Vitamin B12: MedlinePlus Medical Encyclopedia",
+      "retrievalStatus": 200,
+      "retrievedAt": "2026-11-13T04:36:45.521808+00:00",
+      "retrievedSha256": "9c06cab0def33b002bbb099785edbdf69d9bafaee73ba256ddc31f9e6643b3f1",
+      "id": "b12",
+      "publisher": "US National Library of Medicine / MedlinePlus",
+      "retrievedOn": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "verificationStatus": "source-compared-draft; independent-review-pending"
+    }
+  ],
+  "stages": {
+    "foundation": {
+      "objectives": [
+        "Connect vitamin classes to physiological roles.",
+        "Explain deficiency risk without diagnosing from one symptom."
+      ],
+      "prerequisites": [
+        "Nutrient amount, uptake and physiological use are distinct.",
+        "An association between a nutrient and a function does not diagnose a symptom."
+      ],
+      "terms": {
+        "vitamin": "An organic micronutrient required for normal physiological processes.",
+        "coenzyme": "An organic helper molecule used by an enzyme.",
+        "deficiency": "Insufficient availability of a nutrient for normal function."
+      }
+    },
+    "conceptualTeaching": [
+      {
+        "conceptId": "vitamin-classes",
+        "sourceIds": [
+          "nutrition",
+          "diet",
+          "b12"
+        ],
+        "explanation": "Vitamins support regulation and metabolism rather than serving as calorie-bearing fuels. A, D, E and K are classed as fat-soluble; B vitamins and C are water-soluble. Solubility affects handling and storage, but simple slogans have exceptions: vitamin B12 can be stored substantially, and water-soluble supplements are not automatically harmless at any dose. A classification explains a general property rather than a universal toxicity rule."
+      },
+      {
+        "conceptId": "vitamin-functions",
+        "sourceIds": [
+          "nutrition",
+          "diet"
+        ],
+        "explanation": "Vitamin A supports visual function and epithelial maintenance; inadequate availability can impair dark adaptation. Vitamin D supports calcium handling and normal bone mineralization; severe deficiency can contribute to rickets in growing children or osteomalacia in adults. Vitamin C is required for normal collagen formation, and severe deficiency causes scurvy. Vitamin K supports normal blood-clotting processes. Several B vitamins contribute to coenzymes used in metabolism. Each association is a mechanism-linked example, not proof that every visual, bone or bleeding complaint has a nutritional cause."
+      },
+      {
+        "conceptId": "intake-and-risk",
+        "sourceIds": [
+          "nutrition",
+          "diet"
+        ],
+        "explanation": "Varied foods provide different vitamin patterns; absorption, food preparation and physiological needs influence availability. Adequate intake does not mean maximal supplementation. Excess exposure can cause harm, and some deficiencies involve impaired absorption rather than simply no vitamin in food. Discuss intake, availability and physiological use separately. Do not infer clinical deficiency from a single symptom or invent a supplement dose from an examination mnemonic."
+      }
+    ],
+    "visualUnderstanding": {
+      "kind": "labelled-concept-flow",
+      "nodes": [
+        "Food sources",
+        "Digestive availability and absorption",
+        "Vitamin-supported process",
+        "Deficiency may impair that process"
+      ],
+      "description": "Map A to vision, D to calcium/bone, C to collagen and K to clotting; use qualified arrows rather than one-symptom diagnoses.",
+      "limitations": "Conceptual function map, not a diagnostic chart or supplement guide.",
+      "sourceIds": [
+        "nutrition",
+        "diet",
+        "b12"
+      ]
+    },
+    "realWorldApplication": {
+      "example": "Bleeding can have many causes even though vitamin K supports clotting; a physiological association alone is insufficient for diagnosis.",
+      "sourceIds": [
+        "nutrition",
+        "diet",
+        "b12"
+      ]
+    },
+    "examinationApplication": {
+      "origin": "original-practice; no authentic past-paper attribution",
+      "prompt": "Explain the roles of four vitamins and distinguish classification from safe intake."
+    },
+    "activeUnderstanding": {
+      "questions": [
+        {
+          "id": "GS-D-c22-s22-1-1",
+          "lessonId": "c22-s22-1",
+          "conceptId": "vitamin-functions",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "foundational",
+          "type": "conceptual",
+          "prompt": "Which association is correct?",
+          "options": {
+            "A": "Vitamin C supports collagen formation; severe deficiency can cause scurvy.",
+            "B": "Vitamin K supplies energy through the same accounting factor as fat.",
+            "C": "Vitamin D hydrolyses protein as a digestive protease.",
+            "D": "Vitamin A and vitamin C have identical primary physiological functions."
+          },
+          "answer": "A",
+          "optionExplanations": {
+            "A": "This connects a valid role with a severe deficiency condition.",
+            "B": "A vitamin’s regulatory role is distinct from an energy-yielding fuel.",
+            "C": "Vitamin D is not a digestive protease.",
+            "D": "The vitamins have distinct roles despite belonging to one broad nutrient category."
+          },
+          "sources": [
+            "nutrition",
+            "diet"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        },
+        {
+          "id": "GS-D-c22-s22-1-2",
+          "lessonId": "c22-s22-1",
+          "conceptId": "vitamin-classes",
+          "syllabusRefs": [
+            "GS-I-20"
+          ],
+          "origin": "original-examination-style-practice",
+          "difficulty": "intermediate",
+          "type": "reasoning",
+          "prompt": "Which conclusion about water-soluble vitamins is justified?",
+          "options": {
+            "A": "Solubility guarantees harmlessness at any supplement dose.",
+            "B": "No water-soluble vitamin can be stored substantially.",
+            "C": "Solubility alone identifies an individual’s deficiency.",
+            "D": "Solubility affects handling but does not prove unlimited-dose safety."
+          },
+          "answer": "D",
+          "optionExplanations": {
+            "A": "Water solubility does not eliminate excess-intake risks.",
+            "B": "B12 is an important storage exception.",
+            "C": "Status requires more than a classification label.",
+            "D": "The classification is informative but not a universal safety guarantee."
+          },
+          "sources": [
+            "diet"
+          ],
+          "verification": {
+            "status": "draft-pending-independent-review"
+          }
+        }
+      ]
+    },
+    "answerWriting": {
+      "marks": 5,
+      "modelResponse": "Vitamins are organic micronutrients with regulatory roles rather than major calorie-yielding functions. A supports vision, D supports calcium handling and bone mineralization, C supports collagen formation, and K supports clotting. Severe deficiencies can respectively contribute to impaired dark adaptation, defective mineralization or scurvy in appropriate cases. A, D, E and K are fat-soluble; B vitamins and C are water-soluble, but solubility alone does not determine safe intake or exclude storage exceptions. Nutrient availability and clinical context must be considered before attributing a symptom to deficiency.",
+      "rubric": [
+        {
+          "criterion": "Define a vitamin and distinguish energy yield.",
+          "marks": 1
+        },
+        {
+          "criterion": "Correctly associate A with visual function.",
+          "marks": 1
+        },
+        {
+          "criterion": "Associate D with calcium/bone and C with collagen.",
+          "marks": 1
+        },
+        {
+          "criterion": "Associate K with clotting.",
+          "marks": 1
+        },
+        {
+          "criterion": "Explain solubility with intake and diagnostic limitations.",
+          "marks": 1
+        }
+      ],
+      "commonMistakes": [
+        "Treating vitamins as calorie fuels.",
+        "Calling all water-soluble supplements harmless."
+      ],
+      "evaluation": "Rubric-guided self-evaluation only; independent academic approval pending."
+    },
+    "revisionAndRetention": {
+      "definitions": [
+        "vitamin: An organic micronutrient required for normal physiological processes.",
+        "coenzyme: An organic helper molecule used by an enzyme.",
+        "deficiency: Insufficient availability of a nutrient for normal function."
+      ],
+      "closedBookRecall": [
+        "Reconstruct four function links.",
+        "Explain why one symptom does not prove one deficiency."
+      ],
+      "reviewPolicy": "Answer closed-book before revealing explanations. Use the existing performance-based recall schedule; reading and confidence do not establish assessed mastery."
+    }
+  },
+  "reviewLog": [
+    {
+      "date": "2026-11-13",
+      "reviewer": "Assistant source comparison",
+      "status": "draft; not independent approval",
+      "corrections": "New supplementary draft; original manuscript and its answer keys unchanged."
+    }
+  ]
+}
