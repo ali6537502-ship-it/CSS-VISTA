@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "published_at": "2026-11-21T18:55:00+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 21 November 2026 | Preliminary evening edition (00:00–18:55 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-21-dar-multilateralism",
+      "category": "Pakistan — Foreign Policy",
+      "headline": "Ishaq Dar emphasizes independent foreign policy and multilateral diplomacy",
+      "summary": "In an interview reported on 21 November, Deputy Prime Minister and Foreign Minister Ishaq Dar said Pakistan favours multilateralism over bloc politics and continues to support diplomacy in US–Iran relations.",
+      "what_happened": "Dar told Euronews that Pakistan's foreign policy is independent and stressed peaceful settlement of disputes. These are attributed policy statements, not a new treaty or negotiated settlement.",
+      "background": "Pakistan has sought a diplomatic role in regional security and US–Iran de-escalation.",
+      "why_it_matters": "The remarks clarify Islamabad's stated approach to strategic autonomy and cooperation across geopolitical blocs.",
+      "pakistan_perspective": "Pakistan's position is framed around diplomatic engagement rather than exclusive alignment.",
+      "quick_gk": [
+        "Ishaq Dar reiterated Pakistan's commitment to multilateralism in an interview reported on 21 November 2026."
+      ],
+      "question_angles": [
+        "Which Pakistani foreign minister reiterated a preference for multilateralism in a 21 November report?"
+      ],
+      "countries": [
+        "Pakistan",
+        "United States",
+        "Iran"
+      ],
+      "people": [
+        "Ishaq Dar"
+      ],
+      "topics": [
+        "Multilateralism",
+        "Pakistan foreign policy"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "FM Dar calls for multilateralism, says bloc or unilateral politics will not work",
+          "url": "https://www.dawn.com/news/2046111"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-21-sco-iran-tajikistan",
+      "category": "Pakistan — Regional Diplomacy",
+      "headline": "Musadik Malik meets Iranian and Tajik representatives at SCO forum in New Delhi",
+      "summary": "On 21 November, Pakistan's climate minister Musadik Malik held separate meetings with Iranian and Tajik representatives on the sidelines of the SCO Civilisational Dialogue Forum in New Delhi.",
+      "what_happened": "According to Pakistan's High Commission, Malik met Tajikistan's culture minister Sattoriyon Amonzoda and Iran's Islamic Culture and Relations Organisation president Mohammad Mahdi Imanipour. The reported discussions focused on cultural ties and people-to-people exchanges.",
+      "background": "Pakistan's delegation arrived on 20 November; these meetings are distinct developments from the prior day's arrival.",
+      "why_it_matters": "The SCO forum provides multilateral contact across South and Central Asia even amid Pakistan–India diplomatic tensions.",
+      "pakistan_perspective": "Pakistan is chairing the SCO Council of Heads of State in 2026–27.",
+      "quick_gk": [
+        "Musadik Malik met Tajikistan's culture minister Sattoriyon Amonzoda at the SCO forum on 21 November 2026."
+      ],
+      "question_angles": [
+        "Which country's culture minister, Sattoriyon Amonzoda, met Musadik Malik in New Delhi on 21 November?"
+      ],
+      "countries": [
+        "Pakistan",
+        "India",
+        "Tajikistan",
+        "Iran"
+      ],
+      "institutions": [
+        "Shanghai Cooperation Organisation"
+      ],
+      "people": [
+        "Musadik Malik",
+        "Sattoriyon Amonzoda",
+        "Mohammad Mahdi Imanipour"
+      ],
+      "topics": [
+        "SCO",
+        "Cultural diplomacy"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Musadik Malik holds separate meetings with Iranian, Tajik officials on SCO forum sidelines",
+          "url": "https://www.dawn.com/news/2046109/at-sco-moot-in-india-musadik-malik-declares-climate-change-enemy-of-civilisations"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-21-ecc-sme-export-threshold",
+      "category": "Pakistan — Economy and Trade",
+      "headline": "Newly reported ECC decision reduces SME export threshold to 50 percent",
+      "summary": "A 21 November report detailed an Economic Coordination Committee decision taken on Friday, 20 November, reducing the export-share threshold for SMEs under the Long-Term Export Growth Financing Facility from 80% to 50% within four years.",
+      "what_happened": "The ECC, chaired by Finance Minister Muhammad Aurangzeb, approved amendments to the Exim Bank-administered facility and directed a six-month progress review. This is a 21 November reporting development concerning a 20 November decision.",
+      "background": "The financing facility seeks to improve access to longer-term credit for exporters and emerging SMEs.",
+      "why_it_matters": "Lowering the qualifying export share can widen financing eligibility, though actual uptake and export results remain to be evaluated.",
+      "pakistan_perspective": "SME financing and export diversification are central to reducing external-account vulnerability.",
+      "quick_gk": [
+        "An ECC decision reported on 21 November 2026 reduced the SME export threshold under a long-term financing facility from 80% to 50%."
+      ],
+      "question_angles": [
+        "What new minimum export share did the ECC approve for SMEs under the Long-Term Export Growth Financing Facility?"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Economic Coordination Committee",
+        "Exim Bank of Pakistan"
+      ],
+      "topics": [
+        "SME financing",
+        "Exports"
+      ],
+      "statistics": [
+        {
+          "label": "Revised SME export threshold",
+          "value": "50%",
+          "source": "Dawn",
+          "date": "2026-11-21"
+        }
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "The Economic Coordination Committee lowers export threshold for SMEs",
+          "url": "https://www.dawn.com/news/2045994/the-economic-coordination-committee-lowers-export-threshold-for-smes"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-21-unesco-preprimary-financing",
+      "category": "World — Education and Development",
+      "headline": "UNESCO-linked report highlights $35 billion annual pre-primary education financing gap",
+      "summary": "Reporting on 21 November highlighted the 2026 global early childhood education report, which estimated a $35 billion average annual financing gap for one year of quality pre-primary education in low- and lower-middle-income countries during 2027–2030.",
+      "what_happened": "The report, prepared jointly by UNESCO, UNICEF and OECD, estimates annual needs of about $69 billion in those countries, with public financing expected to cover roughly half. The report was released on World Children's Day, 20 November; its findings were reported on 21 November.",
+      "background": "Early childhood education is part of Sustainable Development Goal 4, with wide disparities in access and public financing.",
+      "why_it_matters": "Insufficient preschool financing can entrench learning inequality and reduce later educational attainment.",
+      "pakistan_perspective": "The findings are relevant to Pakistan's early childhood education provision, provincial education budgets and human capital priorities.",
+      "global_implications": "The financing shortfall threatens equitable progress towards universal access to at least one year of pre-primary education.",
+      "quick_gk": [
+        "A UNESCO–UNICEF–OECD report covered on 21 November 2026 estimated a $35 billion annual pre-primary education financing gap for 2027–2030 in low- and lower-middle-income countries."
+      ],
+      "question_angles": [
+        "What average annual pre-primary education financing gap was estimated for low- and lower-middle-income countries for 2027–2030?"
+      ],
+      "institutions": [
+        "UNESCO",
+        "UNICEF",
+        "OECD"
+      ],
+      "topics": [
+        "SDG 4",
+        "Early childhood education",
+        "Education financing"
+      ],
+      "statistics": [
+        {
+          "label": "Average annual pre-primary education financing gap",
+          "value": "US$35 billion",
+          "source": "Dawn",
+          "year": "2027–2030"
+        }
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "$35bn per year needed for pre-primary education by 2030: Unesco report",
+          "url": "https://www.dawn.com/news/2046006"
+        }
+      ]
+    }
+  ]
+}
