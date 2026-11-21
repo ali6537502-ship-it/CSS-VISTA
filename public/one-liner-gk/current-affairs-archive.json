@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 799,
+  "count": 802,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5551,6 +5551,24 @@
     {
       "id": "ca-gk-2026-11-20-afghanistan-regional-conference",
       "text": "Pakistan's Foreign Office cited non-recognition of the Taliban government in explaining Afghanistan's exclusion from a regional conference on 20 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-20",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-20-cop31-overtime",
+      "text": "COP31 negotiations in Antalya entered overtime on 20 November 2026 without a final agreed climate cover decision.",
+      "subcategory": "Current Affairs 2026 — 2026-11-20",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-20-turkey-cop31-investments",
+      "text": "Turkey reported COP31-related deals and plans worth more than $26 billion on 20 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-20",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-20-trilateral-summit-assessment",
+      "text": "The US–China–Russia summit assessed by Reuters on 20 November took place in Shenzhen, China, on 19 November 2026.",
       "subcategory": "Current Affairs 2026 — 2026-11-20",
       "timeSensitive": true
     }
