@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent, type
 import { useAccount } from '@/lib/accountContext'
 import { useSearchParams } from 'react-router'
 import { HostingerApiError } from '@/lib/hostingerApi'
-import { Bold, Italic, Underline, Strikethrough, Highlighter, List, ListOrdered, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Quote, Undo2, Redo2, Plus, FolderPlus, Folder, FolderOpen, FileText, Pin, PinOff, Trash2, RotateCcw, Search, Cloud, CloudOff, CheckCircle2, RefreshCw, ChevronLeft, ChevronRight, History, Download, Table2, Superscript, Subscript, AlertTriangle, Pencil, X } from 'lucide-react'
+import { Bold, Italic, Underline, Strikethrough, Highlighter, List, ListOrdered, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Quote, Undo2, Redo2, Plus, FolderPlus, Folder, FolderOpen, FileText, Pin, PinOff, Trash2, RotateCcw, Search, Cloud, CloudOff, CheckCircle2, RefreshCw, ChevronLeft, ChevronRight, History, Maximize2, Minimize2, Table2, Superscript, Subscript, AlertTriangle, Pencil, X } from 'lucide-react'
 import {
   noteBytes, notesRequest, notesWrite, sanitizeNoteHtml,
   readLocalDraft, writeLocalDraft, clearLocalDraft, PAGE_BYTES,
@@ -10,6 +10,7 @@ import {
   type NoteRevision
 } from './model'
 import './notes.css'
+import './readerPresentation.css'
 
 type NoteView = NoteDocument & { ok: boolean }
 type PageView = { ok: boolean; page: NotePage }
@@ -47,6 +48,7 @@ export default function MyVistaNotes() {
   const [folderForm,setFolderForm] = useState<FolderForm | null>(null)
   const [history,setHistory] = useState<NoteRevision[] | null>(null)
   const [historyPreview,setHistoryPreview] = useState<{version:number;html:string} | null>(null)
+  const [readingMode,setReadingMode] = useState(false)
   const editorRef = useRef<HTMLDivElement>(null)
   const rangeRef = useRef<Range | null>(null)
   const pageRef = useRef<{id:string;note:string;version:number}|null>(null)
@@ -61,6 +63,15 @@ export default function MyVistaNotes() {
   const draftQueue = useRef<Promise<unknown>>(Promise.resolve())
   const retryDelay = useRef(1800)
   const openedDeepLink = useRef<string | null>(null)
+
+  useEffect(()=>{
+    if(!readingMode)return
+    const previousOverflow=document.body.style.overflow
+    document.body.style.overflow='hidden'
+    const escape=(event:KeyboardEvent)=>{if(event.key==='Escape')setReadingMode(false)}
+    window.addEventListener('keydown',escape)
+    return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener('keydown',escape)}
+  },[readingMode])
 
   const foldersById = useMemo(()=>new Map(folders.map(folder=>[folder.id,folder])),[folders])
   const folderIsVisible = useCallback((id:string|null):boolean=>{
@@ -315,14 +326,6 @@ export default function MyVistaNotes() {
     }else document.execCommand('insertText',false,plain)
     markChanged()
   }
-  function downloadPage(){
-    if(!editorRef.current)return
-    const html=sanitizeNoteHtml(editorRef.current.innerHTML)
-    const file='<!doctype html><meta charset="utf-8"><title>'+title.replaceAll('<','&lt;')+'</title><article>'+html+'</article>'
-    const url=URL.createObjectURL(new Blob([file],{type:'text/html;charset=utf-8'}))
-    const a=document.createElement('a');a.href=url;a.download=(title.replace(/[^a-z0-9 \-_]/gi,'').trim()||'My Note')+' - page.html';a.click()
-    setTimeout(()=>URL.revokeObjectURL(url),1000)
-  }
   async function mutation(body:Record<string,unknown>,onSuccess?:()=>void){
     setBusy(true);setError('')
     try{await notesWrite<IdReply>(body);await loadListRef.current(false);onSuccess?.()}
@@ -349,7 +352,7 @@ export default function MyVistaNotes() {
   }
   async function changeFolder(id:string|null, showTrash:boolean){
     if(!await canLeaveCurrent())return
-    setSelectedFolder(id);setTrash(showTrash);setSelectedNote(null);setDocumentData(null)
+    setReadingMode(false);setSelectedFolder(id);setTrash(showTrash);setSelectedNote(null);setDocumentData(null)
   }
   async function createPage(){
     if(!selectedNote||busy||!await canLeaveCurrent())return
@@ -368,6 +371,7 @@ export default function MyVistaNotes() {
   }
   async function selectNote(id:string){
     if(id===selectedNote||!await canLeaveCurrent())return
+    setReadingMode(false)
     setSelectedNote(id)
     void loadDocument(id)
   }
@@ -467,16 +471,16 @@ export default function MyVistaNotes() {
         {hasMore&&<button type="button" className="notes-loadmore" onClick={()=>void loadList(true)} disabled={busy}>Load more notes</button>}
         </div>
       </section>
-      <section className="notes-editor-pane" aria-label="Note editor">
+      <section className={"notes-editor-pane"+(readingMode?" notes-reading-mode":"")} aria-label={readingMode?"Full-screen note reader":"Note editor"}>
         {!selectedNote||!documentData?<div className="notes-editor-empty"><FileText size={39}/><h2>Room for every idea.</h2><p>Select a note or create a new one. Each page is saved to your account separately.</p><button type="button" className="notes-primary" onClick={()=>void createNote()} disabled={busy||trash}><Plus size={16}/> Create note</button></div>
         :<>
           <div className="notes-document-top">
-            <input aria-label="Note title" className="notes-title" value={title} onChange={e=>setTitle(e.target.value)} onBlur={()=>void saveTitle()} disabled={busy||!!documentData.note.deleted_at} maxLength={255}/>
+            <input aria-label="Note title" className="notes-title" value={title} readOnly={readingMode} onChange={e=>setTitle(e.target.value)} onBlur={()=>void saveTitle()} disabled={busy||!!documentData.note.deleted_at} maxLength={255}/>
             <div className="notes-document-actions">
               <span className={'notes-status '+saveState} role="status">{saveState==='saved'?<CheckCircle2 size={15}/>:saveState==='offline'||saveState==='conflict'?<CloudOff size={15}/>:<Cloud size={15}/>}
                 {saveState==='saved'?'Saved to account':saveState==='saving'?'Saving…':saveState==='conflict'?'Save conflict':saveState==='offline'?'Offline draft':saveState==='draft'?'Unsynced changes':'Loading…'}
               </span>
-              <button type="button" title="Download current page" onClick={downloadPage}><Download size={17}/></button>
+              <button type="button" className="notes-reading-toggle" title={readingMode?'Exit full-screen reading':'Read full screen'} aria-label={readingMode?'Exit full-screen reading':'Read full screen'} aria-pressed={readingMode} onClick={()=>setReadingMode(value=>!value)}>{readingMode?<Minimize2 size={17}/>:<Maximize2 size={17}/>}</button>
               <button type="button" title="Page history" onClick={()=>void openHistory()}><History size={17}/></button>
               <button type="button" title="Move note to trash" disabled={busy||!!documentData.note.deleted_at} onClick={()=>{void (async()=>{if(!await canLeaveCurrent())return;if(window.confirm('Move this note to Recently deleted?'))await mutation({action:'note_trash',id:selectedNote},()=>{setSelectedNote(null);setDocumentData(null)})})()}}><Trash2 size={17}/></button>
             </div>
@@ -509,10 +513,10 @@ export default function MyVistaNotes() {
             <ToolbarButton label="Redo" command="redo"><Redo2 size={17}/></ToolbarButton>
           </div>
           {saveState==='conflict'&&<div className="notes-warning"><AlertTriangle size={18}/><div><strong>A different device saved this page.</strong><p>Your version is preserved in a local draft. Copy it or save it to a new page. The newer cloud copy will not be overwritten.</p><button type="button" onClick={()=>void preserveConflictAsPage()} disabled={busy}>Preserve my draft as a new page</button></div></div>}
-          <div className="notes-editor-scroll">
+          <div className="notes-editor-scroll cssv-note-watermark">
             <div
-              ref={editorRef} className="notes-rich-editor" aria-label="Write your note" role="textbox"
-              aria-multiline="true" contentEditable={!loadingPage&&!busy&&!documentData.note.deleted_at}
+              ref={editorRef} className="notes-rich-editor cssv-note-watermark-content" aria-label={readingMode?"Read your note":"Write your note"} role="textbox"
+              aria-multiline="true" contentEditable={!readingMode&&!loadingPage&&!busy&&!documentData.note.deleted_at}
               suppressContentEditableWarning spellCheck
               onInput={markChanged} onPaste={paste} onDrop={event=>event.preventDefault()}
               onMouseUp={keepSelection} onKeyUp={keepSelection}
