@@ -41,8 +41,6 @@ const OptionalTopicNotes = lazy(() => import('./pages/OptionalTopicNotes'))
 const MPTPrep = lazy(() => import('./pages/MPTPrep'))
 const MPTQuestionBank = lazy(() => import('./pages/MPTQuestionBank'))
 const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
-const DailyPdfLibrary = lazy(() => import('./features/daily-pdf/Library'))
-const DailyPdfReader = lazy(() => import('./features/daily-pdf/Reader'))
 const Vistagram = lazy(() => import('./pages/Vistagram'))
 const VistagramArticle = lazy(() => import('./pages/VistagramArticle'))
 const AnswerWriting = lazy(() => import('./pages/AnswerWriting'))
@@ -188,8 +186,6 @@ export default function App() {
         <Route path="/mpt" element={MPT_HIBERNATED ? <Navigate to="/" replace /> : <S><MPTPrep /></S>} />
         <Route path="/mpt/bank/:bankId" element={MPT_HIBERNATED ? <Navigate to="/" replace /> : <S><MPTQuestionBank /></S>} />
         <Route path="/current-affairs" element={<ProfileGate><S><CurrentAffairs /></S></ProfileGate>} />
-        <Route path="/current-affairs-daily" element={<S><DailyPdfLibrary /></S>} />
-        <Route path="/current-affairs-daily/:date" element={<S><DailyPdfReader /></S>} />
         <Route path="/vistagram" element={<S><Vistagram /></S>} />
         <Route path="/vistagram/:slug" element={<S><VistagramArticle /></S>} />
         <Route path="/answer-writing" element={<S><AnswerWriting /></S>} />

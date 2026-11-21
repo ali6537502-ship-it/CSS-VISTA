@@ -41,12 +41,10 @@ test('registry deduplicates routes, searches aliases and preserves pause policy'
   assert.equal(new Set(features.map(f=>f.to)).size,features.length)
   assert.ok(searchFeatures('precis').some(f=>f.to==='/account/precis'))
   assert.ok(features.some(f=>f.to==='/account/precis' && f.title==='CSS Vista Preci Mentor'))
-  assert.ok(searchFeatures('daily pdf').some(f=>f.to==='/current-affairs-daily'))
   assert.equal(featureState(features.find(f=>f.to==='/account/precis')!),'free','Preci Mentor must remain free')
   assert.equal(featureState(features.find(f=>f.to==='/mpt')!),'paused')
   assert.equal(featureState(features.find(f=>f.to==='/daily-briefing')!),'free')
   assert.equal(features.find(f=>f.id==='current-affairs')?.title,'Daily Briefing')
-  assert.notEqual(features.find(f=>f.id==='daily-pdfs')?.to,features.find(f=>f.id==='current-affairs')?.to)
   assert.equal(activeSection('/account/plan'),'plan');assert.equal(activeSection('/account/answer-performance'),'performance')
 })
 

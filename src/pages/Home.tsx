@@ -14,7 +14,6 @@ import { cardIcons } from '@/data/homeCardIcons'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
-import { DailyWidget } from '@/features/daily-pdf/Library'
 import { useAccount } from '@/lib/accountContext'
 import LuckyDrawDiscovery from '@/components/LuckyDrawDiscovery'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
@@ -438,7 +437,6 @@ export default function Home() {
 
         <MptMockStrip className="mt-3" />
 
-        <DailyWidget />
 
         <Suspense fallback={null}><VistagramHomePreview /></Suspense>
 

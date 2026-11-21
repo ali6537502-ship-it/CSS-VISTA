@@ -3,7 +3,7 @@ import { chromium } from 'playwright-core'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { primaryContentText, contentFingerprint, shingles, similarity } from '../../scripts/lib/content-quality.mjs'
 const origin = 'https://www.css-vista.com'
-const paths = ['/', '/subjects/compulsory/current-affairs', '/subjects/optional', '/vistagram', '/vistagram/pakistan-financial-inclusion-digital-finance', '/current-affairs-daily', '/current-affairs-daily/2026-10-30', '/journal', '/journal/opinion-ali-hassan',   '/past-papers', '/past-papers/ppsc/2024', '/css-mcqs', '/notes', '/study-material', '/grammar-course', '/study-tools', '/about', '/contact', '/editorial-policy', '/privacy-policy', '/account', '/answer-timer']
+const paths = ['/', '/subjects/compulsory/current-affairs', '/subjects/optional', '/vistagram', '/vistagram/pakistan-financial-inclusion-digital-finance', '/journal', '/journal/opinion-ali-hassan',   '/past-papers', '/past-papers/ppsc/2024', '/css-mcqs', '/notes', '/study-material', '/grammar-course', '/study-tools', '/about', '/contact', '/editorial-policy', '/privacy-policy', '/account', '/answer-timer']
 const output = process.env.CSSV_EVIDENCE_DIR || 'artifacts/production-content'
 await mkdir(output, { recursive: true })
 const browser = await chromium.launch({ executablePath: '/usr/bin/chromium', headless: true, args: ['--no-sandbox'] })
