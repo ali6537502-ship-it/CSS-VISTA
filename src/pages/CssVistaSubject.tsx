@@ -46,7 +46,7 @@ export default function CssVistaSubject() {
   const item = findCssVistaOptional(slug)
   const [showEntries, setShowEntries] = useState<Record<number, boolean>>({})
   const [only, setOnly] = useState('')
-  const paper = useMemo(() => item ? cssGuideSubjects({ subjects: [item] })[0] : undefined, [item])
+  const paper = useMemo(() => item ? cssGuideSubjects({ subjects: [item] }).find(entry => entry.id === item.slug) : undefined, [item])
   const units = useMemo(() => paper ? guideUnits(paper,'css') : [], [paper])
   if (!item || !paper) return <main className="mx-auto max-w-4xl px-4 py-12">
     <h1 className="text-2xl font-bold">Optional subject not found</h1>
