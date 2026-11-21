@@ -39,7 +39,7 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pnotes-only-test-password" --health-interval=10s --health-timeout=5s --health-retries=12
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: PHP syntax and pure note logic
         run: |
           php -l public/api/_student_notes.php
@@ -73,7 +73,7 @@ jobs:
       VITE_CSSV_PERSONAL_NOTES_ENABLED: 'true'
       CSSV_BROWSER_EXECUTABLE: /usr/bin/chromium
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
