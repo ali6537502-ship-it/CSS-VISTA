@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router'
-import { ArrowLeft, ArrowRight, List } from 'lucide-react'
+import { ArrowLeft, ArrowRight, List, Maximize2, Minimize2 } from 'lucide-react'
 import {
   findOptionalTopic, loadOptionalTopic, optionalTopicNow, topicOutline, type TopicPayload,
 } from '@/data/optionalNotes'
 import { NoteBlocks } from '@/features/optional-notes/Blocks'
 import LessonNotesCapture from '@/features/notes/LessonNotesCapture'
+import '@/features/notes/readerPresentation.css'
 
 export default function OptionalTopicNotes() {
   const { subject: subjectSlug = '', topic: topicSlug = '' } = useParams()
@@ -14,6 +15,7 @@ export default function OptionalTopicNotes() {
   const found = useMemo(() => findOptionalTopic(subjectSlug, topicSlug), [subjectSlug, topicSlug])
   const [payload, setPayload] = useState<TopicPayload | null>(() => optionalTopicNow(subjectSlug, topicSlug))
   const [failed, setFailed] = useState(false)
+  const [readingMode, setReadingMode] = useState(false)
 
   useEffect(() => {
     if (!found) return
@@ -27,6 +29,15 @@ export default function OptionalTopicNotes() {
       })
     return () => controller.abort()
   }, [subjectSlug, topicSlug, found])
+
+  useEffect(() => {
+    if (!readingMode) return
+    const oldOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setReadingMode(false) }
+    window.addEventListener('keydown', onKey)
+    return () => { document.body.style.overflow = oldOverflow; window.removeEventListener('keydown', onKey) }
+  }, [readingMode])
 
   const outline = useMemo(() => (payload ? topicOutline(payload.blocks) : []), [payload])
 
@@ -48,7 +59,7 @@ export default function OptionalTopicNotes() {
   const next = position >= 0 && position < subject.topics.length - 1 ? subject.topics[position + 1] : null
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-5" data-cssv-ad-state={!payload ? (failed ? 'error' : 'loading') : undefined}>
+    <div className={"mx-auto max-w-4xl px-4 py-5"+(readingMode?" cssv-topic-reading":"")} data-cssv-ad-state={!payload ? (failed ? 'error' : 'loading') : undefined}>
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[12px] text-muted-foreground">
         <Link to="/study-material/optional" className="font-medium text-emerald-800 hover:underline underline-offset-2">Optional notes</Link>
         <span aria-hidden="true">/</span>
@@ -57,15 +68,19 @@ export default function OptionalTopicNotes() {
         </Link>
       </nav>
 
-      <header className="mt-3 rounded-xl border bg-white p-4">
-        <h1 className="font-display text-xl font-bold leading-tight text-pine sm:text-2xl">{topic.title}</h1>
+      <header className="cssv-topic-heading mt-3 flex items-start justify-between gap-4 rounded-xl border bg-white p-4">
+        <div className="min-w-0"><h1 className="font-display text-xl font-bold leading-tight text-pine sm:text-2xl">{topic.title}</h1>
         <p className="mt-1.5 text-[12px] font-medium tabular-nums text-muted-foreground">
           {subject.subject} · Group {subject.group} · {topic.words.toLocaleString()} words ·
           about {Math.max(1, Math.round(topic.words / 200))} min read
-        </p>
+        </p></div>
+        <button type="button" aria-pressed={readingMode} aria-label={readingMode ? 'Exit full-screen reading' : 'Read full screen'} onClick={() => setReadingMode(value => !value)} className="cssv-reading-toggle inline-flex shrink-0 items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold text-pine hover:bg-emerald-50">
+          {readingMode ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+          {readingMode ? 'Exit full screen' : 'Read full screen'}
+        </button>
       </header>
 
-      <div className="mt-3"><LessonNotesCapture title={topic.title} /></div>
+      <div className="cssv-topic-capture mt-3"><LessonNotesCapture title={topic.title} /></div>
 
       {/* A long unit needs its own contents; a short one does not. */}
       {outline.length > 3 && (
@@ -100,8 +115,8 @@ export default function OptionalTopicNotes() {
       )}
 
       {payload && (
-        <article className="mt-4 rounded-xl border bg-white p-4 sm:p-5">
-          <NoteBlocks blocks={payload.blocks} />
+        <article className="cssv-note-watermark cssv-topic-article mt-4 rounded-xl border bg-white p-4 sm:p-5">
+          <div className="cssv-note-watermark-content"><NoteBlocks blocks={payload.blocks} /></div>
         </article>
       )}
 
