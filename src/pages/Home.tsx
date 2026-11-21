@@ -18,6 +18,7 @@ import { useAccount } from '@/lib/accountContext'
 import LuckyDrawDiscovery from '@/components/LuckyDrawDiscovery'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
+import TutorialVideoCard from '@/components/TutorialVideoCard'
 
 interface LinkCard {
   title: string
@@ -227,7 +228,7 @@ function DeferredHomeExtras() {
     <div ref={markerRef} className="min-h-px">
       {ready && (
         <Suspense fallback={null}>
-          <TutorialAnnouncement />
+          <TutorialAnnouncement showCard={false} />
         </Suspense>
       )}
     </div>
@@ -404,6 +405,8 @@ export default function Home() {
 
           <HomeHero />
         </div>
+
+        <TutorialVideoCard className="mt-4" />
 
         <section className="mt-4 rounded-[24px] border border-emerald-200 bg-gradient-to-r from-emerald-50 via-white to-[#e8f5e9] px-5 py-5 shadow-sm sm:px-7 sm:py-6" aria-labelledby="home-pms-vista-title">
           <div className="flex flex-wrap items-center justify-between gap-5">

@@ -11,6 +11,7 @@ import { localTaskDateKey } from '@/lib/myTasks'
 import { targetDays } from '@/features/workspace/model'
 import { taskExam } from '@/features/planner/pmsModel'
 import { readableDay } from '@/features/planner/model'
+import TutorialVideoCard from '@/components/TutorialVideoCard'
 export default function AccountHome() {
   const { user, syncStatus, syncError } = useAccount()
   const { snapshot, refresh } = useAccountSnapshot()
@@ -26,6 +27,7 @@ export default function AccountHome() {
   return <div className="ws-overview"><AccountPage title={`${greeting}${user?.display_name ? `, ${user.display_name.split(/\s+/)[0]}` : ''}`} intro="A clear plan for today. Steady progress towards your examination.">
     {days !== null && <p className="ws-muted mb-5">Your chosen target: {snapshot.state.studyPlanner?.examDate} · {days < 0 ? 'Target date has passed — review your schedule' : days === 0 ? 'Today' : `${days} days remaining`}</p>}
     {syncError && <p role="alert" className="ws-panel mb-5">{syncError} <Link to="/account/settings" className="underline">Review account sync</Link></p>}
+    <TutorialVideoCard className="mb-5" />
         <div className="ws-dashboard-grid"><div className="ws-focus-area">
       <ContinueStudying greeting={`${greeting}${user?.display_name ? `, ${user.display_name.split(/\s+/)[0]}` : ''}.`} />
       </div><section className="ws-panel ws-agenda" aria-label="Today’s Study Plan">

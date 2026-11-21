@@ -3,9 +3,8 @@ import { createPortal } from 'react-dom'
 import { ArrowRight, Compass, Instagram, MessageCircle, PlayCircle, X, Youtube } from 'lucide-react'
 import { isNotesDiscountActive } from '@/data/notes'
 import { isNotesBundleExclusiveWindow, notesBundleOfferEndsAt } from '@/data/notesBundleOffer'
+import { CSS_VISTA_TUTORIAL_URL, CSS_VISTA_TUTORIAL_EMBED_URL } from '@/data/tutorialVideo'
 
-const TUTORIAL_URL = 'https://youtu.be/RawGyL7BkEk?si=EiZ8EPo6oMKr-zW9'
-const TUTORIAL_EMBED_URL = 'https://www.youtube-nocookie.com/embed/RawGyL7BkEk?autoplay=1&rel=0'
 const YOUTUBE_SUBSCRIBE_URL = 'https://www.youtube.com/@cssvista?sub_confirmation=1'
 const INSTAGRAM_URL = 'https://www.instagram.com/cssvista?igsh=bmx0cWNiamJ5OTU4&utm_source=qr'
 const WHATSAPP_GROUP_URL = 'https://chat.whatsapp.com/KkmMs8KS4wZ7Z39grDLZwT?s=cl&p=i&ilr=2&amv=2'
@@ -30,7 +29,7 @@ function writeStorage(storage: Storage, key: string) {
   }
 }
 
-export default function TutorialAnnouncement() {
+export default function TutorialAnnouncement({ showCard = true }: { showCard?: boolean }) {
   const [mode, setMode] = useState<TutorialMode>('closed')
   const dialogRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -163,7 +162,7 @@ export default function TutorialAnnouncement() {
             <div className="overflow-hidden rounded-xl border border-emerald-900/10 bg-black shadow-sm">
               <iframe
                 className="aspect-video w-full"
-                src={TUTORIAL_EMBED_URL}
+                src={CSS_VISTA_TUTORIAL_EMBED_URL}
                 title="CSS VISTA tutorial video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
@@ -176,7 +175,7 @@ export default function TutorialAnnouncement() {
                 <h2 id="cssv-tutorial-title" className="mt-1 text-xl font-bold text-emerald-950">Learn how to use CSS VISTA easily</h2>
                 <p id="cssv-tutorial-description" className="mt-1 text-sm text-slate-600">Watch the official walkthrough, then continue exploring the platform.</p>
               </div>
-              <a href={TUTORIAL_URL} target="_blank" rel="noopener noreferrer" className="cssv-tap inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-sm font-bold text-emerald-900 hover:bg-emerald-50">
+              <a href={CSS_VISTA_TUTORIAL_URL} target="_blank" rel="noopener noreferrer" className="cssv-tap inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-sm font-bold text-emerald-900 hover:bg-emerald-50">
                 Open on YouTube <ArrowRight className="h-4 w-4" />
               </a>
             </div>
@@ -220,7 +219,7 @@ export default function TutorialAnnouncement() {
 
   return (
     <>
-      <section className="cssv-glass-panel cssv-tutorial-card cssv-reveal mt-5 flex min-w-0 items-center gap-3 rounded-xl border p-3 sm:p-4" aria-labelledby="cssv-tutorial-card-title">
+      {showCard && <section className="cssv-glass-panel cssv-tutorial-card cssv-reveal mt-5 flex min-w-0 items-center gap-3 rounded-xl border p-3 sm:p-4" aria-labelledby="cssv-tutorial-card-title">
         <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800"><PlayCircle className="h-5 w-5" /></span>
         <span className="min-w-0 flex-1">
           <span className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">New to CSS VISTA?</span>
@@ -234,7 +233,7 @@ export default function TutorialAnnouncement() {
         >
           <PlayCircle className="h-4 w-4" /> Watch <span className="hidden sm:inline">Tutorial</span>
         </button>
-      </section>
+      </section>}
       {modal}
     </>
   )
