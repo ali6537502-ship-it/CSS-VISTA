@@ -16,6 +16,8 @@ import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 const StartCSS = lazy(() => import('./pages/StartCSS'))
 const PmsVista = lazy(() => import('./pages/PmsVista'))
 const PmsVistaSubject = lazy(() => import('./pages/PmsVistaSubject'))
+const CssVista = lazy(() => import('./pages/CssVista'))
+const CssVistaSubject = lazy(() => import('./pages/CssVistaSubject'))
 const GSATutor = lazy(() => import('./pages/GSATutor'))
 const PunjabTrees = lazy(() => import('./pages/PunjabTrees'))
 const FitnessCoach = lazy(() => import('./pages/FitnessCoach'))
@@ -161,6 +163,8 @@ export default function App() {
         <Route path="/start-css" element={<S><StartCSS /></S>} />
         <Route path="/pms-vista" element={<S><PmsVista /></S>} />
         <Route path="/pms-vista/syllabus/:subject" element={<S><PmsVistaSubject /></S>} />
+        <Route path="/css-vista" element={<S><CssVista /></S>} />
+        <Route path="/css-vista/syllabus/:subject" element={<S><CssVistaSubject /></S>} />
         <Route path="/gsa-tutor" element={<S><GSATutor /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
         <Route path="/subjects/compulsory/precis-composition" element={<Navigate to="/account/precis" replace />} />
