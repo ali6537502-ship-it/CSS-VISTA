@@ -144,7 +144,7 @@ async function checkCssOptionalPublicGuide() {
     await page.getByRole('link',{name:/Explore topics and copy commands/}).first().waitFor()
     const subjectResponse=await page.goto(origin+'/css-vista/syllabus/gender-studies',{waitUntil:'domcontentloaded'})
     try {
-      await page.getByRole('heading',{name:/Gender Studies — syllabus and preparation commands/}).waitFor({timeout:8500})
+      await page.getByRole('heading',{name:/Gender Studies.*syllabus and preparation commands/}).waitFor({timeout:8500})
     } catch (failure) {
       console.error('CSS optional public route diagnostics:',JSON.stringify({status:subjectResponse?.status(),url:page.url(),headings:await page.locator('h1,h2').allTextContents(),body:(await page.locator('body').innerText()).slice(0,2500),errors}))
       await page.screenshot({path:resolve(root,'test-artifacts/vista/css-vista-public-route-failure.png'),fullPage:true})
@@ -162,12 +162,12 @@ async function checkCssOptionalPublicGuide() {
     const focused=await page.evaluate(()=>navigator.clipboard.readText())
     assert.match(focused,/COMPLETE SECTION TEXT FOR CONTEXT ONLY/)
     await page.goto(origin+'/css-vista/syllabus/punjabi',{waitUntil:'domcontentloaded'})
-    await page.getByRole('heading',{name:/Official syllabus scans — transcription required/}).waitFor()
+    await page.getByRole('heading',{name:/Official syllabus scans.*transcription required/}).waitFor()
     assert.equal(await page.getByRole('link',{name:/Open scanned page/}).count(),2)
     assert.equal(await page.getByRole('button',{name:'Copy official-syllabus research command'}).count(),1)
     await page.setViewportSize({width:375,height:812})
     await page.goto(origin+'/css-vista/syllabus/political-science',{waitUntil:'domcontentloaded'})
-    await page.getByRole('heading',{name:/Political Science — syllabus and preparation commands/}).waitFor()
+    await page.getByRole('heading',{name:/Political Science.*syllabus and preparation commands/}).waitFor()
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'CSS optional paper accessible on mobile')
     assert.deepEqual(errors,[],'Public optional study-guide pages have no JS errors')
     report.results.push({exam:'css',scenario:'45-paper public browser and source copy commands',sample:'Gender Studies, Punjabi, Political Science',mobile:true})
