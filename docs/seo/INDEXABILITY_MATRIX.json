@@ -1224,5 +1224,11 @@
     }
   ],
   "googleEvidence": "Historical export/notification evidence available separately; current portal status unavailable.",
-  "google_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
+  "google_evidence": "evidence/google-current-account-evidence-2026-10-17.json",
+  "verified_release": {
+    "sha": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+    "date": "2026-10-17",
+    "evidence": "evidence/release-verification-2026-10-17.json",
+    "google_scope": "Prefix and domain counts remain separate; individual indexed snapshots and live tests remain separate. Family decisions do not infer Google inclusion."
+  }
 }

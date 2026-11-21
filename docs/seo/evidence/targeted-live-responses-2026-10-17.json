@@ -1,0 +1,167 @@
+{
+  "observedAt": "2026-10-17T08:02:27.038368+00:00",
+  "verifiedReleaseSha": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+  "scope": "Bounded raw production responses after the exact fingerprint matched; no Google inclusion inference",
+  "pages": [
+    {
+      "url": "https://www.css-vista.com/vistagram/balance-of-payments-external-accounts",
+      "status": 200,
+      "redirects": [],
+      "headers": {
+        "Date": "Sat, 17 Oct 2026 08:02:18 GMT",
+        "Content-Type": "text/html",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "Vary": "Accept-Encoding",
+        "last-modified": "Sat, 17 Oct 2026 07:54:47 GMT",
+        "etag": "W/\"25e96-6ad329c7-f5846b11c1bb761;gz\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "Cache-Control": "public, max-age=300, must-revalidate",
+        "Server": "hcdn",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "4000b0220caa6ca603af0d358c1d56d9-bos-edge12",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.204"
+      },
+      "canonical": [
+        "https://www.css-vista.com/vistagram/balance-of-payments-external-accounts"
+      ],
+      "robots": [
+        "noindex, follow"
+      ],
+      "title": "Balance of Payments: How an Economy Records Its Transactions with the World | CSS Vistagram",
+      "h1": [
+        "Balance of Payments: How an Economy Records Its Transactions with the World"
+      ],
+      "mainCharacters": 4513,
+      "bodySha256": "66c315ef288d704d070ce8c521e3e181b614c172ed6aebdf07d94417e60201dc",
+      "error": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/ppsc/2024",
+      "status": 200,
+      "redirects": [],
+      "headers": {
+        "Date": "Sat, 17 Oct 2026 08:02:19 GMT",
+        "Content-Type": "text/html",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "Vary": "Accept-Encoding",
+        "last-modified": "Sat, 17 Oct 2026 07:54:46 GMT",
+        "etag": "W/\"8894-6ad329c6-a398d1b77ca5d8e7;gz\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "Cache-Control": "public, max-age=300, must-revalidate",
+        "Server": "hcdn",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "3d0e15257e1e70b6a6256a2d662552e2-bos-edge12",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.205"
+      },
+      "canonical": [
+        "https://www.css-vista.com/past-papers/ppsc/2024"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "title": "PPSC 2024 Past Papers \u2014 All Subjects | CSS Vista",
+      "h1": [
+        "PPSC 2024 Past Papers"
+      ],
+      "mainCharacters": 5822,
+      "bodySha256": "f36ae76a67f437df5e9a725a3998c0eaeff100464772ad3bf7ce446fdf22ecb3",
+      "error": null
+    },
+    {
+      "url": "https://www.css-vista.com/grammar-course",
+      "status": 200,
+      "redirects": [],
+      "headers": {
+        "Date": "Sat, 17 Oct 2026 08:02:18 GMT",
+        "Content-Type": "text/html",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "Vary": "Accept-Encoding",
+        "last-modified": "Sat, 17 Oct 2026 07:54:47 GMT",
+        "etag": "W/\"43fbe-6ad329c7-81f256faefaf904e;gz\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "Cache-Control": "public, max-age=300, must-revalidate",
+        "Server": "hcdn",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "6dafa703d3d752b03a0cf123903ade89-bos-edge11",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.203"
+      },
+      "canonical": [
+        "https://www.css-vista.com/grammar-course"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "title": "30-Day Grammar Course | CSS Vista",
+      "h1": [
+        "30-Day Grammar Course"
+      ],
+      "mainCharacters": 24335,
+      "bodySha256": "59323e4a60b38eb78beae0f789e53c07f7c2deabd5560140468237d9eb9b5ebf",
+      "error": null
+    },
+    {
+      "url": "https://www.css-vista.com/seo-postrelease-missing-20261017",
+      "status": 404,
+      "redirects": [],
+      "headers": {
+        "Date": "Sat, 17 Oct 2026 08:02:26 GMT",
+        "Content-Type": "text/html",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "Vary": "Accept-Encoding",
+        "last-modified": "Sat, 17 Oct 2026 07:54:46 GMT",
+        "etag": "W/\"1711-6ad329c6-130e9d07746c85cb;gz\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "Cache-Control": "public, max-age=300, must-revalidate",
+        "Server": "hcdn",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "ddfe16e146cdba24512cbcce489c7049-phx-edge10"
+      },
+      "canonical": [],
+      "robots": [
+        "noindex, nofollow"
+      ],
+      "title": "Page Not Found | CSS Vista",
+      "h1": [
+        "Page not found"
+      ],
+      "mainCharacters": 82,
+      "bodySha256": "1b136d5888c4f2d7d8eaa2522f97d7acf326f21cd511c5f418573ff6ea8b0c19",
+      "error": null
+    }
+  ]
+}

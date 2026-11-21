@@ -1,11 +1,11 @@
 {
   "observedOn": "2026-10-17",
-  "method": "Authorized signed-in Google browser reports, inspected read-only before the session reset. Report dates are retained separately. No account settings changed or AdSense review requested.",
+  "method": "Authorized signed-in Google browser reports. Earlier inspection preceded a session reset; secure reauthentication succeeded and post-release live tests continued on 17 October. Dates and scopes remain separate. No AdSense settings changed or review requested; selective Search indexing requests and the one demonstrated corrected-404 validation are recorded individually.",
   "privacy": "Email, private account URLs, document IDs, credentials, session material and student records omitted.",
   "searchConsole": {
     "property": "https://www.css-vista.com/",
     "permission": "Verified owner (Settings)",
-    "propertySelectorAlsoShows": "sc-domain:css-vista.com; domain-property permission/totals not yet inspected",
+    "propertySelectorAlsoShows": "Domain property separately inspected; see domainProperty. Keep prefix and domain scopes distinct.",
     "pageIndexing": {
       "reportUpdatedOn": "2026-10-12",
       "scope": "All known pages, HTTPS www URL-prefix property",
@@ -213,9 +213,330 @@
     "permissionsCleared": false
   },
   "remaining": [
-    "New browser session is signed out; further Google inspection/live retest requires secure sign-in.",
-    "Domain-property reports, remaining exclusion examples and representative note/book/tool indexed/live inspections not yet completed.",
-    "Regional consent delivery/revocation, US-state applicability and complete ad visual preview remain unverified.",
+    "Google recrawling, canonical selection and actual inclusion remain pending; live test eligibility does not update old indexed snapshots.",
+    "Regional consent delivery/revocation, US-state applicability and complete ad visual preview remain unverified. The current Auto ads table returned no site rows after one reload.",
     "Quotation and reproduction permissions remain unresolved; no new AdSense review is authorized."
-  ]
+  ],
+  "sessionContinuation": {
+    "date": "2026-10-17",
+    "status": "Secure reauthentication succeeded; signed-in Search Console Overview observed"
+  },
+  "domainProperty": {
+    "property": "sc-domain:css-vista.com",
+    "permission": "Verified owner, observed Settings",
+    "addedOn": "2026-08-24",
+    "pageIndexing": {
+      "reportUpdatedOn": "2026-10-12",
+      "scope": "All known pages, domain property",
+      "indexed": 470,
+      "notIndexed": 726,
+      "total": 1196,
+      "reasons": [
+        {
+          "reason": "Crawled - currently not indexed",
+          "pages": 3,
+          "validation": "Failed"
+        },
+        {
+          "reason": "Excluded by noindex tag",
+          "pages": 36,
+          "validation": "Not Started"
+        },
+        {
+          "reason": "Page with redirect",
+          "pages": 5,
+          "validation": "Not Started"
+        },
+        {
+          "reason": "Not found (404)",
+          "pages": 1,
+          "validation": "Not Started"
+        },
+        {
+          "reason": "Discovered - currently not indexed",
+          "pages": 678,
+          "validation": "Started"
+        },
+        {
+          "reason": "Duplicate, Google chose different canonical than user",
+          "pages": 3,
+          "validation": "Started"
+        },
+        {
+          "reason": "Alternative page with proper canonical tag",
+          "pages": 0,
+          "validation": "N/A"
+        }
+      ]
+    },
+    "crawlStatsSettingsOverview": "13.5k requests, last 90 days; full domain Crawl Stats not yet read",
+    "noindexExamplesSample": [
+      {
+        "url": "https://www.css-vista.com/notes/view/ca-pa/proxy-wars",
+        "lastCrawledOn": "2026-10-13"
+      },
+      {
+        "url": "https://www.css-vista.com/language-grammar?lang=english",
+        "lastCrawledOn": "2026-10-13"
+      },
+      {
+        "url": "https://www.css-vista.com/css-mcqs",
+        "lastCrawledOn": "2026-10-11"
+      },
+      {
+        "url": "https://www.css-vista.com/gk/quiz?mode=mpt-mock",
+        "lastCrawledOn": "2026-10-10"
+      },
+      {
+        "url": "https://www.css-vista.com/grammar-course",
+        "lastCrawledOn": "2026-10-09"
+      },
+      {
+        "url": "https://www.css-vista.com/account/dashboard",
+        "lastCrawledOn": "2026-10-08"
+      },
+      {
+        "url": "https://www.css-vista.com/fpsc-updates?tab=dates",
+        "lastCrawledOn": "2026-10-08"
+      },
+      {
+        "url": "https://www.css-vista.com/mistakes",
+        "lastCrawledOn": "2026-10-08"
+      },
+      {
+        "url": "https://www.css-vista.com/one-liner-gk",
+        "lastCrawledOn": "2026-10-08"
+      },
+      {
+        "url": "https://www.css-vista.com/study-planner",
+        "lastCrawledOn": "2026-10-08"
+      }
+    ],
+    "noindexInterpretation": "Bounded first 10 of 36 examples. Private/focused/query views are not automatically defects. Grammar course is the reviewed newly eligible candidate; inspect and retest after exact deployment. No bulk noindex validation started.",
+    "duplicateCanonicalExamples": [
+      {
+        "url": "https://www.css-vista.com/study-material/islamic-studies/public-administration-and-governance/appointments-and-responsibilities-of-civil-servants",
+        "lastCrawledOn": "2026-09-22"
+      },
+      {
+        "url": "https://www.css-vista.com/study-material/optional/governance-and-public-policies/governance-indicators-and-their-application-in-pakistan",
+        "lastCrawledOn": "2026-09-22"
+      },
+      {
+        "url": "https://www.css-vista.com/study-material/optional/governance-and-public-policies/public-policy-and-planning-institutions-and-their-role-in",
+        "lastCrawledOn": "2026-09-22"
+      }
+    ],
+    "duplicateValidationStartedOn": "2026-09-26",
+    "governanceNoteIndexedInspection": {
+      "url": "https://www.css-vista.com/study-material/optional/governance-and-public-policies/governance-indicators-and-their-application-in-pakistan",
+      "result": "URL is not on Google; Duplicate, Google chose different canonical than user",
+      "lastCrawledAtDisplayed": "22 Sept 2026, 17:30:13",
+      "crawledAs": "Googlebot smartphone",
+      "crawlAllowed": true,
+      "fetch": "Successful",
+      "indexingAllowed": true,
+      "userCanonical": "Inspected URL",
+      "googleCanonical": "https://www.css-vista.com/study-material/optional/psychology/intelligence",
+      "sitemap": "https://www.css-vista.com/sitemap.xml",
+      "referringPages": [
+        "https://www.css-vista.com/study-material/optional/governance-and-public-policies/governance-theories",
+        "https://www.css-vista.com/sitemap-core.xml"
+      ],
+      "liveTest": {
+        "testedAtDisplayed": "17 Oct 2026, 12:55:15",
+        "result": "URL is available to Google; Page can be indexed",
+        "crawledAs": "Google Inspection Tool smartphone",
+        "crawlAllowed": true,
+        "fetch": "Successful",
+        "indexingAllowed": true,
+        "userCanonical": "Inspected URL",
+        "googleCanonical": "Only determined after indexing",
+        "releaseAttribution": "Live fingerprint not yet matched merged release; eligibility is not a new Google canonical selection or proof of deployment"
+      }
+    },
+    "notFoundExample": {
+      "url": "https://www.css-vista.com/vistagram/balance-of-payments-external-accounts",
+      "lastCrawledOn": "2026-09-26",
+      "reportUpdatedOn": "2026-10-12",
+      "firstDetectedOn": "2026-10-05",
+      "postReleaseRawResponse": "HTTP 200, correct canonical, 4525 browser main characters; intentionally noindex and no ad loader. See targeted-live-responses evidence. Do not request indexing for this deliberately excluded reader.",
+      "validation": {
+        "status": "Started",
+        "startedOn": "2026-10-17",
+        "scope": "One actual missing Vistagram reader; verified restored HTTP200/content, retains deliberate noindex/ad-free policy",
+        "result": "Pending Google validation; not a passed result"
+      }
+    },
+    "discoveredExamplesSample": [
+      {
+        "url": "https://www.css-vista.com/analysis",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/a-room-of-one-s-own",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/a-short-history-of-nearly-everything",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/animal-farm",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/behave",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/bowling-alone",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/brave-new-world",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/capitalism-and-freedom",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      },
+      {
+        "url": "https://www.css-vista.com/book-summaries/chip-war",
+        "lastCrawledOn": null,
+        "displayedLastCrawl": "N/A"
+      }
+    ],
+    "discoveredSampleScope": "First 10 of 678 current examples, report updated 12 October; validation already Started 26 September, not restarted. No N/A crawl date converted into an epoch or invented fetch."
+  },
+  "experienceContinuation": {
+    "coreWebVitals": {
+      "property": "https://www.css-vista.com/",
+      "reportUpdatedOn": "2026-10-14",
+      "source": "Chrome UX report",
+      "mobile": "Not enough usage data in last 90 days; report disabled",
+      "desktop": "Not enough usage data in last 90 days; report disabled"
+    },
+    "https": {
+      "properties": [
+        "https://www.css-vista.com/",
+        "sc-domain:css-vista.com"
+      ],
+      "reportUpdatedOn": "2026-10-16",
+      "httpsUrls": 27,
+      "nonHttpsUrls": 0,
+      "status": "No critical issues; no issues detected in last 90 days"
+    }
+  },
+  "postReleaseArchive": {
+    "url": "https://www.css-vista.com/past-papers/ppsc/2024",
+    "verifiedRelease": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+    "liveTest": {
+      "testedAtDisplayed": "17 Oct 2026, 12:57:43",
+      "result": "URL is available to Google; Page can be indexed",
+      "fetch": "Successful",
+      "crawlAllowed": true,
+      "indexingAllowed": true,
+      "userCanonical": "Inspected URL",
+      "googleCanonical": "Only determined after indexing"
+    },
+    "browser": {
+      "urlQuery": "",
+      "title": "PPSC 2024 Past Papers - All Subjects | CSS Vista",
+      "canonical": "https://www.css-vista.com/past-papers/ppsc/2024",
+      "robots": "index, follow",
+      "description": "Browse 47 PPSC 2024 past-paper PDFs in this verified collection.",
+      "h1": "PPSC 2024 Past Papers",
+      "viewportWidth": 1363,
+      "scrollWidth": 1348,
+      "adLoaderCount": 1
+    },
+    "selectiveIndexRequest": {
+      "result": "Indexing requested",
+      "confirmation": "URL was added to a priority crawl queue. Submitting a page multiple times will not change its queue position or priority.",
+      "repeated": false
+    },
+    "interpretation": "Earlier live noindex is corrected. This does not update the stored August snapshot or guarantee inclusion."
+  },
+  "adsenseContinuation": {
+    "session": "Reauthenticated account Home accessible",
+    "autoAdsTable": "No site rows rendered after one reload; no settings edited or applied. Earlier verified configuration retained as dated evidence. Final desktop/mobile placement remains unverified.",
+    "europeanMessage": "Published, English +31 languages, modified 25 August; overview displays Messages shown 0, Consent rate 0%, with no reporting period visible",
+    "privacyLinkBrowserCheck": "Clicked Privacy & Cookie Settings on the live archive; navigated to /cookie-policy#managing-cookies fallback. Did not observe a revocation dialog in this browser. Regional delivery/revocation remains unverified.",
+    "reviewSubmitted": false
+  },
+  "bookInspection": {
+    "url": "https://www.css-vista.com/book-summaries/why-nations-fail",
+    "indexedVersion": {
+      "result": "URL is unknown to Google",
+      "lastCrawl": null,
+      "sitemaps": "No referring sitemaps detected",
+      "canonicals": "N/A"
+    },
+    "liveTest": {
+      "testedAtDisplayed": "17 Oct 2026, 13:01:56",
+      "result": "URL is available to Google; Page can be indexed",
+      "crawlAllowed": true,
+      "fetch": "Successful",
+      "indexingAllowed": true,
+      "userCanonical": "Inspected URL",
+      "googleCanonical": "Only determined after indexing",
+      "breadcrumbs": "1 valid item detected"
+    },
+    "indexingRequestSubmitted": false,
+    "interpretation": "Live availability and verified technical content do not establish rights, policy readiness or actual index inclusion."
+  },
+  "grammarInspection": {
+    "url": "https://www.css-vista.com/grammar-course",
+    "indexedVersion": {
+      "result": "Excluded by noindex tag",
+      "lastCrawledAtDisplayed": "9 Oct 2026, 13:34:46",
+      "crawlAllowed": true,
+      "fetch": "Successful",
+      "indexingAllowed": false,
+      "userCanonical": "Inspected URL",
+      "googleCanonical": "Inspected URL",
+      "sitemaps": "No referring sitemaps detected"
+    },
+    "liveTest": {
+      "testedAtDisplayed": "17 Oct 2026, 13:03:30",
+      "result": "URL is available to Google; Page can be indexed",
+      "crawlAllowed": true,
+      "fetch": "Successful",
+      "indexingAllowed": true,
+      "userCanonical": "Inspected URL",
+      "googleCanonical": "Only determined after indexing"
+    },
+    "indexingRequest": "Confirmed: Indexing requested; URL added to priority crawl queue; one request only"
+  },
+  "calculatorInspection": {
+    "url": "https://www.css-vista.com/css-eligibility-calculator",
+    "indexedVersion": {
+      "result": "URL is on Google; Page is indexed",
+      "lastCrawledAtDisplayed": "8 Oct 2026, 15:57:26",
+      "crawledAs": "Googlebot smartphone",
+      "crawlAllowed": true,
+      "fetch": "Successful",
+      "indexingAllowed": true,
+      "userCanonical": "Inspected URL",
+      "googleCanonical": "Inspected URL",
+      "sitemap": "https://www.css-vista.com/sitemap.xml",
+      "referringPage": "https://www.css-vista.com/exam-intelligence?section=mocks"
+    },
+    "indexingRequestSubmitted": false,
+    "interpretation": "Already indexed; useful public tool remains ad-free. No redundant indexing request."
+  }
 }

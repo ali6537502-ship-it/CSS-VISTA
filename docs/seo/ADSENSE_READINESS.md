@@ -1,5 +1,9 @@
 # AdSense readiness
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
 Sites now explicitly confirms **Low-value content**; it is no longer merely owner-reported wording. Policy Centre has no current serving restrictions, while site approval remains rejected. ads.txt is publicly correct despite the dated account Not found status. European consent configuration is published; real delivery/revocation and visual placements remain unverified. Review remains inadvisable pending editorial/rights and outstanding account checks. See [current report](ACCOUNT_RECOVERY_2026-10-17.md).

@@ -1,0 +1,350 @@
+{
+  "observedAt": "2026-10-17T07:56:32.928927+00:00",
+  "scope": "Bounded anonymous technical regression checks, not Google account/indexing/approval or field performance data.",
+  "expectedSha": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+  "liveSha": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+  "errors": [],
+  "pages": [
+    {
+      "url": "https://www.css-vista.com/",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS Vista | Free CSS, PMS & One-Paper Preparation Platform",
+      "mainCharacters": 4707,
+      "adLoader": true,
+      "sha256": "88d1f5fce42f1753ab262581a86a40a5aa4d61c8be73dd614860344e0fe5d740",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/start-css",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/start-css"
+      ],
+      "robots": "index, follow ",
+      "title": "How to Start CSS Preparation | CSS Vista",
+      "mainCharacters": 15206,
+      "adLoader": true,
+      "sha256": "27f145a99362be648ec7bf1c44bb227e034da34931cc6369f40cb83aa76bb3bb",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/grammar-course",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/grammar-course"
+      ],
+      "robots": "index, follow ",
+      "title": "30-Day Grammar Course | CSS Vista",
+      "mainCharacters": 24335,
+      "adLoader": false,
+      "sha256": "59323e4a60b38eb78beae0f789e53c07f7c2deabd5560140468237d9eb9b5ebf",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/css-eligibility-calculator",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/css-eligibility-calculator"
+      ],
+      "robots": "index, follow ",
+      "title": "CSS Age & Attempts Calculator | CSS Vista",
+      "mainCharacters": 1648,
+      "adLoader": false,
+      "sha256": "4a2af62372a0f4ded746223d4fa746066386a9bd4ab1f73d567c36de0144c91b",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/book-summaries/why-nations-fail",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/why-nations-fail"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "Why Nations Fail by Daron Acemoglu and James A. Robinson \u2014 Book Summary | CSS Vista",
+      "mainCharacters": 3462,
+      "adLoader": true,
+      "sha256": "4975e6c93110a4218e6df60b3a3747349a257cda2a86ab32599403d33a85e103",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/book-summaries/development-as-freedom",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/development-as-freedom"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "Development as Freedom by Amartya Sen \u2014 Book Summary | CSS Vista",
+      "mainCharacters": 3226,
+      "adLoader": true,
+      "sha256": "e4d9730f721278cdcf58146c07fc5ed2d57ee1fa6dfcb0e55c8bf354e8dee81f",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "Paper I - Financial Accounting (50 Marks) \u2014 CSS Accounting & Auditing Notes | CSS Vista",
+      "mainCharacters": 16888,
+      "adLoader": true,
+      "sha256": "cba3851e470f3abae5d4f98f15560502a3a10958b99196b09542f4a410804b1e",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "01 Concept of Islam: submission, faith and excellence \u2014 Introduction to Islam References | CSS Vista",
+      "mainCharacters": 16602,
+      "adLoader": true,
+      "sha256": "77ff8e745ae807d5c00a1c8c851b7566515c7d22520c4438fc140b4f1997ffc1",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-computer-science",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-computer-science"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Computer Science Combined Papers Past Paper | CSS Vista",
+      "mainCharacters": 7134,
+      "adLoader": false,
+      "sha256": "73716132c512a5b89ab36662fcfed35d588d2f9a4a11f354d15af0ccef7baacf",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-constitutional-law",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-constitutional-law"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Constitutional Law Past Paper | CSS Vista",
+      "mainCharacters": 2303,
+      "adLoader": false,
+      "sha256": "404bca3b2b7e13d43ff65afd5fd2559101f1bbf4dd853f205d17598cc7c8dae1",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-criminology",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-criminology"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Criminology Past Paper | CSS Vista",
+      "mainCharacters": 2297,
+      "adLoader": false,
+      "sha256": "9579837bd15fdcd2cd0ded86081adb378406b1a857aeb6574cc71bdfe5fec39f",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-current-affairs",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-current-affairs"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Current Affairs Past Paper | CSS Vista",
+      "mainCharacters": 2329,
+      "adLoader": false,
+      "sha256": "1511a26b325bc56d599f4fe8eae939539c2e4488613b6e4070f9cded6cc85ada",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-economics",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-economics"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Economics Combined Papers Past Paper | CSS Vista",
+      "mainCharacters": 3840,
+      "adLoader": false,
+      "sha256": "6ce833d6390d98236961d06ee8de311971a4fc974aa3fabd6e0ed927b5d18366",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-english-literature",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-english-literature"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 English Literature Past Paper | CSS Vista",
+      "mainCharacters": 1980,
+      "adLoader": false,
+      "sha256": "66cf16d05de9cd2188695dc1a44603761954afdada36d6823eef9a1f7c82d1fb",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-european-history",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-european-history"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 European History Past Paper | CSS Vista",
+      "mainCharacters": 2044,
+      "adLoader": false,
+      "sha256": "5987d2bd9adbc8b63bbb354aeb4dec18f308d02dad73d1ac051b731ba7028456",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-gender-studies",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-gender-studies"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Gender Studies Past Paper | CSS Vista",
+      "mainCharacters": 2972,
+      "adLoader": false,
+      "sha256": "bce90ab56cdd49640db6facc7a21e1cad17122870359b24478f15bba017b904c",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-general-science-ability",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-general-science-ability"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 General Science & Ability Past Paper | CSS Vista",
+      "mainCharacters": 5160,
+      "adLoader": false,
+      "sha256": "6901fce46d824b2049d69f06cd054760719106e052a745f8705cb9b9885405d2",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-geography",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-geography"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Geography Past Paper | CSS Vista",
+      "mainCharacters": 2391,
+      "adLoader": false,
+      "sha256": "c72efd610f3d634acd545a899db877b14068cd2a1d16d5d55e639d52fbedc4e0",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-geology",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-geology"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Geology Past Paper | CSS Vista",
+      "mainCharacters": 2051,
+      "adLoader": false,
+      "sha256": "de8d440b04d64dfabfbf820eeeabd6f30ef0600b928e99d88a7a1e8e87918d96",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-governance-public-policies",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-governance-public-policies"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 Governance & Public Policies Past Paper | CSS Vista",
+      "mainCharacters": 4346,
+      "adLoader": false,
+      "sha256": "c4fcdf14b3362d9869ebc60e579e72c36712d957a7fecf1b0f0a112d73d260de",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-history-of-pakistan-india",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-history-of-pakistan-india"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 History of Pakistan & India Past Paper | CSS Vista",
+      "mainCharacters": 2263,
+      "adLoader": false,
+      "sha256": "f6d4ade5d1c6079a381907b5408b99a8e82d13b6de197fa3f3476c27207b8cbd",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-history-of-usa",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-history-of-usa"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 History of USA Past Paper | CSS Vista",
+      "mainCharacters": 2630,
+      "adLoader": false,
+      "sha256": "3109ee65a9a3d202fe1eb6f2c21074b94188805b88551af58edc652548825c1f",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-international-law",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-international-law"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 International Law Past Paper | CSS Vista",
+      "mainCharacters": 3368,
+      "adLoader": false,
+      "sha256": "e518821d82cd6e56335cdf1bb47dd92eb98df1383df5f111f673354007fb6030",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-international-relations",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/past-papers/view/css-2021-international-relations"
+      ],
+      "robots": "index, follow, max-image-preview:large ",
+      "title": "CSS 2021 International Relations Combined Papers Past Paper | CSS Vista",
+      "mainCharacters": 3093,
+      "adLoader": false,
+      "sha256": "6c38e01e8cd3a9d70b14caca5e4cafeb7538ed88be895ad76a7773087737e89f",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/account",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/account"
+      ],
+      "robots": "noindex, nofollow noindex, nofollow",
+      "title": "CSS Vista Account | CSS Vista",
+      "mainCharacters": 992,
+      "adLoader": false,
+      "sha256": "85a77dcdc9373c797ae6b1e1b81479efa48acd0f11725bee9b5e8fbe507fcf37",
+      "errors": []
+    },
+    {
+      "url": "https://www.css-vista.com/account/dashboard",
+      "status": 200,
+      "canonical": [
+        "https://www.css-vista.com/account/dashboard"
+      ],
+      "robots": "noindex, nofollow noindex, nofollow",
+      "title": "My CSS Vista | CSS Vista",
+      "mainCharacters": 1032,
+      "adLoader": false,
+      "sha256": "5ec14492aeaa49d782bf7075a5b3b8b61946359bb1e03ff358dd0d2531ddbc68",
+      "errors": []
+    }
+  ],
+  "sitemapFiles": 5,
+  "sitemapUrls": 1019,
+  "passed": true
+}

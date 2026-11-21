@@ -957,7 +957,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS Vista | Free CSS, PMS & One-Paper Preparation Platform",
+        "mainCharacters": 4707,
+        "adLoader": true,
+        "sha256": "88d1f5fce42f1753ab262581a86a40a5aa4d61c8be73dd614860344e0fe5d740",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/%73tart-css",
@@ -1552,7 +1567,22 @@
         "decision_reason": "Private/account/admin/hibernated surface; preserve authentication and noindex.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/account",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/account"
+        ],
+        "robots": "noindex, nofollow noindex, nofollow",
+        "title": "CSS Vista Account | CSS Vista",
+        "mainCharacters": 992,
+        "adLoader": false,
+        "sha256": "85a77dcdc9373c797ae6b1e1b81479efa48acd0f11725bee9b5e8fbe507fcf37",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/account/ai-usage",
@@ -1846,8 +1876,8 @@
       "x_robots_tag": "noindex, nofollow",
       "sitemap_presence": false,
       "intended_indexability": false,
-      "google_status": null,
-      "action_taken": "disabled_manual_ads_on_management_navigation_and_focused_practice_preserved_access_noindex",
+      "google_status": "Excluded by noindex tag",
+      "action_taken": "disabled_manual_ads_on_management_navigation_and_focused_practice_preserved_access_noindex; observed_domain_google_status_2026-10-17",
       "http_observed": true,
       "access": "authenticated",
       "content_quality": "private",
@@ -1959,7 +1989,27 @@
         "decision_reason": "Private/account/admin/hibernated surface; preserve authentication and noindex.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-08",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json",
+      "post_release_http": {
+        "url": "https://www.css-vista.com/account/dashboard",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/account/dashboard"
+        ],
+        "robots": "noindex, nofollow noindex, nofollow",
+        "title": "My CSS Vista | CSS Vista",
+        "mainCharacters": 1032,
+        "adLoader": false,
+        "sha256": "5ec14492aeaa49d782bf7075a5b3b8b61946359bb1e03ff358dd0d2531ddbc68",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/account/english",
@@ -3090,8 +3140,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved; observed_domain_google_status_2026-10-17",
       "http_observed": true,
       "access": "public",
       "content_quality": "substantial",
@@ -3236,7 +3286,12 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/answer-evaluation",
@@ -3875,8 +3930,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -3904,7 +3959,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/a-short-history-of-nearly-everything",
@@ -3921,8 +3981,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -3950,7 +4010,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/amusing-ourselves-to-death",
@@ -4013,8 +4078,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -4042,7 +4107,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/behave",
@@ -4059,8 +4129,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -4088,7 +4158,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/bowling-alone",
@@ -4105,8 +4180,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -4134,7 +4209,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/brave-new-world",
@@ -4151,8 +4231,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -4180,7 +4260,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century",
@@ -4197,8 +4282,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -4226,7 +4311,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/capitalism-and-freedom",
@@ -4243,8 +4333,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -4272,7 +4362,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/chip-war",
@@ -4289,8 +4384,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "Discovered - currently not indexed",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -4318,7 +4413,12 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
-      }
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/book-summaries/democracy-in-america",
@@ -4410,6 +4510,21 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/book-summaries/development-as-freedom",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/development-as-freedom"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "Development as Freedom by Amartya Sen — Book Summary | CSS Vista",
+        "mainCharacters": 3226,
+        "adLoader": true,
+        "sha256": "e4d9730f721278cdcf58146c07fc5ed2d57ee1fa6dfcb0e55c8bf354e8dee81f",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -8658,8 +8773,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels",
+      "google_status": "URL is unknown to Google",
+      "action_taken": "audited_preserved;added_shared_source_notes_and_reviewed_quotation_labels; observed_domain_google_status_2026-10-17",
       "http_observed": true,
       "access": "public",
       "content_quality": "substantial",
@@ -8750,6 +8865,26 @@
         "identity_status": "verified_primary",
         "source": "docs/seo/editorial/book-quotation-review.json",
         "limitation": "Quotation evidence is separate from bibliographic identity, complete analysis verification and permissions."
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": null,
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": null,
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json",
+      "post_release_http": {
+        "url": "https://www.css-vista.com/book-summaries/why-nations-fail",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/why-nations-fail"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "Why Nations Fail by Daron Acemoglu and James A. Robinson — Book Summary | CSS Vista",
+        "mainCharacters": 3462,
+        "adLoader": true,
+        "sha256": "4975e6c93110a4218e6df60b3a3747349a257cda2a86ab32599403d33a85e103",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -9807,8 +9942,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "audited_preserved",
+      "google_status": "Indexed",
+      "action_taken": "audited_preserved; observed_domain_google_status_2026-10-17",
       "http_observed": true,
       "access": "public",
       "content_quality": "substantial",
@@ -9945,7 +10080,39 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/css-eligibility-calculator",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/css-eligibility-calculator"
+        ],
+        "robots": "index, follow ",
+        "title": "CSS Age & Attempts Calculator | CSS Vista",
+        "mainCharacters": 1648,
+        "adLoader": false,
+        "sha256": "4a2af62372a0f4ded746223d4fa746066386a9bd4ab1f73d567c36de0144c91b",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      },
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": null,
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-08",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json",
+      "google_indexed_inspection": {
+        "result": "URL is on Google; Page is indexed",
+        "lastCrawledAtDisplayed": "8 Oct 2026, 15:57:26",
+        "crawledAs": "Googlebot smartphone",
+        "crawlAllowed": true,
+        "fetch": "Successful",
+        "indexingAllowed": true,
+        "userCanonical": "Inspected URL",
+        "googleCanonical": "Inspected URL",
+        "sitemap": "https://www.css-vista.com/sitemap.xml",
+        "referringPage": "https://www.css-vista.com/exam-intelligence?section=mocks"
+      }
     },
     {
       "url": "https://www.css-vista.com/css-mcqs",
@@ -9962,8 +10129,8 @@
       "x_robots_tag": null,
       "sitemap_presence": false,
       "intended_indexability": false,
-      "google_status": null,
-      "action_taken": "audited_preserved",
+      "google_status": "Excluded by noindex tag",
+      "action_taken": "audited_preserved; observed_domain_google_status_2026-10-17",
       "http_observed": true,
       "access": "public",
       "content_quality": "utility",
@@ -10100,7 +10267,12 @@
         "decision_reason": "Existing utility or rendered-content gate excludes this surface; evaluate functionality and value individually before changing.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-11",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/css-past-paper-analysis",
@@ -14061,8 +14233,8 @@
       "x_robots_tag": null,
       "sitemap_presence": false,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "prerendered_real_grammar_course_and_explicitly_enabled_indexing",
+      "google_status": "Excluded by noindex tag",
+      "action_taken": "prerendered_real_grammar_course_and_explicitly_enabled_indexing; observed_domain_google_status_2026-10-17",
       "http_observed": true,
       "access": "public",
       "content_quality": "interactive",
@@ -14174,7 +14346,37 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-09",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json",
+      "post_release_http": {
+        "url": "https://www.css-vista.com/grammar-course",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/grammar-course"
+        ],
+        "robots": "index, follow ",
+        "title": "30-Day Grammar Course | CSS Vista",
+        "mainCharacters": 24335,
+        "adLoader": false,
+        "sha256": "59323e4a60b38eb78beae0f789e53c07f7c2deabd5560140468237d9eb9b5ebf",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      },
+      "google_post_release_live_test": {
+        "testedAtDisplayed": "17 Oct 2026, 13:03:30",
+        "result": "URL is available to Google; Page can be indexed",
+        "crawlAllowed": true,
+        "fetch": "Successful",
+        "indexingAllowed": true,
+        "userCanonical": "Inspected URL",
+        "googleCanonical": "Only determined after indexing"
+      },
+      "google_indexing_request": "Confirmed queued, 17 October 2026; one request only"
     },
     {
       "url": "https://www.css-vista.com/grammar-vocabulary",
@@ -15374,8 +15576,8 @@
       "x_robots_tag": null,
       "sitemap_presence": false,
       "intended_indexability": false,
-      "google_status": null,
-      "action_taken": "audited_preserved",
+      "google_status": "Excluded by noindex tag",
+      "action_taken": "audited_preserved; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "authenticated",
       "content_quality": "private",
@@ -15398,7 +15600,12 @@
         "decision_reason": "Private/account/admin/hibernated surface; preserve authentication and noindex.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-08",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/mpt",
@@ -15903,8 +16110,8 @@
       "x_robots_tag": null,
       "sitemap_presence": false,
       "intended_indexability": false,
-      "google_status": null,
-      "action_taken": "audited_preserved",
+      "google_status": "Excluded by noindex tag",
+      "action_taken": "audited_preserved; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "authenticated",
       "content_quality": "private",
@@ -15927,7 +16134,12 @@
         "decision_reason": "Private/account/admin/hibernated surface; preserve authentication and noindex.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-13",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/notes/view/criminology/cybercrime",
@@ -16217,8 +16429,8 @@
       "x_robots_tag": null,
       "sitemap_presence": false,
       "intended_indexability": false,
-      "google_status": null,
-      "action_taken": "audited_preserved",
+      "google_status": "Excluded by noindex tag",
+      "action_taken": "audited_preserved; observed_domain_google_status_2026-10-17",
       "http_observed": true,
       "access": "public",
       "content_quality": "utility",
@@ -16355,7 +16567,12 @@
         "decision_reason": "Existing utility or rendered-content gate excludes this surface; evaluate functionality and value individually before changing.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-08",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/opinions",
@@ -18145,7 +18362,7 @@
       "sitemap_presence": true,
       "intended_indexability": true,
       "google_status": "Crawled - currently not indexed",
-      "action_taken": "remove_redundant_archive_defaults_that_cause_rendered_noindex",
+      "action_taken": "archive_default_query_noindex_and_mobile_overflow_corrected; verified_live_2026-10-17; selective_indexing_request_confirmed",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -18174,7 +18391,21 @@
       "google_last_crawled": "2026-08-26",
       "google_live_test_status": "Excluded by noindex tag",
       "google_live_test_date": "2026-10-17",
-      "current_google_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
+      "current_google_evidence": "evidence/google-current-account-evidence-2026-10-17.json",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-08-26",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json",
+      "google_post_release_live_test": {
+        "testedAtDisplayed": "17 Oct 2026, 12:57:43",
+        "result": "URL is available to Google; Page can be indexed",
+        "fetch": "Successful",
+        "crawlAllowed": true,
+        "indexingAllowed": true,
+        "userCanonical": "Inspected URL",
+        "googleCanonical": "Only determined after indexing"
+      },
+      "google_indexing_request": "Confirmed queued, 17 October 2026; no guarantee of inclusion"
     },
     {
       "url": "https://www.css-vista.com/past-papers/ppsc/2025",
@@ -27898,7 +28129,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-computer-science",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-computer-science"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Computer Science Combined Papers Past Paper | CSS Vista",
+        "mainCharacters": 7134,
+        "adLoader": false,
+        "sha256": "73716132c512a5b89ab36662fcfed35d588d2f9a4a11f354d15af0ccef7baacf",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/past-papers/view/css-2021-constitutional-law",
@@ -27949,6 +28195,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-constitutional-law",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-constitutional-law"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Constitutional Law Past Paper | CSS Vista",
+        "mainCharacters": 2303,
+        "adLoader": false,
+        "sha256": "404bca3b2b7e13d43ff65afd5fd2559101f1bbf4dd853f205d17598cc7c8dae1",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28000,6 +28261,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-criminology",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-criminology"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Criminology Past Paper | CSS Vista",
+        "mainCharacters": 2297,
+        "adLoader": false,
+        "sha256": "9579837bd15fdcd2cd0ded86081adb378406b1a857aeb6574cc71bdfe5fec39f",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28051,6 +28327,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-current-affairs",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-current-affairs"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Current Affairs Past Paper | CSS Vista",
+        "mainCharacters": 2329,
+        "adLoader": false,
+        "sha256": "1511a26b325bc56d599f4fe8eae939539c2e4488613b6e4070f9cded6cc85ada",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28092,7 +28383,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-economics",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-economics"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Economics Combined Papers Past Paper | CSS Vista",
+        "mainCharacters": 3840,
+        "adLoader": false,
+        "sha256": "6ce833d6390d98236961d06ee8de311971a4fc974aa3fabd6e0ed927b5d18366",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/past-papers/view/css-2021-english-literature",
@@ -28143,6 +28449,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-english-literature",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-english-literature"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 English Literature Past Paper | CSS Vista",
+        "mainCharacters": 1980,
+        "adLoader": false,
+        "sha256": "66cf16d05de9cd2188695dc1a44603761954afdada36d6823eef9a1f7c82d1fb",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28284,7 +28605,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-european-history",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-european-history"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 European History Past Paper | CSS Vista",
+        "mainCharacters": 2044,
+        "adLoader": false,
+        "sha256": "5987d2bd9adbc8b63bbb354aeb4dec18f308d02dad73d1ac051b731ba7028456",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/past-papers/view/css-2021-gender-studies",
@@ -28335,6 +28671,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-gender-studies",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-gender-studies"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Gender Studies Past Paper | CSS Vista",
+        "mainCharacters": 2972,
+        "adLoader": false,
+        "sha256": "bce90ab56cdd49640db6facc7a21e1cad17122870359b24478f15bba017b904c",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28386,6 +28737,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-general-science-ability",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-general-science-ability"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 General Science & Ability Past Paper | CSS Vista",
+        "mainCharacters": 5160,
+        "adLoader": false,
+        "sha256": "6901fce46d824b2049d69f06cd054760719106e052a745f8705cb9b9885405d2",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28437,6 +28803,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-geography",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-geography"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Geography Past Paper | CSS Vista",
+        "mainCharacters": 2391,
+        "adLoader": false,
+        "sha256": "c72efd610f3d634acd545a899db877b14068cd2a1d16d5d55e639d52fbedc4e0",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28478,7 +28859,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-geology",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-geology"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Geology Past Paper | CSS Vista",
+        "mainCharacters": 2051,
+        "adLoader": false,
+        "sha256": "de8d440b04d64dfabfbf820eeeabd6f30ef0600b928e99d88a7a1e8e87918d96",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/past-papers/view/css-2021-governance-public-policies",
@@ -28519,7 +28915,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-governance-public-policies",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-governance-public-policies"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 Governance & Public Policies Past Paper | CSS Vista",
+        "mainCharacters": 4346,
+        "adLoader": false,
+        "sha256": "c4fcdf14b3362d9869ebc60e579e72c36712d957a7fecf1b0f0a112d73d260de",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/past-papers/view/css-2021-history-of-pakistan-india",
@@ -28570,6 +28981,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-history-of-pakistan-india",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-history-of-pakistan-india"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 History of Pakistan & India Past Paper | CSS Vista",
+        "mainCharacters": 2263,
+        "adLoader": false,
+        "sha256": "f6d4ade5d1c6079a381907b5408b99a8e82d13b6de197fa3f3476c27207b8cbd",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28621,6 +29047,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-history-of-usa",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-history-of-usa"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 History of USA Past Paper | CSS Vista",
+        "mainCharacters": 2630,
+        "adLoader": false,
+        "sha256": "3109ee65a9a3d202fe1eb6f2c21074b94188805b88551af58edc652548825c1f",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28672,6 +29113,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-international-law",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-international-law"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 International Law Past Paper | CSS Vista",
+        "mainCharacters": 3368,
+        "adLoader": false,
+        "sha256": "e518821d82cd6e56335cdf1bb47dd92eb98df1383df5f111f673354007fb6030",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -28723,6 +29179,21 @@
         "last_crawled_verified": null,
         "source": "docs/seo/evidence/gsc-historical-examples-2026-09-04.json",
         "limitation": "Historical example only; current Google status is unavailable."
+      },
+      "post_release_http": {
+        "url": "https://www.css-vista.com/past-papers/view/css-2021-international-relations",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/past-papers/view/css-2021-international-relations"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "CSS 2021 International Relations Combined Papers Past Paper | CSS Vista",
+        "mainCharacters": 3093,
+        "adLoader": false,
+        "sha256": "6c38e01e8cd3a9d70b14caca5e4cafeb7538ed88be895ad76a7773087737e89f",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
       }
     },
     {
@@ -55632,7 +56103,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/start-css",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/start-css"
+        ],
+        "robots": "index, follow ",
+        "title": "How to Start CSS Preparation | CSS Vista",
+        "mainCharacters": 15206,
+        "adLoader": true,
+        "sha256": "27f145a99362be648ec7bf1c44bb227e034da34931cc6369f40cb83aa76bb3bb",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/start-css/",
@@ -57335,7 +57821,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "01 Concept of Islam: submission, faith and excellence — Introduction to Islam References | CSS Vista",
+        "mainCharacters": 16602,
+        "adLoader": true,
+        "sha256": "77ff8e745ae807d5c00a1c8c851b7566515c7d22520c4438fc140b4f1997ffc1",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/02-importance-of-din-in-human-life",
@@ -59837,8 +60338,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "repaired_study_detail_metadata_and_structured_data_consistency;stabilized_failed_content_download_without_automatic_retry_loop",
+      "google_status": "Duplicate, Google chose different canonical than user",
+      "action_taken": "repaired_study_detail_metadata_and_structured_data_consistency;stabilized_failed_content_download_without_automatic_retry_loop; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -59861,7 +60362,12 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-09-22",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/study-material/islamic-studies/public-administration-and-governance/contemporary-administrative-comparison-and-research",
@@ -61282,7 +61788,22 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "post_release_http": {
+        "url": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+        "status": 200,
+        "canonical": [
+          "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+        ],
+        "robots": "index, follow, max-image-preview:large ",
+        "title": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes | CSS Vista",
+        "mainCharacters": 16888,
+        "adLoader": true,
+        "sha256": "cba3851e470f3abae5d4f98f15560502a3a10958b99196b09542f4a410804b1e",
+        "errors": [],
+        "observedAt": "2026-10-17T07:56:32.928927+00:00",
+        "evidence": "evidence/production-monitor-2026-10-17.json"
+      }
     },
     {
       "url": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-ii-auditing",
@@ -68513,8 +69034,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "repaired_study_detail_metadata_and_structured_data_consistency;stabilized_failed_content_download_without_automatic_retry_loop",
+      "google_status": "Duplicate, Google chose different canonical than user",
+      "action_taken": "repaired_study_detail_metadata_and_structured_data_consistency;stabilized_failed_content_download_without_automatic_retry_loop; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -68537,7 +69058,12 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-09-22",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/study-material/optional/governance-and-public-policies/governance-theories",
@@ -68633,8 +69159,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "repaired_study_detail_metadata_and_structured_data_consistency;stabilized_failed_content_download_without_automatic_retry_loop",
+      "google_status": "Duplicate, Google chose different canonical than user",
+      "action_taken": "repaired_study_detail_metadata_and_structured_data_consistency;stabilized_failed_content_download_without_automatic_retry_loop; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -68657,7 +69183,12 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-09-22",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/study-material/optional/governance-and-public-policies/public-policy-formulation-and-implementation",
@@ -76996,8 +77527,8 @@
       "x_robots_tag": null,
       "sitemap_presence": false,
       "intended_indexability": false,
-      "google_status": null,
-      "action_taken": "audited_preserved",
+      "google_status": "Excluded by noindex tag",
+      "action_taken": "audited_preserved; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "authenticated",
       "content_quality": "private",
@@ -77020,7 +77551,12 @@
         "decision_reason": "Private/account/admin/hibernated surface; preserve authentication and noindex.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-10-08",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/study-tools",
@@ -78997,9 +79533,9 @@
       "sitemap_presence": false,
       "source_indexable_candidate": false,
       "intended_indexability": false,
-      "google_status": null,
+      "google_status": "Not found (404)",
       "indexability_recommendation": "Existing utility or rendered-content gate excludes this surface; evaluate functionality and value individually before changing.",
-      "action_taken": "restored_existing_public_article_direct_route_and_real_prerender_preserved_noindex_no_ads",
+      "action_taken": "restored_existing_public_article_direct_route_and_real_prerender_preserved_noindex_no_ads; observed_domain_google_status_2026-10-17",
       "http_observed": false,
       "access": "public",
       "content_quality": "utility",
@@ -79020,7 +79556,12 @@
         "decision_reason": "Existing utility or rendered-content gate excludes this surface; evaluate functionality and value individually before changing.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_status_report_updated_on": "2026-10-12",
+      "google_status_property": "sc-domain:css-vista.com",
+      "google_last_crawled_on": "2026-09-26",
+      "google_current_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/vistagram/globalization-rules-based-world-trade",
@@ -82012,7 +82553,7 @@
     "production_fields_unchanged": "status/final_url/canonical/robots/headers/sitemap_presence/http_observed remain baseline HTTP observations; local_artifact contains local build results."
   },
   "google_evidence": {
-    "current_portal_status": "Read-only authenticated inspection on 2026-10-17; browser signed out after later session reset",
+    "current_portal_status": "Securely reauthenticated; current prefix/domain reports, bounded exclusions and indexed/live inspections saved in dated evidence. Google outcomes remain pending.",
     "historical_issue_examples": 488,
     "historical_example_prepared_classification": {
       "indexable_in_prepared_artifact": 195,
@@ -82037,5 +82578,57 @@
     "observed_on": "2026-10-17",
     "scope": "All known pages; URL-prefix report, distinct from local inventory and domain-property totals",
     "evidence": "evidence/google-current-account-evidence-2026-10-17.json"
+  },
+  "verified_release": {
+    "sha": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+    "builtAt": "2026-10-17T07:54:48.101Z",
+    "evidence": "evidence/release-verification-2026-10-17.json",
+    "note": "Older raw HTTP fields remain the dated baseline; post_release_http records only actually sampled URLs."
+  },
+  "domain_google_report": {
+    "reportUpdatedOn": "2026-10-12",
+    "scope": "All known pages, domain property",
+    "indexed": 470,
+    "notIndexed": 726,
+    "total": 1196,
+    "reasons": [
+      {
+        "reason": "Crawled - currently not indexed",
+        "pages": 3,
+        "validation": "Failed"
+      },
+      {
+        "reason": "Excluded by noindex tag",
+        "pages": 36,
+        "validation": "Not Started"
+      },
+      {
+        "reason": "Page with redirect",
+        "pages": 5,
+        "validation": "Not Started"
+      },
+      {
+        "reason": "Not found (404)",
+        "pages": 1,
+        "validation": "Not Started"
+      },
+      {
+        "reason": "Discovered - currently not indexed",
+        "pages": 678,
+        "validation": "Started"
+      },
+      {
+        "reason": "Duplicate, Google chose different canonical than user",
+        "pages": 3,
+        "validation": "Started"
+      },
+      {
+        "reason": "Alternative page with proper canonical tag",
+        "pages": 0,
+        "validation": "N/A"
+      }
+    ],
+    "property": "sc-domain:css-vista.com",
+    "observedOn": "2026-10-17"
   }
 }

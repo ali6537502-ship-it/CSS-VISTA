@@ -1,5 +1,9 @@
 # Authenticated recovery continuation — 17 October 2026
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 This continuation follows PR #94 on `fix/seo-indexing-adsense-recovery`. The existing scoped SEO release authorization applies; Pro/MPT, payments, AI and private drafts remain held. No AdSense review is submitted. The dated [account evidence](evidence/google-current-account-evidence-2026-10-17.json) supersedes earlier statements that current portals were unavailable. Historical reports remain historical.
 
 ## Verified account findings

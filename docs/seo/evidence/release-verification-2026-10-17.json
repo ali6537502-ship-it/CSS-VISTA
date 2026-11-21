@@ -1,0 +1,58 @@
+{
+  "verifiedAt": "2026-10-17T08:01:38.978925+00:00",
+  "pr": 94,
+  "headSha": "b6624a3e01a545c23a8eb903a21c1fb16cbc57a3",
+  "mergedSha": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+  "sourceTree": "8e6cd5fef0da238c39f90f85d6eca884548bf06d",
+  "liveFingerprint": {
+    "schemaVersion": 1,
+    "gitSha": "b74ee781b230ebd7c047ff0a6419927a125b96db",
+    "source": "git-rev-parse-head",
+    "buildTarget": "hostinger",
+    "builtAt": "2026-10-17T07:54:48.101Z"
+  },
+  "prCI": {
+    "allWorkflows": "success",
+    "hostingerRun": 39013526443,
+    "paymentRun": 39013526447,
+    "paymentJob": 117340829773
+  },
+  "mainCI": {
+    "allSixWorkflows": "success",
+    "hostingerRun": 39015100791,
+    "defaultBuildJob": 117345482407,
+    "documentedBuildJob": 117345482577,
+    "fingerprintJob": 117346571085,
+    "backendJob": 117346588069,
+    "bookJob": 117346588112,
+    "adsenseCrawlerJob": 117346588145
+  },
+  "publicMonitor": {
+    "file": "production-monitor-2026-10-17.json",
+    "passed": true,
+    "sitemapUrls": 1019,
+    "sitemapFiles": 5,
+    "sampledPages": 26,
+    "errors": []
+  },
+  "monitoring": {
+    "created": true,
+    "timezone": "Asia/Karachi",
+    "checkpoints": [
+      {
+        "day": 7,
+        "date": "2026-10-24"
+      },
+      {
+        "day": 14,
+        "date": "2026-10-31"
+      },
+      {
+        "day": 28,
+        "date": "2026-11-14"
+      }
+    ],
+    "scope": "Public/GitHub technical checks plus reminders for authenticated Google comparisons; no scheduled authenticated Google fetch promised"
+  },
+  "adsenseReviewSubmitted": false
+}
