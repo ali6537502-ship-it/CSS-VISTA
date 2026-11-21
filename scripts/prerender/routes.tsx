@@ -10,6 +10,9 @@ import Home from '@/pages/Home'
 import StartCSS from '@/pages/StartCSS'
 import PmsVista from '@/pages/PmsVista'
 import PmsVistaSubject from '@/pages/PmsVistaSubject'
+import CssVista from '@/pages/CssVista'
+import CssVistaSubject from '@/pages/CssVistaSubject'
+import { cssVistaOptionals } from '@/data/cssVistaPublic'
 import { pmsVistaSubjectMeta } from '@/data/pmsVistaMeta.mjs'
 import CssEligibilityCalculator from '@/pages/CssEligibilityCalculator'
 import CompulsoryList from '@/pages/CompulsoryList'
@@ -146,6 +149,8 @@ function vistagramRoutes(): PrerenderRoute[] {
 export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/', () => <Home />),
   page('/start-css', () => <StartCSS />),
+  page('/css-vista', () => <CssVista />),
+  ...cssVistaOptionals.map(paper => page('/css-vista/syllabus/' + paper.slug, () => <CssVistaSubject />, '/css-vista/syllabus/:subject')),
   page('/pms-vista', () => <PmsVista />),
   ...pmsVistaSubjectMeta.map(subject => page('/pms-vista/syllabus/' + subject.id, () => <PmsVistaSubject />, '/pms-vista/syllabus/:subject')),
   page('/pms-vista/syllabus/compulsory-mental-ability-and-reasoning-test', () => <PmsVistaSubject />, '/pms-vista/syllabus/:subject'),
