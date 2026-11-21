@@ -9,7 +9,7 @@ const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXE
 const problems=[]
 await mkdir('test-artifacts/gsa-tutor',{recursive:true})
 try{
- for(const width of [375,768,1440]){
+ for(const width of [320,375,768,1440]){
    const context=await browser.newContext({viewport:{width,height:900}})
    const page=await context.newPage()
    page.on('pageerror',e=>problems.push(width+': '+e.message))
@@ -21,7 +21,7 @@ try{
    await page.locator('[data-days="8"]').click()
    await page.locator('[data-action="saveplan"]').click()
    await page.locator('[data-action="expandplan"]').click()
-   assert.equal(await page.locator('.day').count(),8)
+   assert.ok(await page.locator('.day').count()>8,'Budgeted plan extends an unrealistic deadline')
    assert.equal(await page.locator('.day-lesson').count(),141)
    await page.locator('.day-lesson').first().click()
    await page.locator('.lesson-card').waitFor()
@@ -66,6 +66,79 @@ try{
      await page.locator('[data-water="4"]').click()
      assert.match(await page.locator('.science-graphic svg').getAttribute('aria-label'),/step 5 highlighted/)
    }
+   if(width===320){
+     await page.locator('[data-view="library"]').click()
+     await page.locator('[data-chapter="6"]').click()
+     await page.locator('[data-lesson="c6-s6-4"]').click()
+     await page.locator('[data-radio-mhz="300"]').focus()
+     await page.keyboard.press('Enter')
+     assert.equal(await page.locator('[data-radio-mhz="300"]').getAttribute('aria-pressed'),'true')
+     assert.match(await page.locator('.model [role="status"]').innerText(),/1 m/)
+     assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('data-radio-mhz')),'300','Interaction must retain keyboard focus')
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
+     await page.screenshot({path:'test-artifacts/gsa-tutor/radiation-320.png',fullPage:true})
+     await page.locator('[data-view="practice"]').click()
+     await page.locator('[data-practice="14"]').click()
+     await page.locator('[data-analytical="GS26-W-BIO"]').click()
+     await page.locator('#write').fill('Organic material is broken down without oxygen in a reactor. Biogas is distinct from the remaining digestate.')
+     await page.locator('[data-action="revealwriting"]').click()
+     await page.locator('[data-rubric="0"]').check()
+     await page.locator('[data-action="saveevaluation"]').click()
+     const evaluation=await page.evaluate(()=>Object.values(JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).writingAttempts)[0])
+     assert.equal(evaluation.evaluation,'learner-self-evaluation')
+     assert.equal(evaluation.selfAwarded,1)
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
+     await page.screenshot({path:'test-artifacts/gsa-tutor/writing-320.png',fullPage:true})
+   }
+   if(width===320){
+     const sections=Array.from({length:28},(_,i)=>JSON.parse(readFileSync('public/gsa-tutor/content/chapter-'+String(i+1).padStart(2,'0')+'.json','utf8')).sections).flat()
+     const formulaReport=await page.evaluate(sections=>{
+       const host=document.createElement('div');host.className='study-copy';host.style.cssText='position:absolute;left:0;top:0;width:250px;background:white';document.body.append(host)
+       const issues=[];let rendered=0,repairs=0
+       for(const section of sections){host.innerHTML=section.html;const r=window.CSSVistaGSAMath.render(host,{sourceText:section.text});rendered+=r.rendered;repairs+=r.repairs;if(r.issues.length)issues.push(section.id+': source issue');for(const eq of host.querySelectorAll('.gsa-equation'))if(eq.getBoundingClientRect().width>252)issues.push(section.id+': oversized equation')}
+       host.remove();return {rendered,repairs,issues}
+     },sections)
+     assert.equal(formulaReport.rendered,156)
+     assert.equal(formulaReport.repairs,1)
+     assert.deepEqual(formulaReport.issues,[])
+   }
+   if(width===1440){
+     await page.evaluate(()=>document.documentElement.style.zoom='200%')
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2,'No overflow at 200% zoom')
+     await page.screenshot({path:'test-artifacts/gsa-tutor/zoom-200.png',fullPage:true})
+   }
+   if(width===320){
+     await page.locator('[data-view="practice"]').click()
+     await page.locator('#assessment-count').fill('5')
+     await page.locator('#assessment-mode').selectOption('timed')
+     await page.locator('#assessment-minutes').fill('1')
+     await page.locator('[data-assessment-start]').click()
+     await page.locator('[data-assessment-choice="A"]').waitFor()
+     assert.equal(await page.locator('.assessment-explanation').count(),0,'Keys must stay hidden before submission')
+     const assessment=await page.evaluate(()=>window.CSSVistaGSAAssessment.hydrateAttempt(Object.values(JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentAttempts).at(-1),JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentQuestionSnapshots))
+     await page.locator('[data-assessment-choice="'+assessment.questions[0].answer+'"]').click()
+     await page.reload()
+     await page.locator('[data-view="practice"]').click()
+     await page.locator('[data-assessment-open="'+assessment.id+'"]').click()
+     await page.locator('#assessment-clock').waitFor()
+     const restored=await page.evaluate(()=>Object.values(JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentEvents).filter(e=>e.attemptId===Object.keys(JSON.parse(localStorage.getItem('cssvista:tool:gsa-tutor:v1')).assessmentAttempts).at(-1)&&e.type==='answer'))
+     assert.equal(restored.length,1)
+     await page.locator('[data-assessment-submit]').click()
+     await page.getByRole('heading',{name:'Assessment results',exact:true}).waitFor()
+     assert.match(await page.locator('.panel.accent').innerText(),/1 \/ 5 correct/)
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
+     await page.screenshot({path:'test-artifacts/gsa-tutor/assessment-320.png',fullPage:true})
+     await page.locator('[data-view="library"]').click()
+     await page.locator('[data-chapter="14"]').click()
+     await page.locator('[data-lesson="c14-s14-2"]').click()
+     await page.locator('[data-action="fullsource"]').click()
+     assert.ok(await page.locator('#reference math').count()>0,'Chemical reaction should render as MathML')
+     assert.equal(await page.locator('#reference .math-source-fallback').count(),0)
+     const scrollEquation=page.locator('#reference .scrollable-equation').first();await scrollEquation.waitFor();await scrollEquation.focus();await page.keyboard.press('ArrowRight');await page.waitForTimeout(100);assert.ok(await scrollEquation.evaluate(el=>el.scrollLeft)>0,'Long equations must support keyboard scrolling')
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)<=2)
+     await page.screenshot({path:'test-artifacts/gsa-tutor/formulas-320.png',fullPage:true})
+     await page.locator('#close-reference').click()
+   }
    if(width===375){
      await page.locator('.day-lesson').first().click();await page.locator('.lesson-card').waitFor()
      const empty={plan:null,completed:{},drafts:{}}
@@ -87,8 +160,15 @@ try{
      assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem(`cssvista:reset-data:v1:standalone-fixture-c:fixture-reset:${encodeURIComponent('cssvista:tool:gsa-tutor:v1')}`)).plan.days),8)
      assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1')),null)
    }
+   if(width===320){
+     const retained=await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1'))
+     await context.route('**/gsa-tutor/assessment-ui.js*',route=>route.abort())
+     await page.reload();await page.getByRole('heading',{name:'Course assets could not be loaded',exact:true}).waitFor()
+     assert.equal(await page.evaluate(()=>localStorage.getItem('cssvista:tool:gsa-tutor:v1')),retained,'Asset-load failures must not alter historical progress')
+     await context.unroute('**/gsa-tutor/assessment-ui.js*');await page.getByRole('button',{name:'Reload course',exact:true}).click();await page.getByRole('heading',{name:/programme/}).waitFor()
+   }
    await context.close()
  }
  assert.deepEqual(problems,[],problems.join('; '))
- console.log('PASS standalone GSA: three responsive lesson journeys, stale writer/account-switch redaction, real reload recovery and reset-generation isolation.')
+ console.log('PASS standalone GSA: four responsive lesson journeys, keyboard model controls, 200% zoom, pilot writing rubrics, resumable assessments and 156 rendered equations, stale writer/account-switch redaction, real reload recovery and reset-generation isolation.')
 }finally{await browser.close()}

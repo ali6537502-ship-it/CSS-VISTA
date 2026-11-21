@@ -1,0 +1,226 @@
+{
+  "renderer": "KaTeX 0.19.1, native MathML output; local pinned bundle",
+  "status": "formatting-check-only",
+  "scientificVerification": "NOT ESTABLISHED",
+  "renderedExpressions": 156,
+  "sourceProvenRepairs": 1,
+  "lessonsWithSourceIssues": [],
+  "notes": [
+    "Original content is unchanged. Literal percent characters are rendered as percent signs rather than TeX comments.",
+    "The binary subscript formatting defect in lesson 25.4 is restored only when the original manuscript text confirms the exact formula. This is a formatting repair, not a scientific content revision.",
+    "Fragmented or unsupported formulas remain visible with an editorial-repair warning; no scientific replacement is inferred.",
+    "Browser checks and scientific review are separate release requirements."
+  ],
+  "rows": [
+    {
+      "lessonId": "c1-s1-2",
+      "rendered": 9,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c1-s1-4",
+      "rendered": 7,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c2-s2-3",
+      "rendered": 5,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c2-s2-4",
+      "rendered": 4,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c3-s3-2",
+      "rendered": 13,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c4-s4-1",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c4-s4-2",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c4-s4-3",
+      "rendered": 3,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c6-s6-1",
+      "rendered": 3,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c6-s6-3",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c6-s6-4",
+      "rendered": 8,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c6-s6-5",
+      "rendered": 4,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c7-s7-1",
+      "rendered": 2,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c7-s7-3",
+      "rendered": 9,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c10-s10-4",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c10-s10-5",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c14-s14-2",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c16-s16-3",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c17-s17-3",
+      "rendered": 3,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c18-s18-1",
+      "rendered": 3,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c18-s18-2",
+      "rendered": 8,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c18-s18-4",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c19-s19-1",
+      "rendered": 4,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c19-s19-2",
+      "rendered": 6,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c20-s20-4",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c21-s21-1",
+      "rendered": 4,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c24-s24-1",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c24-s24-2",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c25-s25-2",
+      "rendered": 1,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c25-s25-4",
+      "rendered": 8,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 1
+    },
+    {
+      "lessonId": "c26-s26-2",
+      "rendered": 2,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c26-s26-4",
+      "rendered": 3,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c26-s26-5",
+      "rendered": 7,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c28-s28-2",
+      "rendered": 19,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    },
+    {
+      "lessonId": "c28-s28-3",
+      "rendered": 10,
+      "sourceIssues": [],
+      "sourceProvenRepairs": 0
+    }
+  ]
+}

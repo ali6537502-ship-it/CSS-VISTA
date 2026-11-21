@@ -1,0 +1,2511 @@
+{
+  "status": "editorial-draft",
+  "method": "Manual comparison of each original stem and keyed answer with numbered lesson topics and source text. No keyword inference at runtime.",
+  "limitations": [
+    "These links are not independent scientific verification or calibrated difficulty ratings.",
+    "Lesson core concept groups require finer editorial validation before mastery certification.",
+    "Supporting-parent-topic links do not mean every detail is expressly named in the official syllabus."
+  ],
+  "questions": [
+    {
+      "questionId": "D19-Q19",
+      "chapter": 1,
+      "lessonId": "c1-s1-2",
+      "lessonTitle": "Astronomical distances and measurement",
+      "conceptId": "c1-s1-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q01",
+      "chapter": 1,
+      "lessonId": "c1-s1-4",
+      "lessonTitle": "Evidence for cosmic evolution",
+      "conceptId": "c1-s1-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q02",
+      "chapter": 1,
+      "lessonId": "c1-s1-4",
+      "lessonTitle": "Evidence for cosmic evolution",
+      "conceptId": "c1-s1-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q03",
+      "chapter": 1,
+      "lessonId": "c1-s1-2",
+      "lessonTitle": "Astronomical distances and measurement",
+      "conceptId": "c1-s1-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q18",
+      "chapter": 2,
+      "lessonId": "c2-s2-3",
+      "lessonTitle": "Fusion, energy transport and the Sun",
+      "conceptId": "c2-s2-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q04",
+      "chapter": 2,
+      "lessonId": "c2-s2-4",
+      "lessonTitle": "Brightness, temperature and spectra",
+      "conceptId": "c2-s2-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q05",
+      "chapter": 2,
+      "lessonId": "c2-s2-4",
+      "lessonTitle": "Brightness, temperature and spectra",
+      "conceptId": "c2-s2-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q16",
+      "chapter": 3,
+      "lessonId": "c3-s3-3",
+      "lessonTitle": "Rotation, revolution and seasons",
+      "conceptId": "c3-s3-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q17",
+      "chapter": 3,
+      "lessonId": "c3-s3-4",
+      "lessonTitle": "The Moon, phases and eclipses",
+      "conceptId": "c3-s3-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q22",
+      "chapter": 3,
+      "lessonId": "c3-s3-2",
+      "lessonTitle": "Gravity and orbital motion",
+      "conceptId": "c3-s3-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q06",
+      "chapter": 3,
+      "lessonId": "c3-s3-2",
+      "lessonTitle": "Gravity and orbital motion",
+      "conceptId": "c3-s3-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q07",
+      "chapter": 3,
+      "lessonId": "c3-s3-4",
+      "lessonTitle": "The Moon, phases and eclipses",
+      "conceptId": "c3-s3-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q08",
+      "chapter": 3,
+      "lessonId": "c3-s3-3",
+      "lessonTitle": "Rotation, revolution and seasons",
+      "conceptId": "c3-s3-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q09",
+      "chapter": 4,
+      "lessonId": "c4-s4-3",
+      "lessonTitle": "Humidity, saturation and condensation",
+      "conceptId": "c4-s4-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q10",
+      "chapter": 4,
+      "lessonId": "c4-s4-6",
+      "lessonTitle": "Stability, inversions and forecasting",
+      "conceptId": "c4-s4-6:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q11",
+      "chapter": 4,
+      "lessonId": "c4-s4-4",
+      "lessonTitle": "Clouds and precipitation",
+      "conceptId": "c4-s4-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q12",
+      "chapter": 4,
+      "lessonId": "c4-s4-4",
+      "lessonTitle": "Clouds and precipitation",
+      "conceptId": "c4-s4-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q20",
+      "chapter": 5,
+      "lessonId": "c5-s5-2",
+      "lessonTitle": "Earthquakes and seismic evidence",
+      "conceptId": "c5-s5-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q21",
+      "chapter": 5,
+      "lessonId": "c5-s5-5",
+      "lessonTitle": "Cyclones, tornadoes and drought",
+      "conceptId": "c5-s5-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q43",
+      "chapter": 5,
+      "lessonId": "c5-s5-1",
+      "lessonTitle": "Hazard, exposure and vulnerability",
+      "conceptId": "c5-s5-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q13",
+      "chapter": 5,
+      "lessonId": "c5-s5-3",
+      "lessonTitle": "Volcanoes and tsunamis",
+      "conceptId": "c5-s5-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q14",
+      "chapter": 5,
+      "lessonId": "c5-s5-3",
+      "lessonTitle": "Volcanoes and tsunamis",
+      "conceptId": "c5-s5-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q15",
+      "chapter": 5,
+      "lessonId": "c5-s5-4",
+      "lessonTitle": "Floods, slope failures and avalanches",
+      "conceptId": "c5-s5-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q20",
+      "chapter": 6,
+      "lessonId": "c6-s6-1",
+      "lessonTitle": "Atomic structure and the periodic system",
+      "conceptId": "isotopes",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q23",
+      "chapter": 7,
+      "lessonId": "c7-s7-3",
+      "lessonTitle": "Solar, wind and water technologies",
+      "conceptId": "c7-s7-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q16",
+      "chapter": 7,
+      "lessonId": "c7-s7-4",
+      "lessonTitle": "Fission, fusion and reactor operation",
+      "conceptId": "c7-s7-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q17",
+      "chapter": 7,
+      "lessonId": "c7-s7-4",
+      "lessonTitle": "Fission, fusion and reactor operation",
+      "conceptId": "c7-s7-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q24",
+      "chapter": 8,
+      "lessonId": "c8-s8-2",
+      "lessonTitle": "Plastics, polymers and environmental behaviour",
+      "conceptId": "c8-s8-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q18",
+      "chapter": 8,
+      "lessonId": "c8-s8-3",
+      "lessonTitle": "Semiconductors and electronic devices",
+      "conceptId": "c8-s8-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q19",
+      "chapter": 8,
+      "lessonId": "c8-s8-3",
+      "lessonTitle": "Semiconductors and electronic devices",
+      "conceptId": "c8-s8-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q26",
+      "chapter": 9,
+      "lessonId": "c9-s9-2",
+      "lessonTitle": "Organelles and division of labour",
+      "conceptId": "c9-s9-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q27",
+      "chapter": 9,
+      "lessonId": "c9-s9-3",
+      "lessonTitle": "Membrane transport and osmotic balance",
+      "conceptId": "c9-s9-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q28",
+      "chapter": 9,
+      "lessonId": "c9-s9-5",
+      "lessonTitle": "Gene expression and cell division",
+      "conceptId": "c9-s9-5:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q21",
+      "chapter": 9,
+      "lessonId": "c9-s9-3",
+      "lessonTitle": "Membrane transport and osmotic balance",
+      "conceptId": "c9-s9-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q22",
+      "chapter": 9,
+      "lessonId": "c9-s9-3",
+      "lessonTitle": "Membrane transport and osmotic balance",
+      "conceptId": "c9-s9-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q23",
+      "chapter": 9,
+      "lessonId": "c9-s9-2",
+      "lessonTitle": "Organelles and division of labour",
+      "conceptId": "c9-s9-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q24",
+      "chapter": 9,
+      "lessonId": "c9-s9-2",
+      "lessonTitle": "Organelles and division of labour",
+      "conceptId": "c9-s9-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q26",
+      "chapter": 9,
+      "lessonId": "c9-s9-5",
+      "lessonTitle": "Gene expression and cell division",
+      "conceptId": "c9-s9-5:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q27",
+      "chapter": 9,
+      "lessonId": "c9-s9-4",
+      "lessonTitle": "DNA, genes and replication",
+      "conceptId": "c9-s9-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q25",
+      "chapter": 10,
+      "lessonId": "c10-s10-4",
+      "lessonTitle": "Aerobic respiration step by step",
+      "conceptId": "c10-s10-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q34",
+      "chapter": 10,
+      "lessonId": "c10-s10-5",
+      "lessonTitle": "Photosynthesis and plant energy",
+      "conceptId": "c10-s10-5:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q25",
+      "chapter": 10,
+      "lessonId": "c10-s10-5",
+      "lessonTitle": "Photosynthesis and plant energy",
+      "conceptId": "c10-s10-5:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q28",
+      "chapter": 10,
+      "lessonId": "c10-s10-2",
+      "lessonTitle": "Enzyme action and regulation",
+      "conceptId": "c10-s10-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q29",
+      "chapter": 11,
+      "lessonId": "c11-s11-5",
+      "lessonTitle": "Fungi, microbes and ecological roles",
+      "conceptId": "c11-s11-5:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q30",
+      "chapter": 11,
+      "lessonId": "c11-s11-3",
+      "lessonTitle": "Water, minerals and sugar transport",
+      "conceptId": "c11-s11-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q31",
+      "chapter": 11,
+      "lessonId": "c11-s11-3",
+      "lessonTitle": "Water, minerals and sugar transport",
+      "conceptId": "c11-s11-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q29",
+      "chapter": 12,
+      "lessonId": "c12-s12-5",
+      "lessonTitle": "Nervous and endocrine coordination",
+      "conceptId": "c12-s12-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q30",
+      "chapter": 12,
+      "lessonId": "c12-s12-4",
+      "lessonTitle": "Kidneys and fluid balance",
+      "conceptId": "c12-s12-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q32",
+      "chapter": 12,
+      "lessonId": "c12-s12-4",
+      "lessonTitle": "Kidneys and fluid balance",
+      "conceptId": "c12-s12-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q33",
+      "chapter": 12,
+      "lessonId": "c12-s12-3",
+      "lessonTitle": "Breathing, gas exchange and circulation",
+      "conceptId": "c12-s12-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q34",
+      "chapter": 12,
+      "lessonId": "c12-s12-3",
+      "lessonTitle": "Breathing, gas exchange and circulation",
+      "conceptId": "c12-s12-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q35",
+      "chapter": 12,
+      "lessonId": "c12-s12-3",
+      "lessonTitle": "Breathing, gas exchange and circulation",
+      "conceptId": "c12-s12-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q36",
+      "chapter": 12,
+      "lessonId": "c12-s12-5",
+      "lessonTitle": "Nervous and endocrine coordination",
+      "conceptId": "c12-s12-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q37",
+      "chapter": 12,
+      "lessonId": "c12-s12-5",
+      "lessonTitle": "Nervous and endocrine coordination",
+      "conceptId": "c12-s12-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q31",
+      "chapter": 13,
+      "lessonId": "c13-s13-5",
+      "lessonTitle": "Antibiotics and resistance",
+      "conceptId": "c13-s13-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q32",
+      "chapter": 13,
+      "lessonId": "c13-s13-4",
+      "lessonTitle": "Hepatitis viruses and liver disease",
+      "conceptId": "c13-s13-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q38",
+      "chapter": 13,
+      "lessonId": "c13-s13-6",
+      "lessonTitle": "Vaccines, immunity and epidemic prevention",
+      "conceptId": "c13-s13-6:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q39",
+      "chapter": 13,
+      "lessonId": "c13-s13-3",
+      "lessonTitle": "Malaria and dengue",
+      "conceptId": "c13-s13-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q40",
+      "chapter": 13,
+      "lessonId": "c13-s13-6",
+      "lessonTitle": "Vaccines, immunity and epidemic prevention",
+      "conceptId": "c13-s13-6:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q33",
+      "chapter": 14,
+      "lessonId": "c14-s14-4",
+      "lessonTitle": "Biogas production step by step",
+      "conceptId": "anaerobic-digestion",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q36",
+      "chapter": 15,
+      "lessonId": "c15-s15-7",
+      "lessonTitle": "Biogeochemical cycles",
+      "conceptId": "c15-s15-7:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q41",
+      "chapter": 15,
+      "lessonId": "c15-s15-2",
+      "lessonTitle": "Atmospheric composition and layers",
+      "conceptId": "c15-s15-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q42",
+      "chapter": 15,
+      "lessonId": "c15-s15-2",
+      "lessonTitle": "Atmospheric composition and layers",
+      "conceptId": "c15-s15-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q43",
+      "chapter": 15,
+      "lessonId": "c15-s15-3",
+      "lessonTitle": "Water compartments and the water cycle",
+      "conceptId": "c15-s15-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q44",
+      "chapter": 15,
+      "lessonId": "c15-s15-6",
+      "lessonTitle": "Ecosystems, biomes and food webs",
+      "conceptId": "c15-s15-6:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q47",
+      "chapter": 15,
+      "lessonId": "c15-s15-5",
+      "lessonTitle": "Plate tectonics and Earth's interior",
+      "conceptId": "c15-s15-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q37",
+      "chapter": 16,
+      "lessonId": "c16-s16-3",
+      "lessonTitle": "Photochemical smog and acid deposition",
+      "conceptId": "c16-s16-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q38",
+      "chapter": 16,
+      "lessonId": "c16-s16-3",
+      "lessonTitle": "Photochemical smog and acid deposition",
+      "conceptId": "c16-s16-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q39",
+      "chapter": 16,
+      "lessonId": "c16-s16-5",
+      "lessonTitle": "The greenhouse effect and climate response",
+      "conceptId": "c16-s16-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q49",
+      "chapter": 16,
+      "lessonId": "c16-s16-3",
+      "lessonTitle": "Photochemical smog and acid deposition",
+      "conceptId": "c16-s16-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q50",
+      "chapter": 16,
+      "lessonId": "c16-s16-3",
+      "lessonTitle": "Photochemical smog and acid deposition",
+      "conceptId": "c16-s16-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q51",
+      "chapter": 16,
+      "lessonId": "c16-s16-4",
+      "lessonTitle": "Stratospheric ozone depletion",
+      "conceptId": "c16-s16-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q52",
+      "chapter": 16,
+      "lessonId": "c16-s16-2",
+      "lessonTitle": "Major pollutants and their effects",
+      "conceptId": "c16-s16-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q01",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q02",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q03",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q04",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q05",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q06",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q07",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q08",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q09",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q10",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q11",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q12",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q13",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q14",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q15",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q16",
+      "chapter": 17,
+      "lessonId": "c17-s17-4",
+      "lessonTitle": "Drinking-water quality and Pakistan evidence",
+      "conceptId": "c17-s17-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q17",
+      "chapter": 17,
+      "lessonId": "c17-s17-4",
+      "lessonTitle": "Drinking-water quality and Pakistan evidence",
+      "conceptId": "c17-s17-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q18",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q19",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q20",
+      "chapter": 17,
+      "lessonId": "c17-s17-2",
+      "lessonTitle": "Nutrients, heat and infectious agents",
+      "conceptId": "c17-s17-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q21",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q22",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q23",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q24",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q25",
+      "chapter": 17,
+      "lessonId": "c17-s17-4",
+      "lessonTitle": "Drinking-water quality and Pakistan evidence",
+      "conceptId": "c17-s17-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q26",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q27",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q28",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q29",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q49",
+      "chapter": 17,
+      "lessonId": "c17-s17-4",
+      "lessonTitle": "Drinking-water quality and Pakistan evidence",
+      "conceptId": "c17-s17-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q50",
+      "chapter": 17,
+      "lessonId": "c17-s17-4",
+      "lessonTitle": "Drinking-water quality and Pakistan evidence",
+      "conceptId": "c17-s17-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q40",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q41",
+      "chapter": 17,
+      "lessonId": "c17-s17-4",
+      "lessonTitle": "Drinking-water quality and Pakistan evidence",
+      "conceptId": "c17-s17-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q45",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q53",
+      "chapter": 17,
+      "lessonId": "c17-s17-3",
+      "lessonTitle": "Chemical and radiological contamination",
+      "conceptId": "c17-s17-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q56",
+      "chapter": 17,
+      "lessonId": "c17-s17-1",
+      "lessonTitle": "Sources, transport and measurement",
+      "conceptId": "c17-s17-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q30",
+      "chapter": 18,
+      "lessonId": "c18-s18-1",
+      "lessonTitle": "Drinking-water treatment as a multiple-barrier system",
+      "conceptId": "c18-s18-1:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q31",
+      "chapter": 18,
+      "lessonId": "c18-s18-1",
+      "lessonTitle": "Drinking-water treatment as a multiple-barrier system",
+      "conceptId": "c18-s18-1:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q32",
+      "chapter": 18,
+      "lessonId": "c18-s18-1",
+      "lessonTitle": "Drinking-water treatment as a multiple-barrier system",
+      "conceptId": "c18-s18-1:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q33",
+      "chapter": 18,
+      "lessonId": "c18-s18-1",
+      "lessonTitle": "Drinking-water treatment as a multiple-barrier system",
+      "conceptId": "c18-s18-1:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q34",
+      "chapter": 18,
+      "lessonId": "c18-s18-1",
+      "lessonTitle": "Drinking-water treatment as a multiple-barrier system",
+      "conceptId": "c18-s18-1:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q35",
+      "chapter": 18,
+      "lessonId": "c18-s18-1",
+      "lessonTitle": "Drinking-water treatment as a multiple-barrier system",
+      "conceptId": "c18-s18-1:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q36",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q37",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q38",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q39",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q40",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q41",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q42",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q43",
+      "chapter": 18,
+      "lessonId": "c18-s18-3",
+      "lessonTitle": "Soil contamination and remediation",
+      "conceptId": "c18-s18-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q44",
+      "chapter": 18,
+      "lessonId": "c18-s18-3",
+      "lessonTitle": "Soil contamination and remediation",
+      "conceptId": "c18-s18-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q45",
+      "chapter": 18,
+      "lessonId": "c18-s18-4",
+      "lessonTitle": "Waste prevention, recovery and disposal",
+      "conceptId": "c18-s18-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q46",
+      "chapter": 18,
+      "lessonId": "c18-s18-4",
+      "lessonTitle": "Waste prevention, recovery and disposal",
+      "conceptId": "c18-s18-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q47",
+      "chapter": 18,
+      "lessonId": "c18-s18-4",
+      "lessonTitle": "Waste prevention, recovery and disposal",
+      "conceptId": "c18-s18-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D15-Q48",
+      "chapter": 18,
+      "lessonId": "c18-s18-4",
+      "lessonTitle": "Waste prevention, recovery and disposal",
+      "conceptId": "c18-s18-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q35",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q54",
+      "chapter": 18,
+      "lessonId": "c18-s18-2",
+      "lessonTitle": "Municipal wastewater and sludge",
+      "conceptId": "c18-s18-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q55",
+      "chapter": 18,
+      "lessonId": "c18-s18-1",
+      "lessonTitle": "Drinking-water treatment as a multiple-barrier system",
+      "conceptId": "c18-s18-1:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q57",
+      "chapter": 18,
+      "lessonId": "c18-s18-4",
+      "lessonTitle": "Waste prevention, recovery and disposal",
+      "conceptId": "c18-s18-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q13",
+      "chapter": 19,
+      "lessonId": "c19-s19-4",
+      "lessonTitle": "GNSS positioning and integrated applications",
+      "conceptId": "c19-s19-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q15",
+      "chapter": 19,
+      "lessonId": "c19-s19-1",
+      "lessonTitle": "From electromagnetic signals to environmental information",
+      "conceptId": "c19-s19-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q42",
+      "chapter": 19,
+      "lessonId": "c19-s19-3",
+      "lessonTitle": "Geographic data and spatial analysis",
+      "conceptId": "c19-s19-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q58",
+      "chapter": 19,
+      "lessonId": "c19-s19-2",
+      "lessonTitle": "Spectral signatures, indices and measurement resolution",
+      "conceptId": "c19-s19-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q59",
+      "chapter": 19,
+      "lessonId": "c19-s19-3",
+      "lessonTitle": "Geographic data and spatial analysis",
+      "conceptId": "c19-s19-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q99",
+      "chapter": 19,
+      "lessonId": "c19-s19-1",
+      "lessonTitle": "From electromagnetic signals to environmental information",
+      "conceptId": "c19-s19-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q46",
+      "chapter": 20,
+      "lessonId": "c20-s20-3",
+      "lessonTitle": "Conservation and ecosystem services",
+      "conceptId": "c20-s20-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q48",
+      "chapter": 20,
+      "lessonId": "c20-s20-5",
+      "lessonTitle": "Urbanization, footprints and sustainable development",
+      "conceptId": "c20-s20-5:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q60",
+      "chapter": 20,
+      "lessonId": "c20-s20-2",
+      "lessonTitle": "Environmental Impact Assessment",
+      "conceptId": "c20-s20-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q61",
+      "chapter": 21,
+      "lessonId": "c21-s21-3",
+      "lessonTitle": "Proteins, fats and molecular structure",
+      "conceptId": "c21-s21-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q62",
+      "chapter": 21,
+      "lessonId": "c21-s21-3",
+      "lessonTitle": "Proteins, fats and molecular structure",
+      "conceptId": "c21-s21-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q63",
+      "chapter": 21,
+      "lessonId": "c21-s21-4",
+      "lessonTitle": "Enzymes, browning and cooking",
+      "conceptId": "c21-s21-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q64",
+      "chapter": 21,
+      "lessonId": "c21-s21-2",
+      "lessonTitle": "Carbohydrates, fibre and starch behaviour",
+      "conceptId": "c21-s21-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q65",
+      "chapter": 21,
+      "lessonId": "c21-s21-3",
+      "lessonTitle": "Proteins, fats and molecular structure",
+      "conceptId": "c21-s21-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q47",
+      "chapter": 22,
+      "lessonId": "c22-s22-2",
+      "lessonTitle": "Minerals, absorption and bioavailability",
+      "conceptId": "c22-s22-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q66",
+      "chapter": 22,
+      "lessonId": "c22-s22-1",
+      "lessonTitle": "Vitamins and physiological function",
+      "conceptId": "c22-s22-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q67",
+      "chapter": 22,
+      "lessonId": "c22-s22-1",
+      "lessonTitle": "Vitamins and physiological function",
+      "conceptId": "c22-s22-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q68",
+      "chapter": 22,
+      "lessonId": "c22-s22-1",
+      "lessonTitle": "Vitamins and physiological function",
+      "conceptId": "c22-s22-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q69",
+      "chapter": 22,
+      "lessonId": "c22-s22-2",
+      "lessonTitle": "Minerals, absorption and bioavailability",
+      "conceptId": "c22-s22-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q70",
+      "chapter": 22,
+      "lessonId": "c22-s22-2",
+      "lessonTitle": "Minerals, absorption and bioavailability",
+      "conceptId": "c22-s22-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q78",
+      "chapter": 23,
+      "lessonId": "c23-s23-2",
+      "lessonTitle": "Foodborne infection, intoxication and contamination",
+      "conceptId": "c23-s23-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q79",
+      "chapter": 23,
+      "lessonId": "c23-s23-4",
+      "lessonTitle": "HACCP and practical food hygiene",
+      "conceptId": "c23-s23-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q80",
+      "chapter": 23,
+      "lessonId": "c23-s23-5",
+      "lessonTitle": "Food security and Pakistan's food system",
+      "conceptId": "c23-s23-5:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q44",
+      "chapter": 24,
+      "lessonId": "c24-s24-2",
+      "lessonTitle": "Heating, pasteurization and commercial sterility",
+      "conceptId": "c24-s24-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q45",
+      "chapter": 24,
+      "lessonId": "c24-s24-1",
+      "lessonTitle": "Preservation and water activity",
+      "conceptId": "c24-s24-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q46",
+      "chapter": 24,
+      "lessonId": "c24-s24-2",
+      "lessonTitle": "Heating, pasteurization and commercial sterility",
+      "conceptId": "c24-s24-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q71",
+      "chapter": 24,
+      "lessonId": "c24-s24-2",
+      "lessonTitle": "Heating, pasteurization and commercial sterility",
+      "conceptId": "c24-s24-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q72",
+      "chapter": 24,
+      "lessonId": "c24-s24-2",
+      "lessonTitle": "Heating, pasteurization and commercial sterility",
+      "conceptId": "c24-s24-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q73",
+      "chapter": 24,
+      "lessonId": "c24-s24-6",
+      "lessonTitle": "Packaging and integrated preservation",
+      "conceptId": "c24-s24-6:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q74",
+      "chapter": 24,
+      "lessonId": "c24-s24-3",
+      "lessonTitle": "Canning, acidification and process control",
+      "conceptId": "c24-s24-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q75",
+      "chapter": 24,
+      "lessonId": "c24-s24-4",
+      "lessonTitle": "Refrigeration, freezing and cold chains",
+      "conceptId": "c24-s24-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q76",
+      "chapter": 24,
+      "lessonId": "c24-s24-1",
+      "lessonTitle": "Preservation and water activity",
+      "conceptId": "c24-s24-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q77",
+      "chapter": 24,
+      "lessonId": "c24-s24-5",
+      "lessonTitle": "Fermentation, irradiation and other barriers",
+      "conceptId": "c24-s24-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q01",
+      "chapter": 25,
+      "lessonId": "c25-s25-1",
+      "lessonTitle": "A computer as an information-processing system",
+      "conceptId": "c25-s25-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q02",
+      "chapter": 25,
+      "lessonId": "c25-s25-1",
+      "lessonTitle": "A computer as an information-processing system",
+      "conceptId": "c25-s25-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q03",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q04",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q05",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q06",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q07",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q08",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q09",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q10",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q11",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q12",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q13",
+      "chapter": 25,
+      "lessonId": "c25-s25-3",
+      "lessonTitle": "Operating systems, programs and algorithms",
+      "conceptId": "c25-s25-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q14",
+      "chapter": 25,
+      "lessonId": "c25-s25-3",
+      "lessonTitle": "Operating systems, programs and algorithms",
+      "conceptId": "c25-s25-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q15",
+      "chapter": 25,
+      "lessonId": "c25-s25-3",
+      "lessonTitle": "Operating systems, programs and algorithms",
+      "conceptId": "c25-s25-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q16",
+      "chapter": 25,
+      "lessonId": "c25-s25-4",
+      "lessonTitle": "Binary, text, images and storage units",
+      "conceptId": "c25-s25-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q17",
+      "chapter": 25,
+      "lessonId": "c25-s25-4",
+      "lessonTitle": "Binary, text, images and storage units",
+      "conceptId": "c25-s25-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q18",
+      "chapter": 25,
+      "lessonId": "c25-s25-4",
+      "lessonTitle": "Binary, text, images and storage units",
+      "conceptId": "c25-s25-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q19",
+      "chapter": 25,
+      "lessonId": "c25-s25-4",
+      "lessonTitle": "Binary, text, images and storage units",
+      "conceptId": "c25-s25-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q20",
+      "chapter": 25,
+      "lessonId": "c25-s25-3",
+      "lessonTitle": "Operating systems, programs and algorithms",
+      "conceptId": "c25-s25-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q48",
+      "chapter": 25,
+      "lessonId": "c25-s25-5",
+      "lessonTitle": "Application software, business systems and social media",
+      "conceptId": "c25-s25-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q81",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q82",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q83",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q84",
+      "chapter": 25,
+      "lessonId": "c25-s25-2",
+      "lessonTitle": "Processing, memory and storage",
+      "conceptId": "c25-s25-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q85",
+      "chapter": 25,
+      "lessonId": "c25-s25-4",
+      "lessonTitle": "Binary, text, images and storage units",
+      "conceptId": "c25-s25-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q21",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q22",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q23",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q24",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q25",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q26",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q27",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q28",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q01",
+      "chapter": 26,
+      "lessonId": "c26-s26-2",
+      "lessonTitle": "Signals, modulation and communication quality",
+      "conceptId": "c26-s26-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q02",
+      "chapter": 26,
+      "lessonId": "c26-s26-2",
+      "lessonTitle": "Signals, modulation and communication quality",
+      "conceptId": "c26-s26-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q03",
+      "chapter": 26,
+      "lessonId": "c26-s26-5",
+      "lessonTitle": "Optical fibre and radar ranging",
+      "conceptId": "c26-s26-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q04",
+      "chapter": 26,
+      "lessonId": "c26-s26-2",
+      "lessonTitle": "Signals, modulation and communication quality",
+      "conceptId": "c26-s26-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q05",
+      "chapter": 26,
+      "lessonId": "c26-s26-3",
+      "lessonTitle": "Cellular mobile communication",
+      "conceptId": "c26-s26-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q06",
+      "chapter": 26,
+      "lessonId": "c26-s26-3",
+      "lessonTitle": "Cellular mobile communication",
+      "conceptId": "c26-s26-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q07",
+      "chapter": 26,
+      "lessonId": "c26-s26-4",
+      "lessonTitle": "Satellites, orbits and navigation distinctions",
+      "conceptId": "c26-s26-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q08",
+      "chapter": 26,
+      "lessonId": "c26-s26-4",
+      "lessonTitle": "Satellites, orbits and navigation distinctions",
+      "conceptId": "c26-s26-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q09",
+      "chapter": 26,
+      "lessonId": "c26-s26-4",
+      "lessonTitle": "Satellites, orbits and navigation distinctions",
+      "conceptId": "c26-s26-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q10",
+      "chapter": 26,
+      "lessonId": "c26-s26-4",
+      "lessonTitle": "Satellites, orbits and navigation distinctions",
+      "conceptId": "c26-s26-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q11",
+      "chapter": 26,
+      "lessonId": "c26-s26-5",
+      "lessonTitle": "Optical fibre and radar ranging",
+      "conceptId": "c26-s26-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q12",
+      "chapter": 26,
+      "lessonId": "c26-s26-5",
+      "lessonTitle": "Optical fibre and radar ranging",
+      "conceptId": "c26-s26-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q14",
+      "chapter": 26,
+      "lessonId": "c26-s26-5",
+      "lessonTitle": "Optical fibre and radar ranging",
+      "conceptId": "c26-s26-5:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q86",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q87",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q88",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q89",
+      "chapter": 26,
+      "lessonId": "c26-s26-1",
+      "lessonTitle": "Networks and internet operation",
+      "conceptId": "c26-s26-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q29",
+      "chapter": 27,
+      "lessonId": "c27-s27-1",
+      "lessonTitle": "Data organization and transactions",
+      "conceptId": "c27-s27-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q30",
+      "chapter": 27,
+      "lessonId": "c27-s27-1",
+      "lessonTitle": "Data organization and transactions",
+      "conceptId": "c27-s27-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q31",
+      "chapter": 27,
+      "lessonId": "c27-s27-1",
+      "lessonTitle": "Data organization and transactions",
+      "conceptId": "c27-s27-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q32",
+      "chapter": 27,
+      "lessonId": "c27-s27-1",
+      "lessonTitle": "Data organization and transactions",
+      "conceptId": "c27-s27-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q33",
+      "chapter": 27,
+      "lessonId": "c27-s27-1",
+      "lessonTitle": "Data organization and transactions",
+      "conceptId": "c27-s27-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q34",
+      "chapter": 27,
+      "lessonId": "c27-s27-2",
+      "lessonTitle": "Cloud resources and responsibility",
+      "conceptId": "c27-s27-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q35",
+      "chapter": 27,
+      "lessonId": "c27-s27-2",
+      "lessonTitle": "Cloud resources and responsibility",
+      "conceptId": "c27-s27-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q36",
+      "chapter": 27,
+      "lessonId": "c27-s27-2",
+      "lessonTitle": "Cloud resources and responsibility",
+      "conceptId": "c27-s27-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q37",
+      "chapter": 27,
+      "lessonId": "c27-s27-3",
+      "lessonTitle": "Security objectives and common threats",
+      "conceptId": "c27-s27-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q38",
+      "chapter": 27,
+      "lessonId": "c27-s27-3",
+      "lessonTitle": "Security objectives and common threats",
+      "conceptId": "c27-s27-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q39",
+      "chapter": 27,
+      "lessonId": "c27-s27-3",
+      "lessonTitle": "Security objectives and common threats",
+      "conceptId": "c27-s27-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q40",
+      "chapter": 27,
+      "lessonId": "c27-s27-4",
+      "lessonTitle": "Governance and public-service resilience",
+      "conceptId": "c27-s27-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q50",
+      "chapter": 27,
+      "lessonId": "c27-s27-4",
+      "lessonTitle": "Governance and public-service resilience",
+      "conceptId": "c27-s27-4:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q90",
+      "chapter": 27,
+      "lessonId": "c27-s27-1",
+      "lessonTitle": "Data organization and transactions",
+      "conceptId": "c27-s27-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q91",
+      "chapter": 27,
+      "lessonId": "c27-s27-1",
+      "lessonTitle": "Data organization and transactions",
+      "conceptId": "c27-s27-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q92",
+      "chapter": 27,
+      "lessonId": "c27-s27-3",
+      "lessonTitle": "Security objectives and common threats",
+      "conceptId": "c27-s27-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q93",
+      "chapter": 27,
+      "lessonId": "c27-s27-3",
+      "lessonTitle": "Security objectives and common threats",
+      "conceptId": "c27-s27-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q94",
+      "chapter": 27,
+      "lessonId": "c27-s27-3",
+      "lessonTitle": "Security objectives and common threats",
+      "conceptId": "c27-s27-3:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q95",
+      "chapter": 27,
+      "lessonId": "c27-s27-2",
+      "lessonTitle": "Cloud resources and responsibility",
+      "conceptId": "c27-s27-2:core",
+      "syllabusScope": "supporting-parent-topic",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q41",
+      "chapter": 28,
+      "lessonId": "c28-s28-1",
+      "lessonTitle": "Intelligent systems and learning approaches",
+      "conceptId": "c28-s28-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q42",
+      "chapter": 28,
+      "lessonId": "c28-s28-1",
+      "lessonTitle": "Intelligent systems and learning approaches",
+      "conceptId": "c28-s28-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q43",
+      "chapter": 28,
+      "lessonId": "c28-s28-1",
+      "lessonTitle": "Intelligent systems and learning approaches",
+      "conceptId": "c28-s28-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q44",
+      "chapter": 28,
+      "lessonId": "c28-s28-1",
+      "lessonTitle": "Intelligent systems and learning approaches",
+      "conceptId": "c28-s28-1:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q45",
+      "chapter": 28,
+      "lessonId": "c28-s28-2",
+      "lessonTitle": "Training, optimization and evaluation",
+      "conceptId": "c28-s28-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q46",
+      "chapter": 28,
+      "lessonId": "c28-s28-3",
+      "lessonTitle": "Neural networks and language processing",
+      "conceptId": "c28-s28-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q47",
+      "chapter": 28,
+      "lessonId": "c28-s28-3",
+      "lessonTitle": "Neural networks and language processing",
+      "conceptId": "c28-s28-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q48",
+      "chapter": 28,
+      "lessonId": "c28-s28-3",
+      "lessonTitle": "Neural networks and language processing",
+      "conceptId": "c28-s28-3:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D18-Q49",
+      "chapter": 28,
+      "lessonId": "c28-s28-4",
+      "lessonTitle": "Robotics, feedback and responsible applications",
+      "conceptId": "c28-s28-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q49",
+      "chapter": 28,
+      "lessonId": "c28-s28-2",
+      "lessonTitle": "Training, optimization and evaluation",
+      "conceptId": "c28-s28-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D19-Q50",
+      "chapter": 28,
+      "lessonId": "c28-s28-4",
+      "lessonTitle": "Robotics, feedback and responsible applications",
+      "conceptId": "c28-s28-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q96",
+      "chapter": 28,
+      "lessonId": "c28-s28-2",
+      "lessonTitle": "Training, optimization and evaluation",
+      "conceptId": "c28-s28-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q97",
+      "chapter": 28,
+      "lessonId": "c28-s28-2",
+      "lessonTitle": "Training, optimization and evaluation",
+      "conceptId": "c28-s28-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q98",
+      "chapter": 28,
+      "lessonId": "c28-s28-2",
+      "lessonTitle": "Training, optimization and evaluation",
+      "conceptId": "c28-s28-2:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    },
+    {
+      "questionId": "D20-Q100",
+      "chapter": 28,
+      "lessonId": "c28-s28-4",
+      "lessonTitle": "Robotics, feedback and responsible applications",
+      "conceptId": "c28-s28-4:core",
+      "syllabusScope": "direct-candidate",
+      "scientificReview": "unreviewed",
+      "difficulty": "unrated"
+    }
+  ]
+}
