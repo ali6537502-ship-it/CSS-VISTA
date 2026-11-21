@@ -1378,5 +1378,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.arabnews.pk/pakistan/pakistan-says-it-excluded-afghanistan-from-regional-conference-over-taliban-recognition-3007593"
+  },
+  {
+    "id": "current-affairs-20261120-cop31-antalya-overtime",
+    "q": "COP31 climate negotiations entered overtime on 20 November 2026 in which city?",
+    "o": [
+      "Baku",
+      "Antalya",
+      "Belém",
+      "Dubai"
+    ],
+    "a": 1,
+    "e": "COP31 in Antalya, Turkey, exceeded its scheduled conclusion amid disagreements on fossil fuels and adaptation finance.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-climate-talks-spill-into-overtime-nations-quarrel-over-fossil-fuels-2026-11-20/"
+  },
+  {
+    "id": "current-affairs-20261120-turkey-cop31-investment-total",
+    "q": "On 20 November 2026, Turkey reported COP31-linked investment agreements and plans exceeding approximately what value?",
+    "o": [
+      "$6 billion",
+      "$12 billion",
+      "$26 billion",
+      "$60 billion"
+    ],
+    "a": 2,
+    "e": "Reuters reported more than $26 billion in deals and plans; this did not mean all funds had been disbursed.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/sustainability/cop/cop31-delivers-deals-host-turkey-climate-diplomacy-stalls-2026-11-20/"
+  },
+  {
+    "id": "current-affairs-20261120-trilateral-shenzhen",
+    "q": "Which Chinese city hosted the Trump–Xi–Putin trilateral summit on 19 November 2026, assessed by Reuters the next day?",
+    "o": [
+      "Shanghai",
+      "Beijing",
+      "Shenzhen",
+      "Chengdu"
+    ],
+    "a": 2,
+    "e": "The three leaders met in Shenzhen on 19 November; the 20 November analysis noted the symbolic declaration but no announced arms-control talks.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2045885"
   }
 ]
