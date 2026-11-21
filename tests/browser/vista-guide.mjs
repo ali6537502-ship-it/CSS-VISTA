@@ -108,7 +108,9 @@ async function check(width,height,exam) {
     }
     await page.screenshot({path:resolve(root,'test-artifacts/vista/'+exam+'-desktop-schedule.png'),fullPage:true})
   } else {
-    await page.getByRole('button',{name:'View all subjects'}).click()
+    // CSS now shows all subjects by default; PMS still has a selection-first view.
+    const showAll=page.getByRole('button',{name:'View all subjects'})
+    if(await showAll.count())await showAll.click()
     await page.locator('.vg-subjects button').last().waitFor()
     await page.screenshot({path:resolve(root,'test-artifacts/vista/'+exam+'-mobile.png'),fullPage:true})
   }
