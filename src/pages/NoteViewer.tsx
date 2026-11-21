@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import {
-  ArrowLeft, ChevronLeft, ChevronRight, Download, Expand, ExternalLink,
+  ArrowLeft, ChevronLeft, ChevronRight, Expand,
   FileText, Maximize2, MessageCircle, Minimize2, RotateCcw, ZoomIn, ZoomOut,
   RefreshCw,
 } from 'lucide-react'
 import { Badge, EmptyState, PageHeader } from '@/components/shared'
 import { findNoteDocument, notesPurchaseActionLabel } from '@/data/notes'
 import { mentors, waLink } from '@/data/site'
-import { formatFileSize, safeDownloadName } from '@/lib/resourceFiles'
+import { formatFileSize } from '@/lib/resourceFiles'
+import '@/features/notes/readerPresentation.css'
 
 function useDocumentMetadata(title: string | undefined) {
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function NoteViewer() {
   const [documentAvailable, setDocumentAvailable] = useState<boolean | null>(null)
   const [documentRetry, setDocumentRetry] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [fallbackFullscreen, setFallbackFullscreen] = useState(false)
   const viewerRef = useRef<HTMLDivElement>(null)
   useDocumentMetadata(noteDoc?.title)
 
@@ -90,10 +92,28 @@ export default function NoteViewer() {
     return () => window.removeEventListener('keydown', handleKey)
   }, [goToPage, noteDoc, page])
 
+  useEffect(() => {
+    if (!fallbackFullscreen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setFallbackFullscreen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', onKey) }
+  }, [fallbackFullscreen])
+
   async function toggleFullscreen() {
-    if (!viewerRef.current || !document.fullscreenEnabled) return
-    if (document.fullscreenElement) await document.exitFullscreen()
-    else await viewerRef.current.requestFullscreen()
+    if (!viewerRef.current) return
+    if (fallbackFullscreen) { setFallbackFullscreen(false); return }
+    if (!document.fullscreenEnabled || !viewerRef.current.requestFullscreen) {
+      setFallbackFullscreen(true)
+      return
+    }
+    try {
+      if (document.fullscreenElement === viewerRef.current) await document.exitFullscreen()
+      else await viewerRef.current.requestFullscreen()
+    } catch {
+      setFallbackFullscreen(true)
+    }
   }
 
   if (!record || !product || !noteDoc) {
@@ -112,8 +132,6 @@ export default function NoteViewer() {
   const inquiry = waLink(ali.whatsapp, `Assalam-o-Alaikum, I would like to inquire about the ${product.subject} notes available on CSS VISTA. Please share the price and purchase details.`)
   const isCompleteDocument = noteDoc.kind !== 'image-pages'
   const fileTypeLabel = noteDoc.kind === 'pdf' ? 'PDF document' : noteDoc.kind === 'docx' ? 'Word document' : 'Page images'
-  const fileActionLabel = noteDoc.kind === 'pdf' ? 'PDF' : 'document'
-  const downloadName = safeDownloadName(`${product.subject}-${noteDoc.title}`, noteDoc.kind === 'docx' ? 'docx' : 'pdf')
   const officeEmbedUrl = noteDoc.kind === 'docx' && noteDoc.url
     ? `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(new URL(noteDoc.url, 'https://www.css-vista.com').href)}`
     : null
@@ -133,15 +151,11 @@ export default function NoteViewer() {
         <div className="flex flex-wrap items-center gap-2 rounded-xl border bg-white p-3 shadow-sm">
           <Link to="/notes" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ArrowLeft className="h-4 w-4" /> Notes Library</Link>
           <span className="mr-auto text-sm text-muted-foreground">{isCompleteDocument ? 'Complete supplied document' : 'All supplied public pages'} · {noteDoc.pages} pages</span>
-          {isCompleteDocument && noteDoc.url && documentAvailable && <>
-            <a href={noteDoc.url} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ExternalLink className="h-4 w-4" /> Open {fileActionLabel}</a>
-            <a href={noteDoc.url} download={downloadName} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><Download className="h-4 w-4" /> Download {fileActionLabel}</a>
-          </>}
           <a href={inquiry} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-emerald-600 px-3 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
         </div>
 
         {noteDoc.kind === 'image-pages' ? (
-          <section ref={viewerRef} aria-label={`${noteDoc.title} supplied pages viewer`} className="overflow-hidden rounded-xl border bg-slate-900 text-white shadow-lg">
+          <section ref={viewerRef} aria-label={`${noteDoc.title} supplied pages viewer`} className={"cssv-document-viewer overflow-hidden rounded-xl border bg-slate-900 text-white shadow-lg"+(fallbackFullscreen?" cssv-fullscreen-fallback":"")}>
             <div className="flex flex-wrap items-center gap-2 border-b border-white/15 bg-slate-950 px-3 py-2.5">
               <button type="button" onClick={() => goToPage(page - 1)} disabled={page === 1} className="grid h-9 w-9 place-items-center rounded-lg border border-white/20 disabled:opacity-40" aria-label="Previous page"><ChevronLeft className="h-4 w-4" /></button>
               <label className="flex items-center gap-1 text-sm"><span className="sr-only">Current page</span><input type="number" min={1} max={noteDoc.pages} value={page} onChange={(event) => goToPage(Number(event.target.value))} className="h-9 w-16 rounded-lg border border-white/20 bg-white/10 px-2 text-center" /> <span className="text-white/65">of {noteDoc.pages}</span></label>
@@ -153,12 +167,12 @@ export default function NoteViewer() {
               <button type="button" onClick={() => setZoom(100)} className="grid h-9 w-9 place-items-center rounded-lg border border-white/20" aria-label="Reset zoom"><RotateCcw className="h-4 w-4" /></button>
               <button type="button" onClick={() => setZoom(75)} className="hidden h-9 items-center gap-1 rounded-lg border border-white/20 px-3 text-xs font-bold sm:inline-flex"><Expand className="h-4 w-4" /> Fit width</button>
               <button type="button" onClick={() => setZoom(60)} className="hidden h-9 items-center gap-1 rounded-lg border border-white/20 px-3 text-xs font-bold lg:inline-flex">Fit page</button>
-              <button type="button" onClick={toggleFullscreen} className="ml-auto grid h-9 w-9 place-items-center rounded-lg border border-white/20" aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}>{isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}</button>
+              <button type="button" onClick={toggleFullscreen} className="ml-auto grid h-9 w-9 place-items-center rounded-lg border border-white/20" aria-label={isFullscreen || fallbackFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}>{isFullscreen || fallbackFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}</button>
             </div>
             <div data-page-scroller className="h-[72vh] min-h-[520px] overflow-auto overscroll-contain bg-slate-800 px-3 py-5 sm:px-6">
               <div className="mx-auto space-y-5" style={{ width: `${zoom}%`, maxWidth: `${zoom * 10}px` }}>
                 {Array.from({ length: noteDoc.pages }, (_, index) => (
-                  <figure key={index} data-note-page={index + 1} className="scroll-mt-4 overflow-hidden rounded bg-white shadow-2xl">
+                  <figure key={index} data-note-page={index + 1} className="cssv-note-preview-watermark scroll-mt-4 overflow-hidden rounded bg-white shadow-2xl">
                     <img src={`/note-previews/${noteDoc.previewFolder}/page-${index + 1}.webp`} alt={`${noteDoc.title}, page ${index + 1} of ${noteDoc.pages}`} loading={index === 0 ? 'eager' : 'lazy'} draggable={false} className="w-full" />
                     <figcaption className="border-t px-3 py-2 text-right text-[10px] font-bold uppercase tracking-widest text-slate-500">CSS Vista notes · Page {index + 1} of {noteDoc.pages}</figcaption>
                   </figure>
@@ -174,10 +188,19 @@ export default function NoteViewer() {
             <button type="button" onClick={() => setDocumentRetry((value) => value + 1)} className="mt-4 inline-flex h-10 items-center gap-2 rounded-lg border px-4 text-sm font-bold text-pine hover:bg-secondary"><RefreshCw className="h-4 w-4" /> Retry</button>
           </section>
         ) : (
-          <section aria-label={`${noteDoc.title} document viewer`} className="overflow-hidden rounded-xl border bg-white shadow-sm">
+          <section ref={viewerRef} aria-label={`${noteDoc.title} document viewer`} className={"cssv-document-viewer overflow-hidden rounded-xl border bg-white shadow-sm"+(fallbackFullscreen?" cssv-fullscreen-fallback":"")}>
+            <div className="cssv-document-viewer-bar flex items-center justify-between gap-3 border-b px-4 py-2.5">
+              <span className="text-xs font-semibold text-slate-600">Read online · CSS Vista</span>
+              <button type="button" onClick={toggleFullscreen} aria-label={isFullscreen || fallbackFullscreen ? 'Exit fullscreen' : 'Read full screen'} className="inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold text-pine hover:bg-secondary">
+                {isFullscreen || fallbackFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+                {isFullscreen || fallbackFullscreen ? 'Exit full screen' : 'Read full screen'}
+              </button>
+            </div>
             {documentAvailable === null && <p className="p-4 text-sm text-muted-foreground" role="status" aria-live="polite">Verifying the supplied document…</p>}
-            {noteDoc.kind === 'pdf' && noteDoc.url && <iframe src={noteDoc.url} title={`${noteDoc.title}, ${noteDoc.pages}-page PDF`} className="h-[76vh] min-h-[560px] w-full" />}
-            {noteDoc.kind === 'docx' && officeEmbedUrl && <iframe src={officeEmbedUrl} title={`${noteDoc.title}, ${noteDoc.pages}-page Word document`} className="h-[76vh] min-h-[560px] w-full" />}
+            <div className="cssv-embedded-watermark">
+              {noteDoc.kind === 'pdf' && noteDoc.url && <iframe src={noteDoc.url.split('#')[0] + '#toolbar=0&navpanes=0'} title={`${noteDoc.title}, ${noteDoc.pages}-page PDF`} className="h-[76vh] min-h-[560px] w-full" />}
+              {noteDoc.kind === 'docx' && officeEmbedUrl && <iframe src={officeEmbedUrl} title={`${noteDoc.title}, ${noteDoc.pages}-page Word document`} className="h-[76vh] min-h-[560px] w-full" />}
+            </div>
           </section>
         )}
       </main>
