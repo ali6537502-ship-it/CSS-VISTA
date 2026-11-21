@@ -130,6 +130,46 @@ async function check(width,height,exam) {
   await context.close()
 }
 
+async function checkCssOptionalPublicGuide() {
+  const context=await browser.newContext({viewport:{width:1280,height:900}})
+  await context.grantPermissions(['clipboard-read','clipboard-write'],{origin})
+  const page=await context.newPage()
+  const errors=[]
+  page.on('pageerror',error=>errors.push(error.message))
+  try {
+    const overview=await page.goto(origin+'/css-vista',{waitUntil:'domcontentloaded'})
+    assert.equal(overview.status(),200,'CSS Vista public optional directory resolves')
+    await page.getByRole('heading',{name:'All CSS optional subjects'}).waitFor()
+    assert.equal(await page.locator('#css-optional-syllabus article').count(),45,'All 45 optional papers listed')
+    await page.getByRole('link',{name:/Explore topics and copy commands/}).first().waitFor()
+    await page.goto(origin+'/css-vista/syllabus/gender-studies',{waitUntil:'domcontentloaded'})
+    await page.getByRole('heading',{name:/Gender Studies — syllabus and preparation commands/}).waitFor()
+    const first=page.getByRole('button',{name:'Copy study-unit notes command'}).first()
+    await first.click()
+    await page.getByText('Copied. Paste the command into your notes conversation.').first().waitFor()
+    const command=await page.evaluate(()=>navigator.clipboard.readText())
+    assert.match(command,/SUBJECT: Gender Studies/)
+    assert.match(command,/Never invent citations or statistics/)
+    await page.getByRole('button',{name:/Show \d+ original syllabus entries/}).first().click()
+    const sourceEntry=page.getByRole('button',{name:'Copy this source-entry command'}).first()
+    await sourceEntry.click()
+    const focused=await page.evaluate(()=>navigator.clipboard.readText())
+    assert.match(focused,/COMPLETE SECTION TEXT FOR CONTEXT ONLY/)
+    await page.goto(origin+'/css-vista/syllabus/punjabi',{waitUntil:'domcontentloaded'})
+    await page.getByRole('heading',{name:/Official syllabus scans — transcription required/}).waitFor()
+    assert.equal(await page.getByRole('link',{name:/Open scanned page/}).count(),2)
+    assert.equal(await page.getByRole('button',{name:'Copy official-syllabus research command'}).count(),1)
+    await page.setViewportSize({width:375,height:812})
+    await page.goto(origin+'/css-vista/syllabus/political-science',{waitUntil:'domcontentloaded'})
+    await page.getByRole('heading',{name:/Political Science — syllabus and preparation commands/}).waitFor()
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'CSS optional paper accessible on mobile')
+    assert.deepEqual(errors,[],'Public optional study-guide pages have no JS errors')
+    report.results.push({exam:'css',scenario:'45-paper public browser and source copy commands',sample:'Gender Studies, Punjabi, Political Science',mobile:true})
+  } finally {
+    await context.close()
+  }
+}
+
 async function checkLegacyCssScheduleNotes() {
   const source=JSON.parse(readFileSync(resolve(root,'public/fpsc-syllabus.json'),'utf8'))
   const selected=source.subjects.find(subject=>subject.sections.some(section=>section.items.length))
@@ -216,6 +256,7 @@ async function checkCssOptionalPlannerParity() {
 }
 
 try{
+  await checkCssOptionalPublicGuide()
   await checkLegacyCssScheduleNotes()
   await checkCssOptionalPlannerParity()
   await check(1440,900,'pms-punjab')
