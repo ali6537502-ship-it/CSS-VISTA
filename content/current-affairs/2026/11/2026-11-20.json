@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-11-20",
   "published_at": "2026-11-20T19:04:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 20 November 2026 | Preliminary evening coverage (00:00–19:04 PKT)",
+  "edition": "CSS VISTA — Daily Current Affairs | 20 November 2026 | Final full-day coverage (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-20-sco-delhi-malik",
@@ -152,6 +152,122 @@
           "publisher": "Arab News Pakistan",
           "title": "Pakistan says it excluded Afghanistan from regional conference over Taliban recognition",
           "url": "https://www.arabnews.pk/pakistan/pakistan-says-it-excluded-afghanistan-from-regional-conference-over-taliban-recognition-3007593"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-20-cop31-overtime",
+      "category": "World — Climate Diplomacy",
+      "headline": "COP31 enters overtime as fossil-fuel language and adaptation finance remain disputed",
+      "summary": "COP31 negotiations in Antalya ran beyond their scheduled 20 November conclusion without a final consensus; a revised draft omitted fossil-fuel phaseout language and a proposed $120 billion adaptation-finance target.",
+      "what_happened": "Reuters reported that delegates from nearly 200 countries remained divided on whether the final cover decision should refer to fossil fuels and how wealthy states should support adaptation in developing economies. The reported draft was not an adopted agreement.",
+      "background": "UN climate conferences seek consensus among parties with differing energy mixes, development needs and historical emissions responsibilities.",
+      "why_it_matters": "The disagreement affects the credibility of international climate commitments and access to adaptation finance.",
+      "pakistan_perspective": "Pakistan's exposure to floods, heat and other climate risks makes accessible adaptation finance and stronger emissions action consequential for national resilience.",
+      "regional_implications": "Climate-vulnerable South Asian economies face significant adaptation costs while energy-transition policies can affect trade and investment.",
+      "global_implications": "The draft's omissions show the difficulty of securing common commitments on fossil fuels and funding.",
+      "quick_gk": [
+        "COP31 negotiations in Antalya entered overtime on 20 November 2026 without a final agreed climate cover decision."
+      ],
+      "question_angles": [
+        "In which Turkish city did COP31 negotiations enter overtime on 20 November 2026?"
+      ],
+      "countries": [
+        "Turkey"
+      ],
+      "institutions": [
+        "UNFCCC"
+      ],
+      "topics": [
+        "COP31",
+        "Adaptation finance",
+        "Fossil fuels"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "COP31 climate talks spill into overtime as nations quarrel over fossil fuels",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-climate-talks-spill-into-overtime-nations-quarrel-over-fossil-fuels-2026-11-20/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-20-turkey-cop31-investments",
+      "category": "World — Climate Finance and Energy",
+      "headline": "Turkey reports more than $26 billion in COP31-linked investment deals and plans",
+      "summary": "Turkey reported agreements and investment plans worth more than $26 billion during its hosting of COP31, including a preliminary $15 billion renewable-energy deal with China and $5.1 billion in development-bank financing.",
+      "what_happened": "Reuters reported Turkey's announced total on 20 November. The headline amount combined agreements and plans, and the China renewable-energy deal was preliminary, not evidence that the entire sum had been disbursed.",
+      "background": "Hosting international summits can create opportunities for investment announcements alongside formal negotiations.",
+      "why_it_matters": "The announcements demonstrate the investment dimension of climate diplomacy, while requiring careful distinctions among pledges, preliminary agreements and realized funding.",
+      "pakistan_perspective": "Pakistan's clean-energy financing efforts can draw lessons from investment facilitation but should distinguish announced commitments from actual capital flows.",
+      "global_implications": "Climate conference hosts can use diplomatic gatherings to promote energy transition projects even when multilateral negotiations stall.",
+      "quick_gk": [
+        "Turkey reported COP31-related deals and plans worth more than $26 billion on 20 November 2026."
+      ],
+      "question_angles": [
+        "What was the approximate value of COP31-linked investment deals and plans reported by host Turkey on 20 November 2026?"
+      ],
+      "countries": [
+        "Turkey",
+        "China"
+      ],
+      "topics": [
+        "COP31",
+        "Renewable energy investment",
+        "Climate finance"
+      ],
+      "statistics": [
+        {
+          "label": "Reported COP31-related Turkish deals and plans",
+          "value": "More than $26 billion",
+          "source": "Reuters",
+          "date": "2026-11-20"
+        }
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "COP31 delivers deals for host Turkey as climate diplomacy stalls",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-delivers-deals-host-turkey-climate-diplomacy-stalls-2026-11-20/"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-20-trilateral-summit-assessment",
+      "category": "World — Great Power Relations",
+      "headline": "Reuters analysis assesses limits of US–China–Russia summit diplomacy",
+      "summary": "In a 20 November analysis of the previous day's Shenzhen summit, Reuters reported that Donald Trump, Xi Jinping and Vladimir Putin issued a symbolic nuclear-war peace declaration but announced no arms-control talks.",
+      "what_happened": "The leaders met on 19 November on the sidelines of the APEC gathering. Reuters' 20 November assessment distinguished their declaration from substantive progress on arms control and major disputes.",
+      "background": "Nuclear risk reduction and relations among the United States, China and Russia remain central questions in international security.",
+      "why_it_matters": "Symbolic statements can signal a shared principle without resolving the institutional mechanisms needed for verification and arms control.",
+      "pakistan_perspective": "Major-power relations influence strategic stability, global trade and diplomatic space for countries including Pakistan.",
+      "global_implications": "Unresolved differences on Ukraine, Taiwan, Iran and trade constrain the scope of great-power cooperation.",
+      "quick_gk": [
+        "The US–China–Russia summit assessed by Reuters on 20 November took place in Shenzhen, China, on 19 November 2026."
+      ],
+      "question_angles": [
+        "In which Chinese city did the 19 November 2026 Trump–Xi–Putin summit take place?"
+      ],
+      "countries": [
+        "United States",
+        "China",
+        "Russia"
+      ],
+      "topics": [
+        "Great-power relations",
+        "APEC",
+        "Nuclear risk"
+      ],
+      "people": [
+        "Donald Trump",
+        "Xi Jinping",
+        "Vladimir Putin"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters via Dawn",
+          "title": "Trump's personalised diplomacy hits its limits with 3-way summit",
+          "url": "https://www.dawn.com/news/2045885"
         }
       ]
     }
