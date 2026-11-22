@@ -43,7 +43,7 @@ jobs:
       CSSV_MPT_APPLICATION_FLOW: 'on'
       CSSV_MPT_AUTO_SCHEDULE: 'off'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
