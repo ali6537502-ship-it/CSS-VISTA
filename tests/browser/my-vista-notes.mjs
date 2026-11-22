@@ -103,6 +103,36 @@ try{
  await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
  assert.ok([...pages.values()][0].content_html.includes('Drafting an original research outline.'))
  assert.ok(notesWrites>=1,'Autosave must send content to fixture server')
+ // A dedicated button must paste formatted clipboard content at the caret.
+ // Mock browser clipboard instead of reading or modifying a real student's clipboard.
+ await page.evaluate(()=>{
+  Object.defineProperty(navigator,'clipboard',{configurable:true,value:{
+   read:async()=>[{types:['text/html','text/plain'],getType:async type=>new Blob([
+    type==='text/html'?'<h3>Inserted heading</h3><p><strong>Formatted passage</strong> with a table.</p><table><tr><td>Test cell</td></tr></table><script>window.pasteExecuted=true</script>':'Inserted heading - Formatted passage with a table.'
+   ],{type})}]
+  }})
+ })
+ await editor.click()
+ await editor.press('End')
+ await page.getByRole('button',{name:'Paste clipboard into note'}).click()
+ await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
+ assert.ok([...pages.values()][0].content_html.includes('<h3>Inserted heading</h3>'),'Paste button keeps heading formatting')
+ assert.ok([...pages.values()][0].content_html.includes('<strong>Formatted passage</strong>'),'Paste button keeps bold formatting')
+ assert.ok([...pages.values()][0].content_html.includes('<table>'),'Paste button keeps tabular content')
+ assert.ok([...pages.values()][0].content_html.includes('Drafting an original research outline.'),'Pasting does not erase existing notes')
+ assert.ok(![...pages.values()][0].content_html.includes('<script>'),'Pasted HTML must be sanitized')
+ assert.ok(!await page.evaluate(()=>window.pasteExecuted),'Pasted script must never execute')
+ // Ctrl/Command+V uses the same path; text-only paste preserves newline boundaries.
+ await editor.evaluate(node=>{
+  node.focus()
+  const transfer=new DataTransfer()
+  transfer.setData('text/plain','Plain first line\\nPlain second line')
+  node.dispatchEvent(new ClipboardEvent('paste',{bubbles:true,cancelable:true,clipboardData:transfer}))
+ })
+ await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
+ const afterPlain=[...pages.values()][0].content_html
+ assert.ok(afterPlain.includes('Plain first line')&&afterPlain.includes('Plain second line'),'Text-only paste persists both lines')
+ assert.ok(afterPlain.includes('<br>'),'Text-only paste preserves line breaks')
  for(const label of ['Bold','Italic','Underline','Strikethrough','Font size','Font family','Highlight color','Bullet list','Numbered list']){
   assert.ok(await page.getByLabel(label,{exact:true}).count(),'Missing formatting control: '+label)
  }
