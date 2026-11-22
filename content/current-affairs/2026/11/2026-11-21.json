@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-11-21",
-  "published_at": "2026-11-21T18:55:00+05:00",
-  "edition": "CSS VISTA — Daily Current Affairs | 21 November 2026 | Preliminary evening edition (00:00–18:55 PKT)",
+  "published_at": "2026-11-22T07:04:12+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 21 November 2026 | Finalized full-day edition (00:00–23:59 PKT)",
   "stories": [
     {
       "id": "ca-2026-11-21-dar-multilateralism",
@@ -161,6 +161,94 @@
           "publisher": "Dawn",
           "title": "$35bn per year needed for pre-primary education by 2030: Unesco report",
           "url": "https://www.dawn.com/news/2046006"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-21-cop31-fossil-fuel-overtime",
+      "category": "World — Climate Diplomacy",
+      "headline": "COP31 negotiations continue into Saturday over fossil-fuel language and adaptation finance",
+      "summary": "On 21 November, COP31 negotiations in Antalya, Türkiye, continued beyond the scheduled Friday close without a final consensus on language for transitioning away from fossil fuels and financing adaptation in vulnerable countries.",
+      "what_happened": "A coalition of roughly 130 countries pressed for explicit fossil-fuel transition language, while some fossil-fuel-producing countries resisted. Delegations continued negotiating on Saturday; no final COP31 agreement was adopted during the reported Saturday negotiations.",
+      "background": "COP31 is hosted by Türkiye with Australia leading negotiations. The Paris Agreement's temperature goals make the pace of emissions cuts and adaptation funding consequential.",
+      "why_it_matters": "The impasse highlights the challenge of achieving consensus in UN climate diplomacy while balancing fossil-fuel dependence, mitigation and developing-country finance.",
+      "pakistan_perspective": "Pakistan's climate vulnerability makes adaptation finance and stronger mitigation commitments directly relevant to national resilience and international climate negotiations.",
+      "global_implications": "Disagreement over fossil-fuel transition language may affect the ambition of the eventual COP31 outcome.",
+      "key_takeaways": [
+        "COP31 talks in Antalya continued beyond their 20 November scheduled deadline.",
+        "On 21 November, a final consensus text had not yet been adopted."
+      ],
+      "quick_gk": [
+        "COP31 negotiations in Antalya, Türkiye, continued into 21 November 2026 beyond their scheduled Friday deadline."
+      ],
+      "question_angles": [
+        "Which city hosted the COP31 talks that continued into overtime on 21 November 2026?"
+      ],
+      "countries": [
+        "Türkiye",
+        "Australia",
+        "Pakistan"
+      ],
+      "institutions": [
+        "UNFCCC"
+      ],
+      "topics": [
+        "COP31",
+        "Climate finance",
+        "Fossil fuels"
+      ],
+      "sources": [
+        {
+          "publisher": "The Guardian",
+          "title": "Climate talks stall as countries mull showdown with Saudi Arabia over fossil fuel phaseout",
+          "url": "https://www.theguardian.com/environment/2026/nov/21/climate-talks-stall-countries-mull-showdown-saudi-arabia-over-fossil-fuels"
+        },
+        {
+          "publisher": "Financial Times",
+          "title": "Fossil fuel fightback drives COP31 climate talks into overtime",
+          "url": "https://www.ft.com/content/fb459525-6978-40f3-a079-4e59047858bd"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-21-germany-eight-nation-middle-east-talks",
+      "category": "Pakistan — Foreign Policy",
+      "headline": "Dar says Germany has invited eight countries to December talks on Middle East tensions",
+      "summary": "In remarks reported on 21 November, Pakistan's Foreign Minister Ishaq Dar said Germany had invited ministers from four regional and four European countries to talks planned for December concerning Middle East tensions. The discussions were prospective, not a completed diplomatic settlement.",
+      "what_happened": "Dar described Germany's invitation to an eight-country meeting and Pakistan's continuing efforts to encourage US–Iran diplomatic engagement. No outcome of the proposed December meeting was announced.",
+      "background": "Pakistan has sought to facilitate US–Iran de-escalation amid regional security and energy-market concerns.",
+      "why_it_matters": "The prospective format could broaden diplomatic engagement, but participation and outcomes require subsequent confirmation.",
+      "pakistan_perspective": "Pakistan's involvement reflects Islamabad's stated interest in dialogue and de-escalation in the Middle East.",
+      "regional_implications": "A multilateral discussion may provide another channel for reducing regional tensions if it takes place.",
+      "quick_gk": [
+        "On 21 November 2026, Ishaq Dar said Germany had invited ministers from eight countries to planned Middle East talks in December."
+      ],
+      "question_angles": [
+        "Which European country did Ishaq Dar identify as inviting eight countries to planned December Middle East talks?"
+      ],
+      "countries": [
+        "Pakistan",
+        "Germany",
+        "United States",
+        "Iran"
+      ],
+      "people": [
+        "Ishaq Dar"
+      ],
+      "topics": [
+        "Middle East diplomacy",
+        "Pakistan foreign policy"
+      ],
+      "sources": [
+        {
+          "publisher": "Arab News Pakistan",
+          "title": "Pakistan says eight-nation talks on Middle East tensions planned for December",
+          "url": "https://www.arabnews.pk/pakistan/pakistan-says-eight-nation-talks-on-middle-east-tensions-planned-for-december-3007689"
+        },
+        {
+          "publisher": "Radio Pakistan",
+          "title": "Pakistan continues to persuade US, Iran to honour Islamabad MoU: Dar",
+          "url": "https://www.radio.gov.pk/21-11-2026/pakistan-continues-to-persuade-us-iran-to-honour-islamabad-mou-dar"
         }
       ]
     }

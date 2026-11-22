@@ -1483,5 +1483,35 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.dawn.com/news/2046006"
+  },
+  {
+    "id": "current-affairs-20261121-cop31-host-city",
+    "q": "In which city did COP31 climate negotiations continue beyond their scheduled deadline on 21 November 2026?",
+    "o": [
+      "Baku",
+      "Antalya",
+      "Belém",
+      "Bonn"
+    ],
+    "a": 1,
+    "e": "COP31 negotiations continued in Antalya, Türkiye, after the scheduled Friday close.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.theguardian.com/environment/2026/nov/21/climate-talks-stall-countries-mull-showdown-saudi-arabia-over-fossil-fuels"
+  },
+  {
+    "id": "current-affairs-20261121-germany-middle-east-talks",
+    "q": "Which country did Pakistan's foreign minister identify on 21 November 2026 as the inviter of an eight-nation Middle East diplomatic meeting planned for December?",
+    "o": [
+      "France",
+      "Germany",
+      "Italy",
+      "Switzerland"
+    ],
+    "a": 1,
+    "e": "Ishaq Dar said Germany invited ministers from four regional and four European countries to talks planned for December.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.arabnews.pk/pakistan/pakistan-says-eight-nation-talks-on-middle-east-tensions-planned-for-december-3007689"
   }
 ]

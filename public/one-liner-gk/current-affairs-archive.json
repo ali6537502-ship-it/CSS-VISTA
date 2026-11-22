@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 806,
+  "count": 808,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5593,6 +5593,18 @@
     {
       "id": "ca-gk-2026-11-21-unesco-preprimary-financing",
       "text": "A UNESCO–UNICEF–OECD report covered on 21 November 2026 estimated a $35 billion annual pre-primary education financing gap for 2027–2030 in low- and lower-middle-income countries.",
+      "subcategory": "Current Affairs 2026 — 2026-11-21",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-21-cop31-overtime",
+      "text": "COP31 negotiations in Antalya, Türkiye, continued into 21 November 2026 beyond their scheduled Friday deadline.",
+      "subcategory": "Current Affairs 2026 — 2026-11-21",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-21-germany-eight-nation-talks",
+      "text": "On 21 November 2026, Ishaq Dar said Germany had invited ministers from eight countries to planned Middle East talks in December.",
       "subcategory": "Current Affairs 2026 — 2026-11-21",
       "timeSensitive": true
     }

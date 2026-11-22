@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-11-06",
-  "total": 31136,
+  "total": 31139,
   "sourcePagesProcessed": 207,
   "excludedPages": "208-244 (Urdu and English grammar material, outside One-Liner GK scope)",
   "categories": [
@@ -371,16 +371,32 @@
     {
       "slug": "current-affairs-archive",
       "name": "Current Affairs Archive",
-      "count": 806,
-      "timeSensitiveCount": 806,
+      "count": 808,
+      "timeSensitiveCount": 808,
       "subcategories": [
+        {
+          "name": "Current Affairs 2024-25",
+          "count": 250
+        },
+        {
+          "name": "World Affairs 2024-25",
+          "count": 21
+        },
+        {
+          "name": "International Relations",
+          "count": 13
+        },
+        {
+          "name": "Pakistan Affairs 2024-25",
+          "count": 42
+        },
         {
           "name": "Current Affairs",
           "count": 8
         },
         {
-          "name": "Current Affairs 2024-25",
-          "count": 250
+          "name": "Recent Events",
+          "count": 16
         },
         {
           "name": "Current Affairs 2026",
@@ -399,22 +415,6 @@
           "count": 10
         },
         {
-          "name": "International Relations",
-          "count": 13
-        },
-        {
-          "name": "Pakistan Affairs 2024-25",
-          "count": 42
-        },
-        {
-          "name": "Recent Events",
-          "count": 16
-        },
-        {
-          "name": "World Affairs 2024-25",
-          "count": 21
-        },
-        {
           "name": "Current Affairs 2026 — 2026-11-18",
           "count": 7
         },
@@ -428,15 +428,15 @@
         },
         {
           "name": "Current Affairs 2026 — 2026-11-21",
-          "count": 4
+          "count": 6
         }
       ]
     },
     {
       "slug": "pakistan-current-affairs",
       "name": "Pakistan Current Affairs Archive",
-      "count": 310,
-      "timeSensitiveCount": 310,
+      "count": 311,
+      "timeSensitiveCount": 311,
       "subcategories": [
         {
           "name": "Pakistan Affairs 2024-25",
@@ -456,7 +456,7 @@
         },
         {
           "name": "Pakistan Current Affairs 2026 — 2026-11-15",
-          "count": 1
+          "count": 3
         },
         {
           "name": "Current Affairs 2026 — 2026-11-16",
@@ -480,7 +480,7 @@
         },
         {
           "name": "Pakistan Current Affairs 2026 — 2026-11-21",
-          "count": 3
+          "count": 4
         }
       ]
     },

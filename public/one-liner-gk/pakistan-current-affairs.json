@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 310,
+  "count": 311,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2152,6 +2152,12 @@
     {
       "id": "pak-ca-gk-2026-11-21-ecc-sme-export-threshold",
       "text": "An ECC decision reported on 21 November 2026 reduced the SME export threshold under a long-term financing facility from 80% to 50%.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-21",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-21-germany-eight-nation-talks",
+      "text": "On 21 November 2026, Ishaq Dar said Germany had invited ministers from eight countries to planned Middle East talks in December.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-21",
       "timeSensitive": true
     }
