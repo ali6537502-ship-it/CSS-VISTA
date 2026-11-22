@@ -126,7 +126,7 @@ try{
  await editor.evaluate(node=>{
   node.focus()
   const transfer=new DataTransfer()
-  transfer.setData('text/plain','Plain first line\\nPlain second line')
+  transfer.setData('text/plain','Plain first line\nPlain second line')
   node.dispatchEvent(new ClipboardEvent('paste',{bubbles:true,cancelable:true,clipboardData:transfer}))
  })
  await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
