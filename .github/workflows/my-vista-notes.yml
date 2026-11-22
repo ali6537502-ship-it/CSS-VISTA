@@ -59,7 +59,7 @@ jobs:
           CSSV_NOTES_TEST_USER: root
           CSSV_NOTES_TEST_PASSWORD: notes-only-test-password
         run: php tests/notes/integration.php
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
@@ -80,7 +80,7 @@ jobs:
       CSSV_BROWSER_EXECUTABLE: /usr/bin/chromium
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
