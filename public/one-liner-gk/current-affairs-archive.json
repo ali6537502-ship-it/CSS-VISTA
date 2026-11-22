@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 808,
+  "count": 812,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5606,6 +5606,30 @@
       "id": "ca-gk-2026-11-21-germany-eight-nation-talks",
       "text": "On 21 November 2026, Ishaq Dar said Germany had invited ministers from eight countries to planned Middle East talks in December.",
       "subcategory": "Current Affairs 2026 — 2026-11-21",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-22-portugal-fm-visit",
+      "text": "Portugal's foreign minister Paulo Rangel arrived in Islamabad on 22 November 2026 for a two-day official visit.",
+      "subcategory": "Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-22-pakistan-textile-exports",
+      "text": "Pakistan's textile and clothing exports reached US$6.797 billion in July–October FY2027, up 6.35% year on year, according to figures reported on 22 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-22-banking-concentration",
+      "text": "According to SBP quarterly figures reported on 22 November 2026, Pakistan's five largest banks held 57.3% of total banking assets.",
+      "subcategory": "Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-22-cop31-cover-decision-collapse",
+      "text": "COP31 in Antalya concluded on 22 November 2026 without an overarching cover decision after delegations failed to reach consensus.",
+      "subcategory": "Current Affairs 2026 — 2026-11-22",
       "timeSensitive": true
     }
   ]

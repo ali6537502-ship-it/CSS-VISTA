@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "published_at": "2026-11-22T19:02:27+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 22 November 2026 | Preliminary evening edition (00:00–19:02 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-22-portugal-fm-visit",
+      "category": "Pakistan — Foreign Relations",
+      "headline": "Portuguese foreign minister Paulo Rangel arrives in Islamabad for two-day official visit",
+      "summary": "Portugal's Minister of State and Foreign Affairs Paulo Rangel arrived in Islamabad on 22 November for a two-day visit at the invitation of Pakistan's Deputy Prime Minister and Foreign Minister Ishaq Dar. Planned talks include trade, agriculture, energy and migration; outcomes have not yet been announced.",
+      "what_happened": "Radio Pakistan reported Rangel's arrival and reception by Additional Secretary Europe Ayesha Ali. The governments plan bilateral meetings and a business forum; these are scheduled engagements, not completed agreements.",
+      "background": "Pakistan and Portugal established diplomatic relations on 7 November 1949, and marked their 77th anniversary in November 2026.",
+      "why_it_matters": "The visit creates an opportunity to expand economic and diplomatic links between Pakistan and an EU member state.",
+      "pakistan_perspective": "Areas identified for discussion include olive cultivation, renewable energy, maritime connectivity, education and information technology.",
+      "global_implications": "The proposed exchanges may support economic and multilateral cooperation; no investment outcome is confirmed.",
+      "quick_gk": [
+        "Portugal's foreign minister Paulo Rangel arrived in Islamabad on 22 November 2026 for a two-day official visit."
+      ],
+      "question_angles": [
+        "Who was the Portuguese foreign minister visiting Islamabad on 22 November 2026?"
+      ],
+      "countries": [
+        "Pakistan",
+        "Portugal"
+      ],
+      "people": [
+        "Paulo Rangel",
+        "Ishaq Dar",
+        "Ayesha Ali"
+      ],
+      "topics": [
+        "Pakistan–Portugal relations",
+        "Diplomatic visits"
+      ],
+      "sources": [
+        {
+          "publisher": "Radio Pakistan",
+          "title": "Portugal's FM arrives in Pakistan on official visit",
+          "url": "https://radio.gov.pk/22-11-2026/portugals-foreign-affairs-minister-arrives-in-pakistan-on-official-visit"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-22-pakistan-textile-exports",
+      "category": "Pakistan — Economy and Trade",
+      "headline": "New PBS figures show Pakistan textile and clothing exports rose 6.35% in July–October FY2027",
+      "summary": "Data reported on 22 November show textile and clothing export proceeds of US$6.797 billion in July–October FY2027, up 6.35% from US$6.391 billion a year earlier. These are four-month fiscal-year figures, not November-only exports.",
+      "what_happened": "Dawn reported Pakistan Bureau of Statistics data showing growth in garments and knitwear despite input costs and trade disruptions.",
+      "background": "Textiles are a major source of Pakistan's merchandise export earnings and employment.",
+      "why_it_matters": "The figures help assess export performance and the capacity to earn foreign exchange amid higher costs and regional disruptions.",
+      "pakistan_perspective": "Readymade garment export value rose 13.91% during the same period, according to the reported PBS figures.",
+      "quick_gk": [
+        "Pakistan's textile and clothing exports reached US$6.797 billion in July–October FY2027, up 6.35% year on year, according to figures reported on 22 November 2026."
+      ],
+      "question_angles": [
+        "What was the reported value of Pakistan's textile and clothing exports during July–October FY2027?"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Pakistan Bureau of Statistics"
+      ],
+      "topics": [
+        "Textile exports",
+        "Balance of payments",
+        "FY2027"
+      ],
+      "statistics": [
+        {
+          "label": "Textile and clothing exports July–October FY2027",
+          "value": "US$6.797 billion",
+          "source": "Dawn",
+          "date": "2026-11-22"
+        },
+        {
+          "label": "Year-on-year textile and clothing export growth",
+          "value": "6.35%",
+          "source": "Dawn",
+          "date": "2026-11-22"
+        }
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Textile exports rise 6.35pc in July-October",
+          "url": "https://www.dawn.com/news/2046182"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-22-banking-concentration",
+      "category": "Pakistan — Banking and Finance",
+      "headline": "SBP quarterly figures highlight concentration of assets among Pakistan's five largest banks",
+      "summary": "A 22 November report on State Bank of Pakistan quarterly data said the five largest banks held 57.3% of banking-sector assets and 53% of deposits. These concentration figures describe the reported banking-system structure, not a new monetary policy decision.",
+      "what_happened": "Dawn cited the SBP's 'Concentration in the Banking System' data and discussed the sector's significant holdings of government securities.",
+      "background": "Banking concentration and public-debt investment patterns can influence competition, private credit and monetary transmission.",
+      "why_it_matters": "The distribution of deposits and assets is relevant to financial-sector stability, competition and private-sector access to financing.",
+      "pakistan_perspective": "The report identified the five largest banks as accounting for 47.9% of private-sector advances, illustrating the importance of a small number of institutions.",
+      "quick_gk": [
+        "According to SBP quarterly figures reported on 22 November 2026, Pakistan's five largest banks held 57.3% of total banking assets."
+      ],
+      "question_angles": [
+        "What share of banking-sector assets was held by Pakistan's five largest banks in the figures reported on 22 November 2026?"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "State Bank of Pakistan"
+      ],
+      "topics": [
+        "Banking concentration",
+        "Financial stability",
+        "Private-sector credit"
+      ],
+      "statistics": [
+        {
+          "label": "Asset share of five largest banks",
+          "value": "57.3%",
+          "source": "Dawn",
+          "date": "2026-11-22"
+        },
+        {
+          "label": "Deposit share of five largest banks",
+          "value": "53%",
+          "source": "Dawn",
+          "date": "2026-11-22"
+        }
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Five banks dominate financial system",
+          "url": "https://www.dawn.com/news/2046186"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-22-cop31-cover-decision-collapse",
+      "category": "World — Climate Diplomacy",
+      "headline": "COP31 in Antalya ends without overarching cover decision after fossil-fuel and finance dispute",
+      "summary": "On 22 November, COP31 negotiators in Antalya failed to adopt an overarching political agreement after extended talks. Disagreements over fossil-fuel language and climate finance prevented consensus, although some narrower decisions and initiatives advanced.",
+      "what_happened": "AP and Reuters reported that the proposed cover decision failed to secure consensus. EU members and other delegations objected to the treatment of fossil fuels, while producer states disputed stronger transition language. This is distinct from the 21 November overtime negotiations.",
+      "background": "UN climate negotiations operate by consensus. COP31 was hosted by Türkiye with Australia leading negotiations.",
+      "why_it_matters": "Failure to agree on a summit-wide political text exposes divisions over mitigation, adaptation finance and implementation of the Paris Agreement.",
+      "pakistan_perspective": "Pakistan's climate vulnerability makes predictable adaptation finance and effective emissions-reduction commitments important national interests.",
+      "regional_implications": "The outcome underscores tensions between energy-exporting economies and climate-vulnerable countries.",
+      "global_implications": "The failure of the cover decision does not mean every technical or sectoral COP31 outcome failed; negotiations yielded narrower measures.",
+      "key_takeaways": [
+        "COP31's proposed overarching cover decision was not adopted on 22 November 2026.",
+        "Fossil-fuel transition language and climate finance were central areas of disagreement."
+      ],
+      "quick_gk": [
+        "COP31 in Antalya concluded on 22 November 2026 without an overarching cover decision after delegations failed to reach consensus."
+      ],
+      "question_angles": [
+        "What central outcome failed to secure consensus at COP31 on 22 November 2026?"
+      ],
+      "countries": [
+        "Türkiye",
+        "Australia",
+        "Pakistan"
+      ],
+      "institutions": [
+        "UNFCCC"
+      ],
+      "topics": [
+        "COP31",
+        "Climate finance",
+        "Fossil-fuel transition",
+        "Paris Agreement"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "UN climate talks break down without an overarching agreement",
+          "url": "https://apnews.com/article/f6e36c4caf13ec6fed57c9f077cbd067"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "Countries react as COP31 climate talks collapse",
+          "url": "https://www.reuters.com/sustainability/cop/cop31-climate-deal-balance-after-fractious-talks-2026-11-22/"
+        }
+      ]
+    }
+  ]
+}

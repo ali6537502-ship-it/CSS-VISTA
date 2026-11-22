@@ -1513,5 +1513,65 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.arabnews.pk/pakistan/pakistan-says-eight-nation-talks-on-middle-east-tensions-planned-for-december-3007689"
+  },
+  {
+    "id": "current-affairs-20261122-portugal-foreign-minister",
+    "q": "Which Portuguese foreign minister arrived in Islamabad on 22 November 2026 for a two-day official visit?",
+    "o": [
+      "João Gomes Cravinho",
+      "Paulo Rangel",
+      "António Costa",
+      "Augusto Santos Silva"
+    ],
+    "a": 1,
+    "e": "Radio Pakistan identified Paulo Rangel as the visiting Portuguese Minister of State and Foreign Affairs.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://radio.gov.pk/22-11-2026/portugals-foreign-affairs-minister-arrives-in-pakistan-on-official-visit"
+  },
+  {
+    "id": "current-affairs-20261122-textile-exports-value",
+    "q": "According to figures reported on 22 November 2026, Pakistan's textile and clothing exports in July–October FY2027 totalled approximately:",
+    "o": [
+      "US$5.391 billion",
+      "US$6.391 billion",
+      "US$6.797 billion",
+      "US$7.697 billion"
+    ],
+    "a": 2,
+    "e": "PBS figures cited by Dawn placed exports at US$6.797 billion, compared with US$6.391 billion a year earlier.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046182"
+  },
+  {
+    "id": "current-affairs-20261122-top-five-bank-assets",
+    "q": "What share of Pakistan's total banking-sector assets did the five largest banks hold in SBP data reported on 22 November 2026?",
+    "o": [
+      "47.9%",
+      "53.0%",
+      "57.3%",
+      "63.7%"
+    ],
+    "a": 2,
+    "e": "The five largest banks accounted for 57.3% of total banking assets; 53% was their share of deposits.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046186"
+  },
+  {
+    "id": "current-affairs-20261122-cop31-cover-decision",
+    "q": "Which proposed COP31 outcome failed to gain consensus in Antalya on 22 November 2026?",
+    "o": [
+      "The summit's overarching cover decision",
+      "The original 2015 Paris Agreement",
+      "The UNFCCC founding convention",
+      "The 1997 Kyoto Protocol"
+    ],
+    "a": 0,
+    "e": "Delegates failed to agree on the summit's overarching cover decision, although some narrower outcomes were adopted.",
+    "s": "Current Affairs - November 2026",
+    "d": "Advanced",
+    "sourceUrl": "https://apnews.com/article/f6e36c4caf13ec6fed57c9f077cbd067"
   }
 ]

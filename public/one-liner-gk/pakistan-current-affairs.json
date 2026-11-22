@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 311,
+  "count": 314,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2159,6 +2159,24 @@
       "id": "pak-ca-gk-2026-11-21-germany-eight-nation-talks",
       "text": "On 21 November 2026, Ishaq Dar said Germany had invited ministers from eight countries to planned Middle East talks in December.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-21",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-22-portugal-fm-visit",
+      "text": "Portugal's foreign minister Paulo Rangel arrived in Islamabad on 22 November 2026 for a two-day official visit.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-22-pakistan-textile-exports",
+      "text": "Pakistan's textile and clothing exports reached US$6.797 billion in July–October FY2027, up 6.35% year on year, according to figures reported on 22 November 2026.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-22-banking-concentration",
+      "text": "According to SBP quarterly figures reported on 22 November 2026, Pakistan's five largest banks held 57.3% of total banking assets.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-22",
       "timeSensitive": true
     }
   ]
