@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent, type
 import { useAccount } from '@/lib/accountContext'
 import { useSearchParams } from 'react-router'
 import { HostingerApiError } from '@/lib/hostingerApi'
-import { Bold, Italic, Underline, Strikethrough, Highlighter, List, ListOrdered, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Quote, Undo2, Redo2, Plus, FolderPlus, Folder, FolderOpen, FileText, Pin, PinOff, Trash2, RotateCcw, Search, Cloud, CloudOff, CheckCircle2, RefreshCw, ChevronLeft, ChevronRight, History, Maximize2, Minimize2, Table2, Superscript, Subscript, AlertTriangle, Pencil, X } from 'lucide-react'
+import { Bold, Italic, Underline, Strikethrough, Highlighter, List, ListOrdered, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Quote, ClipboardPaste, Undo2, Redo2, Plus, FolderPlus, Folder, FolderOpen, FileText, Pin, PinOff, Trash2, RotateCcw, Search, Cloud, CloudOff, CheckCircle2, RefreshCw, ChevronLeft, ChevronRight, History, Maximize2, Minimize2, Table2, Superscript, Subscript, AlertTriangle, Pencil, X } from 'lucide-react'
 import {
   noteBytes, notesRequest, notesWrite, sanitizeNoteHtml,
   readLocalDraft, writeLocalDraft, clearLocalDraft, PAGE_BYTES,
@@ -316,15 +316,91 @@ export default function MyVistaNotes() {
     document.execCommand(command,false,value)
     keepSelection();markChanged()
   }
-  function paste(event:ClipboardEvent<HTMLDivElement>){
-    event.preventDefault()
-    const html=event.clipboardData.getData('text/html')
-    const plain=event.clipboardData.getData('text/plain')
-    if(html){
-      const clean=sanitizeNoteHtml(html)
-      document.execCommand('insertHTML',false,clean)
-    }else document.execCommand('insertText',false,plain)
+  // Both the Paste button and keyboard paste use one safe insertion path.
+  // Restore the last editor caret when clicking a toolbar button moves focus.
+  function editorRange(editor:HTMLDivElement):Range{
+    const selection=window.getSelection()
+    const live=selection?.rangeCount?selection.getRangeAt(0):null
+    const saved=rangeRef.current
+    const valid=(range:Range|null)=>!!range&&editor.contains(range.commonAncestorContainer)
+    const range=valid(live)?live!.cloneRange():valid(saved)?saved!.cloneRange():document.createRange()
+    if(!valid(live)&&!valid(saved)){range.selectNodeContents(editor);range.collapse(false)}
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+    return range
+  }
+  function insertClipboardContent(html:string,plain:string):boolean{
+    const editor=editorRef.current
+    if(!editor||!editor.isContentEditable||!pageRef.current||readingMode||loadingPage||busy||documentData?.note.deleted_at)return false
+    let clean=html?sanitizeNoteHtml(html):''
+    if(!clean.trim()&&plain){
+      // Preserve line breaks and special characters without interpreting copied text as HTML.
+      const escaped=document.createElement('div')
+      escaped.textContent=plain
+      clean=escaped.innerHTML.replace(/\r\n?|\n/g,'<br>')
+    }
+    if(!clean.trim())return false
+    editor.focus()
+    const range=editorRange(editor)
+    const before=editor.innerHTML
+    let inserted=false
+    try{inserted=document.execCommand('insertHTML',false,clean)&&editor.innerHTML!==before}catch{/* Use DOM range insertion below. */}
+    if(!inserted){
+      // Some browsers silently ignore execCommand or return false for rich clipboard data.
+      const fragment=range.createContextualFragment(clean)
+      const last=fragment.lastChild
+      range.deleteContents()
+      range.insertNode(fragment)
+      if(last){range.setStartAfter(last);range.collapse(true)}
+      const selection=window.getSelection()
+      selection?.removeAllRanges();selection?.addRange(range)
+    }
+    keepSelection()
     markChanged()
+    return true
+  }
+  function paste(event:ClipboardEvent<HTMLDivElement>){
+    if(!editorRef.current?.isContentEditable)return
+    event.preventDefault()
+    if(!insertClipboardContent(event.clipboardData.getData('text/html'),event.clipboardData.getData('text/plain'))){
+      setError('Nothing readable was found on the clipboard. Copy some text and try again.')
+    }
+  }
+  async function pasteFromClipboard(){
+    if(!editorRef.current?.isContentEditable||!pageRef.current)return
+    setError('')
+    if(!navigator.clipboard){
+      setError('Clipboard access is unavailable here. Click inside the note and use Ctrl+V (Windows) or Command+V (Mac).')
+      editorRef.current.focus()
+      return
+    }
+    try{
+      let html='',plain=''
+      if(typeof navigator.clipboard.read==='function'){
+        try{
+          const items=await navigator.clipboard.read()
+          for(const item of items){
+            if(!html&&item.types.includes('text/html'))html=await(await item.getType('text/html')).text()
+            if(!plain&&item.types.includes('text/plain'))plain=await(await item.getType('text/plain')).text()
+          }
+        }catch(error){
+          if(typeof navigator.clipboard.readText!=='function')throw error
+          plain=await navigator.clipboard.readText()
+        }
+      }else if(typeof navigator.clipboard.readText==='function'){
+        plain=await navigator.clipboard.readText()
+      }
+      if(!html&&!plain){
+        setError('Clipboard is empty or contains no supported text. Copy the note content first.')
+      }else if(insertClipboardContent(html,plain)){
+        setMessage('Pasted into this page. Changes are being saved to your account.')
+      }else{
+        setError('Could not insert into this page. Open an editable note and try again.')
+      }
+    }catch{
+      setError('Your browser blocked clipboard access. Allow clipboard permission, or click in the note and use Ctrl+V (Windows) / Command+V (Mac).')
+      editorRef.current?.focus()
+    }
   }
   async function mutation(body:Record<string,unknown>,onSuccess?:()=>void){
     setBusy(true);setError('')
@@ -488,6 +564,7 @@ export default function MyVistaNotes() {
           <div className="notes-document-location"><label>Folder <select aria-label="Move note to folder" value={documentData.note.folder_id??''} disabled={busy||!!documentData.note.deleted_at} onChange={e=>void mutation({action:'note_update',id:selectedNote,folder_id:e.target.value||null},()=>setDocumentData(current=>current?{...current,note:{...current.note,folder_id:e.target.value||null}}:current))}><option value="">Root</option>{folders.filter(f=>!f.deleted_at&&folderIsVisible(f.id)).map(f=><option value={f.id} key={f.id}>{'— '.repeat(Math.max(0,f.depth-1))+f.name}</option>)}</select></label>
             <small>{documentData.pages.length} {documentData.pages.length===1?'page':'pages'}</small></div>
           <div className="notes-toolbar" role="toolbar" aria-label="Text formatting">
+            <button type="button" className="notes-paste-button" aria-label="Paste clipboard into note" title="Paste copied text at the cursor" onMouseDown={event=>event.preventDefault()} onClick={()=>void pasteFromClipboard()} disabled={readingMode||loadingPage||busy||!selectedPage||!!documentData.note.deleted_at}><ClipboardPaste size={16}/> Paste</button>
             <ToolbarButton label="Bold" command="bold"><Bold size={17}/></ToolbarButton>
             <ToolbarButton label="Italic" command="italic"><Italic size={17}/></ToolbarButton>
             <ToolbarButton label="Underline" command="underline"><Underline size={17}/></ToolbarButton>
