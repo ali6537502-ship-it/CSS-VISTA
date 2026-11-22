@@ -57,6 +57,10 @@
 .notes-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:3px;padding:9px 11px;border-top:1px solid var(--notes-border);border-bottom:1px solid var(--notes-border);background:#fbfdfb}
 .notes-tool{height:30px;min-width:29px;display:grid;place-items:center;border-radius:6px;color:#3a604d;font-size:13px}
 .notes-tool:hover{background:#e8f1ea}
+.notes-paste-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:5px 12px;margin-right:7px;border:1px solid #a8c6b1;border-radius:8px;background:#eaf3ed;color:#155c3d;font-size:12px;font-weight:700;white-space:nowrap}
+.notes-paste-button:hover:not(:disabled){background:#d7eadb;border-color:#7fa68b}
+.notes-paste-button:focus-visible{outline:2px solid #155c3d;outline-offset:2px}
+.notes-paste-button:disabled{opacity:.45;cursor:not-allowed}
 .notes-select-tool{display:inline-flex;align-items:center;gap:4px;margin:0 3px;color:#52705d;font-size:10px}
 .notes-select-tool select{font-size:10px;padding:4px 3px;border:1px solid #e2e9e2;border-radius:6px;background:#fff}
 .notes-color-tool{display:inline-flex;align-items:center;gap:4px;color:#3a604d;font-size:10px;padding:0 5px}
