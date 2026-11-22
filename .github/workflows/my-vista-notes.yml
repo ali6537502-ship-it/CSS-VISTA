@@ -1,5 +1,11 @@
 name: My VISTA Notes — integrity and privacy
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/features/notes/**'
+      - 'tests/browser/my-vista-notes.mjs'
+      - '.github/workflows/my-vista-notes.yml'
   pull_request:
     paths:
       - 'src/features/notes/**'
