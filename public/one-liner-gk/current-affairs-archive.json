@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 812,
+  "count": 815,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5629,6 +5629,24 @@
     {
       "id": "ca-gk-2026-11-22-cop31-cover-decision-collapse",
       "text": "COP31 in Antalya concluded on 22 November 2026 without an overarching cover decision after delegations failed to reach consensus.",
+      "subcategory": "Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-22-oman-pso-credit",
+      "text": "Oman's OQ Trading agreed to extend a US$200 million petroleum-purchase credit line to Pakistan State Oil under an agreement signed on 22 November 2026.",
+      "subcategory": "Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-22-iaea-nssc-islamabad",
+      "text": "Pakistan announced that Islamabad would host the NSSC Network's 15th annual meeting on 23–26 November 2026 in cooperation with the IAEA.",
+      "subcategory": "Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-22-ibcc-online-attestation",
+      "text": "IBCC announced on 22 November 2026 that its fully online attestation service was planned to begin on 1 January 2027.",
       "subcategory": "Current Affairs 2026 — 2026-11-22",
       "timeSensitive": true
     }
