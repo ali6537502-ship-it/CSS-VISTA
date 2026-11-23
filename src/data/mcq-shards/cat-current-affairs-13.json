@@ -1573,5 +1573,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Advanced",
     "sourceUrl": "https://apnews.com/article/f6e36c4caf13ec6fed57c9f077cbd067"
+  },
+  {
+    "id": "current-affairs-20261122-oman-oq-trading-pso",
+    "q": "Which Omani company signed a petroleum products supply agreement with Pakistan State Oil on 22 November 2026?",
+    "o": [
+      "OQ Trading",
+      "Oman LNG",
+      "Petroleum Development Oman",
+      "Oman Oil Marketing Company"
+    ],
+    "a": 0,
+    "e": "OQ Trading signed the supply arrangement and agreed to a US$200 million credit line for PSO.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046330/oman-petroleum-products-200m-credit-to-pso-new-agreement"
+  },
+  {
+    "id": "current-affairs-20261122-nssc-iaea-network",
+    "q": "Which international agency is collaborating with Pakistan on the NSSC Network meeting announced for Islamabad on 23–26 November 2026?",
+    "o": [
+      "International Atomic Energy Agency",
+      "World Health Organization",
+      "International Maritime Organization",
+      "World Meteorological Organization"
+    ],
+    "a": 0,
+    "e": "Pakistan's Foreign Office announced the meeting in collaboration with the IAEA; the event was scheduled for 23–26 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046329/pakistan-to-host-annual-meeting-of-iaea-nuclear-security-network-from-nov-23-26"
+  },
+  {
+    "id": "current-affairs-20261122-ibcc-digital-launch",
+    "q": "On what date did IBCC plan to launch fully online certificate attestation, according to its announcement on 22 November 2026?",
+    "o": [
+      "1 December 2026",
+      "1 January 2027",
+      "1 March 2027",
+      "1 July 2027"
+    ],
+    "a": 1,
+    "e": "IBCC announced a planned launch on 1 January 2027; it had not launched on 22 November.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046341/ibcc-plans-fully-online-attestation-from-jan-1-ending-office-visits-and-courier-submissions"
   }
 ]
