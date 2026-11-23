@@ -115,8 +115,20 @@ try{
  await editor.click()
  await editor.press('End')
  await page.getByRole('button',{name:'Paste clipboard into note'}).click()
+ // The previous "Saved" label can still be visible briefly after a click; wait for
+ // the fixture cloud save, not for stale UI text from before pasting.
+ const savedHeading=async()=>{
+  const started=Date.now()
+  while(Date.now()-started<15000){
+   const html=[...pages.values()][0]?.content_html||''
+   if(html.includes('Inserted heading'))return html
+   await new Promise(resolve=>setTimeout(resolve,100))
+  }
+  throw new Error('Paste did not reach account storage; editor HTML: '+await editor.innerHTML())
+ }
+ const richPasteHtml=await savedHeading()
  await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
- assert.ok([...pages.values()][0].content_html.includes('<h3>Inserted heading</h3>'),'Paste button keeps heading formatting')
+ assert.ok(richPasteHtml.includes('<h3>Inserted heading</h3>'),'Paste button keeps heading formatting: '+richPasteHtml.slice(-1000))
  assert.ok([...pages.values()][0].content_html.includes('<strong>Formatted passage</strong>'),'Paste button keeps bold formatting')
  assert.ok([...pages.values()][0].content_html.includes('<table>'),'Paste button keeps tabular content')
  assert.ok([...pages.values()][0].content_html.includes('Drafting an original research outline.'),'Pasting does not erase existing notes')
@@ -129,6 +141,8 @@ try{
   transfer.setData('text/plain','Plain first line\nPlain second line')
   node.dispatchEvent(new ClipboardEvent('paste',{bubbles:true,cancelable:true,clipboardData:transfer}))
  })
+ const startedPlain=Date.now()
+ while(![...pages.values()][0].content_html.includes('Plain second line')&&Date.now()-startedPlain<15000)await new Promise(resolve=>setTimeout(resolve,100))
  await page.getByText('Saved to account',{exact:true}).waitFor({timeout:15000})
  const afterPlain=[...pages.values()][0].content_html
  assert.ok(afterPlain.includes('Plain first line')&&afterPlain.includes('Plain second line'),'Text-only paste persists both lines')
