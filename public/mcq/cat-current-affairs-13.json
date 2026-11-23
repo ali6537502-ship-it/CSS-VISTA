@@ -1618,5 +1618,50 @@
     "s": "Current Affairs - November 2026",
     "d": "Intermediate",
     "sourceUrl": "https://www.dawn.com/news/2046341/ibcc-plans-fully-online-attestation-from-jan-1-ending-office-visits-and-courier-submissions"
+  },
+  {
+    "id": "current-affairs-20261123-provincial-boundaries-article239",
+    "q": "Under Article 239(4) of Pakistan's Constitution, an amendment altering a province's limits requires approval by what proportion of the concerned provincial assembly's total membership?",
+    "o": [
+      "Simple majority",
+      "Two-thirds majority",
+      "Three-fourths majority",
+      "Unanimous approval"
+    ],
+    "a": 1,
+    "e": "Article 239(4) specifies a majority of not less than two-thirds of the total membership of the provincial assembly concerned.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046401/rifts-grow-as-naqvi-fires-warning-shot-at-cabinet-colleague"
+  },
+  {
+    "id": "current-affairs-20261123-kp-fiscal-transfers",
+    "q": "According to Dawn's 23 November 2026 report, what was KP's estimated annual contribution under its federal-provincial fiscal memorandum?",
+    "o": [
+      "Rs95 billion",
+      "Rs157 billion",
+      "Rs160 billion",
+      "Rs300 billion"
+    ],
+    "a": 1,
+    "e": "The report distinguishes the Rs157 billion estimated annual contribution from the separately announced Rs160 billion package.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2046398"
+  },
+  {
+    "id": "current-affairs-20261123-australia-ai-foreign-policy",
+    "q": "Which Australian foreign minister was reported on 23 November 2026 as preparing to make AI a central foreign-policy concern?",
+    "o": [
+      "Julie Bishop",
+      "Penny Wong",
+      "Marise Payne",
+      "Tanya Plibersek"
+    ],
+    "a": 1,
+    "e": "Reuters identified Foreign Minister Penny Wong as the official expected to deliver the address.",
+    "s": "Current Affairs - November 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/australia-treat-ai-key-foreign-policy-challenge-2026-11-23/"
   }
 ]

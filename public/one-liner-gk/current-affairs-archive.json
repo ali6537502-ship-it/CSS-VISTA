@@ -1,7 +1,7 @@
 {
   "slug": "current-affairs-archive",
   "name": "Current Affairs Archive",
-  "count": 815,
+  "count": 818,
   "notes": [
     {
       "id": "current-affairs-archive-1",
@@ -5648,6 +5648,24 @@
       "id": "ca-gk-2026-11-22-ibcc-online-attestation",
       "text": "IBCC announced on 22 November 2026 that its fully online attestation service was planned to begin on 1 January 2027.",
       "subcategory": "Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-23-provincial-boundaries-article239",
+      "text": "Article 239(4) of Pakistan's Constitution requires a two-thirds majority of the concerned provincial assembly for an amendment altering its limits.",
+      "subcategory": "Current Affairs 2026 — 2026-11-23",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-23-kp-fiscal-transfers",
+      "text": "A 23 November 2026 Dawn report put KP's estimated annual contribution under a federal-provincial memorandum at Rs157 billion.",
+      "subcategory": "Current Affairs 2026 — 2026-11-23",
+      "timeSensitive": true
+    },
+    {
+      "id": "ca-gk-2026-11-23-australia-ai-foreign-policy",
+      "text": "Australia's foreign minister identified in Reuters' 23 November 2026 AI foreign-policy report was Penny Wong.",
+      "subcategory": "Current Affairs 2026 — 2026-11-23",
       "timeSensitive": true
     }
   ]

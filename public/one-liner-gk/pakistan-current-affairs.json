@@ -1,7 +1,7 @@
 {
   "slug": "pakistan-current-affairs",
   "name": "Pakistan Current Affairs Archive",
-  "count": 317,
+  "count": 319,
   "notes": [
     {
       "id": "pakistan-current-affairs-1",
@@ -2195,6 +2195,18 @@
       "id": "pak-ca-gk-2026-11-22-ibcc-online-attestation",
       "text": "IBCC announced on 22 November 2026 that its fully online attestation service was planned to begin on 1 January 2027.",
       "subcategory": "Pakistan Current Affairs 2026 — 2026-11-22",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-23-provincial-boundaries-article239",
+      "text": "Article 239(4) of Pakistan's Constitution requires a two-thirds majority of the concerned provincial assembly for an amendment altering its limits.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-23",
+      "timeSensitive": true
+    },
+    {
+      "id": "pak-ca-gk-2026-11-23-kp-fiscal-transfers",
+      "text": "A 23 November 2026 Dawn report put KP's estimated annual contribution under a federal-provincial memorandum at Rs157 billion.",
+      "subcategory": "Pakistan Current Affairs 2026 — 2026-11-23",
       "timeSensitive": true
     }
   ]

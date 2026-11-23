@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "published_at": "2026-11-23T18:58:19+05:00",
+  "edition": "CSS VISTA — Daily Current Affairs | 23 November 2026 | Preliminary evening edition (00:00–18:58 PKT)",
+  "stories": [
+    {
+      "id": "ca-2026-11-23-provincial-boundaries-article239",
+      "category": "Pakistan — Constitution and Governance",
+      "headline": "Debate over new provinces highlights Article 239(4) constitutional requirement",
+      "summary": "On 23 November, Defence Minister Khawaja Asif discussed the possibility of a referendum on new provinces, while former Senate chairman Raza Rabbani argued that a referendum cannot replace the Constitution's procedure for altering provincial boundaries. No referendum was announced or held.",
+      "what_happened": "Dawn reported Asif's comments on an expected political discussion and Rabbani's objection based on Article 239(4). Their statements are positions in a live debate, not a passed constitutional amendment.",
+      "background": "Article 239(4) requires a constitutional amendment affecting provincial limits to obtain approval by not less than two-thirds of the total membership of the concerned provincial assembly.",
+      "why_it_matters": "The debate tests the distinction between political consultation and the binding constitutional amendment procedure in Pakistan's federal system.",
+      "pakistan_perspective": "Any proposal to alter provincial boundaries must meet constitutional requirements; political statements alone do not change provincial limits.",
+      "quick_gk": [
+        "Article 239(4) of Pakistan's Constitution requires a two-thirds majority of the concerned provincial assembly for an amendment altering its limits."
+      ],
+      "question_angles": [
+        "Under Article 239(4) of Pakistan's Constitution, an amendment altering a province's limits requires approval by what proportion of the concerned provincial assembly's total membership?"
+      ],
+      "topics": [
+        "Article 239(4)",
+        "Federalism",
+        "Constitutional amendment"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Rifts grow as Naqvi fires warning shot at ‘cabinet colleague’",
+          "url": "https://www.dawn.com/news/2046401/rifts-grow-as-naqvi-fires-warning-shot-at-cabinet-colleague"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-23-kp-fiscal-transfers",
+      "category": "Pakistan — Fiscal Federalism",
+      "headline": "23 November reporting examines KP's Rs157 billion annual federal contribution and unresolved fiscal transfers",
+      "summary": "A Dawn investigation published on 23 November reported that Khyber Pakhtunkhwa's interim administration had agreed to an estimated Rs157 billion annual contribution to federal initiatives, while questions remained about the implementation of a separately announced Rs160 billion package for the province.",
+      "what_happened": "The report described an intergovernmental memorandum and cited Rs17.7 billion already deducted from KP's NFC share during July–October 2026. The reported commitments and deductions must not be confused with disbursement of the announced provincial package.",
+      "background": "Pakistan's National Finance Commission framework governs key federal-provincial fiscal transfers. Funding arrangements for merged districts remain a policy issue.",
+      "why_it_matters": "Intergovernmental contributions, transfers and uncertainty over financing affect service delivery and fiscal accountability.",
+      "pakistan_perspective": "The report identified unresolved questions about financing the merged districts and allocation of resources between provincial administrative structures.",
+      "quick_gk": [
+        "A 23 November 2026 Dawn report put KP's estimated annual contribution under a federal-provincial memorandum at Rs157 billion."
+      ],
+      "question_angles": [
+        "According to Dawn's 23 November 2026 report, what was KP's estimated annual contribution under its federal-provincial fiscal memorandum?"
+      ],
+      "topics": [
+        "National Finance Commission",
+        "Fiscal federalism",
+        "Khyber Pakhtunkhwa"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "A lopsided arrangement for KP?",
+          "url": "https://www.dawn.com/news/2046398"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-11-23-australia-ai-foreign-policy",
+      "category": "World — Technology and Diplomacy",
+      "headline": "Australia signals artificial intelligence as a central foreign-policy and security concern",
+      "summary": "Reuters reported on 23 November that Australian Foreign Minister Penny Wong was expected to present artificial intelligence as a central foreign-policy challenge, citing economic competition, security and risks of foreign interference. The speech was described as forthcoming; the report does not establish that every proposed measure had already taken effect.",
+      "what_happened": "The Reuters report outlined an anticipated parliamentary address and Australia's effort to shape international AI safety cooperation.",
+      "background": "Rapid advances in frontier AI have raised concerns over economic competitiveness, election interference and national security.",
+      "why_it_matters": "AI governance is increasingly treated as an issue of diplomacy and strategic competition rather than technology policy alone.",
+      "pakistan_perspective": "Pakistan's digital governance and cybersecurity discussions may draw lessons from the integration of AI risk management into foreign policy.",
+      "global_implications": "The debate concerns how states balance AI innovation, democratic resilience and international safety coordination.",
+      "quick_gk": [
+        "Australia's foreign minister identified in Reuters' 23 November 2026 AI foreign-policy report was Penny Wong."
+      ],
+      "question_angles": [
+        "Which Australian foreign minister was reported on 23 November 2026 as preparing to make AI a central foreign-policy concern?"
+      ],
+      "topics": [
+        "AI governance",
+        "Foreign policy",
+        "Cybersecurity"
+      ],
+      "countries": [
+        "Australia"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Australia to treat AI as key foreign policy challenge",
+          "url": "https://www.reuters.com/world/asia-pacific/australia-treat-ai-key-foreign-policy-challenge-2026-11-23/"
+        }
+      ]
+    }
+  ]
+}
